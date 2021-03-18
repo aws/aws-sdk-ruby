@@ -282,6 +282,8 @@ module Aws::Redshift
     ModifySnapshotCopyRetentionPeriodResult = Shapes::StructureShape.new(name: 'ModifySnapshotCopyRetentionPeriodResult')
     ModifySnapshotScheduleMessage = Shapes::StructureShape.new(name: 'ModifySnapshotScheduleMessage')
     ModifyUsageLimitMessage = Shapes::StructureShape.new(name: 'ModifyUsageLimitMessage')
+    NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
+    NetworkInterfaceList = Shapes::ListShape.new(name: 'NetworkInterfaceList')
     NodeConfigurationOption = Shapes::StructureShape.new(name: 'NodeConfigurationOption')
     NodeConfigurationOptionList = Shapes::ListShape.new(name: 'NodeConfigurationOptionList')
     NodeConfigurationOptionsFilter = Shapes::StructureShape.new(name: 'NodeConfigurationOptionsFilter')
@@ -583,6 +585,7 @@ module Aws::Redshift
     Cluster.add_member(:resize_info, Shapes::ShapeRef.new(shape: ResizeInfo, location_name: "ResizeInfo"))
     Cluster.add_member(:availability_zone_relocation_status, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZoneRelocationStatus"))
     Cluster.add_member(:cluster_namespace_arn, Shapes::ShapeRef.new(shape: String, location_name: "ClusterNamespaceArn"))
+    Cluster.add_member(:total_storage_capacity_in_mega_bytes, Shapes::ShapeRef.new(shape: LongOptional, location_name: "TotalStorageCapacityInMegaBytes"))
     Cluster.struct_class = Types::Cluster
 
     ClusterAlreadyExistsFault.struct_class = Types::ClusterAlreadyExistsFault
@@ -1533,6 +1536,14 @@ module Aws::Redshift
     ModifyUsageLimitMessage.add_member(:breach_action, Shapes::ShapeRef.new(shape: UsageLimitBreachAction, location_name: "BreachAction"))
     ModifyUsageLimitMessage.struct_class = Types::ModifyUsageLimitMessage
 
+    NetworkInterface.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, location_name: "NetworkInterfaceId"))
+    NetworkInterface.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "SubnetId"))
+    NetworkInterface.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "PrivateIpAddress"))
+    NetworkInterface.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
+    NetworkInterface.struct_class = Types::NetworkInterface
+
+    NetworkInterfaceList.member = Shapes::ShapeRef.new(shape: NetworkInterface, location_name: "NetworkInterface")
+
     NodeConfigurationOption.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
     NodeConfigurationOption.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfNodes"))
     NodeConfigurationOption.add_member(:estimated_disk_utilization_percent, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "EstimatedDiskUtilizationPercent"))
@@ -2077,6 +2088,8 @@ module Aws::Redshift
     ValueStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
     VpcEndpoint.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcEndpointId"))
+    VpcEndpoint.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcId"))
+    VpcEndpoint.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: NetworkInterfaceList, location_name: "NetworkInterfaces"))
     VpcEndpoint.struct_class = Types::VpcEndpoint
 
     VpcEndpointsList.member = Shapes::ShapeRef.new(shape: VpcEndpoint, location_name: "VpcEndpoint")

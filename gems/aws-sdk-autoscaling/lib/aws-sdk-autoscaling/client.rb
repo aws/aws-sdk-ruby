@@ -596,8 +596,8 @@ module Aws::AutoScaling
     # not roll back any replacements that have already been completed, but
     # it prevents new replacements from being started.
     #
-    # For more information, see [Replacing Auto Scaling Instances Based on
-    # an Instance Refresh][1].
+    # For more information, see [Replacing Auto Scaling instances based on
+    # an instance refresh][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -2269,8 +2269,8 @@ module Aws::AutoScaling
     #
     # * `Cancelled` - The operation is cancelled.
     #
-    # For more information, see [Replacing Auto Scaling Instances Based on
-    # an Instance Refresh][1].
+    # For more information, see [Replacing Auto Scaling instances based on
+    # an instance refresh][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -4869,8 +4869,8 @@ module Aws::AutoScaling
     # API. To cancel an instance refresh operation in progress, use the
     # CancelInstanceRefresh API.
     #
-    # For more information, see [Replacing Auto Scaling Instances Based on
-    # an Instance Refresh][1].
+    # For more information, see [Replacing Auto Scaling instances based on
+    # an instance refresh][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -4935,6 +4935,8 @@ module Aws::AutoScaling
     #     preferences: {
     #       min_healthy_percentage: 1,
     #       instance_warmup: 1,
+    #       checkpoint_percentages: [1],
+    #       checkpoint_delay: 1,
     #     },
     #   })
     #
@@ -5406,7 +5408,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

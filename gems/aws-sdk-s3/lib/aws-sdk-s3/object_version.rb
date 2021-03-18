@@ -256,7 +256,7 @@ module Aws::S3
     #   Indicates whether S3 Object Lock should bypass Governance-mode
     #   restrictions to process this operation.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [Types::DeleteObjectOutput]
@@ -358,7 +358,7 @@ module Aws::S3
     #   for the part specified. Useful for downloading just a part of an
     #   object.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [Types::GetObjectOutput]
@@ -442,7 +442,7 @@ module Aws::S3
     #   for the part specified. Useful querying about the size of the part and
     #   the number of parts in this object.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [Types::HeadObjectOutput]
@@ -546,7 +546,7 @@ module Aws::S3
       #   Governance-type Object Lock in place. You must have sufficient
       #   permissions to perform this operation.
       # @option options [String] :expected_bucket_owner
-      #   The account id of the expected bucket owner. If the bucket is owned by
+      #   The account ID of the expected bucket owner. If the bucket is owned by
       #   a different account, the request will fail with an HTTP `403 (Access
       #   Denied)` error.
       # @return [void]

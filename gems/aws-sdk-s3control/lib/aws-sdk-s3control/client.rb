@@ -349,21 +349,13 @@ module Aws::S3Control
     #
     #
     #
-    # **Using this action with Amazon S3 on Outposts**
+    # <note markdown="1"> S3 on Outposts only supports VPC-style Access Points.
     #
-    # This action:
+    #  For more information, see [ Accessing Amazon S3 on Outposts using
+    # virtual private cloud (VPC) only Access Points][2] in the *Amazon
+    # Simple Storage Service User Guide*.
     #
-    # * Requires a virtual private cloud (VPC) configuration as S3 on
-    #   Outposts only supports VPC style access points.
-    #
-    # * Does not support ACL on S3 on Outposts buckets.
-    #
-    # * Does not support Public Access on S3 on Outposts buckets.
-    #
-    # * Does not support object lock for S3 on Outposts buckets.
-    #
-    # For more information, see [Using Amazon S3 on Outposts][2] in the
-    # <i>Amazon Simple Storage Service User Guide </i>.
+    #  </note>
     #
     # All Amazon S3 on Outposts REST API requests for this action require an
     # additional parameter of `x-amz-outpost-id` to be passed with the
@@ -385,8 +377,8 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html#API_control_CreateAccessPoint_Examples
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html
@@ -471,6 +463,76 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Creates an Object Lambda Access Point. For more information, see
+    # [Transforming objects with Object Lambda Access Points][1] in the
+    # *Amazon Simple Storage Service User Guide*.
+    #
+    # The following actions are related to
+    # `CreateAccessPointForObjectLambda`\:
+    #
+    # * [DeleteAccessPointForObjectLambda][2]
+    #
+    # * [GetAccessPointForObjectLambda][3]
+    #
+    # * [ListAccessPointsForObjectLambda][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/transforming-objects.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointForObjectLambda.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointForObjectLambda.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID for owner of the specified Object Lambda Access
+    #   Point.
+    #
+    # @option params [required, String] :name
+    #   The name you want to assign to this Object Lambda Access Point.
+    #
+    # @option params [required, Types::ObjectLambdaConfiguration] :configuration
+    #   Object Lambda Access Point configuration as a JSON document.
+    #
+    # @return [Types::CreateAccessPointForObjectLambdaResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAccessPointForObjectLambdaResult#object_lambda_access_point_arn #object_lambda_access_point_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_access_point_for_object_lambda({
+    #     account_id: "AccountId", # required
+    #     name: "ObjectLambdaAccessPointName", # required
+    #     configuration: { # required
+    #       supporting_access_point: "ObjectLambdaSupportingAccessPointArn", # required
+    #       cloud_watch_metrics_enabled: false,
+    #       allowed_features: ["GetObject-Range"], # accepts GetObject-Range, GetObject-PartNumber
+    #       transformation_configurations: [ # required
+    #         {
+    #           actions: ["GetObject"], # required, accepts GetObject
+    #           content_transformation: { # required
+    #             aws_lambda: {
+    #               function_arn: "FunctionArnString", # required
+    #               function_payload: "AwsLambdaTransformationPayload",
+    #             },
+    #           },
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.object_lambda_access_point_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPointForObjectLambda AWS API Documentation
+    #
+    # @overload create_access_point_for_object_lambda(params = {})
+    # @param [Hash] params ({})
+    def create_access_point_for_object_lambda(params = {}, options = {})
+      req = build_request(:create_access_point_for_object_lambda, params)
+      req.send_request(options)
+    end
+
     # <note markdown="1"> This action creates an Amazon S3 on Outposts bucket. To create an S3
     # bucket, see [Create Bucket][1] in the *Amazon Simple Storage Service
     # API*.
@@ -491,8 +553,9 @@ module Aws::S3Control
     #
     # * LifecycleConfigurations for deleting expired objects
     #
-    # For a list of Amazon S3 features not supported by Amazon S3 on
-    # Outposts, see [Unsupported Amazon S3 features][4].
+    # For a complete list of restrictions and Amazon S3 feature limitations
+    # on S3 on Outposts, see [ Amazon S3 on Outposts Restrictions and
+    # Limitations][4].
     #
     # For an example of the request syntax for Amazon S3 on Outposts that
     # uses the S3 on Outposts endpoint hostname prefix and
@@ -514,9 +577,9 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OnOutpostsRestrictionsLimitations.html#S3OnOutpostsFeatureLimitations
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/BucketRestrictions.html#bucketnamingrules
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OnOutpostsRestrictionsLimitations.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html#API_control_CreateBucket_Examples
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html
@@ -919,6 +982,48 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Deletes the specified Object Lambda Access Point.
+    #
+    # The following actions are related to
+    # `DeleteAccessPointForObjectLambda`\:
+    #
+    # * [CreateAccessPointForObjectLambda][1]
+    #
+    # * [GetAccessPointForObjectLambda][2]
+    #
+    # * [ListAccessPointsForObjectLambda][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPointForObjectLambda.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointForObjectLambda.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html
+    #
+    # @option params [required, String] :account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #
+    # @option params [required, String] :name
+    #   The name of the access point you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_access_point_for_object_lambda({
+    #     account_id: "AccountId", # required
+    #     name: "ObjectLambdaAccessPointName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteAccessPointForObjectLambda AWS API Documentation
+    #
+    # @overload delete_access_point_for_object_lambda(params = {})
+    # @param [Hash] params ({})
+    def delete_access_point_for_object_lambda(params = {}, options = {})
+      req = build_request(:delete_access_point_for_object_lambda, params)
+      req.send_request(options)
+    end
+
     # Deletes the access point policy for the specified access point.
     #
     #
@@ -979,6 +1084,46 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Removes the resource policy for an Object Lambda Access Point.
+    #
+    # The following actions are related to
+    # `DeleteAccessPointPolicyForObjectLambda`\:
+    #
+    # * [GetAccessPointPolicyForObjectLambda][1]
+    #
+    # * [PutAccessPointPolicyForObjectLambda][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicyForObjectLambda.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicyForObjectLambda.html
+    #
+    # @option params [required, String] :account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #
+    # @option params [required, String] :name
+    #   The name of the Object Lambda Access Point you want to delete the
+    #   policy for.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_access_point_policy_for_object_lambda({
+    #     account_id: "AccountId", # required
+    #     name: "ObjectLambdaAccessPointName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteAccessPointPolicyForObjectLambda AWS API Documentation
+    #
+    # @overload delete_access_point_policy_for_object_lambda(params = {})
+    # @param [Hash] params ({})
+    def delete_access_point_policy_for_object_lambda(params = {}, options = {})
+      req = build_request(:delete_access_point_policy_for_object_lambda, params)
+      req.send_request(options)
+    end
+
     # <note markdown="1"> This action deletes an Amazon S3 on Outposts bucket. To delete an S3
     # bucket, see [DeleteBucket][1] in the *Amazon Simple Storage Service
     # API*.
@@ -1010,7 +1155,7 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html#API_control_DeleteBucket_Examples
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html
@@ -1092,7 +1237,7 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html#API_control_DeleteBucketLifecycleConfiguration_Examples
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html
@@ -1178,7 +1323,7 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketPolicy.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html
@@ -1251,7 +1396,7 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html#API_control_DeleteBucketTagging_Examples
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html
@@ -1673,6 +1818,114 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Returns configuration for an Object Lambda Access Point.
+    #
+    # The following actions are related to
+    # `GetAccessPointConfigurationForObjectLambda`\:
+    #
+    # * [PutAccessPointConfigurationForObjectLambda][1]
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointConfigurationForObjectLambda.html
+    #
+    # @option params [required, String] :account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #
+    # @option params [required, String] :name
+    #   The name of the Object Lambda Access Point you want to return the
+    #   configuration for.
+    #
+    # @return [Types::GetAccessPointConfigurationForObjectLambdaResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccessPointConfigurationForObjectLambdaResult#configuration #configuration} => Types::ObjectLambdaConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_access_point_configuration_for_object_lambda({
+    #     account_id: "AccountId", # required
+    #     name: "ObjectLambdaAccessPointName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration.supporting_access_point #=> String
+    #   resp.configuration.cloud_watch_metrics_enabled #=> Boolean
+    #   resp.configuration.allowed_features #=> Array
+    #   resp.configuration.allowed_features[0] #=> String, one of "GetObject-Range", "GetObject-PartNumber"
+    #   resp.configuration.transformation_configurations #=> Array
+    #   resp.configuration.transformation_configurations[0].actions #=> Array
+    #   resp.configuration.transformation_configurations[0].actions[0] #=> String, one of "GetObject"
+    #   resp.configuration.transformation_configurations[0].content_transformation.aws_lambda.function_arn #=> String
+    #   resp.configuration.transformation_configurations[0].content_transformation.aws_lambda.function_payload #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointConfigurationForObjectLambda AWS API Documentation
+    #
+    # @overload get_access_point_configuration_for_object_lambda(params = {})
+    # @param [Hash] params ({})
+    def get_access_point_configuration_for_object_lambda(params = {}, options = {})
+      req = build_request(:get_access_point_configuration_for_object_lambda, params)
+      req.send_request(options)
+    end
+
+    # Returns configuration information about the specified Object Lambda
+    # Access Point
+    #
+    # The following actions are related to `GetAccessPointForObjectLambda`\:
+    #
+    # * [CreateAccessPointForObjectLambda][1]
+    #
+    # * [DeleteAccessPointForObjectLambda][2]
+    #
+    # * [ListAccessPointsForObjectLambda][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPointForObjectLambda.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointForObjectLambda.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html
+    #
+    # @option params [required, String] :account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #
+    # @option params [required, String] :name
+    #   The name of the Object Lambda Access Point.
+    #
+    # @return [Types::GetAccessPointForObjectLambdaResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccessPointForObjectLambdaResult#name #name} => String
+    #   * {Types::GetAccessPointForObjectLambdaResult#public_access_block_configuration #public_access_block_configuration} => Types::PublicAccessBlockConfiguration
+    #   * {Types::GetAccessPointForObjectLambdaResult#creation_date #creation_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_access_point_for_object_lambda({
+    #     account_id: "AccountId", # required
+    #     name: "ObjectLambdaAccessPointName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.public_access_block_configuration.block_public_acls #=> Boolean
+    #   resp.public_access_block_configuration.ignore_public_acls #=> Boolean
+    #   resp.public_access_block_configuration.block_public_policy #=> Boolean
+    #   resp.public_access_block_configuration.restrict_public_buckets #=> Boolean
+    #   resp.creation_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointForObjectLambda AWS API Documentation
+    #
+    # @overload get_access_point_for_object_lambda(params = {})
+    # @param [Hash] params ({})
+    def get_access_point_for_object_lambda(params = {}, options = {})
+      req = build_request(:get_access_point_for_object_lambda, params)
+      req.send_request(options)
+    end
+
     # Returns the access point policy associated with the specified access
     # point.
     #
@@ -1729,6 +1982,51 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Returns the resource policy for an Object Lambda Access Point.
+    #
+    # The following actions are related to
+    # `GetAccessPointPolicyForObjectLambda`\:
+    #
+    # * [DeleteAccessPointPolicyForObjectLambda][1]
+    #
+    # * [PutAccessPointPolicyForObjectLambda][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicyForObjectLambda.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicyForObjectLambda.html
+    #
+    # @option params [required, String] :account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #
+    # @option params [required, String] :name
+    #   The name of the Object Lambda Access Point.
+    #
+    # @return [Types::GetAccessPointPolicyForObjectLambdaResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccessPointPolicyForObjectLambdaResult#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_access_point_policy_for_object_lambda({
+    #     account_id: "AccountId", # required
+    #     name: "ObjectLambdaAccessPointName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointPolicyForObjectLambda AWS API Documentation
+    #
+    # @overload get_access_point_policy_for_object_lambda(params = {})
+    # @param [Hash] params ({})
+    def get_access_point_policy_for_object_lambda(params = {}, options = {})
+      req = build_request(:get_access_point_policy_for_object_lambda, params)
+      req.send_request(options)
+    end
+
     # Indicates whether the specified access point currently has a policy
     # that allows public access. For more information about public access
     # through access points, see [Managing Data Access with Amazon S3 Access
@@ -1736,7 +2034,7 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
     #
     # @option params [required, String] :account_id
     #   The account ID for the account that owns the specified access point.
@@ -1768,16 +2066,50 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Returns the status of the resource policy associated with an Object
+    # Lambda Access Point.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #
+    # @option params [required, String] :name
+    #   The name of the Object Lambda Access Point.
+    #
+    # @return [Types::GetAccessPointPolicyStatusForObjectLambdaResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccessPointPolicyStatusForObjectLambdaResult#policy_status #policy_status} => Types::PolicyStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_access_point_policy_status_for_object_lambda({
+    #     account_id: "AccountId", # required
+    #     name: "ObjectLambdaAccessPointName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_status.is_public #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointPolicyStatusForObjectLambda AWS API Documentation
+    #
+    # @overload get_access_point_policy_status_for_object_lambda(params = {})
+    # @param [Hash] params ({})
+    def get_access_point_policy_status_for_object_lambda(params = {}, options = {})
+      req = build_request(:get_access_point_policy_status_for_object_lambda, params)
+      req.send_request(options)
+    end
+
     # Gets an Amazon S3 on Outposts bucket. For more information, see [
     # Using Amazon S3 on Outposts][1] in the *Amazon Simple Storage Service
     # User Guide*.
     #
     # If you are using an identity other than the root user of the AWS
-    # account that owns the bucket, the calling identity must have the
-    # `s3-outposts:GetBucket` permissions on the specified bucket and belong
-    # to the bucket owner's account in order to use this action. Only users
-    # from Outposts bucket owner account with the right permissions can
-    # perform actions on an Outposts bucket.
+    # account that owns the Outposts bucket, the calling identity must have
+    # the `s3-outposts:GetBucket` permissions on the specified Outposts
+    # bucket and belong to the Outposts bucket owner's account in order to
+    # use this action. Only users from Outposts bucket owner account with
+    # the right permissions can perform actions on an Outposts bucket.
     #
     # If you don't have `s3-outposts:GetBucket` permissions or you're not
     # using an identity that belongs to the bucket owner's account, Amazon
@@ -1802,7 +2134,7 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html#API_control_GetBucket_Examples
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html
@@ -1901,10 +2233,10 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html#API_control_GetBucketLifecycleConfiguration_Examples
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html
     # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html
@@ -2019,7 +2351,7 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html#API_control_GetBucketPolicy_Examples
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
@@ -2107,7 +2439,7 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketTagging.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html#API_control_GetBucketTagging_Examples
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html
@@ -2473,6 +2805,75 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Returns a list of the access points associated with the Object Lambda
+    # Access Point. You can retrieve up to 1000 access points per call. If
+    # there are more than 1,000 access points (or the number specified in
+    # `maxResults`, whichever is less), the response will include a
+    # continuation token that you can use to list the additional access
+    # points.
+    #
+    # The following actions are related to
+    # `ListAccessPointsForObjectLambda`\:
+    #
+    # * [CreateAccessPointForObjectLambda][1]
+    #
+    # * [DeleteAccessPointForObjectLambda][2]
+    #
+    # * [GetAccessPointForObjectLambda][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPointForObjectLambda.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointForObjectLambda.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointForObjectLambda.html
+    #
+    # @option params [required, String] :account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #
+    # @option params [String] :next_token
+    #   If the list has more access points than can be returned in one call to
+    #   this API, this field contains a continuation token that you can
+    #   provide in subsequent calls to this API to retrieve additional access
+    #   points.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of access points that you want to include in the
+    #   list. If there are more than this number of access points, then the
+    #   response will include a continuation token in the `NextToken` field
+    #   that you can use to retrieve the next page of access points.
+    #
+    # @return [Types::ListAccessPointsForObjectLambdaResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAccessPointsForObjectLambdaResult#object_lambda_access_point_list #object_lambda_access_point_list} => Array&lt;Types::ObjectLambdaAccessPoint&gt;
+    #   * {Types::ListAccessPointsForObjectLambdaResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_access_points_for_object_lambda({
+    #     account_id: "AccountId", # required
+    #     next_token: "NonEmptyMaxLength1024String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.object_lambda_access_point_list #=> Array
+    #   resp.object_lambda_access_point_list[0].name #=> String
+    #   resp.object_lambda_access_point_list[0].object_lambda_access_point_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessPointsForObjectLambda AWS API Documentation
+    #
+    # @overload list_access_points_for_object_lambda(params = {})
+    # @param [Hash] params ({})
+    def list_access_points_for_object_lambda(params = {}, options = {})
+      req = build_request(:list_access_points_for_object_lambda, params)
+      req.send_request(options)
+    end
+
     # Lists current S3 Batch Operations jobs and jobs that have ended within
     # the last 30 days for the AWS account making the request. For more
     # information, see [S3 Batch Operations][1] in the *Amazon Simple
@@ -2567,7 +2968,7 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListRegionalBuckets.html#API_control_ListRegionalBuckets_Examples
     #
     # @option params [required, String] :account_id
@@ -2672,6 +3073,63 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Replaces configuration for an Object Lambda Access Point.
+    #
+    # The following actions are related to
+    # `PutAccessPointConfigurationForObjectLambda`\:
+    #
+    # * [GetAccessPointConfigurationForObjectLambda][1]
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointConfigurationForObjectLambda.html
+    #
+    # @option params [required, String] :account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #
+    # @option params [required, String] :name
+    #   The name of the Object Lambda Access Point.
+    #
+    # @option params [required, Types::ObjectLambdaConfiguration] :configuration
+    #   Object Lambda Access Point configuration document.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_access_point_configuration_for_object_lambda({
+    #     account_id: "AccountId", # required
+    #     name: "ObjectLambdaAccessPointName", # required
+    #     configuration: { # required
+    #       supporting_access_point: "ObjectLambdaSupportingAccessPointArn", # required
+    #       cloud_watch_metrics_enabled: false,
+    #       allowed_features: ["GetObject-Range"], # accepts GetObject-Range, GetObject-PartNumber
+    #       transformation_configurations: [ # required
+    #         {
+    #           actions: ["GetObject"], # required, accepts GetObject
+    #           content_transformation: { # required
+    #             aws_lambda: {
+    #               function_arn: "FunctionArnString", # required
+    #               function_payload: "AwsLambdaTransformationPayload",
+    #             },
+    #           },
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutAccessPointConfigurationForObjectLambda AWS API Documentation
+    #
+    # @overload put_access_point_configuration_for_object_lambda(params = {})
+    # @param [Hash] params ({})
+    def put_access_point_configuration_for_object_lambda(params = {}, options = {})
+      req = build_request(:put_access_point_configuration_for_object_lambda, params)
+      req.send_request(options)
+    end
+
     # Associates an access policy with the specified access point. Each
     # access point can have only one policy, so a request made to this API
     # replaces any existing policy associated with the specified access
@@ -2727,7 +3185,7 @@ module Aws::S3Control
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2748,6 +3206,52 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Creates or replaces resource policy for an Object Lambda Access Point.
+    # For an example policy, see [Creating Object Lambda Access Points][1]
+    # in the *Amazon Simple Storage Service User Guide*.
+    #
+    # The following actions are related to
+    # `PutAccessPointPolicyForObjectLambda`\:
+    #
+    # * [DeleteAccessPointPolicyForObjectLambda][2]
+    #
+    # * [GetAccessPointPolicyForObjectLambda][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/olap-create.html#olap-create-cli
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicyForObjectLambda.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicyForObjectLambda.html
+    #
+    # @option params [required, String] :account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #
+    # @option params [required, String] :name
+    #   The name of the Object Lambda Access Point.
+    #
+    # @option params [required, String] :policy
+    #   Object Lambda Access Point resource policy document.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_access_point_policy_for_object_lambda({
+    #     account_id: "AccountId", # required
+    #     name: "ObjectLambdaAccessPointName", # required
+    #     policy: "ObjectLambdaPolicy", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutAccessPointPolicyForObjectLambda AWS API Documentation
+    #
+    # @overload put_access_point_policy_for_object_lambda(params = {})
+    # @param [Hash] params ({})
+    def put_access_point_policy_for_object_lambda(params = {}, options = {})
+      req = build_request(:put_access_point_policy_for_object_lambda, params)
+      req.send_request(options)
+    end
+
     # <note markdown="1"> This action puts a lifecycle configuration to an Amazon S3 on Outposts
     # bucket. To put a lifecycle configuration to an S3 bucket, see
     # [PutBucketLifecycleConfiguration][1] in the *Amazon Simple Storage
@@ -2755,12 +3259,10 @@ module Aws::S3Control
     #
     #  </note>
     #
-    # Creates a new lifecycle configuration for the Outposts bucket or
+    # Creates a new lifecycle configuration for the S3 on Outposts bucket or
     # replaces an existing lifecycle configuration. Outposts buckets only
     # support lifecycle configurations that delete/expire objects after a
-    # certain period of time and abort incomplete multipart uploads. For
-    # more information, see [Managing Lifecycle Permissions for Amazon S3 on
-    # Outposts][2].
+    # certain period of time and abort incomplete multipart uploads.
     #
     #
     #
@@ -2770,22 +3272,21 @@ module Aws::S3Control
     # `s3-control`. For an example of the request syntax for Amazon S3 on
     # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
     # `x-amz-outpost-id` derived using the access point ARN, see the
-    # [Examples][3] section.
+    # [Examples][2] section.
     #
     # The following actions are related to
     # `PutBucketLifecycleConfiguration`\:
     #
-    # * [GetBucketLifecycleConfiguration][4]
+    # * [GetBucketLifecycleConfiguration][3]
     #
-    # * [DeleteBucketLifecycleConfiguration][5]
+    # * [DeleteBucketLifecycleConfiguration][4]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html#API_control_PutBucketLifecycleConfiguration_Examples
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html#API_control_PutBucketLifecycleConfiguration_Examples
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html
     #
     # @option params [required, String] :account_id
     #   The AWS account ID of the Outposts bucket.
@@ -2906,7 +3407,7 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketPolicy.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html#API_control_PutBucketPolicy_Examples
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html
@@ -2967,9 +3468,9 @@ module Aws::S3Control
     #
     #  </note>
     #
-    # Sets the tags for an Outposts bucket. For more information, see [Using
-    # Amazon S3 on Outposts][2] in the *Amazon Simple Storage Service User
-    # Guide*.
+    # Sets the tags for an S3 on Outposts bucket. For more information, see
+    # [Using Amazon S3 on Outposts][2] in the *Amazon Simple Storage Service
+    # User Guide*.
     #
     # Use tags to organize your AWS bill to reflect your own cost structure.
     # To do this, sign up to get your AWS account bill with tag key values
@@ -2978,11 +3479,11 @@ module Aws::S3Control
     # values. For example, you can tag several resources with a specific
     # application name, and then organize your billing information to see
     # the total cost of that application across several services. For more
-    # information, see [Cost Allocation and Tagging][3].
+    # information, see [Cost allocation and tagging][3].
     #
     # <note markdown="1"> Within a bucket, if you add a tag that has the same key as an existing
     # tag, the new value overwrites the old value. For more information, see
-    # [ Using Cost Allocation in Amazon S3 Bucket Tags][4].
+    # [ Using cost allocation in Amazon S3 bucket tags][4].
     #
     #  </note>
     #
@@ -2990,8 +3491,8 @@ module Aws::S3Control
     # `s3-outposts:PutBucketTagging` action. The Outposts bucket owner has
     # this permission by default and can grant this permission to others.
     # For more information about permissions, see [ Permissions Related to
-    # Bucket Subresource Operations][5] and [Managing Access Permissions to
-    # Your Amazon S3 Resources][6].
+    # Bucket Subresource Operations][5] and [Managing access permissions to
+    # your Amazon S3 resources][6].
     #
     # `PutBucketTagging` has the following special errors:
     #
@@ -3041,11 +3542,11 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     # [3]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/CostAllocTagging.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/CostAllocTagging.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html
     # [7]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
     # [8]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html
     # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html#API_control_PutBucketTagging_Examples
@@ -3544,7 +4045,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

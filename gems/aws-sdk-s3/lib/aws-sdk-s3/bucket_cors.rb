@@ -182,7 +182,7 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [EmptyStructure]
@@ -214,8 +214,7 @@ module Aws::S3
     # @option options [required, Types::CORSConfiguration] :cors_configuration
     #   Describes the cross-origin access configuration for objects in an
     #   Amazon S3 bucket. For more information, see [Enabling Cross-Origin
-    #   Resource Sharing][1] in the *Amazon Simple Storage Service User
-    #   Guide*.
+    #   Resource Sharing][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -232,7 +231,7 @@ module Aws::S3
     #
     #   [1]: http://www.ietf.org/rfc/rfc1864.txt
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [EmptyStructure]

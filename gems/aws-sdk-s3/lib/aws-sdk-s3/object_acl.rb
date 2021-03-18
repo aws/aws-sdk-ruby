@@ -286,7 +286,7 @@ module Aws::S3
     # @option options [String] :version_id
     #   VersionId used to reference a specific version of the object.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [Types::PutObjectAclOutput]

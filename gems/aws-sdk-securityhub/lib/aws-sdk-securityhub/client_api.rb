@@ -241,6 +241,7 @@ module Aws::SecurityHub
     AwsRedshiftClusterRestoreStatus = Shapes::StructureShape.new(name: 'AwsRedshiftClusterRestoreStatus')
     AwsRedshiftClusterVpcSecurityGroup = Shapes::StructureShape.new(name: 'AwsRedshiftClusterVpcSecurityGroup')
     AwsRedshiftClusterVpcSecurityGroups = Shapes::ListShape.new(name: 'AwsRedshiftClusterVpcSecurityGroups')
+    AwsS3AccountPublicAccessBlockDetails = Shapes::StructureShape.new(name: 'AwsS3AccountPublicAccessBlockDetails')
     AwsS3BucketDetails = Shapes::StructureShape.new(name: 'AwsS3BucketDetails')
     AwsS3BucketServerSideEncryptionByDefault = Shapes::StructureShape.new(name: 'AwsS3BucketServerSideEncryptionByDefault')
     AwsS3BucketServerSideEncryptionConfiguration = Shapes::StructureShape.new(name: 'AwsS3BucketServerSideEncryptionConfiguration')
@@ -269,6 +270,7 @@ module Aws::SecurityHub
     BatchEnableStandardsRequest = Shapes::StructureShape.new(name: 'BatchEnableStandardsRequest')
     BatchEnableStandardsResponse = Shapes::StructureShape.new(name: 'BatchEnableStandardsResponse')
     BatchImportFindingsRequest = Shapes::StructureShape.new(name: 'BatchImportFindingsRequest')
+    BatchImportFindingsRequestFindingList = Shapes::ListShape.new(name: 'BatchImportFindingsRequestFindingList')
     BatchImportFindingsResponse = Shapes::StructureShape.new(name: 'BatchImportFindingsResponse')
     BatchUpdateFindingsRequest = Shapes::StructureShape.new(name: 'BatchUpdateFindingsRequest')
     BatchUpdateFindingsResponse = Shapes::StructureShape.new(name: 'BatchUpdateFindingsResponse')
@@ -276,9 +278,13 @@ module Aws::SecurityHub
     BatchUpdateFindingsUnprocessedFindingsList = Shapes::ListShape.new(name: 'BatchUpdateFindingsUnprocessedFindingsList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CategoryList = Shapes::ListShape.new(name: 'CategoryList')
+    Cell = Shapes::StructureShape.new(name: 'Cell')
+    Cells = Shapes::ListShape.new(name: 'Cells')
     CidrBlockAssociation = Shapes::StructureShape.new(name: 'CidrBlockAssociation')
     CidrBlockAssociationList = Shapes::ListShape.new(name: 'CidrBlockAssociationList')
     City = Shapes::StructureShape.new(name: 'City')
+    ClassificationResult = Shapes::StructureShape.new(name: 'ClassificationResult')
+    ClassificationStatus = Shapes::StructureShape.new(name: 'ClassificationStatus')
     Compliance = Shapes::StructureShape.new(name: 'Compliance')
     ComplianceStatus = Shapes::StringShape.new(name: 'ComplianceStatus')
     ContainerDetails = Shapes::StructureShape.new(name: 'ContainerDetails')
@@ -291,8 +297,12 @@ module Aws::SecurityHub
     CreateMembersRequest = Shapes::StructureShape.new(name: 'CreateMembersRequest')
     CreateMembersResponse = Shapes::StructureShape.new(name: 'CreateMembersResponse')
     CrossAccountMaxResults = Shapes::IntegerShape.new(name: 'CrossAccountMaxResults')
+    CustomDataIdentifiersDetections = Shapes::StructureShape.new(name: 'CustomDataIdentifiersDetections')
+    CustomDataIdentifiersDetectionsList = Shapes::ListShape.new(name: 'CustomDataIdentifiersDetectionsList')
+    CustomDataIdentifiersResult = Shapes::StructureShape.new(name: 'CustomDataIdentifiersResult')
     Cvss = Shapes::StructureShape.new(name: 'Cvss')
     CvssList = Shapes::ListShape.new(name: 'CvssList')
+    DataClassificationDetails = Shapes::StructureShape.new(name: 'DataClassificationDetails')
     DateFilter = Shapes::StructureShape.new(name: 'DateFilter')
     DateFilterList = Shapes::ListShape.new(name: 'DateFilterList')
     DateRange = Shapes::StructureShape.new(name: 'DateRange')
@@ -338,6 +348,8 @@ module Aws::SecurityHub
     EnableSecurityHubRequest = Shapes::StructureShape.new(name: 'EnableSecurityHubRequest')
     EnableSecurityHubResponse = Shapes::StructureShape.new(name: 'EnableSecurityHubResponse')
     FieldMap = Shapes::MapShape.new(name: 'FieldMap')
+    FindingProviderFields = Shapes::StructureShape.new(name: 'FindingProviderFields')
+    FindingProviderSeverity = Shapes::StructureShape.new(name: 'FindingProviderSeverity')
     GeoLocation = Shapes::StructureShape.new(name: 'GeoLocation')
     GetEnabledStandardsRequest = Shapes::StructureShape.new(name: 'GetEnabledStandardsRequest')
     GetEnabledStandardsResponse = Shapes::StructureShape.new(name: 'GetEnabledStandardsResponse')
@@ -414,6 +426,9 @@ module Aws::SecurityHub
     NoteUpdate = Shapes::StructureShape.new(name: 'NoteUpdate')
     NumberFilter = Shapes::StructureShape.new(name: 'NumberFilter')
     NumberFilterList = Shapes::ListShape.new(name: 'NumberFilterList')
+    Occurrences = Shapes::StructureShape.new(name: 'Occurrences')
+    Page = Shapes::StructureShape.new(name: 'Page')
+    Pages = Shapes::ListShape.new(name: 'Pages')
     Partition = Shapes::StringShape.new(name: 'Partition')
     PatchSummary = Shapes::StructureShape.new(name: 'PatchSummary')
     PortProbeAction = Shapes::StructureShape.new(name: 'PortProbeAction')
@@ -425,9 +440,13 @@ module Aws::SecurityHub
     Product = Shapes::StructureShape.new(name: 'Product')
     ProductSubscriptionArnList = Shapes::ListShape.new(name: 'ProductSubscriptionArnList')
     ProductsList = Shapes::ListShape.new(name: 'ProductsList')
+    Range = Shapes::StructureShape.new(name: 'Range')
+    Ranges = Shapes::ListShape.new(name: 'Ranges')
     RatioScale = Shapes::IntegerShape.new(name: 'RatioScale')
     Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
+    Record = Shapes::StructureShape.new(name: 'Record')
     RecordState = Shapes::StringShape.new(name: 'RecordState')
+    Records = Shapes::ListShape.new(name: 'Records')
     RelatedFinding = Shapes::StructureShape.new(name: 'RelatedFinding')
     RelatedFindingList = Shapes::ListShape.new(name: 'RelatedFindingList')
     RelatedRequirementsList = Shapes::ListShape.new(name: 'RelatedRequirementsList')
@@ -441,6 +460,10 @@ module Aws::SecurityHub
     Result = Shapes::StructureShape.new(name: 'Result')
     ResultList = Shapes::ListShape.new(name: 'ResultList')
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
+    SensitiveDataDetections = Shapes::StructureShape.new(name: 'SensitiveDataDetections')
+    SensitiveDataDetectionsList = Shapes::ListShape.new(name: 'SensitiveDataDetectionsList')
+    SensitiveDataResult = Shapes::StructureShape.new(name: 'SensitiveDataResult')
+    SensitiveDataResultList = Shapes::ListShape.new(name: 'SensitiveDataResultList')
     Severity = Shapes::StructureShape.new(name: 'Severity')
     SeverityLabel = Shapes::StringShape.new(name: 'SeverityLabel')
     SeverityRating = Shapes::StringShape.new(name: 'SeverityRating')
@@ -1800,10 +1823,17 @@ module Aws::SecurityHub
 
     AwsRedshiftClusterVpcSecurityGroups.member = Shapes::ShapeRef.new(shape: AwsRedshiftClusterVpcSecurityGroup)
 
+    AwsS3AccountPublicAccessBlockDetails.add_member(:block_public_acls, Shapes::ShapeRef.new(shape: Boolean, location_name: "BlockPublicAcls"))
+    AwsS3AccountPublicAccessBlockDetails.add_member(:block_public_policy, Shapes::ShapeRef.new(shape: Boolean, location_name: "BlockPublicPolicy"))
+    AwsS3AccountPublicAccessBlockDetails.add_member(:ignore_public_acls, Shapes::ShapeRef.new(shape: Boolean, location_name: "IgnorePublicAcls"))
+    AwsS3AccountPublicAccessBlockDetails.add_member(:restrict_public_buckets, Shapes::ShapeRef.new(shape: Boolean, location_name: "RestrictPublicBuckets"))
+    AwsS3AccountPublicAccessBlockDetails.struct_class = Types::AwsS3AccountPublicAccessBlockDetails
+
     AwsS3BucketDetails.add_member(:owner_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OwnerId"))
     AwsS3BucketDetails.add_member(:owner_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OwnerName"))
     AwsS3BucketDetails.add_member(:created_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreatedAt"))
     AwsS3BucketDetails.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: AwsS3BucketServerSideEncryptionConfiguration, location_name: "ServerSideEncryptionConfiguration"))
+    AwsS3BucketDetails.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: AwsS3AccountPublicAccessBlockDetails, location_name: "PublicAccessBlockConfiguration"))
     AwsS3BucketDetails.struct_class = Types::AwsS3BucketDetails
 
     AwsS3BucketServerSideEncryptionByDefault.add_member(:sse_algorithm, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SSEAlgorithm"))
@@ -1844,12 +1874,12 @@ module Aws::SecurityHub
     AwsSecurityFinding.add_member(:product_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ProductArn"))
     AwsSecurityFinding.add_member(:generator_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "GeneratorId"))
     AwsSecurityFinding.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AwsAccountId"))
-    AwsSecurityFinding.add_member(:types, Shapes::ShapeRef.new(shape: TypeList, required: true, location_name: "Types"))
+    AwsSecurityFinding.add_member(:types, Shapes::ShapeRef.new(shape: TypeList, location_name: "Types"))
     AwsSecurityFinding.add_member(:first_observed_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FirstObservedAt"))
     AwsSecurityFinding.add_member(:last_observed_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LastObservedAt"))
     AwsSecurityFinding.add_member(:created_at, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "CreatedAt"))
     AwsSecurityFinding.add_member(:updated_at, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "UpdatedAt"))
-    AwsSecurityFinding.add_member(:severity, Shapes::ShapeRef.new(shape: Severity, required: true, location_name: "Severity"))
+    AwsSecurityFinding.add_member(:severity, Shapes::ShapeRef.new(shape: Severity, location_name: "Severity"))
     AwsSecurityFinding.add_member(:confidence, Shapes::ShapeRef.new(shape: Integer, location_name: "Confidence"))
     AwsSecurityFinding.add_member(:criticality, Shapes::ShapeRef.new(shape: Integer, location_name: "Criticality"))
     AwsSecurityFinding.add_member(:title, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Title"))
@@ -1874,6 +1904,7 @@ module Aws::SecurityHub
     AwsSecurityFinding.add_member(:vulnerabilities, Shapes::ShapeRef.new(shape: VulnerabilityList, location_name: "Vulnerabilities"))
     AwsSecurityFinding.add_member(:patch_summary, Shapes::ShapeRef.new(shape: PatchSummary, location_name: "PatchSummary"))
     AwsSecurityFinding.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "Action"))
+    AwsSecurityFinding.add_member(:finding_provider_fields, Shapes::ShapeRef.new(shape: FindingProviderFields, location_name: "FindingProviderFields"))
     AwsSecurityFinding.struct_class = Types::AwsSecurityFinding
 
     AwsSecurityFindingFilters.add_member(:product_arn, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "ProductArn"))
@@ -1885,8 +1916,8 @@ module Aws::SecurityHub
     AwsSecurityFindingFilters.add_member(:last_observed_at, Shapes::ShapeRef.new(shape: DateFilterList, location_name: "LastObservedAt"))
     AwsSecurityFindingFilters.add_member(:created_at, Shapes::ShapeRef.new(shape: DateFilterList, location_name: "CreatedAt"))
     AwsSecurityFindingFilters.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateFilterList, location_name: "UpdatedAt"))
-    AwsSecurityFindingFilters.add_member(:severity_product, Shapes::ShapeRef.new(shape: NumberFilterList, location_name: "SeverityProduct"))
-    AwsSecurityFindingFilters.add_member(:severity_normalized, Shapes::ShapeRef.new(shape: NumberFilterList, location_name: "SeverityNormalized"))
+    AwsSecurityFindingFilters.add_member(:severity_product, Shapes::ShapeRef.new(shape: NumberFilterList, deprecated: true, location_name: "SeverityProduct", metadata: {"deprecatedMessage"=>"This filter is deprecated, use FindingProviiltersSeverityOriginal instead."}))
+    AwsSecurityFindingFilters.add_member(:severity_normalized, Shapes::ShapeRef.new(shape: NumberFilterList, deprecated: true, location_name: "SeverityNormalized", metadata: {"deprecatedMessage"=>"This filter is deprecated, use SeverityLabel or FindingProviderFieldsSeverityLabel instead."}))
     AwsSecurityFindingFilters.add_member(:severity_label, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "SeverityLabel"))
     AwsSecurityFindingFilters.add_member(:confidence, Shapes::ShapeRef.new(shape: NumberFilterList, location_name: "Confidence"))
     AwsSecurityFindingFilters.add_member(:criticality, Shapes::ShapeRef.new(shape: NumberFilterList, location_name: "Criticality"))
@@ -1960,6 +1991,13 @@ module Aws::SecurityHub
     AwsSecurityFindingFilters.add_member(:note_updated_at, Shapes::ShapeRef.new(shape: DateFilterList, location_name: "NoteUpdatedAt"))
     AwsSecurityFindingFilters.add_member(:note_updated_by, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "NoteUpdatedBy"))
     AwsSecurityFindingFilters.add_member(:keyword, Shapes::ShapeRef.new(shape: KeywordFilterList, location_name: "Keyword"))
+    AwsSecurityFindingFilters.add_member(:finding_provider_fields_confidence, Shapes::ShapeRef.new(shape: NumberFilterList, location_name: "FindingProviderFieldsConfidence"))
+    AwsSecurityFindingFilters.add_member(:finding_provider_fields_criticality, Shapes::ShapeRef.new(shape: NumberFilterList, location_name: "FindingProviderFieldsCriticality"))
+    AwsSecurityFindingFilters.add_member(:finding_provider_fields_related_findings_id, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "FindingProviderFieldsRelatedFindingsId"))
+    AwsSecurityFindingFilters.add_member(:finding_provider_fields_related_findings_product_arn, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "FindingProviderFieldsRelatedFindingsProductArn"))
+    AwsSecurityFindingFilters.add_member(:finding_provider_fields_severity_label, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "FindingProviderFieldsSeverityLabel"))
+    AwsSecurityFindingFilters.add_member(:finding_provider_fields_severity_original, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "FindingProviderFieldsSeverityOriginal"))
+    AwsSecurityFindingFilters.add_member(:finding_provider_fields_types, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "FindingProviderFieldsTypes"))
     AwsSecurityFindingFilters.struct_class = Types::AwsSecurityFindingFilters
 
     AwsSecurityFindingIdentifier.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Id"))
@@ -2042,8 +2080,10 @@ module Aws::SecurityHub
     BatchEnableStandardsResponse.add_member(:standards_subscriptions, Shapes::ShapeRef.new(shape: StandardsSubscriptions, location_name: "StandardsSubscriptions"))
     BatchEnableStandardsResponse.struct_class = Types::BatchEnableStandardsResponse
 
-    BatchImportFindingsRequest.add_member(:findings, Shapes::ShapeRef.new(shape: AwsSecurityFindingList, required: true, location_name: "Findings"))
+    BatchImportFindingsRequest.add_member(:findings, Shapes::ShapeRef.new(shape: BatchImportFindingsRequestFindingList, required: true, location_name: "Findings"))
     BatchImportFindingsRequest.struct_class = Types::BatchImportFindingsRequest
+
+    BatchImportFindingsRequestFindingList.member = Shapes::ShapeRef.new(shape: AwsSecurityFinding)
 
     BatchImportFindingsResponse.add_member(:failed_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "FailedCount"))
     BatchImportFindingsResponse.add_member(:success_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "SuccessCount"))
@@ -2075,6 +2115,14 @@ module Aws::SecurityHub
 
     CategoryList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
+    Cell.add_member(:column, Shapes::ShapeRef.new(shape: Long, location_name: "Column"))
+    Cell.add_member(:row, Shapes::ShapeRef.new(shape: Long, location_name: "Row"))
+    Cell.add_member(:column_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ColumnName"))
+    Cell.add_member(:cell_reference, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CellReference"))
+    Cell.struct_class = Types::Cell
+
+    Cells.member = Shapes::ShapeRef.new(shape: Cell)
+
     CidrBlockAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AssociationId"))
     CidrBlockAssociation.add_member(:cidr_block, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CidrBlock"))
     CidrBlockAssociation.add_member(:cidr_block_state, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CidrBlockState"))
@@ -2084,6 +2132,18 @@ module Aws::SecurityHub
 
     City.add_member(:city_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CityName"))
     City.struct_class = Types::City
+
+    ClassificationResult.add_member(:mime_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MimeType"))
+    ClassificationResult.add_member(:size_classified, Shapes::ShapeRef.new(shape: Long, location_name: "SizeClassified"))
+    ClassificationResult.add_member(:additional_occurrences, Shapes::ShapeRef.new(shape: Boolean, location_name: "AdditionalOccurrences"))
+    ClassificationResult.add_member(:status, Shapes::ShapeRef.new(shape: ClassificationStatus, location_name: "Status"))
+    ClassificationResult.add_member(:sensitive_data, Shapes::ShapeRef.new(shape: SensitiveDataResultList, location_name: "SensitiveData"))
+    ClassificationResult.add_member(:custom_data_identifiers, Shapes::ShapeRef.new(shape: CustomDataIdentifiersResult, location_name: "CustomDataIdentifiers"))
+    ClassificationResult.struct_class = Types::ClassificationResult
+
+    ClassificationStatus.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    ClassificationStatus.add_member(:reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Reason"))
+    ClassificationStatus.struct_class = Types::ClassificationStatus
 
     Compliance.add_member(:status, Shapes::ShapeRef.new(shape: ComplianceStatus, location_name: "Status"))
     Compliance.add_member(:related_requirements, Shapes::ShapeRef.new(shape: RelatedRequirementsList, location_name: "RelatedRequirements"))
@@ -2122,12 +2182,28 @@ module Aws::SecurityHub
     CreateMembersResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: ResultList, location_name: "UnprocessedAccounts"))
     CreateMembersResponse.struct_class = Types::CreateMembersResponse
 
+    CustomDataIdentifiersDetections.add_member(:count, Shapes::ShapeRef.new(shape: Long, location_name: "Count"))
+    CustomDataIdentifiersDetections.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Arn"))
+    CustomDataIdentifiersDetections.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    CustomDataIdentifiersDetections.add_member(:occurrences, Shapes::ShapeRef.new(shape: Occurrences, location_name: "Occurrences"))
+    CustomDataIdentifiersDetections.struct_class = Types::CustomDataIdentifiersDetections
+
+    CustomDataIdentifiersDetectionsList.member = Shapes::ShapeRef.new(shape: CustomDataIdentifiersDetections)
+
+    CustomDataIdentifiersResult.add_member(:detections, Shapes::ShapeRef.new(shape: CustomDataIdentifiersDetectionsList, location_name: "Detections"))
+    CustomDataIdentifiersResult.add_member(:total_count, Shapes::ShapeRef.new(shape: Long, location_name: "TotalCount"))
+    CustomDataIdentifiersResult.struct_class = Types::CustomDataIdentifiersResult
+
     Cvss.add_member(:version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Version"))
     Cvss.add_member(:base_score, Shapes::ShapeRef.new(shape: Double, location_name: "BaseScore"))
     Cvss.add_member(:base_vector, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "BaseVector"))
     Cvss.struct_class = Types::Cvss
 
     CvssList.member = Shapes::ShapeRef.new(shape: Cvss)
+
+    DataClassificationDetails.add_member(:detailed_results_location, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DetailedResultsLocation"))
+    DataClassificationDetails.add_member(:result, Shapes::ShapeRef.new(shape: ClassificationResult, location_name: "Result"))
+    DataClassificationDetails.struct_class = Types::DataClassificationDetails
 
     DateFilter.add_member(:start, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Start"))
     DateFilter.add_member(:end, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "End"))
@@ -2266,6 +2342,17 @@ module Aws::SecurityHub
 
     FieldMap.key = Shapes::ShapeRef.new(shape: NonEmptyString)
     FieldMap.value = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    FindingProviderFields.add_member(:confidence, Shapes::ShapeRef.new(shape: RatioScale, location_name: "Confidence"))
+    FindingProviderFields.add_member(:criticality, Shapes::ShapeRef.new(shape: RatioScale, location_name: "Criticality"))
+    FindingProviderFields.add_member(:related_findings, Shapes::ShapeRef.new(shape: RelatedFindingList, location_name: "RelatedFindings"))
+    FindingProviderFields.add_member(:severity, Shapes::ShapeRef.new(shape: FindingProviderSeverity, location_name: "Severity"))
+    FindingProviderFields.add_member(:types, Shapes::ShapeRef.new(shape: TypeList, location_name: "Types"))
+    FindingProviderFields.struct_class = Types::FindingProviderFields
+
+    FindingProviderSeverity.add_member(:label, Shapes::ShapeRef.new(shape: SeverityLabel, location_name: "Label"))
+    FindingProviderSeverity.add_member(:original, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Original"))
+    FindingProviderSeverity.struct_class = Types::FindingProviderSeverity
 
     GeoLocation.add_member(:lon, Shapes::ShapeRef.new(shape: Double, location_name: "Lon"))
     GeoLocation.add_member(:lat, Shapes::ShapeRef.new(shape: Double, location_name: "Lat"))
@@ -2528,6 +2615,20 @@ module Aws::SecurityHub
 
     NumberFilterList.member = Shapes::ShapeRef.new(shape: NumberFilter)
 
+    Occurrences.add_member(:line_ranges, Shapes::ShapeRef.new(shape: Ranges, location_name: "LineRanges"))
+    Occurrences.add_member(:offset_ranges, Shapes::ShapeRef.new(shape: Ranges, location_name: "OffsetRanges"))
+    Occurrences.add_member(:pages, Shapes::ShapeRef.new(shape: Pages, location_name: "Pages"))
+    Occurrences.add_member(:records, Shapes::ShapeRef.new(shape: Records, location_name: "Records"))
+    Occurrences.add_member(:cells, Shapes::ShapeRef.new(shape: Cells, location_name: "Cells"))
+    Occurrences.struct_class = Types::Occurrences
+
+    Page.add_member(:page_number, Shapes::ShapeRef.new(shape: Long, location_name: "PageNumber"))
+    Page.add_member(:line_range, Shapes::ShapeRef.new(shape: Range, location_name: "LineRange"))
+    Page.add_member(:offset_range, Shapes::ShapeRef.new(shape: Range, location_name: "OffsetRange"))
+    Page.struct_class = Types::Page
+
+    Pages.member = Shapes::ShapeRef.new(shape: Page)
+
     PatchSummary.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Id"))
     PatchSummary.add_member(:installed_count, Shapes::ShapeRef.new(shape: Integer, location_name: "InstalledCount"))
     PatchSummary.add_member(:missing_count, Shapes::ShapeRef.new(shape: Integer, location_name: "MissingCount"))
@@ -2581,9 +2682,22 @@ module Aws::SecurityHub
 
     ProductsList.member = Shapes::ShapeRef.new(shape: Product)
 
+    Range.add_member(:start, Shapes::ShapeRef.new(shape: Long, location_name: "Start"))
+    Range.add_member(:end, Shapes::ShapeRef.new(shape: Long, location_name: "End"))
+    Range.add_member(:start_column, Shapes::ShapeRef.new(shape: Long, location_name: "StartColumn"))
+    Range.struct_class = Types::Range
+
+    Ranges.member = Shapes::ShapeRef.new(shape: Range)
+
     Recommendation.add_member(:text, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Text"))
     Recommendation.add_member(:url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Url"))
     Recommendation.struct_class = Types::Recommendation
+
+    Record.add_member(:json_path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "JsonPath"))
+    Record.add_member(:record_index, Shapes::ShapeRef.new(shape: Long, location_name: "RecordIndex"))
+    Record.struct_class = Types::Record
+
+    Records.member = Shapes::ShapeRef.new(shape: Record)
 
     RelatedFinding.add_member(:product_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ProductArn"))
     RelatedFinding.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Id"))
@@ -2602,6 +2716,7 @@ module Aws::SecurityHub
     Resource.add_member(:region, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Region"))
     Resource.add_member(:resource_role, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceRole"))
     Resource.add_member(:tags, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Tags"))
+    Resource.add_member(:data_classification, Shapes::ShapeRef.new(shape: DataClassificationDetails, location_name: "DataClassification"))
     Resource.add_member(:details, Shapes::ShapeRef.new(shape: ResourceDetails, location_name: "Details"))
     Resource.struct_class = Types::Resource
 
@@ -2621,6 +2736,7 @@ module Aws::SecurityHub
     ResourceDetails.add_member(:aws_elbv_2_load_balancer, Shapes::ShapeRef.new(shape: AwsElbv2LoadBalancerDetails, location_name: "AwsElbv2LoadBalancer"))
     ResourceDetails.add_member(:aws_elasticsearch_domain, Shapes::ShapeRef.new(shape: AwsElasticsearchDomainDetails, location_name: "AwsElasticsearchDomain"))
     ResourceDetails.add_member(:aws_s3_bucket, Shapes::ShapeRef.new(shape: AwsS3BucketDetails, location_name: "AwsS3Bucket"))
+    ResourceDetails.add_member(:aws_s3_account_public_access_block, Shapes::ShapeRef.new(shape: AwsS3AccountPublicAccessBlockDetails, location_name: "AwsS3AccountPublicAccessBlock"))
     ResourceDetails.add_member(:aws_s3_object, Shapes::ShapeRef.new(shape: AwsS3ObjectDetails, location_name: "AwsS3Object"))
     ResourceDetails.add_member(:aws_secrets_manager_secret, Shapes::ShapeRef.new(shape: AwsSecretsManagerSecretDetails, location_name: "AwsSecretsManagerSecret"))
     ResourceDetails.add_member(:aws_iam_access_key, Shapes::ShapeRef.new(shape: AwsIamAccessKeyDetails, location_name: "AwsIamAccessKey"))
@@ -2665,6 +2781,20 @@ module Aws::SecurityHub
     ResultList.member = Shapes::ShapeRef.new(shape: Result)
 
     SecurityGroups.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    SensitiveDataDetections.add_member(:count, Shapes::ShapeRef.new(shape: Long, location_name: "Count"))
+    SensitiveDataDetections.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    SensitiveDataDetections.add_member(:occurrences, Shapes::ShapeRef.new(shape: Occurrences, location_name: "Occurrences"))
+    SensitiveDataDetections.struct_class = Types::SensitiveDataDetections
+
+    SensitiveDataDetectionsList.member = Shapes::ShapeRef.new(shape: SensitiveDataDetections)
+
+    SensitiveDataResult.add_member(:category, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Category"))
+    SensitiveDataResult.add_member(:detections, Shapes::ShapeRef.new(shape: SensitiveDataDetectionsList, location_name: "Detections"))
+    SensitiveDataResult.add_member(:total_count, Shapes::ShapeRef.new(shape: Long, location_name: "TotalCount"))
+    SensitiveDataResult.struct_class = Types::SensitiveDataResult
+
+    SensitiveDataResultList.member = Shapes::ShapeRef.new(shape: SensitiveDataResult)
 
     Severity.add_member(:product, Shapes::ShapeRef.new(shape: Double, location_name: "Product"))
     Severity.add_member(:label, Shapes::ShapeRef.new(shape: SeverityLabel, location_name: "Label"))

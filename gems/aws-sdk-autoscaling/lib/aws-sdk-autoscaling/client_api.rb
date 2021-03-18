@@ -59,6 +59,8 @@ module Aws::AutoScaling
     CancelInstanceRefreshAnswer = Shapes::StructureShape.new(name: 'CancelInstanceRefreshAnswer')
     CancelInstanceRefreshType = Shapes::StructureShape.new(name: 'CancelInstanceRefreshType')
     CapacityRebalanceEnabled = Shapes::BooleanShape.new(name: 'CapacityRebalanceEnabled')
+    CheckpointDelay = Shapes::IntegerShape.new(name: 'CheckpointDelay')
+    CheckpointPercentages = Shapes::ListShape.new(name: 'CheckpointPercentages')
     ClassicLinkVPCSecurityGroups = Shapes::ListShape.new(name: 'ClassicLinkVPCSecurityGroups')
     CompleteLifecycleActionAnswer = Shapes::StructureShape.new(name: 'CompleteLifecycleActionAnswer')
     CompleteLifecycleActionType = Shapes::StructureShape.new(name: 'CompleteLifecycleActionType')
@@ -192,6 +194,7 @@ module Aws::AutoScaling
     MixedInstancesPolicy = Shapes::StructureShape.new(name: 'MixedInstancesPolicy')
     MonitoringEnabled = Shapes::BooleanShape.new(name: 'MonitoringEnabled')
     NoDevice = Shapes::BooleanShape.new(name: 'NoDevice')
+    NonZeroIntPercent = Shapes::IntegerShape.new(name: 'NonZeroIntPercent')
     NotificationConfiguration = Shapes::StructureShape.new(name: 'NotificationConfiguration')
     NotificationConfigurations = Shapes::ListShape.new(name: 'NotificationConfigurations')
     NotificationTargetResourceName = Shapes::StringShape.new(name: 'NotificationTargetResourceName')
@@ -428,6 +431,8 @@ module Aws::AutoScaling
 
     CancelInstanceRefreshType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
     CancelInstanceRefreshType.struct_class = Types::CancelInstanceRefreshType
+
+    CheckpointPercentages.member = Shapes::ShapeRef.new(shape: NonZeroIntPercent)
 
     ClassicLinkVPCSecurityGroups.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
 
@@ -954,6 +959,8 @@ module Aws::AutoScaling
 
     RefreshPreferences.add_member(:min_healthy_percentage, Shapes::ShapeRef.new(shape: IntPercent, location_name: "MinHealthyPercentage"))
     RefreshPreferences.add_member(:instance_warmup, Shapes::ShapeRef.new(shape: RefreshInstanceWarmup, location_name: "InstanceWarmup"))
+    RefreshPreferences.add_member(:checkpoint_percentages, Shapes::ShapeRef.new(shape: CheckpointPercentages, location_name: "CheckpointPercentages"))
+    RefreshPreferences.add_member(:checkpoint_delay, Shapes::ShapeRef.new(shape: CheckpointDelay, location_name: "CheckpointDelay"))
     RefreshPreferences.struct_class = Types::RefreshPreferences
 
     ResourceContentionFault.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "message"))

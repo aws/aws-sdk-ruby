@@ -9765,6 +9765,51 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # provides information about the Amazon S3 Public Access Block
+    # configuration for accounts.
+    #
+    # @note When making an API call, you may pass AwsS3AccountPublicAccessBlockDetails
+    #   data as a hash:
+    #
+    #       {
+    #         block_public_acls: false,
+    #         block_public_policy: false,
+    #         ignore_public_acls: false,
+    #         restrict_public_buckets: false,
+    #       }
+    #
+    # @!attribute [rw] block_public_acls
+    #   Indicates whether to reject calls to update an S3 bucket if the
+    #   calls include a public access control list (ACL).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] block_public_policy
+    #   Indicates whether to reject calls to update the access policy for an
+    #   S3 bucket or access point if the policy allows public access.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ignore_public_acls
+    #   Indicates whether Amazon S3 ignores public ACLs that are associated
+    #   with an S3 bucket.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] restrict_public_buckets
+    #   Indicates whether to restrict access to an access point or S3 bucket
+    #   that has a public policy to only AWS service principals and
+    #   authorized users within the S3 bucket owner's account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3AccountPublicAccessBlockDetails AWS API Documentation
+    #
+    class AwsS3AccountPublicAccessBlockDetails < Struct.new(
+      :block_public_acls,
+      :block_public_policy,
+      :ignore_public_acls,
+      :restrict_public_buckets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of an Amazon S3 bucket.
     #
     # @note When making an API call, you may pass AwsS3BucketDetails
@@ -9783,6 +9828,12 @@ module Aws::SecurityHub
     #               },
     #             },
     #           ],
+    #         },
+    #         public_access_block_configuration: {
+    #           block_public_acls: false,
+    #           block_public_policy: false,
+    #           ignore_public_acls: false,
+    #           restrict_public_buckets: false,
     #         },
     #       }
     #
@@ -9810,13 +9861,19 @@ module Aws::SecurityHub
     #   The encryption rules that are applied to the S3 bucket.
     #   @return [Types::AwsS3BucketServerSideEncryptionConfiguration]
     #
+    # @!attribute [rw] public_access_block_configuration
+    #   Provides information about the Amazon S3 Public Access Block
+    #   configuration for the S3 bucket.
+    #   @return [Types::AwsS3AccountPublicAccessBlockDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketDetails AWS API Documentation
     #
     class AwsS3BucketDetails < Struct.new(
       :owner_id,
       :owner_name,
       :created_at,
-      :server_side_encryption_configuration)
+      :server_side_encryption_configuration,
+      :public_access_block_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10077,12 +10134,12 @@ module Aws::SecurityHub
     #         product_arn: "NonEmptyString", # required
     #         generator_id: "NonEmptyString", # required
     #         aws_account_id: "NonEmptyString", # required
-    #         types: ["NonEmptyString"], # required
+    #         types: ["NonEmptyString"],
     #         first_observed_at: "NonEmptyString",
     #         last_observed_at: "NonEmptyString",
     #         created_at: "NonEmptyString", # required
     #         updated_at: "NonEmptyString", # required
-    #         severity: { # required
+    #         severity: {
     #           product: 1.0,
     #           label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
     #           normalized: 1,
@@ -10205,6 +10262,130 @@ module Aws::SecurityHub
     #             resource_role: "NonEmptyString",
     #             tags: {
     #               "NonEmptyString" => "NonEmptyString",
+    #             },
+    #             data_classification: {
+    #               detailed_results_location: "NonEmptyString",
+    #               result: {
+    #                 mime_type: "NonEmptyString",
+    #                 size_classified: 1,
+    #                 additional_occurrences: false,
+    #                 status: {
+    #                   code: "NonEmptyString",
+    #                   reason: "NonEmptyString",
+    #                 },
+    #                 sensitive_data: [
+    #                   {
+    #                     category: "NonEmptyString",
+    #                     detections: [
+    #                       {
+    #                         count: 1,
+    #                         type: "NonEmptyString",
+    #                         occurrences: {
+    #                           line_ranges: [
+    #                             {
+    #                               start: 1,
+    #                               end: 1,
+    #                               start_column: 1,
+    #                             },
+    #                           ],
+    #                           offset_ranges: [
+    #                             {
+    #                               start: 1,
+    #                               end: 1,
+    #                               start_column: 1,
+    #                             },
+    #                           ],
+    #                           pages: [
+    #                             {
+    #                               page_number: 1,
+    #                               line_range: {
+    #                                 start: 1,
+    #                                 end: 1,
+    #                                 start_column: 1,
+    #                               },
+    #                               offset_range: {
+    #                                 start: 1,
+    #                                 end: 1,
+    #                                 start_column: 1,
+    #                               },
+    #                             },
+    #                           ],
+    #                           records: [
+    #                             {
+    #                               json_path: "NonEmptyString",
+    #                               record_index: 1,
+    #                             },
+    #                           ],
+    #                           cells: [
+    #                             {
+    #                               column: 1,
+    #                               row: 1,
+    #                               column_name: "NonEmptyString",
+    #                               cell_reference: "NonEmptyString",
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                     total_count: 1,
+    #                   },
+    #                 ],
+    #                 custom_data_identifiers: {
+    #                   detections: [
+    #                     {
+    #                       count: 1,
+    #                       arn: "NonEmptyString",
+    #                       name: "NonEmptyString",
+    #                       occurrences: {
+    #                         line_ranges: [
+    #                           {
+    #                             start: 1,
+    #                             end: 1,
+    #                             start_column: 1,
+    #                           },
+    #                         ],
+    #                         offset_ranges: [
+    #                           {
+    #                             start: 1,
+    #                             end: 1,
+    #                             start_column: 1,
+    #                           },
+    #                         ],
+    #                         pages: [
+    #                           {
+    #                             page_number: 1,
+    #                             line_range: {
+    #                               start: 1,
+    #                               end: 1,
+    #                               start_column: 1,
+    #                             },
+    #                             offset_range: {
+    #                               start: 1,
+    #                               end: 1,
+    #                               start_column: 1,
+    #                             },
+    #                           },
+    #                         ],
+    #                         records: [
+    #                           {
+    #                             json_path: "NonEmptyString",
+    #                             record_index: 1,
+    #                           },
+    #                         ],
+    #                         cells: [
+    #                           {
+    #                             column: 1,
+    #                             row: 1,
+    #                             column_name: "NonEmptyString",
+    #                             cell_reference: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                   total_count: 1,
+    #                 },
+    #               },
     #             },
     #             details: {
     #               aws_auto_scaling_auto_scaling_group: {
@@ -10507,6 +10688,18 @@ module Aws::SecurityHub
     #                     },
     #                   ],
     #                 },
+    #                 public_access_block_configuration: {
+    #                   block_public_acls: false,
+    #                   block_public_policy: false,
+    #                   ignore_public_acls: false,
+    #                   restrict_public_buckets: false,
+    #                 },
+    #               },
+    #               aws_s3_account_public_access_block: {
+    #                 block_public_acls: false,
+    #                 block_public_policy: false,
+    #                 ignore_public_acls: false,
+    #                 restrict_public_buckets: false,
     #               },
     #               aws_s3_object: {
     #                 last_modified: "NonEmptyString",
@@ -11737,6 +11930,21 @@ module Aws::SecurityHub
     #             blocked: false,
     #           },
     #         },
+    #         finding_provider_fields: {
+    #           confidence: 1,
+    #           criticality: 1,
+    #           related_findings: [
+    #             {
+    #               product_arn: "NonEmptyString", # required
+    #               id: "NonEmptyString", # required
+    #             },
+    #           ],
+    #           severity: {
+    #             label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #             original: "NonEmptyString",
+    #           },
+    #           types: ["NonEmptyString"],
+    #         },
     #       }
     #
     # @!attribute [rw] schema_version
@@ -11957,6 +12165,12 @@ module Aws::SecurityHub
     #   resource.
     #   @return [Types::Action]
     #
+    # @!attribute [rw] finding_provider_fields
+    #   In a `BatchImportFindings` request, finding providers use
+    #   `FindingProviderFields` to provide and update their own values for
+    #   confidence, criticality, related findings, severity, and types.
+    #   @return [Types::FindingProviderFields]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecurityFinding AWS API Documentation
     #
     class AwsSecurityFinding < Struct.new(
@@ -11994,7 +12208,8 @@ module Aws::SecurityHub
       :note,
       :vulnerabilities,
       :patch_summary,
-      :action)
+      :action,
+      :finding_provider_fields)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12563,6 +12778,50 @@ module Aws::SecurityHub
     #             value: "NonEmptyString",
     #           },
     #         ],
+    #         finding_provider_fields_confidence: [
+    #           {
+    #             gte: 1.0,
+    #             lte: 1.0,
+    #             eq: 1.0,
+    #           },
+    #         ],
+    #         finding_provider_fields_criticality: [
+    #           {
+    #             gte: 1.0,
+    #             lte: 1.0,
+    #             eq: 1.0,
+    #           },
+    #         ],
+    #         finding_provider_fields_related_findings_id: [
+    #           {
+    #             value: "NonEmptyString",
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #           },
+    #         ],
+    #         finding_provider_fields_related_findings_product_arn: [
+    #           {
+    #             value: "NonEmptyString",
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #           },
+    #         ],
+    #         finding_provider_fields_severity_label: [
+    #           {
+    #             value: "NonEmptyString",
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #           },
+    #         ],
+    #         finding_provider_fields_severity_original: [
+    #           {
+    #             value: "NonEmptyString",
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #           },
+    #         ],
+    #         finding_provider_fields_types: [
+    #           {
+    #             value: "NonEmptyString",
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] product_arn
@@ -12970,6 +13229,52 @@ module Aws::SecurityHub
     #   A keyword for a finding.
     #   @return [Array<Types::KeywordFilter>]
     #
+    # @!attribute [rw] finding_provider_fields_confidence
+    #   The finding provider value for the finding confidence. Confidence is
+    #   defined as the likelihood that a finding accurately identifies the
+    #   behavior or issue that it was intended to identify.
+    #
+    #   Confidence is scored on a 0-100 basis using a ratio scale, where 0
+    #   means zero percent confidence and 100 means 100 percent confidence.
+    #   @return [Array<Types::NumberFilter>]
+    #
+    # @!attribute [rw] finding_provider_fields_criticality
+    #   The finding provider value for the level of importance assigned to
+    #   the resources associated with the findings.
+    #
+    #   A score of 0 means that the underlying resources have no
+    #   criticality, and a score of 100 is reserved for the most critical
+    #   resources.
+    #   @return [Array<Types::NumberFilter>]
+    #
+    # @!attribute [rw] finding_provider_fields_related_findings_id
+    #   The finding identifier of a related finding that is identified by
+    #   the finding provider.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] finding_provider_fields_related_findings_product_arn
+    #   The ARN of the solution that generated a related finding that is
+    #   identified by the finding provider.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] finding_provider_fields_severity_label
+    #   The finding provider value for the severity label.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] finding_provider_fields_severity_original
+    #   The finding provider's original value for the severity.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] finding_provider_fields_types
+    #   One or more finding types that the finding provider assigned to the
+    #   finding. Uses the format of `namespace/category/classifier` that
+    #   classify a finding.
+    #
+    #   Valid namespace values are: Software and Configuration Checks \|
+    #   TTPs \| Effects \| Unusual Behaviors \| Sensitive Data
+    #   Identifications
+    #   @return [Array<Types::StringFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecurityFindingFilters AWS API Documentation
     #
     class AwsSecurityFindingFilters < Struct.new(
@@ -13056,7 +13361,14 @@ module Aws::SecurityHub
       :note_text,
       :note_updated_at,
       :note_updated_by,
-      :keyword)
+      :keyword,
+      :finding_provider_fields_confidence,
+      :finding_provider_fields_criticality,
+      :finding_provider_fields_related_findings_id,
+      :finding_provider_fields_related_findings_product_arn,
+      :finding_provider_fields_severity_label,
+      :finding_provider_fields_severity_original,
+      :finding_provider_fields_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13662,12 +13974,12 @@ module Aws::SecurityHub
     #             product_arn: "NonEmptyString", # required
     #             generator_id: "NonEmptyString", # required
     #             aws_account_id: "NonEmptyString", # required
-    #             types: ["NonEmptyString"], # required
+    #             types: ["NonEmptyString"],
     #             first_observed_at: "NonEmptyString",
     #             last_observed_at: "NonEmptyString",
     #             created_at: "NonEmptyString", # required
     #             updated_at: "NonEmptyString", # required
-    #             severity: { # required
+    #             severity: {
     #               product: 1.0,
     #               label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
     #               normalized: 1,
@@ -13790,6 +14102,130 @@ module Aws::SecurityHub
     #                 resource_role: "NonEmptyString",
     #                 tags: {
     #                   "NonEmptyString" => "NonEmptyString",
+    #                 },
+    #                 data_classification: {
+    #                   detailed_results_location: "NonEmptyString",
+    #                   result: {
+    #                     mime_type: "NonEmptyString",
+    #                     size_classified: 1,
+    #                     additional_occurrences: false,
+    #                     status: {
+    #                       code: "NonEmptyString",
+    #                       reason: "NonEmptyString",
+    #                     },
+    #                     sensitive_data: [
+    #                       {
+    #                         category: "NonEmptyString",
+    #                         detections: [
+    #                           {
+    #                             count: 1,
+    #                             type: "NonEmptyString",
+    #                             occurrences: {
+    #                               line_ranges: [
+    #                                 {
+    #                                   start: 1,
+    #                                   end: 1,
+    #                                   start_column: 1,
+    #                                 },
+    #                               ],
+    #                               offset_ranges: [
+    #                                 {
+    #                                   start: 1,
+    #                                   end: 1,
+    #                                   start_column: 1,
+    #                                 },
+    #                               ],
+    #                               pages: [
+    #                                 {
+    #                                   page_number: 1,
+    #                                   line_range: {
+    #                                     start: 1,
+    #                                     end: 1,
+    #                                     start_column: 1,
+    #                                   },
+    #                                   offset_range: {
+    #                                     start: 1,
+    #                                     end: 1,
+    #                                     start_column: 1,
+    #                                   },
+    #                                 },
+    #                               ],
+    #                               records: [
+    #                                 {
+    #                                   json_path: "NonEmptyString",
+    #                                   record_index: 1,
+    #                                 },
+    #                               ],
+    #                               cells: [
+    #                                 {
+    #                                   column: 1,
+    #                                   row: 1,
+    #                                   column_name: "NonEmptyString",
+    #                                   cell_reference: "NonEmptyString",
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         ],
+    #                         total_count: 1,
+    #                       },
+    #                     ],
+    #                     custom_data_identifiers: {
+    #                       detections: [
+    #                         {
+    #                           count: 1,
+    #                           arn: "NonEmptyString",
+    #                           name: "NonEmptyString",
+    #                           occurrences: {
+    #                             line_ranges: [
+    #                               {
+    #                                 start: 1,
+    #                                 end: 1,
+    #                                 start_column: 1,
+    #                               },
+    #                             ],
+    #                             offset_ranges: [
+    #                               {
+    #                                 start: 1,
+    #                                 end: 1,
+    #                                 start_column: 1,
+    #                               },
+    #                             ],
+    #                             pages: [
+    #                               {
+    #                                 page_number: 1,
+    #                                 line_range: {
+    #                                   start: 1,
+    #                                   end: 1,
+    #                                   start_column: 1,
+    #                                 },
+    #                                 offset_range: {
+    #                                   start: 1,
+    #                                   end: 1,
+    #                                   start_column: 1,
+    #                                 },
+    #                               },
+    #                             ],
+    #                             records: [
+    #                               {
+    #                                 json_path: "NonEmptyString",
+    #                                 record_index: 1,
+    #                               },
+    #                             ],
+    #                             cells: [
+    #                               {
+    #                                 column: 1,
+    #                                 row: 1,
+    #                                 column_name: "NonEmptyString",
+    #                                 cell_reference: "NonEmptyString",
+    #                               },
+    #                             ],
+    #                           },
+    #                         },
+    #                       ],
+    #                       total_count: 1,
+    #                     },
+    #                   },
     #                 },
     #                 details: {
     #                   aws_auto_scaling_auto_scaling_group: {
@@ -14092,6 +14528,18 @@ module Aws::SecurityHub
     #                         },
     #                       ],
     #                     },
+    #                     public_access_block_configuration: {
+    #                       block_public_acls: false,
+    #                       block_public_policy: false,
+    #                       ignore_public_acls: false,
+    #                       restrict_public_buckets: false,
+    #                     },
+    #                   },
+    #                   aws_s3_account_public_access_block: {
+    #                     block_public_acls: false,
+    #                     block_public_policy: false,
+    #                     ignore_public_acls: false,
+    #                     restrict_public_buckets: false,
     #                   },
     #                   aws_s3_object: {
     #                     last_modified: "NonEmptyString",
@@ -15322,6 +15770,21 @@ module Aws::SecurityHub
     #                 blocked: false,
     #               },
     #             },
+    #             finding_provider_fields: {
+    #               confidence: 1,
+    #               criticality: 1,
+    #               related_findings: [
+    #                 {
+    #                   product_arn: "NonEmptyString", # required
+    #                   id: "NonEmptyString", # required
+    #                 },
+    #               ],
+    #               severity: {
+    #                 label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #                 original: "NonEmptyString",
+    #               },
+    #               types: ["NonEmptyString"],
+    #             },
     #           },
     #         ],
     #       }
@@ -15545,6 +16008,52 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # An occurrence of sensitive data detected in a Microsoft Excel
+    # workbook, comma-separated value (CSV) file, or tab-separated value
+    # (TSV) file.
+    #
+    # @note When making an API call, you may pass Cell
+    #   data as a hash:
+    #
+    #       {
+    #         column: 1,
+    #         row: 1,
+    #         column_name: "NonEmptyString",
+    #         cell_reference: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] column
+    #   The column number of the column that contains the data. For a
+    #   Microsoft Excel workbook, the column number corresponds to the
+    #   alphabetical column identifiers. For example, a value of 1 for
+    #   Column corresponds to the A column in the workbook.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] row
+    #   The row number of the row that contains the data.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] column_name
+    #   The name of the column that contains the data.
+    #   @return [String]
+    #
+    # @!attribute [rw] cell_reference
+    #   For a Microsoft Excel workbook, provides the location of the cell,
+    #   as an absolute cell reference, that contains the data. For example,
+    #   Sheet2!C5 for cell C5 on Sheet2.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Cell AWS API Documentation
+    #
+    class Cell < Struct.new(
+      :column,
+      :row,
+      :column_name,
+      :cell_reference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An IPv4 CIDR block association.
     #
     # @note When making an API call, you may pass CidrBlockAssociation
@@ -15595,6 +16104,203 @@ module Aws::SecurityHub
     #
     class City < Struct.new(
       :city_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the sensitive data that was detected on the resource.
+    #
+    # @note When making an API call, you may pass ClassificationResult
+    #   data as a hash:
+    #
+    #       {
+    #         mime_type: "NonEmptyString",
+    #         size_classified: 1,
+    #         additional_occurrences: false,
+    #         status: {
+    #           code: "NonEmptyString",
+    #           reason: "NonEmptyString",
+    #         },
+    #         sensitive_data: [
+    #           {
+    #             category: "NonEmptyString",
+    #             detections: [
+    #               {
+    #                 count: 1,
+    #                 type: "NonEmptyString",
+    #                 occurrences: {
+    #                   line_ranges: [
+    #                     {
+    #                       start: 1,
+    #                       end: 1,
+    #                       start_column: 1,
+    #                     },
+    #                   ],
+    #                   offset_ranges: [
+    #                     {
+    #                       start: 1,
+    #                       end: 1,
+    #                       start_column: 1,
+    #                     },
+    #                   ],
+    #                   pages: [
+    #                     {
+    #                       page_number: 1,
+    #                       line_range: {
+    #                         start: 1,
+    #                         end: 1,
+    #                         start_column: 1,
+    #                       },
+    #                       offset_range: {
+    #                         start: 1,
+    #                         end: 1,
+    #                         start_column: 1,
+    #                       },
+    #                     },
+    #                   ],
+    #                   records: [
+    #                     {
+    #                       json_path: "NonEmptyString",
+    #                       record_index: 1,
+    #                     },
+    #                   ],
+    #                   cells: [
+    #                     {
+    #                       column: 1,
+    #                       row: 1,
+    #                       column_name: "NonEmptyString",
+    #                       cell_reference: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             ],
+    #             total_count: 1,
+    #           },
+    #         ],
+    #         custom_data_identifiers: {
+    #           detections: [
+    #             {
+    #               count: 1,
+    #               arn: "NonEmptyString",
+    #               name: "NonEmptyString",
+    #               occurrences: {
+    #                 line_ranges: [
+    #                   {
+    #                     start: 1,
+    #                     end: 1,
+    #                     start_column: 1,
+    #                   },
+    #                 ],
+    #                 offset_ranges: [
+    #                   {
+    #                     start: 1,
+    #                     end: 1,
+    #                     start_column: 1,
+    #                   },
+    #                 ],
+    #                 pages: [
+    #                   {
+    #                     page_number: 1,
+    #                     line_range: {
+    #                       start: 1,
+    #                       end: 1,
+    #                       start_column: 1,
+    #                     },
+    #                     offset_range: {
+    #                       start: 1,
+    #                       end: 1,
+    #                       start_column: 1,
+    #                     },
+    #                   },
+    #                 ],
+    #                 records: [
+    #                   {
+    #                     json_path: "NonEmptyString",
+    #                     record_index: 1,
+    #                   },
+    #                 ],
+    #                 cells: [
+    #                   {
+    #                     column: 1,
+    #                     row: 1,
+    #                     column_name: "NonEmptyString",
+    #                     cell_reference: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           ],
+    #           total_count: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] mime_type
+    #   The type of content that the finding applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] size_classified
+    #   The total size in bytes of the affected data.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_occurrences
+    #   Indicates whether there are additional occurrences of sensitive data
+    #   that are not included in the finding. This occurs when the number of
+    #   occurrences exceeds the maximum that can be included.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   The current status of the sensitive data detection.
+    #   @return [Types::ClassificationStatus]
+    #
+    # @!attribute [rw] sensitive_data
+    #   Provides details about sensitive data that was identified based on
+    #   built-in configuration.
+    #   @return [Array<Types::SensitiveDataResult>]
+    #
+    # @!attribute [rw] custom_data_identifiers
+    #   Provides details about sensitive data that was identified based on
+    #   customer-defined configuration.
+    #   @return [Types::CustomDataIdentifiersResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ClassificationResult AWS API Documentation
+    #
+    class ClassificationResult < Struct.new(
+      :mime_type,
+      :size_classified,
+      :additional_occurrences,
+      :status,
+      :sensitive_data,
+      :custom_data_identifiers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the current status of the sensitive data
+    # detection.
+    #
+    # @note When making an API call, you may pass ClassificationStatus
+    #   data as a hash:
+    #
+    #       {
+    #         code: "NonEmptyString",
+    #         reason: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] code
+    #   The code that represents the status of the sensitive data detection.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   A longer description of the current status of the sensitive data
+    #   detection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ClassificationStatus AWS API Documentation
+    #
+    class ClassificationStatus < Struct.new(
+      :code,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16339,6 +17045,50 @@ module Aws::SecurityHub
     #               value: "NonEmptyString",
     #             },
     #           ],
+    #           finding_provider_fields_confidence: [
+    #             {
+    #               gte: 1.0,
+    #               lte: 1.0,
+    #               eq: 1.0,
+    #             },
+    #           ],
+    #           finding_provider_fields_criticality: [
+    #             {
+    #               gte: 1.0,
+    #               lte: 1.0,
+    #               eq: 1.0,
+    #             },
+    #           ],
+    #           finding_provider_fields_related_findings_id: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_related_findings_product_arn: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_severity_label: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_severity_original: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_types: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
     #         },
     #         group_by_attribute: "NonEmptyString", # required
     #       }
@@ -16422,6 +17172,170 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The list of detected instances of sensitive data.
+    #
+    # @note When making an API call, you may pass CustomDataIdentifiersDetections
+    #   data as a hash:
+    #
+    #       {
+    #         count: 1,
+    #         arn: "NonEmptyString",
+    #         name: "NonEmptyString",
+    #         occurrences: {
+    #           line_ranges: [
+    #             {
+    #               start: 1,
+    #               end: 1,
+    #               start_column: 1,
+    #             },
+    #           ],
+    #           offset_ranges: [
+    #             {
+    #               start: 1,
+    #               end: 1,
+    #               start_column: 1,
+    #             },
+    #           ],
+    #           pages: [
+    #             {
+    #               page_number: 1,
+    #               line_range: {
+    #                 start: 1,
+    #                 end: 1,
+    #                 start_column: 1,
+    #               },
+    #               offset_range: {
+    #                 start: 1,
+    #                 end: 1,
+    #                 start_column: 1,
+    #               },
+    #             },
+    #           ],
+    #           records: [
+    #             {
+    #               json_path: "NonEmptyString",
+    #               record_index: 1,
+    #             },
+    #           ],
+    #           cells: [
+    #             {
+    #               column: 1,
+    #               row: 1,
+    #               column_name: "NonEmptyString",
+    #               cell_reference: "NonEmptyString",
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] count
+    #   The total number of occurrences of sensitive data that were
+    #   detected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the custom identifier that was used to detect the
+    #   sensitive data.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   he name of the custom identifier that detected the sensitive data.
+    #   @return [String]
+    #
+    # @!attribute [rw] occurrences
+    #   Details about the sensitive data that was detected.
+    #   @return [Types::Occurrences]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CustomDataIdentifiersDetections AWS API Documentation
+    #
+    class CustomDataIdentifiersDetections < Struct.new(
+      :count,
+      :arn,
+      :name,
+      :occurrences)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains an instance of sensitive data that was detected by a
+    # customer-defined identifier.
+    #
+    # @note When making an API call, you may pass CustomDataIdentifiersResult
+    #   data as a hash:
+    #
+    #       {
+    #         detections: [
+    #           {
+    #             count: 1,
+    #             arn: "NonEmptyString",
+    #             name: "NonEmptyString",
+    #             occurrences: {
+    #               line_ranges: [
+    #                 {
+    #                   start: 1,
+    #                   end: 1,
+    #                   start_column: 1,
+    #                 },
+    #               ],
+    #               offset_ranges: [
+    #                 {
+    #                   start: 1,
+    #                   end: 1,
+    #                   start_column: 1,
+    #                 },
+    #               ],
+    #               pages: [
+    #                 {
+    #                   page_number: 1,
+    #                   line_range: {
+    #                     start: 1,
+    #                     end: 1,
+    #                     start_column: 1,
+    #                   },
+    #                   offset_range: {
+    #                     start: 1,
+    #                     end: 1,
+    #                     start_column: 1,
+    #                   },
+    #                 },
+    #               ],
+    #               records: [
+    #                 {
+    #                   json_path: "NonEmptyString",
+    #                   record_index: 1,
+    #                 },
+    #               ],
+    #               cells: [
+    #                 {
+    #                   column: 1,
+    #                   row: 1,
+    #                   column_name: "NonEmptyString",
+    #                   cell_reference: "NonEmptyString",
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         ],
+    #         total_count: 1,
+    #       }
+    #
+    # @!attribute [rw] detections
+    #   The list of detected instances of sensitive data.
+    #   @return [Array<Types::CustomDataIdentifiersDetections>]
+    #
+    # @!attribute [rw] total_count
+    #   The total number of occurrences of sensitive data.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CustomDataIdentifiersResult AWS API Documentation
+    #
+    class CustomDataIdentifiersResult < Struct.new(
+      :detections,
+      :total_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # CVSS scores from the advisory related to the vulnerability.
     #
     # @note When making an API call, you may pass Cvss
@@ -16451,6 +17365,154 @@ module Aws::SecurityHub
       :version,
       :base_score,
       :base_vector)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about sensitive data that was detected on a resource.
+    #
+    # @note When making an API call, you may pass DataClassificationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         detailed_results_location: "NonEmptyString",
+    #         result: {
+    #           mime_type: "NonEmptyString",
+    #           size_classified: 1,
+    #           additional_occurrences: false,
+    #           status: {
+    #             code: "NonEmptyString",
+    #             reason: "NonEmptyString",
+    #           },
+    #           sensitive_data: [
+    #             {
+    #               category: "NonEmptyString",
+    #               detections: [
+    #                 {
+    #                   count: 1,
+    #                   type: "NonEmptyString",
+    #                   occurrences: {
+    #                     line_ranges: [
+    #                       {
+    #                         start: 1,
+    #                         end: 1,
+    #                         start_column: 1,
+    #                       },
+    #                     ],
+    #                     offset_ranges: [
+    #                       {
+    #                         start: 1,
+    #                         end: 1,
+    #                         start_column: 1,
+    #                       },
+    #                     ],
+    #                     pages: [
+    #                       {
+    #                         page_number: 1,
+    #                         line_range: {
+    #                           start: 1,
+    #                           end: 1,
+    #                           start_column: 1,
+    #                         },
+    #                         offset_range: {
+    #                           start: 1,
+    #                           end: 1,
+    #                           start_column: 1,
+    #                         },
+    #                       },
+    #                     ],
+    #                     records: [
+    #                       {
+    #                         json_path: "NonEmptyString",
+    #                         record_index: 1,
+    #                       },
+    #                     ],
+    #                     cells: [
+    #                       {
+    #                         column: 1,
+    #                         row: 1,
+    #                         column_name: "NonEmptyString",
+    #                         cell_reference: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #               total_count: 1,
+    #             },
+    #           ],
+    #           custom_data_identifiers: {
+    #             detections: [
+    #               {
+    #                 count: 1,
+    #                 arn: "NonEmptyString",
+    #                 name: "NonEmptyString",
+    #                 occurrences: {
+    #                   line_ranges: [
+    #                     {
+    #                       start: 1,
+    #                       end: 1,
+    #                       start_column: 1,
+    #                     },
+    #                   ],
+    #                   offset_ranges: [
+    #                     {
+    #                       start: 1,
+    #                       end: 1,
+    #                       start_column: 1,
+    #                     },
+    #                   ],
+    #                   pages: [
+    #                     {
+    #                       page_number: 1,
+    #                       line_range: {
+    #                         start: 1,
+    #                         end: 1,
+    #                         start_column: 1,
+    #                       },
+    #                       offset_range: {
+    #                         start: 1,
+    #                         end: 1,
+    #                         start_column: 1,
+    #                       },
+    #                     },
+    #                   ],
+    #                   records: [
+    #                     {
+    #                       json_path: "NonEmptyString",
+    #                       record_index: 1,
+    #                     },
+    #                   ],
+    #                   cells: [
+    #                     {
+    #                       column: 1,
+    #                       row: 1,
+    #                       column_name: "NonEmptyString",
+    #                       cell_reference: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             ],
+    #             total_count: 1,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] detailed_results_location
+    #   The path to the folder or file that contains the sensitive data.
+    #   @return [String]
+    #
+    # @!attribute [rw] result
+    #   The details about the sensitive data that was detected on the
+    #   resource.
+    #   @return [Types::ClassificationResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DataClassificationDetails AWS API Documentation
+    #
+    class DataClassificationDetails < Struct.new(
+      :detailed_results_location,
+      :result)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17183,6 +18245,103 @@ module Aws::SecurityHub
     #
     class EnableSecurityHubResponse < Aws::EmptyStructure; end
 
+    # In a `BatchImportFindings` request, finding providers use
+    # `FindingProviderFields` to provide and update values for confidence,
+    # criticality, related findings, severity, and types.
+    #
+    # @note When making an API call, you may pass FindingProviderFields
+    #   data as a hash:
+    #
+    #       {
+    #         confidence: 1,
+    #         criticality: 1,
+    #         related_findings: [
+    #           {
+    #             product_arn: "NonEmptyString", # required
+    #             id: "NonEmptyString", # required
+    #           },
+    #         ],
+    #         severity: {
+    #           label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #           original: "NonEmptyString",
+    #         },
+    #         types: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] confidence
+    #   A finding's confidence. Confidence is defined as the likelihood
+    #   that a finding accurately identifies the behavior or issue that it
+    #   was intended to identify.
+    #
+    #   Confidence is scored on a 0-100 basis using a ratio scale, where 0
+    #   means zero percent confidence and 100 means 100 percent confidence.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] criticality
+    #   The level of importance assigned to the resources associated with
+    #   the finding.
+    #
+    #   A score of 0 means that the underlying resources have no
+    #   criticality, and a score of 100 is reserved for the most critical
+    #   resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] related_findings
+    #   A list of findings that are related to the current finding.
+    #   @return [Array<Types::RelatedFinding>]
+    #
+    # @!attribute [rw] severity
+    #   The severity of a finding.
+    #   @return [Types::FindingProviderSeverity]
+    #
+    # @!attribute [rw] types
+    #   One or more finding types in the format of
+    #   `namespace/category/classifier` that classify a finding.
+    #
+    #   Valid namespace values are: Software and Configuration Checks \|
+    #   TTPs \| Effects \| Unusual Behaviors \| Sensitive Data
+    #   Identifications
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FindingProviderFields AWS API Documentation
+    #
+    class FindingProviderFields < Struct.new(
+      :confidence,
+      :criticality,
+      :related_findings,
+      :severity,
+      :types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The severity assigned to the finding by the finding provider.
+    #
+    # @note When making an API call, you may pass FindingProviderSeverity
+    #   data as a hash:
+    #
+    #       {
+    #         label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #         original: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] label
+    #   The severity label assigned to the finding by the finding provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] original
+    #   The finding provider's original value for the severity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FindingProviderSeverity AWS API Documentation
+    #
+    class FindingProviderSeverity < Struct.new(
+      :label,
+      :original)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides the latitude and longitude coordinates of a location.
     #
     # @note When making an API call, you may pass GeoLocation
@@ -17822,6 +18981,50 @@ module Aws::SecurityHub
     #           keyword: [
     #             {
     #               value: "NonEmptyString",
+    #             },
+    #           ],
+    #           finding_provider_fields_confidence: [
+    #             {
+    #               gte: 1.0,
+    #               lte: 1.0,
+    #               eq: 1.0,
+    #             },
+    #           ],
+    #           finding_provider_fields_criticality: [
+    #             {
+    #               gte: 1.0,
+    #               lte: 1.0,
+    #               eq: 1.0,
+    #             },
+    #           ],
+    #           finding_provider_fields_related_findings_id: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_related_findings_product_arn: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_severity_label: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_severity_original: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_types: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #         },
@@ -19290,6 +20493,139 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The detected occurrences of sensitive data.
+    #
+    # @note When making an API call, you may pass Occurrences
+    #   data as a hash:
+    #
+    #       {
+    #         line_ranges: [
+    #           {
+    #             start: 1,
+    #             end: 1,
+    #             start_column: 1,
+    #           },
+    #         ],
+    #         offset_ranges: [
+    #           {
+    #             start: 1,
+    #             end: 1,
+    #             start_column: 1,
+    #           },
+    #         ],
+    #         pages: [
+    #           {
+    #             page_number: 1,
+    #             line_range: {
+    #               start: 1,
+    #               end: 1,
+    #               start_column: 1,
+    #             },
+    #             offset_range: {
+    #               start: 1,
+    #               end: 1,
+    #               start_column: 1,
+    #             },
+    #           },
+    #         ],
+    #         records: [
+    #           {
+    #             json_path: "NonEmptyString",
+    #             record_index: 1,
+    #           },
+    #         ],
+    #         cells: [
+    #           {
+    #             column: 1,
+    #             row: 1,
+    #             column_name: "NonEmptyString",
+    #             cell_reference: "NonEmptyString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] line_ranges
+    #   Occurrences of sensitive data detected in a non-binary text file or
+    #   a Microsoft Word file. Non-binary text files include files such as
+    #   HTML, XML, JSON, and TXT files.
+    #   @return [Array<Types::Range>]
+    #
+    # @!attribute [rw] offset_ranges
+    #   Occurrences of sensitive data detected in a binary text file.
+    #   @return [Array<Types::Range>]
+    #
+    # @!attribute [rw] pages
+    #   Occurrences of sensitive data in an Adobe Portable Document Format
+    #   (PDF) file.
+    #   @return [Array<Types::Page>]
+    #
+    # @!attribute [rw] records
+    #   Occurrences of sensitive data in an Apache Avro object container or
+    #   an Apache Parquet file.
+    #   @return [Array<Types::Record>]
+    #
+    # @!attribute [rw] cells
+    #   Occurrences of sensitive data detected in Microsoft Excel workbooks,
+    #   comma-separated value (CSV) files, or tab-separated value (TSV)
+    #   files.
+    #   @return [Array<Types::Cell>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Occurrences AWS API Documentation
+    #
+    class Occurrences < Struct.new(
+      :line_ranges,
+      :offset_ranges,
+      :pages,
+      :records,
+      :cells)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An occurrence of sensitive data in an Adobe Portable Document Format
+    # (PDF) file.
+    #
+    # @note When making an API call, you may pass Page
+    #   data as a hash:
+    #
+    #       {
+    #         page_number: 1,
+    #         line_range: {
+    #           start: 1,
+    #           end: 1,
+    #           start_column: 1,
+    #         },
+    #         offset_range: {
+    #           start: 1,
+    #           end: 1,
+    #           start_column: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] page_number
+    #   The page number of the page that contains the sensitive data.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] line_range
+    #   An occurrence of sensitive data detected in a non-binary text file
+    #   or a Microsoft Word file. Non-binary text files include files such
+    #   as HTML, XML, JSON, and TXT files.
+    #   @return [Types::Range]
+    #
+    # @!attribute [rw] offset_range
+    #   An occurrence of sensitive data detected in a binary text file.
+    #   @return [Types::Range]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Page AWS API Documentation
+    #
+    class Page < Struct.new(
+      :page_number,
+      :line_range,
+      :offset_range)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides an overview of the patch compliance status for an instance
     # against a selected compliance standard.
     #
@@ -19673,6 +21009,44 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Identifies where the sensitive data begins and ends.
+    #
+    # @note When making an API call, you may pass Range
+    #   data as a hash:
+    #
+    #       {
+    #         start: 1,
+    #         end: 1,
+    #         start_column: 1,
+    #       }
+    #
+    # @!attribute [rw] start
+    #   The number of lines (for a line range) or characters (for an offset
+    #   range) from the beginning of the file to the end of the sensitive
+    #   data.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end
+    #   The number of lines (for a line range) or characters (for an offset
+    #   range) from the beginning of the file to the end of the sensitive
+    #   data.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_column
+    #   In the line where the sensitive data starts, the column within the
+    #   line where the sensitive data starts.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Range AWS API Documentation
+    #
+    class Range < Struct.new(
+      :start,
+      :end,
+      :start_column)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A recommendation on how to remediate the issue identified in a
     # finding.
     #
@@ -19699,6 +21073,38 @@ module Aws::SecurityHub
     class Recommendation < Struct.new(
       :text,
       :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An occurrence of sensitive data in an Apache Avro object container or
+    # an Apache Parquet file.
+    #
+    # @note When making an API call, you may pass Record
+    #   data as a hash:
+    #
+    #       {
+    #         json_path: "NonEmptyString",
+    #         record_index: 1,
+    #       }
+    #
+    # @!attribute [rw] json_path
+    #   The path, as a JSONPath expression, to the field in the record that
+    #   contains the data. If the field name is longer than 20 characters,
+    #   it is truncated. If the path is longer than 250 characters, it is
+    #   truncated.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_index
+    #   The record index, starting from 0, for the record that contains the
+    #   data.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Record AWS API Documentation
+    #
+    class Record < Struct.new(
+      :json_path,
+      :record_index)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19768,6 +21174,130 @@ module Aws::SecurityHub
     #         resource_role: "NonEmptyString",
     #         tags: {
     #           "NonEmptyString" => "NonEmptyString",
+    #         },
+    #         data_classification: {
+    #           detailed_results_location: "NonEmptyString",
+    #           result: {
+    #             mime_type: "NonEmptyString",
+    #             size_classified: 1,
+    #             additional_occurrences: false,
+    #             status: {
+    #               code: "NonEmptyString",
+    #               reason: "NonEmptyString",
+    #             },
+    #             sensitive_data: [
+    #               {
+    #                 category: "NonEmptyString",
+    #                 detections: [
+    #                   {
+    #                     count: 1,
+    #                     type: "NonEmptyString",
+    #                     occurrences: {
+    #                       line_ranges: [
+    #                         {
+    #                           start: 1,
+    #                           end: 1,
+    #                           start_column: 1,
+    #                         },
+    #                       ],
+    #                       offset_ranges: [
+    #                         {
+    #                           start: 1,
+    #                           end: 1,
+    #                           start_column: 1,
+    #                         },
+    #                       ],
+    #                       pages: [
+    #                         {
+    #                           page_number: 1,
+    #                           line_range: {
+    #                             start: 1,
+    #                             end: 1,
+    #                             start_column: 1,
+    #                           },
+    #                           offset_range: {
+    #                             start: 1,
+    #                             end: 1,
+    #                             start_column: 1,
+    #                           },
+    #                         },
+    #                       ],
+    #                       records: [
+    #                         {
+    #                           json_path: "NonEmptyString",
+    #                           record_index: 1,
+    #                         },
+    #                       ],
+    #                       cells: [
+    #                         {
+    #                           column: 1,
+    #                           row: 1,
+    #                           column_name: "NonEmptyString",
+    #                           cell_reference: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 ],
+    #                 total_count: 1,
+    #               },
+    #             ],
+    #             custom_data_identifiers: {
+    #               detections: [
+    #                 {
+    #                   count: 1,
+    #                   arn: "NonEmptyString",
+    #                   name: "NonEmptyString",
+    #                   occurrences: {
+    #                     line_ranges: [
+    #                       {
+    #                         start: 1,
+    #                         end: 1,
+    #                         start_column: 1,
+    #                       },
+    #                     ],
+    #                     offset_ranges: [
+    #                       {
+    #                         start: 1,
+    #                         end: 1,
+    #                         start_column: 1,
+    #                       },
+    #                     ],
+    #                     pages: [
+    #                       {
+    #                         page_number: 1,
+    #                         line_range: {
+    #                           start: 1,
+    #                           end: 1,
+    #                           start_column: 1,
+    #                         },
+    #                         offset_range: {
+    #                           start: 1,
+    #                           end: 1,
+    #                           start_column: 1,
+    #                         },
+    #                       },
+    #                     ],
+    #                     records: [
+    #                       {
+    #                         json_path: "NonEmptyString",
+    #                         record_index: 1,
+    #                       },
+    #                     ],
+    #                     cells: [
+    #                       {
+    #                         column: 1,
+    #                         row: 1,
+    #                         column_name: "NonEmptyString",
+    #                         cell_reference: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #               total_count: 1,
+    #             },
+    #           },
     #         },
     #         details: {
     #           aws_auto_scaling_auto_scaling_group: {
@@ -20070,6 +21600,18 @@ module Aws::SecurityHub
     #                 },
     #               ],
     #             },
+    #             public_access_block_configuration: {
+    #               block_public_acls: false,
+    #               block_public_policy: false,
+    #               ignore_public_acls: false,
+    #               restrict_public_buckets: false,
+    #             },
+    #           },
+    #           aws_s3_account_public_access_block: {
+    #             block_public_acls: false,
+    #             block_public_policy: false,
+    #             ignore_public_acls: false,
+    #             restrict_public_buckets: false,
     #           },
     #           aws_s3_object: {
     #             last_modified: "NonEmptyString",
@@ -21155,6 +22697,11 @@ module Aws::SecurityHub
     #   finding was processed.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] data_classification
+    #   Contains information about sensitive data that was detected on the
+    #   resource.
+    #   @return [Types::DataClassificationDetails]
+    #
     # @!attribute [rw] details
     #   Additional details about the resource related to a finding.
     #   @return [Types::ResourceDetails]
@@ -21168,6 +22715,7 @@ module Aws::SecurityHub
       :region,
       :resource_role,
       :tags,
+      :data_classification,
       :details)
       SENSITIVE = []
       include Aws::Structure
@@ -21508,6 +23056,18 @@ module Aws::SecurityHub
     #               },
     #             ],
     #           },
+    #           public_access_block_configuration: {
+    #             block_public_acls: false,
+    #             block_public_policy: false,
+    #             ignore_public_acls: false,
+    #             restrict_public_buckets: false,
+    #           },
+    #         },
+    #         aws_s3_account_public_access_block: {
+    #           block_public_acls: false,
+    #           block_public_policy: false,
+    #           ignore_public_acls: false,
+    #           restrict_public_buckets: false,
     #         },
     #         aws_s3_object: {
     #           last_modified: "NonEmptyString",
@@ -22607,6 +24167,11 @@ module Aws::SecurityHub
     #   Details about an Amazon S3 bucket related to a finding.
     #   @return [Types::AwsS3BucketDetails]
     #
+    # @!attribute [rw] aws_s3_account_public_access_block
+    #   Details about the Amazon S3 Public Access Block configuration for an
+    #   account.
+    #   @return [Types::AwsS3AccountPublicAccessBlockDetails]
+    #
     # @!attribute [rw] aws_s3_object
     #   Details about an Amazon S3 object related to a finding.
     #   @return [Types::AwsS3ObjectDetails]
@@ -22750,6 +24315,7 @@ module Aws::SecurityHub
       :aws_elbv_2_load_balancer,
       :aws_elasticsearch_domain,
       :aws_s3_bucket,
+      :aws_s3_account_public_access_block,
       :aws_s3_object,
       :aws_secrets_manager_secret,
       :aws_iam_access_key,
@@ -22816,6 +24382,171 @@ module Aws::SecurityHub
     class Result < Struct.new(
       :account_id,
       :processing_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The list of detected instances of sensitive data.
+    #
+    # @note When making an API call, you may pass SensitiveDataDetections
+    #   data as a hash:
+    #
+    #       {
+    #         count: 1,
+    #         type: "NonEmptyString",
+    #         occurrences: {
+    #           line_ranges: [
+    #             {
+    #               start: 1,
+    #               end: 1,
+    #               start_column: 1,
+    #             },
+    #           ],
+    #           offset_ranges: [
+    #             {
+    #               start: 1,
+    #               end: 1,
+    #               start_column: 1,
+    #             },
+    #           ],
+    #           pages: [
+    #             {
+    #               page_number: 1,
+    #               line_range: {
+    #                 start: 1,
+    #                 end: 1,
+    #                 start_column: 1,
+    #               },
+    #               offset_range: {
+    #                 start: 1,
+    #                 end: 1,
+    #                 start_column: 1,
+    #               },
+    #             },
+    #           ],
+    #           records: [
+    #             {
+    #               json_path: "NonEmptyString",
+    #               record_index: 1,
+    #             },
+    #           ],
+    #           cells: [
+    #             {
+    #               column: 1,
+    #               row: 1,
+    #               column_name: "NonEmptyString",
+    #               cell_reference: "NonEmptyString",
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] count
+    #   The total number of occurrences of sensitive data that were
+    #   detected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] type
+    #   The type of sensitive data that was detected. For example, the type
+    #   might indicate that the data is an email address.
+    #   @return [String]
+    #
+    # @!attribute [rw] occurrences
+    #   Details about the sensitive data that was detected.
+    #   @return [Types::Occurrences]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SensitiveDataDetections AWS API Documentation
+    #
+    class SensitiveDataDetections < Struct.new(
+      :count,
+      :type,
+      :occurrences)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a detected instance of sensitive data that are based on
+    # built-in identifiers.
+    #
+    # @note When making an API call, you may pass SensitiveDataResult
+    #   data as a hash:
+    #
+    #       {
+    #         category: "NonEmptyString",
+    #         detections: [
+    #           {
+    #             count: 1,
+    #             type: "NonEmptyString",
+    #             occurrences: {
+    #               line_ranges: [
+    #                 {
+    #                   start: 1,
+    #                   end: 1,
+    #                   start_column: 1,
+    #                 },
+    #               ],
+    #               offset_ranges: [
+    #                 {
+    #                   start: 1,
+    #                   end: 1,
+    #                   start_column: 1,
+    #                 },
+    #               ],
+    #               pages: [
+    #                 {
+    #                   page_number: 1,
+    #                   line_range: {
+    #                     start: 1,
+    #                     end: 1,
+    #                     start_column: 1,
+    #                   },
+    #                   offset_range: {
+    #                     start: 1,
+    #                     end: 1,
+    #                     start_column: 1,
+    #                   },
+    #                 },
+    #               ],
+    #               records: [
+    #                 {
+    #                   json_path: "NonEmptyString",
+    #                   record_index: 1,
+    #                 },
+    #               ],
+    #               cells: [
+    #                 {
+    #                   column: 1,
+    #                   row: 1,
+    #                   column_name: "NonEmptyString",
+    #                   cell_reference: "NonEmptyString",
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         ],
+    #         total_count: 1,
+    #       }
+    #
+    # @!attribute [rw] category
+    #   The category of sensitive data that was detected. For example, the
+    #   category can indicate that the sensitive data involved credentials,
+    #   financial information, or personal information.
+    #   @return [String]
+    #
+    # @!attribute [rw] detections
+    #   The list of detected instances of sensitive data.
+    #   @return [Array<Types::SensitiveDataDetections>]
+    #
+    # @!attribute [rw] total_count
+    #   The total number of occurrences of sensitive data.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SensitiveDataResult AWS API Documentation
+    #
+    class SensitiveDataResult < Struct.new(
+      :category,
+      :detections,
+      :total_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24068,6 +25799,50 @@ module Aws::SecurityHub
     #               value: "NonEmptyString",
     #             },
     #           ],
+    #           finding_provider_fields_confidence: [
+    #             {
+    #               gte: 1.0,
+    #               lte: 1.0,
+    #               eq: 1.0,
+    #             },
+    #           ],
+    #           finding_provider_fields_criticality: [
+    #             {
+    #               gte: 1.0,
+    #               lte: 1.0,
+    #               eq: 1.0,
+    #             },
+    #           ],
+    #           finding_provider_fields_related_findings_id: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_related_findings_product_arn: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_severity_label: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_severity_original: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_types: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
     #         },
     #         note: {
     #           text: "NonEmptyString", # required
@@ -24661,6 +26436,50 @@ module Aws::SecurityHub
     #           keyword: [
     #             {
     #               value: "NonEmptyString",
+    #             },
+    #           ],
+    #           finding_provider_fields_confidence: [
+    #             {
+    #               gte: 1.0,
+    #               lte: 1.0,
+    #               eq: 1.0,
+    #             },
+    #           ],
+    #           finding_provider_fields_criticality: [
+    #             {
+    #               gte: 1.0,
+    #               lte: 1.0,
+    #               eq: 1.0,
+    #             },
+    #           ],
+    #           finding_provider_fields_related_findings_id: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_related_findings_product_arn: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_severity_label: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_severity_original: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           finding_provider_fields_types: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #         },

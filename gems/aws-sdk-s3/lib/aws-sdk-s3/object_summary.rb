@@ -375,7 +375,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
     # @option options [String] :copy_source_if_match
     #   Copies the object if its entity tag (ETag) matches the specified tag.
     # @option options [Time,DateTime,Date,Integer,String] :copy_source_if_modified_since
@@ -500,11 +500,11 @@ module Aws::S3
     # @option options [String] :object_lock_legal_hold_status
     #   Specifies whether you want to apply a Legal Hold to the copied object.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected destination bucket owner. If the
+    #   The account ID of the expected destination bucket owner. If the
     #   destination bucket is owned by a different account, the request will
     #   fail with an HTTP `403 (Access Denied)` error.
     # @option options [String] :expected_source_bucket_owner
-    #   The account id of the expected source bucket owner. If the source
+    #   The account ID of the expected source bucket owner. If the source
     #   bucket is owned by a different account, the request will fail with an
     #   HTTP `403 (Access Denied)` error.
     # @return [Types::CopyObjectOutput]
@@ -548,7 +548,7 @@ module Aws::S3
     #   Indicates whether S3 Object Lock should bypass Governance-mode
     #   restrictions to process this operation.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [Types::DeleteObjectOutput]
@@ -652,7 +652,7 @@ module Aws::S3
     #   for the part specified. Useful for downloading just a part of an
     #   object.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [Types::GetObjectOutput]
@@ -812,7 +812,7 @@ module Aws::S3
     #   Specifies whether you want to apply a Legal Hold to the uploaded
     #   object.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [MultipartUpload]
@@ -1061,7 +1061,7 @@ module Aws::S3
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [Types::PutObjectOutput]
@@ -1178,7 +1178,7 @@ module Aws::S3
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [Types::RestoreObjectOutput]
@@ -1335,7 +1335,7 @@ module Aws::S3
       #   Governance-type Object Lock in place. You must have sufficient
       #   permissions to perform this operation.
       # @option options [String] :expected_bucket_owner
-      #   The account id of the expected bucket owner. If the bucket is owned by
+      #   The account ID of the expected bucket owner. If the bucket is owned by
       #   a different account, the request will fail with an HTTP `403 (Access
       #   Denied)` error.
       # @return [void]

@@ -87,8 +87,8 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -112,7 +112,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -939,8 +939,8 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -1057,7 +1057,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -1341,8 +1341,8 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] cache_control
@@ -1411,7 +1411,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
     #   @return [String]
     #
     # @!attribute [rw] copy_source_if_match
@@ -1603,13 +1603,13 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected destination bucket owner. If the
+    #   The account ID of the expected destination bucket owner. If the
     #   destination bucket is owned by a different account, the request will
     #   fail with an HTTP `403 (Access Denied)` error.
     #   @return [String]
     #
     # @!attribute [rw] expected_source_bucket_owner
-    #   The account id of the expected source bucket owner. If the source
+    #   The account ID of the expected source bucket owner. If the source
     #   bucket is owned by a different account, the request will fail with
     #   an HTTP `403 (Access Denied)` error.
     #   @return [String]
@@ -1858,8 +1858,8 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -1996,8 +1996,8 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] cache_control
@@ -2165,7 +2165,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -2295,7 +2295,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -2323,7 +2323,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -2351,7 +2351,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -2410,7 +2410,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -2438,7 +2438,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -2471,7 +2471,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -2499,7 +2499,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -2526,7 +2526,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -2553,7 +2553,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -2580,7 +2580,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -2607,7 +2607,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -2635,7 +2635,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -2791,8 +2791,8 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -2828,7 +2828,7 @@ module Aws::S3
     #   @return [Boolean]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -2893,8 +2893,8 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -2907,7 +2907,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -2991,8 +2991,8 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] delete
@@ -3025,7 +3025,7 @@ module Aws::S3
     #   @return [Boolean]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -3057,7 +3057,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -4244,7 +4244,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -4288,7 +4288,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -4333,7 +4333,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -4374,7 +4374,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -4414,7 +4414,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -4497,7 +4497,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -4537,7 +4537,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -4576,7 +4576,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -4622,7 +4622,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -4668,7 +4668,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -4713,7 +4713,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -4742,7 +4742,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -4783,7 +4783,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -4822,7 +4822,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -4862,7 +4862,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -4902,7 +4902,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -4942,7 +4942,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -4981,7 +4981,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -5028,7 +5028,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -5086,7 +5086,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -5149,7 +5149,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -5173,7 +5173,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -5228,7 +5228,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -5254,7 +5254,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -5305,11 +5305,11 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -5574,8 +5574,8 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] if_match
@@ -5684,7 +5684,7 @@ module Aws::S3
     #   @return [Integer]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -5754,7 +5754,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -5780,7 +5780,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -5850,8 +5850,8 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -5864,7 +5864,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -5943,7 +5943,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -5986,7 +5986,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -6158,12 +6158,12 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -6494,8 +6494,8 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] if_match
@@ -6580,7 +6580,7 @@ module Aws::S3
     #   @return [Integer]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -7623,7 +7623,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -7754,7 +7754,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -7826,7 +7826,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -7985,8 +7985,8 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] delimiter
@@ -8047,7 +8047,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -8227,7 +8227,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -8370,8 +8370,8 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] delimiter
@@ -8408,7 +8408,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -8461,8 +8461,8 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] prefix
@@ -8596,8 +8596,8 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] delimiter
@@ -8644,7 +8644,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -8811,8 +8811,8 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -8846,7 +8846,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -9960,7 +9960,7 @@ module Aws::S3
     # Amazon S3 bucket. You can enable the configuration options in any
     # combination. For more information about when Amazon S3 considers a
     # bucket or object public, see [The Meaning of "Public"][1] in the
-    # *Amazon Simple Storage Service User Guide*.
+    # *Amazon S3 User Guide*.
     #
     #
     #
@@ -10054,7 +10054,7 @@ module Aws::S3
     #   @return [Types::AccelerateConfiguration]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -10152,7 +10152,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -10229,7 +10229,7 @@ module Aws::S3
     #   @return [Types::AnalyticsConfiguration]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -10273,8 +10273,7 @@ module Aws::S3
     # @!attribute [rw] cors_configuration
     #   Describes the cross-origin access configuration for objects in an
     #   Amazon S3 bucket. For more information, see [Enabling Cross-Origin
-    #   Resource Sharing][1] in the *Amazon Simple Storage Service User
-    #   Guide*.
+    #   Resource Sharing][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -10296,7 +10295,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -10358,7 +10357,7 @@ module Aws::S3
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -10481,7 +10480,7 @@ module Aws::S3
     #   @return [Types::InventoryConfiguration]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -10563,7 +10562,7 @@ module Aws::S3
     #   @return [Types::BucketLifecycleConfiguration]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -10628,7 +10627,7 @@ module Aws::S3
     #   @return [Types::LifecycleConfiguration]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -10687,7 +10686,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -10744,7 +10743,7 @@ module Aws::S3
     #   @return [Types::MetricsConfiguration]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -10832,7 +10831,7 @@ module Aws::S3
     #   @return [Types::NotificationConfiguration]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -10893,7 +10892,7 @@ module Aws::S3
     #   @return [Types::NotificationConfigurationDeprecated]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -10938,7 +10937,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -10991,7 +10990,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -11110,7 +11109,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -11162,7 +11161,7 @@ module Aws::S3
     #   @return [Types::RequestPaymentConfiguration]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -11218,7 +11217,7 @@ module Aws::S3
     #   @return [Types::Tagging]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -11277,7 +11276,7 @@ module Aws::S3
     #   @return [Types::VersioningConfiguration]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -11353,7 +11352,7 @@ module Aws::S3
     #   @return [Types::WebsiteConfiguration]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -11447,7 +11446,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] content_md5
@@ -11517,8 +11516,8 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] request_payer
@@ -11538,7 +11537,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -11606,7 +11605,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -11642,7 +11641,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -11729,7 +11728,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -11906,8 +11905,8 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] cache_control
@@ -12155,7 +12154,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -12244,7 +12243,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -12286,7 +12285,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -12361,8 +12360,8 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -12385,7 +12384,7 @@ module Aws::S3
     #   @return [Types::Tagging]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -12456,7 +12455,7 @@ module Aws::S3
     #   @return [Types::PublicAccessBlockConfiguration]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -12562,7 +12561,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] events
-    #   A collection of bucket events for which to send notifications
+    #   A collection of bucket events for which to send notifications.
     #   @return [Array<String>]
     #
     # @!attribute [rw] queue
@@ -13008,7 +13007,7 @@ module Aws::S3
     #   filters in an `And` tag.
     #
     # * If you specify a filter based on multiple tags, wrap the `Tag`
-    #   elements in an `And` tag
+    #   elements in an `And` tag.
     #
     # @note When making an API call, you may pass ReplicationRuleAndOperator
     #   data as a hash:
@@ -13341,8 +13340,8 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -13370,7 +13369,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -13524,8 +13523,7 @@ module Aws::S3
 
     # Specifies the redirect behavior and when a redirect is applied. For
     # more information about routing rules, see [Configuring advanced
-    # conditional redirects][1] in the *Amazon Simple Storage Service User
-    # Guide*.
+    # conditional redirects][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -13574,7 +13572,7 @@ module Aws::S3
     # Specifies lifecycle rules for an Amazon S3 bucket. For more
     # information, see [Put Bucket Lifecycle Configuration][1] in the
     # *Amazon Simple Storage Service API Reference*. For examples, see [Put
-    # Bucket Lifecycle Configuration Examples][2]
+    # Bucket Lifecycle Configuration Examples][2].
     #
     #
     #
@@ -13641,7 +13639,7 @@ module Aws::S3
     #   Specifies when an object transitions to a specified storage class.
     #   For more information about Amazon S3 lifecycle configuration rules,
     #   see [Transitioning Objects Using Amazon S3 Lifecycle][1] in the
-    #   *Amazon Simple Storage Service User Guide*.
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -14040,7 +14038,7 @@ module Aws::S3
     #   @return [Types::ScanRange]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -14245,7 +14243,7 @@ module Aws::S3
     #   Bucket Key. By default, S3 Bucket Key is not enabled.
     #
     #   For more information, see [Amazon S3 Bucket Keys][1] in the *Amazon
-    #   Simple Storage Service User Guide*.
+    #   S3 User Guide*.
     #
     #
     #
@@ -14606,8 +14604,8 @@ module Aws::S3
     #
     # @!attribute [rw] events
     #   The Amazon S3 bucket event about which to send notifications. For
-    #   more information, see [Supported Event Types][1] in the *Amazon
-    #   Simple Storage Service User Guide*.
+    #   more information, see [Supported Event Types][1] in the *Amazon S3
+    #   User Guide*.
     #
     #
     #
@@ -14686,8 +14684,8 @@ module Aws::S3
 
     # Specifies when an object transitions to a specified storage class. For
     # more information about Amazon S3 lifecycle configuration rules, see
-    # [Transitioning Objects Using Amazon S3 Lifecycle][1] in the *Amazon
-    # Simple Storage Service User Guide*.
+    # [Transitioning Objects Using Amazon S3 Lifecycle][1] in the *Amazon S3
+    # User Guide*.
     #
     #
     #
@@ -14834,8 +14832,8 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] copy_source
@@ -14882,7 +14880,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
     #   @return [String]
     #
     # @!attribute [rw] copy_source_if_match
@@ -14977,13 +14975,13 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected destination bucket owner. If the
+    #   The account ID of the expected destination bucket owner. If the
     #   destination bucket is owned by a different account, the request will
     #   fail with an HTTP `403 (Access Denied)` error.
     #   @return [String]
     #
     # @!attribute [rw] expected_source_bucket_owner
-    #   The account id of the expected source bucket owner. If the source
+    #   The account ID of the expected source bucket owner. If the source
     #   bucket is owned by a different account, the request will fail with
     #   an HTTP `403 (Access Denied)` error.
     #   @return [String]
@@ -15111,8 +15109,8 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] content_length
@@ -15174,7 +15172,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned
+    #   The account ID of the expected bucket owner. If the bucket is owned
     #   by a different account, the request will fail with an HTTP `403
     #   (Access Denied)` error.
     #   @return [String]
@@ -15295,6 +15293,315 @@ module Aws::S3
       :redirect_all_requests_to,
       :routing_rules)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass WriteGetObjectResponseRequest
+    #   data as a hash:
+    #
+    #       {
+    #         request_route: "RequestRoute", # required
+    #         request_token: "RequestToken", # required
+    #         body: source_file,
+    #         status_code: 1,
+    #         error_code: "ErrorCode",
+    #         error_message: "ErrorMessage",
+    #         accept_ranges: "AcceptRanges",
+    #         cache_control: "CacheControl",
+    #         content_disposition: "ContentDisposition",
+    #         content_encoding: "ContentEncoding",
+    #         content_language: "ContentLanguage",
+    #         content_length: 1,
+    #         content_range: "ContentRange",
+    #         content_type: "ContentType",
+    #         delete_marker: false,
+    #         etag: "ETag",
+    #         expires: Time.now,
+    #         expiration: "Expiration",
+    #         last_modified: Time.now,
+    #         missing_meta: 1,
+    #         metadata: {
+    #           "MetadataKey" => "MetadataValue",
+    #         },
+    #         object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
+    #         object_lock_legal_hold_status: "ON", # accepts ON, OFF
+    #         object_lock_retain_until_date: Time.now,
+    #         parts_count: 1,
+    #         replication_status: "COMPLETE", # accepts COMPLETE, PENDING, FAILED, REPLICA
+    #         request_charged: "requester", # accepts requester
+    #         restore: "Restore",
+    #         server_side_encryption: "AES256", # accepts AES256, aws:kms
+    #         sse_customer_algorithm: "SSECustomerAlgorithm",
+    #         ssekms_key_id: "SSEKMSKeyId",
+    #         sse_customer_key_md5: "SSECustomerKeyMD5",
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
+    #         tag_count: 1,
+    #         version_id: "ObjectVersionId",
+    #         bucket_key_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] request_route
+    #   Route prefix to the HTTP URL generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_token
+    #   A single use encrypted token that maps `WriteGetObjectResponse` to
+    #   the end user `GetObject` request.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The object data.
+    #   @return [IO]
+    #
+    # @!attribute [rw] status_code
+    #   The integer status code for an HTTP response of a corresponding
+    #   `GetObject` request.
+    #
+    #   **Status Codes**
+    #
+    #   * *200 - OK*
+    #
+    #   * *206 - Partial Content*
+    #
+    #   * *304 - Not Modified*
+    #
+    #   * *400 - Bad Request*
+    #
+    #   * *401 - Unauthorized*
+    #
+    #   * *403 - Forbidden*
+    #
+    #   * *404 - Not Found*
+    #
+    #   * *405 - Method Not Allowed*
+    #
+    #   * *409 - Conflict*
+    #
+    #   * *411 - Length Required*
+    #
+    #   * *412 - Precondition Failed*
+    #
+    #   * *416 - Range Not Satisfiable*
+    #
+    #   * *500 - Internal Server Error*
+    #
+    #   * *503 - Service Unavailable*
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error_code
+    #   A string that uniquely identifies an error condition. Returned in
+    #   the &lt;Code&gt; tag of the error XML response for a corresponding
+    #   `GetObject` call. Cannot be used with a successful `StatusCode`
+    #   header or when the transformed object is provided in the body.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Contains a generic description of the error condition. Returned in
+    #   the &lt;Message&gt; tag of the error XML response for a
+    #   corresponding `GetObject` call. Cannot be used with a successful
+    #   `StatusCode` header or when the transformed object is provided in
+    #   body.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_ranges
+    #   Indicates that a range of bytes was specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_control
+    #   Specifies caching behavior along the request/reply chain.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_disposition
+    #   Specifies presentational information for the object.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_encoding
+    #   Specifies what content encodings have been applied to the object and
+    #   thus what decoding mechanisms must be applied to obtain the
+    #   media-type referenced by the Content-Type header field.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_language
+    #   The language the content is in.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_length
+    #   The size of the content body in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] content_range
+    #   The portion of the object returned in the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   A standard MIME type describing the format of the object data.
+    #   @return [String]
+    #
+    # @!attribute [rw] delete_marker
+    #   Specifies whether an object stored in Amazon S3 is (`true`) or is
+    #   not (`false`) a delete marker.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] etag
+    #   An opaque identifier assigned by a web server to a specific version
+    #   of a resource found at a URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] expires
+    #   The date and time at which the object is no longer cacheable.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expiration
+    #   If object stored in Amazon S3 expiration is configured (see PUT
+    #   Bucket lifecycle) it includes expiry-date and rule-id key-value
+    #   pairs providing object expiration information. The value of the
+    #   rule-id is URL encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified
+    #   The date and time that the object was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] missing_meta
+    #   Set to the number of metadata entries not returned in `x-amz-meta`
+    #   headers. This can happen if you create metadata using an API like
+    #   SOAP that supports more flexible metadata than the REST API. For
+    #   example, using SOAP, you can create metadata whose values are not
+    #   legal HTTP headers.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] metadata
+    #   A map of metadata to store with the object in S3.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] object_lock_mode
+    #   Indicates whether an object stored in Amazon S3 has Object Lock
+    #   enabled. For more information about S3 Object Lock, see [Object
+    #   Lock][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html
+    #   @return [String]
+    #
+    # @!attribute [rw] object_lock_legal_hold_status
+    #   Indicates whether an object stored in Amazon S3 has an active legal
+    #   hold.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_lock_retain_until_date
+    #   The date and time when Object Lock is configured to expire.
+    #   @return [Time]
+    #
+    # @!attribute [rw] parts_count
+    #   The count of parts this object has.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] replication_status
+    #   Indicates if request involves bucket that is either a source or
+    #   destination in a Replication rule. For more information about S3
+    #   Replication, see [Replication][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication.html
+    #   @return [String]
+    #
+    # @!attribute [rw] request_charged
+    #   If present, indicates that the requester was successfully charged
+    #   for the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore
+    #   Provides information about object restoration operation and
+    #   expiration time of the restored object copy.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_side_encryption
+    #   The server-side encryption algorithm used when storing requested
+    #   object in Amazon S3 (for example, AES256, aws:kms).
+    #   @return [String]
+    #
+    # @!attribute [rw] sse_customer_algorithm
+    #   Encryption algorithm used if server-side encryption with a
+    #   customer-provided encryption key was specified for object stored in
+    #   Amazon S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssekms_key_id
+    #   If present, specifies the ID of the AWS Key Management Service (AWS
+    #   KMS) symmetric customer managed customer master key (CMK) that was
+    #   used for stored in Amazon S3 object.
+    #   @return [String]
+    #
+    # @!attribute [rw] sse_customer_key_md5
+    #   128-bit MD5 digest of customer-provided encryption key used in
+    #   Amazon S3 to encrypt data stored in S3. For more information, see
+    #   [Protecting data using server-side encryption with customer-provided
+    #   encryption keys (SSE-C)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_class
+    #   The class of storage used to store object in Amazon S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_count
+    #   The number of tags, if any, on the object.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] version_id
+    #   An ID used to reference a specific version of the object.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_key_enabled
+    #   Indicates whether the object stored in Amazon S3 uses an S3 bucket
+    #   key for server-side encryption with AWS KMS (SSE-KMS).
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/WriteGetObjectResponseRequest AWS API Documentation
+    #
+    class WriteGetObjectResponseRequest < Struct.new(
+      :request_route,
+      :request_token,
+      :body,
+      :status_code,
+      :error_code,
+      :error_message,
+      :accept_ranges,
+      :cache_control,
+      :content_disposition,
+      :content_encoding,
+      :content_language,
+      :content_length,
+      :content_range,
+      :content_type,
+      :delete_marker,
+      :etag,
+      :expires,
+      :expiration,
+      :last_modified,
+      :missing_meta,
+      :metadata,
+      :object_lock_mode,
+      :object_lock_legal_hold_status,
+      :object_lock_retain_until_date,
+      :parts_count,
+      :replication_status,
+      :request_charged,
+      :restore,
+      :server_side_encryption,
+      :sse_customer_algorithm,
+      :ssekms_key_id,
+      :sse_customer_key_md5,
+      :storage_class,
+      :tag_count,
+      :version_id,
+      :bucket_key_enabled)
+      SENSITIVE = [:ssekms_key_id]
       include Aws::Structure
     end
 
