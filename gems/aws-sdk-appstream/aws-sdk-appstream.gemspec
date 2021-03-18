@@ -21,8 +21,8 @@ Gem::Specification.new do |spec|
   spec.files         = Dir['LICENSE.txt', 'CHANGELOG.md', 'VERSION', 'lib/**/*.rb']
 
   spec.metadata = {
-    'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-appstream',
-    'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-appstream/CHANGELOG.md'
+    'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-appstream',
+    'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-appstream/CHANGELOG.md'
   }
 
   spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.112.0')
