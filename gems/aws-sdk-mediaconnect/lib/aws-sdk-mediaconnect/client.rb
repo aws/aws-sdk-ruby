@@ -350,10 +350,10 @@ module Aws::MediaConnect
     #         description: "__string",
     #         destination: "__string",
     #         encryption: {
-    #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #           algorithm: "aes128", # accepts aes128, aes192, aes256
     #           constant_initialization_vector: "__string",
     #           device_id: "__string",
-    #           key_type: "speke", # accepts speke, static-key
+    #           key_type: "speke", # accepts speke, static-key, srt-password
     #           region: "__string",
     #           resource_id: "__string",
     #           role_arn: "__string", # required
@@ -361,9 +361,10 @@ module Aws::MediaConnect
     #           url: "__string",
     #         },
     #         max_latency: 1,
+    #         min_latency: 1,
     #         name: "__string",
     #         port: 1,
-    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
     #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
@@ -384,7 +385,7 @@ module Aws::MediaConnect
     #   resp.outputs[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.outputs[0].encryption.constant_initialization_vector #=> String
     #   resp.outputs[0].encryption.device_id #=> String
-    #   resp.outputs[0].encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.outputs[0].encryption.key_type #=> String, one of "speke", "static-key", "srt-password"
     #   resp.outputs[0].encryption.region #=> String
     #   resp.outputs[0].encryption.resource_id #=> String
     #   resp.outputs[0].encryption.role_arn #=> String
@@ -399,7 +400,8 @@ module Aws::MediaConnect
     #   resp.outputs[0].transport.cidr_allow_list[0] #=> String
     #   resp.outputs[0].transport.max_bitrate #=> Integer
     #   resp.outputs[0].transport.max_latency #=> Integer
-    #   resp.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.outputs[0].transport.min_latency #=> Integer
+    #   resp.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
     #   resp.outputs[0].transport.remote_id #=> String
     #   resp.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.outputs[0].transport.stream_id #=> String
@@ -433,10 +435,10 @@ module Aws::MediaConnect
     #     sources: [ # required
     #       {
     #         decryption: {
-    #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #           algorithm: "aes128", # accepts aes128, aes192, aes256
     #           constant_initialization_vector: "__string",
     #           device_id: "__string",
-    #           key_type: "speke", # accepts speke, static-key
+    #           key_type: "speke", # accepts speke, static-key, srt-password
     #           region: "__string",
     #           resource_id: "__string",
     #           role_arn: "__string", # required
@@ -448,8 +450,9 @@ module Aws::MediaConnect
     #         ingest_port: 1,
     #         max_bitrate: 1,
     #         max_latency: 1,
+    #         min_latency: 1,
     #         name: "__string",
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
     #         stream_id: "__string",
     #         vpc_interface_name: "__string",
     #         whitelist_cidr: "__string",
@@ -465,7 +468,7 @@ module Aws::MediaConnect
     #   resp.sources[0].decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.sources[0].decryption.constant_initialization_vector #=> String
     #   resp.sources[0].decryption.device_id #=> String
-    #   resp.sources[0].decryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.sources[0].decryption.key_type #=> String, one of "speke", "static-key", "srt-password"
     #   resp.sources[0].decryption.region #=> String
     #   resp.sources[0].decryption.resource_id #=> String
     #   resp.sources[0].decryption.role_arn #=> String
@@ -481,7 +484,8 @@ module Aws::MediaConnect
     #   resp.sources[0].transport.cidr_allow_list[0] #=> String
     #   resp.sources[0].transport.max_bitrate #=> Integer
     #   resp.sources[0].transport.max_latency #=> Integer
-    #   resp.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.sources[0].transport.min_latency #=> Integer
+    #   resp.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
     #   resp.sources[0].transport.remote_id #=> String
     #   resp.sources[0].transport.smoothing_latency #=> Integer
     #   resp.sources[0].transport.stream_id #=> String
@@ -585,10 +589,10 @@ module Aws::MediaConnect
     #         data_transfer_subscriber_fee_percent: 1,
     #         description: "__string",
     #         encryption: {
-    #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #           algorithm: "aes128", # accepts aes128, aes192, aes256
     #           constant_initialization_vector: "__string",
     #           device_id: "__string",
-    #           key_type: "speke", # accepts speke, static-key
+    #           key_type: "speke", # accepts speke, static-key, srt-password
     #           region: "__string",
     #           resource_id: "__string",
     #           role_arn: "__string", # required
@@ -607,10 +611,10 @@ module Aws::MediaConnect
     #         description: "__string",
     #         destination: "__string",
     #         encryption: {
-    #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #           algorithm: "aes128", # accepts aes128, aes192, aes256
     #           constant_initialization_vector: "__string",
     #           device_id: "__string",
-    #           key_type: "speke", # accepts speke, static-key
+    #           key_type: "speke", # accepts speke, static-key, srt-password
     #           region: "__string",
     #           resource_id: "__string",
     #           role_arn: "__string", # required
@@ -618,9 +622,10 @@ module Aws::MediaConnect
     #           url: "__string",
     #         },
     #         max_latency: 1,
+    #         min_latency: 1,
     #         name: "__string",
     #         port: 1,
-    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
     #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
@@ -631,10 +636,10 @@ module Aws::MediaConnect
     #     ],
     #     source: {
     #       decryption: {
-    #         algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #         algorithm: "aes128", # accepts aes128, aes192, aes256
     #         constant_initialization_vector: "__string",
     #         device_id: "__string",
-    #         key_type: "speke", # accepts speke, static-key
+    #         key_type: "speke", # accepts speke, static-key, srt-password
     #         region: "__string",
     #         resource_id: "__string",
     #         role_arn: "__string", # required
@@ -646,8 +651,9 @@ module Aws::MediaConnect
     #       ingest_port: 1,
     #       max_bitrate: 1,
     #       max_latency: 1,
+    #       min_latency: 1,
     #       name: "__string",
-    #       protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #       protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
     #       stream_id: "__string",
     #       vpc_interface_name: "__string",
     #       whitelist_cidr: "__string",
@@ -659,10 +665,10 @@ module Aws::MediaConnect
     #     sources: [
     #       {
     #         decryption: {
-    #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #           algorithm: "aes128", # accepts aes128, aes192, aes256
     #           constant_initialization_vector: "__string",
     #           device_id: "__string",
-    #           key_type: "speke", # accepts speke, static-key
+    #           key_type: "speke", # accepts speke, static-key, srt-password
     #           region: "__string",
     #           resource_id: "__string",
     #           role_arn: "__string", # required
@@ -674,8 +680,9 @@ module Aws::MediaConnect
     #         ingest_port: 1,
     #         max_bitrate: 1,
     #         max_latency: 1,
+    #         min_latency: 1,
     #         name: "__string",
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
     #         stream_id: "__string",
     #         vpc_interface_name: "__string",
     #         whitelist_cidr: "__string",
@@ -702,7 +709,7 @@ module Aws::MediaConnect
     #   resp.flow.entitlements[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.entitlements[0].encryption.constant_initialization_vector #=> String
     #   resp.flow.entitlements[0].encryption.device_id #=> String
-    #   resp.flow.entitlements[0].encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.entitlements[0].encryption.key_type #=> String, one of "speke", "static-key", "srt-password"
     #   resp.flow.entitlements[0].encryption.region #=> String
     #   resp.flow.entitlements[0].encryption.resource_id #=> String
     #   resp.flow.entitlements[0].encryption.role_arn #=> String
@@ -722,7 +729,7 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.outputs[0].encryption.constant_initialization_vector #=> String
     #   resp.flow.outputs[0].encryption.device_id #=> String
-    #   resp.flow.outputs[0].encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.outputs[0].encryption.key_type #=> String, one of "speke", "static-key", "srt-password"
     #   resp.flow.outputs[0].encryption.region #=> String
     #   resp.flow.outputs[0].encryption.resource_id #=> String
     #   resp.flow.outputs[0].encryption.role_arn #=> String
@@ -737,7 +744,8 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.cidr_allow_list[0] #=> String
     #   resp.flow.outputs[0].transport.max_bitrate #=> Integer
     #   resp.flow.outputs[0].transport.max_latency #=> Integer
-    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.flow.outputs[0].transport.min_latency #=> Integer
+    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
     #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.flow.outputs[0].transport.stream_id #=> String
@@ -746,7 +754,7 @@ module Aws::MediaConnect
     #   resp.flow.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.source.decryption.constant_initialization_vector #=> String
     #   resp.flow.source.decryption.device_id #=> String
-    #   resp.flow.source.decryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.source.decryption.key_type #=> String, one of "speke", "static-key", "srt-password"
     #   resp.flow.source.decryption.region #=> String
     #   resp.flow.source.decryption.resource_id #=> String
     #   resp.flow.source.decryption.role_arn #=> String
@@ -762,7 +770,8 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.cidr_allow_list[0] #=> String
     #   resp.flow.source.transport.max_bitrate #=> Integer
     #   resp.flow.source.transport.max_latency #=> Integer
-    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.flow.source.transport.min_latency #=> Integer
+    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
     #   resp.flow.source.transport.remote_id #=> String
     #   resp.flow.source.transport.smoothing_latency #=> Integer
     #   resp.flow.source.transport.stream_id #=> String
@@ -775,7 +784,7 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.sources[0].decryption.constant_initialization_vector #=> String
     #   resp.flow.sources[0].decryption.device_id #=> String
-    #   resp.flow.sources[0].decryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.sources[0].decryption.key_type #=> String, one of "speke", "static-key", "srt-password"
     #   resp.flow.sources[0].decryption.region #=> String
     #   resp.flow.sources[0].decryption.resource_id #=> String
     #   resp.flow.sources[0].decryption.role_arn #=> String
@@ -791,7 +800,8 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.cidr_allow_list[0] #=> String
     #   resp.flow.sources[0].transport.max_bitrate #=> Integer
     #   resp.flow.sources[0].transport.max_latency #=> Integer
-    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.flow.sources[0].transport.min_latency #=> Integer
+    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
     #   resp.flow.sources[0].transport.remote_id #=> String
     #   resp.flow.sources[0].transport.smoothing_latency #=> Integer
     #   resp.flow.sources[0].transport.stream_id #=> String
@@ -873,7 +883,7 @@ module Aws::MediaConnect
     #   resp.flow.entitlements[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.entitlements[0].encryption.constant_initialization_vector #=> String
     #   resp.flow.entitlements[0].encryption.device_id #=> String
-    #   resp.flow.entitlements[0].encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.entitlements[0].encryption.key_type #=> String, one of "speke", "static-key", "srt-password"
     #   resp.flow.entitlements[0].encryption.region #=> String
     #   resp.flow.entitlements[0].encryption.resource_id #=> String
     #   resp.flow.entitlements[0].encryption.role_arn #=> String
@@ -893,7 +903,7 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.outputs[0].encryption.constant_initialization_vector #=> String
     #   resp.flow.outputs[0].encryption.device_id #=> String
-    #   resp.flow.outputs[0].encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.outputs[0].encryption.key_type #=> String, one of "speke", "static-key", "srt-password"
     #   resp.flow.outputs[0].encryption.region #=> String
     #   resp.flow.outputs[0].encryption.resource_id #=> String
     #   resp.flow.outputs[0].encryption.role_arn #=> String
@@ -908,7 +918,8 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.cidr_allow_list[0] #=> String
     #   resp.flow.outputs[0].transport.max_bitrate #=> Integer
     #   resp.flow.outputs[0].transport.max_latency #=> Integer
-    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.flow.outputs[0].transport.min_latency #=> Integer
+    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
     #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.flow.outputs[0].transport.stream_id #=> String
@@ -917,7 +928,7 @@ module Aws::MediaConnect
     #   resp.flow.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.source.decryption.constant_initialization_vector #=> String
     #   resp.flow.source.decryption.device_id #=> String
-    #   resp.flow.source.decryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.source.decryption.key_type #=> String, one of "speke", "static-key", "srt-password"
     #   resp.flow.source.decryption.region #=> String
     #   resp.flow.source.decryption.resource_id #=> String
     #   resp.flow.source.decryption.role_arn #=> String
@@ -933,7 +944,8 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.cidr_allow_list[0] #=> String
     #   resp.flow.source.transport.max_bitrate #=> Integer
     #   resp.flow.source.transport.max_latency #=> Integer
-    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.flow.source.transport.min_latency #=> Integer
+    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
     #   resp.flow.source.transport.remote_id #=> String
     #   resp.flow.source.transport.smoothing_latency #=> Integer
     #   resp.flow.source.transport.stream_id #=> String
@@ -946,7 +958,7 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.sources[0].decryption.constant_initialization_vector #=> String
     #   resp.flow.sources[0].decryption.device_id #=> String
-    #   resp.flow.sources[0].decryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.sources[0].decryption.key_type #=> String, one of "speke", "static-key", "srt-password"
     #   resp.flow.sources[0].decryption.region #=> String
     #   resp.flow.sources[0].decryption.resource_id #=> String
     #   resp.flow.sources[0].decryption.role_arn #=> String
@@ -962,7 +974,8 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.cidr_allow_list[0] #=> String
     #   resp.flow.sources[0].transport.max_bitrate #=> Integer
     #   resp.flow.sources[0].transport.max_latency #=> Integer
-    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.flow.sources[0].transport.min_latency #=> Integer
+    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
     #   resp.flow.sources[0].transport.remote_id #=> String
     #   resp.flow.sources[0].transport.smoothing_latency #=> Integer
     #   resp.flow.sources[0].transport.stream_id #=> String
@@ -1089,10 +1102,10 @@ module Aws::MediaConnect
     #         data_transfer_subscriber_fee_percent: 1,
     #         description: "__string",
     #         encryption: {
-    #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #           algorithm: "aes128", # accepts aes128, aes192, aes256
     #           constant_initialization_vector: "__string",
     #           device_id: "__string",
-    #           key_type: "speke", # accepts speke, static-key
+    #           key_type: "speke", # accepts speke, static-key, srt-password
     #           region: "__string",
     #           resource_id: "__string",
     #           role_arn: "__string", # required
@@ -1115,7 +1128,7 @@ module Aws::MediaConnect
     #   resp.entitlements[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.entitlements[0].encryption.constant_initialization_vector #=> String
     #   resp.entitlements[0].encryption.device_id #=> String
-    #   resp.entitlements[0].encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.entitlements[0].encryption.key_type #=> String, one of "speke", "static-key", "srt-password"
     #   resp.entitlements[0].encryption.region #=> String
     #   resp.entitlements[0].encryption.resource_id #=> String
     #   resp.entitlements[0].encryption.role_arn #=> String
@@ -1683,7 +1696,7 @@ module Aws::MediaConnect
     #   resp.flow.entitlements[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.entitlements[0].encryption.constant_initialization_vector #=> String
     #   resp.flow.entitlements[0].encryption.device_id #=> String
-    #   resp.flow.entitlements[0].encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.entitlements[0].encryption.key_type #=> String, one of "speke", "static-key", "srt-password"
     #   resp.flow.entitlements[0].encryption.region #=> String
     #   resp.flow.entitlements[0].encryption.resource_id #=> String
     #   resp.flow.entitlements[0].encryption.role_arn #=> String
@@ -1703,7 +1716,7 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.outputs[0].encryption.constant_initialization_vector #=> String
     #   resp.flow.outputs[0].encryption.device_id #=> String
-    #   resp.flow.outputs[0].encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.outputs[0].encryption.key_type #=> String, one of "speke", "static-key", "srt-password"
     #   resp.flow.outputs[0].encryption.region #=> String
     #   resp.flow.outputs[0].encryption.resource_id #=> String
     #   resp.flow.outputs[0].encryption.role_arn #=> String
@@ -1718,7 +1731,8 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.cidr_allow_list[0] #=> String
     #   resp.flow.outputs[0].transport.max_bitrate #=> Integer
     #   resp.flow.outputs[0].transport.max_latency #=> Integer
-    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.flow.outputs[0].transport.min_latency #=> Integer
+    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
     #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.flow.outputs[0].transport.stream_id #=> String
@@ -1727,7 +1741,7 @@ module Aws::MediaConnect
     #   resp.flow.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.source.decryption.constant_initialization_vector #=> String
     #   resp.flow.source.decryption.device_id #=> String
-    #   resp.flow.source.decryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.source.decryption.key_type #=> String, one of "speke", "static-key", "srt-password"
     #   resp.flow.source.decryption.region #=> String
     #   resp.flow.source.decryption.resource_id #=> String
     #   resp.flow.source.decryption.role_arn #=> String
@@ -1743,7 +1757,8 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.cidr_allow_list[0] #=> String
     #   resp.flow.source.transport.max_bitrate #=> Integer
     #   resp.flow.source.transport.max_latency #=> Integer
-    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.flow.source.transport.min_latency #=> Integer
+    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
     #   resp.flow.source.transport.remote_id #=> String
     #   resp.flow.source.transport.smoothing_latency #=> Integer
     #   resp.flow.source.transport.stream_id #=> String
@@ -1756,7 +1771,7 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.sources[0].decryption.constant_initialization_vector #=> String
     #   resp.flow.sources[0].decryption.device_id #=> String
-    #   resp.flow.sources[0].decryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.sources[0].decryption.key_type #=> String, one of "speke", "static-key", "srt-password"
     #   resp.flow.sources[0].decryption.region #=> String
     #   resp.flow.sources[0].decryption.resource_id #=> String
     #   resp.flow.sources[0].decryption.role_arn #=> String
@@ -1772,7 +1787,8 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.cidr_allow_list[0] #=> String
     #   resp.flow.sources[0].transport.max_bitrate #=> Integer
     #   resp.flow.sources[0].transport.max_latency #=> Integer
-    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.flow.sources[0].transport.min_latency #=> Integer
+    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
     #   resp.flow.sources[0].transport.remote_id #=> String
     #   resp.flow.sources[0].transport.smoothing_latency #=> Integer
     #   resp.flow.sources[0].transport.stream_id #=> String
@@ -1838,7 +1854,7 @@ module Aws::MediaConnect
     #       algorithm: "aes128", # accepts aes128, aes192, aes256
     #       constant_initialization_vector: "__string",
     #       device_id: "__string",
-    #       key_type: "speke", # accepts speke, static-key
+    #       key_type: "speke", # accepts speke, static-key, srt-password
     #       region: "__string",
     #       resource_id: "__string",
     #       role_arn: "__string",
@@ -1858,7 +1874,7 @@ module Aws::MediaConnect
     #   resp.entitlement.encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.entitlement.encryption.constant_initialization_vector #=> String
     #   resp.entitlement.encryption.device_id #=> String
-    #   resp.entitlement.encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.entitlement.encryption.key_type #=> String, one of "speke", "static-key", "srt-password"
     #   resp.entitlement.encryption.region #=> String
     #   resp.entitlement.encryption.resource_id #=> String
     #   resp.entitlement.encryption.role_arn #=> String
@@ -1903,6 +1919,14 @@ module Aws::MediaConnect
     # @option params [Integer] :max_latency
     #   The maximum latency in milliseconds for Zixi-based streams.
     #
+    # @option params [Integer] :min_latency
+    #   The minimum latency in milliseconds for SRT-based streams. In streams
+    #   that use the SRT protocol, this value that you set on your
+    #   MediaConnect source or output represents the minimal potential latency
+    #   of that connection. The latency of the stream is set to the highest
+    #   number between the sender’s minimum latency and the receiver’s minimum
+    #   latency.
+    #
     # @option params [required, String] :output_arn
     #
     # @option params [Integer] :port
@@ -1940,7 +1964,7 @@ module Aws::MediaConnect
     #       algorithm: "aes128", # accepts aes128, aes192, aes256
     #       constant_initialization_vector: "__string",
     #       device_id: "__string",
-    #       key_type: "speke", # accepts speke, static-key
+    #       key_type: "speke", # accepts speke, static-key, srt-password
     #       region: "__string",
     #       resource_id: "__string",
     #       role_arn: "__string",
@@ -1949,9 +1973,10 @@ module Aws::MediaConnect
     #     },
     #     flow_arn: "__string", # required
     #     max_latency: 1,
+    #     min_latency: 1,
     #     output_arn: "__string", # required
     #     port: 1,
-    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
     #     remote_id: "__string",
     #     smoothing_latency: 1,
     #     stream_id: "__string",
@@ -1969,7 +1994,7 @@ module Aws::MediaConnect
     #   resp.output.encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.output.encryption.constant_initialization_vector #=> String
     #   resp.output.encryption.device_id #=> String
-    #   resp.output.encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.output.encryption.key_type #=> String, one of "speke", "static-key", "srt-password"
     #   resp.output.encryption.region #=> String
     #   resp.output.encryption.resource_id #=> String
     #   resp.output.encryption.role_arn #=> String
@@ -1984,7 +2009,8 @@ module Aws::MediaConnect
     #   resp.output.transport.cidr_allow_list[0] #=> String
     #   resp.output.transport.max_bitrate #=> Integer
     #   resp.output.transport.max_latency #=> Integer
-    #   resp.output.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.output.transport.min_latency #=> Integer
+    #   resp.output.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
     #   resp.output.transport.remote_id #=> String
     #   resp.output.transport.smoothing_latency #=> Integer
     #   resp.output.transport.stream_id #=> String
@@ -2025,6 +2051,14 @@ module Aws::MediaConnect
     #   The maximum latency in milliseconds. This parameter applies only to
     #   RIST-based and Zixi-based streams.
     #
+    # @option params [Integer] :min_latency
+    #   The minimum latency in milliseconds for SRT-based streams. In streams
+    #   that use the SRT protocol, this value that you set on your
+    #   MediaConnect source or output represents the minimal potential latency
+    #   of that connection. The latency of the stream is set to the highest
+    #   number between the sender’s minimum latency and the receiver’s minimum
+    #   latency.
+    #
     # @option params [String] :protocol
     #   The protocol that is used by the source.
     #
@@ -2054,7 +2088,7 @@ module Aws::MediaConnect
     #       algorithm: "aes128", # accepts aes128, aes192, aes256
     #       constant_initialization_vector: "__string",
     #       device_id: "__string",
-    #       key_type: "speke", # accepts speke, static-key
+    #       key_type: "speke", # accepts speke, static-key, srt-password
     #       region: "__string",
     #       resource_id: "__string",
     #       role_arn: "__string",
@@ -2067,7 +2101,8 @@ module Aws::MediaConnect
     #     ingest_port: 1,
     #     max_bitrate: 1,
     #     max_latency: 1,
-    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #     min_latency: 1,
+    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
     #     source_arn: "__string", # required
     #     stream_id: "__string",
     #     vpc_interface_name: "__string",
@@ -2081,7 +2116,7 @@ module Aws::MediaConnect
     #   resp.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.source.decryption.constant_initialization_vector #=> String
     #   resp.source.decryption.device_id #=> String
-    #   resp.source.decryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.source.decryption.key_type #=> String, one of "speke", "static-key", "srt-password"
     #   resp.source.decryption.region #=> String
     #   resp.source.decryption.resource_id #=> String
     #   resp.source.decryption.role_arn #=> String
@@ -2097,7 +2132,8 @@ module Aws::MediaConnect
     #   resp.source.transport.cidr_allow_list[0] #=> String
     #   resp.source.transport.max_bitrate #=> Integer
     #   resp.source.transport.max_latency #=> Integer
-    #   resp.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.source.transport.min_latency #=> Integer
+    #   resp.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
     #   resp.source.transport.remote_id #=> String
     #   resp.source.transport.smoothing_latency #=> Integer
     #   resp.source.transport.stream_id #=> String
@@ -2126,7 +2162,7 @@ module Aws::MediaConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

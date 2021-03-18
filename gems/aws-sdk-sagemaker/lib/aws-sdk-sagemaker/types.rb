@@ -3951,7 +3951,7 @@ module Aws::SageMaker
     #         },
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
-    #           target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, x86_win32, x86_win64, coreml, jacinto_tda4vm
+    #           target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, x86_win32, x86_win64, coreml, jacinto_tda4vm
     #           target_platform: {
     #             os: "ANDROID", # required, accepts ANDROID, LINUX
     #             arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
@@ -18818,6 +18818,33 @@ module Aws::SageMaker
     #
     #     * `"CompilerOptions": \{"class_labels":
     #       "imagenet_labels_1000.txt"\}`
+    #
+    #   Depending on the model format, `DataInputConfig` requires the
+    #   following parameters for `ml_eia2` [OutputConfig:TargetDevice][1].
+    #
+    #   * For TensorFlow models saved in the SavedModel format, specify the
+    #     input names from `signature_def_key` and the input model shapes
+    #     for `DataInputConfig`. Specify the `signature_def_key` in [
+    #     `OutputConfig:CompilerOptions` ][2] if the model does not use
+    #     TensorFlow's default signature def key. For example:
+    #
+    #     * `"DataInputConfig": \{"inputs": [1, 224, 224, 3]\}`
+    #
+    #     * `"CompilerOptions": \{"signature_def_key": "serving_custom"\}`
+    #
+    #   * For TensorFlow models saved as a frozen graph, specify the input
+    #     tensor names and shapes in `DataInputConfig` and the output tensor
+    #     names for `output_names` in [ `OutputConfig:CompilerOptions` ][2].
+    #     For example:
+    #
+    #     * `"DataInputConfig": \{"input_tensor:0": [1, 224, 224, 3]\}`
+    #
+    #     * `"CompilerOptions": \{"output_names": ["output_tensor:0"]\}`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OutputConfig.html#sagemaker-Type-OutputConfig-TargetDevice
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OutputConfig.html#sagemaker-Type-OutputConfig-CompilerOptions
     #   @return [String]
     #
     # @!attribute [rw] framework
@@ -27032,7 +27059,7 @@ module Aws::SageMaker
     #
     #       {
     #         s3_output_location: "S3Uri", # required
-    #         target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, x86_win32, x86_win64, coreml, jacinto_tda4vm
+    #         target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, x86_win32, x86_win64, coreml, jacinto_tda4vm
     #         target_platform: {
     #           os: "ANDROID", # required, accepts ANDROID, LINUX
     #           arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
@@ -27166,6 +27193,24 @@ module Aws::SageMaker
     #       be separated by newlines.
     #
     #     ^
+    #
+    #   * `EIA`\: Compilation for the Elastic Inference Accelerator supports
+    #     the following compiler options:
+    #
+    #     * `precision_mode`\: Specifies the precision of compiled
+    #       artifacts. Supported values are `"FP16"` and `"FP32"`. Default
+    #       is `"FP32"`.
+    #
+    #     * `signature_def_key`\: Specifies the signature to use for models
+    #       in SavedModel format. Defaults is TensorFlow's default
+    #       signature def key.
+    #
+    #     * `output_names`\: Specifies a list of output tensor names for
+    #       models in FrozenGraph format. Set at most one API field, either:
+    #       `signature_def_key` or `output_names`.
+    #
+    #     For example: `\{"precision_mode": "FP32", "output_names":
+    #     ["output:0"]\}`
     #
     #
     #

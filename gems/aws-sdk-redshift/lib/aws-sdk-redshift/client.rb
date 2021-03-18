@@ -1030,6 +1030,9 @@ module Aws::Redshift
     #   are disabled, you can still create manual snapshots when you want with
     #   CreateClusterSnapshot.
     #
+    #   You can't disable automated snapshots for RA3 node types. Set the
+    #   automated retention period from 1-35 days.
+    #
     #   Default: `1`
     #
     #   Constraints: Must be a value from 0 to 35.
@@ -1227,6 +1230,12 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.endpoint.vpc_endpoints #=> Array
     #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -1315,6 +1324,7 @@ module Aws::Redshift
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster AWS API Documentation
     #
@@ -2423,6 +2433,12 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.endpoint.vpc_endpoints #=> Array
     #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -2511,6 +2527,7 @@ module Aws::Redshift
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster AWS API Documentation
     #
@@ -3833,6 +3850,12 @@ module Aws::Redshift
     #   resp.clusters[0].endpoint.port #=> Integer
     #   resp.clusters[0].endpoint.vpc_endpoints #=> Array
     #   resp.clusters[0].endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.clusters[0].endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.clusters[0].endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.clusters[0].endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.clusters[0].endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.clusters[0].endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.clusters[0].endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.clusters[0].cluster_create_time #=> Time
     #   resp.clusters[0].automated_snapshot_retention_period #=> Integer
     #   resp.clusters[0].manual_snapshot_retention_period #=> Integer
@@ -3921,6 +3944,7 @@ module Aws::Redshift
     #   resp.clusters[0].resize_info.allow_cancel_resize #=> Boolean
     #   resp.clusters[0].availability_zone_relocation_status #=> String
     #   resp.clusters[0].cluster_namespace_arn #=> String
+    #   resp.clusters[0].total_storage_capacity_in_mega_bytes #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -5592,6 +5616,12 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.endpoint.vpc_endpoints #=> Array
     #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -5680,6 +5710,7 @@ module Aws::Redshift
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy AWS API Documentation
     #
@@ -5830,6 +5861,12 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.endpoint.vpc_endpoints #=> Array
     #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -5918,6 +5955,7 @@ module Aws::Redshift
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopy AWS API Documentation
     #
@@ -6277,6 +6315,9 @@ module Aws::Redshift
     #   current value, existing automated snapshots that fall outside of the
     #   new retention period will be immediately deleted.
     #
+    #   You can't disable automated snapshots for RA3 node types. Set the
+    #   automated retention period from 1-35 days.
+    #
     #   Default: Uses existing setting.
     #
     #   Constraints: Must be a value from 0 to 35.
@@ -6468,6 +6509,12 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.endpoint.vpc_endpoints #=> Array
     #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -6556,6 +6603,7 @@ module Aws::Redshift
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster AWS API Documentation
     #
@@ -6603,6 +6651,12 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.endpoint.vpc_endpoints #=> Array
     #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -6691,6 +6745,7 @@ module Aws::Redshift
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevision AWS API Documentation
     #
@@ -6745,6 +6800,12 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.endpoint.vpc_endpoints #=> Array
     #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -6833,6 +6894,7 @@ module Aws::Redshift
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles AWS API Documentation
     #
@@ -6896,6 +6958,12 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.endpoint.vpc_endpoints #=> Array
     #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -6984,6 +7052,7 @@ module Aws::Redshift
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenance AWS API Documentation
     #
@@ -7483,6 +7552,12 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.endpoint.vpc_endpoints #=> Array
     #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -7571,6 +7646,7 @@ module Aws::Redshift
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriod AWS API Documentation
     #
@@ -7717,6 +7793,12 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.endpoint.vpc_endpoints #=> Array
     #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -7805,6 +7887,7 @@ module Aws::Redshift
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PauseCluster AWS API Documentation
     #
@@ -7914,6 +7997,12 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.endpoint.vpc_endpoints #=> Array
     #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -8002,6 +8091,7 @@ module Aws::Redshift
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster AWS API Documentation
     #
@@ -8150,6 +8240,12 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.endpoint.vpc_endpoints #=> Array
     #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -8238,6 +8334,7 @@ module Aws::Redshift
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeCluster AWS API Documentation
     #
@@ -8405,6 +8502,9 @@ module Aws::Redshift
     #   are disabled, you can still create manual snapshots when you want with
     #   CreateClusterSnapshot.
     #
+    #   You can't disable automated snapshots for RA3 node types. Set the
+    #   automated retention period from 1-35 days.
+    #
     #   Default: The value selected for the cluster from which the snapshot
     #   was taken.
     #
@@ -8536,6 +8636,12 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.endpoint.vpc_endpoints #=> Array
     #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -8624,6 +8730,7 @@ module Aws::Redshift
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot AWS API Documentation
     #
@@ -8749,6 +8856,12 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.endpoint.vpc_endpoints #=> Array
     #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -8837,6 +8950,7 @@ module Aws::Redshift
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResumeCluster AWS API Documentation
     #
@@ -9044,6 +9158,12 @@ module Aws::Redshift
     #   resp.cluster.endpoint.port #=> Integer
     #   resp.cluster.endpoint.vpc_endpoints #=> Array
     #   resp.cluster.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].vpc_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces #=> Array
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
+    #   resp.cluster.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
     #   resp.cluster.cluster_create_time #=> Time
     #   resp.cluster.automated_snapshot_retention_period #=> Integer
     #   resp.cluster.manual_snapshot_retention_period #=> Integer
@@ -9132,6 +9252,7 @@ module Aws::Redshift
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
+    #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey AWS API Documentation
     #
@@ -9155,7 +9276,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

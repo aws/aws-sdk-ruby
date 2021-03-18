@@ -547,6 +547,13 @@ module Aws::AccessAnalyzer
     # automatically archive new findings that meet the criteria you define
     # when you create the rule.
     #
+    # To learn about filter keys that you can use to create an archive rule,
+    # see [Access Analyzer filter keys][1] in the **IAM User Guide**.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html
+    #
     # @option params [required, String] :analyzer_name
     #   The name of the created analyzer.
     #
@@ -1492,6 +1499,84 @@ module Aws::AccessAnalyzer
       req.send_request(options)
     end
 
+    # Requests the validation of a policy and returns a list of findings.
+    # The findings help you identify issues and provide actionable
+    # recommendations to resolve the issue and enable you to author
+    # functional policies that meet security best practices.
+    #
+    # @option params [String] :locale
+    #   The locale to use for localizing the findings.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response.
+    #
+    # @option params [String] :next_token
+    #   A token used for pagination of results returned.
+    #
+    # @option params [required, String] :policy_document
+    #   The JSON policy document to use as the content for the policy.
+    #
+    # @option params [required, String] :policy_type
+    #   The type of policy to validate. Identity policies grant permissions to
+    #   IAM principals. Identity policies include managed and inline policies
+    #   for IAM roles, users, and groups. They also include service-control
+    #   policies (SCPs) that are attached to an AWS organization,
+    #   organizational unit (OU), or an account.
+    #
+    #   Resource policies grant permissions on AWS resources. Resource
+    #   policies include trust policies for IAM roles and bucket policies for
+    #   S3 buckets. You can provide a generic input such as identity policy or
+    #   resource policy or a specific input such as managed policy or S3
+    #   bucket policy.
+    #
+    # @return [Types::ValidatePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ValidatePolicyResponse#findings #findings} => Array&lt;Types::ValidatePolicyFinding&gt;
+    #   * {Types::ValidatePolicyResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.validate_policy({
+    #     locale: "DE", # accepts DE, EN, ES, FR, IT, JA, KO, PT_BR, ZH_CN, ZH_TW
+    #     max_results: 1,
+    #     next_token: "Token",
+    #     policy_document: "PolicyDocument", # required
+    #     policy_type: "IDENTITY_POLICY", # required, accepts IDENTITY_POLICY, RESOURCE_POLICY, SERVICE_CONTROL_POLICY
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.findings #=> Array
+    #   resp.findings[0].finding_details #=> String
+    #   resp.findings[0].finding_type #=> String, one of "ERROR", "SECURITY_WARNING", "SUGGESTION", "WARNING"
+    #   resp.findings[0].issue_code #=> String
+    #   resp.findings[0].learn_more_link #=> String
+    #   resp.findings[0].locations #=> Array
+    #   resp.findings[0].locations[0].path #=> Array
+    #   resp.findings[0].locations[0].path[0].index #=> Integer
+    #   resp.findings[0].locations[0].path[0].key #=> String
+    #   resp.findings[0].locations[0].path[0].substring.length #=> Integer
+    #   resp.findings[0].locations[0].path[0].substring.start #=> Integer
+    #   resp.findings[0].locations[0].path[0].value #=> String
+    #   resp.findings[0].locations[0].span.end.column #=> Integer
+    #   resp.findings[0].locations[0].span.end.line #=> Integer
+    #   resp.findings[0].locations[0].span.end.offset #=> Integer
+    #   resp.findings[0].locations[0].span.start.column #=> Integer
+    #   resp.findings[0].locations[0].span.start.line #=> Integer
+    #   resp.findings[0].locations[0].span.start.offset #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ValidatePolicy AWS API Documentation
+    #
+    # @overload validate_policy(params = {})
+    # @param [Hash] params ({})
+    def validate_policy(params = {}, options = {})
+      req = build_request(:validate_policy, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1505,7 +1590,7 @@ module Aws::AccessAnalyzer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-accessanalyzer'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

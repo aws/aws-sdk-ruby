@@ -509,12 +509,16 @@ module Aws::IAM
     # You use this operation to attach a managed policy to a group. To embed
     # an inline policy in a group, use PutGroupPolicy.
     #
+    # As a best practice, you can validate your IAM policies. To learn more,
+    # see [Validating IAM policies][1] in the *IAM User Guide*.
+    #
     # For more information about policies, see [Managed policies and inline
-    # policies][1] in the *IAM User Guide*.
+    # policies][2] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :group_name
     #   The name (friendly name, not ARN) of the group to attach the policy
@@ -583,9 +587,13 @@ module Aws::IAM
     # policies, see [Managed policies and inline policies][1] in the *IAM
     # User Guide*.
     #
+    # As a best practice, you can validate your IAM policies. To learn more,
+    # see [Validating IAM policies][2] in the *IAM User Guide*.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html
     #
     # @option params [required, String] :role_name
     #   The name (friendly name, not ARN) of the role to attach the policy to.
@@ -642,12 +650,16 @@ module Aws::IAM
     # You use this operation to attach a *managed* policy to a user. To
     # embed an inline policy in a user, use PutUserPolicy.
     #
+    # As a best practice, you can validate your IAM policies. To learn more,
+    # see [Validating IAM policies][1] in the *IAM User Guide*.
+    #
     # For more information about policies, see [Managed policies and inline
-    # policies][1] in the *IAM User Guide*.
+    # policies][2] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :user_name
     #   The name (friendly name, not ARN) of the IAM user to attach the policy
@@ -1367,13 +1379,17 @@ module Aws::IAM
     # information about policy versions, see [Versioning for managed
     # policies][1] in the *IAM User Guide*.
     #
+    # As a best practice, you can validate your IAM policies. To learn more,
+    # see [Validating IAM policies][2] in the *IAM User Guide*.
+    #
     # For more information about managed policies in general, see [Managed
-    # policies and inline policies][2] in the *IAM User Guide*.
+    # policies and inline policies][3] in the *IAM User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
     #
     # @option params [required, String] :policy_name
     #   The friendly name of the policy.
@@ -13037,7 +13053,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

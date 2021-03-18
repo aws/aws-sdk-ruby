@@ -266,7 +266,7 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [EmptyStructure]
@@ -316,7 +316,7 @@ module Aws::S3
     #   Governance-type Object Lock in place. You must have sufficient
     #   permissions to perform this operation.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [Types::DeleteObjectsOutput]
@@ -560,7 +560,7 @@ module Aws::S3
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [Object]
@@ -668,7 +668,7 @@ module Aws::S3
     #   list only if they have an upload ID lexicographically greater than the
     #   specified `upload-id-marker`.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [MultipartUpload::Collection]
@@ -748,7 +748,7 @@ module Aws::S3
     # @option options [String] :version_id_marker
     #   Specifies the object version you want to start listing from.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [ObjectVersion::Collection]
@@ -804,7 +804,7 @@ module Aws::S3
     #   the list objects request in V2 style. Bucket owners need not specify
     #   this parameter in their requests.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [ObjectSummary::Collection]

@@ -713,6 +713,10 @@ module Aws::Redshift
     #   The namespace Amazon Resource Name (ARN) of the cluster.
     #   @return [String]
     #
+    # @!attribute [rw] total_storage_capacity_in_mega_bytes
+    #   The total storage capacity of the cluster in megabytes.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -763,7 +767,8 @@ module Aws::Redshift
       :next_maintenance_window_start_time,
       :resize_info,
       :availability_zone_relocation_status,
-      :cluster_namespace_arn)
+      :cluster_namespace_arn,
+      :total_storage_capacity_in_mega_bytes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1824,6 +1829,9 @@ module Aws::Redshift
     #   value is 0, automated snapshots are disabled. Even if automated
     #   snapshots are disabled, you can still create manual snapshots when
     #   you want with CreateClusterSnapshot.
+    #
+    #   You can't disable automated snapshots for RA3 node types. Set the
+    #   automated retention period from 1-35 days.
     #
     #   Default: `1`
     #
@@ -6714,6 +6722,9 @@ module Aws::Redshift
     #   current value, existing automated snapshots that fall outside of the
     #   new retention period will be immediately deleted.
     #
+    #   You can't disable automated snapshots for RA3 node types. Set the
+    #   automated retention period from 1-35 days.
+    #
     #   Default: Uses existing setting.
     #
     #   Constraints: Must be a value from 0 to 35.
@@ -7402,6 +7413,35 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # Describes a network interface.
+    #
+    # @!attribute [rw] network_interface_id
+    #   The network interface identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The subnet identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_address
+    #   The IPv4 address of the network interface within the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/NetworkInterface AWS API Documentation
+    #
+    class NetworkInterface < Struct.new(
+      :network_interface_id,
+      :subnet_id,
+      :private_ip_address,
+      :availability_zone)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of node configurations.
     #
     # @!attribute [rw] node_type
@@ -7587,7 +7627,9 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] parameter_value
-    #   The value of the parameter.
+    #   The value of the parameter. If `ParameterName` is
+    #   `wlm_json_configuration`, then the maximum size of `ParameterValue`
+    #   is 8000 characters.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -8539,6 +8581,9 @@ module Aws::Redshift
     #   value is 0, automated snapshots are disabled. Even if automated
     #   snapshots are disabled, you can still create manual snapshots when
     #   you want with CreateClusterSnapshot.
+    #
+    #   You can't disable automated snapshots for RA3 node types. Set the
+    #   automated retention period from 1-35 days.
     #
     #   Default: The value selected for the cluster from which the snapshot
     #   was taken.
@@ -10229,10 +10274,21 @@ module Aws::Redshift
     #   through the proxy.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_id
+    #   The VPC identifier that the endpoint is associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interfaces
+    #   One or more network interfaces of the endpoint. Also known as an
+    #   interface endpoint.
+    #   @return [Array<Types::NetworkInterface>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/VpcEndpoint AWS API Documentation
     #
     class VpcEndpoint < Struct.new(
-      :vpc_endpoint_id)
+      :vpc_endpoint_id,
+      :vpc_id,
+      :network_interfaces)
       SENSITIVE = []
       include Aws::Structure
     end

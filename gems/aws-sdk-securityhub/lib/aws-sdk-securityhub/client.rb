@@ -452,9 +452,9 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Imports security findings generated from an integrated third-party
-    # product into Security Hub. This action is requested by the integrated
-    # product to import its findings into Security Hub.
+    # Imports security findings generated from an integrated product into
+    # Security Hub. This action is requested by the integrated product to
+    # import its findings into Security Hub.
     #
     # The maximum allowed size for a finding is 240 Kb. An error is returned
     # for any finding larger than 240 Kb.
@@ -471,11 +471,8 @@ module Aws::SecurityHub
     #
     # * `Workflow`
     #
-    # `BatchImportFindings` can be used to update the following finding
-    # fields and objects only if they have not been updated using
-    # `BatchUpdateFindings`. After they are updated using
-    # `BatchUpdateFindings`, these fields cannot be updated using
-    # `BatchImportFindings`.
+    # Finding providers also should not use `BatchImportFindings` to update
+    # the following attributes.
     #
     # * `Confidence`
     #
@@ -486,6 +483,9 @@ module Aws::SecurityHub
     # * `Severity`
     #
     # * `Types`
+    #
+    # Instead, finding providers use `FindingProviderFields` to provide
+    # values for these attributes.
     #
     # @option params [required, Array<Types::AwsSecurityFinding>] :findings
     #   A list of findings to import. To successfully import a finding, it
@@ -512,12 +512,12 @@ module Aws::SecurityHub
     #         product_arn: "NonEmptyString", # required
     #         generator_id: "NonEmptyString", # required
     #         aws_account_id: "NonEmptyString", # required
-    #         types: ["NonEmptyString"], # required
+    #         types: ["NonEmptyString"],
     #         first_observed_at: "NonEmptyString",
     #         last_observed_at: "NonEmptyString",
     #         created_at: "NonEmptyString", # required
     #         updated_at: "NonEmptyString", # required
-    #         severity: { # required
+    #         severity: {
     #           product: 1.0,
     #           label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
     #           normalized: 1,
@@ -640,6 +640,130 @@ module Aws::SecurityHub
     #             resource_role: "NonEmptyString",
     #             tags: {
     #               "NonEmptyString" => "NonEmptyString",
+    #             },
+    #             data_classification: {
+    #               detailed_results_location: "NonEmptyString",
+    #               result: {
+    #                 mime_type: "NonEmptyString",
+    #                 size_classified: 1,
+    #                 additional_occurrences: false,
+    #                 status: {
+    #                   code: "NonEmptyString",
+    #                   reason: "NonEmptyString",
+    #                 },
+    #                 sensitive_data: [
+    #                   {
+    #                     category: "NonEmptyString",
+    #                     detections: [
+    #                       {
+    #                         count: 1,
+    #                         type: "NonEmptyString",
+    #                         occurrences: {
+    #                           line_ranges: [
+    #                             {
+    #                               start: 1,
+    #                               end: 1,
+    #                               start_column: 1,
+    #                             },
+    #                           ],
+    #                           offset_ranges: [
+    #                             {
+    #                               start: 1,
+    #                               end: 1,
+    #                               start_column: 1,
+    #                             },
+    #                           ],
+    #                           pages: [
+    #                             {
+    #                               page_number: 1,
+    #                               line_range: {
+    #                                 start: 1,
+    #                                 end: 1,
+    #                                 start_column: 1,
+    #                               },
+    #                               offset_range: {
+    #                                 start: 1,
+    #                                 end: 1,
+    #                                 start_column: 1,
+    #                               },
+    #                             },
+    #                           ],
+    #                           records: [
+    #                             {
+    #                               json_path: "NonEmptyString",
+    #                               record_index: 1,
+    #                             },
+    #                           ],
+    #                           cells: [
+    #                             {
+    #                               column: 1,
+    #                               row: 1,
+    #                               column_name: "NonEmptyString",
+    #                               cell_reference: "NonEmptyString",
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     ],
+    #                     total_count: 1,
+    #                   },
+    #                 ],
+    #                 custom_data_identifiers: {
+    #                   detections: [
+    #                     {
+    #                       count: 1,
+    #                       arn: "NonEmptyString",
+    #                       name: "NonEmptyString",
+    #                       occurrences: {
+    #                         line_ranges: [
+    #                           {
+    #                             start: 1,
+    #                             end: 1,
+    #                             start_column: 1,
+    #                           },
+    #                         ],
+    #                         offset_ranges: [
+    #                           {
+    #                             start: 1,
+    #                             end: 1,
+    #                             start_column: 1,
+    #                           },
+    #                         ],
+    #                         pages: [
+    #                           {
+    #                             page_number: 1,
+    #                             line_range: {
+    #                               start: 1,
+    #                               end: 1,
+    #                               start_column: 1,
+    #                             },
+    #                             offset_range: {
+    #                               start: 1,
+    #                               end: 1,
+    #                               start_column: 1,
+    #                             },
+    #                           },
+    #                         ],
+    #                         records: [
+    #                           {
+    #                             json_path: "NonEmptyString",
+    #                             record_index: 1,
+    #                           },
+    #                         ],
+    #                         cells: [
+    #                           {
+    #                             column: 1,
+    #                             row: 1,
+    #                             column_name: "NonEmptyString",
+    #                             cell_reference: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                   total_count: 1,
+    #                 },
+    #               },
     #             },
     #             details: {
     #               aws_auto_scaling_auto_scaling_group: {
@@ -942,6 +1066,18 @@ module Aws::SecurityHub
     #                     },
     #                   ],
     #                 },
+    #                 public_access_block_configuration: {
+    #                   block_public_acls: false,
+    #                   block_public_policy: false,
+    #                   ignore_public_acls: false,
+    #                   restrict_public_buckets: false,
+    #                 },
+    #               },
+    #               aws_s3_account_public_access_block: {
+    #                 block_public_acls: false,
+    #                 block_public_policy: false,
+    #                 ignore_public_acls: false,
+    #                 restrict_public_buckets: false,
     #               },
     #               aws_s3_object: {
     #                 last_modified: "NonEmptyString",
@@ -2172,6 +2308,21 @@ module Aws::SecurityHub
     #             blocked: false,
     #           },
     #         },
+    #         finding_provider_fields: {
+    #           confidence: 1,
+    #           criticality: 1,
+    #           related_findings: [
+    #             {
+    #               product_arn: "NonEmptyString", # required
+    #               id: "NonEmptyString", # required
+    #             },
+    #           ],
+    #           severity: {
+    #             label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #             original: "NonEmptyString",
+    #           },
+    #           types: ["NonEmptyString"],
+    #         },
     #       },
     #     ],
     #   })
@@ -2987,6 +3138,50 @@ module Aws::SecurityHub
     #       keyword: [
     #         {
     #           value: "NonEmptyString",
+    #         },
+    #       ],
+    #       finding_provider_fields_confidence: [
+    #         {
+    #           gte: 1.0,
+    #           lte: 1.0,
+    #           eq: 1.0,
+    #         },
+    #       ],
+    #       finding_provider_fields_criticality: [
+    #         {
+    #           gte: 1.0,
+    #           lte: 1.0,
+    #           eq: 1.0,
+    #         },
+    #       ],
+    #       finding_provider_fields_related_findings_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_related_findings_product_arn: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_severity_label: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_severity_original: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_types: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #         },
     #       ],
     #     },
@@ -4403,6 +4598,50 @@ module Aws::SecurityHub
     #           value: "NonEmptyString",
     #         },
     #       ],
+    #       finding_provider_fields_confidence: [
+    #         {
+    #           gte: 1.0,
+    #           lte: 1.0,
+    #           eq: 1.0,
+    #         },
+    #       ],
+    #       finding_provider_fields_criticality: [
+    #         {
+    #           gte: 1.0,
+    #           lte: 1.0,
+    #           eq: 1.0,
+    #         },
+    #       ],
+    #       finding_provider_fields_related_findings_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_related_findings_product_arn: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_severity_label: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_severity_original: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_types: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
     #     },
     #     sort_criteria: [
     #       {
@@ -4507,6 +4746,71 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].resource_role #=> String
     #   resp.findings[0].resources[0].tags #=> Hash
     #   resp.findings[0].resources[0].tags["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].data_classification.detailed_results_location #=> String
+    #   resp.findings[0].resources[0].data_classification.result.mime_type #=> String
+    #   resp.findings[0].resources[0].data_classification.result.size_classified #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.additional_occurrences #=> Boolean
+    #   resp.findings[0].resources[0].data_classification.result.status.code #=> String
+    #   resp.findings[0].resources[0].data_classification.result.status.reason #=> String
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].category #=> String
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].count #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].type #=> String
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.line_ranges #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.line_ranges[0].start #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.line_ranges[0].end #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.line_ranges[0].start_column #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.offset_ranges #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.offset_ranges[0].start #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.offset_ranges[0].end #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.offset_ranges[0].start_column #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.pages #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.pages[0].page_number #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.pages[0].line_range.start #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.pages[0].line_range.end #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.pages[0].line_range.start_column #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.pages[0].offset_range.start #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.pages[0].offset_range.end #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.pages[0].offset_range.start_column #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.records #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.records[0].json_path #=> String
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.records[0].record_index #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.cells #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.cells[0].column #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.cells[0].row #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.cells[0].column_name #=> String
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].detections[0].occurrences.cells[0].cell_reference #=> String
+    #   resp.findings[0].resources[0].data_classification.result.sensitive_data[0].total_count #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].count #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].arn #=> String
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].name #=> String
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.line_ranges #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.line_ranges[0].start #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.line_ranges[0].end #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.line_ranges[0].start_column #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.offset_ranges #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.offset_ranges[0].start #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.offset_ranges[0].end #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.offset_ranges[0].start_column #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.pages #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.pages[0].page_number #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.pages[0].line_range.start #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.pages[0].line_range.end #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.pages[0].line_range.start_column #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.pages[0].offset_range.start #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.pages[0].offset_range.end #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.pages[0].offset_range.start_column #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.records #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.records[0].json_path #=> String
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.records[0].record_index #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.cells #=> Array
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.cells[0].column #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.cells[0].row #=> Integer
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.cells[0].column_name #=> String
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.detections[0].occurrences.cells[0].cell_reference #=> String
+    #   resp.findings[0].resources[0].data_classification.result.custom_data_identifiers.total_count #=> Integer
     #   resp.findings[0].resources[0].details.aws_auto_scaling_auto_scaling_group.launch_configuration_name #=> String
     #   resp.findings[0].resources[0].details.aws_auto_scaling_auto_scaling_group.load_balancer_names #=> Array
     #   resp.findings[0].resources[0].details.aws_auto_scaling_auto_scaling_group.load_balancer_names[0] #=> String
@@ -4690,6 +4994,14 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_s3_bucket.server_side_encryption_configuration.rules #=> Array
     #   resp.findings[0].resources[0].details.aws_s3_bucket.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.sse_algorithm #=> String
     #   resp.findings[0].resources[0].details.aws_s3_bucket.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.kms_master_key_id #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.public_access_block_configuration.block_public_acls #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.public_access_block_configuration.block_public_policy #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.public_access_block_configuration.ignore_public_acls #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.public_access_block_configuration.restrict_public_buckets #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_s3_account_public_access_block.block_public_acls #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_s3_account_public_access_block.block_public_policy #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_s3_account_public_access_block.ignore_public_acls #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_s3_account_public_access_block.restrict_public_buckets #=> Boolean
     #   resp.findings[0].resources[0].details.aws_s3_object.last_modified #=> String
     #   resp.findings[0].resources[0].details.aws_s3_object.etag #=> String
     #   resp.findings[0].resources[0].details.aws_s3_object.version_id #=> String
@@ -5536,6 +5848,15 @@ module Aws::SecurityHub
     #   resp.findings[0].action.port_probe_action.port_probe_details[0].remote_ip_details.geo_location.lon #=> Float
     #   resp.findings[0].action.port_probe_action.port_probe_details[0].remote_ip_details.geo_location.lat #=> Float
     #   resp.findings[0].action.port_probe_action.blocked #=> Boolean
+    #   resp.findings[0].finding_provider_fields.confidence #=> Integer
+    #   resp.findings[0].finding_provider_fields.criticality #=> Integer
+    #   resp.findings[0].finding_provider_fields.related_findings #=> Array
+    #   resp.findings[0].finding_provider_fields.related_findings[0].product_arn #=> String
+    #   resp.findings[0].finding_provider_fields.related_findings[0].id #=> String
+    #   resp.findings[0].finding_provider_fields.severity.label #=> String, one of "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.findings[0].finding_provider_fields.severity.original #=> String
+    #   resp.findings[0].finding_provider_fields.types #=> Array
+    #   resp.findings[0].finding_provider_fields.types[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindings AWS API Documentation
@@ -5897,6 +6218,29 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.note_updated_by[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
     #   resp.insights[0].filters.keyword #=> Array
     #   resp.insights[0].filters.keyword[0].value #=> String
+    #   resp.insights[0].filters.finding_provider_fields_confidence #=> Array
+    #   resp.insights[0].filters.finding_provider_fields_confidence[0].gte #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_confidence[0].lte #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_confidence[0].eq #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_criticality #=> Array
+    #   resp.insights[0].filters.finding_provider_fields_criticality[0].gte #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_criticality[0].lte #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_criticality[0].eq #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_related_findings_id #=> Array
+    #   resp.insights[0].filters.finding_provider_fields_related_findings_id[0].value #=> String
+    #   resp.insights[0].filters.finding_provider_fields_related_findings_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.insights[0].filters.finding_provider_fields_related_findings_product_arn #=> Array
+    #   resp.insights[0].filters.finding_provider_fields_related_findings_product_arn[0].value #=> String
+    #   resp.insights[0].filters.finding_provider_fields_related_findings_product_arn[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.insights[0].filters.finding_provider_fields_severity_label #=> Array
+    #   resp.insights[0].filters.finding_provider_fields_severity_label[0].value #=> String
+    #   resp.insights[0].filters.finding_provider_fields_severity_label[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.insights[0].filters.finding_provider_fields_severity_original #=> Array
+    #   resp.insights[0].filters.finding_provider_fields_severity_original[0].value #=> String
+    #   resp.insights[0].filters.finding_provider_fields_severity_original[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.insights[0].filters.finding_provider_fields_types #=> Array
+    #   resp.insights[0].filters.finding_provider_fields_types[0].value #=> String
+    #   resp.insights[0].filters.finding_provider_fields_types[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
     #   resp.insights[0].group_by_attribute #=> String
     #   resp.next_token #=> String
     #
@@ -6937,6 +7281,50 @@ module Aws::SecurityHub
     #           value: "NonEmptyString",
     #         },
     #       ],
+    #       finding_provider_fields_confidence: [
+    #         {
+    #           gte: 1.0,
+    #           lte: 1.0,
+    #           eq: 1.0,
+    #         },
+    #       ],
+    #       finding_provider_fields_criticality: [
+    #         {
+    #           gte: 1.0,
+    #           lte: 1.0,
+    #           eq: 1.0,
+    #         },
+    #       ],
+    #       finding_provider_fields_related_findings_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_related_findings_product_arn: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_severity_label: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_severity_original: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_types: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
     #     },
     #     note: {
     #       text: "NonEmptyString", # required
@@ -7530,6 +7918,50 @@ module Aws::SecurityHub
     #           value: "NonEmptyString",
     #         },
     #       ],
+    #       finding_provider_fields_confidence: [
+    #         {
+    #           gte: 1.0,
+    #           lte: 1.0,
+    #           eq: 1.0,
+    #         },
+    #       ],
+    #       finding_provider_fields_criticality: [
+    #         {
+    #           gte: 1.0,
+    #           lte: 1.0,
+    #           eq: 1.0,
+    #         },
+    #       ],
+    #       finding_provider_fields_related_findings_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_related_findings_product_arn: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_severity_label: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_severity_original: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       finding_provider_fields_types: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
     #     },
     #     group_by_attribute: "NonEmptyString",
     #   })
@@ -7645,7 +8077,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

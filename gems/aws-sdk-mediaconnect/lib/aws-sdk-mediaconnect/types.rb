@@ -39,10 +39,10 @@ module Aws::MediaConnect
     #             description: "__string",
     #             destination: "__string",
     #             encryption: {
-    #               algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #               algorithm: "aes128", # accepts aes128, aes192, aes256
     #               constant_initialization_vector: "__string",
     #               device_id: "__string",
-    #               key_type: "speke", # accepts speke, static-key
+    #               key_type: "speke", # accepts speke, static-key, srt-password
     #               region: "__string",
     #               resource_id: "__string",
     #               role_arn: "__string", # required
@@ -50,9 +50,10 @@ module Aws::MediaConnect
     #               url: "__string",
     #             },
     #             max_latency: 1,
+    #             min_latency: 1,
     #             name: "__string",
     #             port: 1,
-    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
     #             remote_id: "__string",
     #             smoothing_latency: 1,
     #             stream_id: "__string",
@@ -109,10 +110,10 @@ module Aws::MediaConnect
     #         sources: [ # required
     #           {
     #             decryption: {
-    #               algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #               algorithm: "aes128", # accepts aes128, aes192, aes256
     #               constant_initialization_vector: "__string",
     #               device_id: "__string",
-    #               key_type: "speke", # accepts speke, static-key
+    #               key_type: "speke", # accepts speke, static-key, srt-password
     #               region: "__string",
     #               resource_id: "__string",
     #               role_arn: "__string", # required
@@ -124,8 +125,9 @@ module Aws::MediaConnect
     #             ingest_port: 1,
     #             max_bitrate: 1,
     #             max_latency: 1,
+    #             min_latency: 1,
     #             name: "__string",
-    #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
     #             stream_id: "__string",
     #             vpc_interface_name: "__string",
     #             whitelist_cidr: "__string",
@@ -232,10 +234,10 @@ module Aws::MediaConnect
     #         description: "__string",
     #         destination: "__string",
     #         encryption: {
-    #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #           algorithm: "aes128", # accepts aes128, aes192, aes256
     #           constant_initialization_vector: "__string",
     #           device_id: "__string",
-    #           key_type: "speke", # accepts speke, static-key
+    #           key_type: "speke", # accepts speke, static-key, srt-password
     #           region: "__string",
     #           resource_id: "__string",
     #           role_arn: "__string", # required
@@ -243,9 +245,10 @@ module Aws::MediaConnect
     #           url: "__string",
     #         },
     #         max_latency: 1,
+    #         min_latency: 1,
     #         name: "__string",
     #         port: 1,
-    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
     #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
@@ -278,6 +281,15 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] max_latency
     #   The maximum latency in milliseconds for Zixi-based streams.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_latency
+    #   The minimum latency in milliseconds for SRT-based streams. In
+    #   streams that use the SRT protocol, this value that you set on your
+    #   MediaConnect source or output represents the minimal potential
+    #   latency of that connection. The latency of the stream is set to the
+    #   highest number between the sender’s minimum latency and the
+    #   receiver’s minimum latency.
     #   @return [Integer]
     #
     # @!attribute [rw] name
@@ -319,6 +331,7 @@ module Aws::MediaConnect
       :destination,
       :encryption,
       :max_latency,
+      :min_latency,
       :name,
       :port,
       :protocol,
@@ -373,10 +386,10 @@ module Aws::MediaConnect
     #             data_transfer_subscriber_fee_percent: 1,
     #             description: "__string",
     #             encryption: {
-    #               algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #               algorithm: "aes128", # accepts aes128, aes192, aes256
     #               constant_initialization_vector: "__string",
     #               device_id: "__string",
-    #               key_type: "speke", # accepts speke, static-key
+    #               key_type: "speke", # accepts speke, static-key, srt-password
     #               region: "__string",
     #               resource_id: "__string",
     #               role_arn: "__string", # required
@@ -395,10 +408,10 @@ module Aws::MediaConnect
     #             description: "__string",
     #             destination: "__string",
     #             encryption: {
-    #               algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #               algorithm: "aes128", # accepts aes128, aes192, aes256
     #               constant_initialization_vector: "__string",
     #               device_id: "__string",
-    #               key_type: "speke", # accepts speke, static-key
+    #               key_type: "speke", # accepts speke, static-key, srt-password
     #               region: "__string",
     #               resource_id: "__string",
     #               role_arn: "__string", # required
@@ -406,9 +419,10 @@ module Aws::MediaConnect
     #               url: "__string",
     #             },
     #             max_latency: 1,
+    #             min_latency: 1,
     #             name: "__string",
     #             port: 1,
-    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
     #             remote_id: "__string",
     #             smoothing_latency: 1,
     #             stream_id: "__string",
@@ -419,10 +433,10 @@ module Aws::MediaConnect
     #         ],
     #         source: {
     #           decryption: {
-    #             algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #             algorithm: "aes128", # accepts aes128, aes192, aes256
     #             constant_initialization_vector: "__string",
     #             device_id: "__string",
-    #             key_type: "speke", # accepts speke, static-key
+    #             key_type: "speke", # accepts speke, static-key, srt-password
     #             region: "__string",
     #             resource_id: "__string",
     #             role_arn: "__string", # required
@@ -434,8 +448,9 @@ module Aws::MediaConnect
     #           ingest_port: 1,
     #           max_bitrate: 1,
     #           max_latency: 1,
+    #           min_latency: 1,
     #           name: "__string",
-    #           protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #           protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
     #           stream_id: "__string",
     #           vpc_interface_name: "__string",
     #           whitelist_cidr: "__string",
@@ -447,10 +462,10 @@ module Aws::MediaConnect
     #         sources: [
     #           {
     #             decryption: {
-    #               algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #               algorithm: "aes128", # accepts aes128, aes192, aes256
     #               constant_initialization_vector: "__string",
     #               device_id: "__string",
-    #               key_type: "speke", # accepts speke, static-key
+    #               key_type: "speke", # accepts speke, static-key, srt-password
     #               region: "__string",
     #               resource_id: "__string",
     #               role_arn: "__string", # required
@@ -462,8 +477,9 @@ module Aws::MediaConnect
     #             ingest_port: 1,
     #             max_bitrate: 1,
     #             max_latency: 1,
+    #             min_latency: 1,
     #             name: "__string",
-    #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
     #             stream_id: "__string",
     #             vpc_interface_name: "__string",
     #             whitelist_cidr: "__string",
@@ -694,10 +710,10 @@ module Aws::MediaConnect
     #   data as a hash:
     #
     #       {
-    #         algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #         algorithm: "aes128", # accepts aes128, aes192, aes256
     #         constant_initialization_vector: "__string",
     #         device_id: "__string",
-    #         key_type: "speke", # accepts speke, static-key
+    #         key_type: "speke", # accepts speke, static-key, srt-password
     #         region: "__string",
     #         resource_id: "__string",
     #         role_arn: "__string", # required
@@ -945,10 +961,10 @@ module Aws::MediaConnect
     #         data_transfer_subscriber_fee_percent: 1,
     #         description: "__string",
     #         encryption: {
-    #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #           algorithm: "aes128", # accepts aes128, aes192, aes256
     #           constant_initialization_vector: "__string",
     #           device_id: "__string",
-    #           key_type: "speke", # accepts speke, static-key
+    #           key_type: "speke", # accepts speke, static-key, srt-password
     #           region: "__string",
     #           resource_id: "__string",
     #           role_arn: "__string", # required
@@ -1033,10 +1049,10 @@ module Aws::MediaConnect
     #             data_transfer_subscriber_fee_percent: 1,
     #             description: "__string",
     #             encryption: {
-    #               algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #               algorithm: "aes128", # accepts aes128, aes192, aes256
     #               constant_initialization_vector: "__string",
     #               device_id: "__string",
-    #               key_type: "speke", # accepts speke, static-key
+    #               key_type: "speke", # accepts speke, static-key, srt-password
     #               region: "__string",
     #               resource_id: "__string",
     #               role_arn: "__string", # required
@@ -1957,10 +1973,10 @@ module Aws::MediaConnect
     #
     #       {
     #         decryption: {
-    #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #           algorithm: "aes128", # accepts aes128, aes192, aes256
     #           constant_initialization_vector: "__string",
     #           device_id: "__string",
-    #           key_type: "speke", # accepts speke, static-key
+    #           key_type: "speke", # accepts speke, static-key, srt-password
     #           region: "__string",
     #           resource_id: "__string",
     #           role_arn: "__string", # required
@@ -1972,8 +1988,9 @@ module Aws::MediaConnect
     #         ingest_port: 1,
     #         max_bitrate: 1,
     #         max_latency: 1,
+    #         min_latency: 1,
     #         name: "__string",
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
     #         stream_id: "__string",
     #         vpc_interface_name: "__string",
     #         whitelist_cidr: "__string",
@@ -2006,6 +2023,15 @@ module Aws::MediaConnect
     # @!attribute [rw] max_latency
     #   The maximum latency in milliseconds. This parameter applies only to
     #   RIST-based and Zixi-based streams.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_latency
+    #   The minimum latency in milliseconds for SRT-based streams. In
+    #   streams that use the SRT protocol, this value that you set on your
+    #   MediaConnect source or output represents the minimal potential
+    #   latency of that connection. The latency of the stream is set to the
+    #   highest number between the sender’s minimum latency and the
+    #   receiver’s minimum latency.
     #   @return [Integer]
     #
     # @!attribute [rw] name
@@ -2041,6 +2067,7 @@ module Aws::MediaConnect
       :ingest_port,
       :max_bitrate,
       :max_latency,
+      :min_latency,
       :name,
       :protocol,
       :stream_id,
@@ -2265,6 +2292,15 @@ module Aws::MediaConnect
     #   RIST-based and Zixi-based streams.
     #   @return [Integer]
     #
+    # @!attribute [rw] min_latency
+    #   The minimum latency in milliseconds for SRT-based streams. In
+    #   streams that use the SRT protocol, this value that you set on your
+    #   MediaConnect source or output represents the minimal potential
+    #   latency of that connection. The latency of the stream is set to the
+    #   highest number between the sender’s minimum latency and the
+    #   receiver’s minimum latency.
+    #   @return [Integer]
+    #
     # @!attribute [rw] protocol
     #   The protocol that is used by the source or output.
     #   @return [String]
@@ -2289,6 +2325,7 @@ module Aws::MediaConnect
       :cidr_allow_list,
       :max_bitrate,
       :max_latency,
+      :min_latency,
       :protocol,
       :remote_id,
       :smoothing_latency,
@@ -2329,7 +2366,7 @@ module Aws::MediaConnect
     #         algorithm: "aes128", # accepts aes128, aes192, aes256
     #         constant_initialization_vector: "__string",
     #         device_id: "__string",
-    #         key_type: "speke", # accepts speke, static-key
+    #         key_type: "speke", # accepts speke, static-key, srt-password
     #         region: "__string",
     #         resource_id: "__string",
     #         role_arn: "__string",
@@ -2443,7 +2480,7 @@ module Aws::MediaConnect
     #           algorithm: "aes128", # accepts aes128, aes192, aes256
     #           constant_initialization_vector: "__string",
     #           device_id: "__string",
-    #           key_type: "speke", # accepts speke, static-key
+    #           key_type: "speke", # accepts speke, static-key, srt-password
     #           region: "__string",
     #           resource_id: "__string",
     #           role_arn: "__string",
@@ -2534,7 +2571,7 @@ module Aws::MediaConnect
     #           algorithm: "aes128", # accepts aes128, aes192, aes256
     #           constant_initialization_vector: "__string",
     #           device_id: "__string",
-    #           key_type: "speke", # accepts speke, static-key
+    #           key_type: "speke", # accepts speke, static-key, srt-password
     #           region: "__string",
     #           resource_id: "__string",
     #           role_arn: "__string",
@@ -2543,9 +2580,10 @@ module Aws::MediaConnect
     #         },
     #         flow_arn: "__string", # required
     #         max_latency: 1,
+    #         min_latency: 1,
     #         output_arn: "__string", # required
     #         port: 1,
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
     #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
@@ -2581,6 +2619,15 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] max_latency
     #   The maximum latency in milliseconds for Zixi-based streams.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_latency
+    #   The minimum latency in milliseconds for SRT-based streams. In
+    #   streams that use the SRT protocol, this value that you set on your
+    #   MediaConnect source or output represents the minimal potential
+    #   latency of that connection. The latency of the stream is set to the
+    #   highest number between the sender’s minimum latency and the
+    #   receiver’s minimum latency.
     #   @return [Integer]
     #
     # @!attribute [rw] output_arn
@@ -2621,6 +2668,7 @@ module Aws::MediaConnect
       :encryption,
       :flow_arn,
       :max_latency,
+      :min_latency,
       :output_arn,
       :port,
       :protocol,
@@ -2706,7 +2754,7 @@ module Aws::MediaConnect
     #           algorithm: "aes128", # accepts aes128, aes192, aes256
     #           constant_initialization_vector: "__string",
     #           device_id: "__string",
-    #           key_type: "speke", # accepts speke, static-key
+    #           key_type: "speke", # accepts speke, static-key, srt-password
     #           region: "__string",
     #           resource_id: "__string",
     #           role_arn: "__string",
@@ -2719,7 +2767,8 @@ module Aws::MediaConnect
     #         ingest_port: 1,
     #         max_bitrate: 1,
     #         max_latency: 1,
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #         min_latency: 1,
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
     #         source_arn: "__string", # required
     #         stream_id: "__string",
     #         vpc_interface_name: "__string",
@@ -2758,6 +2807,15 @@ module Aws::MediaConnect
     #   RIST-based and Zixi-based streams.
     #   @return [Integer]
     #
+    # @!attribute [rw] min_latency
+    #   The minimum latency in milliseconds for SRT-based streams. In
+    #   streams that use the SRT protocol, this value that you set on your
+    #   MediaConnect source or output represents the minimal potential
+    #   latency of that connection. The latency of the stream is set to the
+    #   highest number between the sender’s minimum latency and the
+    #   receiver’s minimum latency.
+    #   @return [Integer]
+    #
     # @!attribute [rw] protocol
     #   The protocol that is used by the source.
     #   @return [String]
@@ -2791,6 +2849,7 @@ module Aws::MediaConnect
       :ingest_port,
       :max_bitrate,
       :max_latency,
+      :min_latency,
       :protocol,
       :source_arn,
       :stream_id,

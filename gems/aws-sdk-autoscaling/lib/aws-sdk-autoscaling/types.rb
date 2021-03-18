@@ -4997,12 +4997,18 @@ module Aws::AutoScaling
 
     # Describes information used to start an instance refresh.
     #
+    # All properties are optional. However, if you specify a value for
+    # `CheckpointDelay`, you must also provide a value for
+    # `CheckpointPercentages`.
+    #
     # @note When making an API call, you may pass RefreshPreferences
     #   data as a hash:
     #
     #       {
     #         min_healthy_percentage: 1,
     #         instance_warmup: 1,
+    #         checkpoint_percentages: [1],
+    #         checkpoint_delay: 1,
     #       }
     #
     # @!attribute [rw] min_healthy_percentage
@@ -5020,11 +5026,35 @@ module Aws::AutoScaling
     #   the value for the health check grace period defined for the group.
     #   @return [Integer]
     #
+    # @!attribute [rw] checkpoint_percentages
+    #   Threshold values for each checkpoint in ascending order. Each number
+    #   must be unique. To replace all instances in the Auto Scaling group,
+    #   the last number in the array must be `100`.
+    #
+    #   For usage examples, see [Adding checkpoints to an instance
+    #   refresh][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-adding-checkpoints-instance-refresh.html
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] checkpoint_delay
+    #   The amount of time, in seconds, to wait after a checkpoint before
+    #   continuing. This property is optional, but if you specify a value
+    #   for it, you must also specify a value for `CheckpointPercentages`.
+    #   If you specify a value for `CheckpointPercentages` and not for
+    #   `CheckpointDelay`, the `CheckpointDelay` defaults to `3600` (1
+    #   hour).
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RefreshPreferences AWS API Documentation
     #
     class RefreshPreferences < Struct.new(
       :min_healthy_percentage,
-      :instance_warmup)
+      :instance_warmup,
+      :checkpoint_percentages,
+      :checkpoint_delay)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5568,6 +5598,8 @@ module Aws::AutoScaling
     #         preferences: {
     #           min_healthy_percentage: 1,
     #           instance_warmup: 1,
+    #           checkpoint_percentages: [1],
+    #           checkpoint_delay: 1,
     #         },
     #       }
     #

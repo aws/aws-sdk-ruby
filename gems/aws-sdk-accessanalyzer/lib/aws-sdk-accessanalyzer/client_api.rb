@@ -86,6 +86,7 @@ module Aws::AccessAnalyzer
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InternetConfiguration = Shapes::StructureShape.new(name: 'InternetConfiguration')
+    IssueCode = Shapes::StringShape.new(name: 'IssueCode')
     IssuingAccount = Shapes::StringShape.new(name: 'IssuingAccount')
     KmsConstraintsKey = Shapes::StringShape.new(name: 'KmsConstraintsKey')
     KmsConstraintsMap = Shapes::MapShape.new(name: 'KmsConstraintsMap')
@@ -98,6 +99,7 @@ module Aws::AccessAnalyzer
     KmsKeyConfiguration = Shapes::StructureShape.new(name: 'KmsKeyConfiguration')
     KmsKeyPoliciesMap = Shapes::MapShape.new(name: 'KmsKeyPoliciesMap')
     KmsKeyPolicy = Shapes::StringShape.new(name: 'KmsKeyPolicy')
+    LearnMoreLink = Shapes::StringShape.new(name: 'LearnMoreLink')
     ListAccessPreviewFindingsRequest = Shapes::StructureShape.new(name: 'ListAccessPreviewFindingsRequest')
     ListAccessPreviewFindingsResponse = Shapes::StructureShape.new(name: 'ListAccessPreviewFindingsResponse')
     ListAccessPreviewsRequest = Shapes::StructureShape.new(name: 'ListAccessPreviewsRequest')
@@ -112,10 +114,18 @@ module Aws::AccessAnalyzer
     ListFindingsResponse = Shapes::StructureShape.new(name: 'ListFindingsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    Locale = Shapes::StringShape.new(name: 'Locale')
+    Location = Shapes::StructureShape.new(name: 'Location')
+    LocationList = Shapes::ListShape.new(name: 'LocationList')
     Name = Shapes::StringShape.new(name: 'Name')
     NetworkOriginConfiguration = Shapes::StructureShape.new(name: 'NetworkOriginConfiguration')
     OrderBy = Shapes::StringShape.new(name: 'OrderBy')
+    PathElement = Shapes::StructureShape.new(name: 'PathElement')
+    PathElementList = Shapes::ListShape.new(name: 'PathElementList')
+    PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
     PolicyName = Shapes::StringShape.new(name: 'PolicyName')
+    PolicyType = Shapes::StringShape.new(name: 'PolicyType')
+    Position = Shapes::StructureShape.new(name: 'Position')
     PrincipalMap = Shapes::MapShape.new(name: 'PrincipalMap')
     ReasonCode = Shapes::StringShape.new(name: 'ReasonCode')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
@@ -135,11 +145,13 @@ module Aws::AccessAnalyzer
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SharedViaList = Shapes::ListShape.new(name: 'SharedViaList')
     SortCriteria = Shapes::StructureShape.new(name: 'SortCriteria')
+    Span = Shapes::StructureShape.new(name: 'Span')
     SqsQueueConfiguration = Shapes::StructureShape.new(name: 'SqsQueueConfiguration')
     SqsQueuePolicy = Shapes::StringShape.new(name: 'SqsQueuePolicy')
     StartResourceScanRequest = Shapes::StructureShape.new(name: 'StartResourceScanRequest')
     StatusReason = Shapes::StructureShape.new(name: 'StatusReason')
     String = Shapes::StringShape.new(name: 'String')
+    Substring = Shapes::StructureShape.new(name: 'Substring')
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
@@ -152,6 +164,11 @@ module Aws::AccessAnalyzer
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateArchiveRuleRequest = Shapes::StructureShape.new(name: 'UpdateArchiveRuleRequest')
     UpdateFindingsRequest = Shapes::StructureShape.new(name: 'UpdateFindingsRequest')
+    ValidatePolicyFinding = Shapes::StructureShape.new(name: 'ValidatePolicyFinding')
+    ValidatePolicyFindingList = Shapes::ListShape.new(name: 'ValidatePolicyFindingList')
+    ValidatePolicyFindingType = Shapes::StringShape.new(name: 'ValidatePolicyFindingType')
+    ValidatePolicyRequest = Shapes::StructureShape.new(name: 'ValidatePolicyRequest')
+    ValidatePolicyResponse = Shapes::StructureShape.new(name: 'ValidatePolicyResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
@@ -498,9 +515,28 @@ module Aws::AccessAnalyzer
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    Location.add_member(:path, Shapes::ShapeRef.new(shape: PathElementList, required: true, location_name: "path"))
+    Location.add_member(:span, Shapes::ShapeRef.new(shape: Span, required: true, location_name: "span"))
+    Location.struct_class = Types::Location
+
+    LocationList.member = Shapes::ShapeRef.new(shape: Location)
+
     NetworkOriginConfiguration.add_member(:internet_configuration, Shapes::ShapeRef.new(shape: InternetConfiguration, location_name: "internetConfiguration"))
     NetworkOriginConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "vpcConfiguration"))
     NetworkOriginConfiguration.struct_class = Types::NetworkOriginConfiguration
+
+    PathElement.add_member(:index, Shapes::ShapeRef.new(shape: Integer, location_name: "index"))
+    PathElement.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
+    PathElement.add_member(:substring, Shapes::ShapeRef.new(shape: Substring, location_name: "substring"))
+    PathElement.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
+    PathElement.struct_class = Types::PathElement
+
+    PathElementList.member = Shapes::ShapeRef.new(shape: PathElement)
+
+    Position.add_member(:column, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "column"))
+    Position.add_member(:line, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "line"))
+    Position.add_member(:offset, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "offset"))
+    Position.struct_class = Types::Position
 
     PrincipalMap.key = Shapes::ShapeRef.new(shape: String)
     PrincipalMap.value = Shapes::ShapeRef.new(shape: String)
@@ -549,6 +585,10 @@ module Aws::AccessAnalyzer
     SortCriteria.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderBy, location_name: "orderBy"))
     SortCriteria.struct_class = Types::SortCriteria
 
+    Span.add_member(:end, Shapes::ShapeRef.new(shape: Position, required: true, location_name: "end"))
+    Span.add_member(:start, Shapes::ShapeRef.new(shape: Position, required: true, location_name: "start"))
+    Span.struct_class = Types::Span
+
     SqsQueueConfiguration.add_member(:queue_policy, Shapes::ShapeRef.new(shape: SqsQueuePolicy, location_name: "queuePolicy"))
     SqsQueueConfiguration.struct_class = Types::SqsQueueConfiguration
 
@@ -558,6 +598,10 @@ module Aws::AccessAnalyzer
 
     StatusReason.add_member(:code, Shapes::ShapeRef.new(shape: ReasonCode, required: true, location_name: "code"))
     StatusReason.struct_class = Types::StatusReason
+
+    Substring.add_member(:length, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "length"))
+    Substring.add_member(:start, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "start"))
+    Substring.struct_class = Types::Substring
 
     TagKeys.member = Shapes::ShapeRef.new(shape: String)
 
@@ -592,6 +636,26 @@ module Aws::AccessAnalyzer
     UpdateFindingsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn"))
     UpdateFindingsRequest.add_member(:status, Shapes::ShapeRef.new(shape: FindingStatusUpdate, required: true, location_name: "status"))
     UpdateFindingsRequest.struct_class = Types::UpdateFindingsRequest
+
+    ValidatePolicyFinding.add_member(:finding_details, Shapes::ShapeRef.new(shape: String, required: true, location_name: "findingDetails"))
+    ValidatePolicyFinding.add_member(:finding_type, Shapes::ShapeRef.new(shape: ValidatePolicyFindingType, required: true, location_name: "findingType"))
+    ValidatePolicyFinding.add_member(:issue_code, Shapes::ShapeRef.new(shape: IssueCode, required: true, location_name: "issueCode"))
+    ValidatePolicyFinding.add_member(:learn_more_link, Shapes::ShapeRef.new(shape: LearnMoreLink, required: true, location_name: "learnMoreLink"))
+    ValidatePolicyFinding.add_member(:locations, Shapes::ShapeRef.new(shape: LocationList, required: true, location_name: "locations"))
+    ValidatePolicyFinding.struct_class = Types::ValidatePolicyFinding
+
+    ValidatePolicyFindingList.member = Shapes::ShapeRef.new(shape: ValidatePolicyFinding)
+
+    ValidatePolicyRequest.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
+    ValidatePolicyRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "maxResults"))
+    ValidatePolicyRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "nextToken"))
+    ValidatePolicyRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: PolicyDocument, required: true, location_name: "policyDocument"))
+    ValidatePolicyRequest.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "policyType"))
+    ValidatePolicyRequest.struct_class = Types::ValidatePolicyRequest
+
+    ValidatePolicyResponse.add_member(:findings, Shapes::ShapeRef.new(shape: ValidatePolicyFindingList, required: true, location_name: "findings"))
+    ValidatePolicyResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "nextToken"))
+    ValidatePolicyResponse.struct_class = Types::ValidatePolicyResponse
 
     ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -964,6 +1028,24 @@ module Aws::AccessAnalyzer
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:validate_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ValidatePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/policy/validation"
+        o.input = Shapes::ShapeRef.new(shape: ValidatePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: ValidatePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
     end
 

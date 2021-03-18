@@ -152,7 +152,9 @@ module Aws::S3
     End = Shapes::IntegerShape.new(name: 'End')
     EndEvent = Shapes::StructureShape.new(name: 'EndEvent')
     Error = Shapes::StructureShape.new(name: 'Error')
+    ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorDocument = Shapes::StructureShape.new(name: 'ErrorDocument')
+    ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     Errors = Shapes::ListShape.new(name: 'Errors', flattened: true)
     Event = Shapes::StringShape.new(name: 'Event')
     EventList = Shapes::ListShape.new(name: 'EventList', flattened: true)
@@ -223,6 +225,7 @@ module Aws::S3
     GetObjectLockConfigurationRequest = Shapes::StructureShape.new(name: 'GetObjectLockConfigurationRequest')
     GetObjectOutput = Shapes::StructureShape.new(name: 'GetObjectOutput')
     GetObjectRequest = Shapes::StructureShape.new(name: 'GetObjectRequest')
+    GetObjectResponseStatusCode = Shapes::IntegerShape.new(name: 'GetObjectResponseStatusCode')
     GetObjectRetentionOutput = Shapes::StructureShape.new(name: 'GetObjectRetentionOutput')
     GetObjectRetentionRequest = Shapes::StructureShape.new(name: 'GetObjectRetentionRequest')
     GetObjectTaggingOutput = Shapes::StructureShape.new(name: 'GetObjectTaggingOutput')
@@ -475,6 +478,8 @@ module Aws::S3
     RequestPayer = Shapes::StringShape.new(name: 'RequestPayer')
     RequestPaymentConfiguration = Shapes::StructureShape.new(name: 'RequestPaymentConfiguration')
     RequestProgress = Shapes::StructureShape.new(name: 'RequestProgress')
+    RequestRoute = Shapes::StringShape.new(name: 'RequestRoute')
+    RequestToken = Shapes::StringShape.new(name: 'RequestToken')
     ResponseCacheControl = Shapes::StringShape.new(name: 'ResponseCacheControl')
     ResponseContentDisposition = Shapes::StringShape.new(name: 'ResponseContentDisposition')
     ResponseContentEncoding = Shapes::StringShape.new(name: 'ResponseContentEncoding')
@@ -559,6 +564,7 @@ module Aws::S3
     VersioningConfiguration = Shapes::StructureShape.new(name: 'VersioningConfiguration')
     WebsiteConfiguration = Shapes::StructureShape.new(name: 'WebsiteConfiguration')
     WebsiteRedirectLocation = Shapes::StringShape.new(name: 'WebsiteRedirectLocation')
+    WriteGetObjectResponseRequest = Shapes::StructureShape.new(name: 'WriteGetObjectResponseRequest')
     Years = Shapes::IntegerShape.new(name: 'Years')
 
     AbortIncompleteMultipartUpload.add_member(:days_after_initiation, Shapes::ShapeRef.new(shape: DaysAfterInitiation, location_name: "DaysAfterInitiation"))
@@ -2432,6 +2438,46 @@ module Aws::S3
     WebsiteConfiguration.add_member(:routing_rules, Shapes::ShapeRef.new(shape: RoutingRules, location_name: "RoutingRules"))
     WebsiteConfiguration.struct_class = Types::WebsiteConfiguration
 
+    WriteGetObjectResponseRequest.add_member(:request_route, Shapes::ShapeRef.new(shape: RequestRoute, required: true, location: "header", location_name: "x-amz-request-route", metadata: {"hostLabel"=>true, "hostLabelName"=>"RequestRoute"}))
+    WriteGetObjectResponseRequest.add_member(:request_token, Shapes::ShapeRef.new(shape: RequestToken, required: true, location: "header", location_name: "x-amz-request-token"))
+    WriteGetObjectResponseRequest.add_member(:body, Shapes::ShapeRef.new(shape: Body, location_name: "Body", metadata: {"streaming"=>true}))
+    WriteGetObjectResponseRequest.add_member(:status_code, Shapes::ShapeRef.new(shape: GetObjectResponseStatusCode, location: "header", location_name: "x-amz-fwd-status"))
+    WriteGetObjectResponseRequest.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location: "header", location_name: "x-amz-fwd-error-code"))
+    WriteGetObjectResponseRequest.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location: "header", location_name: "x-amz-fwd-error-message"))
+    WriteGetObjectResponseRequest.add_member(:accept_ranges, Shapes::ShapeRef.new(shape: AcceptRanges, location: "header", location_name: "x-amz-fwd-header-accept-ranges"))
+    WriteGetObjectResponseRequest.add_member(:cache_control, Shapes::ShapeRef.new(shape: CacheControl, location: "header", location_name: "x-amz-fwd-header-Cache-Control"))
+    WriteGetObjectResponseRequest.add_member(:content_disposition, Shapes::ShapeRef.new(shape: ContentDisposition, location: "header", location_name: "x-amz-fwd-header-Content-Disposition"))
+    WriteGetObjectResponseRequest.add_member(:content_encoding, Shapes::ShapeRef.new(shape: ContentEncoding, location: "header", location_name: "x-amz-fwd-header-Content-Encoding"))
+    WriteGetObjectResponseRequest.add_member(:content_language, Shapes::ShapeRef.new(shape: ContentLanguage, location: "header", location_name: "x-amz-fwd-header-Content-Language"))
+    WriteGetObjectResponseRequest.add_member(:content_length, Shapes::ShapeRef.new(shape: ContentLength, location: "header", location_name: "Content-Length"))
+    WriteGetObjectResponseRequest.add_member(:content_range, Shapes::ShapeRef.new(shape: ContentRange, location: "header", location_name: "x-amz-fwd-header-Content-Range"))
+    WriteGetObjectResponseRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location: "header", location_name: "x-amz-fwd-header-Content-Type"))
+    WriteGetObjectResponseRequest.add_member(:delete_marker, Shapes::ShapeRef.new(shape: DeleteMarker, location: "header", location_name: "x-amz-fwd-header-x-amz-delete-marker"))
+    WriteGetObjectResponseRequest.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location: "header", location_name: "x-amz-fwd-header-ETag"))
+    WriteGetObjectResponseRequest.add_member(:expires, Shapes::ShapeRef.new(shape: Expires, location: "header", location_name: "x-amz-fwd-header-Expires"))
+    WriteGetObjectResponseRequest.add_member(:expiration, Shapes::ShapeRef.new(shape: Expiration, location: "header", location_name: "x-amz-fwd-header-x-amz-expiration"))
+    WriteGetObjectResponseRequest.add_member(:last_modified, Shapes::ShapeRef.new(shape: LastModified, location: "header", location_name: "x-amz-fwd-header-Last-Modified"))
+    WriteGetObjectResponseRequest.add_member(:missing_meta, Shapes::ShapeRef.new(shape: MissingMeta, location: "header", location_name: "x-amz-fwd-header-x-amz-missing-meta"))
+    WriteGetObjectResponseRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location: "headers", location_name: "x-amz-meta-"))
+    WriteGetObjectResponseRequest.add_member(:object_lock_mode, Shapes::ShapeRef.new(shape: ObjectLockMode, location: "header", location_name: "x-amz-fwd-header-x-amz-object-lock-mode"))
+    WriteGetObjectResponseRequest.add_member(:object_lock_legal_hold_status, Shapes::ShapeRef.new(shape: ObjectLockLegalHoldStatus, location: "header", location_name: "x-amz-fwd-header-x-amz-object-lock-legal-hold"))
+    WriteGetObjectResponseRequest.add_member(:object_lock_retain_until_date, Shapes::ShapeRef.new(shape: ObjectLockRetainUntilDate, location: "header", location_name: "x-amz-fwd-header-x-amz-object-lock-retain-until-date"))
+    WriteGetObjectResponseRequest.add_member(:parts_count, Shapes::ShapeRef.new(shape: PartsCount, location: "header", location_name: "x-amz-fwd-header-x-amz-mp-parts-count"))
+    WriteGetObjectResponseRequest.add_member(:replication_status, Shapes::ShapeRef.new(shape: ReplicationStatus, location: "header", location_name: "x-amz-fwd-header-x-amz-replication-status"))
+    WriteGetObjectResponseRequest.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-fwd-header-x-amz-request-charged"))
+    WriteGetObjectResponseRequest.add_member(:restore, Shapes::ShapeRef.new(shape: Restore, location: "header", location_name: "x-amz-fwd-header-x-amz-restore"))
+    WriteGetObjectResponseRequest.add_member(:server_side_encryption, Shapes::ShapeRef.new(shape: ServerSideEncryption, location: "header", location_name: "x-amz-fwd-header-x-amz-server-side-encryption"))
+    WriteGetObjectResponseRequest.add_member(:sse_customer_algorithm, Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location: "header", location_name: "x-amz-fwd-header-x-amz-server-side-encryption-customer-algorithm"))
+    WriteGetObjectResponseRequest.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-fwd-header-x-amz-server-side-encryption-aws-kms-key-id"))
+    WriteGetObjectResponseRequest.add_member(:sse_customer_key_md5, Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location: "header", location_name: "x-amz-fwd-header-x-amz-server-side-encryption-customer-key-MD5"))
+    WriteGetObjectResponseRequest.add_member(:storage_class, Shapes::ShapeRef.new(shape: StorageClass, location: "header", location_name: "x-amz-fwd-header-x-amz-storage-class"))
+    WriteGetObjectResponseRequest.add_member(:tag_count, Shapes::ShapeRef.new(shape: TagCount, location: "header", location_name: "x-amz-fwd-header-x-amz-tagging-count"))
+    WriteGetObjectResponseRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "header", location_name: "x-amz-fwd-header-x-amz-version-id"))
+    WriteGetObjectResponseRequest.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: BucketKeyEnabled, location: "header", location_name: "x-amz-fwd-header-x-amz-server-side-encryption-bucket-key-enabled"))
+    WriteGetObjectResponseRequest.struct_class = Types::WriteGetObjectResponseRequest
+    WriteGetObjectResponseRequest[:payload] = :body
+    WriteGetObjectResponseRequest[:payload_member] = WriteGetObjectResponseRequest.member(:body)
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -3287,6 +3333,18 @@ module Aws::S3
         o.http_request_uri = "/{Bucket}/{Key+}"
         o.input = Shapes::ShapeRef.new(shape: UploadPartCopyRequest)
         o.output = Shapes::ShapeRef.new(shape: UploadPartCopyOutput)
+      end)
+
+      api.add_operation(:write_get_object_response, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "WriteGetObjectResponse"
+        o.http_method = "POST"
+        o.http_request_uri = "/WriteGetObjectResponse"
+        o['authtype'] = "v4-unsigned-body"
+        o.endpoint_pattern = {
+          "hostPrefix" => "{RequestRoute}.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: WriteGetObjectResponseRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
     end
 

@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2021-03-18)
+------------------
+
+* Feature - S3 Object Lambda is a new S3 feature that enables users to apply their own custom code to process the output of a standard S3 GET request by automatically invoking a Lambda function with a GET request
+
+* Feature - Support S3 Object Lambda ARNs in the `bucket:` parameter.
+
 1.91.0 (2021-03-10)
 ------------------
 

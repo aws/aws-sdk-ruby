@@ -207,7 +207,7 @@ module Aws::S3
     #   The concatenation of the authentication device's serial number, a
     #   space, and the value that is displayed on your authentication device.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [EmptyStructure]
@@ -252,7 +252,7 @@ module Aws::S3
     # @option options [required, Types::VersioningConfiguration] :versioning_configuration
     #   Container for setting the versioning state.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [EmptyStructure]
@@ -286,7 +286,7 @@ module Aws::S3
     #   The concatenation of the authentication device's serial number, a
     #   space, and the value that is displayed on your authentication device.
     # @option options [String] :expected_bucket_owner
-    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     # @return [EmptyStructure]

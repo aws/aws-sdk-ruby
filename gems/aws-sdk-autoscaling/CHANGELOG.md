@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2021-03-18)
+------------------
+
+* Feature - Amazon EC2 Auto Scaling Instance Refresh now supports phased deployments.
+
 1.58.0 (2021-03-10)
 ------------------
 

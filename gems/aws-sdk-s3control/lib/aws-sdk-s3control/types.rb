@@ -137,6 +137,35 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # AWS Lambda function used to transform objects through an Object Lambda
+    # Access Point.
+    #
+    # @note When making an API call, you may pass AwsLambdaTransformation
+    #   data as a hash:
+    #
+    #       {
+    #         function_arn: "FunctionArnString", # required
+    #         function_payload: "AwsLambdaTransformationPayload",
+    #       }
+    #
+    # @!attribute [rw] function_arn
+    #   The Amazon Resource Name (ARN) of the AWS Lambda function.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_payload
+    #   Additional JSON that provides supplemental data to the Lambda
+    #   function used to transform objects.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AwsLambdaTransformation AWS API Documentation
+    #
+    class AwsLambdaTransformation < Struct.new(
+      :function_arn,
+      :function_payload)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -199,6 +228,65 @@ module Aws::S3Control
     class BucketLevel < Struct.new(
       :activity_metrics,
       :prefix_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateAccessPointForObjectLambdaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "ObjectLambdaAccessPointName", # required
+    #         configuration: { # required
+    #           supporting_access_point: "ObjectLambdaSupportingAccessPointArn", # required
+    #           cloud_watch_metrics_enabled: false,
+    #           allowed_features: ["GetObject-Range"], # accepts GetObject-Range, GetObject-PartNumber
+    #           transformation_configurations: [ # required
+    #             {
+    #               actions: ["GetObject"], # required, accepts GetObject
+    #               content_transformation: { # required
+    #                 aws_lambda: {
+    #                   function_arn: "FunctionArnString", # required
+    #                   function_payload: "AwsLambdaTransformationPayload",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID for owner of the specified Object Lambda Access
+    #   Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name you want to assign to this Object Lambda Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   Object Lambda Access Point configuration as a JSON document.
+    #   @return [Types::ObjectLambdaConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPointForObjectLambdaRequest AWS API Documentation
+    #
+    class CreateAccessPointForObjectLambdaRequest < Struct.new(
+      :account_id,
+      :name,
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] object_lambda_access_point_arn
+    #   Specifies the ARN for the Object Lambda Access Point.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPointForObjectLambdaResult AWS API Documentation
+    #
+    class CreateAccessPointForObjectLambdaResult < Struct.new(
+      :object_lambda_access_point_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -697,6 +785,59 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteAccessPointForObjectLambdaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "ObjectLambdaAccessPointName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the access point you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteAccessPointForObjectLambdaRequest AWS API Documentation
+    #
+    class DeleteAccessPointForObjectLambdaRequest < Struct.new(
+      :account_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteAccessPointPolicyForObjectLambdaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "ObjectLambdaAccessPointName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Object Lambda Access Point you want to delete the
+    #   policy for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteAccessPointPolicyForObjectLambdaRequest AWS API Documentation
+    #
+    class DeleteAccessPointPolicyForObjectLambdaRequest < Struct.new(
+      :account_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteAccessPointPolicyRequest
     #   data as a hash:
     #
@@ -1090,6 +1231,133 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetAccessPointConfigurationForObjectLambdaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "ObjectLambdaAccessPointName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Object Lambda Access Point you want to return the
+    #   configuration for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointConfigurationForObjectLambdaRequest AWS API Documentation
+    #
+    class GetAccessPointConfigurationForObjectLambdaRequest < Struct.new(
+      :account_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration
+    #   Object Lambda Access Point configuration document.
+    #   @return [Types::ObjectLambdaConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointConfigurationForObjectLambdaResult AWS API Documentation
+    #
+    class GetAccessPointConfigurationForObjectLambdaResult < Struct.new(
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAccessPointForObjectLambdaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "ObjectLambdaAccessPointName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Object Lambda Access Point.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointForObjectLambdaRequest AWS API Documentation
+    #
+    class GetAccessPointForObjectLambdaRequest < Struct.new(
+      :account_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the Object Lambda Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_access_block_configuration
+    #   Configuration to block all public access. This setting is turned on
+    #   and can not be edited.
+    #   @return [Types::PublicAccessBlockConfiguration]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time when the specified Object Lambda Access Point was
+    #   created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointForObjectLambdaResult AWS API Documentation
+    #
+    class GetAccessPointForObjectLambdaResult < Struct.new(
+      :name,
+      :public_access_block_configuration,
+      :creation_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAccessPointPolicyForObjectLambdaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "ObjectLambdaAccessPointName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Object Lambda Access Point.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointPolicyForObjectLambdaRequest AWS API Documentation
+    #
+    class GetAccessPointPolicyForObjectLambdaRequest < Struct.new(
+      :account_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   Object Lambda Access Point resource policy document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointPolicyForObjectLambdaResult AWS API Documentation
+    #
+    class GetAccessPointPolicyForObjectLambdaResult < Struct.new(
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetAccessPointPolicyRequest
     #   data as a hash:
     #
@@ -1136,6 +1404,51 @@ module Aws::S3Control
     #
     class GetAccessPointPolicyResult < Struct.new(
       :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAccessPointPolicyStatusForObjectLambdaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "ObjectLambdaAccessPointName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Object Lambda Access Point.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointPolicyStatusForObjectLambdaRequest AWS API Documentation
+    #
+    class GetAccessPointPolicyStatusForObjectLambdaRequest < Struct.new(
+      :account_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_status
+    #   Indicates whether this access point policy is public. For more
+    #   information about how Amazon S3 evaluates policies to determine
+    #   whether they are public, see [The Meaning of "Public"][1] in the
+    #   *Amazon Simple Storage Service User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
+    #   @return [Types::PolicyStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointPolicyStatusForObjectLambdaResult AWS API Documentation
+    #
+    class GetAccessPointPolicyStatusForObjectLambdaResult < Struct.new(
+      :policy_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2588,6 +2901,64 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListAccessPointsForObjectLambdaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         next_token: "NonEmptyMaxLength1024String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the list has more access points than can be returned in one call
+    #   to this API, this field contains a continuation token that you can
+    #   provide in subsequent calls to this API to retrieve additional
+    #   access points.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of access points that you want to include in the
+    #   list. If there are more than this number of access points, then the
+    #   response will include a continuation token in the `NextToken` field
+    #   that you can use to retrieve the next page of access points.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessPointsForObjectLambdaRequest AWS API Documentation
+    #
+    class ListAccessPointsForObjectLambdaRequest < Struct.new(
+      :account_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] object_lambda_access_point_list
+    #   Returns list of Object Lambda Access Points.
+    #   @return [Array<Types::ObjectLambdaAccessPoint>]
+    #
+    # @!attribute [rw] next_token
+    #   If the list has more access points than can be returned in one call
+    #   to this API, this field contains a continuation token that you can
+    #   provide in subsequent calls to this API to retrieve additional
+    #   access points.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessPointsForObjectLambdaResult AWS API Documentation
+    #
+    class ListAccessPointsForObjectLambdaResult < Struct.new(
+      :object_lambda_access_point_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListAccessPointsRequest
     #   data as a hash:
     #
@@ -2957,6 +3328,138 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # An access point with an attached AWS Lambda function used to access
+    # transformed data from an Amazon S3 bucket.
+    #
+    # @!attribute [rw] name
+    #   The name of the Object Lambda Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_lambda_access_point_arn
+    #   Specifies the ARN for the Object Lambda Access Point.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ObjectLambdaAccessPoint AWS API Documentation
+    #
+    class ObjectLambdaAccessPoint < Struct.new(
+      :name,
+      :object_lambda_access_point_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A configuration used when creating an Object Lambda Access Point.
+    #
+    # @note When making an API call, you may pass ObjectLambdaConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         supporting_access_point: "ObjectLambdaSupportingAccessPointArn", # required
+    #         cloud_watch_metrics_enabled: false,
+    #         allowed_features: ["GetObject-Range"], # accepts GetObject-Range, GetObject-PartNumber
+    #         transformation_configurations: [ # required
+    #           {
+    #             actions: ["GetObject"], # required, accepts GetObject
+    #             content_transformation: { # required
+    #               aws_lambda: {
+    #                 function_arn: "FunctionArnString", # required
+    #                 function_payload: "AwsLambdaTransformationPayload",
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] supporting_access_point
+    #   Standard access point associated with the Object Lambda Access
+    #   Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_metrics_enabled
+    #   A container for whether the CloudWatch metrics configuration is
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] allowed_features
+    #   A container for allowed features. Valid inputs are `GetObject-Range`
+    #   and `GetObject-PartNumber`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] transformation_configurations
+    #   A container for transformation configurations for an Object Lambda
+    #   Access Point.
+    #   @return [Array<Types::ObjectLambdaTransformationConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ObjectLambdaConfiguration AWS API Documentation
+    #
+    class ObjectLambdaConfiguration < Struct.new(
+      :supporting_access_point,
+      :cloud_watch_metrics_enabled,
+      :allowed_features,
+      :transformation_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for AwsLambdaTransformation.
+    #
+    # @note When making an API call, you may pass ObjectLambdaContentTransformation
+    #   data as a hash:
+    #
+    #       {
+    #         aws_lambda: {
+    #           function_arn: "FunctionArnString", # required
+    #           function_payload: "AwsLambdaTransformationPayload",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] aws_lambda
+    #   A container for an AWS Lambda function.
+    #   @return [Types::AwsLambdaTransformation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ObjectLambdaContentTransformation AWS API Documentation
+    #
+    class ObjectLambdaContentTransformation < Struct.new(
+      :aws_lambda)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A configuration used when creating an Object Lambda Access Point
+    # transformation.
+    #
+    # @note When making an API call, you may pass ObjectLambdaTransformationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         actions: ["GetObject"], # required, accepts GetObject
+    #         content_transformation: { # required
+    #           aws_lambda: {
+    #             function_arn: "FunctionArnString", # required
+    #             function_payload: "AwsLambdaTransformationPayload",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] actions
+    #   A container for the action of an Object Lambda Access Point
+    #   configuration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] content_transformation
+    #   A container for the content transformation of an Object Lambda
+    #   Access Point configuration.
+    #   @return [Types::ObjectLambdaContentTransformation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ObjectLambdaTransformationConfiguration AWS API Documentation
+    #
+    class ObjectLambdaTransformationConfiguration < Struct.new(
+      :actions,
+      :content_transformation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Indicates whether this access point policy is public. For more
     # information about how Amazon S3 evaluates policies to determine
     # whether they are public, see [The Meaning of "Public"][1] in the
@@ -3123,6 +3626,85 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutAccessPointConfigurationForObjectLambdaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "ObjectLambdaAccessPointName", # required
+    #         configuration: { # required
+    #           supporting_access_point: "ObjectLambdaSupportingAccessPointArn", # required
+    #           cloud_watch_metrics_enabled: false,
+    #           allowed_features: ["GetObject-Range"], # accepts GetObject-Range, GetObject-PartNumber
+    #           transformation_configurations: [ # required
+    #             {
+    #               actions: ["GetObject"], # required, accepts GetObject
+    #               content_transformation: { # required
+    #                 aws_lambda: {
+    #                   function_arn: "FunctionArnString", # required
+    #                   function_payload: "AwsLambdaTransformationPayload",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Object Lambda Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   Object Lambda Access Point configuration document.
+    #   @return [Types::ObjectLambdaConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutAccessPointConfigurationForObjectLambdaRequest AWS API Documentation
+    #
+    class PutAccessPointConfigurationForObjectLambdaRequest < Struct.new(
+      :account_id,
+      :name,
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutAccessPointPolicyForObjectLambdaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "ObjectLambdaAccessPointName", # required
+    #         policy: "ObjectLambdaPolicy", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified Object Lambda
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Object Lambda Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   Object Lambda Access Point resource policy document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutAccessPointPolicyForObjectLambdaRequest AWS API Documentation
+    #
+    class PutAccessPointPolicyForObjectLambdaRequest < Struct.new(
+      :account_id,
+      :name,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutAccessPointPolicyRequest
     #   data as a hash:
     #
@@ -3163,7 +3745,7 @@ module Aws::S3Control
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutAccessPointPolicyRequest AWS API Documentation

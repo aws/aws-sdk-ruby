@@ -72,8 +72,6 @@ module Aws::MediaTailor
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
     ListPlaybackConfigurationsRequest = Shapes::StructureShape.new(name: 'ListPlaybackConfigurationsRequest')
     ListPlaybackConfigurationsResponse = Shapes::StructureShape.new(name: 'ListPlaybackConfigurationsResponse')
-    ListProgramsRequest = Shapes::StructureShape.new(name: 'ListProgramsRequest')
-    ListProgramsResponse = Shapes::StructureShape.new(name: 'ListProgramsResponse')
     ListSourceLocationsRequest = Shapes::StructureShape.new(name: 'ListSourceLocationsRequest')
     ListSourceLocationsResponse = Shapes::StructureShape.new(name: 'ListSourceLocationsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -88,7 +86,6 @@ module Aws::MediaTailor
     OriginManifestType = Shapes::StringShape.new(name: 'OriginManifestType')
     PlaybackConfiguration = Shapes::StructureShape.new(name: 'PlaybackConfiguration')
     PlaybackMode = Shapes::StringShape.new(name: 'PlaybackMode')
-    Program = Shapes::StructureShape.new(name: 'Program')
     PutChannelPolicyRequest = Shapes::StructureShape.new(name: 'PutChannelPolicyRequest')
     PutChannelPolicyResponse = Shapes::StructureShape.new(name: 'PutChannelPolicyResponse')
     PutPlaybackConfigurationRequest = Shapes::StructureShape.new(name: 'PutPlaybackConfigurationRequest')
@@ -124,7 +121,6 @@ module Aws::MediaTailor
     __listOfAdBreak = Shapes::ListShape.new(name: '__listOfAdBreak')
     __listOfChannel = Shapes::ListShape.new(name: '__listOfChannel')
     __listOfPlaybackConfiguration = Shapes::ListShape.new(name: '__listOfPlaybackConfiguration')
-    __listOfProgram = Shapes::ListShape.new(name: '__listOfProgram')
     __listOfScheduleEntry = Shapes::ListShape.new(name: '__listOfScheduleEntry')
     __listOfSourceLocation = Shapes::ListShape.new(name: '__listOfSourceLocation')
     __listOfVodSource = Shapes::ListShape.new(name: '__listOfVodSource')
@@ -415,15 +411,6 @@ module Aws::MediaTailor
     ListPlaybackConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
     ListPlaybackConfigurationsResponse.struct_class = Types::ListPlaybackConfigurationsResponse
 
-    ListProgramsRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelName"))
-    ListProgramsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
-    ListProgramsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
-    ListProgramsRequest.struct_class = Types::ListProgramsRequest
-
-    ListProgramsResponse.add_member(:items, Shapes::ShapeRef.new(shape: __listOfProgram, location_name: "Items"))
-    ListProgramsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
-    ListProgramsResponse.struct_class = Types::ListProgramsResponse
-
     ListSourceLocationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListSourceLocationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
     ListSourceLocationsRequest.struct_class = Types::ListSourceLocationsRequest
@@ -473,16 +460,6 @@ module Aws::MediaTailor
     PlaybackConfiguration.add_member(:transcode_profile_name, Shapes::ShapeRef.new(shape: __string, location_name: "TranscodeProfileName"))
     PlaybackConfiguration.add_member(:video_content_source_url, Shapes::ShapeRef.new(shape: __string, location_name: "VideoContentSourceUrl"))
     PlaybackConfiguration.struct_class = Types::PlaybackConfiguration
-
-    Program.add_member(:ad_breaks, Shapes::ShapeRef.new(shape: __listOfAdBreak, location_name: "AdBreaks"))
-    Program.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Arn"))
-    Program.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ChannelName"))
-    Program.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
-    Program.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "LastModifiedTime"))
-    Program.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ProgramName"))
-    Program.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "SourceLocationName"))
-    Program.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "VodSourceName"))
-    Program.struct_class = Types::Program
 
     PutChannelPolicyRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelName"))
     PutChannelPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Policy"))
@@ -656,8 +633,6 @@ module Aws::MediaTailor
     __listOfChannel.member = Shapes::ShapeRef.new(shape: Channel)
 
     __listOfPlaybackConfiguration.member = Shapes::ShapeRef.new(shape: PlaybackConfiguration)
-
-    __listOfProgram.member = Shapes::ShapeRef.new(shape: Program)
 
     __listOfScheduleEntry.member = Shapes::ShapeRef.new(shape: ScheduleEntry)
 
@@ -851,20 +826,6 @@ module Aws::MediaTailor
         o.http_request_uri = "/playbackConfigurations"
         o.input = Shapes::ShapeRef.new(shape: ListPlaybackConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPlaybackConfigurationsResponse)
-        o[:pager] = Aws::Pager.new(
-          limit_key: "max_results",
-          tokens: {
-            "next_token" => "next_token"
-          }
-        )
-      end)
-
-      api.add_operation(:list_programs, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListPrograms"
-        o.http_method = "GET"
-        o.http_request_uri = "/channel/{channelName}/programs"
-        o.input = Shapes::ShapeRef.new(shape: ListProgramsRequest)
-        o.output = Shapes::ShapeRef.new(shape: ListProgramsResponse)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

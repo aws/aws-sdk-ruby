@@ -4,7 +4,7 @@ Unreleased Changes
 1.31.0 (2021-03-12)
 ------------------
 
-* Feature - - Added optional billingViewArn field for OSG.
+* Feature - Added optional billingViewArn field for OSG.
 
 1.30.0 (2021-03-10)
 ------------------
