@@ -1130,6 +1130,8 @@ module Aws::SageMaker
     RenderingError = Shapes::StructureShape.new(name: 'RenderingError')
     RenderingErrorList = Shapes::ListShape.new(name: 'RenderingErrorList')
     RepositoryAccessMode = Shapes::StringShape.new(name: 'RepositoryAccessMode')
+    RepositoryAuthConfig = Shapes::StructureShape.new(name: 'RepositoryAuthConfig')
+    RepositoryCredentialsProviderArn = Shapes::StringShape.new(name: 'RepositoryCredentialsProviderArn')
     ResolvedAttributes = Shapes::StructureShape.new(name: 'ResolvedAttributes')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceConfig = Shapes::StructureShape.new(name: 'ResourceConfig')
@@ -3793,6 +3795,7 @@ module Aws::SageMaker
     Image.struct_class = Types::Image
 
     ImageConfig.add_member(:repository_access_mode, Shapes::ShapeRef.new(shape: RepositoryAccessMode, required: true, location_name: "RepositoryAccessMode"))
+    ImageConfig.add_member(:repository_auth_config, Shapes::ShapeRef.new(shape: RepositoryAuthConfig, location_name: "RepositoryAuthConfig"))
     ImageConfig.struct_class = Types::ImageConfig
 
     ImageDeletePropertyList.member = Shapes::ShapeRef.new(shape: ImageDeleteProperty)
@@ -5412,6 +5415,9 @@ module Aws::SageMaker
     RenderingError.struct_class = Types::RenderingError
 
     RenderingErrorList.member = Shapes::ShapeRef.new(shape: RenderingError)
+
+    RepositoryAuthConfig.add_member(:repository_credentials_provider_arn, Shapes::ShapeRef.new(shape: RepositoryCredentialsProviderArn, required: true, location_name: "RepositoryCredentialsProviderArn"))
+    RepositoryAuthConfig.struct_class = Types::RepositoryAuthConfig
 
     ResolvedAttributes.add_member(:auto_ml_job_objective, Shapes::ShapeRef.new(shape: AutoMLJobObjective, location_name: "AutoMLJobObjective"))
     ResolvedAttributes.add_member(:problem_type, Shapes::ShapeRef.new(shape: ProblemType, location_name: "ProblemType"))

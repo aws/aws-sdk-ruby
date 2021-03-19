@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.228.0 (2021-03-19)
+------------------
+
+* Feature - X2gd instances are the next generation of memory-optimized instances powered by AWS-designed, Arm-based AWS Graviton2 processors.
+
 1.227.0 (2021-03-10)
 ------------------
 

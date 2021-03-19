@@ -2885,6 +2885,9 @@ module Aws::SageMaker
     #         image: "ContainerImage",
     #         image_config: {
     #           repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #           repository_auth_config: {
+    #             repository_credentials_provider_arn: "RepositoryCredentialsProviderArn", # required
+    #           },
     #         },
     #         mode: "SingleModel", # accepts SingleModel, MultiModel
     #         model_data_url: "Url",
@@ -6187,6 +6190,9 @@ module Aws::SageMaker
     #           image: "ContainerImage",
     #           image_config: {
     #             repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #             repository_auth_config: {
+    #               repository_credentials_provider_arn: "RepositoryCredentialsProviderArn", # required
+    #             },
     #           },
     #           mode: "SingleModel", # accepts SingleModel, MultiModel
     #           model_data_url: "Url",
@@ -6204,6 +6210,9 @@ module Aws::SageMaker
     #             image: "ContainerImage",
     #             image_config: {
     #               repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #               repository_auth_config: {
+    #                 repository_credentials_provider_arn: "RepositoryCredentialsProviderArn", # required
+    #               },
     #             },
     #             mode: "SingleModel", # accepts SingleModel, MultiModel
     #             model_data_url: "Url",
@@ -18483,6 +18492,9 @@ module Aws::SageMaker
     #
     #       {
     #         repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #         repository_auth_config: {
+    #           repository_credentials_provider_arn: "RepositoryCredentialsProviderArn", # required
+    #         },
     #       }
     #
     # @!attribute [rw] repository_access_mode
@@ -18494,10 +18506,19 @@ module Aws::SageMaker
     #     your VPC.
     #   @return [String]
     #
+    # @!attribute [rw] repository_auth_config
+    #   (Optional) Specifies an authentication configuration for the private
+    #   docker registry where your model image is hosted. Specify a value
+    #   for this property only if you specified `Vpc` as the value for the
+    #   `RepositoryAccessMode` field, and the private Docker registry where
+    #   the model image is hosted requires authentication.
+    #   @return [Types::RepositoryAuthConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ImageConfig AWS API Documentation
     #
     class ImageConfig < Struct.new(
-      :repository_access_mode)
+      :repository_access_mode,
+      :repository_auth_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27137,6 +27158,18 @@ module Aws::SageMaker
     #   for NVIDIA accelerators and highly recommended for CPU compilations.
     #   For any other cases, it is optional to specify `CompilerOptions.`
     #
+    #   * `DTYPE`\: Specifies the data type for the input. When compiling
+    #     for `ml_*` (except for `ml_inf`) instances using PyTorch
+    #     framework, provide the data type (dtype) of the model's input.
+    #     `"float32"` is used if `"DTYPE"` is not specified. Options for
+    #     data type are:
+    #
+    #     * float32: Use either `"float"` or `"float32"`.
+    #
+    #     * int64: Use either `"int64"` or `"long"`.
+    #
+    #     For example, `\{"dtype" : "float32"\}`.
+    #
     #   * `CPU`\: Compilation for CPU supports the following compiler
     #     options.
     #
@@ -29437,6 +29470,40 @@ module Aws::SageMaker
     class RenderingError < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies an authentication configuration for the private docker
+    # registry where your model image is hosted. Specify a value for this
+    # property only if you specified `Vpc` as the value for the
+    # `RepositoryAccessMode` field of the `ImageConfig` object that you
+    # passed to a call to CreateModel and the private Docker registry where
+    # the model image is hosted requires authentication.
+    #
+    # @note When making an API call, you may pass RepositoryAuthConfig
+    #   data as a hash:
+    #
+    #       {
+    #         repository_credentials_provider_arn: "RepositoryCredentialsProviderArn", # required
+    #       }
+    #
+    # @!attribute [rw] repository_credentials_provider_arn
+    #   The Amazon Resource Name (ARN) of an AWS Lambda function that
+    #   provides credentials to authenticate to the private Docker registry
+    #   where your model image is hosted. For information about how to
+    #   create an AWS Lambda function, see [Create a Lambda function with
+    #   the console][1] in the *AWS Lambda Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RepositoryAuthConfig AWS API Documentation
+    #
+    class RepositoryAuthConfig < Struct.new(
+      :repository_credentials_provider_arn)
       SENSITIVE = []
       include Aws::Structure
     end

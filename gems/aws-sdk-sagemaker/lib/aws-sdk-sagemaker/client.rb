@@ -3358,6 +3358,9 @@ module Aws::SageMaker
     #       image: "ContainerImage",
     #       image_config: {
     #         repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #         repository_auth_config: {
+    #           repository_credentials_provider_arn: "RepositoryCredentialsProviderArn", # required
+    #         },
     #       },
     #       mode: "SingleModel", # accepts SingleModel, MultiModel
     #       model_data_url: "Url",
@@ -3375,6 +3378,9 @@ module Aws::SageMaker
     #         image: "ContainerImage",
     #         image_config: {
     #           repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #           repository_auth_config: {
+    #             repository_credentials_provider_arn: "RepositoryCredentialsProviderArn", # required
+    #           },
     #         },
     #         mode: "SingleModel", # accepts SingleModel, MultiModel
     #         model_data_url: "Url",
@@ -8812,6 +8818,7 @@ module Aws::SageMaker
     #   resp.primary_container.container_hostname #=> String
     #   resp.primary_container.image #=> String
     #   resp.primary_container.image_config.repository_access_mode #=> String, one of "Platform", "Vpc"
+    #   resp.primary_container.image_config.repository_auth_config.repository_credentials_provider_arn #=> String
     #   resp.primary_container.mode #=> String, one of "SingleModel", "MultiModel"
     #   resp.primary_container.model_data_url #=> String
     #   resp.primary_container.environment #=> Hash
@@ -8822,6 +8829,7 @@ module Aws::SageMaker
     #   resp.containers[0].container_hostname #=> String
     #   resp.containers[0].image #=> String
     #   resp.containers[0].image_config.repository_access_mode #=> String, one of "Platform", "Vpc"
+    #   resp.containers[0].image_config.repository_auth_config.repository_credentials_provider_arn #=> String
     #   resp.containers[0].mode #=> String, one of "SingleModel", "MultiModel"
     #   resp.containers[0].model_data_url #=> String
     #   resp.containers[0].environment #=> Hash
@@ -17309,7 +17317,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

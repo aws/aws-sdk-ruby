@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2021-03-19)
+------------------
+
+* Feature - Adding authentication support for pulling images stored in private Docker registries to build containers for real-time inference.
+
 1.82.0 (2021-03-17)
 ------------------
 
