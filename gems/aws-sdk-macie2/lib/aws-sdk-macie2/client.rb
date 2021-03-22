@@ -1192,7 +1192,12 @@ module Aws::Macie2
     #   The frequency with which Amazon Macie publishes updates to policy
     #   findings for an account. This includes publishing updates to AWS
     #   Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch
-    #   Events). Valid values are:
+    #   Events). For more information, see [Monitoring and processing
+    #   findings][1] in the *Amazon Macie User Guide*. Valid values are:
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/findings-monitor.html
     #
     # @option params [String] :status
     #   The status of an Amazon Macie account. Valid values are:
@@ -1711,6 +1716,27 @@ module Aws::Macie2
     # @param [Hash] params ({})
     def get_findings_filter(params = {}, options = {})
       req = build_request(:get_findings_filter, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the configuration settings for publishing findings to AWS
+    # Security Hub.
+    #
+    # @return [Types::GetFindingsPublicationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFindingsPublicationConfigurationResponse#security_hub_configuration #security_hub_configuration} => Types::SecurityHubConfiguration
+    #
+    # @example Response structure
+    #
+    #   resp.security_hub_configuration.publish_classification_findings #=> Boolean
+    #   resp.security_hub_configuration.publish_policy_findings #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetFindingsPublicationConfiguration AWS API Documentation
+    #
+    # @overload get_findings_publication_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_findings_publication_configuration(params = {}, options = {})
+      req = build_request(:get_findings_publication_configuration, params)
       req.send_request(options)
     end
 
@@ -2342,6 +2368,44 @@ module Aws::Macie2
       req.send_request(options)
     end
 
+    # Updates the configuration settings for publishing findings to AWS
+    # Security Hub.
+    #
+    # @option params [String] :client_token
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Types::SecurityHubConfiguration] :security_hub_configuration
+    #   Specifies configuration settings that determine which findings are
+    #   published to AWS Security Hub automatically. For information about how
+    #   Macie publishes findings to Security Hub, see [Amazon Macie
+    #   integration with Security Hub][1] in the *Amazon Macie User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_findings_publication_configuration({
+    #     client_token: "__string",
+    #     security_hub_configuration: {
+    #       publish_classification_findings: false, # required
+    #       publish_policy_findings: false, # required
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/PutFindingsPublicationConfiguration AWS API Documentation
+    #
+    # @overload put_findings_publication_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_findings_publication_configuration(params = {}, options = {})
+      req = build_request(:put_findings_publication_configuration, params)
+      req.send_request(options)
+    end
+
     # Adds or updates one or more tags (keys and values) that are associated
     # with a classification job, custom data identifier, findings filter, or
     # member account.
@@ -2530,7 +2594,12 @@ module Aws::Macie2
     #   The frequency with which Amazon Macie publishes updates to policy
     #   findings for an account. This includes publishing updates to AWS
     #   Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch
-    #   Events). Valid values are:
+    #   Events). For more information, see [Monitoring and processing
+    #   findings][1] in the *Amazon Macie User Guide*. Valid values are:
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/findings-monitor.html
     #
     # @option params [String] :status
     #   The status of an Amazon Macie account. Valid values are:
@@ -2614,7 +2683,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

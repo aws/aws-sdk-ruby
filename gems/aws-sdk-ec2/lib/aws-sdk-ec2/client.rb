@@ -6302,14 +6302,14 @@ module Aws::EC2
     # @option params [required, String] :local_gateway_route_table_id
     #   The ID of the local gateway route table.
     #
-    # @option params [required, String] :local_gateway_virtual_interface_group_id
-    #   The ID of the virtual interface group.
-    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :local_gateway_virtual_interface_group_id
+    #   The ID of the virtual interface group.
     #
     # @return [Types::CreateLocalGatewayRouteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6320,8 +6320,8 @@ module Aws::EC2
     #   resp = client.create_local_gateway_route({
     #     destination_cidr_block: "String", # required
     #     local_gateway_route_table_id: "LocalGatewayRoutetableId", # required
-    #     local_gateway_virtual_interface_group_id: "LocalGatewayVirtualInterfaceGroupId", # required
     #     dry_run: false,
+    #     local_gateway_virtual_interface_group_id: "LocalGatewayVirtualInterfaceGroupId", # required
     #   })
     #
     # @example Response structure
@@ -16965,6 +16965,7 @@ module Aws::EC2
     #   * {Types::ImageAttribute#kernel_id #kernel_id} => Types::AttributeValue
     #   * {Types::ImageAttribute#ramdisk_id #ramdisk_id} => Types::AttributeValue
     #   * {Types::ImageAttribute#sriov_net_support #sriov_net_support} => Types::AttributeValue
+    #   * {Types::ImageAttribute#boot_mode #boot_mode} => Types::AttributeValue
     #
     #
     # @example Example: To describe the launch permissions for an AMI
@@ -16989,7 +16990,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_image_attribute({
-    #     attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport
+    #     attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport, bootMode
     #     image_id: "ImageId", # required
     #     dry_run: false,
     #   })
@@ -17020,6 +17021,7 @@ module Aws::EC2
     #   resp.kernel_id #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.ramdisk_id #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.sriov_net_support #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.boot_mode #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImageAttribute AWS API Documentation
     #
@@ -17266,6 +17268,7 @@ module Aws::EC2
     #   resp.images[0].tags[0].key #=> String
     #   resp.images[0].tags[0].value #=> String
     #   resp.images[0].virtualization_type #=> String, one of "hvm", "paravirtual"
+    #   resp.images[0].boot_mode #=> String, one of "legacy-bios", "uefi"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -18141,6 +18144,8 @@ module Aws::EC2
     #   * `processor-info.sustained-clock-speed-in-ghz` - The CPU clock speed,
     #     in GHz.
     #
+    #   * `supported-boot-mode` - The boot mode (`legacy-bios` \| `uefi`).
+    #
     #   * `supported-root-device-type` - The root device type (`ebs` \|
     #     `instance-store`).
     #
@@ -18271,6 +18276,8 @@ module Aws::EC2
     #   resp.instance_types[0].burstable_performance_supported #=> Boolean
     #   resp.instance_types[0].dedicated_hosts_supported #=> Boolean
     #   resp.instance_types[0].auto_recovery_supported #=> Boolean
+    #   resp.instance_types[0].supported_boot_modes #=> Array
+    #   resp.instance_types[0].supported_boot_modes[0] #=> String, one of "legacy-bios", "uefi"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceTypes AWS API Documentation
@@ -18501,6 +18508,8 @@ module Aws::EC2
     #
     #   * `network-interface.vpc-id` - The ID of the VPC for the network
     #     interface.
+    #
+    #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
     #
     #   * `owner-id` - The AWS account ID of the instance owner.
     #
@@ -18810,6 +18819,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].metadata_options.http_put_response_hop_limit #=> Integer
     #   resp.reservations[0].instances[0].metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
     #   resp.reservations[0].instances[0].enclave_options.enabled #=> Boolean
+    #   resp.reservations[0].instances[0].boot_mode #=> String, one of "legacy-bios", "uefi"
     #   resp.reservations[0].owner_id #=> String
     #   resp.reservations[0].requester_id #=> String
     #   resp.reservations[0].reservation_id #=> String
@@ -32553,10 +32563,12 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_ChangingAttributesWhileInstanceStopped.html
     #
     # @option params [Types::AttributeBooleanValue] :source_dest_check
-    #   Specifies whether source/destination checking is enabled. A value of
-    #   `true` means that checking is enabled, and `false` means that checking
-    #   is disabled. This value must be `false` for a NAT instance to perform
-    #   NAT.
+    #   Enable or disable source/destination checks, which ensure that the
+    #   instance is either the source or the destination of any traffic that
+    #   it receives. If the value is `true`, source/destination checks are
+    #   enabled; otherwise, they are disabled. The default value is `true`.
+    #   You must disable source/destination checks if the instance runs
+    #   services such as network address translation, routing, or firewalls.
     #
     # @option params [String] :attribute
     #   The name of the attribute.
@@ -36151,6 +36163,14 @@ module Aws::EC2
     #
     #   Default: `paravirtual`
     #
+    # @option params [String] :boot_mode
+    #   The boot mode of the AMI. For more information, see [Boot modes][1] in
+    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
+    #
     # @return [Types::RegisterImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterImageResult#image_id #image_id} => String
@@ -36188,6 +36208,7 @@ module Aws::EC2
     #     root_device_name: "String",
     #     sriov_net_support: "String",
     #     virtualization_type: "String",
+    #     boot_mode: "legacy-bios", # accepts legacy-bios, uefi
     #   })
     #
     # @example Response structure
@@ -39564,6 +39585,7 @@ module Aws::EC2
     #   resp.instances[0].metadata_options.http_put_response_hop_limit #=> Integer
     #   resp.instances[0].metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
     #   resp.instances[0].enclave_options.enabled #=> Boolean
+    #   resp.instances[0].boot_mode #=> String, one of "legacy-bios", "uefi"
     #   resp.owner_id #=> String
     #   resp.requester_id #=> String
     #   resp.reservation_id #=> String
@@ -41236,7 +41258,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.228.0'
+      context[:gem_version] = '1.229.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

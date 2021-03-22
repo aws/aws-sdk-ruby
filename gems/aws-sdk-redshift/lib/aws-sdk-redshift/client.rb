@@ -1172,6 +1172,18 @@ module Aws::Redshift
     #   The option to enable relocation for an Amazon Redshift cluster between
     #   Availability Zones after the cluster is created.
     #
+    # @option params [String] :aqua_configuration_status
+    #   The value represents how the cluster is configured to use AQUA
+    #   (Advanced Query Accelerator) when it is created. Possible values
+    #   include the following.
+    #
+    #   * enabled - Use AQUA if it is available for the current AWS Region and
+    #     Amazon Redshift node type.
+    #
+    #   * disabled - Don't use AQUA.
+    #
+    #   * auto - Amazon Redshift determines whether to use AQUA.
+    #
     # @return [Types::CreateClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResult#cluster #cluster} => Types::Cluster
@@ -1215,6 +1227,7 @@ module Aws::Redshift
     #     maintenance_track_name: "String",
     #     snapshot_schedule_identifier: "String",
     #     availability_zone_relocation: false,
+    #     aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
     #   })
     #
     # @example Response structure
@@ -1325,6 +1338,8 @@ module Aws::Redshift
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster AWS API Documentation
     #
@@ -2528,6 +2543,8 @@ module Aws::Redshift
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster AWS API Documentation
     #
@@ -3945,6 +3962,8 @@ module Aws::Redshift
     #   resp.clusters[0].availability_zone_relocation_status #=> String
     #   resp.clusters[0].cluster_namespace_arn #=> String
     #   resp.clusters[0].total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.clusters[0].aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.clusters[0].aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -5711,6 +5730,8 @@ module Aws::Redshift
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy AWS API Documentation
     #
@@ -5956,6 +5977,8 @@ module Aws::Redshift
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopy AWS API Documentation
     #
@@ -6178,6 +6201,47 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def get_reserved_node_exchange_offerings(params = {}, options = {})
       req = build_request(:get_reserved_node_exchange_offerings, params)
+      req.send_request(options)
+    end
+
+    # Modifies whether a cluster can use AQUA (Advanced Query Accelerator).
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The identifier of the cluster to be modified.
+    #
+    # @option params [String] :aqua_configuration_status
+    #   The new value of AQUA configuration status. Possible values include
+    #   the following.
+    #
+    #   * enabled - Use AQUA if it is available for the current AWS Region and
+    #     Amazon Redshift node type.
+    #
+    #   * disabled - Don't use AQUA.
+    #
+    #   * auto - Amazon Redshift determines whether to use AQUA.
+    #
+    # @return [Types::ModifyAquaOutputMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyAquaOutputMessage#aqua_configuration #aqua_configuration} => Types::AquaConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_aqua_configuration({
+    #     cluster_identifier: "String", # required
+    #     aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyAquaConfiguration AWS API Documentation
+    #
+    # @overload modify_aqua_configuration(params = {})
+    # @param [Hash] params ({})
+    def modify_aqua_configuration(params = {}, options = {})
+      req = build_request(:modify_aqua_configuration, params)
       req.send_request(options)
     end
 
@@ -6604,6 +6668,8 @@ module Aws::Redshift
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster AWS API Documentation
     #
@@ -6746,6 +6812,8 @@ module Aws::Redshift
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevision AWS API Documentation
     #
@@ -6895,6 +6963,8 @@ module Aws::Redshift
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles AWS API Documentation
     #
@@ -7053,6 +7123,8 @@ module Aws::Redshift
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenance AWS API Documentation
     #
@@ -7647,6 +7719,8 @@ module Aws::Redshift
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriod AWS API Documentation
     #
@@ -7888,6 +7962,8 @@ module Aws::Redshift
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PauseCluster AWS API Documentation
     #
@@ -8092,6 +8168,8 @@ module Aws::Redshift
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster AWS API Documentation
     #
@@ -8335,6 +8413,8 @@ module Aws::Redshift
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeCluster AWS API Documentation
     #
@@ -8587,6 +8667,18 @@ module Aws::Redshift
     #   The option to enable relocation for an Amazon Redshift cluster between
     #   Availability Zones after the cluster is restored.
     #
+    # @option params [String] :aqua_configuration_status
+    #   The value represents how the cluster is configured to use AQUA
+    #   (Advanced Query Accelerator) after the cluster is restored. Possible
+    #   values include the following.
+    #
+    #   * enabled - Use AQUA if it is available for the current AWS Region and
+    #     Amazon Redshift node type.
+    #
+    #   * disabled - Don't use AQUA.
+    #
+    #   * auto - Amazon Redshift determines whether to use AQUA.
+    #
     # @return [Types::RestoreFromClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreFromClusterSnapshotResult#cluster #cluster} => Types::Cluster
@@ -8621,6 +8713,7 @@ module Aws::Redshift
     #     snapshot_schedule_identifier: "String",
     #     number_of_nodes: 1,
     #     availability_zone_relocation: false,
+    #     aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
     #   })
     #
     # @example Response structure
@@ -8731,6 +8824,8 @@ module Aws::Redshift
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot AWS API Documentation
     #
@@ -8951,6 +9046,8 @@ module Aws::Redshift
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResumeCluster AWS API Documentation
     #
@@ -9253,6 +9350,8 @@ module Aws::Redshift
     #   resp.cluster.availability_zone_relocation_status #=> String
     #   resp.cluster.cluster_namespace_arn #=> String
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
+    #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
+    #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey AWS API Documentation
     #
@@ -9276,7 +9375,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

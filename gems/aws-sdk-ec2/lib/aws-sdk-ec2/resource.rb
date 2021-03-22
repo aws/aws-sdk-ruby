@@ -1544,6 +1544,7 @@ module Aws::EC2
     #     root_device_name: "String",
     #     sriov_net_support: "String",
     #     virtualization_type: "String",
+    #     boot_mode: "legacy-bios", # accepts legacy-bios, uefi
     #   })
     # @param [Hash] options ({})
     # @option options [String] :image_location
@@ -1618,6 +1619,13 @@ module Aws::EC2
     #   The type of virtualization (`hvm` \| `paravirtual`).
     #
     #   Default: `paravirtual`
+    # @option options [String] :boot_mode
+    #   The boot mode of the AMI. For more information, see [Boot modes][1] in
+    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
     # @return [Image]
     def register_image(options = {})
       resp = @client.register_image(options)
@@ -2150,6 +2158,8 @@ module Aws::EC2
     #
     #   * `network-interface.vpc-id` - The ID of the VPC for the network
     #     interface.
+    #
+    #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
     #
     #   * `owner-id` - The AWS account ID of the instance owner.
     #

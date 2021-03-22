@@ -211,6 +211,17 @@ module Aws::EC2
       data[:virtualization_type]
     end
 
+    # The boot mode of the image. For more information, see [Boot modes][1]
+    # in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
+    # @return [String]
+    def boot_mode
+      data[:boot_mode]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -478,7 +489,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   image.describe_attribute({
-    #     attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport
+    #     attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport, bootMode
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})

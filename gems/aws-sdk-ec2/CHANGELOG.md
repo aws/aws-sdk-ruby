@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.229.0 (2021-03-22)
+------------------
+
+* Feature - This release adds support for UEFI boot on selected AMD- and Intel-based EC2 instances.
+
 1.228.0 (2021-03-19)
 ------------------
 

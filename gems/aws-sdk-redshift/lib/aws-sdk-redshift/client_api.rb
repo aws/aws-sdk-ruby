@@ -21,6 +21,9 @@ module Aws::Redshift
     AccountWithRestoreAccess = Shapes::StructureShape.new(name: 'AccountWithRestoreAccess')
     AccountsWithRestoreAccessList = Shapes::ListShape.new(name: 'AccountsWithRestoreAccessList')
     ActionType = Shapes::StringShape.new(name: 'ActionType')
+    AquaConfiguration = Shapes::StructureShape.new(name: 'AquaConfiguration')
+    AquaConfigurationStatus = Shapes::StringShape.new(name: 'AquaConfigurationStatus')
+    AquaStatus = Shapes::StringShape.new(name: 'AquaStatus')
     AssociatedClusterList = Shapes::ListShape.new(name: 'AssociatedClusterList')
     AttributeList = Shapes::ListShape.new(name: 'AttributeList')
     AttributeNameList = Shapes::ListShape.new(name: 'AttributeNameList')
@@ -261,6 +264,8 @@ module Aws::Redshift
     LongOptional = Shapes::IntegerShape.new(name: 'LongOptional')
     MaintenanceTrack = Shapes::StructureShape.new(name: 'MaintenanceTrack')
     Mode = Shapes::StringShape.new(name: 'Mode')
+    ModifyAquaInputMessage = Shapes::StructureShape.new(name: 'ModifyAquaInputMessage')
+    ModifyAquaOutputMessage = Shapes::StructureShape.new(name: 'ModifyAquaOutputMessage')
     ModifyClusterDbRevisionMessage = Shapes::StructureShape.new(name: 'ModifyClusterDbRevisionMessage')
     ModifyClusterDbRevisionResult = Shapes::StructureShape.new(name: 'ModifyClusterDbRevisionResult')
     ModifyClusterIamRolesMessage = Shapes::StructureShape.new(name: 'ModifyClusterIamRolesMessage')
@@ -468,6 +473,10 @@ module Aws::Redshift
 
     AccountsWithRestoreAccessList.member = Shapes::ShapeRef.new(shape: AccountWithRestoreAccess, location_name: "AccountWithRestoreAccess")
 
+    AquaConfiguration.add_member(:aqua_status, Shapes::ShapeRef.new(shape: AquaStatus, location_name: "AquaStatus"))
+    AquaConfiguration.add_member(:aqua_configuration_status, Shapes::ShapeRef.new(shape: AquaConfigurationStatus, location_name: "AquaConfigurationStatus"))
+    AquaConfiguration.struct_class = Types::AquaConfiguration
+
     AssociatedClusterList.member = Shapes::ShapeRef.new(shape: ClusterAssociatedToSchedule, location_name: "ClusterAssociatedToSchedule")
 
     AttributeList.member = Shapes::ShapeRef.new(shape: AccountAttribute, location_name: "AccountAttribute")
@@ -586,6 +595,7 @@ module Aws::Redshift
     Cluster.add_member(:availability_zone_relocation_status, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZoneRelocationStatus"))
     Cluster.add_member(:cluster_namespace_arn, Shapes::ShapeRef.new(shape: String, location_name: "ClusterNamespaceArn"))
     Cluster.add_member(:total_storage_capacity_in_mega_bytes, Shapes::ShapeRef.new(shape: LongOptional, location_name: "TotalStorageCapacityInMegaBytes"))
+    Cluster.add_member(:aqua_configuration, Shapes::ShapeRef.new(shape: AquaConfiguration, location_name: "AquaConfiguration"))
     Cluster.struct_class = Types::Cluster
 
     ClusterAlreadyExistsFault.struct_class = Types::ClusterAlreadyExistsFault
@@ -788,6 +798,7 @@ module Aws::Redshift
     CreateClusterMessage.add_member(:maintenance_track_name, Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceTrackName"))
     CreateClusterMessage.add_member(:snapshot_schedule_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotScheduleIdentifier"))
     CreateClusterMessage.add_member(:availability_zone_relocation, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AvailabilityZoneRelocation"))
+    CreateClusterMessage.add_member(:aqua_configuration_status, Shapes::ShapeRef.new(shape: AquaConfigurationStatus, location_name: "AquaConfigurationStatus"))
     CreateClusterMessage.struct_class = Types::CreateClusterMessage
 
     CreateClusterParameterGroupMessage.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ParameterGroupName"))
@@ -1416,6 +1427,13 @@ module Aws::Redshift
     MaintenanceTrack.add_member(:update_targets, Shapes::ShapeRef.new(shape: EligibleTracksToUpdateList, location_name: "UpdateTargets"))
     MaintenanceTrack.struct_class = Types::MaintenanceTrack
 
+    ModifyAquaInputMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
+    ModifyAquaInputMessage.add_member(:aqua_configuration_status, Shapes::ShapeRef.new(shape: AquaConfigurationStatus, location_name: "AquaConfigurationStatus"))
+    ModifyAquaInputMessage.struct_class = Types::ModifyAquaInputMessage
+
+    ModifyAquaOutputMessage.add_member(:aqua_configuration, Shapes::ShapeRef.new(shape: AquaConfiguration, location_name: "AquaConfiguration"))
+    ModifyAquaOutputMessage.struct_class = Types::ModifyAquaOutputMessage
+
     ModifyClusterDbRevisionMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
     ModifyClusterDbRevisionMessage.add_member(:revision_target, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RevisionTarget"))
     ModifyClusterDbRevisionMessage.struct_class = Types::ModifyClusterDbRevisionMessage
@@ -1752,6 +1770,7 @@ module Aws::Redshift
     RestoreFromClusterSnapshotMessage.add_member(:snapshot_schedule_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotScheduleIdentifier"))
     RestoreFromClusterSnapshotMessage.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumberOfNodes"))
     RestoreFromClusterSnapshotMessage.add_member(:availability_zone_relocation, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AvailabilityZoneRelocation"))
+    RestoreFromClusterSnapshotMessage.add_member(:aqua_configuration_status, Shapes::ShapeRef.new(shape: AquaConfigurationStatus, location_name: "AquaConfigurationStatus"))
     RestoreFromClusterSnapshotMessage.struct_class = Types::RestoreFromClusterSnapshotMessage
 
     RestoreFromClusterSnapshotResult.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
@@ -3037,6 +3056,16 @@ module Aws::Redshift
             "marker" => "marker"
           }
         )
+      end)
+
+      api.add_operation(:modify_aqua_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyAquaConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyAquaInputMessage)
+        o.output = Shapes::ShapeRef.new(shape: ModifyAquaOutputMessage)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 
       api.add_operation(:modify_cluster, Seahorse::Model::Operation.new.tap do |o|

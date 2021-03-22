@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2021-03-22)
+------------------
+
+* Feature - Added support to enable AQUA in Amazon Redshift clusters.
+
 1.56.0 (2021-03-18)
 ------------------
 

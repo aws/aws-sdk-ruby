@@ -7541,8 +7541,8 @@ module Aws::EC2
     #       {
     #         destination_cidr_block: "String", # required
     #         local_gateway_route_table_id: "LocalGatewayRoutetableId", # required
-    #         local_gateway_virtual_interface_group_id: "LocalGatewayVirtualInterfaceGroupId", # required
     #         dry_run: false,
+    #         local_gateway_virtual_interface_group_id: "LocalGatewayVirtualInterfaceGroupId", # required
     #       }
     #
     # @!attribute [rw] destination_cidr_block
@@ -7554,10 +7554,6 @@ module Aws::EC2
     #   The ID of the local gateway route table.
     #   @return [String]
     #
-    # @!attribute [rw] local_gateway_virtual_interface_group_id
-    #   The ID of the virtual interface group.
-    #   @return [String]
-    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -7565,13 +7561,17 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] local_gateway_virtual_interface_group_id
+    #   The ID of the virtual interface group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLocalGatewayRouteRequest AWS API Documentation
     #
     class CreateLocalGatewayRouteRequest < Struct.new(
       :destination_cidr_block,
       :local_gateway_route_table_id,
-      :local_gateway_virtual_interface_group_id,
-      :dry_run)
+      :dry_run,
+      :local_gateway_virtual_interface_group_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16843,7 +16843,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport
+    #         attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport, bootMode
     #         image_id: "ImageId", # required
     #         dry_run: false,
     #       }
@@ -17686,6 +17686,8 @@ module Aws::EC2
     #   * `processor-info.sustained-clock-speed-in-ghz` - The CPU clock
     #     speed, in GHz.
     #
+    #   * `supported-boot-mode` - The boot mode (`legacy-bios` \| `uefi`).
+    #
     #   * `supported-root-device-type` - The root device type (`ebs` \|
     #     `instance-store`).
     #
@@ -17974,6 +17976,8 @@ module Aws::EC2
     #
     #   * `network-interface.vpc-id` - The ID of the VPC for the network
     #     interface.
+    #
+    #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
     #
     #   * `owner-id` - The AWS account ID of the instance owner.
     #
@@ -28338,6 +28342,9 @@ module Aws::EC2
     # @!attribute [rw] overrides
     #   Any parameters that you specify override the same parameters in the
     #   launch template.
+    #
+    #   For fleets of type `request` and `maintain`, a maximum of 300 items
+    #   is allowed across all launch templates.
     #   @return [Array<Types::FleetLaunchTemplateOverridesRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateConfigRequest AWS API Documentation
@@ -31192,6 +31199,15 @@ module Aws::EC2
     #   The type of virtualization of the AMI.
     #   @return [String]
     #
+    # @!attribute [rw] boot_mode
+    #   The boot mode of the image. For more information, see [Boot
+    #   modes][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Image AWS API Documentation
     #
     class Image < Struct.new(
@@ -31220,7 +31236,8 @@ module Aws::EC2
       :sriov_net_support,
       :state_reason,
       :tags,
-      :virtualization_type)
+      :virtualization_type,
+      :boot_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31260,6 +31277,10 @@ module Aws::EC2
     #   Function interface is enabled.
     #   @return [Types::AttributeValue]
     #
+    # @!attribute [rw] boot_mode
+    #   Describes a value for a resource attribute that is a String.
+    #   @return [Types::AttributeValue]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImageAttribute AWS API Documentation
     #
     class ImageAttribute < Struct.new(
@@ -31270,7 +31291,8 @@ module Aws::EC2
       :description,
       :kernel_id,
       :ramdisk_id,
-      :sriov_net_support)
+      :sriov_net_support,
+      :boot_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32636,16 +32658,7 @@ module Aws::EC2
     #   @return [Array<Types::GroupIdentifier>]
     #
     # @!attribute [rw] source_dest_check
-    #   Specifies whether to enable an instance launched in a VPC to perform
-    #   NAT. This controls whether source/destination checking is enabled on
-    #   the instance. A value of `true` means that checking is enabled, and
-    #   `false` means that checking is disabled. The value must be `false`
-    #   for the instance to perform NAT. For more information, see [NAT
-    #   instances][1] in the *Amazon VPC User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html
+    #   Indicates whether source/destination checking is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] spot_instance_request_id
@@ -32697,6 +32710,15 @@ module Aws::EC2
     #   Indicates whether the instance is enabled for AWS Nitro Enclaves.
     #   @return [Types::EnclaveOptions]
     #
+    # @!attribute [rw] boot_mode
+    #   The boot mode of the instance. For more information, see [Boot
+    #   modes][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Instance AWS API Documentation
     #
     class Instance < Struct.new(
@@ -32747,7 +32769,8 @@ module Aws::EC2
       :hibernation_options,
       :licenses,
       :metadata_options,
-      :enclave_options)
+      :enclave_options,
+      :boot_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32812,10 +32835,12 @@ module Aws::EC2
     #   @return [Types::AttributeValue]
     #
     # @!attribute [rw] source_dest_check
-    #   Indicates whether source/destination checking is enabled. A value of
-    #   `true` means that checking is enabled, and `false` means that
-    #   checking is disabled. This value must be `false` for a NAT instance
-    #   to perform NAT.
+    #   Enable or disable source/destination checks, which ensure that the
+    #   instance is either the source or the destination of any traffic that
+    #   it receives. If the value is `true`, source/destination checks are
+    #   enabled; otherwise, they are disabled. The default value is `true`.
+    #   You must disable source/destination checks if the instance runs
+    #   services such as network address translation, routing, or firewalls.
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] sriov_net_support
@@ -34022,6 +34047,15 @@ module Aws::EC2
     #   Indicates whether auto recovery is supported.
     #   @return [Boolean]
     #
+    # @!attribute [rw] supported_boot_modes
+    #   The supported boot modes. For more information, see [Boot modes][1]
+    #   in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceTypeInfo AWS API Documentation
     #
     class InstanceTypeInfo < Struct.new(
@@ -34047,7 +34081,8 @@ module Aws::EC2
       :hibernation_supported,
       :burstable_performance_supported,
       :dedicated_hosts_supported,
-      :auto_recovery_supported)
+      :auto_recovery_supported,
+      :supported_boot_modes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37706,10 +37741,12 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] source_dest_check
-    #   Specifies whether source/destination checking is enabled. A value of
-    #   `true` means that checking is enabled, and `false` means that
-    #   checking is disabled. This value must be `false` for a NAT instance
-    #   to perform NAT.
+    #   Enable or disable source/destination checks, which ensure that the
+    #   instance is either the source or the destination of any traffic that
+    #   it receives. If the value is `true`, source/destination checks are
+    #   enabled; otherwise, they are disabled. The default value is `true`.
+    #   You must disable source/destination checks if the instance runs
+    #   services such as network address translation, routing, or firewalls.
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] attribute
@@ -43171,6 +43208,7 @@ module Aws::EC2
     #         root_device_name: "String",
     #         sriov_net_support: "String",
     #         virtualization_type: "String",
+    #         boot_mode: "legacy-bios", # accepts legacy-bios, uefi
     #       }
     #
     # @!attribute [rw] image_location
@@ -43273,6 +43311,15 @@ module Aws::EC2
     #   Default: `paravirtual`
     #   @return [String]
     #
+    # @!attribute [rw] boot_mode
+    #   The boot mode of the AMI. For more information, see [Boot modes][1]
+    #   in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RegisterImageRequest AWS API Documentation
     #
     class RegisterImageRequest < Struct.new(
@@ -43288,7 +43335,8 @@ module Aws::EC2
       :ramdisk_id,
       :root_device_name,
       :sriov_net_support,
-      :virtualization_type)
+      :virtualization_type,
+      :boot_mode)
       SENSITIVE = []
       include Aws::Structure
     end

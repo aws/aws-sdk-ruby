@@ -131,6 +131,8 @@ module Aws::Macie2
     GetFindingStatisticsResponse = Shapes::StructureShape.new(name: 'GetFindingStatisticsResponse')
     GetFindingsFilterRequest = Shapes::StructureShape.new(name: 'GetFindingsFilterRequest')
     GetFindingsFilterResponse = Shapes::StructureShape.new(name: 'GetFindingsFilterResponse')
+    GetFindingsPublicationConfigurationRequest = Shapes::StructureShape.new(name: 'GetFindingsPublicationConfigurationRequest')
+    GetFindingsPublicationConfigurationResponse = Shapes::StructureShape.new(name: 'GetFindingsPublicationConfigurationResponse')
     GetFindingsRequest = Shapes::StructureShape.new(name: 'GetFindingsRequest')
     GetFindingsResponse = Shapes::StructureShape.new(name: 'GetFindingsResponse')
     GetInvitationsCountRequest = Shapes::StructureShape.new(name: 'GetInvitationsCountRequest')
@@ -203,6 +205,8 @@ module Aws::Macie2
     PolicyDetails = Shapes::StructureShape.new(name: 'PolicyDetails')
     PutClassificationExportConfigurationRequest = Shapes::StructureShape.new(name: 'PutClassificationExportConfigurationRequest')
     PutClassificationExportConfigurationResponse = Shapes::StructureShape.new(name: 'PutClassificationExportConfigurationResponse')
+    PutFindingsPublicationConfigurationRequest = Shapes::StructureShape.new(name: 'PutFindingsPublicationConfigurationRequest')
+    PutFindingsPublicationConfigurationResponse = Shapes::StructureShape.new(name: 'PutFindingsPublicationConfigurationResponse')
     Range = Shapes::StructureShape.new(name: 'Range')
     Ranges = Shapes::ListShape.new(name: 'Ranges')
     Record = Shapes::StructureShape.new(name: 'Record')
@@ -219,6 +223,7 @@ module Aws::Macie2
     S3Object = Shapes::StructureShape.new(name: 'S3Object')
     ScopeFilterKey = Shapes::StringShape.new(name: 'ScopeFilterKey')
     Scoping = Shapes::StructureShape.new(name: 'Scoping')
+    SecurityHubConfiguration = Shapes::StructureShape.new(name: 'SecurityHubConfiguration')
     SensitiveData = Shapes::ListShape.new(name: 'SensitiveData')
     SensitiveDataItem = Shapes::StructureShape.new(name: 'SensitiveDataItem')
     SensitiveDataItemCategory = Shapes::StringShape.new(name: 'SensitiveDataItemCategory')
@@ -803,6 +808,11 @@ module Aws::Macie2
     GetFindingsFilterResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetFindingsFilterResponse.struct_class = Types::GetFindingsFilterResponse
 
+    GetFindingsPublicationConfigurationRequest.struct_class = Types::GetFindingsPublicationConfigurationRequest
+
+    GetFindingsPublicationConfigurationResponse.add_member(:security_hub_configuration, Shapes::ShapeRef.new(shape: SecurityHubConfiguration, location_name: "securityHubConfiguration"))
+    GetFindingsPublicationConfigurationResponse.struct_class = Types::GetFindingsPublicationConfigurationResponse
+
     GetFindingsRequest.add_member(:finding_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "findingIds"))
     GetFindingsRequest.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortCriteria, location_name: "sortCriteria"))
     GetFindingsRequest.struct_class = Types::GetFindingsRequest
@@ -1071,6 +1081,12 @@ module Aws::Macie2
     PutClassificationExportConfigurationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: ClassificationExportConfiguration, location_name: "configuration"))
     PutClassificationExportConfigurationResponse.struct_class = Types::PutClassificationExportConfigurationResponse
 
+    PutFindingsPublicationConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    PutFindingsPublicationConfigurationRequest.add_member(:security_hub_configuration, Shapes::ShapeRef.new(shape: SecurityHubConfiguration, location_name: "securityHubConfiguration"))
+    PutFindingsPublicationConfigurationRequest.struct_class = Types::PutFindingsPublicationConfigurationRequest
+
+    PutFindingsPublicationConfigurationResponse.struct_class = Types::PutFindingsPublicationConfigurationResponse
+
     Range.add_member(:end, Shapes::ShapeRef.new(shape: __long, location_name: "end"))
     Range.add_member(:start, Shapes::ShapeRef.new(shape: __long, location_name: "start"))
     Range.add_member(:start_column, Shapes::ShapeRef.new(shape: __long, location_name: "startColumn"))
@@ -1139,6 +1155,10 @@ module Aws::Macie2
     Scoping.add_member(:excludes, Shapes::ShapeRef.new(shape: JobScopingBlock, location_name: "excludes"))
     Scoping.add_member(:includes, Shapes::ShapeRef.new(shape: JobScopingBlock, location_name: "includes"))
     Scoping.struct_class = Types::Scoping
+
+    SecurityHubConfiguration.add_member(:publish_classification_findings, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "publishClassificationFindings"))
+    SecurityHubConfiguration.add_member(:publish_policy_findings, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "publishPolicyFindings"))
+    SecurityHubConfiguration.struct_class = Types::SecurityHubConfiguration
 
     SensitiveData.member = Shapes::ShapeRef.new(shape: SensitiveDataItem)
 
@@ -1837,6 +1857,21 @@ module Aws::Macie2
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:get_findings_publication_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetFindingsPublicationConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/findings-publication-configuration"
+        o.input = Shapes::ShapeRef.new(shape: GetFindingsPublicationConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetFindingsPublicationConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:get_invitations_count, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetInvitationsCount"
         o.http_method = "GET"
@@ -2094,6 +2129,21 @@ module Aws::Macie2
         o.http_request_uri = "/classification-export-configuration"
         o.input = Shapes::ShapeRef.new(shape: PutClassificationExportConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: PutClassificationExportConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:put_findings_publication_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutFindingsPublicationConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/findings-publication-configuration"
+        o.input = Shapes::ShapeRef.new(shape: PutFindingsPublicationConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutFindingsPublicationConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)

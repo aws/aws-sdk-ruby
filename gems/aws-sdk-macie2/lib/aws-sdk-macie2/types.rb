@@ -1999,7 +1999,13 @@ module Aws::Macie2
     #   The frequency with which Amazon Macie publishes updates to policy
     #   findings for an account. This includes publishing updates to AWS
     #   Security Hub and Amazon EventBridge (formerly called Amazon
-    #   CloudWatch Events). Valid values are:
+    #   CloudWatch Events). For more information, see [Monitoring and
+    #   processing findings][1] in the *Amazon Macie User Guide*. Valid
+    #   values are:
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/findings-monitor.html
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2698,6 +2704,34 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetFindingsPublicationConfigurationRequest AWS API Documentation
+    #
+    class GetFindingsPublicationConfigurationRequest < Aws::EmptyStructure; end
+
+    # Provides information about the current configuration settings for
+    # publishing findings to AWS Security Hub automatically.
+    #
+    # @!attribute [rw] security_hub_configuration
+    #   Specifies configuration settings that determine which findings are
+    #   published to AWS Security Hub automatically. For information about
+    #   how Macie publishes findings to Security Hub, see [Amazon Macie
+    #   integration with Security Hub][1] in the *Amazon Macie User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html
+    #   @return [Types::SecurityHubConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetFindingsPublicationConfigurationResponse AWS API Documentation
+    #
+    class GetFindingsPublicationConfigurationResponse < Struct.new(
+      :security_hub_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies one or more findings to retrieve.
     #
     # @note When making an API call, you may pass GetFindingsRequest
@@ -2778,7 +2812,13 @@ module Aws::Macie2
     #   The frequency with which Amazon Macie publishes updates to policy
     #   findings for an account. This includes publishing updates to AWS
     #   Security Hub and Amazon EventBridge (formerly called Amazon
-    #   CloudWatch Events). Valid values are:
+    #   CloudWatch Events). For more information, see [Monitoring and
+    #   processing findings][1] in the *Amazon Macie User Guide*. Valid
+    #   values are:
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/findings-monitor.html
     #   @return [String]
     #
     # @!attribute [rw] service_role
@@ -4228,6 +4268,49 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # Specifies configuration settings for publishing findings to AWS
+    # Security Hub automatically.
+    #
+    # @note When making an API call, you may pass PutFindingsPublicationConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "__string",
+    #         security_hub_configuration: {
+    #           publish_classification_findings: false, # required
+    #           publish_policy_findings: false, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_hub_configuration
+    #   Specifies configuration settings that determine which findings are
+    #   published to AWS Security Hub automatically. For information about
+    #   how Macie publishes findings to Security Hub, see [Amazon Macie
+    #   integration with Security Hub][1] in the *Amazon Macie User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html
+    #   @return [Types::SecurityHubConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/PutFindingsPublicationConfigurationRequest AWS API Documentation
+    #
+    class PutFindingsPublicationConfigurationRequest < Struct.new(
+      :client_token,
+      :security_hub_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/PutFindingsPublicationConfigurationResponse AWS API Documentation
+    #
+    class PutFindingsPublicationConfigurationResponse < Aws::EmptyStructure; end
+
     # Provides details about the location of an occurrence of sensitive data
     # in an Adobe Portable Document Format file, Microsoft Word document, or
     # non-binary text file.
@@ -4661,6 +4744,38 @@ module Aws::Macie2
     class Scoping < Struct.new(
       :excludes,
       :includes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies configuration settings that determine which findings are
+    # published to AWS Security Hub automatically. For information about how
+    # Macie publishes findings to Security Hub, see [Amazon Macie
+    # integration with Security Hub][1] in the *Amazon Macie User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html
+    #
+    # @note When making an API call, you may pass SecurityHubConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         publish_classification_findings: false, # required
+    #         publish_policy_findings: false, # required
+    #       }
+    #
+    # @!attribute [rw] publish_classification_findings
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] publish_policy_findings
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/SecurityHubConfiguration AWS API Documentation
+    #
+    class SecurityHubConfiguration < Struct.new(
+      :publish_classification_findings,
+      :publish_policy_findings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5273,7 +5388,13 @@ module Aws::Macie2
     #   The frequency with which Amazon Macie publishes updates to policy
     #   findings for an account. This includes publishing updates to AWS
     #   Security Hub and Amazon EventBridge (formerly called Amazon
-    #   CloudWatch Events). Valid values are:
+    #   CloudWatch Events). For more information, see [Monitoring and
+    #   processing findings][1] in the *Amazon Macie User Guide*. Valid
+    #   values are:
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/findings-monitor.html
     #   @return [String]
     #
     # @!attribute [rw] status

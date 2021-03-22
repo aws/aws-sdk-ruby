@@ -258,16 +258,7 @@ module Aws::EC2
       data[:security_groups]
     end
 
-    # Specifies whether to enable an instance launched in a VPC to perform
-    # NAT. This controls whether source/destination checking is enabled on
-    # the instance. A value of `true` means that checking is enabled, and
-    # `false` means that checking is disabled. The value must be `false` for
-    # the instance to perform NAT. For more information, see [NAT
-    # instances][1] in the *Amazon VPC User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html
+    # Indicates whether source/destination checking is enabled.
     # @return [Boolean]
     def source_dest_check
       data[:source_dest_check]
@@ -344,6 +335,17 @@ module Aws::EC2
     # @return [Types::EnclaveOptions]
     def enclave_options
       data[:enclave_options]
+    end
+
+    # The boot mode of the instance. For more information, see [Boot
+    # modes][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
+    # @return [String]
+    def boot_mode
+      data[:boot_mode]
     end
 
     # @!endgroup
@@ -928,10 +930,12 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Types::AttributeBooleanValue] :source_dest_check
-    #   Specifies whether source/destination checking is enabled. A value of
-    #   `true` means that checking is enabled, and `false` means that checking
-    #   is disabled. This value must be `false` for a NAT instance to perform
-    #   NAT.
+    #   Enable or disable source/destination checks, which ensure that the
+    #   instance is either the source or the destination of any traffic that
+    #   it receives. If the value is `true`, source/destination checks are
+    #   enabled; otherwise, they are disabled. The default value is `true`.
+    #   You must disable source/destination checks if the instance runs
+    #   services such as network address translation, routing, or firewalls.
     # @option options [String] :attribute
     #   The name of the attribute.
     # @option options [Array<Types::InstanceBlockDeviceMappingSpecification>] :block_device_mappings

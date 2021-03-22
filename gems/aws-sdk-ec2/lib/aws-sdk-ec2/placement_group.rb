@@ -430,6 +430,8 @@ module Aws::EC2
     #   * `network-interface.vpc-id` - The ID of the VPC for the network
     #     interface.
     #
+    #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
+    #
     #   * `owner-id` - The AWS account ID of the instance owner.
     #
     #   * `placement-group-name` - The name of the placement group for the
