@@ -769,9 +769,10 @@ module Aws::GameLift
     # Regions support multiple locations: us-east-1 (N. Virginia), us-west-2
     # (Oregon), eu-central-1 (Frankfurt), eu-west-1 (Ireland),
     # ap-southeast-2 (Sydney), ap-northeast-1 (Tokyo), and ap-northeast-2
-    # (Seoul). Fleets that created in other GameLift Regions can have
-    # instances in the fleet Region only. All instances deployed to fleet
-    # locations use the same configuration.
+    # (Seoul). Fleets that are created in other GameLift Regions can deploy
+    # instances in the fleet's home Region only. All fleet instances use
+    # the same configuration regardless of location; however, you can adjust
+    # capacity settings and turn auto-scaling on/off for each location.
     #
     # To create a fleet, choose the hardware for your instances, specify a
     # game server build or Realtime script to deploy, and provide a runtime
@@ -1633,12 +1634,16 @@ module Aws::GameLift
     #
     # To create a new queue, provide a name, timeout value, and a list of
     # destinations. Optionally, specify a sort configuration and/or a
-    # filter, and define a set of latency cap policies.
+    # filter, and define a set of latency cap policies. You can also include
+    # the ARN for an Amazon Simple Notification Service (SNS) topic to
+    # receive notifications of game session placement activity.
+    # Notifications using SNS or CloudWatch events is the preferred way to
+    # track placement activity.
     #
     # If successful, a new `GameSessionQueue` object is returned with an
     # assigned queue ARN. New game session requests, which are submitted to
-    # queue with StartGameSessionPlacement or StartMatchmaking, reference a
-    # queue's name or ARN.
+    # the queue with StartGameSessionPlacement or StartMatchmaking,
+    # reference a queue's name or ARN.
     #
     # **Learn more**
     #
@@ -1695,6 +1700,19 @@ module Aws::GameLift
     #   named will be automatically applied at the end of the prioritization
     #   process.
     #
+    # @option params [String] :custom_event_data
+    #   Information to be added to all events that are related to this game
+    #   session queue.
+    #
+    # @option params [String] :notification_target
+    #   An SNS topic ARN that is set up to receive game session placement
+    #   notifications. See [ Setting up notifications for game session
+    #   placement][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html
+    #
     # @option params [Array<Types::Tag>] :tags
     #   A list of labels to assign to the new game session queue resource.
     #   Tags are developer-defined key-value pairs. Tagging AWS resources are
@@ -1736,6 +1754,8 @@ module Aws::GameLift
     #       priority_order: ["LATENCY"], # accepts LATENCY, COST, DESTINATION, LOCATION
     #       location_order: ["LocationStringModel"],
     #     },
+    #     custom_event_data: "QueueCustomEventData",
+    #     notification_target: "QueueSnsArnStringModel",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1760,6 +1780,8 @@ module Aws::GameLift
     #   resp.game_session_queue.priority_configuration.priority_order[0] #=> String, one of "LATENCY", "COST", "DESTINATION", "LOCATION"
     #   resp.game_session_queue.priority_configuration.location_order #=> Array
     #   resp.game_session_queue.priority_configuration.location_order[0] #=> String
+    #   resp.game_session_queue.custom_event_data #=> String
+    #   resp.game_session_queue.notification_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameSessionQueue AWS API Documentation
     #
@@ -1790,10 +1812,10 @@ module Aws::GameLift
     # queue to use when starting a game session for the match.
     #
     # In addition, you must set up an Amazon Simple Notification Service
-    # (SNS) to receive matchmaking notifications, and provide the topic ARN
-    # in the matchmaking configuration. An alternative method, continuously
-    # polling ticket status with DescribeMatchmaking, is only suitable for
-    # games in development with low matchmaking usage.
+    # (SNS) topic to receive matchmaking notifications. Provide the topic
+    # ARN in the matchmaking configuration. An alternative method,
+    # continuously polling ticket status with DescribeMatchmaking, is only
+    # suitable for games in development with low matchmaking usage.
     #
     # **Learn more**
     #
@@ -1861,6 +1883,12 @@ module Aws::GameLift
     #
     # @option params [String] :notification_target
     #   An SNS topic ARN that is set up to receive matchmaking notifications.
+    #   See [ Setting up notifications for matchmaking][1] for more
+    #   information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html
     #
     # @option params [Integer] :additional_player_count
     #   The number of player slots in a match to keep open for future players.
@@ -4670,6 +4698,8 @@ module Aws::GameLift
     #   resp.game_session_queues[0].priority_configuration.priority_order[0] #=> String, one of "LATENCY", "COST", "DESTINATION", "LOCATION"
     #   resp.game_session_queues[0].priority_configuration.location_order #=> Array
     #   resp.game_session_queues[0].priority_configuration.location_order[0] #=> String
+    #   resp.game_session_queues[0].custom_event_data #=> String
+    #   resp.game_session_queues[0].notification_target #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionQueues AWS API Documentation
@@ -8804,6 +8834,19 @@ module Aws::GameLift
     #   process. To remove an existing priority configuration, pass in an
     #   empty set.
     #
+    # @option params [String] :custom_event_data
+    #   Information to be added to all events that are related to this game
+    #   session queue.
+    #
+    # @option params [String] :notification_target
+    #   An SNS topic ARN that is set up to receive game session placement
+    #   notifications. See [ Setting up notifications for game session
+    #   placement][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html
+    #
     # @return [Types::UpdateGameSessionQueueOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateGameSessionQueueOutput#game_session_queue #game_session_queue} => Types::GameSessionQueue
@@ -8831,6 +8874,8 @@ module Aws::GameLift
     #       priority_order: ["LATENCY"], # accepts LATENCY, COST, DESTINATION, LOCATION
     #       location_order: ["LocationStringModel"],
     #     },
+    #     custom_event_data: "QueueCustomEventData",
+    #     notification_target: "QueueSnsArnStringModel",
     #   })
     #
     # @example Response structure
@@ -8849,6 +8894,8 @@ module Aws::GameLift
     #   resp.game_session_queue.priority_configuration.priority_order[0] #=> String, one of "LATENCY", "COST", "DESTINATION", "LOCATION"
     #   resp.game_session_queue.priority_configuration.location_order #=> Array
     #   resp.game_session_queue.priority_configuration.location_order[0] #=> String
+    #   resp.game_session_queue.custom_event_data #=> String
+    #   resp.game_session_queue.notification_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameSessionQueue AWS API Documentation
     #
@@ -9307,7 +9354,7 @@ module Aws::GameLift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2021-03-23)
+------------------
+
+* Feature - Removed APIs to control AQUA on clusters.
+
 1.57.0 (2021-03-22)
 ------------------
 

@@ -466,6 +466,9 @@ module Aws::CostExplorer
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html
     #
+    # @option params [String] :default_value
+    #   The default value for the cost category.
+    #
     # @return [Types::CreateCostCategoryDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCostCategoryDefinitionResponse#cost_category_arn #cost_category_arn} => String
@@ -478,8 +481,8 @@ module Aws::CostExplorer
     #     rule_version: "CostCategoryExpression.v1", # required, accepts CostCategoryExpression.v1
     #     rules: [ # required
     #       {
-    #         value: "CostCategoryValue", # required
-    #         rule: { # required
+    #         value: "CostCategoryValue",
+    #         rule: {
     #           or: [
     #             {
     #               # recursive Expression
@@ -509,8 +512,14 @@ module Aws::CostExplorer
     #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #           },
     #         },
+    #         inherited_value: {
+    #           dimension_name: "LINKED_ACCOUNT_NAME", # accepts LINKED_ACCOUNT_NAME, TAG
+    #           dimension_key: "GenericString",
+    #         },
+    #         type: "REGULAR", # accepts REGULAR, INHERITED_VALUE
     #       },
     #     ],
+    #     default_value: "CostCategoryValue",
     #   })
     #
     # @example Response structure
@@ -659,9 +668,13 @@ module Aws::CostExplorer
     #   resp.cost_category.rules[0].rule.cost_categories.values[0] #=> String
     #   resp.cost_category.rules[0].rule.cost_categories.match_options #=> Array
     #   resp.cost_category.rules[0].rule.cost_categories.match_options[0] #=> String, one of "EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE"
+    #   resp.cost_category.rules[0].inherited_value.dimension_name #=> String, one of "LINKED_ACCOUNT_NAME", "TAG"
+    #   resp.cost_category.rules[0].inherited_value.dimension_key #=> String
+    #   resp.cost_category.rules[0].type #=> String, one of "REGULAR", "INHERITED_VALUE"
     #   resp.cost_category.processing_status #=> Array
     #   resp.cost_category.processing_status[0].component #=> String, one of "COST_EXPLORER"
     #   resp.cost_category.processing_status[0].status #=> String, one of "PROCESSING", "APPLIED"
+    #   resp.cost_category.default_value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DescribeCostCategoryDefinition AWS API Documentation
     #
@@ -3851,6 +3864,7 @@ module Aws::CostExplorer
     #   resp.cost_category_references[0].processing_status[0].status #=> String, one of "PROCESSING", "APPLIED"
     #   resp.cost_category_references[0].values #=> Array
     #   resp.cost_category_references[0].values[0] #=> String
+    #   resp.cost_category_references[0].default_value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostCategoryDefinitions AWS API Documentation
@@ -4002,6 +4016,9 @@ module Aws::CostExplorer
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html
     #
+    # @option params [String] :default_value
+    #   The default value for the cost category.
+    #
     # @return [Types::UpdateCostCategoryDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateCostCategoryDefinitionResponse#cost_category_arn #cost_category_arn} => String
@@ -4014,8 +4031,8 @@ module Aws::CostExplorer
     #     rule_version: "CostCategoryExpression.v1", # required, accepts CostCategoryExpression.v1
     #     rules: [ # required
     #       {
-    #         value: "CostCategoryValue", # required
-    #         rule: { # required
+    #         value: "CostCategoryValue",
+    #         rule: {
     #           or: [
     #             {
     #               # recursive Expression
@@ -4045,8 +4062,14 @@ module Aws::CostExplorer
     #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #           },
     #         },
+    #         inherited_value: {
+    #           dimension_name: "LINKED_ACCOUNT_NAME", # accepts LINKED_ACCOUNT_NAME, TAG
+    #           dimension_key: "GenericString",
+    #         },
+    #         type: "REGULAR", # accepts REGULAR, INHERITED_VALUE
     #       },
     #     ],
+    #     default_value: "CostCategoryValue",
     #   })
     #
     # @example Response structure
@@ -4076,7 +4099,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

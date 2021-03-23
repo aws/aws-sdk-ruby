@@ -33,6 +33,8 @@ module Aws::CostExplorer
     BillExpirationException = Shapes::StructureShape.new(name: 'BillExpirationException')
     Context = Shapes::StringShape.new(name: 'Context')
     CostCategory = Shapes::StructureShape.new(name: 'CostCategory')
+    CostCategoryInheritedValueDimension = Shapes::StructureShape.new(name: 'CostCategoryInheritedValueDimension')
+    CostCategoryInheritedValueDimensionName = Shapes::StringShape.new(name: 'CostCategoryInheritedValueDimensionName')
     CostCategoryMaxResults = Shapes::IntegerShape.new(name: 'CostCategoryMaxResults')
     CostCategoryName = Shapes::StringShape.new(name: 'CostCategoryName')
     CostCategoryNamesList = Shapes::ListShape.new(name: 'CostCategoryNamesList')
@@ -41,6 +43,7 @@ module Aws::CostExplorer
     CostCategoryReference = Shapes::StructureShape.new(name: 'CostCategoryReference')
     CostCategoryReferencesList = Shapes::ListShape.new(name: 'CostCategoryReferencesList')
     CostCategoryRule = Shapes::StructureShape.new(name: 'CostCategoryRule')
+    CostCategoryRuleType = Shapes::StringShape.new(name: 'CostCategoryRuleType')
     CostCategoryRuleVersion = Shapes::StringShape.new(name: 'CostCategoryRuleVersion')
     CostCategoryRulesList = Shapes::ListShape.new(name: 'CostCategoryRulesList')
     CostCategoryStatus = Shapes::StringShape.new(name: 'CostCategoryStatus')
@@ -338,7 +341,12 @@ module Aws::CostExplorer
     CostCategory.add_member(:rule_version, Shapes::ShapeRef.new(shape: CostCategoryRuleVersion, required: true, location_name: "RuleVersion"))
     CostCategory.add_member(:rules, Shapes::ShapeRef.new(shape: CostCategoryRulesList, required: true, location_name: "Rules"))
     CostCategory.add_member(:processing_status, Shapes::ShapeRef.new(shape: CostCategoryProcessingStatusList, location_name: "ProcessingStatus"))
+    CostCategory.add_member(:default_value, Shapes::ShapeRef.new(shape: CostCategoryValue, location_name: "DefaultValue"))
     CostCategory.struct_class = Types::CostCategory
+
+    CostCategoryInheritedValueDimension.add_member(:dimension_name, Shapes::ShapeRef.new(shape: CostCategoryInheritedValueDimensionName, location_name: "DimensionName"))
+    CostCategoryInheritedValueDimension.add_member(:dimension_key, Shapes::ShapeRef.new(shape: GenericString, location_name: "DimensionKey"))
+    CostCategoryInheritedValueDimension.struct_class = Types::CostCategoryInheritedValueDimension
 
     CostCategoryNamesList.member = Shapes::ShapeRef.new(shape: CostCategoryName)
 
@@ -355,12 +363,15 @@ module Aws::CostExplorer
     CostCategoryReference.add_member(:number_of_rules, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "NumberOfRules"))
     CostCategoryReference.add_member(:processing_status, Shapes::ShapeRef.new(shape: CostCategoryProcessingStatusList, location_name: "ProcessingStatus"))
     CostCategoryReference.add_member(:values, Shapes::ShapeRef.new(shape: CostCategoryValuesList, location_name: "Values"))
+    CostCategoryReference.add_member(:default_value, Shapes::ShapeRef.new(shape: CostCategoryValue, location_name: "DefaultValue"))
     CostCategoryReference.struct_class = Types::CostCategoryReference
 
     CostCategoryReferencesList.member = Shapes::ShapeRef.new(shape: CostCategoryReference)
 
-    CostCategoryRule.add_member(:value, Shapes::ShapeRef.new(shape: CostCategoryValue, required: true, location_name: "Value"))
-    CostCategoryRule.add_member(:rule, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "Rule"))
+    CostCategoryRule.add_member(:value, Shapes::ShapeRef.new(shape: CostCategoryValue, location_name: "Value"))
+    CostCategoryRule.add_member(:rule, Shapes::ShapeRef.new(shape: Expression, location_name: "Rule"))
+    CostCategoryRule.add_member(:inherited_value, Shapes::ShapeRef.new(shape: CostCategoryInheritedValueDimension, location_name: "InheritedValue"))
+    CostCategoryRule.add_member(:type, Shapes::ShapeRef.new(shape: CostCategoryRuleType, location_name: "Type"))
     CostCategoryRule.struct_class = Types::CostCategoryRule
 
     CostCategoryRulesList.member = Shapes::ShapeRef.new(shape: CostCategoryRule)
@@ -414,6 +425,7 @@ module Aws::CostExplorer
     CreateCostCategoryDefinitionRequest.add_member(:name, Shapes::ShapeRef.new(shape: CostCategoryName, required: true, location_name: "Name"))
     CreateCostCategoryDefinitionRequest.add_member(:rule_version, Shapes::ShapeRef.new(shape: CostCategoryRuleVersion, required: true, location_name: "RuleVersion"))
     CreateCostCategoryDefinitionRequest.add_member(:rules, Shapes::ShapeRef.new(shape: CostCategoryRulesList, required: true, location_name: "Rules"))
+    CreateCostCategoryDefinitionRequest.add_member(:default_value, Shapes::ShapeRef.new(shape: CostCategoryValue, location_name: "DefaultValue"))
     CreateCostCategoryDefinitionRequest.struct_class = Types::CreateCostCategoryDefinitionRequest
 
     CreateCostCategoryDefinitionResponse.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CostCategoryArn"))
@@ -1176,6 +1188,7 @@ module Aws::CostExplorer
     UpdateCostCategoryDefinitionRequest.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CostCategoryArn"))
     UpdateCostCategoryDefinitionRequest.add_member(:rule_version, Shapes::ShapeRef.new(shape: CostCategoryRuleVersion, required: true, location_name: "RuleVersion"))
     UpdateCostCategoryDefinitionRequest.add_member(:rules, Shapes::ShapeRef.new(shape: CostCategoryRulesList, required: true, location_name: "Rules"))
+    UpdateCostCategoryDefinitionRequest.add_member(:default_value, Shapes::ShapeRef.new(shape: CostCategoryValue, location_name: "DefaultValue"))
     UpdateCostCategoryDefinitionRequest.struct_class = Types::UpdateCostCategoryDefinitionRequest
 
     UpdateCostCategoryDefinitionResponse.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CostCategoryArn"))

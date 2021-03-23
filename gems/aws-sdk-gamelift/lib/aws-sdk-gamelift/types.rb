@@ -1325,6 +1325,8 @@ module Aws::GameLift
     #           priority_order: ["LATENCY"], # accepts LATENCY, COST, DESTINATION, LOCATION
     #           location_order: ["LocationStringModel"],
     #         },
+    #         custom_event_data: "QueueCustomEventData",
+    #         notification_target: "QueueSnsArnStringModel",
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -1376,6 +1378,21 @@ module Aws::GameLift
     #   prioritization process.
     #   @return [Types::PriorityConfiguration]
     #
+    # @!attribute [rw] custom_event_data
+    #   Information to be added to all events that are related to this game
+    #   session queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_target
+    #   An SNS topic ARN that is set up to receive game session placement
+    #   notifications. See [ Setting up notifications for game session
+    #   placement][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of labels to assign to the new game session queue resource.
     #   Tags are developer-defined key-value pairs. Tagging AWS resources
@@ -1400,6 +1417,8 @@ module Aws::GameLift
       :destinations,
       :filter_configuration,
       :priority_configuration,
+      :custom_event_data,
+      :notification_target,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1505,7 +1524,12 @@ module Aws::GameLift
     #
     # @!attribute [rw] notification_target
     #   An SNS topic ARN that is set up to receive matchmaking
-    #   notifications.
+    #   notifications. See [ Setting up notifications for matchmaking][1]
+    #   for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html
     #   @return [String]
     #
     # @!attribute [rw] additional_player_count
@@ -5657,6 +5681,21 @@ module Aws::GameLift
     #   prioritization process.
     #   @return [Types::PriorityConfiguration]
     #
+    # @!attribute [rw] custom_event_data
+    #   Information that is added to all events that are related to this
+    #   game session queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_target
+    #   An SNS topic ARN that is set up to receive game session placement
+    #   notifications. See [ Setting up notifications for game session
+    #   placement][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSessionQueue AWS API Documentation
     #
     class GameSessionQueue < Struct.new(
@@ -5666,7 +5705,9 @@ module Aws::GameLift
       :player_latency_policies,
       :destinations,
       :filter_configuration,
-      :priority_configuration)
+      :priority_configuration,
+      :custom_event_data,
+      :notification_target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9879,6 +9920,8 @@ module Aws::GameLift
     #           priority_order: ["LATENCY"], # accepts LATENCY, COST, DESTINATION, LOCATION
     #           location_order: ["LocationStringModel"],
     #         },
+    #         custom_event_data: "QueueCustomEventData",
+    #         notification_target: "QueueSnsArnStringModel",
     #       }
     #
     # @!attribute [rw] name
@@ -9929,6 +9972,21 @@ module Aws::GameLift
     #   configuration, pass in an empty set.
     #   @return [Types::PriorityConfiguration]
     #
+    # @!attribute [rw] custom_event_data
+    #   Information to be added to all events that are related to this game
+    #   session queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_target
+    #   An SNS topic ARN that is set up to receive game session placement
+    #   notifications. See [ Setting up notifications for game session
+    #   placement][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameSessionQueueInput AWS API Documentation
     #
     class UpdateGameSessionQueueInput < Struct.new(
@@ -9937,7 +9995,9 @@ module Aws::GameLift
       :player_latency_policies,
       :destinations,
       :filter_configuration,
-      :priority_configuration)
+      :priority_configuration,
+      :custom_event_data,
+      :notification_target)
       SENSITIVE = []
       include Aws::Structure
     end

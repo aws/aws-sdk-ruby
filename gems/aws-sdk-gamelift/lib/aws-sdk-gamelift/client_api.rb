@@ -341,6 +341,8 @@ module Aws::GameLift
     PutScalingPolicyInput = Shapes::StructureShape.new(name: 'PutScalingPolicyInput')
     PutScalingPolicyOutput = Shapes::StructureShape.new(name: 'PutScalingPolicyOutput')
     QueueArnsList = Shapes::ListShape.new(name: 'QueueArnsList')
+    QueueCustomEventData = Shapes::StringShape.new(name: 'QueueCustomEventData')
+    QueueSnsArnStringModel = Shapes::StringShape.new(name: 'QueueSnsArnStringModel')
     RegisterGameServerInput = Shapes::StructureShape.new(name: 'RegisterGameServerInput')
     RegisterGameServerOutput = Shapes::StructureShape.new(name: 'RegisterGameServerOutput')
     RequestUploadCredentialsInput = Shapes::StructureShape.new(name: 'RequestUploadCredentialsInput')
@@ -591,6 +593,8 @@ module Aws::GameLift
     CreateGameSessionQueueInput.add_member(:destinations, Shapes::ShapeRef.new(shape: GameSessionQueueDestinationList, location_name: "Destinations"))
     CreateGameSessionQueueInput.add_member(:filter_configuration, Shapes::ShapeRef.new(shape: FilterConfiguration, location_name: "FilterConfiguration"))
     CreateGameSessionQueueInput.add_member(:priority_configuration, Shapes::ShapeRef.new(shape: PriorityConfiguration, location_name: "PriorityConfiguration"))
+    CreateGameSessionQueueInput.add_member(:custom_event_data, Shapes::ShapeRef.new(shape: QueueCustomEventData, location_name: "CustomEventData"))
+    CreateGameSessionQueueInput.add_member(:notification_target, Shapes::ShapeRef.new(shape: QueueSnsArnStringModel, location_name: "NotificationTarget"))
     CreateGameSessionQueueInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateGameSessionQueueInput.struct_class = Types::CreateGameSessionQueueInput
 
@@ -1179,6 +1183,8 @@ module Aws::GameLift
     GameSessionQueue.add_member(:destinations, Shapes::ShapeRef.new(shape: GameSessionQueueDestinationList, location_name: "Destinations"))
     GameSessionQueue.add_member(:filter_configuration, Shapes::ShapeRef.new(shape: FilterConfiguration, location_name: "FilterConfiguration"))
     GameSessionQueue.add_member(:priority_configuration, Shapes::ShapeRef.new(shape: PriorityConfiguration, location_name: "PriorityConfiguration"))
+    GameSessionQueue.add_member(:custom_event_data, Shapes::ShapeRef.new(shape: QueueCustomEventData, location_name: "CustomEventData"))
+    GameSessionQueue.add_member(:notification_target, Shapes::ShapeRef.new(shape: QueueSnsArnStringModel, location_name: "NotificationTarget"))
     GameSessionQueue.struct_class = Types::GameSessionQueue
 
     GameSessionQueueDestination.add_member(:destination_arn, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "DestinationArn"))
@@ -1780,6 +1786,8 @@ module Aws::GameLift
     UpdateGameSessionQueueInput.add_member(:destinations, Shapes::ShapeRef.new(shape: GameSessionQueueDestinationList, location_name: "Destinations"))
     UpdateGameSessionQueueInput.add_member(:filter_configuration, Shapes::ShapeRef.new(shape: FilterConfiguration, location_name: "FilterConfiguration"))
     UpdateGameSessionQueueInput.add_member(:priority_configuration, Shapes::ShapeRef.new(shape: PriorityConfiguration, location_name: "PriorityConfiguration"))
+    UpdateGameSessionQueueInput.add_member(:custom_event_data, Shapes::ShapeRef.new(shape: QueueCustomEventData, location_name: "CustomEventData"))
+    UpdateGameSessionQueueInput.add_member(:notification_target, Shapes::ShapeRef.new(shape: QueueSnsArnStringModel, location_name: "NotificationTarget"))
     UpdateGameSessionQueueInput.struct_class = Types::UpdateGameSessionQueueInput
 
     UpdateGameSessionQueueOutput.add_member(:game_session_queue, Shapes::ShapeRef.new(shape: GameSessionQueue, location_name: "GameSessionQueue"))
@@ -1993,6 +2001,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TaggingFailedException)
       end)
 
