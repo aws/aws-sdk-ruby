@@ -17658,6 +17658,10 @@ module Aws::EC2
     #
     #   * `memory-info.size-in-mib` - The memory size.
     #
+    #   * `network-info.efa-info.maximum-efa-interfaces` - The maximum
+    #     number of Elastic Fabric Adapters (EFAs) per instance. (`true` \|
+    #     `false`).
+    #
     #   * `network-info.efa-supported` - Indicates whether the instance type
     #     supports Elastic Fabric Adapter (EFA) (`true` \| `false`).
     #
@@ -26483,6 +26487,20 @@ module Aws::EC2
       :maximum_bandwidth_in_mbps,
       :maximum_throughput_in_m_bps,
       :maximum_iops)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the Elastic Fabric Adapters for the instance type.
+    #
+    # @!attribute [rw] maximum_efa_interfaces
+    #   The maximum number of Elastic Fabric Adapters for the instance type.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EfaInfo AWS API Documentation
+    #
+    class EfaInfo < Struct.new(
+      :maximum_efa_interfaces)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40880,6 +40898,10 @@ module Aws::EC2
     #   Indicates whether Elastic Fabric Adapter (EFA) is supported.
     #   @return [Boolean]
     #
+    # @!attribute [rw] efa_info
+    #   Describes the Elastic Fabric Adapters for the instance type.
+    #   @return [Types::EfaInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInfo AWS API Documentation
     #
     class NetworkInfo < Struct.new(
@@ -40892,7 +40914,8 @@ module Aws::EC2
       :ipv_6_addresses_per_interface,
       :ipv_6_supported,
       :ena_support,
-      :efa_supported)
+      :efa_supported,
+      :efa_info)
       SENSITIVE = []
       include Aws::Structure
     end

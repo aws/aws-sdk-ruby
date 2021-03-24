@@ -540,8 +540,10 @@ module Aws::SSM
     #   The default value is 1 instance.
     #
     # @option params [Time,DateTime,Date,Integer,String] :expiration_date
-    #   The date by which this activation request should expire. The default
-    #   value is 24 hours.
+    #   The date by which this activation request should expire, in timestamp
+    #   format, such as "2021-07-07T00:00:00". You can specify a date up to
+    #   30 days in advance. If you don't provide an expiration date, the
+    #   activation code expires in 24 hours.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Optional metadata that you assign to a resource. Tags enable you to
@@ -1812,6 +1814,7 @@ module Aws::SSM
     #       },
     #       source_regions: ["ResourceDataSyncSourceRegion"], # required
     #       include_future_regions: false,
+    #       enable_all_ops_data_sources: false,
     #     },
     #   })
     #
@@ -7323,6 +7326,7 @@ module Aws::SSM
     #   resp.resource_data_sync_items[0].sync_source.source_regions[0] #=> String
     #   resp.resource_data_sync_items[0].sync_source.include_future_regions #=> Boolean
     #   resp.resource_data_sync_items[0].sync_source.state #=> String
+    #   resp.resource_data_sync_items[0].sync_source.enable_all_ops_data_sources #=> Boolean
     #   resp.resource_data_sync_items[0].s3_destination.bucket_name #=> String
     #   resp.resource_data_sync_items[0].s3_destination.prefix #=> String
     #   resp.resource_data_sync_items[0].s3_destination.sync_format #=> String, one of "JsonSerDe"
@@ -10636,6 +10640,7 @@ module Aws::SSM
     #       },
     #       source_regions: ["ResourceDataSyncSourceRegion"], # required
     #       include_future_regions: false,
+    #       enable_all_ops_data_sources: false,
     #     },
     #   })
     #
@@ -10734,7 +10739,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2021-03-24)
+------------------
+
+* Feature - Documentation updates for route53
+
 1.47.0 (2021-03-10)
 ------------------
 

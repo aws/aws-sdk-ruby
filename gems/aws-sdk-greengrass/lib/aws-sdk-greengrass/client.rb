@@ -970,7 +970,7 @@ module Aws::Greengrass
     # @option params [Types::GroupVersion] :initial_version
     #   Information about a group version.
     #
-    # @option params [String] :name
+    # @option params [required, String] :name
     #
     # @option params [Hash<String,String>] :tags
     #   The key-value pair for the resource tag.
@@ -998,7 +998,7 @@ module Aws::Greengrass
     #       resource_definition_version_arn: "__string",
     #       subscription_definition_version_arn: "__string",
     #     },
-    #     name: "__string",
+    #     name: "__string", # required
     #     tags: {
     #       "__string" => "__string",
     #     },
@@ -4094,7 +4094,7 @@ module Aws::Greengrass
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrass'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

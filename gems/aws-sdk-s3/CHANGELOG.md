@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2021-03-24)
+------------------
+
+* Feature - Documentation updates for Amazon S3
+
 1.92.0 (2021-03-18)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.230.0 (2021-03-24)
+------------------
+
+* Feature - maximumEfaInterfaces added to DescribeInstanceTypes API
+
 1.229.0 (2021-03-22)
 ------------------
 

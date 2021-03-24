@@ -2575,8 +2575,10 @@ module Aws::SSM
     #   @return [Integer]
     #
     # @!attribute [rw] expiration_date
-    #   The date by which this activation request should expire. The default
-    #   value is 24 hours.
+    #   The date by which this activation request should expire, in
+    #   timestamp format, such as "2021-07-07T00:00:00". You can specify a
+    #   date up to 30 days in advance. If you don't provide an expiration
+    #   date, the activation code expires in 24 hours.
     #   @return [Time]
     #
     # @!attribute [rw] tags
@@ -3914,6 +3916,7 @@ module Aws::SSM
     #           },
     #           source_regions: ["ResourceDataSyncSourceRegion"], # required
     #           include_future_regions: false,
+    #           enable_all_ops_data_sources: false,
     #         },
     #       }
     #
@@ -16644,6 +16647,7 @@ module Aws::SSM
     #         },
     #         source_regions: ["ResourceDataSyncSourceRegion"], # required
     #         include_future_regions: false,
+    #         enable_all_ops_data_sources: false,
     #       }
     #
     # @!attribute [rw] source_type
@@ -16667,13 +16671,27 @@ module Aws::SSM
     #   Regions when those Regions come online.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_all_ops_data_sources
+    #   When you create a resource data sync, if you choose one of the AWS
+    #   Organizations options, then Systems Manager automatically enables
+    #   all OpsData sources in the selected AWS Regions for all AWS accounts
+    #   in your organization (or in the selected organization units). For
+    #   more information, see [About multiple account and Region resource
+    #   data syncs][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resouce-data-sync-multiple-accounts-and-regions.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceDataSyncSource AWS API Documentation
     #
     class ResourceDataSyncSource < Struct.new(
       :source_type,
       :aws_organizations_source,
       :source_regions,
-      :include_future_regions)
+      :include_future_regions,
+      :enable_all_ops_data_sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16730,6 +16748,19 @@ module Aws::SSM
     #   organization in AWS Organizations.
     #   @return [String]
     #
+    # @!attribute [rw] enable_all_ops_data_sources
+    #   When you create a resource data sync, if you choose one of the AWS
+    #   Organizations options, then Systems Manager automatically enables
+    #   all OpsData sources in the selected AWS Regions for all AWS accounts
+    #   in your organization (or in the selected organization units). For
+    #   more information, see [About multiple account and Region resource
+    #   data syncs][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resouce-data-sync-multiple-accounts-and-regions.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceDataSyncSourceWithState AWS API Documentation
     #
     class ResourceDataSyncSourceWithState < Struct.new(
@@ -16737,7 +16768,8 @@ module Aws::SSM
       :aws_organizations_source,
       :source_regions,
       :include_future_regions,
-      :state)
+      :state,
+      :enable_all_ops_data_sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18344,6 +18376,9 @@ module Aws::SSM
     #   specified `tag:ServerRole`, you could specify `value:WebServer` to
     #   run a command on instances that include EC2 tags of
     #   `ServerRole,WebServer`.
+    #
+    #   Depending on the type of `Target`, the maximum number of values for
+    #   a `Key` might be lower than the global maximum of 50.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Target AWS API Documentation
@@ -20193,6 +20228,7 @@ module Aws::SSM
     #           },
     #           source_regions: ["ResourceDataSyncSourceRegion"], # required
     #           include_future_regions: false,
+    #           enable_all_ops_data_sources: false,
     #         },
     #       }
     #

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2021-03-24)
+------------------
+
+* Feature - This release allows SSM Explorer customers to enable OpsData sources across their organization when creating a resource data sync.
+
 1.106.0 (2021-03-10)
 ------------------
 

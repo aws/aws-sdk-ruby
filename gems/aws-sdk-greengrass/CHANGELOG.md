@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2021-03-24)
+------------------
+
+* Feature - Updated the parameters to make name required for CreateGroup API.
+
 1.39.0 (2021-03-10)
 ------------------
 

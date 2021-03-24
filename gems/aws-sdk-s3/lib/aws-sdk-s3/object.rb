@@ -73,7 +73,7 @@ module Aws::S3
     # If an archive copy is already restored, the header value indicates
     # when Amazon S3 is scheduled to delete the object copy. For example:
     #
-    # `x-amz-restore: ongoing-request="false", expiry-date="Fri, 23 Dec 2012
+    # `x-amz-restore: ongoing-request="false", expiry-date="Fri, 21 Dec 2012
     # 00:00:00 GMT"`
     #
     # If the object restoration is in progress, the header returns the value
@@ -1445,6 +1445,92 @@ module Aws::S3
         key: @key
       )
       resp = @client.restore_object(options)
+      resp.data
+    end
+
+    # @example Request syntax with placeholder values
+    #
+    #   object.head({
+    #     if_match: "IfMatch",
+    #     if_modified_since: Time.now,
+    #     if_none_match: "IfNoneMatch",
+    #     if_unmodified_since: Time.now,
+    #     range: "Range",
+    #     version_id: "ObjectVersionId",
+    #     sse_customer_algorithm: "SSECustomerAlgorithm",
+    #     sse_customer_key: "SSECustomerKey",
+    #     sse_customer_key_md5: "SSECustomerKeyMD5",
+    #     request_payer: "requester", # accepts requester
+    #     part_number: 1,
+    #     expected_bucket_owner: "AccountId",
+    #   })
+    # @param [Hash] options ({})
+    # @option options [String] :if_match
+    #   Return the object only if its entity tag (ETag) is the same as the one
+    #   specified, otherwise return a 412 (precondition failed).
+    # @option options [Time,DateTime,Date,Integer,String] :if_modified_since
+    #   Return the object only if it has been modified since the specified
+    #   time, otherwise return a 304 (not modified).
+    # @option options [String] :if_none_match
+    #   Return the object only if its entity tag (ETag) is different from the
+    #   one specified, otherwise return a 304 (not modified).
+    # @option options [Time,DateTime,Date,Integer,String] :if_unmodified_since
+    #   Return the object only if it has not been modified since the specified
+    #   time, otherwise return a 412 (precondition failed).
+    # @option options [String] :range
+    #   Downloads the specified range bytes of an object. For more information
+    #   about the HTTP Range header, see
+    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35][1].
+    #
+    #   <note markdown="1"> Amazon S3 doesn't support retrieving multiple ranges of data per
+    #   `GET` request.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
+    # @option options [String] :version_id
+    #   VersionId used to reference a specific version of the object.
+    # @option options [String] :sse_customer_algorithm
+    #   Specifies the algorithm to use to when encrypting the object (for
+    #   example, AES256).
+    # @option options [String] :sse_customer_key
+    #   Specifies the customer-provided encryption key for Amazon S3 to use in
+    #   encrypting data. This value is used to store the object and then it is
+    #   discarded; Amazon S3 does not store the encryption key. The key must
+    #   be appropriate for use with the algorithm specified in the
+    #   `x-amz-server-side-encryption-customer-algorithm` header.
+    # @option options [String] :sse_customer_key_md5
+    #   Specifies the 128-bit MD5 digest of the encryption key according to
+    #   RFC 1321. Amazon S3 uses this header for a message integrity check to
+    #   ensure that the encryption key was transmitted without error.
+    # @option options [String] :request_payer
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    # @option options [Integer] :part_number
+    #   Part number of the object being read. This is a positive integer
+    #   between 1 and 10,000. Effectively performs a 'ranged' HEAD request
+    #   for the part specified. Useful querying about the size of the part and
+    #   the number of parts in this object.
+    # @option options [String] :expected_bucket_owner
+    #   The account ID of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
+    # @return [Types::HeadObjectOutput]
+    def head(options = {})
+      options = options.merge(
+        bucket: @bucket_name,
+        key: @key
+      )
+      resp = @client.head_object(options)
       resp.data
     end
 

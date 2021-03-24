@@ -4104,7 +4104,7 @@ module Aws::Route53
 
     # Lists the resource record sets in a specified hosted zone.
     #
-    # `ListResourceRecordSets` returns up to 100 resource record sets at a
+    # `ListResourceRecordSets` returns up to 300 resource record sets at a
     # time in ASCII order, beginning at a position specified by the `name`
     # and `type` elements.
     #
@@ -5609,7 +5609,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

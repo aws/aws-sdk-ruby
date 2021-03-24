@@ -18116,6 +18116,9 @@ module Aws::EC2
     #
     #   * `memory-info.size-in-mib` - The memory size.
     #
+    #   * `network-info.efa-info.maximum-efa-interfaces` - The maximum number
+    #     of Elastic Fabric Adapters (EFAs) per instance. (`true` \| `false`).
+    #
     #   * `network-info.efa-supported` - Indicates whether the instance type
     #     supports Elastic Fabric Adapter (EFA) (`true` \| `false`).
     #
@@ -18254,6 +18257,7 @@ module Aws::EC2
     #   resp.instance_types[0].network_info.ipv_6_supported #=> Boolean
     #   resp.instance_types[0].network_info.ena_support #=> String, one of "unsupported", "supported", "required"
     #   resp.instance_types[0].network_info.efa_supported #=> Boolean
+    #   resp.instance_types[0].network_info.efa_info.maximum_efa_interfaces #=> Integer
     #   resp.instance_types[0].gpu_info.gpus #=> Array
     #   resp.instance_types[0].gpu_info.gpus[0].name #=> String
     #   resp.instance_types[0].gpu_info.gpus[0].manufacturer #=> String
@@ -41258,7 +41262,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.229.0'
+      context[:gem_version] = '1.230.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
