@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2021-03-25)
+------------------
+
+* Feature - Documentation updates for Amazon SQS
+
 1.37.0 (2021-03-10)
 ------------------
 

@@ -1268,6 +1268,9 @@ module Aws::SageMaker
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TrafficRoutingConfig = Shapes::StructureShape.new(name: 'TrafficRoutingConfig')
     TrafficRoutingConfigType = Shapes::StringShape.new(name: 'TrafficRoutingConfigType')
+    TrainingEnvironmentKey = Shapes::StringShape.new(name: 'TrainingEnvironmentKey')
+    TrainingEnvironmentMap = Shapes::MapShape.new(name: 'TrainingEnvironmentMap')
+    TrainingEnvironmentValue = Shapes::StringShape.new(name: 'TrainingEnvironmentValue')
     TrainingInputMode = Shapes::StringShape.new(name: 'TrainingInputMode')
     TrainingInstanceCount = Shapes::IntegerShape.new(name: 'TrainingInstanceCount')
     TrainingInstanceType = Shapes::StringShape.new(name: 'TrainingInstanceType')
@@ -2255,6 +2258,7 @@ module Aws::SageMaker
     CreateTrainingJobRequest.add_member(:experiment_config, Shapes::ShapeRef.new(shape: ExperimentConfig, location_name: "ExperimentConfig"))
     CreateTrainingJobRequest.add_member(:profiler_config, Shapes::ShapeRef.new(shape: ProfilerConfig, location_name: "ProfilerConfig"))
     CreateTrainingJobRequest.add_member(:profiler_rule_configurations, Shapes::ShapeRef.new(shape: ProfilerRuleConfigurations, location_name: "ProfilerRuleConfigurations"))
+    CreateTrainingJobRequest.add_member(:environment, Shapes::ShapeRef.new(shape: TrainingEnvironmentMap, location_name: "Environment"))
     CreateTrainingJobRequest.struct_class = Types::CreateTrainingJobRequest
 
     CreateTrainingJobResponse.add_member(:training_job_arn, Shapes::ShapeRef.new(shape: TrainingJobArn, required: true, location_name: "TrainingJobArn"))
@@ -3259,6 +3263,7 @@ module Aws::SageMaker
     DescribeTrainingJobResponse.add_member(:profiler_rule_configurations, Shapes::ShapeRef.new(shape: ProfilerRuleConfigurations, location_name: "ProfilerRuleConfigurations"))
     DescribeTrainingJobResponse.add_member(:profiler_rule_evaluation_statuses, Shapes::ShapeRef.new(shape: ProfilerRuleEvaluationStatuses, location_name: "ProfilerRuleEvaluationStatuses"))
     DescribeTrainingJobResponse.add_member(:profiling_status, Shapes::ShapeRef.new(shape: ProfilingStatus, location_name: "ProfilingStatus"))
+    DescribeTrainingJobResponse.add_member(:environment, Shapes::ShapeRef.new(shape: TrainingEnvironmentMap, location_name: "Environment"))
     DescribeTrainingJobResponse.struct_class = Types::DescribeTrainingJobResponse
 
     DescribeTransformJobRequest.add_member(:transform_job_name, Shapes::ShapeRef.new(shape: TransformJobName, required: true, location_name: "TransformJobName"))
@@ -5642,6 +5647,9 @@ module Aws::SageMaker
     TrafficRoutingConfig.add_member(:canary_size, Shapes::ShapeRef.new(shape: CapacitySize, location_name: "CanarySize"))
     TrafficRoutingConfig.struct_class = Types::TrafficRoutingConfig
 
+    TrainingEnvironmentMap.key = Shapes::ShapeRef.new(shape: TrainingEnvironmentKey)
+    TrainingEnvironmentMap.value = Shapes::ShapeRef.new(shape: TrainingEnvironmentValue)
+
     TrainingInstanceTypes.member = Shapes::ShapeRef.new(shape: TrainingInstanceType)
 
     TrainingJob.add_member(:training_job_name, Shapes::ShapeRef.new(shape: TrainingJobName, location_name: "TrainingJobName"))
@@ -5678,6 +5686,7 @@ module Aws::SageMaker
     TrainingJob.add_member(:debug_rule_configurations, Shapes::ShapeRef.new(shape: DebugRuleConfigurations, location_name: "DebugRuleConfigurations"))
     TrainingJob.add_member(:tensor_board_output_config, Shapes::ShapeRef.new(shape: TensorBoardOutputConfig, location_name: "TensorBoardOutputConfig"))
     TrainingJob.add_member(:debug_rule_evaluation_statuses, Shapes::ShapeRef.new(shape: DebugRuleEvaluationStatuses, location_name: "DebugRuleEvaluationStatuses"))
+    TrainingJob.add_member(:environment, Shapes::ShapeRef.new(shape: TrainingEnvironmentMap, location_name: "Environment"))
     TrainingJob.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     TrainingJob.struct_class = Types::TrainingJob
 

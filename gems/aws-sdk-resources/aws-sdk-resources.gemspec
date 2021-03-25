@@ -170,6 +170,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-licensemanager', '~> 1')
   spec.add_dependency('aws-sdk-lightsail', '~> 1')
   spec.add_dependency('aws-sdk-locationservice', '~> 1')
+  spec.add_dependency('aws-sdk-lookoutmetrics', '~> 1')
   spec.add_dependency('aws-sdk-lookoutforvision', '~> 1')
   spec.add_dependency('aws-sdk-mq', '~> 1')
   spec.add_dependency('aws-sdk-mturk', '~> 1')

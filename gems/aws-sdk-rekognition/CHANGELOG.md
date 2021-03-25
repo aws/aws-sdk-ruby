@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2021-03-25)
+------------------
+
+* Feature - "This release introduces AWS tagging support for Amazon Rekognition collections, stream processors, and Custom Label models."
+
 1.49.0 (2021-03-10)
 ------------------
 

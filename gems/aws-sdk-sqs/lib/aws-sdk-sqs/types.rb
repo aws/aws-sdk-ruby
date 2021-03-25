@@ -1946,11 +1946,10 @@ module Aws::SQS
     #   @return [String]
     #
     # @!attribute [rw] md5_of_message_body
-    #   An MD5 digest of the non-URL-encoded message attribute string. You
-    #   can use this attribute to verify that Amazon SQS received the
-    #   message correctly. Amazon SQS URL-decodes the message before
-    #   creating the MD5 digest. For information about MD5, see
-    #   [RFC1321][1].
+    #   An MD5 digest of the non-URL-encoded message body string. You can
+    #   use this attribute to verify that Amazon SQS received the message
+    #   correctly. Amazon SQS URL-decodes the message before creating the
+    #   MD5 digest. For information about MD5, see [RFC1321][1].
     #
     #
     #
@@ -2211,11 +2210,10 @@ module Aws::SQS
     # The `MD5OfMessageBody` and `MessageId` elements.
     #
     # @!attribute [rw] md5_of_message_body
-    #   An MD5 digest of the non-URL-encoded message attribute string. You
-    #   can use this attribute to verify that Amazon SQS received the
-    #   message correctly. Amazon SQS URL-decodes the message before
-    #   creating the MD5 digest. For information about MD5, see
-    #   [RFC1321][1].
+    #   An MD5 digest of the non-URL-encoded message body string. You can
+    #   use this attribute to verify that Amazon SQS received the message
+    #   correctly. Amazon SQS URL-decodes the message before creating the
+    #   MD5 digest. For information about MD5, see [RFC1321][1].
     #
     #
     #

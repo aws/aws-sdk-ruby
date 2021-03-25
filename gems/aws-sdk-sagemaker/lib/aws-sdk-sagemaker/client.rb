@@ -1651,7 +1651,18 @@ module Aws::SageMaker
     #   The mode of authentication that members use to access the domain.
     #
     # @option params [required, Types::UserSettings] :default_user_settings
-    #   The default user settings.
+    #   The default settings to use to create a user profile when
+    #   `UserSettings` isn't specified in the call to the
+    #   [CreateUserProfile][1] API.
+    #
+    #   `SecurityGroups` is aggregated when specified in both calls. For all
+    #   other settings in `UserSettings`, the values specified in
+    #   `CreateUserProfile` take precedence over those specified in
+    #   `CreateDomain`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateUserProfile.html
     #
     # @option params [required, Array<String>] :subnet_ids
     #   The VPC subnets that Studio uses for communication.
@@ -1663,7 +1674,11 @@ module Aws::SageMaker
     # @option params [Array<Types::Tag>] :tags
     #   Tags to associated with the Domain. Each tag consists of a key and an
     #   optional value. Tag keys must be unique per resource. Tags are
-    #   searchable using the Search API.
+    #   searchable using the [Search][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html
     #
     # @option params [String] :app_network_access_type
     #   Specifies the VPC used for non-EFS traffic. The default value is
@@ -4989,6 +5004,9 @@ module Aws::SageMaker
     #   `MaxWaitTimeInSeconds` to specify how long you are willing to wait
     #   for a managed spot training job to complete.
     #
+    # * `Environment` - The environment variables to set in the Docker
+    #   container.
+    #
     # For more information about Amazon SageMaker, see [How It Works][3].
     #
     #
@@ -5186,6 +5204,9 @@ module Aws::SageMaker
     #   Configuration information for Debugger rules for profiling system and
     #   framework metrics.
     #
+    # @option params [Hash<String,String>] :environment
+    #   The environment variables to set in the Docker container.
+    #
     # @return [Types::CreateTrainingJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTrainingJobResponse#training_job_arn #training_job_arn} => String
@@ -5324,6 +5345,9 @@ module Aws::SageMaker
     #         },
     #       },
     #     ],
+    #     environment: {
+    #       "TrainingEnvironmentKey" => "TrainingEnvironmentValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -7538,7 +7562,7 @@ module Aws::SageMaker
     #   resp.best_candidate.last_modified_time #=> Time
     #   resp.best_candidate.failure_reason #=> String
     #   resp.auto_ml_job_status #=> String, one of "Completed", "InProgress", "Failed", "Stopped", "Stopping"
-    #   resp.auto_ml_job_secondary_status #=> String, one of "Starting", "AnalyzingData", "FeatureEngineering", "ModelTuning", "MaxCandidatesReached", "Failed", "Stopped", "MaxAutoMLJobRuntimeReached", "Stopping", "CandidateDefinitionsGenerated"
+    #   resp.auto_ml_job_secondary_status #=> String, one of "Starting", "AnalyzingData", "FeatureEngineering", "ModelTuning", "MaxCandidatesReached", "Failed", "Stopped", "MaxAutoMLJobRuntimeReached", "Stopping", "CandidateDefinitionsGenerated", "GeneratingExplainabilityReport", "Completed", "ExplainabilityError"
     #   resp.generate_candidate_definitions_only #=> Boolean
     #   resp.auto_ml_job_artifacts.candidate_definition_notebook_location #=> String
     #   resp.auto_ml_job_artifacts.data_exploration_notebook_location #=> String
@@ -9871,6 +9895,7 @@ module Aws::SageMaker
     #   * {Types::DescribeTrainingJobResponse#profiler_rule_configurations #profiler_rule_configurations} => Array&lt;Types::ProfilerRuleConfiguration&gt;
     #   * {Types::DescribeTrainingJobResponse#profiler_rule_evaluation_statuses #profiler_rule_evaluation_statuses} => Array&lt;Types::ProfilerRuleEvaluationStatus&gt;
     #   * {Types::DescribeTrainingJobResponse#profiling_status #profiling_status} => String
+    #   * {Types::DescribeTrainingJobResponse#environment #environment} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -9995,6 +10020,8 @@ module Aws::SageMaker
     #   resp.profiler_rule_evaluation_statuses[0].status_details #=> String
     #   resp.profiler_rule_evaluation_statuses[0].last_modified_time #=> Time
     #   resp.profiling_status #=> String, one of "Enabled", "Disabled"
+    #   resp.environment #=> Hash
+    #   resp.environment["TrainingEnvironmentKey"] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -11135,7 +11162,7 @@ module Aws::SageMaker
     #   resp.auto_ml_job_summaries[0].auto_ml_job_name #=> String
     #   resp.auto_ml_job_summaries[0].auto_ml_job_arn #=> String
     #   resp.auto_ml_job_summaries[0].auto_ml_job_status #=> String, one of "Completed", "InProgress", "Failed", "Stopped", "Stopping"
-    #   resp.auto_ml_job_summaries[0].auto_ml_job_secondary_status #=> String, one of "Starting", "AnalyzingData", "FeatureEngineering", "ModelTuning", "MaxCandidatesReached", "Failed", "Stopped", "MaxAutoMLJobRuntimeReached", "Stopping", "CandidateDefinitionsGenerated"
+    #   resp.auto_ml_job_summaries[0].auto_ml_job_secondary_status #=> String, one of "Starting", "AnalyzingData", "FeatureEngineering", "ModelTuning", "MaxCandidatesReached", "Failed", "Stopped", "MaxAutoMLJobRuntimeReached", "Stopping", "CandidateDefinitionsGenerated", "GeneratingExplainabilityReport", "Completed", "ExplainabilityError"
     #   resp.auto_ml_job_summaries[0].creation_time #=> Time
     #   resp.auto_ml_job_summaries[0].end_time #=> Time
     #   resp.auto_ml_job_summaries[0].last_modified_time #=> Time
@@ -14886,6 +14913,8 @@ module Aws::SageMaker
     #   resp.results[0].training_job.debug_rule_evaluation_statuses[0].rule_evaluation_status #=> String, one of "InProgress", "NoIssuesFound", "IssuesFound", "Error", "Stopping", "Stopped"
     #   resp.results[0].training_job.debug_rule_evaluation_statuses[0].status_details #=> String
     #   resp.results[0].training_job.debug_rule_evaluation_statuses[0].last_modified_time #=> Time
+    #   resp.results[0].training_job.environment #=> Hash
+    #   resp.results[0].training_job.environment["TrainingEnvironmentKey"] #=> String
     #   resp.results[0].training_job.tags #=> Array
     #   resp.results[0].training_job.tags[0].key #=> String
     #   resp.results[0].training_job.tags[0].value #=> String
@@ -15072,6 +15101,8 @@ module Aws::SageMaker
     #   resp.results[0].trial_component.source_detail.training_job.debug_rule_evaluation_statuses[0].rule_evaluation_status #=> String, one of "InProgress", "NoIssuesFound", "IssuesFound", "Error", "Stopping", "Stopped"
     #   resp.results[0].trial_component.source_detail.training_job.debug_rule_evaluation_statuses[0].status_details #=> String
     #   resp.results[0].trial_component.source_detail.training_job.debug_rule_evaluation_statuses[0].last_modified_time #=> Time
+    #   resp.results[0].trial_component.source_detail.training_job.environment #=> Hash
+    #   resp.results[0].trial_component.source_detail.training_job.environment["TrainingEnvironmentKey"] #=> String
     #   resp.results[0].trial_component.source_detail.training_job.tags #=> Array
     #   resp.results[0].trial_component.source_detail.training_job.tags[0].key #=> String
     #   resp.results[0].trial_component.source_detail.training_job.tags[0].value #=> String
@@ -17317,7 +17348,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

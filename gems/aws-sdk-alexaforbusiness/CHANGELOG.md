@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2021-03-25)
+------------------
+
+* Feature - Added support for enabling and disabling data retention in the CreateProfile and UpdateProfile APIs and retrieving the state of data retention for a profile in the GetProfile API.
+
 1.46.0 (2021-03-10)
 ------------------
 

@@ -485,6 +485,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Lex Runtime V2                                 | Aws::LexRuntimeV2                    | aws-sdk-lexruntimev2                    | 2020-08-07  |
 | Amazon Lightsail                                      | Aws::Lightsail                       | aws-sdk-lightsail                       | 2016-11-28  |
 | Amazon Location Service                               | Aws::LocationService                 | aws-sdk-locationservice                 | 2020-11-19  |
+| Amazon Lookout for Metrics                            | Aws::LookoutMetrics                  | aws-sdk-lookoutmetrics                  | 2017-07-25  |
 | Amazon Lookout for Vision                             | Aws::LookoutforVision                | aws-sdk-lookoutforvision                | 2020-11-20  |
 | Amazon Machine Learning                               | Aws::MachineLearning                 | aws-sdk-machinelearning                 | 2014-12-12  |
 | Amazon Macie                                          | Aws::Macie                           | aws-sdk-macie                           | 2017-12-19  |

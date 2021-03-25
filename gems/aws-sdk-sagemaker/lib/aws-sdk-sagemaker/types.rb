@@ -4410,7 +4410,18 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] default_user_settings
-    #   The default user settings.
+    #   The default settings to use to create a user profile when
+    #   `UserSettings` isn't specified in the call to the
+    #   [CreateUserProfile][1] API.
+    #
+    #   `SecurityGroups` is aggregated when specified in both calls. For all
+    #   other settings in `UserSettings`, the values specified in
+    #   `CreateUserProfile` take precedence over those specified in
+    #   `CreateDomain`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateUserProfile.html
     #   @return [Types::UserSettings]
     #
     # @!attribute [rw] subnet_ids
@@ -4425,7 +4436,11 @@ module Aws::SageMaker
     # @!attribute [rw] tags
     #   Tags to associated with the Domain. Each tag consists of a key and
     #   an optional value. Tag keys must be unique per resource. Tags are
-    #   searchable using the Search API.
+    #   searchable using the [Search][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] app_network_access_type
@@ -7752,6 +7767,9 @@ module Aws::SageMaker
     #             },
     #           },
     #         ],
+    #         environment: {
+    #           "TrainingEnvironmentKey" => "TrainingEnvironmentValue",
+    #         },
     #       }
     #
     # @!attribute [rw] training_job_name
@@ -7965,6 +7983,10 @@ module Aws::SageMaker
     #   and framework metrics.
     #   @return [Array<Types::ProfilerRuleConfiguration>]
     #
+    # @!attribute [rw] environment
+    #   The environment variables to set in the Docker container.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingJobRequest AWS API Documentation
     #
     class CreateTrainingJobRequest < Struct.new(
@@ -7987,7 +8009,8 @@ module Aws::SageMaker
       :tensor_board_output_config,
       :experiment_config,
       :profiler_config,
-      :profiler_rule_configurations)
+      :profiler_rule_configurations,
+      :environment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11481,7 +11504,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] default_user_settings
-    #   Settings which are applied to all UserProfiles in this domain, if
+    #   Settings which are applied to UserProfiles in this domain if
     #   settings are not explicitly specified in a given UserProfile.
     #   @return [Types::UserSettings]
     #
@@ -14211,6 +14234,10 @@ module Aws::SageMaker
     #   Profiling status of a training job.
     #   @return [String]
     #
+    # @!attribute [rw] environment
+    #   The environment variables to set in the Docker container.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJobResponse AWS API Documentation
     #
     class DescribeTrainingJobResponse < Struct.new(
@@ -14251,7 +14278,8 @@ module Aws::SageMaker
       :profiler_config,
       :profiler_rule_configurations,
       :profiler_rule_evaluation_statuses,
-      :profiling_status)
+      :profiling_status,
+      :environment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19287,7 +19315,12 @@ module Aws::SageMaker
     #   @return [Types::LabelingJobS3DataSource]
     #
     # @!attribute [rw] sns_data_source
-    #   An Amazon SNS data source used for streaming labeling jobs.
+    #   An Amazon SNS data source used for streaming labeling jobs. To learn
+    #   more, see [Send Data to a Streaming Labeling Job][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-streaming-labeling-job.html#sms-streaming-how-it-works-send-data
     #   @return [Types::LabelingJobSnsDataSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobDataSource AWS API Documentation
@@ -19413,37 +19446,39 @@ module Aws::SageMaker
     #   The AWS Key Management Service ID of the key used to encrypt the
     #   output data, if any.
     #
-    #   If you use a KMS key ID or an alias of your master key, the Amazon
-    #   SageMaker execution role must include permissions to call
-    #   `kms:Encrypt`. If you don't provide a KMS key ID, Amazon SageMaker
-    #   uses the default KMS key for Amazon S3 for your role's account.
-    #   Amazon SageMaker uses server-side encryption with KMS-managed keys
-    #   for `LabelingJobOutputConfig`. If you use a bucket policy with an
-    #   `s3:PutObject` permission that only allows objects with server-side
-    #   encryption, set the condition key of
-    #   `s3:x-amz-server-side-encryption` to `"aws:kms"`. For more
-    #   information, see [KMS-Managed Encryption Keys][1] in the *Amazon
+    #   If you provide your own KMS key ID, you must add the required
+    #   permissions to your KMS key described in [Encrypt Output Data and
+    #   Storage Volume with AWS KMS][1].
+    #
+    #   If you don't provide a KMS key ID, Amazon SageMaker uses the
+    #   default AWS KMS key for Amazon S3 for your role's account to
+    #   encrypt your output data.
+    #
+    #   If you use a bucket policy with an `s3:PutObject` permission that
+    #   only allows objects with server-side encryption, set the condition
+    #   key of `s3:x-amz-server-side-encryption` to `"aws:kms"`. For more
+    #   information, see [KMS-Managed Encryption Keys][2] in the *Amazon
     #   Simple Storage Service Developer Guide.*
     #
-    #   The KMS key policy must grant permission to the IAM role that you
-    #   specify in your `CreateLabelingJob` request. For more information,
-    #   see [Using Key Policies in AWS KMS][2] in the *AWS Key Management
-    #   Service Developer Guide*.
     #
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
-    #   [2]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security-permission.html#sms-security-kms-permissions
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arn
     #   An Amazon Simple Notification Service (Amazon SNS) output topic ARN.
     #
-    #   When workers complete labeling tasks, Ground Truth will send
-    #   labeling task output data to the SNS output topic you specify here.
+    #   If you provide an `SnsTopicArn` in `OutputConfig`, when workers
+    #   complete labeling tasks, Ground Truth will send labeling task output
+    #   data to the SNS output topic you specify here.
     #
-    #   You must provide a value for this parameter if you provide an Amazon
-    #   SNS input topic in `SnsDataSource` in `InputConfig`.
+    #   To learn more, see [Receive Output Data from a Streaming Labeling
+    #   Job][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-streaming-labeling-job.html#sms-streaming-how-it-works-output-data
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobOutputConfig AWS API Documentation
@@ -19456,7 +19491,9 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Provides configuration information for labeling jobs.
+    # Configure encryption on the storage volume attached to the ML compute
+    # instance used to run automated data labeling model training and
+    # inference.
     #
     # @note When making an API call, you may pass LabelingJobResourceConfig
     #   data as a hash:
@@ -19468,16 +19505,30 @@ module Aws::SageMaker
     # @!attribute [rw] volume_kms_key_id
     #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
     #   uses to encrypt data on the storage volume attached to the ML
-    #   compute instance(s) that run the training job. The `VolumeKmsKeyId`
-    #   can be any of the following formats:
+    #   compute instance(s) that run the training and inference jobs used
+    #   for automated data labeling.
     #
-    #   * // KMS Key ID
+    #   You can only specify a `VolumeKmsKeyId` when you create a labeling
+    #   job with automated data labeling enabled using the API operation
+    #   `CreateLabelingJob`. You cannot specify an AWS KMS customer managed
+    #   CMK to encrypt the storage volume used for automated data labeling
+    #   model training and inference when you create a labeling job using
+    #   the console. To learn more, see [Output Data and Storage Volume
+    #   Encryption][1].
+    #
+    #   The `VolumeKmsKeyId` can be any of the following formats:
+    #
+    #   * KMS Key ID
     #
     #     `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
-    #   * // Amazon Resource Name (ARN) of a KMS Key
+    #   * Amazon Resource Name (ARN) of a KMS Key
     #
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobResourceConfig AWS API Documentation
@@ -19542,9 +19593,6 @@ module Aws::SageMaker
     #   The Amazon SNS input topic Amazon Resource Name (ARN). Specify the
     #   ARN of the input topic you will use to send new data objects to a
     #   streaming labeling job.
-    #
-    #   If you specify an input topic for `SnsTopicArn` in `InputConfig`,
-    #   you must specify a value for `SnsTopicArn` in `OutputConfig`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobSnsDataSource AWS API Documentation
@@ -30478,10 +30526,16 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies options when sharing an Amazon SageMaker Studio notebook.
-    # These settings are specified as part of `DefaultUserSettings` when the
-    # CreateDomain API is called, and as part of `UserSettings` when the
-    # CreateUserProfile API is called.
+    # Specifies options for sharing SageMaker Studio notebooks. These
+    # settings are specified as part of `DefaultUserSettings` when the
+    # [CreateDomain][1] API is called, and as part of `UserSettings` when
+    # the [CreateUserProfile][2] API is called. When `SharingSettings` is
+    # not specified, notebook sharing isn't allowed.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateDomain.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateUserProfile.html
     #
     # @note When making an API call, you may pass SharingSettings
     #   data as a hash:
@@ -31558,6 +31612,10 @@ module Aws::SageMaker
     #   training job.
     #   @return [Array<Types::DebugRuleEvaluationStatus>]
     #
+    # @!attribute [rw] environment
+    #   The environment variables to set in the Docker container.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] tags
     #   An array of key-value pairs. You can use tags to categorize your AWS
     #   resources in different ways, for example, by purpose, owner, or
@@ -31605,6 +31663,7 @@ module Aws::SageMaker
       :debug_rule_configurations,
       :tensor_board_output_config,
       :debug_rule_evaluation_statuses,
+      :environment,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -34957,14 +35016,19 @@ module Aws::SageMaker
     end
 
     # A collection of settings that apply to users of Amazon SageMaker
-    # Studio. These settings are specified when the CreateUserProfile API is
-    # called, and as `DefaultUserSettings` when the CreateDomain API is
-    # called.
+    # Studio. These settings are specified when the [CreateUserProfile][1]
+    # API is called, and as `DefaultUserSettings` when the [CreateDomain][2]
+    # API is called.
     #
     # `SecurityGroups` is aggregated when specified in both calls. For all
     # other settings in `UserSettings`, the values specified in
     # `CreateUserProfile` take precedence over those specified in
     # `CreateDomain`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateUserProfile.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateDomain.html
     #
     # @note When making an API call, you may pass UserSettings
     #   data as a hash:
@@ -35027,7 +35091,7 @@ module Aws::SageMaker
     #   @return [Array<String>]
     #
     # @!attribute [rw] sharing_settings
-    #   The sharing settings.
+    #   Specifies options for sharing SageMaker Studio notebooks.
     #   @return [Types::SharingSettings]
     #
     # @!attribute [rw] jupyter_server_app_settings

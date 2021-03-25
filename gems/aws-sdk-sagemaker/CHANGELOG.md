@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2021-03-25)
+------------------
+
+* Feature - This feature allows customer to specify the environment variables in their CreateTrainingJob requests.
+
 1.83.0 (2021-03-19)
 ------------------
 

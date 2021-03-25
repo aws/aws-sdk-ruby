@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.96.0 (2021-03-25)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-lookoutmetrics` gem.
+
 3.95.0 (2021-03-15)
 ------------------
 

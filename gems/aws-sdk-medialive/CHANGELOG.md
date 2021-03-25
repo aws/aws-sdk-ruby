@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2021-03-25)
+------------------
+
+* Feature - EML now supports handling HDR10 and HLG 2020 color space from a Link input.
+
 1.67.0 (2021-03-11)
 ------------------
 

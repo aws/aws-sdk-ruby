@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.435.0 (2021-03-25)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::LookoutMetrics`.
+
 1.434.0 (2021-03-17)
 ------------------
 

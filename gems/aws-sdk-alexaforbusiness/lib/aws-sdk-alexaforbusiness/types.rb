@@ -1341,6 +1341,7 @@ module Aws::AlexaForBusiness
     #         setup_mode_disabled: false,
     #         max_volume_limit: 1,
     #         pstn_enabled: false,
+    #         data_retention_opt_in: false,
     #         meeting_room_configuration: {
     #           room_utilization_metrics_enabled: false,
     #           end_of_meeting_reminder: {
@@ -1414,6 +1415,10 @@ module Aws::AlexaForBusiness
     #   Whether PSTN calling is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] data_retention_opt_in
+    #   Whether data retention of the profile is enabled.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] meeting_room_configuration
     #   The meeting room settings of a room profile.
     #   @return [Types::CreateMeetingRoomConfiguration]
@@ -1436,6 +1441,7 @@ module Aws::AlexaForBusiness
       :setup_mode_disabled,
       :max_volume_limit,
       :pstn_enabled,
+      :data_retention_opt_in,
       :meeting_room_configuration,
       :tags)
       SENSITIVE = []
@@ -4010,6 +4016,10 @@ module Aws::AlexaForBusiness
     #   The PSTN setting of a room profile.
     #   @return [Boolean]
     #
+    # @!attribute [rw] data_retention_opt_in
+    #   Whether data retention of the profile is enabled.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] address_book_arn
     #   The ARN of the address book.
     #   @return [String]
@@ -4033,6 +4043,7 @@ module Aws::AlexaForBusiness
       :setup_mode_disabled,
       :max_volume_limit,
       :pstn_enabled,
+      :data_retention_opt_in,
       :address_book_arn,
       :meeting_room_configuration)
       SENSITIVE = []
@@ -6351,6 +6362,7 @@ module Aws::AlexaForBusiness
     #         setup_mode_disabled: false,
     #         max_volume_limit: 1,
     #         pstn_enabled: false,
+    #         data_retention_opt_in: false,
     #         meeting_room_configuration: {
     #           room_utilization_metrics_enabled: false,
     #           end_of_meeting_reminder: {
@@ -6419,6 +6431,10 @@ module Aws::AlexaForBusiness
     #   Whether the PSTN setting of the room profile is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] data_retention_opt_in
+    #   Whether data retention of the profile is enabled.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] meeting_room_configuration
     #   The updated meeting room settings of a room profile.
     #   @return [Types::UpdateMeetingRoomConfiguration]
@@ -6438,6 +6454,7 @@ module Aws::AlexaForBusiness
       :setup_mode_disabled,
       :max_volume_limit,
       :pstn_enabled,
+      :data_retention_opt_in,
       :meeting_room_configuration)
       SENSITIVE = []
       include Aws::Structure
