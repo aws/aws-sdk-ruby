@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2021-03-26)
+------------------
+
+* Feature - Support tag-on-create for WirelessDevice.
+
 1.5.0 (2021-03-10)
 ------------------
 

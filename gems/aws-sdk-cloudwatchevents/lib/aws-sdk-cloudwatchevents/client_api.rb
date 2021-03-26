@@ -248,6 +248,11 @@ module Aws::CloudWatchEvents
     RunCommandTargetValue = Shapes::StringShape.new(name: 'RunCommandTargetValue')
     RunCommandTargetValues = Shapes::ListShape.new(name: 'RunCommandTargetValues')
     RunCommandTargets = Shapes::ListShape.new(name: 'RunCommandTargets')
+    SageMakerPipelineParameter = Shapes::StructureShape.new(name: 'SageMakerPipelineParameter')
+    SageMakerPipelineParameterList = Shapes::ListShape.new(name: 'SageMakerPipelineParameterList')
+    SageMakerPipelineParameterName = Shapes::StringShape.new(name: 'SageMakerPipelineParameterName')
+    SageMakerPipelineParameterValue = Shapes::StringShape.new(name: 'SageMakerPipelineParameterValue')
+    SageMakerPipelineParameters = Shapes::StructureShape.new(name: 'SageMakerPipelineParameters')
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
     SecretsManagerSecretArn = Shapes::StringShape.new(name: 'SecretsManagerSecretArn')
     Sql = Shapes::StringShape.new(name: 'Sql')
@@ -1014,6 +1019,15 @@ module Aws::CloudWatchEvents
 
     RunCommandTargets.member = Shapes::ShapeRef.new(shape: RunCommandTarget)
 
+    SageMakerPipelineParameter.add_member(:name, Shapes::ShapeRef.new(shape: SageMakerPipelineParameterName, required: true, location_name: "Name"))
+    SageMakerPipelineParameter.add_member(:value, Shapes::ShapeRef.new(shape: SageMakerPipelineParameterValue, required: true, location_name: "Value"))
+    SageMakerPipelineParameter.struct_class = Types::SageMakerPipelineParameter
+
+    SageMakerPipelineParameterList.member = Shapes::ShapeRef.new(shape: SageMakerPipelineParameter)
+
+    SageMakerPipelineParameters.add_member(:pipeline_parameter_list, Shapes::ShapeRef.new(shape: SageMakerPipelineParameterList, location_name: "PipelineParameterList"))
+    SageMakerPipelineParameters.struct_class = Types::SageMakerPipelineParameters
+
     SqsParameters.add_member(:message_group_id, Shapes::ShapeRef.new(shape: MessageGroupId, location_name: "MessageGroupId"))
     SqsParameters.struct_class = Types::SqsParameters
 
@@ -1060,6 +1074,7 @@ module Aws::CloudWatchEvents
     Target.add_member(:sqs_parameters, Shapes::ShapeRef.new(shape: SqsParameters, location_name: "SqsParameters"))
     Target.add_member(:http_parameters, Shapes::ShapeRef.new(shape: HttpParameters, location_name: "HttpParameters"))
     Target.add_member(:redshift_data_parameters, Shapes::ShapeRef.new(shape: RedshiftDataParameters, location_name: "RedshiftDataParameters"))
+    Target.add_member(:sage_maker_pipeline_parameters, Shapes::ShapeRef.new(shape: SageMakerPipelineParameters, location_name: "SageMakerPipelineParameters"))
     Target.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
     Target.add_member(:retry_policy, Shapes::ShapeRef.new(shape: RetryPolicy, location_name: "RetryPolicy"))
     Target.struct_class = Types::Target

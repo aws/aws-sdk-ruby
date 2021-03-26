@@ -166,6 +166,44 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ConnectorOperator
+    #   data as a hash:
+    #
+    #       {
+    #         marketo: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #         s3: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #         salesforce: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #         service_now: "PROJECTION", # accepts PROJECTION, CONTAINS, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #         zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #       }
+    #
+    # @!attribute [rw] marketo
+    #   @return [String]
+    #
+    # @!attribute [rw] s3
+    #   @return [String]
+    #
+    # @!attribute [rw] salesforce
+    #   @return [String]
+    #
+    # @!attribute [rw] service_now
+    #   @return [String]
+    #
+    # @!attribute [rw] zendesk
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ConnectorOperator AWS API Documentation
+    #
+    class ConnectorOperator < Struct.new(
+      :marketo,
+      :s3,
+      :salesforce,
+      :service_now,
+      :zendesk)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDomainRequest
     #   data as a hash:
     #
@@ -745,6 +783,104 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass FlowDefinition
+    #   data as a hash:
+    #
+    #       {
+    #         description: "FlowDescription",
+    #         flow_name: "FlowName", # required
+    #         kms_arn: "KmsArn", # required
+    #         source_flow_config: { # required
+    #           connector_profile_name: "ConnectorProfileName",
+    #           connector_type: "Salesforce", # required, accepts Salesforce, Marketo, Zendesk, Servicenow, S3
+    #           incremental_pull_config: {
+    #             datetime_type_field_name: "DatetimeTypeFieldName",
+    #           },
+    #           source_connector_properties: { # required
+    #             marketo: {
+    #               object: "Object", # required
+    #             },
+    #             s3: {
+    #               bucket_name: "BucketName", # required
+    #               bucket_prefix: "BucketPrefix",
+    #             },
+    #             salesforce: {
+    #               object: "Object", # required
+    #               enable_dynamic_field_update: false,
+    #               include_deleted_records: false,
+    #             },
+    #             service_now: {
+    #               object: "Object", # required
+    #             },
+    #             zendesk: {
+    #               object: "Object", # required
+    #             },
+    #           },
+    #         },
+    #         tasks: [ # required
+    #           {
+    #             connector_operator: {
+    #               marketo: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #               s3: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #               salesforce: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #               service_now: "PROJECTION", # accepts PROJECTION, CONTAINS, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #               zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #             },
+    #             destination_field: "DestinationField",
+    #             source_fields: ["stringTo2048"], # required
+    #             task_properties: {
+    #               "VALUE" => "Property",
+    #             },
+    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Mask, Merge, Truncate, Validate
+    #           },
+    #         ],
+    #         trigger_config: { # required
+    #           trigger_type: "Scheduled", # required, accepts Scheduled, Event, OnDemand
+    #           trigger_properties: {
+    #             scheduled: {
+    #               schedule_expression: "ScheduleExpression", # required
+    #               data_pull_mode: "Incremental", # accepts Incremental, Complete
+    #               schedule_start_time: Time.now,
+    #               schedule_end_time: Time.now,
+    #               timezone: "Timezone",
+    #               schedule_offset: 1,
+    #               first_execution_from: Time.now,
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_name
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] source_flow_config
+    #   @return [Types::SourceFlowConfig]
+    #
+    # @!attribute [rw] tasks
+    #   @return [Array<Types::Task>]
+    #
+    # @!attribute [rw] trigger_config
+    #   @return [Types::TriggerConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/FlowDefinition AWS API Documentation
+    #
+    class FlowDefinition < Struct.new(
+      :description,
+      :flow_name,
+      :kms_arn,
+      :source_flow_config,
+      :tasks,
+      :trigger_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetDomainRequest
     #   data as a hash:
     #
@@ -1030,6 +1166,24 @@ module Aws::CustomerProfiles
       :allow_profile_creation,
       :fields,
       :keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass IncrementalPullConfig
+    #   data as a hash:
+    #
+    #       {
+    #         datetime_type_field_name: "DatetimeTypeFieldName",
+    #       }
+    #
+    # @!attribute [rw] datetime_type_field_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/IncrementalPullConfig AWS API Documentation
+    #
+    class IncrementalPullConfig < Struct.new(
+      :datetime_type_field_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1525,6 +1679,24 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass MarketoSourceProperties
+    #   data as a hash:
+    #
+    #       {
+    #         object: "Object", # required
+    #       }
+    #
+    # @!attribute [rw] object
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/MarketoSourceProperties AWS API Documentation
+    #
+    class MarketoSourceProperties < Struct.new(
+      :object)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a field in a ProfileObjectType.
     #
     # @note When making an API call, you may pass ObjectTypeField
@@ -1726,10 +1898,73 @@ module Aws::CustomerProfiles
     #
     #       {
     #         domain_name: "name", # required
-    #         uri: "string1To255", # required
+    #         uri: "string1To255",
     #         object_type_name: "typeName", # required
     #         tags: {
     #           "TagKey" => "TagValue",
+    #         },
+    #         flow_definition: {
+    #           description: "FlowDescription",
+    #           flow_name: "FlowName", # required
+    #           kms_arn: "KmsArn", # required
+    #           source_flow_config: { # required
+    #             connector_profile_name: "ConnectorProfileName",
+    #             connector_type: "Salesforce", # required, accepts Salesforce, Marketo, Zendesk, Servicenow, S3
+    #             incremental_pull_config: {
+    #               datetime_type_field_name: "DatetimeTypeFieldName",
+    #             },
+    #             source_connector_properties: { # required
+    #               marketo: {
+    #                 object: "Object", # required
+    #               },
+    #               s3: {
+    #                 bucket_name: "BucketName", # required
+    #                 bucket_prefix: "BucketPrefix",
+    #               },
+    #               salesforce: {
+    #                 object: "Object", # required
+    #                 enable_dynamic_field_update: false,
+    #                 include_deleted_records: false,
+    #               },
+    #               service_now: {
+    #                 object: "Object", # required
+    #               },
+    #               zendesk: {
+    #                 object: "Object", # required
+    #               },
+    #             },
+    #           },
+    #           tasks: [ # required
+    #             {
+    #               connector_operator: {
+    #                 marketo: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #                 s3: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #                 salesforce: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #                 service_now: "PROJECTION", # accepts PROJECTION, CONTAINS, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #                 zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #               },
+    #               destination_field: "DestinationField",
+    #               source_fields: ["stringTo2048"], # required
+    #               task_properties: {
+    #                 "VALUE" => "Property",
+    #               },
+    #               task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Mask, Merge, Truncate, Validate
+    #             },
+    #           ],
+    #           trigger_config: { # required
+    #             trigger_type: "Scheduled", # required, accepts Scheduled, Event, OnDemand
+    #             trigger_properties: {
+    #               scheduled: {
+    #                 schedule_expression: "ScheduleExpression", # required
+    #                 data_pull_mode: "Incremental", # accepts Incremental, Complete
+    #                 schedule_start_time: Time.now,
+    #                 schedule_end_time: Time.now,
+    #                 timezone: "Timezone",
+    #                 schedule_offset: 1,
+    #                 first_execution_from: Time.now,
+    #               },
+    #             },
+    #           },
     #         },
     #       }
     #
@@ -1750,13 +1985,17 @@ module Aws::CustomerProfiles
     #   resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] flow_definition
+    #   @return [Types::FlowDefinition]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutIntegrationRequest AWS API Documentation
     #
     class PutIntegrationRequest < Struct.new(
       :domain_name,
       :uri,
       :object_type_name,
-      :tags)
+      :tags,
+      :flow_definition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2020,6 +2259,105 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass S3SourceProperties
+    #   data as a hash:
+    #
+    #       {
+    #         bucket_name: "BucketName", # required
+    #         bucket_prefix: "BucketPrefix",
+    #       }
+    #
+    # @!attribute [rw] bucket_name
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_prefix
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/S3SourceProperties AWS API Documentation
+    #
+    class S3SourceProperties < Struct.new(
+      :bucket_name,
+      :bucket_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SalesforceSourceProperties
+    #   data as a hash:
+    #
+    #       {
+    #         object: "Object", # required
+    #         enable_dynamic_field_update: false,
+    #         include_deleted_records: false,
+    #       }
+    #
+    # @!attribute [rw] object
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_dynamic_field_update
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_deleted_records
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/SalesforceSourceProperties AWS API Documentation
+    #
+    class SalesforceSourceProperties < Struct.new(
+      :object,
+      :enable_dynamic_field_update,
+      :include_deleted_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ScheduledTriggerProperties
+    #   data as a hash:
+    #
+    #       {
+    #         schedule_expression: "ScheduleExpression", # required
+    #         data_pull_mode: "Incremental", # accepts Incremental, Complete
+    #         schedule_start_time: Time.now,
+    #         schedule_end_time: Time.now,
+    #         timezone: "Timezone",
+    #         schedule_offset: 1,
+    #         first_execution_from: Time.now,
+    #       }
+    #
+    # @!attribute [rw] schedule_expression
+    #   @return [String]
+    #
+    # @!attribute [rw] data_pull_mode
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_start_time
+    #   @return [Time]
+    #
+    # @!attribute [rw] schedule_end_time
+    #   @return [Time]
+    #
+    # @!attribute [rw] timezone
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_offset
+    #   @return [Integer]
+    #
+    # @!attribute [rw] first_execution_from
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ScheduledTriggerProperties AWS API Documentation
+    #
+    class ScheduledTriggerProperties < Struct.new(
+      :schedule_expression,
+      :data_pull_mode,
+      :schedule_start_time,
+      :schedule_end_time,
+      :timezone,
+      :schedule_offset,
+      :first_execution_from)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass SearchProfilesRequest
     #   data as a hash:
     #
@@ -2084,6 +2422,129 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ServiceNowSourceProperties
+    #   data as a hash:
+    #
+    #       {
+    #         object: "Object", # required
+    #       }
+    #
+    # @!attribute [rw] object
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ServiceNowSourceProperties AWS API Documentation
+    #
+    class ServiceNowSourceProperties < Struct.new(
+      :object)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SourceConnectorProperties
+    #   data as a hash:
+    #
+    #       {
+    #         marketo: {
+    #           object: "Object", # required
+    #         },
+    #         s3: {
+    #           bucket_name: "BucketName", # required
+    #           bucket_prefix: "BucketPrefix",
+    #         },
+    #         salesforce: {
+    #           object: "Object", # required
+    #           enable_dynamic_field_update: false,
+    #           include_deleted_records: false,
+    #         },
+    #         service_now: {
+    #           object: "Object", # required
+    #         },
+    #         zendesk: {
+    #           object: "Object", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] marketo
+    #   @return [Types::MarketoSourceProperties]
+    #
+    # @!attribute [rw] s3
+    #   @return [Types::S3SourceProperties]
+    #
+    # @!attribute [rw] salesforce
+    #   @return [Types::SalesforceSourceProperties]
+    #
+    # @!attribute [rw] service_now
+    #   @return [Types::ServiceNowSourceProperties]
+    #
+    # @!attribute [rw] zendesk
+    #   @return [Types::ZendeskSourceProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/SourceConnectorProperties AWS API Documentation
+    #
+    class SourceConnectorProperties < Struct.new(
+      :marketo,
+      :s3,
+      :salesforce,
+      :service_now,
+      :zendesk)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SourceFlowConfig
+    #   data as a hash:
+    #
+    #       {
+    #         connector_profile_name: "ConnectorProfileName",
+    #         connector_type: "Salesforce", # required, accepts Salesforce, Marketo, Zendesk, Servicenow, S3
+    #         incremental_pull_config: {
+    #           datetime_type_field_name: "DatetimeTypeFieldName",
+    #         },
+    #         source_connector_properties: { # required
+    #           marketo: {
+    #             object: "Object", # required
+    #           },
+    #           s3: {
+    #             bucket_name: "BucketName", # required
+    #             bucket_prefix: "BucketPrefix",
+    #           },
+    #           salesforce: {
+    #             object: "Object", # required
+    #             enable_dynamic_field_update: false,
+    #             include_deleted_records: false,
+    #           },
+    #           service_now: {
+    #             object: "Object", # required
+    #           },
+    #           zendesk: {
+    #             object: "Object", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] connector_profile_name
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_type
+    #   @return [String]
+    #
+    # @!attribute [rw] incremental_pull_config
+    #   @return [Types::IncrementalPullConfig]
+    #
+    # @!attribute [rw] source_connector_properties
+    #   @return [Types::SourceConnectorProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/SourceFlowConfig AWS API Documentation
+    #
+    class SourceFlowConfig < Struct.new(
+      :connector_profile_name,
+      :connector_type,
+      :incremental_pull_config,
+      :source_connector_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass TagResourceRequest
     #   data as a hash:
     #
@@ -2116,6 +2577,52 @@ module Aws::CustomerProfiles
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass Task
+    #   data as a hash:
+    #
+    #       {
+    #         connector_operator: {
+    #           marketo: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #           s3: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #           salesforce: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #           service_now: "PROJECTION", # accepts PROJECTION, CONTAINS, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #           zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #         },
+    #         destination_field: "DestinationField",
+    #         source_fields: ["stringTo2048"], # required
+    #         task_properties: {
+    #           "VALUE" => "Property",
+    #         },
+    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Mask, Merge, Truncate, Validate
+    #       }
+    #
+    # @!attribute [rw] connector_operator
+    #   @return [Types::ConnectorOperator]
+    #
+    # @!attribute [rw] destination_field
+    #   @return [String]
+    #
+    # @!attribute [rw] source_fields
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] task_properties
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] task_type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/Task AWS API Documentation
+    #
+    class Task < Struct.new(
+      :connector_operator,
+      :destination_field,
+      :source_fields,
+      :task_properties,
+      :task_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You exceeded the maximum number of requests.
     #
     # @!attribute [rw] message
@@ -2125,6 +2632,65 @@ module Aws::CustomerProfiles
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TriggerConfig
+    #   data as a hash:
+    #
+    #       {
+    #         trigger_type: "Scheduled", # required, accepts Scheduled, Event, OnDemand
+    #         trigger_properties: {
+    #           scheduled: {
+    #             schedule_expression: "ScheduleExpression", # required
+    #             data_pull_mode: "Incremental", # accepts Incremental, Complete
+    #             schedule_start_time: Time.now,
+    #             schedule_end_time: Time.now,
+    #             timezone: "Timezone",
+    #             schedule_offset: 1,
+    #             first_execution_from: Time.now,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] trigger_type
+    #   @return [String]
+    #
+    # @!attribute [rw] trigger_properties
+    #   @return [Types::TriggerProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/TriggerConfig AWS API Documentation
+    #
+    class TriggerConfig < Struct.new(
+      :trigger_type,
+      :trigger_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TriggerProperties
+    #   data as a hash:
+    #
+    #       {
+    #         scheduled: {
+    #           schedule_expression: "ScheduleExpression", # required
+    #           data_pull_mode: "Incremental", # accepts Incremental, Complete
+    #           schedule_start_time: Time.now,
+    #           schedule_end_time: Time.now,
+    #           timezone: "Timezone",
+    #           schedule_offset: 1,
+    #           first_execution_from: Time.now,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] scheduled
+    #   @return [Types::ScheduledTriggerProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/TriggerProperties AWS API Documentation
+    #
+    class TriggerProperties < Struct.new(
+      :scheduled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2543,6 +3109,24 @@ module Aws::CustomerProfiles
     #
     class UpdateProfileResponse < Struct.new(
       :profile_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ZendeskSourceProperties
+    #   data as a hash:
+    #
+    #       {
+    #         object: "Object", # required
+    #       }
+    #
+    # @!attribute [rw] object
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ZendeskSourceProperties AWS API Documentation
+    #
+    class ZendeskSourceProperties < Struct.new(
+      :object)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -366,6 +366,7 @@ module Aws::IoTWireless
     CreateWirelessDeviceRequest.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, required: true, location_name: "DestinationName"))
     CreateWirelessDeviceRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateWirelessDeviceRequest.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANDevice, location_name: "LoRaWAN"))
+    CreateWirelessDeviceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateWirelessDeviceRequest.struct_class = Types::CreateWirelessDeviceRequest
 
     CreateWirelessDeviceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: WirelessDeviceArn, location_name: "Arn"))

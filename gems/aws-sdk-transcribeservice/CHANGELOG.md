@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2021-03-26)
+------------------
+
+* Feature - Amazon Transcribe now supports tagging words that match your vocabulary filter for batch transcription.
+
 1.52.0 (2021-03-10)
 ------------------
 

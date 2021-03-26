@@ -342,8 +342,8 @@ module Aws::IoTWireless
     #   not need to pass this option.**
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags attached to the specified resource. Tags are metadata that
-    #   can be used to manage a resource
+    #   The tags to attach to the specified resource. Tags are metadata that
+    #   you can use to manage a resource.
     #
     # @return [Types::AssociateAwsAccountWithPartnerAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -476,8 +476,8 @@ module Aws::IoTWireless
     #   The ARN of the IAM Role that authorizes the destination.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to attach to the new destination. Tags are metadata that can
-    #   be used to manage a resource.
+    #   The tags to attach to the new destination. Tags are metadata that you
+    #   can use to manage a resource.
     #
     # @option params [String] :client_request_token
     #   Each resource must have a unique client request token. If you try to
@@ -531,8 +531,8 @@ module Aws::IoTWireless
     #   The device profile information to use to create the device profile.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to attach to the new device profile Tags are metadata that
-    #   can be used to manage a resource.
+    #   The tags to attach to the new device profile. Tags are metadata that
+    #   you can use to manage a resource.
     #
     # @option params [String] :client_request_token
     #   Each resource must have a unique client request token. If you try to
@@ -604,7 +604,7 @@ module Aws::IoTWireless
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to attach to the new service profile. Tags are metadata that
-    #   can be used to manage a resource.
+    #   you can use to manage a resource.
     #
     # @option params [String] :client_request_token
     #   Each resource must have a unique client request token. If you try to
@@ -675,6 +675,10 @@ module Aws::IoTWireless
     #   The device configuration information to use to create the wireless
     #   device.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to attach to the new wireless device. Tags are metadata that
+    #   you can use to manage a resource.
+    #
     # @return [Types::CreateWirelessDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWirelessDeviceResponse#arn #arn} => String
@@ -718,6 +722,12 @@ module Aws::IoTWireless
     #         },
     #       },
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -746,7 +756,7 @@ module Aws::IoTWireless
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to attach to the new wireless gateway. Tags are metadata that
-    #   can be used to manage a resource.
+    #   you can use to manage a resource.
     #
     # @option params [String] :client_request_token
     #   Each resource must have a unique client request token. If you try to
@@ -847,8 +857,8 @@ module Aws::IoTWireless
     #   not need to pass this option.**
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags attached to the specified resource. Tags are metadata that
-    #   can be used to manage a resource
+    #   The tags to attach to the specified resource. Tags are metadata that
+    #   you can use to manage a resource.
     #
     # @return [Types::CreateWirelessGatewayTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1795,7 +1805,7 @@ module Aws::IoTWireless
     # Lists the tags (metadata) you have assigned to the resource.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the resource for which to list tags.
+    #   The ARN of the resource for which you want to list tags.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2027,7 +2037,7 @@ module Aws::IoTWireless
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   Adds to or modifies the tags of the given resource. Tags are metadata
-    #   that can be used to manage a resource.
+    #   that you can use to manage a resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2247,7 +2257,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

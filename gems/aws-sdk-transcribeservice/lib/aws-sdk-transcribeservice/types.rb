@@ -1787,7 +1787,7 @@ module Aws::TranscribeService
     #         show_alternatives: false,
     #         max_alternatives: 1,
     #         vocabulary_filter_name: "VocabularyFilterName",
-    #         vocabulary_filter_method: "remove", # accepts remove, mask
+    #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #       }
     #
     # @!attribute [rw] vocabulary_name
@@ -1853,7 +1853,10 @@ module Aws::TranscribeService
     #   Set to `mask` to remove filtered text from the transcript and
     #   replace it with three asterisks ("***") as placeholder text.
     #   Set to `remove` to remove filtered text from the transcript without
-    #   using placeholder text.
+    #   using placeholder text. Set to `tag` to mark the word in the
+    #   transcription output that matches the vocabulary filter. When you
+    #   set the filter method to `tag`, the words matching your vocabulary
+    #   filter are not masked or removed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/Settings AWS API Documentation
@@ -2075,7 +2078,7 @@ module Aws::TranscribeService
     #           show_alternatives: false,
     #           max_alternatives: 1,
     #           vocabulary_filter_name: "VocabularyFilterName",
-    #           vocabulary_filter_method: "remove", # accepts remove, mask
+    #           vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #         },
     #         model_settings: {
     #           language_model_name: "ModelName",

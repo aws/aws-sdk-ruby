@@ -111,8 +111,8 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags attached to the specified resource. Tags are metadata that
-    #   can be used to manage a resource
+    #   The tags to attach to the specified resource. Tags are metadata that
+    #   you can use to manage a resource.
     #   @return [Array<Types::Tag>]
     #
     class AssociateAwsAccountWithPartnerAccountRequest < Struct.new(
@@ -281,7 +281,7 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] tags
     #   The tags to attach to the new destination. Tags are metadata that
-    #   can be used to manage a resource.
+    #   you can use to manage a resource.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] client_request_token
@@ -365,8 +365,8 @@ module Aws::IoTWireless
     #   @return [Types::LoRaWANDeviceProfile]
     #
     # @!attribute [rw] tags
-    #   The tags to attach to the new device profile Tags are metadata that
-    #   can be used to manage a resource.
+    #   The tags to attach to the new device profile. Tags are metadata that
+    #   you can use to manage a resource.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] client_request_token
@@ -431,7 +431,7 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] tags
     #   The tags to attach to the new service profile. Tags are metadata
-    #   that can be used to manage a resource.
+    #   that you can use to manage a resource.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] client_request_token
@@ -507,6 +507,12 @@ module Aws::IoTWireless
     #             },
     #           },
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] type
@@ -540,13 +546,19 @@ module Aws::IoTWireless
     #   device.
     #   @return [Types::LoRaWANDevice]
     #
+    # @!attribute [rw] tags
+    #   The tags to attach to the new wireless device. Tags are metadata
+    #   that you can use to manage a resource.
+    #   @return [Array<Types::Tag>]
+    #
     class CreateWirelessDeviceRequest < Struct.new(
       :type,
       :name,
       :description,
       :destination_name,
       :client_request_token,
-      :lo_ra_wan)
+      :lo_ra_wan,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -600,7 +612,7 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] tags
     #   The tags to attach to the new wireless gateway. Tags are metadata
-    #   that can be used to manage a resource.
+    #   that you can use to manage a resource.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] client_request_token
@@ -696,8 +708,8 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags attached to the specified resource. Tags are metadata that
-    #   can be used to manage a resource
+    #   The tags to attach to the specified resource. Tags are metadata that
+    #   you can use to manage a resource.
     #   @return [Array<Types::Tag>]
     #
     class CreateWirelessGatewayTaskDefinitionRequest < Struct.new(
@@ -1791,7 +1803,7 @@ module Aws::IoTWireless
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the resource for which to list tags.
+    #   The ARN of the resource for which you want to list tags.
     #   @return [String]
     #
     class ListTagsForResourceRequest < Struct.new(
@@ -1801,8 +1813,8 @@ module Aws::IoTWireless
     end
 
     # @!attribute [rw] tags
-    #   The tags attached to the specified resource. Tags are metadata that
-    #   can be used to manage a resource
+    #   The tags to attach to the specified resource. Tags are metadata that
+    #   you can use to manage a resource.
     #   @return [Array<Types::Tag>]
     #
     class ListTagsForResourceResponse < Struct.new(
@@ -2896,7 +2908,7 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] tags
     #   Adds to or modifies the tags of the given resource. Tags are
-    #   metadata that can be used to manage a resource.
+    #   metadata that you can use to manage a resource.
     #   @return [Array<Types::Tag>]
     #
     class TagResourceRequest < Struct.new(

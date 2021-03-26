@@ -924,7 +924,7 @@ module Aws::TranscribeService
     #   resp.transcription_job.settings.show_alternatives #=> Boolean
     #   resp.transcription_job.settings.max_alternatives #=> Integer
     #   resp.transcription_job.settings.vocabulary_filter_name #=> String
-    #   resp.transcription_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask"
+    #   resp.transcription_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
     #   resp.transcription_job.model_settings.language_model_name #=> String
     #   resp.transcription_job.job_execution_settings.allow_deferred_execution #=> Boolean
     #   resp.transcription_job.job_execution_settings.data_access_role_arn #=> String
@@ -1712,7 +1712,7 @@ module Aws::TranscribeService
     #       show_alternatives: false,
     #       max_alternatives: 1,
     #       vocabulary_filter_name: "VocabularyFilterName",
-    #       vocabulary_filter_method: "remove", # accepts remove, mask
+    #       vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #     },
     #     model_settings: {
     #       language_model_name: "ModelName",
@@ -1750,7 +1750,7 @@ module Aws::TranscribeService
     #   resp.transcription_job.settings.show_alternatives #=> Boolean
     #   resp.transcription_job.settings.max_alternatives #=> Integer
     #   resp.transcription_job.settings.vocabulary_filter_name #=> String
-    #   resp.transcription_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask"
+    #   resp.transcription_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
     #   resp.transcription_job.model_settings.language_model_name #=> String
     #   resp.transcription_job.job_execution_settings.allow_deferred_execution #=> Boolean
     #   resp.transcription_job.job_execution_settings.data_access_role_arn #=> String
@@ -1983,7 +1983,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
