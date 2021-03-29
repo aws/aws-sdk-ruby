@@ -68,7 +68,7 @@ You can also configure default credentials and the region via the `Aws.config`
 hash. The `Aws.config` hash takes precedence over environment variables.
 
 ```ruby
-require 'aws-sdk'
+require 'aws-sdk-core'
 
 Aws.config.update(
   region: 'us-west-2',
