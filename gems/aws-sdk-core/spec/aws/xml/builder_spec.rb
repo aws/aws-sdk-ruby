@@ -245,8 +245,7 @@ module Aws
       it 'correctly serializes newlines' do
         expect(xml(string:"\n")).to eq(<<-XML)
 <xml>
-  <String>
-</String>
+  <String>&#xA;</String>
 </xml>
         XML
       end
