@@ -8472,13 +8472,15 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the AWS Glue resource for the resource policy to be
-    #   retrieved. For more information about AWS Glue resource ARNs, see
-    #   the [AWS Glue ARN string pattern][1]
+    #   The ARN of the AWS Glue resource for which to retrieve the resource
+    #   policy. If not supplied, the Data Catalog resource policy is
+    #   returned. Use `GetResourcePolicies` to view all existing resource
+    #   policies. For more information see [Specifying AWS Glue Resource
+    #   ARNs][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetResourcePolicyRequest AWS API Documentation
@@ -11613,11 +11615,16 @@ module Aws::Glue
     #   The time at which the entry was created.
     #   @return [String]
     #
+    # @!attribute [rw] other_metadata_value_list
+    #   Other metadata belonging to the same metadata key.
+    #   @return [Array<Types::OtherMetadataValueListItem>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MetadataInfo AWS API Documentation
     #
     class MetadataInfo < Struct.new(
       :metadata_value,
-      :created_time)
+      :created_time,
+      :other_metadata_value_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11804,6 +11811,27 @@ module Aws::Glue
     class Order < Struct.new(
       :column,
       :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure containing other metadata for a schema version belonging
+    # to the same metadata key.
+    #
+    # @!attribute [rw] metadata_value
+    #   The metadata key’s corresponding value for the other metadata
+    #   belonging to the same metadata key.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time at which the entry was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/OtherMetadataValueListItem AWS API Documentation
+    #
+    class OtherMetadataValueListItem < Struct.new(
+      :metadata_value,
+      :created_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12287,13 +12315,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the AWS Glue resource for the resource policy to be set.
-    #   For more information about AWS Glue resource ARNs, see the [AWS Glue
-    #   ARN string pattern][1]
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id
+    #   Do not use. For internal use only.
     #   @return [String]
     #
     # @!attribute [rw] policy_hash_condition
@@ -12306,20 +12328,22 @@ module Aws::Glue
     # @!attribute [rw] policy_exists_condition
     #   A value of `MUST_EXIST` is used to update a policy. A value of
     #   `NOT_EXIST` is used to create a new policy. If a value of `NONE` or
-    #   a null value is used, the call will not depend on the existence of a
+    #   a null value is used, the call does not depend on the existence of a
     #   policy.
     #   @return [String]
     #
     # @!attribute [rw] enable_hybrid
-    #   Allows you to specify if you want to use both resource-level and
-    #   account/catalog-level resource policies. A resource-level policy is
-    #   a policy attached to an individual resource such as a database or a
-    #   table.
+    #   If `'TRUE'`, indicates that you are using both methods to grant
+    #   cross-account access to Data Catalog resources:
     #
-    #   The default value of `NO` indicates that resource-level policies
-    #   cannot co-exist with an account-level policy. A value of `YES` means
-    #   the use of both resource-level and account/catalog-level resource
-    #   policies is allowed.
+    #   * By directly updating the resource policy with `PutResourePolicy`
+    #
+    #   * By using the **Grant permissions** command on the AWS Management
+    #     Console.
+    #
+    #   Must be set to `'TRUE'` if you have already used the Management
+    #   Console to grant cross-account access, otherwise the call fails.
+    #   Default is 'FALSE'.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutResourcePolicyRequest AWS API Documentation

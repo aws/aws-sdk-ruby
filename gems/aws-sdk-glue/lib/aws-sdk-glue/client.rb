@@ -5942,11 +5942,11 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves the security configurations for the resource policies set on
-    # individual resources, and also the account-level policy.
+    # Retrieves the resource policies set on individual resources by AWS
+    # Resource Access Manager during cross-account permission grants. Also
+    # retrieves the Data Catalog resource policy.
     #
-    # This operation also returns the Data Catalog resource policy. However,
-    # if you enabled metadata encryption in Data Catalog settings, and you
+    # If you enabled metadata encryption in Data Catalog settings, and you
     # do not have permission on the AWS KMS key, the operation can't return
     # the Data Catalog resource policy.
     #
@@ -5991,13 +5991,14 @@ module Aws::Glue
     # Retrieves a specified resource policy.
     #
     # @option params [String] :resource_arn
-    #   The ARN of the AWS Glue resource for the resource policy to be
-    #   retrieved. For more information about AWS Glue resource ARNs, see the
-    #   [AWS Glue ARN string pattern][1]
+    #   The ARN of the AWS Glue resource for which to retrieve the resource
+    #   policy. If not supplied, the Data Catalog resource policy is returned.
+    #   Use `GetResourcePolicies` to view all existing resource policies. For
+    #   more information see [Specifying AWS Glue Resource ARNs][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html
     #
     # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8031,13 +8032,7 @@ module Aws::Glue
     #   Contains the policy document to set, in JSON format.
     #
     # @option params [String] :resource_arn
-    #   The ARN of the AWS Glue resource for the resource policy to be set.
-    #   For more information about AWS Glue resource ARNs, see the [AWS Glue
-    #   ARN string pattern][1]
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id
+    #   Do not use. For internal use only.
     #
     # @option params [String] :policy_hash_condition
     #   The hash value returned when the previous policy was set using
@@ -8048,19 +8043,21 @@ module Aws::Glue
     # @option params [String] :policy_exists_condition
     #   A value of `MUST_EXIST` is used to update a policy. A value of
     #   `NOT_EXIST` is used to create a new policy. If a value of `NONE` or a
-    #   null value is used, the call will not depend on the existence of a
+    #   null value is used, the call does not depend on the existence of a
     #   policy.
     #
     # @option params [String] :enable_hybrid
-    #   Allows you to specify if you want to use both resource-level and
-    #   account/catalog-level resource policies. A resource-level policy is a
-    #   policy attached to an individual resource such as a database or a
-    #   table.
+    #   If `'TRUE'`, indicates that you are using both methods to grant
+    #   cross-account access to Data Catalog resources:
     #
-    #   The default value of `NO` indicates that resource-level policies
-    #   cannot co-exist with an account-level policy. A value of `YES` means
-    #   the use of both resource-level and account/catalog-level resource
-    #   policies is allowed.
+    #   * By directly updating the resource policy with `PutResourePolicy`
+    #
+    #   * By using the **Grant permissions** command on the AWS Management
+    #     Console.
+    #
+    #   Must be set to `'TRUE'` if you have already used the Management
+    #   Console to grant cross-account access, otherwise the call fails.
+    #   Default is 'FALSE'.
     #
     # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8247,6 +8244,9 @@ module Aws::Glue
     #   resp.metadata_info_map #=> Hash
     #   resp.metadata_info_map["MetadataKeyString"].metadata_value #=> String
     #   resp.metadata_info_map["MetadataKeyString"].created_time #=> String
+    #   resp.metadata_info_map["MetadataKeyString"].other_metadata_value_list #=> Array
+    #   resp.metadata_info_map["MetadataKeyString"].other_metadata_value_list[0].metadata_value #=> String
+    #   resp.metadata_info_map["MetadataKeyString"].other_metadata_value_list[0].created_time #=> String
     #   resp.schema_version_id #=> String
     #   resp.next_token #=> String
     #
@@ -10599,7 +10599,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

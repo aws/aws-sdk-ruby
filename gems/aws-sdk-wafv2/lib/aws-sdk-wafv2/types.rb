@@ -34,16 +34,46 @@ module Aws::WAFV2
     #
     class AllQueryArguments < Aws::EmptyStructure; end
 
-    # Specifies that AWS WAF should allow requests.
+    # Specifies that AWS WAF should allow the request and optionally defines
+    # additional custom handling for the request.
     #
-    # This is used only in the context of other settings, for example to
-    # specify values for RuleAction and web ACL DefaultAction.
+    # This is used in the context of other settings, for example to specify
+    # values for RuleAction and web ACL DefaultAction.
     #
-    # @api private
+    # @note When making an API call, you may pass AllowAction
+    #   data as a hash:
+    #
+    #       {
+    #         custom_request_handling: {
+    #           insert_headers: [ # required
+    #             {
+    #               name: "CustomHTTPHeaderName", # required
+    #               value: "CustomHTTPHeaderValue", # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] custom_request_handling
+    #   Defines custom handling for the web request.
+    #
+    #   For information about customizing web requests and responses, see
+    #   [Customizing web requests and responses in AWS WAF][1] in the [AWS
+    #   WAF Developer Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #   @return [Types::CustomRequestHandling]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AllowAction AWS API Documentation
     #
-    class AllowAction < Aws::EmptyStructure; end
+    class AllowAction < Struct.new(
+      :custom_request_handling)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # A logical rule statement used to combine other rule statements with
     # AND logic. You provide more than one Statement within the
@@ -353,16 +383,48 @@ module Aws::WAFV2
     #
     class AssociateWebACLResponse < Aws::EmptyStructure; end
 
-    # Specifies that AWS WAF should block requests.
+    # Specifies that AWS WAF should block the request and optionally defines
+    # additional custom handling for the response to the web request.
     #
-    # This is used only in the context of other settings, for example to
-    # specify values for RuleAction and web ACL DefaultAction.
+    # This is used in the context of other settings, for example to specify
+    # values for RuleAction and web ACL DefaultAction.
     #
-    # @api private
+    # @note When making an API call, you may pass BlockAction
+    #   data as a hash:
+    #
+    #       {
+    #         custom_response: {
+    #           response_code: 1, # required
+    #           custom_response_body_key: "EntityName",
+    #           response_headers: [
+    #             {
+    #               name: "CustomHTTPHeaderName", # required
+    #               value: "CustomHTTPHeaderValue", # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] custom_response
+    #   Defines a custom response for the web request.
+    #
+    #   For information about customizing web requests and responses, see
+    #   [Customizing web requests and responses in AWS WAF][1] in the [AWS
+    #   WAF Developer Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #   @return [Types::CustomResponse]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/BlockAction AWS API Documentation
     #
-    class BlockAction < Aws::EmptyStructure; end
+    class BlockAction < Struct.new(
+      :custom_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The body of a web request. This immediately follows the request
     # headers.
@@ -781,14 +843,48 @@ module Aws::WAFV2
     #             },
     #             action: {
     #               block: {
+    #                 custom_response: {
+    #                   response_code: 1, # required
+    #                   custom_response_body_key: "EntityName",
+    #                   response_headers: [
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #               allow: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #               count: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #             },
     #             override_action: {
     #               count: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #               none: {
     #               },
@@ -843,16 +939,46 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # Specifies that AWS WAF should count requests.
+    # Specifies that AWS WAF should count the request. Optionally defines
+    # additional custom handling for the request.
     #
-    # This is used only in the context of other settings, for example to
-    # specify values for RuleAction and web ACL DefaultAction.
+    # This is used in the context of other settings, for example to specify
+    # values for RuleAction and web ACL DefaultAction.
     #
-    # @api private
+    # @note When making an API call, you may pass CountAction
+    #   data as a hash:
+    #
+    #       {
+    #         custom_request_handling: {
+    #           insert_headers: [ # required
+    #             {
+    #               name: "CustomHTTPHeaderName", # required
+    #               value: "CustomHTTPHeaderValue", # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] custom_request_handling
+    #   Defines custom handling for the web request.
+    #
+    #   For information about customizing web requests and responses, see
+    #   [Customizing web requests and responses in AWS WAF][1] in the [AWS
+    #   WAF Developer Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #   @return [Types::CustomRequestHandling]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CountAction AWS API Documentation
     #
-    class CountAction < Aws::EmptyStructure; end
+    class CountAction < Struct.new(
+      :custom_request_handling)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass CreateIPSetRequest
     #   data as a hash:
@@ -1304,14 +1430,48 @@ module Aws::WAFV2
     #             },
     #             action: {
     #               block: {
+    #                 custom_response: {
+    #                   response_code: 1, # required
+    #                   custom_response_body_key: "EntityName",
+    #                   response_headers: [
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #               allow: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #               count: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #             },
     #             override_action: {
     #               count: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #               none: {
     #               },
@@ -1334,6 +1494,12 @@ module Aws::WAFV2
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         custom_response_bodies: {
+    #           "EntityName" => {
+    #             content_type: "TEXT_PLAIN", # required, accepts TEXT_PLAIN, TEXT_HTML, APPLICATION_JSON
+    #             content: "ResponseContent", # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1394,6 +1560,27 @@ module Aws::WAFV2
     #   An array of key:value pairs to associate with the resource.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] custom_response_bodies
+    #   A map of custom response keys and content bodies. When you create a
+    #   rule with a block action, you can send a custom response to the web
+    #   request. You define these for the rule group, and then use them in
+    #   the rules that you define in the rule group.
+    #
+    #   For information about customizing web requests and responses, see
+    #   [Customizing web requests and responses in AWS WAF][1] in the [AWS
+    #   WAF Developer Guide][2].
+    #
+    #   For information about the limits on count and size for custom
+    #   request and response settings, see [AWS WAF quotas][3] in the [AWS
+    #   WAF Developer Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #   [3]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
+    #   @return [Hash<String,Types::CustomResponseBody>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CreateRuleGroupRequest AWS API Documentation
     #
     class CreateRuleGroupRequest < Struct.new(
@@ -1403,7 +1590,8 @@ module Aws::WAFV2
       :description,
       :rules,
       :visibility_config,
-      :tags)
+      :tags,
+      :custom_response_bodies)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1432,8 +1620,26 @@ module Aws::WAFV2
     #         scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
     #         default_action: { # required
     #           block: {
+    #             custom_response: {
+    #               response_code: 1, # required
+    #               custom_response_body_key: "EntityName",
+    #               response_headers: [
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
     #           },
     #           allow: {
+    #             custom_request_handling: {
+    #               insert_headers: [ # required
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
     #           },
     #         },
     #         description: "EntityDescription",
@@ -1687,14 +1893,48 @@ module Aws::WAFV2
     #             },
     #             action: {
     #               block: {
+    #                 custom_response: {
+    #                   response_code: 1, # required
+    #                   custom_response_body_key: "EntityName",
+    #                   response_headers: [
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #               allow: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #               count: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #             },
     #             override_action: {
     #               count: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #               none: {
     #               },
@@ -1717,6 +1957,12 @@ module Aws::WAFV2
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         custom_response_bodies: {
+    #           "EntityName" => {
+    #             content_type: "TEXT_PLAIN", # required, accepts TEXT_PLAIN, TEXT_HTML, APPLICATION_JSON
+    #             content: "ResponseContent", # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1764,6 +2010,27 @@ module Aws::WAFV2
     #   An array of key:value pairs to associate with the resource.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] custom_response_bodies
+    #   A map of custom response keys and content bodies. When you create a
+    #   rule with a block action, you can send a custom response to the web
+    #   request. You define these for the web ACL, and then use them in the
+    #   rules and default actions that you define in the web ACL.
+    #
+    #   For information about customizing web requests and responses, see
+    #   [Customizing web requests and responses in AWS WAF][1] in the [AWS
+    #   WAF Developer Guide][2].
+    #
+    #   For information about the limits on count and size for custom
+    #   request and response settings, see [AWS WAF quotas][3] in the [AWS
+    #   WAF Developer Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #   [3]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
+    #   @return [Hash<String,Types::CustomResponseBody>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CreateWebACLRequest AWS API Documentation
     #
     class CreateWebACLRequest < Struct.new(
@@ -1773,7 +2040,8 @@ module Aws::WAFV2
       :description,
       :rules,
       :visibility_config,
-      :tags)
+      :tags,
+      :custom_response_bodies)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1793,17 +2061,232 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # A custom header for custom request and response handling. This is used
+    # in CustomResponse and CustomRequestHandling.
+    #
+    # @note When making an API call, you may pass CustomHTTPHeader
+    #   data as a hash:
+    #
+    #       {
+    #         name: "CustomHTTPHeaderName", # required
+    #         value: "CustomHTTPHeaderValue", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the custom header.
+    #
+    #   For custom request header insertion, when AWS WAF inserts the header
+    #   into the request, it prefixes this name `x-amzn-waf-`, to avoid
+    #   confusion with the headers that are already in the request. For
+    #   example, for the header name `sample`, AWS WAF inserts the header
+    #   `x-amzn-waf-sample`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the custom header.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CustomHTTPHeader AWS API Documentation
+    #
+    class CustomHTTPHeader < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Custom request handling behavior that inserts custom headers into a
+    # web request. You can add custom request handling for the rule actions
+    # allow and count.
+    #
+    # For information about customizing web requests and responses, see
+    # [Customizing web requests and responses in AWS WAF][1] in the [AWS WAF
+    # Developer Guide][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #
+    # @note When making an API call, you may pass CustomRequestHandling
+    #   data as a hash:
+    #
+    #       {
+    #         insert_headers: [ # required
+    #           {
+    #             name: "CustomHTTPHeaderName", # required
+    #             value: "CustomHTTPHeaderValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] insert_headers
+    #   The HTTP headers to insert into the request. Duplicate header names
+    #   are not allowed.
+    #
+    #   For information about the limits on count and size for custom
+    #   request and response settings, see [AWS WAF quotas][1] in the [AWS
+    #   WAF Developer Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #   @return [Array<Types::CustomHTTPHeader>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CustomRequestHandling AWS API Documentation
+    #
+    class CustomRequestHandling < Struct.new(
+      :insert_headers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A custom response to send to the client. You can define a custom
+    # response for rule actions and default web ACL actions that are set to
+    # BlockAction.
+    #
+    # For information about customizing web requests and responses, see
+    # [Customizing web requests and responses in AWS WAF][1] in the [AWS WAF
+    # Developer Guide][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #
+    # @note When making an API call, you may pass CustomResponse
+    #   data as a hash:
+    #
+    #       {
+    #         response_code: 1, # required
+    #         custom_response_body_key: "EntityName",
+    #         response_headers: [
+    #           {
+    #             name: "CustomHTTPHeaderName", # required
+    #             value: "CustomHTTPHeaderValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] response_code
+    #   The HTTP status code to return to the client.
+    #
+    #   For a list of status codes that you can use in your custom
+    #   reqponses, see [Supported status codes for custom response][1] in
+    #   the [AWS WAF Developer Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/customizing-the-response-status-codes.html
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] custom_response_body_key
+    #   References the response body that you want AWS WAF to return to the
+    #   web request client. You can define a custom response for a rule
+    #   action or a default web ACL action that is set to block. To do this,
+    #   you first define the response body key and value in the
+    #   `CustomResponseBodies` setting for the WebACL or RuleGroup where you
+    #   want to use it. Then, in the rule action or web ACL default action
+    #   `BlockAction` setting, you reference the response body using this
+    #   key.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_headers
+    #   The HTTP headers to use in the response. Duplicate header names are
+    #   not allowed.
+    #
+    #   For information about the limits on count and size for custom
+    #   request and response settings, see [AWS WAF quotas][1] in the [AWS
+    #   WAF Developer Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #   @return [Array<Types::CustomHTTPHeader>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CustomResponse AWS API Documentation
+    #
+    class CustomResponse < Struct.new(
+      :response_code,
+      :custom_response_body_key,
+      :response_headers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response body to use in a custom response to a web request. This
+    # is referenced by key from CustomResponse `CustomResponseBodyKey`.
+    #
+    # @note When making an API call, you may pass CustomResponseBody
+    #   data as a hash:
+    #
+    #       {
+    #         content_type: "TEXT_PLAIN", # required, accepts TEXT_PLAIN, TEXT_HTML, APPLICATION_JSON
+    #         content: "ResponseContent", # required
+    #       }
+    #
+    # @!attribute [rw] content_type
+    #   The type of content in the payload that you are defining in the
+    #   `Content` string.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The payload of the custom response.
+    #
+    #   You can use JSON escape strings in JSON content. To do this, you
+    #   must specify JSON content in the `ContentType` setting.
+    #
+    #   For information about the limits on count and size for custom
+    #   request and response settings, see [AWS WAF quotas][1] in the [AWS
+    #   WAF Developer Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CustomResponseBody AWS API Documentation
+    #
+    class CustomResponseBody < Struct.new(
+      :content_type,
+      :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # In a WebACL, this is the action that you want AWS WAF to perform when
     # a web request doesn't match any of the rules in the `WebACL`. The
-    # default action must be a terminating action, so count is not allowed.
+    # default action must be a terminating action, so you can't use count.
     #
     # @note When making an API call, you may pass DefaultAction
     #   data as a hash:
     #
     #       {
     #         block: {
+    #           custom_response: {
+    #             response_code: 1, # required
+    #             custom_response_body_key: "EntityName",
+    #             response_headers: [
+    #               {
+    #                 name: "CustomHTTPHeaderName", # required
+    #                 value: "CustomHTTPHeaderValue", # required
+    #               },
+    #             ],
+    #           },
     #         },
     #         allow: {
+    #           custom_request_handling: {
+    #             insert_headers: [ # required
+    #               {
+    #                 name: "CustomHTTPHeaderName", # required
+    #                 value: "CustomHTTPHeaderValue", # required
+    #               },
+    #             ],
+    #           },
     #         },
     #       }
     #
@@ -3544,12 +4027,12 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] invalid_fallback_behavior
-    #   What AWS WAF should do if it fails to completely parse the JSON
-    #   body. The options are the following:
+    #   The inspection behavior to fall back to if the JSON in the request
+    #   body is invalid. For AWS WAF, invalid JSON is any content that
+    #   isn't complete syntactical JSON, content whose root node isn't an
+    #   object or an array, and duplicate keys in the content.
     #
-    #   * `EVALUATE_AS_STRING` - Inspect the body as plain text. AWS WAF
-    #     applies the text transformations and inspection criteria that you
-    #     defined for the JSON inspection to the body text string.
+    #   You can specify the following fallback behaviors:
     #
     #   * `MATCH` - Treat the web request as matching the rule statement.
     #     AWS WAF applies the rule action to the request.
@@ -3557,22 +4040,13 @@ module Aws::WAFV2
     #   * `NO_MATCH` - Treat the web request as not matching the rule
     #     statement.
     #
-    #   If you don't provide this setting, AWS WAF parses and evaluates the
-    #   content only up to the first parsing failure that it encounters.
+    #   * `EVALUATE_AS_STRING` - Inspect the body as plain text. This option
+    #     applies the text transformations and inspection criteria that you
+    #     defined for the JSON inspection to the body text string.
     #
-    #   AWS WAF does its best to parse the entire JSON body, but might be
-    #   forced to stop for reasons such as invalid characters, duplicate
-    #   keys, truncation, and any content whose root node isn't an object
-    #   or an array.
-    #
-    #   AWS WAF parses the JSON in the following examples as two valid key,
-    #   value pairs:
-    #
-    #   * Missing comma: `\{"key1":"value1""key2":"value2"\}`
-    #
-    #   * Missing colon: `\{"key1":"value1","key2""value2"\}`
-    #
-    #   * Extra colons: `\{"key1"::"value1","key2""value2"\}`
+    #   If you don't provide this setting, when AWS WAF encounters invalid
+    #   JSON, it parses and inspects what it can, up to the first invalid
+    #   JSON that it encounters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/JsonBody AWS API Documentation
@@ -4329,8 +4803,8 @@ module Aws::WAFV2
     # try out a rule without performing any actions. You set the
     # `OverrideAction` on the Rule.
     #
-    # This is used only in the context of other settings, for example to
-    # specify values for RuleAction and web ACL DefaultAction.
+    # This is used in the context of other settings, for example to specify
+    # values for RuleAction and web ACL DefaultAction.
     #
     # @api private
     #
@@ -4890,6 +5364,14 @@ module Aws::WAFV2
     #
     #       {
     #         count: {
+    #           custom_request_handling: {
+    #             insert_headers: [ # required
+    #               {
+    #                 name: "CustomHTTPHeaderName", # required
+    #                 value: "CustomHTTPHeaderValue", # required
+    #               },
+    #             ],
+    #           },
     #         },
     #         none: {
     #         },
@@ -5847,14 +6329,48 @@ module Aws::WAFV2
     #         },
     #         action: {
     #           block: {
+    #             custom_response: {
+    #               response_code: 1, # required
+    #               custom_response_body_key: "EntityName",
+    #               response_headers: [
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
     #           },
     #           allow: {
+    #             custom_request_handling: {
+    #               insert_headers: [ # required
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
     #           },
     #           count: {
+    #             custom_request_handling: {
+    #               insert_headers: [ # required
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
     #           },
     #         },
     #         override_action: {
     #           count: {
+    #             custom_request_handling: {
+    #               insert_headers: [ # required
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
     #           },
     #           none: {
     #           },
@@ -5949,10 +6465,36 @@ module Aws::WAFV2
     #
     #       {
     #         block: {
+    #           custom_response: {
+    #             response_code: 1, # required
+    #             custom_response_body_key: "EntityName",
+    #             response_headers: [
+    #               {
+    #                 name: "CustomHTTPHeaderName", # required
+    #                 value: "CustomHTTPHeaderValue", # required
+    #               },
+    #             ],
+    #           },
     #         },
     #         allow: {
+    #           custom_request_handling: {
+    #             insert_headers: [ # required
+    #               {
+    #                 name: "CustomHTTPHeaderName", # required
+    #                 value: "CustomHTTPHeaderValue", # required
+    #               },
+    #             ],
+    #           },
     #         },
     #         count: {
+    #           custom_request_handling: {
+    #             insert_headers: [ # required
+    #               {
+    #                 name: "CustomHTTPHeaderName", # required
+    #                 value: "CustomHTTPHeaderValue", # required
+    #               },
+    #             ],
+    #           },
     #         },
     #       }
     #
@@ -6033,6 +6575,27 @@ module Aws::WAFV2
     #   collection.
     #   @return [Types::VisibilityConfig]
     #
+    # @!attribute [rw] custom_response_bodies
+    #   A map of custom response keys and content bodies. When you create a
+    #   rule with a block action, you can send a custom response to the web
+    #   request. You define these for the rule group, and then use them in
+    #   the rules that you define in the rule group.
+    #
+    #   For information about customizing web requests and responses, see
+    #   [Customizing web requests and responses in AWS WAF][1] in the [AWS
+    #   WAF Developer Guide][2].
+    #
+    #   For information about the limits on count and size for custom
+    #   request and response settings, see [AWS WAF quotas][3] in the [AWS
+    #   WAF Developer Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #   [3]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
+    #   @return [Hash<String,Types::CustomResponseBody>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RuleGroup AWS API Documentation
     #
     class RuleGroup < Struct.new(
@@ -6042,7 +6605,8 @@ module Aws::WAFV2
       :arn,
       :description,
       :rules,
-      :visibility_config)
+      :visibility_config,
+      :custom_response_bodies)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6194,6 +6758,16 @@ module Aws::WAFV2
     #   a rule group, this field is absent.
     #   @return [String]
     #
+    # @!attribute [rw] request_headers_inserted
+    #   Custom request headers inserted by AWS WAF into the request,
+    #   according to the custom request configuration for the matching rule
+    #   action.
+    #   @return [Array<Types::HTTPHeader>]
+    #
+    # @!attribute [rw] response_code_sent
+    #   The response code that was sent for the request.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/SampledHTTPRequest AWS API Documentation
     #
     class SampledHTTPRequest < Struct.new(
@@ -6201,7 +6775,9 @@ module Aws::WAFV2
       :weight,
       :timestamp,
       :action,
-      :rule_name_within_rule_group)
+      :rule_name_within_rule_group,
+      :request_headers_inserted,
+      :response_code_sent)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8537,14 +9113,48 @@ module Aws::WAFV2
     #             },
     #             action: {
     #               block: {
+    #                 custom_response: {
+    #                   response_code: 1, # required
+    #                   custom_response_body_key: "EntityName",
+    #                   response_headers: [
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #               allow: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #               count: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #             },
     #             override_action: {
     #               count: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #               none: {
     #               },
@@ -8562,6 +9172,12 @@ module Aws::WAFV2
     #           metric_name: "MetricName", # required
     #         },
     #         lock_token: "LockToken", # required
+    #         custom_response_bodies: {
+    #           "EntityName" => {
+    #             content_type: "TEXT_PLAIN", # required, accepts TEXT_PLAIN, TEXT_HTML, APPLICATION_JSON
+    #             content: "ResponseContent", # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -8618,6 +9234,27 @@ module Aws::WAFV2
     #   operation.
     #   @return [String]
     #
+    # @!attribute [rw] custom_response_bodies
+    #   A map of custom response keys and content bodies. When you create a
+    #   rule with a block action, you can send a custom response to the web
+    #   request. You define these for the rule group, and then use them in
+    #   the rules that you define in the rule group.
+    #
+    #   For information about customizing web requests and responses, see
+    #   [Customizing web requests and responses in AWS WAF][1] in the [AWS
+    #   WAF Developer Guide][2].
+    #
+    #   For information about the limits on count and size for custom
+    #   request and response settings, see [AWS WAF quotas][3] in the [AWS
+    #   WAF Developer Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #   [3]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
+    #   @return [Hash<String,Types::CustomResponseBody>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UpdateRuleGroupRequest AWS API Documentation
     #
     class UpdateRuleGroupRequest < Struct.new(
@@ -8627,7 +9264,8 @@ module Aws::WAFV2
       :description,
       :rules,
       :visibility_config,
-      :lock_token)
+      :lock_token,
+      :custom_response_bodies)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8655,8 +9293,26 @@ module Aws::WAFV2
     #         id: "EntityId", # required
     #         default_action: { # required
     #           block: {
+    #             custom_response: {
+    #               response_code: 1, # required
+    #               custom_response_body_key: "EntityName",
+    #               response_headers: [
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
     #           },
     #           allow: {
+    #             custom_request_handling: {
+    #               insert_headers: [ # required
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
     #           },
     #         },
     #         description: "EntityDescription",
@@ -8910,14 +9566,48 @@ module Aws::WAFV2
     #             },
     #             action: {
     #               block: {
+    #                 custom_response: {
+    #                   response_code: 1, # required
+    #                   custom_response_body_key: "EntityName",
+    #                   response_headers: [
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #               allow: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #               count: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #             },
     #             override_action: {
     #               count: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #               none: {
     #               },
@@ -8935,6 +9625,12 @@ module Aws::WAFV2
     #           metric_name: "MetricName", # required
     #         },
     #         lock_token: "LockToken", # required
+    #         custom_response_bodies: {
+    #           "EntityName" => {
+    #             content_type: "TEXT_PLAIN", # required, accepts TEXT_PLAIN, TEXT_HTML, APPLICATION_JSON
+    #             content: "ResponseContent", # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -8996,6 +9692,27 @@ module Aws::WAFV2
     #   operation.
     #   @return [String]
     #
+    # @!attribute [rw] custom_response_bodies
+    #   A map of custom response keys and content bodies. When you create a
+    #   rule with a block action, you can send a custom response to the web
+    #   request. You define these for the web ACL, and then use them in the
+    #   rules and default actions that you define in the web ACL.
+    #
+    #   For information about customizing web requests and responses, see
+    #   [Customizing web requests and responses in AWS WAF][1] in the [AWS
+    #   WAF Developer Guide][2].
+    #
+    #   For information about the limits on count and size for custom
+    #   request and response settings, see [AWS WAF quotas][3] in the [AWS
+    #   WAF Developer Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #   [3]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
+    #   @return [Hash<String,Types::CustomResponseBody>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UpdateWebACLRequest AWS API Documentation
     #
     class UpdateWebACLRequest < Struct.new(
@@ -9006,7 +9723,8 @@ module Aws::WAFV2
       :description,
       :rules,
       :visibility_config,
-      :lock_token)
+      :lock_token,
+      :custom_response_bodies)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9442,6 +10160,27 @@ module Aws::WAFV2
     #   any Firewall Manager rule groups in the web ACL.
     #   @return [Boolean]
     #
+    # @!attribute [rw] custom_response_bodies
+    #   A map of custom response keys and content bodies. When you create a
+    #   rule with a block action, you can send a custom response to the web
+    #   request. You define these for the web ACL, and then use them in the
+    #   rules and default actions that you define in the web ACL.
+    #
+    #   For information about customizing web requests and responses, see
+    #   [Customizing web requests and responses in AWS WAF][1] in the [AWS
+    #   WAF Developer Guide][2].
+    #
+    #   For information about the limits on count and size for custom
+    #   request and response settings, see [AWS WAF quotas][3] in the [AWS
+    #   WAF Developer Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #   [3]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
+    #   @return [Hash<String,Types::CustomResponseBody>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WebACL AWS API Documentation
     #
     class WebACL < Struct.new(
@@ -9455,7 +10194,8 @@ module Aws::WAFV2
       :capacity,
       :pre_process_firewall_manager_rule_groups,
       :post_process_firewall_manager_rule_groups,
-      :managed_by_firewall_manager)
+      :managed_by_firewall_manager,
+      :custom_response_bodies)
       SENSITIVE = []
       include Aws::Structure
     end

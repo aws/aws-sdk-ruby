@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.113.1 (2021-03-29)
+------------------
+
 * Issue - Ensure end of line characters are correctly encoded in XML.
 
 3.113.0 (2021-03-10)

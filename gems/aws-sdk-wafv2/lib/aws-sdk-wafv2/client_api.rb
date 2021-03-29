@@ -42,6 +42,14 @@ module Aws::WAFV2
     CreateRuleGroupResponse = Shapes::StructureShape.new(name: 'CreateRuleGroupResponse')
     CreateWebACLRequest = Shapes::StructureShape.new(name: 'CreateWebACLRequest')
     CreateWebACLResponse = Shapes::StructureShape.new(name: 'CreateWebACLResponse')
+    CustomHTTPHeader = Shapes::StructureShape.new(name: 'CustomHTTPHeader')
+    CustomHTTPHeaderName = Shapes::StringShape.new(name: 'CustomHTTPHeaderName')
+    CustomHTTPHeaderValue = Shapes::StringShape.new(name: 'CustomHTTPHeaderValue')
+    CustomHTTPHeaders = Shapes::ListShape.new(name: 'CustomHTTPHeaders')
+    CustomRequestHandling = Shapes::StructureShape.new(name: 'CustomRequestHandling')
+    CustomResponse = Shapes::StructureShape.new(name: 'CustomResponse')
+    CustomResponseBodies = Shapes::MapShape.new(name: 'CustomResponseBodies')
+    CustomResponseBody = Shapes::StructureShape.new(name: 'CustomResponseBody')
     DefaultAction = Shapes::StructureShape.new(name: 'DefaultAction')
     DeleteFirewallManagerRuleGroupsRequest = Shapes::StructureShape.new(name: 'DeleteFirewallManagerRuleGroupsRequest')
     DeleteFirewallManagerRuleGroupsResponse = Shapes::StructureShape.new(name: 'DeleteFirewallManagerRuleGroupsResponse')
@@ -174,6 +182,9 @@ module Aws::WAFV2
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceArns = Shapes::ListShape.new(name: 'ResourceArns')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    ResponseContent = Shapes::StringShape.new(name: 'ResponseContent')
+    ResponseContentType = Shapes::StringShape.new(name: 'ResponseContentType')
+    ResponseStatusCode = Shapes::IntegerShape.new(name: 'ResponseStatusCode')
     Rule = Shapes::StructureShape.new(name: 'Rule')
     RuleAction = Shapes::StructureShape.new(name: 'RuleAction')
     RuleGroup = Shapes::StructureShape.new(name: 'RuleGroup')
@@ -248,6 +259,7 @@ module Aws::WAFV2
 
     AllQueryArguments.struct_class = Types::AllQueryArguments
 
+    AllowAction.add_member(:custom_request_handling, Shapes::ShapeRef.new(shape: CustomRequestHandling, location_name: "CustomRequestHandling"))
     AllowAction.struct_class = Types::AllowAction
 
     AndStatement.add_member(:statements, Shapes::ShapeRef.new(shape: Statements, required: true, location_name: "Statements"))
@@ -259,6 +271,7 @@ module Aws::WAFV2
 
     AssociateWebACLResponse.struct_class = Types::AssociateWebACLResponse
 
+    BlockAction.add_member(:custom_response, Shapes::ShapeRef.new(shape: CustomResponse, location_name: "CustomResponse"))
     BlockAction.struct_class = Types::BlockAction
 
     Body.struct_class = Types::Body
@@ -276,6 +289,7 @@ module Aws::WAFV2
     CheckCapacityResponse.add_member(:capacity, Shapes::ShapeRef.new(shape: ConsumedCapacity, location_name: "Capacity"))
     CheckCapacityResponse.struct_class = Types::CheckCapacityResponse
 
+    CountAction.add_member(:custom_request_handling, Shapes::ShapeRef.new(shape: CustomRequestHandling, location_name: "CustomRequestHandling"))
     CountAction.struct_class = Types::CountAction
 
     CountryCodes.member = Shapes::ShapeRef.new(shape: CountryCode)
@@ -308,6 +322,7 @@ module Aws::WAFV2
     CreateRuleGroupRequest.add_member(:rules, Shapes::ShapeRef.new(shape: Rules, location_name: "Rules"))
     CreateRuleGroupRequest.add_member(:visibility_config, Shapes::ShapeRef.new(shape: VisibilityConfig, required: true, location_name: "VisibilityConfig"))
     CreateRuleGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateRuleGroupRequest.add_member(:custom_response_bodies, Shapes::ShapeRef.new(shape: CustomResponseBodies, location_name: "CustomResponseBodies"))
     CreateRuleGroupRequest.struct_class = Types::CreateRuleGroupRequest
 
     CreateRuleGroupResponse.add_member(:summary, Shapes::ShapeRef.new(shape: RuleGroupSummary, location_name: "Summary"))
@@ -320,10 +335,32 @@ module Aws::WAFV2
     CreateWebACLRequest.add_member(:rules, Shapes::ShapeRef.new(shape: Rules, location_name: "Rules"))
     CreateWebACLRequest.add_member(:visibility_config, Shapes::ShapeRef.new(shape: VisibilityConfig, required: true, location_name: "VisibilityConfig"))
     CreateWebACLRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateWebACLRequest.add_member(:custom_response_bodies, Shapes::ShapeRef.new(shape: CustomResponseBodies, location_name: "CustomResponseBodies"))
     CreateWebACLRequest.struct_class = Types::CreateWebACLRequest
 
     CreateWebACLResponse.add_member(:summary, Shapes::ShapeRef.new(shape: WebACLSummary, location_name: "Summary"))
     CreateWebACLResponse.struct_class = Types::CreateWebACLResponse
+
+    CustomHTTPHeader.add_member(:name, Shapes::ShapeRef.new(shape: CustomHTTPHeaderName, required: true, location_name: "Name"))
+    CustomHTTPHeader.add_member(:value, Shapes::ShapeRef.new(shape: CustomHTTPHeaderValue, required: true, location_name: "Value"))
+    CustomHTTPHeader.struct_class = Types::CustomHTTPHeader
+
+    CustomHTTPHeaders.member = Shapes::ShapeRef.new(shape: CustomHTTPHeader)
+
+    CustomRequestHandling.add_member(:insert_headers, Shapes::ShapeRef.new(shape: CustomHTTPHeaders, required: true, location_name: "InsertHeaders"))
+    CustomRequestHandling.struct_class = Types::CustomRequestHandling
+
+    CustomResponse.add_member(:response_code, Shapes::ShapeRef.new(shape: ResponseStatusCode, required: true, location_name: "ResponseCode"))
+    CustomResponse.add_member(:custom_response_body_key, Shapes::ShapeRef.new(shape: EntityName, location_name: "CustomResponseBodyKey"))
+    CustomResponse.add_member(:response_headers, Shapes::ShapeRef.new(shape: CustomHTTPHeaders, location_name: "ResponseHeaders"))
+    CustomResponse.struct_class = Types::CustomResponse
+
+    CustomResponseBodies.key = Shapes::ShapeRef.new(shape: EntityName)
+    CustomResponseBodies.value = Shapes::ShapeRef.new(shape: CustomResponseBody)
+
+    CustomResponseBody.add_member(:content_type, Shapes::ShapeRef.new(shape: ResponseContentType, required: true, location_name: "ContentType"))
+    CustomResponseBody.add_member(:content, Shapes::ShapeRef.new(shape: ResponseContent, required: true, location_name: "Content"))
+    CustomResponseBody.struct_class = Types::CustomResponseBody
 
     DefaultAction.add_member(:block, Shapes::ShapeRef.new(shape: BlockAction, location_name: "Block"))
     DefaultAction.add_member(:allow, Shapes::ShapeRef.new(shape: AllowAction, location_name: "Allow"))
@@ -737,6 +774,7 @@ module Aws::WAFV2
     RuleGroup.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "Description"))
     RuleGroup.add_member(:rules, Shapes::ShapeRef.new(shape: Rules, location_name: "Rules"))
     RuleGroup.add_member(:visibility_config, Shapes::ShapeRef.new(shape: VisibilityConfig, required: true, location_name: "VisibilityConfig"))
+    RuleGroup.add_member(:custom_response_bodies, Shapes::ShapeRef.new(shape: CustomResponseBodies, location_name: "CustomResponseBodies"))
     RuleGroup.struct_class = Types::RuleGroup
 
     RuleGroupReferenceStatement.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ARN"))
@@ -765,6 +803,8 @@ module Aws::WAFV2
     SampledHTTPRequest.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     SampledHTTPRequest.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "Action"))
     SampledHTTPRequest.add_member(:rule_name_within_rule_group, Shapes::ShapeRef.new(shape: EntityName, location_name: "RuleNameWithinRuleGroup"))
+    SampledHTTPRequest.add_member(:request_headers_inserted, Shapes::ShapeRef.new(shape: HTTPHeaders, location_name: "RequestHeadersInserted"))
+    SampledHTTPRequest.add_member(:response_code_sent, Shapes::ShapeRef.new(shape: ResponseStatusCode, location_name: "ResponseCodeSent"))
     SampledHTTPRequest.struct_class = Types::SampledHTTPRequest
 
     SampledHTTPRequests.member = Shapes::ShapeRef.new(shape: SampledHTTPRequest)
@@ -865,6 +905,7 @@ module Aws::WAFV2
     UpdateRuleGroupRequest.add_member(:rules, Shapes::ShapeRef.new(shape: Rules, location_name: "Rules"))
     UpdateRuleGroupRequest.add_member(:visibility_config, Shapes::ShapeRef.new(shape: VisibilityConfig, required: true, location_name: "VisibilityConfig"))
     UpdateRuleGroupRequest.add_member(:lock_token, Shapes::ShapeRef.new(shape: LockToken, required: true, location_name: "LockToken"))
+    UpdateRuleGroupRequest.add_member(:custom_response_bodies, Shapes::ShapeRef.new(shape: CustomResponseBodies, location_name: "CustomResponseBodies"))
     UpdateRuleGroupRequest.struct_class = Types::UpdateRuleGroupRequest
 
     UpdateRuleGroupResponse.add_member(:next_lock_token, Shapes::ShapeRef.new(shape: LockToken, location_name: "NextLockToken"))
@@ -878,6 +919,7 @@ module Aws::WAFV2
     UpdateWebACLRequest.add_member(:rules, Shapes::ShapeRef.new(shape: Rules, location_name: "Rules"))
     UpdateWebACLRequest.add_member(:visibility_config, Shapes::ShapeRef.new(shape: VisibilityConfig, required: true, location_name: "VisibilityConfig"))
     UpdateWebACLRequest.add_member(:lock_token, Shapes::ShapeRef.new(shape: LockToken, required: true, location_name: "LockToken"))
+    UpdateWebACLRequest.add_member(:custom_response_bodies, Shapes::ShapeRef.new(shape: CustomResponseBodies, location_name: "CustomResponseBodies"))
     UpdateWebACLRequest.struct_class = Types::UpdateWebACLRequest
 
     UpdateWebACLResponse.add_member(:next_lock_token, Shapes::ShapeRef.new(shape: LockToken, location_name: "NextLockToken"))
@@ -949,6 +991,7 @@ module Aws::WAFV2
     WebACL.add_member(:pre_process_firewall_manager_rule_groups, Shapes::ShapeRef.new(shape: FirewallManagerRuleGroups, location_name: "PreProcessFirewallManagerRuleGroups"))
     WebACL.add_member(:post_process_firewall_manager_rule_groups, Shapes::ShapeRef.new(shape: FirewallManagerRuleGroups, location_name: "PostProcessFirewallManagerRuleGroups"))
     WebACL.add_member(:managed_by_firewall_manager, Shapes::ShapeRef.new(shape: Boolean, location_name: "ManagedByFirewallManager"))
+    WebACL.add_member(:custom_response_bodies, Shapes::ShapeRef.new(shape: CustomResponseBodies, location_name: "CustomResponseBodies"))
     WebACL.struct_class = Types::WebACL
 
     WebACLSummaries.member = Shapes::ShapeRef.new(shape: WebACLSummary)

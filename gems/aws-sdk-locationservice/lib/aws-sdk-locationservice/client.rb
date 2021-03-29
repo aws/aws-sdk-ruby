@@ -331,6 +331,12 @@ module Aws::LocationService
     # resource. This allows the tracker resource to communicate location
     # data to the linked geofence collection.
     #
+    # <note markdown="1"> Currently not supported — Cross-account configurations, such as
+    # creating associations between a tracker resource in one account and a
+    # geofence collection in another account.
+    #
+    #  </note>
+    #
     # @option params [required, String] :consumer_arn
     #   The Amazon Resource Name (ARN) for the geofence collection to be
     #   associated to tracker resource. Used when you need to specify a
@@ -403,8 +409,15 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Used in geofence monitoring. Evaluates device positions against the
-    # position of geofences in a given geofence collection.
+    # Evaluates device positions against the geofence geometries from a
+    # given geofence collection. The evaluation determines if the device has
+    # entered or exited a geofenced area, which publishes ENTER or EXIT
+    # geofence events to Amazon EventBridge.
+    #
+    # <note markdown="1"> The last geofence that a device was observed within, if any, is
+    # tracked for 30 days after the most recent device position update
+    #
+    #  </note>
     #
     # @option params [required, String] :collection_name
     #   The geofence collection used in evaluating the position of devices
@@ -448,11 +461,7 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # A batch request to retrieve device positions.
-    #
-    # <note markdown="1"> The response will return the device positions from the last 24 hours.
-    #
-    #  </note>
+    # A batch request to retrieve all device positions.
     #
     # @option params [required, Array<String>] :device_ids
     #   Devices whose position you want to retrieve.
@@ -499,7 +508,7 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # A batch request for storing geofences into a given geofence
+    # A batch request for storing geofence geometries into a given geofence
     # collection.
     #
     # @option params [required, String] :collection_name
@@ -551,12 +560,13 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Uploads a position update for one or more devices to a tracker
-    # resource. The data is used for API queries requesting the device
-    # position and position history.
+    # Uploads position update data for one or more devices to a tracker
+    # resource. Amazon Location uses the data when reporting the last known
+    # device position and position history.
     #
-    # <note markdown="1"> Limitation — Location data is sampled at a fixed rate of 1 position
-    # per 30 second interval, and retained for 1 year before it is deleted.
+    # <note markdown="1"> Only one position update is stored per sample time. Location data is
+    # sampled at a fixed rate of one position per 30-second interval, and
+    # retained for one year before it is deleted.
     #
     #  </note>
     #
@@ -608,7 +618,7 @@ module Aws::LocationService
     #   Requirements:
     #
     #   * Contain only alphanumeric characters (A–Z, a–z, 0-9), hyphens (-),
-    #     and underscores (\_).
+    #     periods (.), and underscores (\_).
     #
     #   * Must be a unique geofence collection name.
     #
@@ -618,20 +628,25 @@ module Aws::LocationService
     #   An optional description for the geofence collection.
     #
     # @option params [required, String] :pricing_plan
-    #   Specifies the pricing plan for your geofence collection. There's
-    #   three pricing plan options:
-    #
-    #   * `RequestBasedUsage` — Selects the "Request-Based Usage" pricing
-    #     plan.
-    #
-    #   * `MobileAssetTracking` — Selects the "Mobile Asset Tracking"
-    #     pricing plan.
-    #
-    #   * `MobileAssetManagement` — Selects the "Mobile Asset Management"
-    #     pricing plan.
+    #   Specifies the pricing plan for your geofence collection.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see the [Amazon Location Service pricing page][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/pricing/
+    #
+    # @option params [String] :pricing_plan_data_source
+    #   Specifies the plan data source. Required if the Mobile Asset Tracking
+    #   (MAT) or the Mobile Asset Management (MAM) pricing plan is selected.
+    #
+    #   Billing is determined by the resource usage, the associated pricing
+    #   plan, and the data source that was specified. For more information
+    #   about each pricing plan option and restrictions, see the [Amazon
+    #   Location Service pricing page][1].
+    #
+    #   Valid Values: `Esri `\| `Here`
     #
     #
     #
@@ -649,6 +664,7 @@ module Aws::LocationService
     #     collection_name: "ResourceName", # required
     #     description: "ResourceDescription",
     #     pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
+    #     pricing_plan_data_source: "String",
     #   })
     #
     # @example Response structure
@@ -692,24 +708,14 @@ module Aws::LocationService
     #   Requirements:
     #
     #   * Must contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens
-    #     (-), and underscores (\_).
+    #     (-), periods (.), and underscores (\_).
     #
     #   * Must be a unique map resource name.
     #
     #   * No spaces allowed. For example, `ExampleMap`.
     #
     # @option params [required, String] :pricing_plan
-    #   Specifies the pricing plan for your map resource. There's three
-    #   pricing plan options:
-    #
-    #   * `RequestBasedUsage` — Selects the "Request-Based Usage" pricing
-    #     plan.
-    #
-    #   * `MobileAssetTracking` — Selects the "Mobile Asset Tracking"
-    #     pricing plan.
-    #
-    #   * `MobileAssetManagement` — Selects the "Mobile Asset Management"
-    #     pricing plan.
+    #   Specifies the pricing plan for your map resource.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see the [Amazon Location Service pricing page][1].
@@ -771,6 +777,24 @@ module Aws::LocationService
     # @option params [required, String] :data_source
     #   Specifies the data provider of geospatial data.
     #
+    #   <note markdown="1"> This field is case-sensitive. Enter the valid values as shown. For
+    #   example, entering `HERE` will return an error.
+    #
+    #    </note>
+    #
+    #   Valid values include:
+    #
+    #   * `Esri`
+    #
+    #   * `Here`
+    #
+    #   For additional details on data providers, see the [Amazon Location
+    #   Service data providers page][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #
     # @option params [Types::DataSourceConfiguration] :data_source_configuration
     #   Specifies the data storage option for requesting Places.
     #
@@ -782,25 +806,15 @@ module Aws::LocationService
     #
     #   Requirements:
     #
-    #   * Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens (-)
-    #     and underscores (\_) ).
+    #   * Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens (-),
+    #     periods (.), and underscores (\_).
     #
     #   * Must be a unique Place index resource name.
     #
     #   * No spaces allowed. For example, `ExamplePlaceIndex`.
     #
     # @option params [required, String] :pricing_plan
-    #   Specifies the pricing plan for your Place index resource. There's
-    #   three pricing plan options:
-    #
-    #   * `RequestBasedUsage` — Selects the "Request-Based Usage" pricing
-    #     plan.
-    #
-    #   * `MobileAssetTracking` — Selects the "Mobile Asset Tracking"
-    #     pricing plan.
-    #
-    #   * `MobileAssetManagement` — Selects the "Mobile Asset Management"
-    #     pricing plan.
+    #   Specifies the pricing plan for your Place index resource.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see the [Amazon Location Service pricing page][1].
@@ -849,20 +863,25 @@ module Aws::LocationService
     #   An optional description for the tracker resource.
     #
     # @option params [required, String] :pricing_plan
-    #   Specifies the pricing plan for your tracker resource. There's three
-    #   pricing plan options:
-    #
-    #   * `RequestBasedUsage` — Selects the "Request-Based Usage" pricing
-    #     plan.
-    #
-    #   * `MobileAssetTracking` — Selects the "Mobile Asset Tracking"
-    #     pricing plan.
-    #
-    #   * `MobileAssetManagement` — Selects the "Mobile Asset Management"
-    #     pricing plan.
+    #   Specifies the pricing plan for your tracker resource.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see the [Amazon Location Service pricing page][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/pricing/
+    #
+    # @option params [String] :pricing_plan_data_source
+    #   Specifies the plan data source. Required if the Mobile Asset Tracking
+    #   (MAT) or the Mobile Asset Management (MAM) pricing plan is selected.
+    #
+    #   Billing is determined by the resource usage, the associated pricing
+    #   plan, and data source that was specified. For more information about
+    #   each pricing plan option and restrictions, see the [Amazon Location
+    #   Service pricing page][1].
+    #
+    #   Valid Values: `Esri` \| `Here`
     #
     #
     #
@@ -873,8 +892,8 @@ module Aws::LocationService
     #
     #   Requirements:
     #
-    #   * Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens (-)
-    #     and underscores (\_).
+    #   * Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens (-),
+    #     periods (.), and underscores (\_).
     #
     #   * Must be a unique tracker resource name.
     #
@@ -891,6 +910,7 @@ module Aws::LocationService
     #   resp = client.create_tracker({
     #     description: "ResourceDescription",
     #     pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
+    #     pricing_plan_data_source: "String",
     #     tracker_name: "ResourceName", # required
     #   })
     #
@@ -1032,6 +1052,8 @@ module Aws::LocationService
     #   * {Types::DescribeGeofenceCollectionResponse#collection_name #collection_name} => String
     #   * {Types::DescribeGeofenceCollectionResponse#create_time #create_time} => Time
     #   * {Types::DescribeGeofenceCollectionResponse#description #description} => String
+    #   * {Types::DescribeGeofenceCollectionResponse#pricing_plan #pricing_plan} => String
+    #   * {Types::DescribeGeofenceCollectionResponse#pricing_plan_data_source #pricing_plan_data_source} => String
     #   * {Types::DescribeGeofenceCollectionResponse#update_time #update_time} => Time
     #
     # @example Request syntax with placeholder values
@@ -1046,6 +1068,8 @@ module Aws::LocationService
     #   resp.collection_name #=> String
     #   resp.create_time #=> Time
     #   resp.description #=> String
+    #   resp.pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
+    #   resp.pricing_plan_data_source #=> String
     #   resp.update_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DescribeGeofenceCollection AWS API Documentation
@@ -1070,6 +1094,7 @@ module Aws::LocationService
     #   * {Types::DescribeMapResponse#description #description} => String
     #   * {Types::DescribeMapResponse#map_arn #map_arn} => String
     #   * {Types::DescribeMapResponse#map_name #map_name} => String
+    #   * {Types::DescribeMapResponse#pricing_plan #pricing_plan} => String
     #   * {Types::DescribeMapResponse#update_time #update_time} => Time
     #
     # @example Request syntax with placeholder values
@@ -1086,6 +1111,7 @@ module Aws::LocationService
     #   resp.description #=> String
     #   resp.map_arn #=> String
     #   resp.map_name #=> String
+    #   resp.pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
     #   resp.update_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DescribeMap AWS API Documentation
@@ -1110,6 +1136,7 @@ module Aws::LocationService
     #   * {Types::DescribePlaceIndexResponse#description #description} => String
     #   * {Types::DescribePlaceIndexResponse#index_arn #index_arn} => String
     #   * {Types::DescribePlaceIndexResponse#index_name #index_name} => String
+    #   * {Types::DescribePlaceIndexResponse#pricing_plan #pricing_plan} => String
     #   * {Types::DescribePlaceIndexResponse#update_time #update_time} => Time
     #
     # @example Request syntax with placeholder values
@@ -1126,6 +1153,7 @@ module Aws::LocationService
     #   resp.description #=> String
     #   resp.index_arn #=> String
     #   resp.index_name #=> String
+    #   resp.pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
     #   resp.update_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DescribePlaceIndex AWS API Documentation
@@ -1146,6 +1174,8 @@ module Aws::LocationService
     #
     #   * {Types::DescribeTrackerResponse#create_time #create_time} => Time
     #   * {Types::DescribeTrackerResponse#description #description} => String
+    #   * {Types::DescribeTrackerResponse#pricing_plan #pricing_plan} => String
+    #   * {Types::DescribeTrackerResponse#pricing_plan_data_source #pricing_plan_data_source} => String
     #   * {Types::DescribeTrackerResponse#tracker_arn #tracker_arn} => String
     #   * {Types::DescribeTrackerResponse#tracker_name #tracker_name} => String
     #   * {Types::DescribeTrackerResponse#update_time #update_time} => Time
@@ -1160,6 +1190,8 @@ module Aws::LocationService
     #
     #   resp.create_time #=> Time
     #   resp.description #=> String
+    #   resp.pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
+    #   resp.pricing_plan_data_source #=> String
     #   resp.tracker_arn #=> String
     #   resp.tracker_name #=> String
     #   resp.update_time #=> Time
@@ -1173,7 +1205,7 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Removes the association bewteen a tracker resource and a geofence
+    # Removes the association between a tracker resource and a geofence
     # collection.
     #
     # <note markdown="1"> Once you unlink a tracker resource from a geofence collection, the
@@ -1213,14 +1245,15 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Retrieves the latest device position.
+    # Retrieves a device's most recent position according to its sample
+    # time.
     #
-    # <note markdown="1"> Limitation — Device positions are deleted after one year.
+    # <note markdown="1"> Device positions are deleted after one year.
     #
     #  </note>
     #
     # @option params [required, String] :device_id
-    #   The device whose position you want to retreieve.
+    #   The device whose position you want to retrieve.
     #
     # @option params [required, String] :tracker_name
     #   The tracker resource receiving the position update.
@@ -1259,7 +1292,7 @@ module Aws::LocationService
     # Retrieves the device position history from a tracker resource within a
     # specified range of time.
     #
-    # <note markdown="1"> Limitation — Device positions are deleted after one year.
+    # <note markdown="1"> Device positions are deleted after 1 year.
     #
     #  </note>
     #
@@ -1268,9 +1301,12 @@ module Aws::LocationService
     #
     # @option params [Time,DateTime,Date,Integer,String] :end_time_exclusive
     #   Specify the end time for the position history in [ ISO 8601][1]
-    #   format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #   format: `YYYY-MM-DDThh:mm:ss.sssZ`. By default, the value will be the
+    #   time that the request is made.
     #
-    #   * The given time for `EndTimeExclusive` must be after the time for
+    #   Requirement:
+    #
+    #   * The time specified for `EndTimeExclusive` must be after the time for
     #     `StartTimeInclusive`.
     #
     #   ^
@@ -1287,10 +1323,13 @@ module Aws::LocationService
     #
     # @option params [Time,DateTime,Date,Integer,String] :start_time_inclusive
     #   Specify the start time for the position history in [ ISO 8601][1]
-    #   format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #   format: `YYYY-MM-DDThh:mm:ss.sssZ`. By default, the value will be 24
+    #   hours prior to the time that the request is made.
     #
-    #   * The given time for `EndTimeExclusive` must be after the time for
-    #     `StartTimeInclusive`.
+    #   Requirement:
+    #
+    #   * The time specified for `StartTimeInclusive` must be before
+    #     `EndTimeExclusive`.
     #
     #   ^
     #
@@ -1589,6 +1628,8 @@ module Aws::LocationService
     #   resp.entries[0].collection_name #=> String
     #   resp.entries[0].create_time #=> Time
     #   resp.entries[0].description #=> String
+    #   resp.entries[0].pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
+    #   resp.entries[0].pricing_plan_data_source #=> String
     #   resp.entries[0].update_time #=> Time
     #   resp.next_token #=> String
     #
@@ -1683,6 +1724,7 @@ module Aws::LocationService
     #   resp.entries[0].data_source #=> String
     #   resp.entries[0].description #=> String
     #   resp.entries[0].map_name #=> String
+    #   resp.entries[0].pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
     #   resp.entries[0].update_time #=> Time
     #   resp.next_token #=> String
     #
@@ -1730,6 +1772,7 @@ module Aws::LocationService
     #   resp.entries[0].data_source #=> String
     #   resp.entries[0].description #=> String
     #   resp.entries[0].index_name #=> String
+    #   resp.entries[0].pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
     #   resp.entries[0].update_time #=> Time
     #   resp.next_token #=> String
     #
@@ -1824,6 +1867,8 @@ module Aws::LocationService
     #   resp.entries #=> Array
     #   resp.entries[0].create_time #=> Time
     #   resp.entries[0].description #=> String
+    #   resp.entries[0].pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
+    #   resp.entries[0].pricing_plan_data_source #=> String
     #   resp.entries[0].tracker_name #=> String
     #   resp.entries[0].update_time #=> Time
     #   resp.next_token #=> String
@@ -1837,9 +1882,9 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Stores a geofence to a given geofence collection, or updates the
-    # geometry of an existing geofence if a geofence ID is included in the
-    # request.
+    # Stores a geofence geometry in a given geofence collection, or updates
+    # the geometry of an existing geofence if a geofence ID is included in
+    # the request.
     #
     # @option params [required, String] :collection_name
     #   The geofence collection to store the geofence in.
@@ -1849,6 +1894,14 @@ module Aws::LocationService
     #
     # @option params [required, Types::GeofenceGeometry] :geometry
     #   Contains the polygon details to specify the position of the geofence.
+    #
+    #   <note markdown="1"> Each [geofence polygon][1] can have a maximum of 1,000 vertices.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html
     #
     # @return [Types::PutGeofenceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2115,7 +2168,7 @@ module Aws::LocationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
