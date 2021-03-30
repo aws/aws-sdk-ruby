@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2021-03-30)
+------------------
+
+* Feature - This SDK release adds two new dataset features: 1) support for specifying a database connection as a dataset input 2) support for dynamic datasets that accept configurable parameters in S3 path.
+
 1.6.0 (2021-03-10)
 ------------------
 

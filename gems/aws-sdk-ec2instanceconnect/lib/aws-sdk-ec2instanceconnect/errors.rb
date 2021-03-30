@@ -29,7 +29,11 @@ module Aws::EC2InstanceConnect
   # ## Error Classes
   # * {AuthException}
   # * {EC2InstanceNotFoundException}
+  # * {EC2InstanceTypeInvalidException}
   # * {InvalidArgsException}
+  # * {SerialConsoleAccessDisabledException}
+  # * {SerialConsoleSessionLimitExceededException}
+  # * {SerialConsoleSessionUnavailableException}
   # * {ServiceException}
   # * {ThrottlingException}
   #
@@ -69,11 +73,71 @@ module Aws::EC2InstanceConnect
       end
     end
 
+    class EC2InstanceTypeInvalidException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::EC2InstanceConnect::Types::EC2InstanceTypeInvalidException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class InvalidArgsException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::EC2InstanceConnect::Types::InvalidArgsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class SerialConsoleAccessDisabledException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::EC2InstanceConnect::Types::SerialConsoleAccessDisabledException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class SerialConsoleSessionLimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::EC2InstanceConnect::Types::SerialConsoleSessionLimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class SerialConsoleSessionUnavailableException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::EC2InstanceConnect::Types::SerialConsoleSessionUnavailableException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

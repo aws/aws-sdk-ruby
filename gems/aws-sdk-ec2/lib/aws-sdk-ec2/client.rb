@@ -1476,19 +1476,20 @@ module Aws::EC2
     # inside an enclave. For more information, see [AWS Certificate Manager
     # for Nitro Enclaves][1] in the *AWS Nitro Enclaves User Guide*.
     #
-    # When the IAM role is associated with the ACM certificate, places the
-    # certificate, certificate chain, and encrypted private key in an Amazon
-    # S3 bucket that only the associated IAM role can access. The private
-    # key of the certificate is encrypted with an AWS-managed KMS customer
-    # master (CMK) that has an attached attestation-based CMK policy.
+    # When the IAM role is associated with the ACM certificate, the
+    # certificate, certificate chain, and encrypted private key are placed
+    # in an Amazon S3 bucket that only the associated IAM role can access.
+    # The private key of the certificate is encrypted with an AWS-managed
+    # KMS customer master (CMK) that has an attached attestation-based CMK
+    # policy.
     #
     # To enable the IAM role to access the Amazon S3 object, you must grant
     # it permission to call `s3:GetObject` on the Amazon S3 bucket returned
     # by the command. To enable the IAM role to access the AWS KMS CMK, you
-    # must grant it permission to call `kms:Decrypt` on AWS KMS CMK returned
-    # by the command. For more information, see [ Grant the role permission
-    # to access the certificate and encryption key][2] in the *AWS Nitro
-    # Enclaves User Guide*.
+    # must grant it permission to call `kms:Decrypt` on the AWS KMS CMK
+    # returned by the command. For more information, see [ Grant the role
+    # permission to access the certificate and encryption key][2] in the
+    # *AWS Nitro Enclaves User Guide*.
     #
     #
     #
@@ -7353,6 +7354,91 @@ module Aws::EC2
     # @param [Hash] params ({})
     def create_placement_group(params = {}, options = {})
       req = build_request(:create_placement_group, params)
+      req.send_request(options)
+    end
+
+    # Creates a root volume replacement task for an Amazon EC2 instance. The
+    # root volume can either be restored to its initial launch state, or it
+    # can be restored using a specific snapshot.
+    #
+    # For more information, see [Replace a root volume][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/
+    #
+    # @option params [required, String] :instance_id
+    #   The ID of the instance for which to replace the root volume.
+    #
+    # @option params [String] :snapshot_id
+    #   The ID of the snapshot from which to restore the replacement root
+    #   volume. If you want to restore the volume to the initial launch state,
+    #   omit this parameter.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. If you do not specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency. For more information, see [Ensuring Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the root volume replacement task.
+    #
+    # @return [Types::CreateReplaceRootVolumeTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateReplaceRootVolumeTaskResult#replace_root_volume_task #replace_root_volume_task} => Types::ReplaceRootVolumeTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_replace_root_volume_task({
+    #     instance_id: "InstanceId", # required
+    #     snapshot_id: "SnapshotId",
+    #     client_token: "String",
+    #     dry_run: false,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replace_root_volume_task.replace_root_volume_task_id #=> String
+    #   resp.replace_root_volume_task.instance_id #=> String
+    #   resp.replace_root_volume_task.task_state #=> String, one of "pending", "in-progress", "failing", "succeeded", "failed", "failed-detached"
+    #   resp.replace_root_volume_task.start_time #=> String
+    #   resp.replace_root_volume_task.complete_time #=> String
+    #   resp.replace_root_volume_task.tags #=> Array
+    #   resp.replace_root_volume_task.tags[0].key #=> String
+    #   resp.replace_root_volume_task.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateReplaceRootVolumeTask AWS API Documentation
+    #
+    # @overload create_replace_root_volume_task(params = {})
+    # @param [Hash] params ({})
+    def create_replace_root_volume_task(params = {}, options = {})
+      req = build_request(:create_replace_root_volume_task, params)
       req.send_request(options)
     end
 
@@ -21814,6 +21900,83 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes a root volume replacement task. For more information, see
+    # [Replace a root volume][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/
+    #
+    # @option params [Array<String>] :replace_root_volume_task_ids
+    #   The ID of the root volume replacement task to view.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filter to use:
+    #
+    #   * `instance-id` - The ID of the instance for which the root volume
+    #     replacement task was created.
+    #
+    #   ^
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeReplaceRootVolumeTasksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReplaceRootVolumeTasksResult#replace_root_volume_tasks #replace_root_volume_tasks} => Array&lt;Types::ReplaceRootVolumeTask&gt;
+    #   * {Types::DescribeReplaceRootVolumeTasksResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_replace_root_volume_tasks({
+    #     replace_root_volume_task_ids: ["ReplaceRootVolumeTaskId"],
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replace_root_volume_tasks #=> Array
+    #   resp.replace_root_volume_tasks[0].replace_root_volume_task_id #=> String
+    #   resp.replace_root_volume_tasks[0].instance_id #=> String
+    #   resp.replace_root_volume_tasks[0].task_state #=> String, one of "pending", "in-progress", "failing", "succeeded", "failed", "failed-detached"
+    #   resp.replace_root_volume_tasks[0].start_time #=> String
+    #   resp.replace_root_volume_tasks[0].complete_time #=> String
+    #   resp.replace_root_volume_tasks[0].tags #=> Array
+    #   resp.replace_root_volume_tasks[0].tags[0].key #=> String
+    #   resp.replace_root_volume_tasks[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReplaceRootVolumeTasks AWS API Documentation
+    #
+    # @overload describe_replace_root_volume_tasks(params = {})
+    # @param [Hash] params ({})
+    def describe_replace_root_volume_tasks(params = {}, options = {})
+      req = build_request(:describe_replace_root_volume_tasks, params)
+      req.send_request(options)
+    end
+
     # Describes one or more of the Reserved Instances that you purchased.
     #
     # For more information about Reserved Instances, see [Reserved
@@ -28197,6 +28360,44 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Disables access to the EC2 serial console of all instances for your
+    # account. By default, access to the EC2 serial console is disabled for
+    # your account. For more information, see [Manage account access to the
+    # EC2 serial console][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DisableSerialConsoleAccessResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableSerialConsoleAccessResult#serial_console_access_enabled #serial_console_access_enabled} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_serial_console_access({
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.serial_console_access_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableSerialConsoleAccess AWS API Documentation
+    #
+    # @overload disable_serial_console_access(params = {})
+    # @param [Hash] params ({})
+    def disable_serial_console_access(params = {}, options = {})
+      req = build_request(:disable_serial_console_access, params)
+      req.send_request(options)
+    end
+
     # Disables the specified resource attachment from propagating routes to
     # the specified propagation route table.
     #
@@ -28809,10 +29010,10 @@ module Aws::EC2
     # Region.
     #
     # After you enable encryption by default, the EBS volumes that you
-    # create are are always encrypted, either using the default CMK or the
-    # CMK that you specified when you created each volume. For more
-    # information, see [Amazon EBS encryption][1] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # create are always encrypted, either using the default CMK or the CMK
+    # that you specified when you created each volume. For more information,
+    # see [Amazon EBS encryption][1] in the *Amazon Elastic Compute Cloud
+    # User Guide*.
     #
     # You can specify the default CMK for encryption by default using
     # ModifyEbsDefaultKmsKeyId or ResetEbsDefaultKmsKeyId.
@@ -28927,6 +29128,44 @@ module Aws::EC2
     # @param [Hash] params ({})
     def enable_fast_snapshot_restores(params = {}, options = {})
       req = build_request(:enable_fast_snapshot_restores, params)
+      req.send_request(options)
+    end
+
+    # Enables access to the EC2 serial console of all instances for your
+    # account. By default, access to the EC2 serial console is disabled for
+    # your account. For more information, see [Manage account access to the
+    # EC2 serial console][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::EnableSerialConsoleAccessResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableSerialConsoleAccessResult#serial_console_access_enabled #serial_console_access_enabled} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_serial_console_access({
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.serial_console_access_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableSerialConsoleAccess AWS API Documentation
+    #
+    # @overload enable_serial_console_access(params = {})
+    # @param [Hash] params ({})
+    def enable_serial_console_access(params = {}, options = {})
+      req = build_request(:enable_serial_console_access, params)
       req.send_request(options)
     end
 
@@ -30463,6 +30702,44 @@ module Aws::EC2
     # @param [Hash] params ({})
     def get_reserved_instances_exchange_quote(params = {}, options = {})
       req = build_request(:get_reserved_instances_exchange_quote, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the access status of your account to the EC2 serial console
+    # of all instances. By default, access to the EC2 serial console is
+    # disabled for your account. For more information, see [Manage account
+    # access to the EC2 serial console][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetSerialConsoleAccessStatusResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSerialConsoleAccessStatusResult#serial_console_access_enabled #serial_console_access_enabled} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_serial_console_access_status({
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.serial_console_access_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSerialConsoleAccessStatus AWS API Documentation
+    #
+    # @overload get_serial_console_access_status(params = {})
+    # @param [Hash] params ({})
+    def get_serial_console_access_status(params = {}, options = {})
+      req = build_request(:get_serial_console_access_status, params)
       req.send_request(options)
     end
 
@@ -34337,7 +34614,8 @@ module Aws::EC2
     #   * `io2`\: 100-64,000 IOPS
     #
     #   Default: If no IOPS value is specified, the existing value is
-    #   retained.
+    #   retained, unless a volume type is modified that supports different
+    #   values.
     #
     # @option params [Integer] :throughput
     #   The target throughput of the volume, in MiB/s. This parameter is valid
@@ -41262,7 +41540,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.230.0'
+      context[:gem_version] = '1.231.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

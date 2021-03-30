@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2021-03-30)
+------------------
+
+* Feature - Amazon SageMaker Autopilot now supports 1) feature importance reports for AutoML jobs and 2) PartialFailures for AutoML jobs
+
 1.84.0 (2021-03-25)
 ------------------
 

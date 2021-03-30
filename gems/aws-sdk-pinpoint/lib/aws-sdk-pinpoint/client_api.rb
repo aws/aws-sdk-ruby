@@ -2031,6 +2031,7 @@ module Aws::Pinpoint
     JourneyLimits.add_member(:daily_cap, Shapes::ShapeRef.new(shape: __integer, location_name: "DailyCap"))
     JourneyLimits.add_member(:endpoint_reentry_cap, Shapes::ShapeRef.new(shape: __integer, location_name: "EndpointReentryCap"))
     JourneyLimits.add_member(:messages_per_second, Shapes::ShapeRef.new(shape: __integer, location_name: "MessagesPerSecond"))
+    JourneyLimits.add_member(:endpoint_reentry_interval, Shapes::ShapeRef.new(shape: __string, location_name: "EndpointReentryInterval"))
     JourneyLimits.struct_class = Types::JourneyLimits
 
     JourneyPushMessage.add_member(:time_to_live, Shapes::ShapeRef.new(shape: __string, location_name: "TimeToLive"))
@@ -3081,6 +3082,8 @@ module Aws::Pinpoint
     WriteJourneyRequest.add_member(:start_activity, Shapes::ShapeRef.new(shape: __string, location_name: "StartActivity"))
     WriteJourneyRequest.add_member(:start_condition, Shapes::ShapeRef.new(shape: StartCondition, location_name: "StartCondition"))
     WriteJourneyRequest.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "State"))
+    WriteJourneyRequest.add_member(:wait_for_quiet_time, Shapes::ShapeRef.new(shape: __boolean, location_name: "WaitForQuietTime"))
+    WriteJourneyRequest.add_member(:refresh_on_segment_update, Shapes::ShapeRef.new(shape: __boolean, location_name: "RefreshOnSegmentUpdate"))
     WriteJourneyRequest.struct_class = Types::WriteJourneyRequest
 
     WriteSegmentRequest.add_member(:dimensions, Shapes::ShapeRef.new(shape: SegmentDimensions, location_name: "Dimensions"))

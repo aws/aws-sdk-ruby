@@ -20,8 +20,17 @@ module Aws::ConfigService
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AggregateComplianceByConfigRule = Shapes::StructureShape.new(name: 'AggregateComplianceByConfigRule')
     AggregateComplianceByConfigRuleList = Shapes::ListShape.new(name: 'AggregateComplianceByConfigRuleList')
+    AggregateComplianceByConformancePack = Shapes::StructureShape.new(name: 'AggregateComplianceByConformancePack')
+    AggregateComplianceByConformancePackList = Shapes::ListShape.new(name: 'AggregateComplianceByConformancePackList')
     AggregateComplianceCount = Shapes::StructureShape.new(name: 'AggregateComplianceCount')
     AggregateComplianceCountList = Shapes::ListShape.new(name: 'AggregateComplianceCountList')
+    AggregateConformancePackCompliance = Shapes::StructureShape.new(name: 'AggregateConformancePackCompliance')
+    AggregateConformancePackComplianceCount = Shapes::StructureShape.new(name: 'AggregateConformancePackComplianceCount')
+    AggregateConformancePackComplianceFilters = Shapes::StructureShape.new(name: 'AggregateConformancePackComplianceFilters')
+    AggregateConformancePackComplianceSummary = Shapes::StructureShape.new(name: 'AggregateConformancePackComplianceSummary')
+    AggregateConformancePackComplianceSummaryFilters = Shapes::StructureShape.new(name: 'AggregateConformancePackComplianceSummaryFilters')
+    AggregateConformancePackComplianceSummaryGroupKey = Shapes::StringShape.new(name: 'AggregateConformancePackComplianceSummaryGroupKey')
+    AggregateConformancePackComplianceSummaryList = Shapes::ListShape.new(name: 'AggregateConformancePackComplianceSummaryList')
     AggregateEvaluationResult = Shapes::StructureShape.new(name: 'AggregateEvaluationResult')
     AggregateEvaluationResultList = Shapes::ListShape.new(name: 'AggregateEvaluationResultList')
     AggregateResourceIdentifier = Shapes::StructureShape.new(name: 'AggregateResourceIdentifier')
@@ -117,6 +126,7 @@ module Aws::ConfigService
     ConformancePackStatusDetailsList = Shapes::ListShape.new(name: 'ConformancePackStatusDetailsList')
     ConformancePackStatusReason = Shapes::StringShape.new(name: 'ConformancePackStatusReason')
     ConformancePackTemplateValidationException = Shapes::StructureShape.new(name: 'ConformancePackTemplateValidationException')
+    ControlsList = Shapes::ListShape.new(name: 'ControlsList')
     CosmosPageLimit = Shapes::IntegerShape.new(name: 'CosmosPageLimit')
     Date = Shapes::TimestampShape.new(name: 'Date')
     DeleteAggregationAuthorizationRequest = Shapes::StructureShape.new(name: 'DeleteAggregationAuthorizationRequest')
@@ -150,6 +160,8 @@ module Aws::ConfigService
     DeliveryStatus = Shapes::StringShape.new(name: 'DeliveryStatus')
     DescribeAggregateComplianceByConfigRulesRequest = Shapes::StructureShape.new(name: 'DescribeAggregateComplianceByConfigRulesRequest')
     DescribeAggregateComplianceByConfigRulesResponse = Shapes::StructureShape.new(name: 'DescribeAggregateComplianceByConfigRulesResponse')
+    DescribeAggregateComplianceByConformancePacksRequest = Shapes::StructureShape.new(name: 'DescribeAggregateComplianceByConformancePacksRequest')
+    DescribeAggregateComplianceByConformancePacksResponse = Shapes::StructureShape.new(name: 'DescribeAggregateComplianceByConformancePacksResponse')
     DescribeAggregationAuthorizationsRequest = Shapes::StructureShape.new(name: 'DescribeAggregationAuthorizationsRequest')
     DescribeAggregationAuthorizationsResponse = Shapes::StructureShape.new(name: 'DescribeAggregationAuthorizationsResponse')
     DescribeComplianceByConfigRuleRequest = Shapes::StructureShape.new(name: 'DescribeComplianceByConfigRuleRequest')
@@ -226,6 +238,8 @@ module Aws::ConfigService
     GetAggregateComplianceDetailsByConfigRuleResponse = Shapes::StructureShape.new(name: 'GetAggregateComplianceDetailsByConfigRuleResponse')
     GetAggregateConfigRuleComplianceSummaryRequest = Shapes::StructureShape.new(name: 'GetAggregateConfigRuleComplianceSummaryRequest')
     GetAggregateConfigRuleComplianceSummaryResponse = Shapes::StructureShape.new(name: 'GetAggregateConfigRuleComplianceSummaryResponse')
+    GetAggregateConformancePackComplianceSummaryRequest = Shapes::StructureShape.new(name: 'GetAggregateConformancePackComplianceSummaryRequest')
+    GetAggregateConformancePackComplianceSummaryResponse = Shapes::StructureShape.new(name: 'GetAggregateConformancePackComplianceSummaryResponse')
     GetAggregateDiscoveredResourceCountsRequest = Shapes::StructureShape.new(name: 'GetAggregateDiscoveredResourceCountsRequest')
     GetAggregateDiscoveredResourceCountsResponse = Shapes::StructureShape.new(name: 'GetAggregateDiscoveredResourceCountsResponse')
     GetAggregateResourceConfigRequest = Shapes::StructureShape.new(name: 'GetAggregateResourceConfigRequest')
@@ -509,11 +523,45 @@ module Aws::ConfigService
 
     AggregateComplianceByConfigRuleList.member = Shapes::ShapeRef.new(shape: AggregateComplianceByConfigRule)
 
+    AggregateComplianceByConformancePack.add_member(:conformance_pack_name, Shapes::ShapeRef.new(shape: ConformancePackName, location_name: "ConformancePackName"))
+    AggregateComplianceByConformancePack.add_member(:compliance, Shapes::ShapeRef.new(shape: AggregateConformancePackCompliance, location_name: "Compliance"))
+    AggregateComplianceByConformancePack.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    AggregateComplianceByConformancePack.add_member(:aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion"))
+    AggregateComplianceByConformancePack.struct_class = Types::AggregateComplianceByConformancePack
+
+    AggregateComplianceByConformancePackList.member = Shapes::ShapeRef.new(shape: AggregateComplianceByConformancePack)
+
     AggregateComplianceCount.add_member(:group_name, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "GroupName"))
     AggregateComplianceCount.add_member(:compliance_summary, Shapes::ShapeRef.new(shape: ComplianceSummary, location_name: "ComplianceSummary"))
     AggregateComplianceCount.struct_class = Types::AggregateComplianceCount
 
     AggregateComplianceCountList.member = Shapes::ShapeRef.new(shape: AggregateComplianceCount)
+
+    AggregateConformancePackCompliance.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ConformancePackComplianceType, location_name: "ComplianceType"))
+    AggregateConformancePackCompliance.add_member(:compliant_rule_count, Shapes::ShapeRef.new(shape: Integer, location_name: "CompliantRuleCount"))
+    AggregateConformancePackCompliance.add_member(:non_compliant_rule_count, Shapes::ShapeRef.new(shape: Integer, location_name: "NonCompliantRuleCount"))
+    AggregateConformancePackCompliance.add_member(:total_rule_count, Shapes::ShapeRef.new(shape: Integer, location_name: "TotalRuleCount"))
+    AggregateConformancePackCompliance.struct_class = Types::AggregateConformancePackCompliance
+
+    AggregateConformancePackComplianceCount.add_member(:compliant_conformance_pack_count, Shapes::ShapeRef.new(shape: Integer, location_name: "CompliantConformancePackCount"))
+    AggregateConformancePackComplianceCount.add_member(:non_compliant_conformance_pack_count, Shapes::ShapeRef.new(shape: Integer, location_name: "NonCompliantConformancePackCount"))
+    AggregateConformancePackComplianceCount.struct_class = Types::AggregateConformancePackComplianceCount
+
+    AggregateConformancePackComplianceFilters.add_member(:conformance_pack_name, Shapes::ShapeRef.new(shape: ConformancePackName, location_name: "ConformancePackName"))
+    AggregateConformancePackComplianceFilters.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ConformancePackComplianceType, location_name: "ComplianceType"))
+    AggregateConformancePackComplianceFilters.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    AggregateConformancePackComplianceFilters.add_member(:aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion"))
+    AggregateConformancePackComplianceFilters.struct_class = Types::AggregateConformancePackComplianceFilters
+
+    AggregateConformancePackComplianceSummary.add_member(:compliance_summary, Shapes::ShapeRef.new(shape: AggregateConformancePackComplianceCount, location_name: "ComplianceSummary"))
+    AggregateConformancePackComplianceSummary.add_member(:group_name, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "GroupName"))
+    AggregateConformancePackComplianceSummary.struct_class = Types::AggregateConformancePackComplianceSummary
+
+    AggregateConformancePackComplianceSummaryFilters.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    AggregateConformancePackComplianceSummaryFilters.add_member(:aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion"))
+    AggregateConformancePackComplianceSummaryFilters.struct_class = Types::AggregateConformancePackComplianceSummaryFilters
+
+    AggregateConformancePackComplianceSummaryList.member = Shapes::ShapeRef.new(shape: AggregateConformancePackComplianceSummary)
 
     AggregateEvaluationResult.add_member(:evaluation_result_identifier, Shapes::ShapeRef.new(shape: EvaluationResultIdentifier, location_name: "EvaluationResultIdentifier"))
     AggregateEvaluationResult.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ComplianceType, location_name: "ComplianceType"))
@@ -791,6 +839,7 @@ module Aws::ConfigService
 
     ConformancePackRuleCompliance.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName"))
     ConformancePackRuleCompliance.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ConformancePackComplianceType, location_name: "ComplianceType"))
+    ConformancePackRuleCompliance.add_member(:controls, Shapes::ShapeRef.new(shape: ControlsList, location_name: "Controls"))
     ConformancePackRuleCompliance.struct_class = Types::ConformancePackRuleCompliance
 
     ConformancePackRuleComplianceList.member = Shapes::ShapeRef.new(shape: ConformancePackRuleCompliance)
@@ -810,6 +859,8 @@ module Aws::ConfigService
     ConformancePackStatusDetailsList.member = Shapes::ShapeRef.new(shape: ConformancePackStatusDetail)
 
     ConformancePackTemplateValidationException.struct_class = Types::ConformancePackTemplateValidationException
+
+    ControlsList.member = Shapes::ShapeRef.new(shape: StringWithCharLimit128)
 
     DeleteAggregationAuthorizationRequest.add_member(:authorized_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AuthorizedAccountId"))
     DeleteAggregationAuthorizationRequest.add_member(:authorized_aws_region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "AuthorizedAwsRegion"))
@@ -905,6 +956,16 @@ module Aws::ConfigService
     DescribeAggregateComplianceByConfigRulesResponse.add_member(:aggregate_compliance_by_config_rules, Shapes::ShapeRef.new(shape: AggregateComplianceByConfigRuleList, location_name: "AggregateComplianceByConfigRules"))
     DescribeAggregateComplianceByConfigRulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeAggregateComplianceByConfigRulesResponse.struct_class = Types::DescribeAggregateComplianceByConfigRulesResponse
+
+    DescribeAggregateComplianceByConformancePacksRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
+    DescribeAggregateComplianceByConformancePacksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: AggregateConformancePackComplianceFilters, location_name: "Filters"))
+    DescribeAggregateComplianceByConformancePacksRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    DescribeAggregateComplianceByConformancePacksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeAggregateComplianceByConformancePacksRequest.struct_class = Types::DescribeAggregateComplianceByConformancePacksRequest
+
+    DescribeAggregateComplianceByConformancePacksResponse.add_member(:aggregate_compliance_by_conformance_packs, Shapes::ShapeRef.new(shape: AggregateComplianceByConformancePackList, location_name: "AggregateComplianceByConformancePacks"))
+    DescribeAggregateComplianceByConformancePacksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeAggregateComplianceByConformancePacksResponse.struct_class = Types::DescribeAggregateComplianceByConformancePacksResponse
 
     DescribeAggregationAuthorizationsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
     DescribeAggregationAuthorizationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -1190,6 +1251,18 @@ module Aws::ConfigService
     GetAggregateConfigRuleComplianceSummaryResponse.add_member(:aggregate_compliance_counts, Shapes::ShapeRef.new(shape: AggregateComplianceCountList, location_name: "AggregateComplianceCounts"))
     GetAggregateConfigRuleComplianceSummaryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetAggregateConfigRuleComplianceSummaryResponse.struct_class = Types::GetAggregateConfigRuleComplianceSummaryResponse
+
+    GetAggregateConformancePackComplianceSummaryRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
+    GetAggregateConformancePackComplianceSummaryRequest.add_member(:filters, Shapes::ShapeRef.new(shape: AggregateConformancePackComplianceSummaryFilters, location_name: "Filters"))
+    GetAggregateConformancePackComplianceSummaryRequest.add_member(:group_by_key, Shapes::ShapeRef.new(shape: AggregateConformancePackComplianceSummaryGroupKey, location_name: "GroupByKey"))
+    GetAggregateConformancePackComplianceSummaryRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    GetAggregateConformancePackComplianceSummaryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetAggregateConformancePackComplianceSummaryRequest.struct_class = Types::GetAggregateConformancePackComplianceSummaryRequest
+
+    GetAggregateConformancePackComplianceSummaryResponse.add_member(:aggregate_conformance_pack_compliance_summaries, Shapes::ShapeRef.new(shape: AggregateConformancePackComplianceSummaryList, location_name: "AggregateConformancePackComplianceSummaries"))
+    GetAggregateConformancePackComplianceSummaryResponse.add_member(:group_by_key, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "GroupByKey"))
+    GetAggregateConformancePackComplianceSummaryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetAggregateConformancePackComplianceSummaryResponse.struct_class = Types::GetAggregateConformancePackComplianceSummaryResponse
 
     GetAggregateDiscoveredResourceCountsRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
     GetAggregateDiscoveredResourceCountsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ResourceCountFilters, location_name: "Filters"))
@@ -2123,6 +2196,18 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
       end)
 
+      api.add_operation(:describe_aggregate_compliance_by_conformance_packs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAggregateComplianceByConformancePacks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAggregateComplianceByConformancePacksRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAggregateComplianceByConformancePacksResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+      end)
+
       api.add_operation(:describe_aggregation_authorizations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeAggregationAuthorizations"
         o.http_method = "POST"
@@ -2400,6 +2485,18 @@ module Aws::ConfigService
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetAggregateConfigRuleComplianceSummaryRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAggregateConfigRuleComplianceSummaryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+      end)
+
+      api.add_operation(:get_aggregate_conformance_pack_compliance_summary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAggregateConformancePackComplianceSummary"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAggregateConformancePackComplianceSummaryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAggregateConformancePackComplianceSummaryResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)

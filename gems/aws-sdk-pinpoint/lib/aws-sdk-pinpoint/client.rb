@@ -1393,6 +1393,7 @@ module Aws::Pinpoint
     #         daily_cap: 1,
     #         endpoint_reentry_cap: 1,
     #         messages_per_second: 1,
+    #         endpoint_reentry_interval: "__string",
     #       },
     #       local_time: false,
     #       name: "__string", # required
@@ -1437,7 +1438,9 @@ module Aws::Pinpoint
     #           segment_id: "__string", # required
     #         },
     #       },
-    #       state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED
+    #       state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED, PAUSED
+    #       wait_for_quiet_time: false,
+    #       refresh_on_segment_update: false,
     #     },
     #   })
     #
@@ -1592,6 +1595,7 @@ module Aws::Pinpoint
     #   resp.journey_response.limits.daily_cap #=> Integer
     #   resp.journey_response.limits.endpoint_reentry_cap #=> Integer
     #   resp.journey_response.limits.messages_per_second #=> Integer
+    #   resp.journey_response.limits.endpoint_reentry_interval #=> String
     #   resp.journey_response.local_time #=> Boolean
     #   resp.journey_response.name #=> String
     #   resp.journey_response.quiet_time.end #=> String
@@ -1615,7 +1619,7 @@ module Aws::Pinpoint
     #   resp.journey_response.start_condition.event_start_condition.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
     #   resp.journey_response.start_condition.event_start_condition.segment_id #=> String
     #   resp.journey_response.start_condition.segment_start_condition.segment_id #=> String
-    #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED"
+    #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED", "PAUSED"
     #   resp.journey_response.tags #=> Hash
     #   resp.journey_response.tags["__string"] #=> String
     #
@@ -3040,6 +3044,7 @@ module Aws::Pinpoint
     #   resp.journey_response.limits.daily_cap #=> Integer
     #   resp.journey_response.limits.endpoint_reentry_cap #=> Integer
     #   resp.journey_response.limits.messages_per_second #=> Integer
+    #   resp.journey_response.limits.endpoint_reentry_interval #=> String
     #   resp.journey_response.local_time #=> Boolean
     #   resp.journey_response.name #=> String
     #   resp.journey_response.quiet_time.end #=> String
@@ -3063,7 +3068,7 @@ module Aws::Pinpoint
     #   resp.journey_response.start_condition.event_start_condition.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
     #   resp.journey_response.start_condition.event_start_condition.segment_id #=> String
     #   resp.journey_response.start_condition.segment_start_condition.segment_id #=> String
-    #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED"
+    #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED", "PAUSED"
     #   resp.journey_response.tags #=> Hash
     #   resp.journey_response.tags["__string"] #=> String
     #
@@ -5675,6 +5680,7 @@ module Aws::Pinpoint
     #   resp.journey_response.limits.daily_cap #=> Integer
     #   resp.journey_response.limits.endpoint_reentry_cap #=> Integer
     #   resp.journey_response.limits.messages_per_second #=> Integer
+    #   resp.journey_response.limits.endpoint_reentry_interval #=> String
     #   resp.journey_response.local_time #=> Boolean
     #   resp.journey_response.name #=> String
     #   resp.journey_response.quiet_time.end #=> String
@@ -5698,7 +5704,7 @@ module Aws::Pinpoint
     #   resp.journey_response.start_condition.event_start_condition.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
     #   resp.journey_response.start_condition.event_start_condition.segment_id #=> String
     #   resp.journey_response.start_condition.segment_start_condition.segment_id #=> String
-    #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED"
+    #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED", "PAUSED"
     #   resp.journey_response.tags #=> Hash
     #   resp.journey_response.tags["__string"] #=> String
     #
@@ -7072,6 +7078,7 @@ module Aws::Pinpoint
     #   resp.journeys_response.item[0].limits.daily_cap #=> Integer
     #   resp.journeys_response.item[0].limits.endpoint_reentry_cap #=> Integer
     #   resp.journeys_response.item[0].limits.messages_per_second #=> Integer
+    #   resp.journeys_response.item[0].limits.endpoint_reentry_interval #=> String
     #   resp.journeys_response.item[0].local_time #=> Boolean
     #   resp.journeys_response.item[0].name #=> String
     #   resp.journeys_response.item[0].quiet_time.end #=> String
@@ -7095,7 +7102,7 @@ module Aws::Pinpoint
     #   resp.journeys_response.item[0].start_condition.event_start_condition.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
     #   resp.journeys_response.item[0].start_condition.event_start_condition.segment_id #=> String
     #   resp.journeys_response.item[0].start_condition.segment_start_condition.segment_id #=> String
-    #   resp.journeys_response.item[0].state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED"
+    #   resp.journeys_response.item[0].state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED", "PAUSED"
     #   resp.journeys_response.item[0].tags #=> Hash
     #   resp.journeys_response.item[0].tags["__string"] #=> String
     #   resp.journeys_response.next_token #=> String
@@ -9553,6 +9560,7 @@ module Aws::Pinpoint
     #         daily_cap: 1,
     #         endpoint_reentry_cap: 1,
     #         messages_per_second: 1,
+    #         endpoint_reentry_interval: "__string",
     #       },
     #       local_time: false,
     #       name: "__string", # required
@@ -9597,7 +9605,9 @@ module Aws::Pinpoint
     #           segment_id: "__string", # required
     #         },
     #       },
-    #       state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED
+    #       state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED, PAUSED
+    #       wait_for_quiet_time: false,
+    #       refresh_on_segment_update: false,
     #     },
     #   })
     #
@@ -9752,6 +9762,7 @@ module Aws::Pinpoint
     #   resp.journey_response.limits.daily_cap #=> Integer
     #   resp.journey_response.limits.endpoint_reentry_cap #=> Integer
     #   resp.journey_response.limits.messages_per_second #=> Integer
+    #   resp.journey_response.limits.endpoint_reentry_interval #=> String
     #   resp.journey_response.local_time #=> Boolean
     #   resp.journey_response.name #=> String
     #   resp.journey_response.quiet_time.end #=> String
@@ -9775,7 +9786,7 @@ module Aws::Pinpoint
     #   resp.journey_response.start_condition.event_start_condition.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
     #   resp.journey_response.start_condition.event_start_condition.segment_id #=> String
     #   resp.journey_response.start_condition.segment_start_condition.segment_id #=> String
-    #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED"
+    #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED", "PAUSED"
     #   resp.journey_response.tags #=> Hash
     #   resp.journey_response.tags["__string"] #=> String
     #
@@ -9788,7 +9799,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Cancels (stops) an active journey.
+    # Pause, resume or cancels (stops) a journey.
     #
     # @option params [required, String] :application_id
     #
@@ -9807,7 +9818,7 @@ module Aws::Pinpoint
     #     application_id: "__string", # required
     #     journey_id: "__string", # required
     #     journey_state_request: { # required
-    #       state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED
+    #       state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED, PAUSED
     #     },
     #   })
     #
@@ -9962,6 +9973,7 @@ module Aws::Pinpoint
     #   resp.journey_response.limits.daily_cap #=> Integer
     #   resp.journey_response.limits.endpoint_reentry_cap #=> Integer
     #   resp.journey_response.limits.messages_per_second #=> Integer
+    #   resp.journey_response.limits.endpoint_reentry_interval #=> String
     #   resp.journey_response.local_time #=> Boolean
     #   resp.journey_response.name #=> String
     #   resp.journey_response.quiet_time.end #=> String
@@ -9985,7 +9997,7 @@ module Aws::Pinpoint
     #   resp.journey_response.start_condition.event_start_condition.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
     #   resp.journey_response.start_condition.event_start_condition.segment_id #=> String
     #   resp.journey_response.start_condition.segment_start_condition.segment_id #=> String
-    #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED"
+    #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED", "PAUSED"
     #   resp.journey_response.tags #=> Hash
     #   resp.journey_response.tags["__string"] #=> String
     #
@@ -10681,7 +10693,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

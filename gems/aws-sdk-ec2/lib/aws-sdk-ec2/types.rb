@@ -8380,6 +8380,86 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateReplaceRootVolumeTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         snapshot_id: "SnapshotId",
+    #         client_token: "String",
+    #         dry_run: false,
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance for which to replace the root volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot from which to restore the replacement root
+    #   volume. If you want to restore the volume to the initial launch
+    #   state, omit this parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. If you do not specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency. For more information, see [Ensuring Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the root volume replacement task.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateReplaceRootVolumeTaskRequest AWS API Documentation
+    #
+    class CreateReplaceRootVolumeTaskRequest < Struct.new(
+      :instance_id,
+      :snapshot_id,
+      :client_token,
+      :dry_run,
+      :tag_specifications)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replace_root_volume_task
+    #   Information about the root volume replacement task.
+    #   @return [Types::ReplaceRootVolumeTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateReplaceRootVolumeTaskResult AWS API Documentation
+    #
+    class CreateReplaceRootVolumeTaskResult < Struct.new(
+      :replace_root_volume_task)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the parameters for CreateReservedInstancesListing.
     #
     # @note When making an API call, you may pass CreateReservedInstancesListingRequest
@@ -20320,6 +20400,82 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeReplaceRootVolumeTasksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         replace_root_volume_task_ids: ["ReplaceRootVolumeTaskId"],
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] replace_root_volume_task_ids
+    #   The ID of the root volume replacement task to view.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   Filter to use:
+    #
+    #   * `instance-id` - The ID of the instance for which the root volume
+    #     replacement task was created.
+    #
+    #   ^
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReplaceRootVolumeTasksRequest AWS API Documentation
+    #
+    class DescribeReplaceRootVolumeTasksRequest < Struct.new(
+      :replace_root_volume_task_ids,
+      :filters,
+      :max_results,
+      :next_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replace_root_volume_tasks
+    #   Information about the root volume replacement task.
+    #   @return [Array<Types::ReplaceRootVolumeTask>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReplaceRootVolumeTasksResult AWS API Documentation
+    #
+    class DescribeReplaceRootVolumeTasksResult < Struct.new(
+      :replace_root_volume_tasks,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the parameters for DescribeReservedInstancesListings.
     #
     # @note When making an API call, you may pass DescribeReservedInstancesListingsRequest
@@ -25459,6 +25615,42 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisableSerialConsoleAccessRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableSerialConsoleAccessRequest AWS API Documentation
+    #
+    class DisableSerialConsoleAccessRequest < Struct.new(
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serial_console_access_enabled
+    #   If `true`, access to the EC2 serial console of all instances is
+    #   enabled for your account. If `false`, access to the EC2 serial
+    #   console of all instances is disabled for your account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableSerialConsoleAccessResult AWS API Documentation
+    #
+    class DisableSerialConsoleAccessResult < Struct.new(
+      :serial_console_access_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisableTransitGatewayRouteTablePropagationRequest
     #   data as a hash:
     #
@@ -26950,6 +27142,42 @@ module Aws::EC2
     class EnableFastSnapshotRestoresResult < Struct.new(
       :successful,
       :unsuccessful)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass EnableSerialConsoleAccessRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableSerialConsoleAccessRequest AWS API Documentation
+    #
+    class EnableSerialConsoleAccessRequest < Struct.new(
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serial_console_access_enabled
+    #   If `true`, access to the EC2 serial console of all instances is
+    #   enabled for your account. If `false`, access to the EC2 serial
+    #   console of all instances is disabled for your account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableSerialConsoleAccessResult AWS API Documentation
+    #
+    class EnableSerialConsoleAccessResult < Struct.new(
+      :serial_console_access_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29994,6 +30222,42 @@ module Aws::EC2
       :target_configuration_value_rollup,
       :target_configuration_value_set,
       :validation_failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSerialConsoleAccessStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSerialConsoleAccessStatusRequest AWS API Documentation
+    #
+    class GetSerialConsoleAccessStatusRequest < Struct.new(
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serial_console_access_enabled
+    #   If `true`, access to the EC2 serial console of all instances is
+    #   enabled for your account. If `false`, access to the EC2 serial
+    #   console of all instances is disabled for your account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSerialConsoleAccessStatusResult AWS API Documentation
+    #
+    class GetSerialConsoleAccessStatusResult < Struct.new(
+      :serial_console_access_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39402,7 +39666,8 @@ module Aws::EC2
     #   * `io2`\: 100-64,000 IOPS
     #
     #   Default: If no IOPS value is specified, the existing value is
-    #   retained.
+    #   retained, unless a volume type is modified that supports different
+    #   values.
     #   @return [Integer]
     #
     # @!attribute [rw] throughput
@@ -44074,6 +44339,66 @@ module Aws::EC2
       :protocol,
       :rule_action,
       :rule_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a root volume replacement task.
+    #
+    # @!attribute [rw] replace_root_volume_task_id
+    #   The ID of the root volume replacement task.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance for which the root volume replacement task
+    #   was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_state
+    #   The state of the task. The task can be in one of the following
+    #   states:
+    #
+    #   * `pending` - the replacement volume is being created.
+    #
+    #   * `in-progress` - the original volume is being detached and the
+    #     replacement volume is being attached.
+    #
+    #   * `succeeded` - the replacement volume has been successfully
+    #     attached to the instance and the instance is available.
+    #
+    #   * `failing` - the replacement task is in the process of failing.
+    #
+    #   * `failed` - the replacement task has failed but the original root
+    #     volume is still attached.
+    #
+    #   * `failing-detached` - the replacement task is in the process of
+    #     failing. The instance might have no root volume attached.
+    #
+    #   * `failed-detached` - the replacement task has failed and the
+    #     instance has no root volume attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time the task was started.
+    #   @return [String]
+    #
+    # @!attribute [rw] complete_time
+    #   The time the task completed.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the task.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceRootVolumeTask AWS API Documentation
+    #
+    class ReplaceRootVolumeTask < Struct.new(
+      :replace_root_volume_task_id,
+      :instance_id,
+      :task_state,
+      :start_time,
+      :complete_time,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

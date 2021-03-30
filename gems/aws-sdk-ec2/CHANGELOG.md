@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.231.0 (2021-03-30)
+------------------
+
+* Feature - ReplaceRootVolume feature enables customers to replace the EBS root volume of a running instance to a previously known state. Add support to grant account-level access to the EC2 serial console
+
 1.230.0 (2021-03-24)
 ------------------
 
