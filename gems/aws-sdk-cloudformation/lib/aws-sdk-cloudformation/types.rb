@@ -1092,6 +1092,7 @@ module Aws::CloudFormation
     #         accounts: ["Account"],
     #         deployment_targets: {
     #           accounts: ["Account"],
+    #           accounts_url: "AccountsUrl",
     #           organizational_unit_ids: ["OrganizationalUnitId"],
     #         },
     #         regions: ["Region"], # required
@@ -1104,6 +1105,7 @@ module Aws::CloudFormation
     #           },
     #         ],
     #         operation_preferences: {
+    #           region_concurrency_type: "SEQUENTIAL", # accepts SEQUENTIAL, PARALLEL
     #           region_order: ["Region"],
     #           failure_tolerance_count: 1,
     #           failure_tolerance_percentage: 1,
@@ -1688,10 +1690,12 @@ module Aws::CloudFormation
     #         accounts: ["Account"],
     #         deployment_targets: {
     #           accounts: ["Account"],
+    #           accounts_url: "AccountsUrl",
     #           organizational_unit_ids: ["OrganizationalUnitId"],
     #         },
     #         regions: ["Region"], # required
     #         operation_preferences: {
+    #           region_concurrency_type: "SEQUENTIAL", # accepts SEQUENTIAL, PARALLEL
     #           region_order: ["Region"],
     #           failure_tolerance_count: 1,
     #           failure_tolerance_percentage: 1,
@@ -1876,6 +1880,7 @@ module Aws::CloudFormation
     #
     #       {
     #         accounts: ["Account"],
+    #         accounts_url: "AccountsUrl",
     #         organizational_unit_ids: ["OrganizationalUnitId"],
     #       }
     #
@@ -1883,6 +1888,9 @@ module Aws::CloudFormation
     #   The names of one or more AWS accounts for which you want to deploy
     #   stack set updates.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] accounts_url
+    #   @return [String]
     #
     # @!attribute [rw] organizational_unit_ids
     #   The organization root ID or organizational unit (OU) IDs to which
@@ -1893,6 +1901,7 @@ module Aws::CloudFormation
     #
     class DeploymentTargets < Struct.new(
       :accounts,
+      :accounts_url,
       :organizational_unit_ids)
       SENSITIVE = []
       include Aws::Structure
@@ -3120,6 +3129,7 @@ module Aws::CloudFormation
     #       {
     #         stack_set_name: "StackSetNameOrId", # required
     #         operation_preferences: {
+    #           region_concurrency_type: "SEQUENTIAL", # accepts SEQUENTIAL, PARALLEL
     #           region_order: ["Region"],
     #           failure_tolerance_count: 1,
     #           failure_tolerance_percentage: 1,
@@ -7159,12 +7169,16 @@ module Aws::CloudFormation
     #   data as a hash:
     #
     #       {
+    #         region_concurrency_type: "SEQUENTIAL", # accepts SEQUENTIAL, PARALLEL
     #         region_order: ["Region"],
     #         failure_tolerance_count: 1,
     #         failure_tolerance_percentage: 1,
     #         max_concurrent_count: 1,
     #         max_concurrent_percentage: 1,
     #       }
+    #
+    # @!attribute [rw] region_concurrency_type
+    #   @return [String]
     #
     # @!attribute [rw] region_order
     #   The order of the Regions in where you want to perform the stack
@@ -7232,6 +7246,7 @@ module Aws::CloudFormation
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperationPreferences AWS API Documentation
     #
     class StackSetOperationPreferences < Struct.new(
+      :region_concurrency_type,
       :region_order,
       :failure_tolerance_count,
       :failure_tolerance_percentage,
@@ -8135,6 +8150,7 @@ module Aws::CloudFormation
     #         accounts: ["Account"],
     #         deployment_targets: {
     #           accounts: ["Account"],
+    #           accounts_url: "AccountsUrl",
     #           organizational_unit_ids: ["OrganizationalUnitId"],
     #         },
     #         regions: ["Region"], # required
@@ -8147,6 +8163,7 @@ module Aws::CloudFormation
     #           },
     #         ],
     #         operation_preferences: {
+    #           region_concurrency_type: "SEQUENTIAL", # accepts SEQUENTIAL, PARALLEL
     #           region_order: ["Region"],
     #           failure_tolerance_count: 1,
     #           failure_tolerance_percentage: 1,
@@ -8345,6 +8362,7 @@ module Aws::CloudFormation
     #           },
     #         ],
     #         operation_preferences: {
+    #           region_concurrency_type: "SEQUENTIAL", # accepts SEQUENTIAL, PARALLEL
     #           region_order: ["Region"],
     #           failure_tolerance_count: 1,
     #           failure_tolerance_percentage: 1,
@@ -8355,6 +8373,7 @@ module Aws::CloudFormation
     #         execution_role_name: "ExecutionRoleName",
     #         deployment_targets: {
     #           accounts: ["Account"],
+    #           accounts_url: "AccountsUrl",
     #           organizational_unit_ids: ["OrganizationalUnitId"],
     #         },
     #         permission_model: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, SELF_MANAGED

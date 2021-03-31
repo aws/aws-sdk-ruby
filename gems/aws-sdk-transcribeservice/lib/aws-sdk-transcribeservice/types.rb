@@ -78,7 +78,7 @@ module Aws::TranscribeService
     #   data as a hash:
     #
     #       {
-    #         language_code: "en-US", # required, accepts en-US
+    #         language_code: "en-US", # required, accepts en-US, hi-IN, es-US, en-GB, en-AU
     #         base_model_name: "NarrowBand", # required, accepts NarrowBand, WideBand
     #         model_name: "ModelName", # required
     #         input_data_config: { # required

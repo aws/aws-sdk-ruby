@@ -362,6 +362,7 @@ module Aws::CognitoSync
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceFullName" => "Amazon Cognito Sync",
+        "serviceId" => "Cognito Sync",
         "signatureVersion" => "v4",
         "uid" => "cognito-sync-2014-06-30",
       }

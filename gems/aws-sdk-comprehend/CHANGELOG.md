@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2021-03-31)
+------------------
+
+* Feature - Support for customer managed KMS encryption of Comprehend custom models
+
 1.45.0 (2021-03-11)
 ------------------
 

@@ -63,6 +63,10 @@ module Aws::Batch
     DeviceCgroupPermission = Shapes::StringShape.new(name: 'DeviceCgroupPermission')
     DeviceCgroupPermissions = Shapes::ListShape.new(name: 'DeviceCgroupPermissions')
     DevicesList = Shapes::ListShape.new(name: 'DevicesList')
+    EFSAuthorizationConfig = Shapes::StructureShape.new(name: 'EFSAuthorizationConfig')
+    EFSAuthorizationConfigIAM = Shapes::StringShape.new(name: 'EFSAuthorizationConfigIAM')
+    EFSTransitEncryption = Shapes::StringShape.new(name: 'EFSTransitEncryption')
+    EFSVolumeConfiguration = Shapes::StructureShape.new(name: 'EFSVolumeConfiguration')
     Ec2Configuration = Shapes::StructureShape.new(name: 'Ec2Configuration')
     Ec2ConfigurationList = Shapes::ListShape.new(name: 'Ec2ConfigurationList')
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
@@ -381,6 +385,17 @@ module Aws::Batch
 
     DevicesList.member = Shapes::ShapeRef.new(shape: Device)
 
+    EFSAuthorizationConfig.add_member(:access_point_id, Shapes::ShapeRef.new(shape: String, location_name: "accessPointId"))
+    EFSAuthorizationConfig.add_member(:iam, Shapes::ShapeRef.new(shape: EFSAuthorizationConfigIAM, location_name: "iam"))
+    EFSAuthorizationConfig.struct_class = Types::EFSAuthorizationConfig
+
+    EFSVolumeConfiguration.add_member(:file_system_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fileSystemId"))
+    EFSVolumeConfiguration.add_member(:root_directory, Shapes::ShapeRef.new(shape: String, location_name: "rootDirectory"))
+    EFSVolumeConfiguration.add_member(:transit_encryption, Shapes::ShapeRef.new(shape: EFSTransitEncryption, location_name: "transitEncryption"))
+    EFSVolumeConfiguration.add_member(:transit_encryption_port, Shapes::ShapeRef.new(shape: Integer, location_name: "transitEncryptionPort"))
+    EFSVolumeConfiguration.add_member(:authorization_config, Shapes::ShapeRef.new(shape: EFSAuthorizationConfig, location_name: "authorizationConfig"))
+    EFSVolumeConfiguration.struct_class = Types::EFSVolumeConfiguration
+
     Ec2Configuration.add_member(:image_type, Shapes::ShapeRef.new(shape: ImageType, required: true, location_name: "imageType"))
     Ec2Configuration.add_member(:image_id_override, Shapes::ShapeRef.new(shape: ImageIdOverride, location_name: "imageIdOverride"))
     Ec2Configuration.struct_class = Types::Ec2Configuration
@@ -696,6 +711,7 @@ module Aws::Batch
 
     Volume.add_member(:host, Shapes::ShapeRef.new(shape: Host, location_name: "host"))
     Volume.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    Volume.add_member(:efs_volume_configuration, Shapes::ShapeRef.new(shape: EFSVolumeConfiguration, location_name: "efsVolumeConfiguration"))
     Volume.struct_class = Types::Volume
 
     Volumes.member = Shapes::ShapeRef.new(shape: Volume)

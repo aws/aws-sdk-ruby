@@ -27,6 +27,7 @@ module Aws::Redshift
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {AccessToClusterDeniedFault}
   # * {AccessToSnapshotDeniedFault}
   # * {AuthorizationAlreadyExistsFault}
   # * {AuthorizationNotFoundFault}
@@ -54,6 +55,13 @@ module Aws::Redshift
   # * {CopyToRegionDisabledFault}
   # * {DependentServiceRequestThrottlingFault}
   # * {DependentServiceUnavailableFault}
+  # * {EndpointAlreadyExistsFault}
+  # * {EndpointAuthorizationAlreadyExistsFault}
+  # * {EndpointAuthorizationNotFoundFault}
+  # * {EndpointAuthorizationsPerClusterLimitExceededFault}
+  # * {EndpointNotFoundFault}
+  # * {EndpointsPerAuthorizationLimitExceededFault}
+  # * {EndpointsPerClusterLimitExceededFault}
   # * {EventSubscriptionQuotaExceededFault}
   # * {HsmClientCertificateAlreadyExistsFault}
   # * {HsmClientCertificateNotFoundFault}
@@ -65,6 +73,7 @@ module Aws::Redshift
   # * {IncompatibleOrderableOptions}
   # * {InsufficientClusterCapacityFault}
   # * {InsufficientS3BucketPolicyFault}
+  # * {InvalidAuthorizationStateFault}
   # * {InvalidClusterParameterGroupStateFault}
   # * {InvalidClusterSecurityGroupStateFault}
   # * {InvalidClusterSnapshotScheduleStateFault}
@@ -74,6 +83,7 @@ module Aws::Redshift
   # * {InvalidClusterSubnetStateFault}
   # * {InvalidClusterTrackFault}
   # * {InvalidElasticIpFault}
+  # * {InvalidEndpointStateFault}
   # * {InvalidHsmClientCertificateStateFault}
   # * {InvalidHsmConfigurationStateFault}
   # * {InvalidReservedNodeStateFault}
@@ -140,6 +150,16 @@ module Aws::Redshift
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class AccessToClusterDeniedFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::AccessToClusterDeniedFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
 
     class AccessToSnapshotDeniedFault < ServiceError
 
@@ -411,6 +431,76 @@ module Aws::Redshift
       end
     end
 
+    class EndpointAlreadyExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::EndpointAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class EndpointAuthorizationAlreadyExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::EndpointAuthorizationAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class EndpointAuthorizationNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::EndpointAuthorizationNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class EndpointAuthorizationsPerClusterLimitExceededFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::EndpointAuthorizationsPerClusterLimitExceededFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class EndpointNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::EndpointNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class EndpointsPerAuthorizationLimitExceededFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::EndpointsPerAuthorizationLimitExceededFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class EndpointsPerClusterLimitExceededFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::EndpointsPerClusterLimitExceededFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class EventSubscriptionQuotaExceededFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -521,6 +611,16 @@ module Aws::Redshift
       end
     end
 
+    class InvalidAuthorizationStateFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::InvalidAuthorizationStateFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class InvalidClusterParameterGroupStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -606,6 +706,16 @@ module Aws::Redshift
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Redshift::Types::InvalidElasticIpFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidEndpointStateFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::InvalidEndpointStateFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

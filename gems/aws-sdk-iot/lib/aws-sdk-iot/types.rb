@@ -12258,6 +12258,7 @@ module Aws::IoT
     #         attribute_name: "AttributeName",
     #         attribute_value: "AttributeValue",
     #         thing_type_name: "ThingTypeName",
+    #         use_prefix_attribute_value: false,
     #       }
     #
     # @!attribute [rw] next_token
@@ -12282,12 +12283,22 @@ module Aws::IoT
     #   The name of the thing type used to search for things.
     #   @return [String]
     #
+    # @!attribute [rw] use_prefix_attribute_value
+    #   When `true`, the action returns the thing resources with attribute
+    #   values that start with the `attributeValue` provided.
+    #
+    #   When `false`, or not present, the action returns only the thing
+    #   resources with attribute values that match the entire
+    #   `attributeValue` provided.
+    #   @return [Boolean]
+    #
     class ListThingsRequest < Struct.new(
       :next_token,
       :max_results,
       :attribute_name,
       :attribute_value,
-      :thing_type_name)
+      :thing_type_name,
+      :use_prefix_attribute_value)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1184,6 +1184,7 @@ module Aws::IoT
     resourceArn = Shapes::StringShape.new(name: 'resourceArn')
     resourceId = Shapes::StringShape.new(name: 'resourceId')
     stringValue = Shapes::StringShape.new(name: 'stringValue')
+    usePrefixAttributeValue = Shapes::BooleanShape.new(name: 'usePrefixAttributeValue')
 
     AbortConfig.add_member(:criteria_list, Shapes::ShapeRef.new(shape: AbortCriteriaList, required: true, location_name: "criteriaList"))
     AbortConfig.struct_class = Types::AbortConfig
@@ -3347,6 +3348,7 @@ module Aws::IoT
     ListThingsRequest.add_member(:attribute_name, Shapes::ShapeRef.new(shape: AttributeName, location: "querystring", location_name: "attributeName"))
     ListThingsRequest.add_member(:attribute_value, Shapes::ShapeRef.new(shape: AttributeValue, location: "querystring", location_name: "attributeValue"))
     ListThingsRequest.add_member(:thing_type_name, Shapes::ShapeRef.new(shape: ThingTypeName, location: "querystring", location_name: "thingTypeName"))
+    ListThingsRequest.add_member(:use_prefix_attribute_value, Shapes::ShapeRef.new(shape: usePrefixAttributeValue, location: "querystring", location_name: "usePrefixAttributeValue"))
     ListThingsRequest.struct_class = Types::ListThingsRequest
 
     ListThingsResponse.add_member(:things, Shapes::ShapeRef.new(shape: ThingAttributeList, location_name: "things"))

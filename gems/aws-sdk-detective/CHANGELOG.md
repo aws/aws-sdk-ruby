@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2021-03-31)
+------------------
+
+* Feature - Added the ability to assign tag values to Detective behavior graphs. Tag values can be used for attribute-based access control, and for cost allocation for billing.
+
 1.15.0 (2021-03-10)
 ------------------
 

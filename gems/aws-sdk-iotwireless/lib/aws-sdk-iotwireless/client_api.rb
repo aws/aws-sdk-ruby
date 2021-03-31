@@ -33,12 +33,16 @@ module Aws::IoTWireless
     AssociateWirelessGatewayWithThingRequest = Shapes::StructureShape.new(name: 'AssociateWirelessGatewayWithThingRequest')
     AssociateWirelessGatewayWithThingResponse = Shapes::StructureShape.new(name: 'AssociateWirelessGatewayWithThingResponse')
     AutoCreateTasks = Shapes::BooleanShape.new(name: 'AutoCreateTasks')
+    BatteryLevel = Shapes::StringShape.new(name: 'BatteryLevel')
+    CertificateList = Shapes::StructureShape.new(name: 'CertificateList')
     CertificatePEM = Shapes::StringShape.new(name: 'CertificatePEM')
+    CertificateValue = Shapes::StringShape.new(name: 'CertificateValue')
     ChannelMask = Shapes::StringShape.new(name: 'ChannelMask')
     ClassBTimeout = Shapes::IntegerShape.new(name: 'ClassBTimeout')
     ClassCTimeout = Shapes::IntegerShape.new(name: 'ClassCTimeout')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConnectionStatus = Shapes::StringShape.new(name: 'ConnectionStatus')
     Crc = Shapes::IntegerShape.new(name: 'Crc')
     CreateDestinationRequest = Shapes::StructureShape.new(name: 'CreateDestinationRequest')
     CreateDestinationResponse = Shapes::StructureShape.new(name: 'CreateDestinationResponse')
@@ -76,11 +80,13 @@ module Aws::IoTWireless
     DevAddr = Shapes::StringShape.new(name: 'DevAddr')
     DevEui = Shapes::StringShape.new(name: 'DevEui')
     DevStatusReqFreq = Shapes::IntegerShape.new(name: 'DevStatusReqFreq')
+    DeviceCertificateList = Shapes::ListShape.new(name: 'DeviceCertificateList')
     DeviceProfile = Shapes::StructureShape.new(name: 'DeviceProfile')
     DeviceProfileArn = Shapes::StringShape.new(name: 'DeviceProfileArn')
     DeviceProfileId = Shapes::StringShape.new(name: 'DeviceProfileId')
     DeviceProfileList = Shapes::ListShape.new(name: 'DeviceProfileList')
     DeviceProfileName = Shapes::StringShape.new(name: 'DeviceProfileName')
+    DeviceState = Shapes::StringShape.new(name: 'DeviceState')
     DisassociateAwsAccountFromPartnerAccountRequest = Shapes::StructureShape.new(name: 'DisassociateAwsAccountFromPartnerAccountRequest')
     DisassociateAwsAccountFromPartnerAccountResponse = Shapes::StructureShape.new(name: 'DisassociateAwsAccountFromPartnerAccountResponse')
     DisassociateWirelessDeviceFromThingRequest = Shapes::StructureShape.new(name: 'DisassociateWirelessDeviceFromThingRequest')
@@ -96,6 +102,7 @@ module Aws::IoTWireless
     DrMax = Shapes::IntegerShape.new(name: 'DrMax')
     DrMin = Shapes::IntegerShape.new(name: 'DrMin')
     EndPoint = Shapes::StringShape.new(name: 'EndPoint')
+    Event = Shapes::StringShape.new(name: 'Event')
     Expression = Shapes::StringShape.new(name: 'Expression')
     ExpressionType = Shapes::StringShape.new(name: 'ExpressionType')
     FNwkSIntKey = Shapes::StringShape.new(name: 'FNwkSIntKey')
@@ -220,9 +227,14 @@ module Aws::IoTWireless
     SidewalkAccountInfo = Shapes::StructureShape.new(name: 'SidewalkAccountInfo')
     SidewalkAccountInfoWithFingerprint = Shapes::StructureShape.new(name: 'SidewalkAccountInfoWithFingerprint')
     SidewalkAccountList = Shapes::ListShape.new(name: 'SidewalkAccountList')
+    SidewalkDevice = Shapes::StructureShape.new(name: 'SidewalkDevice')
+    SidewalkDeviceMetadata = Shapes::StructureShape.new(name: 'SidewalkDeviceMetadata')
+    SidewalkId = Shapes::StringShape.new(name: 'SidewalkId')
     SidewalkListDevice = Shapes::StructureShape.new(name: 'SidewalkListDevice')
+    SidewalkManufacturingSn = Shapes::StringShape.new(name: 'SidewalkManufacturingSn')
     SidewalkSendDataToDevice = Shapes::StructureShape.new(name: 'SidewalkSendDataToDevice')
     SidewalkUpdateAccount = Shapes::StructureShape.new(name: 'SidewalkUpdateAccount')
+    SigningAlg = Shapes::StringShape.new(name: 'SigningAlg')
     Station = Shapes::StringShape.new(name: 'Station')
     Supports32BitFCnt = Shapes::BooleanShape.new(name: 'Supports32BitFCnt')
     SupportsClassB = Shapes::BooleanShape.new(name: 'SupportsClassB')
@@ -321,6 +333,10 @@ module Aws::IoTWireless
     AssociateWirelessGatewayWithThingRequest.struct_class = Types::AssociateWirelessGatewayWithThingRequest
 
     AssociateWirelessGatewayWithThingResponse.struct_class = Types::AssociateWirelessGatewayWithThingResponse
+
+    CertificateList.add_member(:signing_alg, Shapes::ShapeRef.new(shape: SigningAlg, required: true, location_name: "SigningAlg"))
+    CertificateList.add_member(:value, Shapes::ShapeRef.new(shape: CertificateValue, required: true, location_name: "Value"))
+    CertificateList.struct_class = Types::CertificateList
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId"))
@@ -448,6 +464,8 @@ module Aws::IoTWireless
     Destinations.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     Destinations.struct_class = Types::Destinations
 
+    DeviceCertificateList.member = Shapes::ShapeRef.new(shape: CertificateList)
+
     DeviceProfile.add_member(:arn, Shapes::ShapeRef.new(shape: DeviceProfileArn, location_name: "Arn"))
     DeviceProfile.add_member(:name, Shapes::ShapeRef.new(shape: DeviceProfileName, location_name: "Name"))
     DeviceProfile.add_member(:id, Shapes::ShapeRef.new(shape: DeviceProfileId, location_name: "Id"))
@@ -536,6 +554,7 @@ module Aws::IoTWireless
     GetWirelessDeviceResponse.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, location_name: "ThingName"))
     GetWirelessDeviceResponse.add_member(:thing_arn, Shapes::ShapeRef.new(shape: ThingArn, location_name: "ThingArn"))
     GetWirelessDeviceResponse.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANDevice, location_name: "LoRaWAN"))
+    GetWirelessDeviceResponse.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkDevice, location_name: "Sidewalk"))
     GetWirelessDeviceResponse.struct_class = Types::GetWirelessDeviceResponse
 
     GetWirelessDeviceStatisticsRequest.add_member(:wireless_device_id, Shapes::ShapeRef.new(shape: WirelessDeviceId, required: true, location: "uri", location_name: "Id"))
@@ -544,6 +563,7 @@ module Aws::IoTWireless
     GetWirelessDeviceStatisticsResponse.add_member(:wireless_device_id, Shapes::ShapeRef.new(shape: WirelessDeviceId, location_name: "WirelessDeviceId"))
     GetWirelessDeviceStatisticsResponse.add_member(:last_uplink_received_at, Shapes::ShapeRef.new(shape: ISODateTimeString, location_name: "LastUplinkReceivedAt"))
     GetWirelessDeviceStatisticsResponse.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANDeviceMetadata, location_name: "LoRaWAN"))
+    GetWirelessDeviceStatisticsResponse.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkDeviceMetadata, location_name: "Sidewalk"))
     GetWirelessDeviceStatisticsResponse.struct_class = Types::GetWirelessDeviceStatisticsResponse
 
     GetWirelessGatewayCertificateRequest.add_member(:id, Shapes::ShapeRef.new(shape: WirelessGatewayId, required: true, location: "uri", location_name: "Id"))
@@ -577,6 +597,7 @@ module Aws::IoTWireless
 
     GetWirelessGatewayStatisticsResponse.add_member(:wireless_gateway_id, Shapes::ShapeRef.new(shape: WirelessGatewayId, location_name: "WirelessGatewayId"))
     GetWirelessGatewayStatisticsResponse.add_member(:last_uplink_received_at, Shapes::ShapeRef.new(shape: ISODateTimeString, location_name: "LastUplinkReceivedAt"))
+    GetWirelessGatewayStatisticsResponse.add_member(:connection_status, Shapes::ShapeRef.new(shape: ConnectionStatus, location_name: "ConnectionStatus"))
     GetWirelessGatewayStatisticsResponse.struct_class = Types::GetWirelessGatewayStatisticsResponse
 
     GetWirelessGatewayTaskDefinitionRequest.add_member(:id, Shapes::ShapeRef.new(shape: WirelessGatewayTaskDefinitionId, required: true, location: "uri", location_name: "Id"))
@@ -820,7 +841,21 @@ module Aws::IoTWireless
 
     SidewalkAccountList.member = Shapes::ShapeRef.new(shape: SidewalkAccountInfoWithFingerprint)
 
+    SidewalkDevice.add_member(:sidewalk_id, Shapes::ShapeRef.new(shape: SidewalkId, location_name: "SidewalkId"))
+    SidewalkDevice.add_member(:sidewalk_manufacturing_sn, Shapes::ShapeRef.new(shape: SidewalkManufacturingSn, location_name: "SidewalkManufacturingSn"))
+    SidewalkDevice.add_member(:device_certificates, Shapes::ShapeRef.new(shape: DeviceCertificateList, location_name: "DeviceCertificates"))
+    SidewalkDevice.struct_class = Types::SidewalkDevice
+
+    SidewalkDeviceMetadata.add_member(:rssi, Shapes::ShapeRef.new(shape: Integer, location_name: "Rssi"))
+    SidewalkDeviceMetadata.add_member(:battery_level, Shapes::ShapeRef.new(shape: BatteryLevel, location_name: "BatteryLevel"))
+    SidewalkDeviceMetadata.add_member(:event, Shapes::ShapeRef.new(shape: Event, location_name: "Event"))
+    SidewalkDeviceMetadata.add_member(:device_state, Shapes::ShapeRef.new(shape: DeviceState, location_name: "DeviceState"))
+    SidewalkDeviceMetadata.struct_class = Types::SidewalkDeviceMetadata
+
     SidewalkListDevice.add_member(:amazon_id, Shapes::ShapeRef.new(shape: AmazonId, location_name: "AmazonId"))
+    SidewalkListDevice.add_member(:sidewalk_id, Shapes::ShapeRef.new(shape: SidewalkId, location_name: "SidewalkId"))
+    SidewalkListDevice.add_member(:sidewalk_manufacturing_sn, Shapes::ShapeRef.new(shape: SidewalkManufacturingSn, location_name: "SidewalkManufacturingSn"))
+    SidewalkListDevice.add_member(:device_certificates, Shapes::ShapeRef.new(shape: DeviceCertificateList, location_name: "DeviceCertificates"))
     SidewalkListDevice.struct_class = Types::SidewalkListDevice
 
     SidewalkSendDataToDevice.add_member(:seq, Shapes::ShapeRef.new(shape: Seq, location_name: "Seq"))

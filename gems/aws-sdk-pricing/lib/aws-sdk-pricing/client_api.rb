@@ -121,6 +121,7 @@ module Aws::Pricing
         "protocol" => "json",
         "serviceAbbreviation" => "AWS Pricing",
         "serviceFullName" => "AWS Price List Service",
+        "serviceId" => "Pricing",
         "signatureVersion" => "v4",
         "signingName" => "pricing",
         "targetPrefix" => "AWSPriceListService",

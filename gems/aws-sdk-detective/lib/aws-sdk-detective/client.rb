@@ -381,9 +381,21 @@ module Aws::Detective
     # the same administrator account, it always returns the same behavior
     # graph ARN. It does not create a new behavior graph.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to assign to the new behavior graph. For each tag, you
+    #   provide the tag key and the tag value.
+    #
     # @return [Types::CreateGraphResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGraphResponse#graph_arn #graph_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_graph({
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
     #
     # @example Response structure
     #
@@ -800,6 +812,35 @@ module Aws::Detective
       req.send_request(options)
     end
 
+    # Returns the tag values that are assigned to a behavior graph.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the behavior graph for which to retrieve the tag values.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "GraphArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Rejects an invitation to contribute the account data to a behavior
     # graph. This operation must be called by a member account that has the
     # `INVITED` status.
@@ -865,6 +906,60 @@ module Aws::Detective
       req.send_request(options)
     end
 
+    # Applies tag values to a behavior graph.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the behavior graph to assign the tags to.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tag values to assign to the behavior graph.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "GraphArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from a behavior graph.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the behavior graph to remove the tags from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag keys of the tags to remove from the behavior graph.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "GraphArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -878,7 +973,7 @@ module Aws::Detective
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-detective'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

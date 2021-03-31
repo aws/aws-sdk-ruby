@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2021-03-31)
+------------------
+
+* Feature - Enable customers to share access to their Redshift clusters from other VPCs (including VPCs from other accounts).
+
 1.58.0 (2021-03-23)
 ------------------
 

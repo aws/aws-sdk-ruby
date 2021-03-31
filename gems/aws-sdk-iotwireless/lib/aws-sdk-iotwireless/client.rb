@@ -1361,6 +1361,7 @@ module Aws::IoTWireless
     #   * {Types::GetWirelessDeviceResponse#thing_name #thing_name} => String
     #   * {Types::GetWirelessDeviceResponse#thing_arn #thing_arn} => String
     #   * {Types::GetWirelessDeviceResponse#lo_ra_wan #lo_ra_wan} => Types::LoRaWANDevice
+    #   * {Types::GetWirelessDeviceResponse#sidewalk #sidewalk} => Types::SidewalkDevice
     #
     # @example Request syntax with placeholder values
     #
@@ -1395,6 +1396,11 @@ module Aws::IoTWireless
     #   resp.lo_ra_wan.abp_v1_0_x.dev_addr #=> String
     #   resp.lo_ra_wan.abp_v1_0_x.session_keys.nwk_s_key #=> String
     #   resp.lo_ra_wan.abp_v1_0_x.session_keys.app_s_key #=> String
+    #   resp.sidewalk.sidewalk_id #=> String
+    #   resp.sidewalk.sidewalk_manufacturing_sn #=> String
+    #   resp.sidewalk.device_certificates #=> Array
+    #   resp.sidewalk.device_certificates[0].signing_alg #=> String, one of "Ed25519", "P256r1"
+    #   resp.sidewalk.device_certificates[0].value #=> String
     #
     # @overload get_wireless_device(params = {})
     # @param [Hash] params ({})
@@ -1413,6 +1419,7 @@ module Aws::IoTWireless
     #   * {Types::GetWirelessDeviceStatisticsResponse#wireless_device_id #wireless_device_id} => String
     #   * {Types::GetWirelessDeviceStatisticsResponse#last_uplink_received_at #last_uplink_received_at} => String
     #   * {Types::GetWirelessDeviceStatisticsResponse#lo_ra_wan #lo_ra_wan} => Types::LoRaWANDeviceMetadata
+    #   * {Types::GetWirelessDeviceStatisticsResponse#sidewalk #sidewalk} => Types::SidewalkDeviceMetadata
     #
     # @example Request syntax with placeholder values
     #
@@ -1433,6 +1440,10 @@ module Aws::IoTWireless
     #   resp.lo_ra_wan.gateways[0].gateway_eui #=> String
     #   resp.lo_ra_wan.gateways[0].snr #=> Float
     #   resp.lo_ra_wan.gateways[0].rssi #=> Float
+    #   resp.sidewalk.rssi #=> Integer
+    #   resp.sidewalk.battery_level #=> String, one of "normal", "low", "critical"
+    #   resp.sidewalk.event #=> String, one of "discovered", "lost", "ack", "nack", "passthrough"
+    #   resp.sidewalk.device_state #=> String, one of "Provisioned", "RegisteredNotSeen", "RegisteredReachable", "RegisteredUnreachable"
     #
     # @overload get_wireless_device_statistics(params = {})
     # @param [Hash] params ({})
@@ -1551,6 +1562,7 @@ module Aws::IoTWireless
     #
     #   * {Types::GetWirelessGatewayStatisticsResponse#wireless_gateway_id #wireless_gateway_id} => String
     #   * {Types::GetWirelessGatewayStatisticsResponse#last_uplink_received_at #last_uplink_received_at} => String
+    #   * {Types::GetWirelessGatewayStatisticsResponse#connection_status #connection_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1562,6 +1574,7 @@ module Aws::IoTWireless
     #
     #   resp.wireless_gateway_id #=> String
     #   resp.last_uplink_received_at #=> String
+    #   resp.connection_status #=> String, one of "Connected", "Disconnected"
     #
     # @overload get_wireless_gateway_statistics(params = {})
     # @param [Hash] params ({})
@@ -1885,6 +1898,11 @@ module Aws::IoTWireless
     #   resp.wireless_device_list[0].last_uplink_received_at #=> String
     #   resp.wireless_device_list[0].lo_ra_wan.dev_eui #=> String
     #   resp.wireless_device_list[0].sidewalk.amazon_id #=> String
+    #   resp.wireless_device_list[0].sidewalk.sidewalk_id #=> String
+    #   resp.wireless_device_list[0].sidewalk.sidewalk_manufacturing_sn #=> String
+    #   resp.wireless_device_list[0].sidewalk.device_certificates #=> Array
+    #   resp.wireless_device_list[0].sidewalk.device_certificates[0].signing_alg #=> String, one of "Ed25519", "P256r1"
+    #   resp.wireless_device_list[0].sidewalk.device_certificates[0].value #=> String
     #
     # @overload list_wireless_devices(params = {})
     # @param [Hash] params ({})
@@ -2257,7 +2275,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

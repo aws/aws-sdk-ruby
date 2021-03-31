@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2021-03-31)
+------------------
+
+* Feature - This release adds MACsec support to AWS Direct Connect
+
 1.40.0 (2021-03-10)
 ------------------
 

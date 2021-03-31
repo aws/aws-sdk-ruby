@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2021-03-31)
+------------------
+
+* Feature - Add ImageId input parameter to CreateEnvironmentEC2 endpoint. New parameter enables creation of environments with different AMIs.
+
 1.31.0 (2021-03-10)
 ------------------
 

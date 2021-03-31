@@ -20,6 +20,7 @@ module Aws::CloudFormation
     AccountLimit = Shapes::StructureShape.new(name: 'AccountLimit')
     AccountLimitList = Shapes::ListShape.new(name: 'AccountLimitList')
     AccountList = Shapes::ListShape.new(name: 'AccountList')
+    AccountsUrl = Shapes::StringShape.new(name: 'AccountsUrl')
     AllowedValue = Shapes::StringShape.new(name: 'AllowedValue')
     AllowedValues = Shapes::ListShape.new(name: 'AllowedValues')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
@@ -226,6 +227,7 @@ module Aws::CloudFormation
     RecordHandlerProgressInput = Shapes::StructureShape.new(name: 'RecordHandlerProgressInput')
     RecordHandlerProgressOutput = Shapes::StructureShape.new(name: 'RecordHandlerProgressOutput')
     Region = Shapes::StringShape.new(name: 'Region')
+    RegionConcurrencyType = Shapes::StringShape.new(name: 'RegionConcurrencyType')
     RegionList = Shapes::ListShape.new(name: 'RegionList')
     RegisterTypeInput = Shapes::StructureShape.new(name: 'RegisterTypeInput')
     RegisterTypeOutput = Shapes::StructureShape.new(name: 'RegisterTypeOutput')
@@ -560,6 +562,7 @@ module Aws::CloudFormation
     DeleteStackSetOutput.struct_class = Types::DeleteStackSetOutput
 
     DeploymentTargets.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, location_name: "Accounts"))
+    DeploymentTargets.add_member(:accounts_url, Shapes::ShapeRef.new(shape: AccountsUrl, location_name: "AccountsUrl"))
     DeploymentTargets.add_member(:organizational_unit_ids, Shapes::ShapeRef.new(shape: OrganizationalUnitIdList, location_name: "OrganizationalUnitIds"))
     DeploymentTargets.struct_class = Types::DeploymentTargets
 
@@ -1291,6 +1294,7 @@ module Aws::CloudFormation
     StackSetOperation.add_member(:stack_set_drift_detection_details, Shapes::ShapeRef.new(shape: StackSetDriftDetectionDetails, location_name: "StackSetDriftDetectionDetails"))
     StackSetOperation.struct_class = Types::StackSetOperation
 
+    StackSetOperationPreferences.add_member(:region_concurrency_type, Shapes::ShapeRef.new(shape: RegionConcurrencyType, location_name: "RegionConcurrencyType"))
     StackSetOperationPreferences.add_member(:region_order, Shapes::ShapeRef.new(shape: RegionList, location_name: "RegionOrder"))
     StackSetOperationPreferences.add_member(:failure_tolerance_count, Shapes::ShapeRef.new(shape: FailureToleranceCount, location_name: "FailureToleranceCount"))
     StackSetOperationPreferences.add_member(:failure_tolerance_percentage, Shapes::ShapeRef.new(shape: FailureTolerancePercentage, location_name: "FailureTolerancePercentage"))
