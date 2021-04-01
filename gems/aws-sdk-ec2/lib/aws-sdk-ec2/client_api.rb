@@ -108,6 +108,8 @@ module Aws::EC2
     AssociationIdList = Shapes::ListShape.new(name: 'AssociationIdList')
     AssociationStatus = Shapes::StructureShape.new(name: 'AssociationStatus')
     AssociationStatusCode = Shapes::StringShape.new(name: 'AssociationStatusCode')
+    AthenaIntegration = Shapes::StructureShape.new(name: 'AthenaIntegration')
+    AthenaIntegrationsSet = Shapes::ListShape.new(name: 'AthenaIntegrationsSet')
     AttachClassicLinkVpcRequest = Shapes::StructureShape.new(name: 'AttachClassicLinkVpcRequest')
     AttachClassicLinkVpcResult = Shapes::StructureShape.new(name: 'AttachClassicLinkVpcResult')
     AttachInternetGatewayRequest = Shapes::StructureShape.new(name: 'AttachInternetGatewayRequest')
@@ -1063,6 +1065,8 @@ module Aws::EC2
     GetEbsDefaultKmsKeyIdResult = Shapes::StructureShape.new(name: 'GetEbsDefaultKmsKeyIdResult')
     GetEbsEncryptionByDefaultRequest = Shapes::StructureShape.new(name: 'GetEbsEncryptionByDefaultRequest')
     GetEbsEncryptionByDefaultResult = Shapes::StructureShape.new(name: 'GetEbsEncryptionByDefaultResult')
+    GetFlowLogsIntegrationTemplateRequest = Shapes::StructureShape.new(name: 'GetFlowLogsIntegrationTemplateRequest')
+    GetFlowLogsIntegrationTemplateResult = Shapes::StructureShape.new(name: 'GetFlowLogsIntegrationTemplateResult')
     GetGroupsForCapacityReservationRequest = Shapes::StructureShape.new(name: 'GetGroupsForCapacityReservationRequest')
     GetGroupsForCapacityReservationRequestMaxResults = Shapes::IntegerShape.new(name: 'GetGroupsForCapacityReservationRequestMaxResults')
     GetGroupsForCapacityReservationResult = Shapes::StructureShape.new(name: 'GetGroupsForCapacityReservationResult')
@@ -1260,6 +1264,7 @@ module Aws::EC2
     InstanceUsage = Shapes::StructureShape.new(name: 'InstanceUsage')
     InstanceUsageSet = Shapes::ListShape.new(name: 'InstanceUsageSet')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    IntegrateServices = Shapes::StructureShape.new(name: 'IntegrateServices')
     InterfacePermissionType = Shapes::StringShape.new(name: 'InterfacePermissionType')
     InternetGateway = Shapes::StructureShape.new(name: 'InternetGateway')
     InternetGatewayAttachment = Shapes::StructureShape.new(name: 'InternetGatewayAttachment')
@@ -1585,6 +1590,7 @@ module Aws::EC2
     OnDemandOptionsRequest = Shapes::StructureShape.new(name: 'OnDemandOptionsRequest')
     OperationType = Shapes::StringShape.new(name: 'OperationType')
     OwnerStringList = Shapes::ListShape.new(name: 'OwnerStringList')
+    PartitionLoadFrequency = Shapes::StringShape.new(name: 'PartitionLoadFrequency')
     PathComponent = Shapes::StructureShape.new(name: 'PathComponent')
     PathComponentList = Shapes::ListShape.new(name: 'PathComponentList')
     PaymentOption = Shapes::StringShape.new(name: 'PaymentOption')
@@ -2542,8 +2548,8 @@ module Aws::EC2
     AssociateRouteTableResult.add_member(:association_state, Shapes::ShapeRef.new(shape: RouteTableAssociationState, location_name: "associationState"))
     AssociateRouteTableResult.struct_class = Types::AssociateRouteTableResult
 
-    AssociateSubnetCidrBlockRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "subnetId"))
     AssociateSubnetCidrBlockRequest.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ipv6CidrBlock"))
+    AssociateSubnetCidrBlockRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "subnetId"))
     AssociateSubnetCidrBlockRequest.struct_class = Types::AssociateSubnetCidrBlockRequest
 
     AssociateSubnetCidrBlockResult.add_member(:ipv_6_cidr_block_association, Shapes::ShapeRef.new(shape: SubnetIpv6CidrBlockAssociation, location_name: "ipv6CidrBlockAssociation"))
@@ -2599,6 +2605,14 @@ module Aws::EC2
     AssociationStatus.add_member(:code, Shapes::ShapeRef.new(shape: AssociationStatusCode, location_name: "code"))
     AssociationStatus.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     AssociationStatus.struct_class = Types::AssociationStatus
+
+    AthenaIntegration.add_member(:integration_result_s3_destination_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "IntegrationResultS3DestinationArn"))
+    AthenaIntegration.add_member(:partition_load_frequency, Shapes::ShapeRef.new(shape: PartitionLoadFrequency, required: true, location_name: "PartitionLoadFrequency"))
+    AthenaIntegration.add_member(:partition_start_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "PartitionStartDate"))
+    AthenaIntegration.add_member(:partition_end_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "PartitionEndDate"))
+    AthenaIntegration.struct_class = Types::AthenaIntegration
+
+    AthenaIntegrationsSet.member = Shapes::ShapeRef.new(shape: AthenaIntegration, location_name: "item")
 
     AttachClassicLinkVpcRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     AttachClassicLinkVpcRequest.add_member(:groups, Shapes::ShapeRef.new(shape: GroupIdStringList, required: true, location_name: "SecurityGroupId"))
@@ -3602,11 +3616,11 @@ module Aws::EC2
     CreateSubnetRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateSubnetRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
     CreateSubnetRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZoneId"))
+    CreateSubnetRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CidrBlock"))
     CreateSubnetRequest.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6CidrBlock"))
     CreateSubnetRequest.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "OutpostArn"))
     CreateSubnetRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
     CreateSubnetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
-    CreateSubnetRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CidrBlock"))
     CreateSubnetRequest.struct_class = Types::CreateSubnetRequest
 
     CreateSubnetResult.add_member(:subnet, Shapes::ShapeRef.new(shape: Subnet, location_name: "subnet"))
@@ -6460,6 +6474,15 @@ module Aws::EC2
     GetEbsEncryptionByDefaultResult.add_member(:ebs_encryption_by_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "ebsEncryptionByDefault"))
     GetEbsEncryptionByDefaultResult.struct_class = Types::GetEbsEncryptionByDefaultResult
 
+    GetFlowLogsIntegrationTemplateRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetFlowLogsIntegrationTemplateRequest.add_member(:flow_log_id, Shapes::ShapeRef.new(shape: VpcFlowLogId, required: true, location_name: "FlowLogId"))
+    GetFlowLogsIntegrationTemplateRequest.add_member(:config_delivery_s3_destination_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ConfigDeliveryS3DestinationArn"))
+    GetFlowLogsIntegrationTemplateRequest.add_member(:integrate_services, Shapes::ShapeRef.new(shape: IntegrateServices, required: true, location_name: "IntegrateService"))
+    GetFlowLogsIntegrationTemplateRequest.struct_class = Types::GetFlowLogsIntegrationTemplateRequest
+
+    GetFlowLogsIntegrationTemplateResult.add_member(:result, Shapes::ShapeRef.new(shape: String, location_name: "result"))
+    GetFlowLogsIntegrationTemplateResult.struct_class = Types::GetFlowLogsIntegrationTemplateResult
+
     GetGroupsForCapacityReservationRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "CapacityReservationId"))
     GetGroupsForCapacityReservationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetGroupsForCapacityReservationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetGroupsForCapacityReservationRequestMaxResults, location_name: "MaxResults"))
@@ -7295,6 +7318,9 @@ module Aws::EC2
     InstanceUsage.struct_class = Types::InstanceUsage
 
     InstanceUsageSet.member = Shapes::ShapeRef.new(shape: InstanceUsage, location_name: "item")
+
+    IntegrateServices.add_member(:athena_integrations, Shapes::ShapeRef.new(shape: AthenaIntegrationsSet, location_name: "AthenaIntegration"))
+    IntegrateServices.struct_class = Types::IntegrateServices
 
     InternetGateway.add_member(:attachments, Shapes::ShapeRef.new(shape: InternetGatewayAttachmentList, location_name: "attachmentSet"))
     InternetGateway.add_member(:internet_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "internetGatewayId"))
@@ -14142,6 +14168,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetEbsEncryptionByDefaultRequest)
         o.output = Shapes::ShapeRef.new(shape: GetEbsEncryptionByDefaultResult)
+      end)
+
+      api.add_operation(:get_flow_logs_integration_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetFlowLogsIntegrationTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetFlowLogsIntegrationTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetFlowLogsIntegrationTemplateResult)
       end)
 
       api.add_operation(:get_groups_for_capacity_reservation, Seahorse::Model::Operation.new.tap do |o|

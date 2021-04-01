@@ -1681,24 +1681,36 @@ module Aws::Lightsail
     # @!attribute [rw] state
     #   The current state of the container service.
     #
-    #   The state can be:
+    #   The following container service states are possible:
     #
-    #   * `Pending` - The container service is being created.
+    #   * `PENDING` - The container service is being created.
     #
-    #   * `Ready` - The container service is created but does not have a
-    #     container deployment.
+    #   * `READY` - The container service is running but it does not have an
+    #     active container deployment.
     #
-    #   * `Disabled` - The container service is disabled.
-    #
-    #   * `Updating` - The container service capacity or other setting is
-    #     being updated.
-    #
-    #   * `Deploying` - The container service is launching a container
+    #   * `DEPLOYING` - The container service is launching a container
     #     deployment.
     #
-    #   * `Running` - The container service is created and it has a
+    #   * `RUNNING` - The container service is running and it has an active
     #     container deployment.
+    #
+    #   * `UPDATING` - The container service capacity or its custom domains
+    #     are being updated.
+    #
+    #   * `DELETING` - The container service is being deleted.
+    #
+    #   * `DISABLED` - The container service is disabled, and its active
+    #     deployment and containers, if any, are shut down.
     #   @return [String]
+    #
+    # @!attribute [rw] state_detail
+    #   An object that describes the current state of the container service.
+    #
+    #   <note markdown="1"> The state detail is populated only when a container service is in a
+    #   `PENDING`, `DEPLOYING`, or `UPDATING` state.
+    #
+    #    </note>
+    #   @return [Types::ContainerServiceStateDetail]
     #
     # @!attribute [rw] scale
     #   The scale specification of the container service.
@@ -1782,6 +1794,7 @@ module Aws::Lightsail
       :power,
       :power_id,
       :state,
+      :state_detail,
       :scale,
       :current_deployment,
       :next_deployment,
@@ -2090,6 +2103,65 @@ module Aws::Lightsail
       :password,
       :expires_at,
       :registry)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the current state of a container service.
+    #
+    # @!attribute [rw] code
+    #   The state code of the container service.
+    #
+    #   The following state codes are possible:
+    #
+    #   * The following state codes are possible if your container service
+    #     is in a `DEPLOYING` or `UPDATING` state:
+    #
+    #     * `CREATING_SYSTEM_RESOURCES` - The system resources for your
+    #       container service are being created.
+    #
+    #     * `CREATING_NETWORK_INFRASTRUCTURE` - The network infrastructure
+    #       for your container service are being created.
+    #
+    #     * `PROVISIONING_CERTIFICATE` - The SSL/TLS certificate for your
+    #       container service is being created.
+    #
+    #     * `PROVISIONING_SERVICE` - Your container service is being
+    #       provisioned.
+    #
+    #     * `CREATING_DEPLOYMENT` - Your deployment is being created on your
+    #       container service.
+    #
+    #     * `EVALUATING_HEALTH_CHECK` - The health of your deployment is
+    #       being evaluated.
+    #
+    #     * `ACTIVATING_DEPLOYMENT` - Your deployment is being activated.
+    #
+    #   * The following state codes are possible if your container service
+    #     is in a `PENDING` state:
+    #
+    #     * `CERTIFICATE_LIMIT_EXCEEDED` - The SSL/TLS certificate required
+    #       for your container service exceeds the maximum number of
+    #       certificates allowed for your account.
+    #
+    #     * `UNKNOWN_ERROR` - An error was experienced when your container
+    #       service was being created.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message that provides more information for the state code.
+    #
+    #   <note markdown="1"> The state detail is populated only when a container service is in a
+    #   `PENDING`, `DEPLOYING`, or `UPDATING` state.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ContainerServiceStateDetail AWS API Documentation
+    #
+    class ContainerServiceStateDetail < Struct.new(
+      :code,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

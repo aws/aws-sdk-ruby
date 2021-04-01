@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2021-04-01)
+------------------
+
+* Feature - Route 53 Resolver DNS Firewall is a firewall service that allows you to filter and regulate outbound DNS traffic for your VPCs.
+
 1.24.0 (2021-03-10)
 ------------------
 

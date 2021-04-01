@@ -28,7 +28,7 @@ require_relative 'aws-sdk-route53resolver/customizations'
 # structure.
 #
 #     route_53_resolver = Aws::Route53Resolver::Client.new
-#     resp = route_53_resolver.associate_resolver_endpoint_ip_address(params)
+#     resp = route_53_resolver.associate_firewall_rule_group(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-route53resolver/customizations'
 # @!group service
 module Aws::Route53Resolver
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.25.0'
 
 end

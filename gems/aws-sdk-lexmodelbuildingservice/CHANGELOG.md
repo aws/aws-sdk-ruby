@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2021-04-01)
+------------------
+
+* Feature - Lex now supports the ja-JP locale
+
 1.44.0 (2021-03-10)
 ------------------
 

@@ -10,6 +10,28 @@
 module Aws::WAFV2
   module Types
 
+    # A single action condition for a Condition in a logging filter.
+    #
+    # @note When making an API call, you may pass ActionCondition
+    #   data as a hash:
+    #
+    #       {
+    #         action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action setting that a log record must contain in order to meet
+    #   the condition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ActionCondition AWS API Documentation
+    #
+    class ActionCondition < Struct.new(
+      :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Inspect all of the elements that AWS WAF has parsed and extracted from
     # the web request JSON body that are within the JsonBody `MatchScope`.
     # This is used with the FieldToMatch option `JsonBody`.
@@ -322,6 +344,13 @@ module Aws::WAFV2
     #                   name: "EntityName", # required
     #                 },
     #               ],
+    #               scope_down_statement: {
+    #                 # recursive Statement
+    #               },
+    #             },
+    #             label_match_statement: {
+    #               scope: "LABEL", # required, accepts LABEL, NAMESPACE
+    #               key: "LabelMatchKey", # required
     #             },
     #           },
     #         ],
@@ -839,6 +868,13 @@ module Aws::WAFV2
     #                     name: "EntityName", # required
     #                   },
     #                 ],
+    #                 scope_down_statement: {
+    #                   # recursive Statement
+    #                 },
+    #               },
+    #               label_match_statement: {
+    #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
+    #                 key: "LabelMatchKey", # required
     #               },
     #             },
     #             action: {
@@ -889,6 +925,11 @@ module Aws::WAFV2
     #               none: {
     #               },
     #             },
+    #             rule_labels: [
+    #               {
+    #                 name: "LabelName", # required
+    #               },
+    #             ],
     #             visibility_config: { # required
     #               sampled_requests_enabled: false, # required
     #               cloud_watch_metrics_enabled: false, # required
@@ -935,6 +976,37 @@ module Aws::WAFV2
     #
     class CheckCapacityResponse < Struct.new(
       :capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single match condition for a Filter.
+    #
+    # @note When making an API call, you may pass Condition
+    #   data as a hash:
+    #
+    #       {
+    #         action_condition: {
+    #           action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT
+    #         },
+    #         label_name_condition: {
+    #           label_name: "LabelName", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] action_condition
+    #   A single action condition.
+    #   @return [Types::ActionCondition]
+    #
+    # @!attribute [rw] label_name_condition
+    #   A single label name condition.
+    #   @return [Types::LabelNameCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/Condition AWS API Documentation
+    #
+    class Condition < Struct.new(
+      :action_condition,
+      :label_name_condition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1426,6 +1498,13 @@ module Aws::WAFV2
     #                     name: "EntityName", # required
     #                   },
     #                 ],
+    #                 scope_down_statement: {
+    #                   # recursive Statement
+    #                 },
+    #               },
+    #               label_match_statement: {
+    #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
+    #                 key: "LabelMatchKey", # required
     #               },
     #             },
     #             action: {
@@ -1476,6 +1555,11 @@ module Aws::WAFV2
     #               none: {
     #               },
     #             },
+    #             rule_labels: [
+    #               {
+    #                 name: "LabelName", # required
+    #               },
+    #             ],
     #             visibility_config: { # required
     #               sampled_requests_enabled: false, # required
     #               cloud_watch_metrics_enabled: false, # required
@@ -1889,6 +1973,13 @@ module Aws::WAFV2
     #                     name: "EntityName", # required
     #                   },
     #                 ],
+    #                 scope_down_statement: {
+    #                   # recursive Statement
+    #                 },
+    #               },
+    #               label_match_statement: {
+    #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
+    #                 key: "LabelMatchKey", # required
     #               },
     #             },
     #             action: {
@@ -1939,6 +2030,11 @@ module Aws::WAFV2
     #               none: {
     #               },
     #             },
+    #             rule_labels: [
+    #               {
+    #                 name: "LabelName", # required
+    #               },
+    #             ],
     #             visibility_config: { # required
     #               sampled_requests_enabled: false, # required
     #               cloud_watch_metrics_enabled: false, # required
@@ -2719,11 +2815,44 @@ module Aws::WAFV2
     # @!attribute [rw] rules
     #   @return [Array<Types::RuleSummary>]
     #
+    # @!attribute [rw] label_namespace
+    #   The label namespace prefix for this rule group. All labels added by
+    #   rules in this rule group have this prefix.
+    #
+    #   * The syntax for the label namespace prefix for a managed rule group
+    #     is the following:
+    #
+    #     `awswaf:managed:<vendor>:<rule group name>`\:
+    #
+    #   * When a rule with a label matches a web request, AWS WAF adds the
+    #     fully qualified label to the request. A fully qualified label is
+    #     made up of the label namespace from the rule group or web ACL
+    #     where the rule is defined and the label from the rule, separated
+    #     by a colon:
+    #
+    #     `<label namespace>:<label from rule>`
+    #   @return [String]
+    #
+    # @!attribute [rw] available_labels
+    #   The labels that one or more rules in this rule group add to matching
+    #   web ACLs. These labels are defined in the `RuleLabels` for a Rule.
+    #   @return [Array<Types::LabelSummary>]
+    #
+    # @!attribute [rw] consumed_labels
+    #   The labels that one or more rules in this rule group match against
+    #   in label match statements. These labels are defined in a
+    #   `LabelMatchStatement` specification, in the Statement definition of
+    #   a rule.
+    #   @return [Array<Types::LabelSummary>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DescribeManagedRuleGroupResponse AWS API Documentation
     #
     class DescribeManagedRuleGroupResponse < Struct.new(
       :capacity,
-      :rules)
+      :rules,
+      :label_namespace,
+      :available_labels,
+      :consumed_labels)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2909,6 +3038,51 @@ module Aws::WAFV2
       :body,
       :method,
       :json_body)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single logging filter, used in LoggingFilter.
+    #
+    # @note When making an API call, you may pass Filter
+    #   data as a hash:
+    #
+    #       {
+    #         behavior: "KEEP", # required, accepts KEEP, DROP
+    #         requirement: "MEETS_ALL", # required, accepts MEETS_ALL, MEETS_ANY
+    #         conditions: [ # required
+    #           {
+    #             action_condition: {
+    #               action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT
+    #             },
+    #             label_name_condition: {
+    #               label_name: "LabelName", # required
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] behavior
+    #   How to handle logs that satisfy the filter's conditions and
+    #   requirement.
+    #   @return [String]
+    #
+    # @!attribute [rw] requirement
+    #   Logic to apply to the filtering conditions. You can specify that, in
+    #   order to satisfy the filter, a log must match all conditions or must
+    #   match at least one condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] conditions
+    #   Match conditions for the filter.
+    #   @return [Array<Types::Condition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/Filter AWS API Documentation
+    #
+    class Filter < Struct.new(
+      :behavior,
+      :requirement,
+      :conditions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4027,12 +4201,12 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] invalid_fallback_behavior
-    #   The inspection behavior to fall back to if the JSON in the request
-    #   body is invalid. For AWS WAF, invalid JSON is any content that
-    #   isn't complete syntactical JSON, content whose root node isn't an
-    #   object or an array, and duplicate keys in the content.
+    #   What AWS WAF should do if it fails to completely parse the JSON
+    #   body. The options are the following:
     #
-    #   You can specify the following fallback behaviors:
+    #   * `EVALUATE_AS_STRING` - Inspect the body as plain text. AWS WAF
+    #     applies the text transformations and inspection criteria that you
+    #     defined for the JSON inspection to the body text string.
     #
     #   * `MATCH` - Treat the web request as matching the rule statement.
     #     AWS WAF applies the rule action to the request.
@@ -4040,13 +4214,22 @@ module Aws::WAFV2
     #   * `NO_MATCH` - Treat the web request as not matching the rule
     #     statement.
     #
-    #   * `EVALUATE_AS_STRING` - Inspect the body as plain text. This option
-    #     applies the text transformations and inspection criteria that you
-    #     defined for the JSON inspection to the body text string.
+    #   If you don't provide this setting, AWS WAF parses and evaluates the
+    #   content only up to the first parsing failure that it encounters.
     #
-    #   If you don't provide this setting, when AWS WAF encounters invalid
-    #   JSON, it parses and inspects what it can, up to the first invalid
-    #   JSON that it encounters.
+    #   AWS WAF does its best to parse the entire JSON body, but might be
+    #   forced to stop for reasons such as invalid characters, duplicate
+    #   keys, truncation, and any content whose root node isn't an object
+    #   or an array.
+    #
+    #   AWS WAF parses the JSON in the following examples as two valid key,
+    #   value pairs:
+    #
+    #   * Missing comma: `\{"key1":"value1""key2":"value2"\}`
+    #
+    #   * Missing colon: `\{"key1":"value1","key2""value2"\}`
+    #
+    #   * Extra colons: `\{"key1"::"value1","key2""value2"\}`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/JsonBody AWS API Documentation
@@ -4106,6 +4289,129 @@ module Aws::WAFV2
     class JsonMatchPattern < Struct.new(
       :all,
       :included_paths)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single label container. This is used as an element of a label array
+    # in multiple contexts, for example, in `RuleLabels` inside a Rule and
+    # in `Labels` inside a SampledHTTPRequest.
+    #
+    # @note When making an API call, you may pass Label
+    #   data as a hash:
+    #
+    #       {
+    #         name: "LabelName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The label string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/Label AWS API Documentation
+    #
+    class Label < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A rule statement that defines a string match search against labels
+    # that have been added to the web request by rules that have already run
+    # in the web ACL.
+    #
+    # The label match statement provides the label or namespace string to
+    # search for. The label string can represent a part or all of the fully
+    # qualified label name that had been added to the web request. Fully
+    # qualified labels have a prefix, optional namespaces, and label name.
+    # The prefix identifies the rule group or web ACL context of the rule
+    # that added the label. If you do not provide the fully qualified name
+    # in your label match string, AWS WAF performs the search for labels
+    # that were added in the same context as the label match statement.
+    #
+    # @note When making an API call, you may pass LabelMatchStatement
+    #   data as a hash:
+    #
+    #       {
+    #         scope: "LABEL", # required, accepts LABEL, NAMESPACE
+    #         key: "LabelMatchKey", # required
+    #       }
+    #
+    # @!attribute [rw] scope
+    #   Specify whether you want to match using the label name or just the
+    #   namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The string to match against. The setting you provide for this
+    #   depends on the match statement's `Scope` settings:
+    #
+    #   * If the `Scope` indicates `LABEL`, then this specification must
+    #     include the name and can include any number of preceding namespace
+    #     specifications and prefix up to providing the fully qualified
+    #     label name.
+    #
+    #   * If the `Scope` indicates `NAMESPACE`, then this specification can
+    #     include any number of contiguous namespace strings, and can
+    #     include the entire label namespace prefix from the rule group or
+    #     web ACL where the label originates.
+    #
+    #   Labels are case sensitive and components of a label must be
+    #   separated by colon, for example `NS1:NS2:name`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/LabelMatchStatement AWS API Documentation
+    #
+    class LabelMatchStatement < Struct.new(
+      :scope,
+      :key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single label name condition for a Condition in a logging filter.
+    #
+    # @note When making an API call, you may pass LabelNameCondition
+    #   data as a hash:
+    #
+    #       {
+    #         label_name: "LabelName", # required
+    #       }
+    #
+    # @!attribute [rw] label_name
+    #   The label name that a log record must contain in order to meet the
+    #   condition. This must be a fully qualified label name. Fully
+    #   qualified labels have a prefix, optional namespaces, and label name.
+    #   The prefix identifies the rule group or web ACL context of the rule
+    #   that added the label.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/LabelNameCondition AWS API Documentation
+    #
+    class LabelNameCondition < Struct.new(
+      :label_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List of labels used by one or more of the rules of a RuleGroup. This
+    # summary object is used for the following rule group lists:
+    #
+    # * `AvailableLabels` - Labels that rules add to matching requests.
+    #   These labels are defined in the `RuleLabels` for a Rule.
+    #
+    # * `ConsumedLabels` - Labels that rules match against. These labels are
+    #   defined in a `LabelMatchStatement` specification, in the Statement
+    #   definition of a rule.
+    #
+    # @!attribute [rw] name
+    #   An individual label specification.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/LabelSummary AWS API Documentation
+    #
+    class LabelSummary < Struct.new(
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4628,7 +4934,8 @@ module Aws::WAFV2
     # Defines an association between Amazon Kinesis Data Firehose
     # destinations and a web ACL resource, for logging from AWS WAF. As part
     # of the association, you can specify parts of the standard logging
-    # fields to keep out of the logs.
+    # fields to keep out of the logs and you can specify filters so that you
+    # log only a subset of the logging records.
     #
     # @note When making an API call, you may pass LoggingConfiguration
     #   data as a hash:
@@ -4666,6 +4973,25 @@ module Aws::WAFV2
     #           },
     #         ],
     #         managed_by_firewall_manager: false,
+    #         logging_filter: {
+    #           filters: [ # required
+    #             {
+    #               behavior: "KEEP", # required, accepts KEEP, DROP
+    #               requirement: "MEETS_ALL", # required, accepts MEETS_ALL, MEETS_ANY
+    #               conditions: [ # required
+    #                 {
+    #                   action_condition: {
+    #                     action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT
+    #                   },
+    #                   label_name_condition: {
+    #                     label_name: "LabelName", # required
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           default_behavior: "KEEP", # required, accepts KEEP, DROP
+    #         },
     #       }
     #
     # @!attribute [rw] resource_arn
@@ -4695,13 +5021,68 @@ module Aws::WAFV2
     #   true, only Firewall Manager can modify or delete the configuration.
     #   @return [Boolean]
     #
+    # @!attribute [rw] logging_filter
+    #   Filtering that specifies which web requests are kept in the logs and
+    #   which are dropped. You can filter on the rule action and on the web
+    #   request labels that were applied by matching rules during web ACL
+    #   evaluation.
+    #   @return [Types::LoggingFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/LoggingConfiguration AWS API Documentation
     #
     class LoggingConfiguration < Struct.new(
       :resource_arn,
       :log_destination_configs,
       :redacted_fields,
-      :managed_by_firewall_manager)
+      :managed_by_firewall_manager,
+      :logging_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filtering that specifies which web requests are kept in the logs and
+    # which are dropped, defined for a web ACL's LoggingConfiguration.
+    #
+    # You can filter on the rule action and on the web request labels that
+    # were applied by matching rules during web ACL evaluation.
+    #
+    # @note When making an API call, you may pass LoggingFilter
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [ # required
+    #           {
+    #             behavior: "KEEP", # required, accepts KEEP, DROP
+    #             requirement: "MEETS_ALL", # required, accepts MEETS_ALL, MEETS_ANY
+    #             conditions: [ # required
+    #               {
+    #                 action_condition: {
+    #                   action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT
+    #                 },
+    #                 label_name_condition: {
+    #                   label_name: "LabelName", # required
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         default_behavior: "KEEP", # required, accepts KEEP, DROP
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   The filters that you want to apply to the logs.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] default_behavior
+    #   Default handling for logs that don't match any of the specified
+    #   filtering conditions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/LoggingFilter AWS API Documentation
+    #
+    class LoggingFilter < Struct.new(
+      :filters,
+      :default_behavior)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4726,6 +5107,257 @@ module Aws::WAFV2
     #             name: "EntityName", # required
     #           },
     #         ],
+    #         scope_down_statement: {
+    #           byte_match_statement: {
+    #             search_string: "data", # required
+    #             field_to_match: { # required
+    #               single_header: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               single_query_argument: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               all_query_arguments: {
+    #               },
+    #               uri_path: {
+    #               },
+    #               query_string: {
+    #               },
+    #               body: {
+    #               },
+    #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
+    #             },
+    #             text_transformations: [ # required
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #               },
+    #             ],
+    #             positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
+    #           },
+    #           sqli_match_statement: {
+    #             field_to_match: { # required
+    #               single_header: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               single_query_argument: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               all_query_arguments: {
+    #               },
+    #               uri_path: {
+    #               },
+    #               query_string: {
+    #               },
+    #               body: {
+    #               },
+    #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
+    #             },
+    #             text_transformations: [ # required
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #               },
+    #             ],
+    #           },
+    #           xss_match_statement: {
+    #             field_to_match: { # required
+    #               single_header: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               single_query_argument: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               all_query_arguments: {
+    #               },
+    #               uri_path: {
+    #               },
+    #               query_string: {
+    #               },
+    #               body: {
+    #               },
+    #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
+    #             },
+    #             text_transformations: [ # required
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #               },
+    #             ],
+    #           },
+    #           size_constraint_statement: {
+    #             field_to_match: { # required
+    #               single_header: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               single_query_argument: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               all_query_arguments: {
+    #               },
+    #               uri_path: {
+    #               },
+    #               query_string: {
+    #               },
+    #               body: {
+    #               },
+    #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
+    #             },
+    #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
+    #             size: 1, # required
+    #             text_transformations: [ # required
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #               },
+    #             ],
+    #           },
+    #           geo_match_statement: {
+    #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #             forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #             },
+    #           },
+    #           rule_group_reference_statement: {
+    #             arn: "ResourceArn", # required
+    #             excluded_rules: [
+    #               {
+    #                 name: "EntityName", # required
+    #               },
+    #             ],
+    #           },
+    #           ip_set_reference_statement: {
+    #             arn: "ResourceArn", # required
+    #             ip_set_forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               position: "FIRST", # required, accepts FIRST, LAST, ANY
+    #             },
+    #           },
+    #           regex_pattern_set_reference_statement: {
+    #             arn: "ResourceArn", # required
+    #             field_to_match: { # required
+    #               single_header: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               single_query_argument: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               all_query_arguments: {
+    #               },
+    #               uri_path: {
+    #               },
+    #               query_string: {
+    #               },
+    #               body: {
+    #               },
+    #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
+    #             },
+    #             text_transformations: [ # required
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #               },
+    #             ],
+    #           },
+    #           rate_based_statement: {
+    #             limit: 1, # required
+    #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP
+    #             scope_down_statement: {
+    #               # recursive Statement
+    #             },
+    #             forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #             },
+    #           },
+    #           and_statement: {
+    #             statements: [ # required
+    #               {
+    #                 # recursive Statement
+    #               },
+    #             ],
+    #           },
+    #           or_statement: {
+    #             statements: [ # required
+    #               {
+    #                 # recursive Statement
+    #               },
+    #             ],
+    #           },
+    #           not_statement: {
+    #             statement: { # required
+    #               # recursive Statement
+    #             },
+    #           },
+    #           managed_rule_group_statement: {
+    #             vendor_name: "VendorName", # required
+    #             name: "EntityName", # required
+    #             excluded_rules: [
+    #               {
+    #                 name: "EntityName", # required
+    #               },
+    #             ],
+    #             scope_down_statement: {
+    #               # recursive Statement
+    #             },
+    #           },
+    #           label_match_statement: {
+    #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
+    #             key: "LabelMatchKey", # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] vendor_name
@@ -4744,12 +5376,18 @@ module Aws::WAFV2
     #   excludes the rule from acting on web requests.
     #   @return [Array<Types::ExcludedRule>]
     #
+    # @!attribute [rw] scope_down_statement
+    #   The processing guidance for a Rule, used by AWS WAF to determine
+    #   whether a web request matches the rule.
+    #   @return [Types::Statement]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ManagedRuleGroupStatement AWS API Documentation
     #
     class ManagedRuleGroupStatement < Struct.new(
       :vendor_name,
       :name,
-      :excluded_rules)
+      :excluded_rules,
+      :scope_down_statement)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5061,6 +5699,13 @@ module Aws::WAFV2
     #                 name: "EntityName", # required
     #               },
     #             ],
+    #             scope_down_statement: {
+    #               # recursive Statement
+    #             },
+    #           },
+    #           label_match_statement: {
+    #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
+    #             key: "LabelMatchKey", # required
     #           },
     #         },
     #       }
@@ -5324,6 +5969,13 @@ module Aws::WAFV2
     #                   name: "EntityName", # required
     #                 },
     #               ],
+    #               scope_down_statement: {
+    #                 # recursive Statement
+    #               },
+    #             },
+    #             label_match_statement: {
+    #               scope: "LABEL", # required, accepts LABEL, NAMESPACE
+    #               key: "LabelMatchKey", # required
     #             },
     #           },
     #         ],
@@ -5431,6 +6083,25 @@ module Aws::WAFV2
     #             },
     #           ],
     #           managed_by_firewall_manager: false,
+    #           logging_filter: {
+    #             filters: [ # required
+    #               {
+    #                 behavior: "KEEP", # required, accepts KEEP, DROP
+    #                 requirement: "MEETS_ALL", # required, accepts MEETS_ALL, MEETS_ANY
+    #                 conditions: [ # required
+    #                   {
+    #                     action_condition: {
+    #                       action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT
+    #                     },
+    #                     label_name_condition: {
+    #                       label_name: "LabelName", # required
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             default_behavior: "KEEP", # required, accepts KEEP, DROP
+    #           },
     #         },
     #       }
     #
@@ -5801,6 +6472,13 @@ module Aws::WAFV2
     #                 name: "EntityName", # required
     #               },
     #             ],
+    #             scope_down_statement: {
+    #               # recursive Statement
+    #             },
+    #           },
+    #           label_match_statement: {
+    #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
+    #             key: "LabelMatchKey", # required
     #           },
     #         },
     #         forwarded_ip_config: {
@@ -6325,6 +7003,13 @@ module Aws::WAFV2
     #                 name: "EntityName", # required
     #               },
     #             ],
+    #             scope_down_statement: {
+    #               # recursive Statement
+    #             },
+    #           },
+    #           label_match_statement: {
+    #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
+    #             key: "LabelMatchKey", # required
     #           },
     #         },
     #         action: {
@@ -6375,6 +7060,11 @@ module Aws::WAFV2
     #           none: {
     #           },
     #         },
+    #         rule_labels: [
+    #           {
+    #             name: "LabelName", # required
+    #           },
+    #         ],
     #         visibility_config: { # required
     #           sampled_requests_enabled: false, # required
     #           cloud_watch_metrics_enabled: false, # required
@@ -6438,6 +7128,32 @@ module Aws::WAFV2
     #     rule action setting and not this rule override action setting.
     #   @return [Types::OverrideAction]
     #
+    # @!attribute [rw] rule_labels
+    #   Labels to apply to web requests that match the rule match statement.
+    #   AWS WAF applies fully qualified labels to matching web requests. A
+    #   fully qualified label is the concatenation of a label namespace and
+    #   a rule label. The rule's rule group or web ACL defines the label
+    #   namespace.
+    #
+    #   Rules that run after this rule in the web ACL can match against
+    #   these labels using a `LabelMatchStatement`.
+    #
+    #   For each label, provide a case-sensitive string containing optional
+    #   namespaces and a label name, according to the following guidelines:
+    #
+    #   * Separate each component of the label with a colon.
+    #
+    #   * Each namespace or name can have up to 128 characters.
+    #
+    #   * You can specify up to 5 namespaces in a label.
+    #
+    #   * Don't use the following reserved words in your label
+    #     specification: `aws`, `waf`, `managed`, `rulegroup`, `webacl`,
+    #     `regexpatternset`, or `ipset`.
+    #
+    #   For example, `myLabelName` or `nameSpace1:nameSpace2:myLabelName`.
+    #   @return [Array<Types::Label>]
+    #
     # @!attribute [rw] visibility_config
     #   Defines and enables Amazon CloudWatch metrics and web request sample
     #   collection.
@@ -6451,6 +7167,7 @@ module Aws::WAFV2
       :statement,
       :action,
       :override_action,
+      :rule_labels,
       :visibility_config)
       SENSITIVE = []
       include Aws::Structure
@@ -6575,6 +7292,24 @@ module Aws::WAFV2
     #   collection.
     #   @return [Types::VisibilityConfig]
     #
+    # @!attribute [rw] label_namespace
+    #   The label namespace prefix for this rule group. All labels added by
+    #   rules in this rule group have this prefix.
+    #
+    #   * The syntax for the label namespace prefix for your rule groups is
+    #     the following:
+    #
+    #     `awswaf:<account ID>:rulegroup:<rule group name>:`
+    #
+    #   * When a rule with a label matches a web request, AWS WAF adds the
+    #     fully qualified label to the request. A fully qualified label is
+    #     made up of the label namespace from the rule group or web ACL
+    #     where the rule is defined and the label from the rule, separated
+    #     by a colon:
+    #
+    #     `<label namespace>:<label from rule>`
+    #   @return [String]
+    #
     # @!attribute [rw] custom_response_bodies
     #   A map of custom response keys and content bodies. When you create a
     #   rule with a block action, you can send a custom response to the web
@@ -6596,6 +7331,18 @@ module Aws::WAFV2
     #   [3]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
     #   @return [Hash<String,Types::CustomResponseBody>]
     #
+    # @!attribute [rw] available_labels
+    #   The labels that one or more rules in this rule group add to matching
+    #   web ACLs. These labels are defined in the `RuleLabels` for a Rule.
+    #   @return [Array<Types::LabelSummary>]
+    #
+    # @!attribute [rw] consumed_labels
+    #   The labels that one or more rules in this rule group match against
+    #   in label match statements. These labels are defined in a
+    #   `LabelMatchStatement` specification, in the Statement definition of
+    #   a rule.
+    #   @return [Array<Types::LabelSummary>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RuleGroup AWS API Documentation
     #
     class RuleGroup < Struct.new(
@@ -6606,7 +7353,10 @@ module Aws::WAFV2
       :description,
       :rules,
       :visibility_config,
-      :custom_response_bodies)
+      :label_namespace,
+      :custom_response_bodies,
+      :available_labels,
+      :consumed_labels)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6768,6 +7518,17 @@ module Aws::WAFV2
     #   The response code that was sent for the request.
     #   @return [Integer]
     #
+    # @!attribute [rw] labels
+    #   Labels applied to the web request by matching rules. AWS WAF applies
+    #   fully qualified labels to matching web requests. A fully qualified
+    #   label is the concatenation of a label namespace and a rule label.
+    #   The rule's rule group or web ACL defines the label namespace.
+    #
+    #   For example,
+    #   `awswaf:111122223333:myRuleGroup:testRules:testNS1:testNS2:labelNameA`
+    #   or `awswaf:managed:aws:managed-rule-set:header:encoding:utf8`.
+    #   @return [Array<Types::Label>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/SampledHTTPRequest AWS API Documentation
     #
     class SampledHTTPRequest < Struct.new(
@@ -6777,7 +7538,8 @@ module Aws::WAFV2
       :action,
       :rule_name_within_rule_group,
       :request_headers_inserted,
-      :response_code_sent)
+      :response_code_sent,
+      :labels)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7438,6 +8200,13 @@ module Aws::WAFV2
     #                   name: "EntityName", # required
     #                 },
     #               ],
+    #               scope_down_statement: {
+    #                 # recursive Statement
+    #               },
+    #             },
+    #             label_match_statement: {
+    #               scope: "LABEL", # required, accepts LABEL, NAMESPACE
+    #               key: "LabelMatchKey", # required
     #             },
     #           },
     #           forwarded_ip_config: {
@@ -7683,6 +8452,13 @@ module Aws::WAFV2
     #                     name: "EntityName", # required
     #                   },
     #                 ],
+    #                 scope_down_statement: {
+    #                   # recursive Statement
+    #                 },
+    #               },
+    #               label_match_statement: {
+    #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
+    #                 key: "LabelMatchKey", # required
     #               },
     #             },
     #           ],
@@ -7925,6 +8701,13 @@ module Aws::WAFV2
     #                     name: "EntityName", # required
     #                   },
     #                 ],
+    #                 scope_down_statement: {
+    #                   # recursive Statement
+    #                 },
+    #               },
+    #               label_match_statement: {
+    #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
+    #                 key: "LabelMatchKey", # required
     #               },
     #             },
     #           ],
@@ -8170,6 +8953,13 @@ module Aws::WAFV2
     #                   name: "EntityName", # required
     #                 },
     #               ],
+    #               scope_down_statement: {
+    #                 # recursive Statement
+    #               },
+    #             },
+    #             label_match_statement: {
+    #               scope: "LABEL", # required, accepts LABEL, NAMESPACE
+    #               key: "LabelMatchKey", # required
     #             },
     #           },
     #         },
@@ -8181,6 +8971,252 @@ module Aws::WAFV2
     #               name: "EntityName", # required
     #             },
     #           ],
+    #           scope_down_statement: {
+    #             byte_match_statement: {
+    #               search_string: "data", # required
+    #               field_to_match: { # required
+    #                 single_header: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 single_query_argument: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 all_query_arguments: {
+    #                 },
+    #                 uri_path: {
+    #                 },
+    #                 query_string: {
+    #                 },
+    #                 body: {
+    #                 },
+    #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
+    #               },
+    #               text_transformations: [ # required
+    #                 {
+    #                   priority: 1, # required
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 },
+    #               ],
+    #               positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
+    #             },
+    #             sqli_match_statement: {
+    #               field_to_match: { # required
+    #                 single_header: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 single_query_argument: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 all_query_arguments: {
+    #                 },
+    #                 uri_path: {
+    #                 },
+    #                 query_string: {
+    #                 },
+    #                 body: {
+    #                 },
+    #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
+    #               },
+    #               text_transformations: [ # required
+    #                 {
+    #                   priority: 1, # required
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 },
+    #               ],
+    #             },
+    #             xss_match_statement: {
+    #               field_to_match: { # required
+    #                 single_header: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 single_query_argument: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 all_query_arguments: {
+    #                 },
+    #                 uri_path: {
+    #                 },
+    #                 query_string: {
+    #                 },
+    #                 body: {
+    #                 },
+    #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
+    #               },
+    #               text_transformations: [ # required
+    #                 {
+    #                   priority: 1, # required
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 },
+    #               ],
+    #             },
+    #             size_constraint_statement: {
+    #               field_to_match: { # required
+    #                 single_header: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 single_query_argument: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 all_query_arguments: {
+    #                 },
+    #                 uri_path: {
+    #                 },
+    #                 query_string: {
+    #                 },
+    #                 body: {
+    #                 },
+    #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
+    #               },
+    #               comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
+    #               size: 1, # required
+    #               text_transformations: [ # required
+    #                 {
+    #                   priority: 1, # required
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 },
+    #               ],
+    #             },
+    #             geo_match_statement: {
+    #               country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #               forwarded_ip_config: {
+    #                 header_name: "ForwardedIPHeaderName", # required
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
+    #             },
+    #             rule_group_reference_statement: {
+    #               arn: "ResourceArn", # required
+    #               excluded_rules: [
+    #                 {
+    #                   name: "EntityName", # required
+    #                 },
+    #               ],
+    #             },
+    #             ip_set_reference_statement: {
+    #               arn: "ResourceArn", # required
+    #               ip_set_forwarded_ip_config: {
+    #                 header_name: "ForwardedIPHeaderName", # required
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #                 position: "FIRST", # required, accepts FIRST, LAST, ANY
+    #               },
+    #             },
+    #             regex_pattern_set_reference_statement: {
+    #               arn: "ResourceArn", # required
+    #               field_to_match: { # required
+    #                 single_header: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 single_query_argument: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 all_query_arguments: {
+    #                 },
+    #                 uri_path: {
+    #                 },
+    #                 query_string: {
+    #                 },
+    #                 body: {
+    #                 },
+    #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
+    #               },
+    #               text_transformations: [ # required
+    #                 {
+    #                   priority: 1, # required
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
+    #                 },
+    #               ],
+    #             },
+    #             rate_based_statement: {
+    #               limit: 1, # required
+    #               aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP
+    #               scope_down_statement: {
+    #                 # recursive Statement
+    #               },
+    #               forwarded_ip_config: {
+    #                 header_name: "ForwardedIPHeaderName", # required
+    #                 fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #               },
+    #             },
+    #             and_statement: {
+    #               statements: [ # required
+    #                 {
+    #                   # recursive Statement
+    #                 },
+    #               ],
+    #             },
+    #             or_statement: {
+    #               statements: [ # required
+    #                 {
+    #                   # recursive Statement
+    #                 },
+    #               ],
+    #             },
+    #             not_statement: {
+    #               statement: { # required
+    #                 # recursive Statement
+    #               },
+    #             },
+    #             managed_rule_group_statement: {
+    #               # recursive ManagedRuleGroupStatement
+    #             },
+    #             label_match_statement: {
+    #               scope: "LABEL", # required, accepts LABEL, NAMESPACE
+    #               key: "LabelMatchKey", # required
+    #             },
+    #           },
+    #         },
+    #         label_match_statement: {
+    #           scope: "LABEL", # required, accepts LABEL, NAMESPACE
+    #           key: "LabelMatchKey", # required
     #         },
     #       }
     #
@@ -8340,6 +9376,22 @@ module Aws::WAFV2
     #   as a top-level statement within a rule.
     #   @return [Types::ManagedRuleGroupStatement]
     #
+    # @!attribute [rw] label_match_statement
+    #   A rule statement that defines a string match search against labels
+    #   that have been added to the web request by rules that have already
+    #   run in the web ACL.
+    #
+    #   The label match statement provides the label or namespace string to
+    #   search for. The label string can represent a part or all of the
+    #   fully qualified label name that had been added to the web request.
+    #   Fully qualified labels have a prefix, optional namespaces, and label
+    #   name. The prefix identifies the rule group or web ACL context of the
+    #   rule that added the label. If you do not provide the fully qualified
+    #   name in your label match string, AWS WAF performs the search for
+    #   labels that were added in the same context as the label match
+    #   statement.
+    #   @return [Types::LabelMatchStatement]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/Statement AWS API Documentation
     #
     class Statement < Struct.new(
@@ -8355,7 +9407,8 @@ module Aws::WAFV2
       :and_statement,
       :or_statement,
       :not_statement,
-      :managed_rule_group_statement)
+      :managed_rule_group_statement,
+      :label_match_statement)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9109,6 +10162,13 @@ module Aws::WAFV2
     #                     name: "EntityName", # required
     #                   },
     #                 ],
+    #                 scope_down_statement: {
+    #                   # recursive Statement
+    #                 },
+    #               },
+    #               label_match_statement: {
+    #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
+    #                 key: "LabelMatchKey", # required
     #               },
     #             },
     #             action: {
@@ -9159,6 +10219,11 @@ module Aws::WAFV2
     #               none: {
     #               },
     #             },
+    #             rule_labels: [
+    #               {
+    #                 name: "LabelName", # required
+    #               },
+    #             ],
     #             visibility_config: { # required
     #               sampled_requests_enabled: false, # required
     #               cloud_watch_metrics_enabled: false, # required
@@ -9562,6 +10627,13 @@ module Aws::WAFV2
     #                     name: "EntityName", # required
     #                   },
     #                 ],
+    #                 scope_down_statement: {
+    #                   # recursive Statement
+    #                 },
+    #               },
+    #               label_match_statement: {
+    #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
+    #                 key: "LabelMatchKey", # required
     #               },
     #             },
     #             action: {
@@ -9612,6 +10684,11 @@ module Aws::WAFV2
     #               none: {
     #               },
     #             },
+    #             rule_labels: [
+    #               {
+    #                 name: "LabelName", # required
+    #               },
+    #             ],
     #             visibility_config: { # required
     #               sampled_requests_enabled: false, # required
     #               cloud_watch_metrics_enabled: false, # required
@@ -10015,6 +11092,9 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # You tried to use a managed rule group that's available by
+    # subscription, but you aren't subscribed to it yet.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -10160,6 +11240,24 @@ module Aws::WAFV2
     #   any Firewall Manager rule groups in the web ACL.
     #   @return [Boolean]
     #
+    # @!attribute [rw] label_namespace
+    #   The label namespace prefix for this web ACL. All labels added by
+    #   rules in this web ACL have this prefix.
+    #
+    #   * The syntax for the label namespace prefix for a web ACL is the
+    #     following:
+    #
+    #     `awswaf:<account ID>:webacl:<web ACL name>:`
+    #
+    #   * When a rule with a label matches a web request, AWS WAF adds the
+    #     fully qualified label to the request. A fully qualified label is
+    #     made up of the label namespace from the rule group or web ACL
+    #     where the rule is defined and the label from the rule, separated
+    #     by a colon:
+    #
+    #     `<label namespace>:<label from rule>`
+    #   @return [String]
+    #
     # @!attribute [rw] custom_response_bodies
     #   A map of custom response keys and content bodies. When you create a
     #   rule with a block action, you can send a custom response to the web
@@ -10195,6 +11293,7 @@ module Aws::WAFV2
       :pre_process_firewall_manager_rule_groups,
       :post_process_firewall_manager_rule_groups,
       :managed_by_firewall_manager,
+      :label_namespace,
       :custom_response_bodies)
       SENSITIVE = []
       include Aws::Structure

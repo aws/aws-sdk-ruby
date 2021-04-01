@@ -124,7 +124,9 @@ module Aws::MediaConvert
     #         bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN, COMMENTARY, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
     #         coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
     #         dialnorm: 1,
+    #         dynamic_range_compression_line: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #         dynamic_range_compression_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
+    #         dynamic_range_compression_rf: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #         lfe_filter: "ENABLED", # accepts ENABLED, DISABLED
     #         metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #         sample_rate: 1,
@@ -150,10 +152,44 @@ module Aws::MediaConvert
     #   Digital, dialnorm will be passed through.
     #   @return [Integer]
     #
+    # @!attribute [rw] dynamic_range_compression_line
+    #   Choose the Dolby Digital dynamic range control (DRC) profile that
+    #   MediaConvert uses when encoding the metadata in the Dolby Digital
+    #   stream for the line operating mode. Related setting: When you use
+    #   this setting, MediaConvert ignores any value you provide for Dynamic
+    #   range compression profile (DynamicRangeCompressionProfile). For
+    #   information about the Dolby Digital DRC operating modes and
+    #   profiles, see the Dynamic Range Control chapter of the Dolby
+    #   Metadata Guide at
+    #   https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.
+    #   @return [String]
+    #
     # @!attribute [rw] dynamic_range_compression_profile
-    #   If set to FILM\_STANDARD, adds dynamic range compression signaling
-    #   to the output bitstream as defined in the Dolby Digital
-    #   specification.
+    #   When you want to add Dolby dynamic range compression (DRC) signaling
+    #   to your output stream, we recommend that you use the mode-specific
+    #   settings instead of Dynamic range compression profile
+    #   (DynamicRangeCompressionProfile). The mode-specific settings are
+    #   Dynamic range compression profile, line mode
+    #   (dynamicRangeCompressionLine) and Dynamic range compression profile,
+    #   RF mode (dynamicRangeCompressionRf). Note that when you specify
+    #   values for all three settings, MediaConvert ignores the value of
+    #   this setting in favor of the mode-specific settings. If you do use
+    #   this setting instead of the mode-specific settings, choose None
+    #   (NONE) to leave out DRC signaling. Keep the default Film standard
+    #   (FILM\_STANDARD) to set the profile to Dolby's film standard
+    #   profile for all operating modes.
+    #   @return [String]
+    #
+    # @!attribute [rw] dynamic_range_compression_rf
+    #   Choose the Dolby Digital dynamic range control (DRC) profile that
+    #   MediaConvert uses when encoding the metadata in the Dolby Digital
+    #   stream for the RF operating mode. Related setting: When you use this
+    #   setting, MediaConvert ignores any value you provide for Dynamic
+    #   range compression profile (DynamicRangeCompressionProfile). For
+    #   information about the Dolby Digital DRC operating modes and
+    #   profiles, see the Dynamic Range Control chapter of the Dolby
+    #   Metadata Guide at
+    #   https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.
     #   @return [String]
     #
     # @!attribute [rw] lfe_filter
@@ -179,7 +215,9 @@ module Aws::MediaConvert
       :bitstream_mode,
       :coding_mode,
       :dialnorm,
+      :dynamic_range_compression_line,
       :dynamic_range_compression_profile,
+      :dynamic_range_compression_rf,
       :lfe_filter,
       :metadata_control,
       :sample_rate)
@@ -377,7 +415,9 @@ module Aws::MediaConvert
     #           bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN, COMMENTARY, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
     #           coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
     #           dialnorm: 1,
+    #           dynamic_range_compression_line: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #           dynamic_range_compression_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
+    #           dynamic_range_compression_rf: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #           lfe_filter: "ENABLED", # accepts ENABLED, DISABLED
     #           metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #           sample_rate: 1,
@@ -573,7 +613,9 @@ module Aws::MediaConvert
     #             bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN, COMMENTARY, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
     #             coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
     #             dialnorm: 1,
+    #             dynamic_range_compression_line: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #             dynamic_range_compression_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
+    #             dynamic_range_compression_rf: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #             lfe_filter: "ENABLED", # accepts ENABLED, DISABLED
     #             metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #             sample_rate: 1,
@@ -1775,6 +1817,9 @@ module Aws::MediaConvert
     #           ttml_destination_settings: {
     #             style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #           },
+    #           webvtt_destination_settings: {
+    #             style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
     #         },
     #         language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #         language_description: "__string",
@@ -1896,6 +1941,9 @@ module Aws::MediaConvert
     #           ttml_destination_settings: {
     #             style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #           },
+    #           webvtt_destination_settings: {
+    #             style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
     #         },
     #         language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #         language_description: "__string",
@@ -2012,6 +2060,9 @@ module Aws::MediaConvert
     #         ttml_destination_settings: {
     #           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #         },
+    #         webvtt_destination_settings: {
+    #           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
     #       }
     #
     # @!attribute [rw] burnin_destination_settings
@@ -2055,6 +2106,10 @@ module Aws::MediaConvert
     #   information (TtmlStylePassthrough).
     #   @return [Types::TtmlDestinationSettings]
     #
+    # @!attribute [rw] webvtt_destination_settings
+    #   WEBVTT Destination Settings
+    #   @return [Types::WebvttDestinationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CaptionDestinationSettings AWS API Documentation
     #
     class CaptionDestinationSettings < Struct.new(
@@ -2065,7 +2120,8 @@ module Aws::MediaConvert
       :imsc_destination_settings,
       :scc_destination_settings,
       :teletext_destination_settings,
-      :ttml_destination_settings)
+      :ttml_destination_settings,
+      :webvtt_destination_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2100,10 +2156,10 @@ module Aws::MediaConvert
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #             },
-    #             source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #             source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
     #             time_delta: 1,
     #           },
-    #           source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC
+    #           source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #           teletext_source_settings: {
     #             page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #           },
@@ -2220,10 +2276,10 @@ module Aws::MediaConvert
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
     #           },
-    #           source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #           source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
     #           time_delta: 1,
     #         },
-    #         source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC
+    #         source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #         teletext_source_settings: {
     #           page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #         },
@@ -2245,9 +2301,9 @@ module Aws::MediaConvert
     #   @return [Types::EmbeddedSourceSettings]
     #
     # @!attribute [rw] file_source_settings
-    #   If your input captions are SCC, SMI, SRT, STL, TTML, or IMSC 1.1 in
-    #   an xml file, specify the URI of the input caption source file. If
-    #   your caption source is IMSC in an IMF package, use
+    #   If your input captions are SCC, SMI, SRT, STL, TTML, WebVTT, or IMSC
+    #   1.1 in an xml file, specify the URI of the input caption source
+    #   file. If your caption source is IMSC in an IMF package, use
     #   TrackSourceSettings instead of FileSoureSettings.
     #   @return [Types::FileSourceSettings]
     #
@@ -2492,6 +2548,7 @@ module Aws::MediaConvert
     #         min_buffer_time: 1,
     #         min_final_segment_length: 1.0,
     #         mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
+    #         pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #         segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #         segment_length: 1,
     #         stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -2594,6 +2651,20 @@ module Aws::MediaConvert
     #   control (SegmentControl) to Single file (SINGLE\_FILE).
     #   @return [String]
     #
+    # @!attribute [rw] pts_offset_handling_for_b_frames
+    #   Use this setting only when your output video stream has B-frames,
+    #   which causes the initial presentation time stamp (PTS) to be offset
+    #   from the initial decode time stamp (DTS). Specify how MediaConvert
+    #   handles PTS when writing time stamps in output DASH manifests.
+    #   Choose Match initial PTS (MATCH\_INITIAL\_PTS) when you want
+    #   MediaConvert to use the initial PTS as the first time stamp in the
+    #   manifest. Choose Zero-based (ZERO\_BASED) to have MediaConvert
+    #   ignore the initial PTS in the video stream and instead write the
+    #   initial time stamp as zero in the manifest. For outputs that don't
+    #   have B-frames, the time stamps in your DASH manifests start at zero
+    #   regardless of your choice here.
+    #   @return [String]
+    #
     # @!attribute [rw] segment_control
     #   When set to SINGLE\_FILE, a single output file is generated, which
     #   is internally segmented using the Fragment Length and Segment
@@ -2656,6 +2727,7 @@ module Aws::MediaConvert
       :min_buffer_time,
       :min_final_segment_length,
       :mpd_profile,
+      :pts_offset_handling_for_b_frames,
       :segment_control,
       :segment_length,
       :stream_inf_resolution,
@@ -2673,6 +2745,10 @@ module Aws::MediaConvert
     #
     #       {
     #         audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #         audio_group_id: "__string",
+    #         audio_rendition_sets: "__string",
+    #         audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
+    #         descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #         i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #         scte_35_esam: "INSERT", # accepts INSERT, NONE
     #         scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -2695,6 +2771,74 @@ module Aws::MediaConvert
     #   the end of the file. When you keep the default value, any minor
     #   discrepancies between audio and video duration will depend on your
     #   output audio codec.
+    #   @return [String]
+    #
+    # @!attribute [rw] audio_group_id
+    #   Specify the audio rendition group for this audio rendition. Specify
+    #   up to one value for each audio output in your output group. This
+    #   value appears in your HLS parent manifest in the EXT-X-MEDIA tag of
+    #   TYPE=AUDIO, as the value for the GROUP-ID attribute. For example, if
+    #   you specify "audio\_aac\_1" for Audio group ID, it appears in your
+    #   manifest like this:
+    #   #EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="audio\_aac\_1". Related setting:
+    #   To associate the rendition group that this audio track belongs to
+    #   with a video rendition, include the same value that you provide here
+    #   for that video output's setting Audio rendition sets
+    #   (audioRenditionSets).
+    #   @return [String]
+    #
+    # @!attribute [rw] audio_rendition_sets
+    #   List the audio rendition groups that you want included with this
+    #   video rendition. Use a comma-separated list. For example, say you
+    #   want to include the audio rendition groups that have the audio group
+    #   IDs "audio\_aac\_1" and "audio\_dolby". Then you would specify
+    #   this value: "audio\_aac\_1, audio\_dolby". Related setting: The
+    #   rendition groups that you include in your comma-separated list
+    #   should all match values that you specify in the setting Audio group
+    #   ID (AudioGroupId) for audio renditions in the same output group as
+    #   this video rendition. Default behavior: If you don't specify
+    #   anything here and for Audio group ID, MediaConvert puts each audio
+    #   variant in its own audio rendition group and associates it with
+    #   every video variant. Each value in your list appears in your HLS
+    #   parent manifest in the EXT-X-STREAM-INF tag as the value for the
+    #   AUDIO attribute. To continue the previous example, say that the file
+    #   name for the child manifest for your video rendition is
+    #   "amazing\_video\_1.m3u8". Then, in your parent manifest, each
+    #   value will appear on separate lines, like this:
+    #   #EXT-X-STREAM-INF:AUDIO="audio\_aac\_1"... amazing\_video\_1.m3u8
+    #   #EXT-X-STREAM-INF:AUDIO="audio\_dolby"... amazing\_video\_1.m3u8
+    #   @return [String]
+    #
+    # @!attribute [rw] audio_track_type
+    #   Use this setting to control the values that MediaConvert puts in
+    #   your HLS parent playlist to control how the client player selects
+    #   which audio track to play. The other options for this setting
+    #   determine the values that MediaConvert writes for the DEFAULT and
+    #   AUTOSELECT attributes of the EXT-X-MEDIA entry for the audio
+    #   variant. For more information about these attributes, see the Apple
+    #   documentation article
+    #   https://developer.apple.com/documentation/http\_live\_streaming/example\_playlists\_for\_http\_live\_streaming/adding\_alternate\_media\_to\_a\_playlist.
+    #   Choose Alternate audio, auto select, default
+    #   (ALTERNATE\_AUDIO\_AUTO\_SELECT\_DEFAULT) to set DEFAULT=YES and
+    #   AUTOSELECT=YES. Choose this value for only one variant in your
+    #   output group. Choose Alternate audio, auto select, not default
+    #   (ALTERNATE\_AUDIO\_AUTO\_SELECT) to set DEFAULT=NO and
+    #   AUTOSELECT=YES. Choose Alternate Audio, Not Auto Select to set
+    #   DEFAULT=NO and AUTOSELECT=NO. When you don't specify a value for
+    #   this setting, MediaConvert defaults to Alternate audio, auto select,
+    #   default. When there is more than one variant in your output group,
+    #   you must explicitly choose a value for this setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] descriptive_video_service_flag
+    #   Specify whether to flag this audio track as descriptive video
+    #   service (DVS) in your HLS parent manifest. When you choose Flag
+    #   (FLAG), MediaConvert includes the parameter
+    #   CHARACTERISTICS="public.accessibility.describes-video" in the
+    #   EXT-X-MEDIA entry for this track. When you keep the default choice,
+    #   Don't flag (DONT\_FLAG), MediaConvert leaves this parameter out.
+    #   The DVS flag can help with accessibility on Apple devices. For more
+    #   information, see the Apple documentation.
     #   @return [String]
     #
     # @!attribute [rw] i_frame_only_manifest
@@ -2727,6 +2871,10 @@ module Aws::MediaConvert
     #
     class CmfcSettings < Struct.new(
       :audio_duration,
+      :audio_group_id,
+      :audio_rendition_sets,
+      :audio_track_type,
+      :descriptive_video_service_flag,
       :i_frame_only_manifest,
       :scte_35_esam,
       :scte_35_source)
@@ -2836,6 +2984,10 @@ module Aws::MediaConvert
     #       {
     #         cmfc_settings: {
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #           audio_group_id: "__string",
+    #           audio_rendition_sets: "__string",
+    #           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
+    #           descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #           i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -3102,10 +3254,10 @@ module Aws::MediaConvert
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                       },
-    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
     #                       time_delta: 1,
     #                     },
-    #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC
+    #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #                     teletext_source_settings: {
     #                       page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                     },
@@ -3281,6 +3433,7 @@ module Aws::MediaConvert
     #                   min_buffer_time: 1,
     #                   min_final_segment_length: 1.0,
     #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
+    #                   pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -3295,6 +3448,7 @@ module Aws::MediaConvert
     #                       selected_outputs: ["__stringMin1"],
     #                     },
     #                   ],
+    #                   audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION", # accepts MPEG_CHANNEL_CONFIGURATION, DOLBY_CHANNEL_CONFIGURATION
     #                   base_url: "__string",
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
@@ -3322,6 +3476,7 @@ module Aws::MediaConvert
     #                   min_buffer_time: 1,
     #                   min_final_segment_length: 1.0,
     #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
+    #                   pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
     #                   write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -3476,7 +3631,9 @@ module Aws::MediaConvert
     #                           bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN, COMMENTARY, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
     #                           coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
     #                           dialnorm: 1,
+    #                           dynamic_range_compression_line: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                           dynamic_range_compression_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
+    #                           dynamic_range_compression_rf: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                           lfe_filter: "ENABLED", # accepts ENABLED, DISABLED
     #                           metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                           sample_rate: 1,
@@ -3636,6 +3793,9 @@ module Aws::MediaConvert
     #                         ttml_destination_settings: {
     #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                         },
+    #                         webvtt_destination_settings: {
+    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                         },
     #                       },
     #                       language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                       language_description: "__string",
@@ -3644,6 +3804,10 @@ module Aws::MediaConvert
     #                   container_settings: {
     #                     cmfc_settings: {
     #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #                       audio_group_id: "__string",
+    #                       audio_rendition_sets: "__string",
+    #                       audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
+    #                       descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                       i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -3758,6 +3922,7 @@ module Aws::MediaConvert
     #                       audio_only_container: "AUTOMATIC", # accepts AUTOMATIC, M2TS
     #                       audio_rendition_sets: "__string",
     #                       audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #                       descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                       i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       segment_modifier: "__string",
     #                     },
@@ -4341,10 +4506,10 @@ module Aws::MediaConvert
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                       },
-    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
     #                       time_delta: 1,
     #                     },
-    #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC
+    #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #                     teletext_source_settings: {
     #                       page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                     },
@@ -4512,6 +4677,7 @@ module Aws::MediaConvert
     #                   min_buffer_time: 1,
     #                   min_final_segment_length: 1.0,
     #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
+    #                   pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -4526,6 +4692,7 @@ module Aws::MediaConvert
     #                       selected_outputs: ["__stringMin1"],
     #                     },
     #                   ],
+    #                   audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION", # accepts MPEG_CHANNEL_CONFIGURATION, DOLBY_CHANNEL_CONFIGURATION
     #                   base_url: "__string",
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
@@ -4553,6 +4720,7 @@ module Aws::MediaConvert
     #                   min_buffer_time: 1,
     #                   min_final_segment_length: 1.0,
     #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
+    #                   pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
     #                   write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -4707,7 +4875,9 @@ module Aws::MediaConvert
     #                           bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN, COMMENTARY, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
     #                           coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
     #                           dialnorm: 1,
+    #                           dynamic_range_compression_line: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                           dynamic_range_compression_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
+    #                           dynamic_range_compression_rf: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                           lfe_filter: "ENABLED", # accepts ENABLED, DISABLED
     #                           metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                           sample_rate: 1,
@@ -4867,6 +5037,9 @@ module Aws::MediaConvert
     #                         ttml_destination_settings: {
     #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                         },
+    #                         webvtt_destination_settings: {
+    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                         },
     #                       },
     #                       language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                       language_description: "__string",
@@ -4875,6 +5048,10 @@ module Aws::MediaConvert
     #                   container_settings: {
     #                     cmfc_settings: {
     #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #                       audio_group_id: "__string",
+    #                       audio_rendition_sets: "__string",
+    #                       audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
+    #                       descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                       i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -4989,6 +5166,7 @@ module Aws::MediaConvert
     #                       audio_only_container: "AUTOMATIC", # accepts AUTOMATIC, M2TS
     #                       audio_rendition_sets: "__string",
     #                       audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #                       descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                       i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       segment_modifier: "__string",
     #                     },
@@ -5483,7 +5661,9 @@ module Aws::MediaConvert
     #                   bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN, COMMENTARY, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
     #                   coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
     #                   dialnorm: 1,
+    #                   dynamic_range_compression_line: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                   dynamic_range_compression_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
+    #                   dynamic_range_compression_rf: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                   lfe_filter: "ENABLED", # accepts ENABLED, DISABLED
     #                   metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                   sample_rate: 1,
@@ -5642,6 +5822,9 @@ module Aws::MediaConvert
     #                 ttml_destination_settings: {
     #                   style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                 },
+    #                 webvtt_destination_settings: {
+    #                   style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                 },
     #               },
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               language_description: "__string",
@@ -5650,6 +5833,10 @@ module Aws::MediaConvert
     #           container_settings: {
     #             cmfc_settings: {
     #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #               audio_group_id: "__string",
+    #               audio_rendition_sets: "__string",
+    #               audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
+    #               descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #               i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               scte_35_esam: "INSERT", # accepts INSERT, NONE
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -6318,6 +6505,7 @@ module Aws::MediaConvert
     #             selected_outputs: ["__stringMin1"],
     #           },
     #         ],
+    #         audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION", # accepts MPEG_CHANNEL_CONFIGURATION, DOLBY_CHANNEL_CONFIGURATION
     #         base_url: "__string",
     #         destination: "__stringPatternS3",
     #         destination_settings: {
@@ -6345,6 +6533,7 @@ module Aws::MediaConvert
     #         min_buffer_time: 1,
     #         min_final_segment_length: 1.0,
     #         mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
+    #         pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #         segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #         segment_length: 1,
     #         write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -6357,6 +6546,21 @@ module Aws::MediaConvert
     #   reference a subset of the outputs in the output group, specify a
     #   list of them here.
     #   @return [Array<Types::DashAdditionalManifest>]
+    #
+    # @!attribute [rw] audio_channel_config_scheme_id_uri
+    #   Use this setting only when your audio codec is a Dolby one (AC3,
+    #   EAC3, or Atmos) and your downstream workflow requires that your DASH
+    #   manifest use the Dolby channel configuration tag, rather than the
+    #   MPEG one. For example, you might need to use this to make dynamic ad
+    #   insertion work. Specify which audio channel configuration scheme ID
+    #   URI MediaConvert writes in your DASH manifest. Keep the default
+    #   value, MPEG channel configuration (MPEG\_CHANNEL\_CONFIGURATION), to
+    #   have MediaConvert write this:
+    #   urn:mpeg:mpegB:cicp:ChannelConfiguration. Choose Dolby channel
+    #   configuration (DOLBY\_CHANNEL\_CONFIGURATION) to have MediaConvert
+    #   write this instead:
+    #   tag:dolby.com,2014:dash:audio\_channel\_configuration:2011.
+    #   @return [String]
     #
     # @!attribute [rw] base_url
     #   A partial URI prefix that will be put in the manifest (.mpd) file at
@@ -6425,6 +6629,20 @@ module Aws::MediaConvert
     #   control (SegmentControl) to Single file (SINGLE\_FILE).
     #   @return [String]
     #
+    # @!attribute [rw] pts_offset_handling_for_b_frames
+    #   Use this setting only when your output video stream has B-frames,
+    #   which causes the initial presentation time stamp (PTS) to be offset
+    #   from the initial decode time stamp (DTS). Specify how MediaConvert
+    #   handles PTS when writing time stamps in output DASH manifests.
+    #   Choose Match initial PTS (MATCH\_INITIAL\_PTS) when you want
+    #   MediaConvert to use the initial PTS as the first time stamp in the
+    #   manifest. Choose Zero-based (ZERO\_BASED) to have MediaConvert
+    #   ignore the initial PTS in the video stream and instead write the
+    #   initial time stamp as zero in the manifest. For outputs that don't
+    #   have B-frames, the time stamps in your DASH manifests start at zero
+    #   regardless of your choice here.
+    #   @return [String]
+    #
     # @!attribute [rw] segment_control
     #   When set to SINGLE\_FILE, a single output file is generated, which
     #   is internally segmented using the Fragment Length and Segment
@@ -6456,6 +6674,7 @@ module Aws::MediaConvert
     #
     class DashIsoGroupSettings < Struct.new(
       :additional_manifests,
+      :audio_channel_config_scheme_id_uri,
       :base_url,
       :destination,
       :destination_settings,
@@ -6465,6 +6684,7 @@ module Aws::MediaConvert
       :min_buffer_time,
       :min_final_segment_length,
       :mpd_profile,
+      :pts_offset_handling_for_b_frames,
       :segment_control,
       :segment_length,
       :write_segment_timeline_in_representation)
@@ -7313,13 +7533,27 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] dynamic_range_compression_line
-    #   Specify the absolute peak level for a signal with dynamic range
-    #   compression.
+    #   Choose the Dolby Digital dynamic range control (DRC) profile that
+    #   MediaConvert uses when encoding the metadata in the Dolby Digital
+    #   stream for the line operating mode. Related setting: When you use
+    #   this setting, MediaConvert ignores any value you provide for Dynamic
+    #   range compression profile (DynamicRangeCompressionProfile). For
+    #   information about the Dolby Digital DRC operating modes and
+    #   profiles, see the Dynamic Range Control chapter of the Dolby
+    #   Metadata Guide at
+    #   https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.
     #   @return [String]
     #
     # @!attribute [rw] dynamic_range_compression_rf
-    #   Specify how the service limits the audio dynamic range when
-    #   compressing the audio.
+    #   Choose the Dolby Digital dynamic range control (DRC) profile that
+    #   MediaConvert uses when encoding the metadata in the Dolby Digital
+    #   stream for the RF operating mode. Related setting: When you use this
+    #   setting, MediaConvert ignores any value you provide for Dynamic
+    #   range compression profile (DynamicRangeCompressionProfile). For
+    #   information about the Dolby Digital DRC operating modes and
+    #   profiles, see the Dynamic Range Control chapter of the Dolby
+    #   Metadata Guide at
+    #   https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.
     #   @return [String]
     #
     # @!attribute [rw] lfe_control
@@ -7738,10 +7972,10 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # If your input captions are SCC, SMI, SRT, STL, TTML, or IMSC 1.1 in an
-    # xml file, specify the URI of the input caption source file. If your
-    # caption source is IMSC in an IMF package, use TrackSourceSettings
-    # instead of FileSoureSettings.
+    # If your input captions are SCC, SMI, SRT, STL, TTML, WebVTT, or IMSC
+    # 1.1 in an xml file, specify the URI of the input caption source file.
+    # If your caption source is IMSC in an IMF package, use
+    # TrackSourceSettings instead of FileSoureSettings.
     #
     # @note When making an API call, you may pass FileSourceSettings
     #   data as a hash:
@@ -7752,7 +7986,7 @@ module Aws::MediaConvert
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
     #         },
-    #         source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #         source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
     #         time_delta: 1,
     #       }
     #
@@ -7778,7 +8012,7 @@ module Aws::MediaConvert
     # @!attribute [rw] source_file
     #   External caption file used for loading captions. Accepted file
     #   extensions are 'scc', 'ttml', 'dfxp', 'stl', 'srt',
-    #   'xml', and 'smi'.
+    #   'xml', 'smi', and 'vtt'.
     #   @return [String]
     #
     # @!attribute [rw] time_delta
@@ -9641,12 +9875,13 @@ module Aws::MediaConvert
     #         audio_only_container: "AUTOMATIC", # accepts AUTOMATIC, M2TS
     #         audio_rendition_sets: "__string",
     #         audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #         descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #         i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #         segment_modifier: "__string",
     #       }
     #
     # @!attribute [rw] audio_group_id
-    #   Specifies the group to which the audio Rendition belongs.
+    #   Specifies the group to which the audio rendition belongs.
     #   @return [String]
     #
     # @!attribute [rw] audio_only_container
@@ -9679,6 +9914,17 @@ module Aws::MediaConvert
     #   an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO, AUTOSELECT=NO
     #   @return [String]
     #
+    # @!attribute [rw] descriptive_video_service_flag
+    #   Specify whether to flag this audio track as descriptive video
+    #   service (DVS) in your HLS parent manifest. When you choose Flag
+    #   (FLAG), MediaConvert includes the parameter
+    #   CHARACTERISTICS="public.accessibility.describes-video" in the
+    #   EXT-X-MEDIA entry for this track. When you keep the default choice,
+    #   Don't flag (DONT\_FLAG), MediaConvert leaves this parameter out.
+    #   The DVS flag can help with accessibility on Apple devices. For more
+    #   information, see the Apple documentation.
+    #   @return [String]
+    #
     # @!attribute [rw] i_frame_only_manifest
     #   Choose Include (INCLUDE) to have MediaConvert generate a child
     #   manifest that lists only the I-frames for this rendition, in
@@ -9705,6 +9951,7 @@ module Aws::MediaConvert
       :audio_only_container,
       :audio_rendition_sets,
       :audio_track_type,
+      :descriptive_video_service_flag,
       :i_frame_only_manifest,
       :segment_modifier)
       SENSITIVE = []
@@ -9910,10 +10157,10 @@ module Aws::MediaConvert
     #                   framerate_denominator: 1,
     #                   framerate_numerator: 1,
     #                 },
-    #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
     #                 time_delta: 1,
     #               },
-    #               source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC
+    #               source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #               teletext_source_settings: {
     #                 page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #               },
@@ -10351,10 +10598,10 @@ module Aws::MediaConvert
     #                   framerate_denominator: 1,
     #                   framerate_numerator: 1,
     #                 },
-    #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
     #                 time_delta: 1,
     #               },
-    #               source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC
+    #               source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #               teletext_source_settings: {
     #                 page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #               },
@@ -10990,10 +11237,10 @@ module Aws::MediaConvert
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                     },
-    #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
     #                     time_delta: 1,
     #                   },
-    #                   source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC
+    #                   source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #                   teletext_source_settings: {
     #                     page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                   },
@@ -11169,6 +11416,7 @@ module Aws::MediaConvert
     #                 min_buffer_time: 1,
     #                 min_final_segment_length: 1.0,
     #                 mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
+    #                 pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1,
     #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -11183,6 +11431,7 @@ module Aws::MediaConvert
     #                     selected_outputs: ["__stringMin1"],
     #                   },
     #                 ],
+    #                 audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION", # accepts MPEG_CHANNEL_CONFIGURATION, DOLBY_CHANNEL_CONFIGURATION
     #                 base_url: "__string",
     #                 destination: "__stringPatternS3",
     #                 destination_settings: {
@@ -11210,6 +11459,7 @@ module Aws::MediaConvert
     #                 min_buffer_time: 1,
     #                 min_final_segment_length: 1.0,
     #                 mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
+    #                 pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1,
     #                 write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -11364,7 +11614,9 @@ module Aws::MediaConvert
     #                         bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN, COMMENTARY, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
     #                         coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
     #                         dialnorm: 1,
+    #                         dynamic_range_compression_line: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                         dynamic_range_compression_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
+    #                         dynamic_range_compression_rf: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                         lfe_filter: "ENABLED", # accepts ENABLED, DISABLED
     #                         metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                         sample_rate: 1,
@@ -11524,6 +11776,9 @@ module Aws::MediaConvert
     #                       ttml_destination_settings: {
     #                         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                       },
+    #                       webvtt_destination_settings: {
+    #                         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                       },
     #                     },
     #                     language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                     language_description: "__string",
@@ -11532,6 +11787,10 @@ module Aws::MediaConvert
     #                 container_settings: {
     #                   cmfc_settings: {
     #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #                     audio_group_id: "__string",
+    #                     audio_rendition_sets: "__string",
+    #                     audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
+    #                     descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                     i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -11646,6 +11905,7 @@ module Aws::MediaConvert
     #                     audio_only_container: "AUTOMATIC", # accepts AUTOMATIC, M2TS
     #                     audio_rendition_sets: "__string",
     #                     audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #                     descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                     i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     segment_modifier: "__string",
     #                   },
@@ -12255,10 +12515,10 @@ module Aws::MediaConvert
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                     },
-    #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
     #                     time_delta: 1,
     #                   },
-    #                   source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC
+    #                   source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #                   teletext_source_settings: {
     #                     page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                   },
@@ -12426,6 +12686,7 @@ module Aws::MediaConvert
     #                 min_buffer_time: 1,
     #                 min_final_segment_length: 1.0,
     #                 mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
+    #                 pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1,
     #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -12440,6 +12701,7 @@ module Aws::MediaConvert
     #                     selected_outputs: ["__stringMin1"],
     #                   },
     #                 ],
+    #                 audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION", # accepts MPEG_CHANNEL_CONFIGURATION, DOLBY_CHANNEL_CONFIGURATION
     #                 base_url: "__string",
     #                 destination: "__stringPatternS3",
     #                 destination_settings: {
@@ -12467,6 +12729,7 @@ module Aws::MediaConvert
     #                 min_buffer_time: 1,
     #                 min_final_segment_length: 1.0,
     #                 mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
+    #                 pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1,
     #                 write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -12621,7 +12884,9 @@ module Aws::MediaConvert
     #                         bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN, COMMENTARY, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
     #                         coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
     #                         dialnorm: 1,
+    #                         dynamic_range_compression_line: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                         dynamic_range_compression_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
+    #                         dynamic_range_compression_rf: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                         lfe_filter: "ENABLED", # accepts ENABLED, DISABLED
     #                         metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                         sample_rate: 1,
@@ -12781,6 +13046,9 @@ module Aws::MediaConvert
     #                       ttml_destination_settings: {
     #                         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                       },
+    #                       webvtt_destination_settings: {
+    #                         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                       },
     #                     },
     #                     language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                     language_description: "__string",
@@ -12789,6 +13057,10 @@ module Aws::MediaConvert
     #                 container_settings: {
     #                   cmfc_settings: {
     #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #                     audio_group_id: "__string",
+    #                     audio_rendition_sets: "__string",
+    #                     audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
+    #                     descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                     i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -12903,6 +13175,7 @@ module Aws::MediaConvert
     #                     audio_only_container: "AUTOMATIC", # accepts AUTOMATIC, M2TS
     #                     audio_rendition_sets: "__string",
     #                     audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #                     descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                     i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     segment_modifier: "__string",
     #                   },
@@ -15768,7 +16041,9 @@ module Aws::MediaConvert
     #                 bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN, COMMENTARY, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
     #                 coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
     #                 dialnorm: 1,
+    #                 dynamic_range_compression_line: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                 dynamic_range_compression_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
+    #                 dynamic_range_compression_rf: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                 lfe_filter: "ENABLED", # accepts ENABLED, DISABLED
     #                 metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                 sample_rate: 1,
@@ -15928,6 +16203,9 @@ module Aws::MediaConvert
     #               ttml_destination_settings: {
     #                 style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #               },
+    #               webvtt_destination_settings: {
+    #                 style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #               },
     #             },
     #             language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #             language_description: "__string",
@@ -15936,6 +16214,10 @@ module Aws::MediaConvert
     #         container_settings: {
     #           cmfc_settings: {
     #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #             audio_group_id: "__string",
+    #             audio_rendition_sets: "__string",
+    #             audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
+    #             descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #             i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             scte_35_esam: "INSERT", # accepts INSERT, NONE
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -16050,6 +16332,7 @@ module Aws::MediaConvert
     #             audio_only_container: "AUTOMATIC", # accepts AUTOMATIC, M2TS
     #             audio_rendition_sets: "__string",
     #             audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #             descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #             i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             segment_modifier: "__string",
     #           },
@@ -16569,6 +16852,7 @@ module Aws::MediaConvert
     #             min_buffer_time: 1,
     #             min_final_segment_length: 1.0,
     #             mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
+    #             pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #             segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #             segment_length: 1,
     #             stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -16583,6 +16867,7 @@ module Aws::MediaConvert
     #                 selected_outputs: ["__stringMin1"],
     #               },
     #             ],
+    #             audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION", # accepts MPEG_CHANNEL_CONFIGURATION, DOLBY_CHANNEL_CONFIGURATION
     #             base_url: "__string",
     #             destination: "__stringPatternS3",
     #             destination_settings: {
@@ -16610,6 +16895,7 @@ module Aws::MediaConvert
     #             min_buffer_time: 1,
     #             min_final_segment_length: 1.0,
     #             mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
+    #             pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #             segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #             segment_length: 1,
     #             write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -16764,7 +17050,9 @@ module Aws::MediaConvert
     #                     bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN, COMMENTARY, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
     #                     coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
     #                     dialnorm: 1,
+    #                     dynamic_range_compression_line: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                     dynamic_range_compression_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
+    #                     dynamic_range_compression_rf: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                     lfe_filter: "ENABLED", # accepts ENABLED, DISABLED
     #                     metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                     sample_rate: 1,
@@ -16924,6 +17212,9 @@ module Aws::MediaConvert
     #                   ttml_destination_settings: {
     #                     style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                   },
+    #                   webvtt_destination_settings: {
+    #                     style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                   },
     #                 },
     #                 language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                 language_description: "__string",
@@ -16932,6 +17223,10 @@ module Aws::MediaConvert
     #             container_settings: {
     #               cmfc_settings: {
     #                 audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #                 audio_group_id: "__string",
+    #                 audio_rendition_sets: "__string",
+    #                 audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
+    #                 descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                 i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                 scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -17046,6 +17341,7 @@ module Aws::MediaConvert
     #                 audio_only_container: "AUTOMATIC", # accepts AUTOMATIC, M2TS
     #                 audio_rendition_sets: "__string",
     #                 audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #                 descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                 i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 segment_modifier: "__string",
     #               },
@@ -17490,6 +17786,7 @@ module Aws::MediaConvert
     #           min_buffer_time: 1,
     #           min_final_segment_length: 1.0,
     #           mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
+    #           pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #           segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #           segment_length: 1,
     #           stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -17504,6 +17801,7 @@ module Aws::MediaConvert
     #               selected_outputs: ["__stringMin1"],
     #             },
     #           ],
+    #           audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION", # accepts MPEG_CHANNEL_CONFIGURATION, DOLBY_CHANNEL_CONFIGURATION
     #           base_url: "__string",
     #           destination: "__stringPatternS3",
     #           destination_settings: {
@@ -17531,6 +17829,7 @@ module Aws::MediaConvert
     #           min_buffer_time: 1,
     #           min_final_segment_length: 1.0,
     #           mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
+    #           pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #           segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #           segment_length: 1,
     #           write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -17707,6 +18006,7 @@ module Aws::MediaConvert
     #           audio_only_container: "AUTOMATIC", # accepts AUTOMATIC, M2TS
     #           audio_rendition_sets: "__string",
     #           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #           descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #           i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           segment_modifier: "__string",
     #         },
@@ -17846,7 +18146,9 @@ module Aws::MediaConvert
     #                 bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN, COMMENTARY, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
     #                 coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
     #                 dialnorm: 1,
+    #                 dynamic_range_compression_line: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                 dynamic_range_compression_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
+    #                 dynamic_range_compression_rf: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                 lfe_filter: "ENABLED", # accepts ENABLED, DISABLED
     #                 metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                 sample_rate: 1,
@@ -18005,6 +18307,9 @@ module Aws::MediaConvert
     #               ttml_destination_settings: {
     #                 style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #               },
+    #               webvtt_destination_settings: {
+    #                 style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #               },
     #             },
     #             language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #             language_description: "__string",
@@ -18013,6 +18318,10 @@ module Aws::MediaConvert
     #         container_settings: {
     #           cmfc_settings: {
     #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #             audio_group_id: "__string",
+    #             audio_rendition_sets: "__string",
+    #             audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
+    #             descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #             i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             scte_35_esam: "INSERT", # accepts INSERT, NONE
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -19608,7 +19917,7 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] style_passthrough
     #   Pass through style and position information from a TTML-like input
-    #   source (TTML, SMPTE-TT) to the TTML output.
+    #   source (TTML, IMSC, SMPTE-TT) to the TTML output.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TtmlDestinationSettings AWS API Documentation
@@ -19751,10 +20060,10 @@ module Aws::MediaConvert
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                       },
-    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
     #                       time_delta: 1,
     #                     },
-    #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC
+    #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #                     teletext_source_settings: {
     #                       page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                     },
@@ -19922,6 +20231,7 @@ module Aws::MediaConvert
     #                   min_buffer_time: 1,
     #                   min_final_segment_length: 1.0,
     #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
+    #                   pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -19936,6 +20246,7 @@ module Aws::MediaConvert
     #                       selected_outputs: ["__stringMin1"],
     #                     },
     #                   ],
+    #                   audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION", # accepts MPEG_CHANNEL_CONFIGURATION, DOLBY_CHANNEL_CONFIGURATION
     #                   base_url: "__string",
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
@@ -19963,6 +20274,7 @@ module Aws::MediaConvert
     #                   min_buffer_time: 1,
     #                   min_final_segment_length: 1.0,
     #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
+    #                   pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
     #                   write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -20117,7 +20429,9 @@ module Aws::MediaConvert
     #                           bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN, COMMENTARY, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
     #                           coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
     #                           dialnorm: 1,
+    #                           dynamic_range_compression_line: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                           dynamic_range_compression_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
+    #                           dynamic_range_compression_rf: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                           lfe_filter: "ENABLED", # accepts ENABLED, DISABLED
     #                           metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                           sample_rate: 1,
@@ -20277,6 +20591,9 @@ module Aws::MediaConvert
     #                         ttml_destination_settings: {
     #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                         },
+    #                         webvtt_destination_settings: {
+    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                         },
     #                       },
     #                       language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                       language_description: "__string",
@@ -20285,6 +20602,10 @@ module Aws::MediaConvert
     #                   container_settings: {
     #                     cmfc_settings: {
     #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #                       audio_group_id: "__string",
+    #                       audio_rendition_sets: "__string",
+    #                       audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
+    #                       descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                       i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -20399,6 +20720,7 @@ module Aws::MediaConvert
     #                       audio_only_container: "AUTOMATIC", # accepts AUTOMATIC, M2TS
     #                       audio_rendition_sets: "__string",
     #                       audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #                       descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                       i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       segment_modifier: "__string",
     #                     },
@@ -20880,7 +21202,9 @@ module Aws::MediaConvert
     #                   bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN, COMMENTARY, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
     #                   coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
     #                   dialnorm: 1,
+    #                   dynamic_range_compression_line: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                   dynamic_range_compression_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
+    #                   dynamic_range_compression_rf: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                   lfe_filter: "ENABLED", # accepts ENABLED, DISABLED
     #                   metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                   sample_rate: 1,
@@ -21039,6 +21363,9 @@ module Aws::MediaConvert
     #                 ttml_destination_settings: {
     #                   style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                 },
+    #                 webvtt_destination_settings: {
+    #                   style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                 },
     #               },
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               language_description: "__string",
@@ -21047,6 +21374,10 @@ module Aws::MediaConvert
     #           container_settings: {
     #             cmfc_settings: {
     #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #               audio_group_id: "__string",
+    #               audio_rendition_sets: "__string",
+    #               audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
+    #               descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #               i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               scte_35_esam: "INSERT", # accepts INSERT, NONE
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -23207,6 +23538,29 @@ module Aws::MediaConvert
       :channels,
       :format,
       :sample_rate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # WEBVTT Destination Settings
+    #
+    # @note When making an API call, you may pass WebvttDestinationSettings
+    #   data as a hash:
+    #
+    #       {
+    #         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] style_passthrough
+    #   If your input captions format is teletext or teletext inside of STL,
+    #   enable this setting to pass through style, color, and position
+    #   information to your WebVTT output captions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/WebvttDestinationSettings AWS API Documentation
+    #
+    class WebvttDestinationSettings < Struct.new(
+      :style_passthrough)
       SENSITIVE = []
       include Aws::Structure
     end

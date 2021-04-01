@@ -28,6 +28,7 @@ module Aws::Route53Resolver
   #
   # ## Error Classes
   # * {AccessDeniedException}
+  # * {ConflictException}
   # * {InternalServiceErrorException}
   # * {InvalidNextTokenException}
   # * {InvalidParameterException}
@@ -41,6 +42,7 @@ module Aws::Route53Resolver
   # * {ResourceUnavailableException}
   # * {ThrottlingException}
   # * {UnknownResourceException}
+  # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -53,6 +55,21 @@ module Aws::Route53Resolver
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Route53Resolver::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53Resolver::Types::ConflictException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -278,6 +295,21 @@ module Aws::Route53Resolver
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Route53Resolver::Types::UnknownResourceException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ValidationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53Resolver::Types::ValidationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

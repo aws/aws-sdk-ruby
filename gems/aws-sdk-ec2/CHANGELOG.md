@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.232.0 (2021-04-01)
+------------------
+
+* Feature - VPC Flow Logs Service adds a new API, GetFlowLogsIntegrationTemplate, which generates CloudFormation templates for Athena. For more info, see https://docs.aws.amazon.com/console/vpc/flow-logs/athena
+
 1.231.0 (2021-03-30)
 ------------------
 

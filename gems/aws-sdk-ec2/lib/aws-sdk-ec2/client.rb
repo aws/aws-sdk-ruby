@@ -1682,12 +1682,12 @@ module Aws::EC2
     # single IPv6 CIDR block with your subnet. An IPv6 CIDR block must have
     # a prefix length of /64.
     #
-    # @option params [required, String] :subnet_id
-    #   The ID of your subnet.
-    #
     # @option params [required, String] :ipv_6_cidr_block
     #   The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix
     #   length.
+    #
+    # @option params [required, String] :subnet_id
+    #   The ID of your subnet.
     #
     # @return [Types::AssociateSubnetCidrBlockResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1697,8 +1697,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_subnet_cidr_block({
-    #     subnet_id: "SubnetId", # required
     #     ipv_6_cidr_block: "String", # required
+    #     subnet_id: "SubnetId", # required
     #   })
     #
     # @example Response structure
@@ -8339,6 +8339,12 @@ module Aws::EC2
     # @option params [String] :availability_zone_id
     #   The AZ ID or the Local Zone ID of the subnet.
     #
+    # @option params [required, String] :cidr_block
+    #   The IPv4 network range for the subnet, in CIDR notation. For example,
+    #   `10.0.0.0/24`. We modify the specified CIDR block to its canonical
+    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
+    #   `100.68.0.0/18`.
+    #
     # @option params [String] :ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
@@ -8356,12 +8362,6 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [required, String] :cidr_block
-    #   The IPv4 network range for the subnet, in CIDR notation. For example,
-    #   `10.0.0.0/24`. We modify the specified CIDR block to its canonical
-    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
-    #   `100.68.0.0/18`.
     #
     # @return [Types::CreateSubnetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8406,11 +8406,11 @@ module Aws::EC2
     #     ],
     #     availability_zone: "String",
     #     availability_zone_id: "String",
+    #     cidr_block: "String", # required
     #     ipv_6_cidr_block: "String",
     #     outpost_arn: "String",
     #     vpc_id: "VpcId", # required
     #     dry_run: false,
-    #     cidr_block: "String", # required
     #   })
     #
     # @example Response structure
@@ -24765,6 +24765,8 @@ module Aws::EC2
     #   * `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR
     #     block associated with the subnet.
     #
+    #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
+    #
     #   * `owner-id` - The ID of the AWS account that owns the subnet.
     #
     #   * `state` - The state of the subnet (`pending` \| `available`).
@@ -30149,6 +30151,73 @@ module Aws::EC2
     # @param [Hash] params ({})
     def get_ebs_encryption_by_default(params = {}, options = {})
       req = build_request(:get_ebs_encryption_by_default, params)
+      req.send_request(options)
+    end
+
+    # Generates a CloudFormation template that streamlines and automates the
+    # integration of VPC flow logs with Amazon Athena. This make it easier
+    # for you to query and gain insights from VPC flow logs data. Based on
+    # the information that you provide, we configure resources in the
+    # template to do the following:
+    #
+    # * Create a table in Athena that maps fields to a custom log format
+    #
+    # * Create a Lambda function that updates the table with new partitions
+    #   on a daily, weekly, or monthly basis
+    #
+    # * Create a table partitioned between two timestamps in the past
+    #
+    # * Create a set of named queries in Athena that you can use to get
+    #   started quickly
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :flow_log_id
+    #   The ID of the flow log.
+    #
+    # @option params [required, String] :config_delivery_s3_destination_arn
+    #   To store the CloudFormation template in Amazon S3, specify the
+    #   location in Amazon S3.
+    #
+    # @option params [required, Types::IntegrateServices] :integrate_services
+    #   Information about the service integration.
+    #
+    # @return [Types::GetFlowLogsIntegrationTemplateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFlowLogsIntegrationTemplateResult#result #result} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_flow_logs_integration_template({
+    #     dry_run: false,
+    #     flow_log_id: "VpcFlowLogId", # required
+    #     config_delivery_s3_destination_arn: "String", # required
+    #     integrate_services: { # required
+    #       athena_integrations: [
+    #         {
+    #           integration_result_s3_destination_arn: "String", # required
+    #           partition_load_frequency: "none", # required, accepts none, daily, weekly, monthly
+    #           partition_start_date: Time.now,
+    #           partition_end_date: Time.now,
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.result #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetFlowLogsIntegrationTemplate AWS API Documentation
+    #
+    # @overload get_flow_logs_integration_template(params = {})
+    # @param [Hash] params ({})
+    def get_flow_logs_integration_template(params = {}, options = {})
+      req = build_request(:get_flow_logs_integration_template, params)
       req.send_request(options)
     end
 
@@ -41540,7 +41609,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.231.0'
+      context[:gem_version] = '1.232.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

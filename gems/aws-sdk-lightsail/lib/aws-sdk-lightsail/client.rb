@@ -1309,7 +1309,9 @@ module Aws::Lightsail
     #   resp.container_service.tags[0].value #=> String
     #   resp.container_service.power #=> String, one of "nano", "micro", "small", "medium", "large", "xlarge"
     #   resp.container_service.power_id #=> String
-    #   resp.container_service.state #=> String, one of "PENDING", "READY", "RUNNING", "UPDATING", "DELETING", "DISABLED"
+    #   resp.container_service.state #=> String, one of "PENDING", "READY", "RUNNING", "UPDATING", "DELETING", "DISABLED", "DEPLOYING"
+    #   resp.container_service.state_detail.code #=> String, one of "CREATING_SYSTEM_RESOURCES", "CREATING_NETWORK_INFRASTRUCTURE", "PROVISIONING_CERTIFICATE", "PROVISIONING_SERVICE", "CREATING_DEPLOYMENT", "EVALUATING_HEALTH_CHECK", "ACTIVATING_DEPLOYMENT", "CERTIFICATE_LIMIT_EXCEEDED", "UNKNOWN_ERROR"
+    #   resp.container_service.state_detail.message #=> String
     #   resp.container_service.scale #=> Integer
     #   resp.container_service.current_deployment.version #=> Integer
     #   resp.container_service.current_deployment.state #=> String, one of "ACTIVATING", "ACTIVE", "INACTIVE", "FAILED"
@@ -1442,7 +1444,9 @@ module Aws::Lightsail
     #   resp.container_service.tags[0].value #=> String
     #   resp.container_service.power #=> String, one of "nano", "micro", "small", "medium", "large", "xlarge"
     #   resp.container_service.power_id #=> String
-    #   resp.container_service.state #=> String, one of "PENDING", "READY", "RUNNING", "UPDATING", "DELETING", "DISABLED"
+    #   resp.container_service.state #=> String, one of "PENDING", "READY", "RUNNING", "UPDATING", "DELETING", "DISABLED", "DEPLOYING"
+    #   resp.container_service.state_detail.code #=> String, one of "CREATING_SYSTEM_RESOURCES", "CREATING_NETWORK_INFRASTRUCTURE", "PROVISIONING_CERTIFICATE", "PROVISIONING_SERVICE", "CREATING_DEPLOYMENT", "EVALUATING_HEALTH_CHECK", "ACTIVATING_DEPLOYMENT", "CERTIFICATE_LIMIT_EXCEEDED", "UNKNOWN_ERROR"
+    #   resp.container_service.state_detail.message #=> String
     #   resp.container_service.scale #=> Integer
     #   resp.container_service.current_deployment.version #=> Integer
     #   resp.container_service.current_deployment.state #=> String, one of "ACTIVATING", "ACTIVE", "INACTIVE", "FAILED"
@@ -5594,7 +5598,9 @@ module Aws::Lightsail
     #   resp.container_services[0].tags[0].value #=> String
     #   resp.container_services[0].power #=> String, one of "nano", "micro", "small", "medium", "large", "xlarge"
     #   resp.container_services[0].power_id #=> String
-    #   resp.container_services[0].state #=> String, one of "PENDING", "READY", "RUNNING", "UPDATING", "DELETING", "DISABLED"
+    #   resp.container_services[0].state #=> String, one of "PENDING", "READY", "RUNNING", "UPDATING", "DELETING", "DISABLED", "DEPLOYING"
+    #   resp.container_services[0].state_detail.code #=> String, one of "CREATING_SYSTEM_RESOURCES", "CREATING_NETWORK_INFRASTRUCTURE", "PROVISIONING_CERTIFICATE", "PROVISIONING_SERVICE", "CREATING_DEPLOYMENT", "EVALUATING_HEALTH_CHECK", "ACTIVATING_DEPLOYMENT", "CERTIFICATE_LIMIT_EXCEEDED", "UNKNOWN_ERROR"
+    #   resp.container_services[0].state_detail.message #=> String
     #   resp.container_services[0].scale #=> Integer
     #   resp.container_services[0].current_deployment.version #=> Integer
     #   resp.container_services[0].current_deployment.state #=> String, one of "ACTIVATING", "ACTIVE", "INACTIVE", "FAILED"
@@ -9923,7 +9929,9 @@ module Aws::Lightsail
     #   resp.container_service.tags[0].value #=> String
     #   resp.container_service.power #=> String, one of "nano", "micro", "small", "medium", "large", "xlarge"
     #   resp.container_service.power_id #=> String
-    #   resp.container_service.state #=> String, one of "PENDING", "READY", "RUNNING", "UPDATING", "DELETING", "DISABLED"
+    #   resp.container_service.state #=> String, one of "PENDING", "READY", "RUNNING", "UPDATING", "DELETING", "DISABLED", "DEPLOYING"
+    #   resp.container_service.state_detail.code #=> String, one of "CREATING_SYSTEM_RESOURCES", "CREATING_NETWORK_INFRASTRUCTURE", "PROVISIONING_CERTIFICATE", "PROVISIONING_SERVICE", "CREATING_DEPLOYMENT", "EVALUATING_HEALTH_CHECK", "ACTIVATING_DEPLOYMENT", "CERTIFICATE_LIMIT_EXCEEDED", "UNKNOWN_ERROR"
+    #   resp.container_service.state_detail.message #=> String
     #   resp.container_service.scale #=> Integer
     #   resp.container_service.current_deployment.version #=> Integer
     #   resp.container_service.current_deployment.state #=> String, one of "ACTIVATING", "ACTIVE", "INACTIVE", "FAILED"
@@ -10508,7 +10516,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1647,24 +1647,24 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         subnet_id: "SubnetId", # required
     #         ipv_6_cidr_block: "String", # required
+    #         subnet_id: "SubnetId", # required
     #       }
-    #
-    # @!attribute [rw] subnet_id
-    #   The ID of your subnet.
-    #   @return [String]
     #
     # @!attribute [rw] ipv_6_cidr_block
     #   The IPv6 CIDR block for your subnet. The subnet must have a /64
     #   prefix length.
     #   @return [String]
     #
+    # @!attribute [rw] subnet_id
+    #   The ID of your subnet.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSubnetCidrBlockRequest AWS API Documentation
     #
     class AssociateSubnetCidrBlockRequest < Struct.new(
-      :subnet_id,
-      :ipv_6_cidr_block)
+      :ipv_6_cidr_block,
+      :subnet_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1940,6 +1940,46 @@ module Aws::EC2
     class AssociationStatus < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes integration options for Amazon Athena.
+    #
+    # @note When making an API call, you may pass AthenaIntegration
+    #   data as a hash:
+    #
+    #       {
+    #         integration_result_s3_destination_arn: "String", # required
+    #         partition_load_frequency: "none", # required, accepts none, daily, weekly, monthly
+    #         partition_start_date: Time.now,
+    #         partition_end_date: Time.now,
+    #       }
+    #
+    # @!attribute [rw] integration_result_s3_destination_arn
+    #   The location in Amazon S3 to store the generated CloudFormation
+    #   template.
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_load_frequency
+    #   The schedule for adding new partitions to the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_start_date
+    #   The start date for the partition.
+    #   @return [Time]
+    #
+    # @!attribute [rw] partition_end_date
+    #   The end date for the partition.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AthenaIntegration AWS API Documentation
+    #
+    class AthenaIntegration < Struct.new(
+      :integration_result_s3_destination_arn,
+      :partition_load_frequency,
+      :partition_start_date,
+      :partition_end_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9053,11 +9093,11 @@ module Aws::EC2
     #         ],
     #         availability_zone: "String",
     #         availability_zone_id: "String",
+    #         cidr_block: "String", # required
     #         ipv_6_cidr_block: "String",
     #         outpost_arn: "String",
     #         vpc_id: "VpcId", # required
     #         dry_run: false,
-    #         cidr_block: "String", # required
     #       }
     #
     # @!attribute [rw] tag_specifications
@@ -9088,6 +9128,13 @@ module Aws::EC2
     #   The AZ ID or the Local Zone ID of the subnet.
     #   @return [String]
     #
+    # @!attribute [rw] cidr_block
+    #   The IPv4 network range for the subnet, in CIDR notation. For
+    #   example, `10.0.0.0/24`. We modify the specified CIDR block to its
+    #   canonical form; for example, if you specify `100.68.0.18/18`, we
+    #   modify it to `100.68.0.0/18`.
+    #   @return [String]
+    #
     # @!attribute [rw] ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
@@ -9110,24 +9157,17 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] cidr_block
-    #   The IPv4 network range for the subnet, in CIDR notation. For
-    #   example, `10.0.0.0/24`. We modify the specified CIDR block to its
-    #   canonical form; for example, if you specify `100.68.0.18/18`, we
-    #   modify it to `100.68.0.0/18`.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnetRequest AWS API Documentation
     #
     class CreateSubnetRequest < Struct.new(
       :tag_specifications,
       :availability_zone,
       :availability_zone_id,
+      :cidr_block,
       :ipv_6_cidr_block,
       :outpost_arn,
       :vpc_id,
-      :dry_run,
-      :cidr_block)
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22423,6 +22463,8 @@ module Aws::EC2
     #   * `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR
     #     block associated with the subnet.
     #
+    #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
+    #
     #   * `owner-id` - The ID of the AWS account that owns the subnet.
     #
     #   * `state` - The state of the subnet (`pending` \| `available`).
@@ -29792,6 +29834,68 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetFlowLogsIntegrationTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         flow_log_id: "VpcFlowLogId", # required
+    #         config_delivery_s3_destination_arn: "String", # required
+    #         integrate_services: { # required
+    #           athena_integrations: [
+    #             {
+    #               integration_result_s3_destination_arn: "String", # required
+    #               partition_load_frequency: "none", # required, accepts none, daily, weekly, monthly
+    #               partition_start_date: Time.now,
+    #               partition_end_date: Time.now,
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] flow_log_id
+    #   The ID of the flow log.
+    #   @return [String]
+    #
+    # @!attribute [rw] config_delivery_s3_destination_arn
+    #   To store the CloudFormation template in Amazon S3, specify the
+    #   location in Amazon S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] integrate_services
+    #   Information about the service integration.
+    #   @return [Types::IntegrateServices]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetFlowLogsIntegrationTemplateRequest AWS API Documentation
+    #
+    class GetFlowLogsIntegrationTemplateRequest < Struct.new(
+      :dry_run,
+      :flow_log_id,
+      :config_delivery_s3_destination_arn,
+      :integrate_services)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] result
+    #   The generated CloudFormation template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetFlowLogsIntegrationTemplateResult AWS API Documentation
+    #
+    class GetFlowLogsIntegrationTemplateResult < Struct.new(
+      :result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetGroupsForCapacityReservationRequest
     #   data as a hash:
     #
@@ -34417,6 +34521,34 @@ module Aws::EC2
     class InstanceUsage < Struct.new(
       :account_id,
       :used_instance_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes service integrations with VPC Flow logs.
+    #
+    # @note When making an API call, you may pass IntegrateServices
+    #   data as a hash:
+    #
+    #       {
+    #         athena_integrations: [
+    #           {
+    #             integration_result_s3_destination_arn: "String", # required
+    #             partition_load_frequency: "none", # required, accepts none, daily, weekly, monthly
+    #             partition_start_date: Time.now,
+    #             partition_end_date: Time.now,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] athena_integrations
+    #   Information about the integration with Amazon Athena.
+    #   @return [Array<Types::AthenaIntegration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IntegrateServices AWS API Documentation
+    #
+    class IntegrateServices < Struct.new(
+      :athena_integrations)
       SENSITIVE = []
       include Aws::Structure
     end
