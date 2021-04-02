@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2021-04-02)
+------------------
+
+* Feature - SPEKE v2 is an upgrade to the existing SPEKE API to support multiple encryption keys, based on an encryption contract selected by the customer.
+
 1.38.0 (2021-03-10)
 ------------------
 

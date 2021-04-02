@@ -477,7 +477,11 @@ module Aws::Imagebuilder
     #   Components for build and test that are included in the container
     #   recipe.
     #
-    # @option params [required, String] :dockerfile_template_data
+    # @option params [Types::InstanceConfiguration] :instance_configuration
+    #   A group of options that can be used to configure an instance for
+    #   building and testing container images.
+    #
+    # @option params [String] :dockerfile_template_data
     #   The Dockerfile template used to build your image as an inline data
     #   blob.
     #
@@ -531,7 +535,26 @@ module Aws::Imagebuilder
     #         component_arn: "ComponentVersionArnOrBuildVersionArn", # required
     #       },
     #     ],
-    #     dockerfile_template_data: "InlineDockerFileTemplate", # required
+    #     instance_configuration: {
+    #       image: "NonEmptyString",
+    #       block_device_mappings: [
+    #         {
+    #           device_name: "NonEmptyString",
+    #           ebs: {
+    #             encrypted: false,
+    #             delete_on_termination: false,
+    #             iops: 1,
+    #             kms_key_id: "NonEmptyString",
+    #             snapshot_id: "NonEmptyString",
+    #             volume_size: 1,
+    #             volume_type: "standard", # accepts standard, io1, io2, gp2, gp3, sc1, st1
+    #           },
+    #           virtual_name: "NonEmptyString",
+    #           no_device: "EmptyString",
+    #         },
+    #       ],
+    #     },
+    #     dockerfile_template_data: "InlineDockerFileTemplate",
     #     dockerfile_template_uri: "Uri",
     #     platform_override: "Windows", # accepts Windows, Linux
     #     image_os_version_override: "NonEmptyString",
@@ -620,6 +643,13 @@ module Aws::Imagebuilder
     #           },
     #         },
     #         license_configuration_arns: ["LicenseConfigurationArn"],
+    #         launch_template_configurations: [
+    #           {
+    #             launch_template_id: "LaunchTemplateId", # required
+    #             account_id: "AccountId",
+    #             set_default_version: false,
+    #           },
+    #         ],
     #       },
     #     ],
     #     tags: {
@@ -981,7 +1011,7 @@ module Aws::Imagebuilder
     #     name: "ResourceName", # required
     #     description: "NonEmptyString",
     #     instance_types: ["InstanceType"],
-    #     instance_profile_name: "NonEmptyString", # required
+    #     instance_profile_name: "InstanceProfileNameType", # required
     #     security_group_ids: ["NonEmptyString"],
     #     subnet_id: "NonEmptyString",
     #     logging: {
@@ -1335,6 +1365,18 @@ module Aws::Imagebuilder
     #   resp.container_recipe.version #=> String
     #   resp.container_recipe.components #=> Array
     #   resp.container_recipe.components[0].component_arn #=> String
+    #   resp.container_recipe.instance_configuration.image #=> String
+    #   resp.container_recipe.instance_configuration.block_device_mappings #=> Array
+    #   resp.container_recipe.instance_configuration.block_device_mappings[0].device_name #=> String
+    #   resp.container_recipe.instance_configuration.block_device_mappings[0].ebs.encrypted #=> Boolean
+    #   resp.container_recipe.instance_configuration.block_device_mappings[0].ebs.delete_on_termination #=> Boolean
+    #   resp.container_recipe.instance_configuration.block_device_mappings[0].ebs.iops #=> Integer
+    #   resp.container_recipe.instance_configuration.block_device_mappings[0].ebs.kms_key_id #=> String
+    #   resp.container_recipe.instance_configuration.block_device_mappings[0].ebs.snapshot_id #=> String
+    #   resp.container_recipe.instance_configuration.block_device_mappings[0].ebs.volume_size #=> Integer
+    #   resp.container_recipe.instance_configuration.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "gp3", "sc1", "st1"
+    #   resp.container_recipe.instance_configuration.block_device_mappings[0].virtual_name #=> String
+    #   resp.container_recipe.instance_configuration.block_device_mappings[0].no_device #=> String
     #   resp.container_recipe.dockerfile_template_data #=> String
     #   resp.container_recipe.kms_key_id #=> String
     #   resp.container_recipe.encrypted #=> Boolean
@@ -1429,6 +1471,10 @@ module Aws::Imagebuilder
     #   resp.distribution_configuration.distributions[0].container_distribution_configuration.target_repository.repository_name #=> String
     #   resp.distribution_configuration.distributions[0].license_configuration_arns #=> Array
     #   resp.distribution_configuration.distributions[0].license_configuration_arns[0] #=> String
+    #   resp.distribution_configuration.distributions[0].launch_template_configurations #=> Array
+    #   resp.distribution_configuration.distributions[0].launch_template_configurations[0].launch_template_id #=> String
+    #   resp.distribution_configuration.distributions[0].launch_template_configurations[0].account_id #=> String
+    #   resp.distribution_configuration.distributions[0].launch_template_configurations[0].set_default_version #=> Boolean
     #   resp.distribution_configuration.timeout_minutes #=> Integer
     #   resp.distribution_configuration.date_created #=> String
     #   resp.distribution_configuration.date_updated #=> String
@@ -1506,6 +1552,18 @@ module Aws::Imagebuilder
     #   resp.image.container_recipe.version #=> String
     #   resp.image.container_recipe.components #=> Array
     #   resp.image.container_recipe.components[0].component_arn #=> String
+    #   resp.image.container_recipe.instance_configuration.image #=> String
+    #   resp.image.container_recipe.instance_configuration.block_device_mappings #=> Array
+    #   resp.image.container_recipe.instance_configuration.block_device_mappings[0].device_name #=> String
+    #   resp.image.container_recipe.instance_configuration.block_device_mappings[0].ebs.encrypted #=> Boolean
+    #   resp.image.container_recipe.instance_configuration.block_device_mappings[0].ebs.delete_on_termination #=> Boolean
+    #   resp.image.container_recipe.instance_configuration.block_device_mappings[0].ebs.iops #=> Integer
+    #   resp.image.container_recipe.instance_configuration.block_device_mappings[0].ebs.kms_key_id #=> String
+    #   resp.image.container_recipe.instance_configuration.block_device_mappings[0].ebs.snapshot_id #=> String
+    #   resp.image.container_recipe.instance_configuration.block_device_mappings[0].ebs.volume_size #=> Integer
+    #   resp.image.container_recipe.instance_configuration.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "gp3", "sc1", "st1"
+    #   resp.image.container_recipe.instance_configuration.block_device_mappings[0].virtual_name #=> String
+    #   resp.image.container_recipe.instance_configuration.block_device_mappings[0].no_device #=> String
     #   resp.image.container_recipe.dockerfile_template_data #=> String
     #   resp.image.container_recipe.kms_key_id #=> String
     #   resp.image.container_recipe.encrypted #=> Boolean
@@ -1561,6 +1619,10 @@ module Aws::Imagebuilder
     #   resp.image.distribution_configuration.distributions[0].container_distribution_configuration.target_repository.repository_name #=> String
     #   resp.image.distribution_configuration.distributions[0].license_configuration_arns #=> Array
     #   resp.image.distribution_configuration.distributions[0].license_configuration_arns[0] #=> String
+    #   resp.image.distribution_configuration.distributions[0].launch_template_configurations #=> Array
+    #   resp.image.distribution_configuration.distributions[0].launch_template_configurations[0].launch_template_id #=> String
+    #   resp.image.distribution_configuration.distributions[0].launch_template_configurations[0].account_id #=> String
+    #   resp.image.distribution_configuration.distributions[0].launch_template_configurations[0].set_default_version #=> Boolean
     #   resp.image.distribution_configuration.timeout_minutes #=> Integer
     #   resp.image.distribution_configuration.date_created #=> String
     #   resp.image.distribution_configuration.date_updated #=> String
@@ -2980,6 +3042,13 @@ module Aws::Imagebuilder
     #           },
     #         },
     #         license_configuration_arns: ["LicenseConfigurationArn"],
+    #         launch_template_configurations: [
+    #           {
+    #             launch_template_id: "LaunchTemplateId", # required
+    #             account_id: "AccountId",
+    #             set_default_version: false,
+    #           },
+    #         ],
     #       },
     #     ],
     #     client_token: "ClientToken", # required
@@ -3155,7 +3224,7 @@ module Aws::Imagebuilder
     #     infrastructure_configuration_arn: "InfrastructureConfigurationArn", # required
     #     description: "NonEmptyString",
     #     instance_types: ["InstanceType"],
-    #     instance_profile_name: "NonEmptyString", # required
+    #     instance_profile_name: "InstanceProfileNameType", # required
     #     security_group_ids: ["NonEmptyString"],
     #     subnet_id: "NonEmptyString",
     #     logging: {
@@ -3201,7 +3270,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
