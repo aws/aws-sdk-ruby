@@ -707,6 +707,7 @@ module Aws::Comprehend
     #           subnets: ["SubnetId"], # required
     #         },
     #         mode: "MULTI_CLASS", # accepts MULTI_CLASS, MULTI_LABEL
+    #         model_kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] document_classifier_name
@@ -783,6 +784,17 @@ module Aws::Comprehend
     #   delimiter. The default delimiter between labels is a pipe (\|).
     #   @return [String]
     #
+    # @!attribute [rw] model_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt trained custom models. The ModelKmsKeyId
+    #   can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateDocumentClassifierRequest AWS API Documentation
     #
     class CreateDocumentClassifierRequest < Struct.new(
@@ -795,7 +807,8 @@ module Aws::Comprehend
       :language_code,
       :volume_kms_key_id,
       :vpc_config,
-      :mode)
+      :mode,
+      :model_kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -827,6 +840,7 @@ module Aws::Comprehend
     #             value: "TagValue",
     #           },
     #         ],
+    #         data_access_role_arn: "IamRoleArn",
     #       }
     #
     # @!attribute [rw] endpoint_name
@@ -861,6 +875,13 @@ module Aws::Comprehend
     #   indicate its use by the sales department.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   trained custom models encrypted with a customer managed key
+    #   (ModelKmsKeyId).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateEndpointRequest AWS API Documentation
     #
     class CreateEndpointRequest < Struct.new(
@@ -868,7 +889,8 @@ module Aws::Comprehend
       :model_arn,
       :desired_inference_units,
       :client_request_token,
-      :tags)
+      :tags,
+      :data_access_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -927,6 +949,7 @@ module Aws::Comprehend
     #           security_group_ids: ["SecurityGroupId"], # required
     #           subnets: ["SubnetId"], # required
     #         },
+    #         model_kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] recognizer_name
@@ -993,6 +1016,17 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] model_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt trained custom models. The ModelKmsKeyId
+    #   can be either of the following formats
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateEntityRecognizerRequest AWS API Documentation
     #
     class CreateEntityRecognizerRequest < Struct.new(
@@ -1003,7 +1037,8 @@ module Aws::Comprehend
       :client_request_token,
       :language_code,
       :volume_kms_key_id,
-      :vpc_config)
+      :vpc_config,
+      :model_kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2160,6 +2195,17 @@ module Aws::Comprehend
     #   mode and this cannot be changed once the classifier is trained.
     #   @return [String]
     #
+    # @!attribute [rw] model_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt trained custom models. The ModelKmsKeyId
+    #   can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierProperties AWS API Documentation
     #
     class DocumentClassifierProperties < Struct.new(
@@ -2177,7 +2223,8 @@ module Aws::Comprehend
       :data_access_role_arn,
       :volume_kms_key_id,
       :vpc_config,
-      :mode)
+      :mode,
+      :model_kms_key_id)
       SENSITIVE = [:classifier_metadata]
       include Aws::Structure
     end
@@ -2447,6 +2494,13 @@ module Aws::Comprehend
     #   The date and time that the endpoint was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   trained custom models encrypted with a customer managed key
+    #   (ModelKmsKeyId).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EndpointProperties AWS API Documentation
     #
     class EndpointProperties < Struct.new(
@@ -2457,7 +2511,8 @@ module Aws::Comprehend
       :desired_inference_units,
       :current_inference_units,
       :creation_time,
-      :last_modified_time)
+      :last_modified_time,
+      :data_access_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3050,6 +3105,17 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] model_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt trained custom models. The ModelKmsKeyId
+    #   can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerProperties AWS API Documentation
     #
     class EntityRecognizerProperties < Struct.new(
@@ -3065,7 +3131,8 @@ module Aws::Comprehend
       :recognizer_metadata,
       :data_access_role_arn,
       :volume_kms_key_id,
-      :vpc_config)
+      :vpc_config,
+      :model_kms_key_id)
       SENSITIVE = [:recognizer_metadata]
       include Aws::Structure
     end

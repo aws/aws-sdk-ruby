@@ -400,15 +400,20 @@ module Aws::GlueDataBrew
     #   alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
     #
     # @option params [String] :format
-    #   Specifies the file format of a dataset created from an S3 file or
+    #   The file format of a dataset that is created from an S3 file or
     #   folder.
     #
     # @option params [Types::FormatOptions] :format_options
-    #   Options that define the structure of either Csv, Excel, or JSON input.
+    #   Represents a set of options that define the structure of either
+    #   comma-separated value (CSV), Excel, or JSON input.
     #
     # @option params [required, Types::Input] :input
-    #   Information on how DataBrew can find data, in either the AWS Glue Data
-    #   Catalog or Amazon S3.
+    #   Represents information on how DataBrew can find data, in either the
+    #   AWS Glue Data Catalog or Amazon S3.
+    #
+    # @option params [Types::PathOptions] :path_options
+    #   A set of options that defines how DataBrew interprets an S3 path of
+    #   the dataset.
     #
     # @option params [Hash<String,String>] :tags
     #   Metadata tags to apply to this dataset.
@@ -448,6 +453,45 @@ module Aws::GlueDataBrew
     #         temp_directory: {
     #           bucket: "Bucket", # required
     #           key: "Key",
+    #         },
+    #       },
+    #       database_input_definition: {
+    #         glue_connection_name: "GlueConnectionName", # required
+    #         database_table_name: "DatabaseTableName", # required
+    #         temp_directory: {
+    #           bucket: "Bucket", # required
+    #           key: "Key",
+    #         },
+    #       },
+    #     },
+    #     path_options: {
+    #       last_modified_date_condition: {
+    #         expression: "Expression", # required
+    #         values_map: { # required
+    #           "ValueReference" => "ConditionValue",
+    #         },
+    #       },
+    #       files_limit: {
+    #         max_files: 1, # required
+    #         ordered_by: "LAST_MODIFIED_DATE", # accepts LAST_MODIFIED_DATE
+    #         order: "DESCENDING", # accepts DESCENDING, ASCENDING
+    #       },
+    #       parameters: {
+    #         "PathParameterName" => {
+    #           name: "PathParameterName", # required
+    #           type: "Datetime", # required, accepts Datetime, Number, String
+    #           datetime_options: {
+    #             format: "DatetimeFormat", # required
+    #             timezone_offset: "TimezoneOffset",
+    #             locale_code: "LocaleCode",
+    #           },
+    #           create_column: false,
+    #           filter: {
+    #             expression: "Expression", # required
+    #             values_map: { # required
+    #               "ValueReference" => "ConditionValue",
+    #             },
+    #           },
     #         },
     #       },
     #     },
@@ -502,8 +546,8 @@ module Aws::GlueDataBrew
     #   The maximum number of times to retry the job after a job run fails.
     #
     # @option params [required, Types::S3Location] :output_location
-    #   An Amazon S3 location (bucket name an object key) where DataBrew can
-    #   read input data, or write output from a job.
+    #   Represents an Amazon S3 location (bucket name and object key) where
+    #   DataBrew can read input data, or write output from a job.
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
@@ -1004,6 +1048,7 @@ module Aws::GlueDataBrew
     #   * {Types::DescribeDatasetResponse#last_modified_date #last_modified_date} => Time
     #   * {Types::DescribeDatasetResponse#last_modified_by #last_modified_by} => String
     #   * {Types::DescribeDatasetResponse#source #source} => String
+    #   * {Types::DescribeDatasetResponse#path_options #path_options} => Types::PathOptions
     #   * {Types::DescribeDatasetResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DescribeDatasetResponse#resource_arn #resource_arn} => String
     #
@@ -1034,9 +1079,29 @@ module Aws::GlueDataBrew
     #   resp.input.data_catalog_input_definition.table_name #=> String
     #   resp.input.data_catalog_input_definition.temp_directory.bucket #=> String
     #   resp.input.data_catalog_input_definition.temp_directory.key #=> String
+    #   resp.input.database_input_definition.glue_connection_name #=> String
+    #   resp.input.database_input_definition.database_table_name #=> String
+    #   resp.input.database_input_definition.temp_directory.bucket #=> String
+    #   resp.input.database_input_definition.temp_directory.key #=> String
     #   resp.last_modified_date #=> Time
     #   resp.last_modified_by #=> String
-    #   resp.source #=> String, one of "S3", "DATA-CATALOG"
+    #   resp.source #=> String, one of "S3", "DATA-CATALOG", "DATABASE"
+    #   resp.path_options.last_modified_date_condition.expression #=> String
+    #   resp.path_options.last_modified_date_condition.values_map #=> Hash
+    #   resp.path_options.last_modified_date_condition.values_map["ValueReference"] #=> String
+    #   resp.path_options.files_limit.max_files #=> Integer
+    #   resp.path_options.files_limit.ordered_by #=> String, one of "LAST_MODIFIED_DATE"
+    #   resp.path_options.files_limit.order #=> String, one of "DESCENDING", "ASCENDING"
+    #   resp.path_options.parameters #=> Hash
+    #   resp.path_options.parameters["PathParameterName"].name #=> String
+    #   resp.path_options.parameters["PathParameterName"].type #=> String, one of "Datetime", "Number", "String"
+    #   resp.path_options.parameters["PathParameterName"].datetime_options.format #=> String
+    #   resp.path_options.parameters["PathParameterName"].datetime_options.timezone_offset #=> String
+    #   resp.path_options.parameters["PathParameterName"].datetime_options.locale_code #=> String
+    #   resp.path_options.parameters["PathParameterName"].create_column #=> Boolean
+    #   resp.path_options.parameters["PathParameterName"].filter.expression #=> String
+    #   resp.path_options.parameters["PathParameterName"].filter.values_map #=> Hash
+    #   resp.path_options.parameters["PathParameterName"].filter.values_map["ValueReference"] #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.resource_arn #=> String
@@ -1411,9 +1476,29 @@ module Aws::GlueDataBrew
     #   resp.datasets[0].input.data_catalog_input_definition.table_name #=> String
     #   resp.datasets[0].input.data_catalog_input_definition.temp_directory.bucket #=> String
     #   resp.datasets[0].input.data_catalog_input_definition.temp_directory.key #=> String
+    #   resp.datasets[0].input.database_input_definition.glue_connection_name #=> String
+    #   resp.datasets[0].input.database_input_definition.database_table_name #=> String
+    #   resp.datasets[0].input.database_input_definition.temp_directory.bucket #=> String
+    #   resp.datasets[0].input.database_input_definition.temp_directory.key #=> String
     #   resp.datasets[0].last_modified_date #=> Time
     #   resp.datasets[0].last_modified_by #=> String
-    #   resp.datasets[0].source #=> String, one of "S3", "DATA-CATALOG"
+    #   resp.datasets[0].source #=> String, one of "S3", "DATA-CATALOG", "DATABASE"
+    #   resp.datasets[0].path_options.last_modified_date_condition.expression #=> String
+    #   resp.datasets[0].path_options.last_modified_date_condition.values_map #=> Hash
+    #   resp.datasets[0].path_options.last_modified_date_condition.values_map["ValueReference"] #=> String
+    #   resp.datasets[0].path_options.files_limit.max_files #=> Integer
+    #   resp.datasets[0].path_options.files_limit.ordered_by #=> String, one of "LAST_MODIFIED_DATE"
+    #   resp.datasets[0].path_options.files_limit.order #=> String, one of "DESCENDING", "ASCENDING"
+    #   resp.datasets[0].path_options.parameters #=> Hash
+    #   resp.datasets[0].path_options.parameters["PathParameterName"].name #=> String
+    #   resp.datasets[0].path_options.parameters["PathParameterName"].type #=> String, one of "Datetime", "Number", "String"
+    #   resp.datasets[0].path_options.parameters["PathParameterName"].datetime_options.format #=> String
+    #   resp.datasets[0].path_options.parameters["PathParameterName"].datetime_options.timezone_offset #=> String
+    #   resp.datasets[0].path_options.parameters["PathParameterName"].datetime_options.locale_code #=> String
+    #   resp.datasets[0].path_options.parameters["PathParameterName"].create_column #=> Boolean
+    #   resp.datasets[0].path_options.parameters["PathParameterName"].filter.expression #=> String
+    #   resp.datasets[0].path_options.parameters["PathParameterName"].filter.values_map #=> Hash
+    #   resp.datasets[0].path_options.parameters["PathParameterName"].filter.values_map["ValueReference"] #=> String
     #   resp.datasets[0].tags #=> Hash
     #   resp.datasets[0].tags["TagKey"] #=> String
     #   resp.datasets[0].resource_arn #=> String
@@ -1896,7 +1981,7 @@ module Aws::GlueDataBrew
     #   and ready for work. The action will be performed on this session.
     #
     # @option params [Types::ViewFrame] :view_frame
-    #   Represents the data being being transformed during an action.
+    #   Represents the data being transformed during an action.
     #
     # @return [Types::SendProjectSessionActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2108,15 +2193,20 @@ module Aws::GlueDataBrew
     #   The name of the dataset to be updated.
     #
     # @option params [String] :format
-    #   Specifies the file format of a dataset created from an S3 file or
+    #   The file format of a dataset that is created from an S3 file or
     #   folder.
     #
     # @option params [Types::FormatOptions] :format_options
-    #   Options that define the structure of either Csv, Excel, or JSON input.
+    #   Represents a set of options that define the structure of either
+    #   comma-separated value (CSV), Excel, or JSON input.
     #
     # @option params [required, Types::Input] :input
-    #   Information on how DataBrew can find data, in either the AWS Glue Data
-    #   Catalog or Amazon S3.
+    #   Represents information on how DataBrew can find data, in either the
+    #   AWS Glue Data Catalog or Amazon S3.
+    #
+    # @option params [Types::PathOptions] :path_options
+    #   A set of options that defines how DataBrew interprets an S3 path of
+    #   the dataset.
     #
     # @return [Types::UpdateDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2153,6 +2243,45 @@ module Aws::GlueDataBrew
     #         temp_directory: {
     #           bucket: "Bucket", # required
     #           key: "Key",
+    #         },
+    #       },
+    #       database_input_definition: {
+    #         glue_connection_name: "GlueConnectionName", # required
+    #         database_table_name: "DatabaseTableName", # required
+    #         temp_directory: {
+    #           bucket: "Bucket", # required
+    #           key: "Key",
+    #         },
+    #       },
+    #     },
+    #     path_options: {
+    #       last_modified_date_condition: {
+    #         expression: "Expression", # required
+    #         values_map: { # required
+    #           "ValueReference" => "ConditionValue",
+    #         },
+    #       },
+    #       files_limit: {
+    #         max_files: 1, # required
+    #         ordered_by: "LAST_MODIFIED_DATE", # accepts LAST_MODIFIED_DATE
+    #         order: "DESCENDING", # accepts DESCENDING, ASCENDING
+    #       },
+    #       parameters: {
+    #         "PathParameterName" => {
+    #           name: "PathParameterName", # required
+    #           type: "Datetime", # required, accepts Datetime, Number, String
+    #           datetime_options: {
+    #             format: "DatetimeFormat", # required
+    #             timezone_offset: "TimezoneOffset",
+    #             locale_code: "LocaleCode",
+    #           },
+    #           create_column: false,
+    #           filter: {
+    #             expression: "Expression", # required
+    #             values_map: { # required
+    #               "ValueReference" => "ConditionValue",
+    #             },
+    #           },
     #         },
     #       },
     #     },
@@ -2199,8 +2328,8 @@ module Aws::GlueDataBrew
     #   The maximum number of times to retry the job after a job run fails.
     #
     # @option params [required, Types::S3Location] :output_location
-    #   An Amazon S3 location (bucket name an object key) where DataBrew can
-    #   read input data, or write output from a job.
+    #   Represents an Amazon S3 location (bucket name and object key) where
+    #   DataBrew can read input data, or write output from a job.
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
@@ -2492,7 +2621,7 @@ module Aws::GlueDataBrew
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gluedatabrew'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

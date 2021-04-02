@@ -73,6 +73,28 @@ module Aws::Detective
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateGraphRequest
+    #   data as a hash:
+    #
+    #       {
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] tags
+    #   The tags to assign to the new behavior graph. For each tag, you
+    #   provide the tag key and the tag value.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/CreateGraphRequest AWS API Documentation
+    #
+    class CreateGraphRequest < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] graph_arn
     #   The ARN of the new behavior graph.
     #   @return [String]
@@ -487,6 +509,37 @@ module Aws::Detective
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "GraphArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the behavior graph for which to retrieve the tag values.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tag values that are assigned to the behavior graph.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about a member account that was invited to contribute to a
     # behavior graph.
     #
@@ -693,6 +746,37 @@ module Aws::Detective
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "GraphArn", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the behavior graph to assign the tags to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tag values to assign to the behavior graph.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # A member account that was included in a request but for which the
     # request could not be processed.
     #
@@ -713,6 +797,35 @@ module Aws::Detective
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "GraphArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the behavior graph to remove the tags from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag keys of the tags to remove from the behavior graph.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # The request parameters are invalid.
     #

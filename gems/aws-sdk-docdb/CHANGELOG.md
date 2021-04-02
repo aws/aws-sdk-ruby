@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2021-03-29)
+------------------
+
+* Feature - This release adds support for Event Subscriptions to DocumentDB.
+
 1.29.0 (2021-03-10)
 ------------------
 

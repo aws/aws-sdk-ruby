@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2021-03-31)
+------------------
+
+* Feature - AWS Batch adds support for Amazon EFS File System
+
 1.46.0 (2021-03-17)
 ------------------
 

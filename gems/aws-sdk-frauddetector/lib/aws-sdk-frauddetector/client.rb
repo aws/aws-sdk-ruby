@@ -428,6 +428,83 @@ module Aws::FraudDetector
       req.send_request(options)
     end
 
+    # Cancels the specified batch prediction job.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the batch prediction job to cancel.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_batch_prediction_job({
+    #     job_id: "identifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/CancelBatchPredictionJob AWS API Documentation
+    #
+    # @overload cancel_batch_prediction_job(params = {})
+    # @param [Hash] params ({})
+    def cancel_batch_prediction_job(params = {}, options = {})
+      req = build_request(:cancel_batch_prediction_job, params)
+      req.send_request(options)
+    end
+
+    # Creates a batch prediction job.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the batch prediction job.
+    #
+    # @option params [required, String] :input_path
+    #   The Amazon S3 location of your training file.
+    #
+    # @option params [required, String] :output_path
+    #   The Amazon S3 location of your output file.
+    #
+    # @option params [required, String] :event_type_name
+    #   The name of the event type.
+    #
+    # @option params [required, String] :detector_name
+    #   The name of the detector.
+    #
+    # @option params [String] :detector_version
+    #   The detector version.
+    #
+    # @option params [required, String] :iam_role_arn
+    #   The ARN of the IAM role to use for this job request.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A collection of key and value pairs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_batch_prediction_job({
+    #     job_id: "identifier", # required
+    #     input_path: "s3BucketLocation", # required
+    #     output_path: "s3BucketLocation", # required
+    #     event_type_name: "identifier", # required
+    #     detector_name: "identifier", # required
+    #     detector_version: "wholeNumberVersionString",
+    #     iam_role_arn: "iamRoleArn", # required
+    #     tags: [
+    #       {
+    #         key: "tagKey", # required
+    #         value: "tagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/CreateBatchPredictionJob AWS API Documentation
+    #
+    # @overload create_batch_prediction_job(params = {})
+    # @param [Hash] params ({})
+    def create_batch_prediction_job(params = {}, options = {})
+      req = build_request(:create_batch_prediction_job, params)
+      req.send_request(options)
+    end
+
     # Creates a detector version. The detector version starts in a `DRAFT`
     # status.
     #
@@ -752,6 +829,28 @@ module Aws::FraudDetector
     # @param [Hash] params ({})
     def create_variable(params = {}, options = {})
       req = build_request(:create_variable, params)
+      req.send_request(options)
+    end
+
+    # Deletes a batch prediction job.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the batch prediction job to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_batch_prediction_job({
+    #     job_id: "identifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteBatchPredictionJob AWS API Documentation
+    #
+    # @overload delete_batch_prediction_job(params = {})
+    # @param [Hash] params ({})
+    def delete_batch_prediction_job(params = {}, options = {})
+      req = build_request(:delete_batch_prediction_job, params)
       req.send_request(options)
     end
 
@@ -1241,6 +1340,67 @@ module Aws::FraudDetector
     # @param [Hash] params ({})
     def describe_model_versions(params = {}, options = {})
       req = build_request(:describe_model_versions, params)
+      req.send_request(options)
+    end
+
+    # Gets all batch prediction jobs or a specific job if you specify a job
+    # ID. This is a paginated API. If you provide a null maxResults, this
+    # action retrieves a maximum of 50 records per page. If you provide a
+    # maxResults, the value must be between 1 and 50. To get the next page
+    # results, provide the pagination token from the
+    # GetBatchPredictionJobsResponse as part of your request. A null
+    # pagination token fetches the records from the beginning.
+    #
+    # @option params [String] :job_id
+    #   The batch prediction job for which to get the details.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects to return for the request.
+    #
+    # @option params [String] :next_token
+    #   The next token from the previous request.
+    #
+    # @return [Types::GetBatchPredictionJobsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBatchPredictionJobsResult#batch_predictions #batch_predictions} => Array&lt;Types::BatchPrediction&gt;
+    #   * {Types::GetBatchPredictionJobsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_batch_prediction_jobs({
+    #     job_id: "identifier",
+    #     max_results: 1,
+    #     next_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.batch_predictions #=> Array
+    #   resp.batch_predictions[0].job_id #=> String
+    #   resp.batch_predictions[0].status #=> String, one of "IN_PROGRESS_INITIALIZING", "IN_PROGRESS", "CANCEL_IN_PROGRESS", "CANCELED", "COMPLETE", "FAILED"
+    #   resp.batch_predictions[0].failure_reason #=> String
+    #   resp.batch_predictions[0].start_time #=> String
+    #   resp.batch_predictions[0].completion_time #=> String
+    #   resp.batch_predictions[0].last_heartbeat_time #=> String
+    #   resp.batch_predictions[0].input_path #=> String
+    #   resp.batch_predictions[0].output_path #=> String
+    #   resp.batch_predictions[0].event_type_name #=> String
+    #   resp.batch_predictions[0].detector_name #=> String
+    #   resp.batch_predictions[0].detector_version #=> String
+    #   resp.batch_predictions[0].iam_role_arn #=> String
+    #   resp.batch_predictions[0].arn #=> String
+    #   resp.batch_predictions[0].processed_records_count #=> Integer
+    #   resp.batch_predictions[0].total_records_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetBatchPredictionJobs AWS API Documentation
+    #
+    # @overload get_batch_prediction_jobs(params = {})
+    # @param [Hash] params ({})
+    def get_batch_prediction_jobs(params = {}, options = {})
+      req = build_request(:get_batch_prediction_jobs, params)
       req.send_request(options)
     end
 
@@ -2782,7 +2942,7 @@ module Aws::FraudDetector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-frauddetector'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

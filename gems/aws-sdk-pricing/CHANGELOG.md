@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2021-03-31)
+------------------
+
+* Feature - Minor documentation and link updates.
+
 1.26.0 (2021-03-10)
 ------------------
 

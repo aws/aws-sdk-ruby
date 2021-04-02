@@ -691,6 +691,7 @@ module Aws::AlexaForBusiness
     CreateProfileRequest.add_member(:setup_mode_disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SetupModeDisabled"))
     CreateProfileRequest.add_member(:max_volume_limit, Shapes::ShapeRef.new(shape: MaxVolumeLimit, location_name: "MaxVolumeLimit"))
     CreateProfileRequest.add_member(:pstn_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PSTNEnabled"))
+    CreateProfileRequest.add_member(:data_retention_opt_in, Shapes::ShapeRef.new(shape: Boolean, location_name: "DataRetentionOptIn"))
     CreateProfileRequest.add_member(:meeting_room_configuration, Shapes::ShapeRef.new(shape: CreateMeetingRoomConfiguration, location_name: "MeetingRoomConfiguration"))
     CreateProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateProfileRequest.struct_class = Types::CreateProfileRequest
@@ -1208,6 +1209,7 @@ module Aws::AlexaForBusiness
     Profile.add_member(:setup_mode_disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SetupModeDisabled"))
     Profile.add_member(:max_volume_limit, Shapes::ShapeRef.new(shape: MaxVolumeLimit, location_name: "MaxVolumeLimit"))
     Profile.add_member(:pstn_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PSTNEnabled"))
+    Profile.add_member(:data_retention_opt_in, Shapes::ShapeRef.new(shape: Boolean, location_name: "DataRetentionOptIn"))
     Profile.add_member(:address_book_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AddressBookArn"))
     Profile.add_member(:meeting_room_configuration, Shapes::ShapeRef.new(shape: MeetingRoomConfiguration, location_name: "MeetingRoomConfiguration"))
     Profile.struct_class = Types::Profile
@@ -1639,6 +1641,7 @@ module Aws::AlexaForBusiness
     UpdateProfileRequest.add_member(:setup_mode_disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SetupModeDisabled"))
     UpdateProfileRequest.add_member(:max_volume_limit, Shapes::ShapeRef.new(shape: MaxVolumeLimit, location_name: "MaxVolumeLimit"))
     UpdateProfileRequest.add_member(:pstn_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PSTNEnabled"))
+    UpdateProfileRequest.add_member(:data_retention_opt_in, Shapes::ShapeRef.new(shape: Boolean, location_name: "DataRetentionOptIn"))
     UpdateProfileRequest.add_member(:meeting_room_configuration, Shapes::ShapeRef.new(shape: UpdateMeetingRoomConfiguration, location_name: "MeetingRoomConfiguration"))
     UpdateProfileRequest.struct_class = Types::UpdateProfileRequest
 

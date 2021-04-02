@@ -948,6 +948,7 @@ module Aws::SSM
     ResourceDataSyncCreatedTime = Shapes::TimestampShape.new(name: 'ResourceDataSyncCreatedTime')
     ResourceDataSyncDestinationDataSharing = Shapes::StructureShape.new(name: 'ResourceDataSyncDestinationDataSharing')
     ResourceDataSyncDestinationDataSharingType = Shapes::StringShape.new(name: 'ResourceDataSyncDestinationDataSharingType')
+    ResourceDataSyncEnableAllOpsDataSources = Shapes::BooleanShape.new(name: 'ResourceDataSyncEnableAllOpsDataSources')
     ResourceDataSyncIncludeFutureRegions = Shapes::BooleanShape.new(name: 'ResourceDataSyncIncludeFutureRegions')
     ResourceDataSyncInvalidConfigurationException = Shapes::StructureShape.new(name: 'ResourceDataSyncInvalidConfigurationException')
     ResourceDataSyncItem = Shapes::StructureShape.new(name: 'ResourceDataSyncItem')
@@ -3883,6 +3884,7 @@ module Aws::SSM
     ResourceDataSyncSource.add_member(:aws_organizations_source, Shapes::ShapeRef.new(shape: ResourceDataSyncAwsOrganizationsSource, location_name: "AwsOrganizationsSource"))
     ResourceDataSyncSource.add_member(:source_regions, Shapes::ShapeRef.new(shape: ResourceDataSyncSourceRegionList, required: true, location_name: "SourceRegions"))
     ResourceDataSyncSource.add_member(:include_future_regions, Shapes::ShapeRef.new(shape: ResourceDataSyncIncludeFutureRegions, location_name: "IncludeFutureRegions"))
+    ResourceDataSyncSource.add_member(:enable_all_ops_data_sources, Shapes::ShapeRef.new(shape: ResourceDataSyncEnableAllOpsDataSources, location_name: "EnableAllOpsDataSources"))
     ResourceDataSyncSource.struct_class = Types::ResourceDataSyncSource
 
     ResourceDataSyncSourceRegionList.member = Shapes::ShapeRef.new(shape: ResourceDataSyncSourceRegion)
@@ -3892,6 +3894,7 @@ module Aws::SSM
     ResourceDataSyncSourceWithState.add_member(:source_regions, Shapes::ShapeRef.new(shape: ResourceDataSyncSourceRegionList, location_name: "SourceRegions"))
     ResourceDataSyncSourceWithState.add_member(:include_future_regions, Shapes::ShapeRef.new(shape: ResourceDataSyncIncludeFutureRegions, location_name: "IncludeFutureRegions"))
     ResourceDataSyncSourceWithState.add_member(:state, Shapes::ShapeRef.new(shape: ResourceDataSyncState, location_name: "State"))
+    ResourceDataSyncSourceWithState.add_member(:enable_all_ops_data_sources, Shapes::ShapeRef.new(shape: ResourceDataSyncEnableAllOpsDataSources, location_name: "EnableAllOpsDataSources"))
     ResourceDataSyncSourceWithState.struct_class = Types::ResourceDataSyncSourceWithState
 
     ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))

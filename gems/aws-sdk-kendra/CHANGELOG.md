@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2021-04-01)
+------------------
+
+* Feature - AWS Kendra's ServiceNow data source now supports OAuth 2.0 authentication and knowledge article filtering via a ServiceNow query.
+
 1.22.0 (2021-03-10)
 ------------------
 

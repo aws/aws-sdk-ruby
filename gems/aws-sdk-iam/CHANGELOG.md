@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2021-03-29)
+------------------
+
+* Feature - AWS Identity and Access Management GetAccessKeyLastUsed API will throw a custom error if customer public key is not found for access keys.
+
+1.51.0 (2021-03-23)
+------------------
+
+* Feature - Documentation updates for IAM operations and descriptions.
+
 1.50.0 (2021-03-16)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2021-03-31)
+------------------
+
+* Feature - Amazon Transcribe now supports creating custom language models in the following languages: British English (en-GB), Australian English (en-AU), Indian Hindi (hi-IN), and US Spanish (es-US).
+
+1.53.0 (2021-03-26)
+------------------
+
+* Feature - Amazon Transcribe now supports tagging words that match your vocabulary filter for batch transcription.
+
 1.52.0 (2021-03-10)
 ------------------
 

@@ -505,6 +505,12 @@
   "LocationService": {
     "models": "location/2020-11-19"
   },
+  "LookoutMetrics": {
+    "models": "lookoutmetrics/2017-07-25",
+    "addPlugins": [
+      "Aws::LookoutMetrics::Plugins::ContentType"
+    ]
+  },
   "LookoutforVision": {
     "models": "lookoutvision/2020-11-20"
   },

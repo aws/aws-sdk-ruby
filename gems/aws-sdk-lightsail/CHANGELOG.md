@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2021-04-01)
+------------------
+
+* Feature - This release adds support for state detail for Amazon Lightsail container services.
+
 1.46.0 (2021-03-10)
 ------------------
 

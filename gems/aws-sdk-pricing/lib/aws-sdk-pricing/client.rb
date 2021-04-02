@@ -374,6 +374,8 @@ module Aws::Pricing
     #
     # @example Example: To retrieve a list of services and service codes
     #
+    #   # Retrieves the service for the given Service Code.
+    #
     #   resp = client.describe_services({
     #     format_version: "aws_v1", 
     #     max_results: 1, 
@@ -432,8 +434,8 @@ module Aws::Pricing
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/reading-an-offer.html#pps-defs
-    # [2]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-what-is.html
+    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/reading-an-offer.html#pps-defs
+    # [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-what-is.html
     #
     # @option params [required, String] :service_code
     #   The service code for the service whose attributes you want to
@@ -611,7 +613,7 @@ module Aws::Pricing
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pricing'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -416,6 +416,7 @@ module Aws::Comprehend
     CreateDocumentClassifierRequest.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     CreateDocumentClassifierRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     CreateDocumentClassifierRequest.add_member(:mode, Shapes::ShapeRef.new(shape: DocumentClassifierMode, location_name: "Mode"))
+    CreateDocumentClassifierRequest.add_member(:model_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "ModelKmsKeyId"))
     CreateDocumentClassifierRequest.struct_class = Types::CreateDocumentClassifierRequest
 
     CreateDocumentClassifierResponse.add_member(:document_classifier_arn, Shapes::ShapeRef.new(shape: DocumentClassifierArn, location_name: "DocumentClassifierArn"))
@@ -426,6 +427,7 @@ module Aws::Comprehend
     CreateEndpointRequest.add_member(:desired_inference_units, Shapes::ShapeRef.new(shape: InferenceUnitsInteger, required: true, location_name: "DesiredInferenceUnits"))
     CreateEndpointRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateEndpointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateEndpointRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
     CreateEndpointRequest.struct_class = Types::CreateEndpointRequest
 
     CreateEndpointResponse.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: ComprehendEndpointArn, location_name: "EndpointArn"))
@@ -439,6 +441,7 @@ module Aws::Comprehend
     CreateEntityRecognizerRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
     CreateEntityRecognizerRequest.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     CreateEntityRecognizerRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    CreateEntityRecognizerRequest.add_member(:model_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "ModelKmsKeyId"))
     CreateEntityRecognizerRequest.struct_class = Types::CreateEntityRecognizerRequest
 
     CreateEntityRecognizerResponse.add_member(:entity_recognizer_arn, Shapes::ShapeRef.new(shape: EntityRecognizerArn, location_name: "EntityRecognizerArn"))
@@ -628,6 +631,7 @@ module Aws::Comprehend
     DocumentClassifierProperties.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     DocumentClassifierProperties.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     DocumentClassifierProperties.add_member(:mode, Shapes::ShapeRef.new(shape: DocumentClassifierMode, location_name: "Mode"))
+    DocumentClassifierProperties.add_member(:model_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "ModelKmsKeyId"))
     DocumentClassifierProperties.struct_class = Types::DocumentClassifierProperties
 
     DocumentClassifierPropertiesList.member = Shapes::ShapeRef.new(shape: DocumentClassifierProperties)
@@ -675,6 +679,7 @@ module Aws::Comprehend
     EndpointProperties.add_member(:current_inference_units, Shapes::ShapeRef.new(shape: InferenceUnitsInteger, location_name: "CurrentInferenceUnits"))
     EndpointProperties.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     EndpointProperties.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    EndpointProperties.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
     EndpointProperties.struct_class = Types::EndpointProperties
 
     EndpointPropertiesList.member = Shapes::ShapeRef.new(shape: EndpointProperties)
@@ -768,6 +773,7 @@ module Aws::Comprehend
     EntityRecognizerProperties.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
     EntityRecognizerProperties.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     EntityRecognizerProperties.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    EntityRecognizerProperties.add_member(:model_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "ModelKmsKeyId"))
     EntityRecognizerProperties.struct_class = Types::EntityRecognizerProperties
 
     EntityRecognizerPropertiesList.member = Shapes::ShapeRef.new(shape: EntityRecognizerProperties)

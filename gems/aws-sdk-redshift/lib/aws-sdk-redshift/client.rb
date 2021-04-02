@@ -464,6 +464,59 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Grants access to a cluster.
+    #
+    # @option params [String] :cluster_identifier
+    #   The cluster identifier of the cluster to grant access to.
+    #
+    # @option params [required, String] :account
+    #   The AWS account ID to grant access to.
+    #
+    # @option params [Array<String>] :vpc_ids
+    #   The virtual private cloud (VPC) identifiers to grant access to.
+    #
+    # @return [Types::EndpointAuthorization] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EndpointAuthorization#grantor #grantor} => String
+    #   * {Types::EndpointAuthorization#grantee #grantee} => String
+    #   * {Types::EndpointAuthorization#cluster_identifier #cluster_identifier} => String
+    #   * {Types::EndpointAuthorization#authorize_time #authorize_time} => Time
+    #   * {Types::EndpointAuthorization#cluster_status #cluster_status} => String
+    #   * {Types::EndpointAuthorization#status #status} => String
+    #   * {Types::EndpointAuthorization#allowed_all_vp_cs #allowed_all_vp_cs} => Boolean
+    #   * {Types::EndpointAuthorization#allowed_vp_cs #allowed_vp_cs} => Array&lt;String&gt;
+    #   * {Types::EndpointAuthorization#endpoint_count #endpoint_count} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.authorize_endpoint_access({
+    #     cluster_identifier: "String",
+    #     account: "String", # required
+    #     vpc_ids: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.grantor #=> String
+    #   resp.grantee #=> String
+    #   resp.cluster_identifier #=> String
+    #   resp.authorize_time #=> Time
+    #   resp.cluster_status #=> String
+    #   resp.status #=> String, one of "Authorized", "Revoking"
+    #   resp.allowed_all_vp_cs #=> Boolean
+    #   resp.allowed_vp_cs #=> Array
+    #   resp.allowed_vp_cs[0] #=> String
+    #   resp.endpoint_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeEndpointAccess AWS API Documentation
+    #
+    # @overload authorize_endpoint_access(params = {})
+    # @param [Hash] params ({})
+    def authorize_endpoint_access(params = {}, options = {})
+      req = build_request(:authorize_endpoint_access, params)
+      req.send_request(options)
+    end
+
     # Authorizes the specified AWS customer account to restore the specified
     # snapshot.
     #
@@ -1692,6 +1745,83 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Creates a Redshift-managed VPC endpoint.
+    #
+    # @option params [String] :cluster_identifier
+    #   The cluster identifier of the cluster to access.
+    #
+    # @option params [String] :resource_owner
+    #   The AWS account ID of the owner of the cluster. This is only required
+    #   if the cluster is in another AWS account.
+    #
+    # @option params [required, String] :endpoint_name
+    #   The Redshift-managed VPC endpoint name.
+    #
+    #   An endpoint name must contain 1-30 characters. Valid characters are
+    #   A-Z, a-z, 0-9, and hyphen(-). The first character must be a letter.
+    #   The name can't contain two consecutive hyphens or end with a hyphen.
+    #
+    # @option params [required, String] :subnet_group_name
+    #   The subnet group from which Amazon Redshift chooses the subnet to
+    #   deploy the endpoint.
+    #
+    # @option params [Array<String>] :vpc_security_group_ids
+    #   The security group that defines the ports, protocols, and sources for
+    #   inbound traffic that you are authorizing into your endpoint.
+    #
+    # @return [Types::EndpointAccess] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EndpointAccess#cluster_identifier #cluster_identifier} => String
+    #   * {Types::EndpointAccess#resource_owner #resource_owner} => String
+    #   * {Types::EndpointAccess#subnet_group_name #subnet_group_name} => String
+    #   * {Types::EndpointAccess#endpoint_status #endpoint_status} => String
+    #   * {Types::EndpointAccess#endpoint_name #endpoint_name} => String
+    #   * {Types::EndpointAccess#endpoint_create_time #endpoint_create_time} => Time
+    #   * {Types::EndpointAccess#port #port} => Integer
+    #   * {Types::EndpointAccess#address #address} => String
+    #   * {Types::EndpointAccess#vpc_security_groups #vpc_security_groups} => Array&lt;Types::VpcSecurityGroupMembership&gt;
+    #   * {Types::EndpointAccess#vpc_endpoint #vpc_endpoint} => Types::VpcEndpoint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_endpoint_access({
+    #     cluster_identifier: "String",
+    #     resource_owner: "String",
+    #     endpoint_name: "String", # required
+    #     subnet_group_name: "String", # required
+    #     vpc_security_group_ids: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_identifier #=> String
+    #   resp.resource_owner #=> String
+    #   resp.subnet_group_name #=> String
+    #   resp.endpoint_status #=> String
+    #   resp.endpoint_name #=> String
+    #   resp.endpoint_create_time #=> Time
+    #   resp.port #=> Integer
+    #   resp.address #=> String
+    #   resp.vpc_security_groups #=> Array
+    #   resp.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.vpc_security_groups[0].status #=> String
+    #   resp.vpc_endpoint.vpc_endpoint_id #=> String
+    #   resp.vpc_endpoint.vpc_id #=> String
+    #   resp.vpc_endpoint.network_interfaces #=> Array
+    #   resp.vpc_endpoint.network_interfaces[0].network_interface_id #=> String
+    #   resp.vpc_endpoint.network_interfaces[0].subnet_id #=> String
+    #   resp.vpc_endpoint.network_interfaces[0].private_ip_address #=> String
+    #   resp.vpc_endpoint.network_interfaces[0].availability_zone #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateEndpointAccess AWS API Documentation
+    #
+    # @overload create_endpoint_access(params = {})
+    # @param [Hash] params ({})
+    def create_endpoint_access(params = {}, options = {})
+      req = build_request(:create_endpoint_access, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon Redshift event notification subscription. This
     # action requires an ARN (Amazon Resource Name) of an Amazon SNS topic
     # created by either the Amazon Redshift console, the Amazon SNS console,
@@ -2712,6 +2842,60 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def delete_cluster_subnet_group(params = {}, options = {})
       req = build_request(:delete_cluster_subnet_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes a Redshift-managed VPC endpoint.
+    #
+    # @option params [required, String] :endpoint_name
+    #   The Redshift-managed VPC endpoint to delete.
+    #
+    # @return [Types::EndpointAccess] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EndpointAccess#cluster_identifier #cluster_identifier} => String
+    #   * {Types::EndpointAccess#resource_owner #resource_owner} => String
+    #   * {Types::EndpointAccess#subnet_group_name #subnet_group_name} => String
+    #   * {Types::EndpointAccess#endpoint_status #endpoint_status} => String
+    #   * {Types::EndpointAccess#endpoint_name #endpoint_name} => String
+    #   * {Types::EndpointAccess#endpoint_create_time #endpoint_create_time} => Time
+    #   * {Types::EndpointAccess#port #port} => Integer
+    #   * {Types::EndpointAccess#address #address} => String
+    #   * {Types::EndpointAccess#vpc_security_groups #vpc_security_groups} => Array&lt;Types::VpcSecurityGroupMembership&gt;
+    #   * {Types::EndpointAccess#vpc_endpoint #vpc_endpoint} => Types::VpcEndpoint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_endpoint_access({
+    #     endpoint_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_identifier #=> String
+    #   resp.resource_owner #=> String
+    #   resp.subnet_group_name #=> String
+    #   resp.endpoint_status #=> String
+    #   resp.endpoint_name #=> String
+    #   resp.endpoint_create_time #=> Time
+    #   resp.port #=> Integer
+    #   resp.address #=> String
+    #   resp.vpc_security_groups #=> Array
+    #   resp.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.vpc_security_groups[0].status #=> String
+    #   resp.vpc_endpoint.vpc_endpoint_id #=> String
+    #   resp.vpc_endpoint.vpc_id #=> String
+    #   resp.vpc_endpoint.network_interfaces #=> Array
+    #   resp.vpc_endpoint.network_interfaces[0].network_interface_id #=> String
+    #   resp.vpc_endpoint.network_interfaces[0].subnet_id #=> String
+    #   resp.vpc_endpoint.network_interfaces[0].private_ip_address #=> String
+    #   resp.vpc_endpoint.network_interfaces[0].availability_zone #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteEndpointAccess AWS API Documentation
+    #
+    # @overload delete_endpoint_access(params = {})
+    # @param [Hash] params ({})
+    def delete_endpoint_access(params = {}, options = {})
+      req = build_request(:delete_endpoint_access, params)
       req.send_request(options)
     end
 
@@ -4031,6 +4215,135 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def describe_default_cluster_parameters(params = {}, options = {})
       req = build_request(:describe_default_cluster_parameters, params)
+      req.send_request(options)
+    end
+
+    # Describes a Redshift-managed VPC endpoint.
+    #
+    # @option params [String] :cluster_identifier
+    #   The cluster identifier associated with the described endpoint.
+    #
+    # @option params [String] :resource_owner
+    #   The AWS account ID of the owner of the cluster.
+    #
+    # @option params [String] :endpoint_name
+    #   The name of the endpoint to be described.
+    #
+    # @option params [String] :vpc_id
+    #   The virtual private cloud (VPC) identifier with access to the cluster.
+    #
+    # @option params [Integer] :max_records
+    #   Reserved for Amazon Redshift internal use.
+    #
+    # @option params [String] :marker
+    #   Reserved for Amazon Redshift internal use.
+    #
+    # @return [Types::EndpointAccessList] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EndpointAccessList#endpoint_access_list #endpoint_access_list} => Array&lt;Types::EndpointAccess&gt;
+    #   * {Types::EndpointAccessList#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_endpoint_access({
+    #     cluster_identifier: "String",
+    #     resource_owner: "String",
+    #     endpoint_name: "String",
+    #     vpc_id: "String",
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoint_access_list #=> Array
+    #   resp.endpoint_access_list[0].cluster_identifier #=> String
+    #   resp.endpoint_access_list[0].resource_owner #=> String
+    #   resp.endpoint_access_list[0].subnet_group_name #=> String
+    #   resp.endpoint_access_list[0].endpoint_status #=> String
+    #   resp.endpoint_access_list[0].endpoint_name #=> String
+    #   resp.endpoint_access_list[0].endpoint_create_time #=> Time
+    #   resp.endpoint_access_list[0].port #=> Integer
+    #   resp.endpoint_access_list[0].address #=> String
+    #   resp.endpoint_access_list[0].vpc_security_groups #=> Array
+    #   resp.endpoint_access_list[0].vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.endpoint_access_list[0].vpc_security_groups[0].status #=> String
+    #   resp.endpoint_access_list[0].vpc_endpoint.vpc_endpoint_id #=> String
+    #   resp.endpoint_access_list[0].vpc_endpoint.vpc_id #=> String
+    #   resp.endpoint_access_list[0].vpc_endpoint.network_interfaces #=> Array
+    #   resp.endpoint_access_list[0].vpc_endpoint.network_interfaces[0].network_interface_id #=> String
+    #   resp.endpoint_access_list[0].vpc_endpoint.network_interfaces[0].subnet_id #=> String
+    #   resp.endpoint_access_list[0].vpc_endpoint.network_interfaces[0].private_ip_address #=> String
+    #   resp.endpoint_access_list[0].vpc_endpoint.network_interfaces[0].availability_zone #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEndpointAccess AWS API Documentation
+    #
+    # @overload describe_endpoint_access(params = {})
+    # @param [Hash] params ({})
+    def describe_endpoint_access(params = {}, options = {})
+      req = build_request(:describe_endpoint_access, params)
+      req.send_request(options)
+    end
+
+    # Describes an endpoint authorization.
+    #
+    # @option params [String] :cluster_identifier
+    #   The cluster identifier of the cluster to access.
+    #
+    # @option params [String] :account
+    #   The AWS account ID of either the cluster owner (grantor) or grantee.
+    #   If `Grantee` parameter is true, then the `Account` value is of the
+    #   grantor.
+    #
+    # @option params [Boolean] :grantee
+    #   Indicates whether to check authorization from a grantor or grantee
+    #   point of view. If true, Amazon Redshift returns endpoint
+    #   authorizations that you've been granted. If false (default), checks
+    #   authorization from a grantor point of view.
+    #
+    # @option params [Integer] :max_records
+    #   Reserved for Amazon Redshift internal use.
+    #
+    # @option params [String] :marker
+    #   Reserved for Amazon Redshift internal use.
+    #
+    # @return [Types::EndpointAuthorizationList] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EndpointAuthorizationList#endpoint_authorization_list #endpoint_authorization_list} => Array&lt;Types::EndpointAuthorization&gt;
+    #   * {Types::EndpointAuthorizationList#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_endpoint_authorization({
+    #     cluster_identifier: "String",
+    #     account: "String",
+    #     grantee: false,
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoint_authorization_list #=> Array
+    #   resp.endpoint_authorization_list[0].grantor #=> String
+    #   resp.endpoint_authorization_list[0].grantee #=> String
+    #   resp.endpoint_authorization_list[0].cluster_identifier #=> String
+    #   resp.endpoint_authorization_list[0].authorize_time #=> Time
+    #   resp.endpoint_authorization_list[0].cluster_status #=> String
+    #   resp.endpoint_authorization_list[0].status #=> String, one of "Authorized", "Revoking"
+    #   resp.endpoint_authorization_list[0].allowed_all_vp_cs #=> Boolean
+    #   resp.endpoint_authorization_list[0].allowed_vp_cs #=> Array
+    #   resp.endpoint_authorization_list[0].allowed_vp_cs[0] #=> String
+    #   resp.endpoint_authorization_list[0].endpoint_count #=> Integer
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEndpointAuthorization AWS API Documentation
+    #
+    # @overload describe_endpoint_authorization(params = {})
+    # @param [Hash] params ({})
+    def describe_endpoint_authorization(params = {}, options = {})
+      req = build_request(:describe_endpoint_authorization, params)
       req.send_request(options)
     end
 
@@ -7293,6 +7606,65 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Modifies a Redshift-managed VPC endpoint.
+    #
+    # @option params [required, String] :endpoint_name
+    #   The endpoint to be modified.
+    #
+    # @option params [Array<String>] :vpc_security_group_ids
+    #   The complete list of VPC security groups associated with the endpoint
+    #   after the endpoint is modified.
+    #
+    # @return [Types::EndpointAccess] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EndpointAccess#cluster_identifier #cluster_identifier} => String
+    #   * {Types::EndpointAccess#resource_owner #resource_owner} => String
+    #   * {Types::EndpointAccess#subnet_group_name #subnet_group_name} => String
+    #   * {Types::EndpointAccess#endpoint_status #endpoint_status} => String
+    #   * {Types::EndpointAccess#endpoint_name #endpoint_name} => String
+    #   * {Types::EndpointAccess#endpoint_create_time #endpoint_create_time} => Time
+    #   * {Types::EndpointAccess#port #port} => Integer
+    #   * {Types::EndpointAccess#address #address} => String
+    #   * {Types::EndpointAccess#vpc_security_groups #vpc_security_groups} => Array&lt;Types::VpcSecurityGroupMembership&gt;
+    #   * {Types::EndpointAccess#vpc_endpoint #vpc_endpoint} => Types::VpcEndpoint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_endpoint_access({
+    #     endpoint_name: "String", # required
+    #     vpc_security_group_ids: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_identifier #=> String
+    #   resp.resource_owner #=> String
+    #   resp.subnet_group_name #=> String
+    #   resp.endpoint_status #=> String
+    #   resp.endpoint_name #=> String
+    #   resp.endpoint_create_time #=> Time
+    #   resp.port #=> Integer
+    #   resp.address #=> String
+    #   resp.vpc_security_groups #=> Array
+    #   resp.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.vpc_security_groups[0].status #=> String
+    #   resp.vpc_endpoint.vpc_endpoint_id #=> String
+    #   resp.vpc_endpoint.vpc_id #=> String
+    #   resp.vpc_endpoint.network_interfaces #=> Array
+    #   resp.vpc_endpoint.network_interfaces[0].network_interface_id #=> String
+    #   resp.vpc_endpoint.network_interfaces[0].subnet_id #=> String
+    #   resp.vpc_endpoint.network_interfaces[0].private_ip_address #=> String
+    #   resp.vpc_endpoint.network_interfaces[0].availability_zone #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyEndpointAccess AWS API Documentation
+    #
+    # @overload modify_endpoint_access(params = {})
+    # @param [Hash] params ({})
+    def modify_endpoint_access(params = {}, options = {})
+      req = build_request(:modify_endpoint_access, params)
+      req.send_request(options)
+    end
+
     # Modifies an existing Amazon Redshift event notification subscription.
     #
     # @option params [required, String] :subscription_name
@@ -9038,6 +9410,66 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Revokes access to a cluster.
+    #
+    # @option params [String] :cluster_identifier
+    #   The cluster to revoke access from.
+    #
+    # @option params [String] :account
+    #   The AWS account ID whose access is to be revoked.
+    #
+    # @option params [Array<String>] :vpc_ids
+    #   The virtual private cloud (VPC) identifiers for which access is to be
+    #   revoked.
+    #
+    # @option params [Boolean] :force
+    #   Indicates whether to force the revoke action. If true, the
+    #   Redshift-managed VPC endpoints associated with the endpoint
+    #   authorization are also deleted.
+    #
+    # @return [Types::EndpointAuthorization] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EndpointAuthorization#grantor #grantor} => String
+    #   * {Types::EndpointAuthorization#grantee #grantee} => String
+    #   * {Types::EndpointAuthorization#cluster_identifier #cluster_identifier} => String
+    #   * {Types::EndpointAuthorization#authorize_time #authorize_time} => Time
+    #   * {Types::EndpointAuthorization#cluster_status #cluster_status} => String
+    #   * {Types::EndpointAuthorization#status #status} => String
+    #   * {Types::EndpointAuthorization#allowed_all_vp_cs #allowed_all_vp_cs} => Boolean
+    #   * {Types::EndpointAuthorization#allowed_vp_cs #allowed_vp_cs} => Array&lt;String&gt;
+    #   * {Types::EndpointAuthorization#endpoint_count #endpoint_count} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.revoke_endpoint_access({
+    #     cluster_identifier: "String",
+    #     account: "String",
+    #     vpc_ids: ["String"],
+    #     force: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.grantor #=> String
+    #   resp.grantee #=> String
+    #   resp.cluster_identifier #=> String
+    #   resp.authorize_time #=> Time
+    #   resp.cluster_status #=> String
+    #   resp.status #=> String, one of "Authorized", "Revoking"
+    #   resp.allowed_all_vp_cs #=> Boolean
+    #   resp.allowed_vp_cs #=> Array
+    #   resp.allowed_vp_cs[0] #=> String
+    #   resp.endpoint_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeEndpointAccess AWS API Documentation
+    #
+    # @overload revoke_endpoint_access(params = {})
+    # @param [Hash] params ({})
+    def revoke_endpoint_access(params = {}, options = {})
+      req = build_request(:revoke_endpoint_access, params)
+      req.send_request(options)
+    end
+
     # Removes the ability of the specified AWS customer account to restore
     # the specified snapshot. If the account is currently restoring the
     # snapshot, the restore will run to completion.
@@ -9276,7 +9708,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

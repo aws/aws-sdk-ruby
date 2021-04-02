@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.440.0 (2021-04-01)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.439.0 (2021-03-31)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.438.0 (2021-03-30)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.437.0 (2021-03-29)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.436.0 (2021-03-26)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.435.0 (2021-03-25)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::LookoutMetrics`.
+
 1.434.0 (2021-03-17)
 ------------------
 

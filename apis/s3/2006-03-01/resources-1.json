@@ -928,6 +928,15 @@
               { "target": "Key", "source": "identifier", "name": "Key" }
             ]
           }
+        },
+        "Head": {
+          "request": {
+            "operation": "HeadObject",
+            "params": [
+              { "target": "Bucket", "source": "identifier", "name": "BucketName" },
+              { "target": "Key", "source": "identifier", "name": "Key" }
+            ]
+          }
         }
       },
       "batchActions": {

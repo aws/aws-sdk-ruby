@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2021-03-31)
+------------------
+
+* Feature - Enable customers to share access to their Redshift clusters from other VPCs (including VPCs from other accounts).
+
+1.58.0 (2021-03-23)
+------------------
+
+* Feature - Removed APIs to control AQUA on clusters.
+
+1.57.0 (2021-03-22)
+------------------
+
+* Feature - Added support to enable AQUA in Amazon Redshift clusters.
+
 1.56.0 (2021-03-18)
 ------------------
 

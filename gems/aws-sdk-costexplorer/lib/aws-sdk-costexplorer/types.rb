@@ -380,6 +380,10 @@ module Aws::CostExplorer
     #   specific cost category.
     #   @return [Array<Types::CostCategoryProcessingStatus>]
     #
+    # @!attribute [rw] default_value
+    #   The default value for the cost category.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CostCategory AWS API Documentation
     #
     class CostCategory < Struct.new(
@@ -389,7 +393,46 @@ module Aws::CostExplorer
       :name,
       :rule_version,
       :rules,
-      :processing_status)
+      :processing_status,
+      :default_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # When creating or updating a cost category, you can define the
+    # `CostCategoryRule` rule type as `INHERITED_VALUE`. This rule type adds
+    # the flexibility of defining a rule that dynamically inherits the cost
+    # category value from the dimension value defined by
+    # `CostCategoryInheritedValueDimension`. For example, if you wanted to
+    # dynamically group costs based on the value of a specific tag key, you
+    # would first choose an inherited value rule type, then choose the tag
+    # dimension and specify the tag key to use.
+    #
+    # @note When making an API call, you may pass CostCategoryInheritedValueDimension
+    #   data as a hash:
+    #
+    #       {
+    #         dimension_name: "LINKED_ACCOUNT_NAME", # accepts LINKED_ACCOUNT_NAME, TAG
+    #         dimension_key: "GenericString",
+    #       }
+    #
+    # @!attribute [rw] dimension_name
+    #   The name of dimension for which to group costs.
+    #
+    #   If you specify `LINKED_ACCOUNT_NAME`, the cost category value will
+    #   be based on account name. If you specify `TAG`, the cost category
+    #   value will be based on the value of the specified tag key.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimension_key
+    #   The key to extract cost category values.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CostCategoryInheritedValueDimension AWS API Documentation
+    #
+    class CostCategoryInheritedValueDimension < Struct.new(
+      :dimension_name,
+      :dimension_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -449,6 +492,10 @@ module Aws::CostExplorer
     #   A list of unique cost category values in a specific cost category.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] default_value
+    #   The default value for the cost category.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CostCategoryReference AWS API Documentation
     #
     class CostCategoryReference < Struct.new(
@@ -458,7 +505,8 @@ module Aws::CostExplorer
       :effective_end,
       :number_of_rules,
       :processing_status,
-      :values)
+      :values,
+      :default_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -471,8 +519,8 @@ module Aws::CostExplorer
     #   data as a hash:
     #
     #       {
-    #         value: "CostCategoryValue", # required
-    #         rule: { # required
+    #         value: "CostCategoryValue",
+    #         rule: {
     #           or: [
     #             {
     #               # recursive Expression
@@ -502,11 +550,15 @@ module Aws::CostExplorer
     #             match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #           },
     #         },
+    #         inherited_value: {
+    #           dimension_name: "LINKED_ACCOUNT_NAME", # accepts LINKED_ACCOUNT_NAME, TAG
+    #           dimension_key: "GenericString",
+    #         },
+    #         type: "REGULAR", # accepts REGULAR, INHERITED_VALUE
     #       }
     #
     # @!attribute [rw] value
-    #   The value a line item will be categorized as, if it matches the
-    #   rule.
+    #   The default value for the cost category.
     #   @return [String]
     #
     # @!attribute [rw] rule
@@ -530,11 +582,29 @@ module Aws::CostExplorer
     #   [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms
     #   @return [Types::Expression]
     #
+    # @!attribute [rw] inherited_value
+    #   The value the line item will be categorized as, if the line item
+    #   contains the matched dimension.
+    #   @return [Types::CostCategoryInheritedValueDimension]
+    #
+    # @!attribute [rw] type
+    #   You can define the `CostCategoryRule` rule type as either `REGULAR`
+    #   or `INHERITED_VALUE`. The `INHERITED_VALUE` rule type adds the
+    #   flexibility of defining a rule that dynamically inherits the cost
+    #   category value from the dimension value defined by
+    #   `CostCategoryInheritedValueDimension`. For example, if you wanted to
+    #   dynamically group costs based on the value of a specific tag key,
+    #   you would first choose an inherited value rule type, then choose the
+    #   tag dimension and specify the tag key to use.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CostCategoryRule AWS API Documentation
     #
     class CostCategoryRule < Struct.new(
       :value,
-      :rule)
+      :rule,
+      :inherited_value,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -848,8 +918,8 @@ module Aws::CostExplorer
     #         rule_version: "CostCategoryExpression.v1", # required, accepts CostCategoryExpression.v1
     #         rules: [ # required
     #           {
-    #             value: "CostCategoryValue", # required
-    #             rule: { # required
+    #             value: "CostCategoryValue",
+    #             rule: {
     #               or: [
     #                 {
     #                   # recursive Expression
@@ -879,8 +949,14 @@ module Aws::CostExplorer
     #                 match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #               },
     #             },
+    #             inherited_value: {
+    #               dimension_name: "LINKED_ACCOUNT_NAME", # accepts LINKED_ACCOUNT_NAME, TAG
+    #               dimension_key: "GenericString",
+    #             },
+    #             type: "REGULAR", # accepts REGULAR, INHERITED_VALUE
     #           },
     #         ],
+    #         default_value: "CostCategoryValue",
     #       }
     #
     # @!attribute [rw] name
@@ -900,12 +976,17 @@ module Aws::CostExplorer
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html
     #   @return [Array<Types::CostCategoryRule>]
     #
+    # @!attribute [rw] default_value
+    #   The default value for the cost category.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CreateCostCategoryDefinitionRequest AWS API Documentation
     #
     class CreateCostCategoryDefinitionRequest < Struct.new(
       :name,
       :rule_version,
-      :rules)
+      :rules,
+      :default_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6699,8 +6780,8 @@ module Aws::CostExplorer
     #         rule_version: "CostCategoryExpression.v1", # required, accepts CostCategoryExpression.v1
     #         rules: [ # required
     #           {
-    #             value: "CostCategoryValue", # required
-    #             rule: { # required
+    #             value: "CostCategoryValue",
+    #             rule: {
     #               or: [
     #                 {
     #                   # recursive Expression
@@ -6730,8 +6811,14 @@ module Aws::CostExplorer
     #                 match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #               },
     #             },
+    #             inherited_value: {
+    #               dimension_name: "LINKED_ACCOUNT_NAME", # accepts LINKED_ACCOUNT_NAME, TAG
+    #               dimension_key: "GenericString",
+    #             },
+    #             type: "REGULAR", # accepts REGULAR, INHERITED_VALUE
     #           },
     #         ],
+    #         default_value: "CostCategoryValue",
     #       }
     #
     # @!attribute [rw] cost_category_arn
@@ -6751,12 +6838,17 @@ module Aws::CostExplorer
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html
     #   @return [Array<Types::CostCategoryRule>]
     #
+    # @!attribute [rw] default_value
+    #   The default value for the cost category.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UpdateCostCategoryDefinitionRequest AWS API Documentation
     #
     class UpdateCostCategoryDefinitionRequest < Struct.new(
       :cost_category_arn,
       :rule_version,
-      :rules)
+      :rules,
+      :default_value)
       SENSITIVE = []
       include Aws::Structure
     end

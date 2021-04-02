@@ -23,7 +23,9 @@ module Aws::MediaConvert
     AacVbrQuality = Shapes::StringShape.new(name: 'AacVbrQuality')
     Ac3BitstreamMode = Shapes::StringShape.new(name: 'Ac3BitstreamMode')
     Ac3CodingMode = Shapes::StringShape.new(name: 'Ac3CodingMode')
+    Ac3DynamicRangeCompressionLine = Shapes::StringShape.new(name: 'Ac3DynamicRangeCompressionLine')
     Ac3DynamicRangeCompressionProfile = Shapes::StringShape.new(name: 'Ac3DynamicRangeCompressionProfile')
+    Ac3DynamicRangeCompressionRf = Shapes::StringShape.new(name: 'Ac3DynamicRangeCompressionRf')
     Ac3LfeFilter = Shapes::StringShape.new(name: 'Ac3LfeFilter')
     Ac3MetadataControl = Shapes::StringShape.new(name: 'Ac3MetadataControl')
     Ac3Settings = Shapes::StructureShape.new(name: 'Ac3Settings')
@@ -106,12 +108,15 @@ module Aws::MediaConvert
     CmafManifestCompression = Shapes::StringShape.new(name: 'CmafManifestCompression')
     CmafManifestDurationFormat = Shapes::StringShape.new(name: 'CmafManifestDurationFormat')
     CmafMpdProfile = Shapes::StringShape.new(name: 'CmafMpdProfile')
+    CmafPtsOffsetHandlingForBFrames = Shapes::StringShape.new(name: 'CmafPtsOffsetHandlingForBFrames')
     CmafSegmentControl = Shapes::StringShape.new(name: 'CmafSegmentControl')
     CmafStreamInfResolution = Shapes::StringShape.new(name: 'CmafStreamInfResolution')
     CmafWriteDASHManifest = Shapes::StringShape.new(name: 'CmafWriteDASHManifest')
     CmafWriteHLSManifest = Shapes::StringShape.new(name: 'CmafWriteHLSManifest')
     CmafWriteSegmentTimelineInRepresentation = Shapes::StringShape.new(name: 'CmafWriteSegmentTimelineInRepresentation')
     CmfcAudioDuration = Shapes::StringShape.new(name: 'CmfcAudioDuration')
+    CmfcAudioTrackType = Shapes::StringShape.new(name: 'CmfcAudioTrackType')
+    CmfcDescriptiveVideoServiceFlag = Shapes::StringShape.new(name: 'CmfcDescriptiveVideoServiceFlag')
     CmfcIFrameOnlyManifest = Shapes::StringShape.new(name: 'CmfcIFrameOnlyManifest')
     CmfcScte35Esam = Shapes::StringShape.new(name: 'CmfcScte35Esam')
     CmfcScte35Source = Shapes::StringShape.new(name: 'CmfcScte35Source')
@@ -135,10 +140,12 @@ module Aws::MediaConvert
     CreateQueueResponse = Shapes::StructureShape.new(name: 'CreateQueueResponse')
     DashAdditionalManifest = Shapes::StructureShape.new(name: 'DashAdditionalManifest')
     DashIsoEncryptionSettings = Shapes::StructureShape.new(name: 'DashIsoEncryptionSettings')
+    DashIsoGroupAudioChannelConfigSchemeIdUri = Shapes::StringShape.new(name: 'DashIsoGroupAudioChannelConfigSchemeIdUri')
     DashIsoGroupSettings = Shapes::StructureShape.new(name: 'DashIsoGroupSettings')
     DashIsoHbbtvCompliance = Shapes::StringShape.new(name: 'DashIsoHbbtvCompliance')
     DashIsoMpdProfile = Shapes::StringShape.new(name: 'DashIsoMpdProfile')
     DashIsoPlaybackDeviceCompatibility = Shapes::StringShape.new(name: 'DashIsoPlaybackDeviceCompatibility')
+    DashIsoPtsOffsetHandlingForBFrames = Shapes::StringShape.new(name: 'DashIsoPtsOffsetHandlingForBFrames')
     DashIsoSegmentControl = Shapes::StringShape.new(name: 'DashIsoSegmentControl')
     DashIsoWriteSegmentTimelineInRepresentation = Shapes::StringShape.new(name: 'DashIsoWriteSegmentTimelineInRepresentation')
     DecryptionMode = Shapes::StringShape.new(name: 'DecryptionMode')
@@ -287,6 +294,7 @@ module Aws::MediaConvert
     HlsCaptionLanguageSetting = Shapes::StringShape.new(name: 'HlsCaptionLanguageSetting')
     HlsClientCache = Shapes::StringShape.new(name: 'HlsClientCache')
     HlsCodecSpecification = Shapes::StringShape.new(name: 'HlsCodecSpecification')
+    HlsDescriptiveVideoServiceFlag = Shapes::StringShape.new(name: 'HlsDescriptiveVideoServiceFlag')
     HlsDirectoryStructure = Shapes::StringShape.new(name: 'HlsDirectoryStructure')
     HlsEncryptionSettings = Shapes::StructureShape.new(name: 'HlsEncryptionSettings')
     HlsEncryptionType = Shapes::StringShape.new(name: 'HlsEncryptionType')
@@ -531,6 +539,8 @@ module Aws::MediaConvert
     WatermarkingStrength = Shapes::StringShape.new(name: 'WatermarkingStrength')
     WavFormat = Shapes::StringShape.new(name: 'WavFormat')
     WavSettings = Shapes::StructureShape.new(name: 'WavSettings')
+    WebvttDestinationSettings = Shapes::StructureShape.new(name: 'WebvttDestinationSettings')
+    WebvttStylePassthrough = Shapes::StringShape.new(name: 'WebvttStylePassthrough')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __doubleMin0 = Shapes::FloatShape.new(name: '__doubleMin0')
@@ -674,7 +684,7 @@ module Aws::MediaConvert
     __stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG = Shapes::StringShape.new(name: '__stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG')
     __stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA = Shapes::StringShape.new(name: '__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA')
     __stringMin14PatternS3Mov09PngHttpsMov09Png = Shapes::StringShape.new(name: '__stringMin14PatternS3Mov09PngHttpsMov09Png')
-    __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI = Shapes::StringShape.new(name: '__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI')
+    __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT = Shapes::StringShape.new(name: '__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT')
     __stringMin16Max24PatternAZaZ0922AZaZ0916 = Shapes::StringShape.new(name: '__stringMin16Max24PatternAZaZ0922AZaZ0916')
     __stringMin1Max100000 = Shapes::StringShape.new(name: '__stringMin1Max100000')
     __stringMin1Max20 = Shapes::StringShape.new(name: '__stringMin1Max20')
@@ -726,7 +736,9 @@ module Aws::MediaConvert
     Ac3Settings.add_member(:bitstream_mode, Shapes::ShapeRef.new(shape: Ac3BitstreamMode, location_name: "bitstreamMode"))
     Ac3Settings.add_member(:coding_mode, Shapes::ShapeRef.new(shape: Ac3CodingMode, location_name: "codingMode"))
     Ac3Settings.add_member(:dialnorm, Shapes::ShapeRef.new(shape: __integerMin1Max31, location_name: "dialnorm"))
+    Ac3Settings.add_member(:dynamic_range_compression_line, Shapes::ShapeRef.new(shape: Ac3DynamicRangeCompressionLine, location_name: "dynamicRangeCompressionLine"))
     Ac3Settings.add_member(:dynamic_range_compression_profile, Shapes::ShapeRef.new(shape: Ac3DynamicRangeCompressionProfile, location_name: "dynamicRangeCompressionProfile"))
+    Ac3Settings.add_member(:dynamic_range_compression_rf, Shapes::ShapeRef.new(shape: Ac3DynamicRangeCompressionRf, location_name: "dynamicRangeCompressionRf"))
     Ac3Settings.add_member(:lfe_filter, Shapes::ShapeRef.new(shape: Ac3LfeFilter, location_name: "lfeFilter"))
     Ac3Settings.add_member(:metadata_control, Shapes::ShapeRef.new(shape: Ac3MetadataControl, location_name: "metadataControl"))
     Ac3Settings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integerMin48000Max48000, location_name: "sampleRate"))
@@ -894,6 +906,7 @@ module Aws::MediaConvert
     CaptionDestinationSettings.add_member(:scc_destination_settings, Shapes::ShapeRef.new(shape: SccDestinationSettings, location_name: "sccDestinationSettings"))
     CaptionDestinationSettings.add_member(:teletext_destination_settings, Shapes::ShapeRef.new(shape: TeletextDestinationSettings, location_name: "teletextDestinationSettings"))
     CaptionDestinationSettings.add_member(:ttml_destination_settings, Shapes::ShapeRef.new(shape: TtmlDestinationSettings, location_name: "ttmlDestinationSettings"))
+    CaptionDestinationSettings.add_member(:webvtt_destination_settings, Shapes::ShapeRef.new(shape: WebvttDestinationSettings, location_name: "webvttDestinationSettings"))
     CaptionDestinationSettings.struct_class = Types::CaptionDestinationSettings
 
     CaptionSelector.add_member(:custom_language_code, Shapes::ShapeRef.new(shape: __stringMin3Max3PatternAZaZ3, location_name: "customLanguageCode"))
@@ -942,6 +955,7 @@ module Aws::MediaConvert
     CmafGroupSettings.add_member(:min_buffer_time, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "minBufferTime"))
     CmafGroupSettings.add_member(:min_final_segment_length, Shapes::ShapeRef.new(shape: __doubleMin0Max2147483647, location_name: "minFinalSegmentLength"))
     CmafGroupSettings.add_member(:mpd_profile, Shapes::ShapeRef.new(shape: CmafMpdProfile, location_name: "mpdProfile"))
+    CmafGroupSettings.add_member(:pts_offset_handling_for_b_frames, Shapes::ShapeRef.new(shape: CmafPtsOffsetHandlingForBFrames, location_name: "ptsOffsetHandlingForBFrames"))
     CmafGroupSettings.add_member(:segment_control, Shapes::ShapeRef.new(shape: CmafSegmentControl, location_name: "segmentControl"))
     CmafGroupSettings.add_member(:segment_length, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "segmentLength"))
     CmafGroupSettings.add_member(:stream_inf_resolution, Shapes::ShapeRef.new(shape: CmafStreamInfResolution, location_name: "streamInfResolution"))
@@ -951,6 +965,10 @@ module Aws::MediaConvert
     CmafGroupSettings.struct_class = Types::CmafGroupSettings
 
     CmfcSettings.add_member(:audio_duration, Shapes::ShapeRef.new(shape: CmfcAudioDuration, location_name: "audioDuration"))
+    CmfcSettings.add_member(:audio_group_id, Shapes::ShapeRef.new(shape: __string, location_name: "audioGroupId"))
+    CmfcSettings.add_member(:audio_rendition_sets, Shapes::ShapeRef.new(shape: __string, location_name: "audioRenditionSets"))
+    CmfcSettings.add_member(:audio_track_type, Shapes::ShapeRef.new(shape: CmfcAudioTrackType, location_name: "audioTrackType"))
+    CmfcSettings.add_member(:descriptive_video_service_flag, Shapes::ShapeRef.new(shape: CmfcDescriptiveVideoServiceFlag, location_name: "descriptiveVideoServiceFlag"))
     CmfcSettings.add_member(:i_frame_only_manifest, Shapes::ShapeRef.new(shape: CmfcIFrameOnlyManifest, location_name: "iFrameOnlyManifest"))
     CmfcSettings.add_member(:scte_35_esam, Shapes::ShapeRef.new(shape: CmfcScte35Esam, location_name: "scte35Esam"))
     CmfcSettings.add_member(:scte_35_source, Shapes::ShapeRef.new(shape: CmfcScte35Source, location_name: "scte35Source"))
@@ -1041,6 +1059,7 @@ module Aws::MediaConvert
     DashIsoEncryptionSettings.struct_class = Types::DashIsoEncryptionSettings
 
     DashIsoGroupSettings.add_member(:additional_manifests, Shapes::ShapeRef.new(shape: __listOfDashAdditionalManifest, location_name: "additionalManifests"))
+    DashIsoGroupSettings.add_member(:audio_channel_config_scheme_id_uri, Shapes::ShapeRef.new(shape: DashIsoGroupAudioChannelConfigSchemeIdUri, location_name: "audioChannelConfigSchemeIdUri"))
     DashIsoGroupSettings.add_member(:base_url, Shapes::ShapeRef.new(shape: __string, location_name: "baseUrl"))
     DashIsoGroupSettings.add_member(:destination, Shapes::ShapeRef.new(shape: __stringPatternS3, location_name: "destination"))
     DashIsoGroupSettings.add_member(:destination_settings, Shapes::ShapeRef.new(shape: DestinationSettings, location_name: "destinationSettings"))
@@ -1050,6 +1069,7 @@ module Aws::MediaConvert
     DashIsoGroupSettings.add_member(:min_buffer_time, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "minBufferTime"))
     DashIsoGroupSettings.add_member(:min_final_segment_length, Shapes::ShapeRef.new(shape: __doubleMin0Max2147483647, location_name: "minFinalSegmentLength"))
     DashIsoGroupSettings.add_member(:mpd_profile, Shapes::ShapeRef.new(shape: DashIsoMpdProfile, location_name: "mpdProfile"))
+    DashIsoGroupSettings.add_member(:pts_offset_handling_for_b_frames, Shapes::ShapeRef.new(shape: DashIsoPtsOffsetHandlingForBFrames, location_name: "ptsOffsetHandlingForBFrames"))
     DashIsoGroupSettings.add_member(:segment_control, Shapes::ShapeRef.new(shape: DashIsoSegmentControl, location_name: "segmentControl"))
     DashIsoGroupSettings.add_member(:segment_length, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "segmentLength"))
     DashIsoGroupSettings.add_member(:write_segment_timeline_in_representation, Shapes::ShapeRef.new(shape: DashIsoWriteSegmentTimelineInRepresentation, location_name: "writeSegmentTimelineInRepresentation"))
@@ -1214,7 +1234,7 @@ module Aws::MediaConvert
 
     FileSourceSettings.add_member(:convert_608_to_708, Shapes::ShapeRef.new(shape: FileSourceConvert608To708, location_name: "convert608To708"))
     FileSourceSettings.add_member(:framerate, Shapes::ShapeRef.new(shape: CaptionSourceFramerate, location_name: "framerate"))
-    FileSourceSettings.add_member(:source_file, Shapes::ShapeRef.new(shape: __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI, location_name: "sourceFile"))
+    FileSourceSettings.add_member(:source_file, Shapes::ShapeRef.new(shape: __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT, location_name: "sourceFile"))
     FileSourceSettings.add_member(:time_delta, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "timeDelta"))
     FileSourceSettings.struct_class = Types::FileSourceSettings
 
@@ -1410,6 +1430,7 @@ module Aws::MediaConvert
     HlsSettings.add_member(:audio_only_container, Shapes::ShapeRef.new(shape: HlsAudioOnlyContainer, location_name: "audioOnlyContainer"))
     HlsSettings.add_member(:audio_rendition_sets, Shapes::ShapeRef.new(shape: __string, location_name: "audioRenditionSets"))
     HlsSettings.add_member(:audio_track_type, Shapes::ShapeRef.new(shape: HlsAudioTrackType, location_name: "audioTrackType"))
+    HlsSettings.add_member(:descriptive_video_service_flag, Shapes::ShapeRef.new(shape: HlsDescriptiveVideoServiceFlag, location_name: "descriptiveVideoServiceFlag"))
     HlsSettings.add_member(:i_frame_only_manifest, Shapes::ShapeRef.new(shape: HlsIFrameOnlyManifest, location_name: "iFrameOnlyManifest"))
     HlsSettings.add_member(:segment_modifier, Shapes::ShapeRef.new(shape: __string, location_name: "segmentModifier"))
     HlsSettings.struct_class = Types::HlsSettings
@@ -2164,6 +2185,9 @@ module Aws::MediaConvert
     WavSettings.add_member(:format, Shapes::ShapeRef.new(shape: WavFormat, location_name: "format"))
     WavSettings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integerMin8000Max192000, location_name: "sampleRate"))
     WavSettings.struct_class = Types::WavSettings
+
+    WebvttDestinationSettings.add_member(:style_passthrough, Shapes::ShapeRef.new(shape: WebvttStylePassthrough, location_name: "stylePassthrough"))
+    WebvttDestinationSettings.struct_class = Types::WebvttDestinationSettings
 
     __listOfAudioDescription.member = Shapes::ShapeRef.new(shape: AudioDescription)
 

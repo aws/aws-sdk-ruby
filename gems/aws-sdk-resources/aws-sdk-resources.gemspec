@@ -170,6 +170,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-licensemanager', '~> 1')
   spec.add_dependency('aws-sdk-lightsail', '~> 1')
   spec.add_dependency('aws-sdk-locationservice', '~> 1')
+  spec.add_dependency('aws-sdk-lookoutmetrics', '~> 1')
   spec.add_dependency('aws-sdk-lookoutforvision', '~> 1')
   spec.add_dependency('aws-sdk-mq', '~> 1')
   spec.add_dependency('aws-sdk-mturk', '~> 1')
@@ -277,7 +278,7 @@ Gem::Specification.new do |spec|
   # end service gems
 
   spec.metadata = {
-    'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-resources',
-    'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-resources/CHANGELOG.md'
+    'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-resources',
+    'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-resources/CHANGELOG.md'
   }
 end

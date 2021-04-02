@@ -1129,7 +1129,7 @@ module Aws::Greengrass
     #           resource_definition_version_arn: "__string",
     #           subscription_definition_version_arn: "__string",
     #         },
-    #         name: "__string",
+    #         name: "__string", # required
     #         tags: {
     #           "__string" => "__string",
     #         },

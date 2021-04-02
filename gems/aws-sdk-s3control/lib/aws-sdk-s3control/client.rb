@@ -417,17 +417,8 @@ module Aws::S3Control
     #    </note>
     #
     # @option params [Types::PublicAccessBlockConfiguration] :public_access_block_configuration
-    #   The `PublicAccessBlock` configuration that you want to apply to this
-    #   Amazon S3 account. You can enable the configuration options in any
-    #   combination. For more information about when Amazon S3 considers a
-    #   bucket or object public, see [The Meaning of "Public"][1] in the
-    #   *Amazon Simple Storage Service Developer Guide*.
-    #
-    #   This is not supported for Amazon S3 on Outposts.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
+    #   The `PublicAccessBlock` configuration that you want to apply to the
+    #   access point.
     #
     # @return [Types::CreateAccessPointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3048,6 +3039,8 @@ module Aws::S3Control
     #   * {Types::ListStorageLensConfigurationsResult#next_token #next_token} => String
     #   * {Types::ListStorageLensConfigurationsResult#storage_lens_configuration_list #storage_lens_configuration_list} => Array&lt;Types::ListStorageLensConfigurationEntry&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_storage_lens_configurations({
@@ -4045,7 +4038,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

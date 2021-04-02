@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2021-03-23)
+------------------
+
+* Feature - You can now create cost categories with inherited value rules and specify default values for any uncategorized costs.
+
 1.59.0 (2021-03-10)
 ------------------
 

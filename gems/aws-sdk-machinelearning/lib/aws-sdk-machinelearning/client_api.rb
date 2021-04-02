@@ -712,6 +712,7 @@ module Aws::MachineLearning
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Machine Learning",
+        "serviceId" => "Machine Learning",
         "signatureVersion" => "v4",
         "targetPrefix" => "AmazonML_20141212",
         "uid" => "machinelearning-2014-12-12",

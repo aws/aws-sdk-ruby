@@ -48,6 +48,7 @@ module Aws::Cloud9
     EnvironmentStatus = Shapes::StringShape.new(name: 'EnvironmentStatus')
     EnvironmentType = Shapes::StringShape.new(name: 'EnvironmentType')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
+    ImageId = Shapes::StringShape.new(name: 'ImageId')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -55,6 +56,7 @@ module Aws::Cloud9
     ListEnvironmentsResult = Shapes::StructureShape.new(name: 'ListEnvironmentsResult')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ManagedCredentialsStatus = Shapes::StringShape.new(name: 'ManagedCredentialsStatus')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MemberPermissions = Shapes::StringShape.new(name: 'MemberPermissions')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
@@ -92,6 +94,7 @@ module Aws::Cloud9
     CreateEnvironmentEC2Request.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
     CreateEnvironmentEC2Request.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, required: true, location_name: "instanceType"))
     CreateEnvironmentEC2Request.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "subnetId"))
+    CreateEnvironmentEC2Request.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, location_name: "imageId"))
     CreateEnvironmentEC2Request.add_member(:automatic_stop_time_minutes, Shapes::ShapeRef.new(shape: AutomaticStopTimeMinutes, location_name: "automaticStopTimeMinutes"))
     CreateEnvironmentEC2Request.add_member(:owner_arn, Shapes::ShapeRef.new(shape: UserArn, location_name: "ownerArn"))
     CreateEnvironmentEC2Request.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
@@ -106,7 +109,7 @@ module Aws::Cloud9
     CreateEnvironmentMembershipRequest.add_member(:permissions, Shapes::ShapeRef.new(shape: MemberPermissions, required: true, location_name: "permissions"))
     CreateEnvironmentMembershipRequest.struct_class = Types::CreateEnvironmentMembershipRequest
 
-    CreateEnvironmentMembershipResult.add_member(:membership, Shapes::ShapeRef.new(shape: EnvironmentMember, location_name: "membership"))
+    CreateEnvironmentMembershipResult.add_member(:membership, Shapes::ShapeRef.new(shape: EnvironmentMember, required: true, location_name: "membership"))
     CreateEnvironmentMembershipResult.struct_class = Types::CreateEnvironmentMembershipResult
 
     DeleteEnvironmentMembershipRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location_name: "environmentId"))
@@ -134,8 +137,8 @@ module Aws::Cloud9
     DescribeEnvironmentStatusRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location_name: "environmentId"))
     DescribeEnvironmentStatusRequest.struct_class = Types::DescribeEnvironmentStatusRequest
 
-    DescribeEnvironmentStatusResult.add_member(:status, Shapes::ShapeRef.new(shape: EnvironmentStatus, location_name: "status"))
-    DescribeEnvironmentStatusResult.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    DescribeEnvironmentStatusResult.add_member(:status, Shapes::ShapeRef.new(shape: EnvironmentStatus, required: true, location_name: "status"))
+    DescribeEnvironmentStatusResult.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     DescribeEnvironmentStatusResult.struct_class = Types::DescribeEnvironmentStatusResult
 
     DescribeEnvironmentsRequest.add_member(:environment_ids, Shapes::ShapeRef.new(shape: BoundedEnvironmentIdList, required: true, location_name: "environmentIds"))
@@ -147,11 +150,12 @@ module Aws::Cloud9
     Environment.add_member(:id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "id"))
     Environment.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "name"))
     Environment.add_member(:description, Shapes::ShapeRef.new(shape: EnvironmentDescription, location_name: "description"))
-    Environment.add_member(:type, Shapes::ShapeRef.new(shape: EnvironmentType, location_name: "type"))
+    Environment.add_member(:type, Shapes::ShapeRef.new(shape: EnvironmentType, required: true, location_name: "type"))
     Environment.add_member(:connection_type, Shapes::ShapeRef.new(shape: ConnectionType, location_name: "connectionType"))
-    Environment.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
-    Environment.add_member(:owner_arn, Shapes::ShapeRef.new(shape: String, location_name: "ownerArn"))
+    Environment.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "arn"))
+    Environment.add_member(:owner_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ownerArn"))
     Environment.add_member(:lifecycle, Shapes::ShapeRef.new(shape: EnvironmentLifecycle, location_name: "lifecycle"))
+    Environment.add_member(:managed_credentials_status, Shapes::ShapeRef.new(shape: ManagedCredentialsStatus, location_name: "managedCredentialsStatus"))
     Environment.struct_class = Types::Environment
 
     EnvironmentIdList.member = Shapes::ShapeRef.new(shape: EnvironmentId)
@@ -163,10 +167,10 @@ module Aws::Cloud9
 
     EnvironmentList.member = Shapes::ShapeRef.new(shape: Environment)
 
-    EnvironmentMember.add_member(:permissions, Shapes::ShapeRef.new(shape: Permissions, location_name: "permissions"))
-    EnvironmentMember.add_member(:user_id, Shapes::ShapeRef.new(shape: String, location_name: "userId"))
-    EnvironmentMember.add_member(:user_arn, Shapes::ShapeRef.new(shape: UserArn, location_name: "userArn"))
-    EnvironmentMember.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "environmentId"))
+    EnvironmentMember.add_member(:permissions, Shapes::ShapeRef.new(shape: Permissions, required: true, location_name: "permissions"))
+    EnvironmentMember.add_member(:user_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "userId"))
+    EnvironmentMember.add_member(:user_arn, Shapes::ShapeRef.new(shape: UserArn, required: true, location_name: "userArn"))
+    EnvironmentMember.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location_name: "environmentId"))
     EnvironmentMember.add_member(:last_access, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastAccess"))
     EnvironmentMember.struct_class = Types::EnvironmentMember
 

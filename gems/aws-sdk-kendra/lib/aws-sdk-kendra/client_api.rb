@@ -247,10 +247,12 @@ module Aws::Kendra
     SecretArn = Shapes::StringShape.new(name: 'SecretArn')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     ServerSideEncryptionConfiguration = Shapes::StructureShape.new(name: 'ServerSideEncryptionConfiguration')
+    ServiceNowAuthenticationType = Shapes::StringShape.new(name: 'ServiceNowAuthenticationType')
     ServiceNowBuildVersionType = Shapes::StringShape.new(name: 'ServiceNowBuildVersionType')
     ServiceNowConfiguration = Shapes::StructureShape.new(name: 'ServiceNowConfiguration')
     ServiceNowHostUrl = Shapes::StringShape.new(name: 'ServiceNowHostUrl')
     ServiceNowKnowledgeArticleConfiguration = Shapes::StructureShape.new(name: 'ServiceNowKnowledgeArticleConfiguration')
+    ServiceNowKnowledgeArticleFilterQuery = Shapes::StringShape.new(name: 'ServiceNowKnowledgeArticleFilterQuery')
     ServiceNowServiceCatalogConfiguration = Shapes::StructureShape.new(name: 'ServiceNowServiceCatalogConfiguration')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SharePointConfiguration = Shapes::StructureShape.new(name: 'SharePointConfiguration')
@@ -1003,6 +1005,7 @@ module Aws::Kendra
     ServiceNowConfiguration.add_member(:service_now_build_version, Shapes::ShapeRef.new(shape: ServiceNowBuildVersionType, required: true, location_name: "ServiceNowBuildVersion"))
     ServiceNowConfiguration.add_member(:knowledge_article_configuration, Shapes::ShapeRef.new(shape: ServiceNowKnowledgeArticleConfiguration, location_name: "KnowledgeArticleConfiguration"))
     ServiceNowConfiguration.add_member(:service_catalog_configuration, Shapes::ShapeRef.new(shape: ServiceNowServiceCatalogConfiguration, location_name: "ServiceCatalogConfiguration"))
+    ServiceNowConfiguration.add_member(:authentication_type, Shapes::ShapeRef.new(shape: ServiceNowAuthenticationType, location_name: "AuthenticationType"))
     ServiceNowConfiguration.struct_class = Types::ServiceNowConfiguration
 
     ServiceNowKnowledgeArticleConfiguration.add_member(:crawl_attachments, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlAttachments"))
@@ -1011,6 +1014,7 @@ module Aws::Kendra
     ServiceNowKnowledgeArticleConfiguration.add_member(:document_data_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, required: true, location_name: "DocumentDataFieldName"))
     ServiceNowKnowledgeArticleConfiguration.add_member(:document_title_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, location_name: "DocumentTitleFieldName"))
     ServiceNowKnowledgeArticleConfiguration.add_member(:field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "FieldMappings"))
+    ServiceNowKnowledgeArticleConfiguration.add_member(:filter_query, Shapes::ShapeRef.new(shape: ServiceNowKnowledgeArticleFilterQuery, location_name: "FilterQuery"))
     ServiceNowKnowledgeArticleConfiguration.struct_class = Types::ServiceNowKnowledgeArticleConfiguration
 
     ServiceNowServiceCatalogConfiguration.add_member(:crawl_attachments, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlAttachments"))

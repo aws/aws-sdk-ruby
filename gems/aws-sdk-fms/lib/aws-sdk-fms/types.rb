@@ -394,6 +394,96 @@ module Aws::FMS
     #
     class DisassociateAdminAccountRequest < Aws::EmptyStructure; end
 
+    # A DNS Firewall rule group that Firewall Manager tried to associate
+    # with a VPC is already associated with the VPC and can't be associated
+    # again.
+    #
+    # @!attribute [rw] violation_target
+    #   The ID of the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] violation_target_description
+    #   A description of the violation that specifies the rule group and
+    #   VPC.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DnsDuplicateRuleGroupViolation AWS API Documentation
+    #
+    class DnsDuplicateRuleGroupViolation < Struct.new(
+      :violation_target,
+      :violation_target_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The VPC that Firewall Manager was applying a DNS Fireall policy to
+    # reached the limit for associated DNS Firewall rule groups. Firewall
+    # Manager tried to associate another rule group with the VPC and failed
+    # due to the limit.
+    #
+    # @!attribute [rw] violation_target
+    #   The ID of the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] violation_target_description
+    #   A description of the violation that specifies the rule group and
+    #   VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_rule_groups_already_associated
+    #   The number of rule groups currently associated with the VPC.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DnsRuleGroupLimitExceededViolation AWS API Documentation
+    #
+    class DnsRuleGroupLimitExceededViolation < Struct.new(
+      :violation_target,
+      :violation_target_description,
+      :number_of_rule_groups_already_associated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A rule group that Firewall Manager tried to associate with a VPC has
+    # the same priority as a rule group that's already associated.
+    #
+    # @!attribute [rw] violation_target
+    #   The ID of the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] violation_target_description
+    #   A description of the violation that specifies the VPC and the rule
+    #   group that's already associated with it.
+    #   @return [String]
+    #
+    # @!attribute [rw] conflicting_priority
+    #   The priority setting of the two conflicting rule groups.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] conflicting_policy_id
+    #   The ID of the Firewall Manager DNS Firewall policy that was already
+    #   applied to the VPC. This policy contains the rule group that's
+    #   already associated with the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] unavailable_priorities
+    #   The priorities of rule groups that are already associated with the
+    #   VPC. To retry your operation, choose priority settings that aren't
+    #   in this list for the rule groups in your new DNS Firewall policy.
+    #   @return [Array<Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DnsRuleGroupPriorityConflictViolation AWS API Documentation
+    #
+    class DnsRuleGroupPriorityConflictViolation < Struct.new(
+      :violation_target,
+      :violation_target_description,
+      :conflicting_priority,
+      :conflicting_policy_id,
+      :unavailable_priorities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the compliance status for the account. An account is
     # considered noncompliant if it includes resources that are not
     # protected by the specified policy or that don't comply with the
@@ -1431,7 +1521,7 @@ module Aws::FMS
     #         policy_name: "ResourceName", # required
     #         policy_update_token: "PolicyUpdateToken",
     #         security_service_policy_data: { # required
-    #           type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL
+    #           type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL
     #           managed_service_data: "ManagedServiceData",
     #         },
     #         resource_type: "ResourceType", # required
@@ -1951,7 +2041,7 @@ module Aws::FMS
     #           policy_name: "ResourceName", # required
     #           policy_update_token: "PolicyUpdateToken",
     #           security_service_policy_data: { # required
-    #             type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL
+    #             type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL
     #             managed_service_data: "ManagedServiceData",
     #           },
     #           resource_type: "ResourceType", # required
@@ -2162,6 +2252,25 @@ module Aws::FMS
     #   stateless rule group, or changed a policy default action.
     #   @return [Types::NetworkFirewallPolicyModifiedViolation]
     #
+    # @!attribute [rw] dns_rule_group_priority_conflict_violation
+    #   Violation detail for a DNS Firewall policy that indicates that a
+    #   rule group that Firewall Manager tried to associate with a VPC has
+    #   the same priority as a rule group that's already associated.
+    #   @return [Types::DnsRuleGroupPriorityConflictViolation]
+    #
+    # @!attribute [rw] dns_duplicate_rule_group_violation
+    #   Violation detail for a DNS Firewall policy that indicates that a
+    #   rule group that Firewall Manager tried to associate with a VPC is
+    #   already associated with the VPC and can't be associated again.
+    #   @return [Types::DnsDuplicateRuleGroupViolation]
+    #
+    # @!attribute [rw] dns_rule_group_limit_exceeded_violation
+    #   Violation details for a DNS Firewall policy that indicates that the
+    #   VPC reached the limit for associated DNS Firewall rule groups.
+    #   Firewall Manager tried to associate another rule group with the VPC
+    #   and failed.
+    #   @return [Types::DnsRuleGroupLimitExceededViolation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ResourceViolation AWS API Documentation
     #
     class ResourceViolation < Struct.new(
@@ -2171,7 +2280,10 @@ module Aws::FMS
       :network_firewall_missing_firewall_violation,
       :network_firewall_missing_subnet_violation,
       :network_firewall_missing_expected_rt_violation,
-      :network_firewall_policy_modified_violation)
+      :network_firewall_policy_modified_violation,
+      :dns_rule_group_priority_conflict_violation,
+      :dns_duplicate_rule_group_violation,
+      :dns_rule_group_limit_exceeded_violation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2255,7 +2367,7 @@ module Aws::FMS
     #   data as a hash:
     #
     #       {
-    #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL
+    #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL
     #         managed_service_data: "ManagedServiceData",
     #       }
     #

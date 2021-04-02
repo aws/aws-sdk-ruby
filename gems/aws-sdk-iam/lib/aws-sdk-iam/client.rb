@@ -988,15 +988,18 @@ module Aws::IAM
     end
 
     # Creates a new instance profile. For information about instance
-    # profiles, see [About instance profiles][1].
+    # profiles, see [Using roles for applications on Amazon EC2][1] in the
+    # *IAM User Guide*, and [Instance profiles][2] in the *Amazon EC2 User
+    # Guide*.
     #
     # For information about the number of instance profiles you can create,
-    # see [IAM object quotas][2] in the *IAM User Guide*.
+    # see [IAM object quotas][3] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entities
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#ec2-instance-profile
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html
     #
     # @option params [required, String] :instance_profile_name
     #   The name of the instance profile to create.
@@ -13053,7 +13056,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

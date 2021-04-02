@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   # end gem dependency
 
   spec.metadata = {
-    'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk',
-    'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk/CHANGELOG.md'
+    'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk',
+    'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk/CHANGELOG.md'
   }
 end

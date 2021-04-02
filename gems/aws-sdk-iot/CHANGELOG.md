@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2021-03-31)
+------------------
+
+* Feature - Added ability to prefix search on attribute value for ListThings API.
+
 1.67.0 (2021-03-10)
 ------------------
 

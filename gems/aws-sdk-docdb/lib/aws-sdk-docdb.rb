@@ -29,7 +29,7 @@ require_relative 'aws-sdk-docdb/customizations'
 # structure.
 #
 #     doc_db = Aws::DocDB::Client.new
-#     resp = doc_db.add_tags_to_resource(params)
+#     resp = doc_db.add_source_identifier_to_subscription(params)
 #
 # See {Client} for more information.
 #
@@ -49,6 +49,6 @@ require_relative 'aws-sdk-docdb/customizations'
 # @!group service
 module Aws::DocDB
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.30.0'
 
 end

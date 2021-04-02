@@ -1326,7 +1326,7 @@ module Aws::CustomerProfiles
     # @option params [required, String] :domain_name
     #   The unique name of the domain.
     #
-    # @option params [required, String] :uri
+    # @option params [String] :uri
     #   The URI of the S3 bucket or any other type of data source.
     #
     # @option params [required, String] :object_type_name
@@ -1334,6 +1334,8 @@ module Aws::CustomerProfiles
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
+    #
+    # @option params [Types::FlowDefinition] :flow_definition
     #
     # @return [Types::PutIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1348,10 +1350,73 @@ module Aws::CustomerProfiles
     #
     #   resp = client.put_integration({
     #     domain_name: "name", # required
-    #     uri: "string1To255", # required
+    #     uri: "string1To255",
     #     object_type_name: "typeName", # required
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     flow_definition: {
+    #       description: "FlowDescription",
+    #       flow_name: "FlowName", # required
+    #       kms_arn: "KmsArn", # required
+    #       source_flow_config: { # required
+    #         connector_profile_name: "ConnectorProfileName",
+    #         connector_type: "Salesforce", # required, accepts Salesforce, Marketo, Zendesk, Servicenow, S3
+    #         incremental_pull_config: {
+    #           datetime_type_field_name: "DatetimeTypeFieldName",
+    #         },
+    #         source_connector_properties: { # required
+    #           marketo: {
+    #             object: "Object", # required
+    #           },
+    #           s3: {
+    #             bucket_name: "BucketName", # required
+    #             bucket_prefix: "BucketPrefix",
+    #           },
+    #           salesforce: {
+    #             object: "Object", # required
+    #             enable_dynamic_field_update: false,
+    #             include_deleted_records: false,
+    #           },
+    #           service_now: {
+    #             object: "Object", # required
+    #           },
+    #           zendesk: {
+    #             object: "Object", # required
+    #           },
+    #         },
+    #       },
+    #       tasks: [ # required
+    #         {
+    #           connector_operator: {
+    #             marketo: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #             s3: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #             salesforce: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #             service_now: "PROJECTION", # accepts PROJECTION, CONTAINS, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #             zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #           },
+    #           destination_field: "DestinationField",
+    #           source_fields: ["stringTo2048"], # required
+    #           task_properties: {
+    #             "VALUE" => "Property",
+    #           },
+    #           task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Mask, Merge, Truncate, Validate
+    #         },
+    #       ],
+    #       trigger_config: { # required
+    #         trigger_type: "Scheduled", # required, accepts Scheduled, Event, OnDemand
+    #         trigger_properties: {
+    #           scheduled: {
+    #             schedule_expression: "ScheduleExpression", # required
+    #             data_pull_mode: "Incremental", # accepts Incremental, Complete
+    #             schedule_start_time: Time.now,
+    #             schedule_end_time: Time.now,
+    #             timezone: "Timezone",
+    #             schedule_offset: 1,
+    #             first_execution_from: Time.now,
+    #           },
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -1972,7 +2037,7 @@ module Aws::CustomerProfiles
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

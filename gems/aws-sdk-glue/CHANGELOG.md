@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2021-03-29)
+------------------
+
+* Feature - Allow Dots in Registry and Schema Names for CreateRegistry, CreateSchema; Fixed issue when duplicate keys are present and not returned as part of QuerySchemaVersionMetadata.
+
 1.85.0 (2021-03-10)
 ------------------
 

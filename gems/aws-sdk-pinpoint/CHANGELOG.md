@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2021-03-30)
+------------------
+
+* Feature - Added support for journey pause/resume, journey updatable import segment and journey quiet time wait.
+
 1.52.0 (2021-03-10)
 ------------------
 

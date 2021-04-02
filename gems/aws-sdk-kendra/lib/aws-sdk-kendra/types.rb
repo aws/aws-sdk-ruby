@@ -61,7 +61,7 @@ module Aws::Kendra
     #   A list of groups, separated by semi-colons, that filters a query
     #   response based on user context. The document is only returned to
     #   users that are in one of the groups specified in the `UserContext`
-    #   field of the Query operation.
+    #   field of the `Query` operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AclConfiguration AWS API Documentation
@@ -541,7 +541,7 @@ module Aws::Kendra
     end
 
     # Provides information about documents that could not be removed from an
-    # index by the BatchDeleteDocument operation.
+    # index by the `BatchDeleteDocument` operation.
     #
     # @!attribute [rw] id
     #   The identifier of the document that couldn't be removed from the
@@ -608,7 +608,7 @@ module Aws::Kendra
     #
     # @!attribute [rw] index_id
     #   The identifier of the index to add the documents to. You need to
-    #   create the index first using the CreateIndex operation.
+    #   create the index first using the `CreateIndex` operation.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -729,7 +729,7 @@ module Aws::Kendra
     end
 
     # Gathers information about when a particular result was clicked by a
-    # user. Your application uses the SubmitFeedback operation to provide
+    # user. Your application uses the `SubmitFeedback` operation to provide
     # click information.
     #
     # @note When making an API call, you may pass ClickFeedback
@@ -792,7 +792,7 @@ module Aws::Kendra
     # @!attribute [rw] field_mappings
     #   An array of objects that map database column names to the
     #   corresponding fields in an index. You must first create the fields
-    #   in the index using the UpdateIndex operation.
+    #   in the index using the `UpdateIndex` operation.
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @!attribute [rw] change_detecting_columns
@@ -868,7 +868,8 @@ module Aws::Kendra
     # Defines the mapping between a field in the Confluence data source to a
     # Amazon Kendra index field.
     #
-    # You must first create the index field using the operation.
+    # You must first create the index field using the `UpdateIndex`
+    # operation.
     #
     # @note When making an API call, you may pass ConfluenceAttachmentToIndexFieldMapping
     #   data as a hash:
@@ -882,7 +883,8 @@ module Aws::Kendra
     # @!attribute [rw] data_source_field_name
     #   The name of the field in the data source.
     #
-    #   You must first create the index field using the operation.
+    #   You must first create the index field using the `UpdateIndex`
+    #   operation.
     #   @return [String]
     #
     # @!attribute [rw] date_field_format
@@ -909,7 +911,8 @@ module Aws::Kendra
 
     # Specifies the blog settings for the Confluence data source. Blogs are
     # always indexed unless filtered from the index by the
-    # `ExclusionPatterns` or `InclusionPatterns` fields in the data type.
+    # `ExclusionPatterns` or `InclusionPatterns` fields in the
+    # `ConfluenceConfiguration` type.
     #
     # @note When making an API call, you may pass ConfluenceBlogConfiguration
     #   data as a hash:
@@ -945,7 +948,8 @@ module Aws::Kendra
     # Defines the mapping between a blog field in the Confluence data source
     # to a Amazon Kendra index field.
     #
-    # You must first create the index field using the operation.
+    # You must first create the index field using the `UpdateIndex`
+    # operation.
     #
     # @note When making an API call, you may pass ConfluenceBlogToIndexFieldMapping
     #   data as a hash:
@@ -1158,7 +1162,8 @@ module Aws::Kendra
     # Defines the mapping between a field in the Confluence data source to a
     # Amazon Kendra index field.
     #
-    # You must first create the index field using the operation.
+    # You must first create the index field using the `UpdateIndex`
+    # operation.
     #
     # @note When making an API call, you may pass ConfluencePageToIndexFieldMapping
     #   data as a hash:
@@ -1271,7 +1276,8 @@ module Aws::Kendra
     # Defines the mapping between a field in the Confluence data source to a
     # Amazon Kendra index field.
     #
-    # You must first create the index field using the operation.
+    # You must first create the index field using the `UpdateIndex`
+    # operation.
     #
     # @note When making an API call, you may pass ConfluenceSpaceToIndexFieldMapping
     #   data as a hash:
@@ -1547,6 +1553,7 @@ module Aws::Kendra
     #                   index_field_name: "IndexFieldName", # required
     #                 },
     #               ],
+    #               filter_query: "ServiceNowKnowledgeArticleFilterQuery",
     #             },
     #             service_catalog_configuration: {
     #               crawl_attachments: false,
@@ -1562,6 +1569,7 @@ module Aws::Kendra
     #                 },
     #               ],
     #             },
+    #             authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
     #           },
     #           confluence_configuration: {
     #             server_url: "Url", # required
@@ -2249,6 +2257,7 @@ module Aws::Kendra
     #                 index_field_name: "IndexFieldName", # required
     #               },
     #             ],
+    #             filter_query: "ServiceNowKnowledgeArticleFilterQuery",
     #           },
     #           service_catalog_configuration: {
     #             crawl_attachments: false,
@@ -2264,6 +2273,7 @@ module Aws::Kendra
     #               },
     #             ],
     #           },
+    #           authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
     #         },
     #         confluence_configuration: {
     #           server_url: "Url", # required
@@ -2390,7 +2400,7 @@ module Aws::Kendra
     end
 
     # Summary information for a Amazon Kendra data source. Returned in a
-    # call to .
+    # call to the `DescribeDataSource` operation.
     #
     # @!attribute [rw] name
     #   The name of the data source.
@@ -2413,7 +2423,7 @@ module Aws::Kendra
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The status of the data source. When the status is `ATIVE` the data
+    #   The status of the data source. When the status is `ACTIVE` the data
     #   source is ready to use.
     #   @return [String]
     #
@@ -2558,7 +2568,7 @@ module Aws::Kendra
     end
 
     # Maps a column or attribute in the data source to an index field. You
-    # must first create the fields in the index using the UpdateIndex
+    # must first create the fields in the index using the `UpdateIndex`
     # operation.
     #
     # @note When making an API call, you may pass DataSourceToIndexFieldMapping
@@ -3062,7 +3072,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] capacity_units
-    #   For enterprise edtion indexes, you can choose to use additional
+    #   For Enterprise edition indexes, you can choose to use additional
     #   capacity to meet the needs of your application. This contains the
     #   capacity units used for the index. A 0 for the query capacity or the
     #   storage capacity indicates that the index is using the default
@@ -3629,7 +3639,7 @@ module Aws::Kendra
     #
     #   If you are using the console, you can define index fields when
     #   creating the mapping. If you are using the API, you must first
-    #   create the field using the UpdateIndex operation.
+    #   create the field using the `UpdateIndex` operation.
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @!attribute [rw] exclude_mime_types
@@ -4441,7 +4451,7 @@ module Aws::Kendra
     #
     # @!attribute [rw] index_id
     #   The unique identifier of the index to search. The identifier is
-    #   returned in the response from the operation.
+    #   returned in the response from the `CreateIndex` operation.
     #   @return [String]
     #
     # @!attribute [rw] query_text
@@ -4727,7 +4737,7 @@ module Aws::Kendra
     end
 
     # Provides feedback on how relevant a document is to a search. Your
-    # application uses the SubmitFeedback operation to provide relevance
+    # application uses the `SubmitFeedback` operation to provide relevance
     # information.
     #
     # @note When making an API call, you may pass RelevanceFeedback
@@ -5078,7 +5088,7 @@ module Aws::Kendra
     #   @return [Array<Types::SalesforceStandardObjectConfiguration>]
     #
     # @!attribute [rw] knowledge_article_configuration
-    #   Specifies configuration information for the knowlege article types
+    #   Specifies configuration information for the knowledge article types
     #   that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge
     #   articles and the standard fields of knowledge articles, or the
     #   custom fields of custom knowledge articles, but not both.
@@ -5183,7 +5193,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Specifies configuration information for the knowlege article types
+    # Specifies configuration information for the knowledge article types
     # that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge
     # articles and the standard fields of knowledge articles, or the custom
     # fields of custom knowledge articles, but not both
@@ -5323,7 +5333,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Specifies confguration information for indexing a single standard
+    # Specifies configuration information for indexing a single standard
     # object.
     #
     # @note When making an API call, you may pass SalesforceStandardObjectConfiguration
@@ -5353,7 +5363,7 @@ module Aws::Kendra
     #
     # @!attribute [rw] document_title_field_name
     #   The name of the field in the standard object table that contains the
-    #   document titleB.
+    #   document title.
     #   @return [String]
     #
     # @!attribute [rw] field_mappings
@@ -5485,6 +5495,7 @@ module Aws::Kendra
     #               index_field_name: "IndexFieldName", # required
     #             },
     #           ],
+    #           filter_query: "ServiceNowKnowledgeArticleFilterQuery",
     #         },
     #         service_catalog_configuration: {
     #           crawl_attachments: false,
@@ -5500,6 +5511,7 @@ module Aws::Kendra
     #             },
     #           ],
     #         },
+    #         authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
     #       }
     #
     # @!attribute [rw] host_url
@@ -5529,6 +5541,25 @@ module Aws::Kendra
     #   the ServiceNow site.
     #   @return [Types::ServiceNowServiceCatalogConfiguration]
     #
+    # @!attribute [rw] authentication_type
+    #   Determines the type of authentication used to connect to the
+    #   ServiceNow instance. If you choose `HTTP_BASIC`, Amazon Kendra is
+    #   authenticated using the user name and password provided in the AWS
+    #   Secrets Manager secret in the `SecretArn` field. When you choose
+    #   `OAUTH2`, Amazon Kendra is authenticated using the OAuth token and
+    #   secret provided in the Secrets Manager secret, and the user name and
+    #   password are used to determine which information Amazon Kendra has
+    #   access to.
+    #
+    #   When you use `OAUTH2` authentication, you must generate a token and
+    #   a client secret using the ServiceNow console. For more information,
+    #   see [Using a ServiceNow data source][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-servicenow.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ServiceNowConfiguration AWS API Documentation
     #
     class ServiceNowConfiguration < Struct.new(
@@ -5536,7 +5567,8 @@ module Aws::Kendra
       :secret_arn,
       :service_now_build_version,
       :knowledge_article_configuration,
-      :service_catalog_configuration)
+      :service_catalog_configuration,
+      :authentication_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5560,6 +5592,7 @@ module Aws::Kendra
     #             index_field_name: "IndexFieldName", # required
     #           },
     #         ],
+    #         filter_query: "ServiceNowKnowledgeArticleFilterQuery",
     #       }
     #
     # @!attribute [rw] crawl_attachments
@@ -5594,6 +5627,20 @@ module Aws::Kendra
     #   You must create the index field before you map the field.
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
+    # @!attribute [rw] filter_query
+    #   A query that selects the knowledge articles to index. The query can
+    #   return articles from multiple knowledge bases, and the knowledge
+    #   bases can be public or private.
+    #
+    #   The query string must be one generated by the ServiceNow console.
+    #   For more information, see [Specifying documents to index with a
+    #   query][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/servicenow-query.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ServiceNowKnowledgeArticleConfiguration AWS API Documentation
     #
     class ServiceNowKnowledgeArticleConfiguration < Struct.new(
@@ -5602,7 +5649,8 @@ module Aws::Kendra
       :exclude_attachment_file_patterns,
       :document_data_field_name,
       :document_title_field_name,
-      :field_mappings)
+      :field_mappings,
+      :filter_query)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5634,13 +5682,23 @@ module Aws::Kendra
     #   @return [Boolean]
     #
     # @!attribute [rw] include_attachment_file_patterns
-    #   Determines the types of file attachments that are included in the
-    #   index.
+    #   A list of regular expression patterns. Documents that match the
+    #   patterns are included in the index. Documents that don't match the
+    #   patterns are excluded from the index. If a document matches both an
+    #   exclusion pattern and an inclusion pattern, the document is not
+    #   included in the index.
+    #
+    #   The regex is applied to the file name of the attachment.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclude_attachment_file_patterns
-    #   Determines the types of file attachments that are excluded from the
-    #   index.
+    #   A list of regular expression patterns. Documents that match the
+    #   patterns are excluded from the index. Documents that don't match
+    #   the patterns are included in the index. If a document matches both
+    #   an exclusion pattern and an inclusion pattern, the document is not
+    #   included in the index.
+    #
+    #   The regex is applied to the file name of the attachment.
     #   @return [Array<String>]
     #
     # @!attribute [rw] document_data_field_name
@@ -5775,9 +5833,9 @@ module Aws::Kendra
     # @!attribute [rw] field_mappings
     #   A list of `DataSourceToIndexFieldMapping` objects that map Microsoft
     #   SharePoint attributes to custom fields in the Amazon Kendra index.
-    #   You must first create the index fields using the operation before
-    #   you map SharePoint attributes. For more information, see [Mapping
-    #   Data Source Fields][1].
+    #   You must first create the index fields using the `UpdateIndex`
+    #   operation before you map SharePoint attributes. For more
+    #   information, see [Mapping Data Source Fields][1].
     #
     #
     #
@@ -5995,7 +6053,8 @@ module Aws::Kendra
     #
     # @!attribute [rw] query_id
     #   The identifier of the specific query for which you are submitting
-    #   feedback. The query ID is returned in the response to the operation.
+    #   feedback. The query ID is returned in the response to the `Query`
+    #   operation.
     #   @return [String]
     #
     # @!attribute [rw] click_feedback_items
@@ -6412,6 +6471,7 @@ module Aws::Kendra
     #                   index_field_name: "IndexFieldName", # required
     #                 },
     #               ],
+    #               filter_query: "ServiceNowKnowledgeArticleFilterQuery",
     #             },
     #             service_catalog_configuration: {
     #               crawl_attachments: false,
@@ -6427,6 +6487,7 @@ module Aws::Kendra
     #                 },
     #               ],
     #             },
+    #             authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
     #           },
     #           confluence_configuration: {
     #             server_url: "Url", # required
@@ -6621,7 +6682,7 @@ module Aws::Kendra
     #   @return [Array<Types::DocumentMetadataConfiguration>]
     #
     # @!attribute [rw] capacity_units
-    #   Sets the number of addtional storage and query capacity units that
+    #   Sets the number of additional storage and query capacity units that
     #   should be used by the index. You can change the capacity of the
     #   index up to 5 times per day.
     #

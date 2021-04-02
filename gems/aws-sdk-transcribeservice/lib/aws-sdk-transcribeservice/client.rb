@@ -373,7 +373,7 @@ module Aws::TranscribeService
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_language_model({
-    #     language_code: "en-US", # required, accepts en-US
+    #     language_code: "en-US", # required, accepts en-US, hi-IN, es-US, en-GB, en-AU
     #     base_model_name: "NarrowBand", # required, accepts NarrowBand, WideBand
     #     model_name: "ModelName", # required
     #     input_data_config: { # required
@@ -385,7 +385,7 @@ module Aws::TranscribeService
     #
     # @example Response structure
     #
-    #   resp.language_code #=> String, one of "en-US"
+    #   resp.language_code #=> String, one of "en-US", "hi-IN", "es-US", "en-GB", "en-AU"
     #   resp.base_model_name #=> String, one of "NarrowBand", "WideBand"
     #   resp.model_name #=> String
     #   resp.input_data_config.s3_uri #=> String
@@ -776,7 +776,7 @@ module Aws::TranscribeService
     #   resp.language_model.model_name #=> String
     #   resp.language_model.create_time #=> Time
     #   resp.language_model.last_modified_time #=> Time
-    #   resp.language_model.language_code #=> String, one of "en-US"
+    #   resp.language_model.language_code #=> String, one of "en-US", "hi-IN", "es-US", "en-GB", "en-AU"
     #   resp.language_model.base_model_name #=> String, one of "NarrowBand", "WideBand"
     #   resp.language_model.model_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.language_model.upgrade_availability #=> Boolean
@@ -924,7 +924,7 @@ module Aws::TranscribeService
     #   resp.transcription_job.settings.show_alternatives #=> Boolean
     #   resp.transcription_job.settings.max_alternatives #=> Integer
     #   resp.transcription_job.settings.vocabulary_filter_name #=> String
-    #   resp.transcription_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask"
+    #   resp.transcription_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
     #   resp.transcription_job.model_settings.language_model_name #=> String
     #   resp.transcription_job.job_execution_settings.allow_deferred_execution #=> Boolean
     #   resp.transcription_job.job_execution_settings.data_access_role_arn #=> String
@@ -1064,7 +1064,7 @@ module Aws::TranscribeService
     #   resp.models[0].model_name #=> String
     #   resp.models[0].create_time #=> Time
     #   resp.models[0].last_modified_time #=> Time
-    #   resp.models[0].language_code #=> String, one of "en-US"
+    #   resp.models[0].language_code #=> String, one of "en-US", "hi-IN", "es-US", "en-GB", "en-AU"
     #   resp.models[0].base_model_name #=> String, one of "NarrowBand", "WideBand"
     #   resp.models[0].model_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.models[0].upgrade_availability #=> Boolean
@@ -1712,7 +1712,7 @@ module Aws::TranscribeService
     #       show_alternatives: false,
     #       max_alternatives: 1,
     #       vocabulary_filter_name: "VocabularyFilterName",
-    #       vocabulary_filter_method: "remove", # accepts remove, mask
+    #       vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #     },
     #     model_settings: {
     #       language_model_name: "ModelName",
@@ -1750,7 +1750,7 @@ module Aws::TranscribeService
     #   resp.transcription_job.settings.show_alternatives #=> Boolean
     #   resp.transcription_job.settings.max_alternatives #=> Integer
     #   resp.transcription_job.settings.vocabulary_filter_name #=> String
-    #   resp.transcription_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask"
+    #   resp.transcription_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
     #   resp.transcription_job.model_settings.language_model_name #=> String
     #   resp.transcription_job.job_execution_settings.allow_deferred_execution #=> Boolean
     #   resp.transcription_job.job_execution_settings.data_access_role_arn #=> String
@@ -1983,7 +1983,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

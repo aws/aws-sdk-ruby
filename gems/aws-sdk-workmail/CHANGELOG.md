@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2021-03-31)
+------------------
+
+* Feature - This release adds support for mobile device access rules management in Amazon WorkMail.
+
 1.36.0 (2021-03-10)
 ------------------
 

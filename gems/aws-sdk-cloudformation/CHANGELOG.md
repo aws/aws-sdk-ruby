@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2021-03-31)
+------------------
+
+* Feature - 1. Added a new parameter "RegionConcurrencyType" in OperationPreferences. 2. Changed the name of "AccountUrl" to "AccountsUrl" in "DeploymentTargets" parameter.
+
 1.49.0 (2021-03-10)
 ------------------
 

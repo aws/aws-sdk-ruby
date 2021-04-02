@@ -1231,6 +1231,16 @@ module Aws::Batch
     #               source_path: "String",
     #             },
     #             name: "String",
+    #             efs_volume_configuration: {
+    #               file_system_id: "String", # required
+    #               root_directory: "String",
+    #               transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
+    #               transit_encryption_port: 1,
+    #               authorization_config: {
+    #                 access_point_id: "String",
+    #                 iam: "ENABLED", # accepts ENABLED, DISABLED
+    #               },
+    #             },
     #           },
     #         ],
     #         environment: [
@@ -2328,13 +2338,149 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # The authorization configuration details for the Amazon EFS file
+    # system.
+    #
+    # @note When making an API call, you may pass EFSAuthorizationConfig
+    #   data as a hash:
+    #
+    #       {
+    #         access_point_id: "String",
+    #         iam: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] access_point_id
+    #   The Amazon EFS access point ID to use. If an access point is
+    #   specified, the root directory value specified in the
+    #   `EFSVolumeConfiguration` must either be omitted or set to `/` which
+    #   will enforce the path set on the EFS access point. If an access
+    #   point is used, transit encryption must be enabled in the
+    #   `EFSVolumeConfiguration`. For more information, see [Working with
+    #   Amazon EFS Access Points][1] in the *Amazon Elastic File System User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html
+    #   @return [String]
+    #
+    # @!attribute [rw] iam
+    #   Whether or not to use the AWS Batch execution IAM role defined in a
+    #   job definition when mounting the Amazon EFS file system. If enabled,
+    #   transit encryption must be enabled in the `EFSVolumeConfiguration`.
+    #   If this parameter is omitted, the default value of `DISABLED` is
+    #   used. For more information, see [Using Amazon EFS Access Points][1]
+    #   in the *AWS Batch User Guide*. EFS IAM authorization requires that
+    #   `TransitEncryption` be `ENABLED` and that a `JobRoleArn` is
+    #   specified.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/ug/efs-volumes.html#efs-volume-accesspoints
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EFSAuthorizationConfig AWS API Documentation
+    #
+    class EFSAuthorizationConfig < Struct.new(
+      :access_point_id,
+      :iam)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This parameter is specified when you are using an Amazon Elastic File
+    # System file system for task storage. For more information, see [Amazon
+    # EFS Volumes][1] in the *AWS Batch User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/batch/latest/ug/efs-volumes.html
+    #
+    # @note When making an API call, you may pass EFSVolumeConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         file_system_id: "String", # required
+    #         root_directory: "String",
+    #         transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
+    #         transit_encryption_port: 1,
+    #         authorization_config: {
+    #           access_point_id: "String",
+    #           iam: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] file_system_id
+    #   The Amazon EFS file system ID to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] root_directory
+    #   The directory within the Amazon EFS file system to mount as the root
+    #   directory inside the host. If this parameter is omitted, the root of
+    #   the Amazon EFS volume will be used. Specifying `/` will have the
+    #   same effect as omitting this parameter.
+    #
+    #   If an EFS access point is specified in the `authorizationConfig`,
+    #   the root directory parameter must either be omitted or set to `/`
+    #   which will enforce the path set on the Amazon EFS access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_encryption
+    #   Whether or not to enable encryption for Amazon EFS data in transit
+    #   between the Amazon ECS host and the Amazon EFS server. Transit
+    #   encryption must be enabled if Amazon EFS IAM authorization is used.
+    #   If this parameter is omitted, the default value of `DISABLED` is
+    #   used. For more information, see [Encrypting data in transit][1] in
+    #   the *Amazon Elastic File System User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/encryption-in-transit.html
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_encryption_port
+    #   The port to use when sending encrypted data between the Amazon ECS
+    #   host and the Amazon EFS server. If you do not specify a transit
+    #   encryption port, it will use the port selection strategy that the
+    #   Amazon EFS mount helper uses. For more information, see [EFS Mount
+    #   Helper][1] in the *Amazon Elastic File System User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/efs-mount-helper.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] authorization_config
+    #   The authorization configuration details for the Amazon EFS file
+    #   system.
+    #   @return [Types::EFSAuthorizationConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EFSVolumeConfiguration AWS API Documentation
+    #
+    class EFSVolumeConfiguration < Struct.new(
+      :file_system_id,
+      :root_directory,
+      :transit_encryption,
+      :transit_encryption_port,
+      :authorization_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information used to select Amazon Machine Images (AMIs) for
-    # instances in the compute environment. If the `Ec2Configuration` isn't
-    # specified, the default is `ECS_AL1`.
+    # instances in the compute environment. If `Ec2Configuration` isn't
+    # specified, the default is currently `ECS_AL1` ([Amazon Linux][1]) for
+    # non-GPU, non-Graviton instances. Starting on March 31, 2021, this
+    # default will be changing to `ECS_AL2` ([Amazon Linux 2][2]).
     #
     # <note markdown="1"> This object isn't applicable to jobs running on Fargate resources.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami
     #
     # @note When making an API call, you may pass Ec2Configuration
     #   data as a hash:
@@ -2347,7 +2493,9 @@ module Aws::Batch
     # @!attribute [rw] image_type
     #   The image type to match with the instance type to select an AMI. If
     #   the `imageIdOverride` parameter isn't specified, then a recent
-    #   [Amazon ECS-optimized AMI][1] is used.
+    #   [Amazon ECS-optimized AMI][1] (`ECS_AL1`) is used. Starting on March
+    #   31, 2021, this default will be changing to `ECS_AL2` ([Amazon Linux
+    #   2][2]).
     #
     #   ECS\_AL2
     #
@@ -3042,6 +3190,14 @@ module Aws::Batch
     #   is used. If the value is `$Default`, the default version of the
     #   launch template is used.
     #
+    #   After the compute environment is created, the launch template
+    #   version used will not be changed, even if the `$Default` or
+    #   `$Latest` version for the launch template is updated. To use a new
+    #   launch template version, create a new compute environment, add the
+    #   new compute environment to the existing job queue, remove the old
+    #   compute environment from the job queue, and delete the old compute
+    #   environment.
+    #
     #   Default: `$Default`.
     #   @return [String]
     #
@@ -3697,6 +3853,16 @@ module Aws::Batch
     #                     source_path: "String",
     #                   },
     #                   name: "String",
+    #                   efs_volume_configuration: {
+    #                     file_system_id: "String", # required
+    #                     root_directory: "String",
+    #                     transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
+    #                     transit_encryption_port: 1,
+    #                     authorization_config: {
+    #                       access_point_id: "String",
+    #                       iam: "ENABLED", # accepts ENABLED, DISABLED
+    #                     },
+    #                   },
     #                 },
     #               ],
     #               environment: [
@@ -3901,6 +4067,16 @@ module Aws::Batch
     #                 source_path: "String",
     #               },
     #               name: "String",
+    #               efs_volume_configuration: {
+    #                 file_system_id: "String", # required
+    #                 root_directory: "String",
+    #                 transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
+    #                 transit_encryption_port: 1,
+    #                 authorization_config: {
+    #                   access_point_id: "String",
+    #                   iam: "ENABLED", # accepts ENABLED, DISABLED
+    #                 },
+    #               },
     #             },
     #           ],
     #           environment: [
@@ -4028,6 +4204,16 @@ module Aws::Batch
     #                 source_path: "String",
     #               },
     #               name: "String",
+    #               efs_volume_configuration: {
+    #                 file_system_id: "String", # required
+    #                 root_directory: "String",
+    #                 transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
+    #                 transit_encryption_port: 1,
+    #                 authorization_config: {
+    #                   access_point_id: "String",
+    #                   iam: "ENABLED", # accepts ENABLED, DISABLED
+    #                 },
+    #               },
     #             },
     #           ],
     #           environment: [
@@ -4124,6 +4310,16 @@ module Aws::Batch
     #                       source_path: "String",
     #                     },
     #                     name: "String",
+    #                     efs_volume_configuration: {
+    #                       file_system_id: "String", # required
+    #                       root_directory: "String",
+    #                       transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
+    #                       transit_encryption_port: 1,
+    #                       authorization_config: {
+    #                         access_point_id: "String",
+    #                         iam: "ENABLED", # accepts ENABLED, DISABLED
+    #                       },
+    #                     },
     #                   },
     #                 ],
     #                 environment: [
@@ -5112,6 +5308,10 @@ module Aws::Batch
     #   information, see [AWS Batch service IAM role][1] in the *AWS Batch
     #   User Guide*.
     #
+    #   If the compute environment has a service-linked role, it cannot be
+    #   changed to use a regular IAM role. If the compute environment has a
+    #   regular IAM role, it cannot be changed to use a service-linked role.
+    #
     #   If your specified role has a path other than `/`, then you must
     #   either specify the full role ARN (this is recommended) or prefix the
     #   role name with the path.
@@ -5254,6 +5454,16 @@ module Aws::Batch
     #           source_path: "String",
     #         },
     #         name: "String",
+    #         efs_volume_configuration: {
+    #           file_system_id: "String", # required
+    #           root_directory: "String",
+    #           transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
+    #           transit_encryption_port: 1,
+    #           authorization_config: {
+    #             access_point_id: "String",
+    #             iam: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] host
@@ -5277,11 +5487,18 @@ module Aws::Batch
     #   `mountPoints`.
     #   @return [String]
     #
+    # @!attribute [rw] efs_volume_configuration
+    #   This parameter is specified when you are using an Amazon Elastic
+    #   File System file system for job storage. Jobs running on Fargate
+    #   resources must specify a `platformVersion` of at least `1.4.0`.
+    #   @return [Types::EFSVolumeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/Volume AWS API Documentation
     #
     class Volume < Struct.new(
       :host,
-      :name)
+      :name,
+      :efs_volume_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2021-03-29)
+------------------
+
+* Feature - Amazon Location added support for specifying pricing plan information on resources in alignment with our cost model.
+
 1.2.0 (2021-03-10)
 ------------------
 

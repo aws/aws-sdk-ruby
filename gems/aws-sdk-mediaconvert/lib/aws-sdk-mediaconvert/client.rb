@@ -548,10 +548,10 @@ module Aws::MediaConvert
     #                     framerate_denominator: 1,
     #                     framerate_numerator: 1,
     #                   },
-    #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
     #                   time_delta: 1,
     #                 },
-    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC
+    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #                 teletext_source_settings: {
     #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                 },
@@ -727,6 +727,7 @@ module Aws::MediaConvert
     #               min_buffer_time: 1,
     #               min_final_segment_length: 1.0,
     #               mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
+    #               pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -741,6 +742,7 @@ module Aws::MediaConvert
     #                   selected_outputs: ["__stringMin1"],
     #                 },
     #               ],
+    #               audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION", # accepts MPEG_CHANNEL_CONFIGURATION, DOLBY_CHANNEL_CONFIGURATION
     #               base_url: "__string",
     #               destination: "__stringPatternS3",
     #               destination_settings: {
@@ -768,6 +770,7 @@ module Aws::MediaConvert
     #               min_buffer_time: 1,
     #               min_final_segment_length: 1.0,
     #               mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
+    #               pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
     #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -922,7 +925,9 @@ module Aws::MediaConvert
     #                       bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN, COMMENTARY, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
     #                       coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
     #                       dialnorm: 1,
+    #                       dynamic_range_compression_line: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                       dynamic_range_compression_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
+    #                       dynamic_range_compression_rf: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                       lfe_filter: "ENABLED", # accepts ENABLED, DISABLED
     #                       metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                       sample_rate: 1,
@@ -1082,6 +1087,9 @@ module Aws::MediaConvert
     #                     ttml_destination_settings: {
     #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                     },
+    #                     webvtt_destination_settings: {
+    #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                     },
     #                   },
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   language_description: "__string",
@@ -1090,6 +1098,10 @@ module Aws::MediaConvert
     #               container_settings: {
     #                 cmfc_settings: {
     #                   audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #                   audio_group_id: "__string",
+    #                   audio_rendition_sets: "__string",
+    #                   audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
+    #                   descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                   i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -1204,6 +1216,7 @@ module Aws::MediaConvert
     #                   audio_only_container: "AUTOMATIC", # accepts AUTOMATIC, M2TS
     #                   audio_rendition_sets: "__string",
     #                   audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #                   descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                   i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   segment_modifier: "__string",
     #                 },
@@ -1645,7 +1658,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC"
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
     #   resp.job.settings.inputs[0].crop.height #=> Integer
@@ -1764,6 +1777,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
@@ -1774,6 +1788,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.audio_channel_config_scheme_id_uri #=> String, one of "MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
@@ -1790,6 +1805,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_final_segment_length #=> Float
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -1888,7 +1904,9 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dialnorm #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_line #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_profile #=> String, one of "FILM_STANDARD", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_rf #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.lfe_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.metadata_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.sample_rate #=> Integer
@@ -2008,9 +2026,14 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_group_id #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_rendition_sets #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
@@ -2102,6 +2125,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_only_container #=> String, one of "AUTOMATIC", "M2TS"
     #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_rendition_sets #=> String
     #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
+    #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.segment_modifier #=> String
     #   resp.job.settings.output_groups[0].outputs[0].preset #=> String
@@ -2537,10 +2561,10 @@ module Aws::MediaConvert
     #                     framerate_denominator: 1,
     #                     framerate_numerator: 1,
     #                   },
-    #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
     #                   time_delta: 1,
     #                 },
-    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC
+    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #                 teletext_source_settings: {
     #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                 },
@@ -2708,6 +2732,7 @@ module Aws::MediaConvert
     #               min_buffer_time: 1,
     #               min_final_segment_length: 1.0,
     #               mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
+    #               pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -2722,6 +2747,7 @@ module Aws::MediaConvert
     #                   selected_outputs: ["__stringMin1"],
     #                 },
     #               ],
+    #               audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION", # accepts MPEG_CHANNEL_CONFIGURATION, DOLBY_CHANNEL_CONFIGURATION
     #               base_url: "__string",
     #               destination: "__stringPatternS3",
     #               destination_settings: {
@@ -2749,6 +2775,7 @@ module Aws::MediaConvert
     #               min_buffer_time: 1,
     #               min_final_segment_length: 1.0,
     #               mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
+    #               pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
     #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -2903,7 +2930,9 @@ module Aws::MediaConvert
     #                       bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN, COMMENTARY, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
     #                       coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
     #                       dialnorm: 1,
+    #                       dynamic_range_compression_line: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                       dynamic_range_compression_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
+    #                       dynamic_range_compression_rf: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                       lfe_filter: "ENABLED", # accepts ENABLED, DISABLED
     #                       metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                       sample_rate: 1,
@@ -3063,6 +3092,9 @@ module Aws::MediaConvert
     #                     ttml_destination_settings: {
     #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                     },
+    #                     webvtt_destination_settings: {
+    #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                     },
     #                   },
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   language_description: "__string",
@@ -3071,6 +3103,10 @@ module Aws::MediaConvert
     #               container_settings: {
     #                 cmfc_settings: {
     #                   audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #                   audio_group_id: "__string",
+    #                   audio_rendition_sets: "__string",
+    #                   audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
+    #                   descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                   i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -3185,6 +3221,7 @@ module Aws::MediaConvert
     #                   audio_only_container: "AUTOMATIC", # accepts AUTOMATIC, M2TS
     #                   audio_rendition_sets: "__string",
     #                   audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #                   descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                   i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   segment_modifier: "__string",
     #                 },
@@ -3603,7 +3640,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
     #   resp.job_template.settings.inputs[0].crop.height #=> Integer
@@ -3715,6 +3752,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
@@ -3725,6 +3763,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.audio_channel_config_scheme_id_uri #=> String, one of "MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
@@ -3741,6 +3780,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_final_segment_length #=> Float
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -3839,7 +3879,9 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dialnorm #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_line #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_profile #=> String, one of "FILM_STANDARD", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_rf #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.lfe_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.metadata_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.sample_rate #=> Integer
@@ -3959,9 +4001,14 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_group_id #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_rendition_sets #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
@@ -4053,6 +4100,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_only_container #=> String, one of "AUTOMATIC", "M2TS"
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_rendition_sets #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
+    #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.segment_modifier #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].preset #=> String
@@ -4401,7 +4449,9 @@ module Aws::MediaConvert
     #               bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN, COMMENTARY, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
     #               coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
     #               dialnorm: 1,
+    #               dynamic_range_compression_line: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #               dynamic_range_compression_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
+    #               dynamic_range_compression_rf: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #               lfe_filter: "ENABLED", # accepts ENABLED, DISABLED
     #               metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #               sample_rate: 1,
@@ -4560,6 +4610,9 @@ module Aws::MediaConvert
     #             ttml_destination_settings: {
     #               style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #             },
+    #             webvtt_destination_settings: {
+    #               style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
     #           },
     #           language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #           language_description: "__string",
@@ -4568,6 +4621,10 @@ module Aws::MediaConvert
     #       container_settings: {
     #         cmfc_settings: {
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #           audio_group_id: "__string",
+    #           audio_rendition_sets: "__string",
+    #           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
+    #           descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #           i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -5041,7 +5098,9 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.dialnorm #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_line #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_profile #=> String, one of "FILM_STANDARD", "NONE"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_rf #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.lfe_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.metadata_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.sample_rate #=> Integer
@@ -5160,9 +5219,14 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.preset.settings.caption_descriptions[0].language_description #=> String
     #   resp.preset.settings.container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
+    #   resp.preset.settings.container_settings.cmfc_settings.audio_group_id #=> String
+    #   resp.preset.settings.container_settings.cmfc_settings.audio_rendition_sets #=> String
+    #   resp.preset.settings.container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+    #   resp.preset.settings.container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.preset.settings.container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
@@ -5832,7 +5896,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC"
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
     #   resp.job.settings.inputs[0].crop.height #=> Integer
@@ -5951,6 +6015,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
@@ -5961,6 +6026,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.audio_channel_config_scheme_id_uri #=> String, one of "MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
@@ -5977,6 +6043,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_final_segment_length #=> Float
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -6075,7 +6142,9 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dialnorm #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_line #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_profile #=> String, one of "FILM_STANDARD", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_rf #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.lfe_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.metadata_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.sample_rate #=> Integer
@@ -6195,9 +6264,14 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_group_id #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_rendition_sets #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
@@ -6289,6 +6363,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_only_container #=> String, one of "AUTOMATIC", "M2TS"
     #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_rendition_sets #=> String
     #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
+    #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.segment_modifier #=> String
     #   resp.job.settings.output_groups[0].outputs[0].preset #=> String
@@ -6653,7 +6728,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
     #   resp.job_template.settings.inputs[0].crop.height #=> Integer
@@ -6765,6 +6840,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
@@ -6775,6 +6851,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.audio_channel_config_scheme_id_uri #=> String, one of "MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
@@ -6791,6 +6868,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_final_segment_length #=> Float
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -6889,7 +6967,9 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dialnorm #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_line #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_profile #=> String, one of "FILM_STANDARD", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_rf #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.lfe_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.metadata_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.sample_rate #=> Integer
@@ -7009,9 +7089,14 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_group_id #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_rendition_sets #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
@@ -7103,6 +7188,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_only_container #=> String, one of "AUTOMATIC", "M2TS"
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_rendition_sets #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
+    #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.segment_modifier #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].preset #=> String
@@ -7434,7 +7520,9 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.dialnorm #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_line #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_profile #=> String, one of "FILM_STANDARD", "NONE"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_rf #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.lfe_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.metadata_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.sample_rate #=> Integer
@@ -7553,9 +7641,14 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.preset.settings.caption_descriptions[0].language_description #=> String
     #   resp.preset.settings.container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
+    #   resp.preset.settings.container_settings.cmfc_settings.audio_group_id #=> String
+    #   resp.preset.settings.container_settings.cmfc_settings.audio_rendition_sets #=> String
+    #   resp.preset.settings.container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+    #   resp.preset.settings.container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.preset.settings.container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
@@ -8061,7 +8154,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC"
+    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
     #   resp.job_templates[0].settings.inputs[0].crop.height #=> Integer
@@ -8173,6 +8266,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
@@ -8183,6 +8277,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.audio_channel_config_scheme_id_uri #=> String, one of "MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
@@ -8199,6 +8294,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_final_segment_length #=> Float
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -8297,7 +8393,9 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dialnorm #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_line #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_profile #=> String, one of "FILM_STANDARD", "NONE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_rf #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.lfe_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.metadata_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.sample_rate #=> Integer
@@ -8417,9 +8515,14 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_group_id #=> String
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_rendition_sets #=> String
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
@@ -8511,6 +8614,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_only_container #=> String, one of "AUTOMATIC", "M2TS"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_rendition_sets #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.segment_modifier #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].preset #=> String
@@ -8918,7 +9022,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC"
+    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
     #   resp.jobs[0].settings.inputs[0].crop.height #=> Integer
@@ -9037,6 +9141,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
@@ -9047,6 +9152,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.audio_channel_config_scheme_id_uri #=> String, one of "MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
@@ -9063,6 +9169,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_final_segment_length #=> Float
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -9161,7 +9268,9 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dialnorm #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_line #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_profile #=> String, one of "FILM_STANDARD", "NONE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_rf #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.lfe_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.metadata_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.sample_rate #=> Integer
@@ -9281,9 +9390,14 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_group_id #=> String
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_rendition_sets #=> String
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
@@ -9375,6 +9489,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_only_container #=> String, one of "AUTOMATIC", "M2TS"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_rendition_sets #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.segment_modifier #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].preset #=> String
@@ -9744,7 +9859,9 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.ac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.ac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.ac_3_settings.dialnorm #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_line #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_profile #=> String, one of "FILM_STANDARD", "NONE"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_rf #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.ac_3_settings.lfe_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.ac_3_settings.metadata_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.ac_3_settings.sample_rate #=> Integer
@@ -9863,9 +9980,14 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.presets[0].settings.caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.presets[0].settings.caption_descriptions[0].language_description #=> String
     #   resp.presets[0].settings.container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
+    #   resp.presets[0].settings.container_settings.cmfc_settings.audio_group_id #=> String
+    #   resp.presets[0].settings.container_settings.cmfc_settings.audio_rendition_sets #=> String
+    #   resp.presets[0].settings.container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+    #   resp.presets[0].settings.container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.presets[0].settings.container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.presets[0].settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.presets[0].settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
@@ -10518,10 +10640,10 @@ module Aws::MediaConvert
     #                     framerate_denominator: 1,
     #                     framerate_numerator: 1,
     #                   },
-    #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
     #                   time_delta: 1,
     #                 },
-    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC
+    #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #                 teletext_source_settings: {
     #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                 },
@@ -10689,6 +10811,7 @@ module Aws::MediaConvert
     #               min_buffer_time: 1,
     #               min_final_segment_length: 1.0,
     #               mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
+    #               pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -10703,6 +10826,7 @@ module Aws::MediaConvert
     #                   selected_outputs: ["__stringMin1"],
     #                 },
     #               ],
+    #               audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION", # accepts MPEG_CHANNEL_CONFIGURATION, DOLBY_CHANNEL_CONFIGURATION
     #               base_url: "__string",
     #               destination: "__stringPatternS3",
     #               destination_settings: {
@@ -10730,6 +10854,7 @@ module Aws::MediaConvert
     #               min_buffer_time: 1,
     #               min_final_segment_length: 1.0,
     #               mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
+    #               pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
     #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -10884,7 +11009,9 @@ module Aws::MediaConvert
     #                       bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN, COMMENTARY, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
     #                       coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
     #                       dialnorm: 1,
+    #                       dynamic_range_compression_line: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                       dynamic_range_compression_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
+    #                       dynamic_range_compression_rf: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #                       lfe_filter: "ENABLED", # accepts ENABLED, DISABLED
     #                       metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                       sample_rate: 1,
@@ -11044,6 +11171,9 @@ module Aws::MediaConvert
     #                     ttml_destination_settings: {
     #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                     },
+    #                     webvtt_destination_settings: {
+    #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                     },
     #                   },
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   language_description: "__string",
@@ -11052,6 +11182,10 @@ module Aws::MediaConvert
     #               container_settings: {
     #                 cmfc_settings: {
     #                   audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #                   audio_group_id: "__string",
+    #                   audio_rendition_sets: "__string",
+    #                   audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
+    #                   descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                   i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -11166,6 +11300,7 @@ module Aws::MediaConvert
     #                   audio_only_container: "AUTOMATIC", # accepts AUTOMATIC, M2TS
     #                   audio_rendition_sets: "__string",
     #                   audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #                   descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                   i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   segment_modifier: "__string",
     #                 },
@@ -11581,7 +11716,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
-    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
     #   resp.job_template.settings.inputs[0].crop.height #=> Integer
@@ -11693,6 +11828,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_final_segment_length #=> Float
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
@@ -11703,6 +11839,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs[0] #=> String
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.audio_channel_config_scheme_id_uri #=> String, one of "MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
@@ -11719,6 +11856,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_final_segment_length #=> Float
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -11817,7 +11955,9 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dialnorm #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_line #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_profile #=> String, one of "FILM_STANDARD", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_rf #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.lfe_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.metadata_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.ac_3_settings.sample_rate #=> Integer
@@ -11937,9 +12077,14 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_group_id #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_rendition_sets #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
@@ -12031,6 +12176,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_only_container #=> String, one of "AUTOMATIC", "M2TS"
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_rendition_sets #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
+    #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.segment_modifier #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].preset #=> String
@@ -12373,7 +12519,9 @@ module Aws::MediaConvert
     #               bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN, COMMENTARY, DIALOGUE, EMERGENCY, HEARING_IMPAIRED, MUSIC_AND_EFFECTS, VISUALLY_IMPAIRED, VOICE_OVER
     #               coding_mode: "CODING_MODE_1_0", # accepts CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_3_2_LFE
     #               dialnorm: 1,
+    #               dynamic_range_compression_line: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #               dynamic_range_compression_profile: "FILM_STANDARD", # accepts FILM_STANDARD, NONE
+    #               dynamic_range_compression_rf: "FILM_STANDARD", # accepts FILM_STANDARD, FILM_LIGHT, MUSIC_STANDARD, MUSIC_LIGHT, SPEECH, NONE
     #               lfe_filter: "ENABLED", # accepts ENABLED, DISABLED
     #               metadata_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #               sample_rate: 1,
@@ -12532,6 +12680,9 @@ module Aws::MediaConvert
     #             ttml_destination_settings: {
     #               style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #             },
+    #             webvtt_destination_settings: {
+    #               style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
     #           },
     #           language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #           language_description: "__string",
@@ -12540,6 +12691,10 @@ module Aws::MediaConvert
     #       container_settings: {
     #         cmfc_settings: {
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #           audio_group_id: "__string",
+    #           audio_rendition_sets: "__string",
+    #           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
+    #           descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #           i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -13010,7 +13165,9 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.coding_mode #=> String, one of "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.dialnorm #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_line #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_profile #=> String, one of "FILM_STANDARD", "NONE"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.dynamic_range_compression_rf #=> String, one of "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.lfe_filter #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.metadata_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.ac_3_settings.sample_rate #=> Integer
@@ -13129,9 +13286,14 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.preset.settings.caption_descriptions[0].language_description #=> String
     #   resp.preset.settings.container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
+    #   resp.preset.settings.container_settings.cmfc_settings.audio_group_id #=> String
+    #   resp.preset.settings.container_settings.cmfc_settings.audio_rendition_sets #=> String
+    #   resp.preset.settings.container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+    #   resp.preset.settings.container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.preset.settings.container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
@@ -13570,7 +13732,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

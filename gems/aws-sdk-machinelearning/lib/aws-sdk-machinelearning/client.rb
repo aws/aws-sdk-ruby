@@ -429,7 +429,7 @@ module Aws::MachineLearning
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/machine-learning/latest/dg
+    #   [1]: https://docs.aws.amazon.com/machine-learning/latest/dg
     #
     # @return [Types::CreateBatchPredictionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -488,8 +488,10 @@ module Aws::MachineLearning
     # @option params [required, Types::RDSDataSpec] :rds_data
     #   The data specification of an Amazon RDS `DataSource`\:
     #
-    #   * DatabaseInformation - * `DatabaseName` - The name of the Amazon RDS
-    #     database.
+    #   * DatabaseInformation -
+    #
+    #     * `DatabaseName` - The name of the Amazon RDS database.
+    #
     #     * `InstanceIdentifier ` - A unique identifier for the Amazon RDS
     #       database instance.
     #
@@ -527,13 +529,12 @@ module Aws::MachineLearning
     #   * DataRearrangement - A JSON string that represents the splitting and
     #     rearrangement requirements for the `Datasource`.
     #
-    #
     #     Sample - `
     #     "\{"splitting":\{"percentBegin":10,"percentEnd":60\}\}"`
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html
+    #   [1]: https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html
     #
     # @option params [required, String] :role_arn
     #   The role that Amazon ML assumes on behalf of the user to create and
@@ -544,8 +545,9 @@ module Aws::MachineLearning
     #   The compute statistics for a `DataSource`. The statistics are
     #   generated from the observation data referenced by a `DataSource`.
     #   Amazon ML uses the statistics internally during `MLModel` training.
-    #   This parameter must be set to `true` if the ``DataSource`` needs to be
-    #   used for `MLModel` training.
+    #   This parameter must be set to `true` if the `DataSource needs to be
+    #   used for MLModel training. </p>
+    #   `
     #
     # @return [Types::CreateDataSourceFromRDSOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -623,14 +625,12 @@ module Aws::MachineLearning
     # with another variable or will it be split apart into word
     # combinations? The recipe provides answers to these questions.
     #
-    #  <?oxy\_insert\_start author="laurama" timestamp="20160406T153842-0700">You can't change an existing datasource, but you can copy and modify
+    # You can't change an existing datasource, but you can copy and modify
     # the settings from an existing Amazon Redshift datasource to create a
     # new datasource. To do so, call `GetDataSource` for an existing
     # datasource and copy the values to a `CreateDataSource` call. Change
     # the settings that you want to change and make sure that all required
     # fields have the appropriate values.
-    #
-    #  <?oxy\_insert\_end>
     #
     # @option params [required, String] :data_source_id
     #   A user-supplied ID that uniquely identifies the `DataSource`.
@@ -641,8 +641,10 @@ module Aws::MachineLearning
     # @option params [required, Types::RedshiftDataSpec] :data_spec
     #   The data specification of an Amazon Redshift `DataSource`\:
     #
-    #   * DatabaseInformation - * `DatabaseName` - The name of the Amazon
-    #     Redshift database.
+    #   * DatabaseInformation -
+    #
+    #     * `DatabaseName` - The name of the Amazon Redshift database.
+    #
     #     * ` ClusterIdentifier` - The unique ID for the Amazon Redshift
     #       cluster.
     #
@@ -785,8 +787,9 @@ module Aws::MachineLearning
     #   The compute statistics for a `DataSource`. The statistics are
     #   generated from the observation data referenced by a `DataSource`.
     #   Amazon ML uses the statistics internally during `MLModel` training.
-    #   This parameter must be set to `true` if the ``DataSource`` needs to be
-    #   used for `MLModel` training.
+    #   This parameter must be set to `true` if the `DataSource needs to be
+    #   used for MLModel training.</p>
+    #   `
     #
     # @return [Types::CreateDataSourceFromS3Output] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -910,7 +913,9 @@ module Aws::MachineLearning
     #
     #   * Choose `REGRESSION` if the `MLModel` will be used to predict a
     #     numeric value.
+    #
     #   * Choose `BINARY` if the `MLModel` result has two possible values.
+    #
     #   * Choose `MULTICLASS` if the `MLModel` result has a limited number of
     #     values.
     #
@@ -919,7 +924,7 @@ module Aws::MachineLearning
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/machine-learning/latest/dg
+    #   [1]: https://docs.aws.amazon.com/machine-learning/latest/dg
     #
     # @option params [Hash<String,String>] :parameters
     #   A list of the training parameters in the `MLModel`. The list is
@@ -941,9 +946,8 @@ module Aws::MachineLearning
     #   * `sgd.shuffleType` - Whether Amazon ML shuffles the training data.
     #     Shuffling the data improves a model's ability to find the optimal
     #     solution for a variety of data types. The valid values are `auto`
-    #     and `none`. The default value is `none`. We <?oxy\_insert\_start
-    #     author="laurama" timestamp="20160329T131121-0700">strongly
-    #     recommend that you shuffle your data.<?oxy\_insert\_end>
+    #     and `none`. The default value is `none`. We strongly recommend that
+    #     you shuffle your data.
     #
     #   * `sgd.l1RegularizationAmount` - The coefficient regularization L1
     #     norm. It controls overfitting the data by penalizing large
@@ -1115,9 +1119,8 @@ module Aws::MachineLearning
     # `GetEvaluation` operation to verify that the status of the
     # `Evaluation` changed to `DELETED`.
     #
-    # <caution markdown="1"><title>Caution</title> The results of the `DeleteEvaluation` operation are irreversible.
-    #
-    # </caution>
+    # **Caution:** The results of the `DeleteEvaluation` operation are
+    # irreversible.
     #
     # @option params [required, String] :evaluation_id
     #   A user-supplied ID that uniquely identifies the `Evaluation` to
@@ -1256,15 +1259,21 @@ module Aws::MachineLearning
     #
     #   * `CreatedAt` - Sets the search criteria to the `BatchPrediction`
     #     creation date.
+    #
     #   * `Status` - Sets the search criteria to the `BatchPrediction` status.
+    #
     #   * `Name` - Sets the search criteria to the contents of the
-    #     `BatchPrediction`<b> </b> `Name`.
+    #     `BatchPrediction` <b> </b> `Name`.
+    #
     #   * `IAMUser` - Sets the search criteria to the user account that
     #     invoked the `BatchPrediction` creation.
+    #
     #   * `MLModelId` - Sets the search criteria to the `MLModel` used in the
     #     `BatchPrediction`.
+    #
     #   * `DataSourceId` - Sets the search criteria to the `DataSource` used
     #     in the `BatchPrediction`.
+    #
     #   * `DataURI` - Sets the search criteria to the data file(s) used in the
     #     `BatchPrediction`. The URL can identify either a file or an Amazon
     #     Simple Storage Solution (Amazon S3) bucket or directory.
@@ -1318,6 +1327,7 @@ module Aws::MachineLearning
     #   list of `MLModel`s.
     #
     #   * `asc` - Arranges the list in ascending order (A-Z, 0-9).
+    #
     #   * `dsc` - Arranges the list in descending order (Z-A, 9-0).
     #
     #   Results are sorted by `FilterVariable`.
@@ -1393,12 +1403,16 @@ module Aws::MachineLearning
     #
     #   * `CreatedAt` - Sets the search criteria to `DataSource` creation
     #     dates.
+    #
     #   * `Status` - Sets the search criteria to `DataSource` statuses.
+    #
     #   * `Name` - Sets the search criteria to the contents of `DataSource`
-    #     <b> </b> `Name`.
+    #     `Name`.
+    #
     #   * `DataUri` - Sets the search criteria to the URI of data files used
     #     to create the `DataSource`. The URI can identify either a file or an
     #     Amazon Simple Storage Service (Amazon S3) bucket or directory.
+    #
     #   * `IAMUser` - Sets the search criteria to the user account that
     #     invoked the `DataSource` creation.
     #
@@ -1451,6 +1465,7 @@ module Aws::MachineLearning
     #   list of `DataSource`.
     #
     #   * `asc` - Arranges the list in ascending order (A-Z, 0-9).
+    #
     #   * `dsc` - Arranges the list in descending order (Z-A, 9-0).
     #
     #   Results are sorted by `FilterVariable`.
@@ -1537,15 +1552,21 @@ module Aws::MachineLearning
     #
     #   * `CreatedAt` - Sets the search criteria to the `Evaluation` creation
     #     date.
+    #
     #   * `Status` - Sets the search criteria to the `Evaluation` status.
+    #
     #   * `Name` - Sets the search criteria to the contents of `Evaluation`
     #     <b> </b> `Name`.
+    #
     #   * `IAMUser` - Sets the search criteria to the user account that
     #     invoked an `Evaluation`.
+    #
     #   * `MLModelId` - Sets the search criteria to the `MLModel` that was
     #     evaluated.
+    #
     #   * `DataSourceId` - Sets the search criteria to the `DataSource` used
     #     in `Evaluation`.
+    #
     #   * `DataUri` - Sets the search criteria to the data file(s) used in
     #     `Evaluation`. The URL can identify either a file or an Amazon Simple
     #     Storage Solution (Amazon S3) bucket or directory.
@@ -1599,6 +1620,7 @@ module Aws::MachineLearning
     #   list of `Evaluation`.
     #
     #   * `asc` - Arranges the list in ascending order (A-Z, 0-9).
+    #
     #   * `dsc` - Arranges the list in descending order (Z-A, 9-0).
     #
     #   Results are sorted by `FilterVariable`.
@@ -1671,19 +1693,27 @@ module Aws::MachineLearning
     #   Use one of the following variables to filter a list of `MLModel`\:
     #
     #   * `CreatedAt` - Sets the search criteria to `MLModel` creation date.
+    #
     #   * `Status` - Sets the search criteria to `MLModel` status.
-    #   * `Name` - Sets the search criteria to the contents of `MLModel`<b>
+    #
+    #   * `Name` - Sets the search criteria to the contents of `MLModel` <b>
     #     </b> `Name`.
+    #
     #   * `IAMUser` - Sets the search criteria to the user account that
     #     invoked the `MLModel` creation.
+    #
     #   * `TrainingDataSourceId` - Sets the search criteria to the
     #     `DataSource` used to train one or more `MLModel`.
+    #
     #   * `RealtimeEndpointStatus` - Sets the search criteria to the `MLModel`
     #     real-time endpoint status.
+    #
     #   * `MLModelType` - Sets the search criteria to `MLModel` type: binary,
     #     regression, or multi-class.
+    #
     #   * `Algorithm` - Sets the search criteria to the algorithm that the
     #     `MLModel` uses.
+    #
     #   * `TrainingDataURI` - Sets the search criteria to the data file(s)
     #     used in training a `MLModel`. The URL can identify either a file or
     #     an Amazon Simple Storage Service (Amazon S3) bucket or directory.
@@ -1737,6 +1767,7 @@ module Aws::MachineLearning
     #   list of `MLModel`.
     #
     #   * `asc` - Arranges the list in ascending order (A-Z, 0-9).
+    #
     #   * `dsc` - Arranges the list in descending order (Z-A, 9-0).
     #
     #   Results are sorted by `FilterVariable`.
@@ -2135,10 +2166,9 @@ module Aws::MachineLearning
     # Generates a prediction for the observation using the specified `ML
     # Model`.
     #
-    # <note markdown="1"><title>Note</title> Not all response parameters will be populated. Whether a response
-    # parameter is populated depends on the type of model requested.
-    #
-    # </note>
+    # **Note:** Not all response parameters will be populated. Whether a
+    # response parameter is populated depends on the type of model
+    # requested.
     #
     # @option params [required, String] :ml_model_id
     #   A unique identifier of the `MLModel`.
@@ -2336,7 +2366,7 @@ module Aws::MachineLearning
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-machinelearning'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

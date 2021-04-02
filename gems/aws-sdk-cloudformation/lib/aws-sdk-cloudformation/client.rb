@@ -1225,6 +1225,7 @@ module Aws::CloudFormation
     #     accounts: ["Account"],
     #     deployment_targets: {
     #       accounts: ["Account"],
+    #       accounts_url: "AccountsUrl",
     #       organizational_unit_ids: ["OrganizationalUnitId"],
     #     },
     #     regions: ["Region"], # required
@@ -1237,6 +1238,7 @@ module Aws::CloudFormation
     #       },
     #     ],
     #     operation_preferences: {
+    #       region_concurrency_type: "SEQUENTIAL", # accepts SEQUENTIAL, PARALLEL
     #       region_order: ["Region"],
     #       failure_tolerance_count: 1,
     #       failure_tolerance_percentage: 1,
@@ -1720,10 +1722,12 @@ module Aws::CloudFormation
     #     accounts: ["Account"],
     #     deployment_targets: {
     #       accounts: ["Account"],
+    #       accounts_url: "AccountsUrl",
     #       organizational_unit_ids: ["OrganizationalUnitId"],
     #     },
     #     regions: ["Region"], # required
     #     operation_preferences: {
+    #       region_concurrency_type: "SEQUENTIAL", # accepts SEQUENTIAL, PARALLEL
     #       region_order: ["Region"],
     #       failure_tolerance_count: 1,
     #       failure_tolerance_percentage: 1,
@@ -2607,6 +2611,7 @@ module Aws::CloudFormation
     #   resp.stack_set_operation.stack_set_id #=> String
     #   resp.stack_set_operation.action #=> String, one of "CREATE", "UPDATE", "DELETE", "DETECT_DRIFT"
     #   resp.stack_set_operation.status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "STOPPING", "STOPPED", "QUEUED"
+    #   resp.stack_set_operation.operation_preferences.region_concurrency_type #=> String, one of "SEQUENTIAL", "PARALLEL"
     #   resp.stack_set_operation.operation_preferences.region_order #=> Array
     #   resp.stack_set_operation.operation_preferences.region_order[0] #=> String
     #   resp.stack_set_operation.operation_preferences.failure_tolerance_count #=> Integer
@@ -2620,6 +2625,7 @@ module Aws::CloudFormation
     #   resp.stack_set_operation.end_timestamp #=> Time
     #   resp.stack_set_operation.deployment_targets.accounts #=> Array
     #   resp.stack_set_operation.deployment_targets.accounts[0] #=> String
+    #   resp.stack_set_operation.deployment_targets.accounts_url #=> String
     #   resp.stack_set_operation.deployment_targets.organizational_unit_ids #=> Array
     #   resp.stack_set_operation.deployment_targets.organizational_unit_ids[0] #=> String
     #   resp.stack_set_operation.stack_set_drift_detection_details.drift_status #=> String, one of "DRIFTED", "IN_SYNC", "NOT_CHECKED"
@@ -3106,6 +3112,7 @@ module Aws::CloudFormation
     #   resp = client.detect_stack_set_drift({
     #     stack_set_name: "StackSetNameOrId", # required
     #     operation_preferences: {
+    #       region_concurrency_type: "SEQUENTIAL", # accepts SEQUENTIAL, PARALLEL
     #       region_order: ["Region"],
     #       failure_tolerance_count: 1,
     #       failure_tolerance_percentage: 1,
@@ -5190,6 +5197,7 @@ module Aws::CloudFormation
     #     accounts: ["Account"],
     #     deployment_targets: {
     #       accounts: ["Account"],
+    #       accounts_url: "AccountsUrl",
     #       organizational_unit_ids: ["OrganizationalUnitId"],
     #     },
     #     regions: ["Region"], # required
@@ -5202,6 +5210,7 @@ module Aws::CloudFormation
     #       },
     #     ],
     #     operation_preferences: {
+    #       region_concurrency_type: "SEQUENTIAL", # accepts SEQUENTIAL, PARALLEL
     #       region_order: ["Region"],
     #       failure_tolerance_count: 1,
     #       failure_tolerance_percentage: 1,
@@ -5566,6 +5575,7 @@ module Aws::CloudFormation
     #       },
     #     ],
     #     operation_preferences: {
+    #       region_concurrency_type: "SEQUENTIAL", # accepts SEQUENTIAL, PARALLEL
     #       region_order: ["Region"],
     #       failure_tolerance_count: 1,
     #       failure_tolerance_percentage: 1,
@@ -5576,6 +5586,7 @@ module Aws::CloudFormation
     #     execution_role_name: "ExecutionRoleName",
     #     deployment_targets: {
     #       accounts: ["Account"],
+    #       accounts_url: "AccountsUrl",
     #       organizational_unit_ids: ["OrganizationalUnitId"],
     #     },
     #     permission_model: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, SELF_MANAGED
@@ -5728,7 +5739,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

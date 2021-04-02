@@ -20,6 +20,7 @@ module Aws::Detective
     AccountList = Shapes::ListShape.new(name: 'AccountList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CreateGraphRequest = Shapes::StructureShape.new(name: 'CreateGraphRequest')
     CreateGraphResponse = Shapes::StructureShape.new(name: 'CreateGraphResponse')
     CreateMembersRequest = Shapes::StructureShape.new(name: 'CreateMembersRequest')
     CreateMembersResponse = Shapes::StructureShape.new(name: 'CreateMembersResponse')
@@ -42,6 +43,8 @@ module Aws::Detective
     ListInvitationsResponse = Shapes::StructureShape.new(name: 'ListInvitationsResponse')
     ListMembersRequest = Shapes::StructureShape.new(name: 'ListMembersRequest')
     ListMembersResponse = Shapes::StructureShape.new(name: 'ListMembersResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MemberDetail = Shapes::StructureShape.new(name: 'MemberDetail')
     MemberDetailList = Shapes::ListShape.new(name: 'MemberDetailList')
     MemberDisabledReason = Shapes::StringShape.new(name: 'MemberDisabledReason')
@@ -53,10 +56,18 @@ module Aws::Detective
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     StartMonitoringMemberRequest = Shapes::StructureShape.new(name: 'StartMonitoringMemberRequest')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagMap = Shapes::MapShape.new(name: 'TagMap')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
     UnprocessedAccount = Shapes::StructureShape.new(name: 'UnprocessedAccount')
     UnprocessedAccountList = Shapes::ListShape.new(name: 'UnprocessedAccountList')
     UnprocessedReason = Shapes::StringShape.new(name: 'UnprocessedReason')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
 
     AcceptInvitationRequest.add_member(:graph_arn, Shapes::ShapeRef.new(shape: GraphArn, required: true, location_name: "GraphArn"))
@@ -72,6 +83,9 @@ module Aws::Detective
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
+
+    CreateGraphRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateGraphRequest.struct_class = Types::CreateGraphRequest
 
     CreateGraphResponse.add_member(:graph_arn, Shapes::ShapeRef.new(shape: GraphArn, location_name: "GraphArn"))
     CreateGraphResponse.struct_class = Types::CreateGraphResponse
@@ -142,6 +156,12 @@ module Aws::Detective
     ListMembersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListMembersResponse.struct_class = Types::ListMembersResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: GraphArn, required: true, location: "uri", location_name: "ResourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     MemberDetail.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     MemberDetail.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailAddress, location_name: "EmailAddress"))
     MemberDetail.add_member(:graph_arn, Shapes::ShapeRef.new(shape: GraphArn, location_name: "GraphArn"))
@@ -170,11 +190,28 @@ module Aws::Detective
     StartMonitoringMemberRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
     StartMonitoringMemberRequest.struct_class = Types::StartMonitoringMemberRequest
 
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: GraphArn, required: true, location: "uri", location_name: "ResourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     UnprocessedAccount.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     UnprocessedAccount.add_member(:reason, Shapes::ShapeRef.new(shape: UnprocessedReason, location_name: "Reason"))
     UnprocessedAccount.struct_class = Types::UnprocessedAccount
 
     UnprocessedAccountList.member = Shapes::ShapeRef.new(shape: UnprocessedAccount)
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: GraphArn, required: true, location: "uri", location_name: "ResourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
@@ -213,7 +250,7 @@ module Aws::Detective
         o.name = "CreateGraph"
         o.http_method = "POST"
         o.http_request_uri = "/graph"
-        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.input = Shapes::ShapeRef.new(shape: CreateGraphRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateGraphResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -327,6 +364,17 @@ module Aws::Detective
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:reject_invitation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RejectInvitation"
         o.http_method = "POST"
@@ -350,6 +398,28 @@ module Aws::Detective
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
     end
 

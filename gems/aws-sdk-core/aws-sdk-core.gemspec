@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-eventstream', '~> 1', '>= 1.0.2') # necessary for binary eventstream
 
   spec.metadata = {
-    'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-core',
-    'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-core/CHANGELOG.md'
+    'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-core',
+    'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-core/CHANGELOG.md'
   }
 end

@@ -647,6 +647,7 @@ module Aws::MediaLive
     VideoDescriptionScalingBehavior = Shapes::StringShape.new(name: 'VideoDescriptionScalingBehavior')
     VideoSelector = Shapes::StructureShape.new(name: 'VideoSelector')
     VideoSelectorColorSpace = Shapes::StringShape.new(name: 'VideoSelectorColorSpace')
+    VideoSelectorColorSpaceSettings = Shapes::StructureShape.new(name: 'VideoSelectorColorSpaceSettings')
     VideoSelectorColorSpaceUsage = Shapes::StringShape.new(name: 'VideoSelectorColorSpaceUsage')
     VideoSelectorPid = Shapes::StructureShape.new(name: 'VideoSelectorPid')
     VideoSelectorProgramId = Shapes::StructureShape.new(name: 'VideoSelectorProgramId')
@@ -3043,9 +3044,13 @@ module Aws::MediaLive
     VideoDescription.struct_class = Types::VideoDescription
 
     VideoSelector.add_member(:color_space, Shapes::ShapeRef.new(shape: VideoSelectorColorSpace, location_name: "colorSpace"))
+    VideoSelector.add_member(:color_space_settings, Shapes::ShapeRef.new(shape: VideoSelectorColorSpaceSettings, location_name: "colorSpaceSettings"))
     VideoSelector.add_member(:color_space_usage, Shapes::ShapeRef.new(shape: VideoSelectorColorSpaceUsage, location_name: "colorSpaceUsage"))
     VideoSelector.add_member(:selector_settings, Shapes::ShapeRef.new(shape: VideoSelectorSettings, location_name: "selectorSettings"))
     VideoSelector.struct_class = Types::VideoSelector
+
+    VideoSelectorColorSpaceSettings.add_member(:hdr_10_settings, Shapes::ShapeRef.new(shape: Hdr10Settings, location_name: "hdr10Settings"))
+    VideoSelectorColorSpaceSettings.struct_class = Types::VideoSelectorColorSpaceSettings
 
     VideoSelectorPid.add_member(:pid, Shapes::ShapeRef.new(shape: __integerMin0Max8191, location_name: "pid"))
     VideoSelectorPid.struct_class = Types::VideoSelectorPid

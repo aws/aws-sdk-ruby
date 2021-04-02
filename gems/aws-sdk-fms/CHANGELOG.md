@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2021-04-01)
+------------------
+
+* Feature - Added Firewall Manager policy support for AWS Route 53 Resolver DNS Firewall.
+
 1.35.0 (2021-03-10)
 ------------------
 

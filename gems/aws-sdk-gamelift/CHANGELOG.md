@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2021-03-23)
+------------------
+
+* Feature - GameLift adds support for using event notifications to monitor game session placements. Specify an SNS topic or use CloudWatch Events to track activity for a game session queue.
+
 1.43.0 (2021-03-16)
 ------------------
 

@@ -58,7 +58,7 @@ module AwsSdkCodeGenerator
 
       # @return [String]
       def code_uri
-        "https://github.com/aws/aws-sdk-ruby/tree/master/gems/#{gem_name}"
+        "https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/#{gem_name}"
       end
 
       # @return [Array<Dependency>]

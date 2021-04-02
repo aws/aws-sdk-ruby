@@ -14,6 +14,7 @@ module Aws::FraudDetector
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AsyncJobStatus = Shapes::StringShape.new(name: 'AsyncJobStatus')
     BatchCreateVariableError = Shapes::StructureShape.new(name: 'BatchCreateVariableError')
     BatchCreateVariableErrorList = Shapes::ListShape.new(name: 'BatchCreateVariableErrorList')
     BatchCreateVariableRequest = Shapes::StructureShape.new(name: 'BatchCreateVariableRequest')
@@ -22,7 +23,13 @@ module Aws::FraudDetector
     BatchGetVariableErrorList = Shapes::ListShape.new(name: 'BatchGetVariableErrorList')
     BatchGetVariableRequest = Shapes::StructureShape.new(name: 'BatchGetVariableRequest')
     BatchGetVariableResult = Shapes::StructureShape.new(name: 'BatchGetVariableResult')
+    BatchPrediction = Shapes::StructureShape.new(name: 'BatchPrediction')
+    BatchPredictionList = Shapes::ListShape.new(name: 'BatchPredictionList')
+    CancelBatchPredictionJobRequest = Shapes::StructureShape.new(name: 'CancelBatchPredictionJobRequest')
+    CancelBatchPredictionJobResult = Shapes::StructureShape.new(name: 'CancelBatchPredictionJobResult')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CreateBatchPredictionJobRequest = Shapes::StructureShape.new(name: 'CreateBatchPredictionJobRequest')
+    CreateBatchPredictionJobResult = Shapes::StructureShape.new(name: 'CreateBatchPredictionJobResult')
     CreateDetectorVersionRequest = Shapes::StructureShape.new(name: 'CreateDetectorVersionRequest')
     CreateDetectorVersionResult = Shapes::StructureShape.new(name: 'CreateDetectorVersionResult')
     CreateModelRequest = Shapes::StructureShape.new(name: 'CreateModelRequest')
@@ -37,6 +44,8 @@ module Aws::FraudDetector
     DataSource = Shapes::StringShape.new(name: 'DataSource')
     DataType = Shapes::StringShape.new(name: 'DataType')
     DataValidationMetrics = Shapes::StructureShape.new(name: 'DataValidationMetrics')
+    DeleteBatchPredictionJobRequest = Shapes::StructureShape.new(name: 'DeleteBatchPredictionJobRequest')
+    DeleteBatchPredictionJobResult = Shapes::StructureShape.new(name: 'DeleteBatchPredictionJobResult')
     DeleteDetectorRequest = Shapes::StructureShape.new(name: 'DeleteDetectorRequest')
     DeleteDetectorResult = Shapes::StructureShape.new(name: 'DeleteDetectorResult')
     DeleteDetectorVersionRequest = Shapes::StructureShape.new(name: 'DeleteDetectorVersionRequest')
@@ -83,6 +92,8 @@ module Aws::FraudDetector
     ExternalModelsMaxResults = Shapes::IntegerShape.new(name: 'ExternalModelsMaxResults')
     FieldValidationMessage = Shapes::StructureShape.new(name: 'FieldValidationMessage')
     FileValidationMessage = Shapes::StructureShape.new(name: 'FileValidationMessage')
+    GetBatchPredictionJobsRequest = Shapes::StructureShape.new(name: 'GetBatchPredictionJobsRequest')
+    GetBatchPredictionJobsResult = Shapes::StructureShape.new(name: 'GetBatchPredictionJobsResult')
     GetDetectorVersionRequest = Shapes::StructureShape.new(name: 'GetDetectorVersionRequest')
     GetDetectorVersionResult = Shapes::StructureShape.new(name: 'GetDetectorVersionResult')
     GetDetectorsRequest = Shapes::StructureShape.new(name: 'GetDetectorsRequest')
@@ -108,6 +119,7 @@ module Aws::FraudDetector
     GetRulesResult = Shapes::StructureShape.new(name: 'GetRulesResult')
     GetVariablesRequest = Shapes::StructureShape.new(name: 'GetVariablesRequest')
     GetVariablesResult = Shapes::StructureShape.new(name: 'GetVariablesResult')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     JsonKeyToVariableMap = Shapes::MapShape.new(name: 'JsonKeyToVariableMap')
     KMSKey = Shapes::StructureShape.new(name: 'KMSKey')
@@ -199,6 +211,7 @@ module Aws::FraudDetector
     VariableEntryList = Shapes::ListShape.new(name: 'VariableEntryList')
     VariableList = Shapes::ListShape.new(name: 'VariableList')
     VariablesMaxResults = Shapes::IntegerShape.new(name: 'VariablesMaxResults')
+    batchPredictionsMaxPageSize = Shapes::IntegerShape.new(name: 'batchPredictionsMaxPageSize')
     blob = Shapes::BlobShape.new(name: 'blob')
     contentType = Shapes::StringShape.new(name: 'contentType')
     description = Shapes::StringShape.new(name: 'description')
@@ -268,8 +281,44 @@ module Aws::FraudDetector
     BatchGetVariableResult.add_member(:errors, Shapes::ShapeRef.new(shape: BatchGetVariableErrorList, location_name: "errors"))
     BatchGetVariableResult.struct_class = Types::BatchGetVariableResult
 
+    BatchPrediction.add_member(:job_id, Shapes::ShapeRef.new(shape: identifier, location_name: "jobId"))
+    BatchPrediction.add_member(:status, Shapes::ShapeRef.new(shape: AsyncJobStatus, location_name: "status"))
+    BatchPrediction.add_member(:failure_reason, Shapes::ShapeRef.new(shape: string, location_name: "failureReason"))
+    BatchPrediction.add_member(:start_time, Shapes::ShapeRef.new(shape: time, location_name: "startTime"))
+    BatchPrediction.add_member(:completion_time, Shapes::ShapeRef.new(shape: time, location_name: "completionTime"))
+    BatchPrediction.add_member(:last_heartbeat_time, Shapes::ShapeRef.new(shape: time, location_name: "lastHeartbeatTime"))
+    BatchPrediction.add_member(:input_path, Shapes::ShapeRef.new(shape: s3BucketLocation, location_name: "inputPath"))
+    BatchPrediction.add_member(:output_path, Shapes::ShapeRef.new(shape: s3BucketLocation, location_name: "outputPath"))
+    BatchPrediction.add_member(:event_type_name, Shapes::ShapeRef.new(shape: identifier, location_name: "eventTypeName"))
+    BatchPrediction.add_member(:detector_name, Shapes::ShapeRef.new(shape: identifier, location_name: "detectorName"))
+    BatchPrediction.add_member(:detector_version, Shapes::ShapeRef.new(shape: floatVersionString, location_name: "detectorVersion"))
+    BatchPrediction.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: iamRoleArn, location_name: "iamRoleArn"))
+    BatchPrediction.add_member(:arn, Shapes::ShapeRef.new(shape: fraudDetectorArn, location_name: "arn"))
+    BatchPrediction.add_member(:processed_records_count, Shapes::ShapeRef.new(shape: Integer, location_name: "processedRecordsCount"))
+    BatchPrediction.add_member(:total_records_count, Shapes::ShapeRef.new(shape: Integer, location_name: "totalRecordsCount"))
+    BatchPrediction.struct_class = Types::BatchPrediction
+
+    BatchPredictionList.member = Shapes::ShapeRef.new(shape: BatchPrediction)
+
+    CancelBatchPredictionJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "jobId"))
+    CancelBatchPredictionJobRequest.struct_class = Types::CancelBatchPredictionJobRequest
+
+    CancelBatchPredictionJobResult.struct_class = Types::CancelBatchPredictionJobResult
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: string, required: true, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
+
+    CreateBatchPredictionJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "jobId"))
+    CreateBatchPredictionJobRequest.add_member(:input_path, Shapes::ShapeRef.new(shape: s3BucketLocation, required: true, location_name: "inputPath"))
+    CreateBatchPredictionJobRequest.add_member(:output_path, Shapes::ShapeRef.new(shape: s3BucketLocation, required: true, location_name: "outputPath"))
+    CreateBatchPredictionJobRequest.add_member(:event_type_name, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "eventTypeName"))
+    CreateBatchPredictionJobRequest.add_member(:detector_name, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "detectorName"))
+    CreateBatchPredictionJobRequest.add_member(:detector_version, Shapes::ShapeRef.new(shape: wholeNumberVersionString, location_name: "detectorVersion"))
+    CreateBatchPredictionJobRequest.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: iamRoleArn, required: true, location_name: "iamRoleArn"))
+    CreateBatchPredictionJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagList, location_name: "tags"))
+    CreateBatchPredictionJobRequest.struct_class = Types::CreateBatchPredictionJobRequest
+
+    CreateBatchPredictionJobResult.struct_class = Types::CreateBatchPredictionJobResult
 
     CreateDetectorVersionRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "detectorId"))
     CreateDetectorVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
@@ -337,6 +386,11 @@ module Aws::FraudDetector
     DataValidationMetrics.add_member(:file_level_messages, Shapes::ShapeRef.new(shape: fileValidationMessageList, location_name: "fileLevelMessages"))
     DataValidationMetrics.add_member(:field_level_messages, Shapes::ShapeRef.new(shape: fieldValidationMessageList, location_name: "fieldLevelMessages"))
     DataValidationMetrics.struct_class = Types::DataValidationMetrics
+
+    DeleteBatchPredictionJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "jobId"))
+    DeleteBatchPredictionJobRequest.struct_class = Types::DeleteBatchPredictionJobRequest
+
+    DeleteBatchPredictionJobResult.struct_class = Types::DeleteBatchPredictionJobResult
 
     DeleteDetectorRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "detectorId"))
     DeleteDetectorRequest.struct_class = Types::DeleteDetectorRequest
@@ -498,6 +552,15 @@ module Aws::FraudDetector
     FileValidationMessage.add_member(:content, Shapes::ShapeRef.new(shape: string, location_name: "content"))
     FileValidationMessage.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "type"))
     FileValidationMessage.struct_class = Types::FileValidationMessage
+
+    GetBatchPredictionJobsRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: identifier, location_name: "jobId"))
+    GetBatchPredictionJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: batchPredictionsMaxPageSize, location_name: "maxResults"))
+    GetBatchPredictionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
+    GetBatchPredictionJobsRequest.struct_class = Types::GetBatchPredictionJobsRequest
+
+    GetBatchPredictionJobsResult.add_member(:batch_predictions, Shapes::ShapeRef.new(shape: BatchPredictionList, location_name: "batchPredictions"))
+    GetBatchPredictionJobsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
+    GetBatchPredictionJobsResult.struct_class = Types::GetBatchPredictionJobsResult
 
     GetDetectorVersionRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "detectorId"))
     GetDetectorVersionRequest.add_member(:detector_version_id, Shapes::ShapeRef.new(shape: wholeNumberVersionString, required: true, location_name: "detectorVersionId"))
@@ -1023,6 +1086,29 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:cancel_batch_prediction_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelBatchPredictionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelBatchPredictionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelBatchPredictionJobResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:create_batch_prediction_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateBatchPredictionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateBatchPredictionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateBatchPredictionJobResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:create_detector_version, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDetectorVersion"
         o.http_method = "POST"
@@ -1080,6 +1166,18 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_batch_prediction_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteBatchPredictionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteBatchPredictionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteBatchPredictionJobResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
@@ -1252,6 +1350,24 @@ module Aws::FraudDetector
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeModelVersionsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeModelVersionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_batch_prediction_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBatchPredictionJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetBatchPredictionJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBatchPredictionJobsResult)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

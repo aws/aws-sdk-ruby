@@ -14,7 +14,7 @@ module Aws::S3
     # upload that Amazon S3 will wait before permanently removing all parts
     # of the upload. For more information, see [ Aborting Incomplete
     # Multipart Uploads Using a Bucket Lifecycle Policy][1] in the *Amazon
-    # Simple Storage Service Developer Guide*.
+    # S3 User Guide*.
     #
     #
     #
@@ -74,7 +74,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -83,7 +83,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -131,7 +131,7 @@ module Aws::S3
 
     # Configures the transfer acceleration state for an Amazon S3 bucket.
     # For more information, see [Amazon S3 Transfer Acceleration][1] in the
-    # *Amazon Simple Storage Service Developer Guide*.
+    # *Amazon S3 User Guide*.
     #
     #
     #
@@ -492,7 +492,7 @@ module Aws::S3
 
     # Specifies the lifecycle configuration for objects in an Amazon S3
     # bucket. For more information, see [Object Lifecycle Management][1] in
-    # the *Amazon Simple Storage Service Developer Guide*.
+    # the *Amazon S3 User Guide*.
     #
     #
     #
@@ -608,8 +608,7 @@ module Aws::S3
 
     # Describes the cross-origin access configuration for objects in an
     # Amazon S3 bucket. For more information, see [Enabling Cross-Origin
-    # Resource Sharing][1] in the *Amazon Simple Storage Service Developer
-    # Guide*.
+    # Resource Sharing][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -926,7 +925,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -935,7 +934,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1328,7 +1327,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -1337,7 +1336,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1845,7 +1844,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -1854,7 +1853,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1983,7 +1982,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -1992,7 +1991,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2209,6 +2208,14 @@ module Aws::S3
     # The container element for specifying the default Object Lock retention
     # settings for new objects placed in the specified bucket.
     #
+    # <note markdown="1"> * The `DefaultRetention` settings require both a mode and a period.
+    #
+    # * The `DefaultRetention` period can be either `Days` or `Years` but
+    #   you must select one. You cannot specify `Days` and `Years` at the
+    #   same time.
+    #
+    #  </note>
+    #
     # @note When making an API call, you may pass DefaultRetention
     #   data as a hash:
     #
@@ -2220,17 +2227,18 @@ module Aws::S3
     #
     # @!attribute [rw] mode
     #   The default Object Lock retention mode you want to apply to new
-    #   objects placed in the specified bucket.
+    #   objects placed in the specified bucket. Must be used with either
+    #   `Days` or `Years`.
     #   @return [String]
     #
     # @!attribute [rw] days
     #   The number of days that you want to specify for the default
-    #   retention period.
+    #   retention period. Must be used with `Mode`.
     #   @return [Integer]
     #
     # @!attribute [rw] years
     #   The number of years that you want to specify for the default
-    #   retention period.
+    #   retention period. Must be used with `Mode`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DefaultRetention AWS API Documentation
@@ -2778,7 +2786,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -2787,7 +2795,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2880,7 +2888,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -2889,7 +2897,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2978,7 +2986,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -2987,7 +2995,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -4198,7 +4206,7 @@ module Aws::S3
     #   to which the filtering rule applies. The maximum length is 1,024
     #   characters. Overlapping prefixes and suffixes are not supported. For
     #   more information, see [Configuring Event Notifications][1] in the
-    #   *Amazon Simple Storage Service Developer Guide*.
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -5145,7 +5153,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5224,7 +5232,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5301,7 +5309,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5561,7 +5569,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -5570,7 +5578,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5750,7 +5758,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5837,7 +5845,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -5846,7 +5854,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -6145,7 +6153,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -6154,7 +6162,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -6203,7 +6211,7 @@ module Aws::S3
     #   If an archive copy is already restored, the header value indicates
     #   when Amazon S3 is scheduled to delete the object copy. For example:
     #
-    #   `x-amz-restore: ongoing-request="false", expiry-date="Fri, 23 Dec
+    #   `x-amz-restore: ongoing-request="false", expiry-date="Fri, 21 Dec
     #   2012 00:00:00 GMT"`
     #
     #   If the object restoration is in progress, the header returns the
@@ -6481,7 +6489,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -6490,7 +6498,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -7227,7 +7235,7 @@ module Aws::S3
     # @!attribute [rw] events
     #   The Amazon S3 bucket event for which to invoke the AWS Lambda
     #   function. For more information, see [Supported Event Types][1] in
-    #   the *Amazon Simple Storage Service Developer Guide*.
+    #   the *Amazon S3 User Guide*.
     #
     #
     #
@@ -7237,7 +7245,7 @@ module Aws::S3
     # @!attribute [rw] filter
     #   Specifies object key name filtering rules. For information about key
     #   name filtering, see [Configuring Event Notifications][1] in the
-    #   *Amazon Simple Storage Service Developer Guide*.
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -7403,7 +7411,7 @@ module Aws::S3
     #
     # @!attribute [rw] prefix
     #   Prefix identifying one or more objects to which the rule applies.
-    #   This is No longer used; use `Filter` instead.
+    #   This is no longer used; use `Filter` instead.
     #
     #   Replacement must be made for object keys containing special
     #   characters (such as carriage returns) when using XML requests. For
@@ -7417,7 +7425,8 @@ module Aws::S3
     # @!attribute [rw] filter
     #   The `Filter` is used to identify objects that a Lifecycle Rule
     #   applies to. A `Filter` must have exactly one of `Prefix`, `Tag`, or
-    #   `And` specified.
+    #   `And` specified. `Filter` is required if the `LifecycleRule` does
+    #   not containt a `Prefix` element.
     #   @return [Types::LifecycleRuleFilter]
     #
     # @!attribute [rw] status
@@ -7453,7 +7462,7 @@ module Aws::S3
     #   upload that Amazon S3 will wait before permanently removing all
     #   parts of the upload. For more information, see [ Aborting Incomplete
     #   Multipart Uploads Using a Bucket Lifecycle Policy][1] in the *Amazon
-    #   Simple Storage Service Developer Guide*.
+    #   S3 User Guide*.
     #
     #
     #
@@ -7972,7 +7981,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -7981,7 +7990,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8357,7 +8366,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -8366,7 +8375,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8448,7 +8457,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -8457,7 +8466,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8583,7 +8592,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -8592,7 +8601,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8798,7 +8807,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -8807,7 +8816,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -9232,8 +9241,7 @@ module Aws::S3
     #   Specifies the number of days an object is noncurrent before Amazon
     #   S3 can perform the associated action. For information about the
     #   noncurrent days calculations, see [How Amazon S3 Calculates How Long
-    #   an Object Has Been Noncurrent][1] in the *Amazon Simple Storage
-    #   Service Developer Guide*.
+    #   an Object Has Been Noncurrent][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -9393,7 +9401,7 @@ module Aws::S3
 
     # Specifies object key name filtering rules. For information about key
     # name filtering, see [Configuring Event Notifications][1] in the
-    # *Amazon Simple Storage Service Developer Guide*.
+    # *Amazon S3 User Guide*.
     #
     #
     #
@@ -9542,11 +9550,16 @@ module Aws::S3
     #
     # @!attribute [rw] object_lock_enabled
     #   Indicates whether this bucket has an Object Lock configuration
-    #   enabled.
+    #   enabled. Enable `ObjectLockEnabled` when you apply
+    #   `ObjectLockConfiguration` to a bucket.
     #   @return [String]
     #
     # @!attribute [rw] rule
-    #   The Object Lock rule in place for the specified object.
+    #   Specifies the Object Lock rule for the specified object. Enable the
+    #   this rule when you apply `ObjectLockConfiguration` to a bucket.
+    #   Bucket settings require both a mode and a period. The period can be
+    #   either `Days` or `Years` but you must select one. You cannot specify
+    #   `Days` and `Years` at the same time.
     #   @return [Types::ObjectLockRule]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectLockConfiguration AWS API Documentation
@@ -9620,8 +9633,11 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] default_retention
-    #   The default retention period that you want to apply to new objects
-    #   placed in the specified bucket.
+    #   The default Object Lock retention mode and period that you want to
+    #   apply to new objects placed in the specified bucket. Bucket settings
+    #   require both a mode and a period. The period can be either `Days` or
+    #   `Years` but you must select one. You cannot specify `Days` and
+    #   `Years` at the same time.
     #   @return [Types::DefaultRetention]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectLockRule AWS API Documentation
@@ -10336,8 +10352,7 @@ module Aws::S3
     #   encryption with Amazon S3-managed keys (SSE-S3) or customer master
     #   keys stored in AWS KMS (SSE-KMS). For information about the Amazon
     #   S3 default encryption feature, see [Amazon S3 Default Bucket
-    #   Encryption][1] in the *Amazon Simple Storage Service Developer
-    #   Guide*.
+    #   Encryption][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -11442,7 +11457,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -11503,7 +11518,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -11512,7 +11527,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -11601,7 +11616,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -11892,7 +11907,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -11901,7 +11916,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -12239,7 +12254,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -12347,7 +12362,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -12356,7 +12371,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -12447,7 +12462,7 @@ module Aws::S3
     #   Amazon S3 bucket. You can enable the configuration options in any
     #   combination. For more information about when Amazon S3 considers a
     #   bucket or object public, see [The Meaning of "Public"][1] in the
-    #   *Amazon Simple Storage Service Developer Guide*.
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -12513,7 +12528,7 @@ module Aws::S3
     # @!attribute [rw] filter
     #   Specifies object key name filtering rules. For information about key
     #   name filtering, see [Configuring Event Notifications][1] in the
-    #   *Amazon Simple Storage Service Developer Guide*.
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -12804,7 +12819,7 @@ module Aws::S3
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
     #   Management (IAM) role that Amazon S3 assumes when replicating
     #   objects. For more information, see [How to Set Up Replication][1] in
-    #   the *Amazon Simple Storage Service Developer Guide*.
+    #   the *Amazon S3 User Guide*.
     #
     #
     #
@@ -12905,8 +12920,8 @@ module Aws::S3
     #   will be replicated according to the rule with the highest priority.
     #   The higher the number, the higher the priority.
     #
-    #   For more information, see [Replication][1] in the *Amazon Simple
-    #   Storage Service Developer Guide*.
+    #   For more information, see [Replication][1] in the *Amazon S3 User
+    #   Guide*.
     #
     #
     #
@@ -13327,7 +13342,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -13336,7 +13351,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -13671,7 +13686,7 @@ module Aws::S3
     #   upload that Amazon S3 will wait before permanently removing all
     #   parts of the upload. For more information, see [ Aborting Incomplete
     #   Multipart Uploads Using a Bucket Lifecycle Policy][1] in the *Amazon
-    #   Simple Storage Service Developer Guide*.
+    #   S3 User Guide*.
     #
     #
     #
@@ -14615,7 +14630,7 @@ module Aws::S3
     # @!attribute [rw] filter
     #   Specifies object key name filtering rules. For information about key
     #   name filtering, see [Configuring Event Notifications][1] in the
-    #   *Amazon Simple Storage Service Developer Guide*.
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -14819,7 +14834,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -14828,7 +14843,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -15096,7 +15111,7 @@ module Aws::S3
     #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -15105,7 +15120,7 @@ module Aws::S3
     #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #   Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -15392,7 +15407,9 @@ module Aws::S3
     #   A string that uniquely identifies an error condition. Returned in
     #   the &lt;Code&gt; tag of the error XML response for a corresponding
     #   `GetObject` call. Cannot be used with a successful `StatusCode`
-    #   header or when the transformed object is provided in the body.
+    #   header or when the transformed object is provided in the body. All
+    #   error codes from S3 are sentence-cased. Regex value is
+    #   "^\[A-Z\]\[a-zA-Z\]+$".
     #   @return [String]
     #
     # @!attribute [rw] error_message

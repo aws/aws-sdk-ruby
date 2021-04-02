@@ -33,6 +33,7 @@ module Aws::GlueDataBrew
     ConditionExpressionList = Shapes::ListShape.new(name: 'ConditionExpressionList')
     ConditionValue = Shapes::StringShape.new(name: 'ConditionValue')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CreateColumn = Shapes::BooleanShape.new(name: 'CreateColumn')
     CreateDatasetRequest = Shapes::StructureShape.new(name: 'CreateDatasetRequest')
     CreateDatasetResponse = Shapes::StructureShape.new(name: 'CreateDatasetResponse')
     CreateProfileJobRequest = Shapes::StructureShape.new(name: 'CreateProfileJobRequest')
@@ -50,11 +51,16 @@ module Aws::GlueDataBrew
     CsvOptions = Shapes::StructureShape.new(name: 'CsvOptions')
     CsvOutputOptions = Shapes::StructureShape.new(name: 'CsvOutputOptions')
     DataCatalogInputDefinition = Shapes::StructureShape.new(name: 'DataCatalogInputDefinition')
+    DatabaseInputDefinition = Shapes::StructureShape.new(name: 'DatabaseInputDefinition')
     DatabaseName = Shapes::StringShape.new(name: 'DatabaseName')
+    DatabaseTableName = Shapes::StringShape.new(name: 'DatabaseTableName')
     Dataset = Shapes::StructureShape.new(name: 'Dataset')
     DatasetList = Shapes::ListShape.new(name: 'DatasetList')
     DatasetName = Shapes::StringShape.new(name: 'DatasetName')
+    DatasetParameter = Shapes::StructureShape.new(name: 'DatasetParameter')
     Date = Shapes::TimestampShape.new(name: 'Date')
+    DatetimeFormat = Shapes::StringShape.new(name: 'DatetimeFormat')
+    DatetimeOptions = Shapes::StructureShape.new(name: 'DatetimeOptions')
     DeleteDatasetRequest = Shapes::StructureShape.new(name: 'DeleteDatasetRequest')
     DeleteDatasetResponse = Shapes::StructureShape.new(name: 'DeleteDatasetResponse')
     DeleteJobRequest = Shapes::StructureShape.new(name: 'DeleteJobRequest')
@@ -83,7 +89,11 @@ module Aws::GlueDataBrew
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ExcelOptions = Shapes::StructureShape.new(name: 'ExcelOptions')
     ExecutionTime = Shapes::IntegerShape.new(name: 'ExecutionTime')
+    Expression = Shapes::StringShape.new(name: 'Expression')
+    FilesLimit = Shapes::StructureShape.new(name: 'FilesLimit')
+    FilterExpression = Shapes::StructureShape.new(name: 'FilterExpression')
     FormatOptions = Shapes::StructureShape.new(name: 'FormatOptions')
+    GlueConnectionName = Shapes::StringShape.new(name: 'GlueConnectionName')
     HeaderRow = Shapes::BooleanShape.new(name: 'HeaderRow')
     HiddenColumnList = Shapes::ListShape.new(name: 'HiddenColumnList')
     Input = Shapes::StructureShape.new(name: 'Input')
@@ -120,9 +130,11 @@ module Aws::GlueDataBrew
     ListSchedulesResponse = Shapes::StructureShape.new(name: 'ListSchedulesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    LocaleCode = Shapes::StringShape.new(name: 'LocaleCode')
     LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
     LogSubscription = Shapes::StringShape.new(name: 'LogSubscription')
     MaxCapacity = Shapes::IntegerShape.new(name: 'MaxCapacity')
+    MaxFiles = Shapes::IntegerShape.new(name: 'MaxFiles')
     MaxResults100 = Shapes::IntegerShape.new(name: 'MaxResults100')
     MaxRetries = Shapes::IntegerShape.new(name: 'MaxRetries')
     Message = Shapes::StringShape.new(name: 'Message')
@@ -130,6 +142,8 @@ module Aws::GlueDataBrew
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OpenedBy = Shapes::StringShape.new(name: 'OpenedBy')
     Operation = Shapes::StringShape.new(name: 'Operation')
+    Order = Shapes::StringShape.new(name: 'Order')
+    OrderedBy = Shapes::StringShape.new(name: 'OrderedBy')
     Output = Shapes::StructureShape.new(name: 'Output')
     OutputFormat = Shapes::StringShape.new(name: 'OutputFormat')
     OutputFormatOptions = Shapes::StructureShape.new(name: 'OutputFormatOptions')
@@ -137,7 +151,11 @@ module Aws::GlueDataBrew
     OverwriteOutput = Shapes::BooleanShape.new(name: 'OverwriteOutput')
     ParameterMap = Shapes::MapShape.new(name: 'ParameterMap')
     ParameterName = Shapes::StringShape.new(name: 'ParameterName')
+    ParameterType = Shapes::StringShape.new(name: 'ParameterType')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
+    PathOptions = Shapes::StructureShape.new(name: 'PathOptions')
+    PathParameterName = Shapes::StringShape.new(name: 'PathParameterName')
+    PathParametersMap = Shapes::MapShape.new(name: 'PathParametersMap')
     Preview = Shapes::BooleanShape.new(name: 'Preview')
     Project = Shapes::StructureShape.new(name: 'Project')
     ProjectList = Shapes::ListShape.new(name: 'ProjectList')
@@ -195,6 +213,7 @@ module Aws::GlueDataBrew
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TargetColumn = Shapes::StringShape.new(name: 'TargetColumn')
     Timeout = Shapes::IntegerShape.new(name: 'Timeout')
+    TimezoneOffset = Shapes::StringShape.new(name: 'TimezoneOffset')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateDatasetRequest = Shapes::StructureShape.new(name: 'UpdateDatasetRequest')
@@ -210,6 +229,8 @@ module Aws::GlueDataBrew
     UpdateScheduleRequest = Shapes::StructureShape.new(name: 'UpdateScheduleRequest')
     UpdateScheduleResponse = Shapes::StructureShape.new(name: 'UpdateScheduleResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    ValueReference = Shapes::StringShape.new(name: 'ValueReference')
+    ValuesMap = Shapes::MapShape.new(name: 'ValuesMap')
     ViewFrame = Shapes::StructureShape.new(name: 'ViewFrame')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
@@ -239,6 +260,7 @@ module Aws::GlueDataBrew
     CreateDatasetRequest.add_member(:format, Shapes::ShapeRef.new(shape: InputFormat, location_name: "Format"))
     CreateDatasetRequest.add_member(:format_options, Shapes::ShapeRef.new(shape: FormatOptions, location_name: "FormatOptions"))
     CreateDatasetRequest.add_member(:input, Shapes::ShapeRef.new(shape: Input, required: true, location_name: "Input"))
+    CreateDatasetRequest.add_member(:path_options, Shapes::ShapeRef.new(shape: PathOptions, location_name: "PathOptions"))
     CreateDatasetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateDatasetRequest.struct_class = Types::CreateDatasetRequest
 
@@ -322,6 +344,11 @@ module Aws::GlueDataBrew
     DataCatalogInputDefinition.add_member(:temp_directory, Shapes::ShapeRef.new(shape: S3Location, location_name: "TempDirectory"))
     DataCatalogInputDefinition.struct_class = Types::DataCatalogInputDefinition
 
+    DatabaseInputDefinition.add_member(:glue_connection_name, Shapes::ShapeRef.new(shape: GlueConnectionName, required: true, location_name: "GlueConnectionName"))
+    DatabaseInputDefinition.add_member(:database_table_name, Shapes::ShapeRef.new(shape: DatabaseTableName, required: true, location_name: "DatabaseTableName"))
+    DatabaseInputDefinition.add_member(:temp_directory, Shapes::ShapeRef.new(shape: S3Location, location_name: "TempDirectory"))
+    DatabaseInputDefinition.struct_class = Types::DatabaseInputDefinition
+
     Dataset.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     Dataset.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "CreatedBy"))
     Dataset.add_member(:create_date, Shapes::ShapeRef.new(shape: Date, location_name: "CreateDate"))
@@ -332,11 +359,24 @@ module Aws::GlueDataBrew
     Dataset.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Date, location_name: "LastModifiedDate"))
     Dataset.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: LastModifiedBy, location_name: "LastModifiedBy"))
     Dataset.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "Source"))
+    Dataset.add_member(:path_options, Shapes::ShapeRef.new(shape: PathOptions, location_name: "PathOptions"))
     Dataset.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     Dataset.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ResourceArn"))
     Dataset.struct_class = Types::Dataset
 
     DatasetList.member = Shapes::ShapeRef.new(shape: Dataset)
+
+    DatasetParameter.add_member(:name, Shapes::ShapeRef.new(shape: PathParameterName, required: true, location_name: "Name"))
+    DatasetParameter.add_member(:type, Shapes::ShapeRef.new(shape: ParameterType, required: true, location_name: "Type"))
+    DatasetParameter.add_member(:datetime_options, Shapes::ShapeRef.new(shape: DatetimeOptions, location_name: "DatetimeOptions"))
+    DatasetParameter.add_member(:create_column, Shapes::ShapeRef.new(shape: CreateColumn, location_name: "CreateColumn"))
+    DatasetParameter.add_member(:filter, Shapes::ShapeRef.new(shape: FilterExpression, location_name: "Filter"))
+    DatasetParameter.struct_class = Types::DatasetParameter
+
+    DatetimeOptions.add_member(:format, Shapes::ShapeRef.new(shape: DatetimeFormat, required: true, location_name: "Format"))
+    DatetimeOptions.add_member(:timezone_offset, Shapes::ShapeRef.new(shape: TimezoneOffset, location_name: "TimezoneOffset"))
+    DatetimeOptions.add_member(:locale_code, Shapes::ShapeRef.new(shape: LocaleCode, location_name: "LocaleCode"))
+    DatetimeOptions.struct_class = Types::DatetimeOptions
 
     DeleteDatasetRequest.add_member(:name, Shapes::ShapeRef.new(shape: DatasetName, required: true, location: "uri", location_name: "name"))
     DeleteDatasetRequest.struct_class = Types::DeleteDatasetRequest
@@ -382,6 +422,7 @@ module Aws::GlueDataBrew
     DescribeDatasetResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Date, location_name: "LastModifiedDate"))
     DescribeDatasetResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: LastModifiedBy, location_name: "LastModifiedBy"))
     DescribeDatasetResponse.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "Source"))
+    DescribeDatasetResponse.add_member(:path_options, Shapes::ShapeRef.new(shape: PathOptions, location_name: "PathOptions"))
     DescribeDatasetResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     DescribeDatasetResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ResourceArn"))
     DescribeDatasetResponse.struct_class = Types::DescribeDatasetResponse
@@ -489,6 +530,15 @@ module Aws::GlueDataBrew
     ExcelOptions.add_member(:header_row, Shapes::ShapeRef.new(shape: HeaderRow, location_name: "HeaderRow"))
     ExcelOptions.struct_class = Types::ExcelOptions
 
+    FilesLimit.add_member(:max_files, Shapes::ShapeRef.new(shape: MaxFiles, required: true, location_name: "MaxFiles"))
+    FilesLimit.add_member(:ordered_by, Shapes::ShapeRef.new(shape: OrderedBy, location_name: "OrderedBy"))
+    FilesLimit.add_member(:order, Shapes::ShapeRef.new(shape: Order, location_name: "Order"))
+    FilesLimit.struct_class = Types::FilesLimit
+
+    FilterExpression.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "Expression"))
+    FilterExpression.add_member(:values_map, Shapes::ShapeRef.new(shape: ValuesMap, required: true, location_name: "ValuesMap"))
+    FilterExpression.struct_class = Types::FilterExpression
+
     FormatOptions.add_member(:json, Shapes::ShapeRef.new(shape: JsonOptions, location_name: "Json"))
     FormatOptions.add_member(:excel, Shapes::ShapeRef.new(shape: ExcelOptions, location_name: "Excel"))
     FormatOptions.add_member(:csv, Shapes::ShapeRef.new(shape: CsvOptions, location_name: "Csv"))
@@ -498,6 +548,7 @@ module Aws::GlueDataBrew
 
     Input.add_member(:s3_input_definition, Shapes::ShapeRef.new(shape: S3Location, location_name: "S3InputDefinition"))
     Input.add_member(:data_catalog_input_definition, Shapes::ShapeRef.new(shape: DataCatalogInputDefinition, location_name: "DataCatalogInputDefinition"))
+    Input.add_member(:database_input_definition, Shapes::ShapeRef.new(shape: DatabaseInputDefinition, location_name: "DatabaseInputDefinition"))
     Input.struct_class = Types::Input
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
@@ -639,6 +690,14 @@ module Aws::GlueDataBrew
 
     ParameterMap.key = Shapes::ShapeRef.new(shape: ParameterName)
     ParameterMap.value = Shapes::ShapeRef.new(shape: ParameterValue)
+
+    PathOptions.add_member(:last_modified_date_condition, Shapes::ShapeRef.new(shape: FilterExpression, location_name: "LastModifiedDateCondition"))
+    PathOptions.add_member(:files_limit, Shapes::ShapeRef.new(shape: FilesLimit, location_name: "FilesLimit"))
+    PathOptions.add_member(:parameters, Shapes::ShapeRef.new(shape: PathParametersMap, location_name: "Parameters"))
+    PathOptions.struct_class = Types::PathOptions
+
+    PathParametersMap.key = Shapes::ShapeRef.new(shape: PathParameterName)
+    PathParametersMap.value = Shapes::ShapeRef.new(shape: DatasetParameter)
 
     Project.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     Project.add_member(:create_date, Shapes::ShapeRef.new(shape: Date, location_name: "CreateDate"))
@@ -792,6 +851,7 @@ module Aws::GlueDataBrew
     UpdateDatasetRequest.add_member(:format, Shapes::ShapeRef.new(shape: InputFormat, location_name: "Format"))
     UpdateDatasetRequest.add_member(:format_options, Shapes::ShapeRef.new(shape: FormatOptions, location_name: "FormatOptions"))
     UpdateDatasetRequest.add_member(:input, Shapes::ShapeRef.new(shape: Input, required: true, location_name: "Input"))
+    UpdateDatasetRequest.add_member(:path_options, Shapes::ShapeRef.new(shape: PathOptions, location_name: "PathOptions"))
     UpdateDatasetRequest.struct_class = Types::UpdateDatasetRequest
 
     UpdateDatasetResponse.add_member(:name, Shapes::ShapeRef.new(shape: DatasetName, required: true, location_name: "Name"))
@@ -853,6 +913,9 @@ module Aws::GlueDataBrew
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
+
+    ValuesMap.key = Shapes::ShapeRef.new(shape: ValueReference)
+    ValuesMap.value = Shapes::ShapeRef.new(shape: ConditionValue)
 
     ViewFrame.add_member(:start_column_index, Shapes::ShapeRef.new(shape: StartColumnIndex, required: true, location_name: "StartColumnIndex"))
     ViewFrame.add_member(:column_range, Shapes::ShapeRef.new(shape: ColumnRange, location_name: "ColumnRange"))

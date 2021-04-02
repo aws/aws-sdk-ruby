@@ -346,17 +346,8 @@ module Aws::S3Control
     #   @return [Types::VpcConfiguration]
     #
     # @!attribute [rw] public_access_block_configuration
-    #   The `PublicAccessBlock` configuration that you want to apply to this
-    #   Amazon S3 account. You can enable the configuration options in any
-    #   combination. For more information about when Amazon S3 considers a
-    #   bucket or object public, see [The Meaning of "Public"][1] in the
-    #   *Amazon Simple Storage Service Developer Guide*.
-    #
-    #   This is not supported for Amazon S3 on Outposts.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
+    #   The `PublicAccessBlock` configuration that you want to apply to the
+    #   access point.
     #   @return [Types::PublicAccessBlockConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPointRequest AWS API Documentation
@@ -3443,7 +3434,7 @@ module Aws::S3Control
     #
     # @!attribute [rw] actions
     #   A container for the action of an Object Lambda Access Point
-    #   configuration.
+    #   configuration. Valid input is `GetObject`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] content_transformation

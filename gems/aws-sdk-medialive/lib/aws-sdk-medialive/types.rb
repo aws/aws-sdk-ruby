@@ -3973,7 +3973,13 @@ module Aws::MediaLive
     #               smpte_2038_data_preference: "IGNORE", # accepts IGNORE, PREFER
     #               source_end_behavior: "CONTINUE", # accepts CONTINUE, LOOP
     #               video_selector: {
-    #                 color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709
+    #                 color_space: "FOLLOW", # accepts FOLLOW, HDR10, HLG_2020, REC_601, REC_709
+    #                 color_space_settings: {
+    #                   hdr_10_settings: {
+    #                     max_cll: 1,
+    #                     max_fall: 1,
+    #                   },
+    #                 },
     #                 color_space_usage: "FALLBACK", # accepts FALLBACK, FORCE
     #                 selector_settings: {
     #                   video_selector_pid: {
@@ -9633,7 +9639,13 @@ module Aws::MediaLive
     #           smpte_2038_data_preference: "IGNORE", # accepts IGNORE, PREFER
     #           source_end_behavior: "CONTINUE", # accepts CONTINUE, LOOP
     #           video_selector: {
-    #             color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709
+    #             color_space: "FOLLOW", # accepts FOLLOW, HDR10, HLG_2020, REC_601, REC_709
+    #             color_space_settings: {
+    #               hdr_10_settings: {
+    #                 max_cll: 1,
+    #                 max_fall: 1,
+    #               },
+    #             },
     #             color_space_usage: "FALLBACK", # accepts FALLBACK, FORCE
     #             selector_settings: {
     #               video_selector_pid: {
@@ -10505,7 +10517,13 @@ module Aws::MediaLive
     #         smpte_2038_data_preference: "IGNORE", # accepts IGNORE, PREFER
     #         source_end_behavior: "CONTINUE", # accepts CONTINUE, LOOP
     #         video_selector: {
-    #           color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709
+    #           color_space: "FOLLOW", # accepts FOLLOW, HDR10, HLG_2020, REC_601, REC_709
+    #           color_space_settings: {
+    #             hdr_10_settings: {
+    #               max_cll: 1,
+    #               max_fall: 1,
+    #             },
+    #           },
     #           color_space_usage: "FALLBACK", # accepts FALLBACK, FORCE
     #           selector_settings: {
     #             video_selector_pid: {
@@ -18103,7 +18121,13 @@ module Aws::MediaLive
     #               smpte_2038_data_preference: "IGNORE", # accepts IGNORE, PREFER
     #               source_end_behavior: "CONTINUE", # accepts CONTINUE, LOOP
     #               video_selector: {
-    #                 color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709
+    #                 color_space: "FOLLOW", # accepts FOLLOW, HDR10, HLG_2020, REC_601, REC_709
+    #                 color_space_settings: {
+    #                   hdr_10_settings: {
+    #                     max_cll: 1,
+    #                     max_fall: 1,
+    #                   },
+    #                 },
     #                 color_space_usage: "FALLBACK", # accepts FALLBACK, FORCE
     #                 selector_settings: {
     #                   video_selector_pid: {
@@ -19186,7 +19210,13 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709
+    #         color_space: "FOLLOW", # accepts FOLLOW, HDR10, HLG_2020, REC_601, REC_709
+    #         color_space_settings: {
+    #           hdr_10_settings: {
+    #             max_cll: 1,
+    #             max_fall: 1,
+    #           },
+    #         },
     #         color_space_usage: "FALLBACK", # accepts FALLBACK, FORCE
     #         selector_settings: {
     #           video_selector_pid: {
@@ -19204,6 +19234,10 @@ module Aws::MediaLive
     #   colorSpaceSettingsChoice to determine if any conversion will be
     #   performed.
     #   @return [String]
+    #
+    # @!attribute [rw] color_space_settings
+    #   Color space settings
+    #   @return [Types::VideoSelectorColorSpaceSettings]
     #
     # @!attribute [rw] color_space_usage
     #   Applies only if colorSpace is a value other than follow. This field
@@ -19225,8 +19259,33 @@ module Aws::MediaLive
     #
     class VideoSelector < Struct.new(
       :color_space,
+      :color_space_settings,
       :color_space_usage,
       :selector_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Video Selector Color Space Settings
+    #
+    # @note When making an API call, you may pass VideoSelectorColorSpaceSettings
+    #   data as a hash:
+    #
+    #       {
+    #         hdr_10_settings: {
+    #           max_cll: 1,
+    #           max_fall: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] hdr_10_settings
+    #   Hdr10 Settings
+    #   @return [Types::Hdr10Settings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoSelectorColorSpaceSettings AWS API Documentation
+    #
+    class VideoSelectorColorSpaceSettings < Struct.new(
+      :hdr_10_settings)
       SENSITIVE = []
       include Aws::Structure
     end

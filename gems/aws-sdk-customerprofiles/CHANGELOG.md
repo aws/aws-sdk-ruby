@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2021-03-26)
+------------------
+
+* Feature - This release adds an optional parameter named FlowDefinition in PutIntegrationRequest.
+
 1.4.0 (2021-03-10)
 ------------------
 

@@ -111,6 +111,8 @@ module Aws::SageMaker
     AutoMLMetricEnum = Shapes::StringShape.new(name: 'AutoMLMetricEnum')
     AutoMLNameContains = Shapes::StringShape.new(name: 'AutoMLNameContains')
     AutoMLOutputDataConfig = Shapes::StructureShape.new(name: 'AutoMLOutputDataConfig')
+    AutoMLPartialFailureReason = Shapes::StructureShape.new(name: 'AutoMLPartialFailureReason')
+    AutoMLPartialFailureReasons = Shapes::ListShape.new(name: 'AutoMLPartialFailureReasons')
     AutoMLS3DataSource = Shapes::StructureShape.new(name: 'AutoMLS3DataSource')
     AutoMLS3DataType = Shapes::StringShape.new(name: 'AutoMLS3DataType')
     AutoMLSecurityConfig = Shapes::StructureShape.new(name: 'AutoMLSecurityConfig')
@@ -127,8 +129,10 @@ module Aws::SageMaker
     BooleanOperator = Shapes::StringShape.new(name: 'BooleanOperator')
     Branch = Shapes::StringShape.new(name: 'Branch')
     CacheHitResult = Shapes::StructureShape.new(name: 'CacheHitResult')
+    CandidateArtifactLocations = Shapes::StructureShape.new(name: 'CandidateArtifactLocations')
     CandidateDefinitionNotebookLocation = Shapes::StringShape.new(name: 'CandidateDefinitionNotebookLocation')
     CandidateName = Shapes::StringShape.new(name: 'CandidateName')
+    CandidateProperties = Shapes::StructureShape.new(name: 'CandidateProperties')
     CandidateSortBy = Shapes::StringShape.new(name: 'CandidateSortBy')
     CandidateStatus = Shapes::StringShape.new(name: 'CandidateStatus')
     CandidateStepArn = Shapes::StringShape.new(name: 'CandidateStepArn')
@@ -554,6 +558,7 @@ module Aws::SageMaker
     ExperimentSummary = Shapes::StructureShape.new(name: 'ExperimentSummary')
     ExpiresInSeconds = Shapes::IntegerShape.new(name: 'ExpiresInSeconds')
     Explainability = Shapes::StructureShape.new(name: 'Explainability')
+    ExplainabilityLocation = Shapes::StringShape.new(name: 'ExplainabilityLocation')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     FeatureDefinition = Shapes::StructureShape.new(name: 'FeatureDefinition')
     FeatureDefinitions = Shapes::ListShape.new(name: 'FeatureDefinitions')
@@ -1130,6 +1135,8 @@ module Aws::SageMaker
     RenderingError = Shapes::StructureShape.new(name: 'RenderingError')
     RenderingErrorList = Shapes::ListShape.new(name: 'RenderingErrorList')
     RepositoryAccessMode = Shapes::StringShape.new(name: 'RepositoryAccessMode')
+    RepositoryAuthConfig = Shapes::StructureShape.new(name: 'RepositoryAuthConfig')
+    RepositoryCredentialsProviderArn = Shapes::StringShape.new(name: 'RepositoryCredentialsProviderArn')
     ResolvedAttributes = Shapes::StructureShape.new(name: 'ResolvedAttributes')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceConfig = Shapes::StructureShape.new(name: 'ResourceConfig')
@@ -1266,6 +1273,9 @@ module Aws::SageMaker
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TrafficRoutingConfig = Shapes::StructureShape.new(name: 'TrafficRoutingConfig')
     TrafficRoutingConfigType = Shapes::StringShape.new(name: 'TrafficRoutingConfigType')
+    TrainingEnvironmentKey = Shapes::StringShape.new(name: 'TrainingEnvironmentKey')
+    TrainingEnvironmentMap = Shapes::MapShape.new(name: 'TrainingEnvironmentMap')
+    TrainingEnvironmentValue = Shapes::StringShape.new(name: 'TrainingEnvironmentValue')
     TrainingInputMode = Shapes::StringShape.new(name: 'TrainingInputMode')
     TrainingInstanceCount = Shapes::IntegerShape.new(name: 'TrainingInstanceCount')
     TrainingInstanceType = Shapes::StringShape.new(name: 'TrainingInstanceType')
@@ -1583,6 +1593,7 @@ module Aws::SageMaker
     AutoMLCandidate.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
     AutoMLCandidate.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedTime"))
     AutoMLCandidate.add_member(:failure_reason, Shapes::ShapeRef.new(shape: AutoMLFailureReason, location_name: "FailureReason"))
+    AutoMLCandidate.add_member(:candidate_properties, Shapes::ShapeRef.new(shape: CandidateProperties, location_name: "CandidateProperties"))
     AutoMLCandidate.struct_class = Types::AutoMLCandidate
 
     AutoMLCandidateStep.add_member(:candidate_step_type, Shapes::ShapeRef.new(shape: CandidateStepType, required: true, location_name: "CandidateStepType"))
@@ -1635,11 +1646,17 @@ module Aws::SageMaker
     AutoMLJobSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
     AutoMLJobSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedTime"))
     AutoMLJobSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: AutoMLFailureReason, location_name: "FailureReason"))
+    AutoMLJobSummary.add_member(:partial_failure_reasons, Shapes::ShapeRef.new(shape: AutoMLPartialFailureReasons, location_name: "PartialFailureReasons"))
     AutoMLJobSummary.struct_class = Types::AutoMLJobSummary
 
     AutoMLOutputDataConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     AutoMLOutputDataConfig.add_member(:s3_output_path, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3OutputPath"))
     AutoMLOutputDataConfig.struct_class = Types::AutoMLOutputDataConfig
+
+    AutoMLPartialFailureReason.add_member(:partial_failure_message, Shapes::ShapeRef.new(shape: AutoMLFailureReason, location_name: "PartialFailureMessage"))
+    AutoMLPartialFailureReason.struct_class = Types::AutoMLPartialFailureReason
+
+    AutoMLPartialFailureReasons.member = Shapes::ShapeRef.new(shape: AutoMLPartialFailureReason)
 
     AutoMLS3DataSource.add_member(:s3_data_type, Shapes::ShapeRef.new(shape: AutoMLS3DataType, required: true, location_name: "S3DataType"))
     AutoMLS3DataSource.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
@@ -1663,6 +1680,12 @@ module Aws::SageMaker
 
     CacheHitResult.add_member(:source_pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "SourcePipelineExecutionArn"))
     CacheHitResult.struct_class = Types::CacheHitResult
+
+    CandidateArtifactLocations.add_member(:explainability, Shapes::ShapeRef.new(shape: ExplainabilityLocation, required: true, location_name: "Explainability"))
+    CandidateArtifactLocations.struct_class = Types::CandidateArtifactLocations
+
+    CandidateProperties.add_member(:candidate_artifact_locations, Shapes::ShapeRef.new(shape: CandidateArtifactLocations, location_name: "CandidateArtifactLocations"))
+    CandidateProperties.struct_class = Types::CandidateProperties
 
     CandidateSteps.member = Shapes::ShapeRef.new(shape: AutoMLCandidateStep)
 
@@ -2253,6 +2276,7 @@ module Aws::SageMaker
     CreateTrainingJobRequest.add_member(:experiment_config, Shapes::ShapeRef.new(shape: ExperimentConfig, location_name: "ExperimentConfig"))
     CreateTrainingJobRequest.add_member(:profiler_config, Shapes::ShapeRef.new(shape: ProfilerConfig, location_name: "ProfilerConfig"))
     CreateTrainingJobRequest.add_member(:profiler_rule_configurations, Shapes::ShapeRef.new(shape: ProfilerRuleConfigurations, location_name: "ProfilerRuleConfigurations"))
+    CreateTrainingJobRequest.add_member(:environment, Shapes::ShapeRef.new(shape: TrainingEnvironmentMap, location_name: "Environment"))
     CreateTrainingJobRequest.struct_class = Types::CreateTrainingJobRequest
 
     CreateTrainingJobResponse.add_member(:training_job_arn, Shapes::ShapeRef.new(shape: TrainingJobArn, required: true, location_name: "TrainingJobArn"))
@@ -2688,6 +2712,7 @@ module Aws::SageMaker
     DescribeAutoMLJobResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
     DescribeAutoMLJobResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedTime"))
     DescribeAutoMLJobResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: AutoMLFailureReason, location_name: "FailureReason"))
+    DescribeAutoMLJobResponse.add_member(:partial_failure_reasons, Shapes::ShapeRef.new(shape: AutoMLPartialFailureReasons, location_name: "PartialFailureReasons"))
     DescribeAutoMLJobResponse.add_member(:best_candidate, Shapes::ShapeRef.new(shape: AutoMLCandidate, location_name: "BestCandidate"))
     DescribeAutoMLJobResponse.add_member(:auto_ml_job_status, Shapes::ShapeRef.new(shape: AutoMLJobStatus, required: true, location_name: "AutoMLJobStatus"))
     DescribeAutoMLJobResponse.add_member(:auto_ml_job_secondary_status, Shapes::ShapeRef.new(shape: AutoMLJobSecondaryStatus, required: true, location_name: "AutoMLJobSecondaryStatus"))
@@ -3257,6 +3282,7 @@ module Aws::SageMaker
     DescribeTrainingJobResponse.add_member(:profiler_rule_configurations, Shapes::ShapeRef.new(shape: ProfilerRuleConfigurations, location_name: "ProfilerRuleConfigurations"))
     DescribeTrainingJobResponse.add_member(:profiler_rule_evaluation_statuses, Shapes::ShapeRef.new(shape: ProfilerRuleEvaluationStatuses, location_name: "ProfilerRuleEvaluationStatuses"))
     DescribeTrainingJobResponse.add_member(:profiling_status, Shapes::ShapeRef.new(shape: ProfilingStatus, location_name: "ProfilingStatus"))
+    DescribeTrainingJobResponse.add_member(:environment, Shapes::ShapeRef.new(shape: TrainingEnvironmentMap, location_name: "Environment"))
     DescribeTrainingJobResponse.struct_class = Types::DescribeTrainingJobResponse
 
     DescribeTransformJobRequest.add_member(:transform_job_name, Shapes::ShapeRef.new(shape: TransformJobName, required: true, location_name: "TransformJobName"))
@@ -3793,6 +3819,7 @@ module Aws::SageMaker
     Image.struct_class = Types::Image
 
     ImageConfig.add_member(:repository_access_mode, Shapes::ShapeRef.new(shape: RepositoryAccessMode, required: true, location_name: "RepositoryAccessMode"))
+    ImageConfig.add_member(:repository_auth_config, Shapes::ShapeRef.new(shape: RepositoryAuthConfig, location_name: "RepositoryAuthConfig"))
     ImageConfig.struct_class = Types::ImageConfig
 
     ImageDeletePropertyList.member = Shapes::ShapeRef.new(shape: ImageDeleteProperty)
@@ -5413,6 +5440,9 @@ module Aws::SageMaker
 
     RenderingErrorList.member = Shapes::ShapeRef.new(shape: RenderingError)
 
+    RepositoryAuthConfig.add_member(:repository_credentials_provider_arn, Shapes::ShapeRef.new(shape: RepositoryCredentialsProviderArn, required: true, location_name: "RepositoryCredentialsProviderArn"))
+    RepositoryAuthConfig.struct_class = Types::RepositoryAuthConfig
+
     ResolvedAttributes.add_member(:auto_ml_job_objective, Shapes::ShapeRef.new(shape: AutoMLJobObjective, location_name: "AutoMLJobObjective"))
     ResolvedAttributes.add_member(:problem_type, Shapes::ShapeRef.new(shape: ProblemType, location_name: "ProblemType"))
     ResolvedAttributes.add_member(:completion_criteria, Shapes::ShapeRef.new(shape: AutoMLJobCompletionCriteria, location_name: "CompletionCriteria"))
@@ -5636,6 +5666,9 @@ module Aws::SageMaker
     TrafficRoutingConfig.add_member(:canary_size, Shapes::ShapeRef.new(shape: CapacitySize, location_name: "CanarySize"))
     TrafficRoutingConfig.struct_class = Types::TrafficRoutingConfig
 
+    TrainingEnvironmentMap.key = Shapes::ShapeRef.new(shape: TrainingEnvironmentKey)
+    TrainingEnvironmentMap.value = Shapes::ShapeRef.new(shape: TrainingEnvironmentValue)
+
     TrainingInstanceTypes.member = Shapes::ShapeRef.new(shape: TrainingInstanceType)
 
     TrainingJob.add_member(:training_job_name, Shapes::ShapeRef.new(shape: TrainingJobName, location_name: "TrainingJobName"))
@@ -5672,6 +5705,7 @@ module Aws::SageMaker
     TrainingJob.add_member(:debug_rule_configurations, Shapes::ShapeRef.new(shape: DebugRuleConfigurations, location_name: "DebugRuleConfigurations"))
     TrainingJob.add_member(:tensor_board_output_config, Shapes::ShapeRef.new(shape: TensorBoardOutputConfig, location_name: "TensorBoardOutputConfig"))
     TrainingJob.add_member(:debug_rule_evaluation_statuses, Shapes::ShapeRef.new(shape: DebugRuleEvaluationStatuses, location_name: "DebugRuleEvaluationStatuses"))
+    TrainingJob.add_member(:environment, Shapes::ShapeRef.new(shape: TrainingEnvironmentMap, location_name: "Environment"))
     TrainingJob.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     TrainingJob.struct_class = Types::TrainingJob
 

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.232.0 (2021-04-01)
+------------------
+
+* Feature - VPC Flow Logs Service adds a new API, GetFlowLogsIntegrationTemplate, which generates CloudFormation templates for Athena. For more info, see https://docs.aws.amazon.com/console/vpc/flow-logs/athena
+
+1.231.0 (2021-03-30)
+------------------
+
+* Feature - ReplaceRootVolume feature enables customers to replace the EBS root volume of a running instance to a previously known state. Add support to grant account-level access to the EC2 serial console
+
+1.230.0 (2021-03-24)
+------------------
+
+* Feature - maximumEfaInterfaces added to DescribeInstanceTypes API
+
+1.229.0 (2021-03-22)
+------------------
+
+* Feature - This release adds support for UEFI boot on selected AMD- and Intel-based EC2 instances.
+
+1.228.0 (2021-03-19)
+------------------
+
+* Feature - X2gd instances are the next generation of memory-optimized instances powered by AWS-designed, Arm-based AWS Graviton2 processors.
+
 1.227.0 (2021-03-10)
 ------------------
 

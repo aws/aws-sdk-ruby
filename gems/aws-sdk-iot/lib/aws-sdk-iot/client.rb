@@ -8332,6 +8332,14 @@ module Aws::IoT
     # @option params [String] :thing_type_name
     #   The name of the thing type used to search for things.
     #
+    # @option params [Boolean] :use_prefix_attribute_value
+    #   When `true`, the action returns the thing resources with attribute
+    #   values that start with the `attributeValue` provided.
+    #
+    #   When `false`, or not present, the action returns only the thing
+    #   resources with attribute values that match the entire `attributeValue`
+    #   provided.
+    #
     # @return [Types::ListThingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListThingsResponse#things #things} => Array&lt;Types::ThingAttribute&gt;
@@ -8347,6 +8355,7 @@ module Aws::IoT
     #     attribute_name: "AttributeName",
     #     attribute_value: "AttributeValue",
     #     thing_type_name: "ThingTypeName",
+    #     use_prefix_attribute_value: false,
     #   })
     #
     # @example Response structure
@@ -11346,7 +11355,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

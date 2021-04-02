@@ -1748,6 +1748,10 @@ module Aws::SageMaker
     #   The failure reason.
     #   @return [String]
     #
+    # @!attribute [rw] candidate_properties
+    #   The AutoML candidate's properties.
+    #   @return [Types::CandidateProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLCandidate AWS API Documentation
     #
     class AutoMLCandidate < Struct.new(
@@ -1760,7 +1764,8 @@ module Aws::SageMaker
       :creation_time,
       :end_time,
       :last_modified_time,
-      :failure_reason)
+      :failure_reason,
+      :candidate_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1791,8 +1796,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Similar to Channel. A channel is a named input source that training
-    # algorithms can consume. Refer to Channel for detailed descriptions.
+    # A channel is a named input source that training algorithms can
+    # consume. For more information, see .
     #
     # @note When making an API call, you may pass AutoMLChannel
     #   data as a hash:
@@ -1809,16 +1814,16 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] data_source
-    #   The data source.
+    #   The data source for an AutoML channel.
     #   @return [Types::AutoMLDataSource]
     #
     # @!attribute [rw] compression_type
-    #   You can use Gzip or None. The default value is None.
+    #   You can use `Gzip` or `None`. The default value is `None`.
     #   @return [String]
     #
     # @!attribute [rw] target_attribute_name
-    #   The name of the target variable in supervised learning, a.k.a.
-    #   'y'.
+    #   The name of the target variable in supervised learning, usually
+    #   represented by 'y'.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLChannel AWS API Documentation
@@ -1832,22 +1837,19 @@ module Aws::SageMaker
     end
 
     # A list of container definitions that describe the different containers
-    # that make up one AutoML candidate. Refer to ContainerDefinition for
-    # more details.
+    # that make up an AutoML candidate. For more information, see .
     #
     # @!attribute [rw] image
-    #   The ECR path of the container. Refer to ContainerDefinition for more
-    #   details.
+    #   The ECR path of the container. For more information, see .
     #   @return [String]
     #
     # @!attribute [rw] model_data_url
-    #   The location of the model artifacts. Refer to ContainerDefinition
-    #   for more details.
+    #   The location of the model artifacts. For more information, see .
     #   @return [String]
     #
     # @!attribute [rw] environment
-    #   Environment variables to set in the container. Refer to
-    #   ContainerDefinition for more details.
+    #   Environment variables to set in the container. For more information,
+    #   see .
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLContainerDefinition AWS API Documentation
@@ -1930,7 +1932,7 @@ module Aws::SageMaker
     # @!attribute [rw] max_auto_ml_job_runtime_in_seconds
     #   The maximum time, in seconds, an AutoML job is allowed to wait for a
     #   trial to complete. It must be equal to or greater than
-    #   MaxRuntimePerTrainingJobInSeconds.
+    #   `MaxRuntimePerTrainingJobInSeconds`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLJobCompletionCriteria AWS API Documentation
@@ -1943,7 +1945,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # A collection of settings used for a job.
+    # A collection of settings used for an AutoML job.
     #
     # @note When making an API call, you may pass AutoMLJobConfig
     #   data as a hash:
@@ -1965,8 +1967,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] completion_criteria
-    #   How long a job is allowed to run, or how many candidates a job is
-    #   allowed to generate.
+    #   How long an AutoML job is allowed to run, or how many candidates a
+    #   job is allowed to generate.
     #   @return [Types::AutoMLJobCompletionCriteria]
     #
     # @!attribute [rw] security_config
@@ -2078,26 +2080,26 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Provides a summary about a job.
+    # Provides a summary about an AutoML job.
     #
     # @!attribute [rw] auto_ml_job_name
-    #   The name of the object you are requesting.
+    #   The name of the AutoML you are requesting.
     #   @return [String]
     #
     # @!attribute [rw] auto_ml_job_arn
-    #   The ARN of the job.
+    #   The ARN of the AutoML job.
     #   @return [String]
     #
     # @!attribute [rw] auto_ml_job_status
-    #   The job's status.
+    #   The status of the AutoML job.
     #   @return [String]
     #
     # @!attribute [rw] auto_ml_job_secondary_status
-    #   The job's secondary status.
+    #   The secondary status of the AutoML job.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   When the job was created.
+    #   When the AutoML job was created.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
@@ -2105,12 +2107,16 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_time
-    #   When the job was last modified.
+    #   When the AutoML job was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] failure_reason
-    #   The failure reason of a job.
+    #   The failure reason of an AutoML job.
     #   @return [String]
+    #
+    # @!attribute [rw] partial_failure_reasons
+    #   The list of reasons for partial failures within an AutoML job.
+    #   @return [Array<Types::AutoMLPartialFailureReason>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLJobSummary AWS API Documentation
     #
@@ -2122,7 +2128,8 @@ module Aws::SageMaker
       :creation_time,
       :end_time,
       :last_modified_time,
-      :failure_reason)
+      :failure_reason,
+      :partial_failure_reasons)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2150,6 +2157,21 @@ module Aws::SageMaker
     class AutoMLOutputDataConfig < Struct.new(
       :kms_key_id,
       :s3_output_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The reason for a partial failure of an AutoML job.
+    #
+    # @!attribute [rw] partial_failure_message
+    #   The message containing the reason for a partial failure of an AutoML
+    #   job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLPartialFailureReason AWS API Documentation
+    #
+    class AutoMLPartialFailureReason < Struct.new(
+      :partial_failure_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2313,6 +2335,35 @@ module Aws::SageMaker
     #
     class CacheHitResult < Struct.new(
       :source_pipeline_execution_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Location of artifacts for an AutoML candidate job.
+    #
+    # @!attribute [rw] explainability
+    #   The S3 prefix to the explainability artifacts generated for the
+    #   AutoML candidate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CandidateArtifactLocations AWS API Documentation
+    #
+    class CandidateArtifactLocations < Struct.new(
+      :explainability)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties of an AutoML candidate job.
+    #
+    # @!attribute [rw] candidate_artifact_locations
+    #   The S3 prefix to the artifacts generated for an AutoML candidate.
+    #   @return [Types::CandidateArtifactLocations]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CandidateProperties AWS API Documentation
+    #
+    class CandidateProperties < Struct.new(
+      :candidate_artifact_locations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2885,6 +2936,9 @@ module Aws::SageMaker
     #         image: "ContainerImage",
     #         image_config: {
     #           repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #           repository_auth_config: {
+    #             repository_credentials_provider_arn: "RepositoryCredentialsProviderArn", # required
+    #           },
     #         },
     #         mode: "SingleModel", # accepts SingleModel, MultiModel
     #         model_data_url: "Url",
@@ -3625,7 +3679,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] app_type
-    #   The type of app.
+    #   The type of app. Supported apps are `JupyterServer` and
+    #   `KernelGateway`. `TensorBoard` is not supported.
     #   @return [String]
     #
     # @!attribute [rw] app_name
@@ -3801,36 +3856,44 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] auto_ml_job_name
-    #   Identifies an Autopilot job. Must be unique to your account and is
-    #   case-insensitive.
+    #   Identifies an Autopilot job. The name must be unique to your account
+    #   and is case-insensitive.
     #   @return [String]
     #
     # @!attribute [rw] input_data_config
-    #   Similar to InputDataConfig supported by Tuning. Format(s) supported:
-    #   CSV. Minimum of 500 rows.
+    #   An array of channel objects that describes the input data and its
+    #   location. Each channel is a named input source. Similar to
+    #   `InputDataConfig` supported by . Format(s) supported: CSV. Minimum
+    #   of 500 rows.
     #   @return [Array<Types::AutoMLChannel>]
     #
     # @!attribute [rw] output_data_config
-    #   Similar to OutputDataConfig supported by Tuning. Format(s)
-    #   supported: CSV.
+    #   Provides information about encryption and the Amazon S3 output path
+    #   needed to store artifacts from an AutoML job. Format(s) supported:
+    #   CSV.
     #   @return [Types::AutoMLOutputDataConfig]
     #
     # @!attribute [rw] problem_type
-    #   Defines the kind of preprocessing and algorithms intended for the
+    #   Defines the type of supervised learning available for the
     #   candidates. Options include: BinaryClassification,
-    #   MulticlassClassification, and Regression.
+    #   MulticlassClassification, and Regression. For more information, see
+    #   [ Amazon SageMaker Autopilot problem types and algorithm
+    #   support][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-problem-types.html
     #   @return [String]
     #
     # @!attribute [rw] auto_ml_job_objective
-    #   Defines the objective of a an AutoML job. You provide a
-    #   AutoMLJobObjective$MetricName and Autopilot infers whether to
-    #   minimize or maximize it. If a metric is not specified, the most
-    #   commonly used ObjectiveMetric for problem type is automaically
-    #   selected.
+    #   Defines the objective metric used to measure the predictive quality
+    #   of an AutoML job. You provide a AutoMLJobObjective$MetricName and
+    #   Autopilot infers whether to minimize or maximize it.
     #   @return [Types::AutoMLJobObjective]
     #
     # @!attribute [rw] auto_ml_job_config
-    #   Contains CompletionCriteria and SecurityConfig.
+    #   Contains CompletionCriteria and SecurityConfig settings for the
+    #   AutoML job.
     #   @return [Types::AutoMLJobConfig]
     #
     # @!attribute [rw] role_arn
@@ -3838,9 +3901,9 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] generate_candidate_definitions_only
-    #   Generates possible candidates without training a model. A candidate
-    #   is a combination of data preprocessors, algorithms, and algorithm
-    #   parameter settings.
+    #   Generates possible candidates without training the models. A
+    #   candidate is a combination of data preprocessors, algorithms, and
+    #   algorithm parameter settings.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -3865,7 +3928,8 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] auto_ml_job_arn
-    #   When a job is created, it is assigned a unique ARN.
+    #   The unique ARN that is assigned to the AutoML job when it is
+    #   created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAutoMLJobResponse AWS API Documentation
@@ -4407,7 +4471,14 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] default_user_settings
-    #   The default user settings.
+    #   The default settings to use to create a user profile when
+    #   `UserSettings` isn't specified in the call to the
+    #   `CreateUserProfile` API.
+    #
+    #   `SecurityGroups` is aggregated when specified in both calls. For all
+    #   other settings in `UserSettings`, the values specified in
+    #   `CreateUserProfile` take precedence over those specified in
+    #   `CreateDomain`.
     #   @return [Types::UserSettings]
     #
     # @!attribute [rw] subnet_ids
@@ -4422,7 +4493,7 @@ module Aws::SageMaker
     # @!attribute [rw] tags
     #   Tags to associated with the Domain. Each tag consists of a key and
     #   an optional value. Tag keys must be unique per resource. Tags are
-    #   searchable using the Search API.
+    #   searchable using the `Search` API.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] app_network_access_type
@@ -6187,6 +6258,9 @@ module Aws::SageMaker
     #           image: "ContainerImage",
     #           image_config: {
     #             repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #             repository_auth_config: {
+    #               repository_credentials_provider_arn: "RepositoryCredentialsProviderArn", # required
+    #             },
     #           },
     #           mode: "SingleModel", # accepts SingleModel, MultiModel
     #           model_data_url: "Url",
@@ -6204,6 +6278,9 @@ module Aws::SageMaker
     #             image: "ContainerImage",
     #             image_config: {
     #               repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #               repository_auth_config: {
+    #                 repository_credentials_provider_arn: "RepositoryCredentialsProviderArn", # required
+    #               },
     #             },
     #             mode: "SingleModel", # accepts SingleModel, MultiModel
     #             model_data_url: "Url",
@@ -7743,6 +7820,9 @@ module Aws::SageMaker
     #             },
     #           },
     #         ],
+    #         environment: {
+    #           "TrainingEnvironmentKey" => "TrainingEnvironmentValue",
+    #         },
     #       }
     #
     # @!attribute [rw] training_job_name
@@ -7956,6 +8036,10 @@ module Aws::SageMaker
     #   and framework metrics.
     #   @return [Array<Types::ProfilerRuleConfiguration>]
     #
+    # @!attribute [rw] environment
+    #   The environment variables to set in the Docker container.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingJobRequest AWS API Documentation
     #
     class CreateTrainingJobRequest < Struct.new(
@@ -7978,7 +8062,8 @@ module Aws::SageMaker
       :tensor_board_output_config,
       :experiment_config,
       :profiler_config,
-      :profiler_rule_configurations)
+      :profiler_rule_configurations,
+      :environment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10802,7 +10887,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] auto_ml_job_name
-    #   Request information about a job using that job's unique name.
+    #   Requests information about an AutoML job using its unique name.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAutoMLJobRequest AWS API Documentation
@@ -10814,15 +10899,15 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] auto_ml_job_name
-    #   Returns the name of a job.
+    #   Returns the name of the AutoML job.
     #   @return [String]
     #
     # @!attribute [rw] auto_ml_job_arn
-    #   Returns the job's ARN.
+    #   Returns the ARN of the AutoML job.
     #   @return [String]
     #
     # @!attribute [rw] input_data_config
-    #   Returns the job's input data config.
+    #   Returns the input data configuration for the AutoML job..
     #   @return [Array<Types::AutoMLChannel>]
     #
     # @!attribute [rw] output_data_config
@@ -10845,15 +10930,15 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] auto_ml_job_config
-    #   Returns the job's config.
+    #   Returns the configuration for the AutoML job.
     #   @return [Types::AutoMLJobConfig]
     #
     # @!attribute [rw] creation_time
-    #   Returns the job's creation time.
+    #   Returns the creation time of the AutoML job.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   Returns the job's end time.
+    #   Returns the end time of the AutoML job.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_time
@@ -10864,16 +10949,20 @@ module Aws::SageMaker
     #   Returns the job's FailureReason.
     #   @return [String]
     #
+    # @!attribute [rw] partial_failure_reasons
+    #   Returns a list of reasons for partial failures within an AutoML job.
+    #   @return [Array<Types::AutoMLPartialFailureReason>]
+    #
     # @!attribute [rw] best_candidate
     #   Returns the job's BestCandidate.
     #   @return [Types::AutoMLCandidate]
     #
     # @!attribute [rw] auto_ml_job_status
-    #   Returns the job's AutoMLJobStatus.
+    #   Returns the status of the AutoML job's AutoMLJobStatus.
     #   @return [String]
     #
     # @!attribute [rw] auto_ml_job_secondary_status
-    #   Returns the job's AutoMLJobSecondaryStatus.
+    #   Returns the secondary status of the AutoML job.
     #   @return [String]
     #
     # @!attribute [rw] generate_candidate_definitions_only
@@ -10887,9 +10976,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] resolved_attributes
     #   This contains ProblemType, AutoMLJobObjective and
-    #   CompletionCriteria. They're auto-inferred values, if not provided
-    #   by you. If you do provide them, then they'll be the same as
-    #   provided.
+    #   CompletionCriteria. If you do not provide these values, they are
+    #   auto-inferred. If you do provide them, they are the values you
+    #   provide.
     #   @return [Types::ResolvedAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAutoMLJobResponse AWS API Documentation
@@ -10907,6 +10996,7 @@ module Aws::SageMaker
       :end_time,
       :last_modified_time,
       :failure_reason,
+      :partial_failure_reasons,
       :best_candidate,
       :auto_ml_job_status,
       :auto_ml_job_secondary_status,
@@ -11472,7 +11562,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] default_user_settings
-    #   Settings which are applied to all UserProfiles in this domain, if
+    #   Settings which are applied to UserProfiles in this domain if
     #   settings are not explicitly specified in a given UserProfile.
     #   @return [Types::UserSettings]
     #
@@ -14202,6 +14292,10 @@ module Aws::SageMaker
     #   Profiling status of a training job.
     #   @return [String]
     #
+    # @!attribute [rw] environment
+    #   The environment variables to set in the Docker container.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJobResponse AWS API Documentation
     #
     class DescribeTrainingJobResponse < Struct.new(
@@ -14242,7 +14336,8 @@ module Aws::SageMaker
       :profiler_config,
       :profiler_rule_configurations,
       :profiler_rule_evaluation_statuses,
-      :profiling_status)
+      :profiling_status,
+      :environment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18483,6 +18578,9 @@ module Aws::SageMaker
     #
     #       {
     #         repository_access_mode: "Platform", # required, accepts Platform, Vpc
+    #         repository_auth_config: {
+    #           repository_credentials_provider_arn: "RepositoryCredentialsProviderArn", # required
+    #         },
     #       }
     #
     # @!attribute [rw] repository_access_mode
@@ -18494,10 +18592,19 @@ module Aws::SageMaker
     #     your VPC.
     #   @return [String]
     #
+    # @!attribute [rw] repository_auth_config
+    #   (Optional) Specifies an authentication configuration for the private
+    #   docker registry where your model image is hosted. Specify a value
+    #   for this property only if you specified `Vpc` as the value for the
+    #   `RepositoryAccessMode` field, and the private Docker registry where
+    #   the model image is hosted requires authentication.
+    #   @return [Types::RepositoryAuthConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ImageConfig AWS API Documentation
     #
     class ImageConfig < Struct.new(
-      :repository_access_mode)
+      :repository_access_mode,
+      :repository_auth_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19266,7 +19373,12 @@ module Aws::SageMaker
     #   @return [Types::LabelingJobS3DataSource]
     #
     # @!attribute [rw] sns_data_source
-    #   An Amazon SNS data source used for streaming labeling jobs.
+    #   An Amazon SNS data source used for streaming labeling jobs. To learn
+    #   more, see [Send Data to a Streaming Labeling Job][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-streaming-labeling-job.html#sms-streaming-how-it-works-send-data
     #   @return [Types::LabelingJobSnsDataSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobDataSource AWS API Documentation
@@ -19392,37 +19504,39 @@ module Aws::SageMaker
     #   The AWS Key Management Service ID of the key used to encrypt the
     #   output data, if any.
     #
-    #   If you use a KMS key ID or an alias of your master key, the Amazon
-    #   SageMaker execution role must include permissions to call
-    #   `kms:Encrypt`. If you don't provide a KMS key ID, Amazon SageMaker
-    #   uses the default KMS key for Amazon S3 for your role's account.
-    #   Amazon SageMaker uses server-side encryption with KMS-managed keys
-    #   for `LabelingJobOutputConfig`. If you use a bucket policy with an
-    #   `s3:PutObject` permission that only allows objects with server-side
-    #   encryption, set the condition key of
-    #   `s3:x-amz-server-side-encryption` to `"aws:kms"`. For more
-    #   information, see [KMS-Managed Encryption Keys][1] in the *Amazon
+    #   If you provide your own KMS key ID, you must add the required
+    #   permissions to your KMS key described in [Encrypt Output Data and
+    #   Storage Volume with AWS KMS][1].
+    #
+    #   If you don't provide a KMS key ID, Amazon SageMaker uses the
+    #   default AWS KMS key for Amazon S3 for your role's account to
+    #   encrypt your output data.
+    #
+    #   If you use a bucket policy with an `s3:PutObject` permission that
+    #   only allows objects with server-side encryption, set the condition
+    #   key of `s3:x-amz-server-side-encryption` to `"aws:kms"`. For more
+    #   information, see [KMS-Managed Encryption Keys][2] in the *Amazon
     #   Simple Storage Service Developer Guide.*
     #
-    #   The KMS key policy must grant permission to the IAM role that you
-    #   specify in your `CreateLabelingJob` request. For more information,
-    #   see [Using Key Policies in AWS KMS][2] in the *AWS Key Management
-    #   Service Developer Guide*.
     #
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
-    #   [2]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security-permission.html#sms-security-kms-permissions
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arn
     #   An Amazon Simple Notification Service (Amazon SNS) output topic ARN.
     #
-    #   When workers complete labeling tasks, Ground Truth will send
-    #   labeling task output data to the SNS output topic you specify here.
+    #   If you provide an `SnsTopicArn` in `OutputConfig`, when workers
+    #   complete labeling tasks, Ground Truth will send labeling task output
+    #   data to the SNS output topic you specify here.
     #
-    #   You must provide a value for this parameter if you provide an Amazon
-    #   SNS input topic in `SnsDataSource` in `InputConfig`.
+    #   To learn more, see [Receive Output Data from a Streaming Labeling
+    #   Job][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-streaming-labeling-job.html#sms-streaming-how-it-works-output-data
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobOutputConfig AWS API Documentation
@@ -19435,7 +19549,9 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Provides configuration information for labeling jobs.
+    # Configure encryption on the storage volume attached to the ML compute
+    # instance used to run automated data labeling model training and
+    # inference.
     #
     # @note When making an API call, you may pass LabelingJobResourceConfig
     #   data as a hash:
@@ -19447,16 +19563,30 @@ module Aws::SageMaker
     # @!attribute [rw] volume_kms_key_id
     #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
     #   uses to encrypt data on the storage volume attached to the ML
-    #   compute instance(s) that run the training job. The `VolumeKmsKeyId`
-    #   can be any of the following formats:
+    #   compute instance(s) that run the training and inference jobs used
+    #   for automated data labeling.
     #
-    #   * // KMS Key ID
+    #   You can only specify a `VolumeKmsKeyId` when you create a labeling
+    #   job with automated data labeling enabled using the API operation
+    #   `CreateLabelingJob`. You cannot specify an AWS KMS customer managed
+    #   CMK to encrypt the storage volume used for automated data labeling
+    #   model training and inference when you create a labeling job using
+    #   the console. To learn more, see [Output Data and Storage Volume
+    #   Encryption][1].
+    #
+    #   The `VolumeKmsKeyId` can be any of the following formats:
+    #
+    #   * KMS Key ID
     #
     #     `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
-    #   * // Amazon Resource Name (ARN) of a KMS Key
+    #   * Amazon Resource Name (ARN) of a KMS Key
     #
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobResourceConfig AWS API Documentation
@@ -19521,9 +19651,6 @@ module Aws::SageMaker
     #   The Amazon SNS input topic Amazon Resource Name (ARN). Specify the
     #   ARN of the input topic you will use to send new data objects to a
     #   streaming labeling job.
-    #
-    #   If you specify an input topic for `SnsTopicArn` in `InputConfig`,
-    #   you must specify a value for `SnsTopicArn` in `OutputConfig`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobSnsDataSource AWS API Documentation
@@ -20272,29 +20399,29 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] auto_ml_job_name
-    #   List the Candidates created for the job by providing the job's
+    #   List the candidates created for the job by providing the job's
     #   name.
     #   @return [String]
     #
     # @!attribute [rw] status_equals
-    #   List the Candidates for the job and filter by status.
+    #   List the candidates for the job and filter by status.
     #   @return [String]
     #
     # @!attribute [rw] candidate_name_equals
-    #   List the Candidates for the job and filter by candidate name.
+    #   List the candidates for the job and filter by candidate name.
     #   @return [String]
     #
     # @!attribute [rw] sort_order
-    #   The sort order for the results. The default is Ascending.
+    #   The sort order for the results. The default is `Ascending`.
     #   @return [String]
     #
     # @!attribute [rw] sort_by
     #   The parameter by which to sort the results. The default is
-    #   Descending.
+    #   `Descending`.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   List the job's Candidates up to a specified limit.
+    #   List the job's candidates up to a specified limit.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -27137,6 +27264,18 @@ module Aws::SageMaker
     #   for NVIDIA accelerators and highly recommended for CPU compilations.
     #   For any other cases, it is optional to specify `CompilerOptions.`
     #
+    #   * `DTYPE`\: Specifies the data type for the input. When compiling
+    #     for `ml_*` (except for `ml_inf`) instances using PyTorch
+    #     framework, provide the data type (dtype) of the model's input.
+    #     `"float32"` is used if `"DTYPE"` is not specified. Options for
+    #     data type are:
+    #
+    #     * float32: Use either `"float"` or `"float32"`.
+    #
+    #     * int64: Use either `"int64"` or `"long"`.
+    #
+    #     For example, `\{"dtype" : "float32"\}`.
+    #
     #   * `CPU`\: Compilation for CPU supports the following compiler
     #     options.
     #
@@ -29441,6 +29580,40 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Specifies an authentication configuration for the private docker
+    # registry where your model image is hosted. Specify a value for this
+    # property only if you specified `Vpc` as the value for the
+    # `RepositoryAccessMode` field of the `ImageConfig` object that you
+    # passed to a call to CreateModel and the private Docker registry where
+    # the model image is hosted requires authentication.
+    #
+    # @note When making an API call, you may pass RepositoryAuthConfig
+    #   data as a hash:
+    #
+    #       {
+    #         repository_credentials_provider_arn: "RepositoryCredentialsProviderArn", # required
+    #       }
+    #
+    # @!attribute [rw] repository_credentials_provider_arn
+    #   The Amazon Resource Name (ARN) of an AWS Lambda function that
+    #   provides credentials to authenticate to the private Docker registry
+    #   where your model image is hosted. For information about how to
+    #   create an AWS Lambda function, see [Create a Lambda function with
+    #   the console][1] in the *AWS Lambda Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RepositoryAuthConfig AWS API Documentation
+    #
+    class RepositoryAuthConfig < Struct.new(
+      :repository_credentials_provider_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The resolved attributes.
     #
     # @!attribute [rw] auto_ml_job_objective
@@ -30411,10 +30584,11 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies options when sharing an Amazon SageMaker Studio notebook.
-    # These settings are specified as part of `DefaultUserSettings` when the
-    # CreateDomain API is called, and as part of `UserSettings` when the
-    # CreateUserProfile API is called.
+    # Specifies options for sharing SageMaker Studio notebooks. These
+    # settings are specified as part of `DefaultUserSettings` when the
+    # `CreateDomain` API is called, and as part of `UserSettings` when the
+    # `CreateUserProfile` API is called. When `SharingSettings` is not
+    # specified, notebook sharing isn't allowed.
     #
     # @note When making an API call, you may pass SharingSettings
     #   data as a hash:
@@ -31491,6 +31665,10 @@ module Aws::SageMaker
     #   training job.
     #   @return [Array<Types::DebugRuleEvaluationStatus>]
     #
+    # @!attribute [rw] environment
+    #   The environment variables to set in the Docker container.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] tags
     #   An array of key-value pairs. You can use tags to categorize your AWS
     #   resources in different ways, for example, by purpose, owner, or
@@ -31538,6 +31716,7 @@ module Aws::SageMaker
       :debug_rule_configurations,
       :tensor_board_output_config,
       :debug_rule_evaluation_statuses,
+      :environment,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -34890,8 +35069,8 @@ module Aws::SageMaker
     end
 
     # A collection of settings that apply to users of Amazon SageMaker
-    # Studio. These settings are specified when the CreateUserProfile API is
-    # called, and as `DefaultUserSettings` when the CreateDomain API is
+    # Studio. These settings are specified when the `CreateUserProfile` API
+    # is called, and as `DefaultUserSettings` when the `CreateDomain` API is
     # called.
     #
     # `SecurityGroups` is aggregated when specified in both calls. For all
@@ -34960,7 +35139,7 @@ module Aws::SageMaker
     #   @return [Array<String>]
     #
     # @!attribute [rw] sharing_settings
-    #   The sharing settings.
+    #   Specifies options for sharing SageMaker Studio notebooks.
     #   @return [Types::SharingSettings]
     #
     # @!attribute [rw] jupyter_server_app_settings

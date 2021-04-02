@@ -131,4 +131,4 @@ For additional information of migrating from Version 1 to Version 2, please foll
 
 * [Introduction Blog](https://aws.amazon.com/blogs/developer/aws-sdk-for-ruby-modularization-version-3-2/)
 * [V2 to V3 Upgrade Blog Guide](https://aws.amazon.com/blogs/developer/upgrading-from-version-2-to-version-3-of-the-aws-sdk-for-ruby-2/)
-* [Upgrade Release Notes](https://github.com/aws/aws-sdk-ruby/blob/master/UPGRADING.md)
+* [Upgrade Release Notes](https://github.com/aws/aws-sdk-ruby/blob/version-3/UPGRADING.md)

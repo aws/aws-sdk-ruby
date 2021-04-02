@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2021-04-01)
+------------------
+
+* Feature - Amazon Lex now supports base64-encoded message and input transcript fields.
+
 1.35.0 (2021-03-10)
 ------------------
 

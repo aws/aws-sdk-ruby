@@ -1522,6 +1522,11 @@ module Aws::S3Control
         }
         o.input = Shapes::ShapeRef.new(shape: ListStorageLensConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListStorageLensConfigurationsResult)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:put_access_point_configuration_for_object_lambda, Seahorse::Model::Operation.new.tap do |o|
