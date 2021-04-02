@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix FIPS and global endpoint behavior for S3 ARNs.
+
 1.93.0 (2021-03-24)
 ------------------
 
