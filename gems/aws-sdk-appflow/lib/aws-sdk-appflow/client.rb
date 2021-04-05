@@ -734,6 +734,16 @@ module Aws::Appflow
     #             domain_name: "DomainName", # required
     #             object_type_name: "ObjectTypeName",
     #           },
+    #           zendesk: {
+    #             object: "Object", # required
+    #             id_field_names: ["Name"],
+    #             error_handling_config: {
+    #               fail_on_first_destination_error: false,
+    #               bucket_prefix: "BucketPrefix",
+    #               bucket_name: "BucketName",
+    #             },
+    #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
+    #           },
     #         },
     #       },
     #     ],
@@ -1143,6 +1153,13 @@ module Aws::Appflow
     #   resp.destination_flow_config_list[0].destination_connector_properties.honeycode.error_handling_config.bucket_name #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.customer_profiles.domain_name #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.customer_profiles.object_type_name #=> String
+    #   resp.destination_flow_config_list[0].destination_connector_properties.zendesk.object #=> String
+    #   resp.destination_flow_config_list[0].destination_connector_properties.zendesk.id_field_names #=> Array
+    #   resp.destination_flow_config_list[0].destination_connector_properties.zendesk.id_field_names[0] #=> String
+    #   resp.destination_flow_config_list[0].destination_connector_properties.zendesk.error_handling_config.fail_on_first_destination_error #=> Boolean
+    #   resp.destination_flow_config_list[0].destination_connector_properties.zendesk.error_handling_config.bucket_prefix #=> String
+    #   resp.destination_flow_config_list[0].destination_connector_properties.zendesk.error_handling_config.bucket_name #=> String
+    #   resp.destination_flow_config_list[0].destination_connector_properties.zendesk.write_operation_type #=> String, one of "INSERT", "UPSERT", "UPDATE"
     #   resp.last_run_execution_details.most_recent_execution_message #=> String
     #   resp.last_run_execution_details.most_recent_execution_time #=> Time
     #   resp.last_run_execution_details.most_recent_execution_status #=> String, one of "InProgress", "Successful", "Error"
@@ -1874,6 +1891,16 @@ module Aws::Appflow
     #             domain_name: "DomainName", # required
     #             object_type_name: "ObjectTypeName",
     #           },
+    #           zendesk: {
+    #             object: "Object", # required
+    #             id_field_names: ["Name"],
+    #             error_handling_config: {
+    #               fail_on_first_destination_error: false,
+    #               bucket_prefix: "BucketPrefix",
+    #               bucket_name: "BucketName",
+    #             },
+    #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
+    #           },
     #         },
     #       },
     #     ],
@@ -1931,7 +1958,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

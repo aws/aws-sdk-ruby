@@ -324,6 +324,7 @@ module Aws::MediaLive
     HlsTsFileMode = Shapes::StringShape.new(name: 'HlsTsFileMode')
     HlsWebdavHttpTransferMode = Shapes::StringShape.new(name: 'HlsWebdavHttpTransferMode')
     HlsWebdavSettings = Shapes::StructureShape.new(name: 'HlsWebdavSettings')
+    HtmlMotionGraphicsSettings = Shapes::StructureShape.new(name: 'HtmlMotionGraphicsSettings')
     IFrameOnlyPlaylistType = Shapes::StringShape.new(name: 'IFrameOnlyPlaylistType')
     ImmediateModeScheduleActionStartSettings = Shapes::StructureShape.new(name: 'ImmediateModeScheduleActionStartSettings')
     Input = Shapes::StructureShape.new(name: 'Input')
@@ -451,6 +452,11 @@ module Aws::MediaLive
     MediaPackageGroupSettings = Shapes::StructureShape.new(name: 'MediaPackageGroupSettings')
     MediaPackageOutputDestinationSettings = Shapes::StructureShape.new(name: 'MediaPackageOutputDestinationSettings')
     MediaPackageOutputSettings = Shapes::StructureShape.new(name: 'MediaPackageOutputSettings')
+    MotionGraphicsActivateScheduleActionSettings = Shapes::StructureShape.new(name: 'MotionGraphicsActivateScheduleActionSettings')
+    MotionGraphicsConfiguration = Shapes::StructureShape.new(name: 'MotionGraphicsConfiguration')
+    MotionGraphicsDeactivateScheduleActionSettings = Shapes::StructureShape.new(name: 'MotionGraphicsDeactivateScheduleActionSettings')
+    MotionGraphicsInsertion = Shapes::StringShape.new(name: 'MotionGraphicsInsertion')
+    MotionGraphicsSettings = Shapes::StructureShape.new(name: 'MotionGraphicsSettings')
     Mp2CodingMode = Shapes::StringShape.new(name: 'Mp2CodingMode')
     Mp2Settings = Shapes::StructureShape.new(name: 'Mp2Settings')
     Mpeg2AdaptiveQuantization = Shapes::StringShape.new(name: 'Mpeg2AdaptiveQuantization')
@@ -767,6 +773,7 @@ module Aws::MediaLive
     __longMin0Max1099511627775 = Shapes::IntegerShape.new(name: '__longMin0Max1099511627775')
     __longMin0Max4294967295 = Shapes::IntegerShape.new(name: '__longMin0Max4294967295')
     __longMin0Max8589934591 = Shapes::IntegerShape.new(name: '__longMin0Max8589934591')
+    __longMin0Max86400000 = Shapes::IntegerShape.new(name: '__longMin0Max86400000')
     __string = Shapes::StringShape.new(name: '__string')
     __stringMax1000 = Shapes::StringShape.new(name: '__stringMax1000')
     __stringMax256 = Shapes::StringShape.new(name: '__stringMax256')
@@ -1579,8 +1586,8 @@ module Aws::MediaLive
     Eac3Settings.add_member(:surround_mode, Shapes::ShapeRef.new(shape: Eac3SurroundMode, location_name: "surroundMode"))
     Eac3Settings.struct_class = Types::Eac3Settings
 
-    EbuTtDDestinationSettings.add_member(:fill_line_gap, Shapes::ShapeRef.new(shape: EbuTtDFillLineGapControl, location_name: "fillLineGap"))
     EbuTtDDestinationSettings.add_member(:copyright_holder, Shapes::ShapeRef.new(shape: __stringMax1000, location_name: "copyrightHolder"))
+    EbuTtDDestinationSettings.add_member(:fill_line_gap, Shapes::ShapeRef.new(shape: EbuTtDFillLineGapControl, location_name: "fillLineGap"))
     EbuTtDDestinationSettings.add_member(:font_family, Shapes::ShapeRef.new(shape: __string, location_name: "fontFamily"))
     EbuTtDDestinationSettings.add_member(:style_control, Shapes::ShapeRef.new(shape: EbuTtDDestinationStyleControl, location_name: "styleControl"))
     EbuTtDDestinationSettings.struct_class = Types::EbuTtDDestinationSettings
@@ -1604,6 +1611,7 @@ module Aws::MediaLive
     EncoderSettings.add_member(:caption_descriptions, Shapes::ShapeRef.new(shape: __listOfCaptionDescription, location_name: "captionDescriptions"))
     EncoderSettings.add_member(:feature_activations, Shapes::ShapeRef.new(shape: FeatureActivations, location_name: "featureActivations"))
     EncoderSettings.add_member(:global_configuration, Shapes::ShapeRef.new(shape: GlobalConfiguration, location_name: "globalConfiguration"))
+    EncoderSettings.add_member(:motion_graphics_configuration, Shapes::ShapeRef.new(shape: MotionGraphicsConfiguration, location_name: "motionGraphicsConfiguration"))
     EncoderSettings.add_member(:nielsen_configuration, Shapes::ShapeRef.new(shape: NielsenConfiguration, location_name: "nielsenConfiguration"))
     EncoderSettings.add_member(:output_groups, Shapes::ShapeRef.new(shape: __listOfOutputGroup, required: true, location_name: "outputGroups"))
     EncoderSettings.add_member(:timecode_config, Shapes::ShapeRef.new(shape: TimecodeConfig, required: true, location_name: "timecodeConfig"))
@@ -1872,6 +1880,8 @@ module Aws::MediaLive
     HlsWebdavSettings.add_member(:num_retries, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "numRetries"))
     HlsWebdavSettings.add_member(:restart_delay, Shapes::ShapeRef.new(shape: __integerMin0Max15, location_name: "restartDelay"))
     HlsWebdavSettings.struct_class = Types::HlsWebdavSettings
+
+    HtmlMotionGraphicsSettings.struct_class = Types::HtmlMotionGraphicsSettings
 
     ImmediateModeScheduleActionStartSettings.struct_class = Types::ImmediateModeScheduleActionStartSettings
 
@@ -2295,6 +2305,21 @@ module Aws::MediaLive
 
     MediaPackageOutputSettings.struct_class = Types::MediaPackageOutputSettings
 
+    MotionGraphicsActivateScheduleActionSettings.add_member(:duration, Shapes::ShapeRef.new(shape: __longMin0Max86400000, location_name: "duration"))
+    MotionGraphicsActivateScheduleActionSettings.add_member(:password_param, Shapes::ShapeRef.new(shape: __string, location_name: "passwordParam"))
+    MotionGraphicsActivateScheduleActionSettings.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
+    MotionGraphicsActivateScheduleActionSettings.add_member(:username, Shapes::ShapeRef.new(shape: __string, location_name: "username"))
+    MotionGraphicsActivateScheduleActionSettings.struct_class = Types::MotionGraphicsActivateScheduleActionSettings
+
+    MotionGraphicsConfiguration.add_member(:motion_graphics_insertion, Shapes::ShapeRef.new(shape: MotionGraphicsInsertion, location_name: "motionGraphicsInsertion"))
+    MotionGraphicsConfiguration.add_member(:motion_graphics_settings, Shapes::ShapeRef.new(shape: MotionGraphicsSettings, required: true, location_name: "motionGraphicsSettings"))
+    MotionGraphicsConfiguration.struct_class = Types::MotionGraphicsConfiguration
+
+    MotionGraphicsDeactivateScheduleActionSettings.struct_class = Types::MotionGraphicsDeactivateScheduleActionSettings
+
+    MotionGraphicsSettings.add_member(:html_motion_graphics_settings, Shapes::ShapeRef.new(shape: HtmlMotionGraphicsSettings, location_name: "htmlMotionGraphicsSettings"))
+    MotionGraphicsSettings.struct_class = Types::MotionGraphicsSettings
+
     Mp2Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __double, location_name: "bitrate"))
     Mp2Settings.add_member(:coding_mode, Shapes::ShapeRef.new(shape: Mp2CodingMode, location_name: "codingMode"))
     Mp2Settings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __double, location_name: "sampleRate"))
@@ -2524,6 +2549,8 @@ module Aws::MediaLive
 
     PipelineDetail.add_member(:active_input_attachment_name, Shapes::ShapeRef.new(shape: __string, location_name: "activeInputAttachmentName"))
     PipelineDetail.add_member(:active_input_switch_action_name, Shapes::ShapeRef.new(shape: __string, location_name: "activeInputSwitchActionName"))
+    PipelineDetail.add_member(:active_motion_graphics_action_name, Shapes::ShapeRef.new(shape: __string, location_name: "activeMotionGraphicsActionName"))
+    PipelineDetail.add_member(:active_motion_graphics_uri, Shapes::ShapeRef.new(shape: __string, location_name: "activeMotionGraphicsUri"))
     PipelineDetail.add_member(:pipeline_id, Shapes::ShapeRef.new(shape: __string, location_name: "pipelineId"))
     PipelineDetail.struct_class = Types::PipelineDetail
 
@@ -2629,6 +2656,8 @@ module Aws::MediaLive
     ScheduleActionSettings.add_member(:hls_timed_metadata_settings, Shapes::ShapeRef.new(shape: HlsTimedMetadataScheduleActionSettings, location_name: "hlsTimedMetadataSettings"))
     ScheduleActionSettings.add_member(:input_prepare_settings, Shapes::ShapeRef.new(shape: InputPrepareScheduleActionSettings, location_name: "inputPrepareSettings"))
     ScheduleActionSettings.add_member(:input_switch_settings, Shapes::ShapeRef.new(shape: InputSwitchScheduleActionSettings, location_name: "inputSwitchSettings"))
+    ScheduleActionSettings.add_member(:motion_graphics_image_activate_settings, Shapes::ShapeRef.new(shape: MotionGraphicsActivateScheduleActionSettings, location_name: "motionGraphicsImageActivateSettings"))
+    ScheduleActionSettings.add_member(:motion_graphics_image_deactivate_settings, Shapes::ShapeRef.new(shape: MotionGraphicsDeactivateScheduleActionSettings, location_name: "motionGraphicsImageDeactivateSettings"))
     ScheduleActionSettings.add_member(:pause_state_settings, Shapes::ShapeRef.new(shape: PauseStateScheduleActionSettings, location_name: "pauseStateSettings"))
     ScheduleActionSettings.add_member(:scte_35_return_to_network_settings, Shapes::ShapeRef.new(shape: Scte35ReturnToNetworkScheduleActionSettings, location_name: "scte35ReturnToNetworkSettings"))
     ScheduleActionSettings.add_member(:scte_35_splice_insert_settings, Shapes::ShapeRef.new(shape: Scte35SpliceInsertScheduleActionSettings, location_name: "scte35SpliceInsertSettings"))
@@ -2853,7 +2882,6 @@ module Aws::MediaLive
     TransferringInputDeviceSummary.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     TransferringInputDeviceSummary.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     TransferringInputDeviceSummary.add_member(:target_customer_id, Shapes::ShapeRef.new(shape: __string, location_name: "targetCustomerId"))
-    TransferringInputDeviceSummary.add_member(:target_region, Shapes::ShapeRef.new(shape: __string, location_name: "targetRegion"))
     TransferringInputDeviceSummary.add_member(:transfer_type, Shapes::ShapeRef.new(shape: InputDeviceTransferType, location_name: "transferType"))
     TransferringInputDeviceSummary.struct_class = Types::TransferringInputDeviceSummary
 

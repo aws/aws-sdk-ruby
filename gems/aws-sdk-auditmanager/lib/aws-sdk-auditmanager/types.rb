@@ -65,7 +65,9 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # You do not have sufficient access to perform this action.
+    # Your account is not registered with AWS Audit Manager. Check the
+    # delegated administrator setup on the AWS Audit Manager settings page,
+    # and try again.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1244,7 +1246,8 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] source_keyword
-    #   The keyword to search for in AWS CloudTrail logs.
+    #   The keyword to search for in AWS CloudTrail logs, AWS Config rules,
+    #   AWS Security Hub checks, and AWS API names.
     #   @return [Types::SourceKeyword]
     #
     # @!attribute [rw] source_frequency
@@ -1637,7 +1640,8 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] source_keyword
-    #   The keyword to search for in AWS CloudTrail logs.
+    #   The keyword to search for in AWS CloudTrail logs, AWS Config rules,
+    #   AWS Security Hub checks, and AWS API names.
     #   @return [Types::SourceKeyword]
     #
     # @!attribute [rw] source_frequency
@@ -2399,10 +2403,17 @@ module Aws::AuditManager
     #   of an AWS Audit Manager framework.
     #   @return [Types::Assessment]
     #
+    # @!attribute [rw] user_role
+    #   The wrapper that contains the AWS Audit Manager role information of
+    #   the current user, such as the role type and IAM Amazon Resource Name
+    #   (ARN).
+    #   @return [Types::Role]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetAssessmentResponse AWS API Documentation
     #
     class GetAssessmentResponse < Struct.new(
-      :assessment)
+      :assessment,
+      :user_role)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3393,8 +3404,9 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The wrapper that contains AWS Audit Manager role information, such as
-    # the role type and IAM Amazon Resource Name (ARN).
+    # The wrapper that contains the AWS Audit Manager role information of
+    # the current user, such as the role type and IAM Amazon Resource Name
+    # (ARN).
     #
     # @note When making an API call, you may pass Role
     #   data as a hash:
@@ -3534,7 +3546,8 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The keyword to search for in AWS CloudTrail logs.
+    # The keyword to search for in AWS CloudTrail logs, AWS Config rules,
+    # AWS Security Hub checks, and AWS API names.
     #
     # @note When making an API call, you may pass SourceKeyword
     #   data as a hash:
@@ -3549,7 +3562,8 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] keyword_value
-    #   The value of the keyword used to search AWS CloudTrail logs when
+    #   The value of the keyword used to search AWS CloudTrail logs, AWS
+    #   Config rules, AWS Security Hub checks, and AWS API names when
     #   mapping a control data source.
     #   @return [String]
     #

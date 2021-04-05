@@ -1471,6 +1471,14 @@ module Aws::MediaLive
     #                 },
     #                 url_path: ["__string"],
     #               },
+    #               motion_graphics_image_activate_settings: {
+    #                 duration: 1,
+    #                 password_param: "__string",
+    #                 url: "__string",
+    #                 username: "__string",
+    #               },
+    #               motion_graphics_image_deactivate_settings: {
+    #               },
     #               pause_state_settings: {
     #                 pipelines: [
     #                   {
@@ -1831,6 +1839,14 @@ module Aws::MediaLive
     #                     },
     #                   },
     #                   url_path: ["__string"],
+    #                 },
+    #                 motion_graphics_image_activate_settings: {
+    #                   duration: 1,
+    #                   password_param: "__string",
+    #                   url: "__string",
+    #                   username: "__string",
+    #                 },
+    #                 motion_graphics_image_deactivate_settings: {
     #                 },
     #                 pause_state_settings: {
     #                   pipelines: [
@@ -2283,8 +2299,8 @@ module Aws::MediaLive
     #             y_position: 1,
     #           },
     #           ebu_tt_d_destination_settings: {
-    #             fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
     #             copyright_holder: "__stringMax1000",
+    #             fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
     #             font_family: "__string",
     #             style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #           },
@@ -2405,8 +2421,8 @@ module Aws::MediaLive
     #           y_position: 1,
     #         },
     #         ebu_tt_d_destination_settings: {
-    #           fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
     #           copyright_holder: "__stringMax1000",
+    #           fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
     #           font_family: "__string",
     #           style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #         },
@@ -3285,8 +3301,8 @@ module Aws::MediaLive
     #                   y_position: 1,
     #                 },
     #                 ebu_tt_d_destination_settings: {
-    #                   fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
     #                   copyright_holder: "__stringMax1000",
+    #                   fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
     #                   font_family: "__string",
     #                   style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #                 },
@@ -3335,6 +3351,13 @@ module Aws::MediaLive
     #             output_locking_mode: "EPOCH_LOCKING", # accepts EPOCH_LOCKING, PIPELINE_LOCKING
     #             output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
     #             support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
+    #           },
+    #           motion_graphics_configuration: {
+    #             motion_graphics_insertion: "DISABLED", # accepts DISABLED, ENABLED
+    #             motion_graphics_settings: { # required
+    #               html_motion_graphics_settings: {
+    #               },
+    #             },
     #           },
     #           nielsen_configuration: {
     #             distributor_id: "__string",
@@ -6246,24 +6269,24 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
     #         copyright_holder: "__stringMax1000",
+    #         fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
     #         font_family: "__string",
     #         style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #       }
-    #
-    # @!attribute [rw] fill_line_gap
-    #   Specifies how to handle the gap between the lines (in multi-line
-    #   captions). - enabled: Fill with the captions background color (as
-    #   specified in the input captions). - disabled: Leave the gap
-    #   unfilled.
-    #   @return [String]
     #
     # @!attribute [rw] copyright_holder
     #   Applies only if you plan to convert these source captions to
     #   EBU-TT-D or TTML in an output. Complete this field if you want to
     #   include the name of the copyright holder in the copyright metadata
     #   tag in the TTML
+    #   @return [String]
+    #
+    # @!attribute [rw] fill_line_gap
+    #   Specifies how to handle the gap between the lines (in multi-line
+    #   captions). - enabled: Fill with the captions background color (as
+    #   specified in the input captions). - disabled: Leave the gap
+    #   unfilled.
     #   @return [String]
     #
     # @!attribute [rw] font_family
@@ -6297,8 +6320,8 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EbuTtDDestinationSettings AWS API Documentation
     #
     class EbuTtDDestinationSettings < Struct.new(
-      :fill_line_gap,
       :copyright_holder,
+      :fill_line_gap,
       :font_family,
       :style_control)
       SENSITIVE = []
@@ -6552,8 +6575,8 @@ module Aws::MediaLive
     #                 y_position: 1,
     #               },
     #               ebu_tt_d_destination_settings: {
-    #                 fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
     #                 copyright_holder: "__stringMax1000",
+    #                 fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
     #                 font_family: "__string",
     #                 style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #               },
@@ -6602,6 +6625,13 @@ module Aws::MediaLive
     #           output_locking_mode: "EPOCH_LOCKING", # accepts EPOCH_LOCKING, PIPELINE_LOCKING
     #           output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
     #           support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
+    #         },
+    #         motion_graphics_configuration: {
+    #           motion_graphics_insertion: "DISABLED", # accepts DISABLED, ENABLED
+    #           motion_graphics_settings: { # required
+    #             html_motion_graphics_settings: {
+    #             },
+    #           },
     #         },
     #         nielsen_configuration: {
     #           distributor_id: "__string",
@@ -7166,6 +7196,10 @@ module Aws::MediaLive
     #   Configuration settings that apply to the event as a whole.
     #   @return [Types::GlobalConfiguration]
     #
+    # @!attribute [rw] motion_graphics_configuration
+    #   Settings for motion graphics.
+    #   @return [Types::MotionGraphicsConfiguration]
+    #
     # @!attribute [rw] nielsen_configuration
     #   Nielsen configuration settings.
     #   @return [Types::NielsenConfiguration]
@@ -7191,6 +7225,7 @@ module Aws::MediaLive
       :caption_descriptions,
       :feature_activations,
       :global_configuration,
+      :motion_graphics_configuration,
       :nielsen_configuration,
       :output_groups,
       :timecode_config,
@@ -9429,6 +9464,14 @@ module Aws::MediaLive
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Html Motion Graphics Settings
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HtmlMotionGraphicsSettings AWS API Documentation
+    #
+    class HtmlMotionGraphicsSettings < Aws::EmptyStructure; end
 
     # Settings to configure an action so that it occurs as soon as possible.
     #
@@ -12162,6 +12205,113 @@ module Aws::MediaLive
     #
     class MediaPackageOutputSettings < Aws::EmptyStructure; end
 
+    # Settings to specify the rendering of motion graphics into the video
+    # stream.
+    #
+    # @note When making an API call, you may pass MotionGraphicsActivateScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         duration: 1,
+    #         password_param: "__string",
+    #         url: "__string",
+    #         username: "__string",
+    #       }
+    #
+    # @!attribute [rw] duration
+    #   Duration (in milliseconds) that motion graphics should render on to
+    #   the video stream. Leaving out this property or setting to 0 will
+    #   result in rendering continuing until a deactivate action is
+    #   processed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] password_param
+    #   Key used to extract the password from EC2 Parameter store
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   URI of the HTML5 content to be rendered into the live stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   Username if credentials are required to access a file. This must be
+    #   a reference to an AWS parameter store name from which the password
+    #   can be retrieved. AWS Parameter store format: \\"ssm://<parameter
+    #   name="">"</p> </parameter>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MotionGraphicsActivateScheduleActionSettings AWS API Documentation
+    #
+    class MotionGraphicsActivateScheduleActionSettings < Struct.new(
+      :duration,
+      :password_param,
+      :url,
+      :username)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Motion Graphics Configuration
+    #
+    # @note When making an API call, you may pass MotionGraphicsConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         motion_graphics_insertion: "DISABLED", # accepts DISABLED, ENABLED
+    #         motion_graphics_settings: { # required
+    #           html_motion_graphics_settings: {
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] motion_graphics_insertion
+    #   Motion Graphics Insertion
+    #   @return [String]
+    #
+    # @!attribute [rw] motion_graphics_settings
+    #   Motion Graphics Settings
+    #   @return [Types::MotionGraphicsSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MotionGraphicsConfiguration AWS API Documentation
+    #
+    class MotionGraphicsConfiguration < Struct.new(
+      :motion_graphics_insertion,
+      :motion_graphics_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings to specify the ending of rendering motion graphics into the
+    # video stream.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MotionGraphicsDeactivateScheduleActionSettings AWS API Documentation
+    #
+    class MotionGraphicsDeactivateScheduleActionSettings < Aws::EmptyStructure; end
+
+    # Motion Graphics Settings
+    #
+    # @note When making an API call, you may pass MotionGraphicsSettings
+    #   data as a hash:
+    #
+    #       {
+    #         html_motion_graphics_settings: {
+    #         },
+    #       }
+    #
+    # @!attribute [rw] html_motion_graphics_settings
+    #   Html Motion Graphics Settings
+    #   @return [Types::HtmlMotionGraphicsSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MotionGraphicsSettings AWS API Documentation
+    #
+    class MotionGraphicsSettings < Struct.new(
+      :html_motion_graphics_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Mp2 Settings
     #
     # @note When making an API call, you may pass Mp2Settings
@@ -14587,6 +14737,17 @@ module Aws::MediaLive
     #   attachment for this pipeline.
     #   @return [String]
     #
+    # @!attribute [rw] active_motion_graphics_action_name
+    #   The name of the motion graphics activate action that occurred most
+    #   recently and that resulted in the current graphics URI for this
+    #   pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_motion_graphics_uri
+    #   The current URI being used for HTML5 motion graphics for this
+    #   pipeline.
+    #   @return [String]
+    #
     # @!attribute [rw] pipeline_id
     #   Pipeline ID
     #   @return [String]
@@ -14596,6 +14757,8 @@ module Aws::MediaLive
     class PipelineDetail < Struct.new(
       :active_input_attachment_name,
       :active_input_switch_action_name,
+      :active_motion_graphics_action_name,
+      :active_motion_graphics_uri,
       :pipeline_id)
       SENSITIVE = []
       include Aws::Structure
@@ -15171,6 +15334,14 @@ module Aws::MediaLive
     #             },
     #             url_path: ["__string"],
     #           },
+    #           motion_graphics_image_activate_settings: {
+    #             duration: 1,
+    #             password_param: "__string",
+    #             url: "__string",
+    #             username: "__string",
+    #           },
+    #           motion_graphics_image_deactivate_settings: {
+    #           },
     #           pause_state_settings: {
     #             pipelines: [
     #               {
@@ -15312,6 +15483,14 @@ module Aws::MediaLive
     #           },
     #           url_path: ["__string"],
     #         },
+    #         motion_graphics_image_activate_settings: {
+    #           duration: 1,
+    #           password_param: "__string",
+    #           url: "__string",
+    #           username: "__string",
+    #         },
+    #         motion_graphics_image_deactivate_settings: {
+    #         },
     #         pause_state_settings: {
     #           pipelines: [
     #             {
@@ -15390,6 +15569,14 @@ module Aws::MediaLive
     #   Action to switch the input
     #   @return [Types::InputSwitchScheduleActionSettings]
     #
+    # @!attribute [rw] motion_graphics_image_activate_settings
+    #   Action to activate a motion graphics image overlay
+    #   @return [Types::MotionGraphicsActivateScheduleActionSettings]
+    #
+    # @!attribute [rw] motion_graphics_image_deactivate_settings
+    #   Action to deactivate a motion graphics image overlay
+    #   @return [Types::MotionGraphicsDeactivateScheduleActionSettings]
+    #
     # @!attribute [rw] pause_state_settings
     #   Action to pause or unpause one or both channel pipelines
     #   @return [Types::PauseStateScheduleActionSettings]
@@ -15421,6 +15608,8 @@ module Aws::MediaLive
       :hls_timed_metadata_settings,
       :input_prepare_settings,
       :input_switch_settings,
+      :motion_graphics_image_activate_settings,
+      :motion_graphics_image_deactivate_settings,
       :pause_state_settings,
       :scte_35_return_to_network_settings,
       :scte_35_splice_insert_settings,
@@ -16808,9 +16997,6 @@ module Aws::MediaLive
     #   The AWS account ID for the recipient of the input device transfer.
     #   @return [String]
     #
-    # @!attribute [rw] target_region
-    #   @return [String]
-    #
     # @!attribute [rw] transfer_type
     #   The type (direction) of the input device transfer.
     #   @return [String]
@@ -16821,7 +17007,6 @@ module Aws::MediaLive
       :id,
       :message,
       :target_customer_id,
-      :target_region,
       :transfer_type)
       SENSITIVE = []
       include Aws::Structure
@@ -17433,8 +17618,8 @@ module Aws::MediaLive
     #                   y_position: 1,
     #                 },
     #                 ebu_tt_d_destination_settings: {
-    #                   fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
     #                   copyright_holder: "__stringMax1000",
+    #                   fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
     #                   font_family: "__string",
     #                   style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #                 },
@@ -17483,6 +17668,13 @@ module Aws::MediaLive
     #             output_locking_mode: "EPOCH_LOCKING", # accepts EPOCH_LOCKING, PIPELINE_LOCKING
     #             output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
     #             support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
+    #           },
+    #           motion_graphics_configuration: {
+    #             motion_graphics_insertion: "DISABLED", # accepts DISABLED, ENABLED
+    #             motion_graphics_settings: { # required
+    #               html_motion_graphics_settings: {
+    #               },
+    #             },
     #           },
     #           nielsen_configuration: {
     #             distributor_id: "__string",

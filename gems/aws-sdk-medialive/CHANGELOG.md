@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2021-04-05)
+------------------
+
+* Feature - MediaLive now support HTML5 Motion Graphics overlay
+
 1.68.0 (2021-03-25)
 ------------------
 

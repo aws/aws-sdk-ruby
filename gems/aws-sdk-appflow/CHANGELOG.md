@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2021-04-05)
+------------------
+
+* Feature - Added destination properties for Zendesk.
+
 1.9.0 (2021-03-10)
 ------------------
 
