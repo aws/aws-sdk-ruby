@@ -44,9 +44,9 @@ module Aws
           end
         end
 
-        let(:seventeen_meg_file) do
+        let(:one_hundred_seventeen_meg_file) do
           Tempfile.new('one-meg-file').tap do |f|
-            17.times { f.write(one_mb) }
+            117.times { f.write(one_mb) }
             f.rewind
           end
         end
@@ -98,11 +98,11 @@ module Aws
             expect(client).to receive(:put_object).with(
               bucket: 'bucket',
               key: 'key',
-              body: seventeen_meg_file
+              body: one_hundred_seventeen_meg_file
             )
             object.upload_file(
-              seventeen_meg_file,
-              multipart_threshold: 20 * one_meg
+              one_hundred_seventeen_meg_file,
+              multipart_threshold: 200 * one_meg
             )
           end
 
@@ -120,7 +120,7 @@ module Aws
         end
 
         context 'large objects' do
-          it 'uses multipart APIs for objects >= 15MB' do
+          it 'uses multipart APIs for objects >= 100MB' do
             client.stub_responses(:create_multipart_upload, upload_id: 'id')
             client.stub_responses(:upload_part, etag: 'etag')
             expect(client).to receive(:complete_multipart_upload).with(
@@ -132,25 +132,45 @@ module Aws
                   { etag: 'etag', part_number: 1 },
                   { etag: 'etag', part_number: 2 },
                   { etag: 'etag', part_number: 3 },
-                  { etag: 'etag', part_number: 4 }
+                  { etag: 'etag', part_number: 4 },
+                  { etag: 'etag', part_number: 5 },
+                  { etag: 'etag', part_number: 6 },
+                  { etag: 'etag', part_number: 7 },
+                  { etag: 'etag', part_number: 8 },
+                  { etag: 'etag', part_number: 9 },
+                  { etag: 'etag', part_number: 10 },
+                  { etag: 'etag', part_number: 11 },
+                  { etag: 'etag', part_number: 12 },
+                  { etag: 'etag', part_number: 13 },
+                  { etag: 'etag', part_number: 14 },
+                  { etag: 'etag', part_number: 15 },
+                  { etag: 'etag', part_number: 16 },
+                  { etag: 'etag', part_number: 17 },
+                  { etag: 'etag', part_number: 18 },
+                  { etag: 'etag', part_number: 19 },
+                  { etag: 'etag', part_number: 20 },
+                  { etag: 'etag', part_number: 21 },
+                  { etag: 'etag', part_number: 22 },
+                  { etag: 'etag', part_number: 23 },
+                  { etag: 'etag', part_number: 24 }
                 ]
               }
             )
-            object.upload_file(seventeen_meg_file, content_type: 'text/plain')
+            object.upload_file(one_hundred_seventeen_meg_file, content_type: 'text/plain')
           end
 
           it 'reports progress for multipart uploads' do
             client.stub_responses(:create_multipart_upload, upload_id: 'id')
             client.stub_responses(:complete_multipart_upload)
-            expect(client).to receive(:upload_part).exactly(4).times do |args|
+            expect(client).to receive(:upload_part).exactly(24).times do |args|
               args[:on_chunk_sent].call(args[:body], args[:body].size, args[:body].size)
               double(etag: 'etag')
             end
             callback = proc do |bytes, totals|
-              expect(bytes.size).to eq(4)
-              expect(totals.size).to eq(4)
+              expect(bytes.size).to eq(24)
+              expect(totals.size).to eq(24)
             end
-            object.upload_file(seventeen_meg_file, content_type: 'text/plain', progress_callback: callback)
+            object.upload_file(one_hundred_seventeen_meg_file, content_type: 'text/plain', progress_callback: callback)
           end
 
           it 'raises an error if the multipart threshold is too small' do
@@ -180,7 +200,7 @@ module Aws
             )
 
             expect do
-              object.upload_file(seventeen_meg_file)
+              object.upload_file(one_hundred_seventeen_meg_file)
             end.to raise_error('multipart upload failed: part 3 failed')
           end
 
@@ -198,7 +218,7 @@ module Aws
               :abort_multipart_upload,
               [RuntimeError.new('network-error')]
             )
-            expect { object.upload_file(seventeen_meg_file) }.to raise_error(
+            expect { object.upload_file(one_hundred_seventeen_meg_file) }.to raise_error(
               S3::MultipartUploadError,
               'failed to abort multipart upload: network-error'
             )
