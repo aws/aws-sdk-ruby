@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.233.0 (2021-04-06)
+------------------
+
+* Feature - This release adds support for storing EBS-backed AMIs in S3 and restoring them from S3 to enable cross-partition copying of AMIs
+
 1.232.0 (2021-04-01)
 ------------------
 

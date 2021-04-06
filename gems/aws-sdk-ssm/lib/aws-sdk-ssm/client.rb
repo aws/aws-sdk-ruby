@@ -400,9 +400,7 @@ module Aws::SSM
     #    </note>
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   One or more tags. The value parameter is required, but if you don't
-    #   want the tag to have a value, specify the parameter with no value, and
-    #   we set the value to an empty string.
+    #   One or more tags. The value parameter is required.
     #
     #   Do not enter personally identifiable information in this field.
     #
@@ -2729,7 +2727,7 @@ module Aws::SSM
     #
     # @option params [Boolean] :reverse_order
     #   A boolean that indicates whether to list step executions in reverse
-    #   order by start time. The default value is false.
+    #   order by start time. The default value is 'false'.
     #
     # @return [Types::DescribeAutomationStepExecutionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3338,6 +3336,9 @@ module Aws::SSM
     #   resp.instance_patch_states[0].operation #=> String, one of "Scan", "Install"
     #   resp.instance_patch_states[0].last_no_reboot_install_operation_time #=> Time
     #   resp.instance_patch_states[0].reboot_option #=> String, one of "RebootIfNeeded", "NoReboot"
+    #   resp.instance_patch_states[0].critical_non_compliant_count #=> Integer
+    #   resp.instance_patch_states[0].security_non_compliant_count #=> Integer
+    #   resp.instance_patch_states[0].other_non_compliant_count #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatchStates AWS API Documentation
@@ -3416,6 +3417,9 @@ module Aws::SSM
     #   resp.instance_patch_states[0].operation #=> String, one of "Scan", "Install"
     #   resp.instance_patch_states[0].last_no_reboot_install_operation_time #=> Time
     #   resp.instance_patch_states[0].reboot_option #=> String, one of "RebootIfNeeded", "NoReboot"
+    #   resp.instance_patch_states[0].critical_non_compliant_count #=> Integer
+    #   resp.instance_patch_states[0].security_non_compliant_count #=> Integer
+    #   resp.instance_patch_states[0].other_non_compliant_count #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatchStatesForPatchGroup AWS API Documentation
@@ -4379,6 +4383,9 @@ module Aws::SSM
     #   * {Types::DescribePatchGroupStateResult#instances_with_failed_patches #instances_with_failed_patches} => Integer
     #   * {Types::DescribePatchGroupStateResult#instances_with_not_applicable_patches #instances_with_not_applicable_patches} => Integer
     #   * {Types::DescribePatchGroupStateResult#instances_with_unreported_not_applicable_patches #instances_with_unreported_not_applicable_patches} => Integer
+    #   * {Types::DescribePatchGroupStateResult#instances_with_critical_non_compliant_patches #instances_with_critical_non_compliant_patches} => Integer
+    #   * {Types::DescribePatchGroupStateResult#instances_with_security_non_compliant_patches #instances_with_security_non_compliant_patches} => Integer
+    #   * {Types::DescribePatchGroupStateResult#instances_with_other_non_compliant_patches #instances_with_other_non_compliant_patches} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -4397,6 +4404,9 @@ module Aws::SSM
     #   resp.instances_with_failed_patches #=> Integer
     #   resp.instances_with_not_applicable_patches #=> Integer
     #   resp.instances_with_unreported_not_applicable_patches #=> Integer
+    #   resp.instances_with_critical_non_compliant_patches #=> Integer
+    #   resp.instances_with_security_non_compliant_patches #=> Integer
+    #   resp.instances_with_other_non_compliant_patches #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchGroupState AWS API Documentation
     #
@@ -4854,23 +4864,34 @@ module Aws::SSM
     # Returns detailed information about command execution for an invocation
     # or plugin.
     #
+    # `GetCommandInvocation` only gives the execution status of a plugin in
+    # a document. To get the command execution status on a specific
+    # instance, use ListCommandInvocations. To get the command execution
+    # status across instances, use ListCommands.
+    #
     # @option params [required, String] :command_id
     #   (Required) The parent command ID of the invocation plugin.
     #
     # @option params [required, String] :instance_id
     #   (Required) The ID of the managed instance targeted by the command. A
-    #   managed instance can be an EC2 instance or an instance in your hybrid
-    #   environment that is configured for Systems Manager.
+    #   managed instance can be an Amazon Elastic Compute Cloud (Amazon EC2)
+    #   instance or an instance in your hybrid environment that is configured
+    #   for AWS Systems Manager.
     #
     # @option params [String] :plugin_name
     #   The name of the plugin for which you want detailed results. If the
     #   document contains only one plugin, you can omit the name and details
-    #   for that plugin are returned. If the document contains more than one
-    #   plugin, you must specify the name of the plugin for which you want to
-    #   view details.
+    #   for that plugin. If the document contains more than one plugin, you
+    #   must specify the name of the plugin for which you want to view
+    #   details.
     #
     #   Plugin names are also referred to as *step names* in Systems Manager
     #   documents. For example, `aws:RunShellScript` is a plugin.
+    #
+    #   To find the `PluginName`, check the document content and find the name
+    #   of the plugin. Alternatively, use ListCommandInvocations with the
+    #   `CommandId` and `Details` parameters. The `PluginName` is the `Name`
+    #   attribute of the `CommandPlugin` object in the `CommandPlugins` list.
     #
     # @return [Types::GetCommandInvocationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6270,9 +6291,8 @@ module Aws::SSM
     # * You can't create a label when you create a new parameter. You must
     #   attach a label to a specific version of a parameter.
     #
-    # * You can't delete a parameter label. If you no longer want to use a
-    #   parameter label, then you must move it to a different version of a
-    #   parameter.
+    # * If you no longer want to use a parameter label, then you can either
+    #   delete it or move it to a different version of a parameter.
     #
     # * A label can have a maximum of 100 characters.
     #
@@ -6499,7 +6519,7 @@ module Aws::SSM
     #
     # @option params [Boolean] :details
     #   (Optional) If set this returns the response of the command executions
-    #   and any command output. By default this is set to False.
+    #   and any command output. The default value is 'false'.
     #
     # @return [Types::ListCommandInvocationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7706,8 +7726,7 @@ module Aws::SSM
     #     the `Key ID` parameter.
     #
     # @option params [Boolean] :overwrite
-    #   Overwrite an existing parameter. If not specified, will default to
-    #   "false".
+    #   Overwrite an existing parameter. The default value is 'false'.
     #
     # @option params [String] :allowed_pattern
     #   A regular expression used to validate the parameter value. For
@@ -8947,6 +8966,16 @@ module Aws::SSM
     #
     #   * `Key=Region,Value=us-east-2`
     #
+    # @option params [Time,DateTime,Date,Integer,String] :scheduled_end_time
+    #   The time that the requester expects the runbook workflow related to
+    #   the change request to complete. The time is an estimate only that the
+    #   requester provides for reviewers.
+    #
+    # @option params [String] :change_details
+    #   User-provided details about the change. If no details are provided,
+    #   content specified in the **Template information** section of the
+    #   associated change template is added.
+    #
     # @return [Types::StartChangeRequestExecutionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartChangeRequestExecutionResult#automation_execution_id #automation_execution_id} => String
@@ -8995,6 +9024,8 @@ module Aws::SSM
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     scheduled_end_time: Time.now,
+    #     change_details: "ChangeDetailsValue",
     #   })
     #
     # @example Response structure
@@ -9126,6 +9157,47 @@ module Aws::SSM
     # @param [Hash] params ({})
     def terminate_session(params = {}, options = {})
       req = build_request(:terminate_session, params)
+      req.send_request(options)
+    end
+
+    # Remove a label or labels from a parameter.
+    #
+    # @option params [required, String] :name
+    #   The parameter name of which you want to delete one or more labels.
+    #
+    # @option params [required, Integer] :parameter_version
+    #   The specific version of the parameter which you want to delete one or
+    #   more labels from. If it is not present, the call will fail.
+    #
+    # @option params [required, Array<String>] :labels
+    #   One or more labels to delete from the specified parameter version.
+    #
+    # @return [Types::UnlabelParameterVersionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UnlabelParameterVersionResult#removed_labels #removed_labels} => Array&lt;String&gt;
+    #   * {Types::UnlabelParameterVersionResult#invalid_labels #invalid_labels} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.unlabel_parameter_version({
+    #     name: "PSParameterName", # required
+    #     parameter_version: 1, # required
+    #     labels: ["ParameterLabel"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.removed_labels #=> Array
+    #   resp.removed_labels[0] #=> String
+    #   resp.invalid_labels #=> Array
+    #   resp.invalid_labels[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UnlabelParameterVersion AWS API Documentation
+    #
+    # @overload unlabel_parameter_version(params = {})
+    # @param [Hash] params ({})
+    def unlabel_parameter_version(params = {}, options = {})
+      req = build_request(:unlabel_parameter_version, params)
       req.send_request(options)
     end
 
@@ -9471,10 +9543,10 @@ module Aws::SSM
     #   changed.
     #
     # @option params [String] :document_version
-    #   (Required) The latest version of the document that you want to update.
-    #   The latest document version can be specified using the $LATEST
-    #   variable or by the version number. Updating a previous version of a
-    #   document is not supported.
+    #   The version of the document that you want to update. Currently,
+    #   Systems Manager supports updating only the latest version of the
+    #   document. You can specify the version number of the latest version or
+    #   use the `$LATEST` variable.
     #
     # @option params [String] :document_format
     #   Specify the document format for the new document version. Systems
@@ -10739,7 +10811,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.108.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

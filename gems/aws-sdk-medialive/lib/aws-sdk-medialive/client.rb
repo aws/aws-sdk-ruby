@@ -2347,8 +2347,10 @@ module Aws::MediaLive
     #   resp.channel.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["__string"] #=> String
-    #   resp.channel.vpc.public_address_allocation_ids #=> Array
-    #   resp.channel.vpc.public_address_allocation_ids[0] #=> String
+    #   resp.channel.vpc.availability_zones #=> Array
+    #   resp.channel.vpc.availability_zones[0] #=> String
+    #   resp.channel.vpc.network_interface_ids #=> Array
+    #   resp.channel.vpc.network_interface_ids[0] #=> String
     #   resp.channel.vpc.security_group_ids #=> Array
     #   resp.channel.vpc.security_group_ids[0] #=> String
     #   resp.channel.vpc.subnet_ids #=> Array
@@ -2784,7 +2786,7 @@ module Aws::MediaLive
     #   * {Types::DeleteChannelResponse#role_arn #role_arn} => String
     #   * {Types::DeleteChannelResponse#state #state} => String
     #   * {Types::DeleteChannelResponse#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::DeleteChannelResponse#vpc #vpc} => Types::VpcOutputSettings
+    #   * {Types::DeleteChannelResponse#vpc #vpc} => Types::VpcOutputSettingsDescription
     #
     # @example Request syntax with placeholder values
     #
@@ -3387,8 +3389,10 @@ module Aws::MediaLive
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
-    #   resp.vpc.public_address_allocation_ids #=> Array
-    #   resp.vpc.public_address_allocation_ids[0] #=> String
+    #   resp.vpc.availability_zones #=> Array
+    #   resp.vpc.availability_zones[0] #=> String
+    #   resp.vpc.network_interface_ids #=> Array
+    #   resp.vpc.network_interface_ids[0] #=> String
     #   resp.vpc.security_group_ids #=> Array
     #   resp.vpc.security_group_ids[0] #=> String
     #   resp.vpc.subnet_ids #=> Array
@@ -3695,7 +3699,7 @@ module Aws::MediaLive
     #   * {Types::DescribeChannelResponse#role_arn #role_arn} => String
     #   * {Types::DescribeChannelResponse#state #state} => String
     #   * {Types::DescribeChannelResponse#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::DescribeChannelResponse#vpc #vpc} => Types::VpcOutputSettings
+    #   * {Types::DescribeChannelResponse#vpc #vpc} => Types::VpcOutputSettingsDescription
     #
     # @example Request syntax with placeholder values
     #
@@ -4298,8 +4302,10 @@ module Aws::MediaLive
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
-    #   resp.vpc.public_address_allocation_ids #=> Array
-    #   resp.vpc.public_address_allocation_ids[0] #=> String
+    #   resp.vpc.availability_zones #=> Array
+    #   resp.vpc.availability_zones[0] #=> String
+    #   resp.vpc.network_interface_ids #=> Array
+    #   resp.vpc.network_interface_ids[0] #=> String
     #   resp.vpc.security_group_ids #=> Array
     #   resp.vpc.security_group_ids[0] #=> String
     #   resp.vpc.subnet_ids #=> Array
@@ -4989,8 +4995,10 @@ module Aws::MediaLive
     #   resp.channels[0].state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.channels[0].tags #=> Hash
     #   resp.channels[0].tags["__string"] #=> String
-    #   resp.channels[0].vpc.public_address_allocation_ids #=> Array
-    #   resp.channels[0].vpc.public_address_allocation_ids[0] #=> String
+    #   resp.channels[0].vpc.availability_zones #=> Array
+    #   resp.channels[0].vpc.availability_zones[0] #=> String
+    #   resp.channels[0].vpc.network_interface_ids #=> Array
+    #   resp.channels[0].vpc.network_interface_ids[0] #=> String
     #   resp.channels[0].vpc.security_group_ids #=> Array
     #   resp.channels[0].vpc.security_group_ids[0] #=> String
     #   resp.channels[0].vpc.subnet_ids #=> Array
@@ -5037,6 +5045,7 @@ module Aws::MediaLive
     #   resp.input_device_transfers[0].id #=> String
     #   resp.input_device_transfers[0].message #=> String
     #   resp.input_device_transfers[0].target_customer_id #=> String
+    #   resp.input_device_transfers[0].target_region #=> String
     #   resp.input_device_transfers[0].transfer_type #=> String, one of "OUTGOING", "INCOMING"
     #   resp.next_token #=> String
     #
@@ -5613,7 +5622,7 @@ module Aws::MediaLive
     #   * {Types::StartChannelResponse#role_arn #role_arn} => String
     #   * {Types::StartChannelResponse#state #state} => String
     #   * {Types::StartChannelResponse#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::StartChannelResponse#vpc #vpc} => Types::VpcOutputSettings
+    #   * {Types::StartChannelResponse#vpc #vpc} => Types::VpcOutputSettingsDescription
     #
     # @example Request syntax with placeholder values
     #
@@ -6216,8 +6225,10 @@ module Aws::MediaLive
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
-    #   resp.vpc.public_address_allocation_ids #=> Array
-    #   resp.vpc.public_address_allocation_ids[0] #=> String
+    #   resp.vpc.availability_zones #=> Array
+    #   resp.vpc.availability_zones[0] #=> String
+    #   resp.vpc.network_interface_ids #=> Array
+    #   resp.vpc.network_interface_ids[0] #=> String
     #   resp.vpc.security_group_ids #=> Array
     #   resp.vpc.security_group_ids[0] #=> String
     #   resp.vpc.subnet_ids #=> Array
@@ -6306,7 +6317,7 @@ module Aws::MediaLive
     #   * {Types::StopChannelResponse#role_arn #role_arn} => String
     #   * {Types::StopChannelResponse#state #state} => String
     #   * {Types::StopChannelResponse#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::StopChannelResponse#vpc #vpc} => Types::VpcOutputSettings
+    #   * {Types::StopChannelResponse#vpc #vpc} => Types::VpcOutputSettingsDescription
     #
     # @example Request syntax with placeholder values
     #
@@ -6909,8 +6920,10 @@ module Aws::MediaLive
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
-    #   resp.vpc.public_address_allocation_ids #=> Array
-    #   resp.vpc.public_address_allocation_ids[0] #=> String
+    #   resp.vpc.availability_zones #=> Array
+    #   resp.vpc.availability_zones[0] #=> String
+    #   resp.vpc.network_interface_ids #=> Array
+    #   resp.vpc.network_interface_ids[0] #=> String
     #   resp.vpc.security_group_ids #=> Array
     #   resp.vpc.security_group_ids[0] #=> String
     #   resp.vpc.subnet_ids #=> Array
@@ -8561,8 +8574,10 @@ module Aws::MediaLive
     #   resp.channel.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["__string"] #=> String
-    #   resp.channel.vpc.public_address_allocation_ids #=> Array
-    #   resp.channel.vpc.public_address_allocation_ids[0] #=> String
+    #   resp.channel.vpc.availability_zones #=> Array
+    #   resp.channel.vpc.availability_zones[0] #=> String
+    #   resp.channel.vpc.network_interface_ids #=> Array
+    #   resp.channel.vpc.network_interface_ids[0] #=> String
     #   resp.channel.vpc.security_group_ids #=> Array
     #   resp.channel.vpc.security_group_ids[0] #=> String
     #   resp.channel.vpc.subnet_ids #=> Array
@@ -9215,8 +9230,10 @@ module Aws::MediaLive
     #   resp.channel.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["__string"] #=> String
-    #   resp.channel.vpc.public_address_allocation_ids #=> Array
-    #   resp.channel.vpc.public_address_allocation_ids[0] #=> String
+    #   resp.channel.vpc.availability_zones #=> Array
+    #   resp.channel.vpc.availability_zones[0] #=> String
+    #   resp.channel.vpc.network_interface_ids #=> Array
+    #   resp.channel.vpc.network_interface_ids[0] #=> String
     #   resp.channel.vpc.security_group_ids #=> Array
     #   resp.channel.vpc.security_group_ids[0] #=> String
     #   resp.channel.vpc.subnet_ids #=> Array
@@ -9658,7 +9675,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3332,7 +3332,8 @@ module Aws::EC2
     # Initiates the copy of an AMI. You can copy an AMI from one Region to
     # another, or from a Region to an AWS Outpost. You can't copy an AMI
     # from an Outpost to a Region, from one Outpost to another, or within
-    # the same Outpost.
+    # the same Outpost. To copy an AMI to another partition, see
+    # [CreateStoreImageTask][1].
     #
     # To copy an AMI from one Region to another, specify the source Region
     # using the **SourceRegion** parameter, and specify the destination
@@ -3348,18 +3349,17 @@ module Aws::EC2
     # encryption key for the Region, or a different key that you specify in
     # the request using **KmsKeyId**. Outposts do not support unencrypted
     # snapshots. For more information, [ Amazon EBS local snapshots on
-    # Outposts][1] in the *Amazon Elastic Compute Cloud User Guide*.
-    #
-    #
+    # Outposts][2] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     # For more information about the prerequisites and limits when copying
-    # an AMI, see [Copying an AMI][2] in the *Amazon Elastic Compute Cloud
+    # an AMI, see [Copying an AMI][3] in the *Amazon Elastic Compute Cloud
     # User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure idempotency of
@@ -7547,6 +7547,86 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Starts a task that restores an AMI from an S3 object that was
+    # previously created by using [CreateStoreImageTask][1].
+    #
+    # To use this API, you must have the required permissions. For more
+    # information, see [Permissions for storing and restoring AMIs using
+    # S3][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    # For more information, see [Store and restore an AMI using S3][3] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html
+    #
+    # @option params [required, String] :bucket
+    #   The name of the S3 bucket that contains the stored AMI object.
+    #
+    # @option params [required, String] :object_key
+    #   The name of the stored AMI object in the bucket.
+    #
+    # @option params [String] :name
+    #   The name for the restored AMI. The name must be unique for AMIs in the
+    #   Region for this account. If you do not provide a name, the new AMI
+    #   gets the same name as the original AMI.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the AMI and snapshots on restoration. You can tag
+    #   the AMI, the snapshots, or both.
+    #
+    #   * To tag the AMI, the value for `ResourceType` must be `image`.
+    #
+    #   * To tag the snapshots, the value for `ResourceType` must be
+    #     `snapshot`. The same tag is applied to all of the snapshots that are
+    #     created.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CreateRestoreImageTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRestoreImageTaskResult#image_id #image_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_restore_image_task({
+    #     bucket: "String", # required
+    #     object_key: "String", # required
+    #     name: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRestoreImageTask AWS API Documentation
+    #
+    # @overload create_restore_image_task(params = {})
+    # @param [Hash] params ({})
+    def create_restore_image_task(params = {}, options = {})
+      req = build_request(:create_restore_image_task, params)
+      req.send_request(options)
+    end
+
     # Creates a route in a route table within a VPC.
     #
     # You must specify one of the following targets: internet gateway or
@@ -8282,6 +8362,70 @@ module Aws::EC2
     # @param [Hash] params ({})
     def create_spot_datafeed_subscription(params = {}, options = {})
       req = build_request(:create_spot_datafeed_subscription, params)
+      req.send_request(options)
+    end
+
+    # Stores an AMI as a single object in an S3 bucket.
+    #
+    # To use this API, you must have the required permissions. For more
+    # information, see [Permissions for storing and restoring AMIs using
+    # S3][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    # For more information, see [Store and restore an AMI using S3][2] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html
+    #
+    # @option params [required, String] :image_id
+    #   The ID of the AMI.
+    #
+    # @option params [required, String] :bucket
+    #   The name of the S3 bucket in which the AMI object will be stored. The
+    #   bucket must be in the Region in which the request is being made. The
+    #   AMI object appears in the bucket only after the upload task has
+    #   completed.
+    #
+    # @option params [Array<Types::S3ObjectTag>] :s3_object_tags
+    #   The tags to apply to the AMI object that will be stored in the S3
+    #   bucket.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CreateStoreImageTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateStoreImageTaskResult#object_key #object_key} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_store_image_task({
+    #     image_id: "ImageId", # required
+    #     bucket: "String", # required
+    #     s3_object_tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.object_key #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateStoreImageTask AWS API Documentation
+    #
+    # @overload create_store_image_task(params = {})
+    # @param [Hash] params ({})
+    def create_store_image_task(params = {}, options = {})
+      req = build_request(:create_store_image_task, params)
       req.send_request(options)
     end
 
@@ -24723,6 +24867,98 @@ module Aws::EC2
     # @param [Hash] params ({})
     def describe_stale_security_groups(params = {}, options = {})
       req = build_request(:describe_stale_security_groups, params)
+      req.send_request(options)
+    end
+
+    # Describes the progress of the AMI store tasks. You can describe the
+    # store tasks for specified AMIs. If you don't specify the AMIs, you
+    # get a paginated list of store tasks from the last 31 days.
+    #
+    # For each AMI task, the response indicates if the task is `InProgress`,
+    # `Completed`, or `Failed`. For tasks `InProgress`, the response shows
+    # the estimated progress as a percentage.
+    #
+    # Tasks are listed in reverse chronological order. Currently, only tasks
+    # from the past 31 days can be viewed.
+    #
+    # To use this API, you must have the required permissions. For more
+    # information, see [Permissions for storing and restoring AMIs using
+    # S3][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    # For more information, see [Store and restore an AMI using S3][2] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html
+    #
+    # @option params [Array<String>] :image_ids
+    #   The AMI IDs for which to show progress. Up to 20 AMI IDs can be
+    #   included in a request.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   The filters.
+    #
+    #   * `task-state` - Returns tasks in a certain state (`InProgress` \|
+    #     `Completed` \| `Failed`)
+    #
+    #   * `bucket` - Returns task information for tasks that targeted a
+    #     specific bucket. For the filter value, specify the bucket name.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned `NextToken`
+    #   value. This value can be between 1 and 200. You cannot specify this
+    #   parameter and the `ImageIDs` parameter in the same call.
+    #
+    # @return [Types::DescribeStoreImageTasksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeStoreImageTasksResult#store_image_task_results #store_image_task_results} => Array&lt;Types::StoreImageTaskResult&gt;
+    #   * {Types::DescribeStoreImageTasksResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_store_image_tasks({
+    #     image_ids: ["ImageId"],
+    #     dry_run: false,
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.store_image_task_results #=> Array
+    #   resp.store_image_task_results[0].ami_id #=> String
+    #   resp.store_image_task_results[0].task_start_time #=> Time
+    #   resp.store_image_task_results[0].bucket #=> String
+    #   resp.store_image_task_results[0].s3object_key #=> String
+    #   resp.store_image_task_results[0].progress_percentage #=> Integer
+    #   resp.store_image_task_results[0].store_task_state #=> String
+    #   resp.store_image_task_results[0].store_task_failure_reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeStoreImageTasks AWS API Documentation
+    #
+    # @overload describe_store_image_tasks(params = {})
+    # @param [Hash] params ({})
+    def describe_store_image_tasks(params = {}, options = {})
+      req = build_request(:describe_store_image_tasks, params)
       req.send_request(options)
     end
 
@@ -41206,11 +41442,11 @@ module Aws::EC2
 
     # Unassigns one or more IPv6 addresses from a network interface.
     #
-    # @option params [required, Array<String>] :ipv_6_addresses
-    #   The IPv6 addresses to unassign from the network interface.
-    #
     # @option params [required, String] :network_interface_id
     #   The ID of the network interface.
+    #
+    # @option params [required, Array<String>] :ipv_6_addresses
+    #   The IPv6 addresses to unassign from the network interface.
     #
     # @return [Types::UnassignIpv6AddressesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -41220,8 +41456,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.unassign_ipv_6_addresses({
-    #     ipv_6_addresses: ["String"], # required
     #     network_interface_id: "NetworkInterfaceId", # required
+    #     ipv_6_addresses: ["String"], # required
     #   })
     #
     # @example Response structure
@@ -41609,7 +41845,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.232.0'
+      context[:gem_version] = '1.233.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

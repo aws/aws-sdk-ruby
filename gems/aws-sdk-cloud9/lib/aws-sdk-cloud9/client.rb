@@ -370,29 +370,31 @@ module Aws::Cloud9
     #
     # @option params [String] :image_id
     #   The identifier for the Amazon Machine Image (AMI) that's used to
-    #   create the EC2 instance. You can specify the AMI for the instance
-    #   using an AMI alias or an AWS Systems Manager (SSM) path. The default
-    #   AMI is used if the parameter isn't explicitly assigned a value in the
-    #   request.
+    #   create the EC2 instance. To choose an AMI for the instance, you must
+    #   specify a valid AMI alias or a valid AWS Systems Manager (SSM) path.
+    #
+    #   The default AMI is used if the parameter isn't explicitly assigned a
+    #   value in the request.
     #
     #   <b>AMI aliases </b>
+    #
+    #   * <b>Amazon Linux (default): <code>amazonlinux-1-x86_64</code> </b>
     #
     #   * Amazon Linux 2: `amazonlinux-2-x86_64`
     #
     #   * Ubuntu 18.04: `ubuntu-18.04-x86_64`
     #
-    #   * Amazon Linux (default): `amazonlinux-1-x86_64`
-    #
     #   **SSM paths**
+    #
+    #   * <b>Amazon Linux (default):
+    #     <code>resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64</code>
+    #     </b>
     #
     #   * Amazon Linux 2:
     #     `resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2-x86_64`
     #
     #   * Ubuntu 18.04:
     #     `resolve:ssm:/aws/service/cloud9/amis/ubuntu-18.04-x86_64`
-    #
-    #   * Amazon Linux (default):
-    #     `resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64`
     #
     # @option params [Integer] :automatic_stop_time_minutes
     #   The number of minutes until the running instance is shut down after
@@ -1162,7 +1164,7 @@ module Aws::Cloud9
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloud9'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

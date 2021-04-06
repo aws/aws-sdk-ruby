@@ -349,6 +349,8 @@ module Aws::EC2
     CreateReplaceRootVolumeTaskResult = Shapes::StructureShape.new(name: 'CreateReplaceRootVolumeTaskResult')
     CreateReservedInstancesListingRequest = Shapes::StructureShape.new(name: 'CreateReservedInstancesListingRequest')
     CreateReservedInstancesListingResult = Shapes::StructureShape.new(name: 'CreateReservedInstancesListingResult')
+    CreateRestoreImageTaskRequest = Shapes::StructureShape.new(name: 'CreateRestoreImageTaskRequest')
+    CreateRestoreImageTaskResult = Shapes::StructureShape.new(name: 'CreateRestoreImageTaskResult')
     CreateRouteRequest = Shapes::StructureShape.new(name: 'CreateRouteRequest')
     CreateRouteResult = Shapes::StructureShape.new(name: 'CreateRouteResult')
     CreateRouteTableRequest = Shapes::StructureShape.new(name: 'CreateRouteTableRequest')
@@ -360,6 +362,8 @@ module Aws::EC2
     CreateSnapshotsResult = Shapes::StructureShape.new(name: 'CreateSnapshotsResult')
     CreateSpotDatafeedSubscriptionRequest = Shapes::StructureShape.new(name: 'CreateSpotDatafeedSubscriptionRequest')
     CreateSpotDatafeedSubscriptionResult = Shapes::StructureShape.new(name: 'CreateSpotDatafeedSubscriptionResult')
+    CreateStoreImageTaskRequest = Shapes::StructureShape.new(name: 'CreateStoreImageTaskRequest')
+    CreateStoreImageTaskResult = Shapes::StructureShape.new(name: 'CreateStoreImageTaskResult')
     CreateSubnetRequest = Shapes::StructureShape.new(name: 'CreateSubnetRequest')
     CreateSubnetResult = Shapes::StructureShape.new(name: 'CreateSubnetResult')
     CreateTagsRequest = Shapes::StructureShape.new(name: 'CreateTagsRequest')
@@ -761,6 +765,9 @@ module Aws::EC2
     DescribeStaleSecurityGroupsNextToken = Shapes::StringShape.new(name: 'DescribeStaleSecurityGroupsNextToken')
     DescribeStaleSecurityGroupsRequest = Shapes::StructureShape.new(name: 'DescribeStaleSecurityGroupsRequest')
     DescribeStaleSecurityGroupsResult = Shapes::StructureShape.new(name: 'DescribeStaleSecurityGroupsResult')
+    DescribeStoreImageTasksRequest = Shapes::StructureShape.new(name: 'DescribeStoreImageTasksRequest')
+    DescribeStoreImageTasksRequestMaxResults = Shapes::IntegerShape.new(name: 'DescribeStoreImageTasksRequestMaxResults')
+    DescribeStoreImageTasksResult = Shapes::StructureShape.new(name: 'DescribeStoreImageTasksResult')
     DescribeSubnetsMaxResults = Shapes::IntegerShape.new(name: 'DescribeSubnetsMaxResults')
     DescribeSubnetsRequest = Shapes::StructureShape.new(name: 'DescribeSubnetsRequest')
     DescribeSubnetsResult = Shapes::StructureShape.new(name: 'DescribeSubnetsResult')
@@ -1151,6 +1158,7 @@ module Aws::EC2
     ImageDiskContainer = Shapes::StructureShape.new(name: 'ImageDiskContainer')
     ImageDiskContainerList = Shapes::ListShape.new(name: 'ImageDiskContainerList')
     ImageId = Shapes::StringShape.new(name: 'ImageId')
+    ImageIdList = Shapes::ListShape.new(name: 'ImageIdList')
     ImageIdStringList = Shapes::ListShape.new(name: 'ImageIdStringList')
     ImageList = Shapes::ListShape.new(name: 'ImageList')
     ImageState = Shapes::StringShape.new(name: 'ImageState')
@@ -1852,6 +1860,8 @@ module Aws::EC2
     RunInstancesRequest = Shapes::StructureShape.new(name: 'RunInstancesRequest')
     RunScheduledInstancesRequest = Shapes::StructureShape.new(name: 'RunScheduledInstancesRequest')
     RunScheduledInstancesResult = Shapes::StructureShape.new(name: 'RunScheduledInstancesResult')
+    S3ObjectTag = Shapes::StructureShape.new(name: 'S3ObjectTag')
+    S3ObjectTagList = Shapes::ListShape.new(name: 'S3ObjectTagList')
     S3Storage = Shapes::StructureShape.new(name: 'S3Storage')
     ScheduledInstance = Shapes::StructureShape.new(name: 'ScheduledInstance')
     ScheduledInstanceAvailability = Shapes::StructureShape.new(name: 'ScheduledInstanceAvailability')
@@ -1963,6 +1973,8 @@ module Aws::EC2
     StopInstancesResult = Shapes::StructureShape.new(name: 'StopInstancesResult')
     Storage = Shapes::StructureShape.new(name: 'Storage')
     StorageLocation = Shapes::StructureShape.new(name: 'StorageLocation')
+    StoreImageTaskResult = Shapes::StructureShape.new(name: 'StoreImageTaskResult')
+    StoreImageTaskResultSet = Shapes::ListShape.new(name: 'StoreImageTaskResultSet')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     Subnet = Shapes::StructureShape.new(name: 'Subnet')
@@ -3548,6 +3560,16 @@ module Aws::EC2
     CreateReservedInstancesListingResult.add_member(:reserved_instances_listings, Shapes::ShapeRef.new(shape: ReservedInstancesListingList, location_name: "reservedInstancesListingsSet"))
     CreateReservedInstancesListingResult.struct_class = Types::CreateReservedInstancesListingResult
 
+    CreateRestoreImageTaskRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Bucket"))
+    CreateRestoreImageTaskRequest.add_member(:object_key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ObjectKey"))
+    CreateRestoreImageTaskRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    CreateRestoreImageTaskRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateRestoreImageTaskRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateRestoreImageTaskRequest.struct_class = Types::CreateRestoreImageTaskRequest
+
+    CreateRestoreImageTaskResult.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
+    CreateRestoreImageTaskResult.struct_class = Types::CreateRestoreImageTaskResult
+
     CreateRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationCidrBlock"))
     CreateRouteRequest.add_member(:destination_ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationIpv6CidrBlock"))
     CreateRouteRequest.add_member(:destination_prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, location_name: "DestinationPrefixListId"))
@@ -3612,6 +3634,15 @@ module Aws::EC2
 
     CreateSpotDatafeedSubscriptionResult.add_member(:spot_datafeed_subscription, Shapes::ShapeRef.new(shape: SpotDatafeedSubscription, location_name: "spotDatafeedSubscription"))
     CreateSpotDatafeedSubscriptionResult.struct_class = Types::CreateSpotDatafeedSubscriptionResult
+
+    CreateStoreImageTaskRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
+    CreateStoreImageTaskRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Bucket"))
+    CreateStoreImageTaskRequest.add_member(:s3_object_tags, Shapes::ShapeRef.new(shape: S3ObjectTagList, location_name: "S3ObjectTag"))
+    CreateStoreImageTaskRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateStoreImageTaskRequest.struct_class = Types::CreateStoreImageTaskRequest
+
+    CreateStoreImageTaskResult.add_member(:object_key, Shapes::ShapeRef.new(shape: String, location_name: "objectKey"))
+    CreateStoreImageTaskResult.struct_class = Types::CreateStoreImageTaskResult
 
     CreateSubnetRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateSubnetRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
@@ -5332,6 +5363,17 @@ module Aws::EC2
     DescribeStaleSecurityGroupsResult.add_member(:stale_security_group_set, Shapes::ShapeRef.new(shape: StaleSecurityGroupSet, location_name: "staleSecurityGroupSet"))
     DescribeStaleSecurityGroupsResult.struct_class = Types::DescribeStaleSecurityGroupsResult
 
+    DescribeStoreImageTasksRequest.add_member(:image_ids, Shapes::ShapeRef.new(shape: ImageIdList, location_name: "ImageId"))
+    DescribeStoreImageTasksRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeStoreImageTasksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeStoreImageTasksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeStoreImageTasksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeStoreImageTasksRequestMaxResults, location_name: "MaxResults"))
+    DescribeStoreImageTasksRequest.struct_class = Types::DescribeStoreImageTasksRequest
+
+    DescribeStoreImageTasksResult.add_member(:store_image_task_results, Shapes::ShapeRef.new(shape: StoreImageTaskResultSet, location_name: "storeImageTaskResultSet"))
+    DescribeStoreImageTasksResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeStoreImageTasksResult.struct_class = Types::DescribeStoreImageTasksResult
+
     DescribeSubnetsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeSubnetsRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdStringList, location_name: "SubnetId"))
     DescribeSubnetsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -6819,6 +6861,8 @@ module Aws::EC2
     ImageDiskContainer.struct_class = Types::ImageDiskContainer
 
     ImageDiskContainerList.member = Shapes::ShapeRef.new(shape: ImageDiskContainer, location_name: "item")
+
+    ImageIdList.member = Shapes::ShapeRef.new(shape: ImageId, location_name: "item")
 
     ImageIdStringList.member = Shapes::ShapeRef.new(shape: ImageId, location_name: "ImageId")
 
@@ -9544,6 +9588,12 @@ module Aws::EC2
     RunScheduledInstancesResult.add_member(:instance_id_set, Shapes::ShapeRef.new(shape: InstanceIdSet, location_name: "instanceIdSet"))
     RunScheduledInstancesResult.struct_class = Types::RunScheduledInstancesResult
 
+    S3ObjectTag.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "Key"))
+    S3ObjectTag.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    S3ObjectTag.struct_class = Types::S3ObjectTag
+
+    S3ObjectTagList.member = Shapes::ShapeRef.new(shape: S3ObjectTag, location_name: "item")
+
     S3Storage.add_member(:aws_access_key_id, Shapes::ShapeRef.new(shape: String, location_name: "AWSAccessKeyId"))
     S3Storage.add_member(:bucket, Shapes::ShapeRef.new(shape: String, location_name: "bucket"))
     S3Storage.add_member(:prefix, Shapes::ShapeRef.new(shape: String, location_name: "prefix"))
@@ -10072,6 +10122,17 @@ module Aws::EC2
     StorageLocation.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "Key"))
     StorageLocation.struct_class = Types::StorageLocation
 
+    StoreImageTaskResult.add_member(:ami_id, Shapes::ShapeRef.new(shape: String, location_name: "amiId"))
+    StoreImageTaskResult.add_member(:task_start_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "taskStartTime"))
+    StoreImageTaskResult.add_member(:bucket, Shapes::ShapeRef.new(shape: String, location_name: "bucket"))
+    StoreImageTaskResult.add_member(:s3object_key, Shapes::ShapeRef.new(shape: String, location_name: "s3objectKey"))
+    StoreImageTaskResult.add_member(:progress_percentage, Shapes::ShapeRef.new(shape: Integer, location_name: "progressPercentage"))
+    StoreImageTaskResult.add_member(:store_task_state, Shapes::ShapeRef.new(shape: String, location_name: "storeTaskState"))
+    StoreImageTaskResult.add_member(:store_task_failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "storeTaskFailureReason"))
+    StoreImageTaskResult.struct_class = Types::StoreImageTaskResult
+
+    StoreImageTaskResultSet.member = Shapes::ShapeRef.new(shape: StoreImageTaskResult, location_name: "item")
+
     StringList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
     Subnet.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
@@ -10597,8 +10658,8 @@ module Aws::EC2
 
     TunnelOptionsList.member = Shapes::ShapeRef.new(shape: TunnelOption, location_name: "item")
 
-    UnassignIpv6AddressesRequest.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: Ipv6AddressList, required: true, location_name: "ipv6Addresses"))
     UnassignIpv6AddressesRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, required: true, location_name: "networkInterfaceId"))
+    UnassignIpv6AddressesRequest.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: Ipv6AddressList, required: true, location_name: "ipv6Addresses"))
     UnassignIpv6AddressesRequest.struct_class = Types::UnassignIpv6AddressesRequest
 
     UnassignIpv6AddressesResult.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, location_name: "networkInterfaceId"))
@@ -11633,6 +11694,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: CreateReservedInstancesListingResult)
       end)
 
+      api.add_operation(:create_restore_image_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRestoreImageTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateRestoreImageTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRestoreImageTaskResult)
+      end)
+
       api.add_operation(:create_route, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateRoute"
         o.http_method = "POST"
@@ -11679,6 +11748,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateSpotDatafeedSubscriptionRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateSpotDatafeedSubscriptionResult)
+      end)
+
+      api.add_operation(:create_store_image_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateStoreImageTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateStoreImageTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateStoreImageTaskResult)
       end)
 
       api.add_operation(:create_subnet, Seahorse::Model::Operation.new.tap do |o|
@@ -13442,6 +13519,14 @@ module Aws::EC2
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:describe_store_image_tasks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeStoreImageTasks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeStoreImageTasksRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeStoreImageTasksResult)
       end)
 
       api.add_operation(:describe_subnets, Seahorse::Model::Operation.new.tap do |o|

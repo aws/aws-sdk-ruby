@@ -2861,7 +2861,7 @@ module Aws::MediaLive
     #
     # @!attribute [rw] vpc
     #   Settings for VPC output
-    #   @return [Types::VpcOutputSettings]
+    #   @return [Types::VpcOutputSettingsDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Channel AWS API Documentation
     #
@@ -2976,7 +2976,7 @@ module Aws::MediaLive
     #
     # @!attribute [rw] vpc
     #   Settings for VPC output
-    #   @return [Types::VpcOutputSettings]
+    #   @return [Types::VpcOutputSettingsDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ChannelSummary AWS API Documentation
     #
@@ -4744,10 +4744,8 @@ module Aws::MediaLive
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] vpc
-    #   The properties for a private VPC Output When this property is
-    #   specified, the output egress addresses will be created in a user
-    #   specified VPC
-    #   @return [Types::VpcOutputSettings]
+    #   The properties for a private VPC Output
+    #   @return [Types::VpcOutputSettingsDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteChannelResponse AWS API Documentation
     #
@@ -5153,10 +5151,8 @@ module Aws::MediaLive
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] vpc
-    #   The properties for a private VPC Output When this property is
-    #   specified, the output egress addresses will be created in a user
-    #   specified VPC
-    #   @return [Types::VpcOutputSettings]
+    #   The properties for a private VPC Output
+    #   @return [Types::VpcOutputSettingsDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeChannelResponse AWS API Documentation
     #
@@ -16290,10 +16286,8 @@ module Aws::MediaLive
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] vpc
-    #   The properties for a private VPC Output When this property is
-    #   specified, the output egress addresses will be created in a user
-    #   specified VPC
-    #   @return [Types::VpcOutputSettings]
+    #   The properties for a private VPC Output
+    #   @return [Types::VpcOutputSettingsDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartChannelResponse AWS API Documentation
     #
@@ -16643,10 +16637,8 @@ module Aws::MediaLive
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] vpc
-    #   The properties for a private VPC Output When this property is
-    #   specified, the output egress addresses will be created in a user
-    #   specified VPC
-    #   @return [Types::VpcOutputSettings]
+    #   The properties for a private VPC Output
+    #   @return [Types::VpcOutputSettingsDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopChannelResponse AWS API Documentation
     #
@@ -16997,6 +16989,9 @@ module Aws::MediaLive
     #   The AWS account ID for the recipient of the input device transfer.
     #   @return [String]
     #
+    # @!attribute [rw] target_region
+    #   @return [String]
+    #
     # @!attribute [rw] transfer_type
     #   The type (direction) of the input device transfer.
     #   @return [String]
@@ -17007,6 +17002,7 @@ module Aws::MediaLive
       :id,
       :message,
       :target_customer_id,
+      :target_region,
       :transfer_type)
       SENSITIVE = []
       include Aws::Structure
@@ -19591,6 +19587,40 @@ module Aws::MediaLive
     #
     class VpcOutputSettings < Struct.new(
       :public_address_allocation_ids,
+      :security_group_ids,
+      :subnet_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties for a private VPC Output
+    #
+    # @!attribute [rw] availability_zones
+    #   The Availability Zones where the vpc subnets are located. The first
+    #   Availability Zone applies to the first subnet in the list of
+    #   subnets. The second Availability Zone applies to the second subnet.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] network_interface_ids
+    #   A list of Elastic Network Interfaces created by MediaLive in the
+    #   customer's VPC
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_ids
+    #   A list of up EC2 VPC security group IDs attached to the Output VPC
+    #   network interfaces.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of VPC subnet IDs from the same VPC. If STANDARD channel,
+    #   subnet IDs must be mapped to two unique availability zones (AZ).
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VpcOutputSettingsDescription AWS API Documentation
+    #
+    class VpcOutputSettingsDescription < Struct.new(
+      :availability_zones,
+      :network_interface_ids,
       :security_group_ids,
       :subnet_ids)
       SENSITIVE = []

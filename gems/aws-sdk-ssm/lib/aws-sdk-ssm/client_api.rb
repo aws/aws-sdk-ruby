@@ -127,6 +127,7 @@ module Aws::SSM
     CancelCommandResult = Shapes::StructureShape.new(name: 'CancelCommandResult')
     CancelMaintenanceWindowExecutionRequest = Shapes::StructureShape.new(name: 'CancelMaintenanceWindowExecutionRequest')
     CancelMaintenanceWindowExecutionResult = Shapes::StructureShape.new(name: 'CancelMaintenanceWindowExecutionResult')
+    ChangeDetailsValue = Shapes::StringShape.new(name: 'ChangeDetailsValue')
     ChangeRequestName = Shapes::StringShape.new(name: 'ChangeRequestName')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CloudWatchLogGroupName = Shapes::StringShape.new(name: 'CloudWatchLogGroupName')
@@ -844,6 +845,7 @@ module Aws::SSM
     PatchComplianceLevel = Shapes::StringShape.new(name: 'PatchComplianceLevel')
     PatchComplianceMaxResults = Shapes::IntegerShape.new(name: 'PatchComplianceMaxResults')
     PatchContentUrl = Shapes::StringShape.new(name: 'PatchContentUrl')
+    PatchCriticalNonCompliantCount = Shapes::IntegerShape.new(name: 'PatchCriticalNonCompliantCount')
     PatchDeploymentStatus = Shapes::StringShape.new(name: 'PatchDeploymentStatus')
     PatchDescription = Shapes::StringShape.new(name: 'PatchDescription')
     PatchEpoch = Shapes::IntegerShape.new(name: 'PatchEpoch')
@@ -878,6 +880,7 @@ module Aws::SSM
     PatchOrchestratorFilterList = Shapes::ListShape.new(name: 'PatchOrchestratorFilterList')
     PatchOrchestratorFilterValue = Shapes::StringShape.new(name: 'PatchOrchestratorFilterValue')
     PatchOrchestratorFilterValues = Shapes::ListShape.new(name: 'PatchOrchestratorFilterValues')
+    PatchOtherNonCompliantCount = Shapes::IntegerShape.new(name: 'PatchOtherNonCompliantCount')
     PatchProduct = Shapes::StringShape.new(name: 'PatchProduct')
     PatchProductFamily = Shapes::StringShape.new(name: 'PatchProductFamily')
     PatchPropertiesList = Shapes::ListShape.new(name: 'PatchPropertiesList')
@@ -888,6 +891,7 @@ module Aws::SSM
     PatchRule = Shapes::StructureShape.new(name: 'PatchRule')
     PatchRuleGroup = Shapes::StructureShape.new(name: 'PatchRuleGroup')
     PatchRuleList = Shapes::ListShape.new(name: 'PatchRuleList')
+    PatchSecurityNonCompliantCount = Shapes::IntegerShape.new(name: 'PatchSecurityNonCompliantCount')
     PatchSet = Shapes::StringShape.new(name: 'PatchSet')
     PatchSeverity = Shapes::StringShape.new(name: 'PatchSeverity')
     PatchSource = Shapes::StructureShape.new(name: 'PatchSource')
@@ -1090,6 +1094,8 @@ module Aws::SSM
     TotalCount = Shapes::IntegerShape.new(name: 'TotalCount')
     TotalSizeLimitExceededException = Shapes::StructureShape.new(name: 'TotalSizeLimitExceededException')
     UUID = Shapes::StringShape.new(name: 'UUID')
+    UnlabelParameterVersionRequest = Shapes::StructureShape.new(name: 'UnlabelParameterVersionRequest')
+    UnlabelParameterVersionResult = Shapes::StructureShape.new(name: 'UnlabelParameterVersionResult')
     UnsupportedCalendarException = Shapes::StructureShape.new(name: 'UnsupportedCalendarException')
     UnsupportedFeatureRequiredException = Shapes::StructureShape.new(name: 'UnsupportedFeatureRequiredException')
     UnsupportedInventoryItemContextException = Shapes::StructureShape.new(name: 'UnsupportedInventoryItemContextException')
@@ -2107,6 +2113,9 @@ module Aws::SSM
     DescribePatchGroupStateResult.add_member(:instances_with_failed_patches, Shapes::ShapeRef.new(shape: Integer, location_name: "InstancesWithFailedPatches"))
     DescribePatchGroupStateResult.add_member(:instances_with_not_applicable_patches, Shapes::ShapeRef.new(shape: Integer, location_name: "InstancesWithNotApplicablePatches"))
     DescribePatchGroupStateResult.add_member(:instances_with_unreported_not_applicable_patches, Shapes::ShapeRef.new(shape: Integer, location_name: "InstancesWithUnreportedNotApplicablePatches", metadata: {"box"=>true}))
+    DescribePatchGroupStateResult.add_member(:instances_with_critical_non_compliant_patches, Shapes::ShapeRef.new(shape: InstancesCount, location_name: "InstancesWithCriticalNonCompliantPatches", metadata: {"box"=>true}))
+    DescribePatchGroupStateResult.add_member(:instances_with_security_non_compliant_patches, Shapes::ShapeRef.new(shape: InstancesCount, location_name: "InstancesWithSecurityNonCompliantPatches", metadata: {"box"=>true}))
+    DescribePatchGroupStateResult.add_member(:instances_with_other_non_compliant_patches, Shapes::ShapeRef.new(shape: InstancesCount, location_name: "InstancesWithOtherNonCompliantPatches", metadata: {"box"=>true}))
     DescribePatchGroupStateResult.struct_class = Types::DescribePatchGroupStateResult
 
     DescribePatchGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PatchBaselineMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
@@ -2698,6 +2707,9 @@ module Aws::SSM
     InstancePatchState.add_member(:operation, Shapes::ShapeRef.new(shape: PatchOperationType, required: true, location_name: "Operation"))
     InstancePatchState.add_member(:last_no_reboot_install_operation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastNoRebootInstallOperationTime"))
     InstancePatchState.add_member(:reboot_option, Shapes::ShapeRef.new(shape: RebootOption, location_name: "RebootOption"))
+    InstancePatchState.add_member(:critical_non_compliant_count, Shapes::ShapeRef.new(shape: PatchCriticalNonCompliantCount, location_name: "CriticalNonCompliantCount", metadata: {"box"=>true}))
+    InstancePatchState.add_member(:security_non_compliant_count, Shapes::ShapeRef.new(shape: PatchSecurityNonCompliantCount, location_name: "SecurityNonCompliantCount", metadata: {"box"=>true}))
+    InstancePatchState.add_member(:other_non_compliant_count, Shapes::ShapeRef.new(shape: PatchOtherNonCompliantCount, location_name: "OtherNonCompliantCount", metadata: {"box"=>true}))
     InstancePatchState.struct_class = Types::InstancePatchState
 
     InstancePatchStateFilter.add_member(:key, Shapes::ShapeRef.new(shape: InstancePatchStateFilterKey, required: true, location_name: "Key"))
@@ -4056,6 +4068,8 @@ module Aws::SSM
     StartChangeRequestExecutionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientToken"))
     StartChangeRequestExecutionRequest.add_member(:runbooks, Shapes::ShapeRef.new(shape: Runbooks, required: true, location_name: "Runbooks"))
     StartChangeRequestExecutionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    StartChangeRequestExecutionRequest.add_member(:scheduled_end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "ScheduledEndTime"))
+    StartChangeRequestExecutionRequest.add_member(:change_details, Shapes::ShapeRef.new(shape: ChangeDetailsValue, location_name: "ChangeDetails"))
     StartChangeRequestExecutionRequest.struct_class = Types::StartChangeRequestExecutionRequest
 
     StartChangeRequestExecutionResult.add_member(:automation_execution_id, Shapes::ShapeRef.new(shape: AutomationExecutionId, location_name: "AutomationExecutionId"))
@@ -4169,6 +4183,15 @@ module Aws::SSM
 
     TotalSizeLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     TotalSizeLimitExceededException.struct_class = Types::TotalSizeLimitExceededException
+
+    UnlabelParameterVersionRequest.add_member(:name, Shapes::ShapeRef.new(shape: PSParameterName, required: true, location_name: "Name"))
+    UnlabelParameterVersionRequest.add_member(:parameter_version, Shapes::ShapeRef.new(shape: PSParameterVersion, required: true, location_name: "ParameterVersion", metadata: {"box"=>true}))
+    UnlabelParameterVersionRequest.add_member(:labels, Shapes::ShapeRef.new(shape: ParameterLabelList, required: true, location_name: "Labels"))
+    UnlabelParameterVersionRequest.struct_class = Types::UnlabelParameterVersionRequest
+
+    UnlabelParameterVersionResult.add_member(:removed_labels, Shapes::ShapeRef.new(shape: ParameterLabelList, location_name: "RemovedLabels"))
+    UnlabelParameterVersionResult.add_member(:invalid_labels, Shapes::ShapeRef.new(shape: ParameterLabelList, location_name: "InvalidLabels"))
+    UnlabelParameterVersionResult.struct_class = Types::UnlabelParameterVersionResult
 
     UnsupportedCalendarException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     UnsupportedCalendarException.struct_class = Types::UnsupportedCalendarException
@@ -6044,6 +6067,18 @@ module Aws::SSM
         o.output = Shapes::ShapeRef.new(shape: TerminateSessionResponse)
         o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:unlabel_parameter_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UnlabelParameterVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UnlabelParameterVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UnlabelParameterVersionResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyUpdates)
+        o.errors << Shapes::ShapeRef.new(shape: ParameterNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ParameterVersionNotFound)
       end)
 
       api.add_operation(:update_association, Seahorse::Model::Operation.new.tap do |o|

@@ -8569,6 +8569,83 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateRestoreImageTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "String", # required
+    #         object_key: "String", # required
+    #         name: "String",
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the S3 bucket that contains the stored AMI object.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_key
+    #   The name of the stored AMI object in the bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name for the restored AMI. The name must be unique for AMIs in
+    #   the Region for this account. If you do not provide a name, the new
+    #   AMI gets the same name as the original AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the AMI and snapshots on restoration. You can
+    #   tag the AMI, the snapshots, or both.
+    #
+    #   * To tag the AMI, the value for `ResourceType` must be `image`.
+    #
+    #   * To tag the snapshots, the value for `ResourceType` must be
+    #     `snapshot`. The same tag is applied to all of the snapshots that
+    #     are created.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRestoreImageTaskRequest AWS API Documentation
+    #
+    class CreateRestoreImageTaskRequest < Struct.new(
+      :bucket,
+      :object_key,
+      :name,
+      :tag_specifications,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The AMI ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRestoreImageTaskResult AWS API Documentation
+    #
+    class CreateRestoreImageTaskResult < Struct.new(
+      :image_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateRouteRequest
     #   data as a hash:
     #
@@ -9072,6 +9149,67 @@ module Aws::EC2
     #
     class CreateSpotDatafeedSubscriptionResult < Struct.new(
       :spot_datafeed_subscription)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateStoreImageTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_id: "ImageId", # required
+    #         bucket: "String", # required
+    #         s3_object_tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   The name of the S3 bucket in which the AMI object will be stored.
+    #   The bucket must be in the Region in which the request is being made.
+    #   The AMI object appears in the bucket only after the upload task has
+    #   completed.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_object_tags
+    #   The tags to apply to the AMI object that will be stored in the S3
+    #   bucket.
+    #   @return [Array<Types::S3ObjectTag>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateStoreImageTaskRequest AWS API Documentation
+    #
+    class CreateStoreImageTaskRequest < Struct.new(
+      :image_id,
+      :bucket,
+      :s3_object_tags,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] object_key
+    #   The name of the stored AMI object in the S3 bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateStoreImageTaskResult AWS API Documentation
+    #
+    class CreateStoreImageTaskResult < Struct.new(
+      :object_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22413,6 +22551,86 @@ module Aws::EC2
     class DescribeStaleSecurityGroupsResult < Struct.new(
       :next_token,
       :stale_security_group_set)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeStoreImageTasksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_ids: ["ImageId"],
+    #         dry_run: false,
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] image_ids
+    #   The AMI IDs for which to show progress. Up to 20 AMI IDs can be
+    #   included in a request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   The filters.
+    #
+    #   * `task-state` - Returns tasks in a certain state (`InProgress` \|
+    #     `Completed` \| `Failed`)
+    #
+    #   * `bucket` - Returns task information for tasks that targeted a
+    #     specific bucket. For the filter value, specify the bucket name.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `NextToken` value. This value can be between 1 and 200. You cannot
+    #   specify this parameter and the `ImageIDs` parameter in the same
+    #   call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeStoreImageTasksRequest AWS API Documentation
+    #
+    class DescribeStoreImageTasksRequest < Struct.new(
+      :image_ids,
+      :dry_run,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] store_image_task_results
+    #   The information about the AMI store tasks.
+    #   @return [Array<Types::StoreImageTaskResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeStoreImageTasksResult AWS API Documentation
+    #
+    class DescribeStoreImageTasksResult < Struct.new(
+      :store_image_task_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -48256,6 +48474,45 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The tags to apply to the AMI object that will be stored in the S3
+    # bucket. For more information, see [Categorizing your storage using
+    # tags][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-tagging.html
+    #
+    # @note When making an API call, you may pass S3ObjectTag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key of the tag.
+    #
+    #   Constraints: Tag keys are case-sensitive and can be up to 128
+    #   Unicode characters in length. May not begin with `aws`\:.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the tag.
+    #
+    #   Constraints: Tag values are case-sensitive and can be up to 256
+    #   Unicode characters in length.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/S3ObjectTag AWS API Documentation
+    #
+    class S3ObjectTag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the storage parameters for S3 and S3 buckets for an instance
     # store-backed AMI.
     #
@@ -51861,6 +52118,53 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The information about the AMI store task, including the progress of
+    # the task.
+    #
+    # @!attribute [rw] ami_id
+    #   The ID of the AMI that is being stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_start_time
+    #   The time the task started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] bucket
+    #   The name of the S3 bucket that contains the stored AMI object.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3object_key
+    #   The name of the stored AMI object in the bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] progress_percentage
+    #   The progress of the task as a percentage.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] store_task_state
+    #   The state of the store task (`InProgress`, `Completed`, or
+    #   `Failed`).
+    #   @return [String]
+    #
+    # @!attribute [rw] store_task_failure_reason
+    #   If the tasks fails, the reason for the failure is returned. If the
+    #   task succeeds, `null` is returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StoreImageTaskResult AWS API Documentation
+    #
+    class StoreImageTaskResult < Struct.new(
+      :ami_id,
+      :task_start_time,
+      :bucket,
+      :s3object_key,
+      :progress_percentage,
+      :store_task_state,
+      :store_task_failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a subnet.
     #
     # @!attribute [rw] availability_zone
@@ -54184,23 +54488,23 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         ipv_6_addresses: ["String"], # required
     #         network_interface_id: "NetworkInterfaceId", # required
+    #         ipv_6_addresses: ["String"], # required
     #       }
-    #
-    # @!attribute [rw] ipv_6_addresses
-    #   The IPv6 addresses to unassign from the network interface.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] network_interface_id
     #   The ID of the network interface.
     #   @return [String]
     #
+    # @!attribute [rw] ipv_6_addresses
+    #   The IPv6 addresses to unassign from the network interface.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnassignIpv6AddressesRequest AWS API Documentation
     #
     class UnassignIpv6AddressesRequest < Struct.new(
-      :ipv_6_addresses,
-      :network_interface_id)
+      :network_interface_id,
+      :ipv_6_addresses)
       SENSITIVE = []
       include Aws::Structure
     end

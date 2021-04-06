@@ -659,6 +659,7 @@ module Aws::MediaLive
     VideoSelectorProgramId = Shapes::StructureShape.new(name: 'VideoSelectorProgramId')
     VideoSelectorSettings = Shapes::StructureShape.new(name: 'VideoSelectorSettings')
     VpcOutputSettings = Shapes::StructureShape.new(name: 'VpcOutputSettings')
+    VpcOutputSettingsDescription = Shapes::StructureShape.new(name: 'VpcOutputSettingsDescription')
     WavCodingMode = Shapes::StringShape.new(name: 'WavCodingMode')
     WavSettings = Shapes::StructureShape.new(name: 'WavSettings')
     WebvttDestinationSettings = Shapes::StructureShape.new(name: 'WebvttDestinationSettings')
@@ -1114,7 +1115,7 @@ module Aws::MediaLive
     Channel.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     Channel.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
     Channel.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    Channel.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettings, location_name: "vpc"))
+    Channel.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettingsDescription, location_name: "vpc"))
     Channel.struct_class = Types::Channel
 
     ChannelConfigurationValidationError.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
@@ -1138,7 +1139,7 @@ module Aws::MediaLive
     ChannelSummary.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     ChannelSummary.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
     ChannelSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    ChannelSummary.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettings, location_name: "vpc"))
+    ChannelSummary.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettingsDescription, location_name: "vpc"))
     ChannelSummary.struct_class = Types::ChannelSummary
 
     ColorSpacePassthroughSettings.struct_class = Types::ColorSpacePassthroughSettings
@@ -1299,7 +1300,7 @@ module Aws::MediaLive
     DeleteChannelResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     DeleteChannelResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
     DeleteChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    DeleteChannelResponse.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettings, location_name: "vpc"))
+    DeleteChannelResponse.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettingsDescription, location_name: "vpc"))
     DeleteChannelResponse.struct_class = Types::DeleteChannelResponse
 
     DeleteInputRequest.add_member(:input_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputId"))
@@ -1389,7 +1390,7 @@ module Aws::MediaLive
     DescribeChannelResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     DescribeChannelResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
     DescribeChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    DescribeChannelResponse.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettings, location_name: "vpc"))
+    DescribeChannelResponse.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettingsDescription, location_name: "vpc"))
     DescribeChannelResponse.struct_class = Types::DescribeChannelResponse
 
     DescribeInputDeviceRequest.add_member(:input_device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputDeviceId"))
@@ -2758,7 +2759,7 @@ module Aws::MediaLive
     StartChannelResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     StartChannelResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
     StartChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    StartChannelResponse.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettings, location_name: "vpc"))
+    StartChannelResponse.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettingsDescription, location_name: "vpc"))
     StartChannelResponse.struct_class = Types::StartChannelResponse
 
     StartMultiplexRequest.add_member(:multiplex_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "multiplexId"))
@@ -2818,7 +2819,7 @@ module Aws::MediaLive
     StopChannelResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     StopChannelResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
     StopChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    StopChannelResponse.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettings, location_name: "vpc"))
+    StopChannelResponse.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettingsDescription, location_name: "vpc"))
     StopChannelResponse.struct_class = Types::StopChannelResponse
 
     StopMultiplexRequest.add_member(:multiplex_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "multiplexId"))
@@ -2882,6 +2883,7 @@ module Aws::MediaLive
     TransferringInputDeviceSummary.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     TransferringInputDeviceSummary.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     TransferringInputDeviceSummary.add_member(:target_customer_id, Shapes::ShapeRef.new(shape: __string, location_name: "targetCustomerId"))
+    TransferringInputDeviceSummary.add_member(:target_region, Shapes::ShapeRef.new(shape: __string, location_name: "targetRegion"))
     TransferringInputDeviceSummary.add_member(:transfer_type, Shapes::ShapeRef.new(shape: InputDeviceTransferType, location_name: "transferType"))
     TransferringInputDeviceSummary.struct_class = Types::TransferringInputDeviceSummary
 
@@ -3094,6 +3096,12 @@ module Aws::MediaLive
     VpcOutputSettings.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroupIds"))
     VpcOutputSettings.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "subnetIds"))
     VpcOutputSettings.struct_class = Types::VpcOutputSettings
+
+    VpcOutputSettingsDescription.add_member(:availability_zones, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "availabilityZones"))
+    VpcOutputSettingsDescription.add_member(:network_interface_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "networkInterfaceIds"))
+    VpcOutputSettingsDescription.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroupIds"))
+    VpcOutputSettingsDescription.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "subnetIds"))
+    VpcOutputSettingsDescription.struct_class = Types::VpcOutputSettingsDescription
 
     WavSettings.add_member(:bit_depth, Shapes::ShapeRef.new(shape: __double, location_name: "bitDepth"))
     WavSettings.add_member(:coding_mode, Shapes::ShapeRef.new(shape: WavCodingMode, location_name: "codingMode"))
