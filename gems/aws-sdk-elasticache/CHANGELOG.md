@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2021-04-07)
+------------------
+
+* Feature - This release adds tagging support for all AWS ElastiCache resources except Global Replication Groups.
+
 1.54.0 (2021-03-10)
 ------------------
 

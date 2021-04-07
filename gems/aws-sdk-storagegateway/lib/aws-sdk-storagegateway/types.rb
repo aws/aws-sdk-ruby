@@ -421,6 +421,94 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociateFileSystemInput
+    #   data as a hash:
+    #
+    #       {
+    #         user_name: "DomainUserName", # required
+    #         password: "DomainUserPassword", # required
+    #         client_token: "ClientToken", # required
+    #         gateway_arn: "GatewayARN", # required
+    #         location_arn: "FileSystemLocationARN", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #         audit_destination_arn: "AuditDestinationARN",
+    #         cache_attributes: {
+    #           cache_stale_timeout_in_seconds: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] user_name
+    #   The user name of the user credential that has permission to access
+    #   the root share D$ of the Amazon FSx file system. The user account
+    #   must belong to the Amazon FSx delegated admin user group.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   The password of the user credential.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique string value that you supply that is used by the file
+    #   gateway to ensure idempotent file system association creation.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] location_arn
+    #   The Amazon Resource Name (ARN) of the Amazon FSx file system to
+    #   associate with the Amazon FSx file gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of up to 50 tags that can be assigned to the file system
+    #   association. Each tag is a key-value pair.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] audit_destination_arn
+    #   The Amazon Resource Name (ARN) of the storage used for the audit
+    #   logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_attributes
+    #   The refresh cache information for the file share.
+    #   @return [Types::CacheAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AssociateFileSystemInput AWS API Documentation
+    #
+    class AssociateFileSystemInput < Struct.new(
+      :user_name,
+      :password,
+      :client_token,
+      :gateway_arn,
+      :location_arn,
+      :tags,
+      :audit_destination_arn,
+      :cache_attributes)
+      SENSITIVE = [:password]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] file_system_association_arn
+    #   The ARN of the newly created file system association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AssociateFileSystemOutput AWS API Documentation
+    #
+    class AssociateFileSystemOutput < Struct.new(
+      :file_system_association_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # AttachVolumeInput
     #
     # @note When making an API call, you may pass AttachVolumeInput
@@ -648,7 +736,7 @@ module Aws::StorageGateway
     # @!attribute [rw] days_of_week
     #   The days of the week component of the bandwidth rate limit interval,
     #   represented as ordinal numbers from 0 to 6, where 0 represents
-    #   Sunday and 6 Saturday.
+    #   Sunday and 6 represents Saturday.
     #   @return [Array<Integer>]
     #
     # @!attribute [rw] average_upload_rate_limit_in_bits_per_sec
@@ -677,7 +765,7 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # Lists refresh cache information.
+    # The refresh cache information for the file share.
     #
     # @note When making an API call, you may pass CacheAttributes
     #   data as a hash:
@@ -690,8 +778,8 @@ module Aws::StorageGateway
     #   Refreshes a file share's cache by using Time To Live (TTL). TTL is
     #   the length of time since the last refresh after which access to the
     #   directory would cause the file gateway to first refresh that
-    #   directory's contents from the Amazon S3 bucket. The TTL duration is
-    #   in seconds.
+    #   directory's contents from the Amazon S3 bucket or Amazon FSx file
+    #   system. The TTL duration is in seconds.
     #
     #   Valid Values: 300 to 2,592,000 seconds (5 minutes to 30 days)
     #   @return [Integer]
@@ -1243,11 +1331,31 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] cache_attributes
-    #   Refresh cache information.
+    #   Specifies refresh cache information for the file share.
     #   @return [Types::CacheAttributes]
     #
     # @!attribute [rw] notification_policy
-    #   The notification policy of the file share.
+    #   The notification policy of the file share. `SettlingTimeInSeconds`
+    #   controls the number of seconds to wait after the last point in time
+    #   a client wrote to a file before generating an `ObjectUploaded`
+    #   notification. Because clients can make many small writes to files,
+    #   it's best to set this parameter for as long as possible to avoid
+    #   generating multiple notifications for the same file in a small time
+    #   period.
+    #
+    #   <note markdown="1"> `SettlingTimeInSeconds` has no effect on the timing of the object
+    #   uploading to Amazon S3, only the timing of the notification.
+    #
+    #    </note>
+    #
+    #   The following example sets `NotificationPolicy` on with
+    #   `SettlingTimeInSeconds` set to 60.
+    #
+    #   `\{"Upload": \{"SettlingTimeInSeconds": 60\}\}`
+    #
+    #   The following example sets `NotificationPolicy` off.
+    #
+    #   `\{\}`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateNFSFileShareInput AWS API Documentation
@@ -1308,9 +1416,9 @@ module Aws::StorageGateway
     #         requester_pays: false,
     #         smbacl_enabled: false,
     #         access_based_enumeration: false,
-    #         admin_user_list: ["FileShareUser"],
-    #         valid_user_list: ["FileShareUser"],
-    #         invalid_user_list: ["FileShareUser"],
+    #         admin_user_list: ["UserListUser"],
+    #         valid_user_list: ["UserListUser"],
+    #         invalid_user_list: ["UserListUser"],
     #         audit_destination_arn: "AuditDestinationARN",
     #         authentication: "Authentication",
     #         case_sensitivity: "ClientSpecified", # accepts ClientSpecified, CaseSensitive
@@ -1458,8 +1566,7 @@ module Aws::StorageGateway
     #   @return [Array<String>]
     #
     # @!attribute [rw] audit_destination_arn
-    #   The Amazon Resource Name (ARN) of the storage used for the audit
-    #   logs.
+    #   The Amazon Resource Name (ARN) of the storage used for audit logs.
     #   @return [String]
     #
     # @!attribute [rw] authentication
@@ -1498,11 +1605,31 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] cache_attributes
-    #   Refresh cache information.
+    #   Specifies refresh cache information for the file share.
     #   @return [Types::CacheAttributes]
     #
     # @!attribute [rw] notification_policy
-    #   The notification policy of the file share.
+    #   The notification policy of the file share. `SettlingTimeInSeconds`
+    #   controls the number of seconds to wait after the last point in time
+    #   a client wrote to a file before generating an `ObjectUploaded`
+    #   notification. Because clients can make many small writes to files,
+    #   it's best to set this parameter for as long as possible to avoid
+    #   generating multiple notifications for the same file in a small time
+    #   period.
+    #
+    #   <note markdown="1"> `SettlingTimeInSeconds` has no effect on the timing of the object
+    #   uploading to Amazon S3, only the timing of the notification.
+    #
+    #    </note>
+    #
+    #   The following example sets `NotificationPolicy` on with
+    #   `SettlingTimeInSeconds` set to 60.
+    #
+    #   `\{"Upload": \{"SettlingTimeInSeconds": 60\}\}`
+    #
+    #   The following example sets `NotificationPolicy` off.
+    #
+    #   `\{\}`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSMBFileShareInput AWS API Documentation
@@ -1748,7 +1875,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] snapshot_id
-    #   The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore
+    #   The snapshot ID (e.g., "snap-1122aabb") of the snapshot to restore
     #   as the new stored volume. Specify this field if you want to create
     #   the iSCSI storage volume from a snapshot; otherwise, do not include
     #   this field. To list snapshots for your account use
@@ -1761,8 +1888,8 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] preserve_existing_data
-    #   Set to true `true` if you want to preserve the data on the local
-    #   disk. Otherwise, set to `false` to create an empty volume.
+    #   Set to `true` if you want to preserve the data on the local disk.
+    #   Otherwise, set to `false` to create an empty volume.
     #
     #   Valid Values: `true` \| `false`
     #   @return [Boolean]
@@ -2103,8 +2230,8 @@ module Aws::StorageGateway
     #   A prefix that you append to the barcode of the virtual tape you are
     #   creating. This prefix makes the barcode unique.
     #
-    #   <note markdown="1"> The prefix must be 1 to 4 characters in length and must be one of
-    #   the uppercase letters from A to Z.
+    #   <note markdown="1"> The prefix must be 1-4 characters in length and must be one of the
+    #   uppercase letters from A to Z.
     #
     #    </note>
     #   @return [String]
@@ -2637,12 +2764,12 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the High Availability monitoring test. If a test
+    #   The status of the high availability monitoring test. If a test
     #   hasn't been performed, the value of this field is null.
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The time the High Availability monitoring test was started. If a
+    #   The time the high availability monitoring test was started. If a
     #   test hasn't been performed, the value of this field is null.
     #   @return [Time]
     #
@@ -2915,6 +3042,39 @@ module Aws::StorageGateway
     #
     class DescribeChapCredentialsOutput < Struct.new(
       :chap_credentials)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFileSystemAssociationsInput
+    #   data as a hash:
+    #
+    #       {
+    #         file_system_association_arn_list: ["FileSystemAssociationARN"], # required
+    #       }
+    #
+    # @!attribute [rw] file_system_association_arn_list
+    #   An array containing the Amazon Resource Name (ARN) of each file
+    #   system association to be described.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeFileSystemAssociationsInput AWS API Documentation
+    #
+    class DescribeFileSystemAssociationsInput < Struct.new(
+      :file_system_association_arn_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] file_system_association_info_list
+    #   An array containing the `FileSystemAssociationInfo` data type of
+    #   each file system association to be described.
+    #   @return [Array<Types::FileSystemAssociationInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeFileSystemAssociationsOutput AWS API Documentation
+    #
+    class DescribeFileSystemAssociationsOutput < Struct.new(
+      :file_system_association_info_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3662,8 +3822,8 @@ module Aws::StorageGateway
     #   @return [Array<Types::Tape>]
     #
     # @!attribute [rw] marker
-    #   An opaque string which can be used as part of a subsequent
-    #   DescribeTapes call to retrieve the next page of results.
+    #   An opaque string that can be used as part of a subsequent
+    #   `DescribeTapes` call to retrieve the next page of results.
     #
     #   If a response does not contain a marker, then there are no more
     #   results to be retrieved.
@@ -3988,6 +4148,49 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisassociateFileSystemInput
+    #   data as a hash:
+    #
+    #       {
+    #         file_system_association_arn: "FileSystemAssociationARN", # required
+    #         force_delete: false,
+    #       }
+    #
+    # @!attribute [rw] file_system_association_arn
+    #   The Amazon Resource Name (ARN) of the file system association to be
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] force_delete
+    #   If this value is set to true, the operation disassociates an Amazon
+    #   FSx file system immediately. It ends all data uploads to the file
+    #   system, and the file system association enters the `FORCE_DELETING`
+    #   status. If this value is set to false, the Amazon FSx file system
+    #   does not disassociate until all data is uploaded.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DisassociateFileSystemInput AWS API Documentation
+    #
+    class DisassociateFileSystemInput < Struct.new(
+      :file_system_association_arn,
+      :force_delete)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] file_system_association_arn
+    #   The Amazon Resource Name (ARN) of the deleted file system
+    #   association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DisassociateFileSystemOutput AWS API Documentation
+    #
+    class DisassociateFileSystemOutput < Struct.new(
+      :file_system_association_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a gateway's local disk.
     #
     # @!attribute [rw] disk_id
@@ -4078,6 +4281,97 @@ module Aws::StorageGateway
       :file_share_arn,
       :file_share_id,
       :file_share_status,
+      :gateway_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the object returned by `DescribeFileSystemAssociations` that
+    # describes a created file system association.
+    #
+    # @!attribute [rw] file_system_association_arn
+    #   The Amazon Resource Name (ARN) of the file system association.
+    #   @return [String]
+    #
+    # @!attribute [rw] location_arn
+    #   The ARN of the backend Amazon FSx file system used for storing file
+    #   data. For information, see [FileSystem][1] in the *Amazon FSx API
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_FileSystem.html
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_association_status
+    #   The status of the file system association. Valid Values: `AVAILABLE`
+    #   \| `CREATING` \| `DELETING` \| `FORCE_DELETING` \| `MISCONFIGURED`
+    #   \| `UPDATING` \| `UNAVAILABLE`
+    #   @return [String]
+    #
+    # @!attribute [rw] audit_destination_arn
+    #   The Amazon Resource Name (ARN) of the storage used for the audit
+    #   logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of up to 50 tags assigned to the SMB file share, sorted
+    #   alphabetically by key name. Each tag is a key-value pair.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] cache_attributes
+    #   The refresh cache information for the file share.
+    #   @return [Types::CacheAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/FileSystemAssociationInfo AWS API Documentation
+    #
+    class FileSystemAssociationInfo < Struct.new(
+      :file_system_association_arn,
+      :location_arn,
+      :file_system_association_status,
+      :audit_destination_arn,
+      :gateway_arn,
+      :tags,
+      :cache_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Gets the summary returned by `ListFileSystemAssociation`, which is a
+    # summary of a created file system association.
+    #
+    # @!attribute [rw] file_system_association_id
+    #   The ID of the file system association.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_association_arn
+    #   The Amazon Resource Name (ARN) of the file system association.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_association_status
+    #   The status of the file share. Valid Values: `AVAILABLE` \|
+    #   `CREATING` \| `DELETING` \| `FORCE_DELETING` \| `MISCONFIGURED` \|
+    #   `UPDATING` \| `UNAVAILABLE`
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/FileSystemAssociationSummary AWS API Documentation
+    #
+    class FileSystemAssociationSummary < Struct.new(
+      :file_system_association_id,
+      :file_system_association_arn,
+      :file_system_association_status,
       :gateway_arn)
       SENSITIVE = []
       include Aws::Structure
@@ -4383,6 +4677,70 @@ module Aws::StorageGateway
       :marker,
       :next_marker,
       :file_share_info_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListFileSystemAssociationsInput
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_arn: "GatewayARN",
+    #         limit: 1,
+    #         marker: "Marker",
+    #       }
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of file system associations to return in the
+    #   response. If present, `Limit` must be an integer with a value
+    #   greater than zero. Optional.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   Opaque pagination token returned from a previous
+    #   `ListFileSystemAssociations` operation. If present, `Marker`
+    #   specifies where to continue the list from after a previous call to
+    #   `ListFileSystemAssociations`. Optional.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListFileSystemAssociationsInput AWS API Documentation
+    #
+    class ListFileSystemAssociationsInput < Struct.new(
+      :gateway_arn,
+      :limit,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   If the request includes `Marker`, the response returns that value in
+    #   this field.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_marker
+    #   If a value is present, there are more file system associations to
+    #   return. In a subsequent request, use `NextMarker` as the value for
+    #   `Marker` to retrieve the next set of file system associations.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_association_summary_list
+    #   An array of information about the Amazon FSx gateway's file system
+    #   associations.
+    #   @return [Array<Types::FileSystemAssociationSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListFileSystemAssociationsOutput AWS API Documentation
+    #
+    class ListFileSystemAssociationsOutput < Struct.new(
+      :marker,
+      :next_marker,
+      :file_system_association_summary_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5021,11 +5379,31 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] cache_attributes
-    #   Refresh cache information.
+    #   Refresh cache information for the file share.
     #   @return [Types::CacheAttributes]
     #
     # @!attribute [rw] notification_policy
-    #   The notification policy of the file share.
+    #   The notification policy of the file share. `SettlingTimeInSeconds`
+    #   controls the number of seconds to wait after the last point in time
+    #   a client wrote to a file before generating an `ObjectUploaded`
+    #   notification. Because clients can make many small writes to files,
+    #   it's best to set this parameter for as long as possible to avoid
+    #   generating multiple notifications for the same file in a small time
+    #   period.
+    #
+    #   <note markdown="1"> `SettlingTimeInSeconds` has no effect on the timing of the object
+    #   uploading to Amazon S3, only the timing of the notification.
+    #
+    #    </note>
+    #
+    #   The following example sets `NotificationPolicy` on with
+    #   `SettlingTimeInSeconds` set to 60.
+    #
+    #   `\{"Upload": \{"SettlingTimeInSeconds": 60\}\}`
+    #
+    #   The following example sets `NotificationPolicy` off.
+    #
+    #   `\{\}`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NFSFileShareInfo AWS API Documentation
@@ -5556,8 +5934,7 @@ module Aws::StorageGateway
     #   @return [Array<String>]
     #
     # @!attribute [rw] audit_destination_arn
-    #   The Amazon Resource Name (ARN) of the storage used for the audit
-    #   logs.
+    #   The Amazon Resource Name (ARN) of the storage used for audit logs.
     #   @return [String]
     #
     # @!attribute [rw] authentication
@@ -5591,11 +5968,31 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] cache_attributes
-    #   Refresh cache information.
+    #   Refresh cache information for the file share.
     #   @return [Types::CacheAttributes]
     #
     # @!attribute [rw] notification_policy
-    #   The notification policy of the file share.
+    #   The notification policy of the file share. `SettlingTimeInSeconds`
+    #   controls the number of seconds to wait after the last point in time
+    #   a client wrote to a file before generating an `ObjectUploaded`
+    #   notification. Because clients can make many small writes to files,
+    #   it's best to set this parameter for as long as possible to avoid
+    #   generating multiple notifications for the same file in a small time
+    #   period.
+    #
+    #   <note markdown="1"> `SettlingTimeInSeconds` has no effect on the timing of the object
+    #   uploading to Amazon S3, only the timing of the notification.
+    #
+    #    </note>
+    #
+    #   The following example sets `NotificationPolicy` on with
+    #   `SettlingTimeInSeconds` set to 60.
+    #
+    #   `\{"Upload": \{"SettlingTimeInSeconds": 60\}\}`
+    #
+    #   The following example sets `NotificationPolicy` off.
+    #
+    #   `\{\}`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SMBFileShareInfo AWS API Documentation
@@ -6557,6 +6954,67 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateFileSystemAssociationInput
+    #   data as a hash:
+    #
+    #       {
+    #         file_system_association_arn: "FileSystemAssociationARN", # required
+    #         user_name: "DomainUserName",
+    #         password: "DomainUserPassword",
+    #         audit_destination_arn: "AuditDestinationARN",
+    #         cache_attributes: {
+    #           cache_stale_timeout_in_seconds: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] file_system_association_arn
+    #   The Amazon Resource Name (ARN) of the file system association that
+    #   you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The user name of the user credential that has permission to access
+    #   the root share D$ of the Amazon FSx file system. The user account
+    #   must belong to the Amazon FSx delegated admin user group.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   The password of the user credential.
+    #   @return [String]
+    #
+    # @!attribute [rw] audit_destination_arn
+    #   The Amazon Resource Name (ARN) of the storage used for the audit
+    #   logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_attributes
+    #   The refresh cache information for the file share.
+    #   @return [Types::CacheAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateFileSystemAssociationInput AWS API Documentation
+    #
+    class UpdateFileSystemAssociationInput < Struct.new(
+      :file_system_association_arn,
+      :user_name,
+      :password,
+      :audit_destination_arn,
+      :cache_attributes)
+      SENSITIVE = [:password]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] file_system_association_arn
+    #   The ARN of the updated file system association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateFileSystemAssociationOutput AWS API Documentation
+    #
+    class UpdateFileSystemAssociationOutput < Struct.new(
+      :file_system_association_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateGatewayInformationInput
     #   data as a hash:
     #
@@ -6873,11 +7331,31 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] cache_attributes
-    #   Refresh cache information.
+    #   specifies refresh cache information for the file share.
     #   @return [Types::CacheAttributes]
     #
     # @!attribute [rw] notification_policy
-    #   The notification policy of the file share.
+    #   The notification policy of the file share. `SettlingTimeInSeconds`
+    #   controls the number of seconds to wait after the last point in time
+    #   a client wrote to a file before generating an `ObjectUploaded`
+    #   notification. Because clients can make many small writes to files,
+    #   it's best to set this parameter for as long as possible to avoid
+    #   generating multiple notifications for the same file in a small time
+    #   period.
+    #
+    #   <note markdown="1"> `SettlingTimeInSeconds` has no effect on the timing of the object
+    #   uploading to Amazon S3, only the timing of the notification.
+    #
+    #    </note>
+    #
+    #   The following example sets `NotificationPolicy` on with
+    #   `SettlingTimeInSeconds` set to 60.
+    #
+    #   `\{"Upload": \{"SettlingTimeInSeconds": 60\}\}`
+    #
+    #   The following example sets `NotificationPolicy` off.
+    #
+    #   `\{\}`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateNFSFileShareInput AWS API Documentation
@@ -6931,9 +7409,9 @@ module Aws::StorageGateway
     #         requester_pays: false,
     #         smbacl_enabled: false,
     #         access_based_enumeration: false,
-    #         admin_user_list: ["FileShareUser"],
-    #         valid_user_list: ["FileShareUser"],
-    #         invalid_user_list: ["FileShareUser"],
+    #         admin_user_list: ["UserListUser"],
+    #         valid_user_list: ["UserListUser"],
+    #         invalid_user_list: ["UserListUser"],
     #         audit_destination_arn: "AuditDestinationARN",
     #         case_sensitivity: "ClientSpecified", # accepts ClientSpecified, CaseSensitive
     #         file_share_name: "FileShareName",
@@ -7056,8 +7534,7 @@ module Aws::StorageGateway
     #   @return [Array<String>]
     #
     # @!attribute [rw] audit_destination_arn
-    #   The Amazon Resource Name (ARN) of the storage used for the audit
-    #   logs.
+    #   The Amazon Resource Name (ARN) of the storage used for audit logs.
     #   @return [String]
     #
     # @!attribute [rw] case_sensitivity
@@ -7077,11 +7554,31 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] cache_attributes
-    #   Refresh cache information.
+    #   Specifies refresh cache information for the file share.
     #   @return [Types::CacheAttributes]
     #
     # @!attribute [rw] notification_policy
-    #   The notification policy of the file share.
+    #   The notification policy of the file share. `SettlingTimeInSeconds`
+    #   controls the number of seconds to wait after the last point in time
+    #   a client wrote to a file before generating an `ObjectUploaded`
+    #   notification. Because clients can make many small writes to files,
+    #   it's best to set this parameter for as long as possible to avoid
+    #   generating multiple notifications for the same file in a small time
+    #   period.
+    #
+    #   <note markdown="1"> `SettlingTimeInSeconds` has no effect on the timing of the object
+    #   uploading to Amazon S3, only the timing of the notification.
+    #
+    #    </note>
+    #
+    #   The following example sets `NotificationPolicy` on with
+    #   `SettlingTimeInSeconds` set to 60.
+    #
+    #   `\{"Upload": \{"SettlingTimeInSeconds": 60\}\}`
+    #
+    #   The following example sets `NotificationPolicy` off.
+    #
+    #   `\{\}`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBFileShareInput AWS API Documentation

@@ -398,6 +398,7 @@ module Aws
             'MediaStore' => 'mediastore',
             'MediaStoreData' => 'data.mediastore',
             'MediaTailor' => 'api.mediatailor',
+            'Mgn' => 'mgn',
             'MigrationHub' => 'mgh',
             'MigrationHubConfig' => 'migrationhub-config',
             'Mobile' => 'mobile',

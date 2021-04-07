@@ -47,8 +47,9 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of cost allocation tags to be added to this resource. A tag
-    #   is a key-value pair. A tag key must be accompanied by a tag value.
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AddTagsToResourceMessage AWS API Documentation
@@ -976,7 +977,7 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] is_global
     #   Indicates whether the parameter group is associated with a Global
-    #   Datastore
+    #   datastore
     #   @return [Boolean]
     #
     # @!attribute [rw] arn
@@ -1426,6 +1427,12 @@ module Aws::ElastiCache
     #         target_snapshot_name: "String", # required
     #         target_bucket: "String",
     #         kms_key_id: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] source_snapshot_name
@@ -1453,13 +1460,19 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access
-    #   [2]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access
+    #   [2]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
     #   The ID of the KMS key used to encrypt the target snapshot.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CopySnapshotMessage AWS API Documentation
     #
@@ -1467,7 +1480,8 @@ module Aws::ElastiCache
       :source_snapshot_name,
       :target_snapshot_name,
       :target_bucket,
-      :kms_key_id)
+      :kms_key_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1776,7 +1790,7 @@ module Aws::ElastiCache
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   A list of cost allocation tags to be added to this resource.
+    #   A list of tags to be added to this resource.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] snapshot_arns
@@ -1946,6 +1960,12 @@ module Aws::ElastiCache
     #         cache_parameter_group_name: "String", # required
     #         cache_parameter_group_family: "String", # required
     #         description: "String", # required
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] cache_parameter_group_name
@@ -1965,12 +1985,19 @@ module Aws::ElastiCache
     #   A user-specified description for the cache parameter group.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheParameterGroupMessage AWS API Documentation
     #
     class CreateCacheParameterGroupMessage < Struct.new(
       :cache_parameter_group_name,
       :cache_parameter_group_family,
-      :description)
+      :description,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1995,6 +2022,12 @@ module Aws::ElastiCache
     #       {
     #         cache_security_group_name: "String", # required
     #         description: "String", # required
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] cache_security_group_name
@@ -2011,11 +2044,18 @@ module Aws::ElastiCache
     #   A description for the cache security group.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSecurityGroupMessage AWS API Documentation
     #
     class CreateCacheSecurityGroupMessage < Struct.new(
       :cache_security_group_name,
-      :description)
+      :description,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2047,6 +2087,12 @@ module Aws::ElastiCache
     #         cache_subnet_group_name: "String", # required
     #         cache_subnet_group_description: "String", # required
     #         subnet_ids: ["String"], # required
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] cache_subnet_group_name
@@ -2067,12 +2113,19 @@ module Aws::ElastiCache
     #   A list of VPC subnet IDs for the cache subnet group.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSubnetGroupMessage AWS API Documentation
     #
     class CreateCacheSubnetGroupMessage < Struct.new(
       :cache_subnet_group_name,
       :cache_subnet_group_description,
-      :subnet_ids)
+      :subnet_ids,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2103,16 +2156,16 @@ module Aws::ElastiCache
     #       }
     #
     # @!attribute [rw] global_replication_group_id_suffix
-    #   The suffix name of a Global Datastore. Amazon ElastiCache
-    #   automatically applies a prefix to the Global Datastore ID when it is
+    #   The suffix name of a Global datastore. Amazon ElastiCache
+    #   automatically applies a prefix to the Global datastore ID when it is
     #   created. Each AWS Region has its own prefix. For instance, a Global
-    #   Datastore ID created in the US-West-1 region will begin with
+    #   datastore ID created in the US-West-1 region will begin with
     #   "dsdfu" along with the suffix name you provide. The suffix,
     #   combined with the auto-generated prefix, guarantees uniqueness of
-    #   the Global Datastore name across multiple regions.
+    #   the Global datastore name across multiple regions.
     #
-    #   For a full list of AWS Regions and their respective Global Datastore
-    #   iD prefixes, see [Using the AWS CLI with Global Datastores ][1].
+    #   For a full list of AWS Regions and their respective Global datastore
+    #   iD prefixes, see [Using the AWS CLI with Global datastores ][1].
     #
     #
     #
@@ -2120,7 +2173,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] global_replication_group_description
-    #   Provides details of the Global Datastore
+    #   Provides details of the Global datastore
     #   @return [String]
     #
     # @!attribute [rw] primary_replication_group_id
@@ -2145,7 +2198,7 @@ module Aws::ElastiCache
     #   automatically replicates updates to the secondary cluster.
     #
     #   * The **GlobalReplicationGroupIdSuffix** represents the name of the
-    #     Global Datastore, which is what you use to associate a secondary
+    #     Global datastore, which is what you use to associate a secondary
     #     cluster.
     #
     #   ^
@@ -2234,7 +2287,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #   @return [String]
     #
     # @!attribute [rw] primary_cluster_id
@@ -2499,11 +2552,12 @@ module Aws::ElastiCache
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   A list of cost allocation tags to be added to this resource. Tags
-    #   are comma-separated key,value pairs (e.g. Key=`myKey`,
+    #   A list of tags to be added to this resource. Tags are
+    #   comma-separated key,value pairs (e.g. Key=`myKey`,
     #   Value=`myKeyValue`. You can include multiple tags as shown
     #   following: Key=`myKey`, Value=`myKeyValue` Key=`mySecondKey`,
-    #   Value=`mySecondKeyValue`.
+    #   Value=`mySecondKeyValue`. Tags on replication groups will be
+    #   replicated to all nodes.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] snapshot_arns
@@ -2729,6 +2783,12 @@ module Aws::ElastiCache
     #         cache_cluster_id: "String",
     #         snapshot_name: "String", # required
     #         kms_key_id: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] replication_group_id
@@ -2749,13 +2809,20 @@ module Aws::ElastiCache
     #   The ID of the KMS key used to encrypt the snapshot.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateSnapshotMessage AWS API Documentation
     #
     class CreateSnapshotMessage < Struct.new(
       :replication_group_id,
       :cache_cluster_id,
       :snapshot_name,
-      :kms_key_id)
+      :kms_key_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2780,6 +2847,12 @@ module Aws::ElastiCache
     #         user_group_id: "String", # required
     #         engine: "EngineType", # required
     #         user_ids: ["UserId"],
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] user_group_id
@@ -2794,12 +2867,19 @@ module Aws::ElastiCache
     #   The list of user IDs that belong to the user group.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateUserGroupMessage AWS API Documentation
     #
     class CreateUserGroupMessage < Struct.new(
       :user_group_id,
       :engine,
-      :user_ids)
+      :user_ids,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2814,6 +2894,12 @@ module Aws::ElastiCache
     #         passwords: ["String"],
     #         access_string: "AccessString", # required
     #         no_password_required: false,
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] user_id
@@ -2841,6 +2927,12 @@ module Aws::ElastiCache
     #   Indicates a password is not required for this user.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateUserMessage AWS API Documentation
     #
     class CreateUserMessage < Struct.new(
@@ -2849,7 +2941,8 @@ module Aws::ElastiCache
       :engine,
       :passwords,
       :access_string,
-      :no_password_required)
+      :no_password_required,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2893,7 +2986,7 @@ module Aws::ElastiCache
     #       }
     #
     # @!attribute [rw] global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #   @return [String]
     #
     # @!attribute [rw] node_group_count
@@ -2943,7 +3036,7 @@ module Aws::ElastiCache
     #   automatically replicates updates to the secondary cluster.
     #
     #   * The **GlobalReplicationGroupIdSuffix** represents the name of the
-    #     Global Datastore, which is what you use to associate a secondary
+    #     Global datastore, which is what you use to associate a secondary
     #     cluster.
     #
     #   ^
@@ -3177,7 +3270,7 @@ module Aws::ElastiCache
     #       }
     #
     # @!attribute [rw] global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #   @return [String]
     #
     # @!attribute [rw] retain_primary_replication_group
@@ -3201,7 +3294,7 @@ module Aws::ElastiCache
     #   automatically replicates updates to the secondary cluster.
     #
     #   * The **GlobalReplicationGroupIdSuffix** represents the name of the
-    #     Global Datastore, which is what you use to associate a secondary
+    #     Global datastore, which is what you use to associate a secondary
     #     cluster.
     #
     #   ^
@@ -3803,7 +3896,7 @@ module Aws::ElastiCache
     #       }
     #
     # @!attribute [rw] global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #   @return [String]
     #
     # @!attribute [rw] max_records
@@ -3821,7 +3914,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] show_member_info
-    #   Returns the list of members that comprise the Global Datastore.
+    #   Returns the list of members that comprise the Global datastore.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeGlobalReplicationGroupsMessage AWS API Documentation
@@ -4627,17 +4720,17 @@ module Aws::ElastiCache
     #       }
     #
     # @!attribute [rw] global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #   @return [String]
     #
     # @!attribute [rw] replication_group_id
     #   The name of the secondary cluster you wish to remove from the Global
-    #   Datastore
+    #   datastore
     #   @return [String]
     #
     # @!attribute [rw] replication_group_region
     #   The AWS region of secondary cluster you wish to remove from the
-    #   Global Datastore
+    #   Global datastore
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DisassociateGlobalReplicationGroupMessage AWS API Documentation
@@ -4657,7 +4750,7 @@ module Aws::ElastiCache
     #   automatically replicates updates to the secondary cluster.
     #
     #   * The **GlobalReplicationGroupIdSuffix** represents the name of the
-    #     Global Datastore, which is what you use to associate a secondary
+    #     Global datastore, which is what you use to associate a secondary
     #     cluster.
     #
     #   ^
@@ -4823,11 +4916,11 @@ module Aws::ElastiCache
     #       }
     #
     # @!attribute [rw] global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #   @return [String]
     #
     # @!attribute [rw] primary_region
-    #   The AWS region of the primary cluster of the Global Datastore
+    #   The AWS region of the primary cluster of the Global datastore
     #   @return [String]
     #
     # @!attribute [rw] primary_replication_group_id
@@ -4851,7 +4944,7 @@ module Aws::ElastiCache
     #   automatically replicates updates to the secondary cluster.
     #
     #   * The **GlobalReplicationGroupIdSuffix** represents the name of the
-    #     Global Datastore, which is what you use to associate a secondary
+    #     Global datastore, which is what you use to associate a secondary
     #     cluster.
     #
     #   ^
@@ -4919,25 +5012,25 @@ module Aws::ElastiCache
     # automatically replicates updates to the secondary cluster.
     #
     # * The **GlobalReplicationGroupIdSuffix** represents the name of the
-    #   Global Datastore, which is what you use to associate a secondary
+    #   Global datastore, which is what you use to associate a secondary
     #   cluster.
     #
     # ^
     #
     # @!attribute [rw] global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #   @return [String]
     #
     # @!attribute [rw] global_replication_group_description
-    #   The optional description of the Global Datastore
+    #   The optional description of the Global datastore
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the Global Datastore
+    #   The status of the Global datastore
     #   @return [String]
     #
     # @!attribute [rw] cache_node_type
-    #   The cache node type of the Global Datastore
+    #   The cache node type of the Global datastore
     #   @return [String]
     #
     # @!attribute [rw] engine
@@ -4949,11 +5042,11 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] members
-    #   The replication groups that comprise the Global Datastore.
+    #   The replication groups that comprise the Global datastore.
     #   @return [Array<Types::GlobalReplicationGroupMember>]
     #
     # @!attribute [rw] cluster_enabled
-    #   A flag that indicates whether the Global Datastore is cluster
+    #   A flag that indicates whether the Global datastore is cluster
     #   enabled.
     #   @return [Boolean]
     #
@@ -5016,21 +5109,21 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
-    # The Global Datastore name already exists.
+    # The Global datastore name already exists.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/GlobalReplicationGroupAlreadyExistsFault AWS API Documentation
     #
     class GlobalReplicationGroupAlreadyExistsFault < Aws::EmptyStructure; end
 
-    # The name of the Global Datastore and role of this replication group in
-    # the Global Datastore.
+    # The name of the Global datastore and role of this replication group in
+    # the Global datastore.
     #
     # @!attribute [rw] global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #   @return [String]
     #
     # @!attribute [rw] global_replication_group_member_role
-    #   The role of the replication group in a Global Datastore. Can be
+    #   The role of the replication group in a Global datastore. Can be
     #   primary or secondary.
     #   @return [String]
     #
@@ -5043,15 +5136,15 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
-    # A member of a Global Datastore. It contains the Replication Group Id,
+    # A member of a Global datastore. It contains the Replication Group Id,
     # the AWS region and the role of the replication group.
     #
     # @!attribute [rw] replication_group_id
-    #   The replication group id of the Global Datastore member.
+    #   The replication group id of the Global datastore member.
     #   @return [String]
     #
     # @!attribute [rw] replication_group_region
-    #   The AWS region of the Global Datastore member.
+    #   The AWS region of the Global datastore member.
     #   @return [String]
     #
     # @!attribute [rw] role
@@ -5079,7 +5172,7 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
-    # The Global Datastore does not exist
+    # The Global datastore does not exist
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/GlobalReplicationGroupNotFoundFault AWS API Documentation
     #
@@ -5107,7 +5200,7 @@ module Aws::ElastiCache
     #       }
     #
     # @!attribute [rw] global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #   @return [String]
     #
     # @!attribute [rw] node_group_count
@@ -5117,7 +5210,7 @@ module Aws::ElastiCache
     # @!attribute [rw] regional_configurations
     #   Describes the replication group IDs, the AWS regions where they are
     #   stored and the shard configuration for each that comprise the Global
-    #   Datastore
+    #   datastore
     #   @return [Array<Types::RegionalConfiguration>]
     #
     # @!attribute [rw] apply_immediately
@@ -5143,7 +5236,7 @@ module Aws::ElastiCache
     #   automatically replicates updates to the secondary cluster.
     #
     #   * The **GlobalReplicationGroupIdSuffix** represents the name of the
-    #     Global Datastore, which is what you use to associate a secondary
+    #     Global datastore, which is what you use to associate a secondary
     #     cluster.
     #
     #   ^
@@ -5261,7 +5354,7 @@ module Aws::ElastiCache
     #
     class InvalidCacheSecurityGroupStateFault < Aws::EmptyStructure; end
 
-    # The Global Datastore is not available or in primary-only state.
+    # The Global datastore is not available or in primary-only state.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidGlobalReplicationGroupStateFault AWS API Documentation
     #
@@ -5903,7 +5996,7 @@ module Aws::ElastiCache
     #       }
     #
     # @!attribute [rw] global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #   @return [String]
     #
     # @!attribute [rw] apply_immediately
@@ -5914,13 +6007,13 @@ module Aws::ElastiCache
     #   @return [Boolean]
     #
     # @!attribute [rw] cache_node_type
-    #   A valid cache node type that you want to scale this Global Datastore
+    #   A valid cache node type that you want to scale this Global datastore
     #   to.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
     #   The upgraded version of the cache engine to be run on the clusters
-    #   in the Global Datastore.
+    #   in the Global datastore.
     #   @return [String]
     #
     # @!attribute [rw] cache_parameter_group_name
@@ -5930,7 +6023,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] global_replication_group_description
-    #   A description of the Global Datastore
+    #   A description of the Global datastore
     #   @return [String]
     #
     # @!attribute [rw] automatic_failover_enabled
@@ -5959,7 +6052,7 @@ module Aws::ElastiCache
     #   automatically replicates updates to the secondary cluster.
     #
     #   * The **GlobalReplicationGroupIdSuffix** represents the name of the
-    #     Global Datastore, which is what you use to associate a secondary
+    #     Global datastore, which is what you use to associate a secondary
     #     cluster.
     #
     #   ^
@@ -6035,13 +6128,9 @@ module Aws::ElastiCache
     #   @return [Boolean]
     #
     # @!attribute [rw] multi_az_enabled
-    #   A flag indicating if you have Multi-AZ enabled to enhance fault
-    #   tolerance. For more information, see [Minimizing Downtime:
-    #   Multi-AZ][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
     #   @return [Boolean]
     #
     # @!attribute [rw] node_group_id
@@ -6949,6 +7038,12 @@ module Aws::ElastiCache
     #         reserved_cache_nodes_offering_id: "String", # required
     #         reserved_cache_node_id: "String",
     #         cache_node_count: 1,
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] reserved_cache_nodes_offering_id
@@ -6976,12 +7071,19 @@ module Aws::ElastiCache
     #   Default: `1`
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PurchaseReservedCacheNodesOfferingMessage AWS API Documentation
     #
     class PurchaseReservedCacheNodesOfferingMessage < Struct.new(
       :reserved_cache_nodes_offering_id,
       :reserved_cache_node_id,
-      :cache_node_count)
+      :cache_node_count,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7008,7 +7110,7 @@ module Aws::ElastiCache
     #       }
     #
     # @!attribute [rw] global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #   @return [String]
     #
     # @!attribute [rw] apply_immediately
@@ -7031,7 +7133,7 @@ module Aws::ElastiCache
     #   automatically replicates updates to the secondary cluster.
     #
     #   * The **GlobalReplicationGroupIdSuffix** represents the name of the
-    #     Global Datastore, which is what you use to associate a secondary
+    #     Global datastore, which is what you use to associate a secondary
     #     cluster.
     #
     #   ^
@@ -7195,8 +7297,8 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] global_replication_group_info
-    #   The name of the Global Datastore and role of this replication group
-    #   in the Global Datastore.
+    #   The name of the Global datastore and role of this replication group
+    #   in the Global datastore.
     #   @return [Types::GlobalReplicationGroupInfo]
     #
     # @!attribute [rw] status
@@ -8553,9 +8655,12 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
-    # A cost allocation Tag that can be added to an ElastiCache cluster or
-    # replication group. Tags are composed of a Key/Value pair. A tag with a
-    # null Value is permitted.
+    # A tag that can be added to an ElastiCache cluster or replication
+    # group. Tags are composed of a Key/Value pair. You can use tags to
+    # categorize and track all your ElastiCache resources, with the
+    # exception of global replication group. When you add or remove tags on
+    # replication groups, those actions will be replicated to all nodes in
+    # the replication group. A tag with a null Value is permitted.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -8586,7 +8691,7 @@ module Aws::ElastiCache
     # `ListTagsForResource`, and `RemoveTagsFromResource` operations.
     #
     # @!attribute [rw] tag_list
-    #   A list of cost allocation tags as key-value pairs.
+    #   A list of tags as key-value pairs.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TagListMessage AWS API Documentation

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.442.0 (2021-04-07)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Mgn`.
+
 1.441.0 (2021-04-02)
 ------------------
 

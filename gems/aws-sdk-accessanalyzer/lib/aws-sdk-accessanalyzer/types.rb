@@ -506,6 +506,113 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CancelPolicyGenerationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The `JobId` that is returned by the `StartPolicyGeneration`
+    #   operation. The `JobId` can be used with `GetGeneratedPolicy` to
+    #   retrieve the generated policies or used with
+    #   `CancelPolicyGeneration` to cancel the policy generation request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/CancelPolicyGenerationRequest AWS API Documentation
+    #
+    class CancelPolicyGenerationRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/CancelPolicyGenerationResponse AWS API Documentation
+    #
+    class CancelPolicyGenerationResponse < Aws::EmptyStructure; end
+
+    # Contains information about CloudTrail access.
+    #
+    # @note When making an API call, you may pass CloudTrailDetails
+    #   data as a hash:
+    #
+    #       {
+    #         access_role: "RoleArn", # required
+    #         end_time: Time.now,
+    #         start_time: Time.now, # required
+    #         trails: [ # required
+    #           {
+    #             all_regions: false,
+    #             cloud_trail_arn: "CloudTrailArn", # required
+    #             regions: ["String"],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] access_role
+    #   The ARN of the service role that Access Analyzer uses to access your
+    #   CloudTrail trail and service last accessed information.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   The end of the time range for which Access Analyzer reviews your
+    #   CloudTrail events. Events with a timestamp after this time are not
+    #   considered to generate a policy. If this is not included in the
+    #   request, the default value is the current time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   The start of the time range for which Access Analyzer reviews your
+    #   CloudTrail events. Events with a timestamp before this time are not
+    #   considered to generate a policy.
+    #   @return [Time]
+    #
+    # @!attribute [rw] trails
+    #   A `Trail` object that contains settings for a trail.
+    #   @return [Array<Types::Trail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/CloudTrailDetails AWS API Documentation
+    #
+    class CloudTrailDetails < Struct.new(
+      :access_role,
+      :end_time,
+      :start_time,
+      :trails)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about CloudTrail access.
+    #
+    # @!attribute [rw] end_time
+    #   The end of the time range for which Access Analyzer reviews your
+    #   CloudTrail events. Events with a timestamp after this time are not
+    #   considered to generate a policy. If this is not included in the
+    #   request, the default value is the current time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   The start of the time range for which Access Analyzer reviews your
+    #   CloudTrail events. Events with a timestamp before this time are not
+    #   considered to generate a policy.
+    #   @return [Time]
+    #
+    # @!attribute [rw] trail_properties
+    #   A `TrailProperties` object that contains settings for trail
+    #   properties.
+    #   @return [Array<Types::TrailProperties>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/CloudTrailProperties AWS API Documentation
+    #
+    class CloudTrailProperties < Struct.new(
+      :end_time,
+      :start_time,
+      :trail_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Access control configuration structures for your resource. You specify
     # the configuration as a type-value pair. You can specify only one type
     # of access control configuration.
@@ -1204,6 +1311,77 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
+    # Contains the text for the generated policy.
+    #
+    # @!attribute [rw] policy
+    #   The text to use as the content for the new policy. The policy is
+    #   created using the [CreatePolicy][1] action.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/GeneratedPolicy AWS API Documentation
+    #
+    class GeneratedPolicy < Struct.new(
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the generated policy details.
+    #
+    # @!attribute [rw] cloud_trail_properties
+    #   Lists details about the `Trail` used to generated policy.
+    #   @return [Types::CloudTrailProperties]
+    #
+    # @!attribute [rw] is_complete
+    #   This value is set to `true` if the generated policy contains all
+    #   possible actions for a service that Access Analyzer identified from
+    #   the CloudTrail trail that you specified, and `false` otherwise.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the IAM entity (user or role) for which you are
+    #   generating a policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/GeneratedPolicyProperties AWS API Documentation
+    #
+    class GeneratedPolicyProperties < Struct.new(
+      :cloud_trail_properties,
+      :is_complete,
+      :principal_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the text for the generated policy and its details.
+    #
+    # @!attribute [rw] generated_policies
+    #   The text to use as the content for the new policy. The policy is
+    #   created using the [CreatePolicy][1] action.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html
+    #   @return [Array<Types::GeneratedPolicy>]
+    #
+    # @!attribute [rw] properties
+    #   A `GeneratedPolicyProperties` object that contains properties of the
+    #   generated policy.
+    #   @return [Types::GeneratedPolicyProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/GeneratedPolicyResult AWS API Documentation
+    #
+    class GeneratedPolicyResult < Struct.new(
+      :generated_policies,
+      :properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetAccessPreviewRequest
     #   data as a hash:
     #
@@ -1413,6 +1591,69 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetGeneratedPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         include_resource_placeholders: false,
+    #         include_service_level_template: false,
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] include_resource_placeholders
+    #   The level of detail that you want to generate. You can specify
+    #   whether to generate policies with placeholders for resource ARNs for
+    #   actions that support resource level granularity in policies.
+    #
+    #   For example, in the resource section of a policy, you can receive a
+    #   placeholder such as `"Resource":"arn:aws:s3:::$\{BucketName\}"`
+    #   instead of `"*"`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_service_level_template
+    #   The level of detail that you want to generate. You can specify
+    #   whether to generate service-level policies.
+    #
+    #   Access Analyzer uses `iam:servicelastaccessed` to identify services
+    #   that have been used recently to create this service-level template.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] job_id
+    #   The `JobId` that is returned by the `StartPolicyGeneration`
+    #   operation. The `JobId` can be used with `GetGeneratedPolicy` to
+    #   retrieve the generated policies or used with
+    #   `CancelPolicyGeneration` to cancel the policy generation request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/GetGeneratedPolicyRequest AWS API Documentation
+    #
+    class GetGeneratedPolicyRequest < Struct.new(
+      :include_resource_placeholders,
+      :include_service_level_template,
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] generated_policy_result
+    #   A `GeneratedPolicyResult` object that contains the generated
+    #   policies and associated details.
+    #   @return [Types::GeneratedPolicyResult]
+    #
+    # @!attribute [rw] job_details
+    #   A `GeneratedPolicyDetails` object that contains details about the
+    #   generated policy.
+    #   @return [Types::JobDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/GetGeneratedPolicyResponse AWS API Documentation
+    #
+    class GetGeneratedPolicyResponse < Struct.new(
+      :generated_policy_result,
+      :job_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The proposed access control configuration for an IAM role. You can
     # propose a configuration for a new IAM role or an existing IAM role
     # that you own by specifying the trust policy. If the configuration is
@@ -1507,6 +1748,63 @@ module Aws::AccessAnalyzer
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/InternetConfiguration AWS API Documentation
     #
     class InternetConfiguration < Aws::EmptyStructure; end
+
+    # Contains details about the policy generation request.
+    #
+    # @!attribute [rw] completed_on
+    #   A timestamp of when the job was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] job_error
+    #   Contains the details about the policy generation error.
+    #   @return [Types::JobError]
+    #
+    # @!attribute [rw] job_id
+    #   The `JobId` that is returned by the `StartPolicyGeneration`
+    #   operation. The `JobId` can be used with `GetGeneratedPolicy` to
+    #   retrieve the generated policies or used with
+    #   `CancelPolicyGeneration` to cancel the policy generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_on
+    #   A timestamp of when the job was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the job request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/JobDetails AWS API Documentation
+    #
+    class JobDetails < Struct.new(
+      :completed_on,
+      :job_error,
+      :job_id,
+      :started_on,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the details about the policy generation error.
+    #
+    # @!attribute [rw] code
+    #   The job error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Specific information about the error. For example, which service
+    #   quota was exceeded or which resource was not found.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/JobError AWS API Documentation
+    #
+    class JobError < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # A proposed grant configuration for a KMS key. For more information,
     # see [CreateGrant][1].
@@ -2076,6 +2374,57 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListPolicyGenerationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "Token",
+    #         principal_arn: "PrincipalArn",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token used for pagination of results returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the IAM entity (user or role) for which you are
+    #   generating a policy. Use this with `ListGeneratedPolicies` to filter
+    #   the results to only include results for a specific principal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ListPolicyGenerationsRequest AWS API Documentation
+    #
+    class ListPolicyGenerationsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :principal_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token used for pagination of results returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_generations
+    #   A `PolicyGeneration` object that contains details about the
+    #   generated policy.
+    #   @return [Array<Types::PolicyGeneration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ListPolicyGenerationsResponse AWS API Documentation
+    #
+    class ListPolicyGenerationsResponse < Struct.new(
+      :next_token,
+      :policy_generations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Retrieves a list of tags applied to the specified resource.
     #
     # @note When making an API call, you may pass ListTagsForResourceRequest
@@ -2203,6 +2552,67 @@ module Aws::AccessAnalyzer
       :key,
       :substring,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the policy generation status and properties.
+    #
+    # @!attribute [rw] completed_on
+    #   A timestamp of when the policy generation was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] job_id
+    #   The `JobId` that is returned by the `StartPolicyGeneration`
+    #   operation. The `JobId` can be used with `GetGeneratedPolicy` to
+    #   retrieve the generated policies or used with
+    #   `CancelPolicyGeneration` to cancel the policy generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the IAM entity (user or role) for which you are
+    #   generating a policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_on
+    #   A timestamp of when the policy generation started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the policy generation request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/PolicyGeneration AWS API Documentation
+    #
+    class PolicyGeneration < Struct.new(
+      :completed_on,
+      :job_id,
+      :principal_arn,
+      :started_on,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the ARN details about the IAM entity for which the policy is
+    # generated.
+    #
+    # @note When making an API call, you may pass PolicyGenerationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         principal_arn: "PrincipalArn", # required
+    #       }
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the IAM entity (user or role) for which you are
+    #   generating a policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/PolicyGenerationDetails AWS API Documentation
+    #
+    class PolicyGenerationDetails < Struct.new(
+      :principal_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2631,6 +3041,78 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartPolicyGenerationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "String",
+    #         cloud_trail_details: {
+    #           access_role: "RoleArn", # required
+    #           end_time: Time.now,
+    #           start_time: Time.now, # required
+    #           trails: [ # required
+    #             {
+    #               all_regions: false,
+    #               cloud_trail_arn: "CloudTrailArn", # required
+    #               regions: ["String"],
+    #             },
+    #           ],
+    #         },
+    #         policy_generation_details: { # required
+    #           principal_arn: "PrincipalArn", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes only once. With an idempotent request, if the original
+    #   request completes successfully, the subsequent retries with the same
+    #   client token return the result from the original successful request
+    #   and they have no additional effect.
+    #
+    #   If you do not specify a client token, one is automatically generated
+    #   by the AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_trail_details
+    #   A `CloudTrailDetails` object that contains details about a `Trail`
+    #   that you want to analyze to generate policies.
+    #   @return [Types::CloudTrailDetails]
+    #
+    # @!attribute [rw] policy_generation_details
+    #   Contains the ARN of the IAM entity (user or role) for which you are
+    #   generating a policy.
+    #   @return [Types::PolicyGenerationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/StartPolicyGenerationRequest AWS API Documentation
+    #
+    class StartPolicyGenerationRequest < Struct.new(
+      :client_token,
+      :cloud_trail_details,
+      :policy_generation_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The `JobId` that is returned by the `StartPolicyGeneration`
+    #   operation. The `JobId` can be used with `GetGeneratedPolicy` to
+    #   retrieve the generated policies or used with
+    #   `CancelPolicyGeneration` to cancel the policy generation request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/StartPolicyGenerationResponse AWS API Documentation
+    #
+    class StartPolicyGenerationResponse < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Starts a scan of the policies applied to the specified resource.
     #
     # @note When making an API call, you may pass StartResourceScanRequest
@@ -2749,6 +3231,73 @@ module Aws::AccessAnalyzer
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the CloudTrail trail being analyzed to generate
+    # a policy.
+    #
+    # @note When making an API call, you may pass Trail
+    #   data as a hash:
+    #
+    #       {
+    #         all_regions: false,
+    #         cloud_trail_arn: "CloudTrailArn", # required
+    #         regions: ["String"],
+    #       }
+    #
+    # @!attribute [rw] all_regions
+    #   Possible values are `true` or `false`. If set to `true`, Access
+    #   Analyzer retrieves CloudTrail data from all regions to analyze and
+    #   generate a policy.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cloud_trail_arn
+    #   Specifies the ARN of the trail. The format of a trail ARN is
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`.
+    #   @return [String]
+    #
+    # @!attribute [rw] regions
+    #   A list of regions to get CloudTrail data from and analyze to
+    #   generate a policy.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/Trail AWS API Documentation
+    #
+    class Trail < Struct.new(
+      :all_regions,
+      :cloud_trail_arn,
+      :regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the CloudTrail trail being analyzed to generate
+    # a policy.
+    #
+    # @!attribute [rw] all_regions
+    #   Possible values are `true` or `false`. If set to `true`, Access
+    #   Analyzer retrieves CloudTrail data from all regions to analyze and
+    #   generate a policy.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cloud_trail_arn
+    #   Specifies the ARN of the trail. The format of a trail ARN is
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`.
+    #   @return [String]
+    #
+    # @!attribute [rw] regions
+    #   A list of regions to get CloudTrail data from and analyze to
+    #   generate a policy.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/TrailProperties AWS API Documentation
+    #
+    class TrailProperties < Struct.new(
+      :all_regions,
+      :cloud_trail_arn,
+      :regions)
       SENSITIVE = []
       include Aws::Structure
     end

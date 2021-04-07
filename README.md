@@ -540,6 +540,7 @@ RubyGems.org page under "LINKS" section.
 | AmazonMWAA                                            | Aws::MWAA                            | aws-sdk-mwaa                            | 2020-07-01  |
 | AmplifyBackend                                        | Aws::AmplifyBackend                  | aws-sdk-amplifybackend                  | 2020-08-11  |
 | Application Auto Scaling                              | Aws::ApplicationAutoScaling          | aws-sdk-applicationautoscaling          | 2016-02-06  |
+| Application Migration Service                         | Aws::Mgn                             | aws-sdk-mgn                             | 2020-02-26  |
 | Auto Scaling                                          | Aws::AutoScaling                     | aws-sdk-autoscaling                     | 2011-01-01  |
 | Braket                                                | Aws::Braket                          | aws-sdk-braket                          | 2019-09-01  |
 | CodeArtifact                                          | Aws::CodeArtifact                    | aws-sdk-codeartifact                    | 2018-09-22  |

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2021-04-07)
+------------------
+
+* Feature - This release adds support for the Auto-Record to S3 feature. Amazon IVS now enables you to save your live video to Amazon S3.
+
 1.8.0 (2021-03-10)
 ------------------
 
