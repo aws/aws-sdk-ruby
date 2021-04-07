@@ -368,6 +368,34 @@ module Aws::Cloud9
     #   The ID of the subnet in Amazon VPC that AWS Cloud9 will use to
     #   communicate with the Amazon EC2 instance.
     #
+    # @option params [String] :image_id
+    #   The identifier for the Amazon Machine Image (AMI) that's used to
+    #   create the EC2 instance. To choose an AMI for the instance, you must
+    #   specify a valid AMI alias or a valid AWS Systems Manager (SSM) path.
+    #
+    #   The default AMI is used if the parameter isn't explicitly assigned a
+    #   value in the request.
+    #
+    #   <b>AMI aliases </b>
+    #
+    #   * <b>Amazon Linux (default): <code>amazonlinux-1-x86_64</code> </b>
+    #
+    #   * Amazon Linux 2: `amazonlinux-2-x86_64`
+    #
+    #   * Ubuntu 18.04: `ubuntu-18.04-x86_64`
+    #
+    #   **SSM paths**
+    #
+    #   * <b>Amazon Linux (default):
+    #     <code>resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64</code>
+    #     </b>
+    #
+    #   * Amazon Linux 2:
+    #     `resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2-x86_64`
+    #
+    #   * Ubuntu 18.04:
+    #     `resolve:ssm:/aws/service/cloud9/amis/ubuntu-18.04-x86_64`
+    #
     # @option params [Integer] :automatic_stop_time_minutes
     #   The number of minutes until the running instance is shut down after
     #   the environment has last been used.
@@ -383,6 +411,15 @@ module Aws::Cloud9
     #
     # @option params [String] :connection_type
     #   The connection type used for connecting to an Amazon EC2 environment.
+    #   Valid values are `CONNECT_SSH` (default) and `CONNECT_SSM` (connected
+    #   through AWS Systems Manager).
+    #
+    #   For more information, see [Accessing no-ingress EC2 instances with AWS
+    #   Systems Manager][1] in the *AWS Cloud9 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud9/latest/user-guide/ec2-ssm.html
     #
     # @return [Types::CreateEnvironmentEC2Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -397,7 +434,7 @@ module Aws::Cloud9
     #     description: "This is my demonstration environment.", 
     #     instance_type: "t2.micro", 
     #     owner_arn: "arn:aws:iam::123456789012:user/MyDemoUser", 
-    #     subnet_id: "subnet-1fab8aEX", 
+    #     subnet_id: "subnet-6300cd1b", 
     #   })
     #
     #   resp.to_h outputs the following:
@@ -413,6 +450,7 @@ module Aws::Cloud9
     #     client_request_token: "ClientRequestToken",
     #     instance_type: "InstanceType", # required
     #     subnet_id: "SubnetId",
+    #     image_id: "ImageId",
     #     automatic_stop_time_minutes: 1,
     #     owner_arn: "UserArn",
     #     tags: [
@@ -838,6 +876,7 @@ module Aws::Cloud9
     #   resp.environments[0].lifecycle.status #=> String, one of "CREATING", "CREATED", "CREATE_FAILED", "DELETING", "DELETE_FAILED"
     #   resp.environments[0].lifecycle.reason #=> String
     #   resp.environments[0].lifecycle.failure_resource #=> String
+    #   resp.environments[0].managed_credentials_status #=> String, one of "ENABLED_ON_CREATE", "ENABLED_BY_OWNER", "DISABLED_BY_DEFAULT", "DISABLED_BY_OWNER", "DISABLED_BY_COLLABORATOR", "PENDING_REMOVAL_BY_COLLABORATOR", "PENDING_START_REMOVAL_BY_COLLABORATOR", "PENDING_REMOVAL_BY_OWNER", "PENDING_START_REMOVAL_BY_OWNER", "FAILED_REMOVAL_BY_COLLABORATOR", "FAILED_REMOVAL_BY_OWNER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/DescribeEnvironments AWS API Documentation
     #
@@ -1125,7 +1164,7 @@ module Aws::Cloud9
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloud9'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

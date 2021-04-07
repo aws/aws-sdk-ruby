@@ -70,7 +70,7 @@ module Aws::GlueDataBrew
 
     # Represents an individual condition that evaluates to true or false.
     #
-    # Conditions are used with recipe actions: The action is only performed
+    # Conditions are used with recipe actions. The action is only performed
     # for column values where the condition evaluates to true.
     #
     # If a recipe requires more than one condition, then the recipe must
@@ -163,6 +163,45 @@ module Aws::GlueDataBrew
     #               key: "Key",
     #             },
     #           },
+    #           database_input_definition: {
+    #             glue_connection_name: "GlueConnectionName", # required
+    #             database_table_name: "DatabaseTableName", # required
+    #             temp_directory: {
+    #               bucket: "Bucket", # required
+    #               key: "Key",
+    #             },
+    #           },
+    #         },
+    #         path_options: {
+    #           last_modified_date_condition: {
+    #             expression: "Expression", # required
+    #             values_map: { # required
+    #               "ValueReference" => "ConditionValue",
+    #             },
+    #           },
+    #           files_limit: {
+    #             max_files: 1, # required
+    #             ordered_by: "LAST_MODIFIED_DATE", # accepts LAST_MODIFIED_DATE
+    #             order: "DESCENDING", # accepts DESCENDING, ASCENDING
+    #           },
+    #           parameters: {
+    #             "PathParameterName" => {
+    #               name: "PathParameterName", # required
+    #               type: "Datetime", # required, accepts Datetime, Number, String
+    #               datetime_options: {
+    #                 format: "DatetimeFormat", # required
+    #                 timezone_offset: "TimezoneOffset",
+    #                 locale_code: "LocaleCode",
+    #               },
+    #               create_column: false,
+    #               filter: {
+    #                 expression: "Expression", # required
+    #                 values_map: { # required
+    #                   "ValueReference" => "ConditionValue",
+    #                 },
+    #               },
+    #             },
+    #           },
     #         },
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -175,19 +214,24 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] format
-    #   Specifies the file format of a dataset created from an S3 file or
+    #   The file format of a dataset that is created from an S3 file or
     #   folder.
     #   @return [String]
     #
     # @!attribute [rw] format_options
-    #   Options that define the structure of either Csv, Excel, or JSON
-    #   input.
+    #   Represents a set of options that define the structure of either
+    #   comma-separated value (CSV), Excel, or JSON input.
     #   @return [Types::FormatOptions]
     #
     # @!attribute [rw] input
-    #   Information on how DataBrew can find data, in either the AWS Glue
-    #   Data Catalog or Amazon S3.
+    #   Represents information on how DataBrew can find data, in either the
+    #   AWS Glue Data Catalog or Amazon S3.
     #   @return [Types::Input]
+    #
+    # @!attribute [rw] path_options
+    #   A set of options that defines how DataBrew interprets an S3 path of
+    #   the dataset.
+    #   @return [Types::PathOptions]
     #
     # @!attribute [rw] tags
     #   Metadata tags to apply to this dataset.
@@ -200,6 +244,7 @@ module Aws::GlueDataBrew
       :format,
       :format_options,
       :input,
+      :path_options,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -282,8 +327,8 @@ module Aws::GlueDataBrew
     #   @return [Integer]
     #
     # @!attribute [rw] output_location
-    #   An Amazon S3 location (bucket name an object key) where DataBrew can
-    #   read input data, or write output from a job.
+    #   Represents an Amazon S3 location (bucket name and object key) where
+    #   DataBrew can read input data, or write output from a job.
     #   @return [Types::S3Location]
     #
     # @!attribute [rw] role_arn
@@ -673,8 +718,9 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Options that define how DataBrew will read a Csv file when creating a
-    # dataset from that file.
+    # Represents a set of options that define how DataBrew will read a
+    # comma-separated value (CSV) file when creating a dataset from that
+    # file.
     #
     # @note When making an API call, you may pass CsvOptions
     #   data as a hash:
@@ -686,12 +732,13 @@ module Aws::GlueDataBrew
     #
     # @!attribute [rw] delimiter
     #   A single character that specifies the delimiter being used in the
-    #   Csv file.
+    #   CSV file.
     #   @return [String]
     #
     # @!attribute [rw] header_row
-    #   A variable that specifies whether the first row in the file will be
-    #   parsed as the header. If false, column names will be auto-generated.
+    #   A variable that specifies whether the first row in the file is
+    #   parsed as the header. If this value is false, column names are
+    #   auto-generated.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/CsvOptions AWS API Documentation
@@ -703,7 +750,8 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Options that define how DataBrew will write a Csv file.
+    # Represents a set of options that define how DataBrew will write a
+    # comma-separated value (CSV) file.
     #
     # @note When making an API call, you may pass CsvOutputOptions
     #   data as a hash:
@@ -713,7 +761,7 @@ module Aws::GlueDataBrew
     #       }
     #
     # @!attribute [rw] delimiter
-    #   A single character that specifies the delimiter used to create Csv
+    #   A single character that specifies the delimiter used to create CSV
     #   job output.
     #   @return [String]
     #
@@ -771,6 +819,44 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
+    # Connection information for dataset input files stored in a database.
+    #
+    # @note When making an API call, you may pass DatabaseInputDefinition
+    #   data as a hash:
+    #
+    #       {
+    #         glue_connection_name: "GlueConnectionName", # required
+    #         database_table_name: "DatabaseTableName", # required
+    #         temp_directory: {
+    #           bucket: "Bucket", # required
+    #           key: "Key",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] glue_connection_name
+    #   The AWS Glue Connection that stores the connection information for
+    #   the target database.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_table_name
+    #   The table within the target database.
+    #   @return [String]
+    #
+    # @!attribute [rw] temp_directory
+    #   Represents an Amazon S3 location (bucket name and object key) where
+    #   DataBrew can read input data, or write output from a job.
+    #   @return [Types::S3Location]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/DatabaseInputDefinition AWS API Documentation
+    #
+    class DatabaseInputDefinition < Struct.new(
+      :glue_connection_name,
+      :database_table_name,
+      :temp_directory)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a dataset that can be processed by DataBrew.
     #
     # @!attribute [rw] account_id
@@ -790,12 +876,13 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] format
-    #   Specifies the file format of a dataset created from an S3 file or
+    #   The file format of a dataset that is created from an S3 file or
     #   folder.
     #   @return [String]
     #
     # @!attribute [rw] format_options
-    #   Options that define how DataBrew interprets the data in the dataset.
+    #   A set of options that define how DataBrew interprets the data in the
+    #   dataset.
     #   @return [Types::FormatOptions]
     #
     # @!attribute [rw] input
@@ -816,6 +903,11 @@ module Aws::GlueDataBrew
     #   The location of the data for the dataset, either Amazon S3 or the
     #   AWS Glue Data Catalog.
     #   @return [String]
+    #
+    # @!attribute [rw] path_options
+    #   A set of options that defines how DataBrew interprets an S3 path of
+    #   the dataset.
+    #   @return [Types::PathOptions]
     #
     # @!attribute [rw] tags
     #   Metadata tags that have been applied to the dataset.
@@ -838,8 +930,110 @@ module Aws::GlueDataBrew
       :last_modified_date,
       :last_modified_by,
       :source,
+      :path_options,
       :tags,
       :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a dataset paramater that defines type and conditions for a
+    # parameter in the S3 path of the dataset.
+    #
+    # @note When making an API call, you may pass DatasetParameter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "PathParameterName", # required
+    #         type: "Datetime", # required, accepts Datetime, Number, String
+    #         datetime_options: {
+    #           format: "DatetimeFormat", # required
+    #           timezone_offset: "TimezoneOffset",
+    #           locale_code: "LocaleCode",
+    #         },
+    #         create_column: false,
+    #         filter: {
+    #           expression: "Expression", # required
+    #           values_map: { # required
+    #             "ValueReference" => "ConditionValue",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the parameter that is used in the dataset's S3 path.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the dataset parameter, can be one of a 'String',
+    #   'Number' or 'Datetime'.
+    #   @return [String]
+    #
+    # @!attribute [rw] datetime_options
+    #   Additional parameter options such as a format and a timezone.
+    #   Required for datetime parameters.
+    #   @return [Types::DatetimeOptions]
+    #
+    # @!attribute [rw] create_column
+    #   Optional boolean value that defines whether the captured value of
+    #   this parameter should be loaded as an additional column in the
+    #   dataset.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filter
+    #   The optional filter expression structure to apply additional
+    #   matching criteria to the parameter.
+    #   @return [Types::FilterExpression]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/DatasetParameter AWS API Documentation
+    #
+    class DatasetParameter < Struct.new(
+      :name,
+      :type,
+      :datetime_options,
+      :create_column,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents additional options for correct interpretation of datetime
+    # parameters used in the S3 path of a dataset.
+    #
+    # @note When making an API call, you may pass DatetimeOptions
+    #   data as a hash:
+    #
+    #       {
+    #         format: "DatetimeFormat", # required
+    #         timezone_offset: "TimezoneOffset",
+    #         locale_code: "LocaleCode",
+    #       }
+    #
+    # @!attribute [rw] format
+    #   Required option, that defines the datetime format used for a date
+    #   parameter in the S3 path. Should use only supported datetime
+    #   specifiers and separation characters, all litera a-z or A-Z
+    #   character should be escaped with single quotes. E.g.
+    #   "MM.dd.yyyy-'at'-HH:mm".
+    #   @return [String]
+    #
+    # @!attribute [rw] timezone_offset
+    #   Optional value for a timezone offset of the datetime parameter value
+    #   in the S3 path. Shouldn't be used if Format for this parameter
+    #   includes timezone fields. If no offset specified, UTC is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_code
+    #   Optional value for a non-US locale code, needed for correct
+    #   interpretation of some date formats.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/DatetimeOptions AWS API Documentation
+    #
+    class DatetimeOptions < Struct.new(
+      :format,
+      :timezone_offset,
+      :locale_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1044,18 +1238,18 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] format
-    #   Specifies the file format of a dataset created from an S3 file or
+    #   The file format of a dataset that is created from an S3 file or
     #   folder.
     #   @return [String]
     #
     # @!attribute [rw] format_options
-    #   Options that define the structure of either Csv, Excel, or JSON
-    #   input.
+    #   Represents a set of options that define the structure of either
+    #   comma-separated value (CSV), Excel, or JSON input.
     #   @return [Types::FormatOptions]
     #
     # @!attribute [rw] input
-    #   Information on how DataBrew can find data, in either the AWS Glue
-    #   Data Catalog or Amazon S3.
+    #   Represents information on how DataBrew can find data, in either the
+    #   AWS Glue Data Catalog or Amazon S3.
     #   @return [Types::Input]
     #
     # @!attribute [rw] last_modified_date
@@ -1071,6 +1265,11 @@ module Aws::GlueDataBrew
     #   The location of the data for this dataset, Amazon S3 or the AWS Glue
     #   Data Catalog.
     #   @return [String]
+    #
+    # @!attribute [rw] path_options
+    #   A set of options that defines how DataBrew interprets an S3 path of
+    #   the dataset.
+    #   @return [Types::PathOptions]
     #
     # @!attribute [rw] tags
     #   Metadata tags associated with this dataset.
@@ -1092,6 +1291,7 @@ module Aws::GlueDataBrew
       :last_modified_date,
       :last_modified_by,
       :source,
+      :path_options,
       :tags,
       :resource_arn)
       SENSITIVE = []
@@ -1641,8 +1841,8 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Options that define how DataBrew will interpret a Microsoft Excel
-    # file, when creating a dataset from that file.
+    # Represents a set of options that define how DataBrew will interpret a
+    # Microsoft Excel file when creating a dataset from that file.
     #
     # @note When making an API call, you may pass ExcelOptions
     #   data as a hash:
@@ -1654,18 +1854,19 @@ module Aws::GlueDataBrew
     #       }
     #
     # @!attribute [rw] sheet_names
-    #   Specifies one or more named sheets in the Excel file, which will be
-    #   included in the dataset.
+    #   One or more named sheets in the Excel file that will be included in
+    #   the dataset.
     #   @return [Array<String>]
     #
     # @!attribute [rw] sheet_indexes
-    #   Specifies one or more sheet numbers in the Excel file, which will be
-    #   included in the dataset.
+    #   One or more sheet numbers in the Excel file that will be included in
+    #   the dataset.
     #   @return [Array<Integer>]
     #
     # @!attribute [rw] header_row
-    #   A variable that specifies whether the first row in the file will be
-    #   parsed as the header. If false, column names will be auto-generated.
+    #   A variable that specifies whether the first row in the file is
+    #   parsed as the header. If this value is false, column names are
+    #   auto-generated.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ExcelOptions AWS API Documentation
@@ -1678,7 +1879,80 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Options that define the structure of either Csv, Excel, or JSON input.
+    # Represents a limit imposed on number of S3 files that should be
+    # selected for a dataset from a connected S3 path.
+    #
+    # @note When making an API call, you may pass FilesLimit
+    #   data as a hash:
+    #
+    #       {
+    #         max_files: 1, # required
+    #         ordered_by: "LAST_MODIFIED_DATE", # accepts LAST_MODIFIED_DATE
+    #         order: "DESCENDING", # accepts DESCENDING, ASCENDING
+    #       }
+    #
+    # @!attribute [rw] max_files
+    #   The number of S3 files to select.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ordered_by
+    #   A criteria to use for S3 files sorting before their selection. By
+    #   default uses LAST\_MODIFIED\_DATE as a sorting criteria. Currently
+    #   it's the only allowed value.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   A criteria to use for S3 files sorting before their selection. By
+    #   default uses DESCENDING order, i.e. most recent files are selected
+    #   first. Anotherpossible value is ASCENDING.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/FilesLimit AWS API Documentation
+    #
+    class FilesLimit < Struct.new(
+      :max_files,
+      :ordered_by,
+      :order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a structure for defining parameter conditions.
+    #
+    # @note When making an API call, you may pass FilterExpression
+    #   data as a hash:
+    #
+    #       {
+    #         expression: "Expression", # required
+    #         values_map: { # required
+    #           "ValueReference" => "ConditionValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] expression
+    #   The expression which includes condition names followed by
+    #   substitution variables, possibly grouped and combined with other
+    #   conditions. For example, "(starts\_with :prefix1 or starts\_with
+    #   :prefix2) and (ends\_with :suffix1 or ends\_with :suffix2)".
+    #   Substitution variables should start with ':' symbol.
+    #   @return [String]
+    #
+    # @!attribute [rw] values_map
+    #   The map of substitution variable names to their values used in this
+    #   filter expression.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/FilterExpression AWS API Documentation
+    #
+    class FilterExpression < Struct.new(
+      :expression,
+      :values_map)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a set of options that define the structure of either
+    # comma-separated value (CSV), Excel, or JSON input.
     #
     # @note When making an API call, you may pass FormatOptions
     #   data as a hash:
@@ -1708,7 +1982,7 @@ module Aws::GlueDataBrew
     #   @return [Types::ExcelOptions]
     #
     # @!attribute [rw] csv
-    #   Options that define how Csv input is to be interpreted by DataBrew.
+    #   Options that define how CSV input is to be interpreted by DataBrew.
     #   @return [Types::CsvOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/FormatOptions AWS API Documentation
@@ -1721,8 +1995,8 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Information on how DataBrew can find data, in either the AWS Glue Data
-    # Catalog or Amazon S3.
+    # Represents information on how DataBrew can find data, in either the
+    # AWS Glue Data Catalog or Amazon S3.
     #
     # @note When making an API call, you may pass Input
     #   data as a hash:
@@ -1741,6 +2015,14 @@ module Aws::GlueDataBrew
     #             key: "Key",
     #           },
     #         },
+    #         database_input_definition: {
+    #           glue_connection_name: "GlueConnectionName", # required
+    #           database_table_name: "DatabaseTableName", # required
+    #           temp_directory: {
+    #             bucket: "Bucket", # required
+    #             key: "Key",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] s3_input_definition
@@ -1751,11 +2033,16 @@ module Aws::GlueDataBrew
     #   The AWS Glue Data Catalog parameters for the data.
     #   @return [Types::DataCatalogInputDefinition]
     #
+    # @!attribute [rw] database_input_definition
+    #   Connection information for dataset input files stored in a database.
+    #   @return [Types::DatabaseInputDefinition]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/Input AWS API Documentation
     #
     class Input < Struct.new(
       :s3_input_definition,
-      :data_catalog_input_definition)
+      :data_catalog_input_definition,
+      :database_input_definition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1804,7 +2091,7 @@ module Aws::GlueDataBrew
     # @!attribute [rw] encryption_mode
     #   The encryption mode for the job, which can be one of the following:
     #
-    #   * `SSE-KMS` - Server-side encryption with AWS KMS-managed keys.
+    #   * `SSE-KMS` - Server-side encryption with keys managed by AWS KMS.
     #
     #   * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
     #   @return [String]
@@ -1862,8 +2149,8 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the role that will be assumed for
-    #   this job.
+    #   The Amazon Resource Name (ARN) of the role to be assumed for this
+    #   job.
     #   @return [String]
     #
     # @!attribute [rw] timeout
@@ -1876,10 +2163,10 @@ module Aws::GlueDataBrew
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] job_sample
-    #   Sample configuration for profile jobs only. Determines the number of
-    #   rows on which the profile job will be executed. If a JobSample value
-    #   is not provided, the default value will be used. The default value
-    #   is CUSTOM\_ROWS for the mode parameter and 20000 for the size
+    #   A sample configuration for profile jobs only, which determines the
+    #   number of rows on which the profile job is run. If a `JobSample`
+    #   value isn't provided, the default value is used. The default value
+    #   is CUSTOM\_ROWS for the mode parameter and 20,000 for the size
     #   parameter.
     #   @return [Types::JobSample]
     #
@@ -1974,10 +2261,10 @@ module Aws::GlueDataBrew
     #   @return [Time]
     #
     # @!attribute [rw] job_sample
-    #   Sample configuration for profile jobs only. Determines the number of
-    #   rows on which the profile job will be executed. If a JobSample value
-    #   is not provided, the default value will be used. The default value
-    #   is CUSTOM\_ROWS for the mode parameter and 20000 for the size
+    #   A sample configuration for profile jobs only, which determines the
+    #   number of rows on which the profile job is run. If a `JobSample`
+    #   value isn't provided, the default is used. The default value is
+    #   CUSTOM\_ROWS for the mode parameter and 20,000 for the size
     #   parameter.
     #   @return [Types::JobSample]
     #
@@ -2003,11 +2290,10 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Sample configuration for Profile Jobs only. Determines the number of
-    # rows on which the Profile job will be executed. If a JobSample value
-    # is not provided for profile jobs, the default value will be used. The
-    # default value is CUSTOM\_ROWS for the mode parameter and 20000 for the
-    # size parameter.
+    # A sample configuration for profile jobs only, which determines the
+    # number of rows on which the profile job is run. If a `JobSample` value
+    # isn't provided, the default is used. The default value is
+    # CUSTOM\_ROWS for the mode parameter and 20,000 for the size parameter.
     #
     # @note When making an API call, you may pass JobSample
     #   data as a hash:
@@ -2018,20 +2304,20 @@ module Aws::GlueDataBrew
     #       }
     #
     # @!attribute [rw] mode
-    #   Determines whether the profile job will be executed on the entire
-    #   dataset or on a specified number of rows. Must be one of the
+    #   A value that determines whether the profile job is run on the entire
+    #   dataset or a specified number of rows. This value must be one of the
     #   following:
     #
-    #   * FULL\_DATASET: Profile job will be executed on the entire dataset.
+    #   * FULL\_DATASET - The profile job is run on the entire dataset.
     #
-    #   * CUSTOM\_ROWS: Profile job will be executed on the number of rows
-    #     specified in the Size parameter.
+    #   * CUSTOM\_ROWS - The profile job is run on the number of rows
+    #     specified in the `Size` parameter.
     #   @return [String]
     #
     # @!attribute [rw] size
-    #   Size parameter is only required when the mode is CUSTOM\_ROWS.
-    #   Profile job will be executed on the the specified number of rows.
-    #   The maximum value for size is Long.MAX\_VALUE.
+    #   The `Size` parameter is only required when the mode is CUSTOM\_ROWS.
+    #   The profile job is run on the specified number of rows. The maximum
+    #   value for size is Long.MAX\_VALUE.
     #
     #   Long.MAX\_VALUE = 9223372036854775807
     #   @return [Integer]
@@ -2453,8 +2739,8 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Parameters that specify how and where DataBrew will write the output
-    # generated by recipe jobs or profile jobs.
+    # Represents options that specify how and where DataBrew writes the
+    # output generated by recipe jobs or profile jobs.
     #
     # @note When making an API call, you may pass Output
     #   data as a hash:
@@ -2499,7 +2785,8 @@ module Aws::GlueDataBrew
     #   @return [Boolean]
     #
     # @!attribute [rw] format_options
-    #   Options that define how DataBrew formats job output files.
+    #   Represents options that define how DataBrew formats job output
+    #   files.
     #   @return [Types::OutputFormatOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/Output AWS API Documentation
@@ -2515,7 +2802,8 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Options that define the structure of Csv job output.
+    # Represents a set of options that define the structure of
+    # comma-separated (CSV) job output.
     #
     # @note When making an API call, you may pass OutputFormatOptions
     #   data as a hash:
@@ -2527,13 +2815,77 @@ module Aws::GlueDataBrew
     #       }
     #
     # @!attribute [rw] csv
-    #   Options that define how DataBrew writes Csv output.
+    #   Represents a set of options that define the structure of
+    #   comma-separated value (CSV) job output.
     #   @return [Types::CsvOutputOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/OutputFormatOptions AWS API Documentation
     #
     class OutputFormatOptions < Struct.new(
       :csv)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a set of options that define how DataBrew selects files for
+    # a given S3 path in a dataset.
+    #
+    # @note When making an API call, you may pass PathOptions
+    #   data as a hash:
+    #
+    #       {
+    #         last_modified_date_condition: {
+    #           expression: "Expression", # required
+    #           values_map: { # required
+    #             "ValueReference" => "ConditionValue",
+    #           },
+    #         },
+    #         files_limit: {
+    #           max_files: 1, # required
+    #           ordered_by: "LAST_MODIFIED_DATE", # accepts LAST_MODIFIED_DATE
+    #           order: "DESCENDING", # accepts DESCENDING, ASCENDING
+    #         },
+    #         parameters: {
+    #           "PathParameterName" => {
+    #             name: "PathParameterName", # required
+    #             type: "Datetime", # required, accepts Datetime, Number, String
+    #             datetime_options: {
+    #               format: "DatetimeFormat", # required
+    #               timezone_offset: "TimezoneOffset",
+    #               locale_code: "LocaleCode",
+    #             },
+    #             create_column: false,
+    #             filter: {
+    #               expression: "Expression", # required
+    #               values_map: { # required
+    #                 "ValueReference" => "ConditionValue",
+    #               },
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] last_modified_date_condition
+    #   If provided, this structure defines a date range for matching S3
+    #   objects based on their LastModifiedDate attribute in S3.
+    #   @return [Types::FilterExpression]
+    #
+    # @!attribute [rw] files_limit
+    #   If provided, this structure imposes a limit on a number of files
+    #   that should be selected.
+    #   @return [Types::FilesLimit]
+    #
+    # @!attribute [rw] parameters
+    #   A structure that maps names of parameters used in the S3 path of a
+    #   dataset to their definitions.
+    #   @return [Hash<String,Types::DatasetParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/PathOptions AWS API Documentation
+    #
+    class PathOptions < Struct.new(
+      :last_modified_date_condition,
+      :files_limit,
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2580,8 +2932,8 @@ module Aws::GlueDataBrew
     #
     # @!attribute [rw] sample
     #   The sample size and sampling type to apply to the data. If this
-    #   parameter isn't specified, then the sample will consiste of the
-    #   first 500 rows from the dataset.
+    #   parameter isn't specified, then the sample consists of the first
+    #   500 rows from the dataset.
     #   @return [Types::Sample]
     #
     # @!attribute [rw] tags
@@ -2719,7 +3071,7 @@ module Aws::GlueDataBrew
     #   * Numeric version (`X.Y`) - `X` and `Y` stand for major and minor
     #     version numbers. The maximum length of each is 6 digits, and
     #     neither can be negative values. Both `X` and `Y` are required, and
-    #     "0.0" is not a valid version.
+    #     "0.0" isn't a valid version.
     #
     #   * `LATEST_WORKING` - the most recent valid version being developed
     #     in a DataBrew project.
@@ -2837,8 +3189,8 @@ module Aws::GlueDataBrew
     #   @return [Types::RecipeAction]
     #
     # @!attribute [rw] condition_expressions
-    #   One or more conditions that must be met, in order for the recipe
-    #   step to succeed.
+    #   One or more conditions that must be met for the recipe step to
+    #   succeed.
     #
     #   <note markdown="1"> All of the conditions in the array must be met. In other words, all
     #   of the conditions must be combined using a logical AND operation.
@@ -2893,8 +3245,8 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # An Amazon S3 location (bucket name an object key) where DataBrew can
-    # read input data, or write output from a job.
+    # Represents an Amazon S3 location (bucket name and object key) where
+    # DataBrew can read input data, or write output from a job.
     #
     # @note When making an API call, you may pass S3Location
     #   data as a hash:
@@ -2981,7 +3333,7 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] cron_expression
-    #   The date(s) and time(s) when the job will run. For more information,
+    #   The dates and times when the job is to run. For more information,
     #   see [Cron expressions][1] in the *AWS Glue DataBrew Developer
     #   Guide*.
     #
@@ -3071,7 +3423,7 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] view_frame
-    #   Represents the data being being transformed during an action.
+    #   Represents the data being transformed during an action.
     #   @return [Types::ViewFrame]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/SendProjectSessionActionRequest AWS API Documentation
@@ -3330,6 +3682,45 @@ module Aws::GlueDataBrew
     #               key: "Key",
     #             },
     #           },
+    #           database_input_definition: {
+    #             glue_connection_name: "GlueConnectionName", # required
+    #             database_table_name: "DatabaseTableName", # required
+    #             temp_directory: {
+    #               bucket: "Bucket", # required
+    #               key: "Key",
+    #             },
+    #           },
+    #         },
+    #         path_options: {
+    #           last_modified_date_condition: {
+    #             expression: "Expression", # required
+    #             values_map: { # required
+    #               "ValueReference" => "ConditionValue",
+    #             },
+    #           },
+    #           files_limit: {
+    #             max_files: 1, # required
+    #             ordered_by: "LAST_MODIFIED_DATE", # accepts LAST_MODIFIED_DATE
+    #             order: "DESCENDING", # accepts DESCENDING, ASCENDING
+    #           },
+    #           parameters: {
+    #             "PathParameterName" => {
+    #               name: "PathParameterName", # required
+    #               type: "Datetime", # required, accepts Datetime, Number, String
+    #               datetime_options: {
+    #                 format: "DatetimeFormat", # required
+    #                 timezone_offset: "TimezoneOffset",
+    #                 locale_code: "LocaleCode",
+    #               },
+    #               create_column: false,
+    #               filter: {
+    #                 expression: "Expression", # required
+    #                 values_map: { # required
+    #                   "ValueReference" => "ConditionValue",
+    #                 },
+    #               },
+    #             },
+    #           },
     #         },
     #       }
     #
@@ -3338,19 +3729,24 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] format
-    #   Specifies the file format of a dataset created from an S3 file or
+    #   The file format of a dataset that is created from an S3 file or
     #   folder.
     #   @return [String]
     #
     # @!attribute [rw] format_options
-    #   Options that define the structure of either Csv, Excel, or JSON
-    #   input.
+    #   Represents a set of options that define the structure of either
+    #   comma-separated value (CSV), Excel, or JSON input.
     #   @return [Types::FormatOptions]
     #
     # @!attribute [rw] input
-    #   Information on how DataBrew can find data, in either the AWS Glue
-    #   Data Catalog or Amazon S3.
+    #   Represents information on how DataBrew can find data, in either the
+    #   AWS Glue Data Catalog or Amazon S3.
     #   @return [Types::Input]
+    #
+    # @!attribute [rw] path_options
+    #   A set of options that defines how DataBrew interprets an S3 path of
+    #   the dataset.
+    #   @return [Types::PathOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/UpdateDatasetRequest AWS API Documentation
     #
@@ -3358,7 +3754,8 @@ module Aws::GlueDataBrew
       :name,
       :format,
       :format_options,
-      :input)
+      :input,
+      :path_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3430,8 +3827,8 @@ module Aws::GlueDataBrew
     #   @return [Integer]
     #
     # @!attribute [rw] output_location
-    #   An Amazon S3 location (bucket name an object key) where DataBrew can
-    #   read input data, or write output from a job.
+    #   Represents an Amazon S3 location (bucket name and object key) where
+    #   DataBrew can read input data, or write output from a job.
     #   @return [Types::S3Location]
     #
     # @!attribute [rw] role_arn
@@ -3763,7 +4160,7 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Represents the data being being transformed during an action.
+    # Represents the data being transformed during an action.
     #
     # @note When making an API call, you may pass ViewFrame
     #   data as a hash:

@@ -387,6 +387,89 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociateMacSecKeyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         connection_id: "ConnectionId", # required
+    #         secret_arn: "SecretARN",
+    #         ckn: "Ckn",
+    #         cak: "Cak",
+    #       }
+    #
+    # @!attribute [rw] connection_id
+    #   The ID of the dedicated connection (dxcon-xxxx), or the ID of the
+    #   LAG (dxlag-xxxx).
+    #
+    #   You can use DescribeConnections or DescribeLags to retrieve
+    #   connection ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret
+    #   key to associate with the dedicated connection.
+    #
+    #   You can use DescribeConnections or DescribeLags to retrieve the MAC
+    #   Security (MACsec) secret key.
+    #
+    #   If you use this request parameter, you do not use the `ckn` and
+    #   `cak` request parameters.
+    #   @return [String]
+    #
+    # @!attribute [rw] ckn
+    #   The MAC Security (MACsec) CKN to associate with the dedicated
+    #   connection.
+    #
+    #   You can create the CKN/CAK pair using an industry standard tool.
+    #
+    #   The valid values are 64 hexadecimal characters (0-9, A-E).
+    #
+    #   If you use this request parameter, you must use the `cak` request
+    #   parameter and not use the `secretARN` request parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] cak
+    #   The MAC Security (MACsec) CAK to associate with the dedicated
+    #   connection.
+    #
+    #   You can create the CKN/CAK pair using an industry standard tool.
+    #
+    #   The valid values are 64 hexadecimal characters (0-9, A-E).
+    #
+    #   If you use this request parameter, you must use the `ckn` request
+    #   parameter and not use the `secretARN` request parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateMacSecKeyRequest AWS API Documentation
+    #
+    class AssociateMacSecKeyRequest < Struct.new(
+      :connection_id,
+      :secret_arn,
+      :ckn,
+      :cak)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection_id
+    #   The ID of the dedicated connection (dxcon-xxxx), or the ID of the
+    #   LAG (dxlag-xxxx).
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_sec_keys
+    #   The MAC Security (MACsec) security keys associated with the
+    #   dedicated connection.
+    #   @return [Array<Types::MacSecKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateMacSecKeyResponse AWS API Documentation
+    #
+    class AssociateMacSecKeyResponse < Struct.new(
+      :connection_id,
+      :mac_sec_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateVirtualInterfaceRequest
     #   data as a hash:
     #
@@ -884,6 +967,29 @@ module Aws::DirectConnect
     #   The name of the service provider associated with the connection.
     #   @return [String]
     #
+    # @!attribute [rw] mac_sec_capable
+    #   Indicates whether the connection supports MAC Security (MACsec).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] port_encryption_status
+    #   The MAC Security (MACsec) port link status of the connection.
+    #
+    #   The valid values are `Encryption Up`, which means that there is an
+    #   active Connection Key Name, or `Encryption Down`.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_mode
+    #   The MAC Security (MACsec) connection encryption mode.
+    #
+    #   The valid values are `no_encrypt`, `should_encrypt`, and
+    #   `must_encrypt`.
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_sec_keys
+    #   The MAC Security (MACsec) security keys associated with the
+    #   connection.
+    #   @return [Array<Types::MacSecKey>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Connection AWS API Documentation
     #
     class Connection < Struct.new(
@@ -903,7 +1009,11 @@ module Aws::DirectConnect
       :aws_device_v2,
       :has_logical_redundancy,
       :tags,
-      :provider_name)
+      :provider_name,
+      :mac_sec_capable,
+      :port_encryption_status,
+      :encryption_mode,
+      :mac_sec_keys)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -978,6 +1088,7 @@ module Aws::DirectConnect
     #           },
     #         ],
     #         provider_name: "ProviderName",
+    #         request_mac_sec: false,
     #       }
     #
     # @!attribute [rw] location
@@ -1005,6 +1116,19 @@ module Aws::DirectConnect
     #   connection.
     #   @return [String]
     #
+    # @!attribute [rw] request_mac_sec
+    #   Indicates whether you want the connection to support MAC Security
+    #   (MACsec).
+    #
+    #   MAC Security (MACsec) is only available on dedicated connections.
+    #   For information about MAC Security (MACsec) prerequisties, see
+    #   [MACsec prerequisties][1] in the *AWS Direct Connect User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnectionRequest AWS API Documentation
     #
     class CreateConnectionRequest < Struct.new(
@@ -1013,7 +1137,8 @@ module Aws::DirectConnect
       :connection_name,
       :lag_id,
       :tags,
-      :provider_name)
+      :provider_name,
+      :request_mac_sec)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1261,6 +1386,7 @@ module Aws::DirectConnect
     #           },
     #         ],
     #         provider_name: "ProviderName",
+    #         request_mac_sec: false,
     #       }
     #
     # @!attribute [rw] number_of_connections
@@ -1297,6 +1423,21 @@ module Aws::DirectConnect
     #   The name of the service provider associated with the LAG.
     #   @return [String]
     #
+    # @!attribute [rw] request_mac_sec
+    #   Indicates whether the connection will support MAC Security (MACsec).
+    #
+    #   <note markdown="1"> All connections in the LAG must be capable of supporting MAC
+    #   Security (MACsec). For information about MAC Security (MACsec)
+    #   prerequisties, see [MACsec prerequisties][1] in the *AWS Direct
+    #   Connect User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateLagRequest AWS API Documentation
     #
     class CreateLagRequest < Struct.new(
@@ -1307,7 +1448,8 @@ module Aws::DirectConnect
       :connection_id,
       :tags,
       :child_connection_tags,
-      :provider_name)
+      :provider_name,
+      :request_mac_sec)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2583,6 +2725,58 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisassociateMacSecKeyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         connection_id: "ConnectionId", # required
+    #         secret_arn: "SecretARN", # required
+    #       }
+    #
+    # @!attribute [rw] connection_id
+    #   The ID of the dedicated connection (dxcon-xxxx), or the ID of the
+    #   LAG (dxlag-xxxx).
+    #
+    #   You can use DescribeConnections or DescribeLags to retrieve
+    #   connection ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret
+    #   key.
+    #
+    #   You can use DescribeConnections to retrieve the ARN of the MAC
+    #   Security (MACsec) secret key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DisassociateMacSecKeyRequest AWS API Documentation
+    #
+    class DisassociateMacSecKeyRequest < Struct.new(
+      :connection_id,
+      :secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection_id
+    #   The ID of the dedicated connection (dxcon-xxxx), or the ID of the
+    #   LAG (dxlag-xxxx).
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_sec_keys
+    #   The MAC Security (MACsec) security keys no longer associated with
+    #   the dedicated connection.
+    #   @return [Array<Types::MacSecKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DisassociateMacSecKeyResponse AWS API Documentation
+    #
+    class DisassociateMacSecKeyResponse < Struct.new(
+      :connection_id,
+      :mac_sec_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A tag key was specified more than once.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DuplicateTagKeysException AWS API Documentation
@@ -2793,6 +2987,21 @@ module Aws::DirectConnect
     #   The name of the service provider associated with the LAG.
     #   @return [String]
     #
+    # @!attribute [rw] mac_sec_capable
+    #   Indicates whether the LAG supports MAC Security (MACsec).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] encryption_mode
+    #   The LAG MAC Security (MACsec) encryption mode.
+    #
+    #   The valid values are `no_encrypt`, `should_encrypt`, and
+    #   `must_encrypt`.
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_sec_keys
+    #   The MAC Security (MACsec) security keys associated with the LAG.
+    #   @return [Array<Types::MacSecKey>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Lag AWS API Documentation
     #
     class Lag < Struct.new(
@@ -2812,7 +3021,10 @@ module Aws::DirectConnect
       :jumbo_frame_capable,
       :has_logical_redundancy,
       :tags,
-      :provider_name)
+      :provider_name,
+      :mac_sec_capable,
+      :encryption_mode,
+      :mac_sec_keys)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2946,6 +3158,10 @@ module Aws::DirectConnect
     #   The name of the service provider for the location.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] available_mac_sec_port_speeds
+    #   The available MAC Security (MACsec) port speeds for the location.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Location AWS API Documentation
     #
     class Location < Struct.new(
@@ -2953,7 +3169,8 @@ module Aws::DirectConnect
       :location_name,
       :region,
       :available_port_speeds,
-      :available_providers)
+      :available_providers,
+      :available_mac_sec_port_speeds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2966,6 +3183,51 @@ module Aws::DirectConnect
     #
     class Locations < Struct.new(
       :locations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the MAC Security (MACsec) secret key.
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret
+    #   key.
+    #   @return [String]
+    #
+    # @!attribute [rw] ckn
+    #   The Connection Key Name (CKN) for the MAC Security secret key.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the MAC Security (MACsec) secret key.
+    #
+    #   The possible values are:
+    #
+    #   * `associating`\: The MAC Security (MACsec) secret key is being
+    #     validated and not yet associated with the connection or LAG.
+    #
+    #   * `associated`\: The MAC Security (MACsec) secret key is validated
+    #     and associated with the connection or LAG.
+    #
+    #   * `disassociating`\: The MAC Security (MACsec) secret key is being
+    #     disassociated from the connection or LAG
+    #
+    #   * `disassociated`\: The MAC Security (MACsec) secret key is no
+    #     longer associated with the connection or LAG.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_on
+    #   The date that the MAC Security (MACsec) secret key takes effect. The
+    #   value is displayed in UTC format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/MacSecKey AWS API Documentation
+    #
+    class MacSecKey < Struct.new(
+      :secret_arn,
+      :ckn,
+      :state,
+      :start_on)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3757,6 +4019,42 @@ module Aws::DirectConnect
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         connection_id: "ConnectionId", # required
+    #         connection_name: "ConnectionName",
+    #         encryption_mode: "EncryptionMode",
+    #       }
+    #
+    # @!attribute [rw] connection_id
+    #   The ID of the dedicated connection.
+    #
+    #   You can use DescribeConnections to retrieve the connection ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_name
+    #   The name of the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_mode
+    #   The connection MAC Security (MACsec) encryption mode.
+    #
+    #   The valid values are `no_encrypt`, `should_encrypt`, and
+    #   `must_encrypt`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateConnectionRequest AWS API Documentation
+    #
+    class UpdateConnectionRequest < Struct.new(
+      :connection_id,
+      :connection_name,
+      :encryption_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateDirectConnectGatewayAssociationRequest
     #   data as a hash:
     #
@@ -3817,6 +4115,7 @@ module Aws::DirectConnect
     #         lag_id: "LagId", # required
     #         lag_name: "LagName",
     #         minimum_links: 1,
+    #         encryption_mode: "EncryptionMode",
     #       }
     #
     # @!attribute [rw] lag_id
@@ -3832,12 +4131,19 @@ module Aws::DirectConnect
     #   for the LAG itself to be operational.
     #   @return [Integer]
     #
+    # @!attribute [rw] encryption_mode
+    #   The LAG MAC Security (MACsec) encryption mode.
+    #
+    #   AWS applies the value to all connections which are part of the LAG.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateLagRequest AWS API Documentation
     #
     class UpdateLagRequest < Struct.new(
       :lag_id,
       :lag_name,
-      :minimum_links)
+      :minimum_links,
+      :encryption_mode)
       SENSITIVE = []
       include Aws::Structure
     end

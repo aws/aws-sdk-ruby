@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.108.0 (2021-04-06)
+------------------
+
+* Feature - Supports removing a label or labels from a parameter, enables ScheduledEndTime and ChangeDetails for StartChangeRequestExecution API, supports critical/security/other noncompliant count for patch API.
+
 1.107.0 (2021-03-24)
 ------------------
 

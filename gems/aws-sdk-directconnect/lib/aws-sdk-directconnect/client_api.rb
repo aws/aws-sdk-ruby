@@ -26,9 +26,12 @@ module Aws::DirectConnect
     AmazonAddress = Shapes::StringShape.new(name: 'AmazonAddress')
     AssociateConnectionWithLagRequest = Shapes::StructureShape.new(name: 'AssociateConnectionWithLagRequest')
     AssociateHostedConnectionRequest = Shapes::StructureShape.new(name: 'AssociateHostedConnectionRequest')
+    AssociateMacSecKeyRequest = Shapes::StructureShape.new(name: 'AssociateMacSecKeyRequest')
+    AssociateMacSecKeyResponse = Shapes::StructureShape.new(name: 'AssociateMacSecKeyResponse')
     AssociateVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'AssociateVirtualInterfaceRequest')
     AssociatedGateway = Shapes::StructureShape.new(name: 'AssociatedGateway')
     AssociatedGatewayId = Shapes::StringShape.new(name: 'AssociatedGatewayId')
+    AvailableMacSecPortSpeeds = Shapes::ListShape.new(name: 'AvailableMacSecPortSpeeds')
     AvailablePortSpeeds = Shapes::ListShape.new(name: 'AvailablePortSpeeds')
     AwsDevice = Shapes::StringShape.new(name: 'AwsDevice')
     AwsDeviceV2 = Shapes::StringShape.new(name: 'AwsDeviceV2')
@@ -42,6 +45,8 @@ module Aws::DirectConnect
     Bandwidth = Shapes::StringShape.new(name: 'Bandwidth')
     BooleanFlag = Shapes::BooleanShape.new(name: 'BooleanFlag')
     CIDR = Shapes::StringShape.new(name: 'CIDR')
+    Cak = Shapes::StringShape.new(name: 'Cak')
+    Ckn = Shapes::StringShape.new(name: 'Ckn')
     ConfirmConnectionRequest = Shapes::StructureShape.new(name: 'ConfirmConnectionRequest')
     ConfirmConnectionResponse = Shapes::StructureShape.new(name: 'ConfirmConnectionResponse')
     ConfirmPrivateVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'ConfirmPrivateVirtualInterfaceRequest')
@@ -128,7 +133,10 @@ module Aws::DirectConnect
     DirectConnectGatewayState = Shapes::StringShape.new(name: 'DirectConnectGatewayState')
     DirectConnectServerException = Shapes::StructureShape.new(name: 'DirectConnectServerException')
     DisassociateConnectionFromLagRequest = Shapes::StructureShape.new(name: 'DisassociateConnectionFromLagRequest')
+    DisassociateMacSecKeyRequest = Shapes::StructureShape.new(name: 'DisassociateMacSecKeyRequest')
+    DisassociateMacSecKeyResponse = Shapes::StructureShape.new(name: 'DisassociateMacSecKeyResponse')
     DuplicateTagKeysException = Shapes::StructureShape.new(name: 'DuplicateTagKeysException')
+    EncryptionMode = Shapes::StringShape.new(name: 'EncryptionMode')
     EndTime = Shapes::TimestampShape.new(name: 'EndTime')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     FailureTestHistoryStatus = Shapes::StringShape.new(name: 'FailureTestHistoryStatus')
@@ -162,6 +170,9 @@ module Aws::DirectConnect
     Locations = Shapes::StructureShape.new(name: 'Locations')
     LongAsn = Shapes::IntegerShape.new(name: 'LongAsn')
     MTU = Shapes::IntegerShape.new(name: 'MTU')
+    MacSecCapable = Shapes::BooleanShape.new(name: 'MacSecCapable')
+    MacSecKey = Shapes::StructureShape.new(name: 'MacSecKey')
+    MacSecKeyList = Shapes::ListShape.new(name: 'MacSecKeyList')
     MaxResultSetSize = Shapes::IntegerShape.new(name: 'MaxResultSetSize')
     NewBGPPeer = Shapes::StructureShape.new(name: 'NewBGPPeer')
     NewPrivateVirtualInterface = Shapes::StructureShape.new(name: 'NewPrivateVirtualInterface')
@@ -173,10 +184,12 @@ module Aws::DirectConnect
     OwnerAccount = Shapes::StringShape.new(name: 'OwnerAccount')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PartnerName = Shapes::StringShape.new(name: 'PartnerName')
+    PortEncryptionStatus = Shapes::StringShape.new(name: 'PortEncryptionStatus')
     PortSpeed = Shapes::StringShape.new(name: 'PortSpeed')
     ProviderList = Shapes::ListShape.new(name: 'ProviderList')
     ProviderName = Shapes::StringShape.new(name: 'ProviderName')
     Region = Shapes::StringShape.new(name: 'Region')
+    RequestMACSec = Shapes::BooleanShape.new(name: 'RequestMACSec')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceArnList = Shapes::ListShape.new(name: 'ResourceArnList')
     ResourceTag = Shapes::StructureShape.new(name: 'ResourceTag')
@@ -184,9 +197,12 @@ module Aws::DirectConnect
     RouteFilterPrefix = Shapes::StructureShape.new(name: 'RouteFilterPrefix')
     RouteFilterPrefixList = Shapes::ListShape.new(name: 'RouteFilterPrefixList')
     RouterConfig = Shapes::StringShape.new(name: 'RouterConfig')
+    SecretARN = Shapes::StringShape.new(name: 'SecretARN')
     StartBgpFailoverTestRequest = Shapes::StructureShape.new(name: 'StartBgpFailoverTestRequest')
     StartBgpFailoverTestResponse = Shapes::StructureShape.new(name: 'StartBgpFailoverTestResponse')
+    StartOnDate = Shapes::StringShape.new(name: 'StartOnDate')
     StartTime = Shapes::TimestampShape.new(name: 'StartTime')
+    State = Shapes::StringShape.new(name: 'State')
     StateChangeError = Shapes::StringShape.new(name: 'StateChangeError')
     StopBgpFailoverTestRequest = Shapes::StructureShape.new(name: 'StopBgpFailoverTestRequest')
     StopBgpFailoverTestResponse = Shapes::StructureShape.new(name: 'StopBgpFailoverTestResponse')
@@ -202,6 +218,7 @@ module Aws::DirectConnect
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateConnectionRequest = Shapes::StructureShape.new(name: 'UpdateConnectionRequest')
     UpdateDirectConnectGatewayAssociationRequest = Shapes::StructureShape.new(name: 'UpdateDirectConnectGatewayAssociationRequest')
     UpdateDirectConnectGatewayAssociationResult = Shapes::StructureShape.new(name: 'UpdateDirectConnectGatewayAssociationResult')
     UpdateLagRequest = Shapes::StructureShape.new(name: 'UpdateLagRequest')
@@ -274,6 +291,16 @@ module Aws::DirectConnect
     AssociateHostedConnectionRequest.add_member(:parent_connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "parentConnectionId"))
     AssociateHostedConnectionRequest.struct_class = Types::AssociateHostedConnectionRequest
 
+    AssociateMacSecKeyRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
+    AssociateMacSecKeyRequest.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretARN, location_name: "secretARN"))
+    AssociateMacSecKeyRequest.add_member(:ckn, Shapes::ShapeRef.new(shape: Ckn, location_name: "ckn"))
+    AssociateMacSecKeyRequest.add_member(:cak, Shapes::ShapeRef.new(shape: Cak, location_name: "cak"))
+    AssociateMacSecKeyRequest.struct_class = Types::AssociateMacSecKeyRequest
+
+    AssociateMacSecKeyResponse.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, location_name: "connectionId"))
+    AssociateMacSecKeyResponse.add_member(:mac_sec_keys, Shapes::ShapeRef.new(shape: MacSecKeyList, location_name: "macSecKeys"))
+    AssociateMacSecKeyResponse.struct_class = Types::AssociateMacSecKeyResponse
+
     AssociateVirtualInterfaceRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, required: true, location_name: "virtualInterfaceId"))
     AssociateVirtualInterfaceRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
     AssociateVirtualInterfaceRequest.struct_class = Types::AssociateVirtualInterfaceRequest
@@ -283,6 +310,8 @@ module Aws::DirectConnect
     AssociatedGateway.add_member(:owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, location_name: "ownerAccount"))
     AssociatedGateway.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "region"))
     AssociatedGateway.struct_class = Types::AssociatedGateway
+
+    AvailableMacSecPortSpeeds.member = Shapes::ShapeRef.new(shape: PortSpeed)
 
     AvailablePortSpeeds.member = Shapes::ShapeRef.new(shape: PortSpeed)
 
@@ -345,6 +374,10 @@ module Aws::DirectConnect
     Connection.add_member(:has_logical_redundancy, Shapes::ShapeRef.new(shape: HasLogicalRedundancy, location_name: "hasLogicalRedundancy"))
     Connection.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     Connection.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderName, location_name: "providerName"))
+    Connection.add_member(:mac_sec_capable, Shapes::ShapeRef.new(shape: MacSecCapable, location_name: "macSecCapable"))
+    Connection.add_member(:port_encryption_status, Shapes::ShapeRef.new(shape: PortEncryptionStatus, location_name: "portEncryptionStatus"))
+    Connection.add_member(:encryption_mode, Shapes::ShapeRef.new(shape: EncryptionMode, location_name: "encryptionMode"))
+    Connection.add_member(:mac_sec_keys, Shapes::ShapeRef.new(shape: MacSecKeyList, location_name: "macSecKeys"))
     Connection.struct_class = Types::Connection
 
     ConnectionList.member = Shapes::ShapeRef.new(shape: Connection)
@@ -365,6 +398,7 @@ module Aws::DirectConnect
     CreateConnectionRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, location_name: "lagId"))
     CreateConnectionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateConnectionRequest.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderName, location_name: "providerName"))
+    CreateConnectionRequest.add_member(:request_mac_sec, Shapes::ShapeRef.new(shape: RequestMACSec, location_name: "requestMACSec"))
     CreateConnectionRequest.struct_class = Types::CreateConnectionRequest
 
     CreateDirectConnectGatewayAssociationProposalRequest.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, required: true, location_name: "directConnectGatewayId"))
@@ -409,6 +443,7 @@ module Aws::DirectConnect
     CreateLagRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateLagRequest.add_member(:child_connection_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "childConnectionTags"))
     CreateLagRequest.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderName, location_name: "providerName"))
+    CreateLagRequest.add_member(:request_mac_sec, Shapes::ShapeRef.new(shape: RequestMACSec, location_name: "requestMACSec"))
     CreateLagRequest.struct_class = Types::CreateLagRequest
 
     CreatePrivateVirtualInterfaceRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
@@ -617,6 +652,14 @@ module Aws::DirectConnect
     DisassociateConnectionFromLagRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, required: true, location_name: "lagId"))
     DisassociateConnectionFromLagRequest.struct_class = Types::DisassociateConnectionFromLagRequest
 
+    DisassociateMacSecKeyRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
+    DisassociateMacSecKeyRequest.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretARN, required: true, location_name: "secretARN"))
+    DisassociateMacSecKeyRequest.struct_class = Types::DisassociateMacSecKeyRequest
+
+    DisassociateMacSecKeyResponse.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, location_name: "connectionId"))
+    DisassociateMacSecKeyResponse.add_member(:mac_sec_keys, Shapes::ShapeRef.new(shape: MacSecKeyList, location_name: "macSecKeys"))
+    DisassociateMacSecKeyResponse.struct_class = Types::DisassociateMacSecKeyResponse
+
     DuplicateTagKeysException.struct_class = Types::DuplicateTagKeysException
 
     Interconnect.add_member(:interconnect_id, Shapes::ShapeRef.new(shape: InterconnectId, location_name: "interconnectId"))
@@ -657,6 +700,9 @@ module Aws::DirectConnect
     Lag.add_member(:has_logical_redundancy, Shapes::ShapeRef.new(shape: HasLogicalRedundancy, location_name: "hasLogicalRedundancy"))
     Lag.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     Lag.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderName, location_name: "providerName"))
+    Lag.add_member(:mac_sec_capable, Shapes::ShapeRef.new(shape: MacSecCapable, location_name: "macSecCapable"))
+    Lag.add_member(:encryption_mode, Shapes::ShapeRef.new(shape: EncryptionMode, location_name: "encryptionMode"))
+    Lag.add_member(:mac_sec_keys, Shapes::ShapeRef.new(shape: MacSecKeyList, location_name: "macSecKeys"))
     Lag.struct_class = Types::Lag
 
     LagList.member = Shapes::ShapeRef.new(shape: Lag)
@@ -685,12 +731,21 @@ module Aws::DirectConnect
     Location.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "region"))
     Location.add_member(:available_port_speeds, Shapes::ShapeRef.new(shape: AvailablePortSpeeds, location_name: "availablePortSpeeds"))
     Location.add_member(:available_providers, Shapes::ShapeRef.new(shape: ProviderList, location_name: "availableProviders"))
+    Location.add_member(:available_mac_sec_port_speeds, Shapes::ShapeRef.new(shape: AvailableMacSecPortSpeeds, location_name: "availableMacSecPortSpeeds"))
     Location.struct_class = Types::Location
 
     LocationList.member = Shapes::ShapeRef.new(shape: Location)
 
     Locations.add_member(:locations, Shapes::ShapeRef.new(shape: LocationList, location_name: "locations"))
     Locations.struct_class = Types::Locations
+
+    MacSecKey.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretARN, location_name: "secretARN"))
+    MacSecKey.add_member(:ckn, Shapes::ShapeRef.new(shape: Ckn, location_name: "ckn"))
+    MacSecKey.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "state"))
+    MacSecKey.add_member(:start_on, Shapes::ShapeRef.new(shape: StartOnDate, location_name: "startOn"))
+    MacSecKey.struct_class = Types::MacSecKey
+
+    MacSecKeyList.member = Shapes::ShapeRef.new(shape: MacSecKey)
 
     NewBGPPeer.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, location_name: "asn"))
     NewBGPPeer.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
@@ -819,6 +874,11 @@ module Aws::DirectConnect
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateConnectionRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
+    UpdateConnectionRequest.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, location_name: "connectionName"))
+    UpdateConnectionRequest.add_member(:encryption_mode, Shapes::ShapeRef.new(shape: EncryptionMode, location_name: "encryptionMode"))
+    UpdateConnectionRequest.struct_class = Types::UpdateConnectionRequest
+
     UpdateDirectConnectGatewayAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayAssociationId, location_name: "associationId"))
     UpdateDirectConnectGatewayAssociationRequest.add_member(:add_allowed_prefixes_to_direct_connect_gateway, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, location_name: "addAllowedPrefixesToDirectConnectGateway"))
     UpdateDirectConnectGatewayAssociationRequest.add_member(:remove_allowed_prefixes_to_direct_connect_gateway, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, location_name: "removeAllowedPrefixesToDirectConnectGateway"))
@@ -830,6 +890,7 @@ module Aws::DirectConnect
     UpdateLagRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, required: true, location_name: "lagId"))
     UpdateLagRequest.add_member(:lag_name, Shapes::ShapeRef.new(shape: LagName, location_name: "lagName"))
     UpdateLagRequest.add_member(:minimum_links, Shapes::ShapeRef.new(shape: Count, location_name: "minimumLinks"))
+    UpdateLagRequest.add_member(:encryption_mode, Shapes::ShapeRef.new(shape: EncryptionMode, location_name: "encryptionMode"))
     UpdateLagRequest.struct_class = Types::UpdateLagRequest
 
     UpdateVirtualInterfaceAttributesRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, required: true, location_name: "virtualInterfaceId"))
@@ -991,6 +1052,16 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AssociateHostedConnectionRequest)
         o.output = Shapes::ShapeRef.new(shape: Connection)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:associate_mac_sec_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateMacSecKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateMacSecKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateMacSecKeyResponse)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
@@ -1410,6 +1481,16 @@ module Aws::DirectConnect
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
 
+      api.add_operation(:disassociate_mac_sec_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateMacSecKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateMacSecKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateMacSecKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
       api.add_operation(:list_virtual_interface_test_history, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListVirtualInterfaceTestHistory"
         o.http_method = "POST"
@@ -1458,6 +1539,16 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:update_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateConnection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateConnectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: Connection)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)

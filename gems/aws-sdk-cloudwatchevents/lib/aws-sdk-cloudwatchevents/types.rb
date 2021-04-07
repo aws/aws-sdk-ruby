@@ -3865,6 +3865,14 @@ module Aws::CloudWatchEvents
     #               statement_name: "StatementName",
     #               with_event: false,
     #             },
+    #             sage_maker_pipeline_parameters: {
+    #               pipeline_parameter_list: [
+    #                 {
+    #                   name: "SageMakerPipelineParameterName", # required
+    #                   value: "SageMakerPipelineParameterValue", # required
+    #                 },
+    #               ],
+    #             },
     #             dead_letter_config: {
     #               arn: "ResourceArn",
     #             },
@@ -4373,6 +4381,64 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # Name/Value pair of a parameter to start execution of a SageMaker Model
+    # Building Pipeline.
+    #
+    # @note When making an API call, you may pass SageMakerPipelineParameter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "SageMakerPipelineParameterName", # required
+    #         value: "SageMakerPipelineParameterValue", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Name of parameter to start execution of a SageMaker Model Building
+    #   Pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Value of parameter to start execution of a SageMaker Model Building
+    #   Pipeline.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/SageMakerPipelineParameter AWS API Documentation
+    #
+    class SageMakerPipelineParameter < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # These are custom parameters to use when the target is a SageMaker
+    # Model Building Pipeline that starts based on EventBridge events.
+    #
+    # @note When making an API call, you may pass SageMakerPipelineParameters
+    #   data as a hash:
+    #
+    #       {
+    #         pipeline_parameter_list: [
+    #           {
+    #             name: "SageMakerPipelineParameterName", # required
+    #             value: "SageMakerPipelineParameterValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] pipeline_parameter_list
+    #   List of Parameter names and values for SageMaker Model Building
+    #   Pipeline execution.
+    #   @return [Array<Types::SageMakerPipelineParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/SageMakerPipelineParameters AWS API Documentation
+    #
+    class SageMakerPipelineParameters < Struct.new(
+      :pipeline_parameter_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This structure includes the custom parameter to be used when the
     # target is an SQS FIFO queue.
     #
@@ -4627,6 +4693,14 @@ module Aws::CloudWatchEvents
     #           statement_name: "StatementName",
     #           with_event: false,
     #         },
+    #         sage_maker_pipeline_parameters: {
+    #           pipeline_parameter_list: [
+    #             {
+    #               name: "SageMakerPipelineParameterName", # required
+    #               value: "SageMakerPipelineParameterValue", # required
+    #             },
+    #           ],
+    #         },
     #         dead_letter_config: {
     #           arn: "ResourceArn",
     #         },
@@ -4740,6 +4814,15 @@ module Aws::CloudWatchEvents
     #   based on EventBridge events.
     #   @return [Types::RedshiftDataParameters]
     #
+    # @!attribute [rw] sage_maker_pipeline_parameters
+    #   Contains the SageMaker Model Building Pipeline parameters to start
+    #   execution of a SageMaker Model Building Pipeline.
+    #
+    #   If you specify a SageMaker Model Building Pipeline as a target, you
+    #   can use this to specify parameters to start a pipeline execution
+    #   based on EventBridge events.
+    #   @return [Types::SageMakerPipelineParameters]
+    #
     # @!attribute [rw] dead_letter_config
     #   The `DeadLetterConfig` that defines the target queue to send
     #   dead-letter queue events to.
@@ -4766,6 +4849,7 @@ module Aws::CloudWatchEvents
       :sqs_parameters,
       :http_parameters,
       :redshift_data_parameters,
+      :sage_maker_pipeline_parameters,
       :dead_letter_config,
       :retry_policy)
       SENSITIVE = []

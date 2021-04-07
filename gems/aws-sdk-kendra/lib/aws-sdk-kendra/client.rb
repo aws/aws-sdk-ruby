@@ -338,10 +338,10 @@ module Aws::Kendra
     # @!group API Operations
 
     # Removes one or more documents from an index. The documents must have
-    # been added with the BatchPutDocument operation.
+    # been added with the `BatchPutDocument` operation.
     #
     # The documents are deleted asynchronously. You can see the progress of
-    # the deletion by using AWS CloudWatch. Any error messages releated to
+    # the deletion by using AWS CloudWatch. Any error messages related to
     # the processing of the batch are sent to you CloudWatch log.
     #
     # @option params [required, String] :index_id
@@ -398,7 +398,7 @@ module Aws::Kendra
     #
     # @option params [required, String] :index_id
     #   The identifier of the index to add the documents to. You need to
-    #   create the index first using the CreateIndex operation.
+    #   create the index first using the `CreateIndex` operation.
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of a role that is allowed to run the
@@ -744,6 +744,7 @@ module Aws::Kendra
     #               index_field_name: "IndexFieldName", # required
     #             },
     #           ],
+    #           filter_query: "ServiceNowKnowledgeArticleFilterQuery",
     #         },
     #         service_catalog_configuration: {
     #           crawl_attachments: false,
@@ -759,6 +760,7 @@ module Aws::Kendra
     #             },
     #           ],
     #         },
+    #         authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
     #       },
     #       confluence_configuration: {
     #         server_url: "Url", # required
@@ -944,11 +946,12 @@ module Aws::Kendra
 
     # Creates a new Amazon Kendra index. Index creation is an asynchronous
     # operation. To determine if index creation has completed, check the
-    # `Status` field returned from a call to . The `Status` field is set to
-    # `ACTIVE` when the index is ready to use.
+    # `Status` field returned from a call to `DescribeIndex`. The `Status`
+    # field is set to `ACTIVE` when the index is ready to use.
     #
     # Once the index is active you can index your documents using the
-    # operation or using one of the supported data sources.
+    # `BatchPutDocument` operation or using one of the supported data
+    # sources.
     #
     # @option params [required, String] :name
     #   The name for the new index.
@@ -1134,9 +1137,9 @@ module Aws::Kendra
 
     # Deletes an Amazon Kendra data source. An exception is not thrown if
     # the data source is already being deleted. While the data source is
-    # being deleted, the `Status` field returned by a call to the operation
-    # is set to `DELETING`. For more information, see [Deleting Data
-    # Sources][1].
+    # being deleted, the `Status` field returned by a call to the
+    # `DescribeDataSource` operation is set to `DELETING`. For more
+    # information, see [Deleting Data Sources][1].
     #
     #
     #
@@ -1194,7 +1197,7 @@ module Aws::Kendra
 
     # Deletes an existing Amazon Kendra index. An exception is not thrown if
     # the index is already being deleted. While the index is being deleted,
-    # the `Status` field returned by a call to the DescribeIndex operation
+    # the `Status` field returned by a call to the `DescribeIndex` operation
     # is set to `DELETING`.
     #
     # @option params [required, String] :id
@@ -1402,6 +1405,7 @@ module Aws::Kendra
     #   resp.configuration.service_now_configuration.knowledge_article_configuration.field_mappings[0].data_source_field_name #=> String
     #   resp.configuration.service_now_configuration.knowledge_article_configuration.field_mappings[0].date_field_format #=> String
     #   resp.configuration.service_now_configuration.knowledge_article_configuration.field_mappings[0].index_field_name #=> String
+    #   resp.configuration.service_now_configuration.knowledge_article_configuration.filter_query #=> String
     #   resp.configuration.service_now_configuration.service_catalog_configuration.crawl_attachments #=> Boolean
     #   resp.configuration.service_now_configuration.service_catalog_configuration.include_attachment_file_patterns #=> Array
     #   resp.configuration.service_now_configuration.service_catalog_configuration.include_attachment_file_patterns[0] #=> String
@@ -1413,6 +1417,7 @@ module Aws::Kendra
     #   resp.configuration.service_now_configuration.service_catalog_configuration.field_mappings[0].data_source_field_name #=> String
     #   resp.configuration.service_now_configuration.service_catalog_configuration.field_mappings[0].date_field_format #=> String
     #   resp.configuration.service_now_configuration.service_catalog_configuration.field_mappings[0].index_field_name #=> String
+    #   resp.configuration.service_now_configuration.authentication_type #=> String, one of "HTTP_BASIC", "OAUTH2"
     #   resp.configuration.confluence_configuration.server_url #=> String
     #   resp.configuration.confluence_configuration.secret_arn #=> String
     #   resp.configuration.confluence_configuration.version #=> String, one of "CLOUD", "SERVER"
@@ -1984,7 +1989,7 @@ module Aws::Kendra
     #
     # @option params [required, String] :index_id
     #   The unique identifier of the index to search. The identifier is
-    #   returned in the response from the operation.
+    #   returned in the response from the `CreateIndex` operation.
     #
     # @option params [required, String] :query_text
     #   The text to search for.
@@ -2280,7 +2285,8 @@ module Aws::Kendra
     #
     # @option params [required, String] :query_id
     #   The identifier of the specific query for which you are submitting
-    #   feedback. The query ID is returned in the response to the operation.
+    #   feedback. The query ID is returned in the response to the `Query`
+    #   operation.
     #
     # @option params [Array<Types::ClickFeedback>] :click_feedback_items
     #   Tells Amazon Kendra that a particular search result link was chosen by
@@ -2594,6 +2600,7 @@ module Aws::Kendra
     #               index_field_name: "IndexFieldName", # required
     #             },
     #           ],
+    #           filter_query: "ServiceNowKnowledgeArticleFilterQuery",
     #         },
     #         service_catalog_configuration: {
     #           crawl_attachments: false,
@@ -2609,6 +2616,7 @@ module Aws::Kendra
     #             },
     #           ],
     #         },
+    #         authentication_type: "HTTP_BASIC", # accepts HTTP_BASIC, OAUTH2
     #       },
     #       confluence_configuration: {
     #         server_url: "Url", # required
@@ -2711,7 +2719,7 @@ module Aws::Kendra
     #   The document metadata to update.
     #
     # @option params [Types::CapacityUnitsConfiguration] :capacity_units
-    #   Sets the number of addtional storage and query capacity units that
+    #   Sets the number of additional storage and query capacity units that
     #   should be used by the index. You can change the capacity of the index
     #   up to 5 times per day.
     #
@@ -2845,7 +2853,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

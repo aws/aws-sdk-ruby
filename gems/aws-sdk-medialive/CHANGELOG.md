@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2021-04-06)
+------------------
+
+* Feature - MediaLive VPC outputs update to include Availability Zones, Security groups, Elastic Network Interfaces, and Subnet Ids in channel response
+
+1.69.0 (2021-04-05)
+------------------
+
+* Feature - MediaLive now support HTML5 Motion Graphics overlay
+
 1.68.0 (2021-03-25)
 ------------------
 

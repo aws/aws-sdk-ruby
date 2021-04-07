@@ -37,6 +37,7 @@ module Aws::Cloud9
     #         client_request_token: "ClientRequestToken",
     #         instance_type: "InstanceType", # required
     #         subnet_id: "SubnetId",
+    #         image_id: "ImageId",
     #         automatic_stop_time_minutes: 1,
     #         owner_arn: "UserArn",
     #         tags: [
@@ -80,6 +81,35 @@ module Aws::Cloud9
     #   communicate with the Amazon EC2 instance.
     #   @return [String]
     #
+    # @!attribute [rw] image_id
+    #   The identifier for the Amazon Machine Image (AMI) that's used to
+    #   create the EC2 instance. To choose an AMI for the instance, you must
+    #   specify a valid AMI alias or a valid AWS Systems Manager (SSM) path.
+    #
+    #   The default AMI is used if the parameter isn't explicitly assigned
+    #   a value in the request.
+    #
+    #   <b>AMI aliases </b>
+    #
+    #   * <b>Amazon Linux (default): <code>amazonlinux-1-x86_64</code> </b>
+    #
+    #   * Amazon Linux 2: `amazonlinux-2-x86_64`
+    #
+    #   * Ubuntu 18.04: `ubuntu-18.04-x86_64`
+    #
+    #   **SSM paths**
+    #
+    #   * <b>Amazon Linux (default):
+    #     <code>resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64</code>
+    #     </b>
+    #
+    #   * Amazon Linux 2:
+    #     `resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2-x86_64`
+    #
+    #   * Ubuntu 18.04:
+    #     `resolve:ssm:/aws/service/cloud9/amis/ubuntu-18.04-x86_64`
+    #   @return [String]
+    #
     # @!attribute [rw] automatic_stop_time_minutes
     #   The number of minutes until the running instance is shut down after
     #   the environment has last been used.
@@ -98,7 +128,15 @@ module Aws::Cloud9
     #
     # @!attribute [rw] connection_type
     #   The connection type used for connecting to an Amazon EC2
-    #   environment.
+    #   environment. Valid values are `CONNECT_SSH` (default) and
+    #   `CONNECT_SSM` (connected through AWS Systems Manager).
+    #
+    #   For more information, see [Accessing no-ingress EC2 instances with
+    #   AWS Systems Manager][1] in the *AWS Cloud9 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud9/latest/user-guide/ec2-ssm.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/CreateEnvironmentEC2Request AWS API Documentation
@@ -109,11 +147,12 @@ module Aws::Cloud9
       :client_request_token,
       :instance_type,
       :subnet_id,
+      :image_id,
       :automatic_stop_time_minutes,
       :owner_arn,
       :tags,
       :connection_type)
-      SENSITIVE = [:description]
+      SENSITIVE = [:description, :tags]
       include Aws::Structure
     end
 
@@ -420,7 +459,7 @@ module Aws::Cloud9
     #
     # @!attribute [rw] connection_type
     #   The connection type used for connecting to an Amazon EC2
-    #   environment.
+    #   environment. `CONNECT_SSH` is selected by default.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -435,6 +474,31 @@ module Aws::Cloud9
     #   The state of the environment in its creation or deletion lifecycle.
     #   @return [Types::EnvironmentLifecycle]
     #
+    # @!attribute [rw] managed_credentials_status
+    #   Describes the status of AWS managed temporary credentials for the
+    #   AWS Cloud9 environment. Available values are:
+    #
+    #   * `ENABLED_ON_CREATE`
+    #
+    #   * `ENABLED_BY_OWNER`
+    #
+    #   * `DISABLED_BY_DEFAULT`
+    #
+    #   * `DISABLED_BY_OWNER`
+    #
+    #   * `DISABLED_BY_COLLABORATOR`
+    #
+    #   * `PENDING_REMOVAL_BY_COLLABORATOR`
+    #
+    #   * `PENDING_REMOVAL_BY_OWNER`
+    #
+    #   * `FAILED_REMOVAL_BY_COLLABORATOR`
+    #
+    #   * `ENABLED_BY_OWNER`
+    #
+    #   * `DISABLED_BY_DEFAULT`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/Environment AWS API Documentation
     #
     class Environment < Struct.new(
@@ -445,7 +509,8 @@ module Aws::Cloud9
       :connection_type,
       :arn,
       :owner_arn,
-      :lifecycle)
+      :lifecycle,
+      :managed_credentials_status)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -629,7 +694,7 @@ module Aws::Cloud9
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
@@ -667,7 +732,7 @@ module Aws::Cloud9
     class Tag < Struct.new(
       :key,
       :value)
-      SENSITIVE = []
+      SENSITIVE = [:key, :value]
       include Aws::Structure
     end
 
@@ -699,7 +764,7 @@ module Aws::Cloud9
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
@@ -736,7 +801,7 @@ module Aws::Cloud9
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
-      SENSITIVE = []
+      SENSITIVE = [:tag_keys]
       include Aws::Structure
     end
 

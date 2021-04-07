@@ -827,11 +827,11 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates a running App for the specified UserProfile. Supported Apps
-    # are JupyterServer and KernelGateway. This operation is automatically
-    # invoked by Amazon SageMaker Studio upon access to the associated
-    # Domain, and when new kernel configurations are selected by the user. A
-    # user may have multiple Apps active simultaneously.
+    # Creates a running app for the specified UserProfile. Supported apps
+    # are `JupyterServer` and `KernelGateway`. This operation is
+    # automatically invoked by Amazon SageMaker Studio upon access to the
+    # associated Domain, and when new kernel configurations are selected by
+    # the user. A user may have multiple Apps active simultaneously.
     #
     # @option params [required, String] :domain_id
     #   The domain ID.
@@ -840,7 +840,8 @@ module Aws::SageMaker
     #   The user profile name.
     #
     # @option params [required, String] :app_type
-    #   The type of app.
+    #   The type of app. Supported apps are `JupyterServer` and
+    #   `KernelGateway`. `TensorBoard` is not supported.
     #
     # @option params [required, String] :app_name
     #   The name of the app.
@@ -1025,49 +1026,55 @@ module Aws::SageMaker
     # Creates an Autopilot job.
     #
     # Find the best performing model after you run an Autopilot job by
-    # calling . Deploy that model by following the steps described in [Step
-    # 6.1: Deploy the Model to Amazon SageMaker Hosting Services][1].
+    # calling .
     #
-    # For information about how to use Autopilot, see [ Automate Model
-    # Development with Amazon SageMaker Autopilot][2].
-    #
+    # For information about how to use Autopilot, see [Automate Model
+    # Development with Amazon SageMaker Autopilot][1].
     #
     #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html
-    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html
     #
     # @option params [required, String] :auto_ml_job_name
-    #   Identifies an Autopilot job. Must be unique to your account and is
-    #   case-insensitive.
+    #   Identifies an Autopilot job. The name must be unique to your account
+    #   and is case-insensitive.
     #
     # @option params [required, Array<Types::AutoMLChannel>] :input_data_config
-    #   Similar to InputDataConfig supported by Tuning. Format(s) supported:
-    #   CSV. Minimum of 500 rows.
+    #   An array of channel objects that describes the input data and its
+    #   location. Each channel is a named input source. Similar to
+    #   `InputDataConfig` supported by . Format(s) supported: CSV. Minimum of
+    #   500 rows.
     #
     # @option params [required, Types::AutoMLOutputDataConfig] :output_data_config
-    #   Similar to OutputDataConfig supported by Tuning. Format(s) supported:
+    #   Provides information about encryption and the Amazon S3 output path
+    #   needed to store artifacts from an AutoML job. Format(s) supported:
     #   CSV.
     #
     # @option params [String] :problem_type
-    #   Defines the kind of preprocessing and algorithms intended for the
-    #   candidates. Options include: BinaryClassification,
-    #   MulticlassClassification, and Regression.
+    #   Defines the type of supervised learning available for the candidates.
+    #   Options include: BinaryClassification, MulticlassClassification, and
+    #   Regression. For more information, see [ Amazon SageMaker Autopilot
+    #   problem types and algorithm support][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-problem-types.html
     #
     # @option params [Types::AutoMLJobObjective] :auto_ml_job_objective
-    #   Defines the objective of a an AutoML job. You provide a
-    #   AutoMLJobObjective$MetricName and Autopilot infers whether to minimize
-    #   or maximize it. If a metric is not specified, the most commonly used
-    #   ObjectiveMetric for problem type is automaically selected.
+    #   Defines the objective metric used to measure the predictive quality of
+    #   an AutoML job. You provide a AutoMLJobObjective$MetricName and
+    #   Autopilot infers whether to minimize or maximize it.
     #
     # @option params [Types::AutoMLJobConfig] :auto_ml_job_config
-    #   Contains CompletionCriteria and SecurityConfig.
+    #   Contains CompletionCriteria and SecurityConfig settings for the AutoML
+    #   job.
     #
     # @option params [required, String] :role_arn
     #   The ARN of the role that is used to access the data.
     #
     # @option params [Boolean] :generate_candidate_definitions_only
-    #   Generates possible candidates without training a model. A candidate is
-    #   a combination of data preprocessors, algorithms, and algorithm
+    #   Generates possible candidates without training the models. A candidate
+    #   is a combination of data preprocessors, algorithms, and algorithm
     #   parameter settings.
     #
     # @option params [Array<Types::Tag>] :tags
@@ -1652,17 +1659,13 @@ module Aws::SageMaker
     #
     # @option params [required, Types::UserSettings] :default_user_settings
     #   The default settings to use to create a user profile when
-    #   `UserSettings` isn't specified in the call to the
-    #   [CreateUserProfile][1] API.
+    #   `UserSettings` isn't specified in the call to the `CreateUserProfile`
+    #   API.
     #
     #   `SecurityGroups` is aggregated when specified in both calls. For all
     #   other settings in `UserSettings`, the values specified in
     #   `CreateUserProfile` take precedence over those specified in
     #   `CreateDomain`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateUserProfile.html
     #
     # @option params [required, Array<String>] :subnet_ids
     #   The VPC subnets that Studio uses for communication.
@@ -1674,11 +1677,7 @@ module Aws::SageMaker
     # @option params [Array<Types::Tag>] :tags
     #   Tags to associated with the Domain. Each tag consists of a key and an
     #   optional value. Tag keys must be unique per resource. Tags are
-    #   searchable using the [Search][1] API.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html
+    #   searchable using the `Search` API.
     #
     # @option params [String] :app_network_access_type
     #   Specifies the VPC used for non-EFS traffic. The default value is
@@ -7483,10 +7482,10 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Returns information about an Amazon SageMaker job.
+    # Returns information about an Amazon SageMaker AutoML job.
     #
     # @option params [required, String] :auto_ml_job_name
-    #   Request information about a job using that job's unique name.
+    #   Requests information about an AutoML job using its unique name.
     #
     # @return [Types::DescribeAutoMLJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7502,6 +7501,7 @@ module Aws::SageMaker
     #   * {Types::DescribeAutoMLJobResponse#end_time #end_time} => Time
     #   * {Types::DescribeAutoMLJobResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::DescribeAutoMLJobResponse#failure_reason #failure_reason} => String
+    #   * {Types::DescribeAutoMLJobResponse#partial_failure_reasons #partial_failure_reasons} => Array&lt;Types::AutoMLPartialFailureReason&gt;
     #   * {Types::DescribeAutoMLJobResponse#best_candidate #best_candidate} => Types::AutoMLCandidate
     #   * {Types::DescribeAutoMLJobResponse#auto_ml_job_status #auto_ml_job_status} => String
     #   * {Types::DescribeAutoMLJobResponse#auto_ml_job_secondary_status #auto_ml_job_secondary_status} => String
@@ -7542,6 +7542,8 @@ module Aws::SageMaker
     #   resp.end_time #=> Time
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
+    #   resp.partial_failure_reasons #=> Array
+    #   resp.partial_failure_reasons[0].partial_failure_message #=> String
     #   resp.best_candidate.candidate_name #=> String
     #   resp.best_candidate.final_auto_ml_job_objective_metric.type #=> String, one of "Maximize", "Minimize"
     #   resp.best_candidate.final_auto_ml_job_objective_metric.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC"
@@ -7561,6 +7563,7 @@ module Aws::SageMaker
     #   resp.best_candidate.end_time #=> Time
     #   resp.best_candidate.last_modified_time #=> Time
     #   resp.best_candidate.failure_reason #=> String
+    #   resp.best_candidate.candidate_properties.candidate_artifact_locations.explainability #=> String
     #   resp.auto_ml_job_status #=> String, one of "Completed", "InProgress", "Failed", "Stopped", "Stopping"
     #   resp.auto_ml_job_secondary_status #=> String, one of "Starting", "AnalyzingData", "FeatureEngineering", "ModelTuning", "MaxCandidatesReached", "Failed", "Stopped", "MaxAutoMLJobRuntimeReached", "Stopping", "CandidateDefinitionsGenerated", "GeneratingExplainabilityReport", "Completed", "ExplainabilityError"
     #   resp.generate_candidate_definitions_only #=> Boolean
@@ -11167,6 +11170,8 @@ module Aws::SageMaker
     #   resp.auto_ml_job_summaries[0].end_time #=> Time
     #   resp.auto_ml_job_summaries[0].last_modified_time #=> Time
     #   resp.auto_ml_job_summaries[0].failure_reason #=> String
+    #   resp.auto_ml_job_summaries[0].partial_failure_reasons #=> Array
+    #   resp.auto_ml_job_summaries[0].partial_failure_reasons[0].partial_failure_message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListAutoMLJobs AWS API Documentation
@@ -11178,25 +11183,26 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # List the Candidates created for the job.
+    # List the candidates created for the job.
     #
     # @option params [required, String] :auto_ml_job_name
-    #   List the Candidates created for the job by providing the job's name.
+    #   List the candidates created for the job by providing the job's name.
     #
     # @option params [String] :status_equals
-    #   List the Candidates for the job and filter by status.
+    #   List the candidates for the job and filter by status.
     #
     # @option params [String] :candidate_name_equals
-    #   List the Candidates for the job and filter by candidate name.
+    #   List the candidates for the job and filter by candidate name.
     #
     # @option params [String] :sort_order
-    #   The sort order for the results. The default is Ascending.
+    #   The sort order for the results. The default is `Ascending`.
     #
     # @option params [String] :sort_by
-    #   The parameter by which to sort the results. The default is Descending.
+    #   The parameter by which to sort the results. The default is
+    #   `Descending`.
     #
     # @option params [Integer] :max_results
-    #   List the job's Candidates up to a specified limit.
+    #   List the job's candidates up to a specified limit.
     #
     # @option params [String] :next_token
     #   If the previous response was truncated, you receive this token. Use it
@@ -11243,6 +11249,7 @@ module Aws::SageMaker
     #   resp.candidates[0].end_time #=> Time
     #   resp.candidates[0].last_modified_time #=> Time
     #   resp.candidates[0].failure_reason #=> String
+    #   resp.candidates[0].candidate_properties.candidate_artifact_locations.explainability #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCandidatesForAutoMLJob AWS API Documentation
@@ -17348,7 +17355,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

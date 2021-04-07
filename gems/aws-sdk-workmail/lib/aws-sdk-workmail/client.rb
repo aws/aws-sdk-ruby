@@ -499,6 +499,91 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Creates a new mobile device access rule for the specified Amazon
+    # WorkMail organization.
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization under which the rule will be created.
+    #
+    # @option params [String] :client_token
+    #   The idempotency token for the client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :name
+    #   The rule name.
+    #
+    # @option params [String] :description
+    #   The rule description.
+    #
+    # @option params [required, String] :effect
+    #   The effect of the rule when it matches. Allowed values are `ALLOW` or
+    #   `DENY`.
+    #
+    # @option params [Array<String>] :device_types
+    #   Device types that the rule will match.
+    #
+    # @option params [Array<String>] :not_device_types
+    #   Device types that the rule **will not** match. All other device types
+    #   will match.
+    #
+    # @option params [Array<String>] :device_models
+    #   Device models that the rule will match.
+    #
+    # @option params [Array<String>] :not_device_models
+    #   Device models that the rule **will not** match. All other device
+    #   models will match.
+    #
+    # @option params [Array<String>] :device_operating_systems
+    #   Device operating systems that the rule will match.
+    #
+    # @option params [Array<String>] :not_device_operating_systems
+    #   Device operating systems that the rule **will not** match. All other
+    #   device operating systems will match.
+    #
+    # @option params [Array<String>] :device_user_agents
+    #   Device user agents that the rule will match.
+    #
+    # @option params [Array<String>] :not_device_user_agents
+    #   Device user agents that the rule **will not** match. All other device
+    #   user agents will match.
+    #
+    # @return [Types::CreateMobileDeviceAccessRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMobileDeviceAccessRuleResponse#mobile_device_access_rule_id #mobile_device_access_rule_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_mobile_device_access_rule({
+    #     organization_id: "OrganizationId", # required
+    #     client_token: "IdempotencyClientToken",
+    #     name: "MobileDeviceAccessRuleName", # required
+    #     description: "MobileDeviceAccessRuleDescription",
+    #     effect: "ALLOW", # required, accepts ALLOW, DENY
+    #     device_types: ["DeviceType"],
+    #     not_device_types: ["DeviceType"],
+    #     device_models: ["DeviceModel"],
+    #     not_device_models: ["DeviceModel"],
+    #     device_operating_systems: ["DeviceOperatingSystem"],
+    #     not_device_operating_systems: ["DeviceOperatingSystem"],
+    #     device_user_agents: ["DeviceUserAgent"],
+    #     not_device_user_agents: ["DeviceUserAgent"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.mobile_device_access_rule_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateMobileDeviceAccessRule AWS API Documentation
+    #
+    # @overload create_mobile_device_access_rule(params = {})
+    # @param [Hash] params ({})
+    def create_mobile_device_access_rule(params = {}, options = {})
+      req = build_request(:create_mobile_device_access_rule, params)
+      req.send_request(options)
+    end
+
     # Creates a new Amazon WorkMail organization. Optionally, you can choose
     # to associate an existing AWS Directory Service directory with your
     # organization. If an AWS Directory Service directory ID is specified,
@@ -779,6 +864,33 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def delete_mailbox_permissions(params = {}, options = {})
       req = build_request(:delete_mailbox_permissions, params)
+      req.send_request(options)
+    end
+
+    # Deletes a mobile device access rule for the specified Amazon WorkMail
+    # organization.
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization under which the rule will be deleted.
+    #
+    # @option params [required, String] :mobile_device_access_rule_id
+    #   The identifier of the rule to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_mobile_device_access_rule({
+    #     organization_id: "OrganizationId", # required
+    #     mobile_device_access_rule_id: "MobileDeviceAccessRuleId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteMobileDeviceAccessRule AWS API Documentation
+    #
+    # @overload delete_mobile_device_access_rule(params = {})
+    # @param [Hash] params ({})
+    def delete_mobile_device_access_rule(params = {}, options = {})
+      req = build_request(:delete_mobile_device_access_rule, params)
       req.send_request(options)
     end
 
@@ -1365,6 +1477,57 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Simulates the effect of the mobile device access rules for the given
+    # attributes of a sample access event. Use this method to test the
+    # effects of the current set of mobile device access rules for the
+    # Amazon WorkMail organization for a particular user's attributes.
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization to simulate the access effect for.
+    #
+    # @option params [String] :device_type
+    #   Device type the simulated user will report.
+    #
+    # @option params [String] :device_model
+    #   Device model the simulated user will report.
+    #
+    # @option params [String] :device_operating_system
+    #   Device operating system the simulated user will report.
+    #
+    # @option params [String] :device_user_agent
+    #   Device user agent the simulated user will report.
+    #
+    # @return [Types::GetMobileDeviceAccessEffectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMobileDeviceAccessEffectResponse#effect #effect} => String
+    #   * {Types::GetMobileDeviceAccessEffectResponse#matched_rules #matched_rules} => Array&lt;Types::MobileDeviceAccessMatchedRule&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_mobile_device_access_effect({
+    #     organization_id: "OrganizationId", # required
+    #     device_type: "DeviceType",
+    #     device_model: "DeviceModel",
+    #     device_operating_system: "DeviceOperatingSystem",
+    #     device_user_agent: "DeviceUserAgent",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.effect #=> String, one of "ALLOW", "DENY"
+    #   resp.matched_rules #=> Array
+    #   resp.matched_rules[0].mobile_device_access_rule_id #=> String
+    #   resp.matched_rules[0].name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetMobileDeviceAccessEffect AWS API Documentation
+    #
+    # @overload get_mobile_device_access_effect(params = {})
+    # @param [Hash] params ({})
+    def get_mobile_device_access_effect(params = {}, options = {})
+      req = build_request(:get_mobile_device_access_effect, params)
+      req.send_request(options)
+    end
+
     # Lists the access control rules for the specified organization.
     #
     # @option params [required, String] :organization_id
@@ -1656,6 +1819,57 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def list_mailbox_permissions(params = {}, options = {})
       req = build_request(:list_mailbox_permissions, params)
+      req.send_request(options)
+    end
+
+    # Lists the mobile device access rules for the specified Amazon WorkMail
+    # organization.
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization for which to list the rules.
+    #
+    # @return [Types::ListMobileDeviceAccessRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMobileDeviceAccessRulesResponse#rules #rules} => Array&lt;Types::MobileDeviceAccessRule&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_mobile_device_access_rules({
+    #     organization_id: "OrganizationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rules #=> Array
+    #   resp.rules[0].mobile_device_access_rule_id #=> String
+    #   resp.rules[0].name #=> String
+    #   resp.rules[0].description #=> String
+    #   resp.rules[0].effect #=> String, one of "ALLOW", "DENY"
+    #   resp.rules[0].device_types #=> Array
+    #   resp.rules[0].device_types[0] #=> String
+    #   resp.rules[0].not_device_types #=> Array
+    #   resp.rules[0].not_device_types[0] #=> String
+    #   resp.rules[0].device_models #=> Array
+    #   resp.rules[0].device_models[0] #=> String
+    #   resp.rules[0].not_device_models #=> Array
+    #   resp.rules[0].not_device_models[0] #=> String
+    #   resp.rules[0].device_operating_systems #=> Array
+    #   resp.rules[0].device_operating_systems[0] #=> String
+    #   resp.rules[0].not_device_operating_systems #=> Array
+    #   resp.rules[0].not_device_operating_systems[0] #=> String
+    #   resp.rules[0].device_user_agents #=> Array
+    #   resp.rules[0].device_user_agents[0] #=> String
+    #   resp.rules[0].not_device_user_agents #=> Array
+    #   resp.rules[0].not_device_user_agents[0] #=> String
+    #   resp.rules[0].date_created #=> Time
+    #   resp.rules[0].date_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMobileDeviceAccessRules AWS API Documentation
+    #
+    # @overload list_mobile_device_access_rules(params = {})
+    # @param [Hash] params ({})
+    def list_mobile_device_access_rules(params = {}, options = {})
+      req = build_request(:list_mobile_device_access_rules, params)
       req.send_request(options)
     end
 
@@ -2266,6 +2480,82 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Updates a mobile device access rule for the specified Amazon WorkMail
+    # organization.
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization under which the rule will be updated.
+    #
+    # @option params [required, String] :mobile_device_access_rule_id
+    #   The identifier of the rule to be updated.
+    #
+    # @option params [required, String] :name
+    #   The updated rule name.
+    #
+    # @option params [String] :description
+    #   The updated rule description.
+    #
+    # @option params [required, String] :effect
+    #   The effect of the rule when it matches. Allowed values are `ALLOW` or
+    #   `DENY`.
+    #
+    # @option params [Array<String>] :device_types
+    #   Device types that the updated rule will match.
+    #
+    # @option params [Array<String>] :not_device_types
+    #   Device types that the updated rule **will not** match. All other
+    #   device types will match.
+    #
+    # @option params [Array<String>] :device_models
+    #   Device models that the updated rule will match.
+    #
+    # @option params [Array<String>] :not_device_models
+    #   Device models that the updated rule **will not** match. All other
+    #   device models will match.
+    #
+    # @option params [Array<String>] :device_operating_systems
+    #   Device operating systems that the updated rule will match.
+    #
+    # @option params [Array<String>] :not_device_operating_systems
+    #   Device operating systems that the updated rule **will not** match. All
+    #   other device operating systems will match.
+    #
+    # @option params [Array<String>] :device_user_agents
+    #   User agents that the updated rule will match.
+    #
+    # @option params [Array<String>] :not_device_user_agents
+    #   User agents that the updated rule **will not** match. All other user
+    #   agents will match.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_mobile_device_access_rule({
+    #     organization_id: "OrganizationId", # required
+    #     mobile_device_access_rule_id: "MobileDeviceAccessRuleId", # required
+    #     name: "MobileDeviceAccessRuleName", # required
+    #     description: "MobileDeviceAccessRuleDescription",
+    #     effect: "ALLOW", # required, accepts ALLOW, DENY
+    #     device_types: ["DeviceType"],
+    #     not_device_types: ["DeviceType"],
+    #     device_models: ["DeviceModel"],
+    #     not_device_models: ["DeviceModel"],
+    #     device_operating_systems: ["DeviceOperatingSystem"],
+    #     not_device_operating_systems: ["DeviceOperatingSystem"],
+    #     device_user_agents: ["DeviceUserAgent"],
+    #     not_device_user_agents: ["DeviceUserAgent"],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateMobileDeviceAccessRule AWS API Documentation
+    #
+    # @overload update_mobile_device_access_rule(params = {})
+    # @param [Hash] params ({})
+    def update_mobile_device_access_rule(params = {}, options = {})
+      req = build_request(:update_mobile_device_access_rule, params)
+      req.send_request(options)
+    end
+
     # Updates the primary email for a user, group, or resource. The current
     # email is moved into the list of aliases (or swapped between an
     # existing alias and the current primary email), and the email provided
@@ -2354,7 +2644,7 @@ module Aws::WorkMail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workmail'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

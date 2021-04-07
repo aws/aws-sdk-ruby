@@ -295,6 +295,118 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateMobileDeviceAccessRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         client_token: "IdempotencyClientToken",
+    #         name: "MobileDeviceAccessRuleName", # required
+    #         description: "MobileDeviceAccessRuleDescription",
+    #         effect: "ALLOW", # required, accepts ALLOW, DENY
+    #         device_types: ["DeviceType"],
+    #         not_device_types: ["DeviceType"],
+    #         device_models: ["DeviceModel"],
+    #         not_device_models: ["DeviceModel"],
+    #         device_operating_systems: ["DeviceOperatingSystem"],
+    #         not_device_operating_systems: ["DeviceOperatingSystem"],
+    #         device_user_agents: ["DeviceUserAgent"],
+    #         not_device_user_agents: ["DeviceUserAgent"],
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The Amazon WorkMail organization under which the rule will be
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token for the client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The rule name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The rule description.
+    #   @return [String]
+    #
+    # @!attribute [rw] effect
+    #   The effect of the rule when it matches. Allowed values are `ALLOW`
+    #   or `DENY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_types
+    #   Device types that the rule will match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_device_types
+    #   Device types that the rule **will not** match. All other device
+    #   types will match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] device_models
+    #   Device models that the rule will match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_device_models
+    #   Device models that the rule **will not** match. All other device
+    #   models will match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] device_operating_systems
+    #   Device operating systems that the rule will match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_device_operating_systems
+    #   Device operating systems that the rule **will not** match. All other
+    #   device operating systems will match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] device_user_agents
+    #   Device user agents that the rule will match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_device_user_agents
+    #   Device user agents that the rule **will not** match. All other
+    #   device user agents will match.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateMobileDeviceAccessRuleRequest AWS API Documentation
+    #
+    class CreateMobileDeviceAccessRuleRequest < Struct.new(
+      :organization_id,
+      :client_token,
+      :name,
+      :description,
+      :effect,
+      :device_types,
+      :not_device_types,
+      :device_models,
+      :not_device_models,
+      :device_operating_systems,
+      :not_device_operating_systems,
+      :device_user_agents,
+      :not_device_user_agents)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] mobile_device_access_rule_id
+    #   The identifier for the newly created mobile device access rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateMobileDeviceAccessRuleResponse AWS API Documentation
+    #
+    class CreateMobileDeviceAccessRuleResponse < Struct.new(
+      :mobile_device_access_rule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateOrganizationRequest
     #   data as a hash:
     #
@@ -615,6 +727,36 @@ module Aws::WorkMail
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteMailboxPermissionsResponse AWS API Documentation
     #
     class DeleteMailboxPermissionsResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteMobileDeviceAccessRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         mobile_device_access_rule_id: "MobileDeviceAccessRuleId", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The Amazon WorkMail organization under which the rule will be
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] mobile_device_access_rule_id
+    #   The identifier of the rule to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteMobileDeviceAccessRuleRequest AWS API Documentation
+    #
+    class DeleteMobileDeviceAccessRuleRequest < Struct.new(
+      :organization_id,
+      :mobile_device_access_rule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteMobileDeviceAccessRuleResponse AWS API Documentation
+    #
+    class DeleteMobileDeviceAccessRuleResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteOrganizationRequest
     #   data as a hash:
@@ -1568,6 +1710,69 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetMobileDeviceAccessEffectRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         device_type: "DeviceType",
+    #         device_model: "DeviceModel",
+    #         device_operating_system: "DeviceOperatingSystem",
+    #         device_user_agent: "DeviceUserAgent",
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The Amazon WorkMail organization to simulate the access effect for.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_type
+    #   Device type the simulated user will report.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_model
+    #   Device model the simulated user will report.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_operating_system
+    #   Device operating system the simulated user will report.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_user_agent
+    #   Device user agent the simulated user will report.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetMobileDeviceAccessEffectRequest AWS API Documentation
+    #
+    class GetMobileDeviceAccessEffectRequest < Struct.new(
+      :organization_id,
+      :device_type,
+      :device_model,
+      :device_operating_system,
+      :device_user_agent)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] effect
+    #   The effect of the simulated access, `ALLOW` or `DENY`, after
+    #   evaluating mobile device access rules in the Amazon WorkMail
+    #   organization for the simulated user parameters.
+    #   @return [String]
+    #
+    # @!attribute [rw] matched_rules
+    #   A list of the rules which matched the simulated user input and
+    #   produced the effect.
+    #   @return [Array<Types::MobileDeviceAccessMatchedRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetMobileDeviceAccessEffectResponse AWS API Documentation
+    #
+    class GetMobileDeviceAccessEffectResponse < Struct.new(
+      :effect,
+      :matched_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The representation of an Amazon WorkMail group.
     #
     # @!attribute [rw] id
@@ -1965,6 +2170,38 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListMobileDeviceAccessRulesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The Amazon WorkMail organization for which to list the rules.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMobileDeviceAccessRulesRequest AWS API Documentation
+    #
+    class ListMobileDeviceAccessRulesRequest < Struct.new(
+      :organization_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rules
+    #   The list of mobile device access rules that exist under the
+    #   specified Amazon WorkMail organization.
+    #   @return [Array<Types::MobileDeviceAccessRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMobileDeviceAccessRulesResponse AWS API Documentation
+    #
+    class ListMobileDeviceAccessRulesResponse < Struct.new(
+      :rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListOrganizationsRequest
     #   data as a hash:
     #
@@ -2323,6 +2560,110 @@ module Aws::WorkMail
       :state,
       :enabled_date,
       :disabled_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The rule that a simulated user matches.
+    #
+    # @!attribute [rw] mobile_device_access_rule_id
+    #   Identifier of the rule that a simulated user matches.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Name of a rule that a simulated user matches.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/MobileDeviceAccessMatchedRule AWS API Documentation
+    #
+    class MobileDeviceAccessMatchedRule < Struct.new(
+      :mobile_device_access_rule_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A rule that controls access to mobile devices for an Amazon WorkMail
+    # group.
+    #
+    # @!attribute [rw] mobile_device_access_rule_id
+    #   The ID assigned to a mobile access rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of a mobile access rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of a mobile access rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] effect
+    #   The effect of the rule when it matches. Allowed values are `ALLOW`
+    #   or `DENY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_types
+    #   Device types that a rule will match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_device_types
+    #   Device types that a rule **will not** match. All other device types
+    #   will match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] device_models
+    #   Device models that a rule will match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_device_models
+    #   Device models that a rule **will not** match. All other device
+    #   models will match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] device_operating_systems
+    #   Device operating systems that a rule will match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_device_operating_systems
+    #   Device operating systems that a rule **will not** match. All other
+    #   device types will match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] device_user_agents
+    #   Device user agents that a rule will match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_device_user_agents
+    #   Device user agents that a rule **will not** match. All other device
+    #   user agents will match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] date_created
+    #   The date and time at which an access rule was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] date_modified
+    #   The date and time at which an access rule was modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/MobileDeviceAccessRule AWS API Documentation
+    #
+    class MobileDeviceAccessRule < Struct.new(
+      :mobile_device_access_rule_id,
+      :name,
+      :description,
+      :effect,
+      :device_types,
+      :not_device_types,
+      :device_models,
+      :not_device_models,
+      :device_operating_systems,
+      :not_device_operating_systems,
+      :device_user_agents,
+      :not_device_user_agents,
+      :date_created,
+      :date_modified)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2995,6 +3336,107 @@ module Aws::WorkMail
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateMailboxQuotaResponse AWS API Documentation
     #
     class UpdateMailboxQuotaResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateMobileDeviceAccessRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         mobile_device_access_rule_id: "MobileDeviceAccessRuleId", # required
+    #         name: "MobileDeviceAccessRuleName", # required
+    #         description: "MobileDeviceAccessRuleDescription",
+    #         effect: "ALLOW", # required, accepts ALLOW, DENY
+    #         device_types: ["DeviceType"],
+    #         not_device_types: ["DeviceType"],
+    #         device_models: ["DeviceModel"],
+    #         not_device_models: ["DeviceModel"],
+    #         device_operating_systems: ["DeviceOperatingSystem"],
+    #         not_device_operating_systems: ["DeviceOperatingSystem"],
+    #         device_user_agents: ["DeviceUserAgent"],
+    #         not_device_user_agents: ["DeviceUserAgent"],
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The Amazon WorkMail organization under which the rule will be
+    #   updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] mobile_device_access_rule_id
+    #   The identifier of the rule to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The updated rule name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated rule description.
+    #   @return [String]
+    #
+    # @!attribute [rw] effect
+    #   The effect of the rule when it matches. Allowed values are `ALLOW`
+    #   or `DENY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_types
+    #   Device types that the updated rule will match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_device_types
+    #   Device types that the updated rule **will not** match. All other
+    #   device types will match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] device_models
+    #   Device models that the updated rule will match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_device_models
+    #   Device models that the updated rule **will not** match. All other
+    #   device models will match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] device_operating_systems
+    #   Device operating systems that the updated rule will match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_device_operating_systems
+    #   Device operating systems that the updated rule **will not** match.
+    #   All other device operating systems will match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] device_user_agents
+    #   User agents that the updated rule will match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_device_user_agents
+    #   User agents that the updated rule **will not** match. All other user
+    #   agents will match.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateMobileDeviceAccessRuleRequest AWS API Documentation
+    #
+    class UpdateMobileDeviceAccessRuleRequest < Struct.new(
+      :organization_id,
+      :mobile_device_access_rule_id,
+      :name,
+      :description,
+      :effect,
+      :device_types,
+      :not_device_types,
+      :device_models,
+      :not_device_models,
+      :device_operating_systems,
+      :not_device_operating_systems,
+      :device_user_agents,
+      :not_device_user_agents)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateMobileDeviceAccessRuleResponse AWS API Documentation
+    #
+    class UpdateMobileDeviceAccessRuleResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdatePrimaryEmailAddressRequest
     #   data as a hash:

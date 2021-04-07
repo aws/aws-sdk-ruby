@@ -4117,6 +4117,7 @@ module Aws::Pinpoint
     #             daily_cap: 1,
     #             endpoint_reentry_cap: 1,
     #             messages_per_second: 1,
+    #             endpoint_reentry_interval: "__string",
     #           },
     #           local_time: false,
     #           name: "__string", # required
@@ -4161,7 +4162,9 @@ module Aws::Pinpoint
     #               segment_id: "__string", # required
     #             },
     #           },
-    #           state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED
+    #           state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED, PAUSED
+    #           wait_for_quiet_time: false,
+    #           refresh_on_segment_update: false,
     #         },
     #       }
     #
@@ -10760,6 +10763,7 @@ module Aws::Pinpoint
     #         daily_cap: 1,
     #         endpoint_reentry_cap: 1,
     #         messages_per_second: 1,
+    #         endpoint_reentry_interval: "__string",
     #       }
     #
     # @!attribute [rw] daily_cap
@@ -10778,12 +10782,16 @@ module Aws::Pinpoint
     #   second.
     #   @return [Integer]
     #
+    # @!attribute [rw] endpoint_reentry_interval
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyLimits AWS API Documentation
     #
     class JourneyLimits < Struct.new(
       :daily_cap,
       :endpoint_reentry_cap,
-      :messages_per_second)
+      :messages_per_second,
+      :endpoint_reentry_interval)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10908,6 +10916,10 @@ module Aws::Pinpoint
     #     or scheduled to start running at a later time. If a journey's
     #     status is ACTIVE, you can't add, change, or remove activities
     #     from it.
+    #
+    #   * PAUSED - The journey has been paused. Amazon Pinpoint continues to
+    #     perform activities that are currently in progress, until those
+    #     activities are complete.
     #
     #   * COMPLETED - The journey has been published and has finished
     #     running. All participants have entered the journey and no
@@ -11064,12 +11076,12 @@ module Aws::Pinpoint
     #   data as a hash:
     #
     #       {
-    #         state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED
+    #         state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED, PAUSED
     #       }
     #
     # @!attribute [rw] state
-    #   The status of the journey. Currently, the only supported value is
-    #   CANCELLED.
+    #   The status of the journey. Currently, Supported values are ACTIVE,
+    #   PAUSED, and CANCELLED
     #
     #   If you cancel a journey, Amazon Pinpoint continues to perform
     #   activities that are currently in progress, until those activities
@@ -11082,6 +11094,14 @@ module Aws::Pinpoint
     #   activities from the journey. In addition, Amazon Pinpoint stops
     #   evaluating the journey and doesn't perform any activities that
     #   haven't started.
+    #
+    #   When the journey is paused, Amazon Pinpoint continues to perform
+    #   activities that are currently in progress, until those activities
+    #   are complete. Endpoints will stop entering journeys when the journey
+    #   is paused and will resume entering the journey after the journey is
+    #   resumed. For wait activities, wait time is paused when the journey
+    #   is paused. Currently, PAUSED only supports journeys with a segment
+    #   refresh interval.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyStateRequest AWS API Documentation
@@ -17498,6 +17518,7 @@ module Aws::Pinpoint
     #             daily_cap: 1,
     #             endpoint_reentry_cap: 1,
     #             messages_per_second: 1,
+    #             endpoint_reentry_interval: "__string",
     #           },
     #           local_time: false,
     #           name: "__string", # required
@@ -17542,7 +17563,9 @@ module Aws::Pinpoint
     #               segment_id: "__string", # required
     #             },
     #           },
-    #           state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED
+    #           state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED, PAUSED
+    #           wait_for_quiet_time: false,
+    #           refresh_on_segment_update: false,
     #         },
     #       }
     #
@@ -17586,7 +17609,7 @@ module Aws::Pinpoint
     #         application_id: "__string", # required
     #         journey_id: "__string", # required
     #         journey_state_request: { # required
-    #           state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED
+    #           state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED, PAUSED
     #         },
     #       }
     #
@@ -19585,6 +19608,7 @@ module Aws::Pinpoint
     #           daily_cap: 1,
     #           endpoint_reentry_cap: 1,
     #           messages_per_second: 1,
+    #           endpoint_reentry_interval: "__string",
     #         },
     #         local_time: false,
     #         name: "__string", # required
@@ -19629,7 +19653,9 @@ module Aws::Pinpoint
     #             segment_id: "__string", # required
     #           },
     #         },
-    #         state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED
+    #         state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED, PAUSED
+    #         wait_for_quiet_time: false,
+    #         refresh_on_segment_update: false,
     #       }
     #
     # @!attribute [rw] activities
@@ -19716,12 +19742,19 @@ module Aws::Pinpoint
     #     the scheduled start time. If a journey's status is ACTIVE, you
     #     can't add, change, or remove activities from it.
     #
-    #   The CANCELLED, COMPLETED, and CLOSED values are not supported in
-    #   requests to create or update a journey. To cancel a journey, use the
-    #   <link linkend="apps-application-id-journeys-journey-id-state" />
+    #   PAUSED, CANCELLED, COMPLETED, and CLOSED states are not supported in
+    #   requests to create or update a journey. To cancel, pause, or resume
+    #   a journey, use the <link
+    #   linkend="apps-application-id-journeys-journey-id-state" />
     #
     #   Journey State</link> resource.
     #   @return [String]
+    #
+    # @!attribute [rw] wait_for_quiet_time
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] refresh_on_segment_update
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteJourneyRequest AWS API Documentation
     #
@@ -19737,7 +19770,9 @@ module Aws::Pinpoint
       :schedule,
       :start_activity,
       :start_condition,
-      :state)
+      :state,
+      :wait_for_quiet_time,
+      :refresh_on_segment_update)
       SENSITIVE = []
       include Aws::Structure
     end

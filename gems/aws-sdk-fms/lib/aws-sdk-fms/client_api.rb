@@ -25,6 +25,7 @@ module Aws::FMS
     AwsEc2NetworkInterfaceViolation = Shapes::StructureShape.new(name: 'AwsEc2NetworkInterfaceViolation')
     AwsEc2NetworkInterfaceViolations = Shapes::ListShape.new(name: 'AwsEc2NetworkInterfaceViolations')
     AwsVPCSecurityGroupViolation = Shapes::StructureShape.new(name: 'AwsVPCSecurityGroupViolation')
+    BasicInteger = Shapes::IntegerShape.new(name: 'BasicInteger')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CIDR = Shapes::StringShape.new(name: 'CIDR')
     ComplianceViolator = Shapes::StructureShape.new(name: 'ComplianceViolator')
@@ -40,6 +41,11 @@ module Aws::FMS
     DependentServiceName = Shapes::StringShape.new(name: 'DependentServiceName')
     DetailedInfo = Shapes::StringShape.new(name: 'DetailedInfo')
     DisassociateAdminAccountRequest = Shapes::StructureShape.new(name: 'DisassociateAdminAccountRequest')
+    DnsDuplicateRuleGroupViolation = Shapes::StructureShape.new(name: 'DnsDuplicateRuleGroupViolation')
+    DnsRuleGroupLimitExceededViolation = Shapes::StructureShape.new(name: 'DnsRuleGroupLimitExceededViolation')
+    DnsRuleGroupPriorities = Shapes::ListShape.new(name: 'DnsRuleGroupPriorities')
+    DnsRuleGroupPriority = Shapes::IntegerShape.new(name: 'DnsRuleGroupPriority')
+    DnsRuleGroupPriorityConflictViolation = Shapes::StructureShape.new(name: 'DnsRuleGroupPriorityConflictViolation')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EvaluationResult = Shapes::StructureShape.new(name: 'EvaluationResult')
     EvaluationResults = Shapes::ListShape.new(name: 'EvaluationResults')
@@ -231,6 +237,24 @@ module Aws::FMS
     DeleteProtocolsListRequest.struct_class = Types::DeleteProtocolsListRequest
 
     DisassociateAdminAccountRequest.struct_class = Types::DisassociateAdminAccountRequest
+
+    DnsDuplicateRuleGroupViolation.add_member(:violation_target, Shapes::ShapeRef.new(shape: ViolationTarget, location_name: "ViolationTarget"))
+    DnsDuplicateRuleGroupViolation.add_member(:violation_target_description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "ViolationTargetDescription"))
+    DnsDuplicateRuleGroupViolation.struct_class = Types::DnsDuplicateRuleGroupViolation
+
+    DnsRuleGroupLimitExceededViolation.add_member(:violation_target, Shapes::ShapeRef.new(shape: ViolationTarget, location_name: "ViolationTarget"))
+    DnsRuleGroupLimitExceededViolation.add_member(:violation_target_description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "ViolationTargetDescription"))
+    DnsRuleGroupLimitExceededViolation.add_member(:number_of_rule_groups_already_associated, Shapes::ShapeRef.new(shape: BasicInteger, location_name: "NumberOfRuleGroupsAlreadyAssociated"))
+    DnsRuleGroupLimitExceededViolation.struct_class = Types::DnsRuleGroupLimitExceededViolation
+
+    DnsRuleGroupPriorities.member = Shapes::ShapeRef.new(shape: DnsRuleGroupPriority)
+
+    DnsRuleGroupPriorityConflictViolation.add_member(:violation_target, Shapes::ShapeRef.new(shape: ViolationTarget, location_name: "ViolationTarget"))
+    DnsRuleGroupPriorityConflictViolation.add_member(:violation_target_description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "ViolationTargetDescription"))
+    DnsRuleGroupPriorityConflictViolation.add_member(:conflicting_priority, Shapes::ShapeRef.new(shape: DnsRuleGroupPriority, location_name: "ConflictingPriority"))
+    DnsRuleGroupPriorityConflictViolation.add_member(:conflicting_policy_id, Shapes::ShapeRef.new(shape: PolicyId, location_name: "ConflictingPolicyId"))
+    DnsRuleGroupPriorityConflictViolation.add_member(:unavailable_priorities, Shapes::ShapeRef.new(shape: DnsRuleGroupPriorities, location_name: "UnavailablePriorities"))
+    DnsRuleGroupPriorityConflictViolation.struct_class = Types::DnsRuleGroupPriorityConflictViolation
 
     EvaluationResult.add_member(:compliance_status, Shapes::ShapeRef.new(shape: PolicyComplianceStatusType, location_name: "ComplianceStatus"))
     EvaluationResult.add_member(:violator_count, Shapes::ShapeRef.new(shape: ResourceCount, location_name: "ViolatorCount"))
@@ -528,6 +552,9 @@ module Aws::FMS
     ResourceViolation.add_member(:network_firewall_missing_subnet_violation, Shapes::ShapeRef.new(shape: NetworkFirewallMissingSubnetViolation, location_name: "NetworkFirewallMissingSubnetViolation"))
     ResourceViolation.add_member(:network_firewall_missing_expected_rt_violation, Shapes::ShapeRef.new(shape: NetworkFirewallMissingExpectedRTViolation, location_name: "NetworkFirewallMissingExpectedRTViolation"))
     ResourceViolation.add_member(:network_firewall_policy_modified_violation, Shapes::ShapeRef.new(shape: NetworkFirewallPolicyModifiedViolation, location_name: "NetworkFirewallPolicyModifiedViolation"))
+    ResourceViolation.add_member(:dns_rule_group_priority_conflict_violation, Shapes::ShapeRef.new(shape: DnsRuleGroupPriorityConflictViolation, location_name: "DnsRuleGroupPriorityConflictViolation"))
+    ResourceViolation.add_member(:dns_duplicate_rule_group_violation, Shapes::ShapeRef.new(shape: DnsDuplicateRuleGroupViolation, location_name: "DnsDuplicateRuleGroupViolation"))
+    ResourceViolation.add_member(:dns_rule_group_limit_exceeded_violation, Shapes::ShapeRef.new(shape: DnsRuleGroupLimitExceededViolation, location_name: "DnsRuleGroupLimitExceededViolation"))
     ResourceViolation.struct_class = Types::ResourceViolation
 
     ResourceViolations.member = Shapes::ShapeRef.new(shape: ResourceViolation)

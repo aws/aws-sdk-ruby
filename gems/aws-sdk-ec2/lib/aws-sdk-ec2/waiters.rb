@@ -932,7 +932,7 @@ module Aws::EC2
                 "argument" => "length(security_groups[].group_id) > `0`"
               },
               {
-                "expected" => "InvalidGroupNotFound",
+                "expected" => "InvalidGroup.NotFound",
                 "matcher" => "error",
                 "state" => "retry"
               }

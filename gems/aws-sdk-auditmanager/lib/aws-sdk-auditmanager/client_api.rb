@@ -768,6 +768,7 @@ module Aws::AuditManager
     GetAssessmentRequest.struct_class = Types::GetAssessmentRequest
 
     GetAssessmentResponse.add_member(:assessment, Shapes::ShapeRef.new(shape: Assessment, location_name: "assessment"))
+    GetAssessmentResponse.add_member(:user_role, Shapes::ShapeRef.new(shape: Role, location_name: "userRole"))
     GetAssessmentResponse.struct_class = Types::GetAssessmentResponse
 
     GetChangeLogsRequest.add_member(:assessment_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "assessmentId"))

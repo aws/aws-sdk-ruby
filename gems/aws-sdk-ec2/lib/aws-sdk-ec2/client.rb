@@ -1476,19 +1476,20 @@ module Aws::EC2
     # inside an enclave. For more information, see [AWS Certificate Manager
     # for Nitro Enclaves][1] in the *AWS Nitro Enclaves User Guide*.
     #
-    # When the IAM role is associated with the ACM certificate, places the
-    # certificate, certificate chain, and encrypted private key in an Amazon
-    # S3 bucket that only the associated IAM role can access. The private
-    # key of the certificate is encrypted with an AWS-managed KMS customer
-    # master (CMK) that has an attached attestation-based CMK policy.
+    # When the IAM role is associated with the ACM certificate, the
+    # certificate, certificate chain, and encrypted private key are placed
+    # in an Amazon S3 bucket that only the associated IAM role can access.
+    # The private key of the certificate is encrypted with an AWS-managed
+    # KMS customer master (CMK) that has an attached attestation-based CMK
+    # policy.
     #
     # To enable the IAM role to access the Amazon S3 object, you must grant
     # it permission to call `s3:GetObject` on the Amazon S3 bucket returned
     # by the command. To enable the IAM role to access the AWS KMS CMK, you
-    # must grant it permission to call `kms:Decrypt` on AWS KMS CMK returned
-    # by the command. For more information, see [ Grant the role permission
-    # to access the certificate and encryption key][2] in the *AWS Nitro
-    # Enclaves User Guide*.
+    # must grant it permission to call `kms:Decrypt` on the AWS KMS CMK
+    # returned by the command. For more information, see [ Grant the role
+    # permission to access the certificate and encryption key][2] in the
+    # *AWS Nitro Enclaves User Guide*.
     #
     #
     #
@@ -1681,12 +1682,12 @@ module Aws::EC2
     # single IPv6 CIDR block with your subnet. An IPv6 CIDR block must have
     # a prefix length of /64.
     #
-    # @option params [required, String] :subnet_id
-    #   The ID of your subnet.
-    #
     # @option params [required, String] :ipv_6_cidr_block
     #   The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix
     #   length.
+    #
+    # @option params [required, String] :subnet_id
+    #   The ID of your subnet.
     #
     # @return [Types::AssociateSubnetCidrBlockResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1696,8 +1697,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_subnet_cidr_block({
-    #     subnet_id: "SubnetId", # required
     #     ipv_6_cidr_block: "String", # required
+    #     subnet_id: "SubnetId", # required
     #   })
     #
     # @example Response structure
@@ -3331,7 +3332,8 @@ module Aws::EC2
     # Initiates the copy of an AMI. You can copy an AMI from one Region to
     # another, or from a Region to an AWS Outpost. You can't copy an AMI
     # from an Outpost to a Region, from one Outpost to another, or within
-    # the same Outpost.
+    # the same Outpost. To copy an AMI to another partition, see
+    # [CreateStoreImageTask][1].
     #
     # To copy an AMI from one Region to another, specify the source Region
     # using the **SourceRegion** parameter, and specify the destination
@@ -3347,18 +3349,17 @@ module Aws::EC2
     # encryption key for the Region, or a different key that you specify in
     # the request using **KmsKeyId**. Outposts do not support unencrypted
     # snapshots. For more information, [ Amazon EBS local snapshots on
-    # Outposts][1] in the *Amazon Elastic Compute Cloud User Guide*.
-    #
-    #
+    # Outposts][2] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     # For more information about the prerequisites and limits when copying
-    # an AMI, see [Copying an AMI][2] in the *Amazon Elastic Compute Cloud
+    # an AMI, see [Copying an AMI][3] in the *Amazon Elastic Compute Cloud
     # User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure idempotency of
@@ -7356,6 +7357,91 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Creates a root volume replacement task for an Amazon EC2 instance. The
+    # root volume can either be restored to its initial launch state, or it
+    # can be restored using a specific snapshot.
+    #
+    # For more information, see [Replace a root volume][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/
+    #
+    # @option params [required, String] :instance_id
+    #   The ID of the instance for which to replace the root volume.
+    #
+    # @option params [String] :snapshot_id
+    #   The ID of the snapshot from which to restore the replacement root
+    #   volume. If you want to restore the volume to the initial launch state,
+    #   omit this parameter.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. If you do not specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency. For more information, see [Ensuring Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the root volume replacement task.
+    #
+    # @return [Types::CreateReplaceRootVolumeTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateReplaceRootVolumeTaskResult#replace_root_volume_task #replace_root_volume_task} => Types::ReplaceRootVolumeTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_replace_root_volume_task({
+    #     instance_id: "InstanceId", # required
+    #     snapshot_id: "SnapshotId",
+    #     client_token: "String",
+    #     dry_run: false,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replace_root_volume_task.replace_root_volume_task_id #=> String
+    #   resp.replace_root_volume_task.instance_id #=> String
+    #   resp.replace_root_volume_task.task_state #=> String, one of "pending", "in-progress", "failing", "succeeded", "failed", "failed-detached"
+    #   resp.replace_root_volume_task.start_time #=> String
+    #   resp.replace_root_volume_task.complete_time #=> String
+    #   resp.replace_root_volume_task.tags #=> Array
+    #   resp.replace_root_volume_task.tags[0].key #=> String
+    #   resp.replace_root_volume_task.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateReplaceRootVolumeTask AWS API Documentation
+    #
+    # @overload create_replace_root_volume_task(params = {})
+    # @param [Hash] params ({})
+    def create_replace_root_volume_task(params = {}, options = {})
+      req = build_request(:create_replace_root_volume_task, params)
+      req.send_request(options)
+    end
+
     # Creates a listing for Amazon EC2 Standard Reserved Instances to be
     # sold in the Reserved Instance Marketplace. You can submit one Standard
     # Reserved Instance listing at a time. To get a list of your Standard
@@ -7458,6 +7544,86 @@ module Aws::EC2
     # @param [Hash] params ({})
     def create_reserved_instances_listing(params = {}, options = {})
       req = build_request(:create_reserved_instances_listing, params)
+      req.send_request(options)
+    end
+
+    # Starts a task that restores an AMI from an S3 object that was
+    # previously created by using [CreateStoreImageTask][1].
+    #
+    # To use this API, you must have the required permissions. For more
+    # information, see [Permissions for storing and restoring AMIs using
+    # S3][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    # For more information, see [Store and restore an AMI using S3][3] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html
+    #
+    # @option params [required, String] :bucket
+    #   The name of the S3 bucket that contains the stored AMI object.
+    #
+    # @option params [required, String] :object_key
+    #   The name of the stored AMI object in the bucket.
+    #
+    # @option params [String] :name
+    #   The name for the restored AMI. The name must be unique for AMIs in the
+    #   Region for this account. If you do not provide a name, the new AMI
+    #   gets the same name as the original AMI.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the AMI and snapshots on restoration. You can tag
+    #   the AMI, the snapshots, or both.
+    #
+    #   * To tag the AMI, the value for `ResourceType` must be `image`.
+    #
+    #   * To tag the snapshots, the value for `ResourceType` must be
+    #     `snapshot`. The same tag is applied to all of the snapshots that are
+    #     created.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CreateRestoreImageTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRestoreImageTaskResult#image_id #image_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_restore_image_task({
+    #     bucket: "String", # required
+    #     object_key: "String", # required
+    #     name: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRestoreImageTask AWS API Documentation
+    #
+    # @overload create_restore_image_task(params = {})
+    # @param [Hash] params ({})
+    def create_restore_image_task(params = {}, options = {})
+      req = build_request(:create_restore_image_task, params)
       req.send_request(options)
     end
 
@@ -8199,6 +8365,70 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Stores an AMI as a single object in an S3 bucket.
+    #
+    # To use this API, you must have the required permissions. For more
+    # information, see [Permissions for storing and restoring AMIs using
+    # S3][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    # For more information, see [Store and restore an AMI using S3][2] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html
+    #
+    # @option params [required, String] :image_id
+    #   The ID of the AMI.
+    #
+    # @option params [required, String] :bucket
+    #   The name of the S3 bucket in which the AMI object will be stored. The
+    #   bucket must be in the Region in which the request is being made. The
+    #   AMI object appears in the bucket only after the upload task has
+    #   completed.
+    #
+    # @option params [Array<Types::S3ObjectTag>] :s3_object_tags
+    #   The tags to apply to the AMI object that will be stored in the S3
+    #   bucket.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CreateStoreImageTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateStoreImageTaskResult#object_key #object_key} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_store_image_task({
+    #     image_id: "ImageId", # required
+    #     bucket: "String", # required
+    #     s3_object_tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.object_key #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateStoreImageTask AWS API Documentation
+    #
+    # @overload create_store_image_task(params = {})
+    # @param [Hash] params ({})
+    def create_store_image_task(params = {}, options = {})
+      req = build_request(:create_store_image_task, params)
+      req.send_request(options)
+    end
+
     # Creates a subnet in a specified VPC.
     #
     # You must specify an IPv4 CIDR block for the subnet. After you create a
@@ -8253,6 +8483,12 @@ module Aws::EC2
     # @option params [String] :availability_zone_id
     #   The AZ ID or the Local Zone ID of the subnet.
     #
+    # @option params [required, String] :cidr_block
+    #   The IPv4 network range for the subnet, in CIDR notation. For example,
+    #   `10.0.0.0/24`. We modify the specified CIDR block to its canonical
+    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
+    #   `100.68.0.0/18`.
+    #
     # @option params [String] :ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
@@ -8270,12 +8506,6 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [required, String] :cidr_block
-    #   The IPv4 network range for the subnet, in CIDR notation. For example,
-    #   `10.0.0.0/24`. We modify the specified CIDR block to its canonical
-    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
-    #   `100.68.0.0/18`.
     #
     # @return [Types::CreateSubnetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8320,11 +8550,11 @@ module Aws::EC2
     #     ],
     #     availability_zone: "String",
     #     availability_zone_id: "String",
+    #     cidr_block: "String", # required
     #     ipv_6_cidr_block: "String",
     #     outpost_arn: "String",
     #     vpc_id: "VpcId", # required
     #     dry_run: false,
-    #     cidr_block: "String", # required
     #   })
     #
     # @example Response structure
@@ -21814,6 +22044,83 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes a root volume replacement task. For more information, see
+    # [Replace a root volume][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/
+    #
+    # @option params [Array<String>] :replace_root_volume_task_ids
+    #   The ID of the root volume replacement task to view.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filter to use:
+    #
+    #   * `instance-id` - The ID of the instance for which the root volume
+    #     replacement task was created.
+    #
+    #   ^
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeReplaceRootVolumeTasksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReplaceRootVolumeTasksResult#replace_root_volume_tasks #replace_root_volume_tasks} => Array&lt;Types::ReplaceRootVolumeTask&gt;
+    #   * {Types::DescribeReplaceRootVolumeTasksResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_replace_root_volume_tasks({
+    #     replace_root_volume_task_ids: ["ReplaceRootVolumeTaskId"],
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replace_root_volume_tasks #=> Array
+    #   resp.replace_root_volume_tasks[0].replace_root_volume_task_id #=> String
+    #   resp.replace_root_volume_tasks[0].instance_id #=> String
+    #   resp.replace_root_volume_tasks[0].task_state #=> String, one of "pending", "in-progress", "failing", "succeeded", "failed", "failed-detached"
+    #   resp.replace_root_volume_tasks[0].start_time #=> String
+    #   resp.replace_root_volume_tasks[0].complete_time #=> String
+    #   resp.replace_root_volume_tasks[0].tags #=> Array
+    #   resp.replace_root_volume_tasks[0].tags[0].key #=> String
+    #   resp.replace_root_volume_tasks[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReplaceRootVolumeTasks AWS API Documentation
+    #
+    # @overload describe_replace_root_volume_tasks(params = {})
+    # @param [Hash] params ({})
+    def describe_replace_root_volume_tasks(params = {}, options = {})
+      req = build_request(:describe_replace_root_volume_tasks, params)
+      req.send_request(options)
+    end
+
     # Describes one or more of the Reserved Instances that you purchased.
     #
     # For more information about Reserved Instances, see [Reserved
@@ -24563,6 +24870,98 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes the progress of the AMI store tasks. You can describe the
+    # store tasks for specified AMIs. If you don't specify the AMIs, you
+    # get a paginated list of store tasks from the last 31 days.
+    #
+    # For each AMI task, the response indicates if the task is `InProgress`,
+    # `Completed`, or `Failed`. For tasks `InProgress`, the response shows
+    # the estimated progress as a percentage.
+    #
+    # Tasks are listed in reverse chronological order. Currently, only tasks
+    # from the past 31 days can be viewed.
+    #
+    # To use this API, you must have the required permissions. For more
+    # information, see [Permissions for storing and restoring AMIs using
+    # S3][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    # For more information, see [Store and restore an AMI using S3][2] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html
+    #
+    # @option params [Array<String>] :image_ids
+    #   The AMI IDs for which to show progress. Up to 20 AMI IDs can be
+    #   included in a request.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   The filters.
+    #
+    #   * `task-state` - Returns tasks in a certain state (`InProgress` \|
+    #     `Completed` \| `Failed`)
+    #
+    #   * `bucket` - Returns task information for tasks that targeted a
+    #     specific bucket. For the filter value, specify the bucket name.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned `NextToken`
+    #   value. This value can be between 1 and 200. You cannot specify this
+    #   parameter and the `ImageIDs` parameter in the same call.
+    #
+    # @return [Types::DescribeStoreImageTasksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeStoreImageTasksResult#store_image_task_results #store_image_task_results} => Array&lt;Types::StoreImageTaskResult&gt;
+    #   * {Types::DescribeStoreImageTasksResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_store_image_tasks({
+    #     image_ids: ["ImageId"],
+    #     dry_run: false,
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.store_image_task_results #=> Array
+    #   resp.store_image_task_results[0].ami_id #=> String
+    #   resp.store_image_task_results[0].task_start_time #=> Time
+    #   resp.store_image_task_results[0].bucket #=> String
+    #   resp.store_image_task_results[0].s3object_key #=> String
+    #   resp.store_image_task_results[0].progress_percentage #=> Integer
+    #   resp.store_image_task_results[0].store_task_state #=> String
+    #   resp.store_image_task_results[0].store_task_failure_reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeStoreImageTasks AWS API Documentation
+    #
+    # @overload describe_store_image_tasks(params = {})
+    # @param [Hash] params ({})
+    def describe_store_image_tasks(params = {}, options = {})
+      req = build_request(:describe_store_image_tasks, params)
+      req.send_request(options)
+    end
+
     # Describes one or more of your subnets.
     #
     # For more information, see [Your VPC and Subnets][1] in the *Amazon
@@ -24601,6 +25000,8 @@ module Aws::EC2
     #
     #   * `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR
     #     block associated with the subnet.
+    #
+    #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
     #
     #   * `owner-id` - The ID of the AWS account that owns the subnet.
     #
@@ -28197,6 +28598,44 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Disables access to the EC2 serial console of all instances for your
+    # account. By default, access to the EC2 serial console is disabled for
+    # your account. For more information, see [Manage account access to the
+    # EC2 serial console][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DisableSerialConsoleAccessResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableSerialConsoleAccessResult#serial_console_access_enabled #serial_console_access_enabled} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_serial_console_access({
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.serial_console_access_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableSerialConsoleAccess AWS API Documentation
+    #
+    # @overload disable_serial_console_access(params = {})
+    # @param [Hash] params ({})
+    def disable_serial_console_access(params = {}, options = {})
+      req = build_request(:disable_serial_console_access, params)
+      req.send_request(options)
+    end
+
     # Disables the specified resource attachment from propagating routes to
     # the specified propagation route table.
     #
@@ -28809,10 +29248,10 @@ module Aws::EC2
     # Region.
     #
     # After you enable encryption by default, the EBS volumes that you
-    # create are are always encrypted, either using the default CMK or the
-    # CMK that you specified when you created each volume. For more
-    # information, see [Amazon EBS encryption][1] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # create are always encrypted, either using the default CMK or the CMK
+    # that you specified when you created each volume. For more information,
+    # see [Amazon EBS encryption][1] in the *Amazon Elastic Compute Cloud
+    # User Guide*.
     #
     # You can specify the default CMK for encryption by default using
     # ModifyEbsDefaultKmsKeyId or ResetEbsDefaultKmsKeyId.
@@ -28927,6 +29366,44 @@ module Aws::EC2
     # @param [Hash] params ({})
     def enable_fast_snapshot_restores(params = {}, options = {})
       req = build_request(:enable_fast_snapshot_restores, params)
+      req.send_request(options)
+    end
+
+    # Enables access to the EC2 serial console of all instances for your
+    # account. By default, access to the EC2 serial console is disabled for
+    # your account. For more information, see [Manage account access to the
+    # EC2 serial console][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::EnableSerialConsoleAccessResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableSerialConsoleAccessResult#serial_console_access_enabled #serial_console_access_enabled} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_serial_console_access({
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.serial_console_access_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableSerialConsoleAccess AWS API Documentation
+    #
+    # @overload enable_serial_console_access(params = {})
+    # @param [Hash] params ({})
+    def enable_serial_console_access(params = {}, options = {})
+      req = build_request(:enable_serial_console_access, params)
       req.send_request(options)
     end
 
@@ -29913,6 +30390,73 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Generates a CloudFormation template that streamlines and automates the
+    # integration of VPC flow logs with Amazon Athena. This make it easier
+    # for you to query and gain insights from VPC flow logs data. Based on
+    # the information that you provide, we configure resources in the
+    # template to do the following:
+    #
+    # * Create a table in Athena that maps fields to a custom log format
+    #
+    # * Create a Lambda function that updates the table with new partitions
+    #   on a daily, weekly, or monthly basis
+    #
+    # * Create a table partitioned between two timestamps in the past
+    #
+    # * Create a set of named queries in Athena that you can use to get
+    #   started quickly
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :flow_log_id
+    #   The ID of the flow log.
+    #
+    # @option params [required, String] :config_delivery_s3_destination_arn
+    #   To store the CloudFormation template in Amazon S3, specify the
+    #   location in Amazon S3.
+    #
+    # @option params [required, Types::IntegrateServices] :integrate_services
+    #   Information about the service integration.
+    #
+    # @return [Types::GetFlowLogsIntegrationTemplateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFlowLogsIntegrationTemplateResult#result #result} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_flow_logs_integration_template({
+    #     dry_run: false,
+    #     flow_log_id: "VpcFlowLogId", # required
+    #     config_delivery_s3_destination_arn: "String", # required
+    #     integrate_services: { # required
+    #       athena_integrations: [
+    #         {
+    #           integration_result_s3_destination_arn: "String", # required
+    #           partition_load_frequency: "none", # required, accepts none, daily, weekly, monthly
+    #           partition_start_date: Time.now,
+    #           partition_end_date: Time.now,
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.result #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetFlowLogsIntegrationTemplate AWS API Documentation
+    #
+    # @overload get_flow_logs_integration_template(params = {})
+    # @param [Hash] params ({})
+    def get_flow_logs_integration_template(params = {}, options = {})
+      req = build_request(:get_flow_logs_integration_template, params)
+      req.send_request(options)
+    end
+
     # Lists the resource groups to which a Capacity Reservation has been
     # added.
     #
@@ -30463,6 +31007,44 @@ module Aws::EC2
     # @param [Hash] params ({})
     def get_reserved_instances_exchange_quote(params = {}, options = {})
       req = build_request(:get_reserved_instances_exchange_quote, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the access status of your account to the EC2 serial console
+    # of all instances. By default, access to the EC2 serial console is
+    # disabled for your account. For more information, see [Manage account
+    # access to the EC2 serial console][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetSerialConsoleAccessStatusResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSerialConsoleAccessStatusResult#serial_console_access_enabled #serial_console_access_enabled} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_serial_console_access_status({
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.serial_console_access_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSerialConsoleAccessStatus AWS API Documentation
+    #
+    # @overload get_serial_console_access_status(params = {})
+    # @param [Hash] params ({})
+    def get_serial_console_access_status(params = {}, options = {})
+      req = build_request(:get_serial_console_access_status, params)
       req.send_request(options)
     end
 
@@ -34337,7 +34919,8 @@ module Aws::EC2
     #   * `io2`\: 100-64,000 IOPS
     #
     #   Default: If no IOPS value is specified, the existing value is
-    #   retained.
+    #   retained, unless a volume type is modified that supports different
+    #   values.
     #
     # @option params [Integer] :throughput
     #   The target throughput of the volume, in MiB/s. This parameter is valid
@@ -40859,11 +41442,11 @@ module Aws::EC2
 
     # Unassigns one or more IPv6 addresses from a network interface.
     #
-    # @option params [required, Array<String>] :ipv_6_addresses
-    #   The IPv6 addresses to unassign from the network interface.
-    #
     # @option params [required, String] :network_interface_id
     #   The ID of the network interface.
+    #
+    # @option params [required, Array<String>] :ipv_6_addresses
+    #   The IPv6 addresses to unassign from the network interface.
     #
     # @return [Types::UnassignIpv6AddressesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -40873,8 +41456,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.unassign_ipv_6_addresses({
-    #     ipv_6_addresses: ["String"], # required
     #     network_interface_id: "NetworkInterfaceId", # required
+    #     ipv_6_addresses: ["String"], # required
     #   })
     #
     # @example Response structure
@@ -41262,7 +41845,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.230.0'
+      context[:gem_version] = '1.233.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

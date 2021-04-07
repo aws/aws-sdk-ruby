@@ -19,10 +19,17 @@ module Aws::CustomerProfiles
     Address = Shapes::StructureShape.new(name: 'Address')
     Attributes = Shapes::MapShape.new(name: 'Attributes')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    BucketName = Shapes::StringShape.new(name: 'BucketName')
+    BucketPrefix = Shapes::StringShape.new(name: 'BucketPrefix')
+    ConnectorOperator = Shapes::StructureShape.new(name: 'ConnectorOperator')
+    ConnectorProfileName = Shapes::StringShape.new(name: 'ConnectorProfileName')
     CreateDomainRequest = Shapes::StructureShape.new(name: 'CreateDomainRequest')
     CreateDomainResponse = Shapes::StructureShape.new(name: 'CreateDomainResponse')
     CreateProfileRequest = Shapes::StructureShape.new(name: 'CreateProfileRequest')
     CreateProfileResponse = Shapes::StructureShape.new(name: 'CreateProfileResponse')
+    DataPullMode = Shapes::StringShape.new(name: 'DataPullMode')
+    Date = Shapes::TimestampShape.new(name: 'Date')
+    DatetimeTypeFieldName = Shapes::StringShape.new(name: 'DatetimeTypeFieldName')
     DeleteDomainRequest = Shapes::StructureShape.new(name: 'DeleteDomainRequest')
     DeleteDomainResponse = Shapes::StructureShape.new(name: 'DeleteDomainResponse')
     DeleteIntegrationRequest = Shapes::StructureShape.new(name: 'DeleteIntegrationRequest')
@@ -35,11 +42,15 @@ module Aws::CustomerProfiles
     DeleteProfileObjectTypeResponse = Shapes::StructureShape.new(name: 'DeleteProfileObjectTypeResponse')
     DeleteProfileRequest = Shapes::StructureShape.new(name: 'DeleteProfileRequest')
     DeleteProfileResponse = Shapes::StructureShape.new(name: 'DeleteProfileResponse')
+    DestinationField = Shapes::StringShape.new(name: 'DestinationField')
     DomainList = Shapes::ListShape.new(name: 'DomainList')
     DomainStats = Shapes::StructureShape.new(name: 'DomainStats')
     FieldContentType = Shapes::StringShape.new(name: 'FieldContentType')
     FieldMap = Shapes::MapShape.new(name: 'FieldMap')
     FieldNameList = Shapes::ListShape.new(name: 'FieldNameList')
+    FlowDefinition = Shapes::StructureShape.new(name: 'FlowDefinition')
+    FlowDescription = Shapes::StringShape.new(name: 'FlowDescription')
+    FlowName = Shapes::StringShape.new(name: 'FlowName')
     Gender = Shapes::StringShape.new(name: 'Gender')
     GetDomainRequest = Shapes::StructureShape.new(name: 'GetDomainRequest')
     GetDomainResponse = Shapes::StructureShape.new(name: 'GetDomainResponse')
@@ -49,9 +60,11 @@ module Aws::CustomerProfiles
     GetProfileObjectTypeResponse = Shapes::StructureShape.new(name: 'GetProfileObjectTypeResponse')
     GetProfileObjectTypeTemplateRequest = Shapes::StructureShape.new(name: 'GetProfileObjectTypeTemplateRequest')
     GetProfileObjectTypeTemplateResponse = Shapes::StructureShape.new(name: 'GetProfileObjectTypeTemplateResponse')
+    IncrementalPullConfig = Shapes::StructureShape.new(name: 'IncrementalPullConfig')
     IntegrationList = Shapes::ListShape.new(name: 'IntegrationList')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     KeyMap = Shapes::MapShape.new(name: 'KeyMap')
+    KmsArn = Shapes::StringShape.new(name: 'KmsArn')
     ListAccountIntegrationsRequest = Shapes::StructureShape.new(name: 'ListAccountIntegrationsRequest')
     ListAccountIntegrationsResponse = Shapes::StructureShape.new(name: 'ListAccountIntegrationsResponse')
     ListDomainItem = Shapes::StructureShape.new(name: 'ListDomainItem')
@@ -71,15 +84,20 @@ module Aws::CustomerProfiles
     ListProfileObjectsResponse = Shapes::StructureShape.new(name: 'ListProfileObjectsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    MarketoConnectorOperator = Shapes::StringShape.new(name: 'MarketoConnectorOperator')
+    MarketoSourceProperties = Shapes::StructureShape.new(name: 'MarketoSourceProperties')
+    Object = Shapes::StringShape.new(name: 'Object')
     ObjectTypeField = Shapes::StructureShape.new(name: 'ObjectTypeField')
     ObjectTypeKey = Shapes::StructureShape.new(name: 'ObjectTypeKey')
     ObjectTypeKeyList = Shapes::ListShape.new(name: 'ObjectTypeKeyList')
+    OperatorPropertiesKeys = Shapes::StringShape.new(name: 'OperatorPropertiesKeys')
     PartyType = Shapes::StringShape.new(name: 'PartyType')
     Profile = Shapes::StructureShape.new(name: 'Profile')
     ProfileList = Shapes::ListShape.new(name: 'ProfileList')
     ProfileObjectList = Shapes::ListShape.new(name: 'ProfileObjectList')
     ProfileObjectTypeList = Shapes::ListShape.new(name: 'ProfileObjectTypeList')
     ProfileObjectTypeTemplateList = Shapes::ListShape.new(name: 'ProfileObjectTypeTemplateList')
+    Property = Shapes::StringShape.new(name: 'Property')
     PutIntegrationRequest = Shapes::StructureShape.new(name: 'PutIntegrationRequest')
     PutIntegrationResponse = Shapes::StructureShape.new(name: 'PutIntegrationResponse')
     PutProfileObjectRequest = Shapes::StructureShape.new(name: 'PutProfileObjectRequest')
@@ -87,8 +105,21 @@ module Aws::CustomerProfiles
     PutProfileObjectTypeRequest = Shapes::StructureShape.new(name: 'PutProfileObjectTypeRequest')
     PutProfileObjectTypeResponse = Shapes::StructureShape.new(name: 'PutProfileObjectTypeResponse')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    S3ConnectorOperator = Shapes::StringShape.new(name: 'S3ConnectorOperator')
+    S3SourceProperties = Shapes::StructureShape.new(name: 'S3SourceProperties')
+    SalesforceConnectorOperator = Shapes::StringShape.new(name: 'SalesforceConnectorOperator')
+    SalesforceSourceProperties = Shapes::StructureShape.new(name: 'SalesforceSourceProperties')
+    ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
+    ScheduleOffset = Shapes::IntegerShape.new(name: 'ScheduleOffset')
+    ScheduledTriggerProperties = Shapes::StructureShape.new(name: 'ScheduledTriggerProperties')
     SearchProfilesRequest = Shapes::StructureShape.new(name: 'SearchProfilesRequest')
     SearchProfilesResponse = Shapes::StructureShape.new(name: 'SearchProfilesResponse')
+    ServiceNowConnectorOperator = Shapes::StringShape.new(name: 'ServiceNowConnectorOperator')
+    ServiceNowSourceProperties = Shapes::StructureShape.new(name: 'ServiceNowSourceProperties')
+    SourceConnectorProperties = Shapes::StructureShape.new(name: 'SourceConnectorProperties')
+    SourceConnectorType = Shapes::StringShape.new(name: 'SourceConnectorType')
+    SourceFields = Shapes::ListShape.new(name: 'SourceFields')
+    SourceFlowConfig = Shapes::StructureShape.new(name: 'SourceFlowConfig')
     StandardIdentifier = Shapes::StringShape.new(name: 'StandardIdentifier')
     StandardIdentifierList = Shapes::ListShape.new(name: 'StandardIdentifierList')
     TagArn = Shapes::StringShape.new(name: 'TagArn')
@@ -98,7 +129,15 @@ module Aws::CustomerProfiles
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Task = Shapes::StructureShape.new(name: 'Task')
+    TaskPropertiesMap = Shapes::MapShape.new(name: 'TaskPropertiesMap')
+    TaskType = Shapes::StringShape.new(name: 'TaskType')
+    Tasks = Shapes::ListShape.new(name: 'Tasks')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    Timezone = Shapes::StringShape.new(name: 'Timezone')
+    TriggerConfig = Shapes::StructureShape.new(name: 'TriggerConfig')
+    TriggerProperties = Shapes::StructureShape.new(name: 'TriggerProperties')
+    TriggerType = Shapes::StringShape.new(name: 'TriggerType')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAddress = Shapes::StructureShape.new(name: 'UpdateAddress')
@@ -107,6 +146,8 @@ module Aws::CustomerProfiles
     UpdateDomainResponse = Shapes::StructureShape.new(name: 'UpdateDomainResponse')
     UpdateProfileRequest = Shapes::StructureShape.new(name: 'UpdateProfileRequest')
     UpdateProfileResponse = Shapes::StructureShape.new(name: 'UpdateProfileResponse')
+    ZendeskConnectorOperator = Shapes::StringShape.new(name: 'ZendeskConnectorOperator')
+    ZendeskSourceProperties = Shapes::StructureShape.new(name: 'ZendeskSourceProperties')
     boolean = Shapes::BooleanShape.new(name: 'boolean')
     encryptionKey = Shapes::StringShape.new(name: 'encryptionKey')
     expirationDaysInteger = Shapes::IntegerShape.new(name: 'expirationDaysInteger')
@@ -120,6 +161,7 @@ module Aws::CustomerProfiles
     string0To255 = Shapes::StringShape.new(name: 'string0To255')
     string1To1000 = Shapes::StringShape.new(name: 'string1To1000')
     string1To255 = Shapes::StringShape.new(name: 'string1To255')
+    stringTo2048 = Shapes::StringShape.new(name: 'stringTo2048')
     stringifiedJson = Shapes::StringShape.new(name: 'stringifiedJson')
     text = Shapes::StringShape.new(name: 'text')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
@@ -157,6 +199,13 @@ module Aws::CustomerProfiles
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: message, location_name: "Message"))
     BadRequestException.struct_class = Types::BadRequestException
+
+    ConnectorOperator.add_member(:marketo, Shapes::ShapeRef.new(shape: MarketoConnectorOperator, location_name: "Marketo"))
+    ConnectorOperator.add_member(:s3, Shapes::ShapeRef.new(shape: S3ConnectorOperator, location_name: "S3"))
+    ConnectorOperator.add_member(:salesforce, Shapes::ShapeRef.new(shape: SalesforceConnectorOperator, location_name: "Salesforce"))
+    ConnectorOperator.add_member(:service_now, Shapes::ShapeRef.new(shape: ServiceNowConnectorOperator, location_name: "ServiceNow"))
+    ConnectorOperator.add_member(:zendesk, Shapes::ShapeRef.new(shape: ZendeskConnectorOperator, location_name: "Zendesk"))
+    ConnectorOperator.struct_class = Types::ConnectorOperator
 
     CreateDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     CreateDomainRequest.add_member(:default_expiration_days, Shapes::ShapeRef.new(shape: expirationDaysInteger, required: true, location_name: "DefaultExpirationDays"))
@@ -259,6 +308,14 @@ module Aws::CustomerProfiles
 
     FieldNameList.member = Shapes::ShapeRef.new(shape: name)
 
+    FlowDefinition.add_member(:description, Shapes::ShapeRef.new(shape: FlowDescription, location_name: "Description"))
+    FlowDefinition.add_member(:flow_name, Shapes::ShapeRef.new(shape: FlowName, required: true, location_name: "FlowName"))
+    FlowDefinition.add_member(:kms_arn, Shapes::ShapeRef.new(shape: KmsArn, required: true, location_name: "KmsArn"))
+    FlowDefinition.add_member(:source_flow_config, Shapes::ShapeRef.new(shape: SourceFlowConfig, required: true, location_name: "SourceFlowConfig"))
+    FlowDefinition.add_member(:tasks, Shapes::ShapeRef.new(shape: Tasks, required: true, location_name: "Tasks"))
+    FlowDefinition.add_member(:trigger_config, Shapes::ShapeRef.new(shape: TriggerConfig, required: true, location_name: "TriggerConfig"))
+    FlowDefinition.struct_class = Types::FlowDefinition
+
     GetDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     GetDomainRequest.struct_class = Types::GetDomainRequest
 
@@ -311,6 +368,9 @@ module Aws::CustomerProfiles
     GetProfileObjectTypeTemplateResponse.add_member(:fields, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Fields"))
     GetProfileObjectTypeTemplateResponse.add_member(:keys, Shapes::ShapeRef.new(shape: KeyMap, location_name: "Keys"))
     GetProfileObjectTypeTemplateResponse.struct_class = Types::GetProfileObjectTypeTemplateResponse
+
+    IncrementalPullConfig.add_member(:datetime_type_field_name, Shapes::ShapeRef.new(shape: DatetimeTypeFieldName, location_name: "DatetimeTypeFieldName"))
+    IncrementalPullConfig.struct_class = Types::IncrementalPullConfig
 
     IntegrationList.member = Shapes::ShapeRef.new(shape: ListIntegrationItem)
 
@@ -411,6 +471,9 @@ module Aws::CustomerProfiles
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    MarketoSourceProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "Object"))
+    MarketoSourceProperties.struct_class = Types::MarketoSourceProperties
+
     ObjectTypeField.add_member(:source, Shapes::ShapeRef.new(shape: text, location_name: "Source"))
     ObjectTypeField.add_member(:target, Shapes::ShapeRef.new(shape: text, location_name: "Target"))
     ObjectTypeField.add_member(:content_type, Shapes::ShapeRef.new(shape: FieldContentType, location_name: "ContentType"))
@@ -455,9 +518,10 @@ module Aws::CustomerProfiles
     ProfileObjectTypeTemplateList.member = Shapes::ShapeRef.new(shape: ListProfileObjectTypeTemplateItem)
 
     PutIntegrationRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
-    PutIntegrationRequest.add_member(:uri, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "Uri"))
+    PutIntegrationRequest.add_member(:uri, Shapes::ShapeRef.new(shape: string1To255, location_name: "Uri"))
     PutIntegrationRequest.add_member(:object_type_name, Shapes::ShapeRef.new(shape: typeName, required: true, location_name: "ObjectTypeName"))
     PutIntegrationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    PutIntegrationRequest.add_member(:flow_definition, Shapes::ShapeRef.new(shape: FlowDefinition, location_name: "FlowDefinition"))
     PutIntegrationRequest.struct_class = Types::PutIntegrationRequest
 
     PutIntegrationResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "DomainName"))
@@ -504,6 +568,24 @@ module Aws::CustomerProfiles
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: message, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    S3SourceProperties.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "BucketName"))
+    S3SourceProperties.add_member(:bucket_prefix, Shapes::ShapeRef.new(shape: BucketPrefix, location_name: "BucketPrefix"))
+    S3SourceProperties.struct_class = Types::S3SourceProperties
+
+    SalesforceSourceProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "Object"))
+    SalesforceSourceProperties.add_member(:enable_dynamic_field_update, Shapes::ShapeRef.new(shape: boolean, location_name: "EnableDynamicFieldUpdate"))
+    SalesforceSourceProperties.add_member(:include_deleted_records, Shapes::ShapeRef.new(shape: boolean, location_name: "IncludeDeletedRecords"))
+    SalesforceSourceProperties.struct_class = Types::SalesforceSourceProperties
+
+    ScheduledTriggerProperties.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, required: true, location_name: "ScheduleExpression"))
+    ScheduledTriggerProperties.add_member(:data_pull_mode, Shapes::ShapeRef.new(shape: DataPullMode, location_name: "DataPullMode"))
+    ScheduledTriggerProperties.add_member(:schedule_start_time, Shapes::ShapeRef.new(shape: Date, location_name: "ScheduleStartTime"))
+    ScheduledTriggerProperties.add_member(:schedule_end_time, Shapes::ShapeRef.new(shape: Date, location_name: "ScheduleEndTime"))
+    ScheduledTriggerProperties.add_member(:timezone, Shapes::ShapeRef.new(shape: Timezone, location_name: "Timezone"))
+    ScheduledTriggerProperties.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: ScheduleOffset, location_name: "ScheduleOffset", metadata: {"box"=>true}))
+    ScheduledTriggerProperties.add_member(:first_execution_from, Shapes::ShapeRef.new(shape: Date, location_name: "FirstExecutionFrom"))
+    ScheduledTriggerProperties.struct_class = Types::ScheduledTriggerProperties
+
     SearchProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
     SearchProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxSize100, location: "querystring", location_name: "max-results"))
     SearchProfilesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
@@ -514,6 +596,24 @@ module Aws::CustomerProfiles
     SearchProfilesResponse.add_member(:items, Shapes::ShapeRef.new(shape: ProfileList, location_name: "Items"))
     SearchProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
     SearchProfilesResponse.struct_class = Types::SearchProfilesResponse
+
+    ServiceNowSourceProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "Object"))
+    ServiceNowSourceProperties.struct_class = Types::ServiceNowSourceProperties
+
+    SourceConnectorProperties.add_member(:marketo, Shapes::ShapeRef.new(shape: MarketoSourceProperties, location_name: "Marketo"))
+    SourceConnectorProperties.add_member(:s3, Shapes::ShapeRef.new(shape: S3SourceProperties, location_name: "S3"))
+    SourceConnectorProperties.add_member(:salesforce, Shapes::ShapeRef.new(shape: SalesforceSourceProperties, location_name: "Salesforce"))
+    SourceConnectorProperties.add_member(:service_now, Shapes::ShapeRef.new(shape: ServiceNowSourceProperties, location_name: "ServiceNow"))
+    SourceConnectorProperties.add_member(:zendesk, Shapes::ShapeRef.new(shape: ZendeskSourceProperties, location_name: "Zendesk"))
+    SourceConnectorProperties.struct_class = Types::SourceConnectorProperties
+
+    SourceFields.member = Shapes::ShapeRef.new(shape: stringTo2048)
+
+    SourceFlowConfig.add_member(:connector_profile_name, Shapes::ShapeRef.new(shape: ConnectorProfileName, location_name: "ConnectorProfileName"))
+    SourceFlowConfig.add_member(:connector_type, Shapes::ShapeRef.new(shape: SourceConnectorType, required: true, location_name: "ConnectorType"))
+    SourceFlowConfig.add_member(:incremental_pull_config, Shapes::ShapeRef.new(shape: IncrementalPullConfig, location_name: "IncrementalPullConfig"))
+    SourceFlowConfig.add_member(:source_connector_properties, Shapes::ShapeRef.new(shape: SourceConnectorProperties, required: true, location_name: "SourceConnectorProperties"))
+    SourceFlowConfig.struct_class = Types::SourceFlowConfig
 
     StandardIdentifierList.member = Shapes::ShapeRef.new(shape: StandardIdentifier)
 
@@ -528,8 +628,27 @@ module Aws::CustomerProfiles
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    Task.add_member(:connector_operator, Shapes::ShapeRef.new(shape: ConnectorOperator, location_name: "ConnectorOperator"))
+    Task.add_member(:destination_field, Shapes::ShapeRef.new(shape: DestinationField, location_name: "DestinationField"))
+    Task.add_member(:source_fields, Shapes::ShapeRef.new(shape: SourceFields, required: true, location_name: "SourceFields"))
+    Task.add_member(:task_properties, Shapes::ShapeRef.new(shape: TaskPropertiesMap, location_name: "TaskProperties"))
+    Task.add_member(:task_type, Shapes::ShapeRef.new(shape: TaskType, required: true, location_name: "TaskType"))
+    Task.struct_class = Types::Task
+
+    TaskPropertiesMap.key = Shapes::ShapeRef.new(shape: OperatorPropertiesKeys)
+    TaskPropertiesMap.value = Shapes::ShapeRef.new(shape: Property)
+
+    Tasks.member = Shapes::ShapeRef.new(shape: Task)
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: message, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TriggerConfig.add_member(:trigger_type, Shapes::ShapeRef.new(shape: TriggerType, required: true, location_name: "TriggerType"))
+    TriggerConfig.add_member(:trigger_properties, Shapes::ShapeRef.new(shape: TriggerProperties, location_name: "TriggerProperties"))
+    TriggerConfig.struct_class = Types::TriggerConfig
+
+    TriggerProperties.add_member(:scheduled, Shapes::ShapeRef.new(shape: ScheduledTriggerProperties, location_name: "Scheduled"))
+    TriggerProperties.struct_class = Types::TriggerProperties
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TagArn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
@@ -595,6 +714,9 @@ module Aws::CustomerProfiles
 
     UpdateProfileResponse.add_member(:profile_id, Shapes::ShapeRef.new(shape: uuid, required: true, location_name: "ProfileId"))
     UpdateProfileResponse.struct_class = Types::UpdateProfileResponse
+
+    ZendeskSourceProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "Object"))
+    ZendeskSourceProperties.struct_class = Types::ZendeskSourceProperties
 
     requestValueList.member = Shapes::ShapeRef.new(shape: string1To255)
 

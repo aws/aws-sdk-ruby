@@ -377,6 +377,7 @@ module Aws::DataPipeline
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Data Pipeline",
+        "serviceId" => "Data Pipeline",
         "signatureVersion" => "v4",
         "targetPrefix" => "DataPipeline",
         "uid" => "datapipeline-2012-10-29",

@@ -383,7 +383,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] supported_os_versions
-    #   The operating system (OS) version supported by the component. If the
+    #   he operating system (OS) version supported by the component. If the
     #   OS information is available, a prefix match is performed against the
     #   parent image OS version during image recipe creation.
     #   @return [Array<String>]
@@ -511,6 +511,11 @@ module Aws::Imagebuilder
     #   recipe.
     #   @return [Array<Types::ComponentConfiguration>]
     #
+    # @!attribute [rw] instance_configuration
+    #   A group of options that can be used to configure an instance for
+    #   building and testing container images.
+    #   @return [Types::InstanceConfiguration]
+    #
     # @!attribute [rw] dockerfile_template_data
     #   Dockerfiles are text documents that are used to build Docker
     #   containers, and ensure that they contain all of the elements
@@ -559,6 +564,7 @@ module Aws::Imagebuilder
       :owner,
       :version,
       :components,
+      :instance_configuration,
       :dockerfile_template_data,
       :kms_key_id,
       :encrypted,
@@ -752,7 +758,26 @@ module Aws::Imagebuilder
     #             component_arn: "ComponentVersionArnOrBuildVersionArn", # required
     #           },
     #         ],
-    #         dockerfile_template_data: "InlineDockerFileTemplate", # required
+    #         instance_configuration: {
+    #           image: "NonEmptyString",
+    #           block_device_mappings: [
+    #             {
+    #               device_name: "NonEmptyString",
+    #               ebs: {
+    #                 encrypted: false,
+    #                 delete_on_termination: false,
+    #                 iops: 1,
+    #                 kms_key_id: "NonEmptyString",
+    #                 snapshot_id: "NonEmptyString",
+    #                 volume_size: 1,
+    #                 volume_type: "standard", # accepts standard, io1, io2, gp2, gp3, sc1, st1
+    #               },
+    #               virtual_name: "NonEmptyString",
+    #               no_device: "EmptyString",
+    #             },
+    #           ],
+    #         },
+    #         dockerfile_template_data: "InlineDockerFileTemplate",
     #         dockerfile_template_uri: "Uri",
     #         platform_override: "Windows", # accepts Windows, Linux
     #         image_os_version_override: "NonEmptyString",
@@ -790,6 +815,11 @@ module Aws::Imagebuilder
     #   Components for build and test that are included in the container
     #   recipe.
     #   @return [Array<Types::ComponentConfiguration>]
+    #
+    # @!attribute [rw] instance_configuration
+    #   A group of options that can be used to configure an instance for
+    #   building and testing container images.
+    #   @return [Types::InstanceConfiguration]
     #
     # @!attribute [rw] dockerfile_template_data
     #   The Dockerfile template used to build your image as an inline data
@@ -845,6 +875,7 @@ module Aws::Imagebuilder
       :description,
       :semantic_version,
       :components,
+      :instance_configuration,
       :dockerfile_template_data,
       :dockerfile_template_uri,
       :platform_override,
@@ -913,6 +944,13 @@ module Aws::Imagebuilder
     #               },
     #             },
     #             license_configuration_arns: ["LicenseConfigurationArn"],
+    #             launch_template_configurations: [
+    #               {
+    #                 launch_template_id: "LaunchTemplateId", # required
+    #                 account_id: "AccountId",
+    #                 set_default_version: false,
+    #               },
+    #             ],
     #           },
     #         ],
     #         tags: {
@@ -1335,7 +1373,7 @@ module Aws::Imagebuilder
     #         name: "ResourceName", # required
     #         description: "NonEmptyString",
     #         instance_types: ["InstanceType"],
-    #         instance_profile_name: "NonEmptyString", # required
+    #         instance_profile_name: "InstanceProfileNameType", # required
     #         security_group_ids: ["NonEmptyString"],
     #         subnet_id: "NonEmptyString",
     #         logging: {
@@ -1752,6 +1790,13 @@ module Aws::Imagebuilder
     #           },
     #         },
     #         license_configuration_arns: ["LicenseConfigurationArn"],
+    #         launch_template_configurations: [
+    #           {
+    #             launch_template_id: "LaunchTemplateId", # required
+    #             account_id: "AccountId",
+    #             set_default_version: false,
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] region
@@ -1759,8 +1804,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] ami_distribution_configuration
-    #   The specific AMI settings (for example, launch permissions, AMI
-    #   tags).
+    #   The specific AMI settings; for example, launch permissions or AMI
+    #   tags.
     #   @return [Types::AmiDistributionConfiguration]
     #
     # @!attribute [rw] container_distribution_configuration
@@ -1773,13 +1818,19 @@ module Aws::Imagebuilder
     #   specified Region.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] launch_template_configurations
+    #   A group of launchTemplateConfiguration settings that apply to image
+    #   distribution for specified accounts.
+    #   @return [Array<Types::LaunchTemplateConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/Distribution AWS API Documentation
     #
     class Distribution < Struct.new(
       :region,
       :ami_distribution_configuration,
       :container_distribution_configuration,
-      :license_configuration_arns)
+      :license_configuration_arns,
+      :launch_template_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1799,7 +1850,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] distributions
-    #   The distributions of the distribution configuration.
+    #   The distribution objects that apply Region-specific settings for the
+    #   deployment of the image to targeted Regions.
     #   @return [Array<Types::Distribution>]
     #
     # @!attribute [rw] timeout_minutes
@@ -3220,6 +3272,52 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # Defines a custom source AMI and block device mapping configurations of
+    # an instance used for building and testing container images.
+    #
+    # @note When making an API call, you may pass InstanceConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         image: "NonEmptyString",
+    #         block_device_mappings: [
+    #           {
+    #             device_name: "NonEmptyString",
+    #             ebs: {
+    #               encrypted: false,
+    #               delete_on_termination: false,
+    #               iops: 1,
+    #               kms_key_id: "NonEmptyString",
+    #               snapshot_id: "NonEmptyString",
+    #               volume_size: 1,
+    #               volume_type: "standard", # accepts standard, io1, io2, gp2, gp3, sc1, st1
+    #             },
+    #             virtual_name: "NonEmptyString",
+    #             no_device: "EmptyString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] image
+    #   The AMI ID to use as the base image for a container build and test
+    #   instance. If not specified, Image Builder will use the appropriate
+    #   ECS-optimized AMI as a base image.
+    #   @return [String]
+    #
+    # @!attribute [rw] block_device_mappings
+    #   Defines the block devices to attach for building an instance from
+    #   this Image Builder AMI.
+    #   @return [Array<Types::InstanceBlockDeviceMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/InstanceConfiguration AWS API Documentation
+    #
+    class InstanceConfiguration < Struct.new(
+      :image,
+      :block_device_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You have provided an invalid pagination token in your request.
     #
     # @!attribute [rw] message
@@ -3334,6 +3432,40 @@ module Aws::Imagebuilder
     class LaunchPermissionConfiguration < Struct.new(
       :user_ids,
       :user_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies an EC2 launch template to use for a specific account.
+    #
+    # @note When making an API call, you may pass LaunchTemplateConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         launch_template_id: "LaunchTemplateId", # required
+    #         account_id: "AccountId",
+    #         set_default_version: false,
+    #       }
+    #
+    # @!attribute [rw] launch_template_id
+    #   Identifies the EC2 launch template to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID that this configuration applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] set_default_version
+    #   Set the specified EC2 launch template as the default launch template
+    #   for the specified account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/LaunchTemplateConfiguration AWS API Documentation
+    #
+    class LaunchTemplateConfiguration < Struct.new(
+      :launch_template_id,
+      :account_id,
+      :set_default_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4702,6 +4834,13 @@ module Aws::Imagebuilder
     #               },
     #             },
     #             license_configuration_arns: ["LicenseConfigurationArn"],
+    #             launch_template_configurations: [
+    #               {
+    #                 launch_template_id: "LaunchTemplateId", # required
+    #                 account_id: "AccountId",
+    #                 set_default_version: false,
+    #               },
+    #             ],
     #           },
     #         ],
     #         client_token: "ClientToken", # required
@@ -4888,7 +5027,7 @@ module Aws::Imagebuilder
     #         infrastructure_configuration_arn: "InfrastructureConfigurationArn", # required
     #         description: "NonEmptyString",
     #         instance_types: ["InstanceType"],
-    #         instance_profile_name: "NonEmptyString", # required
+    #         instance_profile_name: "InstanceProfileNameType", # required
     #         security_group_ids: ["NonEmptyString"],
     #         subnet_id: "NonEmptyString",
     #         logging: {

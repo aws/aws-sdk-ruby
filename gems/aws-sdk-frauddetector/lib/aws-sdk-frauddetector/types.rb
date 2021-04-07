@@ -160,6 +160,114 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
+    # The batch prediction details.
+    #
+    # @!attribute [rw] job_id
+    #   The job ID for the batch prediction.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The batch prediction status.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason a batch prediction job failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   Timestamp of when the batch prediction job started.
+    #   @return [String]
+    #
+    # @!attribute [rw] completion_time
+    #   Timestamp of when the batch prediction job comleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_heartbeat_time
+    #   Timestamp of most recent heartbeat indicating the batch prediction
+    #   job was making progress.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_path
+    #   The Amazon S3 location of your training file.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_path
+    #   The Amazon S3 location of your output file.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type_name
+    #   The name of the event type.
+    #   @return [String]
+    #
+    # @!attribute [rw] detector_name
+    #   The name of the detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] detector_version
+    #   The detector version.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The ARN of the IAM role to use for this job request.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of batch prediction job.
+    #   @return [String]
+    #
+    # @!attribute [rw] processed_records_count
+    #   The number of records processed by the batch prediction job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_records_count
+    #   The total number of records in the batch prediction job.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/BatchPrediction AWS API Documentation
+    #
+    class BatchPrediction < Struct.new(
+      :job_id,
+      :status,
+      :failure_reason,
+      :start_time,
+      :completion_time,
+      :last_heartbeat_time,
+      :input_path,
+      :output_path,
+      :event_type_name,
+      :detector_name,
+      :detector_version,
+      :iam_role_arn,
+      :arn,
+      :processed_records_count,
+      :total_records_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CancelBatchPredictionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "identifier", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the batch prediction job to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/CancelBatchPredictionJobRequest AWS API Documentation
+    #
+    class CancelBatchPredictionJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/CancelBatchPredictionJobResult AWS API Documentation
+    #
+    class CancelBatchPredictionJobResult < Aws::EmptyStructure; end
+
     # An exception indicating there was a conflict during a delete
     # operation. The following delete operations can cause a conflict
     # exception:
@@ -184,6 +292,76 @@ module Aws::FraudDetector
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass CreateBatchPredictionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "identifier", # required
+    #         input_path: "s3BucketLocation", # required
+    #         output_path: "s3BucketLocation", # required
+    #         event_type_name: "identifier", # required
+    #         detector_name: "identifier", # required
+    #         detector_version: "wholeNumberVersionString",
+    #         iam_role_arn: "iamRoleArn", # required
+    #         tags: [
+    #           {
+    #             key: "tagKey", # required
+    #             value: "tagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the batch prediction job.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_path
+    #   The Amazon S3 location of your training file.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_path
+    #   The Amazon S3 location of your output file.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type_name
+    #   The name of the event type.
+    #   @return [String]
+    #
+    # @!attribute [rw] detector_name
+    #   The name of the detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] detector_version
+    #   The detector version.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The ARN of the IAM role to use for this job request.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A collection of key and value pairs.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/CreateBatchPredictionJobRequest AWS API Documentation
+    #
+    class CreateBatchPredictionJobRequest < Struct.new(
+      :job_id,
+      :input_path,
+      :output_path,
+      :event_type_name,
+      :detector_name,
+      :detector_version,
+      :iam_role_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/CreateBatchPredictionJobResult AWS API Documentation
+    #
+    class CreateBatchPredictionJobResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass CreateDetectorVersionRequest
     #   data as a hash:
@@ -607,6 +785,29 @@ module Aws::FraudDetector
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteBatchPredictionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "identifier", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the batch prediction job to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteBatchPredictionJobRequest AWS API Documentation
+    #
+    class DeleteBatchPredictionJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteBatchPredictionJobResult AWS API Documentation
+    #
+    class DeleteBatchPredictionJobResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteDetectorRequest
     #   data as a hash:
@@ -1351,6 +1552,54 @@ module Aws::FraudDetector
       :title,
       :content,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetBatchPredictionJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "identifier",
+    #         max_results: 1,
+    #         next_token: "string",
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The batch prediction job for which to get the details.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects to return for the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The next token from the previous request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetBatchPredictionJobsRequest AWS API Documentation
+    #
+    class GetBatchPredictionJobsRequest < Struct.new(
+      :job_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] batch_predictions
+    #   An array containing the details of each batch prediction job.
+    #   @return [Array<Types::BatchPrediction>]
+    #
+    # @!attribute [rw] next_token
+    #   The next token for the subsequent request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetBatchPredictionJobsResult AWS API Documentation
+    #
+    class GetBatchPredictionJobsResult < Struct.new(
+      :batch_predictions,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end

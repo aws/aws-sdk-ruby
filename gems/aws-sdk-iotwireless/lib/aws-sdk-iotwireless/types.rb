@@ -111,8 +111,8 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags attached to the specified resource. Tags are metadata that
-    #   can be used to manage a resource
+    #   The tags to attach to the specified resource. Tags are metadata that
+    #   you can use to manage a resource.
     #   @return [Array<Types::Tag>]
     #
     class AssociateAwsAccountWithPartnerAccountRequest < Struct.new(
@@ -221,6 +221,23 @@ module Aws::IoTWireless
 
     class AssociateWirelessGatewayWithThingResponse < Aws::EmptyStructure; end
 
+    # List of sidewalk certificates.
+    #
+    # @!attribute [rw] signing_alg
+    #   The certificate chain algorithm provided by sidewalk.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the chosen sidewalk certificate.
+    #   @return [String]
+    #
+    class CertificateList < Struct.new(
+      :signing_alg,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Adding, updating, or deleting the resource can cause an inconsistent
     # state.
     #
@@ -281,7 +298,7 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] tags
     #   The tags to attach to the new destination. Tags are metadata that
-    #   can be used to manage a resource.
+    #   you can use to manage a resource.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] client_request_token
@@ -365,8 +382,8 @@ module Aws::IoTWireless
     #   @return [Types::LoRaWANDeviceProfile]
     #
     # @!attribute [rw] tags
-    #   The tags to attach to the new device profile Tags are metadata that
-    #   can be used to manage a resource.
+    #   The tags to attach to the new device profile. Tags are metadata that
+    #   you can use to manage a resource.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] client_request_token
@@ -431,7 +448,7 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] tags
     #   The tags to attach to the new service profile. Tags are metadata
-    #   that can be used to manage a resource.
+    #   that you can use to manage a resource.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] client_request_token
@@ -507,6 +524,12 @@ module Aws::IoTWireless
     #             },
     #           },
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] type
@@ -540,13 +563,19 @@ module Aws::IoTWireless
     #   device.
     #   @return [Types::LoRaWANDevice]
     #
+    # @!attribute [rw] tags
+    #   The tags to attach to the new wireless device. Tags are metadata
+    #   that you can use to manage a resource.
+    #   @return [Array<Types::Tag>]
+    #
     class CreateWirelessDeviceRequest < Struct.new(
       :type,
       :name,
       :description,
       :destination_name,
       :client_request_token,
-      :lo_ra_wan)
+      :lo_ra_wan,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -600,7 +629,7 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] tags
     #   The tags to attach to the new wireless gateway. Tags are metadata
-    #   that can be used to manage a resource.
+    #   that you can use to manage a resource.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] client_request_token
@@ -696,8 +725,8 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags attached to the specified resource. Tags are metadata that
-    #   can be used to manage a resource
+    #   The tags to attach to the specified resource. Tags are metadata that
+    #   you can use to manage a resource.
     #   @return [Array<Types::Tag>]
     #
     class CreateWirelessGatewayTaskDefinitionRequest < Struct.new(
@@ -1310,6 +1339,10 @@ module Aws::IoTWireless
     #   Information about the wireless device.
     #   @return [Types::LoRaWANDevice]
     #
+    # @!attribute [rw] sidewalk
+    #   Sidewalk device object.
+    #   @return [Types::SidewalkDevice]
+    #
     class GetWirelessDeviceResponse < Struct.new(
       :type,
       :name,
@@ -1319,7 +1352,8 @@ module Aws::IoTWireless
       :arn,
       :thing_name,
       :thing_arn,
-      :lo_ra_wan)
+      :lo_ra_wan,
+      :sidewalk)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1353,10 +1387,15 @@ module Aws::IoTWireless
     #   Information about the wireless device's operations.
     #   @return [Types::LoRaWANDeviceMetadata]
     #
+    # @!attribute [rw] sidewalk
+    #   MetaData for Sidewalk device.
+    #   @return [Types::SidewalkDeviceMetadata]
+    #
     class GetWirelessDeviceStatisticsResponse < Struct.new(
       :wireless_device_id,
       :last_uplink_received_at,
-      :lo_ra_wan)
+      :lo_ra_wan,
+      :sidewalk)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1510,9 +1549,14 @@ module Aws::IoTWireless
     #   The date and time when the most recent uplink was received.
     #   @return [String]
     #
+    # @!attribute [rw] connection_status
+    #   The connection status of the wireless gateway.
+    #   @return [String]
+    #
     class GetWirelessGatewayStatisticsResponse < Struct.new(
       :wireless_gateway_id,
-      :last_uplink_received_at)
+      :last_uplink_received_at,
+      :connection_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1791,7 +1835,7 @@ module Aws::IoTWireless
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the resource for which to list tags.
+    #   The ARN of the resource for which you want to list tags.
     #   @return [String]
     #
     class ListTagsForResourceRequest < Struct.new(
@@ -1801,8 +1845,8 @@ module Aws::IoTWireless
     end
 
     # @!attribute [rw] tags
-    #   The tags attached to the specified resource. Tags are metadata that
-    #   can be used to manage a resource
+    #   The tags to attach to the specified resource. Tags are metadata that
+    #   you can use to manage a resource.
     #   @return [Array<Types::Tag>]
     #
     class ListTagsForResourceResponse < Struct.new(
@@ -2802,14 +2846,78 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # Sidewalk device object.
+    #
+    # @!attribute [rw] sidewalk_id
+    #   The sidewalk device identification.
+    #   @return [String]
+    #
+    # @!attribute [rw] sidewalk_manufacturing_sn
+    #   The Sidewalk manufacturing series number.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_certificates
+    #   The sidewalk device certificates for Ed25519 and P256r1.
+    #   @return [Array<Types::CertificateList>]
+    #
+    class SidewalkDevice < Struct.new(
+      :sidewalk_id,
+      :sidewalk_manufacturing_sn,
+      :device_certificates)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # MetaData for Sidewalk device.
+    #
+    # @!attribute [rw] rssi
+    #   The RSSI value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] battery_level
+    #   Sidewalk device battery level.
+    #   @return [String]
+    #
+    # @!attribute [rw] event
+    #   Sidewalk device status notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_state
+    #   Device state defines the device status of sidewalk device.
+    #   @return [String]
+    #
+    class SidewalkDeviceMetadata < Struct.new(
+      :rssi,
+      :battery_level,
+      :event,
+      :device_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Sidewalk object used by list functions.
     #
     # @!attribute [rw] amazon_id
     #   The Sidewalk Amazon ID.
     #   @return [String]
     #
+    # @!attribute [rw] sidewalk_id
+    #   The sidewalk device identification.
+    #   @return [String]
+    #
+    # @!attribute [rw] sidewalk_manufacturing_sn
+    #   The Sidewalk manufacturing series number.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_certificates
+    #   The sidewalk device certificates for Ed25519 and P256r1.
+    #   @return [Array<Types::CertificateList>]
+    #
     class SidewalkListDevice < Struct.new(
-      :amazon_id)
+      :amazon_id,
+      :sidewalk_id,
+      :sidewalk_manufacturing_sn,
+      :device_certificates)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2896,7 +3004,7 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] tags
     #   Adds to or modifies the tags of the given resource. Tags are
-    #   metadata that can be used to manage a resource.
+    #   metadata that you can use to manage a resource.
     #   @return [Array<Types::Tag>]
     #
     class TagResourceRequest < Struct.new(

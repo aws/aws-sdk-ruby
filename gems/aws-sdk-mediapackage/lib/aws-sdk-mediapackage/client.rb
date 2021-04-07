@@ -567,6 +567,10 @@ module Aws::MediaPackage
     #         key_rotation_interval_seconds: 1,
     #         speke_key_provider: { # required
     #           certificate_arn: "__string",
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #           },
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -601,6 +605,10 @@ module Aws::MediaPackage
     #         key_rotation_interval_seconds: 1,
     #         speke_key_provider: { # required
     #           certificate_arn: "__string",
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #           },
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -636,6 +644,10 @@ module Aws::MediaPackage
     #         repeat_ext_x_key: false,
     #         speke_key_provider: { # required
     #           certificate_arn: "__string",
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #           },
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -660,6 +672,10 @@ module Aws::MediaPackage
     #       encryption: {
     #         speke_key_provider: { # required
     #           certificate_arn: "__string",
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #           },
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -691,6 +707,8 @@ module Aws::MediaPackage
     #   resp.channel_id #=> String
     #   resp.cmaf_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.cmaf_package.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.cmaf_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET-AUDIO-1"
+    #   resp.cmaf_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_video #=> String, one of "PRESET-VIDEO-1"
     #   resp.cmaf_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.system_ids #=> Array
@@ -715,6 +733,8 @@ module Aws::MediaPackage
     #   resp.dash_package.ads_on_delivery_restrictions #=> String, one of "NONE", "RESTRICTED", "UNRESTRICTED", "BOTH"
     #   resp.dash_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.dash_package.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.dash_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET-AUDIO-1"
+    #   resp.dash_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_video #=> String, one of "PRESET-VIDEO-1"
     #   resp.dash_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.dash_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.dash_package.encryption.speke_key_provider.system_ids #=> Array
@@ -745,6 +765,8 @@ module Aws::MediaPackage
     #   resp.hls_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.hls_package.encryption.repeat_ext_x_key #=> Boolean
     #   resp.hls_package.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.hls_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET-AUDIO-1"
+    #   resp.hls_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_video #=> String, one of "PRESET-VIDEO-1"
     #   resp.hls_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.hls_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.hls_package.encryption.speke_key_provider.system_ids #=> Array
@@ -762,6 +784,8 @@ module Aws::MediaPackage
     #   resp.id #=> String
     #   resp.manifest_name #=> String
     #   resp.mss_package.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.mss_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET-AUDIO-1"
+    #   resp.mss_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_video #=> String, one of "PRESET-VIDEO-1"
     #   resp.mss_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.mss_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.mss_package.encryption.speke_key_provider.system_ids #=> Array
@@ -958,6 +982,8 @@ module Aws::MediaPackage
     #   resp.channel_id #=> String
     #   resp.cmaf_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.cmaf_package.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.cmaf_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET-AUDIO-1"
+    #   resp.cmaf_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_video #=> String, one of "PRESET-VIDEO-1"
     #   resp.cmaf_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.system_ids #=> Array
@@ -982,6 +1008,8 @@ module Aws::MediaPackage
     #   resp.dash_package.ads_on_delivery_restrictions #=> String, one of "NONE", "RESTRICTED", "UNRESTRICTED", "BOTH"
     #   resp.dash_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.dash_package.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.dash_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET-AUDIO-1"
+    #   resp.dash_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_video #=> String, one of "PRESET-VIDEO-1"
     #   resp.dash_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.dash_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.dash_package.encryption.speke_key_provider.system_ids #=> Array
@@ -1012,6 +1040,8 @@ module Aws::MediaPackage
     #   resp.hls_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.hls_package.encryption.repeat_ext_x_key #=> Boolean
     #   resp.hls_package.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.hls_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET-AUDIO-1"
+    #   resp.hls_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_video #=> String, one of "PRESET-VIDEO-1"
     #   resp.hls_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.hls_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.hls_package.encryption.speke_key_provider.system_ids #=> Array
@@ -1029,6 +1059,8 @@ module Aws::MediaPackage
     #   resp.id #=> String
     #   resp.manifest_name #=> String
     #   resp.mss_package.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.mss_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET-AUDIO-1"
+    #   resp.mss_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_video #=> String, one of "PRESET-VIDEO-1"
     #   resp.mss_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.mss_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.mss_package.encryption.speke_key_provider.system_ids #=> Array
@@ -1187,6 +1219,8 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].channel_id #=> String
     #   resp.origin_endpoints[0].cmaf_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.origin_endpoints[0].cmaf_package.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.origin_endpoints[0].cmaf_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET-AUDIO-1"
+    #   resp.origin_endpoints[0].cmaf_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_video #=> String, one of "PRESET-VIDEO-1"
     #   resp.origin_endpoints[0].cmaf_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.origin_endpoints[0].cmaf_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.origin_endpoints[0].cmaf_package.encryption.speke_key_provider.system_ids #=> Array
@@ -1211,6 +1245,8 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].dash_package.ads_on_delivery_restrictions #=> String, one of "NONE", "RESTRICTED", "UNRESTRICTED", "BOTH"
     #   resp.origin_endpoints[0].dash_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.origin_endpoints[0].dash_package.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.origin_endpoints[0].dash_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET-AUDIO-1"
+    #   resp.origin_endpoints[0].dash_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_video #=> String, one of "PRESET-VIDEO-1"
     #   resp.origin_endpoints[0].dash_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.origin_endpoints[0].dash_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.origin_endpoints[0].dash_package.encryption.speke_key_provider.system_ids #=> Array
@@ -1241,6 +1277,8 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].hls_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.origin_endpoints[0].hls_package.encryption.repeat_ext_x_key #=> Boolean
     #   resp.origin_endpoints[0].hls_package.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.origin_endpoints[0].hls_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET-AUDIO-1"
+    #   resp.origin_endpoints[0].hls_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_video #=> String, one of "PRESET-VIDEO-1"
     #   resp.origin_endpoints[0].hls_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.origin_endpoints[0].hls_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.origin_endpoints[0].hls_package.encryption.speke_key_provider.system_ids #=> Array
@@ -1258,6 +1296,8 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].id #=> String
     #   resp.origin_endpoints[0].manifest_name #=> String
     #   resp.origin_endpoints[0].mss_package.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.origin_endpoints[0].mss_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET-AUDIO-1"
+    #   resp.origin_endpoints[0].mss_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_video #=> String, one of "PRESET-VIDEO-1"
     #   resp.origin_endpoints[0].mss_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.origin_endpoints[0].mss_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.origin_endpoints[0].mss_package.encryption.speke_key_provider.system_ids #=> Array
@@ -1561,6 +1601,10 @@ module Aws::MediaPackage
     #         key_rotation_interval_seconds: 1,
     #         speke_key_provider: { # required
     #           certificate_arn: "__string",
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #           },
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -1595,6 +1639,10 @@ module Aws::MediaPackage
     #         key_rotation_interval_seconds: 1,
     #         speke_key_provider: { # required
     #           certificate_arn: "__string",
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #           },
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -1630,6 +1678,10 @@ module Aws::MediaPackage
     #         repeat_ext_x_key: false,
     #         speke_key_provider: { # required
     #           certificate_arn: "__string",
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #           },
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -1654,6 +1706,10 @@ module Aws::MediaPackage
     #       encryption: {
     #         speke_key_provider: { # required
     #           certificate_arn: "__string",
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "PRESET-AUDIO-1", # required, accepts PRESET-AUDIO-1
+    #             preset_speke_20_video: "PRESET-VIDEO-1", # required, accepts PRESET-VIDEO-1
+    #           },
     #           resource_id: "__string", # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -1682,6 +1738,8 @@ module Aws::MediaPackage
     #   resp.channel_id #=> String
     #   resp.cmaf_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.cmaf_package.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.cmaf_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET-AUDIO-1"
+    #   resp.cmaf_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_video #=> String, one of "PRESET-VIDEO-1"
     #   resp.cmaf_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.system_ids #=> Array
@@ -1706,6 +1764,8 @@ module Aws::MediaPackage
     #   resp.dash_package.ads_on_delivery_restrictions #=> String, one of "NONE", "RESTRICTED", "UNRESTRICTED", "BOTH"
     #   resp.dash_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.dash_package.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.dash_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET-AUDIO-1"
+    #   resp.dash_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_video #=> String, one of "PRESET-VIDEO-1"
     #   resp.dash_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.dash_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.dash_package.encryption.speke_key_provider.system_ids #=> Array
@@ -1736,6 +1796,8 @@ module Aws::MediaPackage
     #   resp.hls_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.hls_package.encryption.repeat_ext_x_key #=> Boolean
     #   resp.hls_package.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.hls_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET-AUDIO-1"
+    #   resp.hls_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_video #=> String, one of "PRESET-VIDEO-1"
     #   resp.hls_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.hls_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.hls_package.encryption.speke_key_provider.system_ids #=> Array
@@ -1753,6 +1815,8 @@ module Aws::MediaPackage
     #   resp.id #=> String
     #   resp.manifest_name #=> String
     #   resp.mss_package.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.mss_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_audio #=> String, one of "PRESET-AUDIO-1"
+    #   resp.mss_package.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_video #=> String, one of "PRESET-VIDEO-1"
     #   resp.mss_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.mss_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.mss_package.encryption.speke_key_provider.system_ids #=> Array
@@ -1794,7 +1858,7 @@ module Aws::MediaPackage
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackage'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1199,6 +1199,12 @@ module Aws::Batch
     #   resp.job_definitions[0].container_properties.volumes #=> Array
     #   resp.job_definitions[0].container_properties.volumes[0].host.source_path #=> String
     #   resp.job_definitions[0].container_properties.volumes[0].name #=> String
+    #   resp.job_definitions[0].container_properties.volumes[0].efs_volume_configuration.file_system_id #=> String
+    #   resp.job_definitions[0].container_properties.volumes[0].efs_volume_configuration.root_directory #=> String
+    #   resp.job_definitions[0].container_properties.volumes[0].efs_volume_configuration.transit_encryption #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_definitions[0].container_properties.volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
+    #   resp.job_definitions[0].container_properties.volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
+    #   resp.job_definitions[0].container_properties.volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_definitions[0].container_properties.environment #=> Array
     #   resp.job_definitions[0].container_properties.environment[0].name #=> String
     #   resp.job_definitions[0].container_properties.environment[0].value #=> String
@@ -1257,6 +1263,12 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes #=> Array
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes[0].host.source_path #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.file_system_id #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.root_directory #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.transit_encryption #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.environment #=> Array
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.environment[0].name #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.environment[0].value #=> String
@@ -1528,6 +1540,12 @@ module Aws::Batch
     #   resp.jobs[0].container.volumes #=> Array
     #   resp.jobs[0].container.volumes[0].host.source_path #=> String
     #   resp.jobs[0].container.volumes[0].name #=> String
+    #   resp.jobs[0].container.volumes[0].efs_volume_configuration.file_system_id #=> String
+    #   resp.jobs[0].container.volumes[0].efs_volume_configuration.root_directory #=> String
+    #   resp.jobs[0].container.volumes[0].efs_volume_configuration.transit_encryption #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jobs[0].container.volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
+    #   resp.jobs[0].container.volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
+    #   resp.jobs[0].container.volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].container.environment #=> Array
     #   resp.jobs[0].container.environment[0].name #=> String
     #   resp.jobs[0].container.environment[0].value #=> String
@@ -1596,6 +1614,12 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes #=> Array
     #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes[0].host.source_path #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.file_system_id #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.root_directory #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.transit_encryption #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].node_properties.node_range_properties[0].container.environment #=> Array
     #   resp.jobs[0].node_properties.node_range_properties[0].container.environment[0].name #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.environment[0].value #=> String
@@ -2031,6 +2055,16 @@ module Aws::Batch
     #             source_path: "String",
     #           },
     #           name: "String",
+    #           efs_volume_configuration: {
+    #             file_system_id: "String", # required
+    #             root_directory: "String",
+    #             transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
+    #             transit_encryption_port: 1,
+    #             authorization_config: {
+    #               access_point_id: "String",
+    #               iam: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
+    #           },
     #         },
     #       ],
     #       environment: [
@@ -2127,6 +2161,16 @@ module Aws::Batch
     #                   source_path: "String",
     #                 },
     #                 name: "String",
+    #                 efs_volume_configuration: {
+    #                   file_system_id: "String", # required
+    #                   root_directory: "String",
+    #                   transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
+    #                   transit_encryption_port: 1,
+    #                   authorization_config: {
+    #                     access_point_id: "String",
+    #                     iam: "ENABLED", # accepts ENABLED, DISABLED
+    #                   },
+    #                 },
     #               },
     #             ],
     #             environment: [
@@ -2663,6 +2707,10 @@ module Aws::Batch
     #   information, see [AWS Batch service IAM role][1] in the *AWS Batch
     #   User Guide*.
     #
+    #   If the compute environment has a service-linked role, it cannot be
+    #   changed to use a regular IAM role. If the compute environment has a
+    #   regular IAM role, it cannot be changed to use a service-linked role.
+    #
     #   If your specified role has a path other than `/`, then you must either
     #   specify the full role ARN (this is recommended) or prefix the role
     #   name with the path.
@@ -2829,7 +2877,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

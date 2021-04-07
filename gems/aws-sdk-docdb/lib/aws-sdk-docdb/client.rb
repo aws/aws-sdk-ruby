@@ -329,6 +329,63 @@ module Aws::DocDB
 
     # @!group API Operations
 
+    # Adds a source identifier to an existing event notification
+    # subscription.
+    #
+    # @option params [required, String] :subscription_name
+    #   The name of the Amazon DocumentDB event notification subscription that
+    #   you want to add a source identifier to.
+    #
+    # @option params [required, String] :source_identifier
+    #   The identifier of the event source to be added:
+    #
+    #   * If the source type is an instance, a `DBInstanceIdentifier` must be
+    #     provided.
+    #
+    #   * If the source type is a security group, a `DBSecurityGroupName` must
+    #     be provided.
+    #
+    #   * If the source type is a parameter group, a `DBParameterGroupName`
+    #     must be provided.
+    #
+    #   * If the source type is a snapshot, a `DBSnapshotIdentifier` must be
+    #     provided.
+    #
+    # @return [Types::AddSourceIdentifierToSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddSourceIdentifierToSubscriptionResult#event_subscription #event_subscription} => Types::EventSubscription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_source_identifier_to_subscription({
+    #     subscription_name: "String", # required
+    #     source_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_subscription.customer_aws_id #=> String
+    #   resp.event_subscription.cust_subscription_id #=> String
+    #   resp.event_subscription.sns_topic_arn #=> String
+    #   resp.event_subscription.status #=> String
+    #   resp.event_subscription.subscription_creation_time #=> String
+    #   resp.event_subscription.source_type #=> String
+    #   resp.event_subscription.source_ids_list #=> Array
+    #   resp.event_subscription.source_ids_list[0] #=> String
+    #   resp.event_subscription.event_categories_list #=> Array
+    #   resp.event_subscription.event_categories_list[0] #=> String
+    #   resp.event_subscription.enabled #=> Boolean
+    #   resp.event_subscription.event_subscription_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/AddSourceIdentifierToSubscription AWS API Documentation
+    #
+    # @overload add_source_identifier_to_subscription(params = {})
+    # @param [Hash] params ({})
+    def add_source_identifier_to_subscription(params = {}, options = {})
+      req = build_request(:add_source_identifier_to_subscription, params)
+      req.send_request(options)
+    end
+
     # Adds metadata tags to an Amazon DocumentDB resource. You can use these
     # tags with cost allocation reporting to track costs that are associated
     # with Amazon DocumentDB resources. or in a `Condition` statement in an
@@ -1284,6 +1341,129 @@ module Aws::DocDB
       req.send_request(options)
     end
 
+    # Creates an Amazon DocumentDB event notification subscription. This
+    # action requires a topic Amazon Resource Name (ARN) created by using
+    # the Amazon DocumentDB console, the Amazon SNS console, or the Amazon
+    # SNS API. To obtain an ARN with Amazon SNS, you must create a topic in
+    # Amazon SNS and subscribe to the topic. The ARN is displayed in the
+    # Amazon SNS console.
+    #
+    # You can specify the type of source (`SourceType`) that you want to be
+    # notified of. You can also provide a list of Amazon DocumentDB sources
+    # (`SourceIds`) that trigger the events, and you can provide a list of
+    # event categories (`EventCategories`) for events that you want to be
+    # notified of. For example, you can specify `SourceType = db-instance`,
+    # `SourceIds = mydbinstance1, mydbinstance2` and `EventCategories =
+    # Availability, Backup`.
+    #
+    # If you specify both the `SourceType` and `SourceIds` (such as
+    # `SourceType = db-instance` and `SourceIdentifier = myDBInstance1`),
+    # you are notified of all the `db-instance` events for the specified
+    # source. If you specify a `SourceType` but do not specify a
+    # `SourceIdentifier`, you receive notice of the events for that source
+    # type for all your Amazon DocumentDB sources. If you do not specify
+    # either the `SourceType` or the `SourceIdentifier`, you are notified of
+    # events generated from all Amazon DocumentDB sources belonging to your
+    # customer account.
+    #
+    # @option params [required, String] :subscription_name
+    #   The name of the subscription.
+    #
+    #   Constraints: The name must be fewer than 255 characters.
+    #
+    # @option params [required, String] :sns_topic_arn
+    #   The Amazon Resource Name (ARN) of the SNS topic created for event
+    #   notification. Amazon SNS creates the ARN when you create a topic and
+    #   subscribe to it.
+    #
+    # @option params [String] :source_type
+    #   The type of source that is generating the events. For example, if you
+    #   want to be notified of events generated by an instance, you would set
+    #   this parameter to `db-instance`. If this value is not specified, all
+    #   events are returned.
+    #
+    #   Valid values: `db-instance`, `db-cluster`, `db-parameter-group`,
+    #   `db-security-group`, `db-snapshot`, `db-cluster-snapshot`
+    #
+    # @option params [Array<String>] :event_categories
+    #   A list of event categories for a `SourceType` that you want to
+    #   subscribe to.
+    #
+    # @option params [Array<String>] :source_ids
+    #   The list of identifiers of the event sources for which events are
+    #   returned. If not specified, then all sources are included in the
+    #   response. An identifier must begin with a letter and must contain only
+    #   ASCII letters, digits, and hyphens; it can't end with a hyphen or
+    #   contain two consecutive hyphens.
+    #
+    #   Constraints:
+    #
+    #   * If `SourceIds` are provided, `SourceType` must also be provided.
+    #
+    #   * If the source type is an instance, a `DBInstanceIdentifier` must be
+    #     provided.
+    #
+    #   * If the source type is a security group, a `DBSecurityGroupName` must
+    #     be provided.
+    #
+    #   * If the source type is a parameter group, a `DBParameterGroupName`
+    #     must be provided.
+    #
+    #   * If the source type is a snapshot, a `DBSnapshotIdentifier` must be
+    #     provided.
+    #
+    # @option params [Boolean] :enabled
+    #   A Boolean value; set to `true` to activate the subscription, set to
+    #   `false` to create the subscription but not active it.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to be assigned to the event subscription.
+    #
+    # @return [Types::CreateEventSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateEventSubscriptionResult#event_subscription #event_subscription} => Types::EventSubscription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_event_subscription({
+    #     subscription_name: "String", # required
+    #     sns_topic_arn: "String", # required
+    #     source_type: "String",
+    #     event_categories: ["String"],
+    #     source_ids: ["String"],
+    #     enabled: false,
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_subscription.customer_aws_id #=> String
+    #   resp.event_subscription.cust_subscription_id #=> String
+    #   resp.event_subscription.sns_topic_arn #=> String
+    #   resp.event_subscription.status #=> String
+    #   resp.event_subscription.subscription_creation_time #=> String
+    #   resp.event_subscription.source_type #=> String
+    #   resp.event_subscription.source_ids_list #=> Array
+    #   resp.event_subscription.source_ids_list[0] #=> String
+    #   resp.event_subscription.event_categories_list #=> Array
+    #   resp.event_subscription.event_categories_list[0] #=> String
+    #   resp.event_subscription.enabled #=> Boolean
+    #   resp.event_subscription.event_subscription_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateEventSubscription AWS API Documentation
+    #
+    # @overload create_event_subscription(params = {})
+    # @param [Hash] params ({})
+    def create_event_subscription(params = {}, options = {})
+      req = build_request(:create_event_subscription, params)
+      req.send_request(options)
+    end
+
     # Deletes a previously provisioned cluster. When you delete a cluster,
     # all automated backups for that cluster are deleted and can't be
     # recovered. Manual DB cluster snapshots of the specified cluster are
@@ -1604,6 +1784,46 @@ module Aws::DocDB
     # @param [Hash] params ({})
     def delete_db_subnet_group(params = {}, options = {})
       req = build_request(:delete_db_subnet_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon DocumentDB event notification subscription.
+    #
+    # @option params [required, String] :subscription_name
+    #   The name of the Amazon DocumentDB event notification subscription that
+    #   you want to delete.
+    #
+    # @return [Types::DeleteEventSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteEventSubscriptionResult#event_subscription #event_subscription} => Types::EventSubscription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_event_subscription({
+    #     subscription_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_subscription.customer_aws_id #=> String
+    #   resp.event_subscription.cust_subscription_id #=> String
+    #   resp.event_subscription.sns_topic_arn #=> String
+    #   resp.event_subscription.status #=> String
+    #   resp.event_subscription.subscription_creation_time #=> String
+    #   resp.event_subscription.source_type #=> String
+    #   resp.event_subscription.source_ids_list #=> Array
+    #   resp.event_subscription.source_ids_list[0] #=> String
+    #   resp.event_subscription.event_categories_list #=> Array
+    #   resp.event_subscription.event_categories_list[0] #=> String
+    #   resp.event_subscription.enabled #=> Boolean
+    #   resp.event_subscription.event_subscription_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteEventSubscription AWS API Documentation
+    #
+    # @overload delete_event_subscription(params = {})
+    # @param [Hash] params ({})
+    def delete_event_subscription(params = {}, options = {})
+      req = build_request(:delete_event_subscription, params)
       req.send_request(options)
     end
 
@@ -2565,6 +2785,83 @@ module Aws::DocDB
     # @param [Hash] params ({})
     def describe_event_categories(params = {}, options = {})
       req = build_request(:describe_event_categories, params)
+      req.send_request(options)
+    end
+
+    # Lists all the subscription descriptions for a customer account. The
+    # description for a subscription includes `SubscriptionName`,
+    # `SNSTopicARN`, `CustomerID`, `SourceType`, `SourceID`, `CreationTime`,
+    # and `Status`.
+    #
+    # If you specify a `SubscriptionName`, lists the description for that
+    # subscription.
+    #
+    # @option params [String] :subscription_name
+    #   The name of the Amazon DocumentDB event notification subscription that
+    #   you want to describe.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   This parameter is not currently supported.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token (marker) is included in the response so that the remaining
+    #   results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @return [Types::EventSubscriptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EventSubscriptionsMessage#marker #marker} => String
+    #   * {Types::EventSubscriptionsMessage#event_subscriptions_list #event_subscriptions_list} => Array&lt;Types::EventSubscription&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_event_subscriptions({
+    #     subscription_name: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.event_subscriptions_list #=> Array
+    #   resp.event_subscriptions_list[0].customer_aws_id #=> String
+    #   resp.event_subscriptions_list[0].cust_subscription_id #=> String
+    #   resp.event_subscriptions_list[0].sns_topic_arn #=> String
+    #   resp.event_subscriptions_list[0].status #=> String
+    #   resp.event_subscriptions_list[0].subscription_creation_time #=> String
+    #   resp.event_subscriptions_list[0].source_type #=> String
+    #   resp.event_subscriptions_list[0].source_ids_list #=> Array
+    #   resp.event_subscriptions_list[0].source_ids_list[0] #=> String
+    #   resp.event_subscriptions_list[0].event_categories_list #=> Array
+    #   resp.event_subscriptions_list[0].event_categories_list[0] #=> String
+    #   resp.event_subscriptions_list[0].enabled #=> Boolean
+    #   resp.event_subscriptions_list[0].event_subscription_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeEventSubscriptions AWS API Documentation
+    #
+    # @overload describe_event_subscriptions(params = {})
+    # @param [Hash] params ({})
+    def describe_event_subscriptions(params = {}, options = {})
+      req = build_request(:describe_event_subscriptions, params)
       req.send_request(options)
     end
 
@@ -3556,6 +3853,71 @@ module Aws::DocDB
       req.send_request(options)
     end
 
+    # Modifies an existing Amazon DocumentDB event notification
+    # subscription.
+    #
+    # @option params [required, String] :subscription_name
+    #   The name of the Amazon DocumentDB event notification subscription.
+    #
+    # @option params [String] :sns_topic_arn
+    #   The Amazon Resource Name (ARN) of the SNS topic created for event
+    #   notification. The ARN is created by Amazon SNS when you create a topic
+    #   and subscribe to it.
+    #
+    # @option params [String] :source_type
+    #   The type of source that is generating the events. For example, if you
+    #   want to be notified of events generated by an instance, set this
+    #   parameter to `db-instance`. If this value is not specified, all events
+    #   are returned.
+    #
+    #   Valid values: `db-instance`, `db-parameter-group`,
+    #   `db-security-group`, `db-snapshot`
+    #
+    # @option params [Array<String>] :event_categories
+    #   A list of event categories for a `SourceType` that you want to
+    #   subscribe to.
+    #
+    # @option params [Boolean] :enabled
+    #   A Boolean value; set to `true` to activate the subscription.
+    #
+    # @return [Types::ModifyEventSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyEventSubscriptionResult#event_subscription #event_subscription} => Types::EventSubscription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_event_subscription({
+    #     subscription_name: "String", # required
+    #     sns_topic_arn: "String",
+    #     source_type: "String",
+    #     event_categories: ["String"],
+    #     enabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_subscription.customer_aws_id #=> String
+    #   resp.event_subscription.cust_subscription_id #=> String
+    #   resp.event_subscription.sns_topic_arn #=> String
+    #   resp.event_subscription.status #=> String
+    #   resp.event_subscription.subscription_creation_time #=> String
+    #   resp.event_subscription.source_type #=> String
+    #   resp.event_subscription.source_ids_list #=> Array
+    #   resp.event_subscription.source_ids_list[0] #=> String
+    #   resp.event_subscription.event_categories_list #=> Array
+    #   resp.event_subscription.event_categories_list[0] #=> String
+    #   resp.event_subscription.enabled #=> Boolean
+    #   resp.event_subscription.event_subscription_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyEventSubscription AWS API Documentation
+    #
+    # @overload modify_event_subscription(params = {})
+    # @param [Hash] params ({})
+    def modify_event_subscription(params = {}, options = {})
+      req = build_request(:modify_event_subscription, params)
+      req.send_request(options)
+    end
+
     # You might need to reboot your instance, usually for maintenance
     # reasons. For example, if you make certain changes, or if you change
     # the cluster parameter group that is associated with the instance, you
@@ -3660,6 +4022,52 @@ module Aws::DocDB
     # @param [Hash] params ({})
     def reboot_db_instance(params = {}, options = {})
       req = build_request(:reboot_db_instance, params)
+      req.send_request(options)
+    end
+
+    # Removes a source identifier from an existing Amazon DocumentDB event
+    # notification subscription.
+    #
+    # @option params [required, String] :subscription_name
+    #   The name of the Amazon DocumentDB event notification subscription that
+    #   you want to remove a source identifier from.
+    #
+    # @option params [required, String] :source_identifier
+    #   The source identifier to be removed from the subscription, such as the
+    #   instance identifier for an instance, or the name of a security group.
+    #
+    # @return [Types::RemoveSourceIdentifierFromSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RemoveSourceIdentifierFromSubscriptionResult#event_subscription #event_subscription} => Types::EventSubscription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_source_identifier_from_subscription({
+    #     subscription_name: "String", # required
+    #     source_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_subscription.customer_aws_id #=> String
+    #   resp.event_subscription.cust_subscription_id #=> String
+    #   resp.event_subscription.sns_topic_arn #=> String
+    #   resp.event_subscription.status #=> String
+    #   resp.event_subscription.subscription_creation_time #=> String
+    #   resp.event_subscription.source_type #=> String
+    #   resp.event_subscription.source_ids_list #=> Array
+    #   resp.event_subscription.source_ids_list[0] #=> String
+    #   resp.event_subscription.event_categories_list #=> Array
+    #   resp.event_subscription.event_categories_list[0] #=> String
+    #   resp.event_subscription.enabled #=> Boolean
+    #   resp.event_subscription.event_subscription_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RemoveSourceIdentifierFromSubscription AWS API Documentation
+    #
+    # @overload remove_source_identifier_from_subscription(params = {})
+    # @param [Hash] params ({})
+    def remove_source_identifier_from_subscription(params = {}, options = {})
+      req = build_request(:remove_source_identifier_from_subscription, params)
       req.send_request(options)
     end
 
@@ -4282,7 +4690,7 @@ module Aws::DocDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-docdb'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

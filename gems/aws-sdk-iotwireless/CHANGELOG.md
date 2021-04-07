@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2021-03-31)
+------------------
+
+* Feature - Add Sidewalk support to APIs: GetWirelessDevice, ListWirelessDevices, GetWirelessDeviceStatistics. Add Gateway connection status in GetWirelessGatewayStatistics API.
+
+1.6.0 (2021-03-26)
+------------------
+
+* Feature - Support tag-on-create for WirelessDevice.
+
 1.5.0 (2021-03-10)
 ------------------
 

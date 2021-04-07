@@ -486,6 +486,29 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteMetricStreamInput
+    #   data as a hash:
+    #
+    #       {
+    #         name: "MetricStreamName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the metric stream to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteMetricStreamInput AWS API Documentation
+    #
+    class DeleteMetricStreamInput < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteMetricStreamOutput AWS API Documentation
+    #
+    class DeleteMetricStreamOutput < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DescribeAlarmHistoryInput
     #   data as a hash:
     #
@@ -1596,6 +1619,89 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetMetricStreamInput
+    #   data as a hash:
+    #
+    #       {
+    #         name: "MetricStreamName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the metric stream to retrieve information about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricStreamInput AWS API Documentation
+    #
+    class GetMetricStreamInput < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the metric stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the metric stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_filters
+    #   If this array of metric namespaces is present, then these namespaces
+    #   are the only metric namespaces that are streamed by this metric
+    #   stream.
+    #   @return [Array<Types::MetricStreamFilter>]
+    #
+    # @!attribute [rw] exclude_filters
+    #   If this array of metric namespaces is present, then these namespaces
+    #   are the only metric namespaces that are not streamed by this metric
+    #   stream. In this case, all other metric namespaces in the account are
+    #   streamed by this metric stream.
+    #   @return [Array<Types::MetricStreamFilter>]
+    #
+    # @!attribute [rw] firehose_arn
+    #   The ARN of the Amazon Kinesis Firehose delivery stream that is used
+    #   by this metric stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role that is used by this metric stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the metric stream. The possible values are `running`
+    #   and `stopped`.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date that the metric stream was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_update_date
+    #   The date of the most recent update to the metric stream's
+    #   configuration.
+    #   @return [Time]
+    #
+    # @!attribute [rw] output_format
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricStreamOutput AWS API Documentation
+    #
+    class GetMetricStreamOutput < Struct.new(
+      :arn,
+      :name,
+      :include_filters,
+      :exclude_filters,
+      :firehose_arn,
+      :role_arn,
+      :state,
+      :creation_date,
+      :last_update_date,
+      :output_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetMetricWidgetImageInput
     #   data as a hash:
     #
@@ -2034,6 +2140,51 @@ module Aws::CloudWatch
     class ListDashboardsOutput < Struct.new(
       :dashboard_entries,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListMetricStreamsInput
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   Include this value, if it was returned by the previous call, to get
+    #   the next set of metric streams.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in one operation.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetricStreamsInput AWS API Documentation
+    #
+    class ListMetricStreamsInput < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token that marks the start of the next batch of returned
+    #   results. You can use this token in a subsequent operation to get the
+    #   next batch of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] entries
+    #   The array of metric stream information.
+    #   @return [Array<Types::MetricStreamEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetricStreamsOutput AWS API Documentation
+    #
+    class ListMetricStreamsOutput < Struct.new(
+      :next_token,
+      :entries)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2789,6 +2940,77 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # This structure contains the configuration information about one metric
+    # stream.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the metric stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date that the metric stream was originally created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_update_date
+    #   The date that the configuration of this metric stream was most
+    #   recently updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the metric stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] firehose_arn
+    #   The ARN of the Kinesis Firehose devlivery stream that is used for
+    #   this metric stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of this stream. Valid values are `running` and
+    #   `stopped`.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_format
+    #   The output format of this metric stream. Valid values are `json` and
+    #   `opentelemetry0.7`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricStreamEntry AWS API Documentation
+    #
+    class MetricStreamEntry < Struct.new(
+      :arn,
+      :creation_date,
+      :last_update_date,
+      :name,
+      :firehose_arn,
+      :state,
+      :output_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This structure contains the name of one of the metric namespaces that
+    # is listed in a filter of a metric stream.
+    #
+    # @note When making an API call, you may pass MetricStreamFilter
+    #   data as a hash:
+    #
+    #       {
+    #         namespace: "Namespace",
+    #       }
+    #
+    # @!attribute [rw] namespace
+    #   The name of the metric namespace in the filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricStreamFilter AWS API Documentation
+    #
+    class MetricStreamFilter < Struct.new(
+      :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An input parameter that is required is missing.
     #
     # @!attribute [rw] message
@@ -3262,6 +3484,8 @@ module Aws::CloudWatch
     #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
     #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
+    #   \|
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Recover/1.0`
     #   @return [Array<String>]
     #
     # @!attribute [rw] alarm_actions
@@ -3597,6 +3821,123 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutMetricStreamInput
+    #   data as a hash:
+    #
+    #       {
+    #         name: "MetricStreamName", # required
+    #         include_filters: [
+    #           {
+    #             namespace: "Namespace",
+    #           },
+    #         ],
+    #         exclude_filters: [
+    #           {
+    #             namespace: "Namespace",
+    #           },
+    #         ],
+    #         firehose_arn: "AmazonResourceName", # required
+    #         role_arn: "AmazonResourceName", # required
+    #         output_format: "json", # required, accepts json, opentelemetry0.7
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   If you are creating a new metric stream, this is the name for the
+    #   new stream. The name must be different than the names of other
+    #   metric streams in this account and Region.
+    #
+    #   If you are updating a metric stream, specify the name of that stream
+    #   here.
+    #
+    #   Valid characters are A-Z, a-z, 0-9, "-" and "\_".
+    #   @return [String]
+    #
+    # @!attribute [rw] include_filters
+    #   If you specify this parameter, the stream sends only the metrics
+    #   from the metric namespaces that you specify here.
+    #
+    #   You cannot include `IncludeFilters` and `ExcludeFilters` in the same
+    #   operation.
+    #   @return [Array<Types::MetricStreamFilter>]
+    #
+    # @!attribute [rw] exclude_filters
+    #   If you specify this parameter, the stream sends metrics from all
+    #   metric namespaces except for the namespaces that you specify here.
+    #
+    #   You cannot include `ExcludeFilters` and `IncludeFilters` in the same
+    #   operation.
+    #   @return [Array<Types::MetricStreamFilter>]
+    #
+    # @!attribute [rw] firehose_arn
+    #   The ARN of the Amazon Kinesis Firehose delivery stream to use for
+    #   this metric stream. This Amazon Kinesis Firehose delivery stream
+    #   must already exist and must be in the same account as the metric
+    #   stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of an IAM role that this metric stream will use to access
+    #   Amazon Kinesis Firehose resources. This IAM role must already exist
+    #   and must be in the same account as the metric stream. This IAM role
+    #   must include the following permissions:
+    #
+    #   * firehose:PutRecord
+    #
+    #   * firehose:PutRecordBatch
+    #   @return [String]
+    #
+    # @!attribute [rw] output_format
+    #   The output format for the stream. Valid values are `json` and
+    #   `opentelemetry0.7`. For more information about metric stream output
+    #   formats, see [ Metric streams output formats][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs to associate with the metric stream. You
+    #   can associate as many as 50 tags with a metric stream.
+    #
+    #   Tags can help you organize and categorize your resources. You can
+    #   also use them to scope user permissions by granting a user
+    #   permission to access or change only resources with certain tag
+    #   values.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricStreamInput AWS API Documentation
+    #
+    class PutMetricStreamInput < Struct.new(
+      :name,
+      :include_filters,
+      :exclude_filters,
+      :firehose_arn,
+      :role_arn,
+      :output_format,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the metric stream.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricStreamOutput AWS API Documentation
+    #
+    class PutMetricStreamOutput < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies one range of days or times to exclude from use for training
     # an anomaly detection model.
     #
@@ -3701,6 +4042,34 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartMetricStreamsInput
+    #   data as a hash:
+    #
+    #       {
+    #         names: ["MetricStreamName"], # required
+    #       }
+    #
+    # @!attribute [rw] names
+    #   The array of the names of metric streams to start streaming.
+    #
+    #   This is an "all or nothing" operation. If you do not have
+    #   permission to access all of the metric streams that you list here,
+    #   then none of the streams that you list in the operation will start
+    #   streaming.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/StartMetricStreamsInput AWS API Documentation
+    #
+    class StartMetricStreamsInput < Struct.new(
+      :names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/StartMetricStreamsOutput AWS API Documentation
+    #
+    class StartMetricStreamsOutput < Aws::EmptyStructure; end
+
     # Represents a set of statistics that describes a specific metric.
     #
     # @note When making an API call, you may pass StatisticSet
@@ -3739,6 +4108,34 @@ module Aws::CloudWatch
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass StopMetricStreamsInput
+    #   data as a hash:
+    #
+    #       {
+    #         names: ["MetricStreamName"], # required
+    #       }
+    #
+    # @!attribute [rw] names
+    #   The array of the names of metric streams to stop streaming.
+    #
+    #   This is an "all or nothing" operation. If you do not have
+    #   permission to access all of the metric streams that you list here,
+    #   then none of the streams that you list in the operation will stop
+    #   streaming.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/StopMetricStreamsInput AWS API Documentation
+    #
+    class StopMetricStreamsInput < Struct.new(
+      :names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/StopMetricStreamsOutput AWS API Documentation
+    #
+    class StopMetricStreamsOutput < Aws::EmptyStructure; end
 
     # A key-value pair associated with a CloudWatch resource.
     #

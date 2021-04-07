@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2021-04-01)
+------------------
+
+* Feature - MediaConvert now supports HLS ingest, sidecar WebVTT ingest, Teletext color & style passthrough to TTML subtitles, TTML to WebVTT subtitle conversion with style, & DRC profiles in AC3 audio.
+
 1.64.0 (2021-03-10)
 ------------------
 

@@ -620,7 +620,7 @@ module Aws::FMS
     #   resp.policy_compliance_detail.member_account #=> String
     #   resp.policy_compliance_detail.violators #=> Array
     #   resp.policy_compliance_detail.violators[0].resource_id #=> String
-    #   resp.policy_compliance_detail.violators[0].violation_reason #=> String, one of "WEB_ACL_MISSING_RULE_GROUP", "RESOURCE_MISSING_WEB_ACL", "RESOURCE_INCORRECT_WEB_ACL", "RESOURCE_MISSING_SHIELD_PROTECTION", "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION", "RESOURCE_MISSING_SECURITY_GROUP", "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP", "SECURITY_GROUP_UNUSED", "SECURITY_GROUP_REDUNDANT", "MISSING_FIREWALL", "MISSING_FIREWALL_SUBNET_IN_AZ", "MISSING_EXPECTED_ROUTE_TABLE", "NETWORK_FIREWALL_POLICY_MODIFIED"
+    #   resp.policy_compliance_detail.violators[0].violation_reason #=> String, one of "WEB_ACL_MISSING_RULE_GROUP", "RESOURCE_MISSING_WEB_ACL", "RESOURCE_INCORRECT_WEB_ACL", "RESOURCE_MISSING_SHIELD_PROTECTION", "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION", "RESOURCE_MISSING_SECURITY_GROUP", "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP", "SECURITY_GROUP_UNUSED", "SECURITY_GROUP_REDUNDANT", "FMS_CREATED_SECURITY_GROUP_EDITED", "MISSING_FIREWALL", "MISSING_FIREWALL_SUBNET_IN_AZ", "MISSING_EXPECTED_ROUTE_TABLE", "NETWORK_FIREWALL_POLICY_MODIFIED", "RESOURCE_MISSING_DNS_FIREWALL"
     #   resp.policy_compliance_detail.violators[0].resource_type #=> String
     #   resp.policy_compliance_detail.evaluation_limit_exceeded #=> Boolean
     #   resp.policy_compliance_detail.expired_at #=> Time
@@ -680,7 +680,7 @@ module Aws::FMS
     #   resp.policy.policy_id #=> String
     #   resp.policy.policy_name #=> String
     #   resp.policy.policy_update_token #=> String
-    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL"
+    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL"
     #   resp.policy.security_service_policy_data.managed_service_data #=> String
     #   resp.policy.resource_type #=> String
     #   resp.policy.resource_type_list #=> Array
@@ -766,7 +766,7 @@ module Aws::FMS
     # @example Response structure
     #
     #   resp.admin_account_id #=> String
-    #   resp.service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL"
+    #   resp.service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL"
     #   resp.data #=> String
     #   resp.next_token #=> String
     #
@@ -934,6 +934,17 @@ module Aws::FMS
     #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateful_rule_groups #=> Array
     #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateful_rule_groups[0].rule_group_name #=> String
     #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateful_rule_groups[0].resource_id #=> String
+    #   resp.violation_detail.resource_violations[0].dns_rule_group_priority_conflict_violation.violation_target #=> String
+    #   resp.violation_detail.resource_violations[0].dns_rule_group_priority_conflict_violation.violation_target_description #=> String
+    #   resp.violation_detail.resource_violations[0].dns_rule_group_priority_conflict_violation.conflicting_priority #=> Integer
+    #   resp.violation_detail.resource_violations[0].dns_rule_group_priority_conflict_violation.conflicting_policy_id #=> String
+    #   resp.violation_detail.resource_violations[0].dns_rule_group_priority_conflict_violation.unavailable_priorities #=> Array
+    #   resp.violation_detail.resource_violations[0].dns_rule_group_priority_conflict_violation.unavailable_priorities[0] #=> Integer
+    #   resp.violation_detail.resource_violations[0].dns_duplicate_rule_group_violation.violation_target #=> String
+    #   resp.violation_detail.resource_violations[0].dns_duplicate_rule_group_violation.violation_target_description #=> String
+    #   resp.violation_detail.resource_violations[0].dns_rule_group_limit_exceeded_violation.violation_target #=> String
+    #   resp.violation_detail.resource_violations[0].dns_rule_group_limit_exceeded_violation.violation_target_description #=> String
+    #   resp.violation_detail.resource_violations[0].dns_rule_group_limit_exceeded_violation.number_of_rule_groups_already_associated #=> Integer
     #   resp.violation_detail.resource_tags #=> Array
     #   resp.violation_detail.resource_tags[0].key #=> String
     #   resp.violation_detail.resource_tags[0].value #=> String
@@ -1159,7 +1170,7 @@ module Aws::FMS
     #   resp.policy_list[0].policy_id #=> String
     #   resp.policy_list[0].policy_name #=> String
     #   resp.policy_list[0].resource_type #=> String
-    #   resp.policy_list[0].security_service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL"
+    #   resp.policy_list[0].security_service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL"
     #   resp.policy_list[0].remediation_enabled #=> Boolean
     #   resp.next_token #=> String
     #
@@ -1422,7 +1433,7 @@ module Aws::FMS
     #       policy_name: "ResourceName", # required
     #       policy_update_token: "PolicyUpdateToken",
     #       security_service_policy_data: { # required
-    #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL
+    #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL
     #         managed_service_data: "ManagedServiceData",
     #       },
     #       resource_type: "ResourceType", # required
@@ -1455,7 +1466,7 @@ module Aws::FMS
     #   resp.policy.policy_id #=> String
     #   resp.policy.policy_name #=> String
     #   resp.policy.policy_update_token #=> String
-    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL"
+    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL"
     #   resp.policy.security_service_policy_data.managed_service_data #=> String
     #   resp.policy.resource_type #=> String
     #   resp.policy.resource_type_list #=> Array
@@ -1614,7 +1625,7 @@ module Aws::FMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fms'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -35,6 +35,8 @@ module Aws::WorkMail
     CreateAliasResponse = Shapes::StructureShape.new(name: 'CreateAliasResponse')
     CreateGroupRequest = Shapes::StructureShape.new(name: 'CreateGroupRequest')
     CreateGroupResponse = Shapes::StructureShape.new(name: 'CreateGroupResponse')
+    CreateMobileDeviceAccessRuleRequest = Shapes::StructureShape.new(name: 'CreateMobileDeviceAccessRuleRequest')
+    CreateMobileDeviceAccessRuleResponse = Shapes::StructureShape.new(name: 'CreateMobileDeviceAccessRuleResponse')
     CreateOrganizationRequest = Shapes::StructureShape.new(name: 'CreateOrganizationRequest')
     CreateOrganizationResponse = Shapes::StructureShape.new(name: 'CreateOrganizationResponse')
     CreateResourceRequest = Shapes::StructureShape.new(name: 'CreateResourceRequest')
@@ -50,6 +52,8 @@ module Aws::WorkMail
     DeleteGroupResponse = Shapes::StructureShape.new(name: 'DeleteGroupResponse')
     DeleteMailboxPermissionsRequest = Shapes::StructureShape.new(name: 'DeleteMailboxPermissionsRequest')
     DeleteMailboxPermissionsResponse = Shapes::StructureShape.new(name: 'DeleteMailboxPermissionsResponse')
+    DeleteMobileDeviceAccessRuleRequest = Shapes::StructureShape.new(name: 'DeleteMobileDeviceAccessRuleRequest')
+    DeleteMobileDeviceAccessRuleResponse = Shapes::StructureShape.new(name: 'DeleteMobileDeviceAccessRuleResponse')
     DeleteOrganizationRequest = Shapes::StructureShape.new(name: 'DeleteOrganizationRequest')
     DeleteOrganizationResponse = Shapes::StructureShape.new(name: 'DeleteOrganizationResponse')
     DeleteResourceRequest = Shapes::StructureShape.new(name: 'DeleteResourceRequest')
@@ -71,6 +75,14 @@ module Aws::WorkMail
     DescribeUserRequest = Shapes::StructureShape.new(name: 'DescribeUserRequest')
     DescribeUserResponse = Shapes::StructureShape.new(name: 'DescribeUserResponse')
     Description = Shapes::StringShape.new(name: 'Description')
+    DeviceModel = Shapes::StringShape.new(name: 'DeviceModel')
+    DeviceModelList = Shapes::ListShape.new(name: 'DeviceModelList')
+    DeviceOperatingSystem = Shapes::StringShape.new(name: 'DeviceOperatingSystem')
+    DeviceOperatingSystemList = Shapes::ListShape.new(name: 'DeviceOperatingSystemList')
+    DeviceType = Shapes::StringShape.new(name: 'DeviceType')
+    DeviceTypeList = Shapes::ListShape.new(name: 'DeviceTypeList')
+    DeviceUserAgent = Shapes::StringShape.new(name: 'DeviceUserAgent')
+    DeviceUserAgentList = Shapes::ListShape.new(name: 'DeviceUserAgentList')
     DirectoryId = Shapes::StringShape.new(name: 'DirectoryId')
     DirectoryInUseException = Shapes::StructureShape.new(name: 'DirectoryInUseException')
     DirectoryServiceAuthenticationFailedException = Shapes::StructureShape.new(name: 'DirectoryServiceAuthenticationFailedException')
@@ -97,6 +109,8 @@ module Aws::WorkMail
     GetDefaultRetentionPolicyResponse = Shapes::StructureShape.new(name: 'GetDefaultRetentionPolicyResponse')
     GetMailboxDetailsRequest = Shapes::StructureShape.new(name: 'GetMailboxDetailsRequest')
     GetMailboxDetailsResponse = Shapes::StructureShape.new(name: 'GetMailboxDetailsResponse')
+    GetMobileDeviceAccessEffectRequest = Shapes::StructureShape.new(name: 'GetMobileDeviceAccessEffectRequest')
+    GetMobileDeviceAccessEffectResponse = Shapes::StructureShape.new(name: 'GetMobileDeviceAccessEffectResponse')
     Group = Shapes::StructureShape.new(name: 'Group')
     GroupName = Shapes::StringShape.new(name: 'GroupName')
     Groups = Shapes::ListShape.new(name: 'Groups')
@@ -123,6 +137,8 @@ module Aws::WorkMail
     ListMailboxExportJobsResponse = Shapes::StructureShape.new(name: 'ListMailboxExportJobsResponse')
     ListMailboxPermissionsRequest = Shapes::StructureShape.new(name: 'ListMailboxPermissionsRequest')
     ListMailboxPermissionsResponse = Shapes::StructureShape.new(name: 'ListMailboxPermissionsResponse')
+    ListMobileDeviceAccessRulesRequest = Shapes::StructureShape.new(name: 'ListMobileDeviceAccessRulesRequest')
+    ListMobileDeviceAccessRulesResponse = Shapes::StructureShape.new(name: 'ListMobileDeviceAccessRulesResponse')
     ListOrganizationsRequest = Shapes::StructureShape.new(name: 'ListOrganizationsRequest')
     ListOrganizationsResponse = Shapes::StructureShape.new(name: 'ListOrganizationsResponse')
     ListResourceDelegatesRequest = Shapes::StructureShape.new(name: 'ListResourceDelegatesRequest')
@@ -145,6 +161,14 @@ module Aws::WorkMail
     Member = Shapes::StructureShape.new(name: 'Member')
     MemberType = Shapes::StringShape.new(name: 'MemberType')
     Members = Shapes::ListShape.new(name: 'Members')
+    MobileDeviceAccessMatchedRule = Shapes::StructureShape.new(name: 'MobileDeviceAccessMatchedRule')
+    MobileDeviceAccessMatchedRuleList = Shapes::ListShape.new(name: 'MobileDeviceAccessMatchedRuleList')
+    MobileDeviceAccessRule = Shapes::StructureShape.new(name: 'MobileDeviceAccessRule')
+    MobileDeviceAccessRuleDescription = Shapes::StringShape.new(name: 'MobileDeviceAccessRuleDescription')
+    MobileDeviceAccessRuleEffect = Shapes::StringShape.new(name: 'MobileDeviceAccessRuleEffect')
+    MobileDeviceAccessRuleId = Shapes::StringShape.new(name: 'MobileDeviceAccessRuleId')
+    MobileDeviceAccessRuleName = Shapes::StringShape.new(name: 'MobileDeviceAccessRuleName')
+    MobileDeviceAccessRulesList = Shapes::ListShape.new(name: 'MobileDeviceAccessRulesList')
     NameAvailabilityException = Shapes::StructureShape.new(name: 'NameAvailabilityException')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OrganizationId = Shapes::StringShape.new(name: 'OrganizationId')
@@ -201,6 +225,8 @@ module Aws::WorkMail
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateMailboxQuotaRequest = Shapes::StructureShape.new(name: 'UpdateMailboxQuotaRequest')
     UpdateMailboxQuotaResponse = Shapes::StructureShape.new(name: 'UpdateMailboxQuotaResponse')
+    UpdateMobileDeviceAccessRuleRequest = Shapes::StructureShape.new(name: 'UpdateMobileDeviceAccessRuleRequest')
+    UpdateMobileDeviceAccessRuleResponse = Shapes::StructureShape.new(name: 'UpdateMobileDeviceAccessRuleResponse')
     UpdatePrimaryEmailAddressRequest = Shapes::StructureShape.new(name: 'UpdatePrimaryEmailAddressRequest')
     UpdatePrimaryEmailAddressResponse = Shapes::StructureShape.new(name: 'UpdatePrimaryEmailAddressResponse')
     UpdateResourceRequest = Shapes::StructureShape.new(name: 'UpdateResourceRequest')
@@ -273,6 +299,24 @@ module Aws::WorkMail
     CreateGroupResponse.add_member(:group_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "GroupId"))
     CreateGroupResponse.struct_class = Types::CreateGroupResponse
 
+    CreateMobileDeviceAccessRuleRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    CreateMobileDeviceAccessRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateMobileDeviceAccessRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleName, required: true, location_name: "Name"))
+    CreateMobileDeviceAccessRuleRequest.add_member(:description, Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleDescription, location_name: "Description"))
+    CreateMobileDeviceAccessRuleRequest.add_member(:effect, Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleEffect, required: true, location_name: "Effect"))
+    CreateMobileDeviceAccessRuleRequest.add_member(:device_types, Shapes::ShapeRef.new(shape: DeviceTypeList, location_name: "DeviceTypes"))
+    CreateMobileDeviceAccessRuleRequest.add_member(:not_device_types, Shapes::ShapeRef.new(shape: DeviceTypeList, location_name: "NotDeviceTypes"))
+    CreateMobileDeviceAccessRuleRequest.add_member(:device_models, Shapes::ShapeRef.new(shape: DeviceModelList, location_name: "DeviceModels"))
+    CreateMobileDeviceAccessRuleRequest.add_member(:not_device_models, Shapes::ShapeRef.new(shape: DeviceModelList, location_name: "NotDeviceModels"))
+    CreateMobileDeviceAccessRuleRequest.add_member(:device_operating_systems, Shapes::ShapeRef.new(shape: DeviceOperatingSystemList, location_name: "DeviceOperatingSystems"))
+    CreateMobileDeviceAccessRuleRequest.add_member(:not_device_operating_systems, Shapes::ShapeRef.new(shape: DeviceOperatingSystemList, location_name: "NotDeviceOperatingSystems"))
+    CreateMobileDeviceAccessRuleRequest.add_member(:device_user_agents, Shapes::ShapeRef.new(shape: DeviceUserAgentList, location_name: "DeviceUserAgents"))
+    CreateMobileDeviceAccessRuleRequest.add_member(:not_device_user_agents, Shapes::ShapeRef.new(shape: DeviceUserAgentList, location_name: "NotDeviceUserAgents"))
+    CreateMobileDeviceAccessRuleRequest.struct_class = Types::CreateMobileDeviceAccessRuleRequest
+
+    CreateMobileDeviceAccessRuleResponse.add_member(:mobile_device_access_rule_id, Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleId, location_name: "MobileDeviceAccessRuleId"))
+    CreateMobileDeviceAccessRuleResponse.struct_class = Types::CreateMobileDeviceAccessRuleResponse
+
     CreateOrganizationRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
     CreateOrganizationRequest.add_member(:alias, Shapes::ShapeRef.new(shape: OrganizationName, required: true, location_name: "Alias"))
     CreateOrganizationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
@@ -330,6 +374,12 @@ module Aws::WorkMail
     DeleteMailboxPermissionsRequest.struct_class = Types::DeleteMailboxPermissionsRequest
 
     DeleteMailboxPermissionsResponse.struct_class = Types::DeleteMailboxPermissionsResponse
+
+    DeleteMobileDeviceAccessRuleRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    DeleteMobileDeviceAccessRuleRequest.add_member(:mobile_device_access_rule_id, Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleId, required: true, location_name: "MobileDeviceAccessRuleId"))
+    DeleteMobileDeviceAccessRuleRequest.struct_class = Types::DeleteMobileDeviceAccessRuleRequest
+
+    DeleteMobileDeviceAccessRuleResponse.struct_class = Types::DeleteMobileDeviceAccessRuleResponse
 
     DeleteOrganizationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     DeleteOrganizationRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
@@ -436,6 +486,14 @@ module Aws::WorkMail
     DescribeUserResponse.add_member(:disabled_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DisabledDate"))
     DescribeUserResponse.struct_class = Types::DescribeUserResponse
 
+    DeviceModelList.member = Shapes::ShapeRef.new(shape: DeviceModel)
+
+    DeviceOperatingSystemList.member = Shapes::ShapeRef.new(shape: DeviceOperatingSystem)
+
+    DeviceTypeList.member = Shapes::ShapeRef.new(shape: DeviceType)
+
+    DeviceUserAgentList.member = Shapes::ShapeRef.new(shape: DeviceUserAgent)
+
     DirectoryInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     DirectoryInUseException.struct_class = Types::DirectoryInUseException
 
@@ -510,6 +568,17 @@ module Aws::WorkMail
     GetMailboxDetailsResponse.add_member(:mailbox_quota, Shapes::ShapeRef.new(shape: MailboxQuota, location_name: "MailboxQuota"))
     GetMailboxDetailsResponse.add_member(:mailbox_size, Shapes::ShapeRef.new(shape: MailboxSize, location_name: "MailboxSize"))
     GetMailboxDetailsResponse.struct_class = Types::GetMailboxDetailsResponse
+
+    GetMobileDeviceAccessEffectRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    GetMobileDeviceAccessEffectRequest.add_member(:device_type, Shapes::ShapeRef.new(shape: DeviceType, location_name: "DeviceType"))
+    GetMobileDeviceAccessEffectRequest.add_member(:device_model, Shapes::ShapeRef.new(shape: DeviceModel, location_name: "DeviceModel"))
+    GetMobileDeviceAccessEffectRequest.add_member(:device_operating_system, Shapes::ShapeRef.new(shape: DeviceOperatingSystem, location_name: "DeviceOperatingSystem"))
+    GetMobileDeviceAccessEffectRequest.add_member(:device_user_agent, Shapes::ShapeRef.new(shape: DeviceUserAgent, location_name: "DeviceUserAgent"))
+    GetMobileDeviceAccessEffectRequest.struct_class = Types::GetMobileDeviceAccessEffectRequest
+
+    GetMobileDeviceAccessEffectResponse.add_member(:effect, Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleEffect, location_name: "Effect"))
+    GetMobileDeviceAccessEffectResponse.add_member(:matched_rules, Shapes::ShapeRef.new(shape: MobileDeviceAccessMatchedRuleList, location_name: "MatchedRules"))
+    GetMobileDeviceAccessEffectResponse.struct_class = Types::GetMobileDeviceAccessEffectResponse
 
     Group.add_member(:id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "Id"))
     Group.add_member(:email, Shapes::ShapeRef.new(shape: EmailAddress, location_name: "Email"))
@@ -591,6 +660,12 @@ module Aws::WorkMail
     ListMailboxPermissionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListMailboxPermissionsResponse.struct_class = Types::ListMailboxPermissionsResponse
 
+    ListMobileDeviceAccessRulesRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    ListMobileDeviceAccessRulesRequest.struct_class = Types::ListMobileDeviceAccessRulesRequest
+
+    ListMobileDeviceAccessRulesResponse.add_member(:rules, Shapes::ShapeRef.new(shape: MobileDeviceAccessRulesList, location_name: "Rules"))
+    ListMobileDeviceAccessRulesResponse.struct_class = Types::ListMobileDeviceAccessRulesResponse
+
     ListOrganizationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListOrganizationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListOrganizationsRequest.struct_class = Types::ListOrganizationsRequest
@@ -659,6 +734,30 @@ module Aws::WorkMail
     Member.struct_class = Types::Member
 
     Members.member = Shapes::ShapeRef.new(shape: Member)
+
+    MobileDeviceAccessMatchedRule.add_member(:mobile_device_access_rule_id, Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleId, location_name: "MobileDeviceAccessRuleId"))
+    MobileDeviceAccessMatchedRule.add_member(:name, Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleName, location_name: "Name"))
+    MobileDeviceAccessMatchedRule.struct_class = Types::MobileDeviceAccessMatchedRule
+
+    MobileDeviceAccessMatchedRuleList.member = Shapes::ShapeRef.new(shape: MobileDeviceAccessMatchedRule)
+
+    MobileDeviceAccessRule.add_member(:mobile_device_access_rule_id, Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleId, location_name: "MobileDeviceAccessRuleId"))
+    MobileDeviceAccessRule.add_member(:name, Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleName, location_name: "Name"))
+    MobileDeviceAccessRule.add_member(:description, Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleDescription, location_name: "Description"))
+    MobileDeviceAccessRule.add_member(:effect, Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleEffect, location_name: "Effect"))
+    MobileDeviceAccessRule.add_member(:device_types, Shapes::ShapeRef.new(shape: DeviceTypeList, location_name: "DeviceTypes"))
+    MobileDeviceAccessRule.add_member(:not_device_types, Shapes::ShapeRef.new(shape: DeviceTypeList, location_name: "NotDeviceTypes"))
+    MobileDeviceAccessRule.add_member(:device_models, Shapes::ShapeRef.new(shape: DeviceModelList, location_name: "DeviceModels"))
+    MobileDeviceAccessRule.add_member(:not_device_models, Shapes::ShapeRef.new(shape: DeviceModelList, location_name: "NotDeviceModels"))
+    MobileDeviceAccessRule.add_member(:device_operating_systems, Shapes::ShapeRef.new(shape: DeviceOperatingSystemList, location_name: "DeviceOperatingSystems"))
+    MobileDeviceAccessRule.add_member(:not_device_operating_systems, Shapes::ShapeRef.new(shape: DeviceOperatingSystemList, location_name: "NotDeviceOperatingSystems"))
+    MobileDeviceAccessRule.add_member(:device_user_agents, Shapes::ShapeRef.new(shape: DeviceUserAgentList, location_name: "DeviceUserAgents"))
+    MobileDeviceAccessRule.add_member(:not_device_user_agents, Shapes::ShapeRef.new(shape: DeviceUserAgentList, location_name: "NotDeviceUserAgents"))
+    MobileDeviceAccessRule.add_member(:date_created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateCreated"))
+    MobileDeviceAccessRule.add_member(:date_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateModified"))
+    MobileDeviceAccessRule.struct_class = Types::MobileDeviceAccessRule
+
+    MobileDeviceAccessRulesList.member = Shapes::ShapeRef.new(shape: MobileDeviceAccessRule)
 
     NameAvailabilityException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     NameAvailabilityException.struct_class = Types::NameAvailabilityException
@@ -797,6 +896,23 @@ module Aws::WorkMail
 
     UpdateMailboxQuotaResponse.struct_class = Types::UpdateMailboxQuotaResponse
 
+    UpdateMobileDeviceAccessRuleRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:mobile_device_access_rule_id, Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleId, required: true, location_name: "MobileDeviceAccessRuleId"))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleName, required: true, location_name: "Name"))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:description, Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleDescription, location_name: "Description"))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:effect, Shapes::ShapeRef.new(shape: MobileDeviceAccessRuleEffect, required: true, location_name: "Effect"))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:device_types, Shapes::ShapeRef.new(shape: DeviceTypeList, location_name: "DeviceTypes"))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:not_device_types, Shapes::ShapeRef.new(shape: DeviceTypeList, location_name: "NotDeviceTypes"))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:device_models, Shapes::ShapeRef.new(shape: DeviceModelList, location_name: "DeviceModels"))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:not_device_models, Shapes::ShapeRef.new(shape: DeviceModelList, location_name: "NotDeviceModels"))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:device_operating_systems, Shapes::ShapeRef.new(shape: DeviceOperatingSystemList, location_name: "DeviceOperatingSystems"))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:not_device_operating_systems, Shapes::ShapeRef.new(shape: DeviceOperatingSystemList, location_name: "NotDeviceOperatingSystems"))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:device_user_agents, Shapes::ShapeRef.new(shape: DeviceUserAgentList, location_name: "DeviceUserAgents"))
+    UpdateMobileDeviceAccessRuleRequest.add_member(:not_device_user_agents, Shapes::ShapeRef.new(shape: DeviceUserAgentList, location_name: "NotDeviceUserAgents"))
+    UpdateMobileDeviceAccessRuleRequest.struct_class = Types::UpdateMobileDeviceAccessRuleRequest
+
+    UpdateMobileDeviceAccessRuleResponse.struct_class = Types::UpdateMobileDeviceAccessRuleResponse
+
     UpdatePrimaryEmailAddressRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     UpdatePrimaryEmailAddressRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "EntityId"))
     UpdatePrimaryEmailAddressRequest.add_member(:email, Shapes::ShapeRef.new(shape: EmailAddress, required: true, location_name: "Email"))
@@ -918,6 +1034,18 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
+      api.add_operation(:create_mobile_device_access_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMobileDeviceAccessRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateMobileDeviceAccessRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateMobileDeviceAccessRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+      end)
+
       api.add_operation(:create_organization, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateOrganization"
         o.http_method = "POST"
@@ -1009,6 +1137,17 @@ module Aws::WorkMail
         o.output = Shapes::ShapeRef.new(shape: DeleteMailboxPermissionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: EntityStateException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+      end)
+
+      api.add_operation(:delete_mobile_device_access_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteMobileDeviceAccessRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteMobileDeviceAccessRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteMobileDeviceAccessRuleResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
@@ -1198,6 +1337,17 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
       end)
 
+      api.add_operation(:get_mobile_device_access_effect, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMobileDeviceAccessEffect"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetMobileDeviceAccessEffectRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMobileDeviceAccessEffectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+      end)
+
       api.add_operation(:list_access_control_rules, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAccessControlRules"
         o.http_method = "POST"
@@ -1297,6 +1447,17 @@ module Aws::WorkMail
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_mobile_device_access_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMobileDeviceAccessRules"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListMobileDeviceAccessRulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMobileDeviceAccessRulesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
       end)
 
       api.add_operation(:list_organizations, Seahorse::Model::Operation.new.tap do |o|
@@ -1494,6 +1655,18 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: EntityStateException)
+      end)
+
+      api.add_operation(:update_mobile_device_access_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMobileDeviceAccessRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMobileDeviceAccessRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMobileDeviceAccessRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
       end)
 
       api.add_operation(:update_primary_email_address, Seahorse::Model::Operation.new.tap do |o|

@@ -337,7 +337,7 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # Contains geofence details.
+    # Contains geofence geometry details.
     #
     # @note When making an API call, you may pass BatchPutGeofenceRequestEntry
     #   data as a hash:
@@ -359,7 +359,16 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] geometry
-    #   The geometry details for the geofence.
+    #   Contains the polygon details to specify the position of the
+    #   geofence.
+    #
+    #   <note markdown="1"> Each [geofence polygon][1] can have a maximum of 1,000 vertices.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html
     #   @return [Types::GeofenceGeometry]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/BatchPutGeofenceRequestEntry AWS API Documentation
@@ -438,8 +447,8 @@ module Aws::LocationService
     #   @return [Types::BatchItemError]
     #
     # @!attribute [rw] sample_time
-    #   The timestamp for when a position sample was attempted in [ ISO
-    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #   The timestamp at which the device position was determined. Uses [
+    #   ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
     #
     #
     #
@@ -520,6 +529,7 @@ module Aws::LocationService
     #         collection_name: "ResourceName", # required
     #         description: "ResourceDescription",
     #         pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
+    #         pricing_plan_data_source: "String",
     #       }
     #
     # @!attribute [rw] collection_name
@@ -528,7 +538,7 @@ module Aws::LocationService
     #   Requirements:
     #
     #   * Contain only alphanumeric characters (A–Z, a–z, 0-9), hyphens (-),
-    #     and underscores (\_).
+    #     periods (.), and underscores (\_).
     #
     #   * Must be a unique geofence collection name.
     #
@@ -540,20 +550,27 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   Specifies the pricing plan for your geofence collection. There's
-    #   three pricing plan options:
-    #
-    #   * `RequestBasedUsage` — Selects the "Request-Based Usage" pricing
-    #     plan.
-    #
-    #   * `MobileAssetTracking` — Selects the "Mobile Asset Tracking"
-    #     pricing plan.
-    #
-    #   * `MobileAssetManagement` — Selects the "Mobile Asset Management"
-    #     pricing plan.
+    #   Specifies the pricing plan for your geofence collection.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see the [Amazon Location Service pricing page][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/pricing/
+    #   @return [String]
+    #
+    # @!attribute [rw] pricing_plan_data_source
+    #   Specifies the plan data source. Required if the Mobile Asset
+    #   Tracking (MAT) or the Mobile Asset Management (MAM) pricing plan is
+    #   selected.
+    #
+    #   Billing is determined by the resource usage, the associated pricing
+    #   plan, and the data source that was specified. For more information
+    #   about each pricing plan option and restrictions, see the [Amazon
+    #   Location Service pricing page][1].
+    #
+    #   Valid Values: `Esri `\| `Here`
     #
     #
     #
@@ -565,7 +582,8 @@ module Aws::LocationService
     class CreateGeofenceCollectionRequest < Struct.new(
       :collection_name,
       :description,
-      :pricing_plan)
+      :pricing_plan,
+      :pricing_plan_data_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -624,7 +642,7 @@ module Aws::LocationService
     #   Requirements:
     #
     #   * Must contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens
-    #     (-), and underscores (\_).
+    #     (-), periods (.), and underscores (\_).
     #
     #   * Must be a unique map resource name.
     #
@@ -632,17 +650,7 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   Specifies the pricing plan for your map resource. There's three
-    #   pricing plan options:
-    #
-    #   * `RequestBasedUsage` — Selects the "Request-Based Usage" pricing
-    #     plan.
-    #
-    #   * `MobileAssetTracking` — Selects the "Mobile Asset Tracking"
-    #     pricing plan.
-    #
-    #   * `MobileAssetManagement` — Selects the "Mobile Asset Management"
-    #     pricing plan.
+    #   Specifies the pricing plan for your map resource.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see the [Amazon Location Service pricing page][1].
@@ -711,6 +719,24 @@ module Aws::LocationService
     #
     # @!attribute [rw] data_source
     #   Specifies the data provider of geospatial data.
+    #
+    #   <note markdown="1"> This field is case-sensitive. Enter the valid values as shown. For
+    #   example, entering `HERE` will return an error.
+    #
+    #    </note>
+    #
+    #   Valid values include:
+    #
+    #   * `Esri`
+    #
+    #   * `Here`
+    #
+    #   For additional details on data providers, see the [Amazon Location
+    #   Service data providers page][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #   @return [String]
     #
     # @!attribute [rw] data_source_configuration
@@ -726,8 +752,8 @@ module Aws::LocationService
     #
     #   Requirements:
     #
-    #   * Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens (-)
-    #     and underscores (\_) ).
+    #   * Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens
+    #     (-), periods (.), and underscores (\_).
     #
     #   * Must be a unique Place index resource name.
     #
@@ -735,17 +761,7 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   Specifies the pricing plan for your Place index resource. There's
-    #   three pricing plan options:
-    #
-    #   * `RequestBasedUsage` — Selects the "Request-Based Usage" pricing
-    #     plan.
-    #
-    #   * `MobileAssetTracking` — Selects the "Mobile Asset Tracking"
-    #     pricing plan.
-    #
-    #   * `MobileAssetManagement` — Selects the "Mobile Asset Management"
-    #     pricing plan.
+    #   Specifies the pricing plan for your Place index resource.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see the [Amazon Location Service pricing page][1].
@@ -801,6 +817,7 @@ module Aws::LocationService
     #       {
     #         description: "ResourceDescription",
     #         pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
+    #         pricing_plan_data_source: "String",
     #         tracker_name: "ResourceName", # required
     #       }
     #
@@ -809,20 +826,27 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   Specifies the pricing plan for your tracker resource. There's three
-    #   pricing plan options:
-    #
-    #   * `RequestBasedUsage` — Selects the "Request-Based Usage" pricing
-    #     plan.
-    #
-    #   * `MobileAssetTracking` — Selects the "Mobile Asset Tracking"
-    #     pricing plan.
-    #
-    #   * `MobileAssetManagement` — Selects the "Mobile Asset Management"
-    #     pricing plan.
+    #   Specifies the pricing plan for your tracker resource.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see the [Amazon Location Service pricing page][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/pricing/
+    #   @return [String]
+    #
+    # @!attribute [rw] pricing_plan_data_source
+    #   Specifies the plan data source. Required if the Mobile Asset
+    #   Tracking (MAT) or the Mobile Asset Management (MAM) pricing plan is
+    #   selected.
+    #
+    #   Billing is determined by the resource usage, the associated pricing
+    #   plan, and data source that was specified. For more information about
+    #   each pricing plan option and restrictions, see the [Amazon Location
+    #   Service pricing page][1].
+    #
+    #   Valid Values: `Esri` \| `Here`
     #
     #
     #
@@ -834,8 +858,8 @@ module Aws::LocationService
     #
     #   Requirements:
     #
-    #   * Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens (-)
-    #     and underscores (\_).
+    #   * Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens
+    #     (-), periods (.), and underscores (\_).
     #
     #   * Must be a unique tracker resource name.
     #
@@ -847,6 +871,7 @@ module Aws::LocationService
     class CreateTrackerRequest < Struct.new(
       :description,
       :pricing_plan,
+      :pricing_plan_data_source,
       :tracker_name)
       SENSITIVE = []
       include Aws::Structure
@@ -1060,6 +1085,22 @@ module Aws::LocationService
     #   The optional description for the geofence collection.
     #   @return [String]
     #
+    # @!attribute [rw] pricing_plan
+    #   The pricing plan selected for the specified geofence collection.
+    #
+    #   For additional details and restrictions on each pricing plan option,
+    #   see the [Amazon Location Service pricing page][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/pricing/
+    #   @return [String]
+    #
+    # @!attribute [rw] pricing_plan_data_source
+    #   The data source selected for the geofence collection and associated
+    #   pricing plan.
+    #   @return [String]
+    #
     # @!attribute [rw] update_time
     #   The timestamp for when the geofence collection was last updated in
     #   [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`
@@ -1076,6 +1117,8 @@ module Aws::LocationService
       :collection_name,
       :create_time,
       :description,
+      :pricing_plan,
+      :pricing_plan_data_source,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
@@ -1130,6 +1173,12 @@ module Aws::LocationService
     #   The map style selected from an available provider.
     #   @return [String]
     #
+    # @!attribute [rw] pricing_plan
+    #   The pricing plan selected for the specified map resource.
+    #
+    #        <p>For additional details and restrictions on each pricing plan option, see the <a href="https://aws.amazon.com/location/pricing/">Amazon Location Service pricing page</a>.</p>
+    #   @return [String]
+    #
     # @!attribute [rw] update_time
     #   The timestamp for when the map resource was last update in [ISO
     #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
@@ -1148,6 +1197,7 @@ module Aws::LocationService
       :description,
       :map_arn,
       :map_name,
+      :pricing_plan,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
@@ -1182,7 +1232,19 @@ module Aws::LocationService
     #   @return [Time]
     #
     # @!attribute [rw] data_source
-    #   The data provider of geospatial data.
+    #   The data provider of geospatial data. Indicates one of the available
+    #   providers:
+    #
+    #   * `Esri`
+    #
+    #   * `Here`
+    #
+    #   For additional details on data providers, see the [Amazon Location
+    #   Service data providers page][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #   @return [String]
     #
     # @!attribute [rw] data_source_configuration
@@ -1200,6 +1262,17 @@ module Aws::LocationService
     #
     # @!attribute [rw] index_name
     #   The name of the Place index resource being described.
+    #   @return [String]
+    #
+    # @!attribute [rw] pricing_plan
+    #   The pricing plan selected for the specified Place index resource.
+    #
+    #   For additional details and restrictions on each pricing plan option,
+    #   see the [Amazon Location Service pricing page][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/pricing/
     #   @return [String]
     #
     # @!attribute [rw] update_time
@@ -1220,6 +1293,7 @@ module Aws::LocationService
       :description,
       :index_arn,
       :index_name,
+      :pricing_plan,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
@@ -1257,6 +1331,22 @@ module Aws::LocationService
     #   The optional description for the tracker resource.
     #   @return [String]
     #
+    # @!attribute [rw] pricing_plan
+    #   The pricing plan selected for the specified tracker resource.
+    #
+    #   For additional details and restrictions on each pricing plan option,
+    #   see the [Amazon Location Service pricing page][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/pricing/
+    #   @return [String]
+    #
+    # @!attribute [rw] pricing_plan_data_source
+    #   The data source selected for the tracker resource and associated
+    #   pricing plan.
+    #   @return [String]
+    #
     # @!attribute [rw] tracker_arn
     #   The Amazon Resource Name (ARN) for the tracker resource. Used when
     #   you need to specify a resource across all AWS.
@@ -1280,6 +1370,8 @@ module Aws::LocationService
     class DescribeTrackerResponse < Struct.new(
       :create_time,
       :description,
+      :pricing_plan,
+      :pricing_plan_data_source,
       :tracker_arn,
       :tracker_name,
       :update_time)
@@ -1298,8 +1390,8 @@ module Aws::LocationService
     #   @return [Array<Float>]
     #
     # @!attribute [rw] received_time
-    #   The timestamp for when the tracker resource recieved the position in
-    #   [ ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #   The timestamp for when the tracker resource received the device
+    #   position in [ ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
     #
     #
     #
@@ -1307,7 +1399,7 @@ module Aws::LocationService
     #   @return [Time]
     #
     # @!attribute [rw] sample_time
-    #   The timestamp for when the position was detected and sampled in [
+    #   The timestamp at which the device's position was determined. Uses [
     #   ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
     #
     #
@@ -1342,8 +1434,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] position
-    #   The latest device position defined in [WGS 84][1] format:
-    #   `[Xlongitude, Ylatitude]`.
+    #   The latest device position defined in [WGS 84][1] format: `[X or
+    #   longitude, Y or latitude]`.
     #
     #
     #
@@ -1351,8 +1443,8 @@ module Aws::LocationService
     #   @return [Array<Float>]
     #
     # @!attribute [rw] sample_time
-    #   The timestamp for when the position update was received in [ISO
-    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`
+    #   The timestamp at which the device's position was determined. Uses
+    #   [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`
     #
     #
     #
@@ -1408,9 +1500,9 @@ module Aws::LocationService
 
     # Contains the geofence geometry details.
     #
-    # <note markdown="1"> Limitation — Amazon Location does not currently support polygons with
-    # holes, multipolygons, polygons that are wound clockwise, or that cross
-    # the antimeridian.
+    # <note markdown="1"> Amazon Location does not currently support polygons with holes,
+    # multipolygons, polygons that are wound clockwise, or that cross the
+    # antimeridian.
     #
     #  </note>
     #
@@ -1465,10 +1557,13 @@ module Aws::LocationService
     #
     # @!attribute [rw] end_time_exclusive
     #   Specify the end time for the position history in [ ISO 8601][1]
-    #   format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #   format: `YYYY-MM-DDThh:mm:ss.sssZ`. By default, the value will be
+    #   the time that the request is made.
     #
-    #   * The given time for `EndTimeExclusive` must be after the time for
-    #     `StartTimeInclusive`.
+    #   Requirement:
+    #
+    #   * The time specified for `EndTimeExclusive` must be after the time
+    #     for `StartTimeInclusive`.
     #
     #   ^
     #
@@ -1487,10 +1582,13 @@ module Aws::LocationService
     #
     # @!attribute [rw] start_time_inclusive
     #   Specify the start time for the position history in [ ISO 8601][1]
-    #   format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #   format: `YYYY-MM-DDThh:mm:ss.sssZ`. By default, the value will be 24
+    #   hours prior to the time that the request is made.
     #
-    #   * The given time for `EndTimeExclusive` must be after the time for
-    #     `StartTimeInclusive`.
+    #   Requirement:
+    #
+    #   * The time specified for `StartTimeInclusive` must be before
+    #     `EndTimeExclusive`.
     #
     #   ^
     #
@@ -1544,7 +1642,7 @@ module Aws::LocationService
     #       }
     #
     # @!attribute [rw] device_id
-    #   The device whose position you want to retreieve.
+    #   The device whose position you want to retrieve.
     #   @return [String]
     #
     # @!attribute [rw] tracker_name
@@ -1569,8 +1667,8 @@ module Aws::LocationService
     #   @return [Array<Float>]
     #
     # @!attribute [rw] received_time
-    #   The timestamp for when the tracker resource recieved the position in
-    #   [ ISO 8601 ][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #   The timestamp for when the tracker resource received the device
+    #   position in [ ISO 8601 ][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
     #
     #
     #
@@ -1578,7 +1676,7 @@ module Aws::LocationService
     #   @return [Time]
     #
     # @!attribute [rw] sample_time
-    #   The timestamp for when the position was detected and sampled in [
+    #   The timestamp at which the device's position was determined. Uses [
     #   ISO 8601 ][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
     #
     #
@@ -1959,6 +2057,22 @@ module Aws::LocationService
     #   The description for the geofence collection
     #   @return [String]
     #
+    # @!attribute [rw] pricing_plan
+    #   The pricing plan for the specified geofence collection.
+    #
+    #   For additional details and restrictions on each pricing plan option,
+    #   see the [Amazon Location Service pricing page][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/pricing/
+    #   @return [String]
+    #
+    # @!attribute [rw] pricing_plan_data_source
+    #   The data source selected for the geofence collection and associated
+    #   pricing plan.
+    #   @return [String]
+    #
     # @!attribute [rw] update_time
     #   Specifies a timestamp for when the resource was last updated in [ISO
     #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`
@@ -1974,6 +2088,8 @@ module Aws::LocationService
       :collection_name,
       :create_time,
       :description,
+      :pricing_plan,
+      :pricing_plan_data_source,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
@@ -2156,6 +2272,17 @@ module Aws::LocationService
     #   The name of the associated map resource.
     #   @return [String]
     #
+    # @!attribute [rw] pricing_plan
+    #   The pricing plan for the specified map resource.
+    #
+    #   For additional details and restrictions on each pricing plan option,
+    #   see the [Amazon Location Service pricing page][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/pricing/
+    #   @return [String]
+    #
     # @!attribute [rw] update_time
     #   The timestamp for when the map resource was last updated in [ISO
     #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
@@ -2172,6 +2299,7 @@ module Aws::LocationService
       :data_source,
       :description,
       :map_name,
+      :pricing_plan,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
@@ -2240,7 +2368,19 @@ module Aws::LocationService
     #   @return [Time]
     #
     # @!attribute [rw] data_source
-    #   The data provider of geospatial data.
+    #   The data provider of geospatial data. Indicates one of the available
+    #   providers:
+    #
+    #   * Esri
+    #
+    #   * HERE
+    #
+    #   For additional details on data providers, see the [Amazon Location
+    #   Service data providers page][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2249,6 +2389,17 @@ module Aws::LocationService
     #
     # @!attribute [rw] index_name
     #   The name of the Place index resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] pricing_plan
+    #   The pricing plan for the specified Place index resource.
+    #
+    #   For additional details and restrictions on each pricing plan option,
+    #   see the [Amazon Location Service pricing page][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/pricing/
     #   @return [String]
     #
     # @!attribute [rw] update_time
@@ -2267,6 +2418,7 @@ module Aws::LocationService
       :data_source,
       :description,
       :index_name,
+      :pricing_plan,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
@@ -2399,12 +2551,28 @@ module Aws::LocationService
     #   The description for the tracker resource.
     #   @return [String]
     #
+    # @!attribute [rw] pricing_plan
+    #   The pricing plan for the specified tracker resource.
+    #
+    #   For additional details and restrictions on each pricing plan option,
+    #   see the [Amazon Location Service pricing page][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/pricing/
+    #   @return [String]
+    #
+    # @!attribute [rw] pricing_plan_data_source
+    #   The data source selected for the tracker resource and associated
+    #   pricing plan.
+    #   @return [String]
+    #
     # @!attribute [rw] tracker_name
     #   The name of the tracker resource.
     #   @return [String]
     #
     # @!attribute [rw] update_time
-    #   The timestamp for when the position was detected and sampled in [
+    #   The timestamp at which the device's position was determined. Uses [
     #   ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
     #
     #
@@ -2417,6 +2585,8 @@ module Aws::LocationService
     class ListTrackersResponseEntry < Struct.new(
       :create_time,
       :description,
+      :pricing_plan,
+      :pricing_plan_data_source,
       :tracker_name,
       :update_time)
       SENSITIVE = []
@@ -2578,6 +2748,14 @@ module Aws::LocationService
     # @!attribute [rw] geometry
     #   Contains the polygon details to specify the position of the
     #   geofence.
+    #
+    #   <note markdown="1"> Each [geofence polygon][1] can have a maximum of 1,000 vertices.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html
     #   @return [Types::GeofenceGeometry]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/PutGeofenceRequest AWS API Documentation
@@ -2728,7 +2906,19 @@ module Aws::LocationService
     # `SearchPlaceIndexForPosition`.
     #
     # @!attribute [rw] data_source
-    #   The data provider of geospatial data for the Place index resource.
+    #   The data provider of geospatial data. Indicates one of the available
+    #   providers:
+    #
+    #   * Esri
+    #
+    #   * HERE
+    #
+    #   For additional details on data providers, see the [Amazon Location
+    #   Service data providers page][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2873,7 +3063,19 @@ module Aws::LocationService
     #   @return [Array<Float>]
     #
     # @!attribute [rw] data_source
-    #   The data provider of geospatial data for the Place index resource.
+    #   The data provider of geospatial data. Indicates one of the available
+    #   providers:
+    #
+    #   * Esri
+    #
+    #   * HERE
+    #
+    #   For additional details on data providers, see the [Amazon Location
+    #   Service data providers page][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #   @return [String]
     #
     # @!attribute [rw] filter_b_box

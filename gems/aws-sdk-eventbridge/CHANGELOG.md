@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2021-03-26)
+------------------
+
+* Feature - Add support for SageMaker Model Builder Pipelines Targets to EventBridge
+
 1.22.0 (2021-03-10)
 ------------------
 

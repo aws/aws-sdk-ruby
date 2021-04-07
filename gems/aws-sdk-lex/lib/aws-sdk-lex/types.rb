@@ -890,6 +890,11 @@ module Aws::Lex
     #   @return [String]
     #
     # @!attribute [rw] message
+    #   You can only use this field in the de-DE, en-AU, en-GB, en-US,
+    #   es-419, es-ES, es-US, fr-CA, fr-FR, and it-IT locales. In all other
+    #   locales, the `message` field is null. You should use the
+    #   `encodedMessage` field instead.
+    #
     #   The message to convey to the user. The message can come from the
     #   bot's configuration or from a Lambda function.
     #
@@ -909,6 +914,31 @@ module Aws::Lex
     #
     #   If the Lambda function returns a message, Amazon Lex passes it to
     #   the client in its response.
+    #   @return [String]
+    #
+    # @!attribute [rw] encoded_message
+    #   The message to convey to the user. The message can come from the
+    #   bot's configuration or from a Lambda function.
+    #
+    #   If the intent is not configured with a Lambda function, or if the
+    #   Lambda function returned `Delegate` as the `dialogAction.type` in
+    #   its response, Amazon Lex decides on the next course of action and
+    #   selects an appropriate message from the bot's configuration based
+    #   on the current interaction context. For example, if Amazon Lex
+    #   isn't able to understand user input, it uses a clarification prompt
+    #   message.
+    #
+    #   When you create an intent you can assign messages to groups. When
+    #   messages are assigned to groups Amazon Lex returns one message from
+    #   each group in the response. The message field is an escaped JSON
+    #   string containing the messages. For more information about the
+    #   structure of the JSON string returned, see msg-prompts-formats.
+    #
+    #   If the Lambda function returns a message, Amazon Lex passes it to
+    #   the client in its response.
+    #
+    #   The `encodedMessage` field is base-64 encoded. You must decode the
+    #   field before you can use the value.
     #   @return [String]
     #
     # @!attribute [rw] message_format
@@ -981,11 +1011,29 @@ module Aws::Lex
     # @!attribute [rw] input_transcript
     #   The text used to process the request.
     #
+    #   You can use this field only in the de-DE, en-AU, en-GB, en-US,
+    #   es-419, es-ES, es-US, fr-CA, fr-FR, and it-IT locales. In all other
+    #   locales, the `inputTranscript` field is null. You should use the
+    #   `encodedInputTranscript` field instead.
+    #
     #   If the input was an audio stream, the `inputTranscript` field
     #   contains the text extracted from the audio stream. This is the text
     #   that is actually processed to recognize intents and slot values. You
     #   can use this information to determine if Amazon Lex is correctly
     #   processing the audio that you send.
+    #   @return [String]
+    #
+    # @!attribute [rw] encoded_input_transcript
+    #   The text used to process the request.
+    #
+    #   If the input was an audio stream, the `encodedInputTranscript` field
+    #   contains the text extracted from the audio stream. This is the text
+    #   that is actually processed to recognize intents and slot values. You
+    #   can use this information to determine if Amazon Lex is correctly
+    #   processing the audio that you send.
+    #
+    #   The `encodedInputTranscript` field is base-64 encoded. You must
+    #   decode the field before you can use the value.
     #   @return [String]
     #
     # @!attribute [rw] audio_stream
@@ -1029,15 +1077,17 @@ module Aws::Lex
       :session_attributes,
       :sentiment_response,
       :message,
+      :encoded_message,
       :message_format,
       :dialog_state,
       :slot_to_elicit,
       :input_transcript,
+      :encoded_input_transcript,
       :audio_stream,
       :bot_version,
       :session_id,
       :active_contexts)
-      SENSITIVE = [:message, :active_contexts]
+      SENSITIVE = [:message, :encoded_message, :encoded_input_transcript, :active_contexts]
       include Aws::Structure
     end
 
@@ -1563,6 +1613,18 @@ module Aws::Lex
     #
     # @!attribute [rw] message
     #   The next message that should be presented to the user.
+    #
+    #   You can only use this field in the de-DE, en-AU, en-GB, en-US,
+    #   es-419, es-ES, es-US, fr-CA, fr-FR, and it-IT locales. In all other
+    #   locales, the `message` field is null. You should use the
+    #   `encodedMessage` field instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] encoded_message
+    #   The next message that should be presented to the user.
+    #
+    #   The `encodedMessage` field is base-64 encoded. You must decode the
+    #   field before you can use the value.
     #   @return [String]
     #
     # @!attribute [rw] message_format
@@ -1625,13 +1687,14 @@ module Aws::Lex
       :slots,
       :session_attributes,
       :message,
+      :encoded_message,
       :message_format,
       :dialog_state,
       :slot_to_elicit,
       :audio_stream,
       :session_id,
       :active_contexts)
-      SENSITIVE = [:message, :active_contexts]
+      SENSITIVE = [:message, :encoded_message, :active_contexts]
       include Aws::Structure
     end
 

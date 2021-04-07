@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2021-04-01)
+------------------
+
+* Feature - Added support for ScopeDownStatement for ManagedRuleGroups, Labels, LabelMatchStatement, and LoggingFilter. For more information on these features, see the AWS WAF Developer Guide.
+
+1.19.0 (2021-03-29)
+------------------
+
+* Feature - Added custom request handling and custom response support in rule actions and default action; Added the option to inspect the web request body as parsed and filtered JSON.
+
 1.18.0 (2021-03-11)
 ------------------
 

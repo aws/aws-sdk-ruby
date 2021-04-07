@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2021-03-30)
+------------------
+
+* Feature - This release adds support for Batch Predictions in Amazon Fraud Detector.
+
 1.17.0 (2021-03-10)
 ------------------
 

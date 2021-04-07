@@ -2069,6 +2069,9 @@ module Aws::CloudWatchEvents
     #   resp.targets[0].redshift_data_parameters.sql #=> String
     #   resp.targets[0].redshift_data_parameters.statement_name #=> String
     #   resp.targets[0].redshift_data_parameters.with_event #=> Boolean
+    #   resp.targets[0].sage_maker_pipeline_parameters.pipeline_parameter_list #=> Array
+    #   resp.targets[0].sage_maker_pipeline_parameters.pipeline_parameter_list[0].name #=> String
+    #   resp.targets[0].sage_maker_pipeline_parameters.pipeline_parameter_list[0].value #=> String
     #   resp.targets[0].dead_letter_config.arn #=> String
     #   resp.targets[0].retry_policy.maximum_retry_attempts #=> Integer
     #   resp.targets[0].retry_policy.maximum_event_age_in_seconds #=> Integer
@@ -2449,6 +2452,8 @@ module Aws::CloudWatchEvents
     #
     # * Custom/SaaS HTTPS APIs via EventBridge API Destinations
     #
+    # * Amazon SageMaker Model Building Pipelines
+    #
     # Creating rules with built-in targets is supported only in the AWS
     # Management Console. The built-in targets are `EC2 CreateSnapshot API
     # call`, `EC2 RebootInstances API call`, `EC2 StopInstances API call`,
@@ -2621,6 +2626,14 @@ module Aws::CloudWatchEvents
     #           sql: "Sql", # required
     #           statement_name: "StatementName",
     #           with_event: false,
+    #         },
+    #         sage_maker_pipeline_parameters: {
+    #           pipeline_parameter_list: [
+    #             {
+    #               name: "SageMakerPipelineParameterName", # required
+    #               value: "SageMakerPipelineParameterValue", # required
+    #             },
+    #           ],
     #         },
     #         dead_letter_config: {
     #           arn: "ResourceArn",
@@ -3177,7 +3190,7 @@ module Aws::CloudWatchEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevents'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

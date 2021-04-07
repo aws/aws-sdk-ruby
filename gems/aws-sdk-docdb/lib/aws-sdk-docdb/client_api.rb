@@ -13,6 +13,8 @@ module Aws::DocDB
 
     include Seahorse::Model
 
+    AddSourceIdentifierToSubscriptionMessage = Shapes::StructureShape.new(name: 'AddSourceIdentifierToSubscriptionMessage')
+    AddSourceIdentifierToSubscriptionResult = Shapes::StructureShape.new(name: 'AddSourceIdentifierToSubscriptionResult')
     AddTagsToResourceMessage = Shapes::StructureShape.new(name: 'AddTagsToResourceMessage')
     ApplyMethod = Shapes::StringShape.new(name: 'ApplyMethod')
     ApplyPendingMaintenanceActionMessage = Shapes::StructureShape.new(name: 'ApplyPendingMaintenanceActionMessage')
@@ -43,6 +45,8 @@ module Aws::DocDB
     CreateDBInstanceResult = Shapes::StructureShape.new(name: 'CreateDBInstanceResult')
     CreateDBSubnetGroupMessage = Shapes::StructureShape.new(name: 'CreateDBSubnetGroupMessage')
     CreateDBSubnetGroupResult = Shapes::StructureShape.new(name: 'CreateDBSubnetGroupResult')
+    CreateEventSubscriptionMessage = Shapes::StructureShape.new(name: 'CreateEventSubscriptionMessage')
+    CreateEventSubscriptionResult = Shapes::StructureShape.new(name: 'CreateEventSubscriptionResult')
     DBCluster = Shapes::StructureShape.new(name: 'DBCluster')
     DBClusterAlreadyExistsFault = Shapes::StructureShape.new(name: 'DBClusterAlreadyExistsFault')
     DBClusterList = Shapes::ListShape.new(name: 'DBClusterList')
@@ -100,6 +104,8 @@ module Aws::DocDB
     DeleteDBInstanceMessage = Shapes::StructureShape.new(name: 'DeleteDBInstanceMessage')
     DeleteDBInstanceResult = Shapes::StructureShape.new(name: 'DeleteDBInstanceResult')
     DeleteDBSubnetGroupMessage = Shapes::StructureShape.new(name: 'DeleteDBSubnetGroupMessage')
+    DeleteEventSubscriptionMessage = Shapes::StructureShape.new(name: 'DeleteEventSubscriptionMessage')
+    DeleteEventSubscriptionResult = Shapes::StructureShape.new(name: 'DeleteEventSubscriptionResult')
     DescribeCertificatesMessage = Shapes::StructureShape.new(name: 'DescribeCertificatesMessage')
     DescribeDBClusterParameterGroupsMessage = Shapes::StructureShape.new(name: 'DescribeDBClusterParameterGroupsMessage')
     DescribeDBClusterParametersMessage = Shapes::StructureShape.new(name: 'DescribeDBClusterParametersMessage')
@@ -113,6 +119,7 @@ module Aws::DocDB
     DescribeEngineDefaultClusterParametersMessage = Shapes::StructureShape.new(name: 'DescribeEngineDefaultClusterParametersMessage')
     DescribeEngineDefaultClusterParametersResult = Shapes::StructureShape.new(name: 'DescribeEngineDefaultClusterParametersResult')
     DescribeEventCategoriesMessage = Shapes::StructureShape.new(name: 'DescribeEventCategoriesMessage')
+    DescribeEventSubscriptionsMessage = Shapes::StructureShape.new(name: 'DescribeEventSubscriptionsMessage')
     DescribeEventsMessage = Shapes::StructureShape.new(name: 'DescribeEventsMessage')
     DescribeOrderableDBInstanceOptionsMessage = Shapes::StructureShape.new(name: 'DescribeOrderableDBInstanceOptionsMessage')
     DescribePendingMaintenanceActionsMessage = Shapes::StructureShape.new(name: 'DescribePendingMaintenanceActionsMessage')
@@ -124,6 +131,10 @@ module Aws::DocDB
     EventCategoriesMapList = Shapes::ListShape.new(name: 'EventCategoriesMapList')
     EventCategoriesMessage = Shapes::StructureShape.new(name: 'EventCategoriesMessage')
     EventList = Shapes::ListShape.new(name: 'EventList')
+    EventSubscription = Shapes::StructureShape.new(name: 'EventSubscription')
+    EventSubscriptionQuotaExceededFault = Shapes::StructureShape.new(name: 'EventSubscriptionQuotaExceededFault')
+    EventSubscriptionsList = Shapes::ListShape.new(name: 'EventSubscriptionsList')
+    EventSubscriptionsMessage = Shapes::StructureShape.new(name: 'EventSubscriptionsMessage')
     EventsMessage = Shapes::StructureShape.new(name: 'EventsMessage')
     FailoverDBClusterMessage = Shapes::StructureShape.new(name: 'FailoverDBClusterMessage')
     FailoverDBClusterResult = Shapes::StructureShape.new(name: 'FailoverDBClusterResult')
@@ -144,6 +155,7 @@ module Aws::DocDB
     InvalidDBSnapshotStateFault = Shapes::StructureShape.new(name: 'InvalidDBSnapshotStateFault')
     InvalidDBSubnetGroupStateFault = Shapes::StructureShape.new(name: 'InvalidDBSubnetGroupStateFault')
     InvalidDBSubnetStateFault = Shapes::StructureShape.new(name: 'InvalidDBSubnetStateFault')
+    InvalidEventSubscriptionStateFault = Shapes::StructureShape.new(name: 'InvalidEventSubscriptionStateFault')
     InvalidRestoreFault = Shapes::StructureShape.new(name: 'InvalidRestoreFault')
     InvalidSubnet = Shapes::StructureShape.new(name: 'InvalidSubnet')
     InvalidVPCNetworkStateFault = Shapes::StructureShape.new(name: 'InvalidVPCNetworkStateFault')
@@ -160,6 +172,8 @@ module Aws::DocDB
     ModifyDBInstanceResult = Shapes::StructureShape.new(name: 'ModifyDBInstanceResult')
     ModifyDBSubnetGroupMessage = Shapes::StructureShape.new(name: 'ModifyDBSubnetGroupMessage')
     ModifyDBSubnetGroupResult = Shapes::StructureShape.new(name: 'ModifyDBSubnetGroupResult')
+    ModifyEventSubscriptionMessage = Shapes::StructureShape.new(name: 'ModifyEventSubscriptionMessage')
+    ModifyEventSubscriptionResult = Shapes::StructureShape.new(name: 'ModifyEventSubscriptionResult')
     OrderableDBInstanceOption = Shapes::StructureShape.new(name: 'OrderableDBInstanceOption')
     OrderableDBInstanceOptionsList = Shapes::ListShape.new(name: 'OrderableDBInstanceOptionsList')
     OrderableDBInstanceOptionsMessage = Shapes::StructureShape.new(name: 'OrderableDBInstanceOptionsMessage')
@@ -173,6 +187,8 @@ module Aws::DocDB
     PendingModifiedValues = Shapes::StructureShape.new(name: 'PendingModifiedValues')
     RebootDBInstanceMessage = Shapes::StructureShape.new(name: 'RebootDBInstanceMessage')
     RebootDBInstanceResult = Shapes::StructureShape.new(name: 'RebootDBInstanceResult')
+    RemoveSourceIdentifierFromSubscriptionMessage = Shapes::StructureShape.new(name: 'RemoveSourceIdentifierFromSubscriptionMessage')
+    RemoveSourceIdentifierFromSubscriptionResult = Shapes::StructureShape.new(name: 'RemoveSourceIdentifierFromSubscriptionResult')
     RemoveTagsFromResourceMessage = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceMessage')
     ResetDBClusterParameterGroupMessage = Shapes::StructureShape.new(name: 'ResetDBClusterParameterGroupMessage')
     ResourceNotFoundFault = Shapes::StructureShape.new(name: 'ResourceNotFoundFault')
@@ -181,8 +197,13 @@ module Aws::DocDB
     RestoreDBClusterFromSnapshotResult = Shapes::StructureShape.new(name: 'RestoreDBClusterFromSnapshotResult')
     RestoreDBClusterToPointInTimeMessage = Shapes::StructureShape.new(name: 'RestoreDBClusterToPointInTimeMessage')
     RestoreDBClusterToPointInTimeResult = Shapes::StructureShape.new(name: 'RestoreDBClusterToPointInTimeResult')
+    SNSInvalidTopicFault = Shapes::StructureShape.new(name: 'SNSInvalidTopicFault')
+    SNSNoAuthorizationFault = Shapes::StructureShape.new(name: 'SNSNoAuthorizationFault')
+    SNSTopicArnNotFoundFault = Shapes::StructureShape.new(name: 'SNSTopicArnNotFoundFault')
     SharedSnapshotQuotaExceededFault = Shapes::StructureShape.new(name: 'SharedSnapshotQuotaExceededFault')
     SnapshotQuotaExceededFault = Shapes::StructureShape.new(name: 'SnapshotQuotaExceededFault')
+    SourceIdsList = Shapes::ListShape.new(name: 'SourceIdsList')
+    SourceNotFoundFault = Shapes::StructureShape.new(name: 'SourceNotFoundFault')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     StartDBClusterMessage = Shapes::StructureShape.new(name: 'StartDBClusterMessage')
     StartDBClusterResult = Shapes::StructureShape.new(name: 'StartDBClusterResult')
@@ -195,6 +216,9 @@ module Aws::DocDB
     SubnetAlreadyInUse = Shapes::StructureShape.new(name: 'SubnetAlreadyInUse')
     SubnetIdentifierList = Shapes::ListShape.new(name: 'SubnetIdentifierList')
     SubnetList = Shapes::ListShape.new(name: 'SubnetList')
+    SubscriptionAlreadyExistFault = Shapes::StructureShape.new(name: 'SubscriptionAlreadyExistFault')
+    SubscriptionCategoryNotFoundFault = Shapes::StructureShape.new(name: 'SubscriptionCategoryNotFoundFault')
+    SubscriptionNotFoundFault = Shapes::StructureShape.new(name: 'SubscriptionNotFoundFault')
     TStamp = Shapes::TimestampShape.new(name: 'TStamp')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagList = Shapes::ListShape.new(name: 'TagList')
@@ -204,6 +228,13 @@ module Aws::DocDB
     VpcSecurityGroupIdList = Shapes::ListShape.new(name: 'VpcSecurityGroupIdList')
     VpcSecurityGroupMembership = Shapes::StructureShape.new(name: 'VpcSecurityGroupMembership')
     VpcSecurityGroupMembershipList = Shapes::ListShape.new(name: 'VpcSecurityGroupMembershipList')
+
+    AddSourceIdentifierToSubscriptionMessage.add_member(:subscription_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SubscriptionName"))
+    AddSourceIdentifierToSubscriptionMessage.add_member(:source_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceIdentifier"))
+    AddSourceIdentifierToSubscriptionMessage.struct_class = Types::AddSourceIdentifierToSubscriptionMessage
+
+    AddSourceIdentifierToSubscriptionResult.add_member(:event_subscription, Shapes::ShapeRef.new(shape: EventSubscription, location_name: "EventSubscription"))
+    AddSourceIdentifierToSubscriptionResult.struct_class = Types::AddSourceIdentifierToSubscriptionResult
 
     AddTagsToResourceMessage.add_member(:resource_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceName"))
     AddTagsToResourceMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
@@ -333,6 +364,18 @@ module Aws::DocDB
 
     CreateDBSubnetGroupResult.add_member(:db_subnet_group, Shapes::ShapeRef.new(shape: DBSubnetGroup, location_name: "DBSubnetGroup"))
     CreateDBSubnetGroupResult.struct_class = Types::CreateDBSubnetGroupResult
+
+    CreateEventSubscriptionMessage.add_member(:subscription_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SubscriptionName"))
+    CreateEventSubscriptionMessage.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SnsTopicArn"))
+    CreateEventSubscriptionMessage.add_member(:source_type, Shapes::ShapeRef.new(shape: String, location_name: "SourceType"))
+    CreateEventSubscriptionMessage.add_member(:event_categories, Shapes::ShapeRef.new(shape: EventCategoriesList, location_name: "EventCategories"))
+    CreateEventSubscriptionMessage.add_member(:source_ids, Shapes::ShapeRef.new(shape: SourceIdsList, location_name: "SourceIds"))
+    CreateEventSubscriptionMessage.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Enabled"))
+    CreateEventSubscriptionMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateEventSubscriptionMessage.struct_class = Types::CreateEventSubscriptionMessage
+
+    CreateEventSubscriptionResult.add_member(:event_subscription, Shapes::ShapeRef.new(shape: EventSubscription, location_name: "EventSubscription"))
+    CreateEventSubscriptionResult.struct_class = Types::CreateEventSubscriptionResult
 
     DBCluster.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
     DBCluster.add_member(:backup_retention_period, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "BackupRetentionPeriod"))
@@ -577,6 +620,12 @@ module Aws::DocDB
     DeleteDBSubnetGroupMessage.add_member(:db_subnet_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBSubnetGroupName"))
     DeleteDBSubnetGroupMessage.struct_class = Types::DeleteDBSubnetGroupMessage
 
+    DeleteEventSubscriptionMessage.add_member(:subscription_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SubscriptionName"))
+    DeleteEventSubscriptionMessage.struct_class = Types::DeleteEventSubscriptionMessage
+
+    DeleteEventSubscriptionResult.add_member(:event_subscription, Shapes::ShapeRef.new(shape: EventSubscription, location_name: "EventSubscription"))
+    DeleteEventSubscriptionResult.struct_class = Types::DeleteEventSubscriptionResult
+
     DescribeCertificatesMessage.add_member(:certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CertificateIdentifier"))
     DescribeCertificatesMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeCertificatesMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
@@ -654,6 +703,12 @@ module Aws::DocDB
     DescribeEventCategoriesMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeEventCategoriesMessage.struct_class = Types::DescribeEventCategoriesMessage
 
+    DescribeEventSubscriptionsMessage.add_member(:subscription_name, Shapes::ShapeRef.new(shape: String, location_name: "SubscriptionName"))
+    DescribeEventSubscriptionsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeEventSubscriptionsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeEventSubscriptionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeEventSubscriptionsMessage.struct_class = Types::DescribeEventSubscriptionsMessage
+
     DescribeEventsMessage.add_member(:source_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SourceIdentifier"))
     DescribeEventsMessage.add_member(:source_type, Shapes::ShapeRef.new(shape: SourceType, location_name: "SourceType"))
     DescribeEventsMessage.add_member(:start_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "StartTime"))
@@ -712,6 +767,26 @@ module Aws::DocDB
 
     EventList.member = Shapes::ShapeRef.new(shape: Event, location_name: "Event")
 
+    EventSubscription.add_member(:customer_aws_id, Shapes::ShapeRef.new(shape: String, location_name: "CustomerAwsId"))
+    EventSubscription.add_member(:cust_subscription_id, Shapes::ShapeRef.new(shape: String, location_name: "CustSubscriptionId"))
+    EventSubscription.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: String, location_name: "SnsTopicArn"))
+    EventSubscription.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    EventSubscription.add_member(:subscription_creation_time, Shapes::ShapeRef.new(shape: String, location_name: "SubscriptionCreationTime"))
+    EventSubscription.add_member(:source_type, Shapes::ShapeRef.new(shape: String, location_name: "SourceType"))
+    EventSubscription.add_member(:source_ids_list, Shapes::ShapeRef.new(shape: SourceIdsList, location_name: "SourceIdsList"))
+    EventSubscription.add_member(:event_categories_list, Shapes::ShapeRef.new(shape: EventCategoriesList, location_name: "EventCategoriesList"))
+    EventSubscription.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    EventSubscription.add_member(:event_subscription_arn, Shapes::ShapeRef.new(shape: String, location_name: "EventSubscriptionArn"))
+    EventSubscription.struct_class = Types::EventSubscription
+
+    EventSubscriptionQuotaExceededFault.struct_class = Types::EventSubscriptionQuotaExceededFault
+
+    EventSubscriptionsList.member = Shapes::ShapeRef.new(shape: EventSubscription, location_name: "EventSubscription")
+
+    EventSubscriptionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    EventSubscriptionsMessage.add_member(:event_subscriptions_list, Shapes::ShapeRef.new(shape: EventSubscriptionsList, location_name: "EventSubscriptionsList"))
+    EventSubscriptionsMessage.struct_class = Types::EventSubscriptionsMessage
+
     EventsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     EventsMessage.add_member(:events, Shapes::ShapeRef.new(shape: EventList, location_name: "Events"))
     EventsMessage.struct_class = Types::EventsMessage
@@ -754,6 +829,8 @@ module Aws::DocDB
     InvalidDBSubnetGroupStateFault.struct_class = Types::InvalidDBSubnetGroupStateFault
 
     InvalidDBSubnetStateFault.struct_class = Types::InvalidDBSubnetStateFault
+
+    InvalidEventSubscriptionStateFault.struct_class = Types::InvalidEventSubscriptionStateFault
 
     InvalidRestoreFault.struct_class = Types::InvalidRestoreFault
 
@@ -822,6 +899,16 @@ module Aws::DocDB
 
     ModifyDBSubnetGroupResult.add_member(:db_subnet_group, Shapes::ShapeRef.new(shape: DBSubnetGroup, location_name: "DBSubnetGroup"))
     ModifyDBSubnetGroupResult.struct_class = Types::ModifyDBSubnetGroupResult
+
+    ModifyEventSubscriptionMessage.add_member(:subscription_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SubscriptionName"))
+    ModifyEventSubscriptionMessage.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: String, location_name: "SnsTopicArn"))
+    ModifyEventSubscriptionMessage.add_member(:source_type, Shapes::ShapeRef.new(shape: String, location_name: "SourceType"))
+    ModifyEventSubscriptionMessage.add_member(:event_categories, Shapes::ShapeRef.new(shape: EventCategoriesList, location_name: "EventCategories"))
+    ModifyEventSubscriptionMessage.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Enabled"))
+    ModifyEventSubscriptionMessage.struct_class = Types::ModifyEventSubscriptionMessage
+
+    ModifyEventSubscriptionResult.add_member(:event_subscription, Shapes::ShapeRef.new(shape: EventSubscription, location_name: "EventSubscription"))
+    ModifyEventSubscriptionResult.struct_class = Types::ModifyEventSubscriptionResult
 
     OrderableDBInstanceOption.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     OrderableDBInstanceOption.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
@@ -894,6 +981,13 @@ module Aws::DocDB
     RebootDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
     RebootDBInstanceResult.struct_class = Types::RebootDBInstanceResult
 
+    RemoveSourceIdentifierFromSubscriptionMessage.add_member(:subscription_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SubscriptionName"))
+    RemoveSourceIdentifierFromSubscriptionMessage.add_member(:source_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceIdentifier"))
+    RemoveSourceIdentifierFromSubscriptionMessage.struct_class = Types::RemoveSourceIdentifierFromSubscriptionMessage
+
+    RemoveSourceIdentifierFromSubscriptionResult.add_member(:event_subscription, Shapes::ShapeRef.new(shape: EventSubscription, location_name: "EventSubscription"))
+    RemoveSourceIdentifierFromSubscriptionResult.struct_class = Types::RemoveSourceIdentifierFromSubscriptionResult
+
     RemoveTagsFromResourceMessage.add_member(:resource_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceName"))
     RemoveTagsFromResourceMessage.add_member(:tag_keys, Shapes::ShapeRef.new(shape: KeyList, required: true, location_name: "TagKeys"))
     RemoveTagsFromResourceMessage.struct_class = Types::RemoveTagsFromResourceMessage
@@ -942,9 +1036,19 @@ module Aws::DocDB
     RestoreDBClusterToPointInTimeResult.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
     RestoreDBClusterToPointInTimeResult.struct_class = Types::RestoreDBClusterToPointInTimeResult
 
+    SNSInvalidTopicFault.struct_class = Types::SNSInvalidTopicFault
+
+    SNSNoAuthorizationFault.struct_class = Types::SNSNoAuthorizationFault
+
+    SNSTopicArnNotFoundFault.struct_class = Types::SNSTopicArnNotFoundFault
+
     SharedSnapshotQuotaExceededFault.struct_class = Types::SharedSnapshotQuotaExceededFault
 
     SnapshotQuotaExceededFault.struct_class = Types::SnapshotQuotaExceededFault
+
+    SourceIdsList.member = Shapes::ShapeRef.new(shape: String, location_name: "SourceId")
+
+    SourceNotFoundFault.struct_class = Types::SourceNotFoundFault
 
     StartDBClusterMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
     StartDBClusterMessage.struct_class = Types::StartDBClusterMessage
@@ -972,6 +1076,12 @@ module Aws::DocDB
     SubnetIdentifierList.member = Shapes::ShapeRef.new(shape: String, location_name: "SubnetIdentifier")
 
     SubnetList.member = Shapes::ShapeRef.new(shape: Subnet, location_name: "Subnet")
+
+    SubscriptionAlreadyExistFault.struct_class = Types::SubscriptionAlreadyExistFault
+
+    SubscriptionCategoryNotFoundFault.struct_class = Types::SubscriptionCategoryNotFoundFault
+
+    SubscriptionNotFoundFault.struct_class = Types::SubscriptionNotFoundFault
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
@@ -1017,6 +1127,16 @@ module Aws::DocDB
         "uid" => "docdb-2014-10-31",
         "xmlNamespace" => "http://rds.amazonaws.com/doc/2014-10-31/",
       }
+
+      api.add_operation(:add_source_identifier_to_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AddSourceIdentifierToSubscription"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AddSourceIdentifierToSubscriptionMessage)
+        o.output = Shapes::ShapeRef.new(shape: AddSourceIdentifierToSubscriptionResult)
+        o.errors << Shapes::ShapeRef.new(shape: SubscriptionNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: SourceNotFoundFault)
+      end)
 
       api.add_operation(:add_tags_to_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AddTagsToResource"
@@ -1147,6 +1267,21 @@ module Aws::DocDB
         o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
       end)
 
+      api.add_operation(:create_event_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateEventSubscription"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateEventSubscriptionMessage)
+        o.output = Shapes::ShapeRef.new(shape: CreateEventSubscriptionResult)
+        o.errors << Shapes::ShapeRef.new(shape: EventSubscriptionQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: SubscriptionAlreadyExistFault)
+        o.errors << Shapes::ShapeRef.new(shape: SNSInvalidTopicFault)
+        o.errors << Shapes::ShapeRef.new(shape: SNSNoAuthorizationFault)
+        o.errors << Shapes::ShapeRef.new(shape: SNSTopicArnNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: SubscriptionCategoryNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: SourceNotFoundFault)
+      end)
+
       api.add_operation(:delete_db_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDBCluster"
         o.http_method = "POST"
@@ -1202,6 +1337,16 @@ module Aws::DocDB
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBSubnetGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBSubnetStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
+      end)
+
+      api.add_operation(:delete_event_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEventSubscription"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEventSubscriptionMessage)
+        o.output = Shapes::ShapeRef.new(shape: DeleteEventSubscriptionResult)
+        o.errors << Shapes::ShapeRef.new(shape: SubscriptionNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEventSubscriptionStateFault)
       end)
 
       api.add_operation(:describe_certificates, Seahorse::Model::Operation.new.tap do |o|
@@ -1348,6 +1493,21 @@ module Aws::DocDB
         o.output = Shapes::ShapeRef.new(shape: EventCategoriesMessage)
       end)
 
+      api.add_operation(:describe_event_subscriptions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEventSubscriptions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEventSubscriptionsMessage)
+        o.output = Shapes::ShapeRef.new(shape: EventSubscriptionsMessage)
+        o.errors << Shapes::ShapeRef.new(shape: SubscriptionNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:describe_events, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeEvents"
         o.http_method = "POST"
@@ -1487,6 +1647,20 @@ module Aws::DocDB
         o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
       end)
 
+      api.add_operation(:modify_event_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyEventSubscription"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyEventSubscriptionMessage)
+        o.output = Shapes::ShapeRef.new(shape: ModifyEventSubscriptionResult)
+        o.errors << Shapes::ShapeRef.new(shape: EventSubscriptionQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: SubscriptionNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: SNSInvalidTopicFault)
+        o.errors << Shapes::ShapeRef.new(shape: SNSNoAuthorizationFault)
+        o.errors << Shapes::ShapeRef.new(shape: SNSTopicArnNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: SubscriptionCategoryNotFoundFault)
+      end)
+
       api.add_operation(:reboot_db_instance, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RebootDBInstance"
         o.http_method = "POST"
@@ -1495,6 +1669,16 @@ module Aws::DocDB
         o.output = Shapes::ShapeRef.new(shape: RebootDBInstanceResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+      end)
+
+      api.add_operation(:remove_source_identifier_from_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveSourceIdentifierFromSubscription"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RemoveSourceIdentifierFromSubscriptionMessage)
+        o.output = Shapes::ShapeRef.new(shape: RemoveSourceIdentifierFromSubscriptionResult)
+        o.errors << Shapes::ShapeRef.new(shape: SubscriptionNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: SourceNotFoundFault)
       end)
 
       api.add_operation(:remove_tags_from_resource, Seahorse::Model::Operation.new.tap do |o|

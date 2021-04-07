@@ -15,6 +15,7 @@ module Aws::Redshift
 
     AcceptReservedNodeExchangeInputMessage = Shapes::StructureShape.new(name: 'AcceptReservedNodeExchangeInputMessage')
     AcceptReservedNodeExchangeOutputMessage = Shapes::StructureShape.new(name: 'AcceptReservedNodeExchangeOutputMessage')
+    AccessToClusterDeniedFault = Shapes::StructureShape.new(name: 'AccessToClusterDeniedFault')
     AccessToSnapshotDeniedFault = Shapes::StructureShape.new(name: 'AccessToSnapshotDeniedFault')
     AccountAttribute = Shapes::StructureShape.new(name: 'AccountAttribute')
     AccountAttributeList = Shapes::StructureShape.new(name: 'AccountAttributeList')
@@ -29,8 +30,10 @@ module Aws::Redshift
     AuthorizationAlreadyExistsFault = Shapes::StructureShape.new(name: 'AuthorizationAlreadyExistsFault')
     AuthorizationNotFoundFault = Shapes::StructureShape.new(name: 'AuthorizationNotFoundFault')
     AuthorizationQuotaExceededFault = Shapes::StructureShape.new(name: 'AuthorizationQuotaExceededFault')
+    AuthorizationStatus = Shapes::StringShape.new(name: 'AuthorizationStatus')
     AuthorizeClusterSecurityGroupIngressMessage = Shapes::StructureShape.new(name: 'AuthorizeClusterSecurityGroupIngressMessage')
     AuthorizeClusterSecurityGroupIngressResult = Shapes::StructureShape.new(name: 'AuthorizeClusterSecurityGroupIngressResult')
+    AuthorizeEndpointAccessMessage = Shapes::StructureShape.new(name: 'AuthorizeEndpointAccessMessage')
     AuthorizeSnapshotAccessMessage = Shapes::StructureShape.new(name: 'AuthorizeSnapshotAccessMessage')
     AuthorizeSnapshotAccessResult = Shapes::StructureShape.new(name: 'AuthorizeSnapshotAccessResult')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
@@ -110,6 +113,7 @@ module Aws::Redshift
     CreateClusterSnapshotResult = Shapes::StructureShape.new(name: 'CreateClusterSnapshotResult')
     CreateClusterSubnetGroupMessage = Shapes::StructureShape.new(name: 'CreateClusterSubnetGroupMessage')
     CreateClusterSubnetGroupResult = Shapes::StructureShape.new(name: 'CreateClusterSubnetGroupResult')
+    CreateEndpointAccessMessage = Shapes::StructureShape.new(name: 'CreateEndpointAccessMessage')
     CreateEventSubscriptionMessage = Shapes::StructureShape.new(name: 'CreateEventSubscriptionMessage')
     CreateEventSubscriptionResult = Shapes::StructureShape.new(name: 'CreateEventSubscriptionResult')
     CreateHsmClientCertificateMessage = Shapes::StructureShape.new(name: 'CreateHsmClientCertificateMessage')
@@ -136,6 +140,7 @@ module Aws::Redshift
     DeleteClusterSnapshotMessageList = Shapes::ListShape.new(name: 'DeleteClusterSnapshotMessageList')
     DeleteClusterSnapshotResult = Shapes::StructureShape.new(name: 'DeleteClusterSnapshotResult')
     DeleteClusterSubnetGroupMessage = Shapes::StructureShape.new(name: 'DeleteClusterSubnetGroupMessage')
+    DeleteEndpointAccessMessage = Shapes::StructureShape.new(name: 'DeleteEndpointAccessMessage')
     DeleteEventSubscriptionMessage = Shapes::StructureShape.new(name: 'DeleteEventSubscriptionMessage')
     DeleteHsmClientCertificateMessage = Shapes::StructureShape.new(name: 'DeleteHsmClientCertificateMessage')
     DeleteHsmConfigurationMessage = Shapes::StructureShape.new(name: 'DeleteHsmConfigurationMessage')
@@ -158,6 +163,8 @@ module Aws::Redshift
     DescribeClustersMessage = Shapes::StructureShape.new(name: 'DescribeClustersMessage')
     DescribeDefaultClusterParametersMessage = Shapes::StructureShape.new(name: 'DescribeDefaultClusterParametersMessage')
     DescribeDefaultClusterParametersResult = Shapes::StructureShape.new(name: 'DescribeDefaultClusterParametersResult')
+    DescribeEndpointAccessMessage = Shapes::StructureShape.new(name: 'DescribeEndpointAccessMessage')
+    DescribeEndpointAuthorizationMessage = Shapes::StructureShape.new(name: 'DescribeEndpointAuthorizationMessage')
     DescribeEventCategoriesMessage = Shapes::StructureShape.new(name: 'DescribeEventCategoriesMessage')
     DescribeEventSubscriptionsMessage = Shapes::StructureShape.new(name: 'DescribeEventSubscriptionsMessage')
     DescribeEventsMessage = Shapes::StructureShape.new(name: 'DescribeEventsMessage')
@@ -189,6 +196,19 @@ module Aws::Redshift
     EnableSnapshotCopyMessage = Shapes::StructureShape.new(name: 'EnableSnapshotCopyMessage')
     EnableSnapshotCopyResult = Shapes::StructureShape.new(name: 'EnableSnapshotCopyResult')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
+    EndpointAccess = Shapes::StructureShape.new(name: 'EndpointAccess')
+    EndpointAccessList = Shapes::StructureShape.new(name: 'EndpointAccessList')
+    EndpointAccesses = Shapes::ListShape.new(name: 'EndpointAccesses')
+    EndpointAlreadyExistsFault = Shapes::StructureShape.new(name: 'EndpointAlreadyExistsFault')
+    EndpointAuthorization = Shapes::StructureShape.new(name: 'EndpointAuthorization')
+    EndpointAuthorizationAlreadyExistsFault = Shapes::StructureShape.new(name: 'EndpointAuthorizationAlreadyExistsFault')
+    EndpointAuthorizationList = Shapes::StructureShape.new(name: 'EndpointAuthorizationList')
+    EndpointAuthorizationNotFoundFault = Shapes::StructureShape.new(name: 'EndpointAuthorizationNotFoundFault')
+    EndpointAuthorizations = Shapes::ListShape.new(name: 'EndpointAuthorizations')
+    EndpointAuthorizationsPerClusterLimitExceededFault = Shapes::StructureShape.new(name: 'EndpointAuthorizationsPerClusterLimitExceededFault')
+    EndpointNotFoundFault = Shapes::StructureShape.new(name: 'EndpointNotFoundFault')
+    EndpointsPerAuthorizationLimitExceededFault = Shapes::StructureShape.new(name: 'EndpointsPerAuthorizationLimitExceededFault')
+    EndpointsPerClusterLimitExceededFault = Shapes::StructureShape.new(name: 'EndpointsPerClusterLimitExceededFault')
     Event = Shapes::StructureShape.new(name: 'Event')
     EventCategoriesList = Shapes::ListShape.new(name: 'EventCategoriesList')
     EventCategoriesMap = Shapes::StructureShape.new(name: 'EventCategoriesMap')
@@ -230,6 +250,7 @@ module Aws::Redshift
     InsufficientS3BucketPolicyFault = Shapes::StructureShape.new(name: 'InsufficientS3BucketPolicyFault')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerOptional = Shapes::IntegerShape.new(name: 'IntegerOptional')
+    InvalidAuthorizationStateFault = Shapes::StructureShape.new(name: 'InvalidAuthorizationStateFault')
     InvalidClusterParameterGroupStateFault = Shapes::StructureShape.new(name: 'InvalidClusterParameterGroupStateFault')
     InvalidClusterSecurityGroupStateFault = Shapes::StructureShape.new(name: 'InvalidClusterSecurityGroupStateFault')
     InvalidClusterSnapshotScheduleStateFault = Shapes::StructureShape.new(name: 'InvalidClusterSnapshotScheduleStateFault')
@@ -239,6 +260,7 @@ module Aws::Redshift
     InvalidClusterSubnetStateFault = Shapes::StructureShape.new(name: 'InvalidClusterSubnetStateFault')
     InvalidClusterTrackFault = Shapes::StructureShape.new(name: 'InvalidClusterTrackFault')
     InvalidElasticIpFault = Shapes::StructureShape.new(name: 'InvalidElasticIpFault')
+    InvalidEndpointStateFault = Shapes::StructureShape.new(name: 'InvalidEndpointStateFault')
     InvalidHsmClientCertificateStateFault = Shapes::StructureShape.new(name: 'InvalidHsmClientCertificateStateFault')
     InvalidHsmConfigurationStateFault = Shapes::StructureShape.new(name: 'InvalidHsmConfigurationStateFault')
     InvalidReservedNodeStateFault = Shapes::StructureShape.new(name: 'InvalidReservedNodeStateFault')
@@ -275,6 +297,7 @@ module Aws::Redshift
     ModifyClusterSnapshotScheduleMessage = Shapes::StructureShape.new(name: 'ModifyClusterSnapshotScheduleMessage')
     ModifyClusterSubnetGroupMessage = Shapes::StructureShape.new(name: 'ModifyClusterSubnetGroupMessage')
     ModifyClusterSubnetGroupResult = Shapes::StructureShape.new(name: 'ModifyClusterSubnetGroupResult')
+    ModifyEndpointAccessMessage = Shapes::StructureShape.new(name: 'ModifyEndpointAccessMessage')
     ModifyEventSubscriptionMessage = Shapes::StructureShape.new(name: 'ModifyEventSubscriptionMessage')
     ModifyEventSubscriptionResult = Shapes::StructureShape.new(name: 'ModifyEventSubscriptionResult')
     ModifyScheduledActionMessage = Shapes::StructureShape.new(name: 'ModifyScheduledActionMessage')
@@ -341,6 +364,7 @@ module Aws::Redshift
     RevisionTargetsList = Shapes::ListShape.new(name: 'RevisionTargetsList')
     RevokeClusterSecurityGroupIngressMessage = Shapes::StructureShape.new(name: 'RevokeClusterSecurityGroupIngressMessage')
     RevokeClusterSecurityGroupIngressResult = Shapes::StructureShape.new(name: 'RevokeClusterSecurityGroupIngressResult')
+    RevokeEndpointAccessMessage = Shapes::StructureShape.new(name: 'RevokeEndpointAccessMessage')
     RevokeSnapshotAccessMessage = Shapes::StructureShape.new(name: 'RevokeSnapshotAccessMessage')
     RevokeSnapshotAccessResult = Shapes::StructureShape.new(name: 'RevokeSnapshotAccessResult')
     RotateEncryptionKeyMessage = Shapes::StructureShape.new(name: 'RotateEncryptionKeyMessage')
@@ -442,6 +466,7 @@ module Aws::Redshift
     ValueStringList = Shapes::ListShape.new(name: 'ValueStringList')
     VpcEndpoint = Shapes::StructureShape.new(name: 'VpcEndpoint')
     VpcEndpointsList = Shapes::ListShape.new(name: 'VpcEndpointsList')
+    VpcIdentifierList = Shapes::ListShape.new(name: 'VpcIdentifierList')
     VpcSecurityGroupIdList = Shapes::ListShape.new(name: 'VpcSecurityGroupIdList')
     VpcSecurityGroupMembership = Shapes::StructureShape.new(name: 'VpcSecurityGroupMembership')
     VpcSecurityGroupMembershipList = Shapes::ListShape.new(name: 'VpcSecurityGroupMembershipList')
@@ -452,6 +477,8 @@ module Aws::Redshift
 
     AcceptReservedNodeExchangeOutputMessage.add_member(:exchanged_reserved_node, Shapes::ShapeRef.new(shape: ReservedNode, location_name: "ExchangedReservedNode"))
     AcceptReservedNodeExchangeOutputMessage.struct_class = Types::AcceptReservedNodeExchangeOutputMessage
+
+    AccessToClusterDeniedFault.struct_class = Types::AccessToClusterDeniedFault
 
     AccessToSnapshotDeniedFault.struct_class = Types::AccessToSnapshotDeniedFault
 
@@ -493,6 +520,11 @@ module Aws::Redshift
 
     AuthorizeClusterSecurityGroupIngressResult.add_member(:cluster_security_group, Shapes::ShapeRef.new(shape: ClusterSecurityGroup, location_name: "ClusterSecurityGroup"))
     AuthorizeClusterSecurityGroupIngressResult.struct_class = Types::AuthorizeClusterSecurityGroupIngressResult
+
+    AuthorizeEndpointAccessMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
+    AuthorizeEndpointAccessMessage.add_member(:account, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Account"))
+    AuthorizeEndpointAccessMessage.add_member(:vpc_ids, Shapes::ShapeRef.new(shape: VpcIdentifierList, location_name: "VpcIds"))
+    AuthorizeEndpointAccessMessage.struct_class = Types::AuthorizeEndpointAccessMessage
 
     AuthorizeSnapshotAccessMessage.add_member(:snapshot_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SnapshotIdentifier"))
     AuthorizeSnapshotAccessMessage.add_member(:snapshot_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotClusterIdentifier"))
@@ -828,6 +860,13 @@ module Aws::Redshift
     CreateClusterSubnetGroupResult.add_member(:cluster_subnet_group, Shapes::ShapeRef.new(shape: ClusterSubnetGroup, location_name: "ClusterSubnetGroup"))
     CreateClusterSubnetGroupResult.struct_class = Types::CreateClusterSubnetGroupResult
 
+    CreateEndpointAccessMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
+    CreateEndpointAccessMessage.add_member(:resource_owner, Shapes::ShapeRef.new(shape: String, location_name: "ResourceOwner"))
+    CreateEndpointAccessMessage.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointName"))
+    CreateEndpointAccessMessage.add_member(:subnet_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SubnetGroupName"))
+    CreateEndpointAccessMessage.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIdList, location_name: "VpcSecurityGroupIds"))
+    CreateEndpointAccessMessage.struct_class = Types::CreateEndpointAccessMessage
+
     CreateEventSubscriptionMessage.add_member(:subscription_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SubscriptionName"))
     CreateEventSubscriptionMessage.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SnsTopicArn"))
     CreateEventSubscriptionMessage.add_member(:source_type, Shapes::ShapeRef.new(shape: String, location_name: "SourceType"))
@@ -952,6 +991,9 @@ module Aws::Redshift
     DeleteClusterSubnetGroupMessage.add_member(:cluster_subnet_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterSubnetGroupName"))
     DeleteClusterSubnetGroupMessage.struct_class = Types::DeleteClusterSubnetGroupMessage
 
+    DeleteEndpointAccessMessage.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointName"))
+    DeleteEndpointAccessMessage.struct_class = Types::DeleteEndpointAccessMessage
+
     DeleteEventSubscriptionMessage.add_member(:subscription_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SubscriptionName"))
     DeleteEventSubscriptionMessage.struct_class = Types::DeleteEventSubscriptionMessage
 
@@ -1055,6 +1097,21 @@ module Aws::Redshift
 
     DescribeDefaultClusterParametersResult.add_member(:default_cluster_parameters, Shapes::ShapeRef.new(shape: DefaultClusterParameters, location_name: "DefaultClusterParameters"))
     DescribeDefaultClusterParametersResult.struct_class = Types::DescribeDefaultClusterParametersResult
+
+    DescribeEndpointAccessMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
+    DescribeEndpointAccessMessage.add_member(:resource_owner, Shapes::ShapeRef.new(shape: String, location_name: "ResourceOwner"))
+    DescribeEndpointAccessMessage.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: String, location_name: "EndpointName"))
+    DescribeEndpointAccessMessage.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcId"))
+    DescribeEndpointAccessMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeEndpointAccessMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeEndpointAccessMessage.struct_class = Types::DescribeEndpointAccessMessage
+
+    DescribeEndpointAuthorizationMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
+    DescribeEndpointAuthorizationMessage.add_member(:account, Shapes::ShapeRef.new(shape: String, location_name: "Account"))
+    DescribeEndpointAuthorizationMessage.add_member(:grantee, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Grantee"))
+    DescribeEndpointAuthorizationMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeEndpointAuthorizationMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeEndpointAuthorizationMessage.struct_class = Types::DescribeEndpointAuthorizationMessage
 
     DescribeEventCategoriesMessage.add_member(:source_type, Shapes::ShapeRef.new(shape: String, location_name: "SourceType"))
     DescribeEventCategoriesMessage.struct_class = Types::DescribeEventCategoriesMessage
@@ -1215,6 +1272,55 @@ module Aws::Redshift
     Endpoint.add_member(:vpc_endpoints, Shapes::ShapeRef.new(shape: VpcEndpointsList, location_name: "VpcEndpoints"))
     Endpoint.struct_class = Types::Endpoint
 
+    EndpointAccess.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
+    EndpointAccess.add_member(:resource_owner, Shapes::ShapeRef.new(shape: String, location_name: "ResourceOwner"))
+    EndpointAccess.add_member(:subnet_group_name, Shapes::ShapeRef.new(shape: String, location_name: "SubnetGroupName"))
+    EndpointAccess.add_member(:endpoint_status, Shapes::ShapeRef.new(shape: String, location_name: "EndpointStatus"))
+    EndpointAccess.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: String, location_name: "EndpointName"))
+    EndpointAccess.add_member(:endpoint_create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "EndpointCreateTime"))
+    EndpointAccess.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "Port"))
+    EndpointAccess.add_member(:address, Shapes::ShapeRef.new(shape: String, location_name: "Address"))
+    EndpointAccess.add_member(:vpc_security_groups, Shapes::ShapeRef.new(shape: VpcSecurityGroupMembershipList, location_name: "VpcSecurityGroups"))
+    EndpointAccess.add_member(:vpc_endpoint, Shapes::ShapeRef.new(shape: VpcEndpoint, location_name: "VpcEndpoint"))
+    EndpointAccess.struct_class = Types::EndpointAccess
+
+    EndpointAccessList.add_member(:endpoint_access_list, Shapes::ShapeRef.new(shape: EndpointAccesses, location_name: "EndpointAccessList"))
+    EndpointAccessList.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    EndpointAccessList.struct_class = Types::EndpointAccessList
+
+    EndpointAccesses.member = Shapes::ShapeRef.new(shape: EndpointAccess)
+
+    EndpointAlreadyExistsFault.struct_class = Types::EndpointAlreadyExistsFault
+
+    EndpointAuthorization.add_member(:grantor, Shapes::ShapeRef.new(shape: String, location_name: "Grantor"))
+    EndpointAuthorization.add_member(:grantee, Shapes::ShapeRef.new(shape: String, location_name: "Grantee"))
+    EndpointAuthorization.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
+    EndpointAuthorization.add_member(:authorize_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "AuthorizeTime"))
+    EndpointAuthorization.add_member(:cluster_status, Shapes::ShapeRef.new(shape: String, location_name: "ClusterStatus"))
+    EndpointAuthorization.add_member(:status, Shapes::ShapeRef.new(shape: AuthorizationStatus, location_name: "Status"))
+    EndpointAuthorization.add_member(:allowed_all_vp_cs, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowedAllVPCs"))
+    EndpointAuthorization.add_member(:allowed_vp_cs, Shapes::ShapeRef.new(shape: VpcIdentifierList, location_name: "AllowedVPCs"))
+    EndpointAuthorization.add_member(:endpoint_count, Shapes::ShapeRef.new(shape: Integer, location_name: "EndpointCount"))
+    EndpointAuthorization.struct_class = Types::EndpointAuthorization
+
+    EndpointAuthorizationAlreadyExistsFault.struct_class = Types::EndpointAuthorizationAlreadyExistsFault
+
+    EndpointAuthorizationList.add_member(:endpoint_authorization_list, Shapes::ShapeRef.new(shape: EndpointAuthorizations, location_name: "EndpointAuthorizationList"))
+    EndpointAuthorizationList.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    EndpointAuthorizationList.struct_class = Types::EndpointAuthorizationList
+
+    EndpointAuthorizationNotFoundFault.struct_class = Types::EndpointAuthorizationNotFoundFault
+
+    EndpointAuthorizations.member = Shapes::ShapeRef.new(shape: EndpointAuthorization)
+
+    EndpointAuthorizationsPerClusterLimitExceededFault.struct_class = Types::EndpointAuthorizationsPerClusterLimitExceededFault
+
+    EndpointNotFoundFault.struct_class = Types::EndpointNotFoundFault
+
+    EndpointsPerAuthorizationLimitExceededFault.struct_class = Types::EndpointsPerAuthorizationLimitExceededFault
+
+    EndpointsPerClusterLimitExceededFault.struct_class = Types::EndpointsPerClusterLimitExceededFault
+
     Event.add_member(:source_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SourceIdentifier"))
     Event.add_member(:source_type, Shapes::ShapeRef.new(shape: SourceType, location_name: "SourceType"))
     Event.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -1351,6 +1457,8 @@ module Aws::Redshift
 
     InsufficientS3BucketPolicyFault.struct_class = Types::InsufficientS3BucketPolicyFault
 
+    InvalidAuthorizationStateFault.struct_class = Types::InvalidAuthorizationStateFault
+
     InvalidClusterParameterGroupStateFault.struct_class = Types::InvalidClusterParameterGroupStateFault
 
     InvalidClusterSecurityGroupStateFault.struct_class = Types::InvalidClusterSecurityGroupStateFault
@@ -1368,6 +1476,8 @@ module Aws::Redshift
     InvalidClusterTrackFault.struct_class = Types::InvalidClusterTrackFault
 
     InvalidElasticIpFault.struct_class = Types::InvalidElasticIpFault
+
+    InvalidEndpointStateFault.struct_class = Types::InvalidEndpointStateFault
 
     InvalidHsmClientCertificateStateFault.struct_class = Types::InvalidHsmClientCertificateStateFault
 
@@ -1496,6 +1606,10 @@ module Aws::Redshift
 
     ModifyClusterSubnetGroupResult.add_member(:cluster_subnet_group, Shapes::ShapeRef.new(shape: ClusterSubnetGroup, location_name: "ClusterSubnetGroup"))
     ModifyClusterSubnetGroupResult.struct_class = Types::ModifyClusterSubnetGroupResult
+
+    ModifyEndpointAccessMessage.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointName"))
+    ModifyEndpointAccessMessage.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIdList, location_name: "VpcSecurityGroupIds"))
+    ModifyEndpointAccessMessage.struct_class = Types::ModifyEndpointAccessMessage
 
     ModifyEventSubscriptionMessage.add_member(:subscription_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SubscriptionName"))
     ModifyEventSubscriptionMessage.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: String, location_name: "SnsTopicArn"))
@@ -1800,6 +1914,12 @@ module Aws::Redshift
     RevokeClusterSecurityGroupIngressResult.add_member(:cluster_security_group, Shapes::ShapeRef.new(shape: ClusterSecurityGroup, location_name: "ClusterSecurityGroup"))
     RevokeClusterSecurityGroupIngressResult.struct_class = Types::RevokeClusterSecurityGroupIngressResult
 
+    RevokeEndpointAccessMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
+    RevokeEndpointAccessMessage.add_member(:account, Shapes::ShapeRef.new(shape: String, location_name: "Account"))
+    RevokeEndpointAccessMessage.add_member(:vpc_ids, Shapes::ShapeRef.new(shape: VpcIdentifierList, location_name: "VpcIds"))
+    RevokeEndpointAccessMessage.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "Force"))
+    RevokeEndpointAccessMessage.struct_class = Types::RevokeEndpointAccessMessage
+
     RevokeSnapshotAccessMessage.add_member(:snapshot_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SnapshotIdentifier"))
     RevokeSnapshotAccessMessage.add_member(:snapshot_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotClusterIdentifier"))
     RevokeSnapshotAccessMessage.add_member(:account_with_restore_access, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AccountWithRestoreAccess"))
@@ -2094,6 +2214,8 @@ module Aws::Redshift
 
     VpcEndpointsList.member = Shapes::ShapeRef.new(shape: VpcEndpoint, location_name: "VpcEndpoint")
 
+    VpcIdentifierList.member = Shapes::ShapeRef.new(shape: String, location_name: "VpcIdentifier")
+
     VpcSecurityGroupIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "VpcSecurityGroupId")
 
     VpcSecurityGroupMembership.add_member(:vpc_security_group_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcSecurityGroupId"))
@@ -2144,6 +2266,20 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterSecurityGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationQuotaExceededFault)
+      end)
+
+      api.add_operation(:authorize_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AuthorizeEndpointAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AuthorizeEndpointAccessMessage)
+        o.output = Shapes::ShapeRef.new(shape: EndpointAuthorization)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: EndpointAuthorizationsPerClusterLimitExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: EndpointAuthorizationAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAuthorizationStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
       end)
 
       api.add_operation(:authorize_snapshot_access, Seahorse::Model::Operation.new.tap do |o|
@@ -2287,6 +2423,24 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: TagLimitExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
         o.errors << Shapes::ShapeRef.new(shape: DependentServiceRequestThrottlingFault)
+      end)
+
+      api.add_operation(:create_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateEndpointAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateEndpointAccessMessage)
+        o.output = Shapes::ShapeRef.new(shape: EndpointAccess)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessToClusterDeniedFault)
+        o.errors << Shapes::ShapeRef.new(shape: EndpointsPerClusterLimitExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: EndpointsPerAuthorizationLimitExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterSecurityGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterSubnetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: EndpointAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
       end)
 
       api.add_operation(:create_event_subscription, Seahorse::Model::Operation.new.tap do |o|
@@ -2453,6 +2607,19 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterSubnetGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterSubnetStateFault)
         o.errors << Shapes::ShapeRef.new(shape: ClusterSubnetGroupNotFoundFault)
+      end)
+
+      api.add_operation(:delete_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEndpointAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEndpointAccessMessage)
+        o.output = Shapes::ShapeRef.new(shape: EndpointAccess)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEndpointStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterSecurityGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: EndpointNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
       end)
 
       api.add_operation(:delete_event_subscription, Seahorse::Model::Operation.new.tap do |o|
@@ -2697,6 +2864,27 @@ module Aws::Redshift
             "default_cluster_parameters.marker" => "marker"
           }
         )
+      end)
+
+      api.add_operation(:describe_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEndpointAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEndpointAccessMessage)
+        o.output = Shapes::ShapeRef.new(shape: EndpointAccessList)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: EndpointNotFoundFault)
+      end)
+
+      api.add_operation(:describe_endpoint_authorization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEndpointAuthorization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEndpointAuthorizationMessage)
+        o.output = Shapes::ShapeRef.new(shape: EndpointAuthorizationList)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 
       api.add_operation(:describe_event_categories, Seahorse::Model::Operation.new.tap do |o|
@@ -3143,6 +3331,20 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: DependentServiceRequestThrottlingFault)
       end)
 
+      api.add_operation(:modify_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyEndpointAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyEndpointAccessMessage)
+        o.output = Shapes::ShapeRef.new(shape: EndpointAccess)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterSecurityGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEndpointStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: EndpointNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+      end)
+
       api.add_operation(:modify_event_subscription, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ModifyEventSubscription"
         o.http_method = "POST"
@@ -3335,6 +3537,21 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: ClusterSecurityGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterSecurityGroupStateFault)
+      end)
+
+      api.add_operation(:revoke_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RevokeEndpointAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RevokeEndpointAccessMessage)
+        o.output = Shapes::ShapeRef.new(shape: EndpointAuthorization)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEndpointStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterSecurityGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: EndpointNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: EndpointAuthorizationNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAuthorizationStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
       end)
 
       api.add_operation(:revoke_snapshot_access, Seahorse::Model::Operation.new.tap do |o|

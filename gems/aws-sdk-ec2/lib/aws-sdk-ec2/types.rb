@@ -1647,24 +1647,24 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         subnet_id: "SubnetId", # required
     #         ipv_6_cidr_block: "String", # required
+    #         subnet_id: "SubnetId", # required
     #       }
-    #
-    # @!attribute [rw] subnet_id
-    #   The ID of your subnet.
-    #   @return [String]
     #
     # @!attribute [rw] ipv_6_cidr_block
     #   The IPv6 CIDR block for your subnet. The subnet must have a /64
     #   prefix length.
     #   @return [String]
     #
+    # @!attribute [rw] subnet_id
+    #   The ID of your subnet.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSubnetCidrBlockRequest AWS API Documentation
     #
     class AssociateSubnetCidrBlockRequest < Struct.new(
-      :subnet_id,
-      :ipv_6_cidr_block)
+      :ipv_6_cidr_block,
+      :subnet_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1940,6 +1940,46 @@ module Aws::EC2
     class AssociationStatus < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes integration options for Amazon Athena.
+    #
+    # @note When making an API call, you may pass AthenaIntegration
+    #   data as a hash:
+    #
+    #       {
+    #         integration_result_s3_destination_arn: "String", # required
+    #         partition_load_frequency: "none", # required, accepts none, daily, weekly, monthly
+    #         partition_start_date: Time.now,
+    #         partition_end_date: Time.now,
+    #       }
+    #
+    # @!attribute [rw] integration_result_s3_destination_arn
+    #   The location in Amazon S3 to store the generated CloudFormation
+    #   template.
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_load_frequency
+    #   The schedule for adding new partitions to the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_start_date
+    #   The start date for the partition.
+    #   @return [Time]
+    #
+    # @!attribute [rw] partition_end_date
+    #   The end date for the partition.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AthenaIntegration AWS API Documentation
+    #
+    class AthenaIntegration < Struct.new(
+      :integration_result_s3_destination_arn,
+      :partition_load_frequency,
+      :partition_start_date,
+      :partition_end_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8380,6 +8420,86 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateReplaceRootVolumeTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         snapshot_id: "SnapshotId",
+    #         client_token: "String",
+    #         dry_run: false,
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance for which to replace the root volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot from which to restore the replacement root
+    #   volume. If you want to restore the volume to the initial launch
+    #   state, omit this parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. If you do not specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency. For more information, see [Ensuring Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the root volume replacement task.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateReplaceRootVolumeTaskRequest AWS API Documentation
+    #
+    class CreateReplaceRootVolumeTaskRequest < Struct.new(
+      :instance_id,
+      :snapshot_id,
+      :client_token,
+      :dry_run,
+      :tag_specifications)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replace_root_volume_task
+    #   Information about the root volume replacement task.
+    #   @return [Types::ReplaceRootVolumeTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateReplaceRootVolumeTaskResult AWS API Documentation
+    #
+    class CreateReplaceRootVolumeTaskResult < Struct.new(
+      :replace_root_volume_task)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the parameters for CreateReservedInstancesListing.
     #
     # @note When making an API call, you may pass CreateReservedInstancesListingRequest
@@ -8445,6 +8565,83 @@ module Aws::EC2
     #
     class CreateReservedInstancesListingResult < Struct.new(
       :reserved_instances_listings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateRestoreImageTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "String", # required
+    #         object_key: "String", # required
+    #         name: "String",
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the S3 bucket that contains the stored AMI object.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_key
+    #   The name of the stored AMI object in the bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name for the restored AMI. The name must be unique for AMIs in
+    #   the Region for this account. If you do not provide a name, the new
+    #   AMI gets the same name as the original AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the AMI and snapshots on restoration. You can
+    #   tag the AMI, the snapshots, or both.
+    #
+    #   * To tag the AMI, the value for `ResourceType` must be `image`.
+    #
+    #   * To tag the snapshots, the value for `ResourceType` must be
+    #     `snapshot`. The same tag is applied to all of the snapshots that
+    #     are created.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRestoreImageTaskRequest AWS API Documentation
+    #
+    class CreateRestoreImageTaskRequest < Struct.new(
+      :bucket,
+      :object_key,
+      :name,
+      :tag_specifications,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The AMI ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRestoreImageTaskResult AWS API Documentation
+    #
+    class CreateRestoreImageTaskResult < Struct.new(
+      :image_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8956,6 +9153,67 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateStoreImageTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_id: "ImageId", # required
+    #         bucket: "String", # required
+    #         s3_object_tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   The name of the S3 bucket in which the AMI object will be stored.
+    #   The bucket must be in the Region in which the request is being made.
+    #   The AMI object appears in the bucket only after the upload task has
+    #   completed.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_object_tags
+    #   The tags to apply to the AMI object that will be stored in the S3
+    #   bucket.
+    #   @return [Array<Types::S3ObjectTag>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateStoreImageTaskRequest AWS API Documentation
+    #
+    class CreateStoreImageTaskRequest < Struct.new(
+      :image_id,
+      :bucket,
+      :s3_object_tags,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] object_key
+    #   The name of the stored AMI object in the S3 bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateStoreImageTaskResult AWS API Documentation
+    #
+    class CreateStoreImageTaskResult < Struct.new(
+      :object_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateSubnetRequest
     #   data as a hash:
     #
@@ -8973,11 +9231,11 @@ module Aws::EC2
     #         ],
     #         availability_zone: "String",
     #         availability_zone_id: "String",
+    #         cidr_block: "String", # required
     #         ipv_6_cidr_block: "String",
     #         outpost_arn: "String",
     #         vpc_id: "VpcId", # required
     #         dry_run: false,
-    #         cidr_block: "String", # required
     #       }
     #
     # @!attribute [rw] tag_specifications
@@ -9008,6 +9266,13 @@ module Aws::EC2
     #   The AZ ID or the Local Zone ID of the subnet.
     #   @return [String]
     #
+    # @!attribute [rw] cidr_block
+    #   The IPv4 network range for the subnet, in CIDR notation. For
+    #   example, `10.0.0.0/24`. We modify the specified CIDR block to its
+    #   canonical form; for example, if you specify `100.68.0.18/18`, we
+    #   modify it to `100.68.0.0/18`.
+    #   @return [String]
+    #
     # @!attribute [rw] ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
@@ -9030,24 +9295,17 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] cidr_block
-    #   The IPv4 network range for the subnet, in CIDR notation. For
-    #   example, `10.0.0.0/24`. We modify the specified CIDR block to its
-    #   canonical form; for example, if you specify `100.68.0.18/18`, we
-    #   modify it to `100.68.0.0/18`.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnetRequest AWS API Documentation
     #
     class CreateSubnetRequest < Struct.new(
       :tag_specifications,
       :availability_zone,
       :availability_zone_id,
+      :cidr_block,
       :ipv_6_cidr_block,
       :outpost_arn,
       :vpc_id,
-      :dry_run,
-      :cidr_block)
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20320,6 +20578,82 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeReplaceRootVolumeTasksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         replace_root_volume_task_ids: ["ReplaceRootVolumeTaskId"],
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] replace_root_volume_task_ids
+    #   The ID of the root volume replacement task to view.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   Filter to use:
+    #
+    #   * `instance-id` - The ID of the instance for which the root volume
+    #     replacement task was created.
+    #
+    #   ^
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReplaceRootVolumeTasksRequest AWS API Documentation
+    #
+    class DescribeReplaceRootVolumeTasksRequest < Struct.new(
+      :replace_root_volume_task_ids,
+      :filters,
+      :max_results,
+      :next_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replace_root_volume_tasks
+    #   Information about the root volume replacement task.
+    #   @return [Array<Types::ReplaceRootVolumeTask>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReplaceRootVolumeTasksResult AWS API Documentation
+    #
+    class DescribeReplaceRootVolumeTasksResult < Struct.new(
+      :replace_root_volume_tasks,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the parameters for DescribeReservedInstancesListings.
     #
     # @note When making an API call, you may pass DescribeReservedInstancesListingsRequest
@@ -22221,6 +22555,86 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeStoreImageTasksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_ids: ["ImageId"],
+    #         dry_run: false,
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] image_ids
+    #   The AMI IDs for which to show progress. Up to 20 AMI IDs can be
+    #   included in a request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   The filters.
+    #
+    #   * `task-state` - Returns tasks in a certain state (`InProgress` \|
+    #     `Completed` \| `Failed`)
+    #
+    #   * `bucket` - Returns task information for tasks that targeted a
+    #     specific bucket. For the filter value, specify the bucket name.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `NextToken` value. This value can be between 1 and 200. You cannot
+    #   specify this parameter and the `ImageIDs` parameter in the same
+    #   call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeStoreImageTasksRequest AWS API Documentation
+    #
+    class DescribeStoreImageTasksRequest < Struct.new(
+      :image_ids,
+      :dry_run,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] store_image_task_results
+    #   The information about the AMI store tasks.
+    #   @return [Array<Types::StoreImageTaskResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeStoreImageTasksResult AWS API Documentation
+    #
+    class DescribeStoreImageTasksResult < Struct.new(
+      :store_image_task_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeSubnetsRequest
     #   data as a hash:
     #
@@ -22266,6 +22680,8 @@ module Aws::EC2
     #
     #   * `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR
     #     block associated with the subnet.
+    #
+    #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
     #
     #   * `owner-id` - The ID of the AWS account that owns the subnet.
     #
@@ -25459,6 +25875,42 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisableSerialConsoleAccessRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableSerialConsoleAccessRequest AWS API Documentation
+    #
+    class DisableSerialConsoleAccessRequest < Struct.new(
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serial_console_access_enabled
+    #   If `true`, access to the EC2 serial console of all instances is
+    #   enabled for your account. If `false`, access to the EC2 serial
+    #   console of all instances is disabled for your account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableSerialConsoleAccessResult AWS API Documentation
+    #
+    class DisableSerialConsoleAccessResult < Struct.new(
+      :serial_console_access_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisableTransitGatewayRouteTablePropagationRequest
     #   data as a hash:
     #
@@ -26950,6 +27402,42 @@ module Aws::EC2
     class EnableFastSnapshotRestoresResult < Struct.new(
       :successful,
       :unsuccessful)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass EnableSerialConsoleAccessRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableSerialConsoleAccessRequest AWS API Documentation
+    #
+    class EnableSerialConsoleAccessRequest < Struct.new(
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serial_console_access_enabled
+    #   If `true`, access to the EC2 serial console of all instances is
+    #   enabled for your account. If `false`, access to the EC2 serial
+    #   console of all instances is disabled for your account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableSerialConsoleAccessResult AWS API Documentation
+    #
+    class EnableSerialConsoleAccessResult < Struct.new(
+      :serial_console_access_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29564,6 +30052,68 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetFlowLogsIntegrationTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         flow_log_id: "VpcFlowLogId", # required
+    #         config_delivery_s3_destination_arn: "String", # required
+    #         integrate_services: { # required
+    #           athena_integrations: [
+    #             {
+    #               integration_result_s3_destination_arn: "String", # required
+    #               partition_load_frequency: "none", # required, accepts none, daily, weekly, monthly
+    #               partition_start_date: Time.now,
+    #               partition_end_date: Time.now,
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] flow_log_id
+    #   The ID of the flow log.
+    #   @return [String]
+    #
+    # @!attribute [rw] config_delivery_s3_destination_arn
+    #   To store the CloudFormation template in Amazon S3, specify the
+    #   location in Amazon S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] integrate_services
+    #   Information about the service integration.
+    #   @return [Types::IntegrateServices]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetFlowLogsIntegrationTemplateRequest AWS API Documentation
+    #
+    class GetFlowLogsIntegrationTemplateRequest < Struct.new(
+      :dry_run,
+      :flow_log_id,
+      :config_delivery_s3_destination_arn,
+      :integrate_services)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] result
+    #   The generated CloudFormation template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetFlowLogsIntegrationTemplateResult AWS API Documentation
+    #
+    class GetFlowLogsIntegrationTemplateResult < Struct.new(
+      :result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetGroupsForCapacityReservationRequest
     #   data as a hash:
     #
@@ -29994,6 +30544,42 @@ module Aws::EC2
       :target_configuration_value_rollup,
       :target_configuration_value_set,
       :validation_failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSerialConsoleAccessStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSerialConsoleAccessStatusRequest AWS API Documentation
+    #
+    class GetSerialConsoleAccessStatusRequest < Struct.new(
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serial_console_access_enabled
+    #   If `true`, access to the EC2 serial console of all instances is
+    #   enabled for your account. If `false`, access to the EC2 serial
+    #   console of all instances is disabled for your account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSerialConsoleAccessStatusResult AWS API Documentation
+    #
+    class GetSerialConsoleAccessStatusResult < Struct.new(
+      :serial_console_access_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34153,6 +34739,34 @@ module Aws::EC2
     class InstanceUsage < Struct.new(
       :account_id,
       :used_instance_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes service integrations with VPC Flow logs.
+    #
+    # @note When making an API call, you may pass IntegrateServices
+    #   data as a hash:
+    #
+    #       {
+    #         athena_integrations: [
+    #           {
+    #             integration_result_s3_destination_arn: "String", # required
+    #             partition_load_frequency: "none", # required, accepts none, daily, weekly, monthly
+    #             partition_start_date: Time.now,
+    #             partition_end_date: Time.now,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] athena_integrations
+    #   Information about the integration with Amazon Athena.
+    #   @return [Array<Types::AthenaIntegration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IntegrateServices AWS API Documentation
+    #
+    class IntegrateServices < Struct.new(
+      :athena_integrations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39402,7 +40016,8 @@ module Aws::EC2
     #   * `io2`\: 100-64,000 IOPS
     #
     #   Default: If no IOPS value is specified, the existing value is
-    #   retained.
+    #   retained, unless a volume type is modified that supports different
+    #   values.
     #   @return [Integer]
     #
     # @!attribute [rw] throughput
@@ -44078,6 +44693,66 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Information about a root volume replacement task.
+    #
+    # @!attribute [rw] replace_root_volume_task_id
+    #   The ID of the root volume replacement task.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance for which the root volume replacement task
+    #   was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_state
+    #   The state of the task. The task can be in one of the following
+    #   states:
+    #
+    #   * `pending` - the replacement volume is being created.
+    #
+    #   * `in-progress` - the original volume is being detached and the
+    #     replacement volume is being attached.
+    #
+    #   * `succeeded` - the replacement volume has been successfully
+    #     attached to the instance and the instance is available.
+    #
+    #   * `failing` - the replacement task is in the process of failing.
+    #
+    #   * `failed` - the replacement task has failed but the original root
+    #     volume is still attached.
+    #
+    #   * `failing-detached` - the replacement task is in the process of
+    #     failing. The instance might have no root volume attached.
+    #
+    #   * `failed-detached` - the replacement task has failed and the
+    #     instance has no root volume attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time the task was started.
+    #   @return [String]
+    #
+    # @!attribute [rw] complete_time
+    #   The time the task completed.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the task.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceRootVolumeTask AWS API Documentation
+    #
+    class ReplaceRootVolumeTask < Struct.new(
+      :replace_root_volume_task_id,
+      :instance_id,
+      :task_state,
+      :start_time,
+      :complete_time,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ReplaceRouteRequest
     #   data as a hash:
     #
@@ -47799,6 +48474,45 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The tags to apply to the AMI object that will be stored in the S3
+    # bucket. For more information, see [Categorizing your storage using
+    # tags][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-tagging.html
+    #
+    # @note When making an API call, you may pass S3ObjectTag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key of the tag.
+    #
+    #   Constraints: Tag keys are case-sensitive and can be up to 128
+    #   Unicode characters in length. May not begin with `aws`\:.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the tag.
+    #
+    #   Constraints: Tag values are case-sensitive and can be up to 256
+    #   Unicode characters in length.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/S3ObjectTag AWS API Documentation
+    #
+    class S3ObjectTag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the storage parameters for S3 and S3 buckets for an instance
     # store-backed AMI.
     #
@@ -51404,6 +52118,53 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The information about the AMI store task, including the progress of
+    # the task.
+    #
+    # @!attribute [rw] ami_id
+    #   The ID of the AMI that is being stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_start_time
+    #   The time the task started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] bucket
+    #   The name of the S3 bucket that contains the stored AMI object.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3object_key
+    #   The name of the stored AMI object in the bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] progress_percentage
+    #   The progress of the task as a percentage.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] store_task_state
+    #   The state of the store task (`InProgress`, `Completed`, or
+    #   `Failed`).
+    #   @return [String]
+    #
+    # @!attribute [rw] store_task_failure_reason
+    #   If the tasks fails, the reason for the failure is returned. If the
+    #   task succeeds, `null` is returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StoreImageTaskResult AWS API Documentation
+    #
+    class StoreImageTaskResult < Struct.new(
+      :ami_id,
+      :task_start_time,
+      :bucket,
+      :s3object_key,
+      :progress_percentage,
+      :store_task_state,
+      :store_task_failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a subnet.
     #
     # @!attribute [rw] availability_zone
@@ -53727,23 +54488,23 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         ipv_6_addresses: ["String"], # required
     #         network_interface_id: "NetworkInterfaceId", # required
+    #         ipv_6_addresses: ["String"], # required
     #       }
-    #
-    # @!attribute [rw] ipv_6_addresses
-    #   The IPv6 addresses to unassign from the network interface.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] network_interface_id
     #   The ID of the network interface.
     #   @return [String]
     #
+    # @!attribute [rw] ipv_6_addresses
+    #   The IPv6 addresses to unassign from the network interface.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnassignIpv6AddressesRequest AWS API Documentation
     #
     class UnassignIpv6AddressesRequest < Struct.new(
-      :ipv_6_addresses,
-      :network_interface_id)
+      :network_interface_id,
+      :ipv_6_addresses)
       SENSITIVE = []
       include Aws::Structure
     end

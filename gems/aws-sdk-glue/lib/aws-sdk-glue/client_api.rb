@@ -516,6 +516,8 @@ module Aws::Glue
     OrchestrationStringList = Shapes::ListShape.new(name: 'OrchestrationStringList')
     Order = Shapes::StructureShape.new(name: 'Order')
     OrderList = Shapes::ListShape.new(name: 'OrderList')
+    OtherMetadataValueList = Shapes::ListShape.new(name: 'OtherMetadataValueList')
+    OtherMetadataValueListItem = Shapes::StructureShape.new(name: 'OtherMetadataValueListItem')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     ParametersMap = Shapes::MapShape.new(name: 'ParametersMap')
@@ -2576,6 +2578,7 @@ module Aws::Glue
 
     MetadataInfo.add_member(:metadata_value, Shapes::ShapeRef.new(shape: MetadataValueString, location_name: "MetadataValue"))
     MetadataInfo.add_member(:created_time, Shapes::ShapeRef.new(shape: CreatedTimestamp, location_name: "CreatedTime"))
+    MetadataInfo.add_member(:other_metadata_value_list, Shapes::ShapeRef.new(shape: OtherMetadataValueList, location_name: "OtherMetadataValueList"))
     MetadataInfo.struct_class = Types::MetadataInfo
 
     MetadataInfoMap.key = Shapes::ShapeRef.new(shape: MetadataKeyString)
@@ -2624,6 +2627,12 @@ module Aws::Glue
     Order.struct_class = Types::Order
 
     OrderList.member = Shapes::ShapeRef.new(shape: Order)
+
+    OtherMetadataValueList.member = Shapes::ShapeRef.new(shape: OtherMetadataValueListItem)
+
+    OtherMetadataValueListItem.add_member(:metadata_value, Shapes::ShapeRef.new(shape: MetadataValueString, location_name: "MetadataValue"))
+    OtherMetadataValueListItem.add_member(:created_time, Shapes::ShapeRef.new(shape: CreatedTimestamp, location_name: "CreatedTime"))
+    OtherMetadataValueListItem.struct_class = Types::OtherMetadataValueListItem
 
     ParametersMap.key = Shapes::ShapeRef.new(shape: KeyString)
     ParametersMap.value = Shapes::ShapeRef.new(shape: ParametersMapValue)

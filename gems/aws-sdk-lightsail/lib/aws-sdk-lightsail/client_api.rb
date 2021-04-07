@@ -106,6 +106,8 @@ module Aws::Lightsail
     ContainerServiceRegistryLogin = Shapes::StructureShape.new(name: 'ContainerServiceRegistryLogin')
     ContainerServiceScale = Shapes::IntegerShape.new(name: 'ContainerServiceScale')
     ContainerServiceState = Shapes::StringShape.new(name: 'ContainerServiceState')
+    ContainerServiceStateDetail = Shapes::StructureShape.new(name: 'ContainerServiceStateDetail')
+    ContainerServiceStateDetailCode = Shapes::StringShape.new(name: 'ContainerServiceStateDetailCode')
     ContainerServicesListResult = Shapes::StructureShape.new(name: 'ContainerServicesListResult')
     CookieObject = Shapes::StructureShape.new(name: 'CookieObject')
     CopySnapshotRequest = Shapes::StructureShape.new(name: 'CopySnapshotRequest')
@@ -835,6 +837,7 @@ module Aws::Lightsail
     ContainerService.add_member(:power, Shapes::ShapeRef.new(shape: ContainerServicePowerName, location_name: "power"))
     ContainerService.add_member(:power_id, Shapes::ShapeRef.new(shape: string, location_name: "powerId"))
     ContainerService.add_member(:state, Shapes::ShapeRef.new(shape: ContainerServiceState, location_name: "state"))
+    ContainerService.add_member(:state_detail, Shapes::ShapeRef.new(shape: ContainerServiceStateDetail, location_name: "stateDetail"))
     ContainerService.add_member(:scale, Shapes::ShapeRef.new(shape: ContainerServiceScale, location_name: "scale"))
     ContainerService.add_member(:current_deployment, Shapes::ShapeRef.new(shape: ContainerServiceDeployment, location_name: "currentDeployment"))
     ContainerService.add_member(:next_deployment, Shapes::ShapeRef.new(shape: ContainerServiceDeployment, location_name: "nextDeployment"))
@@ -904,6 +907,10 @@ module Aws::Lightsail
     ContainerServiceRegistryLogin.add_member(:expires_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "expiresAt"))
     ContainerServiceRegistryLogin.add_member(:registry, Shapes::ShapeRef.new(shape: string, location_name: "registry"))
     ContainerServiceRegistryLogin.struct_class = Types::ContainerServiceRegistryLogin
+
+    ContainerServiceStateDetail.add_member(:code, Shapes::ShapeRef.new(shape: ContainerServiceStateDetailCode, location_name: "code"))
+    ContainerServiceStateDetail.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    ContainerServiceStateDetail.struct_class = Types::ContainerServiceStateDetail
 
     ContainerServicesListResult.add_member(:container_services, Shapes::ShapeRef.new(shape: ContainerServiceList, location_name: "containerServices"))
     ContainerServicesListResult.struct_class = Types::ContainerServicesListResult

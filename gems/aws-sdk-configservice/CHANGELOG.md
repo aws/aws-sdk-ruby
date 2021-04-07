@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2021-03-30)
+------------------
+
+* Feature - Adding new APIs to support ConformancePack Compliance CI in Aggregators
+
 1.59.0 (2021-03-10)
 ------------------
 

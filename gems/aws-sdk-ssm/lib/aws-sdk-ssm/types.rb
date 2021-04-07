@@ -152,9 +152,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags. The value parameter is required, but if you don't
-    #   want the tag to have a value, specify the parameter with no value,
-    #   and we set the value to an empty string.
+    #   One or more tags. The value parameter is required.
     #
     #   Do not enter personally identifiable information in this field.
     #   @return [Array<Types::Tag>]
@@ -234,7 +232,7 @@ module Aws::SSM
     #
     # @!attribute [rw] schedule_expression
     #   A cron expression that specifies a schedule when the association
-    #   runs.
+    #   runs. The schedule runs in Coordinated Universal Time (UTC).
     #   @return [String]
     #
     # @!attribute [rw] association_name
@@ -4882,7 +4880,7 @@ module Aws::SSM
     #
     # @!attribute [rw] reverse_order
     #   A boolean that indicates whether to list step executions in reverse
-    #   order by start time. The default value is false.
+    #   order by start time. The default value is 'false'.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationStepExecutionsRequest AWS API Documentation
@@ -6431,6 +6429,28 @@ module Aws::SSM
     #   Inventory.
     #   @return [Integer]
     #
+    # @!attribute [rw] instances_with_critical_non_compliant_patches
+    #   The number of instances where patches that are specified as
+    #   "Critical" for compliance reporting in the patch baseline are not
+    #   installed. These patches might be missing, have failed installation,
+    #   were rejected, or were installed but awaiting a required instance
+    #   reboot. The status of these instances is `NON_COMPLIANT`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instances_with_security_non_compliant_patches
+    #   The number of instances where patches that are specified as
+    #   "Security" in a patch advisory are not installed. These patches
+    #   might be missing, have failed installation, were rejected, or were
+    #   installed but awaiting a required instance reboot. The status of
+    #   these instances is `NON_COMPLIANT`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instances_with_other_non_compliant_patches
+    #   The number of instances with patches installed that are specified as
+    #   other than "Critical" or "Security" but are not compliant with
+    #   the patch baseline. The status of these instances is NON\_COMPLIANT.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchGroupStateResult AWS API Documentation
     #
     class DescribePatchGroupStateResult < Struct.new(
@@ -6442,7 +6462,10 @@ module Aws::SSM
       :instances_with_missing_patches,
       :instances_with_failed_patches,
       :instances_with_not_applicable_patches,
-      :instances_with_unreported_not_applicable_patches)
+      :instances_with_unreported_not_applicable_patches,
+      :instances_with_critical_non_compliant_patches,
+      :instances_with_security_non_compliant_patches,
+      :instances_with_other_non_compliant_patches)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7631,19 +7654,26 @@ module Aws::SSM
     #
     # @!attribute [rw] instance_id
     #   (Required) The ID of the managed instance targeted by the command. A
-    #   managed instance can be an EC2 instance or an instance in your
-    #   hybrid environment that is configured for Systems Manager.
+    #   managed instance can be an Amazon Elastic Compute Cloud (Amazon EC2)
+    #   instance or an instance in your hybrid environment that is
+    #   configured for AWS Systems Manager.
     #   @return [String]
     #
     # @!attribute [rw] plugin_name
     #   The name of the plugin for which you want detailed results. If the
     #   document contains only one plugin, you can omit the name and details
-    #   for that plugin are returned. If the document contains more than one
-    #   plugin, you must specify the name of the plugin for which you want
-    #   to view details.
+    #   for that plugin. If the document contains more than one plugin, you
+    #   must specify the name of the plugin for which you want to view
+    #   details.
     #
     #   Plugin names are also referred to as *step names* in Systems Manager
     #   documents. For example, `aws:RunShellScript` is a plugin.
+    #
+    #   To find the `PluginName`, check the document content and find the
+    #   name of the plugin. Alternatively, use ListCommandInvocations with
+    #   the `CommandId` and `Details` parameters. The `PluginName` is the
+    #   `Name` attribute of the `CommandPlugin` object in the
+    #   `CommandPlugins` list.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCommandInvocationRequest AWS API Documentation
@@ -7672,7 +7702,7 @@ module Aws::SSM
     #
     # @!attribute [rw] document_name
     #   The name of the document that was run. For example,
-    #   AWS-RunShellScript.
+    #   `AWS-RunShellScript`.
     #   @return [String]
     #
     # @!attribute [rw] document_version
@@ -7686,7 +7716,7 @@ module Aws::SSM
     #
     # @!attribute [rw] response_code
     #   The error level response code for the plugin script. If the response
-    #   code is -1, then the command has not started running on the
+    #   code is `-1`, then the command has not started running on the
     #   instance, or it was not received by the instance.
     #   @return [Integer]
     #
@@ -7703,11 +7733,11 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] execution_elapsed_time
-    #   Duration since ExecutionStartDateTime.
+    #   Duration since `ExecutionStartDateTime`.
     #   @return [String]
     #
     # @!attribute [rw] execution_end_date_time
-    #   The date and time the plugin was finished running. Date and time are
+    #   The date and time the plugin finished running. Date and time are
     #   written in ISO 8601 format. For example, June 7, 2017 is represented
     #   as 2017-06-7. The following sample AWS CLI command uses the
     #   `InvokedAfter` filter.
@@ -7720,17 +7750,17 @@ module Aws::SSM
     #
     # @!attribute [rw] status
     #   The status of this invocation plugin. This status can be different
-    #   than StatusDetails.
+    #   than `StatusDetails`.
     #   @return [String]
     #
     # @!attribute [rw] status_details
     #   A detailed status of the command execution for an invocation.
-    #   StatusDetails includes more information than Status because it
+    #   `StatusDetails` includes more information than `Status` because it
     #   includes states resulting from error and concurrency control
-    #   parameters. StatusDetails can show different results than Status.
-    #   For more information about these statuses, see [Understanding
-    #   command statuses][1] in the *AWS Systems Manager User Guide*.
-    #   StatusDetails can be one of the following values:
+    #   parameters. `StatusDetails` can show different results than
+    #   `Status`. For more information about these statuses, see
+    #   [Understanding command statuses][1] in the *AWS Systems Manager User
+    #   Guide*. `StatusDetails` can be one of the following values:
     #
     #   * Pending: The command has not been sent to the instance.
     #
@@ -7748,20 +7778,20 @@ module Aws::SSM
     #
     #   * Delivery Timed Out: The command was not delivered to the instance
     #     before the delivery timeout expired. Delivery timeouts do not
-    #     count against the parent command's MaxErrors limit, but they do
+    #     count against the parent command's `MaxErrors` limit, but they do
     #     contribute to whether the parent command status is Success or
     #     Incomplete. This is a terminal state.
     #
     #   * Execution Timed Out: The command started to run on the instance,
     #     but the execution was not complete before the timeout expired.
-    #     Execution timeouts count against the MaxErrors limit of the parent
-    #     command. This is a terminal state.
+    #     Execution timeouts count against the `MaxErrors` limit of the
+    #     parent command. This is a terminal state.
     #
     #   * Failed: The command wasn't run successfully on the instance. For
     #     a plugin, this indicates that the result code was not zero. For a
     #     command invocation, this indicates that the result code for one or
     #     more plugins was not zero. Invocation failures count against the
-    #     MaxErrors limit of the parent command. This is a terminal state.
+    #     `MaxErrors` limit of the parent command. This is a terminal state.
     #
     #   * Canceled: The command was terminated before it was completed. This
     #     is a terminal state.
@@ -7769,11 +7799,11 @@ module Aws::SSM
     #   * Undeliverable: The command can't be delivered to the instance.
     #     The instance might not exist or might not be responding.
     #     Undeliverable invocations don't count against the parent
-    #     command's MaxErrors limit and don't contribute to whether the
+    #     command's `MaxErrors` limit and don't contribute to whether the
     #     parent command status is Success or Incomplete. This is a terminal
     #     state.
     #
-    #   * Terminated: The parent command exceeded its MaxErrors limit and
+    #   * Terminated: The parent command exceeded its `MaxErrors` limit and
     #     subsequent command invocations were canceled by the system. This
     #     is a terminal state.
     #
@@ -7783,24 +7813,24 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] standard_output_content
-    #   The first 24,000 characters written by the plugin to stdout. If the
-    #   command has not finished running, if ExecutionStatus is neither
-    #   Succeeded nor Failed, then this string is empty.
+    #   The first 24,000 characters written by the plugin to `stdout`. If
+    #   the command has not finished running, if `ExecutionStatus` is
+    #   neither Succeeded nor Failed, then this string is empty.
     #   @return [String]
     #
     # @!attribute [rw] standard_output_url
-    #   The URL for the complete text written by the plugin to stdout in
-    #   Amazon S3. If an S3 bucket was not specified, then this string is
-    #   empty.
+    #   The URL for the complete text written by the plugin to `stdout` in
+    #   Amazon Simple Storage Service (Amazon S3). If an S3 bucket was not
+    #   specified, then this string is empty.
     #   @return [String]
     #
     # @!attribute [rw] standard_error_content
-    #   The first 8,000 characters written by the plugin to stderr. If the
+    #   The first 8,000 characters written by the plugin to `stderr`. If the
     #   command has not finished running, then this string is empty.
     #   @return [String]
     #
     # @!attribute [rw] standard_error_url
-    #   The URL for the complete text written by the plugin to stderr. If
+    #   The URL for the complete text written by the plugin to `stderr`. If
     #   the command has not finished running, then this string is empty.
     #   @return [String]
     #
@@ -10055,6 +10085,28 @@ module Aws::SSM
     #     patches might not be in effect until a reboot is performed.
     #   @return [String]
     #
+    # @!attribute [rw] critical_non_compliant_count
+    #   The number of instances where patches that are specified as
+    #   "Critical" for compliance reporting in the patch baseline are not
+    #   installed. These patches might be missing, have failed installation,
+    #   were rejected, or were installed but awaiting a required instance
+    #   reboot. The status of these instances is `NON_COMPLIANT`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] security_non_compliant_count
+    #   The number of instances where patches that are specified as
+    #   "Security" in a patch advisory are not installed. These patches
+    #   might be missing, have failed installation, were rejected, or were
+    #   installed but awaiting a required instance reboot. The status of
+    #   these instances is `NON_COMPLIANT`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] other_non_compliant_count
+    #   The number of instances with patches installed that are specified as
+    #   other than "Critical" or "Security" but are not compliant with
+    #   the patch baseline. The status of these instances is NON\_COMPLIANT.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstancePatchState AWS API Documentation
     #
     class InstancePatchState < Struct.new(
@@ -10076,7 +10128,10 @@ module Aws::SSM
       :operation_end_time,
       :operation,
       :last_no_reboot_install_operation_time,
-      :reboot_option)
+      :reboot_option,
+      :critical_non_compliant_count,
+      :security_non_compliant_count,
+      :other_non_compliant_count)
       SENSITIVE = [:owner_information]
       include Aws::Structure
     end
@@ -11447,7 +11502,7 @@ module Aws::SSM
     #
     # @!attribute [rw] details
     #   (Optional) If set this returns the response of the command
-    #   executions and any command output. By default this is set to False.
+    #   executions and any command output. The default value is 'false'.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCommandInvocationsRequest AWS API Documentation
@@ -15506,8 +15561,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] overwrite
-    #   Overwrite an existing parameter. If not specified, will default to
-    #   "false".
+    #   Overwrite an existing parameter. The default value is 'false'.
     #   @return [Boolean]
     #
     # @!attribute [rw] allowed_pattern
@@ -17879,6 +17933,8 @@ module Aws::SSM
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         scheduled_end_time: Time.now,
+    #         change_details: "ChangeDetailsValue",
     #       }
     #
     # @!attribute [rw] scheduled_time
@@ -17941,6 +17997,18 @@ module Aws::SSM
     #   * `Key=Region,Value=us-east-2`
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] scheduled_end_time
+    #   The time that the requester expects the runbook workflow related to
+    #   the change request to complete. The time is an estimate only that
+    #   the requester provides for reviewers.
+    #   @return [Time]
+    #
+    # @!attribute [rw] change_details
+    #   User-provided details about the change. If no details are provided,
+    #   content specified in the **Template information** section of the
+    #   associated change template is added.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartChangeRequestExecutionRequest AWS API Documentation
     #
     class StartChangeRequestExecutionRequest < Struct.new(
@@ -17951,7 +18019,9 @@ module Aws::SSM
       :change_request_name,
       :client_token,
       :runbooks,
-      :tags)
+      :tags,
+      :scheduled_end_time,
+      :change_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18543,6 +18613,55 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UnlabelParameterVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "PSParameterName", # required
+    #         parameter_version: 1, # required
+    #         labels: ["ParameterLabel"], # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The parameter name of which you want to delete one or more labels.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameter_version
+    #   The specific version of the parameter which you want to delete one
+    #   or more labels from. If it is not present, the call will fail.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] labels
+    #   One or more labels to delete from the specified parameter version.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UnlabelParameterVersionRequest AWS API Documentation
+    #
+    class UnlabelParameterVersionRequest < Struct.new(
+      :name,
+      :parameter_version,
+      :labels)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] removed_labels
+    #   A list of all labels deleted from the parameter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] invalid_labels
+    #   The labels that are not attached to the given parameter version.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UnlabelParameterVersionResult AWS API Documentation
+    #
+    class UnlabelParameterVersionResult < Struct.new(
+      :removed_labels,
+      :invalid_labels)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The calendar entry contained in the specified Systems Manager document
     # is not supported.
     #
@@ -19042,10 +19161,10 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] document_version
-    #   (Required) The latest version of the document that you want to
-    #   update. The latest document version can be specified using the
-    #   $LATEST variable or by the version number. Updating a previous
-    #   version of a document is not supported.
+    #   The version of the document that you want to update. Currently,
+    #   Systems Manager supports updating only the latest version of the
+    #   document. You can specify the version number of the latest version
+    #   or use the `$LATEST` variable.
     #   @return [String]
     #
     # @!attribute [rw] document_format
