@@ -83,6 +83,8 @@ group :test do
     gem 'webmock'
     # cucumber drop support for Ruby under 2.2 after 3.0.0
     gem 'cucumber', '2.99.0'
+    # Versions of rexml above 3.2.4 introduce breaking changes for ruby 2.0.0
+    gem 'rexml', '3.2.4'
   elsif RUBY_VERSION < '2.2'
     gem 'addressable'
     gem 'webmock'
