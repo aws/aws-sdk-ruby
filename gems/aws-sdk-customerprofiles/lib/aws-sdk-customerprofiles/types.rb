@@ -166,6 +166,8 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # The operation to be performed on the provided source fields.
+    #
     # @note When making an API call, you may pass ConnectorOperator
     #   data as a hash:
     #
@@ -178,18 +180,26 @@ module Aws::CustomerProfiles
     #       }
     #
     # @!attribute [rw] marketo
+    #   The operation to be performed on the provided Marketo source fields.
     #   @return [String]
     #
     # @!attribute [rw] s3
+    #   The operation to be performed on the provided Amazon S3 source
+    #   fields.
     #   @return [String]
     #
     # @!attribute [rw] salesforce
+    #   The operation to be performed on the provided Salesforce source
+    #   fields.
     #   @return [String]
     #
     # @!attribute [rw] service_now
+    #   The operation to be performed on the provided ServiceNow source
+    #   fields.
     #   @return [String]
     #
     # @!attribute [rw] zendesk
+    #   The operation to be performed on the provided Zendesk source fields.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ConnectorOperator AWS API Documentation
@@ -783,6 +793,10 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # The configurations that control how Customer Profiles retrieves data
+    # from the source, Amazon AppFlow. Customer Profiles uses this
+    # information to create an AppFlow flow on behalf of customers.
+    #
     # @note When making an API call, you may pass FlowDefinition
     #   data as a hash:
     #
@@ -851,21 +865,31 @@ module Aws::CustomerProfiles
     #       }
     #
     # @!attribute [rw] description
+    #   A description of the flow you want to create.
     #   @return [String]
     #
     # @!attribute [rw] flow_name
+    #   The specified name of the flow. Use underscores (\_) or hyphens (-)
+    #   only. Spaces are not allowed.
     #   @return [String]
     #
     # @!attribute [rw] kms_arn
+    #   The Amazon Resource Name of the AWS Key Management Service (KMS) key
+    #   you provide for encryption.
     #   @return [String]
     #
     # @!attribute [rw] source_flow_config
+    #   The configuration that controls how Customer Profiles retrieves data
+    #   from the source.
     #   @return [Types::SourceFlowConfig]
     #
     # @!attribute [rw] tasks
+    #   A list of tasks that Customer Profiles performs while transferring
+    #   the data in the flow run.
     #   @return [Array<Types::Task>]
     #
     # @!attribute [rw] trigger_config
+    #   The trigger settings that determine how and when the flow runs.
     #   @return [Types::TriggerConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/FlowDefinition AWS API Documentation
@@ -1170,6 +1194,9 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # Specifies the configuration used when importing incremental records
+    # from the source.
+    #
     # @note When making an API call, you may pass IncrementalPullConfig
     #   data as a hash:
     #
@@ -1178,6 +1205,8 @@ module Aws::CustomerProfiles
     #       }
     #
     # @!attribute [rw] datetime_type_field_name
+    #   A field that specifies the date time or timestamp field as the
+    #   criteria to use when importing incremental records from the source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/IncrementalPullConfig AWS API Documentation
@@ -1679,6 +1708,9 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # The properties that are applied when Marketo is being used as a
+    # source.
+    #
     # @note When making an API call, you may pass MarketoSourceProperties
     #   data as a hash:
     #
@@ -1687,6 +1719,7 @@ module Aws::CustomerProfiles
     #       }
     #
     # @!attribute [rw] object
+    #   The object specified in the Marketo flow source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/MarketoSourceProperties AWS API Documentation
@@ -1986,6 +2019,8 @@ module Aws::CustomerProfiles
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] flow_definition
+    #   The configuration that controls how Customer Profiles retrieves data
+    #   from the source.
     #   @return [Types::FlowDefinition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutIntegrationRequest AWS API Documentation
@@ -2259,6 +2294,9 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # The properties that are applied when Amazon S3 is being used as the
+    # flow source.
+    #
     # @note When making an API call, you may pass S3SourceProperties
     #   data as a hash:
     #
@@ -2268,9 +2306,12 @@ module Aws::CustomerProfiles
     #       }
     #
     # @!attribute [rw] bucket_name
+    #   The Amazon S3 bucket name where the source files are stored.
     #   @return [String]
     #
     # @!attribute [rw] bucket_prefix
+    #   The object key for the Amazon S3 bucket in which the source files
+    #   are stored.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/S3SourceProperties AWS API Documentation
@@ -2282,6 +2323,9 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # The properties that are applied when Salesforce is being used as a
+    # source.
+    #
     # @note When making an API call, you may pass SalesforceSourceProperties
     #   data as a hash:
     #
@@ -2292,12 +2336,17 @@ module Aws::CustomerProfiles
     #       }
     #
     # @!attribute [rw] object
+    #   The object specified in the Salesforce flow source.
     #   @return [String]
     #
     # @!attribute [rw] enable_dynamic_field_update
+    #   The flag that enables dynamic fetching of new (recently added)
+    #   fields in the Salesforce objects while running a flow.
     #   @return [Boolean]
     #
     # @!attribute [rw] include_deleted_records
+    #   Indicates whether Amazon AppFlow includes deleted files in the flow
+    #   run.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/SalesforceSourceProperties AWS API Documentation
@@ -2310,6 +2359,10 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # Specifies the configuration details of a scheduled-trigger flow that
+    # you define. Currently, these settings only apply to the
+    # scheduled-trigger type.
+    #
     # @note When making an API call, you may pass ScheduledTriggerProperties
     #   data as a hash:
     #
@@ -2324,24 +2377,36 @@ module Aws::CustomerProfiles
     #       }
     #
     # @!attribute [rw] schedule_expression
+    #   The scheduling expression that determines the rate at which the
+    #   schedule will run, for example rate (5 minutes).
     #   @return [String]
     #
     # @!attribute [rw] data_pull_mode
+    #   Specifies whether a scheduled flow has an incremental data transfer
+    #   or a complete data transfer for each flow run.
     #   @return [String]
     #
     # @!attribute [rw] schedule_start_time
+    #   Specifies the scheduled start time for a scheduled-trigger flow.
     #   @return [Time]
     #
     # @!attribute [rw] schedule_end_time
+    #   Specifies the scheduled end time for a scheduled-trigger flow.
     #   @return [Time]
     #
     # @!attribute [rw] timezone
+    #   Specifies the time zone used when referring to the date and time of
+    #   a scheduled-triggered flow, such as America/New\_York.
     #   @return [String]
     #
     # @!attribute [rw] schedule_offset
+    #   Specifies the optional offset that is added to the time interval for
+    #   a schedule-triggered flow.
     #   @return [Integer]
     #
     # @!attribute [rw] first_execution_from
+    #   Specifies the date range for the records to import from the
+    #   connector in the first flow run.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ScheduledTriggerProperties AWS API Documentation
@@ -2422,6 +2487,9 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # The properties that are applied when ServiceNow is being used as a
+    # source.
+    #
     # @note When making an API call, you may pass ServiceNowSourceProperties
     #   data as a hash:
     #
@@ -2430,6 +2498,7 @@ module Aws::CustomerProfiles
     #       }
     #
     # @!attribute [rw] object
+    #   The object specified in the ServiceNow flow source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ServiceNowSourceProperties AWS API Documentation
@@ -2440,6 +2509,10 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # Specifies the information that is required to query a particular
+    # Amazon AppFlow connector. Customer Profiles supports Salesforce,
+    # Zendesk, Marketo, ServiceNow and Amazon S3.
+    #
     # @note When making an API call, you may pass SourceConnectorProperties
     #   data as a hash:
     #
@@ -2465,18 +2538,27 @@ module Aws::CustomerProfiles
     #       }
     #
     # @!attribute [rw] marketo
+    #   The properties that are applied when Marketo is being used as a
+    #   source.
     #   @return [Types::MarketoSourceProperties]
     #
     # @!attribute [rw] s3
+    #   The properties that are applied when Amazon S3 is being used as the
+    #   flow source.
     #   @return [Types::S3SourceProperties]
     #
     # @!attribute [rw] salesforce
+    #   The properties that are applied when Salesforce is being used as a
+    #   source.
     #   @return [Types::SalesforceSourceProperties]
     #
     # @!attribute [rw] service_now
+    #   The properties that are applied when ServiceNow is being used as a
+    #   source.
     #   @return [Types::ServiceNowSourceProperties]
     #
     # @!attribute [rw] zendesk
+    #   The properties that are applied when using Zendesk as a flow source.
     #   @return [Types::ZendeskSourceProperties]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/SourceConnectorProperties AWS API Documentation
@@ -2491,6 +2573,9 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # Contains information about the configuration of the source connector
+    # used in the flow.
+    #
     # @note When making an API call, you may pass SourceFlowConfig
     #   data as a hash:
     #
@@ -2523,15 +2608,23 @@ module Aws::CustomerProfiles
     #       }
     #
     # @!attribute [rw] connector_profile_name
+    #   The name of the AppFlow connector profile. This name must be unique
+    #   for each connector profile in the AWS account.
     #   @return [String]
     #
     # @!attribute [rw] connector_type
+    #   The type of connector, such as Salesforce, Marketo, and so on.
     #   @return [String]
     #
     # @!attribute [rw] incremental_pull_config
+    #   Defines the configuration for a scheduled incremental data pull. If
+    #   a valid configuration is provided, the fields specified in the
+    #   configuration are used when querying for the incremental data pull.
     #   @return [Types::IncrementalPullConfig]
     #
     # @!attribute [rw] source_connector_properties
+    #   Specifies the information that is required to query a particular
+    #   source connector.
     #   @return [Types::SourceConnectorProperties]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/SourceFlowConfig AWS API Documentation
@@ -2577,6 +2670,9 @@ module Aws::CustomerProfiles
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # A class for modeling different type of tasks. Task implementation
+    # varies based on the TaskType.
+    #
     # @note When making an API call, you may pass Task
     #   data as a hash:
     #
@@ -2597,18 +2693,26 @@ module Aws::CustomerProfiles
     #       }
     #
     # @!attribute [rw] connector_operator
+    #   The operation to be performed on the provided source fields.
     #   @return [Types::ConnectorOperator]
     #
     # @!attribute [rw] destination_field
+    #   A field in a destination connector, or a field value against which
+    #   Amazon AppFlow validates a source field.
     #   @return [String]
     #
     # @!attribute [rw] source_fields
+    #   The source fields to which a particular task is applied.
     #   @return [Array<String>]
     #
     # @!attribute [rw] task_properties
+    #   A map used to store task-related information. The service looks for
+    #   particular information based on the TaskType.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] task_type
+    #   Specifies the particular task implementation that Amazon AppFlow
+    #   performs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/Task AWS API Documentation
@@ -2636,6 +2740,9 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # The trigger settings that determine how and when Amazon AppFlow runs
+    # the specified flow.
+    #
     # @note When making an API call, you may pass TriggerConfig
     #   data as a hash:
     #
@@ -2655,9 +2762,14 @@ module Aws::CustomerProfiles
     #       }
     #
     # @!attribute [rw] trigger_type
+    #   Specifies the type of flow trigger. It can be OnDemand, Scheduled,
+    #   or Event.
     #   @return [String]
     #
     # @!attribute [rw] trigger_properties
+    #   Specifies the configuration details of a schedule-triggered flow
+    #   that you define. Currently, these settings only apply to the
+    #   Scheduled trigger type.
     #   @return [Types::TriggerProperties]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/TriggerConfig AWS API Documentation
@@ -2669,6 +2781,10 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # Specifies the configuration details that control the trigger for a
+    # flow. Currently, these settings only apply to the Scheduled trigger
+    # type.
+    #
     # @note When making an API call, you may pass TriggerProperties
     #   data as a hash:
     #
@@ -2685,6 +2801,8 @@ module Aws::CustomerProfiles
     #       }
     #
     # @!attribute [rw] scheduled
+    #   Specifies the configuration details of a schedule-triggered flow
+    #   that you define.
     #   @return [Types::ScheduledTriggerProperties]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/TriggerProperties AWS API Documentation
@@ -3113,6 +3231,8 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # The properties that are applied when using Zendesk as a flow source.
+    #
     # @note When making an API call, you may pass ZendeskSourceProperties
     #   data as a hash:
     #
@@ -3121,6 +3241,7 @@ module Aws::CustomerProfiles
     #       }
     #
     # @!attribute [rw] object
+    #   The object specified in the Zendesk flow source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ZendeskSourceProperties AWS API Documentation

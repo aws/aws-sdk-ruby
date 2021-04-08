@@ -382,7 +382,7 @@ module Aws::RoboMaker
     #   resp.jobs[0].last_started_at #=> Time
     #   resp.jobs[0].last_updated_at #=> Time
     #   resp.jobs[0].failure_behavior #=> String, one of "Fail", "Continue"
-    #   resp.jobs[0].failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Object", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "InvalidS3Resource", "LimitExceeded", "MismatchedEtag", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "ResourceNotFound", "RequestThrottled", "BatchTimedOut", "BatchCanceled", "InvalidInput", "WrongRegionS3Bucket", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication", "UploadContentMismatchError"
+    #   resp.jobs[0].failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "RobotApplicationHealthCheckFailure", "SimulationApplicationHealthCheckFailure", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Object", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "InvalidS3Resource", "ThrottlingError", "LimitExceeded", "MismatchedEtag", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "ResourceNotFound", "RequestThrottled", "BatchTimedOut", "BatchCanceled", "InvalidInput", "WrongRegionS3Bucket", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication", "UploadContentMismatchError"
     #   resp.jobs[0].failure_reason #=> String
     #   resp.jobs[0].client_request_token #=> String
     #   resp.jobs[0].output_location.s3_bucket #=> String
@@ -408,6 +408,13 @@ module Aws::RoboMaker
     #   resp.jobs[0].robot_applications[0].upload_configurations[0].path #=> String
     #   resp.jobs[0].robot_applications[0].upload_configurations[0].upload_behavior #=> String, one of "UPLOAD_ON_TERMINATE", "UPLOAD_ROLLING_AUTO_REMOVE"
     #   resp.jobs[0].robot_applications[0].use_default_upload_configurations #=> Boolean
+    #   resp.jobs[0].robot_applications[0].tools #=> Array
+    #   resp.jobs[0].robot_applications[0].tools[0].stream_ui #=> Boolean
+    #   resp.jobs[0].robot_applications[0].tools[0].name #=> String
+    #   resp.jobs[0].robot_applications[0].tools[0].command #=> String
+    #   resp.jobs[0].robot_applications[0].tools[0].stream_output_to_cloud_watch #=> Boolean
+    #   resp.jobs[0].robot_applications[0].tools[0].exit_behavior #=> String, one of "FAIL", "RESTART"
+    #   resp.jobs[0].robot_applications[0].use_default_tools #=> Boolean
     #   resp.jobs[0].simulation_applications #=> Array
     #   resp.jobs[0].simulation_applications[0].application #=> String
     #   resp.jobs[0].simulation_applications[0].application_version #=> String
@@ -427,6 +434,13 @@ module Aws::RoboMaker
     #   resp.jobs[0].simulation_applications[0].world_configs #=> Array
     #   resp.jobs[0].simulation_applications[0].world_configs[0].world #=> String
     #   resp.jobs[0].simulation_applications[0].use_default_upload_configurations #=> Boolean
+    #   resp.jobs[0].simulation_applications[0].tools #=> Array
+    #   resp.jobs[0].simulation_applications[0].tools[0].stream_ui #=> Boolean
+    #   resp.jobs[0].simulation_applications[0].tools[0].name #=> String
+    #   resp.jobs[0].simulation_applications[0].tools[0].command #=> String
+    #   resp.jobs[0].simulation_applications[0].tools[0].stream_output_to_cloud_watch #=> Boolean
+    #   resp.jobs[0].simulation_applications[0].tools[0].exit_behavior #=> String, one of "FAIL", "RESTART"
+    #   resp.jobs[0].simulation_applications[0].use_default_tools #=> Boolean
     #   resp.jobs[0].data_sources #=> Array
     #   resp.jobs[0].data_sources[0].name #=> String
     #   resp.jobs[0].data_sources[0].s3_bucket #=> String
@@ -668,7 +682,7 @@ module Aws::RoboMaker
     #   resp.deployment_application_configs[0].launch_config.environment_variables #=> Hash
     #   resp.deployment_application_configs[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
     #   resp.failure_reason #=> String
-    #   resp.failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "InvalidGreengrassGroup", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "LambdaDeleted", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "InternalServerError"
+    #   resp.failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "InvalidGreengrassGroup", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "LambdaDeleted", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "BadLambdaAssociated", "InternalServerError", "RobotApplicationDoesNotExist", "DeploymentFleetDoesNotExist", "FleetDeploymentTimeout"
     #   resp.created_at #=> Time
     #   resp.deployment_config.concurrent_deployment_percentage #=> Integer
     #   resp.deployment_config.failure_threshold_percentage #=> Integer
@@ -1193,6 +1207,16 @@ module Aws::RoboMaker
     #           },
     #         ],
     #         use_default_upload_configurations: false,
+    #         tools: [
+    #           {
+    #             stream_ui: false,
+    #             name: "Name", # required
+    #             command: "UnrestrictedCommand", # required
+    #             stream_output_to_cloud_watch: false,
+    #             exit_behavior: "FAIL", # accepts FAIL, RESTART
+    #           },
+    #         ],
+    #         use_default_tools: false,
     #       },
     #     ],
     #     simulation_applications: [
@@ -1229,6 +1253,16 @@ module Aws::RoboMaker
     #           },
     #         ],
     #         use_default_upload_configurations: false,
+    #         tools: [
+    #           {
+    #             stream_ui: false,
+    #             name: "Name", # required
+    #             command: "UnrestrictedCommand", # required
+    #             stream_output_to_cloud_watch: false,
+    #             exit_behavior: "FAIL", # accepts FAIL, RESTART
+    #           },
+    #         ],
+    #         use_default_tools: false,
     #       },
     #     ],
     #     data_sources: [
@@ -1258,7 +1292,7 @@ module Aws::RoboMaker
     #   resp.last_started_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.failure_behavior #=> String, one of "Fail", "Continue"
-    #   resp.failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Object", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "InvalidS3Resource", "LimitExceeded", "MismatchedEtag", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "ResourceNotFound", "RequestThrottled", "BatchTimedOut", "BatchCanceled", "InvalidInput", "WrongRegionS3Bucket", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication", "UploadContentMismatchError"
+    #   resp.failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "RobotApplicationHealthCheckFailure", "SimulationApplicationHealthCheckFailure", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Object", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "InvalidS3Resource", "ThrottlingError", "LimitExceeded", "MismatchedEtag", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "ResourceNotFound", "RequestThrottled", "BatchTimedOut", "BatchCanceled", "InvalidInput", "WrongRegionS3Bucket", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication", "UploadContentMismatchError"
     #   resp.client_request_token #=> String
     #   resp.output_location.s3_bucket #=> String
     #   resp.output_location.s3_prefix #=> String
@@ -1283,6 +1317,13 @@ module Aws::RoboMaker
     #   resp.robot_applications[0].upload_configurations[0].path #=> String
     #   resp.robot_applications[0].upload_configurations[0].upload_behavior #=> String, one of "UPLOAD_ON_TERMINATE", "UPLOAD_ROLLING_AUTO_REMOVE"
     #   resp.robot_applications[0].use_default_upload_configurations #=> Boolean
+    #   resp.robot_applications[0].tools #=> Array
+    #   resp.robot_applications[0].tools[0].stream_ui #=> Boolean
+    #   resp.robot_applications[0].tools[0].name #=> String
+    #   resp.robot_applications[0].tools[0].command #=> String
+    #   resp.robot_applications[0].tools[0].stream_output_to_cloud_watch #=> Boolean
+    #   resp.robot_applications[0].tools[0].exit_behavior #=> String, one of "FAIL", "RESTART"
+    #   resp.robot_applications[0].use_default_tools #=> Boolean
     #   resp.simulation_applications #=> Array
     #   resp.simulation_applications[0].application #=> String
     #   resp.simulation_applications[0].application_version #=> String
@@ -1302,6 +1343,13 @@ module Aws::RoboMaker
     #   resp.simulation_applications[0].world_configs #=> Array
     #   resp.simulation_applications[0].world_configs[0].world #=> String
     #   resp.simulation_applications[0].use_default_upload_configurations #=> Boolean
+    #   resp.simulation_applications[0].tools #=> Array
+    #   resp.simulation_applications[0].tools[0].stream_ui #=> Boolean
+    #   resp.simulation_applications[0].tools[0].name #=> String
+    #   resp.simulation_applications[0].tools[0].command #=> String
+    #   resp.simulation_applications[0].tools[0].stream_output_to_cloud_watch #=> Boolean
+    #   resp.simulation_applications[0].tools[0].exit_behavior #=> String, one of "FAIL", "RESTART"
+    #   resp.simulation_applications[0].use_default_tools #=> Boolean
     #   resp.data_sources #=> Array
     #   resp.data_sources[0].name #=> String
     #   resp.data_sources[0].s3_bucket #=> String
@@ -1734,7 +1782,7 @@ module Aws::RoboMaker
     #   resp.deployment_application_configs[0].launch_config.environment_variables #=> Hash
     #   resp.deployment_application_configs[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
     #   resp.failure_reason #=> String
-    #   resp.failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "InvalidGreengrassGroup", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "LambdaDeleted", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "InternalServerError"
+    #   resp.failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "InvalidGreengrassGroup", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "LambdaDeleted", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "BadLambdaAssociated", "InternalServerError", "RobotApplicationDoesNotExist", "DeploymentFleetDoesNotExist", "FleetDeploymentTimeout"
     #   resp.created_at #=> Time
     #   resp.robot_deployment_summary #=> Array
     #   resp.robot_deployment_summary[0].arn #=> String
@@ -1746,7 +1794,7 @@ module Aws::RoboMaker
     #   resp.robot_deployment_summary[0].progress_detail.estimated_time_remaining_seconds #=> Integer
     #   resp.robot_deployment_summary[0].progress_detail.target_resource #=> String
     #   resp.robot_deployment_summary[0].failure_reason #=> String
-    #   resp.robot_deployment_summary[0].failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "InvalidGreengrassGroup", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "LambdaDeleted", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "InternalServerError"
+    #   resp.robot_deployment_summary[0].failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "InvalidGreengrassGroup", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "LambdaDeleted", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "BadLambdaAssociated", "InternalServerError", "RobotApplicationDoesNotExist", "DeploymentFleetDoesNotExist", "FleetDeploymentTimeout"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -2011,7 +2059,7 @@ module Aws::RoboMaker
     #   resp.last_started_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.failure_behavior #=> String, one of "Fail", "Continue"
-    #   resp.failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Object", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "InvalidS3Resource", "LimitExceeded", "MismatchedEtag", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "ResourceNotFound", "RequestThrottled", "BatchTimedOut", "BatchCanceled", "InvalidInput", "WrongRegionS3Bucket", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication", "UploadContentMismatchError"
+    #   resp.failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "RobotApplicationHealthCheckFailure", "SimulationApplicationHealthCheckFailure", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Object", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "InvalidS3Resource", "ThrottlingError", "LimitExceeded", "MismatchedEtag", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "ResourceNotFound", "RequestThrottled", "BatchTimedOut", "BatchCanceled", "InvalidInput", "WrongRegionS3Bucket", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication", "UploadContentMismatchError"
     #   resp.failure_reason #=> String
     #   resp.client_request_token #=> String
     #   resp.output_location.s3_bucket #=> String
@@ -2037,6 +2085,13 @@ module Aws::RoboMaker
     #   resp.robot_applications[0].upload_configurations[0].path #=> String
     #   resp.robot_applications[0].upload_configurations[0].upload_behavior #=> String, one of "UPLOAD_ON_TERMINATE", "UPLOAD_ROLLING_AUTO_REMOVE"
     #   resp.robot_applications[0].use_default_upload_configurations #=> Boolean
+    #   resp.robot_applications[0].tools #=> Array
+    #   resp.robot_applications[0].tools[0].stream_ui #=> Boolean
+    #   resp.robot_applications[0].tools[0].name #=> String
+    #   resp.robot_applications[0].tools[0].command #=> String
+    #   resp.robot_applications[0].tools[0].stream_output_to_cloud_watch #=> Boolean
+    #   resp.robot_applications[0].tools[0].exit_behavior #=> String, one of "FAIL", "RESTART"
+    #   resp.robot_applications[0].use_default_tools #=> Boolean
     #   resp.simulation_applications #=> Array
     #   resp.simulation_applications[0].application #=> String
     #   resp.simulation_applications[0].application_version #=> String
@@ -2056,6 +2111,13 @@ module Aws::RoboMaker
     #   resp.simulation_applications[0].world_configs #=> Array
     #   resp.simulation_applications[0].world_configs[0].world #=> String
     #   resp.simulation_applications[0].use_default_upload_configurations #=> Boolean
+    #   resp.simulation_applications[0].tools #=> Array
+    #   resp.simulation_applications[0].tools[0].stream_ui #=> Boolean
+    #   resp.simulation_applications[0].tools[0].name #=> String
+    #   resp.simulation_applications[0].tools[0].command #=> String
+    #   resp.simulation_applications[0].tools[0].stream_output_to_cloud_watch #=> Boolean
+    #   resp.simulation_applications[0].tools[0].exit_behavior #=> String, one of "FAIL", "RESTART"
+    #   resp.simulation_applications[0].use_default_tools #=> Boolean
     #   resp.data_sources #=> Array
     #   resp.data_sources[0].name #=> String
     #   resp.data_sources[0].s3_bucket #=> String
@@ -2146,6 +2208,13 @@ module Aws::RoboMaker
     #   resp.failed_requests[0].request.robot_applications[0].upload_configurations[0].path #=> String
     #   resp.failed_requests[0].request.robot_applications[0].upload_configurations[0].upload_behavior #=> String, one of "UPLOAD_ON_TERMINATE", "UPLOAD_ROLLING_AUTO_REMOVE"
     #   resp.failed_requests[0].request.robot_applications[0].use_default_upload_configurations #=> Boolean
+    #   resp.failed_requests[0].request.robot_applications[0].tools #=> Array
+    #   resp.failed_requests[0].request.robot_applications[0].tools[0].stream_ui #=> Boolean
+    #   resp.failed_requests[0].request.robot_applications[0].tools[0].name #=> String
+    #   resp.failed_requests[0].request.robot_applications[0].tools[0].command #=> String
+    #   resp.failed_requests[0].request.robot_applications[0].tools[0].stream_output_to_cloud_watch #=> Boolean
+    #   resp.failed_requests[0].request.robot_applications[0].tools[0].exit_behavior #=> String, one of "FAIL", "RESTART"
+    #   resp.failed_requests[0].request.robot_applications[0].use_default_tools #=> Boolean
     #   resp.failed_requests[0].request.simulation_applications #=> Array
     #   resp.failed_requests[0].request.simulation_applications[0].application #=> String
     #   resp.failed_requests[0].request.simulation_applications[0].application_version #=> String
@@ -2165,6 +2234,13 @@ module Aws::RoboMaker
     #   resp.failed_requests[0].request.simulation_applications[0].world_configs #=> Array
     #   resp.failed_requests[0].request.simulation_applications[0].world_configs[0].world #=> String
     #   resp.failed_requests[0].request.simulation_applications[0].use_default_upload_configurations #=> Boolean
+    #   resp.failed_requests[0].request.simulation_applications[0].tools #=> Array
+    #   resp.failed_requests[0].request.simulation_applications[0].tools[0].stream_ui #=> Boolean
+    #   resp.failed_requests[0].request.simulation_applications[0].tools[0].name #=> String
+    #   resp.failed_requests[0].request.simulation_applications[0].tools[0].command #=> String
+    #   resp.failed_requests[0].request.simulation_applications[0].tools[0].stream_output_to_cloud_watch #=> Boolean
+    #   resp.failed_requests[0].request.simulation_applications[0].tools[0].exit_behavior #=> String, one of "FAIL", "RESTART"
+    #   resp.failed_requests[0].request.simulation_applications[0].use_default_tools #=> Boolean
     #   resp.failed_requests[0].request.data_sources #=> Array
     #   resp.failed_requests[0].request.data_sources[0].name #=> String
     #   resp.failed_requests[0].request.data_sources[0].s3_bucket #=> String
@@ -2179,7 +2255,7 @@ module Aws::RoboMaker
     #   resp.failed_requests[0].request.tags #=> Hash
     #   resp.failed_requests[0].request.tags["TagKey"] #=> String
     #   resp.failed_requests[0].failure_reason #=> String
-    #   resp.failed_requests[0].failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Object", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "InvalidS3Resource", "LimitExceeded", "MismatchedEtag", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "ResourceNotFound", "RequestThrottled", "BatchTimedOut", "BatchCanceled", "InvalidInput", "WrongRegionS3Bucket", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication", "UploadContentMismatchError"
+    #   resp.failed_requests[0].failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "RobotApplicationHealthCheckFailure", "SimulationApplicationHealthCheckFailure", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Object", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "InvalidS3Resource", "ThrottlingError", "LimitExceeded", "MismatchedEtag", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "ResourceNotFound", "RequestThrottled", "BatchTimedOut", "BatchCanceled", "InvalidInput", "WrongRegionS3Bucket", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication", "UploadContentMismatchError"
     #   resp.failed_requests[0].failed_at #=> Time
     #   resp.pending_requests #=> Array
     #   resp.pending_requests[0].output_location.s3_bucket #=> String
@@ -2206,6 +2282,13 @@ module Aws::RoboMaker
     #   resp.pending_requests[0].robot_applications[0].upload_configurations[0].path #=> String
     #   resp.pending_requests[0].robot_applications[0].upload_configurations[0].upload_behavior #=> String, one of "UPLOAD_ON_TERMINATE", "UPLOAD_ROLLING_AUTO_REMOVE"
     #   resp.pending_requests[0].robot_applications[0].use_default_upload_configurations #=> Boolean
+    #   resp.pending_requests[0].robot_applications[0].tools #=> Array
+    #   resp.pending_requests[0].robot_applications[0].tools[0].stream_ui #=> Boolean
+    #   resp.pending_requests[0].robot_applications[0].tools[0].name #=> String
+    #   resp.pending_requests[0].robot_applications[0].tools[0].command #=> String
+    #   resp.pending_requests[0].robot_applications[0].tools[0].stream_output_to_cloud_watch #=> Boolean
+    #   resp.pending_requests[0].robot_applications[0].tools[0].exit_behavior #=> String, one of "FAIL", "RESTART"
+    #   resp.pending_requests[0].robot_applications[0].use_default_tools #=> Boolean
     #   resp.pending_requests[0].simulation_applications #=> Array
     #   resp.pending_requests[0].simulation_applications[0].application #=> String
     #   resp.pending_requests[0].simulation_applications[0].application_version #=> String
@@ -2225,6 +2308,13 @@ module Aws::RoboMaker
     #   resp.pending_requests[0].simulation_applications[0].world_configs #=> Array
     #   resp.pending_requests[0].simulation_applications[0].world_configs[0].world #=> String
     #   resp.pending_requests[0].simulation_applications[0].use_default_upload_configurations #=> Boolean
+    #   resp.pending_requests[0].simulation_applications[0].tools #=> Array
+    #   resp.pending_requests[0].simulation_applications[0].tools[0].stream_ui #=> Boolean
+    #   resp.pending_requests[0].simulation_applications[0].tools[0].name #=> String
+    #   resp.pending_requests[0].simulation_applications[0].tools[0].command #=> String
+    #   resp.pending_requests[0].simulation_applications[0].tools[0].stream_output_to_cloud_watch #=> Boolean
+    #   resp.pending_requests[0].simulation_applications[0].tools[0].exit_behavior #=> String, one of "FAIL", "RESTART"
+    #   resp.pending_requests[0].simulation_applications[0].use_default_tools #=> Boolean
     #   resp.pending_requests[0].data_sources #=> Array
     #   resp.pending_requests[0].data_sources[0].name #=> String
     #   resp.pending_requests[0].data_sources[0].s3_bucket #=> String
@@ -2549,7 +2639,7 @@ module Aws::RoboMaker
     #   resp.deployment_jobs[0].deployment_config.download_condition_file.key #=> String
     #   resp.deployment_jobs[0].deployment_config.download_condition_file.etag #=> String
     #   resp.deployment_jobs[0].failure_reason #=> String
-    #   resp.deployment_jobs[0].failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "InvalidGreengrassGroup", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "LambdaDeleted", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "InternalServerError"
+    #   resp.deployment_jobs[0].failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "InvalidGreengrassGroup", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "LambdaDeleted", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "BadLambdaAssociated", "InternalServerError", "RobotApplicationDoesNotExist", "DeploymentFleetDoesNotExist", "FleetDeploymentTimeout"
     #   resp.deployment_jobs[0].created_at #=> Time
     #   resp.next_token #=> String
     #
@@ -3392,6 +3482,16 @@ module Aws::RoboMaker
     #               },
     #             ],
     #             use_default_upload_configurations: false,
+    #             tools: [
+    #               {
+    #                 stream_ui: false,
+    #                 name: "Name", # required
+    #                 command: "UnrestrictedCommand", # required
+    #                 stream_output_to_cloud_watch: false,
+    #                 exit_behavior: "FAIL", # accepts FAIL, RESTART
+    #               },
+    #             ],
+    #             use_default_tools: false,
     #           },
     #         ],
     #         simulation_applications: [
@@ -3428,6 +3528,16 @@ module Aws::RoboMaker
     #               },
     #             ],
     #             use_default_upload_configurations: false,
+    #             tools: [
+    #               {
+    #                 stream_ui: false,
+    #                 name: "Name", # required
+    #                 command: "UnrestrictedCommand", # required
+    #                 stream_output_to_cloud_watch: false,
+    #                 exit_behavior: "FAIL", # accepts FAIL, RESTART
+    #               },
+    #             ],
+    #             use_default_tools: false,
     #           },
     #         ],
     #         data_sources: [
@@ -3490,6 +3600,13 @@ module Aws::RoboMaker
     #   resp.failed_requests[0].request.robot_applications[0].upload_configurations[0].path #=> String
     #   resp.failed_requests[0].request.robot_applications[0].upload_configurations[0].upload_behavior #=> String, one of "UPLOAD_ON_TERMINATE", "UPLOAD_ROLLING_AUTO_REMOVE"
     #   resp.failed_requests[0].request.robot_applications[0].use_default_upload_configurations #=> Boolean
+    #   resp.failed_requests[0].request.robot_applications[0].tools #=> Array
+    #   resp.failed_requests[0].request.robot_applications[0].tools[0].stream_ui #=> Boolean
+    #   resp.failed_requests[0].request.robot_applications[0].tools[0].name #=> String
+    #   resp.failed_requests[0].request.robot_applications[0].tools[0].command #=> String
+    #   resp.failed_requests[0].request.robot_applications[0].tools[0].stream_output_to_cloud_watch #=> Boolean
+    #   resp.failed_requests[0].request.robot_applications[0].tools[0].exit_behavior #=> String, one of "FAIL", "RESTART"
+    #   resp.failed_requests[0].request.robot_applications[0].use_default_tools #=> Boolean
     #   resp.failed_requests[0].request.simulation_applications #=> Array
     #   resp.failed_requests[0].request.simulation_applications[0].application #=> String
     #   resp.failed_requests[0].request.simulation_applications[0].application_version #=> String
@@ -3509,6 +3626,13 @@ module Aws::RoboMaker
     #   resp.failed_requests[0].request.simulation_applications[0].world_configs #=> Array
     #   resp.failed_requests[0].request.simulation_applications[0].world_configs[0].world #=> String
     #   resp.failed_requests[0].request.simulation_applications[0].use_default_upload_configurations #=> Boolean
+    #   resp.failed_requests[0].request.simulation_applications[0].tools #=> Array
+    #   resp.failed_requests[0].request.simulation_applications[0].tools[0].stream_ui #=> Boolean
+    #   resp.failed_requests[0].request.simulation_applications[0].tools[0].name #=> String
+    #   resp.failed_requests[0].request.simulation_applications[0].tools[0].command #=> String
+    #   resp.failed_requests[0].request.simulation_applications[0].tools[0].stream_output_to_cloud_watch #=> Boolean
+    #   resp.failed_requests[0].request.simulation_applications[0].tools[0].exit_behavior #=> String, one of "FAIL", "RESTART"
+    #   resp.failed_requests[0].request.simulation_applications[0].use_default_tools #=> Boolean
     #   resp.failed_requests[0].request.data_sources #=> Array
     #   resp.failed_requests[0].request.data_sources[0].name #=> String
     #   resp.failed_requests[0].request.data_sources[0].s3_bucket #=> String
@@ -3523,7 +3647,7 @@ module Aws::RoboMaker
     #   resp.failed_requests[0].request.tags #=> Hash
     #   resp.failed_requests[0].request.tags["TagKey"] #=> String
     #   resp.failed_requests[0].failure_reason #=> String
-    #   resp.failed_requests[0].failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Object", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "InvalidS3Resource", "LimitExceeded", "MismatchedEtag", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "ResourceNotFound", "RequestThrottled", "BatchTimedOut", "BatchCanceled", "InvalidInput", "WrongRegionS3Bucket", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication", "UploadContentMismatchError"
+    #   resp.failed_requests[0].failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "RobotApplicationHealthCheckFailure", "SimulationApplicationHealthCheckFailure", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Object", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "InvalidS3Resource", "ThrottlingError", "LimitExceeded", "MismatchedEtag", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "ResourceNotFound", "RequestThrottled", "BatchTimedOut", "BatchCanceled", "InvalidInput", "WrongRegionS3Bucket", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication", "UploadContentMismatchError"
     #   resp.failed_requests[0].failed_at #=> Time
     #   resp.pending_requests #=> Array
     #   resp.pending_requests[0].output_location.s3_bucket #=> String
@@ -3550,6 +3674,13 @@ module Aws::RoboMaker
     #   resp.pending_requests[0].robot_applications[0].upload_configurations[0].path #=> String
     #   resp.pending_requests[0].robot_applications[0].upload_configurations[0].upload_behavior #=> String, one of "UPLOAD_ON_TERMINATE", "UPLOAD_ROLLING_AUTO_REMOVE"
     #   resp.pending_requests[0].robot_applications[0].use_default_upload_configurations #=> Boolean
+    #   resp.pending_requests[0].robot_applications[0].tools #=> Array
+    #   resp.pending_requests[0].robot_applications[0].tools[0].stream_ui #=> Boolean
+    #   resp.pending_requests[0].robot_applications[0].tools[0].name #=> String
+    #   resp.pending_requests[0].robot_applications[0].tools[0].command #=> String
+    #   resp.pending_requests[0].robot_applications[0].tools[0].stream_output_to_cloud_watch #=> Boolean
+    #   resp.pending_requests[0].robot_applications[0].tools[0].exit_behavior #=> String, one of "FAIL", "RESTART"
+    #   resp.pending_requests[0].robot_applications[0].use_default_tools #=> Boolean
     #   resp.pending_requests[0].simulation_applications #=> Array
     #   resp.pending_requests[0].simulation_applications[0].application #=> String
     #   resp.pending_requests[0].simulation_applications[0].application_version #=> String
@@ -3569,6 +3700,13 @@ module Aws::RoboMaker
     #   resp.pending_requests[0].simulation_applications[0].world_configs #=> Array
     #   resp.pending_requests[0].simulation_applications[0].world_configs[0].world #=> String
     #   resp.pending_requests[0].simulation_applications[0].use_default_upload_configurations #=> Boolean
+    #   resp.pending_requests[0].simulation_applications[0].tools #=> Array
+    #   resp.pending_requests[0].simulation_applications[0].tools[0].stream_ui #=> Boolean
+    #   resp.pending_requests[0].simulation_applications[0].tools[0].name #=> String
+    #   resp.pending_requests[0].simulation_applications[0].tools[0].command #=> String
+    #   resp.pending_requests[0].simulation_applications[0].tools[0].stream_output_to_cloud_watch #=> Boolean
+    #   resp.pending_requests[0].simulation_applications[0].tools[0].exit_behavior #=> String, one of "FAIL", "RESTART"
+    #   resp.pending_requests[0].simulation_applications[0].use_default_tools #=> Boolean
     #   resp.pending_requests[0].data_sources #=> Array
     #   resp.pending_requests[0].data_sources[0].name #=> String
     #   resp.pending_requests[0].data_sources[0].s3_bucket #=> String
@@ -3657,7 +3795,7 @@ module Aws::RoboMaker
     #   resp.deployment_application_configs[0].launch_config.environment_variables #=> Hash
     #   resp.deployment_application_configs[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
     #   resp.failure_reason #=> String
-    #   resp.failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "InvalidGreengrassGroup", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "LambdaDeleted", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "InternalServerError"
+    #   resp.failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "InvalidGreengrassGroup", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "LambdaDeleted", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "BadLambdaAssociated", "InternalServerError", "RobotApplicationDoesNotExist", "DeploymentFleetDoesNotExist", "FleetDeploymentTimeout"
     #   resp.created_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SyncDeploymentJob AWS API Documentation
@@ -3960,7 +4098,7 @@ module Aws::RoboMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-robomaker'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

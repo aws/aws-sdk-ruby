@@ -505,6 +505,9 @@
   "LocationService": {
     "models": "location/2020-11-19"
   },
+  "LookoutEquipment": {
+    "models": "lookoutequipment/2020-12-15"
+  },
   "LookoutMetrics": {
     "models": "lookoutmetrics/2017-07-25",
     "addPlugins": [

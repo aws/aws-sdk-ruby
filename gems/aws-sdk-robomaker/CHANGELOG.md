@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2021-04-08)
+------------------
+
+* Feature - This release allows RoboMaker customers to specify custom tools to run with their simulation job
+
 1.34.0 (2021-03-10)
 ------------------
 

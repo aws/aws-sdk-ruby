@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.443.0 (2021-04-08)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::LookoutEquipment`.
+
 1.442.0 (2021-04-07)
 ------------------
 

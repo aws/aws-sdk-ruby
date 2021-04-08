@@ -1032,9 +1032,12 @@ module Aws::AutoScaling
     #
     #   resp = client.create_auto_scaling_group({
     #     auto_scaling_group_name: "my-auto-scaling-group", 
-    #     health_check_grace_period: 120, 
+    #     health_check_grace_period: 300, 
     #     health_check_type: "ELB", 
-    #     launch_configuration_name: "my-launch-config", 
+    #     launch_template: {
+    #       launch_template_id: "lt-0a20c965061f64abc", 
+    #       version: "$Default", 
+    #     }, 
     #     max_size: 3, 
     #     min_size: 1, 
     #     target_group_arns: [
@@ -1043,23 +1046,45 @@ module Aws::AutoScaling
     #     vpc_zone_identifier: "subnet-057fa0918fEXAMPLE, subnet-610acd08EXAMPLE", 
     #   })
     #
-    # @example Example: To create an Auto Scaling group with an attached load balancer
+    # @example Example: To create an Auto Scaling group with a mixed instances policy
     #
-    #   # This example creates an Auto Scaling group and attaches the specified Classic Load Balancer.
+    #   # This example creates an Auto Scaling group with a mixed instances policy. It specifies the c5.large, c5a.large, and
+    #   # c6g.large instance types and defines a different launch template for the c6g.large instance type.
     #
     #   resp = client.create_auto_scaling_group({
-    #     auto_scaling_group_name: "my-auto-scaling-group", 
-    #     availability_zones: [
-    #       "us-west-2c", 
-    #     ], 
-    #     health_check_grace_period: 120, 
-    #     health_check_type: "ELB", 
-    #     launch_configuration_name: "my-launch-config", 
-    #     load_balancer_names: [
-    #       "my-load-balancer", 
-    #     ], 
-    #     max_size: 3, 
+    #     auto_scaling_group_name: "my-asg", 
+    #     desired_capacity: 3, 
+    #     max_size: 5, 
     #     min_size: 1, 
+    #     mixed_instances_policy: {
+    #       instances_distribution: {
+    #         on_demand_base_capacity: 1, 
+    #         on_demand_percentage_above_base_capacity: 50, 
+    #         spot_allocation_strategy: "capacity-optimized", 
+    #       }, 
+    #       launch_template: {
+    #         launch_template_specification: {
+    #           launch_template_name: "my-launch-template-for-x86", 
+    #           version: "$Latest", 
+    #         }, 
+    #         overrides: [
+    #           {
+    #             instance_type: "c6g.large", 
+    #             launch_template_specification: {
+    #               launch_template_name: "my-launch-template-for-arm", 
+    #               version: "$Latest", 
+    #             }, 
+    #           }, 
+    #           {
+    #             instance_type: "c5.large", 
+    #           }, 
+    #           {
+    #             instance_type: "c5a.large", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     }, 
+    #     vpc_zone_identifier: "subnet-057fa0918fEXAMPLE, subnet-610acd08EXAMPLE", 
     #   })
     #
     # @example Request syntax with placeholder values
@@ -1567,8 +1592,8 @@ module Aws::AutoScaling
     # @option params [Boolean] :force_delete
     #   Specifies that the group is to be deleted along with all instances
     #   associated with the group, without waiting for all instances to be
-    #   terminated. This parameter also deletes any lifecycle actions
-    #   associated with the group.
+    #   terminated. This parameter also deletes any outstanding lifecycle
+    #   actions associated with the group.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1847,6 +1872,35 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
+    # Deletes the warm pool for the specified Auto Scaling group.
+    #
+    # @option params [required, String] :auto_scaling_group_name
+    #   The name of the Auto Scaling group.
+    #
+    # @option params [Boolean] :force_delete
+    #   Specifies that the warm pool is to be deleted along with all instances
+    #   associated with the warm pool, without waiting for all instances to be
+    #   terminated. This parameter also deletes any outstanding lifecycle
+    #   actions associated with the warm pool instances.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_warm_pool({
+    #     auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #     force_delete: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteWarmPool AWS API Documentation
+    #
+    # @overload delete_warm_pool(params = {})
+    # @param [Hash] params ({})
+    def delete_warm_pool(params = {}, options = {})
+      req = build_request(:delete_warm_pool, params)
+      req.send_request(options)
+    end
+
     # Describes the current Amazon EC2 Auto Scaling resource quotas for your
     # AWS account.
     #
@@ -2078,7 +2132,7 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].instances[0].instance_id #=> String
     #   resp.auto_scaling_groups[0].instances[0].instance_type #=> String
     #   resp.auto_scaling_groups[0].instances[0].availability_zone #=> String
-    #   resp.auto_scaling_groups[0].instances[0].lifecycle_state #=> String, one of "Pending", "Pending:Wait", "Pending:Proceed", "Quarantined", "InService", "Terminating", "Terminating:Wait", "Terminating:Proceed", "Terminated", "Detaching", "Detached", "EnteringStandby", "Standby"
+    #   resp.auto_scaling_groups[0].instances[0].lifecycle_state #=> String, one of "Pending", "Pending:Wait", "Pending:Proceed", "Quarantined", "InService", "Terminating", "Terminating:Wait", "Terminating:Proceed", "Terminated", "Detaching", "Detached", "EnteringStandby", "Standby", "Warmed:Pending", "Warmed:Pending:Wait", "Warmed:Pending:Proceed", "Warmed:Terminating", "Warmed:Terminating:Wait", "Warmed:Terminating:Proceed", "Warmed:Terminated", "Warmed:Stopped", "Warmed:Running"
     #   resp.auto_scaling_groups[0].instances[0].health_status #=> String
     #   resp.auto_scaling_groups[0].instances[0].launch_configuration_name #=> String
     #   resp.auto_scaling_groups[0].instances[0].launch_template.launch_template_id #=> String
@@ -2108,6 +2162,11 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].service_linked_role_arn #=> String
     #   resp.auto_scaling_groups[0].max_instance_lifetime #=> Integer
     #   resp.auto_scaling_groups[0].capacity_rebalance #=> Boolean
+    #   resp.auto_scaling_groups[0].warm_pool_configuration.max_group_prepared_capacity #=> Integer
+    #   resp.auto_scaling_groups[0].warm_pool_configuration.min_size #=> Integer
+    #   resp.auto_scaling_groups[0].warm_pool_configuration.pool_state #=> String, one of "Stopped", "Running"
+    #   resp.auto_scaling_groups[0].warm_pool_configuration.status #=> String, one of "PendingDelete"
+    #   resp.auto_scaling_groups[0].warm_pool_size #=> Integer
     #   resp.next_token #=> String
     #
     #
@@ -2347,6 +2406,10 @@ module Aws::AutoScaling
     #   resp.instance_refreshes[0].end_time #=> Time
     #   resp.instance_refreshes[0].percentage_complete #=> Integer
     #   resp.instance_refreshes[0].instances_to_update #=> Integer
+    #   resp.instance_refreshes[0].progress_details.live_pool_progress.percentage_complete #=> Integer
+    #   resp.instance_refreshes[0].progress_details.live_pool_progress.instances_to_update #=> Integer
+    #   resp.instance_refreshes[0].progress_details.warm_pool_progress.percentage_complete #=> Integer
+    #   resp.instance_refreshes[0].progress_details.warm_pool_progress.instances_to_update #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeInstanceRefreshes AWS API Documentation
@@ -3381,6 +3444,62 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
+    # Describes a warm pool and its instances.
+    #
+    # @option params [required, String] :auto_scaling_group_name
+    #   The name of the Auto Scaling group.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of instances to return with this call. The maximum
+    #   value is `50`.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of instances to return. (You received this
+    #   token from a previous call.)
+    #
+    # @return [Types::DescribeWarmPoolAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeWarmPoolAnswer#warm_pool_configuration #warm_pool_configuration} => Types::WarmPoolConfiguration
+    #   * {Types::DescribeWarmPoolAnswer#instances #instances} => Array&lt;Types::Instance&gt;
+    #   * {Types::DescribeWarmPoolAnswer#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_warm_pool({
+    #     auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #     max_records: 1,
+    #     next_token: "XmlString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.warm_pool_configuration.max_group_prepared_capacity #=> Integer
+    #   resp.warm_pool_configuration.min_size #=> Integer
+    #   resp.warm_pool_configuration.pool_state #=> String, one of "Stopped", "Running"
+    #   resp.warm_pool_configuration.status #=> String, one of "PendingDelete"
+    #   resp.instances #=> Array
+    #   resp.instances[0].instance_id #=> String
+    #   resp.instances[0].instance_type #=> String
+    #   resp.instances[0].availability_zone #=> String
+    #   resp.instances[0].lifecycle_state #=> String, one of "Pending", "Pending:Wait", "Pending:Proceed", "Quarantined", "InService", "Terminating", "Terminating:Wait", "Terminating:Proceed", "Terminated", "Detaching", "Detached", "EnteringStandby", "Standby", "Warmed:Pending", "Warmed:Pending:Wait", "Warmed:Pending:Proceed", "Warmed:Terminating", "Warmed:Terminating:Wait", "Warmed:Terminating:Proceed", "Warmed:Terminated", "Warmed:Stopped", "Warmed:Running"
+    #   resp.instances[0].health_status #=> String
+    #   resp.instances[0].launch_configuration_name #=> String
+    #   resp.instances[0].launch_template.launch_template_id #=> String
+    #   resp.instances[0].launch_template.launch_template_name #=> String
+    #   resp.instances[0].launch_template.version #=> String
+    #   resp.instances[0].protected_from_scale_in #=> Boolean
+    #   resp.instances[0].weighted_capacity #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeWarmPool AWS API Documentation
+    #
+    # @overload describe_warm_pool(params = {})
+    # @param [Hash] params ({})
+    def describe_warm_pool(params = {}, options = {})
+      req = build_request(:describe_warm_pool, params)
+      req.send_request(options)
+    end
+
     # Removes one or more instances from the specified Auto Scaling group.
     #
     # After the instances are detached, you can manage them independent of
@@ -3601,6 +3720,20 @@ module Aws::AutoScaling
     #
     #   * `GroupTotalCapacity`
     #
+    #   * `WarmPoolDesiredCapacity`
+    #
+    #   * `WarmPoolWarmedCapacity`
+    #
+    #   * `WarmPoolPendingCapacity`
+    #
+    #   * `WarmPoolTerminatingCapacity`
+    #
+    #   * `WarmPoolTotalCapacity`
+    #
+    #   * `GroupAndWarmPoolDesiredCapacity`
+    #
+    #   * `GroupAndWarmPoolTotalCapacity`
+    #
     #   If you omit this parameter, all metrics are disabled.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -3676,6 +3809,22 @@ module Aws::AutoScaling
     #   * `GroupTerminatingCapacity`
     #
     #   * `GroupTotalCapacity`
+    #
+    #   The warm pools feature supports the following additional metrics:
+    #
+    #   * `WarmPoolDesiredCapacity`
+    #
+    #   * `WarmPoolWarmedCapacity`
+    #
+    #   * `WarmPoolPendingCapacity`
+    #
+    #   * `WarmPoolTerminatingCapacity`
+    #
+    #   * `WarmPoolTotalCapacity`
+    #
+    #   * `GroupAndWarmPoolDesiredCapacity`
+    #
+    #   * `GroupAndWarmPoolTotalCapacity`
     #
     #   If you omit this parameter, all metrics are enabled.
     #
@@ -4331,7 +4480,7 @@ module Aws::AutoScaling
     #     target_tracking_configuration: {
     #       predefined_metric_specification: {
     #         predefined_metric_type: "ALBRequestCountPerTarget", 
-    #         resource_label: "app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d", 
+    #         resource_label: "app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff", 
     #       }, 
     #       target_value: 1000.0, 
     #     }, 
@@ -4527,6 +4676,92 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
+    # Adds a warm pool to the specified Auto Scaling group. A warm pool is a
+    # pool of pre-initialized EC2 instances that sits alongside the Auto
+    # Scaling group. Whenever your application needs to scale out, the Auto
+    # Scaling group can draw on the warm pool to meet its new desired
+    # capacity. For more information, see [Warm pools for Amazon EC2 Auto
+    # Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    # This operation must be called from the Region in which the Auto
+    # Scaling group was created. This operation cannot be called on an Auto
+    # Scaling group that has a mixed instances policy or a launch template
+    # or launch configuration that requests Spot Instances.
+    #
+    # You can view the instances in the warm pool using the DescribeWarmPool
+    # API call. If you are no longer using a warm pool, you can delete it by
+    # calling the DeleteWarmPool API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html
+    #
+    # @option params [required, String] :auto_scaling_group_name
+    #   The name of the Auto Scaling group.
+    #
+    # @option params [Integer] :max_group_prepared_capacity
+    #   Specifies the total maximum number of instances that are allowed to be
+    #   in the warm pool or in any state except `Terminated` for the Auto
+    #   Scaling group. This is an optional property. Specify it only if the
+    #   warm pool size should not be determined by the difference between the
+    #   group's maximum capacity and its desired capacity.
+    #
+    #   Amazon EC2 Auto Scaling will launch and maintain either the difference
+    #   between the group's maximum capacity and its desired capacity, if a
+    #   value for `MaxGroupPreparedCapacity` is not specified, or the
+    #   difference between the `MaxGroupPreparedCapacity` and the desired
+    #   capacity, if a value for `MaxGroupPreparedCapacity` is specified.
+    #
+    #    The size of the warm pool is dynamic. Only when
+    #   `MaxGroupPreparedCapacity` and `MinSize` are set to the same value
+    #   does the warm pool have an absolute size.
+    #
+    #   If the desired capacity of the Auto Scaling group is higher than the
+    #   `MaxGroupPreparedCapacity`, the capacity of the warm pool is 0. To
+    #   remove a value that you previously set, include the property but
+    #   specify -1 for the value.
+    #
+    # @option params [Integer] :min_size
+    #   Specifies the minimum number of instances to maintain in the warm
+    #   pool. This helps you to ensure that there is always a certain number
+    #   of warmed instances available to handle traffic spikes. Defaults to 0
+    #   if not specified.
+    #
+    # @option params [String] :pool_state
+    #   Sets the instance state to transition to after the lifecycle hooks
+    #   finish. Valid values are: `Stopped` (default) or `Running`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To add a warm pool to an Auto Scaling group
+    #
+    #   # This example adds a warm pool to the specified Auto Scaling group.
+    #
+    #   resp = client.put_warm_pool({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     min_size: 30, 
+    #     pool_state: "Stopped", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_warm_pool({
+    #     auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #     max_group_prepared_capacity: 1,
+    #     min_size: 1,
+    #     pool_state: "Stopped", # accepts Stopped, Running
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutWarmPool AWS API Documentation
+    #
+    # @overload put_warm_pool(params = {})
+    # @param [Hash] params ({})
+    def put_warm_pool(params = {}, options = {})
+      req = build_request(:put_warm_pool, params)
+      req.send_request(options)
+    end
+
     # Records a heartbeat for the lifecycle action associated with the
     # specified token or instance. This extends the timeout by the length of
     # time defined using the PutLifecycleHook API call.
@@ -4552,12 +4787,12 @@ module Aws::AutoScaling
     # 5.  If you finish before the timeout period ends, complete the
     #     lifecycle action.
     #
-    # For more information, see [Auto Scaling lifecycle][1] in the *Amazon
-    # EC2 Auto Scaling User Guide*.
+    # For more information, see [Amazon EC2 Auto Scaling lifecycle hooks][1]
+    # in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html
     #
     # @option params [required, String] :lifecycle_hook_name
     #   The name of the lifecycle hook.
@@ -4792,6 +5027,7 @@ module Aws::AutoScaling
     end
 
     # Updates the instance protection settings of the specified instances.
+    # This operation cannot be called on instances in a warm pool.
     #
     # For more information about preventing instances that are part of an
     # Auto Scaling group from terminating on scale in, see [Instance
@@ -4859,8 +5095,8 @@ module Aws::AutoScaling
     end
 
     # Starts a new instance refresh operation, which triggers a rolling
-    # replacement of all previously launched instances in the Auto Scaling
-    # group with a new group of instances.
+    # replacement of previously launched instances in the Auto Scaling group
+    # with a new group of instances.
     #
     # If successful, this call creates a new instance refresh request with a
     # unique ID that you can use to track its progress. To query its status,
@@ -5025,7 +5261,8 @@ module Aws::AutoScaling
     end
 
     # Terminates the specified instance and optionally adjusts the desired
-    # group size.
+    # group size. This operation cannot be called on instances in a warm
+    # pool.
     #
     # This call simply makes a termination request. The instance is not
     # terminated immediately. When an instance is terminated, the instance
@@ -5408,7 +5645,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

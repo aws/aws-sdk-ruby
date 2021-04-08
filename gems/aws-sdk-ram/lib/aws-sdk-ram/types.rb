@@ -133,7 +133,9 @@ module Aws::RAM
     #   @return [Array<String>]
     #
     # @!attribute [rw] principals
-    #   The principals.
+    #   The principals to associate with the resource share. The possible
+    #   values are IDs of AWS accounts, and the ARNs of organizational units
+    #   (OU) or organizations from AWS Organizations.
     #   @return [Array<String>]
     #
     # @!attribute [rw] client_token
@@ -960,12 +962,21 @@ module Aws::RAM
     # @!attribute [rw] resource_type
     #   The resource type.
     #
-    #   Valid values: `codebuild:Project` \| `codebuild:ReportGroup` \|
-    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \| `ec2:Subnet` \|
+    #   Valid values: `acm-pca:CertificateAuthority` \| `appmesh:Mesh` \|
+    #   `codebuild:Project` \| `codebuild:ReportGroup` \|
+    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \|
+    #   `ec2:LocalGatewayRouteTable` \| `ec2:PrefixList` \| `ec2:Subnet` \|
     #   `ec2:TrafficMirrorTarget` \| `ec2:TransitGateway` \|
     #   `imagebuilder:Component` \| `imagebuilder:Image` \|
-    #   `imagebuilder:ImageRecipe` \| `license-manager:LicenseConfiguration`
-    #   I `resource-groups:Group` \| `rds:Cluster` \|
+    #   `imagebuilder:ImageRecipe` \| `imagebuilder:ContainerRecipe` \|
+    #   `glue:Catalog` \| `glue:Database` \| `glue:Table` \|
+    #   `license-manager:LicenseConfiguration` I
+    #   `network-firewall:FirewallPolicy` \|
+    #   `network-firewall:StatefulRuleGroup` \|
+    #   `network-firewall:StatelessRuleGroup` \| `outposts:Outpost` \|
+    #   `resource-groups:Group` \| `rds:Cluster` \|
+    #   `route53resolver:FirewallRuleGroup`
+    #   \|`route53resolver:ResolverQueryLogConfig` \|
     #   `route53resolver:ResolverRule`
     #   @return [String]
     #
@@ -1135,12 +1146,21 @@ module Aws::RAM
     # @!attribute [rw] resource_type
     #   The resource type.
     #
-    #   Valid values: `codebuild:Project` \| `codebuild:ReportGroup` \|
-    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \| `ec2:Subnet` \|
+    #   Valid values: `acm-pca:CertificateAuthority` \| `appmesh:Mesh` \|
+    #   `codebuild:Project` \| `codebuild:ReportGroup` \|
+    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \|
+    #   `ec2:LocalGatewayRouteTable` \| `ec2:PrefixList` \| `ec2:Subnet` \|
     #   `ec2:TrafficMirrorTarget` \| `ec2:TransitGateway` \|
     #   `imagebuilder:Component` \| `imagebuilder:Image` \|
-    #   `imagebuilder:ImageRecipe` \| `license-manager:LicenseConfiguration`
-    #   I `resource-groups:Group` \| `rds:Cluster` \|
+    #   `imagebuilder:ImageRecipe` \| `imagebuilder:ContainerRecipe` \|
+    #   `glue:Catalog` \| `glue:Database` \| `glue:Table` \|
+    #   `license-manager:LicenseConfiguration` I
+    #   `network-firewall:FirewallPolicy` \|
+    #   `network-firewall:StatefulRuleGroup` \|
+    #   `network-firewall:StatelessRuleGroup` \| `outposts:Outpost` \|
+    #   `resource-groups:Group` \| `rds:Cluster` \|
+    #   `route53resolver:FirewallRuleGroup`
+    #   \|`route53resolver:ResolverQueryLogConfig` \|
     #   `route53resolver:ResolverRule`
     #   @return [String]
     #

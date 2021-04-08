@@ -115,6 +115,7 @@ module Aws::RoboMaker
     EnvironmentVariableKey = Shapes::StringShape.new(name: 'EnvironmentVariableKey')
     EnvironmentVariableMap = Shapes::MapShape.new(name: 'EnvironmentVariableMap')
     EnvironmentVariableValue = Shapes::StringShape.new(name: 'EnvironmentVariableValue')
+    ExitBehavior = Shapes::StringShape.new(name: 'ExitBehavior')
     FailedAt = Shapes::TimestampShape.new(name: 'FailedAt')
     FailedCreateSimulationJobRequest = Shapes::StructureShape.new(name: 'FailedCreateSimulationJobRequest')
     FailedCreateSimulationJobRequests = Shapes::ListShape.new(name: 'FailedCreateSimulationJobRequests')
@@ -259,6 +260,9 @@ module Aws::RoboMaker
     TemplateSummaries = Shapes::ListShape.new(name: 'TemplateSummaries')
     TemplateSummary = Shapes::StructureShape.new(name: 'TemplateSummary')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    Tool = Shapes::StructureShape.new(name: 'Tool')
+    Tools = Shapes::ListShape.new(name: 'Tools')
+    UnrestrictedCommand = Shapes::StringShape.new(name: 'UnrestrictedCommand')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateRobotApplicationRequest = Shapes::StructureShape.new(name: 'UpdateRobotApplicationRequest')
@@ -1023,6 +1027,8 @@ module Aws::RoboMaker
     RobotApplicationConfig.add_member(:launch_config, Shapes::ShapeRef.new(shape: LaunchConfig, required: true, location_name: "launchConfig"))
     RobotApplicationConfig.add_member(:upload_configurations, Shapes::ShapeRef.new(shape: UploadConfigurations, location_name: "uploadConfigurations"))
     RobotApplicationConfig.add_member(:use_default_upload_configurations, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "useDefaultUploadConfigurations"))
+    RobotApplicationConfig.add_member(:tools, Shapes::ShapeRef.new(shape: Tools, location_name: "tools"))
+    RobotApplicationConfig.add_member(:use_default_tools, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "useDefaultTools"))
     RobotApplicationConfig.struct_class = Types::RobotApplicationConfig
 
     RobotApplicationConfigs.member = Shapes::ShapeRef.new(shape: RobotApplicationConfig)
@@ -1079,6 +1085,8 @@ module Aws::RoboMaker
     SimulationApplicationConfig.add_member(:upload_configurations, Shapes::ShapeRef.new(shape: UploadConfigurations, location_name: "uploadConfigurations"))
     SimulationApplicationConfig.add_member(:world_configs, Shapes::ShapeRef.new(shape: WorldConfigs, location_name: "worldConfigs"))
     SimulationApplicationConfig.add_member(:use_default_upload_configurations, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "useDefaultUploadConfigurations"))
+    SimulationApplicationConfig.add_member(:tools, Shapes::ShapeRef.new(shape: Tools, location_name: "tools"))
+    SimulationApplicationConfig.add_member(:use_default_tools, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "useDefaultTools"))
     SimulationApplicationConfig.struct_class = Types::SimulationApplicationConfig
 
     SimulationApplicationConfigs.member = Shapes::ShapeRef.new(shape: SimulationApplicationConfig)
@@ -1235,6 +1243,15 @@ module Aws::RoboMaker
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    Tool.add_member(:stream_ui, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "streamUI"))
+    Tool.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    Tool.add_member(:command, Shapes::ShapeRef.new(shape: UnrestrictedCommand, required: true, location_name: "command"))
+    Tool.add_member(:stream_output_to_cloud_watch, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "streamOutputToCloudWatch"))
+    Tool.add_member(:exit_behavior, Shapes::ShapeRef.new(shape: ExitBehavior, location_name: "exitBehavior"))
+    Tool.struct_class = Types::Tool
+
+    Tools.member = Shapes::ShapeRef.new(shape: Tool)
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))

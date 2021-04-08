@@ -1033,6 +1033,16 @@ module Aws::RoboMaker
     #               },
     #             ],
     #             use_default_upload_configurations: false,
+    #             tools: [
+    #               {
+    #                 stream_ui: false,
+    #                 name: "Name", # required
+    #                 command: "UnrestrictedCommand", # required
+    #                 stream_output_to_cloud_watch: false,
+    #                 exit_behavior: "FAIL", # accepts FAIL, RESTART
+    #               },
+    #             ],
+    #             use_default_tools: false,
     #           },
     #         ],
     #         simulation_applications: [
@@ -1069,6 +1079,16 @@ module Aws::RoboMaker
     #               },
     #             ],
     #             use_default_upload_configurations: false,
+    #             tools: [
+    #               {
+    #                 stream_ui: false,
+    #                 name: "Name", # required
+    #                 command: "UnrestrictedCommand", # required
+    #                 stream_output_to_cloud_watch: false,
+    #                 exit_behavior: "FAIL", # accepts FAIL, RESTART
+    #               },
+    #             ],
+    #             use_default_tools: false,
     #           },
     #         ],
     #         data_sources: [
@@ -4811,6 +4831,16 @@ module Aws::RoboMaker
     #           },
     #         ],
     #         use_default_upload_configurations: false,
+    #         tools: [
+    #           {
+    #             stream_ui: false,
+    #             name: "Name", # required
+    #             command: "UnrestrictedCommand", # required
+    #             stream_output_to_cloud_watch: false,
+    #             exit_behavior: "FAIL", # accepts FAIL, RESTART
+    #           },
+    #         ],
+    #         use_default_tools: false,
     #       }
     #
     # @!attribute [rw] application
@@ -4837,6 +4867,16 @@ module Aws::RoboMaker
     #   If you set this value, you must specify an `outputLocation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tools
+    #   Information about tools configured for the robot application.
+    #   @return [Array<Types::Tool>]
+    #
+    # @!attribute [rw] use_default_tools
+    #   A Boolean indicating whether to use default robot application tools.
+    #   The default tools are rviz, rqt, terminal and rosbag record. The
+    #   default is `False`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/RobotApplicationConfig AWS API Documentation
     #
     class RobotApplicationConfig < Struct.new(
@@ -4844,7 +4884,9 @@ module Aws::RoboMaker
       :application_version,
       :launch_config,
       :upload_configurations,
-      :use_default_upload_configurations)
+      :use_default_upload_configurations,
+      :tools,
+      :use_default_tools)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5060,6 +5102,16 @@ module Aws::RoboMaker
     #           },
     #         ],
     #         use_default_upload_configurations: false,
+    #         tools: [
+    #           {
+    #             stream_ui: false,
+    #             name: "Name", # required
+    #             command: "UnrestrictedCommand", # required
+    #             stream_output_to_cloud_watch: false,
+    #             exit_behavior: "FAIL", # accepts FAIL, RESTART
+    #           },
+    #         ],
+    #         use_default_tools: false,
     #       }
     #
     # @!attribute [rw] application
@@ -5091,6 +5143,16 @@ module Aws::RoboMaker
     #   If you set this value, you must specify an `outputLocation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tools
+    #   Information about tools configured for the simulation application.
+    #   @return [Array<Types::Tool>]
+    #
+    # @!attribute [rw] use_default_tools
+    #   A Boolean indicating whether to use default simulation application
+    #   tools. The default tools are rviz, rqt, terminal and rosbag record.
+    #   The default is `False`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationApplicationConfig AWS API Documentation
     #
     class SimulationApplicationConfig < Struct.new(
@@ -5099,7 +5161,9 @@ module Aws::RoboMaker
       :launch_config,
       :upload_configurations,
       :world_configs,
-      :use_default_upload_configurations)
+      :use_default_upload_configurations,
+      :tools,
+      :use_default_tools)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5413,6 +5477,16 @@ module Aws::RoboMaker
     #               },
     #             ],
     #             use_default_upload_configurations: false,
+    #             tools: [
+    #               {
+    #                 stream_ui: false,
+    #                 name: "Name", # required
+    #                 command: "UnrestrictedCommand", # required
+    #                 stream_output_to_cloud_watch: false,
+    #                 exit_behavior: "FAIL", # accepts FAIL, RESTART
+    #               },
+    #             ],
+    #             use_default_tools: false,
     #           },
     #         ],
     #         simulation_applications: [
@@ -5449,6 +5523,16 @@ module Aws::RoboMaker
     #               },
     #             ],
     #             use_default_upload_configurations: false,
+    #             tools: [
+    #               {
+    #                 stream_ui: false,
+    #                 name: "Name", # required
+    #                 command: "UnrestrictedCommand", # required
+    #                 stream_output_to_cloud_watch: false,
+    #                 exit_behavior: "FAIL", # accepts FAIL, RESTART
+    #               },
+    #             ],
+    #             use_default_tools: false,
     #           },
     #         ],
     #         data_sources: [
@@ -5748,6 +5832,16 @@ module Aws::RoboMaker
     #                   },
     #                 ],
     #                 use_default_upload_configurations: false,
+    #                 tools: [
+    #                   {
+    #                     stream_ui: false,
+    #                     name: "Name", # required
+    #                     command: "UnrestrictedCommand", # required
+    #                     stream_output_to_cloud_watch: false,
+    #                     exit_behavior: "FAIL", # accepts FAIL, RESTART
+    #                   },
+    #                 ],
+    #                 use_default_tools: false,
     #               },
     #             ],
     #             simulation_applications: [
@@ -5784,6 +5878,16 @@ module Aws::RoboMaker
     #                   },
     #                 ],
     #                 use_default_upload_configurations: false,
+    #                 tools: [
+    #                   {
+    #                     stream_ui: false,
+    #                     name: "Name", # required
+    #                     command: "UnrestrictedCommand", # required
+    #                     stream_output_to_cloud_watch: false,
+    #                     exit_behavior: "FAIL", # accepts FAIL, RESTART
+    #                   },
+    #                 ],
+    #                 use_default_tools: false,
     #               },
     #             ],
     #             data_sources: [
@@ -6203,6 +6307,59 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
+    # Information about a tool. Tools are used in a simulation job.
+    #
+    # @note When making an API call, you may pass Tool
+    #   data as a hash:
+    #
+    #       {
+    #         stream_ui: false,
+    #         name: "Name", # required
+    #         command: "UnrestrictedCommand", # required
+    #         stream_output_to_cloud_watch: false,
+    #         exit_behavior: "FAIL", # accepts FAIL, RESTART
+    #       }
+    #
+    # @!attribute [rw] stream_ui
+    #   Boolean indicating whether a streaming session will be configured
+    #   for the tool. If `True`, AWS RoboMaker will configure a connection
+    #   so you can interact with the tool as it is running in the
+    #   simulation. It must have a graphical user interface. The default is
+    #   `False`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] name
+    #   The name of the tool.
+    #   @return [String]
+    #
+    # @!attribute [rw] command
+    #   Command-line arguments for the tool. It must include the tool
+    #   executable name.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_output_to_cloud_watch
+    #   Boolean indicating whether logs will be recorded in CloudWatch for
+    #   the tool. The default is `False`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] exit_behavior
+    #   Exit behavior determines what happens when your tool quits running.
+    #   `RESTART` will cause your tool to be restarted. `FAIL` will cause
+    #   your job to exit. The default is `RESTART`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/Tool AWS API Documentation
+    #
+    class Tool < Struct.new(
+      :stream_ui,
+      :name,
+      :command,
+      :stream_output_to_cloud_watch,
+      :exit_behavior)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
     #
@@ -6547,7 +6704,7 @@ module Aws::RoboMaker
     #   @return [String]
     #
     # @!attribute [rw] upload_behavior
-    #   Specifies how to upload the files:
+    #   Specifies when to upload the files:
     #
     #   UPLOAD\_ON\_TERMINATE
     #

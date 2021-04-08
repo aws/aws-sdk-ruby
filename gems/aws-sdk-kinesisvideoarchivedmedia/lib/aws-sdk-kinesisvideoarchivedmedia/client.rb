@@ -1035,7 +1035,7 @@ module Aws::KinesisVideoArchivedMedia
     #     recommended to use a value of `NEVER` to ensure the media player
     #     timeline most accurately maps to the producer timestamps.
     #
-    #   * `ON_DISCONTIUNITY`\: a discontinuity marker is placed between
+    #   * `ON_DISCONTINUITY`\: a discontinuity marker is placed between
     #     fragments that have a gap or overlap of more than 50 milliseconds.
     #     For most playback scenarios, it is recommended to use a value of
     #     `ON_DISCONTINUITY` so that the media player timeline is only reset
@@ -1328,7 +1328,7 @@ module Aws::KinesisVideoArchivedMedia
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideoarchivedmedia'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

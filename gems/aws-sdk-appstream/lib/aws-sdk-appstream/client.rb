@@ -1023,7 +1023,7 @@ module Aws::AppStream
     #   resp.image_builder.instance_type #=> String
     #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019"
     #   resp.image_builder.iam_role_arn #=> String
-    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
+    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builder.state_change_reason.message #=> String
     #   resp.image_builder.created_time #=> Time
@@ -1290,6 +1290,118 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Creates a new image with the latest Windows operating system updates,
+    # driver updates, and AppStream 2.0 agent software.
+    #
+    # For more information, see the "Update an Image by Using Managed
+    # AppStream 2.0 Image Updates" section in [Administer Your AppStream
+    # 2.0 Images][1], in the *Amazon AppStream 2.0 Administration Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/administer-images.html
+    #
+    # @option params [required, String] :existing_image_name
+    #   The name of the image to update.
+    #
+    # @option params [required, String] :new_image_name
+    #   The name of the new image. The name must be unique within the AWS
+    #   account and Region.
+    #
+    # @option params [String] :new_image_description
+    #   The description to display for the new image.
+    #
+    # @option params [String] :new_image_display_name
+    #   The name to display for the new image.
+    #
+    # @option params [Hash<String,String>] :new_image_tags
+    #   The tags to associate with the new image. A tag is a key-value pair,
+    #   and the value is optional. For example, Environment=Test. If you do
+    #   not specify a value, Environment=.
+    #
+    #   Generally allowed characters are: letters, numbers, and spaces
+    #   representable in UTF-8, and the following special characters:
+    #
+    #   \_ . : / = + \\ - @
+    #
+    #   If you do not specify a value, the value is set to an empty string.
+    #
+    #   For more information about tags, see [Tagging Your Resources][1] in
+    #   the *Amazon AppStream 2.0 Administration Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Indicates whether to display the status of image update availability
+    #   before AppStream 2.0 initiates the process of creating a new updated
+    #   image. If this value is set to `true`, AppStream 2.0 displays whether
+    #   image updates are available. If this value is set to `false`,
+    #   AppStream 2.0 initiates the process of creating a new updated image
+    #   without displaying whether image updates are available.
+    #
+    # @return [Types::CreateUpdatedImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateUpdatedImageResult#image #image} => Types::Image
+    #   * {Types::CreateUpdatedImageResult#can_update_image #can_update_image} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_updated_image({
+    #     existing_image_name: "Name", # required
+    #     new_image_name: "Name", # required
+    #     new_image_description: "Description",
+    #     new_image_display_name: "DisplayName",
+    #     new_image_tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image.name #=> String
+    #   resp.image.arn #=> String
+    #   resp.image.base_image_arn #=> String
+    #   resp.image.display_name #=> String
+    #   resp.image.state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING", "CREATING", "IMPORTING"
+    #   resp.image.visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
+    #   resp.image.image_builder_supported #=> Boolean
+    #   resp.image.image_builder_name #=> String
+    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019"
+    #   resp.image.description #=> String
+    #   resp.image.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE"
+    #   resp.image.state_change_reason.message #=> String
+    #   resp.image.applications #=> Array
+    #   resp.image.applications[0].name #=> String
+    #   resp.image.applications[0].display_name #=> String
+    #   resp.image.applications[0].icon_url #=> String
+    #   resp.image.applications[0].launch_path #=> String
+    #   resp.image.applications[0].launch_parameters #=> String
+    #   resp.image.applications[0].enabled #=> Boolean
+    #   resp.image.applications[0].metadata #=> Hash
+    #   resp.image.applications[0].metadata["String"] #=> String
+    #   resp.image.created_time #=> Time
+    #   resp.image.public_base_image_released_date #=> Time
+    #   resp.image.appstream_agent_version #=> String
+    #   resp.image.image_permissions.allow_fleet #=> Boolean
+    #   resp.image.image_permissions.allow_image_builder #=> Boolean
+    #   resp.image.image_errors #=> Array
+    #   resp.image.image_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.image.image_errors[0].error_message #=> String
+    #   resp.image.image_errors[0].error_timestamp #=> Time
+    #   resp.can_update_image #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUpdatedImage AWS API Documentation
+    #
+    # @overload create_updated_image(params = {})
+    # @param [Hash] params ({})
+    def create_updated_image(params = {}, options = {})
+      req = build_request(:create_updated_image, params)
+      req.send_request(options)
+    end
+
     # Creates a usage report subscription. Usage reports are generated
     # daily.
     #
@@ -1457,6 +1569,10 @@ module Aws::AppStream
     #   resp.image.appstream_agent_version #=> String
     #   resp.image.image_permissions.allow_fleet #=> Boolean
     #   resp.image.image_permissions.allow_image_builder #=> Boolean
+    #   resp.image.image_errors #=> Array
+    #   resp.image.image_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.image.image_errors[0].error_message #=> String
+    #   resp.image.image_errors[0].error_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImage AWS API Documentation
     #
@@ -1496,7 +1612,7 @@ module Aws::AppStream
     #   resp.image_builder.instance_type #=> String
     #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019"
     #   resp.image_builder.iam_role_arn #=> String
-    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
+    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builder.state_change_reason.message #=> String
     #   resp.image_builder.created_time #=> Time
@@ -1787,7 +1903,7 @@ module Aws::AppStream
     #   resp.image_builders[0].instance_type #=> String
     #   resp.image_builders[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019"
     #   resp.image_builders[0].iam_role_arn #=> String
-    #   resp.image_builders[0].state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
+    #   resp.image_builders[0].state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"
     #   resp.image_builders[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builders[0].state_change_reason.message #=> String
     #   resp.image_builders[0].created_time #=> Time
@@ -1934,6 +2050,10 @@ module Aws::AppStream
     #   resp.images[0].appstream_agent_version #=> String
     #   resp.images[0].image_permissions.allow_fleet #=> Boolean
     #   resp.images[0].image_permissions.allow_image_builder #=> Boolean
+    #   resp.images[0].image_errors #=> Array
+    #   resp.images[0].image_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+    #   resp.images[0].image_errors[0].error_message #=> String
+    #   resp.images[0].image_errors[0].error_timestamp #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImages AWS API Documentation
@@ -2514,7 +2634,7 @@ module Aws::AppStream
     #   resp.image_builder.instance_type #=> String
     #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019"
     #   resp.image_builder.iam_role_arn #=> String
-    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
+    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builder.state_change_reason.message #=> String
     #   resp.image_builder.created_time #=> Time
@@ -2592,7 +2712,7 @@ module Aws::AppStream
     #   resp.image_builder.instance_type #=> String
     #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019"
     #   resp.image_builder.iam_role_arn #=> String
-    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
+    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builder.state_change_reason.message #=> String
     #   resp.image_builder.created_time #=> Time
@@ -3188,7 +3308,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -160,6 +160,7 @@ module Aws
   autoload :LicenseManager, 'aws-sdk-licensemanager'
   autoload :Lightsail, 'aws-sdk-lightsail'
   autoload :LocationService, 'aws-sdk-locationservice'
+  autoload :LookoutEquipment, 'aws-sdk-lookoutequipment'
   autoload :LookoutMetrics, 'aws-sdk-lookoutmetrics'
   autoload :LookoutforVision, 'aws-sdk-lookoutforvision'
   autoload :MQ, 'aws-sdk-mq'

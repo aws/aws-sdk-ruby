@@ -377,6 +377,7 @@ module Aws
             'LicenseManager' => 'license-manager',
             'Lightsail' => 'lightsail',
             'LocationService' => 'geo',
+            'LookoutEquipment' => 'lookoutequipment',
             'LookoutMetrics' => 'lookoutmetrics',
             'LookoutforVision' => 'lookoutvision',
             'MQ' => 'mq',
