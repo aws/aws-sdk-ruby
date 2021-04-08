@@ -38,14 +38,14 @@ module Aws
         end
 
         let(:ten_meg_file) do
-          Tempfile.new('one-meg-file').tap do |f|
+          Tempfile.new('ten-meg-file').tap do |f|
             10.times { f.write(one_mb) }
             f.rewind
           end
         end
 
         let(:one_hundred_seventeen_meg_file) do
-          Tempfile.new('one-meg-file').tap do |f|
+          Tempfile.new('one-hundred-seventeen-meg-file').tap do |f|
             117.times { f.write(one_mb) }
             f.rewind
           end
