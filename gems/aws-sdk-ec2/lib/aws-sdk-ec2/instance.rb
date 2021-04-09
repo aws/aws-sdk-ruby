@@ -973,10 +973,10 @@ module Aws::EC2
     #   This option is supported only for HVM instances. Specifying this
     #   option with a PV instance can make it unreachable.
     # @option options [Array<String>] :groups
-    #   \[EC2-VPC\] Changes the security groups of the instance. You must
-    #   specify at least one security group, even if it's just the default
-    #   security group for the VPC. You must specify the security group ID,
-    #   not the security group name.
+    #   \[EC2-VPC\] Replaces the security groups of the instance with the
+    #   specified security groups. You must specify at least one security
+    #   group, even if it's just the default security group for the VPC. You
+    #   must specify the security group ID, not the security group name.
     # @option options [Types::AttributeValue] :instance_initiated_shutdown_behavior
     #   Specifies whether an instance stops or terminates when you initiate
     #   shutdown from the instance (using the operating system command for

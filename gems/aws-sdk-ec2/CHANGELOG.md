@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.234.0 (2021-04-09)
+------------------
+
+* Feature - Add paginator support to DescribeStoreImageTasks and update documentation.
+
 1.233.0 (2021-04-06)
 ------------------
 

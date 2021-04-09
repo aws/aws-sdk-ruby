@@ -120,7 +120,7 @@ module Aws::EC2
       data[:requester_managed]
     end
 
-    # Indicates whether traffic to or from the instance is validated.
+    # Indicates whether source/destination checking is enabled.
     # @return [Boolean]
     def source_dest_check
       data[:source_dest_check]
@@ -535,15 +535,12 @@ module Aws::EC2
     #   one group, even if it's just the default security group in the VPC.
     #   You must specify the ID of the security group, not the name.
     # @option options [Types::AttributeBooleanValue] :source_dest_check
-    #   Indicates whether source/destination checking is enabled. A value of
-    #   `true` means checking is enabled, and `false` means checking is
-    #   disabled. This value must be `false` for a NAT instance to perform
-    #   NAT. For more information, see [NAT Instances][1] in the *Amazon
-    #   Virtual Private Cloud User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html
+    #   Enable or disable source/destination checks, which ensure that the
+    #   instance is either the source or the destination of any traffic that
+    #   it receives. If the value is `true`, source/destination checks are
+    #   enabled; otherwise, they are disabled. The default value is `true`.
+    #   You must disable source/destination checks if the instance runs
+    #   services such as network address translation, routing, or firewalls.
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(network_interface_id: @id)

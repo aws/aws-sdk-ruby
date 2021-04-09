@@ -1023,11 +1023,11 @@ module Aws::EC2
     #     ],
     #     availability_zone: "String",
     #     availability_zone_id: "String",
-    #     cidr_block: "String", # required
     #     ipv_6_cidr_block: "String",
     #     outpost_arn: "String",
     #     vpc_id: "VpcId", # required
     #     dry_run: false,
+    #     cidr_block: "String", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::TagSpecification>] :tag_specifications
@@ -1052,11 +1052,6 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions
     # @option options [String] :availability_zone_id
     #   The AZ ID or the Local Zone ID of the subnet.
-    # @option options [required, String] :cidr_block
-    #   The IPv4 network range for the subnet, in CIDR notation. For example,
-    #   `10.0.0.0/24`. We modify the specified CIDR block to its canonical
-    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
-    #   `100.68.0.0/18`.
     # @option options [String] :ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
@@ -1071,6 +1066,11 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [required, String] :cidr_block
+    #   The IPv4 network range for the subnet, in CIDR notation. For example,
+    #   `10.0.0.0/24`. We modify the specified CIDR block to its canonical
+    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
+    #   `100.68.0.0/18`.
     # @return [Subnet]
     def create_subnet(options = {})
       resp = @client.create_subnet(options)

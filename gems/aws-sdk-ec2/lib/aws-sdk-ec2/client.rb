@@ -1682,12 +1682,12 @@ module Aws::EC2
     # single IPv6 CIDR block with your subnet. An IPv6 CIDR block must have
     # a prefix length of /64.
     #
+    # @option params [required, String] :subnet_id
+    #   The ID of your subnet.
+    #
     # @option params [required, String] :ipv_6_cidr_block
     #   The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix
     #   length.
-    #
-    # @option params [required, String] :subnet_id
-    #   The ID of your subnet.
     #
     # @return [Types::AssociateSubnetCidrBlockResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1697,8 +1697,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_subnet_cidr_block({
-    #     ipv_6_cidr_block: "String", # required
     #     subnet_id: "SubnetId", # required
+    #     ipv_6_cidr_block: "String", # required
     #   })
     #
     # @example Response structure
@@ -5420,7 +5420,7 @@ module Aws::EC2
     #
     # For information about the supported operating systems, image formats,
     # and known limitations for the types of instances you can export, see
-    # [Exporting an Instance as a VM Using VM Import/Export][1] in the *VM
+    # [Exporting an instance as a VM Using VM Import/Export][1] in the *VM
     # Import/Export User Guide*.
     #
     #
@@ -8483,12 +8483,6 @@ module Aws::EC2
     # @option params [String] :availability_zone_id
     #   The AZ ID or the Local Zone ID of the subnet.
     #
-    # @option params [required, String] :cidr_block
-    #   The IPv4 network range for the subnet, in CIDR notation. For example,
-    #   `10.0.0.0/24`. We modify the specified CIDR block to its canonical
-    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
-    #   `100.68.0.0/18`.
-    #
     # @option params [String] :ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
@@ -8506,6 +8500,12 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :cidr_block
+    #   The IPv4 network range for the subnet, in CIDR notation. For example,
+    #   `10.0.0.0/24`. We modify the specified CIDR block to its canonical
+    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
+    #   `100.68.0.0/18`.
     #
     # @return [Types::CreateSubnetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8550,11 +8550,11 @@ module Aws::EC2
     #     ],
     #     availability_zone: "String",
     #     availability_zone_id: "String",
-    #     cidr_block: "String", # required
     #     ipv_6_cidr_block: "String",
     #     outpost_arn: "String",
     #     vpc_id: "VpcId", # required
     #     dry_run: false,
+    #     cidr_block: "String", # required
     #   })
     #
     # @example Response structure
@@ -14620,6 +14620,9 @@ module Aws::EC2
     #       constraints, or instance limit constraints. Failed requests are
     #       retained for 60 minutes.
     #
+    #   * `start-date` - The date and time at which the Capacity Reservation
+    #     was started.
+    #
     #   * `end-date` - The date and time at which the Capacity Reservation
     #     expires. When a Capacity Reservation expires, the reserved capacity
     #     is released and you can no longer launch instances into it. The
@@ -18347,7 +18350,7 @@ module Aws::EC2
     #   * `memory-info.size-in-mib` - The memory size.
     #
     #   * `network-info.efa-info.maximum-efa-interfaces` - The maximum number
-    #     of Elastic Fabric Adapters (EFAs) per instance. (`true` \| `false`).
+    #     of Elastic Fabric Adapters (EFAs) per instance.
     #
     #   * `network-info.efa-supported` - Indicates whether the instance type
     #     supports Elastic Fabric Adapter (EFA) (`true` \| `false`).
@@ -24633,11 +24636,10 @@ module Aws::EC2
     # Instance pricing history][1] in the *Amazon EC2 User Guide for Linux
     # Instances*.
     #
-    # When you specify a start and end time, this operation returns the
-    # prices of the instance types within the time range that you specified
-    # and the time when the price changed. The price is valid within the
-    # time period that you specified; the response merely indicates the last
-    # time that the price changed.
+    # When you specify a start and end time, the operation returns the
+    # prices of the instance types within that time range. It also returns
+    # the last price change before the start time, which is the effective
+    # price as of the start time.
     #
     #
     #
@@ -24925,6 +24927,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeStoreImageTasksResult#store_image_task_results #store_image_task_results} => Array&lt;Types::StoreImageTaskResult&gt;
     #   * {Types::DescribeStoreImageTasksResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -29702,8 +29706,8 @@ module Aws::EC2
     end
 
     # Exports an Amazon Machine Image (AMI) to a VM file. For more
-    # information, see [Exporting a VM Directory from an Amazon Machine
-    # Image (AMI)][1] in the *VM Import/Export User Guide*.
+    # information, see [Exporting a VM directly from an Amazon Machine Image
+    # (AMI)][1] in the *VM Import/Export User Guide*.
     #
     #
     #
@@ -31471,9 +31475,10 @@ module Aws::EC2
     end
 
     # Import single or multi-volume disk images or EBS snapshots into an
-    # Amazon Machine Image (AMI). For more information, see [Importing a VM
-    # as an Image Using VM Import/Export][1] in the *VM Import/Export User
-    # Guide*.
+    # Amazon Machine Image (AMI).
+    #
+    # For more information, see [Importing a VM as an image using VM
+    # Import/Export][1] in the *VM Import/Export User Guide*.
     #
     #
     #
@@ -31697,16 +31702,22 @@ module Aws::EC2
     end
 
     # Creates an import instance task using metadata from the specified disk
-    # image. `ImportInstance` only supports single-volume VMs. To import
-    # multi-volume VMs, use ImportImage. For more information, see
-    # [Importing a Virtual Machine Using the Amazon EC2 CLI][1].
+    # image.
+    #
+    # This API action supports only single-volume VMs. To import
+    # multi-volume VMs, use ImportImage instead.
+    #
+    # This API action is not supported by the AWS Command Line Interface
+    # (AWS CLI). For information about using the Amazon EC2 CLI, which is
+    # deprecated, see [Importing a VM to Amazon EC2][1] in the *Amazon EC2
+    # CLI Reference* PDF file.
     #
     # For information about the import manifest referenced by this API
     # action, see [VM Import Manifest][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ec2-cli-vmimport-export.html
+    # [1]: https://awsdocs.s3.amazonaws.com/EC2/ec2-clt.pdf#UsingVirtualMachinesinAmazonEC2
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html
     #
     # @option params [String] :description
@@ -31895,6 +31906,13 @@ module Aws::EC2
 
     # Imports a disk into an EBS snapshot.
     #
+    # For more information, see [Importing a disk as a snapshot using VM
+    # Import/Export][1] in the *VM Import/Export User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-import-snapshot.html
+    #
     # @option params [Types::ClientData] :client_data
     #   The client-specific data.
     #
@@ -32041,14 +32059,23 @@ module Aws::EC2
     end
 
     # Creates an import volume task using metadata from the specified disk
-    # image.For more information, see [Importing Disks to Amazon EBS][1].
+    # image.
+    #
+    # This API action supports only single-volume VMs. To import
+    # multi-volume VMs, use ImportImage instead. To import a disk to a
+    # snapshot, use ImportSnapshot instead.
+    #
+    # This API action is not supported by the AWS Command Line Interface
+    # (AWS CLI). For information about using the Amazon EC2 CLI, which is
+    # deprecated, see [Importing Disks to Amazon EBS][1] in the *Amazon EC2
+    # CLI Reference* PDF file.
     #
     # For information about the import manifest referenced by this API
     # action, see [VM Import Manifest][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/importing-your-volumes-into-amazon-ebs.html
+    # [1]: https://awsdocs.s3.amazonaws.com/EC2/ec2-clt.pdf#importing-your-volumes-into-amazon-ebs
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html
     #
     # @option params [required, String] :availability_zone
@@ -33199,10 +33226,10 @@ module Aws::EC2
     #   option with a PV instance can make it unreachable.
     #
     # @option params [Array<String>] :groups
-    #   \[EC2-VPC\] Changes the security groups of the instance. You must
-    #   specify at least one security group, even if it's just the default
-    #   security group for the VPC. You must specify the security group ID,
-    #   not the security group name.
+    #   \[EC2-VPC\] Replaces the security groups of the instance with the
+    #   specified security groups. You must specify at least one security
+    #   group, even if it's just the default security group for the VPC. You
+    #   must specify the security group ID, not the security group name.
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance.
@@ -33877,15 +33904,12 @@ module Aws::EC2
     #   The ID of the network interface.
     #
     # @option params [Types::AttributeBooleanValue] :source_dest_check
-    #   Indicates whether source/destination checking is enabled. A value of
-    #   `true` means checking is enabled, and `false` means checking is
-    #   disabled. This value must be `false` for a NAT instance to perform
-    #   NAT. For more information, see [NAT Instances][1] in the *Amazon
-    #   Virtual Private Cloud User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html
+    #   Enable or disable source/destination checks, which ensure that the
+    #   instance is either the source or the destination of any traffic that
+    #   it receives. If the value is `true`, source/destination checks are
+    #   enabled; otherwise, they are disabled. The default value is `true`.
+    #   You must disable source/destination checks if the instance runs
+    #   services such as network address translation, routing, or firewalls.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -38452,7 +38476,7 @@ module Aws::EC2
     #     launch_group: "String",
     #     launch_specification: {
     #       security_group_ids: ["SecurityGroupId"],
-    #       security_groups: ["SecurityGroupName"],
+    #       security_groups: ["String"],
     #       addressing_type: "String",
     #       block_device_mappings: [
     #         {
@@ -41845,7 +41869,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.233.0'
+      context[:gem_version] = '1.234.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

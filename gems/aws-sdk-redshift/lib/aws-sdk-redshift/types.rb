@@ -9230,6 +9230,7 @@ module Aws::Redshift
     #         target_database_name: "String",
     #         target_schema_name: "String",
     #         new_table_name: "String", # required
+    #         enable_case_sensitive_identifier: false,
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -9270,6 +9271,12 @@ module Aws::Redshift
     #   The name of the table to create as a result of the current request.
     #   @return [String]
     #
+    # @!attribute [rw] enable_case_sensitive_identifier
+    #   Indicates whether name identifiers for database, schema, and table
+    #   are case sensitive. If `true`, the names are case sensitive. If
+    #   `false` (default), the names are not case sensitive.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreTableFromClusterSnapshotMessage AWS API Documentation
     #
     class RestoreTableFromClusterSnapshotMessage < Struct.new(
@@ -9280,7 +9287,8 @@ module Aws::Redshift
       :source_table_name,
       :target_database_name,
       :target_schema_name,
-      :new_table_name)
+      :new_table_name,
+      :enable_case_sensitive_identifier)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2021-04-09)
+------------------
+
+* Feature - Add support for case sensitive table level restore
+
 1.59.0 (2021-03-31)
 ------------------
 

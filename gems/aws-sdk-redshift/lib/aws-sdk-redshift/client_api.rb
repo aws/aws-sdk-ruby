@@ -1887,6 +1887,7 @@ module Aws::Redshift
     RestoreTableFromClusterSnapshotMessage.add_member(:target_database_name, Shapes::ShapeRef.new(shape: String, location_name: "TargetDatabaseName"))
     RestoreTableFromClusterSnapshotMessage.add_member(:target_schema_name, Shapes::ShapeRef.new(shape: String, location_name: "TargetSchemaName"))
     RestoreTableFromClusterSnapshotMessage.add_member(:new_table_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "NewTableName"))
+    RestoreTableFromClusterSnapshotMessage.add_member(:enable_case_sensitive_identifier, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableCaseSensitiveIdentifier"))
     RestoreTableFromClusterSnapshotMessage.struct_class = Types::RestoreTableFromClusterSnapshotMessage
 
     RestoreTableFromClusterSnapshotResult.add_member(:table_restore_status, Shapes::ShapeRef.new(shape: TableRestoreStatus, location_name: "TableRestoreStatus"))

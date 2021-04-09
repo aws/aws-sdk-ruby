@@ -1647,24 +1647,24 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         ipv_6_cidr_block: "String", # required
     #         subnet_id: "SubnetId", # required
+    #         ipv_6_cidr_block: "String", # required
     #       }
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of your subnet.
+    #   @return [String]
     #
     # @!attribute [rw] ipv_6_cidr_block
     #   The IPv6 CIDR block for your subnet. The subnet must have a /64
     #   prefix length.
     #   @return [String]
     #
-    # @!attribute [rw] subnet_id
-    #   The ID of your subnet.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSubnetCidrBlockRequest AWS API Documentation
     #
     class AssociateSubnetCidrBlockRequest < Struct.new(
-      :ipv_6_cidr_block,
-      :subnet_id)
+      :subnet_id,
+      :ipv_6_cidr_block)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9231,11 +9231,11 @@ module Aws::EC2
     #         ],
     #         availability_zone: "String",
     #         availability_zone_id: "String",
-    #         cidr_block: "String", # required
     #         ipv_6_cidr_block: "String",
     #         outpost_arn: "String",
     #         vpc_id: "VpcId", # required
     #         dry_run: false,
+    #         cidr_block: "String", # required
     #       }
     #
     # @!attribute [rw] tag_specifications
@@ -9266,13 +9266,6 @@ module Aws::EC2
     #   The AZ ID or the Local Zone ID of the subnet.
     #   @return [String]
     #
-    # @!attribute [rw] cidr_block
-    #   The IPv4 network range for the subnet, in CIDR notation. For
-    #   example, `10.0.0.0/24`. We modify the specified CIDR block to its
-    #   canonical form; for example, if you specify `100.68.0.18/18`, we
-    #   modify it to `100.68.0.0/18`.
-    #   @return [String]
-    #
     # @!attribute [rw] ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
@@ -9295,17 +9288,24 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] cidr_block
+    #   The IPv4 network range for the subnet, in CIDR notation. For
+    #   example, `10.0.0.0/24`. We modify the specified CIDR block to its
+    #   canonical form; for example, if you specify `100.68.0.18/18`, we
+    #   modify it to `100.68.0.0/18`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnetRequest AWS API Documentation
     #
     class CreateSubnetRequest < Struct.new(
       :tag_specifications,
       :availability_zone,
       :availability_zone_id,
-      :cidr_block,
       :ipv_6_cidr_block,
       :outpost_arn,
       :vpc_id,
-      :dry_run)
+      :dry_run,
+      :cidr_block)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14694,6 +14694,9 @@ module Aws::EC2
     #       constraints, or instance limit constraints. Failed requests are
     #       retained for 60 minutes.
     #
+    #   * `start-date` - The date and time at which the Capacity Reservation
+    #     was started.
+    #
     #   * `end-date` - The date and time at which the Capacity Reservation
     #     expires. When a Capacity Reservation expires, the reserved
     #     capacity is released and you can no longer launch instances into
@@ -17917,8 +17920,7 @@ module Aws::EC2
     #   * `memory-info.size-in-mib` - The memory size.
     #
     #   * `network-info.efa-info.maximum-efa-interfaces` - The maximum
-    #     number of Elastic Fabric Adapters (EFAs) per instance. (`true` \|
-    #     `false`).
+    #     number of Elastic Fabric Adapters (EFAs) per instance.
     #
     #   * `network-info.efa-supported` - Indicates whether the instance type
     #     supports Elastic Fabric Adapter (EFA) (`true` \| `false`).
@@ -28896,7 +28898,7 @@ module Aws::EC2
     #   If the Spot `AllocationStrategy` is set to
     #   `capacity-optimized-prioritized`, EC2 Fleet uses priority on a
     #   best-effort basis to determine which launch template override to use
-    #   first in fulfilling Spot capacity, but optimizes for capacity first.
+    #   in fulfilling Spot capacity, but optimizes for capacity first.
     #
     #   Valid values are whole numbers starting at `0`. The lower the
     #   number, the higher the priority. If no number is set, the override
@@ -28981,7 +28983,7 @@ module Aws::EC2
     #   If the Spot `AllocationStrategy` is set to
     #   `capacity-optimized-prioritized`, EC2 Fleet uses priority on a
     #   best-effort basis to determine which launch template override to use
-    #   first in fulfilling Spot capacity, but optimizes for capacity first.
+    #   in fulfilling Spot capacity, but optimizes for capacity first.
     #
     #   Valid values are whole numbers starting at `0`. The lower the
     #   number, the higher the priority. If no number is set, the launch
@@ -33944,8 +33946,7 @@ module Aws::EC2
     #   @return [Array<Types::InstancePrivateIpAddress>]
     #
     # @!attribute [rw] source_dest_check
-    #   Indicates whether to validate network traffic to or from this
-    #   network interface.
+    #   Indicates whether source/destination checking is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] status
@@ -36470,7 +36471,7 @@ module Aws::EC2
     #   If the Spot `AllocationStrategy` is set to
     #   `capacityOptimizedPrioritized`, Spot Fleet uses priority on a
     #   best-effort basis to determine which launch template override to use
-    #   first in fulfilling Spot capacity, but optimizes for capacity first.
+    #   in fulfilling Spot capacity, but optimizes for capacity first.
     #
     #   Valid values are whole numbers starting at `0`. The lower the
     #   number, the higher the priority. If no number is set, the launch
@@ -38432,10 +38433,10 @@ module Aws::EC2
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] groups
-    #   \[EC2-VPC\] Changes the security groups of the instance. You must
-    #   specify at least one security group, even if it's just the default
-    #   security group for the VPC. You must specify the security group ID,
-    #   not the security group name.
+    #   \[EC2-VPC\] Replaces the security groups of the instance with the
+    #   specified security groups. You must specify at least one security
+    #   group, even if it's just the default security group for the VPC.
+    #   You must specify the security group ID, not the security group name.
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_id
@@ -39048,15 +39049,12 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] source_dest_check
-    #   Indicates whether source/destination checking is enabled. A value of
-    #   `true` means checking is enabled, and `false` means checking is
-    #   disabled. This value must be `false` for a NAT instance to perform
-    #   NAT. For more information, see [NAT Instances][1] in the *Amazon
-    #   Virtual Private Cloud User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html
+    #   Enable or disable source/destination checks, which ensure that the
+    #   instance is either the source or the destination of any traffic that
+    #   it receives. If the value is `true`, source/destination checks are
+    #   enabled; otherwise, they are disabled. The default value is `true`.
+    #   You must disable source/destination checks if the instance runs
+    #   services such as network address translation, routing, or firewalls.
     #   @return [Types::AttributeBooleanValue]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyNetworkInterfaceAttributeRequest AWS API Documentation
@@ -41744,7 +41742,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] source_dest_check
-    #   Indicates whether traffic to or from the instance is validated.
+    #   Indicates whether source/destination checking is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] status
@@ -45677,7 +45675,7 @@ module Aws::EC2
     #         launch_group: "String",
     #         launch_specification: {
     #           security_group_ids: ["SecurityGroupId"],
-    #           security_groups: ["SecurityGroupName"],
+    #           security_groups: ["String"],
     #           addressing_type: "String",
     #           block_device_mappings: [
     #             {
@@ -45938,7 +45936,7 @@ module Aws::EC2
     #
     #       {
     #         security_group_ids: ["SecurityGroupId"],
-    #         security_groups: ["SecurityGroupName"],
+    #         security_groups: ["String"],
     #         addressing_type: "String",
     #         block_device_mappings: [
     #           {
@@ -46084,9 +46082,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
-    #   The IDs of the subnets in which to launch the instance. To specify
-    #   multiple subnets, separate them using commas; for example,
-    #   "subnet-1234abcdeexample1, subnet-0987cdef6example2".
+    #   The ID of the subnet in which to launch the instance.
     #   @return [String]
     #
     # @!attribute [rw] user_data
