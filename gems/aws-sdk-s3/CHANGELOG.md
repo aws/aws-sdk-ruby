@@ -5,7 +5,6 @@ Unreleased Changes
 
 * Issue - Increases `multipart_threshold` default from 15 megabytes to 100 megabytes.
 
-
 1.93.0 (2021-03-24)
 ------------------
 
