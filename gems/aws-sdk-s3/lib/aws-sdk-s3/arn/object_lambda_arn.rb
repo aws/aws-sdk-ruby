@@ -9,8 +9,6 @@ module Aws
         @type, @access_point_name, @extra = @resource.split(/[:,\/]/)
       end
 
-      attr_reader :access_point_name
-
       def support_dualstack?
         false
       end
@@ -52,13 +50,13 @@ module Aws
         end
       end
 
-      def host_url(region, _dualstack = false, custom_endpoint = nil)
+      def host_url(region, fips = false, _dualstack = false, custom_endpoint = nil)
         pfx = "#{@access_point_name}-#{@account_id}"
         if custom_endpoint
           "#{pfx}.#{custom_endpoint}"
         else
           sfx = Aws::Partitions::EndpointProvider.dns_suffix_for(region)
-          "#{pfx}.s3-object-lambda.#{region}.#{sfx}"
+          "#{pfx}.s3-object-lambda#{'-fips' if fips}.#{region}.#{sfx}"
         end
       end
     end

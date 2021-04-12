@@ -10,8 +10,6 @@ module Aws
           @resource.split(/[:,\/]/)
       end
 
-      attr_reader :outpost_id, :access_point_name
-
       def support_dualstack?
         false
       end
@@ -62,7 +60,7 @@ module Aws
       end
 
       # Outpost ARNs currently do not support dualstack
-      def host_url(region, _dualstack = false, custom_endpoint = nil)
+      def host_url(region, _fips = false, _dualstack = false, custom_endpoint = nil)
         pfx = "#{@access_point_name}-#{@account_id}.#{@outpost_id}"
         if custom_endpoint
           "#{pfx}.#{custom_endpoint}"
