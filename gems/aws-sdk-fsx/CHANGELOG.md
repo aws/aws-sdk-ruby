@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2021-04-12)
+------------------
+
+* Feature - Support for cross-region and cross-account backup copies
+
 1.35.0 (2021-03-10)
 ------------------
 

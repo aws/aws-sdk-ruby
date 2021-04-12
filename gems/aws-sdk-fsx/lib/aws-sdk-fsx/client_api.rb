@@ -33,6 +33,7 @@ module Aws::FSx
     AutoImportPolicyType = Shapes::StringShape.new(name: 'AutoImportPolicyType')
     AutomaticBackupRetentionDays = Shapes::IntegerShape.new(name: 'AutomaticBackupRetentionDays')
     Backup = Shapes::StructureShape.new(name: 'Backup')
+    BackupBeingCopied = Shapes::StructureShape.new(name: 'BackupBeingCopied')
     BackupFailureDetails = Shapes::StructureShape.new(name: 'BackupFailureDetails')
     BackupId = Shapes::StringShape.new(name: 'BackupId')
     BackupIds = Shapes::ListShape.new(name: 'BackupIds')
@@ -47,6 +48,8 @@ module Aws::FSx
     CancelDataRepositoryTaskResponse = Shapes::StructureShape.new(name: 'CancelDataRepositoryTaskResponse')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     CompletionReport = Shapes::StructureShape.new(name: 'CompletionReport')
+    CopyBackupRequest = Shapes::StructureShape.new(name: 'CopyBackupRequest')
+    CopyBackupResponse = Shapes::StructureShape.new(name: 'CopyBackupResponse')
     CreateBackupRequest = Shapes::StructureShape.new(name: 'CreateBackupRequest')
     CreateBackupResponse = Shapes::StructureShape.new(name: 'CreateBackupResponse')
     CreateDataRepositoryTaskRequest = Shapes::StructureShape.new(name: 'CreateDataRepositoryTaskRequest')
@@ -123,11 +126,15 @@ module Aws::FSx
     Filters = Shapes::ListShape.new(name: 'Filters')
     Flag = Shapes::BooleanShape.new(name: 'Flag')
     IncompatibleParameterError = Shapes::StructureShape.new(name: 'IncompatibleParameterError')
+    IncompatibleRegionForMultiAZ = Shapes::StructureShape.new(name: 'IncompatibleRegionForMultiAZ')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
+    InvalidDestinationKmsKey = Shapes::StructureShape.new(name: 'InvalidDestinationKmsKey')
     InvalidExportPath = Shapes::StructureShape.new(name: 'InvalidExportPath')
     InvalidImportPath = Shapes::StructureShape.new(name: 'InvalidImportPath')
     InvalidNetworkSettings = Shapes::StructureShape.new(name: 'InvalidNetworkSettings')
     InvalidPerUnitStorageThroughput = Shapes::StructureShape.new(name: 'InvalidPerUnitStorageThroughput')
+    InvalidRegion = Shapes::StructureShape.new(name: 'InvalidRegion')
+    InvalidSourceKmsKey = Shapes::StructureShape.new(name: 'InvalidSourceKmsKey')
     IpAddress = Shapes::StringShape.new(name: 'IpAddress')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LastUpdatedTime = Shapes::TimestampShape.new(name: 'LastUpdatedTime')
@@ -148,6 +155,7 @@ module Aws::FSx
     Parameter = Shapes::StringShape.new(name: 'Parameter')
     PerUnitStorageThroughput = Shapes::IntegerShape.new(name: 'PerUnitStorageThroughput')
     ProgressPercent = Shapes::IntegerShape.new(name: 'ProgressPercent')
+    Region = Shapes::StringShape.new(name: 'Region')
     ReportFormat = Shapes::StringShape.new(name: 'ReportFormat')
     ReportScope = Shapes::StringShape.new(name: 'ReportScope')
     RequestTime = Shapes::TimestampShape.new(name: 'RequestTime')
@@ -161,6 +169,8 @@ module Aws::FSx
     SelfManagedActiveDirectoryConfigurationUpdates = Shapes::StructureShape.new(name: 'SelfManagedActiveDirectoryConfigurationUpdates')
     ServiceLimit = Shapes::StringShape.new(name: 'ServiceLimit')
     ServiceLimitExceeded = Shapes::StructureShape.new(name: 'ServiceLimitExceeded')
+    SourceBackupId = Shapes::StringShape.new(name: 'SourceBackupId')
+    SourceBackupUnavailable = Shapes::StructureShape.new(name: 'SourceBackupUnavailable')
     StartTime = Shapes::TimestampShape.new(name: 'StartTime')
     Status = Shapes::StringShape.new(name: 'Status')
     StorageCapacity = Shapes::IntegerShape.new(name: 'StorageCapacity')
@@ -192,6 +202,7 @@ module Aws::FSx
 
     ActiveDirectoryBackupAttributes.add_member(:domain_name, Shapes::ShapeRef.new(shape: ActiveDirectoryFullyQualifiedName, location_name: "DomainName"))
     ActiveDirectoryBackupAttributes.add_member(:active_directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "ActiveDirectoryId"))
+    ActiveDirectoryBackupAttributes.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
     ActiveDirectoryBackupAttributes.struct_class = Types::ActiveDirectoryBackupAttributes
 
     ActiveDirectoryError.add_member(:active_directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "ActiveDirectoryId"))
@@ -239,7 +250,14 @@ module Aws::FSx
     Backup.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     Backup.add_member(:file_system, Shapes::ShapeRef.new(shape: FileSystem, required: true, location_name: "FileSystem"))
     Backup.add_member(:directory_information, Shapes::ShapeRef.new(shape: ActiveDirectoryBackupAttributes, location_name: "DirectoryInformation"))
+    Backup.add_member(:owner_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "OwnerId"))
+    Backup.add_member(:source_backup_id, Shapes::ShapeRef.new(shape: BackupId, location_name: "SourceBackupId"))
+    Backup.add_member(:source_backup_region, Shapes::ShapeRef.new(shape: Region, location_name: "SourceBackupRegion"))
     Backup.struct_class = Types::Backup
+
+    BackupBeingCopied.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    BackupBeingCopied.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, location_name: "BackupId"))
+    BackupBeingCopied.struct_class = Types::BackupBeingCopied
 
     BackupFailureDetails.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     BackupFailureDetails.struct_class = Types::BackupFailureDetails
@@ -274,6 +292,17 @@ module Aws::FSx
     CompletionReport.add_member(:scope, Shapes::ShapeRef.new(shape: ReportScope, location_name: "Scope"))
     CompletionReport.struct_class = Types::CompletionReport
 
+    CopyBackupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CopyBackupRequest.add_member(:source_backup_id, Shapes::ShapeRef.new(shape: SourceBackupId, required: true, location_name: "SourceBackupId"))
+    CopyBackupRequest.add_member(:source_region, Shapes::ShapeRef.new(shape: Region, location_name: "SourceRegion"))
+    CopyBackupRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    CopyBackupRequest.add_member(:copy_tags, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTags"))
+    CopyBackupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CopyBackupRequest.struct_class = Types::CopyBackupRequest
+
+    CopyBackupResponse.add_member(:backup, Shapes::ShapeRef.new(shape: Backup, location_name: "Backup"))
+    CopyBackupResponse.struct_class = Types::CopyBackupResponse
+
     CreateBackupRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
     CreateBackupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateBackupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
@@ -301,6 +330,7 @@ module Aws::FSx
     CreateFileSystemFromBackupRequest.add_member(:windows_configuration, Shapes::ShapeRef.new(shape: CreateFileSystemWindowsConfiguration, location_name: "WindowsConfiguration"))
     CreateFileSystemFromBackupRequest.add_member(:lustre_configuration, Shapes::ShapeRef.new(shape: CreateFileSystemLustreConfiguration, location_name: "LustreConfiguration"))
     CreateFileSystemFromBackupRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "StorageType"))
+    CreateFileSystemFromBackupRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     CreateFileSystemFromBackupRequest.struct_class = Types::CreateFileSystemFromBackupRequest
 
     CreateFileSystemFromBackupResponse.add_member(:file_system, Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))
@@ -531,8 +561,14 @@ module Aws::FSx
     IncompatibleParameterError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     IncompatibleParameterError.struct_class = Types::IncompatibleParameterError
 
+    IncompatibleRegionForMultiAZ.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    IncompatibleRegionForMultiAZ.struct_class = Types::IncompatibleRegionForMultiAZ
+
     InternalServerError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InternalServerError.struct_class = Types::InternalServerError
+
+    InvalidDestinationKmsKey.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidDestinationKmsKey.struct_class = Types::InvalidDestinationKmsKey
 
     InvalidExportPath.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InvalidExportPath.struct_class = Types::InvalidExportPath
@@ -547,6 +583,12 @@ module Aws::FSx
 
     InvalidPerUnitStorageThroughput.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InvalidPerUnitStorageThroughput.struct_class = Types::InvalidPerUnitStorageThroughput
+
+    InvalidRegion.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidRegion.struct_class = Types::InvalidRegion
+
+    InvalidSourceKmsKey.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidSourceKmsKey.struct_class = Types::InvalidSourceKmsKey
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN"))
     ListTagsForResourceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -610,6 +652,10 @@ module Aws::FSx
     ServiceLimitExceeded.add_member(:limit, Shapes::ShapeRef.new(shape: ServiceLimit, required: true, location_name: "Limit"))
     ServiceLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ServiceLimitExceeded.struct_class = Types::ServiceLimitExceeded
+
+    SourceBackupUnavailable.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    SourceBackupUnavailable.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, location_name: "BackupId"))
+    SourceBackupUnavailable.struct_class = Types::SourceBackupUnavailable
 
     SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
 
@@ -719,6 +765,25 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:copy_backup, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CopyBackup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CopyBackupRequest)
+        o.output = Shapes::ShapeRef.new(shape: CopyBackupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: BackupNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSourceKmsKey)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDestinationKmsKey)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRegion)
+        o.errors << Shapes::ShapeRef.new(shape: SourceBackupUnavailable)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleRegionForMultiAZ)
+      end)
+
       api.add_operation(:create_backup, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateBackup"
         o.http_method = "POST"
@@ -796,6 +861,7 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: BackupRestoring)
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: BackupBeingCopied)
       end)
 
       api.add_operation(:delete_file_system, Seahorse::Model::Operation.new.tap do |o|

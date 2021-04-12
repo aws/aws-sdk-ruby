@@ -441,6 +441,7 @@ module Aws::CodeBuild
     #   resp.build_batches[0].artifacts.override_artifact_name #=> Boolean
     #   resp.build_batches[0].artifacts.encryption_disabled #=> Boolean
     #   resp.build_batches[0].artifacts.artifact_identifier #=> String
+    #   resp.build_batches[0].artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batches[0].secondary_artifacts #=> Array
     #   resp.build_batches[0].secondary_artifacts[0].location #=> String
     #   resp.build_batches[0].secondary_artifacts[0].sha256sum #=> String
@@ -448,6 +449,7 @@ module Aws::CodeBuild
     #   resp.build_batches[0].secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build_batches[0].secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build_batches[0].secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build_batches[0].secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batches[0].cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build_batches[0].cache.location #=> String
     #   resp.build_batches[0].cache.modes #=> Array
@@ -471,6 +473,7 @@ module Aws::CodeBuild
     #   resp.build_batches[0].log_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build_batches[0].log_config.s3_logs.location #=> String
     #   resp.build_batches[0].log_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build_batches[0].log_config.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batches[0].build_timeout_in_minutes #=> Integer
     #   resp.build_batches[0].queued_timeout_in_minutes #=> Integer
     #   resp.build_batches[0].complete #=> Boolean
@@ -858,6 +861,7 @@ module Aws::CodeBuild
     #   resp.builds[0].artifacts.override_artifact_name #=> Boolean
     #   resp.builds[0].artifacts.encryption_disabled #=> Boolean
     #   resp.builds[0].artifacts.artifact_identifier #=> String
+    #   resp.builds[0].artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.builds[0].secondary_artifacts #=> Array
     #   resp.builds[0].secondary_artifacts[0].location #=> String
     #   resp.builds[0].secondary_artifacts[0].sha256sum #=> String
@@ -865,6 +869,7 @@ module Aws::CodeBuild
     #   resp.builds[0].secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.builds[0].secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.builds[0].secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.builds[0].secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.builds[0].cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.builds[0].cache.location #=> String
     #   resp.builds[0].cache.modes #=> Array
@@ -894,6 +899,7 @@ module Aws::CodeBuild
     #   resp.builds[0].logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.builds[0].logs.s3_logs.location #=> String
     #   resp.builds[0].logs.s3_logs.encryption_disabled #=> Boolean
+    #   resp.builds[0].logs.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.builds[0].timeout_in_minutes #=> Integer
     #   resp.builds[0].queued_timeout_in_minutes #=> Integer
     #   resp.builds[0].build_complete #=> Boolean
@@ -994,6 +1000,7 @@ module Aws::CodeBuild
     #   resp.projects[0].artifacts.override_artifact_name #=> Boolean
     #   resp.projects[0].artifacts.encryption_disabled #=> Boolean
     #   resp.projects[0].artifacts.artifact_identifier #=> String
+    #   resp.projects[0].artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.projects[0].secondary_artifacts #=> Array
     #   resp.projects[0].secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.projects[0].secondary_artifacts[0].location #=> String
@@ -1004,6 +1011,7 @@ module Aws::CodeBuild
     #   resp.projects[0].secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.projects[0].secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.projects[0].secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.projects[0].secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.projects[0].cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.projects[0].cache.location #=> String
     #   resp.projects[0].cache.modes #=> Array
@@ -1053,6 +1061,7 @@ module Aws::CodeBuild
     #   resp.projects[0].logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.projects[0].logs_config.s3_logs.location #=> String
     #   resp.projects[0].logs_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.projects[0].logs_config.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.projects[0].file_system_locations #=> Array
     #   resp.projects[0].file_system_locations[0].type #=> String, one of "EFS"
     #   resp.projects[0].file_system_locations[0].location #=> String
@@ -1379,6 +1388,7 @@ module Aws::CodeBuild
     #       override_artifact_name: false,
     #       encryption_disabled: false,
     #       artifact_identifier: "String",
+    #       bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #     },
     #     secondary_artifacts: [
     #       {
@@ -1391,6 +1401,7 @@ module Aws::CodeBuild
     #         override_artifact_name: false,
     #         encryption_disabled: false,
     #         artifact_identifier: "String",
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     ],
     #     cache: {
@@ -1443,6 +1454,7 @@ module Aws::CodeBuild
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         location: "String",
     #         encryption_disabled: false,
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     },
     #     file_system_locations: [
@@ -1509,6 +1521,7 @@ module Aws::CodeBuild
     #   resp.project.artifacts.override_artifact_name #=> Boolean
     #   resp.project.artifacts.encryption_disabled #=> Boolean
     #   resp.project.artifacts.artifact_identifier #=> String
+    #   resp.project.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.project.secondary_artifacts #=> Array
     #   resp.project.secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.project.secondary_artifacts[0].location #=> String
@@ -1519,6 +1532,7 @@ module Aws::CodeBuild
     #   resp.project.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.project.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.project.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.project.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.project.cache.location #=> String
     #   resp.project.cache.modes #=> Array
@@ -1568,6 +1582,7 @@ module Aws::CodeBuild
     #   resp.project.logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.logs_config.s3_logs.location #=> String
     #   resp.project.logs_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.project.logs_config.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.project.file_system_locations #=> Array
     #   resp.project.file_system_locations[0].type #=> String, one of "EFS"
     #   resp.project.file_system_locations[0].location #=> String
@@ -3056,6 +3071,7 @@ module Aws::CodeBuild
     #   resp.build.artifacts.override_artifact_name #=> Boolean
     #   resp.build.artifacts.encryption_disabled #=> Boolean
     #   resp.build.artifacts.artifact_identifier #=> String
+    #   resp.build.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.secondary_artifacts #=> Array
     #   resp.build.secondary_artifacts[0].location #=> String
     #   resp.build.secondary_artifacts[0].sha256sum #=> String
@@ -3063,6 +3079,7 @@ module Aws::CodeBuild
     #   resp.build.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build.cache.location #=> String
     #   resp.build.cache.modes #=> Array
@@ -3092,6 +3109,7 @@ module Aws::CodeBuild
     #   resp.build.logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build.logs.s3_logs.location #=> String
     #   resp.build.logs.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build.logs.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.timeout_in_minutes #=> Integer
     #   resp.build.queued_timeout_in_minutes #=> Integer
     #   resp.build.build_complete #=> Boolean
@@ -3210,6 +3228,7 @@ module Aws::CodeBuild
     #   resp.build_batch.artifacts.override_artifact_name #=> Boolean
     #   resp.build_batch.artifacts.encryption_disabled #=> Boolean
     #   resp.build_batch.artifacts.artifact_identifier #=> String
+    #   resp.build_batch.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.secondary_artifacts #=> Array
     #   resp.build_batch.secondary_artifacts[0].location #=> String
     #   resp.build_batch.secondary_artifacts[0].sha256sum #=> String
@@ -3217,6 +3236,7 @@ module Aws::CodeBuild
     #   resp.build_batch.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build_batch.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build_batch.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build_batch.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build_batch.cache.location #=> String
     #   resp.build_batch.cache.modes #=> Array
@@ -3240,6 +3260,7 @@ module Aws::CodeBuild
     #   resp.build_batch.log_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build_batch.log_config.s3_logs.location #=> String
     #   resp.build_batch.log_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build_batch.log_config.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.build_timeout_in_minutes #=> Integer
     #   resp.build_batch.queued_timeout_in_minutes #=> Integer
     #   resp.build_batch.complete #=> Boolean
@@ -3575,6 +3596,7 @@ module Aws::CodeBuild
     #       override_artifact_name: false,
     #       encryption_disabled: false,
     #       artifact_identifier: "String",
+    #       bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #     },
     #     secondary_artifacts_override: [
     #       {
@@ -3587,6 +3609,7 @@ module Aws::CodeBuild
     #         override_artifact_name: false,
     #         encryption_disabled: false,
     #         artifact_identifier: "String",
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     ],
     #     environment_variables_override: [
@@ -3638,6 +3661,7 @@ module Aws::CodeBuild
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         location: "String",
     #         encryption_disabled: false,
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     },
     #     registry_credential_override: {
@@ -3703,6 +3727,7 @@ module Aws::CodeBuild
     #   resp.build.artifacts.override_artifact_name #=> Boolean
     #   resp.build.artifacts.encryption_disabled #=> Boolean
     #   resp.build.artifacts.artifact_identifier #=> String
+    #   resp.build.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.secondary_artifacts #=> Array
     #   resp.build.secondary_artifacts[0].location #=> String
     #   resp.build.secondary_artifacts[0].sha256sum #=> String
@@ -3710,6 +3735,7 @@ module Aws::CodeBuild
     #   resp.build.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build.cache.location #=> String
     #   resp.build.cache.modes #=> Array
@@ -3739,6 +3765,7 @@ module Aws::CodeBuild
     #   resp.build.logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build.logs.s3_logs.location #=> String
     #   resp.build.logs.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build.logs.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.timeout_in_minutes #=> Integer
     #   resp.build.queued_timeout_in_minutes #=> Integer
     #   resp.build.build_complete #=> Boolean
@@ -4040,6 +4067,7 @@ module Aws::CodeBuild
     #       override_artifact_name: false,
     #       encryption_disabled: false,
     #       artifact_identifier: "String",
+    #       bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #     },
     #     secondary_artifacts_override: [
     #       {
@@ -4052,6 +4080,7 @@ module Aws::CodeBuild
     #         override_artifact_name: false,
     #         encryption_disabled: false,
     #         artifact_identifier: "String",
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     ],
     #     environment_variables_override: [
@@ -4099,6 +4128,7 @@ module Aws::CodeBuild
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         location: "String",
     #         encryption_disabled: false,
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     },
     #     registry_credential_override: {
@@ -4172,6 +4202,7 @@ module Aws::CodeBuild
     #   resp.build_batch.artifacts.override_artifact_name #=> Boolean
     #   resp.build_batch.artifacts.encryption_disabled #=> Boolean
     #   resp.build_batch.artifacts.artifact_identifier #=> String
+    #   resp.build_batch.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.secondary_artifacts #=> Array
     #   resp.build_batch.secondary_artifacts[0].location #=> String
     #   resp.build_batch.secondary_artifacts[0].sha256sum #=> String
@@ -4179,6 +4210,7 @@ module Aws::CodeBuild
     #   resp.build_batch.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build_batch.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build_batch.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build_batch.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build_batch.cache.location #=> String
     #   resp.build_batch.cache.modes #=> Array
@@ -4202,6 +4234,7 @@ module Aws::CodeBuild
     #   resp.build_batch.log_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build_batch.log_config.s3_logs.location #=> String
     #   resp.build_batch.log_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build_batch.log_config.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.build_timeout_in_minutes #=> Integer
     #   resp.build_batch.queued_timeout_in_minutes #=> Integer
     #   resp.build_batch.complete #=> Boolean
@@ -4332,6 +4365,7 @@ module Aws::CodeBuild
     #   resp.build.artifacts.override_artifact_name #=> Boolean
     #   resp.build.artifacts.encryption_disabled #=> Boolean
     #   resp.build.artifacts.artifact_identifier #=> String
+    #   resp.build.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.secondary_artifacts #=> Array
     #   resp.build.secondary_artifacts[0].location #=> String
     #   resp.build.secondary_artifacts[0].sha256sum #=> String
@@ -4339,6 +4373,7 @@ module Aws::CodeBuild
     #   resp.build.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build.cache.location #=> String
     #   resp.build.cache.modes #=> Array
@@ -4368,6 +4403,7 @@ module Aws::CodeBuild
     #   resp.build.logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build.logs.s3_logs.location #=> String
     #   resp.build.logs.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build.logs.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.timeout_in_minutes #=> Integer
     #   resp.build.queued_timeout_in_minutes #=> Integer
     #   resp.build.build_complete #=> Boolean
@@ -4473,6 +4509,7 @@ module Aws::CodeBuild
     #   resp.build_batch.artifacts.override_artifact_name #=> Boolean
     #   resp.build_batch.artifacts.encryption_disabled #=> Boolean
     #   resp.build_batch.artifacts.artifact_identifier #=> String
+    #   resp.build_batch.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.secondary_artifacts #=> Array
     #   resp.build_batch.secondary_artifacts[0].location #=> String
     #   resp.build_batch.secondary_artifacts[0].sha256sum #=> String
@@ -4480,6 +4517,7 @@ module Aws::CodeBuild
     #   resp.build_batch.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build_batch.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build_batch.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build_batch.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build_batch.cache.location #=> String
     #   resp.build_batch.cache.modes #=> Array
@@ -4503,6 +4541,7 @@ module Aws::CodeBuild
     #   resp.build_batch.log_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build_batch.log_config.s3_logs.location #=> String
     #   resp.build_batch.log_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build_batch.log_config.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.build_timeout_in_minutes #=> Integer
     #   resp.build_batch.queued_timeout_in_minutes #=> Integer
     #   resp.build_batch.complete #=> Boolean
@@ -4766,6 +4805,7 @@ module Aws::CodeBuild
     #       override_artifact_name: false,
     #       encryption_disabled: false,
     #       artifact_identifier: "String",
+    #       bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #     },
     #     secondary_artifacts: [
     #       {
@@ -4778,6 +4818,7 @@ module Aws::CodeBuild
     #         override_artifact_name: false,
     #         encryption_disabled: false,
     #         artifact_identifier: "String",
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     ],
     #     cache: {
@@ -4830,6 +4871,7 @@ module Aws::CodeBuild
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         location: "String",
     #         encryption_disabled: false,
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     },
     #     file_system_locations: [
@@ -4896,6 +4938,7 @@ module Aws::CodeBuild
     #   resp.project.artifacts.override_artifact_name #=> Boolean
     #   resp.project.artifacts.encryption_disabled #=> Boolean
     #   resp.project.artifacts.artifact_identifier #=> String
+    #   resp.project.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.project.secondary_artifacts #=> Array
     #   resp.project.secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.project.secondary_artifacts[0].location #=> String
@@ -4906,6 +4949,7 @@ module Aws::CodeBuild
     #   resp.project.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.project.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.project.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.project.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.project.cache.location #=> String
     #   resp.project.cache.modes #=> Array
@@ -4955,6 +4999,7 @@ module Aws::CodeBuild
     #   resp.project.logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.logs_config.s3_logs.location #=> String
     #   resp.project.logs_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.project.logs_config.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.project.file_system_locations #=> Array
     #   resp.project.file_system_locations[0].type #=> String, one of "EFS"
     #   resp.project.file_system_locations[0].location #=> String
@@ -5143,7 +5188,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

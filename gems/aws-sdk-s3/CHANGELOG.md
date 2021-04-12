@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.93.1 (2021-04-12)
+------------------
+
 * Issue - Fix FIPS and global endpoint behavior for S3 ARNs.
 
 * Issue - Increases `multipart_threshold` default from 15 megabytes to 100 megabytes.

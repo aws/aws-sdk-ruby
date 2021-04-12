@@ -32,6 +32,7 @@ module Aws::CodeBuild
     BatchGetReportsOutput = Shapes::StructureShape.new(name: 'BatchGetReportsOutput')
     BatchRestrictions = Shapes::StructureShape.new(name: 'BatchRestrictions')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BucketOwnerAccess = Shapes::StringShape.new(name: 'BucketOwnerAccess')
     Build = Shapes::StructureShape.new(name: 'Build')
     BuildArtifacts = Shapes::StructureShape.new(name: 'BuildArtifacts')
     BuildArtifactsList = Shapes::ListShape.new(name: 'BuildArtifactsList')
@@ -344,6 +345,7 @@ module Aws::CodeBuild
     BuildArtifacts.add_member(:override_artifact_name, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "overrideArtifactName"))
     BuildArtifacts.add_member(:encryption_disabled, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "encryptionDisabled"))
     BuildArtifacts.add_member(:artifact_identifier, Shapes::ShapeRef.new(shape: String, location_name: "artifactIdentifier"))
+    BuildArtifacts.add_member(:bucket_owner_access, Shapes::ShapeRef.new(shape: BucketOwnerAccess, location_name: "bucketOwnerAccess"))
     BuildArtifacts.struct_class = Types::BuildArtifacts
 
     BuildArtifactsList.member = Shapes::ShapeRef.new(shape: BuildArtifacts)
@@ -828,6 +830,7 @@ module Aws::CodeBuild
     ProjectArtifacts.add_member(:override_artifact_name, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "overrideArtifactName"))
     ProjectArtifacts.add_member(:encryption_disabled, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "encryptionDisabled"))
     ProjectArtifacts.add_member(:artifact_identifier, Shapes::ShapeRef.new(shape: String, location_name: "artifactIdentifier"))
+    ProjectArtifacts.add_member(:bucket_owner_access, Shapes::ShapeRef.new(shape: BucketOwnerAccess, location_name: "bucketOwnerAccess"))
     ProjectArtifacts.struct_class = Types::ProjectArtifacts
 
     ProjectArtifactsList.member = Shapes::ShapeRef.new(shape: ProjectArtifacts)
@@ -985,6 +988,7 @@ module Aws::CodeBuild
     S3LogsConfig.add_member(:status, Shapes::ShapeRef.new(shape: LogsConfigStatusType, required: true, location_name: "status"))
     S3LogsConfig.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))
     S3LogsConfig.add_member(:encryption_disabled, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "encryptionDisabled"))
+    S3LogsConfig.add_member(:bucket_owner_access, Shapes::ShapeRef.new(shape: BucketOwnerAccess, location_name: "bucketOwnerAccess"))
     S3LogsConfig.struct_class = Types::S3LogsConfig
 
     S3ReportExportConfig.add_member(:bucket, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "bucket"))

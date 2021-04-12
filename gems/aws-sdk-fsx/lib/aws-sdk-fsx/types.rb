@@ -22,11 +22,24 @@ module Aws::FSx
     #   which the file system is joined.
     #   @return [String]
     #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for a given resource. ARNs uniquely
+    #   identify AWS resources. We require an ARN when you need to specify a
+    #   resource unambiguously across all of AWS. For more information, see
+    #   [Amazon Resource Names (ARNs) and AWS Service Namespaces][1] in the
+    #   *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/ActiveDirectoryBackupAttributes AWS API Documentation
     #
     class ActiveDirectoryBackupAttributes < Struct.new(
       :domain_name,
-      :active_directory_id)
+      :active_directory_id,
+      :resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -191,7 +204,8 @@ module Aws::FSx
     #   * Formatted as a fully-qualified domain name (FQDN),
     #     `hostname.domain`, for example, `accounting.example.com`.
     #
-    #   * Can contain alphanumeric characters and the hyphen (-).
+    #   * Can contain alphanumeric characters, the underscore (\_), and the
+    #     hyphen (-).
     #
     #   * Cannot start or end with a hyphen.
     #
@@ -308,16 +322,7 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # A backup of an Amazon FSx file system. For more information see:
-    #
-    # * [Working with backups for Windows file systems][1]
-    #
-    # * [Working with backups for Lustre file systems][2]
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html
-    # [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html
+    # A backup of an Amazon FSx file system.
     #
     # @!attribute [rw] backup_id
     #   The ID of the backup.
@@ -335,6 +340,8 @@ module Aws::FSx
     #
     #   * `TRANSFERRING` - For user-initiated backups on Lustre file systems
     #     only; Amazon FSx is transferring the backup to S3.
+    #
+    #   * `COPYING` - Amazon FSx is copying the backup.
     #
     #   * `DELETED` - Amazon FSx deleted the backup and it is no longer
     #     available.
@@ -381,6 +388,20 @@ module Aws::FSx
     #   (AD) to which the Windows File Server instance is joined.
     #   @return [Types::ActiveDirectoryBackupAttributes]
     #
+    # @!attribute [rw] owner_id
+    #   An AWS account ID. This ID is a 12-digit number that you use to
+    #   construct Amazon Resource Names (ARNs) for resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_backup_id
+    #   The ID of the source backup. Specifies the backup you are copying.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_backup_region
+    #   The source Region of the backup. Specifies the Region from where
+    #   this backup is copied.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/Backup AWS API Documentation
     #
     class Backup < Struct.new(
@@ -394,7 +415,29 @@ module Aws::FSx
       :resource_arn,
       :tags,
       :file_system,
-      :directory_information)
+      :directory_information,
+      :owner_id,
+      :source_backup_id,
+      :source_backup_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You can't delete a backup while it's being copied.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_id
+    #   The ID of the source backup. Specifies the backup you are copying.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/BackupBeingCopied AWS API Documentation
+    #
+    class BackupBeingCopied < Struct.new(
+      :message,
+      :backup_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -589,6 +632,102 @@ module Aws::FSx
       :path,
       :format,
       :scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CopyBackupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_request_token: "ClientRequestToken",
+    #         source_backup_id: "SourceBackupId", # required
+    #         source_region: "Region",
+    #         kms_key_id: "KmsKeyId",
+    #         copy_tags: false,
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
+    #   an AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_backup_id
+    #   The ID of the source backup. Specifies the ID of the backup that is
+    #   being copied.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_region
+    #   The source AWS Region of the backup. Specifies the AWS Region from
+    #   which the backup is being copied. The source and destination Regions
+    #   must be in the same AWS partition. If you don't specify a Region,
+    #   it defaults to the Region where the request is sent from (in-Region
+    #   copy).
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the AWS Key Management Service (AWS KMS) key used to
+    #   encrypt the file system's data for Amazon FSx for Windows File
+    #   Server file systems and Amazon FSx for Lustre `PERSISTENT_1` file
+    #   systems at rest. In either case, if not specified, the Amazon FSx
+    #   managed key is used. The Amazon FSx for Lustre `SCRATCH_1` and
+    #   `SCRATCH_2` file systems are always encrypted at rest using Amazon
+    #   FSx managed keys. For more information, see [Encrypt][1] in the *AWS
+    #   Key Management Service API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
+    #   @return [String]
+    #
+    # @!attribute [rw] copy_tags
+    #   A boolean flag indicating whether tags from the source backup should
+    #   be copied to the backup copy. This value defaults to false.
+    #
+    #   If you set `CopyTags` to true and the source backup has existing
+    #   tags, you can use the `Tags` parameter to create new tags, provided
+    #   that the sum of the source backup tags and the new tags doesn't
+    #   exceed 50. Both sets of tags are merged. If there are tag conflicts
+    #   (for example, two tags with the same key but different values), the
+    #   tags created with the `Tags` parameter take precedence.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CopyBackupRequest AWS API Documentation
+    #
+    class CopyBackupRequest < Struct.new(
+      :client_request_token,
+      :source_backup_id,
+      :source_region,
+      :kms_key_id,
+      :copy_tags,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backup
+    #   A backup of an Amazon FSx file system.
+    #   @return [Types::Backup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CopyBackupResponse AWS API Documentation
+    #
+    class CopyBackupResponse < Struct.new(
+      :backup)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -795,11 +934,11 @@ module Aws::FSx
     #           drive_cache_type: "NONE", # accepts NONE, READ
     #         },
     #         storage_type: "SSD", # accepts SSD, HDD
+    #         kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] backup_id
-    #   The ID of the backup. Specifies the backup to use if you're
-    #   creating a file system from an existing backup.
+    #   The ID of the source backup. Specifies the backup you are copying.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -869,6 +1008,21 @@ module Aws::FSx
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the AWS Key Management Service (AWS KMS) key used to
+    #   encrypt the file system's data for Amazon FSx for Windows File
+    #   Server file systems and Amazon FSx for Lustre `PERSISTENT_1` file
+    #   systems at rest. In either case, if not specified, the Amazon FSx
+    #   managed key is used. The Amazon FSx for Lustre `SCRATCH_1` and
+    #   `SCRATCH_2` file systems are always encrypted at rest using Amazon
+    #   FSx managed keys. For more information, see [Encrypt][1] in the *AWS
+    #   Key Management Service API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemFromBackupRequest AWS API Documentation
     #
     class CreateFileSystemFromBackupRequest < Struct.new(
@@ -879,7 +1033,8 @@ module Aws::FSx
       :tags,
       :windows_configuration,
       :lustre_configuration,
-      :storage_type)
+      :storage_type,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1215,11 +1370,17 @@ module Aws::FSx
     #   types, provide exactly two subnet IDs, one for the preferred file
     #   server and one for the standby file server. You specify one of these
     #   subnets as the preferred subnet using the `WindowsConfiguration >
-    #   PreferredSubnetID` property.
+    #   PreferredSubnetID` property. For more information, see [
+    #   Availability and durability: Single-AZ and Multi-AZ file
+    #   systems][1].
     #
     #   For Windows `SINGLE_AZ_1` and `SINGLE_AZ_2` file system deployment
     #   types and Lustre file systems, provide exactly one subnet ID. The
     #   file server is launched in that subnet's Availability Zone.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
@@ -1322,7 +1483,13 @@ module Aws::FSx
     # @!attribute [rw] self_managed_active_directory_configuration
     #   The configuration that Amazon FSx uses to join the Windows File
     #   Server instance to your self-managed (including on-premises)
-    #   Microsoft Active Directory (AD) directory.
+    #   Microsoft Active Directory (AD) directory. For more information, see
+    #   [ Using Amazon FSx with your self-managed Microsoft Active
+    #   Directory][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html
     #   @return [Types::SelfManagedActiveDirectoryConfiguration]
     #
     # @!attribute [rw] deployment_type
@@ -1415,7 +1582,8 @@ module Aws::FSx
     #   * Formatted as a fully-qualified domain name (FQDN),
     #     `hostname.domain`, for example, `accounting.example.com`.
     #
-    #   * Can contain alphanumeric characters and the hyphen (-).
+    #   * Can contain alphanumeric characters, the underscore (\_), and the
+    #     hyphen (-).
     #
     #   * Cannot start or end with a hyphen.
     #
@@ -2142,7 +2310,7 @@ module Aws::FSx
     # Response object for `DescribeBackups` operation.
     #
     # @!attribute [rw] backups
-    #   Any array of backups.
+    #   An array of backups.
     #   @return [Array<Types::Backup>]
     #
     # @!attribute [rw] next_token
@@ -2672,6 +2840,21 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # Amazon FSx doesn't support Multi-AZ Windows File Server copy backup
+    # in the destination Region, so the copied backup can't be restored.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/IncompatibleRegionForMultiAZ AWS API Documentation
+    #
+    class IncompatibleRegionForMultiAZ < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A generic error indicating a server-side failure.
     #
     # @!attribute [rw] message
@@ -2681,6 +2864,21 @@ module Aws::FSx
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InternalServerError AWS API Documentation
     #
     class InternalServerError < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The AWS Key Management Service (AWS KMS) key of the destination backup
+    # is invalid.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidDestinationKmsKey AWS API Documentation
+    #
+    class InvalidDestinationKmsKey < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -2767,6 +2965,36 @@ module Aws::FSx
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidPerUnitStorageThroughput AWS API Documentation
     #
     class InvalidPerUnitStorageThroughput < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Region provided for `Source Region` is invalid or is in a
+    # different AWS partition.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidRegion AWS API Documentation
+    #
+    class InvalidRegion < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The AWS Key Management Service (AWS KMS) key of the source backup is
+    # invalid.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidSourceKmsKey AWS API Documentation
+    #
+    class InvalidSourceKmsKey < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -3050,7 +3278,12 @@ module Aws::FSx
 
     # The configuration that Amazon FSx uses to join the Windows File Server
     # instance to your self-managed (including on-premises) Microsoft Active
-    # Directory (AD) directory.
+    # Directory (AD) directory. For more information, see [ Using Amazon FSx
+    # with your self-managed Microsoft Active Directory][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html
     #
     # @note When making an API call, you may pass SelfManagedActiveDirectoryConfiguration
     #   data as a hash:
@@ -3112,20 +3345,7 @@ module Aws::FSx
     #
     # @!attribute [rw] dns_ips
     #   A list of up to two IP addresses of DNS servers or domain
-    #   controllers in the self-managed AD directory. The IP addresses need
-    #   to be either in the same VPC CIDR range as the one in which your
-    #   Amazon FSx file system is being created, or in the private IP
-    #   version 4 (IPv4) address ranges, as specified in [RFC 1918][1]\:
-    #
-    #   * 10\.0.0.0 - 10.255.255.255 (10/8 prefix)
-    #
-    #   * 172\.16.0.0 - 172.31.255.255 (172.16/12 prefix)
-    #
-    #   * 192\.168.0.0 - 192.168.255.255 (192.168/16 prefix)
-    #
-    #
-    #
-    #   [1]: http://www.faqs.org/rfcs/rfc1918.html
+    #   controllers in the self-managed AD directory.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryConfiguration AWS API Documentation
@@ -3197,6 +3417,26 @@ module Aws::FSx
     class ServiceLimitExceeded < Struct.new(
       :limit,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was rejected because the lifecycle status of the source
+    # backup is not `AVAILABLE`.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_id
+    #   The ID of the source backup. Specifies the backup you are copying.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SourceBackupUnavailable AWS API Documentation
+    #
+    class SourceBackupUnavailable < Struct.new(
+      :message,
+      :backup_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3584,8 +3824,8 @@ module Aws::FSx
     # The configuration for this Microsoft Windows file system.
     #
     # @!attribute [rw] active_directory_id
-    #   The ID for an existing Microsoft Active Directory instance that the
-    #   file system should join when it's created.
+    #   The ID for an existing AWS Managed Microsoft Active Directory
+    #   instance that the file system is joined to.
     #   @return [String]
     #
     # @!attribute [rw] self_managed_active_directory_configuration
@@ -3637,8 +3877,8 @@ module Aws::FSx
     #
     #   For `SINGLE_AZ_1` and `SINGLE_AZ_2` deployment types, this value is
     #   the same as that for `SubnetIDs`. For more information, see
-    #   [Availability and Durability: Single-AZ and Multi-AZ File
-    #   Systems][1]
+    #   [Availability and durability: Single-AZ and Multi-AZ file
+    #   systems][1].
     #
     #
     #
@@ -3664,7 +3904,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] throughput_capacity
-    #   The throughput of an Amazon FSx file system, measured in megabytes
+    #   The throughput of the Amazon FSx file system, measured in megabytes
     #   per second.
     #   @return [Integer]
     #

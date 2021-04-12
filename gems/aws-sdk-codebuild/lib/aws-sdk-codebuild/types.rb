@@ -462,6 +462,16 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] exported_environment_variables
     #   A list of exported environment variables for this build.
+    #
+    #   Exported environment variables are used in conjunction with AWS
+    #   CodePipeline to export environment variables from the current build
+    #   stage to subsequent stages in the pipeline. For more information,
+    #   see [Working with variables][1] in the *AWS CodePipeline User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html
     #   @return [Array<Types::ExportedEnvironmentVariable>]
     #
     # @!attribute [rw] report_arns
@@ -570,6 +580,46 @@ module Aws::CodeBuild
     #   An identifier for this artifact definition.
     #   @return [String]
     #
+    # @!attribute [rw] bucket_owner_access
+    #   Specifies the access for objects that are uploaded to an Amazon S3
+    #   bucket that is owned by another account.
+    #
+    #   By default, only the account that uploads the objects to the bucket
+    #   has access to these objects. This property allows you to give the
+    #   bucket owner access to these objects.
+    #
+    #   NONE
+    #
+    #   : The bucket owner does not have access to the objects. This is the
+    #     default.
+    #
+    #   READ\_ONLY
+    #
+    #   : The bucket owner has read only access to the objects. The
+    #     uploading account retains ownership of the objects.
+    #
+    #   FULL
+    #
+    #   : The bucket owner has full access to the objects. Object ownership
+    #     is determined by the following criteria:
+    #
+    #     * If the bucket is configured with the **Bucket owner preferred**
+    #       setting, the bucket owner owns the objects. The uploading
+    #       account will have object access as specified by the bucket's
+    #       policy.
+    #
+    #     * Otherwise, the uploading account retains ownership of the
+    #       objects.
+    #
+    #     For more information about Amazon S3 object ownership, see
+    #     [Controlling ownership of uploaded objects using S3 Object
+    #     Ownership][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BuildArtifacts AWS API Documentation
     #
     class BuildArtifacts < Struct.new(
@@ -578,7 +628,8 @@ module Aws::CodeBuild
       :md5sum,
       :override_artifact_name,
       :encryption_disabled,
-      :artifact_identifier)
+      :artifact_identifier,
+      :bucket_owner_access)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1446,6 +1497,7 @@ module Aws::CodeBuild
     #           override_artifact_name: false,
     #           encryption_disabled: false,
     #           artifact_identifier: "String",
+    #           bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #         },
     #         secondary_artifacts: [
     #           {
@@ -1458,6 +1510,7 @@ module Aws::CodeBuild
     #             override_artifact_name: false,
     #             encryption_disabled: false,
     #             artifact_identifier: "String",
+    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #           },
     #         ],
     #         cache: {
@@ -1510,6 +1563,7 @@ module Aws::CodeBuild
     #             status: "ENABLED", # required, accepts ENABLED, DISABLED
     #             location: "String",
     #             encryption_disabled: false,
+    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #           },
     #         },
     #         file_system_locations: [
@@ -2379,22 +2433,30 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # Information about an exported environment variable.
+    # Contains information about an exported environment variable.
+    #
+    # Exported environment variables are used in conjunction with AWS
+    # CodePipeline to export environment variables from the current build
+    # stage to subsequent stages in the pipeline. For more information, see
+    # [Working with variables][1] in the *AWS CodePipeline User Guide*.
+    #
+    # <note markdown="1"> During a build, the value of a variable is available starting with the
+    # `install` phase. It can be updated between the start of the `install`
+    # phase and the end of the `post_build` phase. After the `post_build`
+    # phase ends, the value of exported variables cannot change.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html
     #
     # @!attribute [rw] name
-    #   The name of this exported environment variable.
+    #   The name of the exported environment variable.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value assigned to this exported environment variable.
-    #
-    #   <note markdown="1"> During a build, the value of a variable is available starting with
-    #   the `install` phase. It can be updated between the start of the
-    #   `install` phase and the end of the `post_build` phase. After the
-    #   `post_build` phase ends, the value of exported variables cannot
-    #   change.
-    #
-    #    </note>
+    #   The value assigned to the exported environment variable.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ExportedEnvironmentVariable AWS API Documentation
@@ -3444,6 +3506,7 @@ module Aws::CodeBuild
     #           status: "ENABLED", # required, accepts ENABLED, DISABLED
     #           location: "String",
     #           encryption_disabled: false,
+    #           bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #         },
     #       }
     #
@@ -3788,6 +3851,7 @@ module Aws::CodeBuild
     #         override_artifact_name: false,
     #         encryption_disabled: false,
     #         artifact_identifier: "String",
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       }
     #
     # @!attribute [rw] type
@@ -3931,6 +3995,46 @@ module Aws::CodeBuild
     #   An identifier for this artifact definition.
     #   @return [String]
     #
+    # @!attribute [rw] bucket_owner_access
+    #   Specifies the access for objects that are uploaded to an Amazon S3
+    #   bucket that is owned by another account.
+    #
+    #   By default, only the account that uploads the objects to the bucket
+    #   has access to these objects. This property allows you to give the
+    #   bucket owner access to these objects.
+    #
+    #   NONE
+    #
+    #   : The bucket owner does not have access to the objects. This is the
+    #     default.
+    #
+    #   READ\_ONLY
+    #
+    #   : The bucket owner has read only access to the objects. The
+    #     uploading account retains ownership of the objects.
+    #
+    #   FULL
+    #
+    #   : The bucket owner has full access to the objects. Object ownership
+    #     is determined by the following criteria:
+    #
+    #     * If the bucket is configured with the **Bucket owner preferred**
+    #       setting, the bucket owner owns the objects. The uploading
+    #       account will have object access as specified by the bucket's
+    #       policy.
+    #
+    #     * Otherwise, the uploading account retains ownership of the
+    #       objects.
+    #
+    #     For more information about Amazon S3 object ownership, see
+    #     [Controlling ownership of uploaded objects using S3 Object
+    #     Ownership][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectArtifacts AWS API Documentation
     #
     class ProjectArtifacts < Struct.new(
@@ -3942,7 +4046,8 @@ module Aws::CodeBuild
       :packaging,
       :override_artifact_name,
       :encryption_disabled,
-      :artifact_identifier)
+      :artifact_identifier,
+      :bucket_owner_access)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5103,6 +5208,7 @@ module Aws::CodeBuild
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         location: "String",
     #         encryption_disabled: false,
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       }
     #
     # @!attribute [rw] status
@@ -5125,12 +5231,53 @@ module Aws::CodeBuild
     #   By default S3 build logs are encrypted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] bucket_owner_access
+    #   Specifies the access for objects that are uploaded to an Amazon S3
+    #   bucket that is owned by another account.
+    #
+    #   By default, only the account that uploads the objects to the bucket
+    #   has access to these objects. This property allows you to give the
+    #   bucket owner access to these objects.
+    #
+    #   NONE
+    #
+    #   : The bucket owner does not have access to the objects. This is the
+    #     default.
+    #
+    #   READ\_ONLY
+    #
+    #   : The bucket owner has read only access to the objects. The
+    #     uploading account retains ownership of the objects.
+    #
+    #   FULL
+    #
+    #   : The bucket owner has full access to the objects. Object ownership
+    #     is determined by the following criteria:
+    #
+    #     * If the bucket is configured with the **Bucket owner preferred**
+    #       setting, the bucket owner owns the objects. The uploading
+    #       account will have object access as specified by the bucket's
+    #       policy.
+    #
+    #     * Otherwise, the uploading account retains ownership of the
+    #       objects.
+    #
+    #     For more information about Amazon S3 object ownership, see
+    #     [Controlling ownership of uploaded objects using S3 Object
+    #     Ownership][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/S3LogsConfig AWS API Documentation
     #
     class S3LogsConfig < Struct.new(
       :status,
       :location,
-      :encryption_disabled)
+      :encryption_disabled,
+      :bucket_owner_access)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5304,6 +5451,7 @@ module Aws::CodeBuild
     #           override_artifact_name: false,
     #           encryption_disabled: false,
     #           artifact_identifier: "String",
+    #           bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #         },
     #         secondary_artifacts_override: [
     #           {
@@ -5316,6 +5464,7 @@ module Aws::CodeBuild
     #             override_artifact_name: false,
     #             encryption_disabled: false,
     #             artifact_identifier: "String",
+    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #           },
     #         ],
     #         environment_variables_override: [
@@ -5363,6 +5512,7 @@ module Aws::CodeBuild
     #             status: "ENABLED", # required, accepts ENABLED, DISABLED
     #             location: "String",
     #             encryption_disabled: false,
+    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #           },
     #         },
     #         registry_credential_override: {
@@ -5726,6 +5876,7 @@ module Aws::CodeBuild
     #           override_artifact_name: false,
     #           encryption_disabled: false,
     #           artifact_identifier: "String",
+    #           bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #         },
     #         secondary_artifacts_override: [
     #           {
@@ -5738,6 +5889,7 @@ module Aws::CodeBuild
     #             override_artifact_name: false,
     #             encryption_disabled: false,
     #             artifact_identifier: "String",
+    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #           },
     #         ],
     #         environment_variables_override: [
@@ -5789,6 +5941,7 @@ module Aws::CodeBuild
     #             status: "ENABLED", # required, accepts ENABLED, DISABLED
     #             location: "String",
     #             encryption_disabled: false,
+    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #           },
     #         },
     #         registry_credential_override: {
@@ -6390,6 +6543,7 @@ module Aws::CodeBuild
     #           override_artifact_name: false,
     #           encryption_disabled: false,
     #           artifact_identifier: "String",
+    #           bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #         },
     #         secondary_artifacts: [
     #           {
@@ -6402,6 +6556,7 @@ module Aws::CodeBuild
     #             override_artifact_name: false,
     #             encryption_disabled: false,
     #             artifact_identifier: "String",
+    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #           },
     #         ],
     #         cache: {
@@ -6454,6 +6609,7 @@ module Aws::CodeBuild
     #             status: "ENABLED", # required, accepts ENABLED, DISABLED
     #             location: "String",
     #             encryption_disabled: false,
+    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #           },
     #         },
     #         file_system_locations: [
