@@ -7,7 +7,7 @@ module Aws
     # @api private
     class FileUploader
 
-      FIFTEEN_MEGABYTES = 15 * 1024 * 1024
+      ONE_HUNDRED_MEGABYTES = 100 * 1024 * 1024
 
       # @param [Hash] options
       # @option options [Client] :client
@@ -16,7 +16,7 @@ module Aws
         @options = options
         @client = options[:client] || Client.new
         @multipart_threshold = options[:multipart_threshold] ||
-                               FIFTEEN_MEGABYTES
+                               ONE_HUNDRED_MEGABYTES
       end
 
       # @return [Client]
