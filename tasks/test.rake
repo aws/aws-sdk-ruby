@@ -47,14 +47,14 @@ end
 
 rule /^test:features:.+$/ do |task|
   dir = "gems/#{task.name.split(':').last}/features"
-  sh("bundle exec cucumber -t ~@veryslow -r #{dir} #{dir}")
+  sh("bundle exec cucumber -t 'not @veryslow' -r #{dir} #{dir} --publish-quiet")
 end
 
 desc 'Executes integration tests.'
 task 'test:features' do
   failures = []
   Dir.glob('gems/*/features').each do |dir|
-    sh("bundle exec cucumber -t ~@veryslow -r #{dir} #{dir}") do |ok, _|
+    sh("bundle exec cucumber -t 'not @veryslow' -r #{dir} #{dir} --publish-quiet") do |ok, _|
       failures << File.basename(File.dirname(dir)) unless ok
     end
   end
