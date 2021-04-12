@@ -1647,24 +1647,24 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         ipv_6_cidr_block: "String", # required
     #         subnet_id: "SubnetId", # required
+    #         ipv_6_cidr_block: "String", # required
     #       }
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of your subnet.
+    #   @return [String]
     #
     # @!attribute [rw] ipv_6_cidr_block
     #   The IPv6 CIDR block for your subnet. The subnet must have a /64
     #   prefix length.
     #   @return [String]
     #
-    # @!attribute [rw] subnet_id
-    #   The ID of your subnet.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSubnetCidrBlockRequest AWS API Documentation
     #
     class AssociateSubnetCidrBlockRequest < Struct.new(
-      :ipv_6_cidr_block,
-      :subnet_id)
+      :subnet_id,
+      :ipv_6_cidr_block)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8569,6 +8569,83 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateRestoreImageTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "String", # required
+    #         object_key: "String", # required
+    #         name: "String",
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the S3 bucket that contains the stored AMI object.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_key
+    #   The name of the stored AMI object in the bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name for the restored AMI. The name must be unique for AMIs in
+    #   the Region for this account. If you do not provide a name, the new
+    #   AMI gets the same name as the original AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the AMI and snapshots on restoration. You can
+    #   tag the AMI, the snapshots, or both.
+    #
+    #   * To tag the AMI, the value for `ResourceType` must be `image`.
+    #
+    #   * To tag the snapshots, the value for `ResourceType` must be
+    #     `snapshot`. The same tag is applied to all of the snapshots that
+    #     are created.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRestoreImageTaskRequest AWS API Documentation
+    #
+    class CreateRestoreImageTaskRequest < Struct.new(
+      :bucket,
+      :object_key,
+      :name,
+      :tag_specifications,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The AMI ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRestoreImageTaskResult AWS API Documentation
+    #
+    class CreateRestoreImageTaskResult < Struct.new(
+      :image_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateRouteRequest
     #   data as a hash:
     #
@@ -9076,6 +9153,67 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateStoreImageTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_id: "ImageId", # required
+    #         bucket: "String", # required
+    #         s3_object_tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   The name of the S3 bucket in which the AMI object will be stored.
+    #   The bucket must be in the Region in which the request is being made.
+    #   The AMI object appears in the bucket only after the upload task has
+    #   completed.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_object_tags
+    #   The tags to apply to the AMI object that will be stored in the S3
+    #   bucket.
+    #   @return [Array<Types::S3ObjectTag>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateStoreImageTaskRequest AWS API Documentation
+    #
+    class CreateStoreImageTaskRequest < Struct.new(
+      :image_id,
+      :bucket,
+      :s3_object_tags,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] object_key
+    #   The name of the stored AMI object in the S3 bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateStoreImageTaskResult AWS API Documentation
+    #
+    class CreateStoreImageTaskResult < Struct.new(
+      :object_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateSubnetRequest
     #   data as a hash:
     #
@@ -9093,11 +9231,11 @@ module Aws::EC2
     #         ],
     #         availability_zone: "String",
     #         availability_zone_id: "String",
-    #         cidr_block: "String", # required
     #         ipv_6_cidr_block: "String",
     #         outpost_arn: "String",
     #         vpc_id: "VpcId", # required
     #         dry_run: false,
+    #         cidr_block: "String", # required
     #       }
     #
     # @!attribute [rw] tag_specifications
@@ -9128,13 +9266,6 @@ module Aws::EC2
     #   The AZ ID or the Local Zone ID of the subnet.
     #   @return [String]
     #
-    # @!attribute [rw] cidr_block
-    #   The IPv4 network range for the subnet, in CIDR notation. For
-    #   example, `10.0.0.0/24`. We modify the specified CIDR block to its
-    #   canonical form; for example, if you specify `100.68.0.18/18`, we
-    #   modify it to `100.68.0.0/18`.
-    #   @return [String]
-    #
     # @!attribute [rw] ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
@@ -9157,17 +9288,24 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] cidr_block
+    #   The IPv4 network range for the subnet, in CIDR notation. For
+    #   example, `10.0.0.0/24`. We modify the specified CIDR block to its
+    #   canonical form; for example, if you specify `100.68.0.18/18`, we
+    #   modify it to `100.68.0.0/18`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnetRequest AWS API Documentation
     #
     class CreateSubnetRequest < Struct.new(
       :tag_specifications,
       :availability_zone,
       :availability_zone_id,
-      :cidr_block,
       :ipv_6_cidr_block,
       :outpost_arn,
       :vpc_id,
-      :dry_run)
+      :dry_run,
+      :cidr_block)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14556,6 +14694,9 @@ module Aws::EC2
     #       constraints, or instance limit constraints. Failed requests are
     #       retained for 60 minutes.
     #
+    #   * `start-date` - The date and time at which the Capacity Reservation
+    #     was started.
+    #
     #   * `end-date` - The date and time at which the Capacity Reservation
     #     expires. When a Capacity Reservation expires, the reserved
     #     capacity is released and you can no longer launch instances into
@@ -17779,8 +17920,7 @@ module Aws::EC2
     #   * `memory-info.size-in-mib` - The memory size.
     #
     #   * `network-info.efa-info.maximum-efa-interfaces` - The maximum
-    #     number of Elastic Fabric Adapters (EFAs) per instance. (`true` \|
-    #     `false`).
+    #     number of Elastic Fabric Adapters (EFAs) per instance.
     #
     #   * `network-info.efa-supported` - Indicates whether the instance type
     #     supports Elastic Fabric Adapter (EFA) (`true` \| `false`).
@@ -22413,6 +22553,86 @@ module Aws::EC2
     class DescribeStaleSecurityGroupsResult < Struct.new(
       :next_token,
       :stale_security_group_set)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeStoreImageTasksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_ids: ["ImageId"],
+    #         dry_run: false,
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] image_ids
+    #   The AMI IDs for which to show progress. Up to 20 AMI IDs can be
+    #   included in a request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   The filters.
+    #
+    #   * `task-state` - Returns tasks in a certain state (`InProgress` \|
+    #     `Completed` \| `Failed`)
+    #
+    #   * `bucket` - Returns task information for tasks that targeted a
+    #     specific bucket. For the filter value, specify the bucket name.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `NextToken` value. This value can be between 1 and 200. You cannot
+    #   specify this parameter and the `ImageIDs` parameter in the same
+    #   call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeStoreImageTasksRequest AWS API Documentation
+    #
+    class DescribeStoreImageTasksRequest < Struct.new(
+      :image_ids,
+      :dry_run,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] store_image_task_results
+    #   The information about the AMI store tasks.
+    #   @return [Array<Types::StoreImageTaskResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeStoreImageTasksResult AWS API Documentation
+    #
+    class DescribeStoreImageTasksResult < Struct.new(
+      :store_image_task_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28678,7 +28898,7 @@ module Aws::EC2
     #   If the Spot `AllocationStrategy` is set to
     #   `capacity-optimized-prioritized`, EC2 Fleet uses priority on a
     #   best-effort basis to determine which launch template override to use
-    #   first in fulfilling Spot capacity, but optimizes for capacity first.
+    #   in fulfilling Spot capacity, but optimizes for capacity first.
     #
     #   Valid values are whole numbers starting at `0`. The lower the
     #   number, the higher the priority. If no number is set, the override
@@ -28763,7 +28983,7 @@ module Aws::EC2
     #   If the Spot `AllocationStrategy` is set to
     #   `capacity-optimized-prioritized`, EC2 Fleet uses priority on a
     #   best-effort basis to determine which launch template override to use
-    #   first in fulfilling Spot capacity, but optimizes for capacity first.
+    #   in fulfilling Spot capacity, but optimizes for capacity first.
     #
     #   Valid values are whole numbers starting at `0`. The lower the
     #   number, the higher the priority. If no number is set, the launch
@@ -33726,8 +33946,7 @@ module Aws::EC2
     #   @return [Array<Types::InstancePrivateIpAddress>]
     #
     # @!attribute [rw] source_dest_check
-    #   Indicates whether to validate network traffic to or from this
-    #   network interface.
+    #   Indicates whether source/destination checking is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] status
@@ -36252,7 +36471,7 @@ module Aws::EC2
     #   If the Spot `AllocationStrategy` is set to
     #   `capacityOptimizedPrioritized`, Spot Fleet uses priority on a
     #   best-effort basis to determine which launch template override to use
-    #   first in fulfilling Spot capacity, but optimizes for capacity first.
+    #   in fulfilling Spot capacity, but optimizes for capacity first.
     #
     #   Valid values are whole numbers starting at `0`. The lower the
     #   number, the higher the priority. If no number is set, the launch
@@ -38214,10 +38433,10 @@ module Aws::EC2
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] groups
-    #   \[EC2-VPC\] Changes the security groups of the instance. You must
-    #   specify at least one security group, even if it's just the default
-    #   security group for the VPC. You must specify the security group ID,
-    #   not the security group name.
+    #   \[EC2-VPC\] Replaces the security groups of the instance with the
+    #   specified security groups. You must specify at least one security
+    #   group, even if it's just the default security group for the VPC.
+    #   You must specify the security group ID, not the security group name.
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_id
@@ -38830,15 +39049,12 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] source_dest_check
-    #   Indicates whether source/destination checking is enabled. A value of
-    #   `true` means checking is enabled, and `false` means checking is
-    #   disabled. This value must be `false` for a NAT instance to perform
-    #   NAT. For more information, see [NAT Instances][1] in the *Amazon
-    #   Virtual Private Cloud User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html
+    #   Enable or disable source/destination checks, which ensure that the
+    #   instance is either the source or the destination of any traffic that
+    #   it receives. If the value is `true`, source/destination checks are
+    #   enabled; otherwise, they are disabled. The default value is `true`.
+    #   You must disable source/destination checks if the instance runs
+    #   services such as network address translation, routing, or firewalls.
     #   @return [Types::AttributeBooleanValue]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyNetworkInterfaceAttributeRequest AWS API Documentation
@@ -41526,7 +41742,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] source_dest_check
-    #   Indicates whether traffic to or from the instance is validated.
+    #   Indicates whether source/destination checking is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] status
@@ -45459,7 +45675,7 @@ module Aws::EC2
     #         launch_group: "String",
     #         launch_specification: {
     #           security_group_ids: ["SecurityGroupId"],
-    #           security_groups: ["SecurityGroupName"],
+    #           security_groups: ["String"],
     #           addressing_type: "String",
     #           block_device_mappings: [
     #             {
@@ -45720,7 +45936,7 @@ module Aws::EC2
     #
     #       {
     #         security_group_ids: ["SecurityGroupId"],
-    #         security_groups: ["SecurityGroupName"],
+    #         security_groups: ["String"],
     #         addressing_type: "String",
     #         block_device_mappings: [
     #           {
@@ -45866,9 +46082,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
-    #   The IDs of the subnets in which to launch the instance. To specify
-    #   multiple subnets, separate them using commas; for example,
-    #   "subnet-1234abcdeexample1, subnet-0987cdef6example2".
+    #   The ID of the subnet in which to launch the instance.
     #   @return [String]
     #
     # @!attribute [rw] user_data
@@ -48252,6 +48466,45 @@ module Aws::EC2
     #
     class RunScheduledInstancesResult < Struct.new(
       :instance_id_set)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The tags to apply to the AMI object that will be stored in the S3
+    # bucket. For more information, see [Categorizing your storage using
+    # tags][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-tagging.html
+    #
+    # @note When making an API call, you may pass S3ObjectTag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key of the tag.
+    #
+    #   Constraints: Tag keys are case-sensitive and can be up to 128
+    #   Unicode characters in length. May not begin with `aws`\:.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the tag.
+    #
+    #   Constraints: Tag values are case-sensitive and can be up to 256
+    #   Unicode characters in length.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/S3ObjectTag AWS API Documentation
+    #
+    class S3ObjectTag < Struct.new(
+      :key,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -51861,6 +52114,53 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The information about the AMI store task, including the progress of
+    # the task.
+    #
+    # @!attribute [rw] ami_id
+    #   The ID of the AMI that is being stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_start_time
+    #   The time the task started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] bucket
+    #   The name of the S3 bucket that contains the stored AMI object.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3object_key
+    #   The name of the stored AMI object in the bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] progress_percentage
+    #   The progress of the task as a percentage.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] store_task_state
+    #   The state of the store task (`InProgress`, `Completed`, or
+    #   `Failed`).
+    #   @return [String]
+    #
+    # @!attribute [rw] store_task_failure_reason
+    #   If the tasks fails, the reason for the failure is returned. If the
+    #   task succeeds, `null` is returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StoreImageTaskResult AWS API Documentation
+    #
+    class StoreImageTaskResult < Struct.new(
+      :ami_id,
+      :task_start_time,
+      :bucket,
+      :s3object_key,
+      :progress_percentage,
+      :store_task_state,
+      :store_task_failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a subnet.
     #
     # @!attribute [rw] availability_zone
@@ -54184,23 +54484,23 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         ipv_6_addresses: ["String"], # required
     #         network_interface_id: "NetworkInterfaceId", # required
+    #         ipv_6_addresses: ["String"], # required
     #       }
-    #
-    # @!attribute [rw] ipv_6_addresses
-    #   The IPv6 addresses to unassign from the network interface.
-    #   @return [Array<String>]
     #
     # @!attribute [rw] network_interface_id
     #   The ID of the network interface.
     #   @return [String]
     #
+    # @!attribute [rw] ipv_6_addresses
+    #   The IPv6 addresses to unassign from the network interface.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnassignIpv6AddressesRequest AWS API Documentation
     #
     class UnassignIpv6AddressesRequest < Struct.new(
-      :ipv_6_addresses,
-      :network_interface_id)
+      :network_interface_id,
+      :ipv_6_addresses)
       SENSITIVE = []
       include Aws::Structure
     end

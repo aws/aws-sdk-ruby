@@ -27,6 +27,8 @@ module Aws::StorageGateway
     AddWorkingStorageOutput = Shapes::StructureShape.new(name: 'AddWorkingStorageOutput')
     AssignTapePoolInput = Shapes::StructureShape.new(name: 'AssignTapePoolInput')
     AssignTapePoolOutput = Shapes::StructureShape.new(name: 'AssignTapePoolOutput')
+    AssociateFileSystemInput = Shapes::StructureShape.new(name: 'AssociateFileSystemInput')
+    AssociateFileSystemOutput = Shapes::StructureShape.new(name: 'AssociateFileSystemOutput')
     AttachVolumeInput = Shapes::StructureShape.new(name: 'AttachVolumeInput')
     AttachVolumeOutput = Shapes::StructureShape.new(name: 'AttachVolumeOutput')
     AuditDestinationARN = Shapes::StringShape.new(name: 'AuditDestinationARN')
@@ -111,6 +113,8 @@ module Aws::StorageGateway
     DescribeCachediSCSIVolumesOutput = Shapes::StructureShape.new(name: 'DescribeCachediSCSIVolumesOutput')
     DescribeChapCredentialsInput = Shapes::StructureShape.new(name: 'DescribeChapCredentialsInput')
     DescribeChapCredentialsOutput = Shapes::StructureShape.new(name: 'DescribeChapCredentialsOutput')
+    DescribeFileSystemAssociationsInput = Shapes::StructureShape.new(name: 'DescribeFileSystemAssociationsInput')
+    DescribeFileSystemAssociationsOutput = Shapes::StructureShape.new(name: 'DescribeFileSystemAssociationsOutput')
     DescribeGatewayInformationInput = Shapes::StructureShape.new(name: 'DescribeGatewayInformationInput')
     DescribeGatewayInformationOutput = Shapes::StructureShape.new(name: 'DescribeGatewayInformationOutput')
     DescribeMaintenanceStartTimeInput = Shapes::StructureShape.new(name: 'DescribeMaintenanceStartTimeInput')
@@ -144,6 +148,8 @@ module Aws::StorageGateway
     DeviceiSCSIAttributes = Shapes::StructureShape.new(name: 'DeviceiSCSIAttributes')
     DisableGatewayInput = Shapes::StructureShape.new(name: 'DisableGatewayInput')
     DisableGatewayOutput = Shapes::StructureShape.new(name: 'DisableGatewayOutput')
+    DisassociateFileSystemInput = Shapes::StructureShape.new(name: 'DisassociateFileSystemInput')
+    DisassociateFileSystemOutput = Shapes::StructureShape.new(name: 'DisassociateFileSystemOutput')
     Disk = Shapes::StructureShape.new(name: 'Disk')
     DiskAllocationType = Shapes::StringShape.new(name: 'DiskAllocationType')
     DiskAttribute = Shapes::StringShape.new(name: 'DiskAttribute')
@@ -168,8 +174,15 @@ module Aws::StorageGateway
     FileShareName = Shapes::StringShape.new(name: 'FileShareName')
     FileShareStatus = Shapes::StringShape.new(name: 'FileShareStatus')
     FileShareType = Shapes::StringShape.new(name: 'FileShareType')
-    FileShareUser = Shapes::StringShape.new(name: 'FileShareUser')
-    FileShareUserList = Shapes::ListShape.new(name: 'FileShareUserList')
+    FileSystemAssociationARN = Shapes::StringShape.new(name: 'FileSystemAssociationARN')
+    FileSystemAssociationARNList = Shapes::ListShape.new(name: 'FileSystemAssociationARNList')
+    FileSystemAssociationId = Shapes::StringShape.new(name: 'FileSystemAssociationId')
+    FileSystemAssociationInfo = Shapes::StructureShape.new(name: 'FileSystemAssociationInfo')
+    FileSystemAssociationInfoList = Shapes::ListShape.new(name: 'FileSystemAssociationInfoList')
+    FileSystemAssociationStatus = Shapes::StringShape.new(name: 'FileSystemAssociationStatus')
+    FileSystemAssociationSummary = Shapes::StructureShape.new(name: 'FileSystemAssociationSummary')
+    FileSystemAssociationSummaryList = Shapes::ListShape.new(name: 'FileSystemAssociationSummaryList')
+    FileSystemLocationARN = Shapes::StringShape.new(name: 'FileSystemLocationARN')
     Folder = Shapes::StringShape.new(name: 'Folder')
     FolderList = Shapes::ListShape.new(name: 'FolderList')
     GatewayARN = Shapes::StringShape.new(name: 'GatewayARN')
@@ -200,6 +213,8 @@ module Aws::StorageGateway
     ListAutomaticTapeCreationPoliciesOutput = Shapes::StructureShape.new(name: 'ListAutomaticTapeCreationPoliciesOutput')
     ListFileSharesInput = Shapes::StructureShape.new(name: 'ListFileSharesInput')
     ListFileSharesOutput = Shapes::StructureShape.new(name: 'ListFileSharesOutput')
+    ListFileSystemAssociationsInput = Shapes::StructureShape.new(name: 'ListFileSystemAssociationsInput')
+    ListFileSystemAssociationsOutput = Shapes::StructureShape.new(name: 'ListFileSystemAssociationsOutput')
     ListGatewaysInput = Shapes::StructureShape.new(name: 'ListGatewaysInput')
     ListGatewaysOutput = Shapes::StructureShape.new(name: 'ListGatewaysOutput')
     ListLocalDisksInput = Shapes::StructureShape.new(name: 'ListLocalDisksInput')
@@ -321,6 +336,8 @@ module Aws::StorageGateway
     UpdateBandwidthRateLimitScheduleOutput = Shapes::StructureShape.new(name: 'UpdateBandwidthRateLimitScheduleOutput')
     UpdateChapCredentialsInput = Shapes::StructureShape.new(name: 'UpdateChapCredentialsInput')
     UpdateChapCredentialsOutput = Shapes::StructureShape.new(name: 'UpdateChapCredentialsOutput')
+    UpdateFileSystemAssociationInput = Shapes::StructureShape.new(name: 'UpdateFileSystemAssociationInput')
+    UpdateFileSystemAssociationOutput = Shapes::StructureShape.new(name: 'UpdateFileSystemAssociationOutput')
     UpdateGatewayInformationInput = Shapes::StructureShape.new(name: 'UpdateGatewayInformationInput')
     UpdateGatewayInformationOutput = Shapes::StructureShape.new(name: 'UpdateGatewayInformationOutput')
     UpdateGatewaySoftwareNowInput = Shapes::StructureShape.new(name: 'UpdateGatewaySoftwareNowInput')
@@ -339,6 +356,8 @@ module Aws::StorageGateway
     UpdateSnapshotScheduleOutput = Shapes::StructureShape.new(name: 'UpdateSnapshotScheduleOutput')
     UpdateVTLDeviceTypeInput = Shapes::StructureShape.new(name: 'UpdateVTLDeviceTypeInput')
     UpdateVTLDeviceTypeOutput = Shapes::StructureShape.new(name: 'UpdateVTLDeviceTypeOutput')
+    UserList = Shapes::ListShape.new(name: 'UserList')
+    UserListUser = Shapes::StringShape.new(name: 'UserListUser')
     VTLDevice = Shapes::StructureShape.new(name: 'VTLDevice')
     VTLDeviceARN = Shapes::StringShape.new(name: 'VTLDeviceARN')
     VTLDeviceARNs = Shapes::ListShape.new(name: 'VTLDeviceARNs')
@@ -413,6 +432,19 @@ module Aws::StorageGateway
 
     AssignTapePoolOutput.add_member(:tape_arn, Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
     AssignTapePoolOutput.struct_class = Types::AssignTapePoolOutput
+
+    AssociateFileSystemInput.add_member(:user_name, Shapes::ShapeRef.new(shape: DomainUserName, required: true, location_name: "UserName"))
+    AssociateFileSystemInput.add_member(:password, Shapes::ShapeRef.new(shape: DomainUserPassword, required: true, location_name: "Password"))
+    AssociateFileSystemInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken"))
+    AssociateFileSystemInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
+    AssociateFileSystemInput.add_member(:location_arn, Shapes::ShapeRef.new(shape: FileSystemLocationARN, required: true, location_name: "LocationARN"))
+    AssociateFileSystemInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    AssociateFileSystemInput.add_member(:audit_destination_arn, Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
+    AssociateFileSystemInput.add_member(:cache_attributes, Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
+    AssociateFileSystemInput.struct_class = Types::AssociateFileSystemInput
+
+    AssociateFileSystemOutput.add_member(:file_system_association_arn, Shapes::ShapeRef.new(shape: FileSystemAssociationARN, location_name: "FileSystemAssociationARN"))
+    AssociateFileSystemOutput.struct_class = Types::AssociateFileSystemOutput
 
     AttachVolumeInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     AttachVolumeInput.add_member(:target_name, Shapes::ShapeRef.new(shape: TargetName, location_name: "TargetName"))
@@ -545,9 +577,9 @@ module Aws::StorageGateway
     CreateSMBFileShareInput.add_member(:requester_pays, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
     CreateSMBFileShareInput.add_member(:smbacl_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SMBACLEnabled"))
     CreateSMBFileShareInput.add_member(:access_based_enumeration, Shapes::ShapeRef.new(shape: Boolean, location_name: "AccessBasedEnumeration"))
-    CreateSMBFileShareInput.add_member(:admin_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "AdminUserList"))
-    CreateSMBFileShareInput.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "ValidUserList"))
-    CreateSMBFileShareInput.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "InvalidUserList"))
+    CreateSMBFileShareInput.add_member(:admin_user_list, Shapes::ShapeRef.new(shape: UserList, location_name: "AdminUserList"))
+    CreateSMBFileShareInput.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: UserList, location_name: "ValidUserList"))
+    CreateSMBFileShareInput.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: UserList, location_name: "InvalidUserList"))
     CreateSMBFileShareInput.add_member(:audit_destination_arn, Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
     CreateSMBFileShareInput.add_member(:authentication, Shapes::ShapeRef.new(shape: Authentication, location_name: "Authentication"))
     CreateSMBFileShareInput.add_member(:case_sensitivity, Shapes::ShapeRef.new(shape: CaseSensitivity, location_name: "CaseSensitivity"))
@@ -749,6 +781,12 @@ module Aws::StorageGateway
     DescribeChapCredentialsOutput.add_member(:chap_credentials, Shapes::ShapeRef.new(shape: ChapCredentials, location_name: "ChapCredentials"))
     DescribeChapCredentialsOutput.struct_class = Types::DescribeChapCredentialsOutput
 
+    DescribeFileSystemAssociationsInput.add_member(:file_system_association_arn_list, Shapes::ShapeRef.new(shape: FileSystemAssociationARNList, required: true, location_name: "FileSystemAssociationARNList"))
+    DescribeFileSystemAssociationsInput.struct_class = Types::DescribeFileSystemAssociationsInput
+
+    DescribeFileSystemAssociationsOutput.add_member(:file_system_association_info_list, Shapes::ShapeRef.new(shape: FileSystemAssociationInfoList, location_name: "FileSystemAssociationInfoList"))
+    DescribeFileSystemAssociationsOutput.struct_class = Types::DescribeFileSystemAssociationsOutput
+
     DescribeGatewayInformationInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     DescribeGatewayInformationInput.struct_class = Types::DescribeGatewayInformationInput
 
@@ -900,6 +938,13 @@ module Aws::StorageGateway
     DisableGatewayOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
     DisableGatewayOutput.struct_class = Types::DisableGatewayOutput
 
+    DisassociateFileSystemInput.add_member(:file_system_association_arn, Shapes::ShapeRef.new(shape: FileSystemAssociationARN, required: true, location_name: "FileSystemAssociationARN"))
+    DisassociateFileSystemInput.add_member(:force_delete, Shapes::ShapeRef.new(shape: boolean, location_name: "ForceDelete"))
+    DisassociateFileSystemInput.struct_class = Types::DisassociateFileSystemInput
+
+    DisassociateFileSystemOutput.add_member(:file_system_association_arn, Shapes::ShapeRef.new(shape: FileSystemAssociationARN, location_name: "FileSystemAssociationARN"))
+    DisassociateFileSystemOutput.struct_class = Types::DisassociateFileSystemOutput
+
     Disk.add_member(:disk_id, Shapes::ShapeRef.new(shape: DiskId, location_name: "DiskId"))
     Disk.add_member(:disk_path, Shapes::ShapeRef.new(shape: string, location_name: "DiskPath"))
     Disk.add_member(:disk_node, Shapes::ShapeRef.new(shape: string, location_name: "DiskNode"))
@@ -929,7 +974,26 @@ module Aws::StorageGateway
 
     FileShareInfoList.member = Shapes::ShapeRef.new(shape: FileShareInfo)
 
-    FileShareUserList.member = Shapes::ShapeRef.new(shape: FileShareUser)
+    FileSystemAssociationARNList.member = Shapes::ShapeRef.new(shape: FileSystemAssociationARN)
+
+    FileSystemAssociationInfo.add_member(:file_system_association_arn, Shapes::ShapeRef.new(shape: FileSystemAssociationARN, location_name: "FileSystemAssociationARN"))
+    FileSystemAssociationInfo.add_member(:location_arn, Shapes::ShapeRef.new(shape: FileSystemLocationARN, location_name: "LocationARN"))
+    FileSystemAssociationInfo.add_member(:file_system_association_status, Shapes::ShapeRef.new(shape: FileSystemAssociationStatus, location_name: "FileSystemAssociationStatus"))
+    FileSystemAssociationInfo.add_member(:audit_destination_arn, Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
+    FileSystemAssociationInfo.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    FileSystemAssociationInfo.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    FileSystemAssociationInfo.add_member(:cache_attributes, Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
+    FileSystemAssociationInfo.struct_class = Types::FileSystemAssociationInfo
+
+    FileSystemAssociationInfoList.member = Shapes::ShapeRef.new(shape: FileSystemAssociationInfo)
+
+    FileSystemAssociationSummary.add_member(:file_system_association_id, Shapes::ShapeRef.new(shape: FileSystemAssociationId, location_name: "FileSystemAssociationId"))
+    FileSystemAssociationSummary.add_member(:file_system_association_arn, Shapes::ShapeRef.new(shape: FileSystemAssociationARN, location_name: "FileSystemAssociationARN"))
+    FileSystemAssociationSummary.add_member(:file_system_association_status, Shapes::ShapeRef.new(shape: FileSystemAssociationStatus, location_name: "FileSystemAssociationStatus"))
+    FileSystemAssociationSummary.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    FileSystemAssociationSummary.struct_class = Types::FileSystemAssociationSummary
+
+    FileSystemAssociationSummaryList.member = Shapes::ShapeRef.new(shape: FileSystemAssociationSummary)
 
     FolderList.member = Shapes::ShapeRef.new(shape: Folder)
 
@@ -986,6 +1050,16 @@ module Aws::StorageGateway
     ListFileSharesOutput.add_member(:next_marker, Shapes::ShapeRef.new(shape: Marker, location_name: "NextMarker"))
     ListFileSharesOutput.add_member(:file_share_info_list, Shapes::ShapeRef.new(shape: FileShareInfoList, location_name: "FileShareInfoList"))
     ListFileSharesOutput.struct_class = Types::ListFileSharesOutput
+
+    ListFileSystemAssociationsInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    ListFileSystemAssociationsInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveIntObject, location_name: "Limit"))
+    ListFileSystemAssociationsInput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    ListFileSystemAssociationsInput.struct_class = Types::ListFileSystemAssociationsInput
+
+    ListFileSystemAssociationsOutput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    ListFileSystemAssociationsOutput.add_member(:next_marker, Shapes::ShapeRef.new(shape: Marker, location_name: "NextMarker"))
+    ListFileSystemAssociationsOutput.add_member(:file_system_association_summary_list, Shapes::ShapeRef.new(shape: FileSystemAssociationSummaryList, location_name: "FileSystemAssociationSummaryList"))
+    ListFileSystemAssociationsOutput.struct_class = Types::ListFileSystemAssociationsOutput
 
     ListGatewaysInput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
     ListGatewaysInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveIntObject, location_name: "Limit"))
@@ -1160,9 +1234,9 @@ module Aws::StorageGateway
     SMBFileShareInfo.add_member(:requester_pays, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
     SMBFileShareInfo.add_member(:smbacl_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SMBACLEnabled"))
     SMBFileShareInfo.add_member(:access_based_enumeration, Shapes::ShapeRef.new(shape: Boolean, location_name: "AccessBasedEnumeration"))
-    SMBFileShareInfo.add_member(:admin_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "AdminUserList"))
-    SMBFileShareInfo.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "ValidUserList"))
-    SMBFileShareInfo.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "InvalidUserList"))
+    SMBFileShareInfo.add_member(:admin_user_list, Shapes::ShapeRef.new(shape: UserList, location_name: "AdminUserList"))
+    SMBFileShareInfo.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: UserList, location_name: "ValidUserList"))
+    SMBFileShareInfo.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: UserList, location_name: "InvalidUserList"))
     SMBFileShareInfo.add_member(:audit_destination_arn, Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
     SMBFileShareInfo.add_member(:authentication, Shapes::ShapeRef.new(shape: Authentication, location_name: "Authentication"))
     SMBFileShareInfo.add_member(:case_sensitivity, Shapes::ShapeRef.new(shape: CaseSensitivity, location_name: "CaseSensitivity"))
@@ -1329,6 +1403,16 @@ module Aws::StorageGateway
     UpdateChapCredentialsOutput.add_member(:initiator_name, Shapes::ShapeRef.new(shape: IqnName, location_name: "InitiatorName"))
     UpdateChapCredentialsOutput.struct_class = Types::UpdateChapCredentialsOutput
 
+    UpdateFileSystemAssociationInput.add_member(:file_system_association_arn, Shapes::ShapeRef.new(shape: FileSystemAssociationARN, required: true, location_name: "FileSystemAssociationARN"))
+    UpdateFileSystemAssociationInput.add_member(:user_name, Shapes::ShapeRef.new(shape: DomainUserName, location_name: "UserName"))
+    UpdateFileSystemAssociationInput.add_member(:password, Shapes::ShapeRef.new(shape: DomainUserPassword, location_name: "Password"))
+    UpdateFileSystemAssociationInput.add_member(:audit_destination_arn, Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
+    UpdateFileSystemAssociationInput.add_member(:cache_attributes, Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
+    UpdateFileSystemAssociationInput.struct_class = Types::UpdateFileSystemAssociationInput
+
+    UpdateFileSystemAssociationOutput.add_member(:file_system_association_arn, Shapes::ShapeRef.new(shape: FileSystemAssociationARN, location_name: "FileSystemAssociationARN"))
+    UpdateFileSystemAssociationOutput.struct_class = Types::UpdateFileSystemAssociationOutput
+
     UpdateGatewayInformationInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     UpdateGatewayInformationInput.add_member(:gateway_name, Shapes::ShapeRef.new(shape: GatewayName, location_name: "GatewayName"))
     UpdateGatewayInformationInput.add_member(:gateway_timezone, Shapes::ShapeRef.new(shape: GatewayTimezone, location_name: "GatewayTimezone"))
@@ -1384,9 +1468,9 @@ module Aws::StorageGateway
     UpdateSMBFileShareInput.add_member(:requester_pays, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
     UpdateSMBFileShareInput.add_member(:smbacl_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SMBACLEnabled"))
     UpdateSMBFileShareInput.add_member(:access_based_enumeration, Shapes::ShapeRef.new(shape: Boolean, location_name: "AccessBasedEnumeration"))
-    UpdateSMBFileShareInput.add_member(:admin_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "AdminUserList"))
-    UpdateSMBFileShareInput.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "ValidUserList"))
-    UpdateSMBFileShareInput.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "InvalidUserList"))
+    UpdateSMBFileShareInput.add_member(:admin_user_list, Shapes::ShapeRef.new(shape: UserList, location_name: "AdminUserList"))
+    UpdateSMBFileShareInput.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: UserList, location_name: "ValidUserList"))
+    UpdateSMBFileShareInput.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: UserList, location_name: "InvalidUserList"))
     UpdateSMBFileShareInput.add_member(:audit_destination_arn, Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
     UpdateSMBFileShareInput.add_member(:case_sensitivity, Shapes::ShapeRef.new(shape: CaseSensitivity, location_name: "CaseSensitivity"))
     UpdateSMBFileShareInput.add_member(:file_share_name, Shapes::ShapeRef.new(shape: FileShareName, location_name: "FileShareName"))
@@ -1427,6 +1511,8 @@ module Aws::StorageGateway
 
     UpdateVTLDeviceTypeOutput.add_member(:vtl_device_arn, Shapes::ShapeRef.new(shape: VTLDeviceARN, location_name: "VTLDeviceARN"))
     UpdateVTLDeviceTypeOutput.struct_class = Types::UpdateVTLDeviceTypeOutput
+
+    UserList.member = Shapes::ShapeRef.new(shape: UserListUser)
 
     VTLDevice.add_member(:vtl_device_arn, Shapes::ShapeRef.new(shape: VTLDeviceARN, location_name: "VTLDeviceARN"))
     VTLDevice.add_member(:vtl_device_type, Shapes::ShapeRef.new(shape: VTLDeviceType, location_name: "VTLDeviceType"))
@@ -1544,6 +1630,16 @@ module Aws::StorageGateway
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AssignTapePoolInput)
         o.output = Shapes::ShapeRef.new(shape: AssignTapePoolOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:associate_file_system, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateFileSystem"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateFileSystemInput)
+        o.output = Shapes::ShapeRef.new(shape: AssociateFileSystemOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
@@ -1830,6 +1926,16 @@ module Aws::StorageGateway
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:describe_file_system_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFileSystemAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFileSystemAssociationsInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFileSystemAssociationsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:describe_gateway_information, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeGatewayInformation"
         o.http_method = "POST"
@@ -2004,6 +2110,16 @@ module Aws::StorageGateway
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:disassociate_file_system, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateFileSystem"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateFileSystemInput)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateFileSystemOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:join_domain, Seahorse::Model::Operation.new.tap do |o|
         o.name = "JoinDomain"
         o.http_method = "POST"
@@ -2030,6 +2146,22 @@ module Aws::StorageGateway
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListFileSharesInput)
         o.output = Shapes::ShapeRef.new(shape: ListFileSharesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:list_file_system_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFileSystemAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListFileSystemAssociationsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListFileSystemAssociationsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o[:pager] = Aws::Pager.new(
@@ -2296,6 +2428,16 @@ module Aws::StorageGateway
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateChapCredentialsInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateChapCredentialsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:update_file_system_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateFileSystemAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateFileSystemAssociationInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateFileSystemAssociationOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)

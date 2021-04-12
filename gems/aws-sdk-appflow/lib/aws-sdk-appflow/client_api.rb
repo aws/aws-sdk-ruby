@@ -282,6 +282,7 @@ module Aws::Appflow
     ZendeskConnectorOperator = Shapes::StringShape.new(name: 'ZendeskConnectorOperator')
     ZendeskConnectorProfileCredentials = Shapes::StructureShape.new(name: 'ZendeskConnectorProfileCredentials')
     ZendeskConnectorProfileProperties = Shapes::StructureShape.new(name: 'ZendeskConnectorProfileProperties')
+    ZendeskDestinationProperties = Shapes::StructureShape.new(name: 'ZendeskDestinationProperties')
     ZendeskMetadata = Shapes::StructureShape.new(name: 'ZendeskMetadata')
     ZendeskSourceProperties = Shapes::StructureShape.new(name: 'ZendeskSourceProperties')
 
@@ -558,6 +559,7 @@ module Aws::Appflow
     DestinationConnectorProperties.add_member(:upsolver, Shapes::ShapeRef.new(shape: UpsolverDestinationProperties, location_name: "Upsolver"))
     DestinationConnectorProperties.add_member(:honeycode, Shapes::ShapeRef.new(shape: HoneycodeDestinationProperties, location_name: "Honeycode"))
     DestinationConnectorProperties.add_member(:customer_profiles, Shapes::ShapeRef.new(shape: CustomerProfilesDestinationProperties, location_name: "CustomerProfiles"))
+    DestinationConnectorProperties.add_member(:zendesk, Shapes::ShapeRef.new(shape: ZendeskDestinationProperties, location_name: "Zendesk"))
     DestinationConnectorProperties.struct_class = Types::DestinationConnectorProperties
 
     DestinationFieldProperties.add_member(:is_creatable, Shapes::ShapeRef.new(shape: Boolean, location_name: "isCreatable"))
@@ -1032,6 +1034,12 @@ module Aws::Appflow
 
     ZendeskConnectorProfileProperties.add_member(:instance_url, Shapes::ShapeRef.new(shape: InstanceUrl, required: true, location_name: "instanceUrl"))
     ZendeskConnectorProfileProperties.struct_class = Types::ZendeskConnectorProfileProperties
+
+    ZendeskDestinationProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "object"))
+    ZendeskDestinationProperties.add_member(:id_field_names, Shapes::ShapeRef.new(shape: IdFieldNameList, location_name: "idFieldNames"))
+    ZendeskDestinationProperties.add_member(:error_handling_config, Shapes::ShapeRef.new(shape: ErrorHandlingConfig, location_name: "errorHandlingConfig"))
+    ZendeskDestinationProperties.add_member(:write_operation_type, Shapes::ShapeRef.new(shape: WriteOperationType, location_name: "writeOperationType"))
+    ZendeskDestinationProperties.struct_class = Types::ZendeskDestinationProperties
 
     ZendeskMetadata.add_member(:o_auth_scopes, Shapes::ShapeRef.new(shape: OAuthScopeList, location_name: "oAuthScopes"))
     ZendeskMetadata.struct_class = Types::ZendeskMetadata

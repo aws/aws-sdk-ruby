@@ -327,22 +327,27 @@ module Aws::ElastiCache
 
     # @!group API Operations
 
-    # Adds up to 50 cost allocation tags to the named resource. A cost
-    # allocation tag is a key-value pair where the key and value are
-    # case-sensitive. You can use cost allocation tags to categorize and
-    # track your AWS costs.
+    # A tag is a key-value pair where the key and value are case-sensitive.
+    # You can use tags to categorize and track all your ElastiCache
+    # resources, with the exception of global replication group. When you
+    # add or remove tags on replication groups, those actions will be
+    # replicated to all nodes in the replication group. For more
+    # information, see [Resource-level permissions][1].
     #
-    # When you apply tags to your ElastiCache resources, AWS generates a
-    # cost allocation report as a comma-separated value (CSV) file with your
-    # usage and costs aggregated by your tags. You can apply tags that
-    # represent business categories (such as cost centers, application
-    # names, or owners) to organize your costs across multiple services. For
-    # more information, see [Using Cost Allocation Tags in Amazon
-    # ElastiCache][1] in the *ElastiCache User Guide*.
+    # For example, you can use cost-allocation tags to your ElastiCache
+    # resources, AWS generates a cost allocation report as a comma-separated
+    # value (CSV) file with your usage and costs aggregated by your tags.
+    # You can apply tags that represent business categories (such as cost
+    # centers, application names, or owners) to organize your costs across
+    # multiple services.
+    #
+    # For more information, see [Using Cost Allocation Tags in Amazon
+    # ElastiCache][2] in the *ElastiCache User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html
+    # [2]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html
     #
     # @option params [required, String] :resource_name
     #   The Amazon Resource Name (ARN) of the resource to which the tags are
@@ -359,8 +364,9 @@ module Aws::ElastiCache
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   A list of cost allocation tags to be added to this resource. A tag is
-    #   a key-value pair. A tag key must be accompanied by a tag value.
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
     #
     # @return [Types::TagListMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -779,11 +785,16 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access
-    #   [2]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access
+    #   [2]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html
     #
     # @option params [String] :kms_key_id
     #   The ID of the KMS key used to encrypt the target snapshot.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
     #
     # @return [Types::CopySnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -839,6 +850,12 @@ module Aws::ElastiCache
     #     target_snapshot_name: "String", # required
     #     target_bucket: "String",
     #     kms_key_id: "String",
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1137,7 +1154,7 @@ module Aws::ElastiCache
     #   Virtual Private Cloud (Amazon VPC).
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of cost allocation tags to be added to this resource.
+    #   A list of tags to be added to this resource.
     #
     # @option params [Array<String>] :snapshot_arns
     #   A single-element string list containing an Amazon Resource Name (ARN)
@@ -1463,6 +1480,11 @@ module Aws::ElastiCache
     # @option params [required, String] :description
     #   A user-specified description for the cache parameter group.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
+    #
     # @return [Types::CreateCacheParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCacheParameterGroupResult#cache_parameter_group #cache_parameter_group} => Types::CacheParameterGroup
@@ -1493,6 +1515,12 @@ module Aws::ElastiCache
     #     cache_parameter_group_name: "String", # required
     #     cache_parameter_group_family: "String", # required
     #     description: "String", # required
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1536,6 +1564,11 @@ module Aws::ElastiCache
     # @option params [required, String] :description
     #   A description for the cache security group.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
+    #
     # @return [Types::CreateCacheSecurityGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCacheSecurityGroupResult#cache_security_group #cache_security_group} => Types::CacheSecurityGroup
@@ -1555,6 +1588,12 @@ module Aws::ElastiCache
     #   resp = client.create_cache_security_group({
     #     cache_security_group_name: "String", # required
     #     description: "String", # required
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1596,6 +1635,11 @@ module Aws::ElastiCache
     #
     # @option params [required, Array<String>] :subnet_ids
     #   A list of VPC subnet IDs for the cache subnet group.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
     #
     # @return [Types::CreateCacheSubnetGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1651,6 +1695,12 @@ module Aws::ElastiCache
     #     cache_subnet_group_name: "String", # required
     #     cache_subnet_group_description: "String", # required
     #     subnet_ids: ["String"], # required
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1681,7 +1731,7 @@ module Aws::ElastiCache
     # Global Datastore][1].
     #
     # * The **GlobalReplicationGroupIdSuffix** is the name of the Global
-    #   Datastore.
+    #   datastore.
     #
     # * The **PrimaryReplicationGroupId** represents the name of the primary
     #   cluster that accepts writes and will replicate updates to the
@@ -1692,23 +1742,23 @@ module Aws::ElastiCache
     # [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastore.html
     #
     # @option params [required, String] :global_replication_group_id_suffix
-    #   The suffix name of a Global Datastore. Amazon ElastiCache
-    #   automatically applies a prefix to the Global Datastore ID when it is
+    #   The suffix name of a Global datastore. Amazon ElastiCache
+    #   automatically applies a prefix to the Global datastore ID when it is
     #   created. Each AWS Region has its own prefix. For instance, a Global
-    #   Datastore ID created in the US-West-1 region will begin with "dsdfu"
+    #   datastore ID created in the US-West-1 region will begin with "dsdfu"
     #   along with the suffix name you provide. The suffix, combined with the
-    #   auto-generated prefix, guarantees uniqueness of the Global Datastore
+    #   auto-generated prefix, guarantees uniqueness of the Global datastore
     #   name across multiple regions.
     #
-    #   For a full list of AWS Regions and their respective Global Datastore
-    #   iD prefixes, see [Using the AWS CLI with Global Datastores ][1].
+    #   For a full list of AWS Regions and their respective Global datastore
+    #   iD prefixes, see [Using the AWS CLI with Global datastores ][1].
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html
     #
     # @option params [String] :global_replication_group_description
-    #   Provides details of the Global Datastore
+    #   Provides details of the Global datastore
     #
     # @option params [required, String] :primary_replication_group_id
     #   The name of the primary cluster that accepts writes and will replicate
@@ -1762,7 +1812,7 @@ module Aws::ElastiCache
     # enabled) replication group.
     #
     # This API can be used to create a standalone regional replication group
-    # or a secondary replication group associated with a Global Datastore.
+    # or a secondary replication group associated with a Global datastore.
     #
     # A Redis (cluster mode disabled) replication group is a collection of
     # clusters, where one of the clusters is a read/write primary and the
@@ -1822,7 +1872,7 @@ module Aws::ElastiCache
     #   A user-created description for the replication group.
     #
     # @option params [String] :global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #
     # @option params [String] :primary_cluster_id
     #   The identifier of the cluster that serves as the primary for this
@@ -2071,10 +2121,11 @@ module Aws::ElastiCache
     #   an Amazon Virtual Private Cloud (Amazon VPC).
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of cost allocation tags to be added to this resource. Tags are
-    #   comma-separated key,value pairs (e.g. Key=`myKey`, Value=`myKeyValue`.
-    #   You can include multiple tags as shown following: Key=`myKey`,
-    #   Value=`myKeyValue` Key=`mySecondKey`, Value=`mySecondKeyValue`.
+    #   A list of tags to be added to this resource. Tags are comma-separated
+    #   key,value pairs (e.g. Key=`myKey`, Value=`myKeyValue`. You can include
+    #   multiple tags as shown following: Key=`myKey`, Value=`myKeyValue`
+    #   Key=`mySecondKey`, Value=`mySecondKeyValue`. Tags on replication
+    #   groups will be replicated to all nodes.
     #
     # @option params [Array<String>] :snapshot_arns
     #   A list of Amazon Resource Names (ARN) that uniquely identify the Redis
@@ -2454,6 +2505,11 @@ module Aws::ElastiCache
     # @option params [String] :kms_key_id
     #   The ID of the KMS key used to encrypt the snapshot.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
+    #
     # @return [Types::CreateSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSnapshotResult#snapshot #snapshot} => Types::Snapshot
@@ -2590,6 +2646,12 @@ module Aws::ElastiCache
     #     cache_cluster_id: "String",
     #     snapshot_name: "String", # required
     #     kms_key_id: "String",
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2672,6 +2734,11 @@ module Aws::ElastiCache
     # @option params [Boolean] :no_password_required
     #   Indicates a password is not required for this user.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
+    #
     # @return [Types::User] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::User#user_id #user_id} => String
@@ -2692,6 +2759,12 @@ module Aws::ElastiCache
     #     passwords: ["String"],
     #     access_string: "AccessString", # required
     #     no_password_required: false,
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2732,6 +2805,11 @@ module Aws::ElastiCache
     # @option params [Array<String>] :user_ids
     #   The list of user IDs that belong to the user group.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
+    #
     # @return [Types::UserGroup] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UserGroup#user_group_id #user_group_id} => String
@@ -2748,6 +2826,12 @@ module Aws::ElastiCache
     #     user_group_id: "String", # required
     #     engine: "EngineType", # required
     #     user_ids: ["UserId"],
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2774,10 +2858,10 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Decreases the number of node groups in a Global Datastore
+    # Decreases the number of node groups in a Global datastore
     #
     # @option params [required, String] :global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #
     # @option params [required, Integer] :node_group_count
     #   The number of node groups (shards) that results from the modification
@@ -3235,25 +3319,28 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Deleting a Global Datastore is a two-step process:
+    # Deleting a Global datastore is a two-step process:
     #
     # * First, you must DisassociateGlobalReplicationGroup to remove the
-    #   secondary clusters in the Global Datastore.
+    #   secondary clusters in the Global datastore.
     #
-    # * Once the Global Datastore contains only the primary cluster, you can
-    #   use DeleteGlobalReplicationGroup API to delete the Global Datastore
-    #   while retainining the primary cluster using Retain…= true.
+    # * Once the Global datastore contains only the primary cluster, you can
+    #   use the `DeleteGlobalReplicationGroup` API to delete the Global
+    #   datastore while retainining the primary cluster using
+    #   `RetainPrimaryReplicationGroup=true`.
     #
     # Since the Global Datastore has only a primary cluster, you can delete
     # the Global Datastore while retaining the primary by setting
-    # `RetainPrimaryCluster=true`.
+    # `RetainPrimaryReplicationGroup=true`. The primary cluster is never
+    # deleted when deleting a Global Datastore. It can only be deleted when
+    # it no longer is associated with any Global Datastore.
     #
     # When you receive a successful response from this operation, Amazon
     # ElastiCache immediately begins deleting the selected resources; you
     # cannot cancel or revert this operation.
     #
     # @option params [required, String] :global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #
     # @option params [required, Boolean] :retain_primary_replication_group
     #   The primary replication group is retained as a standalone replication
@@ -5763,10 +5850,10 @@ module Aws::ElastiCache
 
     # Returns information about a particular global replication group. If no
     # identifier is specified, returns information about all Global
-    # Datastores.
+    # datastores.
     #
     # @option params [String] :global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -5781,7 +5868,7 @@ module Aws::ElastiCache
     #   the value specified by `MaxRecords`.
     #
     # @option params [Boolean] :show_member_info
-    #   Returns the list of members that comprise the Global Datastore.
+    #   Returns the list of members that comprise the Global datastore.
     #
     # @return [Types::DescribeGlobalReplicationGroupsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7189,21 +7276,21 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Remove a secondary cluster from the Global Datastore using the Global
-    # Datastore name. The secondary cluster will no longer receive updates
+    # Remove a secondary cluster from the Global datastore using the Global
+    # datastore name. The secondary cluster will no longer receive updates
     # from the primary cluster, but will remain as a standalone cluster in
     # that AWS region.
     #
     # @option params [required, String] :global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #
     # @option params [required, String] :replication_group_id
     #   The name of the secondary cluster you wish to remove from the Global
-    #   Datastore
+    #   datastore
     #
     # @option params [required, String] :replication_group_region
     #   The AWS region of secondary cluster you wish to remove from the Global
-    #   Datastore
+    #   datastore
     #
     # @return [Types::DisassociateGlobalReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7254,10 +7341,10 @@ module Aws::ElastiCache
     # clusters will become secondary.
     #
     # @option params [required, String] :global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #
     # @option params [required, String] :primary_region
-    #   The AWS region of the primary cluster of the Global Datastore
+    #   The AWS region of the primary cluster of the Global datastore
     #
     # @option params [required, String] :primary_replication_group_id
     #   The name of the primary replication group
@@ -7306,10 +7393,10 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Increase the number of node groups in the Global Datastore
+    # Increase the number of node groups in the Global datastore
     #
     # @option params [required, String] :global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #
     # @option params [required, Integer] :node_group_count
     #   The number of node groups you wish to add
@@ -7317,7 +7404,7 @@ module Aws::ElastiCache
     # @option params [Array<Types::RegionalConfiguration>] :regional_configurations
     #   Describes the replication group IDs, the AWS regions where they are
     #   stored and the shard configuration for each that comprise the Global
-    #   Datastore
+    #   datastore
     #
     # @option params [required, Boolean] :apply_immediately
     #   Indicates that the process begins immediately. At present, the only
@@ -7579,20 +7666,21 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Lists all cost allocation tags currently on the named resource. A
-    # `cost allocation tag` is a key-value pair where the key is
-    # case-sensitive and the value is optional. You can use cost allocation
-    # tags to categorize and track your AWS costs.
+    # Lists all tags currently on a named resource.
+    #
+    # A tag is a key-value pair where the key and value are case-sensitive.
+    # You can use tags to categorize and track all your ElastiCache
+    # resources, with the exception of global replication group. When you
+    # add or remove tags on replication groups, those actions will be
+    # replicated to all nodes in the replication group. For more
+    # information, see [Resource-level permissions][1].
     #
     # If the cluster is not in the *available* state, `ListTagsForResource`
     # returns an error.
     #
-    # You can have a maximum of 50 cost allocation tags on an ElastiCache
-    # resource. For more information, see [Monitoring Costs with Tags][1].
     #
     #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html
     #
     # @option params [required, String] :resource_name
     #   The Amazon Resource Name (ARN) of the resource for which you want the
@@ -8259,10 +8347,10 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Modifies the settings for a Global Datastore.
+    # Modifies the settings for a Global datastore.
     #
     # @option params [required, String] :global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #
     # @option params [required, Boolean] :apply_immediately
     #   This parameter causes the modifications in this request and any
@@ -8271,12 +8359,12 @@ module Aws::ElastiCache
     #   requested to be applied in PreferredMaintenceWindow.
     #
     # @option params [String] :cache_node_type
-    #   A valid cache node type that you want to scale this Global Datastore
+    #   A valid cache node type that you want to scale this Global datastore
     #   to.
     #
     # @option params [String] :engine_version
     #   The upgraded version of the cache engine to be run on the clusters in
-    #   the Global Datastore.
+    #   the Global datastore.
     #
     # @option params [String] :cache_parameter_group_name
     #   The name of the cache parameter group to use with the Global
@@ -8284,7 +8372,7 @@ module Aws::ElastiCache
     #   the Global datastore.
     #
     # @option params [String] :global_replication_group_description
-    #   A description of the Global Datastore
+    #   A description of the Global datastore
     #
     # @option params [Boolean] :automatic_failover_enabled
     #   Determines whether a read replica is automatically promoted to
@@ -8380,13 +8468,9 @@ module Aws::ElastiCache
     #   Valid values: `true` \| `false`
     #
     # @option params [Boolean] :multi_az_enabled
-    #   A flag indicating if you have Multi-AZ enabled to enhance fault
-    #   tolerance. For more information, see [Minimizing Downtime:
-    #   Multi-AZ][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
     #
     # @option params [String] :node_group_id
     #   Deprecated. This parameter is not used.
@@ -8990,6 +9074,11 @@ module Aws::ElastiCache
     #
     #   Default: `1`
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
+    #
     # @return [Types::PurchaseReservedCacheNodesOfferingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PurchaseReservedCacheNodesOfferingResult#reserved_cache_node #reserved_cache_node} => Types::ReservedCacheNode
@@ -9009,6 +9098,12 @@ module Aws::ElastiCache
     #     reserved_cache_nodes_offering_id: "String", # required
     #     reserved_cache_node_id: "String",
     #     cache_node_count: 1,
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -9042,7 +9137,7 @@ module Aws::ElastiCache
     # shards in the cluster.
     #
     # @option params [required, String] :global_replication_group_id
-    #   The name of the Global Datastore
+    #   The name of the Global datastore
     #
     # @option params [required, Boolean] :apply_immediately
     #   If `True`, redistribution is applied immediately.
@@ -9242,7 +9337,16 @@ module Aws::ElastiCache
     end
 
     # Removes the tags identified by the `TagKeys` list from the named
-    # resource.
+    # resource. A tag is a key-value pair where the key and value are
+    # case-sensitive. You can use tags to categorize and track all your
+    # ElastiCache resources, with the exception of global replication group.
+    # When you add or remove tags on replication groups, those actions will
+    # be replicated to all nodes in the replication group. For more
+    # information, see [Resource-level permissions][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html
     #
     # @option params [required, String] :resource_name
     #   The Amazon Resource Name (ARN) of the resource from which you want the
@@ -9689,7 +9793,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

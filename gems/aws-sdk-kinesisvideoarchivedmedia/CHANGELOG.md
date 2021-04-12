@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2021-04-08)
+------------------
+
+* Feature - Documentation updates for archived.kinesisvideo
+
 1.33.0 (2021-03-10)
 ------------------
 

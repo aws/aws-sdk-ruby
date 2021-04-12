@@ -361,6 +361,31 @@ module Aws::AccessAnalyzer
       req.send_request(options)
     end
 
+    # Cancels the requested policy generation.
+    #
+    # @option params [required, String] :job_id
+    #   The `JobId` that is returned by the `StartPolicyGeneration` operation.
+    #   The `JobId` can be used with `GetGeneratedPolicy` to retrieve the
+    #   generated policies or used with `CancelPolicyGeneration` to cancel the
+    #   policy generation request.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_policy_generation({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/CancelPolicyGeneration AWS API Documentation
+    #
+    # @overload cancel_policy_generation(params = {})
+    # @param [Hash] params ({})
+    def cancel_policy_generation(params = {}, options = {})
+      req = build_request(:cancel_policy_generation, params)
+      req.send_request(options)
+    end
+
     # Creates an access preview that allows you to preview Access Analyzer
     # findings for your resource before deploying resource permissions.
     #
@@ -920,6 +945,72 @@ module Aws::AccessAnalyzer
       req.send_request(options)
     end
 
+    # Retrieves the policy that was generated using `StartPolicyGeneration`.
+    #
+    # @option params [Boolean] :include_resource_placeholders
+    #   The level of detail that you want to generate. You can specify whether
+    #   to generate policies with placeholders for resource ARNs for actions
+    #   that support resource level granularity in policies.
+    #
+    #   For example, in the resource section of a policy, you can receive a
+    #   placeholder such as `"Resource":"arn:aws:s3:::$\{BucketName\}"`
+    #   instead of `"*"`.
+    #
+    # @option params [Boolean] :include_service_level_template
+    #   The level of detail that you want to generate. You can specify whether
+    #   to generate service-level policies.
+    #
+    #   Access Analyzer uses `iam:servicelastaccessed` to identify services
+    #   that have been used recently to create this service-level template.
+    #
+    # @option params [required, String] :job_id
+    #   The `JobId` that is returned by the `StartPolicyGeneration` operation.
+    #   The `JobId` can be used with `GetGeneratedPolicy` to retrieve the
+    #   generated policies or used with `CancelPolicyGeneration` to cancel the
+    #   policy generation request.
+    #
+    # @return [Types::GetGeneratedPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGeneratedPolicyResponse#generated_policy_result #generated_policy_result} => Types::GeneratedPolicyResult
+    #   * {Types::GetGeneratedPolicyResponse#job_details #job_details} => Types::JobDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_generated_policy({
+    #     include_resource_placeholders: false,
+    #     include_service_level_template: false,
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.generated_policy_result.generated_policies #=> Array
+    #   resp.generated_policy_result.generated_policies[0].policy #=> String
+    #   resp.generated_policy_result.properties.cloud_trail_properties.end_time #=> Time
+    #   resp.generated_policy_result.properties.cloud_trail_properties.start_time #=> Time
+    #   resp.generated_policy_result.properties.cloud_trail_properties.trail_properties #=> Array
+    #   resp.generated_policy_result.properties.cloud_trail_properties.trail_properties[0].all_regions #=> Boolean
+    #   resp.generated_policy_result.properties.cloud_trail_properties.trail_properties[0].cloud_trail_arn #=> String
+    #   resp.generated_policy_result.properties.cloud_trail_properties.trail_properties[0].regions #=> Array
+    #   resp.generated_policy_result.properties.cloud_trail_properties.trail_properties[0].regions[0] #=> String
+    #   resp.generated_policy_result.properties.is_complete #=> Boolean
+    #   resp.generated_policy_result.properties.principal_arn #=> String
+    #   resp.job_details.completed_on #=> Time
+    #   resp.job_details.job_error.code #=> String, one of "AUTHORIZATION_ERROR", "RESOURCE_NOT_FOUND_ERROR", "SERVICE_QUOTA_EXCEEDED_ERROR", "SERVICE_ERROR"
+    #   resp.job_details.job_error.message #=> String
+    #   resp.job_details.job_id #=> String
+    #   resp.job_details.started_on #=> Time
+    #   resp.job_details.status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED", "CANCELED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/GetGeneratedPolicy AWS API Documentation
+    #
+    # @overload get_generated_policy(params = {})
+    # @param [Hash] params ({})
+    def get_generated_policy(params = {}, options = {})
+      req = build_request(:get_generated_policy, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of access preview findings generated by the specified
     # access preview.
     #
@@ -1292,6 +1383,53 @@ module Aws::AccessAnalyzer
       req.send_request(options)
     end
 
+    # Lists all of the policy generations requested in the last seven days.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response.
+    #
+    # @option params [String] :next_token
+    #   A token used for pagination of results returned.
+    #
+    # @option params [String] :principal_arn
+    #   The ARN of the IAM entity (user or role) for which you are generating
+    #   a policy. Use this with `ListGeneratedPolicies` to filter the results
+    #   to only include results for a specific principal.
+    #
+    # @return [Types::ListPolicyGenerationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPolicyGenerationsResponse#next_token #next_token} => String
+    #   * {Types::ListPolicyGenerationsResponse#policy_generations #policy_generations} => Array&lt;Types::PolicyGeneration&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_policy_generations({
+    #     max_results: 1,
+    #     next_token: "Token",
+    #     principal_arn: "PrincipalArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.policy_generations #=> Array
+    #   resp.policy_generations[0].completed_on #=> Time
+    #   resp.policy_generations[0].job_id #=> String
+    #   resp.policy_generations[0].principal_arn #=> String
+    #   resp.policy_generations[0].started_on #=> Time
+    #   resp.policy_generations[0].status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED", "CANCELED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ListPolicyGenerations AWS API Documentation
+    #
+    # @overload list_policy_generations(params = {})
+    # @param [Hash] params ({})
+    def list_policy_generations(params = {}, options = {})
+      req = build_request(:list_policy_generations, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of tags applied to the specified resource.
     #
     # @option params [required, String] :resource_arn
@@ -1318,6 +1456,68 @@ module Aws::AccessAnalyzer
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Starts the policy generation request.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes only once. With an idempotent request, if the original
+    #   request completes successfully, the subsequent retries with the same
+    #   client token return the result from the original successful request
+    #   and they have no additional effect.
+    #
+    #   If you do not specify a client token, one is automatically generated
+    #   by the AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Types::CloudTrailDetails] :cloud_trail_details
+    #   A `CloudTrailDetails` object that contains details about a `Trail`
+    #   that you want to analyze to generate policies.
+    #
+    # @option params [required, Types::PolicyGenerationDetails] :policy_generation_details
+    #   Contains the ARN of the IAM entity (user or role) for which you are
+    #   generating a policy.
+    #
+    # @return [Types::StartPolicyGenerationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartPolicyGenerationResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_policy_generation({
+    #     client_token: "String",
+    #     cloud_trail_details: {
+    #       access_role: "RoleArn", # required
+    #       end_time: Time.now,
+    #       start_time: Time.now, # required
+    #       trails: [ # required
+    #         {
+    #           all_regions: false,
+    #           cloud_trail_arn: "CloudTrailArn", # required
+    #           regions: ["String"],
+    #         },
+    #       ],
+    #     },
+    #     policy_generation_details: { # required
+    #       principal_arn: "PrincipalArn", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/StartPolicyGeneration AWS API Documentation
+    #
+    # @overload start_policy_generation(params = {})
+    # @param [Hash] params ({})
+    def start_policy_generation(params = {}, options = {})
+      req = build_request(:start_policy_generation, params)
       req.send_request(options)
     end
 
@@ -1590,7 +1790,7 @@ module Aws::AccessAnalyzer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-accessanalyzer'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

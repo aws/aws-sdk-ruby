@@ -1156,6 +1156,7 @@ module Aws::AuditManager
     # @return [Types::GetAssessmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetAssessmentResponse#assessment #assessment} => Types::Assessment
+    #   * {Types::GetAssessmentResponse#user_role #user_role} => Types::Role
     #
     # @example Request syntax with placeholder values
     #
@@ -1242,6 +1243,8 @@ module Aws::AuditManager
     #   resp.assessment.framework.control_sets[0].manual_evidence_count #=> Integer
     #   resp.assessment.tags #=> Hash
     #   resp.assessment.tags["TagKey"] #=> String
+    #   resp.user_role.role_type #=> String, one of "PROCESS_OWNER", "RESOURCE_OWNER"
+    #   resp.user_role.role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetAssessment AWS API Documentation
     #
@@ -3010,7 +3013,7 @@ module Aws::AuditManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-auditmanager'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

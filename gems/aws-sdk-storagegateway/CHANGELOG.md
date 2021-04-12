@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2021-04-07)
+------------------
+
+* Feature - File Gateway APIs now support FSx for Windows as a cloud storage.
+
 1.54.0 (2021-03-10)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+3.98.0 (2021-04-08)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-lookoutequipment` gem.
+
+3.97.0 (2021-04-07)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-mgn` gem.
+
 3.96.0 (2021-03-25)
 ------------------
 

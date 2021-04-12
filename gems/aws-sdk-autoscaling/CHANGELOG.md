@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2021-04-08)
+------------------
+
+* Feature - Amazon EC2 Auto Scaling announces Warm Pools that help applications to scale out faster by pre-initializing EC2 instances and save money by requiring fewer continuously running instances
+
 1.59.0 (2021-03-18)
 ------------------
 

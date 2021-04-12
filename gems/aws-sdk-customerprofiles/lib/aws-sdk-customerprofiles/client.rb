@@ -1336,6 +1336,8 @@ module Aws::CustomerProfiles
     #   The tags used to organize, track, or control access for this resource.
     #
     # @option params [Types::FlowDefinition] :flow_definition
+    #   The configuration that controls how Customer Profiles retrieves data
+    #   from the source.
     #
     # @return [Types::PutIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2037,7 +2039,7 @@ module Aws::CustomerProfiles
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

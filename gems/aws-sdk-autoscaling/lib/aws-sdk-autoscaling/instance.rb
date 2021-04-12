@@ -63,7 +63,11 @@ module Aws::AutoScaling
     # Valid Values: `Pending` \| `Pending:Wait` \| `Pending:Proceed` \|
     # `Quarantined` \| `InService` \| `Terminating` \| `Terminating:Wait` \|
     # `Terminating:Proceed` \| `Terminated` \| `Detaching` \| `Detached` \|
-    # `EnteringStandby` \| `Standby`
+    # `EnteringStandby` \| `Standby` \| `Warmed:Pending` \|
+    # `Warmed:Pending:Wait` \| `Warmed:Pending:Proceed` \|
+    # `Warmed:Terminating` \| `Warmed:Terminating:Wait` \|
+    # `Warmed:Terminating:Proceed` \| `Warmed:Terminated` \|
+    # `Warmed:Stopped` \| `Warmed:Running`
     #
     #
     #

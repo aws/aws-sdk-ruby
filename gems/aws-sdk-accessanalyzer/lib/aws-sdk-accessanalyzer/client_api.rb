@@ -42,6 +42,11 @@ module Aws::AccessAnalyzer
     ArchiveRuleSummary = Shapes::StructureShape.new(name: 'ArchiveRuleSummary')
     ArchiveRulesList = Shapes::ListShape.new(name: 'ArchiveRulesList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CancelPolicyGenerationRequest = Shapes::StructureShape.new(name: 'CancelPolicyGenerationRequest')
+    CancelPolicyGenerationResponse = Shapes::StructureShape.new(name: 'CancelPolicyGenerationResponse')
+    CloudTrailArn = Shapes::StringShape.new(name: 'CloudTrailArn')
+    CloudTrailDetails = Shapes::StructureShape.new(name: 'CloudTrailDetails')
+    CloudTrailProperties = Shapes::StructureShape.new(name: 'CloudTrailProperties')
     ConditionKeyMap = Shapes::MapShape.new(name: 'ConditionKeyMap')
     Configuration = Shapes::StructureShape.new(name: 'Configuration')
     ConfigurationsMap = Shapes::MapShape.new(name: 'ConfigurationsMap')
@@ -68,6 +73,10 @@ module Aws::AccessAnalyzer
     FindingStatusUpdate = Shapes::StringShape.new(name: 'FindingStatusUpdate')
     FindingSummary = Shapes::StructureShape.new(name: 'FindingSummary')
     FindingsList = Shapes::ListShape.new(name: 'FindingsList')
+    GeneratedPolicy = Shapes::StructureShape.new(name: 'GeneratedPolicy')
+    GeneratedPolicyList = Shapes::ListShape.new(name: 'GeneratedPolicyList')
+    GeneratedPolicyProperties = Shapes::StructureShape.new(name: 'GeneratedPolicyProperties')
+    GeneratedPolicyResult = Shapes::StructureShape.new(name: 'GeneratedPolicyResult')
     GetAccessPreviewRequest = Shapes::StructureShape.new(name: 'GetAccessPreviewRequest')
     GetAccessPreviewResponse = Shapes::StructureShape.new(name: 'GetAccessPreviewResponse')
     GetAnalyzedResourceRequest = Shapes::StructureShape.new(name: 'GetAnalyzedResourceRequest')
@@ -78,6 +87,8 @@ module Aws::AccessAnalyzer
     GetArchiveRuleResponse = Shapes::StructureShape.new(name: 'GetArchiveRuleResponse')
     GetFindingRequest = Shapes::StructureShape.new(name: 'GetFindingRequest')
     GetFindingResponse = Shapes::StructureShape.new(name: 'GetFindingResponse')
+    GetGeneratedPolicyRequest = Shapes::StructureShape.new(name: 'GetGeneratedPolicyRequest')
+    GetGeneratedPolicyResponse = Shapes::StructureShape.new(name: 'GetGeneratedPolicyResponse')
     GranteePrincipal = Shapes::StringShape.new(name: 'GranteePrincipal')
     IamRoleConfiguration = Shapes::StructureShape.new(name: 'IamRoleConfiguration')
     IamTrustPolicy = Shapes::StringShape.new(name: 'IamTrustPolicy')
@@ -88,6 +99,11 @@ module Aws::AccessAnalyzer
     InternetConfiguration = Shapes::StructureShape.new(name: 'InternetConfiguration')
     IssueCode = Shapes::StringShape.new(name: 'IssueCode')
     IssuingAccount = Shapes::StringShape.new(name: 'IssuingAccount')
+    JobDetails = Shapes::StructureShape.new(name: 'JobDetails')
+    JobError = Shapes::StructureShape.new(name: 'JobError')
+    JobErrorCode = Shapes::StringShape.new(name: 'JobErrorCode')
+    JobId = Shapes::StringShape.new(name: 'JobId')
+    JobStatus = Shapes::StringShape.new(name: 'JobStatus')
     KmsConstraintsKey = Shapes::StringShape.new(name: 'KmsConstraintsKey')
     KmsConstraintsMap = Shapes::MapShape.new(name: 'KmsConstraintsMap')
     KmsConstraintsValue = Shapes::StringShape.new(name: 'KmsConstraintsValue')
@@ -112,6 +128,9 @@ module Aws::AccessAnalyzer
     ListArchiveRulesResponse = Shapes::StructureShape.new(name: 'ListArchiveRulesResponse')
     ListFindingsRequest = Shapes::StructureShape.new(name: 'ListFindingsRequest')
     ListFindingsResponse = Shapes::StructureShape.new(name: 'ListFindingsResponse')
+    ListPolicyGenerationsRequest = Shapes::StructureShape.new(name: 'ListPolicyGenerationsRequest')
+    ListPolicyGenerationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListPolicyGenerationsRequestMaxResultsInteger')
+    ListPolicyGenerationsResponse = Shapes::StructureShape.new(name: 'ListPolicyGenerationsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Locale = Shapes::StringShape.new(name: 'Locale')
@@ -123,15 +142,21 @@ module Aws::AccessAnalyzer
     PathElement = Shapes::StructureShape.new(name: 'PathElement')
     PathElementList = Shapes::ListShape.new(name: 'PathElementList')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
+    PolicyGeneration = Shapes::StructureShape.new(name: 'PolicyGeneration')
+    PolicyGenerationDetails = Shapes::StructureShape.new(name: 'PolicyGenerationDetails')
+    PolicyGenerationList = Shapes::ListShape.new(name: 'PolicyGenerationList')
     PolicyName = Shapes::StringShape.new(name: 'PolicyName')
     PolicyType = Shapes::StringShape.new(name: 'PolicyType')
     Position = Shapes::StructureShape.new(name: 'Position')
+    PrincipalArn = Shapes::StringShape.new(name: 'PrincipalArn')
     PrincipalMap = Shapes::MapShape.new(name: 'PrincipalMap')
     ReasonCode = Shapes::StringShape.new(name: 'ReasonCode')
+    RegionList = Shapes::ListShape.new(name: 'RegionList')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     RetiringPrincipal = Shapes::StringShape.new(name: 'RetiringPrincipal')
+    RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3AccessPointConfiguration = Shapes::StructureShape.new(name: 'S3AccessPointConfiguration')
     S3AccessPointConfigurationsMap = Shapes::MapShape.new(name: 'S3AccessPointConfigurationsMap')
     S3BucketAclGrantConfiguration = Shapes::StructureShape.new(name: 'S3BucketAclGrantConfiguration')
@@ -148,6 +173,8 @@ module Aws::AccessAnalyzer
     Span = Shapes::StructureShape.new(name: 'Span')
     SqsQueueConfiguration = Shapes::StructureShape.new(name: 'SqsQueueConfiguration')
     SqsQueuePolicy = Shapes::StringShape.new(name: 'SqsQueuePolicy')
+    StartPolicyGenerationRequest = Shapes::StructureShape.new(name: 'StartPolicyGenerationRequest')
+    StartPolicyGenerationResponse = Shapes::StructureShape.new(name: 'StartPolicyGenerationResponse')
     StartResourceScanRequest = Shapes::StructureShape.new(name: 'StartResourceScanRequest')
     StatusReason = Shapes::StructureShape.new(name: 'StatusReason')
     String = Shapes::StringShape.new(name: 'String')
@@ -159,6 +186,10 @@ module Aws::AccessAnalyzer
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
     Token = Shapes::StringShape.new(name: 'Token')
+    Trail = Shapes::StructureShape.new(name: 'Trail')
+    TrailList = Shapes::ListShape.new(name: 'TrailList')
+    TrailProperties = Shapes::StructureShape.new(name: 'TrailProperties')
+    TrailPropertiesList = Shapes::ListShape.new(name: 'TrailPropertiesList')
     Type = Shapes::StringShape.new(name: 'Type')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -271,6 +302,22 @@ module Aws::AccessAnalyzer
 
     ArchiveRulesList.member = Shapes::ShapeRef.new(shape: ArchiveRuleSummary)
 
+    CancelPolicyGenerationRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
+    CancelPolicyGenerationRequest.struct_class = Types::CancelPolicyGenerationRequest
+
+    CancelPolicyGenerationResponse.struct_class = Types::CancelPolicyGenerationResponse
+
+    CloudTrailDetails.add_member(:access_role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "accessRole"))
+    CloudTrailDetails.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
+    CloudTrailDetails.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
+    CloudTrailDetails.add_member(:trails, Shapes::ShapeRef.new(shape: TrailList, required: true, location_name: "trails"))
+    CloudTrailDetails.struct_class = Types::CloudTrailDetails
+
+    CloudTrailProperties.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endTime"))
+    CloudTrailProperties.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
+    CloudTrailProperties.add_member(:trail_properties, Shapes::ShapeRef.new(shape: TrailPropertiesList, required: true, location_name: "trailProperties"))
+    CloudTrailProperties.struct_class = Types::CloudTrailProperties
+
     ConditionKeyMap.key = Shapes::ShapeRef.new(shape: String)
     ConditionKeyMap.value = Shapes::ShapeRef.new(shape: String)
 
@@ -376,6 +423,20 @@ module Aws::AccessAnalyzer
 
     FindingsList.member = Shapes::ShapeRef.new(shape: FindingSummary)
 
+    GeneratedPolicy.add_member(:policy, Shapes::ShapeRef.new(shape: String, required: true, location_name: "policy"))
+    GeneratedPolicy.struct_class = Types::GeneratedPolicy
+
+    GeneratedPolicyList.member = Shapes::ShapeRef.new(shape: GeneratedPolicy)
+
+    GeneratedPolicyProperties.add_member(:cloud_trail_properties, Shapes::ShapeRef.new(shape: CloudTrailProperties, location_name: "cloudTrailProperties"))
+    GeneratedPolicyProperties.add_member(:is_complete, Shapes::ShapeRef.new(shape: Boolean, location_name: "isComplete"))
+    GeneratedPolicyProperties.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArn, required: true, location_name: "principalArn"))
+    GeneratedPolicyProperties.struct_class = Types::GeneratedPolicyProperties
+
+    GeneratedPolicyResult.add_member(:generated_policies, Shapes::ShapeRef.new(shape: GeneratedPolicyList, location_name: "generatedPolicies"))
+    GeneratedPolicyResult.add_member(:properties, Shapes::ShapeRef.new(shape: GeneratedPolicyProperties, required: true, location_name: "properties"))
+    GeneratedPolicyResult.struct_class = Types::GeneratedPolicyResult
+
     GetAccessPreviewRequest.add_member(:access_preview_id, Shapes::ShapeRef.new(shape: AccessPreviewId, required: true, location: "uri", location_name: "accessPreviewId"))
     GetAccessPreviewRequest.add_member(:analyzer_arn, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location: "querystring", location_name: "analyzerArn"))
     GetAccessPreviewRequest.struct_class = Types::GetAccessPreviewRequest
@@ -410,6 +471,15 @@ module Aws::AccessAnalyzer
     GetFindingResponse.add_member(:finding, Shapes::ShapeRef.new(shape: Finding, location_name: "finding"))
     GetFindingResponse.struct_class = Types::GetFindingResponse
 
+    GetGeneratedPolicyRequest.add_member(:include_resource_placeholders, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "includeResourcePlaceholders"))
+    GetGeneratedPolicyRequest.add_member(:include_service_level_template, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "includeServiceLevelTemplate"))
+    GetGeneratedPolicyRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
+    GetGeneratedPolicyRequest.struct_class = Types::GetGeneratedPolicyRequest
+
+    GetGeneratedPolicyResponse.add_member(:generated_policy_result, Shapes::ShapeRef.new(shape: GeneratedPolicyResult, required: true, location_name: "generatedPolicyResult"))
+    GetGeneratedPolicyResponse.add_member(:job_details, Shapes::ShapeRef.new(shape: JobDetails, required: true, location_name: "jobDetails"))
+    GetGeneratedPolicyResponse.struct_class = Types::GetGeneratedPolicyResponse
+
     IamRoleConfiguration.add_member(:trust_policy, Shapes::ShapeRef.new(shape: IamTrustPolicy, location_name: "trustPolicy"))
     IamRoleConfiguration.struct_class = Types::IamRoleConfiguration
 
@@ -424,6 +494,17 @@ module Aws::AccessAnalyzer
     InternalServerException.struct_class = Types::InternalServerException
 
     InternetConfiguration.struct_class = Types::InternetConfiguration
+
+    JobDetails.add_member(:completed_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "completedOn"))
+    JobDetails.add_member(:job_error, Shapes::ShapeRef.new(shape: JobError, location_name: "jobError"))
+    JobDetails.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "jobId"))
+    JobDetails.add_member(:started_on, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startedOn"))
+    JobDetails.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, required: true, location_name: "status"))
+    JobDetails.struct_class = Types::JobDetails
+
+    JobError.add_member(:code, Shapes::ShapeRef.new(shape: JobErrorCode, required: true, location_name: "code"))
+    JobError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    JobError.struct_class = Types::JobError
 
     KmsConstraintsMap.key = Shapes::ShapeRef.new(shape: KmsConstraintsKey)
     KmsConstraintsMap.value = Shapes::ShapeRef.new(shape: KmsConstraintsValue)
@@ -509,6 +590,15 @@ module Aws::AccessAnalyzer
     ListFindingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "nextToken"))
     ListFindingsResponse.struct_class = Types::ListFindingsResponse
 
+    ListPolicyGenerationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListPolicyGenerationsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListPolicyGenerationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "nextToken"))
+    ListPolicyGenerationsRequest.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArn, location: "querystring", location_name: "principalArn"))
+    ListPolicyGenerationsRequest.struct_class = Types::ListPolicyGenerationsRequest
+
+    ListPolicyGenerationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "nextToken"))
+    ListPolicyGenerationsResponse.add_member(:policy_generations, Shapes::ShapeRef.new(shape: PolicyGenerationList, required: true, location_name: "policyGenerations"))
+    ListPolicyGenerationsResponse.struct_class = Types::ListPolicyGenerationsResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -533,6 +623,18 @@ module Aws::AccessAnalyzer
 
     PathElementList.member = Shapes::ShapeRef.new(shape: PathElement)
 
+    PolicyGeneration.add_member(:completed_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "completedOn"))
+    PolicyGeneration.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "jobId"))
+    PolicyGeneration.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArn, required: true, location_name: "principalArn"))
+    PolicyGeneration.add_member(:started_on, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startedOn"))
+    PolicyGeneration.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, required: true, location_name: "status"))
+    PolicyGeneration.struct_class = Types::PolicyGeneration
+
+    PolicyGenerationDetails.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArn, required: true, location_name: "principalArn"))
+    PolicyGenerationDetails.struct_class = Types::PolicyGenerationDetails
+
+    PolicyGenerationList.member = Shapes::ShapeRef.new(shape: PolicyGeneration)
+
     Position.add_member(:column, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "column"))
     Position.add_member(:line, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "line"))
     Position.add_member(:offset, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "offset"))
@@ -540,6 +642,8 @@ module Aws::AccessAnalyzer
 
     PrincipalMap.key = Shapes::ShapeRef.new(shape: String)
     PrincipalMap.value = Shapes::ShapeRef.new(shape: String)
+
+    RegionList.member = Shapes::ShapeRef.new(shape: String)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
@@ -592,6 +696,14 @@ module Aws::AccessAnalyzer
     SqsQueueConfiguration.add_member(:queue_policy, Shapes::ShapeRef.new(shape: SqsQueuePolicy, location_name: "queuePolicy"))
     SqsQueueConfiguration.struct_class = Types::SqsQueueConfiguration
 
+    StartPolicyGenerationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartPolicyGenerationRequest.add_member(:cloud_trail_details, Shapes::ShapeRef.new(shape: CloudTrailDetails, location_name: "cloudTrailDetails"))
+    StartPolicyGenerationRequest.add_member(:policy_generation_details, Shapes::ShapeRef.new(shape: PolicyGenerationDetails, required: true, location_name: "policyGenerationDetails"))
+    StartPolicyGenerationRequest.struct_class = Types::StartPolicyGenerationRequest
+
+    StartPolicyGenerationResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "jobId"))
+    StartPolicyGenerationResponse.struct_class = Types::StartPolicyGenerationResponse
+
     StartResourceScanRequest.add_member(:analyzer_arn, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location_name: "analyzerArn"))
     StartResourceScanRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
     StartResourceScanRequest.struct_class = Types::StartResourceScanRequest
@@ -617,6 +729,20 @@ module Aws::AccessAnalyzer
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ThrottlingException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    Trail.add_member(:all_regions, Shapes::ShapeRef.new(shape: Boolean, location_name: "allRegions"))
+    Trail.add_member(:cloud_trail_arn, Shapes::ShapeRef.new(shape: CloudTrailArn, required: true, location_name: "cloudTrailArn"))
+    Trail.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "regions"))
+    Trail.struct_class = Types::Trail
+
+    TrailList.member = Shapes::ShapeRef.new(shape: Trail)
+
+    TrailProperties.add_member(:all_regions, Shapes::ShapeRef.new(shape: Boolean, location_name: "allRegions"))
+    TrailProperties.add_member(:cloud_trail_arn, Shapes::ShapeRef.new(shape: CloudTrailArn, required: true, location_name: "cloudTrailArn"))
+    TrailProperties.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "regions"))
+    TrailProperties.struct_class = Types::TrailProperties
+
+    TrailPropertiesList.member = Shapes::ShapeRef.new(shape: TrailProperties)
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location: "querystring", location_name: "tagKeys"))
@@ -698,6 +824,18 @@ module Aws::AccessAnalyzer
         o.input = Shapes::ShapeRef.new(shape: ApplyArchiveRuleRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:cancel_policy_generation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelPolicyGeneration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/policy/generation/{jobId}"
+        o.input = Shapes::ShapeRef.new(shape: CancelPolicyGenerationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelPolicyGenerationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -839,6 +977,18 @@ module Aws::AccessAnalyzer
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:get_generated_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetGeneratedPolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/policy/generation/{jobId}"
+        o.input = Shapes::ShapeRef.new(shape: GetGeneratedPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetGeneratedPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:list_access_preview_findings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAccessPreviewFindings"
         o.http_method = "POST"
@@ -952,6 +1102,24 @@ module Aws::AccessAnalyzer
         )
       end)
 
+      api.add_operation(:list_policy_generations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPolicyGenerations"
+        o.http_method = "GET"
+        o.http_request_uri = "/policy/generation"
+        o.input = Shapes::ShapeRef.new(shape: ListPolicyGenerationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPolicyGenerationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -961,6 +1129,20 @@ module Aws::AccessAnalyzer
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:start_policy_generation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartPolicyGeneration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/policy/generation"
+        o.input = Shapes::ShapeRef.new(shape: StartPolicyGenerationRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartPolicyGenerationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)

@@ -393,6 +393,14 @@ module Aws::AutoScaling
     #   Indicates whether Capacity Rebalancing is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] warm_pool_configuration
+    #   The warm pool for the group.
+    #   @return [Types::WarmPoolConfiguration]
+    #
+    # @!attribute [rw] warm_pool_size
+    #   The current size of the warm pool.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingGroup AWS API Documentation
     #
     class AutoScalingGroup < Struct.new(
@@ -422,7 +430,9 @@ module Aws::AutoScaling
       :new_instances_protected_from_scale_in,
       :service_linked_role_arn,
       :max_instance_lifetime,
-      :capacity_rebalance)
+      :capacity_rebalance,
+      :warm_pool_configuration,
+      :warm_pool_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -511,7 +521,11 @@ module Aws::AutoScaling
     #   Valid Values: `Pending` \| `Pending:Wait` \| `Pending:Proceed` \|
     #   `Quarantined` \| `InService` \| `Terminating` \| `Terminating:Wait`
     #   \| `Terminating:Proceed` \| `Terminated` \| `Detaching` \|
-    #   `Detached` \| `EnteringStandby` \| `Standby`
+    #   `Detached` \| `EnteringStandby` \| `Standby` \| `Warmed:Pending` \|
+    #   `Warmed:Pending:Wait` \| `Warmed:Pending:Proceed` \|
+    #   `Warmed:Terminating` \| `Warmed:Terminating:Wait` \|
+    #   `Warmed:Terminating:Proceed` \| `Warmed:Terminated` \|
+    #   `Warmed:Stopped` \| `Warmed:Running`
     #
     #
     #
@@ -1660,8 +1674,8 @@ module Aws::AutoScaling
     # @!attribute [rw] force_delete
     #   Specifies that the group is to be deleted along with all instances
     #   associated with the group, without waiting for all instances to be
-    #   terminated. This parameter also deletes any lifecycle actions
-    #   associated with the group.
+    #   terminated. This parameter also deletes any outstanding lifecycle
+    #   actions associated with the group.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteAutoScalingGroupType AWS API Documentation
@@ -1801,6 +1815,39 @@ module Aws::AutoScaling
     #
     class DeleteTagsType < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteWarmPoolAnswer AWS API Documentation
+    #
+    class DeleteWarmPoolAnswer < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteWarmPoolType
+    #   data as a hash:
+    #
+    #       {
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #         force_delete: false,
+    #       }
+    #
+    # @!attribute [rw] auto_scaling_group_name
+    #   The name of the Auto Scaling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] force_delete
+    #   Specifies that the warm pool is to be deleted along with all
+    #   instances associated with the warm pool, without waiting for all
+    #   instances to be terminated. This parameter also deletes any
+    #   outstanding lifecycle actions associated with the warm pool
+    #   instances.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteWarmPoolType AWS API Documentation
+    #
+    class DeleteWarmPoolType < Struct.new(
+      :auto_scaling_group_name,
+      :force_delete)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2393,6 +2440,62 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
+    # @!attribute [rw] warm_pool_configuration
+    #   The warm pool configuration details.
+    #   @return [Types::WarmPoolConfiguration]
+    #
+    # @!attribute [rw] instances
+    #   The instances that are currently in the warm pool.
+    #   @return [Array<Types::Instance>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeWarmPoolAnswer AWS API Documentation
+    #
+    class DescribeWarmPoolAnswer < Struct.new(
+      :warm_pool_configuration,
+      :instances,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeWarmPoolType
+    #   data as a hash:
+    #
+    #       {
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #         max_records: 1,
+    #         next_token: "XmlString",
+    #       }
+    #
+    # @!attribute [rw] auto_scaling_group_name
+    #   The name of the Auto Scaling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of instances to return with this call. The
+    #   maximum value is `50`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of instances to return. (You received
+    #   this token from a previous call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeWarmPoolType AWS API Documentation
+    #
+    class DescribeWarmPoolType < Struct.new(
+      :auto_scaling_group_name,
+      :max_records,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] activities
     #   The activities related to detaching the instances from the Auto
     #   Scaling group.
@@ -2538,6 +2641,20 @@ module Aws::AutoScaling
     #   * `GroupTerminatingCapacity`
     #
     #   * `GroupTotalCapacity`
+    #
+    #   * `WarmPoolDesiredCapacity`
+    #
+    #   * `WarmPoolWarmedCapacity`
+    #
+    #   * `WarmPoolPendingCapacity`
+    #
+    #   * `WarmPoolTerminatingCapacity`
+    #
+    #   * `WarmPoolTotalCapacity`
+    #
+    #   * `GroupAndWarmPoolDesiredCapacity`
+    #
+    #   * `GroupAndWarmPoolTotalCapacity`
     #
     #   If you omit this parameter, all metrics are disabled.
     #   @return [Array<String>]
@@ -2717,6 +2834,22 @@ module Aws::AutoScaling
     #
     #   * `GroupTotalCapacity`
     #
+    #   The warm pools feature supports the following additional metrics:
+    #
+    #   * `WarmPoolDesiredCapacity`
+    #
+    #   * `WarmPoolWarmedCapacity`
+    #
+    #   * `WarmPoolPendingCapacity`
+    #
+    #   * `WarmPoolTerminatingCapacity`
+    #
+    #   * `WarmPoolTotalCapacity`
+    #
+    #   * `GroupAndWarmPoolDesiredCapacity`
+    #
+    #   * `GroupAndWarmPoolTotalCapacity`
+    #
     #   If you omit this parameter, all metrics are enabled.
     #   @return [Array<String>]
     #
@@ -2765,6 +2898,20 @@ module Aws::AutoScaling
     #   * `GroupTerminatingCapacity`
     #
     #   * `GroupTotalCapacity`
+    #
+    #   * `WarmPoolDesiredCapacity`
+    #
+    #   * `WarmPoolWarmedCapacity`
+    #
+    #   * `WarmPoolPendingCapacity`
+    #
+    #   * `WarmPoolTerminatingCapacity`
+    #
+    #   * `WarmPoolTotalCapacity`
+    #
+    #   * `GroupAndWarmPoolDesiredCapacity`
+    #
+    #   * `GroupAndWarmPoolTotalCapacity`
     #   @return [String]
     #
     # @!attribute [rw] granularity
@@ -3198,6 +3345,11 @@ module Aws::AutoScaling
     #   refresh is complete.
     #   @return [Integer]
     #
+    # @!attribute [rw] progress_details
+    #   Additional progress details for an Auto Scaling group that has a
+    #   warm pool.
+    #   @return [Types::InstanceRefreshProgressDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstanceRefresh AWS API Documentation
     #
     class InstanceRefresh < Struct.new(
@@ -3208,7 +3360,8 @@ module Aws::AutoScaling
       :start_time,
       :end_time,
       :percentage_complete,
-      :instances_to_update)
+      :instances_to_update,
+      :progress_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3223,6 +3376,79 @@ module Aws::AutoScaling
     #
     class InstanceRefreshInProgressFault < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Reports the progress of an instance fresh on instances that are in the
+    # Auto Scaling group.
+    #
+    # @!attribute [rw] percentage_complete
+    #   The percentage of instances in the Auto Scaling group that have been
+    #   replaced. For each instance replacement, Amazon EC2 Auto Scaling
+    #   tracks the instance's health status and warm-up time. When the
+    #   instance's health status changes to healthy and the specified
+    #   warm-up time passes, the instance is considered updated and added to
+    #   the percentage complete.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instances_to_update
+    #   The number of instances remaining to update.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstanceRefreshLivePoolProgress AWS API Documentation
+    #
+    class InstanceRefreshLivePoolProgress < Struct.new(
+      :percentage_complete,
+      :instances_to_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Reports the progress of an instance refresh on an Auto Scaling group
+    # that has a warm pool. This includes separate details for instances in
+    # the warm pool and instances in the Auto Scaling group (the live pool).
+    #
+    # @!attribute [rw] live_pool_progress
+    #   Indicates the progress of an instance fresh on instances that are in
+    #   the Auto Scaling group.
+    #   @return [Types::InstanceRefreshLivePoolProgress]
+    #
+    # @!attribute [rw] warm_pool_progress
+    #   Indicates the progress of an instance fresh on instances that are in
+    #   the warm pool.
+    #   @return [Types::InstanceRefreshWarmPoolProgress]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstanceRefreshProgressDetails AWS API Documentation
+    #
+    class InstanceRefreshProgressDetails < Struct.new(
+      :live_pool_progress,
+      :warm_pool_progress)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Reports the progress of an instance fresh on instances that are in the
+    # warm pool.
+    #
+    # @!attribute [rw] percentage_complete
+    #   The percentage of instances in the warm pool that have been
+    #   replaced. For each instance replacement, Amazon EC2 Auto Scaling
+    #   tracks the instance's health status and warm-up time. When the
+    #   instance's health status changes to healthy and the specified
+    #   warm-up time passes, the instance is considered updated and added to
+    #   the percentage complete.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instances_to_update
+    #   The number of instances remaining to update.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstanceRefreshWarmPoolProgress AWS API Documentation
+    #
+    class InstanceRefreshWarmPoolProgress < Struct.new(
+      :percentage_complete,
+      :instances_to_update)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4178,6 +4404,20 @@ module Aws::AutoScaling
     #   * `GroupTerminatingCapacity`
     #
     #   * `GroupTotalCapacity`
+    #
+    #   * `WarmPoolDesiredCapacity`
+    #
+    #   * `WarmPoolWarmedCapacity`
+    #
+    #   * `WarmPoolPendingCapacity`
+    #
+    #   * `WarmPoolTerminatingCapacity`
+    #
+    #   * `WarmPoolTotalCapacity`
+    #
+    #   * `GroupAndWarmPoolDesiredCapacity`
+    #
+    #   * `GroupAndWarmPoolTotalCapacity`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/MetricCollectionType AWS API Documentation
@@ -4947,6 +5187,71 @@ module Aws::AutoScaling
       :max_size,
       :desired_capacity,
       :time_zone)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutWarmPoolAnswer AWS API Documentation
+    #
+    class PutWarmPoolAnswer < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass PutWarmPoolType
+    #   data as a hash:
+    #
+    #       {
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #         max_group_prepared_capacity: 1,
+    #         min_size: 1,
+    #         pool_state: "Stopped", # accepts Stopped, Running
+    #       }
+    #
+    # @!attribute [rw] auto_scaling_group_name
+    #   The name of the Auto Scaling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_group_prepared_capacity
+    #   Specifies the total maximum number of instances that are allowed to
+    #   be in the warm pool or in any state except `Terminated` for the Auto
+    #   Scaling group. This is an optional property. Specify it only if the
+    #   warm pool size should not be determined by the difference between
+    #   the group's maximum capacity and its desired capacity.
+    #
+    #   Amazon EC2 Auto Scaling will launch and maintain either the
+    #   difference between the group's maximum capacity and its desired
+    #   capacity, if a value for `MaxGroupPreparedCapacity` is not
+    #   specified, or the difference between the `MaxGroupPreparedCapacity`
+    #   and the desired capacity, if a value for `MaxGroupPreparedCapacity`
+    #   is specified.
+    #
+    #    The size of the warm pool is dynamic. Only when
+    #   `MaxGroupPreparedCapacity` and `MinSize` are set to the same value
+    #   does the warm pool have an absolute size.
+    #
+    #   If the desired capacity of the Auto Scaling group is higher than the
+    #   `MaxGroupPreparedCapacity`, the capacity of the warm pool is 0. To
+    #   remove a value that you previously set, include the property but
+    #   specify -1 for the value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_size
+    #   Specifies the minimum number of instances to maintain in the warm
+    #   pool. This helps you to ensure that there is always a certain number
+    #   of warmed instances available to handle traffic spikes. Defaults to
+    #   0 if not specified.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pool_state
+    #   Sets the instance state to transition to after the lifecycle hooks
+    #   finish. Valid values are: `Stopped` (default) or `Running`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutWarmPoolType AWS API Documentation
+    #
+    class PutWarmPoolType < Struct.new(
+      :auto_scaling_group_name,
+      :max_group_prepared_capacity,
+      :min_size,
+      :pool_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6187,6 +6492,38 @@ module Aws::AutoScaling
       :service_linked_role_arn,
       :max_instance_lifetime,
       :capacity_rebalance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a warm pool configuration.
+    #
+    # @!attribute [rw] max_group_prepared_capacity
+    #   The total maximum number of instances that are allowed to be in the
+    #   warm pool or in any state except `Terminated` for the Auto Scaling
+    #   group.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_size
+    #   The minimum number of instances to maintain in the warm pool.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pool_state
+    #   The instance state to transition to after the lifecycle actions are
+    #   complete: `Stopped` or `Running`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of a warm pool that is marked for deletion.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/WarmPoolConfiguration AWS API Documentation
+    #
+    class WarmPoolConfiguration < Struct.new(
+      :max_group_prepared_capacity,
+      :min_size,
+      :pool_state,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

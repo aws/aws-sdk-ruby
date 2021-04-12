@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2021-04-06)
+------------------
+
+* Feature - Documentation updates for Cloud9
+
 1.32.0 (2021-03-31)
 ------------------
 

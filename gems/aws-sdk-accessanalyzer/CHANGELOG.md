@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2021-04-07)
+------------------
+
+* Feature - IAM Access Analyzer now analyzes your CloudTrail events to identify actions and services that have been used by an IAM entity (user or role) and generates an IAM policy that is based on that activity.
+
 1.18.0 (2021-03-16)
 ------------------
 

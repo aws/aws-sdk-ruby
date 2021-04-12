@@ -388,7 +388,9 @@ module Aws::RAM
     #   The Amazon Resource Names (ARN) of the resources.
     #
     # @option params [Array<String>] :principals
-    #   The principals.
+    #   The principals to associate with the resource share. The possible
+    #   values are IDs of AWS accounts, and the ARNs of organizational units
+    #   (OU) or organizations from AWS Organizations.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -1117,12 +1119,21 @@ module Aws::RAM
     # @option params [String] :resource_type
     #   The resource type.
     #
-    #   Valid values: `codebuild:Project` \| `codebuild:ReportGroup` \|
-    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \| `ec2:Subnet` \|
+    #   Valid values: `acm-pca:CertificateAuthority` \| `appmesh:Mesh` \|
+    #   `codebuild:Project` \| `codebuild:ReportGroup` \|
+    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \|
+    #   `ec2:LocalGatewayRouteTable` \| `ec2:PrefixList` \| `ec2:Subnet` \|
     #   `ec2:TrafficMirrorTarget` \| `ec2:TransitGateway` \|
     #   `imagebuilder:Component` \| `imagebuilder:Image` \|
-    #   `imagebuilder:ImageRecipe` \| `license-manager:LicenseConfiguration` I
+    #   `imagebuilder:ImageRecipe` \| `imagebuilder:ContainerRecipe` \|
+    #   `glue:Catalog` \| `glue:Database` \| `glue:Table` \|
+    #   `license-manager:LicenseConfiguration` I
+    #   `network-firewall:FirewallPolicy` \|
+    #   `network-firewall:StatefulRuleGroup` \|
+    #   `network-firewall:StatelessRuleGroup` \| `outposts:Outpost` \|
     #   `resource-groups:Group` \| `rds:Cluster` \|
+    #   `route53resolver:FirewallRuleGroup`
+    #   \|`route53resolver:ResolverQueryLogConfig` \|
     #   `route53resolver:ResolverRule`
     #
     # @option params [Array<String>] :resource_share_arns
@@ -1273,12 +1284,21 @@ module Aws::RAM
     # @option params [String] :resource_type
     #   The resource type.
     #
-    #   Valid values: `codebuild:Project` \| `codebuild:ReportGroup` \|
-    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \| `ec2:Subnet` \|
+    #   Valid values: `acm-pca:CertificateAuthority` \| `appmesh:Mesh` \|
+    #   `codebuild:Project` \| `codebuild:ReportGroup` \|
+    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \|
+    #   `ec2:LocalGatewayRouteTable` \| `ec2:PrefixList` \| `ec2:Subnet` \|
     #   `ec2:TrafficMirrorTarget` \| `ec2:TransitGateway` \|
     #   `imagebuilder:Component` \| `imagebuilder:Image` \|
-    #   `imagebuilder:ImageRecipe` \| `license-manager:LicenseConfiguration` I
+    #   `imagebuilder:ImageRecipe` \| `imagebuilder:ContainerRecipe` \|
+    #   `glue:Catalog` \| `glue:Database` \| `glue:Table` \|
+    #   `license-manager:LicenseConfiguration` I
+    #   `network-firewall:FirewallPolicy` \|
+    #   `network-firewall:StatefulRuleGroup` \|
+    #   `network-firewall:StatelessRuleGroup` \| `outposts:Outpost` \|
     #   `resource-groups:Group` \| `rds:Cluster` \|
+    #   `route53resolver:FirewallRuleGroup`
+    #   \|`route53resolver:ResolverQueryLogConfig` \|
     #   `route53resolver:ResolverRule`
     #
     # @option params [Array<String>] :resource_arns
@@ -1550,7 +1570,7 @@ module Aws::RAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ram'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

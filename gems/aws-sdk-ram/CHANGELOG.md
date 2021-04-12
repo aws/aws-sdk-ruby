@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2021-04-08)
+------------------
+
+* Feature - Documentation updates for AWS RAM resource sharing
+
 1.24.0 (2021-03-10)
 ------------------
 

@@ -530,6 +530,14 @@ module Aws::MediaLive
     #               },
     #               url_path: ["__string"],
     #             },
+    #             motion_graphics_image_activate_settings: {
+    #               duration: 1,
+    #               password_param: "__string",
+    #               url: "__string",
+    #               username: "__string",
+    #             },
+    #             motion_graphics_image_deactivate_settings: {
+    #             },
     #             pause_state_settings: {
     #               pipelines: [
     #                 {
@@ -630,6 +638,10 @@ module Aws::MediaLive
     #   resp.creates.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.stop_timecode.timecode #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.input_switch_settings.url_path #=> Array
     #   resp.creates.schedule_actions[0].schedule_action_settings.input_switch_settings.url_path[0] #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.motion_graphics_image_activate_settings.duration #=> Integer
+    #   resp.creates.schedule_actions[0].schedule_action_settings.motion_graphics_image_activate_settings.password_param #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.motion_graphics_image_activate_settings.url #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.motion_graphics_image_activate_settings.username #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines #=> Array
     #   resp.creates.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines[0].pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
     #   resp.creates.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
@@ -685,6 +697,10 @@ module Aws::MediaLive
     #   resp.deletes.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.stop_timecode.timecode #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.input_switch_settings.url_path #=> Array
     #   resp.deletes.schedule_actions[0].schedule_action_settings.input_switch_settings.url_path[0] #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.motion_graphics_image_activate_settings.duration #=> Integer
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.motion_graphics_image_activate_settings.password_param #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.motion_graphics_image_activate_settings.url #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.motion_graphics_image_activate_settings.username #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines #=> Array
     #   resp.deletes.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines[0].pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
     #   resp.deletes.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
@@ -1001,8 +1017,8 @@ module Aws::MediaLive
     #               y_position: 1,
     #             },
     #             ebu_tt_d_destination_settings: {
-    #               fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
     #               copyright_holder: "__stringMax1000",
+    #               fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
     #               font_family: "__string",
     #               style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #             },
@@ -1051,6 +1067,13 @@ module Aws::MediaLive
     #         output_locking_mode: "EPOCH_LOCKING", # accepts EPOCH_LOCKING, PIPELINE_LOCKING
     #         output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
     #         support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
+    #       },
+    #       motion_graphics_configuration: {
+    #         motion_graphics_insertion: "DISABLED", # accepts DISABLED, ENABLED
+    #         motion_graphics_settings: { # required
+    #           html_motion_graphics_settings: {
+    #           },
+    #         },
     #       },
     #       nielsen_configuration: {
     #         distributor_id: "__string",
@@ -1866,8 +1889,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_grid_control #=> String, one of "FIXED", "SCALED"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
-    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.copyright_holder #=> String
+    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
@@ -1887,6 +1910,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.channel.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.channel.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.channel.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups #=> Array
@@ -2315,14 +2339,18 @@ module Aws::MediaLive
     #   resp.channel.pipeline_details #=> Array
     #   resp.channel.pipeline_details[0].active_input_attachment_name #=> String
     #   resp.channel.pipeline_details[0].active_input_switch_action_name #=> String
+    #   resp.channel.pipeline_details[0].active_motion_graphics_action_name #=> String
+    #   resp.channel.pipeline_details[0].active_motion_graphics_uri #=> String
     #   resp.channel.pipeline_details[0].pipeline_id #=> String
     #   resp.channel.pipelines_running_count #=> Integer
     #   resp.channel.role_arn #=> String
     #   resp.channel.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["__string"] #=> String
-    #   resp.channel.vpc.public_address_allocation_ids #=> Array
-    #   resp.channel.vpc.public_address_allocation_ids[0] #=> String
+    #   resp.channel.vpc.availability_zones #=> Array
+    #   resp.channel.vpc.availability_zones[0] #=> String
+    #   resp.channel.vpc.network_interface_ids #=> Array
+    #   resp.channel.vpc.network_interface_ids[0] #=> String
     #   resp.channel.vpc.security_group_ids #=> Array
     #   resp.channel.vpc.security_group_ids[0] #=> String
     #   resp.channel.vpc.subnet_ids #=> Array
@@ -2758,7 +2786,7 @@ module Aws::MediaLive
     #   * {Types::DeleteChannelResponse#role_arn #role_arn} => String
     #   * {Types::DeleteChannelResponse#state #state} => String
     #   * {Types::DeleteChannelResponse#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::DeleteChannelResponse#vpc #vpc} => Types::VpcOutputSettings
+    #   * {Types::DeleteChannelResponse#vpc #vpc} => Types::VpcOutputSettingsDescription
     #
     # @example Request syntax with placeholder values
     #
@@ -2903,8 +2931,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_grid_control #=> String, one of "FIXED", "SCALED"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
-    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.copyright_holder #=> String
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
@@ -2924,6 +2952,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups #=> Array
@@ -3352,14 +3381,18 @@ module Aws::MediaLive
     #   resp.pipeline_details #=> Array
     #   resp.pipeline_details[0].active_input_attachment_name #=> String
     #   resp.pipeline_details[0].active_input_switch_action_name #=> String
+    #   resp.pipeline_details[0].active_motion_graphics_action_name #=> String
+    #   resp.pipeline_details[0].active_motion_graphics_uri #=> String
     #   resp.pipeline_details[0].pipeline_id #=> String
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
-    #   resp.vpc.public_address_allocation_ids #=> Array
-    #   resp.vpc.public_address_allocation_ids[0] #=> String
+    #   resp.vpc.availability_zones #=> Array
+    #   resp.vpc.availability_zones[0] #=> String
+    #   resp.vpc.network_interface_ids #=> Array
+    #   resp.vpc.network_interface_ids[0] #=> String
     #   resp.vpc.security_group_ids #=> Array
     #   resp.vpc.security_group_ids[0] #=> String
     #   resp.vpc.subnet_ids #=> Array
@@ -3666,7 +3699,7 @@ module Aws::MediaLive
     #   * {Types::DescribeChannelResponse#role_arn #role_arn} => String
     #   * {Types::DescribeChannelResponse#state #state} => String
     #   * {Types::DescribeChannelResponse#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::DescribeChannelResponse#vpc #vpc} => Types::VpcOutputSettings
+    #   * {Types::DescribeChannelResponse#vpc #vpc} => Types::VpcOutputSettingsDescription
     #
     # @example Request syntax with placeholder values
     #
@@ -3811,8 +3844,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_grid_control #=> String, one of "FIXED", "SCALED"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
-    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.copyright_holder #=> String
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
@@ -3832,6 +3865,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups #=> Array
@@ -4260,14 +4294,18 @@ module Aws::MediaLive
     #   resp.pipeline_details #=> Array
     #   resp.pipeline_details[0].active_input_attachment_name #=> String
     #   resp.pipeline_details[0].active_input_switch_action_name #=> String
+    #   resp.pipeline_details[0].active_motion_graphics_action_name #=> String
+    #   resp.pipeline_details[0].active_motion_graphics_uri #=> String
     #   resp.pipeline_details[0].pipeline_id #=> String
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
-    #   resp.vpc.public_address_allocation_ids #=> Array
-    #   resp.vpc.public_address_allocation_ids[0] #=> String
+    #   resp.vpc.availability_zones #=> Array
+    #   resp.vpc.availability_zones[0] #=> String
+    #   resp.vpc.network_interface_ids #=> Array
+    #   resp.vpc.network_interface_ids[0] #=> String
     #   resp.vpc.security_group_ids #=> Array
     #   resp.vpc.security_group_ids[0] #=> String
     #   resp.vpc.subnet_ids #=> Array
@@ -4803,6 +4841,10 @@ module Aws::MediaLive
     #   resp.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.stop_timecode.timecode #=> String
     #   resp.schedule_actions[0].schedule_action_settings.input_switch_settings.url_path #=> Array
     #   resp.schedule_actions[0].schedule_action_settings.input_switch_settings.url_path[0] #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.motion_graphics_image_activate_settings.duration #=> Integer
+    #   resp.schedule_actions[0].schedule_action_settings.motion_graphics_image_activate_settings.password_param #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.motion_graphics_image_activate_settings.url #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.motion_graphics_image_activate_settings.username #=> String
     #   resp.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines #=> Array
     #   resp.schedule_actions[0].schedule_action_settings.pause_state_settings.pipelines[0].pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
     #   resp.schedule_actions[0].schedule_action_settings.scte_35_return_to_network_settings.splice_event_id #=> Integer
@@ -4953,8 +4995,10 @@ module Aws::MediaLive
     #   resp.channels[0].state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.channels[0].tags #=> Hash
     #   resp.channels[0].tags["__string"] #=> String
-    #   resp.channels[0].vpc.public_address_allocation_ids #=> Array
-    #   resp.channels[0].vpc.public_address_allocation_ids[0] #=> String
+    #   resp.channels[0].vpc.availability_zones #=> Array
+    #   resp.channels[0].vpc.availability_zones[0] #=> String
+    #   resp.channels[0].vpc.network_interface_ids #=> Array
+    #   resp.channels[0].vpc.network_interface_ids[0] #=> String
     #   resp.channels[0].vpc.security_group_ids #=> Array
     #   resp.channels[0].vpc.security_group_ids[0] #=> String
     #   resp.channels[0].vpc.subnet_ids #=> Array
@@ -5578,7 +5622,7 @@ module Aws::MediaLive
     #   * {Types::StartChannelResponse#role_arn #role_arn} => String
     #   * {Types::StartChannelResponse#state #state} => String
     #   * {Types::StartChannelResponse#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::StartChannelResponse#vpc #vpc} => Types::VpcOutputSettings
+    #   * {Types::StartChannelResponse#vpc #vpc} => Types::VpcOutputSettingsDescription
     #
     # @example Request syntax with placeholder values
     #
@@ -5723,8 +5767,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_grid_control #=> String, one of "FIXED", "SCALED"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
-    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.copyright_holder #=> String
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
@@ -5744,6 +5788,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups #=> Array
@@ -6172,14 +6217,18 @@ module Aws::MediaLive
     #   resp.pipeline_details #=> Array
     #   resp.pipeline_details[0].active_input_attachment_name #=> String
     #   resp.pipeline_details[0].active_input_switch_action_name #=> String
+    #   resp.pipeline_details[0].active_motion_graphics_action_name #=> String
+    #   resp.pipeline_details[0].active_motion_graphics_uri #=> String
     #   resp.pipeline_details[0].pipeline_id #=> String
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
-    #   resp.vpc.public_address_allocation_ids #=> Array
-    #   resp.vpc.public_address_allocation_ids[0] #=> String
+    #   resp.vpc.availability_zones #=> Array
+    #   resp.vpc.availability_zones[0] #=> String
+    #   resp.vpc.network_interface_ids #=> Array
+    #   resp.vpc.network_interface_ids[0] #=> String
     #   resp.vpc.security_group_ids #=> Array
     #   resp.vpc.security_group_ids[0] #=> String
     #   resp.vpc.subnet_ids #=> Array
@@ -6268,7 +6317,7 @@ module Aws::MediaLive
     #   * {Types::StopChannelResponse#role_arn #role_arn} => String
     #   * {Types::StopChannelResponse#state #state} => String
     #   * {Types::StopChannelResponse#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::StopChannelResponse#vpc #vpc} => Types::VpcOutputSettings
+    #   * {Types::StopChannelResponse#vpc #vpc} => Types::VpcOutputSettingsDescription
     #
     # @example Request syntax with placeholder values
     #
@@ -6413,8 +6462,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_grid_control #=> String, one of "FIXED", "SCALED"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
-    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.copyright_holder #=> String
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
@@ -6434,6 +6483,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups #=> Array
@@ -6862,14 +6912,18 @@ module Aws::MediaLive
     #   resp.pipeline_details #=> Array
     #   resp.pipeline_details[0].active_input_attachment_name #=> String
     #   resp.pipeline_details[0].active_input_switch_action_name #=> String
+    #   resp.pipeline_details[0].active_motion_graphics_action_name #=> String
+    #   resp.pipeline_details[0].active_motion_graphics_uri #=> String
     #   resp.pipeline_details[0].pipeline_id #=> String
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
-    #   resp.vpc.public_address_allocation_ids #=> Array
-    #   resp.vpc.public_address_allocation_ids[0] #=> String
+    #   resp.vpc.availability_zones #=> Array
+    #   resp.vpc.availability_zones[0] #=> String
+    #   resp.vpc.network_interface_ids #=> Array
+    #   resp.vpc.network_interface_ids[0] #=> String
     #   resp.vpc.security_group_ids #=> Array
     #   resp.vpc.security_group_ids[0] #=> String
     #   resp.vpc.subnet_ids #=> Array
@@ -7200,8 +7254,8 @@ module Aws::MediaLive
     #               y_position: 1,
     #             },
     #             ebu_tt_d_destination_settings: {
-    #               fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
     #               copyright_holder: "__stringMax1000",
+    #               fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
     #               font_family: "__string",
     #               style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #             },
@@ -7250,6 +7304,13 @@ module Aws::MediaLive
     #         output_locking_mode: "EPOCH_LOCKING", # accepts EPOCH_LOCKING, PIPELINE_LOCKING
     #         output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
     #         support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
+    #       },
+    #       motion_graphics_configuration: {
+    #         motion_graphics_insertion: "DISABLED", # accepts DISABLED, ENABLED
+    #         motion_graphics_settings: { # required
+    #           html_motion_graphics_settings: {
+    #           },
+    #         },
     #       },
     #       nielsen_configuration: {
     #         distributor_id: "__string",
@@ -8055,8 +8116,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_grid_control #=> String, one of "FIXED", "SCALED"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
-    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.copyright_holder #=> String
+    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
@@ -8076,6 +8137,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.channel.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.channel.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.channel.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups #=> Array
@@ -8504,14 +8566,18 @@ module Aws::MediaLive
     #   resp.channel.pipeline_details #=> Array
     #   resp.channel.pipeline_details[0].active_input_attachment_name #=> String
     #   resp.channel.pipeline_details[0].active_input_switch_action_name #=> String
+    #   resp.channel.pipeline_details[0].active_motion_graphics_action_name #=> String
+    #   resp.channel.pipeline_details[0].active_motion_graphics_uri #=> String
     #   resp.channel.pipeline_details[0].pipeline_id #=> String
     #   resp.channel.pipelines_running_count #=> Integer
     #   resp.channel.role_arn #=> String
     #   resp.channel.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["__string"] #=> String
-    #   resp.channel.vpc.public_address_allocation_ids #=> Array
-    #   resp.channel.vpc.public_address_allocation_ids[0] #=> String
+    #   resp.channel.vpc.availability_zones #=> Array
+    #   resp.channel.vpc.availability_zones[0] #=> String
+    #   resp.channel.vpc.network_interface_ids #=> Array
+    #   resp.channel.vpc.network_interface_ids[0] #=> String
     #   resp.channel.vpc.security_group_ids #=> Array
     #   resp.channel.vpc.security_group_ids[0] #=> String
     #   resp.channel.vpc.subnet_ids #=> Array
@@ -8706,8 +8772,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_grid_control #=> String, one of "FIXED", "SCALED"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
-    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.copyright_holder #=> String
+    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
@@ -8727,6 +8793,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.channel.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.channel.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.channel.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups #=> Array
@@ -9155,14 +9222,18 @@ module Aws::MediaLive
     #   resp.channel.pipeline_details #=> Array
     #   resp.channel.pipeline_details[0].active_input_attachment_name #=> String
     #   resp.channel.pipeline_details[0].active_input_switch_action_name #=> String
+    #   resp.channel.pipeline_details[0].active_motion_graphics_action_name #=> String
+    #   resp.channel.pipeline_details[0].active_motion_graphics_uri #=> String
     #   resp.channel.pipeline_details[0].pipeline_id #=> String
     #   resp.channel.pipelines_running_count #=> Integer
     #   resp.channel.role_arn #=> String
     #   resp.channel.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["__string"] #=> String
-    #   resp.channel.vpc.public_address_allocation_ids #=> Array
-    #   resp.channel.vpc.public_address_allocation_ids[0] #=> String
+    #   resp.channel.vpc.availability_zones #=> Array
+    #   resp.channel.vpc.availability_zones[0] #=> String
+    #   resp.channel.vpc.network_interface_ids #=> Array
+    #   resp.channel.vpc.network_interface_ids[0] #=> String
     #   resp.channel.vpc.security_group_ids #=> Array
     #   resp.channel.vpc.security_group_ids[0] #=> String
     #   resp.channel.vpc.subnet_ids #=> Array
@@ -9604,7 +9675,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

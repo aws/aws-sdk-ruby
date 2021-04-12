@@ -1194,6 +1194,97 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateUpdatedImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         existing_image_name: "Name", # required
+    #         new_image_name: "Name", # required
+    #         new_image_description: "Description",
+    #         new_image_display_name: "DisplayName",
+    #         new_image_tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] existing_image_name
+    #   The name of the image to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_image_name
+    #   The name of the new image. The name must be unique within the AWS
+    #   account and Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_image_description
+    #   The description to display for the new image.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_image_display_name
+    #   The name to display for the new image.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_image_tags
+    #   The tags to associate with the new image. A tag is a key-value pair,
+    #   and the value is optional. For example, Environment=Test. If you do
+    #   not specify a value, Environment=.
+    #
+    #   Generally allowed characters are: letters, numbers, and spaces
+    #   representable in UTF-8, and the following special characters:
+    #
+    #   \_ . : / = + \\ - @
+    #
+    #   If you do not specify a value, the value is set to an empty string.
+    #
+    #   For more information about tags, see [Tagging Your Resources][1] in
+    #   the *Amazon AppStream 2.0 Administration Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Indicates whether to display the status of image update availability
+    #   before AppStream 2.0 initiates the process of creating a new updated
+    #   image. If this value is set to `true`, AppStream 2.0 displays
+    #   whether image updates are available. If this value is set to
+    #   `false`, AppStream 2.0 initiates the process of creating a new
+    #   updated image without displaying whether image updates are
+    #   available.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUpdatedImageRequest AWS API Documentation
+    #
+    class CreateUpdatedImageRequest < Struct.new(
+      :existing_image_name,
+      :new_image_name,
+      :new_image_description,
+      :new_image_display_name,
+      :new_image_tags,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image
+    #   Describes an image.
+    #   @return [Types::Image]
+    #
+    # @!attribute [rw] can_update_image
+    #   Indicates whether a new image can be created.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUpdatedImageResult AWS API Documentation
+    #
+    class CreateUpdatedImageResult < Struct.new(
+      :image,
+      :can_update_image)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUsageReportSubscriptionRequest AWS API Documentation
@@ -2566,6 +2657,11 @@ module Aws::AppStream
     #   specified image.
     #   @return [Types::ImagePermissions]
     #
+    # @!attribute [rw] image_errors
+    #   Describes the errors that are returned when a new image can't be
+    #   created.
+    #   @return [Array<Types::ResourceError>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Image AWS API Documentation
     #
     class Image < Struct.new(
@@ -2584,7 +2680,8 @@ module Aws::AppStream
       :created_time,
       :public_base_image_released_date,
       :appstream_agent_version,
-      :image_permissions)
+      :image_permissions,
+      :image_errors)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2839,7 +2936,7 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # The image does not support storage connectors.
+    # The image can't be updated because it's not compatible for updates.
     #
     # @!attribute [rw] message
     #   The error message in the exception.

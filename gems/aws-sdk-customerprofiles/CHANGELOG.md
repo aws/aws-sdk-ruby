@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2021-04-08)
+------------------
+
+* Feature - Documentation updates for Put-Integration API
+
 1.5.0 (2021-03-26)
 ------------------
 

@@ -76,6 +76,8 @@ module Aws::AutoScaling
     DeletePolicyType = Shapes::StructureShape.new(name: 'DeletePolicyType')
     DeleteScheduledActionType = Shapes::StructureShape.new(name: 'DeleteScheduledActionType')
     DeleteTagsType = Shapes::StructureShape.new(name: 'DeleteTagsType')
+    DeleteWarmPoolAnswer = Shapes::StructureShape.new(name: 'DeleteWarmPoolAnswer')
+    DeleteWarmPoolType = Shapes::StructureShape.new(name: 'DeleteWarmPoolType')
     DescribeAccountLimitsAnswer = Shapes::StructureShape.new(name: 'DescribeAccountLimitsAnswer')
     DescribeAdjustmentTypesAnswer = Shapes::StructureShape.new(name: 'DescribeAdjustmentTypesAnswer')
     DescribeAutoScalingInstancesType = Shapes::StructureShape.new(name: 'DescribeAutoScalingInstancesType')
@@ -97,6 +99,8 @@ module Aws::AutoScaling
     DescribeScheduledActionsType = Shapes::StructureShape.new(name: 'DescribeScheduledActionsType')
     DescribeTagsType = Shapes::StructureShape.new(name: 'DescribeTagsType')
     DescribeTerminationPolicyTypesAnswer = Shapes::StructureShape.new(name: 'DescribeTerminationPolicyTypesAnswer')
+    DescribeWarmPoolAnswer = Shapes::StructureShape.new(name: 'DescribeWarmPoolAnswer')
+    DescribeWarmPoolType = Shapes::StructureShape.new(name: 'DescribeWarmPoolType')
     DetachInstancesAnswer = Shapes::StructureShape.new(name: 'DetachInstancesAnswer')
     DetachInstancesQuery = Shapes::StructureShape.new(name: 'DetachInstancesQuery')
     DetachLoadBalancerTargetGroupsResultType = Shapes::StructureShape.new(name: 'DetachLoadBalancerTargetGroupsResultType')
@@ -137,7 +141,10 @@ module Aws::AutoScaling
     InstanceRefresh = Shapes::StructureShape.new(name: 'InstanceRefresh')
     InstanceRefreshIds = Shapes::ListShape.new(name: 'InstanceRefreshIds')
     InstanceRefreshInProgressFault = Shapes::StructureShape.new(name: 'InstanceRefreshInProgressFault')
+    InstanceRefreshLivePoolProgress = Shapes::StructureShape.new(name: 'InstanceRefreshLivePoolProgress')
+    InstanceRefreshProgressDetails = Shapes::StructureShape.new(name: 'InstanceRefreshProgressDetails')
     InstanceRefreshStatus = Shapes::StringShape.new(name: 'InstanceRefreshStatus')
+    InstanceRefreshWarmPoolProgress = Shapes::StructureShape.new(name: 'InstanceRefreshWarmPoolProgress')
     InstanceRefreshes = Shapes::ListShape.new(name: 'InstanceRefreshes')
     Instances = Shapes::ListShape.new(name: 'Instances')
     InstancesDistribution = Shapes::StructureShape.new(name: 'InstancesDistribution')
@@ -169,6 +176,7 @@ module Aws::AutoScaling
     LoadBalancerStates = Shapes::ListShape.new(name: 'LoadBalancerStates')
     LoadBalancerTargetGroupState = Shapes::StructureShape.new(name: 'LoadBalancerTargetGroupState')
     LoadBalancerTargetGroupStates = Shapes::ListShape.new(name: 'LoadBalancerTargetGroupStates')
+    MaxGroupPreparedCapacity = Shapes::IntegerShape.new(name: 'MaxGroupPreparedCapacity')
     MaxInstanceLifetime = Shapes::IntegerShape.new(name: 'MaxInstanceLifetime')
     MaxNumberOfAutoScalingGroups = Shapes::IntegerShape.new(name: 'MaxNumberOfAutoScalingGroups')
     MaxNumberOfLaunchConfigurations = Shapes::IntegerShape.new(name: 'MaxNumberOfLaunchConfigurations')
@@ -221,6 +229,8 @@ module Aws::AutoScaling
     PutNotificationConfigurationType = Shapes::StructureShape.new(name: 'PutNotificationConfigurationType')
     PutScalingPolicyType = Shapes::StructureShape.new(name: 'PutScalingPolicyType')
     PutScheduledUpdateGroupActionType = Shapes::StructureShape.new(name: 'PutScheduledUpdateGroupActionType')
+    PutWarmPoolAnswer = Shapes::StructureShape.new(name: 'PutWarmPoolAnswer')
+    PutWarmPoolType = Shapes::StructureShape.new(name: 'PutWarmPoolType')
     RecordLifecycleActionHeartbeatAnswer = Shapes::StructureShape.new(name: 'RecordLifecycleActionHeartbeatAnswer')
     RecordLifecycleActionHeartbeatType = Shapes::StructureShape.new(name: 'RecordLifecycleActionHeartbeatType')
     RefreshInstanceWarmup = Shapes::IntegerShape.new(name: 'RefreshInstanceWarmup')
@@ -271,6 +281,11 @@ module Aws::AutoScaling
     TimestampType = Shapes::TimestampShape.new(name: 'TimestampType')
     UpdateAutoScalingGroupType = Shapes::StructureShape.new(name: 'UpdateAutoScalingGroupType')
     Values = Shapes::ListShape.new(name: 'Values')
+    WarmPoolConfiguration = Shapes::StructureShape.new(name: 'WarmPoolConfiguration')
+    WarmPoolMinSize = Shapes::IntegerShape.new(name: 'WarmPoolMinSize')
+    WarmPoolSize = Shapes::IntegerShape.new(name: 'WarmPoolSize')
+    WarmPoolState = Shapes::StringShape.new(name: 'WarmPoolState')
+    WarmPoolStatus = Shapes::StringShape.new(name: 'WarmPoolStatus')
     XmlString = Shapes::StringShape.new(name: 'XmlString')
     XmlStringMaxLen1023 = Shapes::StringShape.new(name: 'XmlStringMaxLen1023')
     XmlStringMaxLen1600 = Shapes::StringShape.new(name: 'XmlStringMaxLen1600')
@@ -367,6 +382,8 @@ module Aws::AutoScaling
     AutoScalingGroup.add_member(:service_linked_role_arn, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ServiceLinkedRoleARN"))
     AutoScalingGroup.add_member(:max_instance_lifetime, Shapes::ShapeRef.new(shape: MaxInstanceLifetime, location_name: "MaxInstanceLifetime"))
     AutoScalingGroup.add_member(:capacity_rebalance, Shapes::ShapeRef.new(shape: CapacityRebalanceEnabled, location_name: "CapacityRebalance"))
+    AutoScalingGroup.add_member(:warm_pool_configuration, Shapes::ShapeRef.new(shape: WarmPoolConfiguration, location_name: "WarmPoolConfiguration"))
+    AutoScalingGroup.add_member(:warm_pool_size, Shapes::ShapeRef.new(shape: WarmPoolSize, location_name: "WarmPoolSize"))
     AutoScalingGroup.struct_class = Types::AutoScalingGroup
 
     AutoScalingGroupNames.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
@@ -526,6 +543,12 @@ module Aws::AutoScaling
     DeleteTagsType.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
     DeleteTagsType.struct_class = Types::DeleteTagsType
 
+    DeleteWarmPoolAnswer.struct_class = Types::DeleteWarmPoolAnswer
+
+    DeleteWarmPoolType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
+    DeleteWarmPoolType.add_member(:force_delete, Shapes::ShapeRef.new(shape: ForceDelete, location_name: "ForceDelete"))
+    DeleteWarmPoolType.struct_class = Types::DeleteWarmPoolType
+
     DescribeAccountLimitsAnswer.add_member(:max_number_of_auto_scaling_groups, Shapes::ShapeRef.new(shape: MaxNumberOfAutoScalingGroups, location_name: "MaxNumberOfAutoScalingGroups"))
     DescribeAccountLimitsAnswer.add_member(:max_number_of_launch_configurations, Shapes::ShapeRef.new(shape: MaxNumberOfLaunchConfigurations, location_name: "MaxNumberOfLaunchConfigurations"))
     DescribeAccountLimitsAnswer.add_member(:number_of_auto_scaling_groups, Shapes::ShapeRef.new(shape: NumberOfAutoScalingGroups, location_name: "NumberOfAutoScalingGroups"))
@@ -623,6 +646,16 @@ module Aws::AutoScaling
 
     DescribeTerminationPolicyTypesAnswer.add_member(:termination_policy_types, Shapes::ShapeRef.new(shape: TerminationPolicies, location_name: "TerminationPolicyTypes"))
     DescribeTerminationPolicyTypesAnswer.struct_class = Types::DescribeTerminationPolicyTypesAnswer
+
+    DescribeWarmPoolAnswer.add_member(:warm_pool_configuration, Shapes::ShapeRef.new(shape: WarmPoolConfiguration, location_name: "WarmPoolConfiguration"))
+    DescribeWarmPoolAnswer.add_member(:instances, Shapes::ShapeRef.new(shape: Instances, location_name: "Instances"))
+    DescribeWarmPoolAnswer.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
+    DescribeWarmPoolAnswer.struct_class = Types::DescribeWarmPoolAnswer
+
+    DescribeWarmPoolType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
+    DescribeWarmPoolType.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
+    DescribeWarmPoolType.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
+    DescribeWarmPoolType.struct_class = Types::DescribeWarmPoolType
 
     DetachInstancesAnswer.add_member(:activities, Shapes::ShapeRef.new(shape: Activities, location_name: "Activities"))
     DetachInstancesAnswer.struct_class = Types::DetachInstancesAnswer
@@ -731,12 +764,25 @@ module Aws::AutoScaling
     InstanceRefresh.add_member(:end_time, Shapes::ShapeRef.new(shape: TimestampType, location_name: "EndTime"))
     InstanceRefresh.add_member(:percentage_complete, Shapes::ShapeRef.new(shape: IntPercent, location_name: "PercentageComplete"))
     InstanceRefresh.add_member(:instances_to_update, Shapes::ShapeRef.new(shape: InstancesToUpdate, location_name: "InstancesToUpdate"))
+    InstanceRefresh.add_member(:progress_details, Shapes::ShapeRef.new(shape: InstanceRefreshProgressDetails, location_name: "ProgressDetails"))
     InstanceRefresh.struct_class = Types::InstanceRefresh
 
     InstanceRefreshIds.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
 
     InstanceRefreshInProgressFault.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "message"))
     InstanceRefreshInProgressFault.struct_class = Types::InstanceRefreshInProgressFault
+
+    InstanceRefreshLivePoolProgress.add_member(:percentage_complete, Shapes::ShapeRef.new(shape: IntPercent, location_name: "PercentageComplete"))
+    InstanceRefreshLivePoolProgress.add_member(:instances_to_update, Shapes::ShapeRef.new(shape: InstancesToUpdate, location_name: "InstancesToUpdate"))
+    InstanceRefreshLivePoolProgress.struct_class = Types::InstanceRefreshLivePoolProgress
+
+    InstanceRefreshProgressDetails.add_member(:live_pool_progress, Shapes::ShapeRef.new(shape: InstanceRefreshLivePoolProgress, location_name: "LivePoolProgress"))
+    InstanceRefreshProgressDetails.add_member(:warm_pool_progress, Shapes::ShapeRef.new(shape: InstanceRefreshWarmPoolProgress, location_name: "WarmPoolProgress"))
+    InstanceRefreshProgressDetails.struct_class = Types::InstanceRefreshProgressDetails
+
+    InstanceRefreshWarmPoolProgress.add_member(:percentage_complete, Shapes::ShapeRef.new(shape: IntPercent, location_name: "PercentageComplete"))
+    InstanceRefreshWarmPoolProgress.add_member(:instances_to_update, Shapes::ShapeRef.new(shape: InstancesToUpdate, location_name: "InstancesToUpdate"))
+    InstanceRefreshWarmPoolProgress.struct_class = Types::InstanceRefreshWarmPoolProgress
 
     InstanceRefreshes.member = Shapes::ShapeRef.new(shape: InstanceRefresh)
 
@@ -949,6 +995,14 @@ module Aws::AutoScaling
     PutScheduledUpdateGroupActionType.add_member(:time_zone, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "TimeZone"))
     PutScheduledUpdateGroupActionType.struct_class = Types::PutScheduledUpdateGroupActionType
 
+    PutWarmPoolAnswer.struct_class = Types::PutWarmPoolAnswer
+
+    PutWarmPoolType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
+    PutWarmPoolType.add_member(:max_group_prepared_capacity, Shapes::ShapeRef.new(shape: MaxGroupPreparedCapacity, location_name: "MaxGroupPreparedCapacity"))
+    PutWarmPoolType.add_member(:min_size, Shapes::ShapeRef.new(shape: WarmPoolMinSize, location_name: "MinSize"))
+    PutWarmPoolType.add_member(:pool_state, Shapes::ShapeRef.new(shape: WarmPoolState, location_name: "PoolState"))
+    PutWarmPoolType.struct_class = Types::PutWarmPoolType
+
     RecordLifecycleActionHeartbeatAnswer.struct_class = Types::RecordLifecycleActionHeartbeatAnswer
 
     RecordLifecycleActionHeartbeatType.add_member(:lifecycle_hook_name, Shapes::ShapeRef.new(shape: AsciiStringMaxLen255, required: true, location_name: "LifecycleHookName"))
@@ -1128,6 +1182,12 @@ module Aws::AutoScaling
     UpdateAutoScalingGroupType.struct_class = Types::UpdateAutoScalingGroupType
 
     Values.member = Shapes::ShapeRef.new(shape: XmlString)
+
+    WarmPoolConfiguration.add_member(:max_group_prepared_capacity, Shapes::ShapeRef.new(shape: MaxGroupPreparedCapacity, location_name: "MaxGroupPreparedCapacity"))
+    WarmPoolConfiguration.add_member(:min_size, Shapes::ShapeRef.new(shape: WarmPoolMinSize, location_name: "MinSize"))
+    WarmPoolConfiguration.add_member(:pool_state, Shapes::ShapeRef.new(shape: WarmPoolState, location_name: "PoolState"))
+    WarmPoolConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: WarmPoolStatus, location_name: "Status"))
+    WarmPoolConfiguration.struct_class = Types::WarmPoolConfiguration
 
 
     # @api private
@@ -1316,6 +1376,18 @@ module Aws::AutoScaling
         o.input = Shapes::ShapeRef.new(shape: DeleteTagsType)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseFault)
+      end)
+
+      api.add_operation(:delete_warm_pool, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteWarmPool"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteWarmPoolType)
+        o.output = Shapes::ShapeRef.new(shape: DeleteWarmPoolAnswer)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        o.errors << Shapes::ShapeRef.new(shape: ScalingActivityInProgressFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseFault)
       end)
 
@@ -1548,6 +1620,17 @@ module Aws::AutoScaling
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
       end)
 
+      api.add_operation(:describe_warm_pool, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeWarmPool"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeWarmPoolType)
+        o.output = Shapes::ShapeRef.new(shape: DescribeWarmPoolAnswer)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+      end)
+
       api.add_operation(:detach_instances, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DetachInstances"
         o.http_method = "POST"
@@ -1660,6 +1743,16 @@ module Aws::AutoScaling
         o.input = Shapes::ShapeRef.new(shape: PutScheduledUpdateGroupActionType)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+      end)
+
+      api.add_operation(:put_warm_pool, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutWarmPool"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutWarmPoolType)
+        o.output = Shapes::ShapeRef.new(shape: PutWarmPoolAnswer)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
       end)

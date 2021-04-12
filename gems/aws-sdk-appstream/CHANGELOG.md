@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2021-04-08)
+------------------
+
+* Feature - This release provides support for image updates
+
 1.51.0 (2021-03-10)
 ------------------
 

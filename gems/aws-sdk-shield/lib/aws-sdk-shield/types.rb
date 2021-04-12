@@ -1123,17 +1123,15 @@ module Aws::Shield
 
     # Exception that indicates that the operation would exceed a limit.
     #
-    # `Type` is the type of limit that would be exceeded.
-    #
-    # `Limit` is the threshold that would be exceeded.
-    #
     # @!attribute [rw] message
     #   @return [String]
     #
     # @!attribute [rw] type
+    #   The type of limit that would be exceeded.
     #   @return [String]
     #
     # @!attribute [rw] limit
+    #   The threshold that would be exceeded.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/LimitsExceededException AWS API Documentation

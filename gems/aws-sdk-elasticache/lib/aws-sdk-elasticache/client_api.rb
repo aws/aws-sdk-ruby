@@ -602,6 +602,7 @@ module Aws::ElastiCache
     CopySnapshotMessage.add_member(:target_snapshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetSnapshotName"))
     CopySnapshotMessage.add_member(:target_bucket, Shapes::ShapeRef.new(shape: String, location_name: "TargetBucket"))
     CopySnapshotMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    CopySnapshotMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CopySnapshotMessage.struct_class = Types::CopySnapshotMessage
 
     CopySnapshotResult.add_member(:snapshot, Shapes::ShapeRef.new(shape: Snapshot, location_name: "Snapshot"))
@@ -641,6 +642,7 @@ module Aws::ElastiCache
     CreateCacheParameterGroupMessage.add_member(:cache_parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CacheParameterGroupName"))
     CreateCacheParameterGroupMessage.add_member(:cache_parameter_group_family, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CacheParameterGroupFamily"))
     CreateCacheParameterGroupMessage.add_member(:description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Description"))
+    CreateCacheParameterGroupMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateCacheParameterGroupMessage.struct_class = Types::CreateCacheParameterGroupMessage
 
     CreateCacheParameterGroupResult.add_member(:cache_parameter_group, Shapes::ShapeRef.new(shape: CacheParameterGroup, location_name: "CacheParameterGroup"))
@@ -648,6 +650,7 @@ module Aws::ElastiCache
 
     CreateCacheSecurityGroupMessage.add_member(:cache_security_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CacheSecurityGroupName"))
     CreateCacheSecurityGroupMessage.add_member(:description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Description"))
+    CreateCacheSecurityGroupMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateCacheSecurityGroupMessage.struct_class = Types::CreateCacheSecurityGroupMessage
 
     CreateCacheSecurityGroupResult.add_member(:cache_security_group, Shapes::ShapeRef.new(shape: CacheSecurityGroup, location_name: "CacheSecurityGroup"))
@@ -656,6 +659,7 @@ module Aws::ElastiCache
     CreateCacheSubnetGroupMessage.add_member(:cache_subnet_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CacheSubnetGroupName"))
     CreateCacheSubnetGroupMessage.add_member(:cache_subnet_group_description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CacheSubnetGroupDescription"))
     CreateCacheSubnetGroupMessage.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdentifierList, required: true, location_name: "SubnetIds"))
+    CreateCacheSubnetGroupMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateCacheSubnetGroupMessage.struct_class = Types::CreateCacheSubnetGroupMessage
 
     CreateCacheSubnetGroupResult.add_member(:cache_subnet_group, Shapes::ShapeRef.new(shape: CacheSubnetGroup, location_name: "CacheSubnetGroup"))
@@ -710,6 +714,7 @@ module Aws::ElastiCache
     CreateSnapshotMessage.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "CacheClusterId"))
     CreateSnapshotMessage.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SnapshotName"))
     CreateSnapshotMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    CreateSnapshotMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateSnapshotMessage.struct_class = Types::CreateSnapshotMessage
 
     CreateSnapshotResult.add_member(:snapshot, Shapes::ShapeRef.new(shape: Snapshot, location_name: "Snapshot"))
@@ -718,6 +723,7 @@ module Aws::ElastiCache
     CreateUserGroupMessage.add_member(:user_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "UserGroupId"))
     CreateUserGroupMessage.add_member(:engine, Shapes::ShapeRef.new(shape: EngineType, required: true, location_name: "Engine"))
     CreateUserGroupMessage.add_member(:user_ids, Shapes::ShapeRef.new(shape: UserIdListInput, location_name: "UserIds"))
+    CreateUserGroupMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateUserGroupMessage.struct_class = Types::CreateUserGroupMessage
 
     CreateUserMessage.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location_name: "UserId"))
@@ -726,6 +732,7 @@ module Aws::ElastiCache
     CreateUserMessage.add_member(:passwords, Shapes::ShapeRef.new(shape: PasswordListInput, location_name: "Passwords"))
     CreateUserMessage.add_member(:access_string, Shapes::ShapeRef.new(shape: AccessString, required: true, location_name: "AccessString"))
     CreateUserMessage.add_member(:no_password_required, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "NoPasswordRequired"))
+    CreateUserMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateUserMessage.struct_class = Types::CreateUserMessage
 
     CustomerNodeEndpoint.add_member(:address, Shapes::ShapeRef.new(shape: String, location_name: "Address"))
@@ -1321,6 +1328,7 @@ module Aws::ElastiCache
     PurchaseReservedCacheNodesOfferingMessage.add_member(:reserved_cache_nodes_offering_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReservedCacheNodesOfferingId"))
     PurchaseReservedCacheNodesOfferingMessage.add_member(:reserved_cache_node_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedCacheNodeId"))
     PurchaseReservedCacheNodesOfferingMessage.add_member(:cache_node_count, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "CacheNodeCount"))
+    PurchaseReservedCacheNodesOfferingMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     PurchaseReservedCacheNodesOfferingMessage.struct_class = Types::PurchaseReservedCacheNodesOfferingMessage
 
     PurchaseReservedCacheNodesOfferingResult.add_member(:reserved_cache_node, Shapes::ShapeRef.new(shape: ReservedCacheNode, location_name: "ReservedCacheNode"))
@@ -1722,7 +1730,15 @@ module Aws::ElastiCache
         o.input = Shapes::ShapeRef.new(shape: AddTagsToResourceMessage)
         o.output = Shapes::ShapeRef.new(shape: TagListMessage)
         o.errors << Shapes::ShapeRef.new(shape: CacheClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: CacheParameterGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: CacheSecurityGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: CacheSubnetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidReplicationGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReservedCacheNodeNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UserNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UserGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidARNFault)
       end)
@@ -1781,6 +1797,7 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: SnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSnapshotStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -1816,6 +1833,7 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: CacheParameterGroupQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: CacheParameterGroupAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCacheParameterGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -1828,6 +1846,7 @@ module Aws::ElastiCache
         o.output = Shapes::ShapeRef.new(shape: CreateCacheSecurityGroupResult)
         o.errors << Shapes::ShapeRef.new(shape: CacheSecurityGroupAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: CacheSecurityGroupQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -1841,6 +1860,7 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: CacheSubnetGroupAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: CacheSubnetGroupQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: CacheSubnetQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
         o.errors << Shapes::ShapeRef.new(shape: SubnetNotAllowedFault)
       end)
@@ -1898,6 +1918,7 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: InvalidReplicationGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotFeatureNotSupportedFault)
+        o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
       end)
@@ -1913,6 +1934,7 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: DuplicateUserNameFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
       end)
 
       api.add_operation(:create_user_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1927,6 +1949,7 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: DefaultUserRequired)
         o.errors << Shapes::ShapeRef.new(shape: UserGroupQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
       end)
 
       api.add_operation(:decrease_node_groups_in_global_replication_group, Seahorse::Model::Operation.new.tap do |o|
@@ -2425,7 +2448,15 @@ module Aws::ElastiCache
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceMessage)
         o.output = Shapes::ShapeRef.new(shape: TagListMessage)
         o.errors << Shapes::ShapeRef.new(shape: CacheClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: CacheParameterGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: CacheSecurityGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: CacheSubnetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidReplicationGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReservedCacheNodeNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UserNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UserGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidARNFault)
       end)
 
@@ -2563,6 +2594,7 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: ReservedCacheNodesOfferingNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ReservedCacheNodeAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: ReservedCacheNodeQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -2595,7 +2627,15 @@ module Aws::ElastiCache
         o.input = Shapes::ShapeRef.new(shape: RemoveTagsFromResourceMessage)
         o.output = Shapes::ShapeRef.new(shape: TagListMessage)
         o.errors << Shapes::ShapeRef.new(shape: CacheClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: CacheParameterGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: CacheSecurityGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: CacheSubnetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidReplicationGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReservedCacheNodeNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UserNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UserGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidARNFault)
         o.errors << Shapes::ShapeRef.new(shape: TagNotFoundFault)
       end)

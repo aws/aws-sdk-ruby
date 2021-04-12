@@ -153,6 +153,7 @@ module Aws::Imagebuilder
     InlineDockerFileTemplate = Shapes::StringShape.new(name: 'InlineDockerFileTemplate')
     InstanceBlockDeviceMapping = Shapes::StructureShape.new(name: 'InstanceBlockDeviceMapping')
     InstanceBlockDeviceMappings = Shapes::ListShape.new(name: 'InstanceBlockDeviceMappings')
+    InstanceConfiguration = Shapes::StructureShape.new(name: 'InstanceConfiguration')
     InstanceProfileNameType = Shapes::StringShape.new(name: 'InstanceProfileNameType')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     InstanceTypeList = Shapes::ListShape.new(name: 'InstanceTypeList')
@@ -163,6 +164,9 @@ module Aws::Imagebuilder
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     InvalidVersionNumberException = Shapes::StructureShape.new(name: 'InvalidVersionNumberException')
     LaunchPermissionConfiguration = Shapes::StructureShape.new(name: 'LaunchPermissionConfiguration')
+    LaunchTemplateConfiguration = Shapes::StructureShape.new(name: 'LaunchTemplateConfiguration')
+    LaunchTemplateConfigurationList = Shapes::ListShape.new(name: 'LaunchTemplateConfigurationList')
+    LaunchTemplateId = Shapes::StringShape.new(name: 'LaunchTemplateId')
     LicenseConfigurationArn = Shapes::StringShape.new(name: 'LicenseConfigurationArn')
     LicenseConfigurationArnList = Shapes::ListShape.new(name: 'LicenseConfigurationArnList')
     ListComponentBuildVersionsRequest = Shapes::StructureShape.new(name: 'ListComponentBuildVersionsRequest')
@@ -349,6 +353,7 @@ module Aws::Imagebuilder
     ContainerRecipe.add_member(:owner, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "owner"))
     ContainerRecipe.add_member(:version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "version"))
     ContainerRecipe.add_member(:components, Shapes::ShapeRef.new(shape: ComponentConfigurationList, location_name: "components"))
+    ContainerRecipe.add_member(:instance_configuration, Shapes::ShapeRef.new(shape: InstanceConfiguration, location_name: "instanceConfiguration"))
     ContainerRecipe.add_member(:dockerfile_template_data, Shapes::ShapeRef.new(shape: DockerFileTemplate, location_name: "dockerfileTemplateData"))
     ContainerRecipe.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "kmsKeyId"))
     ContainerRecipe.add_member(:encrypted, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "encrypted"))
@@ -394,7 +399,8 @@ module Aws::Imagebuilder
     CreateContainerRecipeRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
     CreateContainerRecipeRequest.add_member(:semantic_version, Shapes::ShapeRef.new(shape: VersionNumber, required: true, location_name: "semanticVersion"))
     CreateContainerRecipeRequest.add_member(:components, Shapes::ShapeRef.new(shape: ComponentConfigurationList, required: true, location_name: "components"))
-    CreateContainerRecipeRequest.add_member(:dockerfile_template_data, Shapes::ShapeRef.new(shape: InlineDockerFileTemplate, required: true, location_name: "dockerfileTemplateData"))
+    CreateContainerRecipeRequest.add_member(:instance_configuration, Shapes::ShapeRef.new(shape: InstanceConfiguration, location_name: "instanceConfiguration"))
+    CreateContainerRecipeRequest.add_member(:dockerfile_template_data, Shapes::ShapeRef.new(shape: InlineDockerFileTemplate, location_name: "dockerfileTemplateData"))
     CreateContainerRecipeRequest.add_member(:dockerfile_template_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "dockerfileTemplateUri"))
     CreateContainerRecipeRequest.add_member(:platform_override, Shapes::ShapeRef.new(shape: Platform, location_name: "platformOverride"))
     CreateContainerRecipeRequest.add_member(:image_os_version_override, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "imageOsVersionOverride"))
@@ -476,7 +482,7 @@ module Aws::Imagebuilder
     CreateInfrastructureConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     CreateInfrastructureConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
     CreateInfrastructureConfigurationRequest.add_member(:instance_types, Shapes::ShapeRef.new(shape: InstanceTypeList, location_name: "instanceTypes"))
-    CreateInfrastructureConfigurationRequest.add_member(:instance_profile_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "instanceProfileName"))
+    CreateInfrastructureConfigurationRequest.add_member(:instance_profile_name, Shapes::ShapeRef.new(shape: InstanceProfileNameType, required: true, location_name: "instanceProfileName"))
     CreateInfrastructureConfigurationRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "securityGroupIds"))
     CreateInfrastructureConfigurationRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "subnetId"))
     CreateInfrastructureConfigurationRequest.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))
@@ -546,6 +552,7 @@ module Aws::Imagebuilder
     Distribution.add_member(:ami_distribution_configuration, Shapes::ShapeRef.new(shape: AmiDistributionConfiguration, location_name: "amiDistributionConfiguration"))
     Distribution.add_member(:container_distribution_configuration, Shapes::ShapeRef.new(shape: ContainerDistributionConfiguration, location_name: "containerDistributionConfiguration"))
     Distribution.add_member(:license_configuration_arns, Shapes::ShapeRef.new(shape: LicenseConfigurationArnList, location_name: "licenseConfigurationArns"))
+    Distribution.add_member(:launch_template_configurations, Shapes::ShapeRef.new(shape: LaunchTemplateConfigurationList, location_name: "launchTemplateConfigurations"))
     Distribution.struct_class = Types::Distribution
 
     DistributionConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, location_name: "arn"))
@@ -836,6 +843,10 @@ module Aws::Imagebuilder
 
     InstanceBlockDeviceMappings.member = Shapes::ShapeRef.new(shape: InstanceBlockDeviceMapping)
 
+    InstanceConfiguration.add_member(:image, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "image"))
+    InstanceConfiguration.add_member(:block_device_mappings, Shapes::ShapeRef.new(shape: InstanceBlockDeviceMappings, location_name: "blockDeviceMappings"))
+    InstanceConfiguration.struct_class = Types::InstanceConfiguration
+
     InstanceTypeList.member = Shapes::ShapeRef.new(shape: InstanceType)
 
     InvalidPaginationTokenException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -859,6 +870,13 @@ module Aws::Imagebuilder
     LaunchPermissionConfiguration.add_member(:user_ids, Shapes::ShapeRef.new(shape: AccountList, location_name: "userIds"))
     LaunchPermissionConfiguration.add_member(:user_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "userGroups"))
     LaunchPermissionConfiguration.struct_class = Types::LaunchPermissionConfiguration
+
+    LaunchTemplateConfiguration.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: LaunchTemplateId, required: true, location_name: "launchTemplateId"))
+    LaunchTemplateConfiguration.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    LaunchTemplateConfiguration.add_member(:set_default_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "setDefaultVersion"))
+    LaunchTemplateConfiguration.struct_class = Types::LaunchTemplateConfiguration
+
+    LaunchTemplateConfigurationList.member = Shapes::ShapeRef.new(shape: LaunchTemplateConfiguration)
 
     LicenseConfigurationArnList.member = Shapes::ShapeRef.new(shape: LicenseConfigurationArn)
 
@@ -1129,7 +1147,7 @@ module Aws::Imagebuilder
     UpdateInfrastructureConfigurationRequest.add_member(:infrastructure_configuration_arn, Shapes::ShapeRef.new(shape: InfrastructureConfigurationArn, required: true, location_name: "infrastructureConfigurationArn"))
     UpdateInfrastructureConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
     UpdateInfrastructureConfigurationRequest.add_member(:instance_types, Shapes::ShapeRef.new(shape: InstanceTypeList, location_name: "instanceTypes"))
-    UpdateInfrastructureConfigurationRequest.add_member(:instance_profile_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "instanceProfileName"))
+    UpdateInfrastructureConfigurationRequest.add_member(:instance_profile_name, Shapes::ShapeRef.new(shape: InstanceProfileNameType, required: true, location_name: "instanceProfileName"))
     UpdateInfrastructureConfigurationRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "securityGroupIds"))
     UpdateInfrastructureConfigurationRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "subnetId"))
     UpdateInfrastructureConfigurationRequest.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))

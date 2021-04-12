@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2021-04-09)
+------------------
+
+* Feature - CreateProtection now throws InvalidParameterException instead of InternalErrorException when system tags (tag with keys prefixed with "aws:") are passed in.
+
 1.36.0 (2021-03-10)
 ------------------
 

@@ -1963,12 +1963,12 @@ module Aws::Redshift
     # addition to creating the HSM certificate, you must create an Amazon
     # Redshift HSM configuration that provides a cluster the information
     # needed to store and use encryption keys in the HSM. For more
-    # information, go to [Hardware Security Modules][1] in the Amazon
-    # Redshift Cluster Management Guide.
+    # information, go to [Hardware Security Modules][1] in the *Amazon
+    # Redshift Cluster Management Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html#working-with-HSM
     #
     # @option params [required, String] :hsm_client_certificate_identifier
     #   The identifier to be assigned to the new HSM client certificate that
@@ -9157,6 +9157,11 @@ module Aws::Redshift
     # @option params [required, String] :new_table_name
     #   The name of the table to create as a result of the current request.
     #
+    # @option params [Boolean] :enable_case_sensitive_identifier
+    #   Indicates whether name identifiers for database, schema, and table are
+    #   case sensitive. If `true`, the names are case sensitive. If `false`
+    #   (default), the names are not case sensitive.
+    #
     # @return [Types::RestoreTableFromClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreTableFromClusterSnapshotResult#table_restore_status #table_restore_status} => Types::TableRestoreStatus
@@ -9172,6 +9177,7 @@ module Aws::Redshift
     #     target_database_name: "String",
     #     target_schema_name: "String",
     #     new_table_name: "String", # required
+    #     enable_case_sensitive_identifier: false,
     #   })
     #
     # @example Response structure
@@ -9708,7 +9714,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

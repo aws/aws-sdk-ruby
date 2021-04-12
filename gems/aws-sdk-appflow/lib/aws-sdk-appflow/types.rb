@@ -1455,6 +1455,16 @@ module Aws::Appflow
     #                 domain_name: "DomainName", # required
     #                 object_type_name: "ObjectTypeName",
     #               },
+    #               zendesk: {
+    #                 object: "Object", # required
+    #                 id_field_names: ["Name"],
+    #                 error_handling_config: {
+    #                   fail_on_first_destination_error: false,
+    #                   bucket_prefix: "BucketPrefix",
+    #                   bucket_name: "BucketName",
+    #                 },
+    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
+    #               },
     #             },
     #           },
     #         ],
@@ -2143,6 +2153,16 @@ module Aws::Appflow
     #           domain_name: "DomainName", # required
     #           object_type_name: "ObjectTypeName",
     #         },
+    #         zendesk: {
+    #           object: "Object", # required
+    #           id_field_names: ["Name"],
+    #           error_handling_config: {
+    #             fail_on_first_destination_error: false,
+    #             bucket_prefix: "BucketPrefix",
+    #             bucket_name: "BucketName",
+    #           },
+    #           write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
+    #         },
     #       }
     #
     # @!attribute [rw] redshift
@@ -2181,6 +2201,9 @@ module Aws::Appflow
     #   The properties required to query Amazon Connect Customer Profiles.
     #   @return [Types::CustomerProfilesDestinationProperties]
     #
+    # @!attribute [rw] zendesk
+    #   @return [Types::ZendeskDestinationProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DestinationConnectorProperties AWS API Documentation
     #
     class DestinationConnectorProperties < Struct.new(
@@ -2192,7 +2215,8 @@ module Aws::Appflow
       :lookout_metrics,
       :upsolver,
       :honeycode,
-      :customer_profiles)
+      :customer_profiles,
+      :zendesk)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2327,6 +2351,16 @@ module Aws::Appflow
     #           customer_profiles: {
     #             domain_name: "DomainName", # required
     #             object_type_name: "ObjectTypeName",
+    #           },
+    #           zendesk: {
+    #             object: "Object", # required
+    #             id_field_names: ["Name"],
+    #             error_handling_config: {
+    #               fail_on_first_destination_error: false,
+    #               bucket_prefix: "BucketPrefix",
+    #               bucket_name: "BucketName",
+    #             },
+    #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
     #           },
     #         },
     #       }
@@ -5194,6 +5228,16 @@ module Aws::Appflow
     #                 domain_name: "DomainName", # required
     #                 object_type_name: "ObjectTypeName",
     #               },
+    #               zendesk: {
+    #                 object: "Object", # required
+    #                 id_field_names: ["Name"],
+    #                 error_handling_config: {
+    #                   fail_on_first_destination_error: false,
+    #                   bucket_prefix: "BucketPrefix",
+    #                   bucket_name: "BucketName",
+    #                 },
+    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
+    #               },
     #             },
     #           },
     #         ],
@@ -5523,6 +5567,53 @@ module Aws::Appflow
     #
     class ZendeskConnectorProfileProperties < Struct.new(
       :instance_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ZendeskDestinationProperties
+    #   data as a hash:
+    #
+    #       {
+    #         object: "Object", # required
+    #         id_field_names: ["Name"],
+    #         error_handling_config: {
+    #           fail_on_first_destination_error: false,
+    #           bucket_prefix: "BucketPrefix",
+    #           bucket_name: "BucketName",
+    #         },
+    #         write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
+    #       }
+    #
+    # @!attribute [rw] object
+    #   @return [String]
+    #
+    # @!attribute [rw] id_field_names
+    #   A list of field names that can be used as an ID field when
+    #   performing a write operation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] error_handling_config
+    #   The settings that determine how Amazon AppFlow handles an error when
+    #   placing data in the destination. For example, this setting would
+    #   determine if the flow should fail after one insertion error, or
+    #   continue and attempt to insert every record regardless of the
+    #   initial failure. `ErrorHandlingConfig` is a part of the destination
+    #   connector details.
+    #   @return [Types::ErrorHandlingConfig]
+    #
+    # @!attribute [rw] write_operation_type
+    #   The possible write operations in the destination connector. When
+    #   this value is not provided, this defaults to the `INSERT` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ZendeskDestinationProperties AWS API Documentation
+    #
+    class ZendeskDestinationProperties < Struct.new(
+      :object,
+      :id_field_names,
+      :error_handling_config,
+      :write_operation_type)
       SENSITIVE = []
       include Aws::Structure
     end

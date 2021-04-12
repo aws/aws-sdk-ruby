@@ -192,6 +192,18 @@ module Aws::AutoScaling
       data[:capacity_rebalance]
     end
 
+    # The warm pool for the group.
+    # @return [Types::WarmPoolConfiguration]
+    def warm_pool_configuration
+      data[:warm_pool_configuration]
+    end
+
+    # The current size of the warm pool.
+    # @return [Integer]
+    def warm_pool_size
+      data[:warm_pool_size]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -415,8 +427,8 @@ module Aws::AutoScaling
     # @option options [Boolean] :force_delete
     #   Specifies that the group is to be deleted along with all instances
     #   associated with the group, without waiting for all instances to be
-    #   terminated. This parameter also deletes any lifecycle actions
-    #   associated with the group.
+    #   terminated. This parameter also deletes any outstanding lifecycle
+    #   actions associated with the group.
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -486,6 +498,20 @@ module Aws::AutoScaling
     #
     #   * `GroupTotalCapacity`
     #
+    #   * `WarmPoolDesiredCapacity`
+    #
+    #   * `WarmPoolWarmedCapacity`
+    #
+    #   * `WarmPoolPendingCapacity`
+    #
+    #   * `WarmPoolTerminatingCapacity`
+    #
+    #   * `WarmPoolTotalCapacity`
+    #
+    #   * `GroupAndWarmPoolDesiredCapacity`
+    #
+    #   * `GroupAndWarmPoolTotalCapacity`
+    #
     #   If you omit this parameter, all metrics are disabled.
     # @return [EmptyStructure]
     def disable_metrics_collection(options = {})
@@ -533,6 +559,22 @@ module Aws::AutoScaling
     #   * `GroupTerminatingCapacity`
     #
     #   * `GroupTotalCapacity`
+    #
+    #   The warm pools feature supports the following additional metrics:
+    #
+    #   * `WarmPoolDesiredCapacity`
+    #
+    #   * `WarmPoolWarmedCapacity`
+    #
+    #   * `WarmPoolPendingCapacity`
+    #
+    #   * `WarmPoolTerminatingCapacity`
+    #
+    #   * `WarmPoolTotalCapacity`
+    #
+    #   * `GroupAndWarmPoolDesiredCapacity`
+    #
+    #   * `GroupAndWarmPoolTotalCapacity`
     #
     #   If you omit this parameter, all metrics are enabled.
     # @option options [required, String] :granularity
