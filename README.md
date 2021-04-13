@@ -1,6 +1,8 @@
 # AWS SDK for Ruby - Version 3
 
-[![Gem Version](https://badge.fury.io/rb/aws-sdk-core.svg)](https://badge.fury.io/rb/aws-sdk-core) [![Build Status](https://travis-ci.org/aws/aws-sdk-ruby.svg?branch=version-3)](https://travis-ci.org/aws/aws-sdk-ruby) [![Github forks](https://img.shields.io/github/forks/aws/aws-sdk-ruby.svg)](https://github.com/aws/aws-sdk-ruby/network)
+[![Gem Version](https://badge.fury.io/rb/aws-sdk-core.svg)](https://badge.fury.io/rb/aws-sdk-core) 
+[![Build Status](https://github.com/aws/aws-sdk-ruby/workflows/CI/badge.svg)](https://github.com/aws/aws-sdk-ruby/actions)
+[![Github forks](https://img.shields.io/github/forks/aws/aws-sdk-ruby.svg)](https://github.com/aws/aws-sdk-ruby/network)
 [![Github stars](https://img.shields.io/github/stars/aws/aws-sdk-ruby.svg)](https://github.com/aws/aws-sdk-ruby/stargazers)
 [![Gitter](https://badges.gitter.im/aws/aws-sdk-ruby.svg)](https://gitter.im/aws/aws-sdk-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
