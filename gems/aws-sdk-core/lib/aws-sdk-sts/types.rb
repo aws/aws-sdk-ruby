@@ -33,6 +33,7 @@ module Aws::STS
     #         external_id: "externalIdType",
     #         serial_number: "serialNumberType",
     #         token_code: "tokenCodeType",
+    #         source_identity: "sourceIdentityType",
     #       }
     #
     # @!attribute [rw] role_arn
@@ -63,14 +64,14 @@ module Aws::STS
     #   in the same account as the role.
     #
     #   This parameter is optional. You can provide up to 10 managed policy
-    #   ARNs. However, the plain text that you use for both inline and
+    #   ARNs. However, the plaintext that you use for both inline and
     #   managed session policies can't exceed 2,048 characters. For more
     #   information about ARNs, see [Amazon Resource Names (ARNs) and AWS
     #   Service Namespaces][1] in the AWS General Reference.
     #
     #   <note markdown="1"> An AWS conversion compresses the passed session policies and session
     #   tags into a packed binary format that has a separate limit. Your
-    #   request can fail for this limit even if your plain text meets the
+    #   request can fail for this limit even if your plaintext meets the
     #   other requirements. The `PackedPolicySize` response element
     #   indicates by percentage how close the policies and tags for your
     #   request are to the upper size limit.
@@ -107,7 +108,7 @@ module Aws::STS
     #   the role that is being assumed. For more information, see [Session
     #   Policies][1] in the *IAM User Guide*.
     #
-    #   The plain text that you use for both inline and managed session
+    #   The plaintext that you use for both inline and managed session
     #   policies can't exceed 2,048 characters. The JSON policy characters
     #   can be any ASCII character from the space character to the end of
     #   the valid character list (\\u0020 through \\u00FF). It can also
@@ -116,7 +117,7 @@ module Aws::STS
     #
     #   <note markdown="1"> An AWS conversion compresses the passed session policies and session
     #   tags into a packed binary format that has a separate limit. Your
-    #   request can fail for this limit even if your plain text meets the
+    #   request can fail for this limit even if your plaintext meets the
     #   other requirements. The `PackedPolicySize` response element
     #   indicates by percentage how close the policies and tags for your
     #   request are to the upper size limit.
@@ -129,15 +130,17 @@ module Aws::STS
     #   @return [String]
     #
     # @!attribute [rw] duration_seconds
-    #   The duration, in seconds, of the role session. The value can range
-    #   from 900 seconds (15 minutes) up to the maximum session duration
-    #   setting for the role. This setting can have a value from 1 hour to
-    #   12 hours. If you specify a value higher than this setting, the
-    #   operation fails. For example, if you specify a session duration of
-    #   12 hours, but your administrator set the maximum session duration to
-    #   6 hours, your operation fails. To learn how to view the maximum
-    #   value for your role, see [View the Maximum Session Duration Setting
-    #   for a Role][1] in the *IAM User Guide*.
+    #   The duration, in seconds, of the role session. The value specified
+    #   can can range from 900 seconds (15 minutes) up to the maximum
+    #   session duration that is set for the role. The maximum session
+    #   duration setting can have a value from 1 hour to 12 hours. If you
+    #   specify a value higher than this setting or the administrator
+    #   setting (whichever is lower), the operation fails. For example, if
+    #   you specify a session duration of 12 hours, but your administrator
+    #   set the maximum session duration to 6 hours, your operation fails.
+    #   To learn how to view the maximum value for your role, see [View the
+    #   Maximum Session Duration Setting for a Role][1] in the *IAM User
+    #   Guide*.
     #
     #   By default, the value is set to `3600` seconds.
     #
@@ -164,13 +167,13 @@ module Aws::STS
     #   User Guide*.
     #
     #   This parameter is optional. You can pass up to 50 session tags. The
-    #   plain text session tag keys can’t exceed 128 characters, and the
+    #   plaintext session tag keys can’t exceed 128 characters, and the
     #   values can’t exceed 256 characters. For these and additional limits,
     #   see [IAM and STS Character Limits][2] in the *IAM User Guide*.
     #
     #   <note markdown="1"> An AWS conversion compresses the passed session policies and session
     #   tags into a packed binary format that has a separate limit. Your
-    #   request can fail for this limit even if your plain text meets the
+    #   request can fail for this limit even if your plaintext meets the
     #   other requirements. The `PackedPolicySize` response element
     #   indicates by percentage how close the policies and tags for your
     #   request are to the upper size limit.
@@ -262,13 +265,38 @@ module Aws::STS
     #
     # @!attribute [rw] token_code
     #   The value provided by the MFA device, if the trust policy of the
-    #   role being assumed requires MFA (that is, if the policy includes a
-    #   condition that tests for MFA). If the role being assumed requires
-    #   MFA and if the `TokenCode` value is missing or expired, the
+    #   role being assumed requires MFA. (In other words, if the policy
+    #   includes a condition that tests for MFA). If the role being assumed
+    #   requires MFA and if the `TokenCode` value is missing or expired, the
     #   `AssumeRole` call returns an "access denied" error.
     #
     #   The format for this parameter, as described by its regex pattern, is
     #   a sequence of six numeric digits.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_identity
+    #   The source identity specified by the principal that is calling the
+    #   `AssumeRole` operation.
+    #
+    #   You can require users to specify a source identity when they assume
+    #   a role. You do this by using the `sts:SourceIdentity` condition key
+    #   in a role trust policy. You can use source identity information in
+    #   AWS CloudTrail logs to determine who took actions with a role. You
+    #   can use the `aws:SourceIdentity` condition key to further control
+    #   access to AWS resources based on the value of source identity. For
+    #   more information about using source identity, see [Monitor and
+    #   control actions taken with assumed roles][1] in the *IAM User
+    #   Guide*.
+    #
+    #   The regex used to validate this parameter is a string of characters
+    #   consisting of upper- and lower-case alphanumeric characters with no
+    #   spaces. You can also include underscores or any of the following
+    #   characters: =,.@-. You cannot use a value that begins with the text
+    #   `aws:`. This prefix is reserved for AWS internal use.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleRequest AWS API Documentation
@@ -283,7 +311,8 @@ module Aws::STS
       :transitive_tag_keys,
       :external_id,
       :serial_number,
-      :token_code)
+      :token_code,
+      :source_identity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -318,12 +347,37 @@ module Aws::STS
     #   means the policies and tags exceeded the allowed space.
     #   @return [Integer]
     #
+    # @!attribute [rw] source_identity
+    #   The source identity specified by the principal that is calling the
+    #   `AssumeRole` operation.
+    #
+    #   You can require users to specify a source identity when they assume
+    #   a role. You do this by using the `sts:SourceIdentity` condition key
+    #   in a role trust policy. You can use source identity information in
+    #   AWS CloudTrail logs to determine who took actions with a role. You
+    #   can use the `aws:SourceIdentity` condition key to further control
+    #   access to AWS resources based on the value of source identity. For
+    #   more information about using source identity, see [Monitor and
+    #   control actions taken with assumed roles][1] in the *IAM User
+    #   Guide*.
+    #
+    #   The regex used to validate this parameter is a string of characters
+    #   consisting of upper- and lower-case alphanumeric characters with no
+    #   spaces. You can also include underscores or any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleResponse AWS API Documentation
     #
     class AssumeRoleResponse < Struct.new(
       :credentials,
       :assumed_role_user,
-      :packed_policy_size)
+      :packed_policy_size,
+      :source_identity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -355,8 +409,7 @@ module Aws::STS
     #   @return [String]
     #
     # @!attribute [rw] saml_assertion
-    #   The base-64 encoded SAML authentication response provided by the
-    #   IdP.
+    #   The base64 encoded SAML authentication response provided by the IdP.
     #
     #   For more information, see [Configuring a Relying Party and Adding
     #   Claims][1] in the *IAM User Guide*.
@@ -372,14 +425,14 @@ module Aws::STS
     #   in the same account as the role.
     #
     #   This parameter is optional. You can provide up to 10 managed policy
-    #   ARNs. However, the plain text that you use for both inline and
+    #   ARNs. However, the plaintext that you use for both inline and
     #   managed session policies can't exceed 2,048 characters. For more
     #   information about ARNs, see [Amazon Resource Names (ARNs) and AWS
     #   Service Namespaces][1] in the AWS General Reference.
     #
     #   <note markdown="1"> An AWS conversion compresses the passed session policies and session
     #   tags into a packed binary format that has a separate limit. Your
-    #   request can fail for this limit even if your plain text meets the
+    #   request can fail for this limit even if your plaintext meets the
     #   other requirements. The `PackedPolicySize` response element
     #   indicates by percentage how close the policies and tags for your
     #   request are to the upper size limit.
@@ -416,7 +469,7 @@ module Aws::STS
     #   the role that is being assumed. For more information, see [Session
     #   Policies][1] in the *IAM User Guide*.
     #
-    #   The plain text that you use for both inline and managed session
+    #   The plaintext that you use for both inline and managed session
     #   policies can't exceed 2,048 characters. The JSON policy characters
     #   can be any ASCII character from the space character to the end of
     #   the valid character list (\\u0020 through \\u00FF). It can also
@@ -425,7 +478,7 @@ module Aws::STS
     #
     #   <note markdown="1"> An AWS conversion compresses the passed session policies and session
     #   tags into a packed binary format that has a separate limit. Your
-    #   request can fail for this limit even if your plain text meets the
+    #   request can fail for this limit even if your plaintext meets the
     #   other requirements. The `PackedPolicySize` response element
     #   indicates by percentage how close the policies and tags for your
     #   request are to the upper size limit.
@@ -537,16 +590,50 @@ module Aws::STS
     #   @return [String]
     #
     # @!attribute [rw] name_qualifier
-    #   A hash value based on the concatenation of the `Issuer` response
-    #   value, the AWS account ID, and the friendly name (the last part of
-    #   the ARN) of the SAML provider in IAM. The combination of
-    #   `NameQualifier` and `Subject` can be used to uniquely identify a
-    #   federated user.
+    #   A hash value based on the concatenation of the following:
+    #
+    #   * The `Issuer` response value.
+    #
+    #   * The AWS account ID.
+    #
+    #   * The friendly name (the last part of the ARN) of the SAML provider
+    #     in IAM.
+    #
+    #   The combination of `NameQualifier` and `Subject` can be used to
+    #   uniquely identify a federated user.
     #
     #   The following pseudocode shows how the hash value is calculated:
     #
     #   `BASE64 ( SHA1 ( "https://example.com/saml" + "123456789012" +
     #   "/MySAMLIdP" ) )`
+    #   @return [String]
+    #
+    # @!attribute [rw] source_identity
+    #   The value in the `SourceIdentity` attribute in the SAML assertion.
+    #
+    #   You can require users to set a source identity value when they
+    #   assume a role. You do this by using the `sts:SourceIdentity`
+    #   condition key in a role trust policy. That way, actions that are
+    #   taken with the role are associated with that user. After the source
+    #   identity is set, the value cannot be changed. It is present in the
+    #   request for all actions that are taken by the role and persists
+    #   across [chained role][1] sessions. You can configure your SAML
+    #   identity provider to use an attribute associated with your users,
+    #   like user name or email, as the source identity when calling
+    #   `AssumeRoleWithSAML`. You do this by adding an attribute to the SAML
+    #   assertion. For more information about using source identity, see
+    #   [Monitor and control actions taken with assumed roles][2] in the
+    #   *IAM User Guide*.
+    #
+    #   The regex used to validate this parameter is a string of characters
+    #   consisting of upper- and lower-case alphanumeric characters with no
+    #   spaces. You can also include underscores or any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts#iam-term-role-chaining
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithSAMLResponse AWS API Documentation
@@ -559,7 +646,8 @@ module Aws::STS
       :subject_type,
       :issuer,
       :audience,
-      :name_qualifier)
+      :name_qualifier,
+      :source_identity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -626,14 +714,14 @@ module Aws::STS
     #   in the same account as the role.
     #
     #   This parameter is optional. You can provide up to 10 managed policy
-    #   ARNs. However, the plain text that you use for both inline and
+    #   ARNs. However, the plaintext that you use for both inline and
     #   managed session policies can't exceed 2,048 characters. For more
     #   information about ARNs, see [Amazon Resource Names (ARNs) and AWS
     #   Service Namespaces][1] in the AWS General Reference.
     #
     #   <note markdown="1"> An AWS conversion compresses the passed session policies and session
     #   tags into a packed binary format that has a separate limit. Your
-    #   request can fail for this limit even if your plain text meets the
+    #   request can fail for this limit even if your plaintext meets the
     #   other requirements. The `PackedPolicySize` response element
     #   indicates by percentage how close the policies and tags for your
     #   request are to the upper size limit.
@@ -670,7 +758,7 @@ module Aws::STS
     #   the role that is being assumed. For more information, see [Session
     #   Policies][1] in the *IAM User Guide*.
     #
-    #   The plain text that you use for both inline and managed session
+    #   The plaintext that you use for both inline and managed session
     #   policies can't exceed 2,048 characters. The JSON policy characters
     #   can be any ASCII character from the space character to the end of
     #   the valid character list (\\u0020 through \\u00FF). It can also
@@ -679,7 +767,7 @@ module Aws::STS
     #
     #   <note markdown="1"> An AWS conversion compresses the passed session policies and session
     #   tags into a packed binary format that has a separate limit. Your
-    #   request can fail for this limit even if your plain text meets the
+    #   request can fail for this limit even if your plaintext meets the
     #   other requirements. The `PackedPolicySize` response element
     #   indicates by percentage how close the policies and tags for your
     #   request are to the upper size limit.
@@ -789,6 +877,38 @@ module Aws::STS
     #   application that requested the web identity token.
     #   @return [String]
     #
+    # @!attribute [rw] source_identity
+    #   The value of the source identity that is returned in the JSON web
+    #   token (JWT) from the identity provider.
+    #
+    #   You can require users to set a source identity value when they
+    #   assume a role. You do this by using the `sts:SourceIdentity`
+    #   condition key in a role trust policy. That way, actions that are
+    #   taken with the role are associated with that user. After the source
+    #   identity is set, the value cannot be changed. It is present in the
+    #   request for all actions that are taken by the role and persists
+    #   across [chained role][1] sessions. You can configure your identity
+    #   provider to use an attribute associated with your users, like user
+    #   name or email, as the source identity when calling
+    #   `AssumeRoleWithWebIdentity`. You do this by adding a claim to the
+    #   JSON web token. To learn more about OIDC tokens and claims, see
+    #   [Using Tokens with User Pools][2] in the *Amazon Cognito Developer
+    #   Guide*. For more information about using source identity, see
+    #   [Monitor and control actions taken with assumed roles][3] in the
+    #   *IAM User Guide*.
+    #
+    #   The regex used to validate this parameter is a string of characters
+    #   consisting of upper- and lower-case alphanumeric characters with no
+    #   spaces. You can also include underscores or any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts#iam-term-role-chaining
+    #   [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-with-identity-providers.html
+    #   [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithWebIdentityResponse AWS API Documentation
     #
     class AssumeRoleWithWebIdentityResponse < Struct.new(
@@ -797,7 +917,8 @@ module Aws::STS
       :assumed_role_user,
       :packed_policy_size,
       :provider,
-      :audience)
+      :audience,
+      :source_identity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1074,7 +1195,7 @@ module Aws::STS
     #   are granted in addition to the permissions that are granted by the
     #   session policies.
     #
-    #   The plain text that you use for both inline and managed session
+    #   The plaintext that you use for both inline and managed session
     #   policies can't exceed 2,048 characters. The JSON policy characters
     #   can be any ASCII character from the space character to the end of
     #   the valid character list (\\u0020 through \\u00FF). It can also
@@ -1083,7 +1204,7 @@ module Aws::STS
     #
     #   <note markdown="1"> An AWS conversion compresses the passed session policies and session
     #   tags into a packed binary format that has a separate limit. Your
-    #   request can fail for this limit even if your plain text meets the
+    #   request can fail for this limit even if your plaintext meets the
     #   other requirements. The `PackedPolicySize` response element
     #   indicates by percentage how close the policies and tags for your
     #   request are to the upper size limit.
@@ -1104,7 +1225,7 @@ module Aws::STS
     #   You must pass an inline or managed [session policy][1] to this
     #   operation. You can pass a single JSON policy document to use as an
     #   inline session policy. You can also specify up to 10 managed
-    #   policies to use as managed session policies. The plain text that you
+    #   policies to use as managed session policies. The plaintext that you
     #   use for both inline and managed session policies can't exceed 2,048
     #   characters. You can provide up to 10 managed policy ARNs. For more
     #   information about ARNs, see [Amazon Resource Names (ARNs) and AWS
@@ -1131,7 +1252,7 @@ module Aws::STS
     #
     #   <note markdown="1"> An AWS conversion compresses the passed session policies and session
     #   tags into a packed binary format that has a separate limit. Your
-    #   request can fail for this limit even if your plain text meets the
+    #   request can fail for this limit even if your plaintext meets the
     #   other requirements. The `PackedPolicySize` response element
     #   indicates by percentage how close the policies and tags for your
     #   request are to the upper size limit.
@@ -1160,13 +1281,13 @@ module Aws::STS
     #   [Passing Session Tags in STS][1] in the *IAM User Guide*.
     #
     #   This parameter is optional. You can pass up to 50 session tags. The
-    #   plain text session tag keys can’t exceed 128 characters and the
+    #   plaintext session tag keys can’t exceed 128 characters and the
     #   values can’t exceed 256 characters. For these and additional limits,
     #   see [IAM and STS Character Limits][2] in the *IAM User Guide*.
     #
     #   <note markdown="1"> An AWS conversion compresses the passed session policies and session
     #   tags into a packed binary format that has a separate limit. Your
-    #   request can fail for this limit even if your plain text meets the
+    #   request can fail for this limit even if your plaintext meets the
     #   other requirements. The `PackedPolicySize` response element
     #   indicates by percentage how close the policies and tags for your
     #   request are to the upper size limit.

@@ -1981,9 +1981,8 @@ module Aws::RDS
     #   parameter.
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region. To see the time blocks available,
-    #   see [ Adjusting the Preferred DB Cluster Maintenance Window][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   block of time for each AWS Region. To view the time blocks available,
+    #   see [ Backup window][1] in the *Amazon Aurora User Guide.*
     #
     #   Constraints:
     #
@@ -1997,7 +1996,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow
     #
     # @option params [String] :preferred_maintenance_window
     #   The weekly time range during which system maintenance can occur, in
@@ -3200,18 +3199,14 @@ module Aws::RDS
     # @option params [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled, using the `BackupRetentionPeriod`
-    #   parameter. For more information, see [The Backup Window][1] in the
-    #   *Amazon RDS User Guide*.
+    #   parameter. The default is a 30-minute window selected at random from
+    #   an 8-hour block of time for each AWS Region. For more information, see
+    #   [Backup window][1] in the *Amazon RDS User Guide*.
     #
     #   **Amazon Aurora**
     #
     #   Not applicable. The daily time range for creating automated backups is
     #   managed by the DB cluster.
-    #
-    #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region. To see the time blocks available,
-    #   see [ Adjusting the Preferred DB Instance Maintenance Window][2] in
-    #   the *Amazon RDS User Guide*.
     #
     #   Constraints:
     #
@@ -3226,7 +3221,6 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow
     #
     # @option params [Integer] :port
     #   The port number on which the database accepts connections.
@@ -5206,8 +5200,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * If a `SourceIds` value is supplied, `SourceType` must also be
-    #     provided.
+    #   * If `SourceIds` are supplied, `SourceType` must also be provided.
     #
     #   * If the source type is a DB instance, a `DBInstanceIdentifier` value
     #     must be supplied.
@@ -11516,7 +11509,7 @@ module Aws::RDS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.managed-failover
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html#aurora-global-database-disaster-recovery.managed-failover
     #
     # @option params [required, String] :global_cluster_identifier
     #   Identifier of the Aurora global database (GlobalCluster) that should
@@ -12029,9 +12022,8 @@ module Aws::RDS
     #   parameter.
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region. To see the time blocks available,
-    #   see [ Adjusting the Preferred DB Cluster Maintenance Window][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   block of time for each AWS Region. To view the time blocks available,
+    #   see [ Backup window][1] in the *Amazon Aurora User Guide.*
     #
     #   Constraints:
     #
@@ -12045,7 +12037,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow
     #
     # @option params [String] :preferred_maintenance_window
     #   The weekly time range during which system maintenance can occur, in
@@ -12842,10 +12834,14 @@ module Aws::RDS
     #   to a positive number enables backups. Setting this parameter to 0
     #   disables automated backups.
     #
-    #   Changing this parameter can result in an outage if you change from 0
-    #   to a non-zero value or from a non-zero value to 0. These changes are
-    #   applied during the next maintenance window unless the
-    #   `ApplyImmediately` parameter is enabled for this request. If you
+    #   <note markdown="1"> Enabling and disabling backups can result in a brief I/O suspension
+    #   that lasts from a few seconds to a few minutes, depending on the size
+    #   and class of your DB instance.
+    #
+    #    </note>
+    #
+    #   These changes are applied during the next maintenance window unless
+    #   the `ApplyImmediately` parameter is enabled for this request. If you
     #   change the parameter from one non-zero value to another non-zero
     #   value, the change is asynchronously applied as soon as possible.
     #
@@ -12873,7 +12869,9 @@ module Aws::RDS
     #   automated backups are enabled, as determined by the
     #   `BackupRetentionPeriod` parameter. Changing this parameter doesn't
     #   result in an outage and the change is asynchronously applied as soon
-    #   as possible.
+    #   as possible. The default is a 30-minute window selected at random from
+    #   an 8-hour block of time for each AWS Region. For more information, see
+    #   [Backup window][1] in the *Amazon RDS User Guide.*
     #
     #   **Amazon Aurora**
     #
@@ -12891,6 +12889,10 @@ module Aws::RDS
     #
     #   * Must be at least 30 minutes
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow
+    #
     # @option params [String] :preferred_maintenance_window
     #   The weekly time range (in UTC) during which system maintenance can
     #   occur, which might result in an outage. Changing this parameter
@@ -12902,6 +12904,9 @@ module Aws::RDS
     #   current time, there must be at least 30 minutes between the current
     #   time and end of the window to ensure pending changes are applied.
     #
+    #   For more information, see [Amazon RDS Maintenance Window][1] in the
+    #   *Amazon RDS User Guide.*
+    #
     #   Default: Uses existing setting
     #
     #   Format: ddd:hh24:mi-ddd:hh24:mi
@@ -12909,6 +12914,10 @@ module Aws::RDS
     #   Valid Days: Mon \| Tue \| Wed \| Thu \| Fri \| Sat \| Sun
     #
     #   Constraints: Must be at least 30 minutes
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#Concepts.DBMaintenance
     #
     # @option params [Boolean] :multi_az
     #   A value that indicates whether the DB instance is a Multi-AZ
@@ -15832,9 +15841,8 @@ module Aws::RDS
     #   parameter.
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region. To see the time blocks available,
-    #   see [ Adjusting the Preferred Maintenance Window][1] in the *Amazon
-    #   Aurora User Guide.*
+    #   block of time for each AWS Region. To view the time blocks available,
+    #   see [ Backup window][1] in the *Amazon Aurora User Guide.*
     #
     #   Constraints:
     #
@@ -15848,7 +15856,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow
     #
     # @option params [String] :preferred_maintenance_window
     #   The weekly time range during which system maintenance can occur, in
@@ -17651,8 +17659,8 @@ module Aws::RDS
     #
     # @option params [String] :preferred_backup_window
     #   The time range each day during which automated backups are created if
-    #   automated backups are enabled. For more information, see [The Backup
-    #   Window][1] in the *Amazon RDS User Guide.*
+    #   automated backups are enabled. For more information, see [Backup
+    #   window][1] in the *Amazon RDS User Guide.*
     #
     #   Constraints:
     #
@@ -18720,7 +18728,7 @@ module Aws::RDS
     end
 
     # Revokes ingress from a DBSecurityGroup for previously authorized IP
-    # ranges or EC2 or VPC Security Groups. Required parameters for this API
+    # ranges or EC2 or VPC security groups. Required parameters for this API
     # are one of CIDRIP, EC2SecurityGroupId for VPC, or
     # (EC2SecurityGroupOwnerId and either EC2SecurityGroupName or
     # EC2SecurityGroupId).
@@ -19805,7 +19813,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.117.0'
+      context[:gem_version] = '1.118.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

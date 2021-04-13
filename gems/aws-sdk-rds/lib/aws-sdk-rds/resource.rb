@@ -213,9 +213,8 @@ module Aws::RDS
     #   parameter.
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region. To see the time blocks available,
-    #   see [ Adjusting the Preferred DB Cluster Maintenance Window][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   block of time for each AWS Region. To view the time blocks available,
+    #   see [ Backup window][1] in the *Amazon Aurora User Guide.*
     #
     #   Constraints:
     #
@@ -229,7 +228,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow
     # @option options [String] :preferred_maintenance_window
     #   The weekly time range during which system maintenance can occur, in
     #   Universal Coordinated Time (UTC).
@@ -1023,18 +1022,14 @@ module Aws::RDS
     # @option options [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled, using the `BackupRetentionPeriod`
-    #   parameter. For more information, see [The Backup Window][1] in the
-    #   *Amazon RDS User Guide*.
+    #   parameter. The default is a 30-minute window selected at random from
+    #   an 8-hour block of time for each AWS Region. For more information, see
+    #   [Backup window][1] in the *Amazon RDS User Guide*.
     #
     #   **Amazon Aurora**
     #
     #   Not applicable. The daily time range for creating automated backups is
     #   managed by the DB cluster.
-    #
-    #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region. To see the time blocks available,
-    #   see [ Adjusting the Preferred DB Instance Maintenance Window][2] in
-    #   the *Amazon RDS User Guide*.
     #
     #   Constraints:
     #
@@ -1049,7 +1044,6 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow
     # @option options [Integer] :port
     #   The port number on which the database accepts connections.
     #
@@ -1649,8 +1643,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * If a `SourceIds` value is supplied, `SourceType` must also be
-    #     provided.
+    #   * If `SourceIds` are supplied, `SourceType` must also be provided.
     #
     #   * If the source type is a DB instance, a `DBInstanceIdentifier` value
     #     must be supplied.

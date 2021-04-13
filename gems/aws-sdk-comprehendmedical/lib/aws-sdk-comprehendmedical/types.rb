@@ -627,6 +627,16 @@ module Aws::ComprehendMedical
     #   by InferICD10CM are `DIAGNOSIS`, `SIGN`, `SYMPTOM`, and `NEGATION`.
     #   @return [Array<Types::ICD10CMTrait>]
     #
+    # @!attribute [rw] category
+    #   The category of attribute. Can be either of `DX_NAME` or
+    #   `TIME_EXPRESSION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] relationship_type
+    #   The type of relationship between the entity and attribute. Type for
+    #   the relationship can be either of `OVERLAP` or `SYSTEM_ORGAN_SITE`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/ICD10CMAttribute AWS API Documentation
     #
     class ICD10CMAttribute < Struct.new(
@@ -637,7 +647,9 @@ module Aws::ComprehendMedical
       :begin_offset,
       :end_offset,
       :text,
-      :traits)
+      :traits,
+      :category,
+      :relationship_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -693,7 +705,8 @@ module Aws::ComprehendMedical
     #
     # @!attribute [rw] type
     #   Describes the specific type of entity with category of entities.
-    #   InferICD10CM detects entities of the type `DX_NAME`.
+    #   InferICD10CM detects entities of the type `DX_NAME` and
+    #   `TIME_EXPRESSION`.
     #   @return [String]
     #
     # @!attribute [rw] score
@@ -864,8 +877,7 @@ module Aws::ComprehendMedical
     end
 
     # The input properties for an entities detection job. This includes the
-    # name of the S3 bucket and the path to the files to be analyzed. See
-    # batch-manifest for more information.
+    # name of the S3 bucket and the path to the files to be analyzed.
     #
     # @note When making an API call, you may pass InputDataConfig
     #   data as a hash:

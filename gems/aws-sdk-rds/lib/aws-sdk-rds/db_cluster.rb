@@ -777,9 +777,8 @@ module Aws::RDS
     #   parameter.
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region. To see the time blocks available,
-    #   see [ Adjusting the Preferred DB Cluster Maintenance Window][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   block of time for each AWS Region. To view the time blocks available,
+    #   see [ Backup window][1] in the *Amazon Aurora User Guide.*
     #
     #   Constraints:
     #
@@ -793,7 +792,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow
     # @option options [String] :preferred_maintenance_window
     #   The weekly time range during which system maintenance can occur, in
     #   Universal Coordinated Time (UTC).
@@ -1262,9 +1261,8 @@ module Aws::RDS
     #   parameter.
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region. To see the time blocks available,
-    #   see [ Adjusting the Preferred DB Cluster Maintenance Window][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   block of time for each AWS Region. To view the time blocks available,
+    #   see [ Backup window][1] in the *Amazon Aurora User Guide.*
     #
     #   Constraints:
     #
@@ -1278,7 +1276,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow
     # @option options [String] :preferred_maintenance_window
     #   The weekly time range during which system maintenance can occur, in
     #   Universal Coordinated Time (UTC).

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1.0 (2021-04-13)
+------------------
+
+* Feature - This release adds the SourceIdentity parameter that can be set when assuming a role.
+
 1.0.2 (2021-03-04)
 ------------------
 

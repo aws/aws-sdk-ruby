@@ -4008,7 +4008,7 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] relational_database_name
-    #   The name to use for your new database.
+    #   The name to use for your new Lightsail database resource.
     #
     #   Constraints:
     #
@@ -4177,45 +4177,116 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] master_database_name
-    #   The name of the master database created when the Lightsail database
-    #   resource is created.
+    #   The meaning of this parameter differs according to the database
+    #   engine you use.
+    #
+    #   **MySQL**
+    #
+    #   The name of the database to create when the Lightsail database
+    #   resource is created. If this parameter isn't specified, no database
+    #   is created in the database resource.
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 64 alphanumeric characters.
+    #   * Must contain 1 to 64 letters or numbers.
     #
-    #   * Cannot be a word reserved by the specified database engine
-    #   @return [String]
+    #   * Must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0- 9).
     #
-    # @!attribute [rw] master_username
-    #   The master user name for your new database.
+    #   * Can't be a word reserved by the specified database engine.
+    #
+    #     For more information about reserved words in MySQL, see the
+    #     Keywords and Reserved Words articles for [MySQL 5.6][1], [MySQL
+    #     5.7][2], and [MySQL 8.0][3].
+    #
+    #   **PostgreSQL**
+    #
+    #   The name of the database to create when the Lightsail database
+    #   resource is created. If this parameter isn't specified, a database
+    #   named `postgres` is created in the database resource.
     #
     #   Constraints:
     #
-    #   * Master user name is required.
+    #   * Must contain 1 to 63 letters or numbers.
     #
-    #   * Must contain from 1 to 16 alphanumeric characters.
+    #   * Must begin with a letter. Subsequent characters can be letters,
+    #     underscores, or digits (0- 9).
     #
-    #   * The first character must be a letter.
+    #   * Can't be a word reserved by the specified database engine.
     #
-    #   * Cannot be a reserved word for the database engine you choose.
-    #
-    #     For more information about reserved words in MySQL 5.6 or 5.7, see
-    #     the Keywords and Reserved Words articles for [MySQL 5.6][1] or
-    #     [MySQL 5.7][2] respectively.
+    #     For more information about reserved words in PostgreSQL, see the
+    #     SQL Key Words articles for [PostgreSQL 9.6][4], [PostgreSQL
+    #     10][5], [PostgreSQL 11][6], and [PostgreSQL 12][7].
     #
     #
     #
     #   [1]: https://dev.mysql.com/doc/refman/5.6/en/keywords.html
     #   [2]: https://dev.mysql.com/doc/refman/5.7/en/keywords.html
+    #   [3]: https://dev.mysql.com/doc/refman/8.0/en/keywords.html
+    #   [4]: https://www.postgresql.org/docs/9.6/sql-keywords-appendix.html
+    #   [5]: https://www.postgresql.org/docs/10/sql-keywords-appendix.html
+    #   [6]: https://www.postgresql.org/docs/11/sql-keywords-appendix.html
+    #   [7]: https://www.postgresql.org/docs/12/sql-keywords-appendix.html
+    #   @return [String]
+    #
+    # @!attribute [rw] master_username
+    #   The name for the master user.
+    #
+    #   **MySQL**
+    #
+    #   Constraints:
+    #
+    #   * Required for MySQL.
+    #
+    #   * Must be 1 to 16 letters or numbers. Can contain underscores.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Can't be a reserved word for the chosen database engine.
+    #
+    #     For more information about reserved words in MySQL 5.6 or 5.7, see
+    #     the Keywords and Reserved Words articles for [MySQL 5.6][1],
+    #     [MySQL 5.7][2], or [MySQL 8.0][3].
+    #
+    #   **PostgreSQL**
+    #
+    #   Constraints:
+    #
+    #   * Required for PostgreSQL.
+    #
+    #   * Must be 1 to 63 letters or numbers. Can contain underscores.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Can't be a reserved word for the chosen database engine.
+    #
+    #     For more information about reserved words in MySQL 5.6 or 5.7, see
+    #     the Keywords and Reserved Words articles for [PostgreSQL 9.6][4],
+    #     [PostgreSQL 10][5], [PostgreSQL 11][6], and [PostgreSQL 12][7].
+    #
+    #
+    #
+    #   [1]: https://dev.mysql.com/doc/refman/5.6/en/keywords.html
+    #   [2]: https://dev.mysql.com/doc/refman/5.7/en/keywords.html
+    #   [3]: https://dev.mysql.com/doc/refman/8.0/en/keywords.html
+    #   [4]: https://www.postgresql.org/docs/9.6/sql-keywords-appendix.html
+    #   [5]: https://www.postgresql.org/docs/10/sql-keywords-appendix.html
+    #   [6]: https://www.postgresql.org/docs/11/sql-keywords-appendix.html
+    #   [7]: https://www.postgresql.org/docs/12/sql-keywords-appendix.html
     #   @return [String]
     #
     # @!attribute [rw] master_user_password
-    #   The password for the master user of your new database. The password
-    #   can include any printable ASCII character except "/", """, or
-    #   "@".
+    #   The password for the master user. The password can include any
+    #   printable ASCII character except "/", """, or "@". It cannot
+    #   contain spaces.
     #
-    #   Constraints: Must contain 8 to 41 characters.
+    #   **MySQL**
+    #
+    #   Constraints: Must contain from 8 to 41 characters.
+    #
+    #   **PostgreSQL**
+    #
+    #   Constraints: Must contain from 8 to 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] preferred_backup_window
@@ -13881,15 +13952,20 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] relational_database_name
-    #   The name of your database to update.
+    #   The name of your Lightsail database resource to update.
     #   @return [String]
     #
     # @!attribute [rw] master_user_password
-    #   The password for the master user of your database. The password can
-    #   include any printable ASCII character except "/", """, or
-    #   "@".
+    #   The password for the master user. The password can include any
+    #   printable ASCII character except "/", """, or "@".
     #
-    #   Constraints: Must contain 8 to 41 characters.
+    #   My**SQL**
+    #
+    #   Constraints: Must contain from 8 to 41 characters.
+    #
+    #   **PostgreSQL**
+    #
+    #   Constraints: Must contain from 8 to 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] rotate_master_user_password

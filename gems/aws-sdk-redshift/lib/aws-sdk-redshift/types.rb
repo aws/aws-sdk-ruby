@@ -115,6 +115,40 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # The AQUA (Advanced Query Accelerator) configuration of the cluster.
+    #
+    # @!attribute [rw] aqua_status
+    #   The value indicates the status of AQUA on the cluster. Possible
+    #   values include the following.
+    #
+    #   * enabled - AQUA is enabled.
+    #
+    #   * disabled - AQUA is not enabled.
+    #
+    #   * applying - AQUA status is being applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] aqua_configuration_status
+    #   The value represents how the cluster is configured to use AQUA.
+    #   Possible values include the following.
+    #
+    #   * enabled - Use AQUA if it is available for the current AWS Region
+    #     and Amazon Redshift node type.
+    #
+    #   * disabled - Don't use AQUA.
+    #
+    #   * auto - Amazon Redshift determines whether to use AQUA.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AquaConfiguration AWS API Documentation
+    #
+    class AquaConfiguration < Struct.new(
+      :aqua_status,
+      :aqua_configuration_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an attribute value.
     #
     # @!attribute [rw] attribute_value
@@ -754,6 +788,10 @@ module Aws::Redshift
     #   The total storage capacity of the cluster in megabytes.
     #   @return [Integer]
     #
+    # @!attribute [rw] aqua_configuration
+    #   The AQUA (Advanced Query Accelerator) configuration of the cluster.
+    #   @return [Types::AquaConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -805,7 +843,8 @@ module Aws::Redshift
       :resize_info,
       :availability_zone_relocation_status,
       :cluster_namespace_arn,
-      :total_storage_capacity_in_mega_bytes)
+      :total_storage_capacity_in_mega_bytes,
+      :aqua_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1669,6 +1708,7 @@ module Aws::Redshift
     #         maintenance_track_name: "String",
     #         snapshot_schedule_identifier: "String",
     #         availability_zone_relocation: false,
+    #         aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
     #       }
     #
     # @!attribute [rw] db_name
@@ -2030,6 +2070,19 @@ module Aws::Redshift
     #   between Availability Zones after the cluster is created.
     #   @return [Boolean]
     #
+    # @!attribute [rw] aqua_configuration_status
+    #   The value represents how the cluster is configured to use AQUA
+    #   (Advanced Query Accelerator) when it is created. Possible values
+    #   include the following.
+    #
+    #   * enabled - Use AQUA if it is available for the current AWS Region
+    #     and Amazon Redshift node type.
+    #
+    #   * disabled - Don't use AQUA.
+    #
+    #   * auto - Amazon Redshift determines whether to use AQUA.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterMessage AWS API Documentation
     #
     class CreateClusterMessage < Struct.new(
@@ -2063,7 +2116,8 @@ module Aws::Redshift
       :iam_roles,
       :maintenance_track_name,
       :snapshot_schedule_identifier,
-      :availability_zone_relocation)
+      :availability_zone_relocation,
+      :aqua_configuration_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6828,6 +6882,51 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyAquaInputMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String", # required
+    #         aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The identifier of the cluster to be modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] aqua_configuration_status
+    #   The new value of AQUA configuration status. Possible values include
+    #   the following.
+    #
+    #   * enabled - Use AQUA if it is available for the current AWS Region
+    #     and Amazon Redshift node type.
+    #
+    #   * disabled - Don't use AQUA.
+    #
+    #   * auto - Amazon Redshift determines whether to use AQUA.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyAquaInputMessage AWS API Documentation
+    #
+    class ModifyAquaInputMessage < Struct.new(
+      :cluster_identifier,
+      :aqua_configuration_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aqua_configuration
+    #   The updated AQUA configuration of the cluster.
+    #   @return [Types::AquaConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyAquaOutputMessage AWS API Documentation
+    #
+    class ModifyAquaOutputMessage < Struct.new(
+      :aqua_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyClusterDbRevisionMessage
     #   data as a hash:
     #
@@ -8869,6 +8968,7 @@ module Aws::Redshift
     #         snapshot_schedule_identifier: "String",
     #         number_of_nodes: 1,
     #         availability_zone_relocation: false,
+    #         aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -9121,6 +9221,19 @@ module Aws::Redshift
     #   between Availability Zones after the cluster is restored.
     #   @return [Boolean]
     #
+    # @!attribute [rw] aqua_configuration_status
+    #   The value represents how the cluster is configured to use AQUA
+    #   (Advanced Query Accelerator) after the cluster is restored. Possible
+    #   values include the following.
+    #
+    #   * enabled - Use AQUA if it is available for the current AWS Region
+    #     and Amazon Redshift node type.
+    #
+    #   * disabled - Don't use AQUA.
+    #
+    #   * auto - Amazon Redshift determines whether to use AQUA.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotMessage AWS API Documentation
     #
     class RestoreFromClusterSnapshotMessage < Struct.new(
@@ -9150,7 +9263,8 @@ module Aws::Redshift
       :maintenance_track_name,
       :snapshot_schedule_identifier,
       :number_of_nodes,
-      :availability_zone_relocation)
+      :availability_zone_relocation,
+      :aqua_configuration_status)
       SENSITIVE = []
       include Aws::Structure
     end

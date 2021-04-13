@@ -321,8 +321,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * If a `SourceIds` value is supplied, `SourceType` must also be
-    #     provided.
+    #   * If `SourceIds` are supplied, `SourceType` must also be provided.
     #
     #   * If the source type is a DB instance, a `DBInstanceIdentifier` value
     #     must be supplied.

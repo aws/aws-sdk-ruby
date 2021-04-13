@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2021-04-13)
+------------------
+
+* Feature - The InferICD10CM API now returns TIME_EXPRESSION entities that refer to medical conditions.
+
 1.25.0 (2021-03-10)
 ------------------
 

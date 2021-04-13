@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2021-04-13)
+------------------
+
+* Feature - Clarify that enabling or disabling automated backups causes a brief downtime, not an outage.
+
 1.117.0 (2021-03-10)
 ------------------
 

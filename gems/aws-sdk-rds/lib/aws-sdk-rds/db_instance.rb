@@ -1188,18 +1188,14 @@ module Aws::RDS
     # @option options [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled, using the `BackupRetentionPeriod`
-    #   parameter. For more information, see [The Backup Window][1] in the
-    #   *Amazon RDS User Guide*.
+    #   parameter. The default is a 30-minute window selected at random from
+    #   an 8-hour block of time for each AWS Region. For more information, see
+    #   [Backup window][1] in the *Amazon RDS User Guide*.
     #
     #   **Amazon Aurora**
     #
     #   Not applicable. The daily time range for creating automated backups is
     #   managed by the DB cluster.
-    #
-    #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region. To see the time blocks available,
-    #   see [ Adjusting the Preferred DB Instance Maintenance Window][2] in
-    #   the *Amazon RDS User Guide*.
     #
     #   Constraints:
     #
@@ -1214,7 +1210,6 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow
     # @option options [Integer] :port
     #   The port number on which the database accepts connections.
     #
@@ -2344,10 +2339,14 @@ module Aws::RDS
     #   to a positive number enables backups. Setting this parameter to 0
     #   disables automated backups.
     #
-    #   Changing this parameter can result in an outage if you change from 0
-    #   to a non-zero value or from a non-zero value to 0. These changes are
-    #   applied during the next maintenance window unless the
-    #   `ApplyImmediately` parameter is enabled for this request. If you
+    #   <note markdown="1"> Enabling and disabling backups can result in a brief I/O suspension
+    #   that lasts from a few seconds to a few minutes, depending on the size
+    #   and class of your DB instance.
+    #
+    #    </note>
+    #
+    #   These changes are applied during the next maintenance window unless
+    #   the `ApplyImmediately` parameter is enabled for this request. If you
     #   change the parameter from one non-zero value to another non-zero
     #   value, the change is asynchronously applied as soon as possible.
     #
@@ -2374,7 +2373,9 @@ module Aws::RDS
     #   automated backups are enabled, as determined by the
     #   `BackupRetentionPeriod` parameter. Changing this parameter doesn't
     #   result in an outage and the change is asynchronously applied as soon
-    #   as possible.
+    #   as possible. The default is a 30-minute window selected at random from
+    #   an 8-hour block of time for each AWS Region. For more information, see
+    #   [Backup window][1] in the *Amazon RDS User Guide.*
     #
     #   **Amazon Aurora**
     #
@@ -2391,6 +2392,10 @@ module Aws::RDS
     #   * Must not conflict with the preferred maintenance window
     #
     #   * Must be at least 30 minutes
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow
     # @option options [String] :preferred_maintenance_window
     #   The weekly time range (in UTC) during which system maintenance can
     #   occur, which might result in an outage. Changing this parameter
@@ -2402,6 +2407,9 @@ module Aws::RDS
     #   current time, there must be at least 30 minutes between the current
     #   time and end of the window to ensure pending changes are applied.
     #
+    #   For more information, see [Amazon RDS Maintenance Window][1] in the
+    #   *Amazon RDS User Guide.*
+    #
     #   Default: Uses existing setting
     #
     #   Format: ddd:hh24:mi-ddd:hh24:mi
@@ -2409,6 +2417,10 @@ module Aws::RDS
     #   Valid Days: Mon \| Tue \| Wed \| Thu \| Fri \| Sat \| Sun
     #
     #   Constraints: Must be at least 30 minutes
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#Concepts.DBMaintenance
     # @option options [Boolean] :multi_az
     #   A value that indicates whether the DB instance is a Multi-AZ
     #   deployment. Changing this parameter doesn't result in an outage and
