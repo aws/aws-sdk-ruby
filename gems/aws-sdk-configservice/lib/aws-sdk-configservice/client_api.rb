@@ -2132,6 +2132,7 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoSuchRemediationConfigurationException)
         o.errors << Shapes::ShapeRef.new(shape: RemediationInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
       end)
 
       api.add_operation(:delete_remediation_exceptions, Seahorse::Model::Operation.new.tap do |o|
@@ -2448,6 +2449,7 @@ module Aws::ConfigService
         o.output = Shapes::ShapeRef.new(shape: DescribeRemediationExecutionStatusResponse)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchRemediationConfigurationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {

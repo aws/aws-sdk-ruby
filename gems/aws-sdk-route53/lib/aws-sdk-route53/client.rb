@@ -1477,6 +1477,9 @@ module Aws::Route53
     # servers. When the NS and SOA records are available, the status of the
     # zone changes to `INSYNC`.
     #
+    # The `CreateHostedZone` request requires the caller to have an
+    # `ec2:DescribeVpcs` permission.
+    #
     #
     #
     # [1]: http://aws.amazon.com/route53/pricing/
@@ -1635,7 +1638,7 @@ module Aws::Route53
     #     The key policy must also include the Amazon Route 53 service in the
     #     principal for your account. Specify the following:
     #
-    #     * `"Service": "api-service.dnssec.route53.aws.internal"`
+    #     * `"Service": "dnssec.route53.aws.amazonaws.com"`
     #
     #     ^
     #
@@ -2371,7 +2374,7 @@ module Aws::Route53
     end
 
     # Deletes a key-signing key (KSK). Before you can delete a KSK, you must
-    # deactivate it. The KSK must be deactived before you can delete it
+    # deactivate it. The KSK must be deactivated before you can delete it
     # regardless of whether the hosted zone is enabled for DNSSEC signing.
     #
     # @option params [required, String] :hosted_zone_id
@@ -4954,6 +4957,8 @@ module Aws::Route53
     # specify the IP address of a DNS resolver, an EDNS0 client subnet IP
     # address, and a subnet mask.
     #
+    # This call only supports querying public hosted zones.
+    #
     # @option params [required, String] :hosted_zone_id
     #   The ID of the hosted zone that you want Amazon Route 53 to simulate a
     #   query for.
@@ -5609,7 +5614,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -353,6 +353,7 @@ module Aws::MediaConnect
     Output.add_member(:destination, Shapes::ShapeRef.new(shape: __string, location_name: "destination"))
     Output.add_member(:encryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "encryption"))
     Output.add_member(:entitlement_arn, Shapes::ShapeRef.new(shape: __string, location_name: "entitlementArn"))
+    Output.add_member(:listener_address, Shapes::ShapeRef.new(shape: __string, location_name: "listenerAddress"))
     Output.add_member(:media_live_input_arn, Shapes::ShapeRef.new(shape: __string, location_name: "mediaLiveInputArn"))
     Output.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     Output.add_member(:output_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "outputArn"))

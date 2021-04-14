@@ -82,17 +82,14 @@ module Aws::ConfigService
     # whether a conformance pack is compliant based on the name of the
     # conformance pack, account ID, and region.
     #
-    # A conformance pack is compliant if all of the rules in that
-    # conformance packs are compliant. It is noncompliant if any of the
-    # rules are not compliant.
-    #
-    # <note markdown="1"> If a conformance pack has rules that return INSUFFICIENT\_DATA, the
-    # conformance pack returns INSUFFICIENT\_DATA only if all the rules
-    # within that conformance pack return INSUFFICIENT\_DATA. If some of the
-    # rules in a conformance pack are compliant and others return
-    # INSUFFICIENT\_DATA, the conformance pack shows compliant.
-    #
-    #  </note>
+    # A conformance pack is compliant if all of the rules in a conformance
+    # packs are compliant. It is noncompliant if any of the rules are not
+    # compliant. The compliance status of a conformance pack is
+    # INSUFFICIENT\_DATA only if all rules within a conformance pack cannot
+    # be evaluated due to insufficient data. If some of the rules in a
+    # conformance pack are compliant but the compliance status of other
+    # rules in that same conformance pack is INSUFFICIENT\_DATA, the
+    # conformance pack shows compliant.
     #
     # @!attribute [rw] conformance_pack_name
     #   The name of the conformance pack.
@@ -142,9 +139,19 @@ module Aws::ConfigService
     end
 
     # Provides the number of compliant and noncompliant rules within a
-    # conformance pack. Also provides the total count of compliant rules,
-    # noncompliant rules, and the rules that do not have any applicable
-    # resources to evaluate upon resulting in insufficient data.
+    # conformance pack. Also provides the compliance status of the
+    # conformance pack and the total rule count which includes compliant
+    # rules, noncompliant rules, and rules that cannot be evaluated due to
+    # insufficient data.
+    #
+    # A conformance pack is compliant if all of the rules in a conformance
+    # packs are compliant. It is noncompliant if any of the rules are not
+    # compliant. The compliance status of a conformance pack is
+    # INSUFFICIENT\_DATA only if all rules within a conformance pack cannot
+    # be evaluated due to insufficient data. If some of the rules in a
+    # conformance pack are compliant but the compliance status of other
+    # rules in that same conformance pack is INSUFFICIENT\_DATA, the
+    # conformance pack shows compliant.
     #
     # @!attribute [rw] compliance_type
     #   The compliance status of the conformance pack.
@@ -2478,9 +2485,9 @@ module Aws::ConfigService
     #   @return [Types::AggregateConformancePackComplianceFilters]
     #
     # @!attribute [rw] limit
-    #   The maximum number of conformance packs details returned on each
-    #   page. The default is maximum. If you specify 0, AWS Config uses the
-    #   default.
+    #   The maximum number of conformance packs compliance details returned
+    #   on each page. The default is maximum. If you specify 0, AWS Config
+    #   uses the default.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token

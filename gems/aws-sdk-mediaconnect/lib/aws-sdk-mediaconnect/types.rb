@@ -1533,6 +1533,15 @@ module Aws::MediaConnect
     #   is relevant only on entitled flows.
     #   @return [String]
     #
+    # @!attribute [rw] listener_address
+    #   The IP address that the receiver requires in order to establish a
+    #   connection with the flow. For public networking, the ListenerAddress
+    #   is represented by the elastic IP address of the flow. For private
+    #   networking, the ListenerAddress is represented by the elastic
+    #   network interface IP address of the VPC. This field applies only to
+    #   outputs that use the Zixi pull or SRT listener protocol.
+    #   @return [String]
+    #
     # @!attribute [rw] media_live_input_arn
     #   The input ARN of the AWS Elemental MediaLive channel. This parameter
     #   is relevant only for outputs that were added by creating a MediaLive
@@ -1569,6 +1578,7 @@ module Aws::MediaConnect
       :destination,
       :encryption,
       :entitlement_arn,
+      :listener_address,
       :media_live_input_arn,
       :name,
       :output_arn,

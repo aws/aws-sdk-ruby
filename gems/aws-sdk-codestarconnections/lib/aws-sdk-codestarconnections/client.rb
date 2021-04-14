@@ -423,9 +423,12 @@ module Aws::CodeStarconnections
     #   configured and the infrastructure to be represented by the host must
     #   already be connected to the VPC.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #
     # @return [Types::CreateHostOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateHostOutput#host_arn #host_arn} => String
+    #   * {Types::CreateHostOutput#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -439,11 +442,20 @@ module Aws::CodeStarconnections
     #       security_group_ids: ["SecurityGroupId"], # required
     #       tls_certificate: "TlsCertificate",
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.host_arn #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/CreateHost AWS API Documentation
     #
@@ -831,7 +843,7 @@ module Aws::CodeStarconnections
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codestarconnections'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

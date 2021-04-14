@@ -1013,7 +1013,9 @@ module Aws::ConfigService
 
     # Returns a list of the conformance packs and their associated
     # compliance status with the count of compliant and noncompliant AWS
-    # Config rules within each conformance pack.
+    # Config rules within each conformance pack. Also returns the total rule
+    # count which includes compliant rules, noncompliant rules, and rules
+    # that cannot be evaluated due to insufficient data.
     #
     # <note markdown="1"> The results can return an empty result page, but if you have a
     # `nextToken`, the results are displayed on the next page.
@@ -1028,8 +1030,9 @@ module Aws::ConfigService
     #   object.
     #
     # @option params [Integer] :limit
-    #   The maximum number of conformance packs details returned on each page.
-    #   The default is maximum. If you specify 0, AWS Config uses the default.
+    #   The maximum number of conformance packs compliance details returned on
+    #   each page. The default is maximum. If you specify 0, AWS Config uses
+    #   the default.
     #
     # @option params [String] :next_token
     #   The `nextToken` string returned on a previous page that you use to get
@@ -2535,8 +2538,8 @@ module Aws::ConfigService
     end
 
     # Returns the count of compliant and noncompliant conformance packs
-    # across all AWS Accounts and AWS Regions. You can filter based on AWS
-    # Account ID or AWS Region.
+    # across all AWS Accounts and AWS Regions in an aggregator. You can
+    # filter based on AWS Account ID or AWS Region.
     #
     # <note markdown="1"> The results can return an empty result page, but if you have a
     # nextToken, the results are displayed on the next page.
@@ -5004,7 +5007,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

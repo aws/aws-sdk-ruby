@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2021-04-14)
+------------------
+
+* Feature - This release adds tagging support for CodeStar Connections Host resources
+
 1.14.0 (2021-03-10)
 ------------------
 

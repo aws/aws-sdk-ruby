@@ -1346,7 +1346,7 @@ module Aws::Route53
     #     The key policy must also include the Amazon Route 53 service in
     #     the principal for your account. Specify the following:
     #
-    #     * `"Service": "api-service.dnssec.route53.aws.internal"`
+    #     * `"Service": "dnssec.route53.aws.amazonaws.com"`
     #
     #     ^
     #

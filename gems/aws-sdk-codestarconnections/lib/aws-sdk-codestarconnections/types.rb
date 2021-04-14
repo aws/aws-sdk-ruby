@@ -159,6 +159,12 @@ module Aws::CodeStarconnections
     #           security_group_ids: ["SecurityGroupId"], # required
     #           tls_certificate: "TlsCertificate",
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -184,13 +190,17 @@ module Aws::CodeStarconnections
     #   already be connected to the VPC.
     #   @return [Types::VpcConfiguration]
     #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/CreateHostInput AWS API Documentation
     #
     class CreateHostInput < Struct.new(
       :name,
       :provider_type,
       :provider_endpoint,
-      :vpc_configuration)
+      :vpc_configuration,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -199,10 +209,14 @@ module Aws::CodeStarconnections
     #   The Amazon Resource Name (ARN) of the host to be created.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/CreateHostOutput AWS API Documentation
     #
     class CreateHostOutput < Struct.new(
-      :host_arn)
+      :host_arn,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

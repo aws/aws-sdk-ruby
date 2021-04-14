@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2021-04-14)
+------------------
+
+* Feature - Add exception for DeleteRemediationConfiguration and DescribeRemediationExecutionStatus
+
 1.60.0 (2021-03-30)
 ------------------
 

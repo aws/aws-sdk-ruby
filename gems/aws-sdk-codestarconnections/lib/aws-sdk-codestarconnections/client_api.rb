@@ -100,9 +100,11 @@ module Aws::CodeStarconnections
     CreateHostInput.add_member(:provider_type, Shapes::ShapeRef.new(shape: ProviderType, required: true, location_name: "ProviderType"))
     CreateHostInput.add_member(:provider_endpoint, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "ProviderEndpoint"))
     CreateHostInput.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "VpcConfiguration"))
+    CreateHostInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateHostInput.struct_class = Types::CreateHostInput
 
     CreateHostOutput.add_member(:host_arn, Shapes::ShapeRef.new(shape: HostArn, location_name: "HostArn"))
+    CreateHostOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateHostOutput.struct_class = Types::CreateHostOutput
 
     DeleteConnectionInput.add_member(:connection_arn, Shapes::ShapeRef.new(shape: ConnectionArn, required: true, location_name: "ConnectionArn"))
