@@ -901,6 +901,13 @@ module Aws::DatabaseMigrationService
     #       include_control_details: false,
     #       message_max_bytes: 1,
     #       include_null_and_empty: false,
+    #       security_protocol: "plaintext", # accepts plaintext, ssl-authentication, ssl-encryption, sasl-ssl
+    #       ssl_client_certificate_arn: "String",
+    #       ssl_client_key_arn: "String",
+    #       ssl_client_key_password: "SecretString",
+    #       ssl_ca_certificate_arn: "String",
+    #       sasl_username: "String",
+    #       sasl_password: "SecretString",
     #     },
     #     elasticsearch_settings: {
     #       service_access_role_arn: "String", # required
@@ -967,6 +974,7 @@ module Aws::DatabaseMigrationService
     #     },
     #     my_sql_settings: {
     #       after_connect_script: "String",
+    #       clean_source_metadata_on_mismatch: false,
     #       database_name: "String",
     #       events_poll_interval: 1,
     #       target_db_type: "specific-database", # accepts specific-database, multiple-databases
@@ -1010,6 +1018,7 @@ module Aws::DatabaseMigrationService
     #       security_db_encryption: "SecretString",
     #       security_db_encryption_name: "String",
     #       server_name: "String",
+    #       spatial_data_option_to_geo_json_function_name: "String",
     #       username: "String",
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
@@ -1031,11 +1040,13 @@ module Aws::DatabaseMigrationService
     #       database_name: "String",
     #       control_tables_file_group: "String",
     #       password: "SecretString",
+    #       query_single_always_on_node: false,
     #       read_backup_only: false,
     #       safeguard_policy: "rely-on-sql-server-replication-agent", # accepts rely-on-sql-server-replication-agent, exclusive-automatic-truncation, shared-automatic-truncation
     #       server_name: "String",
     #       username: "String",
     #       use_bcp_full_load: false,
+    #       use_third_party_backup_device: false,
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
     #     },
@@ -1150,6 +1161,13 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kafka_settings.include_control_details #=> Boolean
     #   resp.endpoint.kafka_settings.message_max_bytes #=> Integer
     #   resp.endpoint.kafka_settings.include_null_and_empty #=> Boolean
+    #   resp.endpoint.kafka_settings.security_protocol #=> String, one of "plaintext", "ssl-authentication", "ssl-encryption", "sasl-ssl"
+    #   resp.endpoint.kafka_settings.ssl_client_certificate_arn #=> String
+    #   resp.endpoint.kafka_settings.ssl_client_key_arn #=> String
+    #   resp.endpoint.kafka_settings.ssl_client_key_password #=> String
+    #   resp.endpoint.kafka_settings.ssl_ca_certificate_arn #=> String
+    #   resp.endpoint.kafka_settings.sasl_username #=> String
+    #   resp.endpoint.kafka_settings.sasl_password #=> String
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -1206,6 +1224,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.postgre_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
+    #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
     #   resp.endpoint.my_sql_settings.events_poll_interval #=> Integer
     #   resp.endpoint.my_sql_settings.target_db_type #=> String, one of "specific-database", "multiple-databases"
@@ -1247,6 +1266,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.security_db_encryption #=> String
     #   resp.endpoint.oracle_settings.security_db_encryption_name #=> String
     #   resp.endpoint.oracle_settings.server_name #=> String
+    #   resp.endpoint.oracle_settings.spatial_data_option_to_geo_json_function_name #=> String
     #   resp.endpoint.oracle_settings.username #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_secret_id #=> String
@@ -1264,11 +1284,13 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.microsoft_sql_server_settings.database_name #=> String
     #   resp.endpoint.microsoft_sql_server_settings.control_tables_file_group #=> String
     #   resp.endpoint.microsoft_sql_server_settings.password #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.query_single_always_on_node #=> Boolean
     #   resp.endpoint.microsoft_sql_server_settings.read_backup_only #=> Boolean
     #   resp.endpoint.microsoft_sql_server_settings.safeguard_policy #=> String, one of "rely-on-sql-server-replication-agent", "exclusive-automatic-truncation", "shared-automatic-truncation"
     #   resp.endpoint.microsoft_sql_server_settings.server_name #=> String
     #   resp.endpoint.microsoft_sql_server_settings.username #=> String
     #   resp.endpoint.microsoft_sql_server_settings.use_bcp_full_load #=> Boolean
+    #   resp.endpoint.microsoft_sql_server_settings.use_third_party_backup_device #=> Boolean
     #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.ibm_db_2_settings.database_name #=> String
@@ -2243,6 +2265,13 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kafka_settings.include_control_details #=> Boolean
     #   resp.endpoint.kafka_settings.message_max_bytes #=> Integer
     #   resp.endpoint.kafka_settings.include_null_and_empty #=> Boolean
+    #   resp.endpoint.kafka_settings.security_protocol #=> String, one of "plaintext", "ssl-authentication", "ssl-encryption", "sasl-ssl"
+    #   resp.endpoint.kafka_settings.ssl_client_certificate_arn #=> String
+    #   resp.endpoint.kafka_settings.ssl_client_key_arn #=> String
+    #   resp.endpoint.kafka_settings.ssl_client_key_password #=> String
+    #   resp.endpoint.kafka_settings.ssl_ca_certificate_arn #=> String
+    #   resp.endpoint.kafka_settings.sasl_username #=> String
+    #   resp.endpoint.kafka_settings.sasl_password #=> String
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -2299,6 +2328,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.postgre_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
+    #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
     #   resp.endpoint.my_sql_settings.events_poll_interval #=> Integer
     #   resp.endpoint.my_sql_settings.target_db_type #=> String, one of "specific-database", "multiple-databases"
@@ -2340,6 +2370,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.security_db_encryption #=> String
     #   resp.endpoint.oracle_settings.security_db_encryption_name #=> String
     #   resp.endpoint.oracle_settings.server_name #=> String
+    #   resp.endpoint.oracle_settings.spatial_data_option_to_geo_json_function_name #=> String
     #   resp.endpoint.oracle_settings.username #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_secret_id #=> String
@@ -2357,11 +2388,13 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.microsoft_sql_server_settings.database_name #=> String
     #   resp.endpoint.microsoft_sql_server_settings.control_tables_file_group #=> String
     #   resp.endpoint.microsoft_sql_server_settings.password #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.query_single_always_on_node #=> Boolean
     #   resp.endpoint.microsoft_sql_server_settings.read_backup_only #=> Boolean
     #   resp.endpoint.microsoft_sql_server_settings.safeguard_policy #=> String, one of "rely-on-sql-server-replication-agent", "exclusive-automatic-truncation", "shared-automatic-truncation"
     #   resp.endpoint.microsoft_sql_server_settings.server_name #=> String
     #   resp.endpoint.microsoft_sql_server_settings.username #=> String
     #   resp.endpoint.microsoft_sql_server_settings.use_bcp_full_load #=> Boolean
+    #   resp.endpoint.microsoft_sql_server_settings.use_third_party_backup_device #=> Boolean
     #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.ibm_db_2_settings.database_name #=> String
@@ -3073,6 +3106,61 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Returns information about the possible endpoint settings available
+    # when you create an endpoint for a specific database engine.
+    #
+    # @option params [required, String] :engine_name
+    #   The databse engine used for your source or target endpoint.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @return [Types::DescribeEndpointSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEndpointSettingsResponse#marker #marker} => String
+    #   * {Types::DescribeEndpointSettingsResponse#endpoint_settings #endpoint_settings} => Array&lt;Types::EndpointSetting&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_endpoint_settings({
+    #     engine_name: "String", # required
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.endpoint_settings #=> Array
+    #   resp.endpoint_settings[0].name #=> String
+    #   resp.endpoint_settings[0].type #=> String, one of "string", "boolean", "integer", "enum"
+    #   resp.endpoint_settings[0].enum_values #=> Array
+    #   resp.endpoint_settings[0].enum_values[0] #=> String
+    #   resp.endpoint_settings[0].sensitive #=> Boolean
+    #   resp.endpoint_settings[0].units #=> String
+    #   resp.endpoint_settings[0].applicability #=> String
+    #   resp.endpoint_settings[0].int_value_min #=> Integer
+    #   resp.endpoint_settings[0].int_value_max #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpointSettings AWS API Documentation
+    #
+    # @overload describe_endpoint_settings(params = {})
+    # @param [Hash] params ({})
+    def describe_endpoint_settings(params = {}, options = {})
+      req = build_request(:describe_endpoint_settings, params)
+      req.send_request(options)
+    end
+
     # Returns information about the type of endpoints available.
     #
     # @option params [Array<Types::Filter>] :filters
@@ -3315,6 +3403,13 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].kafka_settings.include_control_details #=> Boolean
     #   resp.endpoints[0].kafka_settings.message_max_bytes #=> Integer
     #   resp.endpoints[0].kafka_settings.include_null_and_empty #=> Boolean
+    #   resp.endpoints[0].kafka_settings.security_protocol #=> String, one of "plaintext", "ssl-authentication", "ssl-encryption", "sasl-ssl"
+    #   resp.endpoints[0].kafka_settings.ssl_client_certificate_arn #=> String
+    #   resp.endpoints[0].kafka_settings.ssl_client_key_arn #=> String
+    #   resp.endpoints[0].kafka_settings.ssl_client_key_password #=> String
+    #   resp.endpoints[0].kafka_settings.ssl_ca_certificate_arn #=> String
+    #   resp.endpoints[0].kafka_settings.sasl_username #=> String
+    #   resp.endpoints[0].kafka_settings.sasl_password #=> String
     #   resp.endpoints[0].elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoints[0].elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoints[0].elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -3371,6 +3466,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].postgre_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoints[0].postgre_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoints[0].my_sql_settings.after_connect_script #=> String
+    #   resp.endpoints[0].my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoints[0].my_sql_settings.database_name #=> String
     #   resp.endpoints[0].my_sql_settings.events_poll_interval #=> Integer
     #   resp.endpoints[0].my_sql_settings.target_db_type #=> String, one of "specific-database", "multiple-databases"
@@ -3412,6 +3508,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].oracle_settings.security_db_encryption #=> String
     #   resp.endpoints[0].oracle_settings.security_db_encryption_name #=> String
     #   resp.endpoints[0].oracle_settings.server_name #=> String
+    #   resp.endpoints[0].oracle_settings.spatial_data_option_to_geo_json_function_name #=> String
     #   resp.endpoints[0].oracle_settings.username #=> String
     #   resp.endpoints[0].oracle_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoints[0].oracle_settings.secrets_manager_secret_id #=> String
@@ -3429,11 +3526,13 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].microsoft_sql_server_settings.database_name #=> String
     #   resp.endpoints[0].microsoft_sql_server_settings.control_tables_file_group #=> String
     #   resp.endpoints[0].microsoft_sql_server_settings.password #=> String
+    #   resp.endpoints[0].microsoft_sql_server_settings.query_single_always_on_node #=> Boolean
     #   resp.endpoints[0].microsoft_sql_server_settings.read_backup_only #=> Boolean
     #   resp.endpoints[0].microsoft_sql_server_settings.safeguard_policy #=> String, one of "rely-on-sql-server-replication-agent", "exclusive-automatic-truncation", "shared-automatic-truncation"
     #   resp.endpoints[0].microsoft_sql_server_settings.server_name #=> String
     #   resp.endpoints[0].microsoft_sql_server_settings.username #=> String
     #   resp.endpoints[0].microsoft_sql_server_settings.use_bcp_full_load #=> Boolean
+    #   resp.endpoints[0].microsoft_sql_server_settings.use_third_party_backup_device #=> Boolean
     #   resp.endpoints[0].microsoft_sql_server_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoints[0].microsoft_sql_server_settings.secrets_manager_secret_id #=> String
     #   resp.endpoints[0].ibm_db_2_settings.database_name #=> String
@@ -4697,7 +4796,7 @@ module Aws::DatabaseMigrationService
     #
     #   resp = client.import_certificate({
     #     certificate_identifier: "String", # required
-    #     certificate_pem: "String",
+    #     certificate_pem: "SecretString",
     #     certificate_wallet: "data",
     #     tags: [
     #       {
@@ -5140,6 +5239,13 @@ module Aws::DatabaseMigrationService
     #       include_control_details: false,
     #       message_max_bytes: 1,
     #       include_null_and_empty: false,
+    #       security_protocol: "plaintext", # accepts plaintext, ssl-authentication, ssl-encryption, sasl-ssl
+    #       ssl_client_certificate_arn: "String",
+    #       ssl_client_key_arn: "String",
+    #       ssl_client_key_password: "SecretString",
+    #       ssl_ca_certificate_arn: "String",
+    #       sasl_username: "String",
+    #       sasl_password: "SecretString",
     #     },
     #     elasticsearch_settings: {
     #       service_access_role_arn: "String", # required
@@ -5206,6 +5312,7 @@ module Aws::DatabaseMigrationService
     #     },
     #     my_sql_settings: {
     #       after_connect_script: "String",
+    #       clean_source_metadata_on_mismatch: false,
     #       database_name: "String",
     #       events_poll_interval: 1,
     #       target_db_type: "specific-database", # accepts specific-database, multiple-databases
@@ -5249,6 +5356,7 @@ module Aws::DatabaseMigrationService
     #       security_db_encryption: "SecretString",
     #       security_db_encryption_name: "String",
     #       server_name: "String",
+    #       spatial_data_option_to_geo_json_function_name: "String",
     #       username: "String",
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
@@ -5270,11 +5378,13 @@ module Aws::DatabaseMigrationService
     #       database_name: "String",
     #       control_tables_file_group: "String",
     #       password: "SecretString",
+    #       query_single_always_on_node: false,
     #       read_backup_only: false,
     #       safeguard_policy: "rely-on-sql-server-replication-agent", # accepts rely-on-sql-server-replication-agent, exclusive-automatic-truncation, shared-automatic-truncation
     #       server_name: "String",
     #       username: "String",
     #       use_bcp_full_load: false,
+    #       use_third_party_backup_device: false,
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
     #     },
@@ -5388,6 +5498,13 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kafka_settings.include_control_details #=> Boolean
     #   resp.endpoint.kafka_settings.message_max_bytes #=> Integer
     #   resp.endpoint.kafka_settings.include_null_and_empty #=> Boolean
+    #   resp.endpoint.kafka_settings.security_protocol #=> String, one of "plaintext", "ssl-authentication", "ssl-encryption", "sasl-ssl"
+    #   resp.endpoint.kafka_settings.ssl_client_certificate_arn #=> String
+    #   resp.endpoint.kafka_settings.ssl_client_key_arn #=> String
+    #   resp.endpoint.kafka_settings.ssl_client_key_password #=> String
+    #   resp.endpoint.kafka_settings.ssl_ca_certificate_arn #=> String
+    #   resp.endpoint.kafka_settings.sasl_username #=> String
+    #   resp.endpoint.kafka_settings.sasl_password #=> String
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -5444,6 +5561,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.postgre_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
+    #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
     #   resp.endpoint.my_sql_settings.events_poll_interval #=> Integer
     #   resp.endpoint.my_sql_settings.target_db_type #=> String, one of "specific-database", "multiple-databases"
@@ -5485,6 +5603,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.security_db_encryption #=> String
     #   resp.endpoint.oracle_settings.security_db_encryption_name #=> String
     #   resp.endpoint.oracle_settings.server_name #=> String
+    #   resp.endpoint.oracle_settings.spatial_data_option_to_geo_json_function_name #=> String
     #   resp.endpoint.oracle_settings.username #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_secret_id #=> String
@@ -5502,11 +5621,13 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.microsoft_sql_server_settings.database_name #=> String
     #   resp.endpoint.microsoft_sql_server_settings.control_tables_file_group #=> String
     #   resp.endpoint.microsoft_sql_server_settings.password #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.query_single_always_on_node #=> Boolean
     #   resp.endpoint.microsoft_sql_server_settings.read_backup_only #=> Boolean
     #   resp.endpoint.microsoft_sql_server_settings.safeguard_policy #=> String, one of "rely-on-sql-server-replication-agent", "exclusive-automatic-truncation", "shared-automatic-truncation"
     #   resp.endpoint.microsoft_sql_server_settings.server_name #=> String
     #   resp.endpoint.microsoft_sql_server_settings.username #=> String
     #   resp.endpoint.microsoft_sql_server_settings.use_bcp_full_load #=> Boolean
+    #   resp.endpoint.microsoft_sql_server_settings.use_third_party_backup_device #=> Boolean
     #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.ibm_db_2_settings.database_name #=> String
@@ -5931,9 +6052,9 @@ module Aws::DatabaseMigrationService
     #
     # @option params [String] :table_mappings
     #   When using the AWS CLI or boto3, provide the path of the JSON file
-    #   that contains the table mappings. Precede the path with `file://`.
-    #   When working with the DMS API, provide the JSON as the parameter
-    #   value, for example: `--table-mappings file://mappingfile.json`
+    #   that contains the table mappings. Precede the path with `file://`. For
+    #   example, `--table-mappings file://mappingfile.json`. When working with
+    #   the DMS API, provide the JSON as the parameter value.
     #
     # @option params [String] :replication_task_settings
     #   JSON file that contains settings for the task, such as task metadata
@@ -6809,7 +6930,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

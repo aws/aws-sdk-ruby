@@ -522,12 +522,6 @@ module Aws::DatabaseMigrationService
               },
               {
                 "argument" => "replication_tasks[].status",
-                "expected" => "running",
-                "matcher" => "pathAny",
-                "state" => "failure"
-              },
-              {
-                "argument" => "replication_tasks[].status",
                 "expected" => "failed",
                 "matcher" => "pathAny",
                 "state" => "failure"

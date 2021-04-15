@@ -418,6 +418,13 @@ module Aws::DatabaseMigrationService
     #           include_control_details: false,
     #           message_max_bytes: 1,
     #           include_null_and_empty: false,
+    #           security_protocol: "plaintext", # accepts plaintext, ssl-authentication, ssl-encryption, sasl-ssl
+    #           ssl_client_certificate_arn: "String",
+    #           ssl_client_key_arn: "String",
+    #           ssl_client_key_password: "SecretString",
+    #           ssl_ca_certificate_arn: "String",
+    #           sasl_username: "String",
+    #           sasl_password: "SecretString",
     #         },
     #         elasticsearch_settings: {
     #           service_access_role_arn: "String", # required
@@ -484,6 +491,7 @@ module Aws::DatabaseMigrationService
     #         },
     #         my_sql_settings: {
     #           after_connect_script: "String",
+    #           clean_source_metadata_on_mismatch: false,
     #           database_name: "String",
     #           events_poll_interval: 1,
     #           target_db_type: "specific-database", # accepts specific-database, multiple-databases
@@ -527,6 +535,7 @@ module Aws::DatabaseMigrationService
     #           security_db_encryption: "SecretString",
     #           security_db_encryption_name: "String",
     #           server_name: "String",
+    #           spatial_data_option_to_geo_json_function_name: "String",
     #           username: "String",
     #           secrets_manager_access_role_arn: "String",
     #           secrets_manager_secret_id: "String",
@@ -548,11 +557,13 @@ module Aws::DatabaseMigrationService
     #           database_name: "String",
     #           control_tables_file_group: "String",
     #           password: "SecretString",
+    #           query_single_always_on_node: false,
     #           read_backup_only: false,
     #           safeguard_policy: "rely-on-sql-server-replication-agent", # accepts rely-on-sql-server-replication-agent, exclusive-automatic-truncation, shared-automatic-truncation
     #           server_name: "String",
     #           username: "String",
     #           use_bcp_full_load: false,
+    #           use_third_party_backup_device: false,
     #           secrets_manager_access_role_arn: "String",
     #           secrets_manager_secret_id: "String",
     #         },
@@ -1963,6 +1974,62 @@ module Aws::DatabaseMigrationService
     class DescribeConnectionsResponse < Struct.new(
       :marker,
       :connections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeEndpointSettingsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         engine_name: "String", # required
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] engine_name
+    #   The databse engine used for your source or target endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpointSettingsMessage AWS API Documentation
+    #
+    class DescribeEndpointSettingsMessage < Struct.new(
+      :engine_name,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_settings
+    #   Descriptions of the endpoint settings available for your source or
+    #   target database engine.
+    #   @return [Array<Types::EndpointSetting>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpointSettingsResponse AWS API Documentation
+    #
+    class DescribeEndpointSettingsResponse < Struct.new(
+      :marker,
+      :endpoint_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3539,6 +3606,56 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Endpoint settings.
+    #
+    # @!attribute [rw] name
+    #   The name that you want to give the endpoint settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of endpoint. Valid values are `source` and `target`.
+    #   @return [String]
+    #
+    # @!attribute [rw] enum_values
+    #   Enumerated values to use for this endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] sensitive
+    #   A value that marks this endpoint setting as sensitive.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] units
+    #   The unit of measure for this endpoint setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] applicability
+    #   The relevance or validity of an endpoint setting for an engine name
+    #   and its endpoint type.
+    #   @return [String]
+    #
+    # @!attribute [rw] int_value_min
+    #   The minimum value of an endpoint setting that is of type `int`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] int_value_max
+    #   The maximum value of an endpoint setting that is of type `int`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/EndpointSetting AWS API Documentation
+    #
+    class EndpointSetting < Struct.new(
+      :name,
+      :type,
+      :enum_values,
+      :sensitive,
+      :units,
+      :applicability,
+      :int_value_min,
+      :int_value_max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an identifiable significant activity that affects a
     # replication instance or task. This object can provide the message, the
     # available event categories, the date and source of the event, and the
@@ -3812,7 +3929,7 @@ module Aws::DatabaseMigrationService
     #
     #       {
     #         certificate_identifier: "String", # required
-    #         certificate_pem: "String",
+    #         certificate_pem: "SecretString",
     #         certificate_wallet: "data",
     #         tags: [
     #           {
@@ -3849,7 +3966,7 @@ module Aws::DatabaseMigrationService
       :certificate_pem,
       :certificate_wallet,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:certificate_pem]
       include Aws::Structure
     end
 
@@ -4031,13 +4148,27 @@ module Aws::DatabaseMigrationService
     #         include_control_details: false,
     #         message_max_bytes: 1,
     #         include_null_and_empty: false,
+    #         security_protocol: "plaintext", # accepts plaintext, ssl-authentication, ssl-encryption, sasl-ssl
+    #         ssl_client_certificate_arn: "String",
+    #         ssl_client_key_arn: "String",
+    #         ssl_client_key_password: "SecretString",
+    #         ssl_ca_certificate_arn: "String",
+    #         sasl_username: "String",
+    #         sasl_password: "SecretString",
     #       }
     #
     # @!attribute [rw] broker
-    #   The broker location and port of the Kafka broker that hosts your
-    #   Kafka instance. Specify the broker in the form `
-    #   broker-hostname-or-ip:port `. For example,
-    #   `"ec2-12-345-678-901.compute-1.amazonaws.com:2345"`.
+    #   A comma-separated list of one or more broker locations in your Kafka
+    #   cluster that host your Kafka instance. Specify each broker location
+    #   in the form ` broker-hostname-or-ip:port `. For example,
+    #   `"ec2-12-345-678-901.compute-1.amazonaws.com:2345"`. For more
+    #   information and examples of specifying a list of broker locations,
+    #   see [Using Apache Kafka as a target for AWS Database Migration
+    #   Service][1] in the *AWS Data Migration Service User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html
     #   @return [String]
     #
     # @!attribute [rw] topic
@@ -4098,6 +4229,46 @@ module Aws::DatabaseMigrationService
     #   The default is `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] security_protocol
+    #   Set secure connection to a Kafka target endpoint using Transport
+    #   Layer Security (TLS). Options include `ssl-encryption`,
+    #   `ssl-authentication`, and `sasl-ssl`. `sasl-ssl` requires
+    #   `SaslUsername` and `SaslPassword`.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl_client_certificate_arn
+    #   The Amazon Resource Name (ARN) of the client certificate used to
+    #   securely connect to a Kafka target endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl_client_key_arn
+    #   The Amazon Resource Name (ARN) for the client private key used to
+    #   securely connect to a Kafka target endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl_client_key_password
+    #   The password for the client private key used to securely connect to
+    #   a Kafka target endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl_ca_certificate_arn
+    #   The Amazon Resource Name (ARN) for the private Certification
+    #   Authority (CA) cert that AWS DMS uses to securely connect to your
+    #   Kafka target endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] sasl_username
+    #   The secure username you created when you first set up your MSK
+    #   cluster to validate a client identity and make an encrypted
+    #   connection between server and client using SASL-SSL authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] sasl_password
+    #   The secure password you created when you first set up your MSK
+    #   cluster to validate a client identity and make an encrypted
+    #   connection between server and client using SASL-SSL authentication.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/KafkaSettings AWS API Documentation
     #
     class KafkaSettings < Struct.new(
@@ -4110,8 +4281,15 @@ module Aws::DatabaseMigrationService
       :include_table_alter_operations,
       :include_control_details,
       :message_max_bytes,
-      :include_null_and_empty)
-      SENSITIVE = []
+      :include_null_and_empty,
+      :security_protocol,
+      :ssl_client_certificate_arn,
+      :ssl_client_key_arn,
+      :ssl_client_key_password,
+      :ssl_ca_certificate_arn,
+      :sasl_username,
+      :sasl_password)
+      SENSITIVE = [:ssl_client_key_password, :sasl_password]
       include Aws::Structure
     end
 
@@ -4252,11 +4430,13 @@ module Aws::DatabaseMigrationService
     #         database_name: "String",
     #         control_tables_file_group: "String",
     #         password: "SecretString",
+    #         query_single_always_on_node: false,
     #         read_backup_only: false,
     #         safeguard_policy: "rely-on-sql-server-replication-agent", # accepts rely-on-sql-server-replication-agent, exclusive-automatic-truncation, shared-automatic-truncation
     #         server_name: "String",
     #         username: "String",
     #         use_bcp_full_load: false,
+    #         use_third_party_backup_device: false,
     #         secrets_manager_access_role_arn: "String",
     #         secrets_manager_secret_id: "String",
     #       }
@@ -4284,6 +4464,13 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] password
     #   Endpoint connection password.
     #   @return [String]
+    #
+    # @!attribute [rw] query_single_always_on_node
+    #   Cleans and recreates table metadata information on the replication
+    #   instance when a mismatch occurs. An example is a situation where
+    #   running an alter DDL statement on a table might result in different
+    #   information about the table cached in the replication instance.
+    #   @return [Boolean]
     #
     # @!attribute [rw] read_backup_only
     #   When this attribute is set to `Y`, AWS DMS only reads changes from
@@ -4331,6 +4518,11 @@ module Aws::DatabaseMigrationService
     #   loading table option.
     #   @return [Boolean]
     #
+    # @!attribute [rw] use_third_party_backup_device
+    #   When this attribute is set to `Y`, DMS processes third-party
+    #   transaction log backups if they are created in native format.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] secrets_manager_access_role_arn
     #   The full Amazon Resource Name (ARN) of the IAM role that specifies
     #   AWS DMS as the trusted entity and grants the required permissions to
@@ -4369,11 +4561,13 @@ module Aws::DatabaseMigrationService
       :database_name,
       :control_tables_file_group,
       :password,
+      :query_single_always_on_node,
       :read_backup_only,
       :safeguard_policy,
       :server_name,
       :username,
       :use_bcp_full_load,
+      :use_third_party_backup_device,
       :secrets_manager_access_role_arn,
       :secrets_manager_secret_id)
       SENSITIVE = [:password]
@@ -4473,6 +4667,13 @@ module Aws::DatabaseMigrationService
     #           include_control_details: false,
     #           message_max_bytes: 1,
     #           include_null_and_empty: false,
+    #           security_protocol: "plaintext", # accepts plaintext, ssl-authentication, ssl-encryption, sasl-ssl
+    #           ssl_client_certificate_arn: "String",
+    #           ssl_client_key_arn: "String",
+    #           ssl_client_key_password: "SecretString",
+    #           ssl_ca_certificate_arn: "String",
+    #           sasl_username: "String",
+    #           sasl_password: "SecretString",
     #         },
     #         elasticsearch_settings: {
     #           service_access_role_arn: "String", # required
@@ -4539,6 +4740,7 @@ module Aws::DatabaseMigrationService
     #         },
     #         my_sql_settings: {
     #           after_connect_script: "String",
+    #           clean_source_metadata_on_mismatch: false,
     #           database_name: "String",
     #           events_poll_interval: 1,
     #           target_db_type: "specific-database", # accepts specific-database, multiple-databases
@@ -4582,6 +4784,7 @@ module Aws::DatabaseMigrationService
     #           security_db_encryption: "SecretString",
     #           security_db_encryption_name: "String",
     #           server_name: "String",
+    #           spatial_data_option_to_geo_json_function_name: "String",
     #           username: "String",
     #           secrets_manager_access_role_arn: "String",
     #           secrets_manager_secret_id: "String",
@@ -4603,11 +4806,13 @@ module Aws::DatabaseMigrationService
     #           database_name: "String",
     #           control_tables_file_group: "String",
     #           password: "SecretString",
+    #           query_single_always_on_node: false,
     #           read_backup_only: false,
     #           safeguard_policy: "rely-on-sql-server-replication-agent", # accepts rely-on-sql-server-replication-agent, exclusive-automatic-truncation, shared-automatic-truncation
     #           server_name: "String",
     #           username: "String",
     #           use_bcp_full_load: false,
+    #           use_third_party_backup_device: false,
     #           secrets_manager_access_role_arn: "String",
     #           secrets_manager_secret_id: "String",
     #         },
@@ -5243,8 +5448,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] table_mappings
     #   When using the AWS CLI or boto3, provide the path of the JSON file
     #   that contains the table mappings. Precede the path with `file://`.
-    #   When working with the DMS API, provide the JSON as the parameter
-    #   value, for example: `--table-mappings file://mappingfile.json`
+    #   For example, `--table-mappings file://mappingfile.json`. When
+    #   working with the DMS API, provide the JSON as the parameter value.
     #   @return [String]
     #
     # @!attribute [rw] replication_task_settings
@@ -5535,6 +5740,7 @@ module Aws::DatabaseMigrationService
     #
     #       {
     #         after_connect_script: "String",
+    #         clean_source_metadata_on_mismatch: false,
     #         database_name: "String",
     #         events_poll_interval: 1,
     #         target_db_type: "specific-database", # accepts specific-database, multiple-databases
@@ -5554,6 +5760,13 @@ module Aws::DatabaseMigrationService
     #   endpoint. The migration task continues running regardless if the SQL
     #   statement succeeds or fails.
     #   @return [String]
+    #
+    # @!attribute [rw] clean_source_metadata_on_mismatch
+    #   Adjusts the behavior of DMS when migrating from an SQL Server source
+    #   database that is hosted as part of an Always On availability group
+    #   cluster. If you need DMS to poll all the nodes in the Always On
+    #   cluster for transaction backups, set this attribute to `false`.
+    #   @return [Boolean]
     #
     # @!attribute [rw] database_name
     #   Database name for the endpoint.
@@ -5651,6 +5864,7 @@ module Aws::DatabaseMigrationService
     #
     class MySQLSettings < Struct.new(
       :after_connect_script,
+      :clean_source_metadata_on_mismatch,
       :database_name,
       :events_poll_interval,
       :target_db_type,
@@ -5781,6 +5995,7 @@ module Aws::DatabaseMigrationService
     #         security_db_encryption: "SecretString",
     #         security_db_encryption_name: "String",
     #         server_name: "String",
+    #         spatial_data_option_to_geo_json_function_name: "String",
     #         username: "String",
     #         secrets_manager_access_role_arn: "String",
     #         secrets_manager_secret_id: "String",
@@ -6019,6 +6234,14 @@ module Aws::DatabaseMigrationService
     #   Fully qualified domain name of the endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] spatial_data_option_to_geo_json_function_name
+    #   Use this attribute to convert `SDO_GEOMETRY` to `GEOJSON` format. By
+    #   default, DMS calls the `SDO2GEOJSON` custom function if present and
+    #   accessible. Or you can create your own custom function that mimics
+    #   the operation of `SDOGEOJSON` and set
+    #   `SpatialDataOptionToGeoJsonFunctionName` to call it instead.
+    #   @return [String]
+    #
     # @!attribute [rw] username
     #   Endpoint connection user name.
     #   @return [String]
@@ -6118,6 +6341,7 @@ module Aws::DatabaseMigrationService
       :security_db_encryption,
       :security_db_encryption_name,
       :server_name,
+      :spatial_data_option_to_geo_json_function_name,
       :username,
       :secrets_manager_access_role_arn,
       :secrets_manager_secret_id,
@@ -7912,7 +8136,7 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] service_access_role_arn
     #   The Amazon Resource Name (ARN) used by the service access IAM role.
     #   It is a required parameter that enables DMS to write and read
-    #   objects from an 3S bucket.
+    #   objects from an S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] external_table_definition

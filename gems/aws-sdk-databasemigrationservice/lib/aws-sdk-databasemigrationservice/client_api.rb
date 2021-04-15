@@ -72,6 +72,8 @@ module Aws::DatabaseMigrationService
     DescribeCertificatesResponse = Shapes::StructureShape.new(name: 'DescribeCertificatesResponse')
     DescribeConnectionsMessage = Shapes::StructureShape.new(name: 'DescribeConnectionsMessage')
     DescribeConnectionsResponse = Shapes::StructureShape.new(name: 'DescribeConnectionsResponse')
+    DescribeEndpointSettingsMessage = Shapes::StructureShape.new(name: 'DescribeEndpointSettingsMessage')
+    DescribeEndpointSettingsResponse = Shapes::StructureShape.new(name: 'DescribeEndpointSettingsResponse')
     DescribeEndpointTypesMessage = Shapes::StructureShape.new(name: 'DescribeEndpointTypesMessage')
     DescribeEndpointTypesResponse = Shapes::StructureShape.new(name: 'DescribeEndpointTypesResponse')
     DescribeEndpointsMessage = Shapes::StructureShape.new(name: 'DescribeEndpointsMessage')
@@ -115,6 +117,10 @@ module Aws::DatabaseMigrationService
     EncryptionModeValue = Shapes::StringShape.new(name: 'EncryptionModeValue')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EndpointList = Shapes::ListShape.new(name: 'EndpointList')
+    EndpointSetting = Shapes::StructureShape.new(name: 'EndpointSetting')
+    EndpointSettingEnumValues = Shapes::ListShape.new(name: 'EndpointSettingEnumValues')
+    EndpointSettingTypeValue = Shapes::StringShape.new(name: 'EndpointSettingTypeValue')
+    EndpointSettingsList = Shapes::ListShape.new(name: 'EndpointSettingsList')
     Event = Shapes::StructureShape.new(name: 'Event')
     EventCategoriesList = Shapes::ListShape.new(name: 'EventCategoriesList')
     EventCategoryGroup = Shapes::StructureShape.new(name: 'EventCategoryGroup')
@@ -145,6 +151,7 @@ module Aws::DatabaseMigrationService
     KMSKeyNotAccessibleFault = Shapes::StructureShape.new(name: 'KMSKeyNotAccessibleFault')
     KMSNotFoundFault = Shapes::StructureShape.new(name: 'KMSNotFoundFault')
     KMSThrottlingFault = Shapes::StructureShape.new(name: 'KMSThrottlingFault')
+    KafkaSecurityProtocol = Shapes::StringShape.new(name: 'KafkaSecurityProtocol')
     KafkaSettings = Shapes::StructureShape.new(name: 'KafkaSettings')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
     KinesisSettings = Shapes::StructureShape.new(name: 'KinesisSettings')
@@ -500,6 +507,15 @@ module Aws::DatabaseMigrationService
     DescribeConnectionsResponse.add_member(:connections, Shapes::ShapeRef.new(shape: ConnectionList, location_name: "Connections"))
     DescribeConnectionsResponse.struct_class = Types::DescribeConnectionsResponse
 
+    DescribeEndpointSettingsMessage.add_member(:engine_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EngineName"))
+    DescribeEndpointSettingsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeEndpointSettingsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeEndpointSettingsMessage.struct_class = Types::DescribeEndpointSettingsMessage
+
+    DescribeEndpointSettingsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeEndpointSettingsResponse.add_member(:endpoint_settings, Shapes::ShapeRef.new(shape: EndpointSettingsList, location_name: "EndpointSettings"))
+    DescribeEndpointSettingsResponse.struct_class = Types::DescribeEndpointSettingsResponse
+
     DescribeEndpointTypesMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeEndpointTypesMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
     DescribeEndpointTypesMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
@@ -723,6 +739,20 @@ module Aws::DatabaseMigrationService
 
     EndpointList.member = Shapes::ShapeRef.new(shape: Endpoint)
 
+    EndpointSetting.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    EndpointSetting.add_member(:type, Shapes::ShapeRef.new(shape: EndpointSettingTypeValue, location_name: "Type"))
+    EndpointSetting.add_member(:enum_values, Shapes::ShapeRef.new(shape: EndpointSettingEnumValues, location_name: "EnumValues"))
+    EndpointSetting.add_member(:sensitive, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Sensitive"))
+    EndpointSetting.add_member(:units, Shapes::ShapeRef.new(shape: String, location_name: "Units"))
+    EndpointSetting.add_member(:applicability, Shapes::ShapeRef.new(shape: String, location_name: "Applicability"))
+    EndpointSetting.add_member(:int_value_min, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "IntValueMin"))
+    EndpointSetting.add_member(:int_value_max, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "IntValueMax"))
+    EndpointSetting.struct_class = Types::EndpointSetting
+
+    EndpointSettingEnumValues.member = Shapes::ShapeRef.new(shape: String)
+
+    EndpointSettingsList.member = Shapes::ShapeRef.new(shape: EndpointSetting)
+
     Event.add_member(:source_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SourceIdentifier"))
     Event.add_member(:source_type, Shapes::ShapeRef.new(shape: SourceType, location_name: "SourceType"))
     Event.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -776,7 +806,7 @@ module Aws::DatabaseMigrationService
     IBMDb2Settings.struct_class = Types::IBMDb2Settings
 
     ImportCertificateMessage.add_member(:certificate_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CertificateIdentifier"))
-    ImportCertificateMessage.add_member(:certificate_pem, Shapes::ShapeRef.new(shape: String, location_name: "CertificatePem"))
+    ImportCertificateMessage.add_member(:certificate_pem, Shapes::ShapeRef.new(shape: SecretString, location_name: "CertificatePem"))
     ImportCertificateMessage.add_member(:certificate_wallet, Shapes::ShapeRef.new(shape: CertificateWallet, location_name: "CertificateWallet"))
     ImportCertificateMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ImportCertificateMessage.struct_class = Types::ImportCertificateMessage
@@ -831,6 +861,13 @@ module Aws::DatabaseMigrationService
     KafkaSettings.add_member(:include_control_details, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludeControlDetails"))
     KafkaSettings.add_member(:message_max_bytes, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MessageMaxBytes"))
     KafkaSettings.add_member(:include_null_and_empty, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludeNullAndEmpty"))
+    KafkaSettings.add_member(:security_protocol, Shapes::ShapeRef.new(shape: KafkaSecurityProtocol, location_name: "SecurityProtocol"))
+    KafkaSettings.add_member(:ssl_client_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "SslClientCertificateArn"))
+    KafkaSettings.add_member(:ssl_client_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "SslClientKeyArn"))
+    KafkaSettings.add_member(:ssl_client_key_password, Shapes::ShapeRef.new(shape: SecretString, location_name: "SslClientKeyPassword"))
+    KafkaSettings.add_member(:ssl_ca_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "SslCaCertificateArn"))
+    KafkaSettings.add_member(:sasl_username, Shapes::ShapeRef.new(shape: String, location_name: "SaslUsername"))
+    KafkaSettings.add_member(:sasl_password, Shapes::ShapeRef.new(shape: SecretString, location_name: "SaslPassword"))
     KafkaSettings.struct_class = Types::KafkaSettings
 
     KeyList.member = Shapes::ShapeRef.new(shape: String)
@@ -857,11 +894,13 @@ module Aws::DatabaseMigrationService
     MicrosoftSQLServerSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
     MicrosoftSQLServerSettings.add_member(:control_tables_file_group, Shapes::ShapeRef.new(shape: String, location_name: "ControlTablesFileGroup"))
     MicrosoftSQLServerSettings.add_member(:password, Shapes::ShapeRef.new(shape: SecretString, location_name: "Password"))
+    MicrosoftSQLServerSettings.add_member(:query_single_always_on_node, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "QuerySingleAlwaysOnNode"))
     MicrosoftSQLServerSettings.add_member(:read_backup_only, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ReadBackupOnly"))
     MicrosoftSQLServerSettings.add_member(:safeguard_policy, Shapes::ShapeRef.new(shape: SafeguardPolicy, location_name: "SafeguardPolicy"))
     MicrosoftSQLServerSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
     MicrosoftSQLServerSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
     MicrosoftSQLServerSettings.add_member(:use_bcp_full_load, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UseBcpFullLoad"))
+    MicrosoftSQLServerSettings.add_member(:use_third_party_backup_device, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UseThirdPartyBackupDevice"))
     MicrosoftSQLServerSettings.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
     MicrosoftSQLServerSettings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
     MicrosoftSQLServerSettings.struct_class = Types::MicrosoftSQLServerSettings
@@ -973,6 +1012,7 @@ module Aws::DatabaseMigrationService
     MoveReplicationTaskResponse.struct_class = Types::MoveReplicationTaskResponse
 
     MySQLSettings.add_member(:after_connect_script, Shapes::ShapeRef.new(shape: String, location_name: "AfterConnectScript"))
+    MySQLSettings.add_member(:clean_source_metadata_on_mismatch, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CleanSourceMetadataOnMismatch"))
     MySQLSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
     MySQLSettings.add_member(:events_poll_interval, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "EventsPollInterval"))
     MySQLSettings.add_member(:target_db_type, Shapes::ShapeRef.new(shape: TargetDbType, location_name: "TargetDbType"))
@@ -1025,6 +1065,7 @@ module Aws::DatabaseMigrationService
     OracleSettings.add_member(:security_db_encryption, Shapes::ShapeRef.new(shape: SecretString, location_name: "SecurityDbEncryption"))
     OracleSettings.add_member(:security_db_encryption_name, Shapes::ShapeRef.new(shape: String, location_name: "SecurityDbEncryptionName"))
     OracleSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
+    OracleSettings.add_member(:spatial_data_option_to_geo_json_function_name, Shapes::ShapeRef.new(shape: String, location_name: "SpatialDataOptionToGeoJsonFunctionName"))
     OracleSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
     OracleSettings.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
     OracleSettings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
@@ -1717,6 +1758,20 @@ module Aws::DatabaseMigrationService
         )
       end)
 
+      api.add_operation(:describe_endpoint_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEndpointSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEndpointSettingsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeEndpointSettingsResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:describe_endpoint_types, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeEndpointTypes"
         o.http_method = "POST"
@@ -2060,6 +2115,7 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
       end)
 
       api.add_operation(:reboot_replication_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -2164,6 +2220,7 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
       end)
     end
 

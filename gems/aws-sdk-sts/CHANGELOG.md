@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2021-04-15)
+------------------
+
+* Feature - STS now supports assume role with Web Identity using JWT token length upto 20000 characters
+
 1.1.0 (2021-04-13)
 ------------------
 

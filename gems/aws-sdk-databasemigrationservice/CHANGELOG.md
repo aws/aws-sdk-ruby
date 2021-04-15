@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2021-04-15)
+------------------
+
+* Feature - AWS DMS added support of TLS for Kafka endpoint. Added Describe endpoint setting API for DMS endpoints.
+
 1.52.0 (2021-03-10)
 ------------------
 
