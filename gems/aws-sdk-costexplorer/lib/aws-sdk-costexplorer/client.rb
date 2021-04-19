@@ -916,7 +916,7 @@ module Aws::CostExplorer
     #   data is retrieved from `2017-01-01` up to and including `2017-04-30`
     #   but not including `2017-05-01`.
     #
-    # @option params [String] :granularity
+    # @option params [required, String] :granularity
     #   Sets the AWS cost granularity to `MONTHLY` or `DAILY`, or `HOURLY`. If
     #   `Granularity` isn't set, the response object doesn't include the
     #   `Granularity`, either `MONTHLY` or `DAILY`, or `HOURLY`.
@@ -987,7 +987,7 @@ module Aws::CostExplorer
     #       start: "YearMonthDay", # required
     #       end: "YearMonthDay", # required
     #     },
-    #     granularity: "DAILY", # accepts DAILY, MONTHLY, HOURLY
+    #     granularity: "DAILY", # required, accepts DAILY, MONTHLY, HOURLY
     #     filter: {
     #       or: [
     #         {
@@ -1092,7 +1092,7 @@ module Aws::CostExplorer
     #   `2017-01-01` up to and including `2017-04-30` but not including
     #   `2017-05-01`.
     #
-    # @option params [String] :granularity
+    # @option params [required, String] :granularity
     #   Sets the AWS cost granularity to `MONTHLY`, `DAILY`, or `HOURLY`. If
     #   `Granularity` isn't set, the response object doesn't include the
     #   `Granularity`, `MONTHLY`, `DAILY`, or `HOURLY`.
@@ -1160,7 +1160,7 @@ module Aws::CostExplorer
     #       start: "YearMonthDay", # required
     #       end: "YearMonthDay", # required
     #     },
-    #     granularity: "DAILY", # accepts DAILY, MONTHLY, HOURLY
+    #     granularity: "DAILY", # required, accepts DAILY, MONTHLY, HOURLY
     #     filter: { # required
     #       or: [
     #         {
@@ -3078,7 +3078,7 @@ module Aws::CostExplorer
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_savings_plans_purchase_recommendation({
-    #     savings_plans_type: "COMPUTE_SP", # required, accepts COMPUTE_SP, EC2_INSTANCE_SP
+    #     savings_plans_type: "COMPUTE_SP", # required, accepts COMPUTE_SP, EC2_INSTANCE_SP, SAGEMAKER_SP
     #     term_in_years: "ONE_YEAR", # required, accepts ONE_YEAR, THREE_YEARS
     #     payment_option: "NO_UPFRONT", # required, accepts NO_UPFRONT, PARTIAL_UPFRONT, ALL_UPFRONT, LIGHT_UTILIZATION, MEDIUM_UTILIZATION, HEAVY_UTILIZATION
     #     account_scope: "PAYER", # accepts PAYER, LINKED
@@ -3123,7 +3123,7 @@ module Aws::CostExplorer
     #   resp.metadata.generation_timestamp #=> String
     #   resp.metadata.additional_metadata #=> String
     #   resp.savings_plans_purchase_recommendation.account_scope #=> String, one of "PAYER", "LINKED"
-    #   resp.savings_plans_purchase_recommendation.savings_plans_type #=> String, one of "COMPUTE_SP", "EC2_INSTANCE_SP"
+    #   resp.savings_plans_purchase_recommendation.savings_plans_type #=> String, one of "COMPUTE_SP", "EC2_INSTANCE_SP", "SAGEMAKER_SP"
     #   resp.savings_plans_purchase_recommendation.term_in_years #=> String, one of "ONE_YEAR", "THREE_YEARS"
     #   resp.savings_plans_purchase_recommendation.payment_option #=> String, one of "NO_UPFRONT", "PARTIAL_UPFRONT", "ALL_UPFRONT", "LIGHT_UTILIZATION", "MEDIUM_UTILIZATION", "HEAVY_UTILIZATION"
     #   resp.savings_plans_purchase_recommendation.lookback_period_in_days #=> String, one of "SEVEN_DAYS", "THIRTY_DAYS", "SIXTY_DAYS"
@@ -4099,7 +4099,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

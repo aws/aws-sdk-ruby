@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2021-04-19)
+------------------
+
+* Feature - Added support for Amazon SageMaker in Machine Learning Savings Plans
+
 1.14.0 (2021-03-10)
 ------------------
 

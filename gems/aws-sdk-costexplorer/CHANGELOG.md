@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2021-04-19)
+------------------
+
+* Feature - Adding support for Sagemaker savings plans in GetSavingsPlansPurchaseRecommendation API
+
 1.60.0 (2021-03-23)
 ------------------
 

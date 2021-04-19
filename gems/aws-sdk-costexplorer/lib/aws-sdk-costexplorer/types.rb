@@ -2004,7 +2004,7 @@ module Aws::CostExplorer
     #           start: "YearMonthDay", # required
     #           end: "YearMonthDay", # required
     #         },
-    #         granularity: "DAILY", # accepts DAILY, MONTHLY, HOURLY
+    #         granularity: "DAILY", # required, accepts DAILY, MONTHLY, HOURLY
     #         filter: {
     #           or: [
     #             {
@@ -2168,7 +2168,7 @@ module Aws::CostExplorer
     #           start: "YearMonthDay", # required
     #           end: "YearMonthDay", # required
     #         },
-    #         granularity: "DAILY", # accepts DAILY, MONTHLY, HOURLY
+    #         granularity: "DAILY", # required, accepts DAILY, MONTHLY, HOURLY
     #         filter: { # required
     #           or: [
     #             {
@@ -4107,7 +4107,7 @@ module Aws::CostExplorer
     #   data as a hash:
     #
     #       {
-    #         savings_plans_type: "COMPUTE_SP", # required, accepts COMPUTE_SP, EC2_INSTANCE_SP
+    #         savings_plans_type: "COMPUTE_SP", # required, accepts COMPUTE_SP, EC2_INSTANCE_SP, SAGEMAKER_SP
     #         term_in_years: "ONE_YEAR", # required, accepts ONE_YEAR, THREE_YEARS
     #         payment_option: "NO_UPFRONT", # required, accepts NO_UPFRONT, PARTIAL_UPFRONT, ALL_UPFRONT, LIGHT_UTILIZATION, MEDIUM_UTILIZATION, HEAVY_UTILIZATION
     #         account_scope: "PAYER", # accepts PAYER, LINKED
