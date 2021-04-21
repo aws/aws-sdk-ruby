@@ -128,6 +128,8 @@ module Aws::Kendra
     DocumentMetadataConfiguration = Shapes::StructureShape.new(name: 'DocumentMetadataConfiguration')
     DocumentMetadataConfigurationList = Shapes::ListShape.new(name: 'DocumentMetadataConfigurationList')
     DocumentMetadataConfigurationName = Shapes::StringShape.new(name: 'DocumentMetadataConfigurationName')
+    DocumentRelevanceConfiguration = Shapes::StructureShape.new(name: 'DocumentRelevanceConfiguration')
+    DocumentRelevanceOverrideConfigurationList = Shapes::ListShape.new(name: 'DocumentRelevanceOverrideConfigurationList')
     DocumentsMetadataConfiguration = Shapes::StructureShape.new(name: 'DocumentsMetadataConfiguration')
     Duration = Shapes::StringShape.new(name: 'Duration')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
@@ -709,6 +711,12 @@ module Aws::Kendra
 
     DocumentMetadataConfigurationList.member = Shapes::ShapeRef.new(shape: DocumentMetadataConfiguration)
 
+    DocumentRelevanceConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: DocumentMetadataConfigurationName, required: true, location_name: "Name"))
+    DocumentRelevanceConfiguration.add_member(:relevance, Shapes::ShapeRef.new(shape: Relevance, required: true, location_name: "Relevance"))
+    DocumentRelevanceConfiguration.struct_class = Types::DocumentRelevanceConfiguration
+
+    DocumentRelevanceOverrideConfigurationList.member = Shapes::ShapeRef.new(shape: DocumentRelevanceConfiguration)
+
     DocumentsMetadataConfiguration.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "S3Prefix"))
     DocumentsMetadataConfiguration.struct_class = Types::DocumentsMetadataConfiguration
 
@@ -871,6 +879,7 @@ module Aws::Kendra
     QueryRequest.add_member(:facets, Shapes::ShapeRef.new(shape: FacetList, location_name: "Facets"))
     QueryRequest.add_member(:requested_document_attributes, Shapes::ShapeRef.new(shape: DocumentAttributeKeyList, location_name: "RequestedDocumentAttributes"))
     QueryRequest.add_member(:query_result_type_filter, Shapes::ShapeRef.new(shape: QueryResultType, location_name: "QueryResultTypeFilter"))
+    QueryRequest.add_member(:document_relevance_override_configurations, Shapes::ShapeRef.new(shape: DocumentRelevanceOverrideConfigurationList, location_name: "DocumentRelevanceOverrideConfigurations"))
     QueryRequest.add_member(:page_number, Shapes::ShapeRef.new(shape: Integer, location_name: "PageNumber"))
     QueryRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: Integer, location_name: "PageSize"))
     QueryRequest.add_member(:sorting_configuration, Shapes::ShapeRef.new(shape: SortingConfiguration, location_name: "SortingConfiguration"))

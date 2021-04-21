@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2021-04-21)
+------------------
+
+* Feature - Support new S3 Recording Config allowing customers to write downlink data directly to S3.
+
 1.17.0 (2021-03-10)
 ------------------
 

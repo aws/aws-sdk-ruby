@@ -557,8 +557,6 @@ module Aws::Detective
     #   @return [String]
     #
     # @!attribute [rw] master_id
-    #   Deprecated. Instead of `MasterId`, use `AdministratorId`.
-    #
     #   The AWS account identifier of the administrator account for the
     #   behavior graph.
     #   @return [String]
@@ -621,6 +619,15 @@ module Aws::Detective
     #   value is in milliseconds since the epoch.
     #   @return [Time]
     #
+    # @!attribute [rw] volume_usage_in_bytes
+    #   The data volume in bytes per day for the member account.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] volume_usage_updated_time
+    #   The data and time when the member account data volume was last
+    #   updated.
+    #   @return [Time]
+    #
     # @!attribute [rw] percent_of_graph_utilization
     #   The member account data volume as a percentage of the maximum
     #   allowed data volume. 0 indicates 0 percent, and 100 indicates 100
@@ -653,6 +660,8 @@ module Aws::Detective
       :disabled_reason,
       :invited_time,
       :updated_time,
+      :volume_usage_in_bytes,
+      :volume_usage_updated_time,
       :percent_of_graph_utilization,
       :percent_of_graph_utilization_updated_time)
       SENSITIVE = []

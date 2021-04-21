@@ -176,6 +176,8 @@ module Aws::Redshift
     DescribeLoggingStatusMessage = Shapes::StructureShape.new(name: 'DescribeLoggingStatusMessage')
     DescribeNodeConfigurationOptionsMessage = Shapes::StructureShape.new(name: 'DescribeNodeConfigurationOptionsMessage')
     DescribeOrderableClusterOptionsMessage = Shapes::StructureShape.new(name: 'DescribeOrderableClusterOptionsMessage')
+    DescribePartnersInputMessage = Shapes::StructureShape.new(name: 'DescribePartnersInputMessage')
+    DescribePartnersOutputMessage = Shapes::StructureShape.new(name: 'DescribePartnersOutputMessage')
     DescribeReservedNodeOfferingsMessage = Shapes::StructureShape.new(name: 'DescribeReservedNodeOfferingsMessage')
     DescribeReservedNodesMessage = Shapes::StructureShape.new(name: 'DescribeReservedNodesMessage')
     DescribeResizeMessage = Shapes::StructureShape.new(name: 'DescribeResizeMessage')
@@ -328,6 +330,17 @@ module Aws::Redshift
     ParameterApplyType = Shapes::StringShape.new(name: 'ParameterApplyType')
     ParameterGroupList = Shapes::ListShape.new(name: 'ParameterGroupList')
     ParametersList = Shapes::ListShape.new(name: 'ParametersList')
+    PartnerIntegrationAccountId = Shapes::StringShape.new(name: 'PartnerIntegrationAccountId')
+    PartnerIntegrationClusterIdentifier = Shapes::StringShape.new(name: 'PartnerIntegrationClusterIdentifier')
+    PartnerIntegrationDatabaseName = Shapes::StringShape.new(name: 'PartnerIntegrationDatabaseName')
+    PartnerIntegrationInfo = Shapes::StructureShape.new(name: 'PartnerIntegrationInfo')
+    PartnerIntegrationInfoList = Shapes::ListShape.new(name: 'PartnerIntegrationInfoList')
+    PartnerIntegrationInputMessage = Shapes::StructureShape.new(name: 'PartnerIntegrationInputMessage')
+    PartnerIntegrationOutputMessage = Shapes::StructureShape.new(name: 'PartnerIntegrationOutputMessage')
+    PartnerIntegrationPartnerName = Shapes::StringShape.new(name: 'PartnerIntegrationPartnerName')
+    PartnerIntegrationStatus = Shapes::StringShape.new(name: 'PartnerIntegrationStatus')
+    PartnerIntegrationStatusMessage = Shapes::StringShape.new(name: 'PartnerIntegrationStatusMessage')
+    PartnerNotFoundFault = Shapes::StructureShape.new(name: 'PartnerNotFoundFault')
     PauseClusterMessage = Shapes::StructureShape.new(name: 'PauseClusterMessage')
     PauseClusterResult = Shapes::StructureShape.new(name: 'PauseClusterResult')
     PendingActionsList = Shapes::ListShape.new(name: 'PendingActionsList')
@@ -455,9 +468,11 @@ module Aws::Redshift
     TrackList = Shapes::ListShape.new(name: 'TrackList')
     TrackListMessage = Shapes::StructureShape.new(name: 'TrackListMessage')
     UnauthorizedOperation = Shapes::StructureShape.new(name: 'UnauthorizedOperation')
+    UnauthorizedPartnerIntegrationFault = Shapes::StructureShape.new(name: 'UnauthorizedPartnerIntegrationFault')
     UnknownSnapshotCopyRegionFault = Shapes::StructureShape.new(name: 'UnknownSnapshotCopyRegionFault')
     UnsupportedOperationFault = Shapes::StructureShape.new(name: 'UnsupportedOperationFault')
     UnsupportedOptionFault = Shapes::StructureShape.new(name: 'UnsupportedOptionFault')
+    UpdatePartnerStatusInputMessage = Shapes::StructureShape.new(name: 'UpdatePartnerStatusInputMessage')
     UpdateTarget = Shapes::StructureShape.new(name: 'UpdateTarget')
     UsageLimit = Shapes::StructureShape.new(name: 'UsageLimit')
     UsageLimitAlreadyExistsFault = Shapes::StructureShape.new(name: 'UsageLimitAlreadyExistsFault')
@@ -1175,6 +1190,15 @@ module Aws::Redshift
     DescribeOrderableClusterOptionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeOrderableClusterOptionsMessage.struct_class = Types::DescribeOrderableClusterOptionsMessage
 
+    DescribePartnersInputMessage.add_member(:account_id, Shapes::ShapeRef.new(shape: PartnerIntegrationAccountId, required: true, location_name: "AccountId"))
+    DescribePartnersInputMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: PartnerIntegrationClusterIdentifier, required: true, location_name: "ClusterIdentifier"))
+    DescribePartnersInputMessage.add_member(:database_name, Shapes::ShapeRef.new(shape: PartnerIntegrationDatabaseName, location_name: "DatabaseName"))
+    DescribePartnersInputMessage.add_member(:partner_name, Shapes::ShapeRef.new(shape: PartnerIntegrationPartnerName, location_name: "PartnerName"))
+    DescribePartnersInputMessage.struct_class = Types::DescribePartnersInputMessage
+
+    DescribePartnersOutputMessage.add_member(:partner_integration_info_list, Shapes::ShapeRef.new(shape: PartnerIntegrationInfoList, location_name: "PartnerIntegrationInfoList"))
+    DescribePartnersOutputMessage.struct_class = Types::DescribePartnersOutputMessage
+
     DescribeReservedNodeOfferingsMessage.add_member(:reserved_node_offering_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodeOfferingId"))
     DescribeReservedNodeOfferingsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
     DescribeReservedNodeOfferingsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
@@ -1726,6 +1750,28 @@ module Aws::Redshift
 
     ParametersList.member = Shapes::ShapeRef.new(shape: Parameter, location_name: "Parameter")
 
+    PartnerIntegrationInfo.add_member(:database_name, Shapes::ShapeRef.new(shape: PartnerIntegrationDatabaseName, location_name: "DatabaseName"))
+    PartnerIntegrationInfo.add_member(:partner_name, Shapes::ShapeRef.new(shape: PartnerIntegrationPartnerName, location_name: "PartnerName"))
+    PartnerIntegrationInfo.add_member(:status, Shapes::ShapeRef.new(shape: PartnerIntegrationStatus, location_name: "Status"))
+    PartnerIntegrationInfo.add_member(:status_message, Shapes::ShapeRef.new(shape: PartnerIntegrationStatusMessage, location_name: "StatusMessage"))
+    PartnerIntegrationInfo.add_member(:created_at, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreatedAt"))
+    PartnerIntegrationInfo.add_member(:updated_at, Shapes::ShapeRef.new(shape: TStamp, location_name: "UpdatedAt"))
+    PartnerIntegrationInfo.struct_class = Types::PartnerIntegrationInfo
+
+    PartnerIntegrationInfoList.member = Shapes::ShapeRef.new(shape: PartnerIntegrationInfo, location_name: "PartnerIntegrationInfo")
+
+    PartnerIntegrationInputMessage.add_member(:account_id, Shapes::ShapeRef.new(shape: PartnerIntegrationAccountId, required: true, location_name: "AccountId"))
+    PartnerIntegrationInputMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: PartnerIntegrationClusterIdentifier, required: true, location_name: "ClusterIdentifier"))
+    PartnerIntegrationInputMessage.add_member(:database_name, Shapes::ShapeRef.new(shape: PartnerIntegrationDatabaseName, required: true, location_name: "DatabaseName"))
+    PartnerIntegrationInputMessage.add_member(:partner_name, Shapes::ShapeRef.new(shape: PartnerIntegrationPartnerName, required: true, location_name: "PartnerName"))
+    PartnerIntegrationInputMessage.struct_class = Types::PartnerIntegrationInputMessage
+
+    PartnerIntegrationOutputMessage.add_member(:database_name, Shapes::ShapeRef.new(shape: PartnerIntegrationDatabaseName, location_name: "DatabaseName"))
+    PartnerIntegrationOutputMessage.add_member(:partner_name, Shapes::ShapeRef.new(shape: PartnerIntegrationPartnerName, location_name: "PartnerName"))
+    PartnerIntegrationOutputMessage.struct_class = Types::PartnerIntegrationOutputMessage
+
+    PartnerNotFoundFault.struct_class = Types::PartnerNotFoundFault
+
     PauseClusterMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
     PauseClusterMessage.struct_class = Types::PauseClusterMessage
 
@@ -2194,11 +2240,21 @@ module Aws::Redshift
 
     UnauthorizedOperation.struct_class = Types::UnauthorizedOperation
 
+    UnauthorizedPartnerIntegrationFault.struct_class = Types::UnauthorizedPartnerIntegrationFault
+
     UnknownSnapshotCopyRegionFault.struct_class = Types::UnknownSnapshotCopyRegionFault
 
     UnsupportedOperationFault.struct_class = Types::UnsupportedOperationFault
 
     UnsupportedOptionFault.struct_class = Types::UnsupportedOptionFault
+
+    UpdatePartnerStatusInputMessage.add_member(:account_id, Shapes::ShapeRef.new(shape: PartnerIntegrationAccountId, required: true, location_name: "AccountId"))
+    UpdatePartnerStatusInputMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: PartnerIntegrationClusterIdentifier, required: true, location_name: "ClusterIdentifier"))
+    UpdatePartnerStatusInputMessage.add_member(:database_name, Shapes::ShapeRef.new(shape: PartnerIntegrationDatabaseName, required: true, location_name: "DatabaseName"))
+    UpdatePartnerStatusInputMessage.add_member(:partner_name, Shapes::ShapeRef.new(shape: PartnerIntegrationPartnerName, required: true, location_name: "PartnerName"))
+    UpdatePartnerStatusInputMessage.add_member(:status, Shapes::ShapeRef.new(shape: PartnerIntegrationStatus, required: true, location_name: "Status"))
+    UpdatePartnerStatusInputMessage.add_member(:status_message, Shapes::ShapeRef.new(shape: PartnerIntegrationStatusMessage, location_name: "StatusMessage"))
+    UpdatePartnerStatusInputMessage.struct_class = Types::UpdatePartnerStatusInputMessage
 
     UpdateTarget.add_member(:maintenance_track_name, Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceTrackName"))
     UpdateTarget.add_member(:database_version, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseVersion"))
@@ -2274,6 +2330,17 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
         o.errors << Shapes::ShapeRef.new(shape: DependentServiceUnavailableFault)
         o.errors << Shapes::ShapeRef.new(shape: ReservedNodeAlreadyExistsFault)
+      end)
+
+      api.add_operation(:add_partner, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AddPartner"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PartnerIntegrationInputMessage)
+        o.output = Shapes::ShapeRef.new(shape: PartnerIntegrationOutputMessage)
+        o.errors << Shapes::ShapeRef.new(shape: PartnerNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedPartnerIntegrationFault)
       end)
 
       api.add_operation(:authorize_cluster_security_group_ingress, Seahorse::Model::Operation.new.tap do |o|
@@ -2672,6 +2739,17 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: HsmConfigurationNotFoundFault)
       end)
 
+      api.add_operation(:delete_partner, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePartner"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PartnerIntegrationInputMessage)
+        o.output = Shapes::ShapeRef.new(shape: PartnerIntegrationOutputMessage)
+        o.errors << Shapes::ShapeRef.new(shape: PartnerNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedPartnerIntegrationFault)
+      end)
+
       api.add_operation(:delete_scheduled_action, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteScheduledAction"
         o.http_method = "POST"
@@ -2895,6 +2973,12 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: EndpointNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_endpoint_authorization, Seahorse::Model::Operation.new.tap do |o|
@@ -2905,6 +2989,12 @@ module Aws::Redshift
         o.output = Shapes::ShapeRef.new(shape: EndpointAuthorizationList)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_event_categories, Seahorse::Model::Operation.new.tap do |o|
@@ -3016,6 +3106,16 @@ module Aws::Redshift
             "marker" => "marker"
           }
         )
+      end)
+
+      api.add_operation(:describe_partners, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribePartners"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribePartnersInputMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribePartnersOutputMessage)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedPartnerIntegrationFault)
       end)
 
       api.add_operation(:describe_reserved_node_offerings, Seahorse::Model::Operation.new.tap do |o|
@@ -3604,6 +3704,17 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DependentServiceRequestThrottlingFault)
+      end)
+
+      api.add_operation(:update_partner_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePartnerStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePartnerStatusInputMessage)
+        o.output = Shapes::ShapeRef.new(shape: PartnerIntegrationOutputMessage)
+        o.errors << Shapes::ShapeRef.new(shape: PartnerNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedPartnerIntegrationFault)
       end)
     end
 

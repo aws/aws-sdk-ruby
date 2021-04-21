@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2021-04-21)
+------------------
+
+* Feature - Added support for creating and updating stack sets with self-managed permissions from templates that reference macros.
+
 1.50.0 (2021-03-31)
 ------------------
 

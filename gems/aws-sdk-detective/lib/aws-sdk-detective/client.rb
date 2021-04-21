@@ -482,6 +482,8 @@ module Aws::Detective
     #   resp.members[0].disabled_reason #=> String, one of "VOLUME_TOO_HIGH", "VOLUME_UNKNOWN"
     #   resp.members[0].invited_time #=> Time
     #   resp.members[0].updated_time #=> Time
+    #   resp.members[0].volume_usage_in_bytes #=> Integer
+    #   resp.members[0].volume_usage_updated_time #=> Time
     #   resp.members[0].percent_of_graph_utilization #=> Float
     #   resp.members[0].percent_of_graph_utilization_updated_time #=> Time
     #   resp.unprocessed_accounts #=> Array
@@ -631,6 +633,8 @@ module Aws::Detective
     #   resp.member_details[0].disabled_reason #=> String, one of "VOLUME_TOO_HIGH", "VOLUME_UNKNOWN"
     #   resp.member_details[0].invited_time #=> Time
     #   resp.member_details[0].updated_time #=> Time
+    #   resp.member_details[0].volume_usage_in_bytes #=> Integer
+    #   resp.member_details[0].volume_usage_updated_time #=> Time
     #   resp.member_details[0].percent_of_graph_utilization #=> Float
     #   resp.member_details[0].percent_of_graph_utilization_updated_time #=> Time
     #   resp.unprocessed_accounts #=> Array
@@ -742,6 +746,8 @@ module Aws::Detective
     #   resp.invitations[0].disabled_reason #=> String, one of "VOLUME_TOO_HIGH", "VOLUME_UNKNOWN"
     #   resp.invitations[0].invited_time #=> Time
     #   resp.invitations[0].updated_time #=> Time
+    #   resp.invitations[0].volume_usage_in_bytes #=> Integer
+    #   resp.invitations[0].volume_usage_updated_time #=> Time
     #   resp.invitations[0].percent_of_graph_utilization #=> Float
     #   resp.invitations[0].percent_of_graph_utilization_updated_time #=> Time
     #   resp.next_token #=> String
@@ -799,6 +805,8 @@ module Aws::Detective
     #   resp.member_details[0].disabled_reason #=> String, one of "VOLUME_TOO_HIGH", "VOLUME_UNKNOWN"
     #   resp.member_details[0].invited_time #=> Time
     #   resp.member_details[0].updated_time #=> Time
+    #   resp.member_details[0].volume_usage_in_bytes #=> Integer
+    #   resp.member_details[0].volume_usage_updated_time #=> Time
     #   resp.member_details[0].percent_of_graph_utilization #=> Float
     #   resp.member_details[0].percent_of_graph_utilization_updated_time #=> Time
     #   resp.next_token #=> String
@@ -973,7 +981,7 @@ module Aws::Detective
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-detective'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

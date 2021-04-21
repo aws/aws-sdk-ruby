@@ -2018,6 +2018,23 @@ module Aws::Kendra
     #   Sets the type of query. Only results for the specified query type are
     #   returned.
     #
+    # @option params [Array<Types::DocumentRelevanceConfiguration>] :document_relevance_override_configurations
+    #   Overrides relevance tuning configurations of fields or attributes set
+    #   at the index level.
+    #
+    #   If you use this API to override the relevance tuning configured at the
+    #   index level, but there is no relevance tuning configured at the index
+    #   level, then Amazon Kendra does not apply any relevance tuning.
+    #
+    #   If there is relevance tuning configured at the index level, but you do
+    #   not use this API to override any relevance tuning in the index, then
+    #   Amazon Kendra uses the relevance tuning that is configured at the
+    #   index level.
+    #
+    #   If there is relevance tuning configured for fields at the index level,
+    #   but you use this API to override only some of these fields, then for
+    #   the fields you did not override, the importance is set to 1.
+    #
     # @option params [Integer] :page_number
     #   Query results are returned in pages the size of the `PageSize`
     #   parameter. By default, Amazon Kendra returns the first page of
@@ -2144,6 +2161,20 @@ module Aws::Kendra
     #     ],
     #     requested_document_attributes: ["DocumentAttributeKey"],
     #     query_result_type_filter: "DOCUMENT", # accepts DOCUMENT, QUESTION_ANSWER, ANSWER
+    #     document_relevance_override_configurations: [
+    #       {
+    #         name: "DocumentMetadataConfigurationName", # required
+    #         relevance: { # required
+    #           freshness: false,
+    #           importance: 1,
+    #           duration: "Duration",
+    #           rank_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #           value_importance_map: {
+    #             "ValueImportanceMapKey" => 1,
+    #           },
+    #         },
+    #       },
+    #     ],
     #     page_number: 1,
     #     page_size: 1,
     #     sorting_configuration: {
@@ -2853,7 +2884,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

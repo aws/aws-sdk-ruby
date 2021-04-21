@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2021-04-21)
+------------------
+
+* Feature - Added parameters to track the data volume in bytes for a member account. Deprecated the existing parameters that tracked the volume as a percentage of the allowed volume for a behavior graph. Changes reflected in MemberDetails object.
+
 1.16.0 (2021-03-31)
 ------------------
 

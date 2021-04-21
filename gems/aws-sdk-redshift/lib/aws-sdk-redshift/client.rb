@@ -378,6 +378,52 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Adds a partner integration to a cluster. This operation authorizes a
+    # partner to push status updates for the specified database. To complete
+    # the integration, you also set up the integration on the partner
+    # website.
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID that owns the cluster.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The cluster identifier of the cluster that receives data from the
+    #   partner.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database that receives data from the partner.
+    #
+    # @option params [required, String] :partner_name
+    #   The name of the partner that is authorized to send data.
+    #
+    # @return [Types::PartnerIntegrationOutputMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PartnerIntegrationOutputMessage#database_name #database_name} => String
+    #   * {Types::PartnerIntegrationOutputMessage#partner_name #partner_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_partner({
+    #     account_id: "PartnerIntegrationAccountId", # required
+    #     cluster_identifier: "PartnerIntegrationClusterIdentifier", # required
+    #     database_name: "PartnerIntegrationDatabaseName", # required
+    #     partner_name: "PartnerIntegrationPartnerName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.database_name #=> String
+    #   resp.partner_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AddPartner AWS API Documentation
+    #
+    # @overload add_partner(params = {})
+    # @param [Hash] params ({})
+    def add_partner(params = {}, options = {})
+      req = build_request(:add_partner, params)
+      req.send_request(options)
+    end
+
     # Adds an inbound (ingress) rule to an Amazon Redshift security group.
     # Depending on whether the application accessing your cluster is running
     # on the Internet or an Amazon EC2 instance, you can authorize inbound
@@ -2983,6 +3029,51 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Deletes a partner integration from a cluster. Data can still flow to
+    # the cluster until the integration is deleted at the partner's
+    # website.
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID that owns the cluster.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The cluster identifier of the cluster that receives data from the
+    #   partner.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database that receives data from the partner.
+    #
+    # @option params [required, String] :partner_name
+    #   The name of the partner that is authorized to send data.
+    #
+    # @return [Types::PartnerIntegrationOutputMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PartnerIntegrationOutputMessage#database_name #database_name} => String
+    #   * {Types::PartnerIntegrationOutputMessage#partner_name #partner_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_partner({
+    #     account_id: "PartnerIntegrationAccountId", # required
+    #     cluster_identifier: "PartnerIntegrationClusterIdentifier", # required
+    #     database_name: "PartnerIntegrationDatabaseName", # required
+    #     partner_name: "PartnerIntegrationPartnerName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.database_name #=> String
+    #   resp.partner_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeletePartner AWS API Documentation
+    #
+    # @overload delete_partner(params = {})
+    # @param [Hash] params ({})
+    def delete_partner(params = {}, options = {})
+      req = build_request(:delete_partner, params)
+      req.send_request(options)
+    end
+
     # Deletes a scheduled action.
     #
     # @option params [required, String] :scheduled_action_name
@@ -4252,15 +4343,23 @@ module Aws::Redshift
     #   The virtual private cloud (VPC) identifier with access to the cluster.
     #
     # @option params [Integer] :max_records
-    #   Reserved for Amazon Redshift internal use.
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a `Marker` is included in the response so that the
+    #   remaining results can be retrieved.
     #
     # @option params [String] :marker
-    #   Reserved for Amazon Redshift internal use.
+    #   An optional pagination token provided by a previous
+    #   `DescribeEndpointAccess` request. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by the `MaxRecords` parameter.
     #
     # @return [Types::EndpointAccessList] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EndpointAccessList#endpoint_access_list #endpoint_access_list} => Array&lt;Types::EndpointAccess&gt;
     #   * {Types::EndpointAccessList#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4322,15 +4421,23 @@ module Aws::Redshift
     #   authorization from a grantor point of view.
     #
     # @option params [Integer] :max_records
-    #   Reserved for Amazon Redshift internal use.
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a `Marker` is included in the response so that the
+    #   remaining results can be retrieved.
     #
     # @option params [String] :marker
-    #   Reserved for Amazon Redshift internal use.
+    #   An optional pagination token provided by a previous
+    #   `DescribeEndpointAuthorization` request. If this parameter is
+    #   specified, the response includes only records beyond the marker, up to
+    #   the value specified by the `MaxRecords` parameter.
     #
     # @return [Types::EndpointAuthorizationList] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EndpointAuthorizationList#endpoint_authorization_list #endpoint_authorization_list} => Array&lt;Types::EndpointAuthorization&gt;
     #   * {Types::EndpointAuthorizationList#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5052,6 +5159,57 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def describe_orderable_cluster_options(params = {}, options = {})
       req = build_request(:describe_orderable_cluster_options, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the partner integrations defined for a
+    # cluster.
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID that owns the cluster.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The cluster identifier of the cluster whose partner integration is
+    #   being described.
+    #
+    # @option params [String] :database_name
+    #   The name of the database whose partner integration is being described.
+    #   If database name is not specified, then all databases in the cluster
+    #   are described.
+    #
+    # @option params [String] :partner_name
+    #   The name of the partner that is being described. If partner name is
+    #   not specified, then all partner integrations are described.
+    #
+    # @return [Types::DescribePartnersOutputMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePartnersOutputMessage#partner_integration_info_list #partner_integration_info_list} => Array&lt;Types::PartnerIntegrationInfo&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_partners({
+    #     account_id: "PartnerIntegrationAccountId", # required
+    #     cluster_identifier: "PartnerIntegrationClusterIdentifier", # required
+    #     database_name: "PartnerIntegrationDatabaseName",
+    #     partner_name: "PartnerIntegrationPartnerName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.partner_integration_info_list #=> Array
+    #   resp.partner_integration_info_list[0].database_name #=> String
+    #   resp.partner_integration_info_list[0].partner_name #=> String
+    #   resp.partner_integration_info_list[0].status #=> String, one of "Active", "Inactive", "RuntimeFailure", "ConnectionFailure"
+    #   resp.partner_integration_info_list[0].status_message #=> String
+    #   resp.partner_integration_info_list[0].created_at #=> Time
+    #   resp.partner_integration_info_list[0].updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribePartners AWS API Documentation
+    #
+    # @overload describe_partners(params = {})
+    # @param [Hash] params ({})
+    def describe_partners(params = {}, options = {})
+      req = build_request(:describe_partners, params)
       req.send_request(options)
     end
 
@@ -9800,6 +9958,58 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Updates the status of a partner integration.
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID that owns the cluster.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The cluster identifier of the cluster whose partner integration status
+    #   is being updated.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database whose partner integration status is being
+    #   updated.
+    #
+    # @option params [required, String] :partner_name
+    #   The name of the partner whose integration status is being updated.
+    #
+    # @option params [required, String] :status
+    #   The value of the updated status.
+    #
+    # @option params [String] :status_message
+    #   The status message provided by the partner.
+    #
+    # @return [Types::PartnerIntegrationOutputMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PartnerIntegrationOutputMessage#database_name #database_name} => String
+    #   * {Types::PartnerIntegrationOutputMessage#partner_name #partner_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_partner_status({
+    #     account_id: "PartnerIntegrationAccountId", # required
+    #     cluster_identifier: "PartnerIntegrationClusterIdentifier", # required
+    #     database_name: "PartnerIntegrationDatabaseName", # required
+    #     partner_name: "PartnerIntegrationPartnerName", # required
+    #     status: "Active", # required, accepts Active, Inactive, RuntimeFailure, ConnectionFailure
+    #     status_message: "PartnerIntegrationStatusMessage",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.database_name #=> String
+    #   resp.partner_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UpdatePartnerStatus AWS API Documentation
+    #
+    # @overload update_partner_status(params = {})
+    # @param [Hash] params ({})
+    def update_partner_status(params = {}, options = {})
+      req = build_request(:update_partner_status, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -9813,7 +10023,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

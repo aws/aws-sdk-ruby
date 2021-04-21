@@ -3449,6 +3449,45 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Overrides the document relevance properties of a custom index field.
+    #
+    # @note When making an API call, you may pass DocumentRelevanceConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         name: "DocumentMetadataConfigurationName", # required
+    #         relevance: { # required
+    #           freshness: false,
+    #           importance: 1,
+    #           duration: "Duration",
+    #           rank_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #           value_importance_map: {
+    #             "ValueImportanceMapKey" => 1,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the tuning configuration to override document relevance
+    #   at the index level.
+    #   @return [String]
+    #
+    # @!attribute [rw] relevance
+    #   Provides information for manually tuning the relevance of a field in
+    #   a search. When a query includes terms that match the field, the
+    #   results are given a boost in the response based on these tuning
+    #   parameters.
+    #   @return [Types::Relevance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DocumentRelevanceConfiguration AWS API Documentation
+    #
+    class DocumentRelevanceConfiguration < Struct.new(
+      :name,
+      :relevance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Document metadata files that contain information such as the document
     # access control information, source URI, document author, and custom
     # attributes. Each metadata file contains metadata about a single
@@ -4437,6 +4476,20 @@ module Aws::Kendra
     #         ],
     #         requested_document_attributes: ["DocumentAttributeKey"],
     #         query_result_type_filter: "DOCUMENT", # accepts DOCUMENT, QUESTION_ANSWER, ANSWER
+    #         document_relevance_override_configurations: [
+    #           {
+    #             name: "DocumentMetadataConfigurationName", # required
+    #             relevance: { # required
+    #               freshness: false,
+    #               importance: 1,
+    #               duration: "Duration",
+    #               rank_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #               value_importance_map: {
+    #                 "ValueImportanceMapKey" => 1,
+    #               },
+    #             },
+    #           },
+    #         ],
     #         page_number: 1,
     #         page_size: 1,
     #         sorting_configuration: {
@@ -4486,6 +4539,25 @@ module Aws::Kendra
     #   are returned.
     #   @return [String]
     #
+    # @!attribute [rw] document_relevance_override_configurations
+    #   Overrides relevance tuning configurations of fields or attributes
+    #   set at the index level.
+    #
+    #   If you use this API to override the relevance tuning configured at
+    #   the index level, but there is no relevance tuning configured at the
+    #   index level, then Amazon Kendra does not apply any relevance tuning.
+    #
+    #   If there is relevance tuning configured at the index level, but you
+    #   do not use this API to override any relevance tuning in the index,
+    #   then Amazon Kendra uses the relevance tuning that is configured at
+    #   the index level.
+    #
+    #   If there is relevance tuning configured for fields at the index
+    #   level, but you use this API to override only some of these fields,
+    #   then for the fields you did not override, the importance is set to
+    #   1.
+    #   @return [Array<Types::DocumentRelevanceConfiguration>]
+    #
     # @!attribute [rw] page_number
     #   Query results are returned in pages the size of the `PageSize`
     #   parameter. By default, Amazon Kendra returns the first page of
@@ -4530,6 +4602,7 @@ module Aws::Kendra
       :facets,
       :requested_document_attributes,
       :query_result_type_filter,
+      :document_relevance_override_configurations,
       :page_number,
       :page_size,
       :sorting_configuration,

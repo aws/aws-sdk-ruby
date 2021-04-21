@@ -4300,11 +4300,17 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] max_records
-    #   Reserved for Amazon Redshift internal use.
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a `Marker` is included in the response so that the
+    #   remaining results can be retrieved.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
-    #   Reserved for Amazon Redshift internal use.
+    #   An optional pagination token provided by a previous
+    #   `DescribeEndpointAccess` request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the
+    #   value specified by the `MaxRecords` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEndpointAccessMessage AWS API Documentation
@@ -4349,11 +4355,17 @@ module Aws::Redshift
     #   @return [Boolean]
     #
     # @!attribute [rw] max_records
-    #   Reserved for Amazon Redshift internal use.
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a `Marker` is included in the response so that the
+    #   remaining results can be retrieved.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
-    #   Reserved for Amazon Redshift internal use.
+    #   An optional pagination token provided by a previous
+    #   `DescribeEndpointAuthorization` request. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by the `MaxRecords` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEndpointAuthorizationMessage AWS API Documentation
@@ -4887,6 +4899,59 @@ module Aws::Redshift
       :node_type,
       :max_records,
       :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribePartnersInputMessage
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "PartnerIntegrationAccountId", # required
+    #         cluster_identifier: "PartnerIntegrationClusterIdentifier", # required
+    #         database_name: "PartnerIntegrationDatabaseName",
+    #         partner_name: "PartnerIntegrationPartnerName",
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID that owns the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The cluster identifier of the cluster whose partner integration is
+    #   being described.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database whose partner integration is being
+    #   described. If database name is not specified, then all databases in
+    #   the cluster are described.
+    #   @return [String]
+    #
+    # @!attribute [rw] partner_name
+    #   The name of the partner that is being described. If partner name is
+    #   not specified, then all partner integrations are described.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribePartnersInputMessage AWS API Documentation
+    #
+    class DescribePartnersInputMessage < Struct.new(
+      :account_id,
+      :cluster_identifier,
+      :database_name,
+      :partner_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] partner_integration_info_list
+    #   A list of partner integrations.
+    #   @return [Array<Types::PartnerIntegrationInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribePartnersOutputMessage AWS API Documentation
+    #
+    class DescribePartnersOutputMessage < Struct.new(
+      :partner_integration_info_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5800,7 +5865,10 @@ module Aws::Redshift
     #   @return [Array<Types::EndpointAccess>]
     #
     # @!attribute [rw] marker
-    #   Reserved for Amazon Redshift internal use.
+    #   An optional pagination token provided by a previous
+    #   `DescribeEndpointAccess` request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the
+    #   value specified by the `MaxRecords` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EndpointAccessList AWS API Documentation
@@ -5887,7 +5955,10 @@ module Aws::Redshift
     #   @return [Array<Types::EndpointAuthorization>]
     #
     # @!attribute [rw] marker
-    #   Reserved for Amazon Redshift internal use.
+    #   An optional pagination token provided by a previous
+    #   `DescribeEndpointAuthorization` request. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by the `MaxRecords` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EndpointAuthorizationList AWS API Documentation
@@ -8227,6 +8298,107 @@ module Aws::Redshift
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Describes a partner integration.
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database that receives data from a partner.
+    #   @return [String]
+    #
+    # @!attribute [rw] partner_name
+    #   The name of the partner.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The partner integration status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message provided by the partner.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date (UTC) that the partner integration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date (UTC) that the partner integration status was last updated
+    #   by the partner.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PartnerIntegrationInfo AWS API Documentation
+    #
+    class PartnerIntegrationInfo < Struct.new(
+      :database_name,
+      :partner_name,
+      :status,
+      :status_message,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PartnerIntegrationInputMessage
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "PartnerIntegrationAccountId", # required
+    #         cluster_identifier: "PartnerIntegrationClusterIdentifier", # required
+    #         database_name: "PartnerIntegrationDatabaseName", # required
+    #         partner_name: "PartnerIntegrationPartnerName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID that owns the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The cluster identifier of the cluster that receives data from the
+    #   partner.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database that receives data from the partner.
+    #   @return [String]
+    #
+    # @!attribute [rw] partner_name
+    #   The name of the partner that is authorized to send data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PartnerIntegrationInputMessage AWS API Documentation
+    #
+    class PartnerIntegrationInputMessage < Struct.new(
+      :account_id,
+      :cluster_identifier,
+      :database_name,
+      :partner_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] database_name
+    #   The name of the database that receives data from the partner.
+    #   @return [String]
+    #
+    # @!attribute [rw] partner_name
+    #   The name of the partner that is authorized to send data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PartnerIntegrationOutputMessage AWS API Documentation
+    #
+    class PartnerIntegrationOutputMessage < Struct.new(
+      :database_name,
+      :partner_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The name of the partner was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PartnerNotFoundFault AWS API Documentation
+    #
+    class PartnerNotFoundFault < Aws::EmptyStructure; end
 
     # Describes a pause cluster operation. For example, a scheduled action
     # to run the `PauseCluster` API operation.
@@ -10733,6 +10905,12 @@ module Aws::Redshift
     #
     class UnauthorizedOperation < Aws::EmptyStructure; end
 
+    # The partner integration is not authorized.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UnauthorizedPartnerIntegrationFault AWS API Documentation
+    #
+    class UnauthorizedPartnerIntegrationFault < Aws::EmptyStructure; end
+
     # The specified region is incorrect or does not exist.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UnknownSnapshotCopyRegionFault AWS API Documentation
@@ -10750,6 +10928,57 @@ module Aws::Redshift
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UnsupportedOptionFault AWS API Documentation
     #
     class UnsupportedOptionFault < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdatePartnerStatusInputMessage
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "PartnerIntegrationAccountId", # required
+    #         cluster_identifier: "PartnerIntegrationClusterIdentifier", # required
+    #         database_name: "PartnerIntegrationDatabaseName", # required
+    #         partner_name: "PartnerIntegrationPartnerName", # required
+    #         status: "Active", # required, accepts Active, Inactive, RuntimeFailure, ConnectionFailure
+    #         status_message: "PartnerIntegrationStatusMessage",
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID that owns the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The cluster identifier of the cluster whose partner integration
+    #   status is being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database whose partner integration status is being
+    #   updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] partner_name
+    #   The name of the partner whose integration status is being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The value of the updated status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message provided by the partner.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UpdatePartnerStatusInputMessage AWS API Documentation
+    #
+    class UpdatePartnerStatusInputMessage < Struct.new(
+      :account_id,
+      :cluster_identifier,
+      :database_name,
+      :partner_name,
+      :status,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # A maintenance track that you can switch the current track to.
     #

@@ -103,6 +103,7 @@ module Aws::Redshift
   # * {LimitExceededFault}
   # * {NumberOfNodesPerClusterLimitExceededFault}
   # * {NumberOfNodesQuotaExceededFault}
+  # * {PartnerNotFoundFault}
   # * {ReservedNodeAlreadyExistsFault}
   # * {ReservedNodeAlreadyMigratedFault}
   # * {ReservedNodeNotFoundFault}
@@ -139,6 +140,7 @@ module Aws::Redshift
   # * {TableRestoreNotFoundFault}
   # * {TagLimitExceededFault}
   # * {UnauthorizedOperation}
+  # * {UnauthorizedPartnerIntegrationFault}
   # * {UnknownSnapshotCopyRegionFault}
   # * {UnsupportedOperationFault}
   # * {UnsupportedOptionFault}
@@ -911,6 +913,16 @@ module Aws::Redshift
       end
     end
 
+    class PartnerNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::PartnerNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class ReservedNodeAlreadyExistsFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1266,6 +1278,16 @@ module Aws::Redshift
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Redshift::Types::UnauthorizedOperation] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class UnauthorizedPartnerIntegrationFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::UnauthorizedPartnerIntegrationFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

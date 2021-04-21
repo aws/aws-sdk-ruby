@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2021-04-21)
+------------------
+
+* Feature - Add operations: AddPartner, DescribePartners, DeletePartner, and UpdatePartnerStatus to support tracking integration status with data partners.
+
 1.61.0 (2021-04-13)
 ------------------
 

@@ -1354,20 +1354,21 @@ module Aws::CloudFormation
     #
     #   * `CAPABILITY_AUTO_EXPAND`
     #
-    #     Some templates contain macros. If your stack template contains one
-    #     or more macros, and you choose to create a stack directly from the
-    #     processed template, without first reviewing the resulting changes in
-    #     a change set, you must acknowledge this capability. For more
-    #     information, see [Using AWS CloudFormation Macros to Perform Custom
-    #     Processing on Templates][9].
+    #     Some templates reference macros. If your stack set template
+    #     references one or more macros, you must create the stack set
+    #     directly from the processed template, without first reviewing the
+    #     resulting changes in a change set. To create the stack set directly,
+    #     you must acknowledge this capability. For more information, see
+    #     [Using AWS CloudFormation Macros to Perform Custom Processing on
+    #     Templates][9].
     #
-    #     <note markdown="1"> Stack sets do not currently support macros in stack templates. (This
-    #     includes the [AWS::Include][10] and [AWS::Serverless][11]
-    #     transforms, which are macros hosted by AWS CloudFormation.) Even if
-    #     you specify this capability, if you include a macro in your template
-    #     the stack set operation will fail.
-    #
-    #      </note>
+    #     Stack sets with service-managed permissions do not currently support
+    #     the use of macros in templates. (This includes the
+    #     [AWS::Include][10] and [AWS::Serverless][11] transforms, which are
+    #     macros hosted by AWS CloudFormation.) Even if you specify this
+    #     capability for a stack set with service-managed permissions, if you
+    #     reference a macro in your template the stack set operation will
+    #     fail.
     #
     #
     #
@@ -5332,18 +5333,21 @@ module Aws::CloudFormation
     #
     #   * `CAPABILITY_AUTO_EXPAND`
     #
-    #     Some templates contain macros. If your stack template contains one
-    #     or more macros, and you choose to update a stack directly from the
-    #     processed template, without first reviewing the resulting changes in
-    #     a change set, you must acknowledge this capability. For more
-    #     information, see [Using AWS CloudFormation Macros to Perform Custom
-    #     Processing on Templates][9].
+    #     Some templates reference macros. If your stack set template
+    #     references one or more macros, you must update the stack set
+    #     directly from the processed template, without first reviewing the
+    #     resulting changes in a change set. To update the stack set directly,
+    #     you must acknowledge this capability. For more information, see
+    #     [Using AWS CloudFormation Macros to Perform Custom Processing on
+    #     Templates][9].
     #
-    #     Stack sets do not currently support macros in stack templates. (This
-    #     includes the [AWS::Include][10] and [AWS::Serverless][11]
-    #     transforms, which are macros hosted by AWS CloudFormation.) Even if
-    #     you specify this capability, if you include a macro in your template
-    #     the stack set operation will fail.
+    #     Stack sets with service-managed permissions do not currently support
+    #     the use of macros in templates. (This includes the
+    #     [AWS::Include][10] and [AWS::Serverless][11] transforms, which are
+    #     macros hosted by AWS CloudFormation.) Even if you specify this
+    #     capability for a stack set with service-managed permissions, if you
+    #     reference a macro in your template the stack set operation will
+    #     fail.
     #
     #
     #
@@ -5739,7 +5743,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

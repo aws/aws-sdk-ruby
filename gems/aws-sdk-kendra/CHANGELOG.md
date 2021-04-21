@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2021-04-21)
+------------------
+
+* Feature - Amazon Kendra now enables users to override index-level boosting configurations for each query.
+
 1.23.0 (2021-04-01)
 ------------------
 
