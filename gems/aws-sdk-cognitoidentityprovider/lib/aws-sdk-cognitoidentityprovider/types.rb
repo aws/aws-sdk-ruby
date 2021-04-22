@@ -705,7 +705,7 @@ module Aws::CognitoIdentityProvider
     #
     class AdminDisableProviderForUserResponse < Aws::EmptyStructure; end
 
-    # Represents the request to disable any user as an administrator.
+    # Represents the request to disable the user as an administrator.
     #
     # @note When making an API call, you may pass AdminDisableUserRequest
     #   data as a hash:
@@ -1191,10 +1191,22 @@ module Aws::CognitoIdentityProvider
     #     with `USERNAME` and `PASSWORD` directly. An app client must be
     #     enabled to use this flow.
     #
-    #   * `NEW_PASSWORD_REQUIRED`\: For users which are required to change
+    #   * `NEW_PASSWORD_REQUIRED`\: For users who are required to change
     #     their passwords after successful first login. This challenge
     #     should be passed with `NEW_PASSWORD` and any other required
     #     attributes.
+    #
+    #   * `MFA_SETUP`\: For users who are required to setup an MFA factor
+    #     before they can sign-in. The MFA types enabled for the user pool
+    #     will be listed in the challenge parameters `MFA_CAN_SETUP` value.
+    #
+    #     To setup software token MFA, use the session returned here from
+    #     `InitiateAuth` as an input to `AssociateSoftwareToken`, and use
+    #     the session returned by `VerifySoftwareToken` as an input to
+    #     `RespondToAuthChallenge` with challenge name `MFA_SETUP` to
+    #     complete sign-in. To setup SMS MFA, users will need help from an
+    #     administrator to add a phone number to their account and then call
+    #     `InitiateAuth` again to restart sign-in.
     #   @return [String]
     #
     # @!attribute [rw] session
@@ -1670,6 +1682,10 @@ module Aws::CognitoIdentityProvider
     #   * `NEW_PASSWORD_REQUIRED`\: `NEW_PASSWORD`, any other required
     #     attributes, `USERNAME`, `SECRET_HASH` (if app client is configured
     #     with client secret).
+    #
+    #   * `MFA_SETUP` requires `USERNAME`, plus you need to use the session
+    #     value returned by `VerifySoftwareToken` in the `Session`
+    #     parameter.
     #
     #   The value of the `USERNAME` attribute must be the user's actual
     #   username, not an alias (such as email address or phone number). To
@@ -5889,10 +5905,22 @@ module Aws::CognitoIdentityProvider
     #   * `DEVICE_PASSWORD_VERIFIER`\: Similar to `PASSWORD_VERIFIER`, but
     #     for devices only.
     #
-    #   * `NEW_PASSWORD_REQUIRED`\: For users which are required to change
+    #   * `NEW_PASSWORD_REQUIRED`\: For users who are required to change
     #     their passwords after successful first login. This challenge
     #     should be passed with `NEW_PASSWORD` and any other required
     #     attributes.
+    #
+    #   * `MFA_SETUP`\: For users who are required to setup an MFA factor
+    #     before they can sign-in. The MFA types enabled for the user pool
+    #     will be listed in the challenge parameters `MFA_CAN_SETUP` value.
+    #
+    #     To setup software token MFA, use the session returned here from
+    #     `InitiateAuth` as an input to `AssociateSoftwareToken`, and use
+    #     the session returned by `VerifySoftwareToken` as an input to
+    #     `RespondToAuthChallenge` with challenge name `MFA_SETUP` to
+    #     complete sign-in. To setup SMS MFA, users will need help from an
+    #     administrator to add a phone number to their account and then call
+    #     `InitiateAuth` again to restart sign-in.
     #   @return [String]
     #
     # @!attribute [rw] session
@@ -7467,6 +7495,10 @@ module Aws::CognitoIdentityProvider
     #
     #   * `DEVICE_PASSWORD_VERIFIER` requires everything that
     #     `PASSWORD_VERIFIER` requires plus `DEVICE_KEY`.
+    #
+    #   * `MFA_SETUP` requires `USERNAME`, plus you need to use the session
+    #     value returned by `VerifySoftwareToken` in the `Session`
+    #     parameter.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] analytics_metadata
@@ -8017,7 +8049,11 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::SoftwareTokenMfaConfigType]
     #
     # @!attribute [rw] mfa_configuration
-    #   The MFA configuration. Valid values include:
+    #   The MFA configuration. Users who don't have an MFA factor set up
+    #   won't be able to sign-in if you set the MfaConfiguration value to
+    #   ‘ON’. See [Adding Multi-Factor Authentication (MFA) to a User
+    #   Pool](cognito/latest/developerguide/user-pool-settings-mfa.html) to
+    #   learn more. Valid values include:
     #
     #   * `OFF` MFA will not be used for any users.
     #
@@ -8297,6 +8333,14 @@ module Aws::CognitoIdentityProvider
     #   role for SMS MFA, Cognito will create a role with the required
     #   permissions and a trust policy that demonstrates use of the
     #   `ExternalId`.
+    #
+    #   For more information about the `ExternalId` of a role, see [How to
+    #   use an external ID when granting access to your AWS resources to a
+    #   third party][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SmsConfigurationType AWS API Documentation
@@ -9564,10 +9608,16 @@ module Aws::CognitoIdentityProvider
     #     user registration.
     #
     #   * `ON` - MFA tokens are required for all user registrations. You can
-    #     only specify required when you are initially creating a user pool.
+    #     only specify ON when you are initially creating a user pool. You
+    #     can use the [SetUserPoolMfaConfig][1] API operation to turn MFA
+    #     "ON" for existing user pools.
     #
     #   * `OPTIONAL` - Users have the option when registering to create an
     #     MFA token.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserPoolMfaConfig.html
     #   @return [String]
     #
     # @!attribute [rw] device_configuration

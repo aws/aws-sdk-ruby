@@ -397,7 +397,7 @@ module Aws::ElastiCache
     #   The number of cache nodes in the cluster.
     #
     #   For clusters running Redis, this value must be 1. For clusters
-    #   running Memcached, this value must be between 1 and 20.
+    #   running Memcached, this value must be between 1 and 40.
     #   @return [Integer]
     #
     # @!attribute [rw] preferred_availability_zone
@@ -540,6 +540,15 @@ module Aws::ElastiCache
     #   The ARN (Amazon Resource Name) of the cache cluster.
     #   @return [String]
     #
+    # @!attribute [rw] replication_group_log_delivery_enabled
+    #   A boolean value indicating whether log delivery is enabled for the
+    #   replication group.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] log_delivery_configurations
+    #   Returns the destination, format and type of the logs.
+    #   @return [Array<Types::LogDeliveryConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheCluster AWS API Documentation
     #
     class CacheCluster < Struct.new(
@@ -570,7 +579,9 @@ module Aws::ElastiCache
       :auth_token_last_modified_date,
       :transit_encryption_enabled,
       :at_rest_encryption_enabled,
-      :arn)
+      :arn,
+      :replication_group_log_delivery_enabled,
+      :log_delivery_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1302,6 +1313,27 @@ module Aws::ElastiCache
     #
     class CacheSubnetQuotaExceededFault < Aws::EmptyStructure; end
 
+    # The configuration details of the CloudWatch Logs destination.
+    #
+    # @note When making an API call, you may pass CloudWatchLogsDestinationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         log_group: "String",
+    #       }
+    #
+    # @!attribute [rw] log_group
+    #   The name of the CloudWatch Logs log group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CloudWatchLogsDestinationDetails AWS API Documentation
+    #
+    class CloudWatchLogsDestinationDetails < Struct.new(
+      :log_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request cannot be processed because it would exceed the allowed
     # number of clusters per customer.
     #
@@ -1536,6 +1568,22 @@ module Aws::ElastiCache
     #         outpost_mode: "single-outpost", # accepts single-outpost, cross-outpost
     #         preferred_outpost_arn: "String",
     #         preferred_outpost_arns: ["String"],
+    #         log_delivery_configurations: [
+    #           {
+    #             log_type: "slow-log", # accepts slow-log
+    #             destination_type: "cloudwatch-logs", # accepts cloudwatch-logs, kinesis-firehose
+    #             destination_details: {
+    #               cloud_watch_logs_details: {
+    #                 log_group: "String",
+    #               },
+    #               kinesis_firehose_details: {
+    #                 delivery_stream: "String",
+    #               },
+    #             },
+    #             log_format: "text", # accepts text, json
+    #             enabled: false,
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] cache_cluster_id
@@ -1617,7 +1665,7 @@ module Aws::ElastiCache
     #   The initial number of cache nodes that the cluster has.
     #
     #   For clusters running Redis, this value must be 1. For clusters
-    #   running Memcached, this value must be between 1 and 20.
+    #   running Memcached, this value must be between 1 and 40.
     #
     #   If you need more than 20 nodes for your Memcached cluster, please
     #   fill out the ElastiCache Limit Increase Request form at
@@ -1906,6 +1954,10 @@ module Aws::ElastiCache
     #   The outpost ARNs in which the cache cluster is created.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] log_delivery_configurations
+    #   Specifies the destination, format and type of the logs.
+    #   @return [Array<Types::LogDeliveryConfigurationRequest>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheClusterMessage AWS API Documentation
     #
     class CreateCacheClusterMessage < Struct.new(
@@ -1934,7 +1986,8 @@ module Aws::ElastiCache
       :auth_token,
       :outpost_mode,
       :preferred_outpost_arn,
-      :preferred_outpost_arns)
+      :preferred_outpost_arns,
+      :log_delivery_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2265,6 +2318,22 @@ module Aws::ElastiCache
     #         at_rest_encryption_enabled: false,
     #         kms_key_id: "String",
     #         user_group_ids: ["UserGroupId"],
+    #         log_delivery_configurations: [
+    #           {
+    #             log_type: "slow-log", # accepts slow-log
+    #             destination_type: "cloudwatch-logs", # accepts cloudwatch-logs, kinesis-firehose
+    #             destination_details: {
+    #               cloud_watch_logs_details: {
+    #                 log_group: "String",
+    #               },
+    #               kinesis_firehose_details: {
+    #                 delivery_stream: "String",
+    #               },
+    #             },
+    #             log_format: "text", # accepts text, json
+    #             enabled: false,
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] replication_group_id
@@ -2721,6 +2790,10 @@ module Aws::ElastiCache
     #   The list of user groups to associate with the replication group.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] log_delivery_configurations
+    #   Specifies the destination, format and type of the logs.
+    #   @return [Array<Types::LogDeliveryConfigurationRequest>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroupMessage AWS API Documentation
     #
     class CreateReplicationGroupMessage < Struct.new(
@@ -2755,7 +2828,8 @@ module Aws::ElastiCache
       :transit_encryption_enabled,
       :at_rest_encryption_enabled,
       :kms_key_id,
-      :user_group_ids)
+      :user_group_ids,
+      :log_delivery_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2997,19 +3071,19 @@ module Aws::ElastiCache
     # @!attribute [rw] global_node_groups_to_remove
     #   If the value of NodeGroupCount is less than the current number of
     #   node groups (shards), then either NodeGroupsToRemove or
-    #   NodeGroupsToRetain is required. NodeGroupsToRemove is a list of
-    #   NodeGroupIds to remove from the cluster. ElastiCache for Redis will
-    #   attempt to remove all node groups listed by NodeGroupsToRemove from
-    #   the cluster.
+    #   NodeGroupsToRetain is required. GlobalNodeGroupsToRemove is a list
+    #   of NodeGroupIds to remove from the cluster. ElastiCache for Redis
+    #   will attempt to remove all node groups listed by
+    #   GlobalNodeGroupsToRemove from the cluster.
     #   @return [Array<String>]
     #
     # @!attribute [rw] global_node_groups_to_retain
     #   If the value of NodeGroupCount is less than the current number of
     #   node groups (shards), then either NodeGroupsToRemove or
-    #   NodeGroupsToRetain is required. NodeGroupsToRemove is a list of
-    #   NodeGroupIds to remove from the cluster. ElastiCache for Redis will
-    #   attempt to remove all node groups listed by NodeGroupsToRemove from
-    #   the cluster.
+    #   NodeGroupsToRetain is required. GlobalNodeGroupsToRetain is a list
+    #   of NodeGroupIds to retain from the cluster. ElastiCache for Redis
+    #   will attempt to retain all node groups listed by
+    #   GlobalNodeGroupsToRetain from the cluster.
     #   @return [Array<String>]
     #
     # @!attribute [rw] apply_immediately
@@ -4710,6 +4784,38 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # Configuration details of either a CloudWatch Logs destination or
+    # Kinesis Data Firehose destination.
+    #
+    # @note When making an API call, you may pass DestinationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_watch_logs_details: {
+    #           log_group: "String",
+    #         },
+    #         kinesis_firehose_details: {
+    #           delivery_stream: "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cloud_watch_logs_details
+    #   The configuration details of the CloudWatch Logs destination.
+    #   @return [Types::CloudWatchLogsDestinationDetails]
+    #
+    # @!attribute [rw] kinesis_firehose_details
+    #   The configuration details of the Kinesis Data Firehose destination.
+    #   @return [Types::KinesisFirehoseDestinationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DestinationDetails AWS API Documentation
+    #
+    class DestinationDetails < Struct.new(
+      :cloud_watch_logs_details,
+      :kinesis_firehose_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisassociateGlobalReplicationGroupMessage
     #   data as a hash:
     #
@@ -5432,6 +5538,27 @@ module Aws::ElastiCache
     #
     class InvalidVPCNetworkStateFault < Aws::EmptyStructure; end
 
+    # The configuration details of the Kinesis Data Firehose destination.
+    #
+    # @note When making an API call, you may pass KinesisFirehoseDestinationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         delivery_stream: "String",
+    #       }
+    #
+    # @!attribute [rw] delivery_stream
+    #   The name of the Kinesis Data Firehose delivery stream.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/KinesisFirehoseDestinationDetails AWS API Documentation
+    #
+    class KinesisFirehoseDestinationDetails < Struct.new(
+      :delivery_stream)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input parameters for the `ListAllowedNodeTypeModifications`
     # operation.
     #
@@ -5503,6 +5630,110 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # Returns the destination, format and type of the logs.
+    #
+    # @!attribute [rw] log_type
+    #   Refers to [slow-log][1].
+    #
+    #
+    #
+    #   [1]: https://redis.io/commands/slowlog
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_type
+    #   Returns the destination type, either `cloudwatch-logs` or
+    #   `kinesis-firehose`.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_details
+    #   Configuration details of either a CloudWatch Logs destination or
+    #   Kinesis Data Firehose destination.
+    #   @return [Types::DestinationDetails]
+    #
+    # @!attribute [rw] log_format
+    #   Returns the log format, either JSON or TEXT.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Returns the log delivery configuration status. Values are one of
+    #   `enabling` \| `disabling` \| `modifying` \| `active` \| `error`
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Returns an error message for the log delivery configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/LogDeliveryConfiguration AWS API Documentation
+    #
+    class LogDeliveryConfiguration < Struct.new(
+      :log_type,
+      :destination_type,
+      :destination_details,
+      :log_format,
+      :status,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the destination, format and type of the logs.
+    #
+    # @note When making an API call, you may pass LogDeliveryConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         log_type: "slow-log", # accepts slow-log
+    #         destination_type: "cloudwatch-logs", # accepts cloudwatch-logs, kinesis-firehose
+    #         destination_details: {
+    #           cloud_watch_logs_details: {
+    #             log_group: "String",
+    #           },
+    #           kinesis_firehose_details: {
+    #             delivery_stream: "String",
+    #           },
+    #         },
+    #         log_format: "text", # accepts text, json
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] log_type
+    #   Refers to [slow-log][1].
+    #
+    #
+    #
+    #   [1]: https://redis.io/commands/slowlog
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_type
+    #   Specify either `cloudwatch-logs` or `kinesis-firehose` as the
+    #   destination type.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_details
+    #   Configuration details of either a CloudWatch Logs destination or
+    #   Kinesis Data Firehose destination.
+    #   @return [Types::DestinationDetails]
+    #
+    # @!attribute [rw] log_format
+    #   Specifies either JSON or TEXT
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Specify if log delivery is enabled. Default `true`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/LogDeliveryConfigurationRequest AWS API Documentation
+    #
+    class LogDeliveryConfigurationRequest < Struct.new(
+      :log_type,
+      :destination_type,
+      :destination_details,
+      :log_format,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input of a `ModifyCacheCluster` operation.
     #
     # @note When making an API call, you may pass ModifyCacheClusterMessage
@@ -5528,6 +5759,22 @@ module Aws::ElastiCache
     #         cache_node_type: "String",
     #         auth_token: "String",
     #         auth_token_update_strategy: "SET", # accepts SET, ROTATE, DELETE
+    #         log_delivery_configurations: [
+    #           {
+    #             log_type: "slow-log", # accepts slow-log
+    #             destination_type: "cloudwatch-logs", # accepts cloudwatch-logs, kinesis-firehose
+    #             destination_details: {
+    #               cloud_watch_logs_details: {
+    #                 log_group: "String",
+    #               },
+    #               kinesis_firehose_details: {
+    #                 delivery_stream: "String",
+    #               },
+    #             },
+    #             log_format: "text", # accepts text, json
+    #             enabled: false,
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] cache_cluster_id
@@ -5548,7 +5795,7 @@ module Aws::ElastiCache
     #   cache nodes to remove.
     #
     #   For clusters running Redis, this value must be 1. For clusters
-    #   running Memcached, this value must be between 1 and 20.
+    #   running Memcached, this value must be between 1 and 40.
     #
     #   <note markdown="1"> Adding or removing Memcached cache nodes can be applied immediately
     #   or as a pending operation (see `ApplyImmediately`).
@@ -5610,6 +5857,10 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] new_availability_zones
+    #   <note markdown="1"> This option is only supported on Memcached clusters.
+    #
+    #    </note>
+    #
     #   The list of Availability Zones where the new Memcached cache nodes
     #   are created.
     #
@@ -5618,8 +5869,6 @@ module Aws::ElastiCache
     #   number of cache nodes pending creation (which may be zero). The
     #   number of Availability Zones supplied in this list must match the
     #   cache nodes being added in this request.
-    #
-    #   This option is only supported on Memcached clusters.
     #
     #   Scenarios:
     #
@@ -5854,6 +6103,10 @@ module Aws::ElastiCache
     #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
     #   @return [String]
     #
+    # @!attribute [rw] log_delivery_configurations
+    #   Specifies the destination, format and type of the logs.
+    #   @return [Array<Types::LogDeliveryConfigurationRequest>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheClusterMessage AWS API Documentation
     #
     class ModifyCacheClusterMessage < Struct.new(
@@ -5875,7 +6128,8 @@ module Aws::ElastiCache
       :snapshot_window,
       :cache_node_type,
       :auth_token,
-      :auth_token_update_strategy)
+      :auth_token_update_strategy,
+      :log_delivery_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6096,6 +6350,22 @@ module Aws::ElastiCache
     #         user_group_ids_to_add: ["UserGroupId"],
     #         user_group_ids_to_remove: ["UserGroupId"],
     #         remove_user_groups: false,
+    #         log_delivery_configurations: [
+    #           {
+    #             log_type: "slow-log", # accepts slow-log
+    #             destination_type: "cloudwatch-logs", # accepts cloudwatch-logs, kinesis-firehose
+    #             destination_details: {
+    #               cloud_watch_logs_details: {
+    #                 log_group: "String",
+    #               },
+    #               kinesis_firehose_details: {
+    #                 delivery_stream: "String",
+    #               },
+    #             },
+    #             log_format: "text", # accepts text, json
+    #             enabled: false,
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] replication_group_id
@@ -6317,6 +6587,10 @@ module Aws::ElastiCache
     #   Removes the user groups that can access this replication group.
     #   @return [Boolean]
     #
+    # @!attribute [rw] log_delivery_configurations
+    #   Specifies the destination, format and type of the logs.
+    #   @return [Array<Types::LogDeliveryConfigurationRequest>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupMessage AWS API Documentation
     #
     class ModifyReplicationGroupMessage < Struct.new(
@@ -6343,7 +6617,8 @@ module Aws::ElastiCache
       :auth_token_update_strategy,
       :user_group_ids_to_add,
       :user_group_ids_to_remove,
-      :remove_user_groups)
+      :remove_user_groups,
+      :log_delivery_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6957,6 +7232,41 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # The log delivery configurations being modified
+    #
+    # @!attribute [rw] log_type
+    #   Refers to [slow-log][1].
+    #
+    #
+    #
+    #   [1]: https://redis.io/commands/slowlog
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_type
+    #   Returns the destination type, either CloudWatch Logs or Kinesis Data
+    #   Firehose.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_details
+    #   Configuration details of either a CloudWatch Logs destination or
+    #   Kinesis Data Firehose destination.
+    #   @return [Types::DestinationDetails]
+    #
+    # @!attribute [rw] log_format
+    #   Returns the log format, either JSON or TEXT
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PendingLogDeliveryConfiguration AWS API Documentation
+    #
+    class PendingLogDeliveryConfiguration < Struct.new(
+      :log_type,
+      :destination_type,
+      :destination_details,
+      :log_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A group of settings that are applied to the cluster in the future, or
     # that are currently being applied.
     #
@@ -6964,7 +7274,7 @@ module Aws::ElastiCache
     #   The new number of cache nodes for the cluster.
     #
     #   For clusters running Redis, this value must be 1. For clusters
-    #   running Memcached, this value must be between 1 and 20.
+    #   running Memcached, this value must be between 1 and 40.
     #   @return [Integer]
     #
     # @!attribute [rw] cache_node_ids_to_remove
@@ -6986,6 +7296,10 @@ module Aws::ElastiCache
     #   The auth token status
     #   @return [String]
     #
+    # @!attribute [rw] log_delivery_configurations
+    #   The log delivery configurations being modified
+    #   @return [Array<Types::PendingLogDeliveryConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PendingModifiedValues AWS API Documentation
     #
     class PendingModifiedValues < Struct.new(
@@ -6993,7 +7307,8 @@ module Aws::ElastiCache
       :cache_node_ids_to_remove,
       :engine_version,
       :cache_node_type,
-      :auth_token_status)
+      :auth_token_status,
+      :log_delivery_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7442,6 +7757,10 @@ module Aws::ElastiCache
     #   group.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] log_delivery_configurations
+    #   Returns the destination, format and type of the logs.
+    #   @return [Array<Types::LogDeliveryConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroup AWS API Documentation
     #
     class ReplicationGroup < Struct.new(
@@ -7467,7 +7786,8 @@ module Aws::ElastiCache
       :member_clusters_outpost_arns,
       :kms_key_id,
       :arn,
-      :user_group_ids)
+      :user_group_ids,
+      :log_delivery_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7542,6 +7862,10 @@ module Aws::ElastiCache
     #   The user groups being modified.
     #   @return [Types::UserGroupsUpdateStatus]
     #
+    # @!attribute [rw] log_delivery_configurations
+    #   The log delivery configurations being modified
+    #   @return [Array<Types::PendingLogDeliveryConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroupPendingModifiedValues AWS API Documentation
     #
     class ReplicationGroupPendingModifiedValues < Struct.new(
@@ -7549,7 +7873,8 @@ module Aws::ElastiCache
       :automatic_failover_status,
       :resharding,
       :auth_token_status,
-      :user_groups)
+      :user_groups,
+      :log_delivery_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8378,7 +8703,7 @@ module Aws::ElastiCache
     #   The number of cache nodes in the source cluster.
     #
     #   For clusters running Redis, this value must be 1. For clusters
-    #   running Memcached, this value must be between 1 and 20.
+    #   running Memcached, this value must be between 1 and 40.
     #   @return [Integer]
     #
     # @!attribute [rw] preferred_availability_zone

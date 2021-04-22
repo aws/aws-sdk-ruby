@@ -1629,6 +1629,9 @@ module Aws::CognitoIdentityProvider
     #     attributes, `USERNAME`, `SECRET_HASH` (if app client is configured
     #     with client secret).
     #
+    #   * `MFA_SETUP` requires `USERNAME`, plus you need to use the session
+    #     value returned by `VerifySoftwareToken` in the `Session` parameter.
+    #
     #   The value of the `USERNAME` attribute must be the user's actual
     #   username, not an alias (such as email address or phone number). To
     #   make this easier, the `AdminInitiateAuth` response includes the actual
@@ -3346,7 +3349,7 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
-    # Deletes a group. Currently only groups with no members can be deleted.
+    # Deletes a group.
     #
     # Calling this action requires developer credentials.
     #
@@ -5366,6 +5369,9 @@ module Aws::CognitoIdentityProvider
     #   * `DEVICE_PASSWORD_VERIFIER` requires everything that
     #     `PASSWORD_VERIFIER` requires plus `DEVICE_KEY`.
     #
+    #   * `MFA_SETUP` requires `USERNAME`, plus you need to use the session
+    #     value returned by `VerifySoftwareToken` in the `Session` parameter.
+    #
     # @option params [Types::AnalyticsMetadataType] :analytics_metadata
     #   The Amazon Pinpoint analytics metadata for collecting metrics for
     #   `RespondToAuthChallenge` calls.
@@ -5708,7 +5714,11 @@ module Aws::CognitoIdentityProvider
     #   The software token MFA configuration.
     #
     # @option params [String] :mfa_configuration
-    #   The MFA configuration. Valid values include:
+    #   The MFA configuration. Users who don't have an MFA factor set up
+    #   won't be able to sign-in if you set the MfaConfiguration value to
+    #   ‘ON’. See [Adding Multi-Factor Authentication (MFA) to a User
+    #   Pool](cognito/latest/developerguide/user-pool-settings-mfa.html) to
+    #   learn more. Valid values include:
     #
     #   * `OFF` MFA will not be used for any users.
     #
@@ -6461,10 +6471,16 @@ module Aws::CognitoIdentityProvider
     #     user registration.
     #
     #   * `ON` - MFA tokens are required for all user registrations. You can
-    #     only specify required when you are initially creating a user pool.
+    #     only specify ON when you are initially creating a user pool. You can
+    #     use the [SetUserPoolMfaConfig][1] API operation to turn MFA "ON"
+    #     for existing user pools.
     #
     #   * `OPTIONAL` - Users have the option when registering to create an MFA
     #     token.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserPoolMfaConfig.html
     #
     # @option params [Types::DeviceConfigurationType] :device_configuration
     #   Device configuration.
@@ -7032,7 +7048,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

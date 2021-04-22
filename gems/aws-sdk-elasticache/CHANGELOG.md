@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2021-04-22)
+------------------
+
+* Feature - This release introduces log delivery of Redis slow log from Amazon ElastiCache.
+
 1.55.0 (2021-04-07)
 ------------------
 

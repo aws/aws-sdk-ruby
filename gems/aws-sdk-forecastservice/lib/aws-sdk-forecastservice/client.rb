@@ -1690,6 +1690,7 @@ module Aws::ForecastService
     #   * {Types::DescribeDatasetImportJobResponse#use_geolocation_for_time_zone #use_geolocation_for_time_zone} => Boolean
     #   * {Types::DescribeDatasetImportJobResponse#geolocation_format #geolocation_format} => String
     #   * {Types::DescribeDatasetImportJobResponse#data_source #data_source} => Types::DataSource
+    #   * {Types::DescribeDatasetImportJobResponse#estimated_time_remaining_in_minutes #estimated_time_remaining_in_minutes} => Integer
     #   * {Types::DescribeDatasetImportJobResponse#field_statistics #field_statistics} => Hash&lt;String,Types::Statistics&gt;
     #   * {Types::DescribeDatasetImportJobResponse#data_size #data_size} => Float
     #   * {Types::DescribeDatasetImportJobResponse#status #status} => String
@@ -1715,6 +1716,7 @@ module Aws::ForecastService
     #   resp.data_source.s3_config.path #=> String
     #   resp.data_source.s3_config.role_arn #=> String
     #   resp.data_source.s3_config.kms_key_arn #=> String
+    #   resp.estimated_time_remaining_in_minutes #=> Integer
     #   resp.field_statistics #=> Hash
     #   resp.field_statistics["String"].count #=> Integer
     #   resp.field_statistics["String"].count_distinct #=> Integer
@@ -1765,6 +1767,7 @@ module Aws::ForecastService
     #   * {Types::DescribeForecastResponse#forecast_types #forecast_types} => Array&lt;String&gt;
     #   * {Types::DescribeForecastResponse#predictor_arn #predictor_arn} => String
     #   * {Types::DescribeForecastResponse#dataset_group_arn #dataset_group_arn} => String
+    #   * {Types::DescribeForecastResponse#estimated_time_remaining_in_minutes #estimated_time_remaining_in_minutes} => Integer
     #   * {Types::DescribeForecastResponse#status #status} => String
     #   * {Types::DescribeForecastResponse#message #message} => String
     #   * {Types::DescribeForecastResponse#creation_time #creation_time} => Time
@@ -1784,6 +1787,7 @@ module Aws::ForecastService
     #   resp.forecast_types[0] #=> String
     #   resp.predictor_arn #=> String
     #   resp.dataset_group_arn #=> String
+    #   resp.estimated_time_remaining_in_minutes #=> Integer
     #   resp.status #=> String
     #   resp.message #=> String
     #   resp.creation_time #=> Time
@@ -1895,6 +1899,7 @@ module Aws::ForecastService
     #   * {Types::DescribePredictorResponse#featurization_config #featurization_config} => Types::FeaturizationConfig
     #   * {Types::DescribePredictorResponse#encryption_config #encryption_config} => Types::EncryptionConfig
     #   * {Types::DescribePredictorResponse#predictor_execution_details #predictor_execution_details} => Types::PredictorExecutionDetails
+    #   * {Types::DescribePredictorResponse#estimated_time_remaining_in_minutes #estimated_time_remaining_in_minutes} => Integer
     #   * {Types::DescribePredictorResponse#dataset_import_job_arns #dataset_import_job_arns} => Array&lt;String&gt;
     #   * {Types::DescribePredictorResponse#auto_ml_algorithm_arns #auto_ml_algorithm_arns} => Array&lt;String&gt;
     #   * {Types::DescribePredictorResponse#status #status} => String
@@ -1958,6 +1963,7 @@ module Aws::ForecastService
     #   resp.predictor_execution_details.predictor_executions[0].test_windows[0].test_window_end #=> Time
     #   resp.predictor_execution_details.predictor_executions[0].test_windows[0].status #=> String
     #   resp.predictor_execution_details.predictor_executions[0].test_windows[0].message #=> String
+    #   resp.estimated_time_remaining_in_minutes #=> Integer
     #   resp.dataset_import_job_arns #=> Array
     #   resp.dataset_import_job_arns[0] #=> String
     #   resp.auto_ml_algorithm_arns #=> Array
@@ -2818,7 +2824,7 @@ module Aws::ForecastService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-forecastservice'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

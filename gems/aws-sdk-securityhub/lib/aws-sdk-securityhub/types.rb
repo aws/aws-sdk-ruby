@@ -10,6 +10,37 @@
 module Aws::SecurityHub
   module Types
 
+    # @note When making an API call, you may pass AcceptAdministratorInvitationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         administrator_id: "NonEmptyString", # required
+    #         invitation_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] administrator_id
+    #   The account ID of the Security Hub administrator account that sent
+    #   the invitation.
+    #   @return [String]
+    #
+    # @!attribute [rw] invitation_id
+    #   The identifier of the invitation sent from the Security Hub
+    #   administrator account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AcceptAdministratorInvitationRequest AWS API Documentation
+    #
+    class AcceptAdministratorInvitationRequest < Struct.new(
+      :administrator_id,
+      :invitation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AcceptAdministratorInvitationResponse AWS API Documentation
+    #
+    class AcceptAdministratorInvitationResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass AcceptInvitationRequest
     #   data as a hash:
     #
@@ -19,12 +50,13 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] master_id
-    #   The account ID of the Security Hub master account that sent the
-    #   invitation.
+    #   The account ID of the Security Hub administrator account that sent
+    #   the invitation.
     #   @return [String]
     #
     # @!attribute [rw] invitation_id
-    #   The ID of the invitation sent from the Security Hub master account.
+    #   The identifier of the invitation sent from the Security Hub
+    #   administrator account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AcceptInvitationRequest AWS API Documentation
@@ -17146,9 +17178,9 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] account_details
-    #   The list of accounts to associate with the Security Hub master
-    #   account. For each account, the list includes the account ID and
-    #   optionally the email address.
+    #   The list of accounts to associate with the Security Hub
+    #   administrator account. For each account, the list includes the
+    #   account ID and optionally the email address.
     #   @return [Array<Types::AccountDetails>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateMembersRequest AWS API Documentation
@@ -18088,6 +18120,16 @@ module Aws::SecurityHub
 
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisassociateFromAdministratorAccountRequest AWS API Documentation
+    #
+    class DisassociateFromAdministratorAccountRequest < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisassociateFromAdministratorAccountResponse AWS API Documentation
+    #
+    class DisassociateFromAdministratorAccountResponse < Aws::EmptyStructure; end
+
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisassociateFromMasterAccountRequest AWS API Documentation
     #
     class DisassociateFromMasterAccountRequest < Aws::EmptyStructure; end
@@ -18105,7 +18147,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] account_ids
     #   The account IDs of the member accounts to disassociate from the
-    #   master account.
+    #   administrator account.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisassociateMembersRequest AWS API Documentation
@@ -18365,6 +18407,24 @@ module Aws::SecurityHub
     class GeoLocation < Struct.new(
       :lon,
       :lat)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetAdministratorAccountRequest AWS API Documentation
+    #
+    class GetAdministratorAccountRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] administrator
+    #   Details about an invitation.
+    #   @return [Types::Invitation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetAdministratorAccountResponse AWS API Documentation
+    #
+    class GetAdministratorAccountResponse < Struct.new(
+      :administrator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19207,8 +19267,8 @@ module Aws::SecurityHub
     class GetMasterAccountRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] master
-    #   A list of details about the Security Hub master account for the
-    #   current member account.
+    #   A list of details about the Security Hub administrator account for
+    #   the current member account.
     #   @return [Types::Invitation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetMasterAccountResponse AWS API Documentation
@@ -19425,7 +19485,7 @@ module Aws::SecurityHub
     # Details about an invitation.
     #
     # @!attribute [rw] account_id
-    #   The account ID of the Security Hub master account that the
+    #   The account ID of the Security Hub administrator account that the
     #   invitation was sent from.
     #   @return [String]
     #
@@ -19438,8 +19498,8 @@ module Aws::SecurityHub
     #   @return [Time]
     #
     # @!attribute [rw] member_status
-    #   The current status of the association between the member and master
-    #   accounts.
+    #   The current status of the association between the member and
+    #   administrator accounts.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Invitation AWS API Documentation
@@ -19727,12 +19787,12 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] only_associated
     #   Specifies which member accounts to include in the response based on
-    #   their relationship status with the master account. The default value
-    #   is `TRUE`.
+    #   their relationship status with the administrator account. The
+    #   default value is `TRUE`.
     #
     #   If `OnlyAssociated` is set to `TRUE`, the response includes member
-    #   accounts whose relationship status with the master is set to
-    #   `ENABLED`.
+    #   accounts whose relationship status with the administrator account is
+    #   set to `ENABLED`.
     #
     #   If `OnlyAssociated` is set to `FALSE`, the response includes all
     #   existing member accounts.
@@ -19997,35 +20057,42 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] master_id
-    #   The AWS account ID of the Security Hub master account associated
-    #   with this member account.
+    #   This is replaced by `AdministratorID`.
+    #
+    #   The AWS account ID of the Security Hub administrator account
+    #   associated with this member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] administrator_id
+    #   The AWS account ID of the Security Hub administrator account
+    #   associated with this member account.
     #   @return [String]
     #
     # @!attribute [rw] member_status
     #   The status of the relationship between the member account and its
-    #   master account.
+    #   administrator account.
     #
     #   The status can have one of the following values:
     #
-    #   * `CREATED` - Indicates that the master account added the member
-    #     account, but has not yet invited the member account.
+    #   * `CREATED` - Indicates that the administrator account added the
+    #     member account, but has not yet invited the member account.
     #
-    #   * `INVITED` - Indicates that the master account invited the member
-    #     account. The member account has not yet responded to the
+    #   * `INVITED` - Indicates that the administrator account invited the
+    #     member account. The member account has not yet responded to the
     #     invitation.
     #
     #   * `ENABLED` - Indicates that the member account is currently active.
     #     For manually invited member accounts, indicates that the member
     #     account accepted the invitation.
     #
-    #   * `REMOVED` - Indicates that the master account disassociated the
-    #     member account.
+    #   * `REMOVED` - Indicates that the administrator account disassociated
+    #     the member account.
     #
     #   * `RESIGNED` - Indicates that the member account disassociated
-    #     themselves from the master account.
+    #     themselves from the administrator account.
     #
-    #   * `DELETED` - Indicates that the master account deleted the member
-    #     account.
+    #   * `DELETED` - Indicates that the administrator account deleted the
+    #     member account.
     #   @return [String]
     #
     # @!attribute [rw] invited_at
@@ -20044,6 +20111,7 @@ module Aws::SecurityHub
       :account_id,
       :email,
       :master_id,
+      :administrator_id,
       :member_status,
       :invited_at,
       :updated_at)
@@ -20973,20 +21041,29 @@ module Aws::SecurityHub
     #   The types of integration that the product supports. Available values
     #   are the following.
     #
-    #   * `SEND_FINDINGS_TO_SECURITY_HUB` - Indicates that the integration
-    #     sends findings to Security Hub.
+    #   * `SEND_FINDINGS_TO_SECURITY_HUB` - The integration sends findings
+    #     to Security Hub.
     #
-    #   * `RECEIVE_FINDINGS_FROM_SECURITY_HUB` - Indicates that the
-    #     integration receives findings from Security Hub.
+    #   * `RECEIVE_FINDINGS_FROM_SECURITY_HUB` - The integration receives
+    #     findings from Security Hub.
+    #
+    #   * `UPDATE_FINDINGS_IN_SECURITY_HUB` - The integration does not send
+    #     new findings to Security Hub, but does make updates to the
+    #     findings that it receives from Security Hub.
     #   @return [Array<String>]
     #
     # @!attribute [rw] marketplace_url
-    #   The URL for the page that contains more information about the
-    #   product.
+    #   For integrations with AWS services, the AWS Console URL from which
+    #   to activate the service.
+    #
+    #   For integrations with third-party products, the AWS Marketplace URL
+    #   from which to subscribe to or purchase the product.
     #   @return [String]
     #
     # @!attribute [rw] activation_url
-    #   The URL used to activate the product.
+    #   The URL to the service or product documentation about the
+    #   integration with Security Hub, including how to activate the
+    #   integration.
     #   @return [String]
     #
     # @!attribute [rw] product_subscription_resource_policy

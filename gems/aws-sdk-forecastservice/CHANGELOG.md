@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2021-04-22)
+------------------
+
+* Feature - This release adds EstimatedTimeRemaining minutes field to the DescribeDatasetImportJob, DescribePredictor, DescribeForecast API response which denotes the time remaining to complete the job IN_PROGRESS.
+
 1.17.0 (2021-03-10)
 ------------------
 

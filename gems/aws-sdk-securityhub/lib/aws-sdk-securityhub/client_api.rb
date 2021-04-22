@@ -13,6 +13,8 @@ module Aws::SecurityHub
 
     include Seahorse::Model
 
+    AcceptAdministratorInvitationRequest = Shapes::StructureShape.new(name: 'AcceptAdministratorInvitationRequest')
+    AcceptAdministratorInvitationResponse = Shapes::StructureShape.new(name: 'AcceptAdministratorInvitationResponse')
     AcceptInvitationRequest = Shapes::StructureShape.new(name: 'AcceptInvitationRequest')
     AcceptInvitationResponse = Shapes::StructureShape.new(name: 'AcceptInvitationResponse')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
@@ -335,6 +337,8 @@ module Aws::SecurityHub
     DisableOrganizationAdminAccountResponse = Shapes::StructureShape.new(name: 'DisableOrganizationAdminAccountResponse')
     DisableSecurityHubRequest = Shapes::StructureShape.new(name: 'DisableSecurityHubRequest')
     DisableSecurityHubResponse = Shapes::StructureShape.new(name: 'DisableSecurityHubResponse')
+    DisassociateFromAdministratorAccountRequest = Shapes::StructureShape.new(name: 'DisassociateFromAdministratorAccountRequest')
+    DisassociateFromAdministratorAccountResponse = Shapes::StructureShape.new(name: 'DisassociateFromAdministratorAccountResponse')
     DisassociateFromMasterAccountRequest = Shapes::StructureShape.new(name: 'DisassociateFromMasterAccountRequest')
     DisassociateFromMasterAccountResponse = Shapes::StructureShape.new(name: 'DisassociateFromMasterAccountResponse')
     DisassociateMembersRequest = Shapes::StructureShape.new(name: 'DisassociateMembersRequest')
@@ -351,6 +355,8 @@ module Aws::SecurityHub
     FindingProviderFields = Shapes::StructureShape.new(name: 'FindingProviderFields')
     FindingProviderSeverity = Shapes::StructureShape.new(name: 'FindingProviderSeverity')
     GeoLocation = Shapes::StructureShape.new(name: 'GeoLocation')
+    GetAdministratorAccountRequest = Shapes::StructureShape.new(name: 'GetAdministratorAccountRequest')
+    GetAdministratorAccountResponse = Shapes::StructureShape.new(name: 'GetAdministratorAccountResponse')
     GetEnabledStandardsRequest = Shapes::StructureShape.new(name: 'GetEnabledStandardsRequest')
     GetEnabledStandardsResponse = Shapes::StructureShape.new(name: 'GetEnabledStandardsResponse')
     GetFindingsRequest = Shapes::StructureShape.new(name: 'GetFindingsRequest')
@@ -529,6 +535,12 @@ module Aws::SecurityHub
     WorkflowState = Shapes::StringShape.new(name: 'WorkflowState')
     WorkflowStatus = Shapes::StringShape.new(name: 'WorkflowStatus')
     WorkflowUpdate = Shapes::StructureShape.new(name: 'WorkflowUpdate')
+
+    AcceptAdministratorInvitationRequest.add_member(:administrator_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AdministratorId"))
+    AcceptAdministratorInvitationRequest.add_member(:invitation_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "InvitationId"))
+    AcceptAdministratorInvitationRequest.struct_class = Types::AcceptAdministratorInvitationRequest
+
+    AcceptAdministratorInvitationResponse.struct_class = Types::AcceptAdministratorInvitationResponse
 
     AcceptInvitationRequest.add_member(:master_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "MasterId"))
     AcceptInvitationRequest.add_member(:invitation_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "InvitationId"))
@@ -2309,6 +2321,10 @@ module Aws::SecurityHub
 
     DisableSecurityHubResponse.struct_class = Types::DisableSecurityHubResponse
 
+    DisassociateFromAdministratorAccountRequest.struct_class = Types::DisassociateFromAdministratorAccountRequest
+
+    DisassociateFromAdministratorAccountResponse.struct_class = Types::DisassociateFromAdministratorAccountResponse
+
     DisassociateFromMasterAccountRequest.struct_class = Types::DisassociateFromMasterAccountRequest
 
     DisassociateFromMasterAccountResponse.struct_class = Types::DisassociateFromMasterAccountResponse
@@ -2357,6 +2373,11 @@ module Aws::SecurityHub
     GeoLocation.add_member(:lon, Shapes::ShapeRef.new(shape: Double, location_name: "Lon"))
     GeoLocation.add_member(:lat, Shapes::ShapeRef.new(shape: Double, location_name: "Lat"))
     GeoLocation.struct_class = Types::GeoLocation
+
+    GetAdministratorAccountRequest.struct_class = Types::GetAdministratorAccountRequest
+
+    GetAdministratorAccountResponse.add_member(:administrator, Shapes::ShapeRef.new(shape: Invitation, location_name: "Administrator"))
+    GetAdministratorAccountResponse.struct_class = Types::GetAdministratorAccountResponse
 
     GetEnabledStandardsRequest.add_member(:standards_subscription_arns, Shapes::ShapeRef.new(shape: StandardsSubscriptionArns, location_name: "StandardsSubscriptionArns"))
     GetEnabledStandardsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -2550,7 +2571,8 @@ module Aws::SecurityHub
 
     Member.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     Member.add_member(:email, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Email"))
-    Member.add_member(:master_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MasterId"))
+    Member.add_member(:master_id, Shapes::ShapeRef.new(shape: NonEmptyString, deprecated: true, location_name: "MasterId", metadata: {"deprecatedMessage"=>"This field is deprecated, use AdministratorId instead."}))
+    Member.add_member(:administrator_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AdministratorId"))
     Member.add_member(:member_status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MemberStatus"))
     Member.add_member(:invited_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "InvitedAt"))
     Member.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
@@ -2997,10 +3019,24 @@ module Aws::SecurityHub
         "uid" => "securityhub-2018-10-26",
       }
 
+      api.add_operation(:accept_administrator_invitation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AcceptAdministratorInvitation"
+        o.http_method = "POST"
+        o.http_request_uri = "/administrator"
+        o.input = Shapes::ShapeRef.new(shape: AcceptAdministratorInvitationRequest)
+        o.output = Shapes::ShapeRef.new(shape: AcceptAdministratorInvitationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+      end)
+
       api.add_operation(:accept_invitation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AcceptInvitation"
         o.http_method = "POST"
         o.http_request_uri = "/master"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: AcceptInvitationRequest)
         o.output = Shapes::ShapeRef.new(shape: AcceptInvitationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
@@ -3293,10 +3329,24 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:disassociate_from_administrator_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateFromAdministratorAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/administrator/disassociate"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateFromAdministratorAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateFromAdministratorAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:disassociate_from_master_account, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateFromMasterAccount"
         o.http_method = "POST"
         o.http_request_uri = "/master/disassociate"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DisassociateFromMasterAccountRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateFromMasterAccountResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
@@ -3355,6 +3405,19 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_administrator_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAdministratorAccount"
+        o.http_method = "GET"
+        o.http_request_uri = "/administrator"
+        o.input = Shapes::ShapeRef.new(shape: GetAdministratorAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAdministratorAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_enabled_standards, Seahorse::Model::Operation.new.tap do |o|
@@ -3441,6 +3504,7 @@ module Aws::SecurityHub
         o.name = "GetMasterAccount"
         o.http_method = "GET"
         o.http_request_uri = "/master"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetMasterAccountRequest)
         o.output = Shapes::ShapeRef.new(shape: GetMasterAccountResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)

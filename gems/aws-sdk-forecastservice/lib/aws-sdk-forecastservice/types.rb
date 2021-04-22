@@ -1536,6 +1536,11 @@ module Aws::ForecastService
     #   Service (KMS) key.
     #   @return [Types::DataSource]
     #
+    # @!attribute [rw] estimated_time_remaining_in_minutes
+    #   The estimated time in minutes for the dataset import job to
+    #   complete.
+    #   @return [Integer]
+    #
     # @!attribute [rw] field_statistics
     #   Statistical information about each field in the input data.
     #   @return [Hash<String,Types::Statistics>]
@@ -1591,6 +1596,7 @@ module Aws::ForecastService
       :use_geolocation_for_time_zone,
       :geolocation_format,
       :data_source,
+      :estimated_time_remaining_in_minutes,
       :field_statistics,
       :data_size,
       :status,
@@ -1840,6 +1846,10 @@ module Aws::ForecastService
     #   the predictor.
     #   @return [String]
     #
+    # @!attribute [rw] estimated_time_remaining_in_minutes
+    #   The estimated time in minutes for the forecast job to complete.
+    #   @return [Integer]
+    #
     # @!attribute [rw] status
     #   The status of the forecast. States include:
     #
@@ -1888,6 +1898,7 @@ module Aws::ForecastService
       :forecast_types,
       :predictor_arn,
       :dataset_group_arn,
+      :estimated_time_remaining_in_minutes,
       :status,
       :message,
       :creation_time,
@@ -2077,6 +2088,11 @@ module Aws::ForecastService
     #   backtests to perform when you call the operation.
     #   @return [Types::PredictorExecutionDetails]
     #
+    # @!attribute [rw] estimated_time_remaining_in_minutes
+    #   The estimated time in minutes for the predictor training job to
+    #   complete.
+    #   @return [Integer]
+    #
     # @!attribute [rw] dataset_import_job_arns
     #   An array of the ARNs of the dataset import jobs used to import
     #   training data for the predictor.
@@ -2143,6 +2159,7 @@ module Aws::ForecastService
       :featurization_config,
       :encryption_config,
       :predictor_execution_details,
+      :estimated_time_remaining_in_minutes,
       :dataset_import_job_arns,
       :auto_ml_algorithm_arns,
       :status,

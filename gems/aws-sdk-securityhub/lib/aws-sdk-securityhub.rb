@@ -28,7 +28,7 @@ require_relative 'aws-sdk-securityhub/customizations'
 # structure.
 #
 #     security_hub = Aws::SecurityHub::Client.new
-#     resp = security_hub.accept_invitation(params)
+#     resp = security_hub.accept_administrator_invitation(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-securityhub/customizations'
 # @!group service
 module Aws::SecurityHub
 
-  GEM_VERSION = '1.42.0'
+  GEM_VERSION = '1.43.0'
 
 end
