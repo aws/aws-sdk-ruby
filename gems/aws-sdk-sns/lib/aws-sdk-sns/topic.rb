@@ -526,7 +526,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-kinesis-subscriber.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html
     # @option options [Boolean] :return_subscription_arn
     #   Sets whether the response from the `Subscribe` request includes the
     #   subscription ARN, even if the subscription is not yet confirmed.

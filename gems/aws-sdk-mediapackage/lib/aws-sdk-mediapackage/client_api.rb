@@ -148,6 +148,7 @@ module Aws::MediaPackage
     ChannelUpdateParameters.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     ChannelUpdateParameters.struct_class = Types::ChannelUpdateParameters
 
+    CmafEncryption.add_member(:constant_initialization_vector, Shapes::ShapeRef.new(shape: __string, location_name: "constantInitializationVector"))
     CmafEncryption.add_member(:key_rotation_interval_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "keyRotationIntervalSeconds"))
     CmafEncryption.add_member(:speke_key_provider, Shapes::ShapeRef.new(shape: SpekeKeyProvider, required: true, location_name: "spekeKeyProvider"))
     CmafEncryption.struct_class = Types::CmafEncryption

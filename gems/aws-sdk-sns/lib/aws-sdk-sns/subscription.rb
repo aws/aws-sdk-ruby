@@ -90,7 +90,7 @@ module Aws::SNS
     #
     #
     # [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-message-filtering.html
-    # [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-kinesis-subscriber.html
+    # [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html
     # @return [Hash<String,String>]
     def attributes
       data[:attributes]
@@ -193,7 +193,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-kinesis-subscriber.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html
     # @option options [String] :attribute_value
     #   The new value for the attribute in JSON format.
     # @return [EmptyStructure]

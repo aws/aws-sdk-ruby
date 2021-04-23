@@ -752,7 +752,7 @@ module Aws::SNS
     #
     #
     #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-message-filtering.html
-    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-kinesis-subscriber.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSubscriptionAttributesResponse AWS API Documentation
@@ -1397,7 +1397,7 @@ module Aws::SNS
     #       }
     #
     # @!attribute [rw] phone_number
-    #   The phone number to opt in.
+    #   The phone number to opt in. Use E.164 format.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/OptInPhoneNumberInput AWS API Documentation
@@ -1971,7 +1971,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-kinesis-subscriber.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html
     #   @return [String]
     #
     # @!attribute [rw] attribute_value
@@ -2204,7 +2204,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-kinesis-subscriber.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] return_subscription_arn

@@ -149,6 +149,7 @@ module Aws::MediaPackage
     #   data as a hash:
     #
     #       {
+    #         constant_initialization_vector: "__string",
     #         key_rotation_interval_seconds: 1,
     #         speke_key_provider: { # required
     #           certificate_arn: "__string",
@@ -163,6 +164,13 @@ module Aws::MediaPackage
     #         },
     #       }
     #
+    # @!attribute [rw] constant_initialization_vector
+    #   An optional 128-bit, 16-byte hex value represented by a 32-character
+    #   string, used in conjunction with the key for encrypting blocks. If
+    #   you don't specify a value, then MediaPackage creates the constant
+    #   initialization vector (IV).
+    #   @return [String]
+    #
     # @!attribute [rw] key_rotation_interval_seconds
     #   Time (in seconds) between each encryption key rotation.
     #   @return [Integer]
@@ -176,6 +184,7 @@ module Aws::MediaPackage
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CmafEncryption AWS API Documentation
     #
     class CmafEncryption < Struct.new(
+      :constant_initialization_vector,
       :key_rotation_interval_seconds,
       :speke_key_provider)
       SENSITIVE = []
@@ -225,6 +234,7 @@ module Aws::MediaPackage
     #
     #       {
     #         encryption: {
+    #           constant_initialization_vector: "__string",
     #           key_rotation_interval_seconds: 1,
     #           speke_key_provider: { # required
     #             certificate_arn: "__string",
@@ -556,6 +566,7 @@ module Aws::MediaPackage
     #         channel_id: "__string", # required
     #         cmaf_package: {
     #           encryption: {
+    #             constant_initialization_vector: "__string",
     #             key_rotation_interval_seconds: 1,
     #             speke_key_provider: { # required
     #               certificate_arn: "__string",
@@ -2884,6 +2895,7 @@ module Aws::MediaPackage
     #         },
     #         cmaf_package: {
     #           encryption: {
+    #             constant_initialization_vector: "__string",
     #             key_rotation_interval_seconds: 1,
     #             speke_key_provider: { # required
     #               certificate_arn: "__string",

@@ -1282,7 +1282,7 @@ module Aws::SNS
     # You can opt in a phone number only once every 30 days.
     #
     # @option params [required, String] :phone_number
-    #   The phone number to opt in.
+    #   The phone number to opt in. Use E.164 format.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1814,7 +1814,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-kinesis-subscriber.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html
     #
     # @option params [String] :attribute_value
     #   The new value for the attribute in JSON format.
@@ -2023,7 +2023,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-kinesis-subscriber.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html
     #
     # @option params [Boolean] :return_subscription_arn
     #   Sets whether the response from the `Subscribe` request includes the
@@ -2197,7 +2197,7 @@ module Aws::SNS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sns'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
