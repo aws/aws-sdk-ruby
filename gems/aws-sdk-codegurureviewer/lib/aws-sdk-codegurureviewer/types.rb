@@ -46,6 +46,10 @@ module Aws::CodeGuruReviewer
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         kms_key_details: {
+    #           kms_key_id: "KMSKeyId",
+    #           encryption_option: "AWS_OWNED_CMK", # accepts AWS_OWNED_CMK, CUSTOMER_MANAGED_CMK
+    #         },
     #       }
     #
     # @!attribute [rw] repository
@@ -74,12 +78,24 @@ module Aws::CodeGuruReviewer
     #     values are case sensitive.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] kms_key_details
+    #   A `KMSKeyDetails` object that contains:
+    #
+    #   * The encryption option for this repository association. It is
+    #     either owned by AWS Key Management Service (KMS) (`AWS_OWNED_CMK`)
+    #     or customer managed (`CUSTOMER_MANAGED_CMK`).
+    #
+    #   * The ID of the AWS KMS key that is associated with this respository
+    #     association.
+    #   @return [Types::KMSKeyDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/AssociateRepositoryRequest AWS API Documentation
     #
     class AssociateRepositoryRequest < Struct.new(
       :repository,
       :client_request_token,
-      :tags)
+      :tags,
+      :kms_key_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -331,12 +347,12 @@ module Aws::CodeGuruReviewer
     # The type of a code review. There are two code review types:
     #
     # * `PullRequest` - A code review that is automatically triggered by a
-    #   pull request on an assocaited repository. Because this type of code
+    #   pull request on an associated repository. Because this type of code
     #   review is automatically generated, you cannot specify this code
     #   review type using [ `CreateCodeReview` ][1].
     #
     # * `RepositoryAnalysis` - A code review that analyzes all code under a
-    #   specified branch in an associated respository. The assocated
+    #   specified branch in an associated repository. The associated
     #   repository is specified using its ARN in [ `CreateCodeReview` ][1].
     #
     #
@@ -356,7 +372,7 @@ module Aws::CodeGuruReviewer
     #
     # @!attribute [rw] repository_analysis
     #   A code review that analyzes all code under a specified branch in an
-    #   associated respository. The assocated repository is specified using
+    #   associated repository. The associated repository is specified using
     #   its ARN in [ `CreateCodeReview` ][1].
     #
     #
@@ -696,6 +712,43 @@ module Aws::CodeGuruReviewer
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains:
+    #
+    # * The encryption option for a repository association. It is either
+    #   owned by AWS Key Management Service (KMS) (`AWS_OWNED_CMK`) or
+    #   customer managed (`CUSTOMER_MANAGED_CMK`).
+    #
+    # * The ID of the AWS KMS key that is associated with a respository
+    #   association.
+    #
+    # @note When making an API call, you may pass KMSKeyDetails
+    #   data as a hash:
+    #
+    #       {
+    #         kms_key_id: "KMSKeyId",
+    #         encryption_option: "AWS_OWNED_CMK", # accepts AWS_OWNED_CMK, CUSTOMER_MANAGED_CMK
+    #       }
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the AWS KMS key that is associated with a respository
+    #   association.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_option
+    #   The encryption option for a repository association. It is either
+    #   owned by AWS Key Management Service (KMS) (`AWS_OWNED_CMK`) or
+    #   customer managed (`CUSTOMER_MANAGED_CMK`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/KMSKeyDetails AWS API Documentation
+    #
+    class KMSKeyDetails < Struct.new(
+      :kms_key_id,
+      :encryption_option)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1389,7 +1442,7 @@ module Aws::CodeGuruReviewer
     end
 
     # A code review type that analyzes all code under a specified branch in
-    # an associated respository. The assocated repository is specified using
+    # an associated repository. The associated repository is specified using
     # its ARN when you call [ `CreateCodeReview` ][1].
     #
     #
@@ -1522,6 +1575,17 @@ module Aws::CodeGuruReviewer
     #   association was created.
     #   @return [Time]
     #
+    # @!attribute [rw] kms_key_details
+    #   A `KMSKeyDetails` object that contains:
+    #
+    #   * The encryption option for this repository association. It is
+    #     either owned by AWS Key Management Service (KMS) (`AWS_OWNED_CMK`)
+    #     or customer managed (`CUSTOMER_MANAGED_CMK`).
+    #
+    #   * The ID of the AWS KMS key that is associated with this respository
+    #     association.
+    #   @return [Types::KMSKeyDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/RepositoryAssociation AWS API Documentation
     #
     class RepositoryAssociation < Struct.new(
@@ -1534,7 +1598,8 @@ module Aws::CodeGuruReviewer
       :state,
       :state_reason,
       :last_updated_time_stamp,
-      :created_time_stamp)
+      :created_time_stamp,
+      :kms_key_details)
       SENSITIVE = []
       include Aws::Structure
     end

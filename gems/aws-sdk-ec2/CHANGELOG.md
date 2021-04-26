@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.235.0 (2021-04-26)
+------------------
+
+* Feature - Adding support for Red Hat Enterprise Linux with HA for Reserved Instances.
+
 1.234.0 (2021-04-09)
 ------------------
 

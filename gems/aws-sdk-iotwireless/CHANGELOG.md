@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2021-04-26)
+------------------
+
+* Feature - Add a new optional field MessageType to support Sidewalk devices in SendDataToWirelessDevice API
+
 1.7.0 (2021-03-31)
 ------------------
 

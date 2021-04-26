@@ -823,8 +823,8 @@ module Aws::KinesisAnalyticsV2
     #   A summary description of the application.
     #
     # @option params [required, String] :runtime_environment
-    #   The runtime environment for the application (`SQL-1.0`, `FLINK-1_6`,
-    #   or `FLINK-1_8`).
+    #   The runtime environment for the application (`SQL-1_0`, `FLINK-1_6`,
+    #   `FLINK-1_8`, or `FLINK-1_11`).
     #
     # @option params [required, String] :service_execution_role
     #   The IAM role used by the application to access Kinesis data streams,
@@ -1023,7 +1023,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_name #=> String
     #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11"
     #   resp.application_detail.service_execution_role #=> String
-    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING"
+    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "MAINTENANCE"
     #   resp.application_detail.application_version_id #=> Integer
     #   resp.application_detail.create_timestamp #=> Time
     #   resp.application_detail.last_update_timestamp #=> Time
@@ -1113,6 +1113,8 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].cloud_watch_logging_option_id #=> String
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].log_stream_arn #=> String
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].role_arn #=> String
+    #   resp.application_detail.application_maintenance_configuration_description.application_maintenance_window_start_time #=> String
+    #   resp.application_detail.application_maintenance_configuration_description.application_maintenance_window_end_time #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateApplication AWS API Documentation
     #
@@ -1128,10 +1130,14 @@ module Aws::KinesisAnalyticsV2
     # the Apache Flink dashboard.
     #
     # The IAM role or user used to call this API defines the permissions to
-    # access the extension. Once the presigned URL is created, no additional
-    # permission is required to access this URL. IAM authorization policies
-    # for this API are also enforced for every HTTP request that attempts to
-    # connect to the extension.
+    # access the extension. After the presigned URL is created, no
+    # additional permission is required to access this URL. IAM
+    # authorization policies for this API are also enforced for every HTTP
+    # request that attempts to connect to the extension.
+    #
+    # You control the amount of time that the URL will be valid using the
+    # `SessionExpirationDurationInSeconds` parameter. If you do not provide
+    # this parameter, the returned URL is valid for twelve hours.
     #
     # <note markdown="1"> The URL that you get from a call to CreateApplicationPresignedUrl must
     # be used within 3 minutes to be valid. If you first try to use the URL
@@ -1518,7 +1524,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_name #=> String
     #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11"
     #   resp.application_detail.service_execution_role #=> String
-    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING"
+    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "MAINTENANCE"
     #   resp.application_detail.application_version_id #=> Integer
     #   resp.application_detail.create_timestamp #=> Time
     #   resp.application_detail.last_update_timestamp #=> Time
@@ -1608,6 +1614,8 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].cloud_watch_logging_option_id #=> String
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].log_stream_arn #=> String
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].role_arn #=> String
+    #   resp.application_detail.application_maintenance_configuration_description.application_maintenance_window_start_time #=> String
+    #   resp.application_detail.application_maintenance_configuration_description.application_maintenance_window_end_time #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeApplication AWS API Documentation
     #
@@ -1819,7 +1827,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_summaries #=> Array
     #   resp.application_summaries[0].application_name #=> String
     #   resp.application_summaries[0].application_arn #=> String
-    #   resp.application_summaries[0].application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING"
+    #   resp.application_summaries[0].application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "MAINTENANCE"
     #   resp.application_summaries[0].application_version_id #=> Integer
     #   resp.application_summaries[0].runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11"
     #   resp.next_token #=> String
@@ -2249,7 +2257,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_name #=> String
     #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11"
     #   resp.application_detail.service_execution_role #=> String
-    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING"
+    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "MAINTENANCE"
     #   resp.application_detail.application_version_id #=> Integer
     #   resp.application_detail.create_timestamp #=> Time
     #   resp.application_detail.last_update_timestamp #=> Time
@@ -2339,6 +2347,8 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].cloud_watch_logging_option_id #=> String
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].log_stream_arn #=> String
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].role_arn #=> String
+    #   resp.application_detail.application_maintenance_configuration_description.application_maintenance_window_start_time #=> String
+    #   resp.application_detail.application_maintenance_configuration_description.application_maintenance_window_end_time #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UpdateApplication AWS API Documentation
     #
@@ -2346,6 +2356,51 @@ module Aws::KinesisAnalyticsV2
     # @param [Hash] params ({})
     def update_application(params = {}, options = {})
       req = build_request(:update_application, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration for the automatic maintenance that Kinesis
+    # Data Analytics performs on the application. For information about
+    # automatic application maintenance, see [Kinesis Data Analytics for
+    # Apache Flink Maintenance][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/maintenance.html
+    #
+    # @option params [required, String] :application_name
+    #   The name of the application for which you want to update the
+    #   maintenance time window.
+    #
+    # @option params [required, Types::ApplicationMaintenanceConfigurationUpdate] :application_maintenance_configuration_update
+    #   Describes the application maintenance configuration update.
+    #
+    # @return [Types::UpdateApplicationMaintenanceConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateApplicationMaintenanceConfigurationResponse#application_arn #application_arn} => String
+    #   * {Types::UpdateApplicationMaintenanceConfigurationResponse#application_maintenance_configuration_description #application_maintenance_configuration_description} => Types::ApplicationMaintenanceConfigurationDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_application_maintenance_configuration({
+    #     application_name: "ApplicationName", # required
+    #     application_maintenance_configuration_update: { # required
+    #       application_maintenance_window_start_time_update: "ApplicationMaintenanceWindowStartTime", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_arn #=> String
+    #   resp.application_maintenance_configuration_description.application_maintenance_window_start_time #=> String
+    #   resp.application_maintenance_configuration_description.application_maintenance_window_end_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UpdateApplicationMaintenanceConfiguration AWS API Documentation
+    #
+    # @overload update_application_maintenance_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_application_maintenance_configuration(params = {}, options = {})
+      req = build_request(:update_application_maintenance_configuration, params)
       req.send_request(options)
     end
 
@@ -2362,7 +2417,7 @@ module Aws::KinesisAnalyticsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisanalyticsv2'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -350,8 +350,12 @@ module Aws::Personalize
     #
     # @option params [String] :filter_arn
     #   The ARN of the filter to apply to the batch inference job. For more
-    #   information on using filters, see Using Filters with Amazon
-    #   Personalize.
+    #   information on using filters, see [Filtering Batch
+    #   Recommendations][1]..
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter-batch.html
     #
     # @option params [Integer] :num_results
     #   The number of recommendations to retreive.
@@ -366,8 +370,8 @@ module Aws::Personalize
     #
     # @option params [required, String] :role_arn
     #   The ARN of the Amazon Identity and Access Management role that has
-    #   permissions to read and write to your input and out Amazon S3 buckets
-    #   respectively.
+    #   permissions to read and write to your input and output Amazon S3
+    #   buckets respectively.
     #
     # @option params [Types::BatchInferenceJobConfig] :batch_inference_job_config
     #   The configuration details of a batch inference job.
@@ -597,6 +601,87 @@ module Aws::Personalize
       req.send_request(options)
     end
 
+    # Creates a job that exports data from your dataset to an Amazon S3
+    # bucket. To allow Amazon Personalize to export the training data, you
+    # must specify an service-linked AWS Identity and Access Management
+    # (IAM) role that gives Amazon Personalize `PutObject` permissions for
+    # your Amazon S3 bucket. For information, see [Dataset export job
+    # permissions requirements][1] in the Amazon Personalize developer
+    # guide.
+    #
+    # **Status**
+    #
+    # A dataset export job can be in one of the following states:
+    #
+    # * CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE
+    #   FAILED
+    #
+    # ^
+    #
+    # To get the status of the export job, call DescribeDatasetExportJob,
+    # and specify the Amazon Resource Name (ARN) of the dataset export job.
+    # The dataset export is complete when the status shows as ACTIVE. If the
+    # status shows as CREATE FAILED, the response includes a `failureReason`
+    # key, which describes why the job failed.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/export-permissions.html
+    #
+    # @option params [required, String] :job_name
+    #   The name for the dataset export job.
+    #
+    # @option params [required, String] :dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset that contains the data
+    #   to export.
+    #
+    # @option params [String] :ingestion_mode
+    #   The data to export, based on how you imported the data. You can choose
+    #   to export only `BULK` data that you imported using a dataset import
+    #   job, only `PUT` data that you imported incrementally (using the
+    #   console, PutEvents, PutUsers and PutItems operations), or `ALL` for
+    #   both types. The default value is `PUT`.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management service role that has permissions to add data to your
+    #   output Amazon S3 bucket.
+    #
+    # @option params [required, Types::DatasetExportJobOutput] :job_output
+    #   The path to the Amazon S3 bucket where the job's output is stored.
+    #
+    # @return [Types::CreateDatasetExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDatasetExportJobResponse#dataset_export_job_arn #dataset_export_job_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_dataset_export_job({
+    #     job_name: "Name", # required
+    #     dataset_arn: "Arn", # required
+    #     ingestion_mode: "BULK", # accepts BULK, PUT, ALL
+    #     role_arn: "RoleArn", # required
+    #     job_output: { # required
+    #       s3_data_destination: { # required
+    #         path: "S3Location", # required
+    #         kms_key_arn: "KmsKeyArn",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_export_job_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateDatasetExportJob AWS API Documentation
+    #
+    # @overload create_dataset_export_job(params = {})
+    # @param [Hash] params ({})
+    def create_dataset_export_job(params = {}, options = {})
+      req = build_request(:create_dataset_export_job, params)
+      req.send_request(options)
+    end
+
     # Creates an empty dataset group. A dataset group contains related
     # datasets that supply data for training a model. A dataset group can
     # contain at most three datasets, one for each type of dataset:
@@ -687,9 +772,11 @@ module Aws::Personalize
     # Creates a job that imports training data from your data source (an
     # Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon
     # Personalize to import the training data, you must specify an AWS
-    # Identity and Access Management (IAM) role that has permission to read
-    # from the data source, as Amazon Personalize makes a copy of your data
-    # and processes it in an internal AWS system.
+    # Identity and Access Management (IAM) service role that has permission
+    # to read from the data source, as Amazon Personalize makes a copy of
+    # your data and processes it in an internal AWS system. For information
+    # on granting access to your Amazon S3 bucket, see [Giving Amazon
+    # Personalize Access to Amazon S3 Resources][1].
     #
     # The dataset import job replaces any existing data in the dataset that
     # you imported in bulk.
@@ -719,6 +806,10 @@ module Aws::Personalize
     # * ListDatasetImportJobs
     #
     # * DescribeDatasetImportJob
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/granting-personalize-s3-access.html
     #
     # @option params [required, String] :job_name
     #   The name for the dataset import job.
@@ -1549,6 +1640,45 @@ module Aws::Personalize
       req.send_request(options)
     end
 
+    # Describes the dataset export job created by CreateDatasetExportJob,
+    # including the export job status.
+    #
+    # @option params [required, String] :dataset_export_job_arn
+    #   The Amazon Resource Name (ARN) of the dataset export job to describe.
+    #
+    # @return [Types::DescribeDatasetExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDatasetExportJobResponse#dataset_export_job #dataset_export_job} => Types::DatasetExportJob
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_dataset_export_job({
+    #     dataset_export_job_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_export_job.job_name #=> String
+    #   resp.dataset_export_job.dataset_export_job_arn #=> String
+    #   resp.dataset_export_job.dataset_arn #=> String
+    #   resp.dataset_export_job.ingestion_mode #=> String, one of "BULK", "PUT", "ALL"
+    #   resp.dataset_export_job.role_arn #=> String
+    #   resp.dataset_export_job.status #=> String
+    #   resp.dataset_export_job.job_output.s3_data_destination.path #=> String
+    #   resp.dataset_export_job.job_output.s3_data_destination.kms_key_arn #=> String
+    #   resp.dataset_export_job.creation_date_time #=> Time
+    #   resp.dataset_export_job.last_updated_date_time #=> Time
+    #   resp.dataset_export_job.failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeDatasetExportJob AWS API Documentation
+    #
+    # @overload describe_dataset_export_job(params = {})
+    # @param [Hash] params ({})
+    def describe_dataset_export_job(params = {}, options = {})
+      req = build_request(:describe_dataset_export_job, params)
+      req.send_request(options)
+    end
+
     # Describes the given dataset group. For more information on dataset
     # groups, see CreateDatasetGroup.
     #
@@ -2089,6 +2219,59 @@ module Aws::Personalize
       req.send_request(options)
     end
 
+    # Returns a list of dataset export jobs that use the given dataset. When
+    # a dataset is not specified, all the dataset export jobs associated
+    # with the account are listed. The response provides the properties for
+    # each dataset export job, including the Amazon Resource Name (ARN). For
+    # more information on dataset export jobs, see CreateDatasetExportJob.
+    # For more information on datasets, see CreateDataset.
+    #
+    # @option params [String] :dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset to list the dataset
+    #   export jobs for.
+    #
+    # @option params [String] :next_token
+    #   A token returned from the previous call to `ListDatasetExportJobs` for
+    #   getting the next set of dataset export jobs (if they exist).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of dataset export jobs to return.
+    #
+    # @return [Types::ListDatasetExportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDatasetExportJobsResponse#dataset_export_jobs #dataset_export_jobs} => Array&lt;Types::DatasetExportJobSummary&gt;
+    #   * {Types::ListDatasetExportJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_dataset_export_jobs({
+    #     dataset_arn: "Arn",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_export_jobs #=> Array
+    #   resp.dataset_export_jobs[0].dataset_export_job_arn #=> String
+    #   resp.dataset_export_jobs[0].job_name #=> String
+    #   resp.dataset_export_jobs[0].status #=> String
+    #   resp.dataset_export_jobs[0].creation_date_time #=> Time
+    #   resp.dataset_export_jobs[0].last_updated_date_time #=> Time
+    #   resp.dataset_export_jobs[0].failure_reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListDatasetExportJobs AWS API Documentation
+    #
+    # @overload list_dataset_export_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_dataset_export_jobs(params = {}, options = {})
+      req = build_request(:list_dataset_export_jobs, params)
+      req.send_request(options)
+    end
+
     # Returns a list of dataset groups. The response provides the properties
     # for each dataset group, including the Amazon Resource Name (ARN). For
     # more information on dataset groups, see CreateDatasetGroup.
@@ -2303,6 +2486,8 @@ module Aws::Personalize
     #
     #   * {Types::ListFiltersResponse#filters #filters} => Array&lt;Types::FilterSummary&gt;
     #   * {Types::ListFiltersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2593,7 +2778,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

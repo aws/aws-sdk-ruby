@@ -2033,6 +2033,7 @@ module Aws::IoTWireless
     #       },
     #       sidewalk: {
     #         seq: 1,
+    #         message_type: "CUSTOM_COMMAND_ID_NOTIFY", # accepts CUSTOM_COMMAND_ID_NOTIFY, CUSTOM_COMMAND_ID_GET, CUSTOM_COMMAND_ID_SET, CUSTOM_COMMAND_ID_RESP
     #       },
     #     },
     #   })
@@ -2275,7 +2276,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2674,6 +2674,7 @@ module Aws::IoTWireless
     #           },
     #           sidewalk: {
     #             seq: 1,
+    #             message_type: "CUSTOM_COMMAND_ID_NOTIFY", # accepts CUSTOM_COMMAND_ID_NOTIFY, CUSTOM_COMMAND_ID_GET, CUSTOM_COMMAND_ID_SET, CUSTOM_COMMAND_ID_RESP
     #           },
     #         },
     #       }
@@ -2929,14 +2930,20 @@ module Aws::IoTWireless
     #
     #       {
     #         seq: 1,
+    #         message_type: "CUSTOM_COMMAND_ID_NOTIFY", # accepts CUSTOM_COMMAND_ID_NOTIFY, CUSTOM_COMMAND_ID_GET, CUSTOM_COMMAND_ID_SET, CUSTOM_COMMAND_ID_RESP
     #       }
     #
     # @!attribute [rw] seq
     #   The sequence number.
     #   @return [Integer]
     #
+    # @!attribute [rw] message_type
+    #   Sidewalk device message type.
+    #   @return [String]
+    #
     class SidewalkSendDataToDevice < Struct.new(
-      :seq)
+      :seq,
+      :message_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3420,6 +3427,7 @@ module Aws::IoTWireless
     #         },
     #         sidewalk: {
     #           seq: 1,
+    #           message_type: "CUSTOM_COMMAND_ID_NOTIFY", # accepts CUSTOM_COMMAND_ID_NOTIFY, CUSTOM_COMMAND_ID_GET, CUSTOM_COMMAND_ID_SET, CUSTOM_COMMAND_ID_RESP
     #         },
     #       }
     #

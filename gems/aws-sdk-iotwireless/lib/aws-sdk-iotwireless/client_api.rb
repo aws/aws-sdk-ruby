@@ -180,6 +180,7 @@ module Aws::IoTWireless
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Message = Shapes::StringShape.new(name: 'Message')
     MessageId = Shapes::StringShape.new(name: 'MessageId')
+    MessageType = Shapes::StringShape.new(name: 'MessageType')
     MinGwDiversity = Shapes::IntegerShape.new(name: 'MinGwDiversity')
     Model = Shapes::StringShape.new(name: 'Model')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -859,6 +860,7 @@ module Aws::IoTWireless
     SidewalkListDevice.struct_class = Types::SidewalkListDevice
 
     SidewalkSendDataToDevice.add_member(:seq, Shapes::ShapeRef.new(shape: Seq, location_name: "Seq"))
+    SidewalkSendDataToDevice.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
     SidewalkSendDataToDevice.struct_class = Types::SidewalkSendDataToDevice
 
     SidewalkUpdateAccount.add_member(:app_server_private_key, Shapes::ShapeRef.new(shape: AppServerPrivateKey, location_name: "AppServerPrivateKey"))

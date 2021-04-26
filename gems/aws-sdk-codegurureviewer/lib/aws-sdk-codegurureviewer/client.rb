@@ -341,8 +341,8 @@ module Aws::CodeGuruReviewer
     #
     # Bitbucket and GitHub Enterprise Server repositories are managed by AWS
     # CodeStar Connections to connect to CodeGuru Reviewer. For more
-    # information, see [Connect to a repository source provider][2] in the
-    # *Amazon CodeGuru Reviewer User Guide.*
+    # information, see [Associate a repository][2] in the *Amazon CodeGuru
+    # Reviewer User Guide.*
     #
     # <note markdown="1"> You cannot use the CodeGuru Reviewer SDK or the AWS CLI to associate a
     # GitHub repository with Amazon CodeGuru Reviewer. To associate a GitHub
@@ -355,7 +355,7 @@ module Aws::CodeGuruReviewer
     #
     #
     # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html
-    # [2]: https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/reviewer-ug/step-one.html#select-repository-source-provider
+    # [2]: https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-associate-repository.html
     # [3]: https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-with-guru.html
     #
     # @option params [required, Types::Repository] :repository
@@ -380,6 +380,16 @@ module Aws::CodeGuruReviewer
     #     `111122223333`, `Production`, or a team name). Omitting the tag
     #     value is the same as using an empty string. Like tag keys, tag
     #     values are case sensitive.
+    #
+    # @option params [Types::KMSKeyDetails] :kms_key_details
+    #   A `KMSKeyDetails` object that contains:
+    #
+    #   * The encryption option for this repository association. It is either
+    #     owned by AWS Key Management Service (KMS) (`AWS_OWNED_CMK`) or
+    #     customer managed (`CUSTOMER_MANAGED_CMK`).
+    #
+    #   * The ID of the AWS KMS key that is associated with this respository
+    #     association.
     #
     # @return [Types::AssociateRepositoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -408,6 +418,10 @@ module Aws::CodeGuruReviewer
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     kms_key_details: {
+    #       kms_key_id: "KMSKeyId",
+    #       encryption_option: "AWS_OWNED_CMK", # accepts AWS_OWNED_CMK, CUSTOMER_MANAGED_CMK
+    #     },
     #   })
     #
     # @example Response structure
@@ -422,6 +436,8 @@ module Aws::CodeGuruReviewer
     #   resp.repository_association.state_reason #=> String
     #   resp.repository_association.last_updated_time_stamp #=> Time
     #   resp.repository_association.created_time_stamp #=> Time
+    #   resp.repository_association.kms_key_details.kms_key_id #=> String
+    #   resp.repository_association.kms_key_details.encryption_option #=> String, one of "AWS_OWNED_CMK", "CUSTOMER_MANAGED_CMK"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -672,6 +688,8 @@ module Aws::CodeGuruReviewer
     #   resp.repository_association.state_reason #=> String
     #   resp.repository_association.last_updated_time_stamp #=> Time
     #   resp.repository_association.created_time_stamp #=> Time
+    #   resp.repository_association.kms_key_details.kms_key_id #=> String
+    #   resp.repository_association.kms_key_details.encryption_option #=> String, one of "AWS_OWNED_CMK", "CUSTOMER_MANAGED_CMK"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -720,6 +738,8 @@ module Aws::CodeGuruReviewer
     #   resp.repository_association.state_reason #=> String
     #   resp.repository_association.last_updated_time_stamp #=> Time
     #   resp.repository_association.created_time_stamp #=> Time
+    #   resp.repository_association.kms_key_details.kms_key_id #=> String
+    #   resp.repository_association.kms_key_details.encryption_option #=> String, one of "AWS_OWNED_CMK", "CUSTOMER_MANAGED_CMK"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1237,7 +1257,7 @@ module Aws::CodeGuruReviewer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codegurureviewer'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

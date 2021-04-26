@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2021-04-26)
+------------------
+
+* Feature - Amazon Kinesis Data Analytics now supports custom application maintenance configuration using UpdateApplicationMaintenanceConfiguration API for Apache Flink applications. Customers will have visibility when their application is under maintenance status using 'MAINTENANCE' application status.
+
 1.26.0 (2021-03-10)
 ------------------
 

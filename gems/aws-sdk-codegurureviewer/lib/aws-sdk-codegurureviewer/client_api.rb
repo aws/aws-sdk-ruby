@@ -41,12 +41,15 @@ module Aws::CodeGuruReviewer
     DescribeRepositoryAssociationResponse = Shapes::StructureShape.new(name: 'DescribeRepositoryAssociationResponse')
     DisassociateRepositoryRequest = Shapes::StructureShape.new(name: 'DisassociateRepositoryRequest')
     DisassociateRepositoryResponse = Shapes::StructureShape.new(name: 'DisassociateRepositoryResponse')
+    EncryptionOption = Shapes::StringShape.new(name: 'EncryptionOption')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     FilePath = Shapes::StringShape.new(name: 'FilePath')
     FindingsCount = Shapes::IntegerShape.new(name: 'FindingsCount')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     JobState = Shapes::StringShape.new(name: 'JobState')
     JobStates = Shapes::ListShape.new(name: 'JobStates')
+    KMSKeyDetails = Shapes::StructureShape.new(name: 'KMSKeyDetails')
+    KMSKeyId = Shapes::StringShape.new(name: 'KMSKeyId')
     LineNumber = Shapes::IntegerShape.new(name: 'LineNumber')
     ListCodeReviewsMaxResults = Shapes::IntegerShape.new(name: 'ListCodeReviewsMaxResults')
     ListCodeReviewsRequest = Shapes::StructureShape.new(name: 'ListCodeReviewsRequest')
@@ -118,6 +121,7 @@ module Aws::CodeGuruReviewer
     AssociateRepositoryRequest.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, required: true, location_name: "Repository"))
     AssociateRepositoryRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     AssociateRepositoryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    AssociateRepositoryRequest.add_member(:kms_key_details, Shapes::ShapeRef.new(shape: KMSKeyDetails, location_name: "KMSKeyDetails"))
     AssociateRepositoryRequest.struct_class = Types::AssociateRepositoryRequest
 
     AssociateRepositoryResponse.add_member(:repository_association, Shapes::ShapeRef.new(shape: RepositoryAssociation, location_name: "RepositoryAssociation"))
@@ -209,6 +213,10 @@ module Aws::CodeGuruReviewer
     InternalServerException.struct_class = Types::InternalServerException
 
     JobStates.member = Shapes::ShapeRef.new(shape: JobState)
+
+    KMSKeyDetails.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "KMSKeyId"))
+    KMSKeyDetails.add_member(:encryption_option, Shapes::ShapeRef.new(shape: EncryptionOption, location_name: "EncryptionOption"))
+    KMSKeyDetails.struct_class = Types::KMSKeyDetails
 
     ListCodeReviewsRequest.add_member(:provider_types, Shapes::ShapeRef.new(shape: ProviderTypes, location: "querystring", location_name: "ProviderTypes"))
     ListCodeReviewsRequest.add_member(:states, Shapes::ShapeRef.new(shape: JobStates, location: "querystring", location_name: "States"))
@@ -330,6 +338,7 @@ module Aws::CodeGuruReviewer
     RepositoryAssociation.add_member(:state_reason, Shapes::ShapeRef.new(shape: StateReason, location_name: "StateReason"))
     RepositoryAssociation.add_member(:last_updated_time_stamp, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "LastUpdatedTimeStamp"))
     RepositoryAssociation.add_member(:created_time_stamp, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "CreatedTimeStamp"))
+    RepositoryAssociation.add_member(:kms_key_details, Shapes::ShapeRef.new(shape: KMSKeyDetails, location_name: "KMSKeyDetails"))
     RepositoryAssociation.struct_class = Types::RepositoryAssociation
 
     RepositoryAssociationStates.member = Shapes::ShapeRef.new(shape: RepositoryAssociationState)

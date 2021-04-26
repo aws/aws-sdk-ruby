@@ -863,7 +863,7 @@ module Aws::EKS
     #         disk_size: 1,
     #         subnets: ["String"], # required
     #         instance_types: ["String"],
-    #         ami_type: "AL2_x86_64", # accepts AL2_x86_64, AL2_x86_64_GPU, AL2_ARM_64
+    #         ami_type: "AL2_x86_64", # accepts AL2_x86_64, AL2_x86_64_GPU, AL2_ARM_64, CUSTOM
     #         remote_access: {
     #           ec2_ssh_key: "String",
     #           source_security_groups: ["String"],

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2021-04-26)
+------------------
+
+* Feature - This release updates existing Amazon EKS input validation so customers will see an InvalidParameterException instead of a ParamValidationError when they enter 0 for minSize and/or desiredSize. It also adds LaunchTemplate information to update responses and a new "CUSTOM" value for AMIType.
+
 1.51.0 (2021-03-10)
 ------------------
 

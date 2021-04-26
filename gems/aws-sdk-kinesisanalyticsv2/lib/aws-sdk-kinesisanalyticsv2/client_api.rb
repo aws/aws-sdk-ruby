@@ -33,6 +33,10 @@ module Aws::KinesisAnalyticsV2
     ApplicationConfigurationUpdate = Shapes::StructureShape.new(name: 'ApplicationConfigurationUpdate')
     ApplicationDescription = Shapes::StringShape.new(name: 'ApplicationDescription')
     ApplicationDetail = Shapes::StructureShape.new(name: 'ApplicationDetail')
+    ApplicationMaintenanceConfigurationDescription = Shapes::StructureShape.new(name: 'ApplicationMaintenanceConfigurationDescription')
+    ApplicationMaintenanceConfigurationUpdate = Shapes::StructureShape.new(name: 'ApplicationMaintenanceConfigurationUpdate')
+    ApplicationMaintenanceWindowEndTime = Shapes::StringShape.new(name: 'ApplicationMaintenanceWindowEndTime')
+    ApplicationMaintenanceWindowStartTime = Shapes::StringShape.new(name: 'ApplicationMaintenanceWindowStartTime')
     ApplicationName = Shapes::StringShape.new(name: 'ApplicationName')
     ApplicationRestoreConfiguration = Shapes::StructureShape.new(name: 'ApplicationRestoreConfiguration')
     ApplicationRestoreType = Shapes::StringShape.new(name: 'ApplicationRestoreType')
@@ -254,6 +258,8 @@ module Aws::KinesisAnalyticsV2
     UnsupportedOperationException = Shapes::StructureShape.new(name: 'UnsupportedOperationException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateApplicationMaintenanceConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationMaintenanceConfigurationRequest')
+    UpdateApplicationMaintenanceConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateApplicationMaintenanceConfigurationResponse')
     UpdateApplicationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationRequest')
     UpdateApplicationResponse = Shapes::StructureShape.new(name: 'UpdateApplicationResponse')
     UrlType = Shapes::StringShape.new(name: 'UrlType')
@@ -376,7 +382,15 @@ module Aws::KinesisAnalyticsV2
     ApplicationDetail.add_member(:last_update_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdateTimestamp"))
     ApplicationDetail.add_member(:application_configuration_description, Shapes::ShapeRef.new(shape: ApplicationConfigurationDescription, location_name: "ApplicationConfigurationDescription"))
     ApplicationDetail.add_member(:cloud_watch_logging_option_descriptions, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptionDescriptions, location_name: "CloudWatchLoggingOptionDescriptions"))
+    ApplicationDetail.add_member(:application_maintenance_configuration_description, Shapes::ShapeRef.new(shape: ApplicationMaintenanceConfigurationDescription, location_name: "ApplicationMaintenanceConfigurationDescription"))
     ApplicationDetail.struct_class = Types::ApplicationDetail
+
+    ApplicationMaintenanceConfigurationDescription.add_member(:application_maintenance_window_start_time, Shapes::ShapeRef.new(shape: ApplicationMaintenanceWindowStartTime, required: true, location_name: "ApplicationMaintenanceWindowStartTime"))
+    ApplicationMaintenanceConfigurationDescription.add_member(:application_maintenance_window_end_time, Shapes::ShapeRef.new(shape: ApplicationMaintenanceWindowEndTime, required: true, location_name: "ApplicationMaintenanceWindowEndTime"))
+    ApplicationMaintenanceConfigurationDescription.struct_class = Types::ApplicationMaintenanceConfigurationDescription
+
+    ApplicationMaintenanceConfigurationUpdate.add_member(:application_maintenance_window_start_time_update, Shapes::ShapeRef.new(shape: ApplicationMaintenanceWindowStartTime, required: true, location_name: "ApplicationMaintenanceWindowStartTimeUpdate"))
+    ApplicationMaintenanceConfigurationUpdate.struct_class = Types::ApplicationMaintenanceConfigurationUpdate
 
     ApplicationRestoreConfiguration.add_member(:application_restore_type, Shapes::ShapeRef.new(shape: ApplicationRestoreType, required: true, location_name: "ApplicationRestoreType"))
     ApplicationRestoreConfiguration.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: SnapshotName, location_name: "SnapshotName"))
@@ -1018,6 +1032,14 @@ module Aws::KinesisAnalyticsV2
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateApplicationMaintenanceConfigurationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
+    UpdateApplicationMaintenanceConfigurationRequest.add_member(:application_maintenance_configuration_update, Shapes::ShapeRef.new(shape: ApplicationMaintenanceConfigurationUpdate, required: true, location_name: "ApplicationMaintenanceConfigurationUpdate"))
+    UpdateApplicationMaintenanceConfigurationRequest.struct_class = Types::UpdateApplicationMaintenanceConfigurationRequest
+
+    UpdateApplicationMaintenanceConfigurationResponse.add_member(:application_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ApplicationARN"))
+    UpdateApplicationMaintenanceConfigurationResponse.add_member(:application_maintenance_configuration_description, Shapes::ShapeRef.new(shape: ApplicationMaintenanceConfigurationDescription, location_name: "ApplicationMaintenanceConfigurationDescription"))
+    UpdateApplicationMaintenanceConfigurationResponse.struct_class = Types::UpdateApplicationMaintenanceConfigurationResponse
+
     UpdateApplicationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     UpdateApplicationRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "CurrentApplicationVersionId"))
     UpdateApplicationRequest.add_member(:application_configuration_update, Shapes::ShapeRef.new(shape: ApplicationConfigurationUpdate, location_name: "ApplicationConfigurationUpdate"))
@@ -1415,6 +1437,20 @@ module Aws::KinesisAnalyticsV2
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidApplicationConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:update_application_maintenance_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateApplicationMaintenanceConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateApplicationMaintenanceConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateApplicationMaintenanceConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
     end
 

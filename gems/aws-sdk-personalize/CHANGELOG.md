@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2021-04-26)
+------------------
+
+* Feature - Added support for exporting data imported into an Amazon Personalize dataset to a specified data source (Amazon S3 bucket).
+
 1.22.0 (2021-03-10)
 ------------------
 

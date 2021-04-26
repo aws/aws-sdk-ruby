@@ -244,7 +244,11 @@ module Aws::Personalize
     #   hyperparameters, including `explorationWeight` and
     #   `explorationItemAgeCutOff`, you want to use to configure the amount
     #   of item exploration Amazon Personalize uses when recommending items.
-    #   See native-recipe-new-item-USER\_PERSONALIZATION.
+    #   See [User-Personalization][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/BatchInferenceJobConfig AWS API Documentation
@@ -665,8 +669,12 @@ module Aws::Personalize
     #
     # @!attribute [rw] filter_arn
     #   The ARN of the filter to apply to the batch inference job. For more
-    #   information on using filters, see Using Filters with Amazon
-    #   Personalize.
+    #   information on using filters, see [Filtering Batch
+    #   Recommendations][1]..
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter-batch.html
     #   @return [String]
     #
     # @!attribute [rw] num_results
@@ -685,7 +693,7 @@ module Aws::Personalize
     #
     # @!attribute [rw] role_arn
     #   The ARN of the Amazon Identity and Access Management role that has
-    #   permissions to read and write to your input and out Amazon S3
+    #   permissions to read and write to your input and output Amazon S3
     #   buckets respectively.
     #   @return [String]
     #
@@ -771,6 +779,73 @@ module Aws::Personalize
     #
     class CreateCampaignResponse < Struct.new(
       :campaign_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateDatasetExportJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_name: "Name", # required
+    #         dataset_arn: "Arn", # required
+    #         ingestion_mode: "BULK", # accepts BULK, PUT, ALL
+    #         role_arn: "RoleArn", # required
+    #         job_output: { # required
+    #           s3_data_destination: { # required
+    #             path: "S3Location", # required
+    #             kms_key_arn: "KmsKeyArn",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] job_name
+    #   The name for the dataset export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset that contains the data
+    #   to export.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingestion_mode
+    #   The data to export, based on how you imported the data. You can
+    #   choose to export only `BULK` data that you imported using a dataset
+    #   import job, only `PUT` data that you imported incrementally (using
+    #   the console, PutEvents, PutUsers and PutItems operations), or `ALL`
+    #   for both types. The default value is `PUT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management service role that has permissions to add data to your
+    #   output Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_output
+    #   The path to the Amazon S3 bucket where the job's output is stored.
+    #   @return [Types::DatasetExportJobOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateDatasetExportJobRequest AWS API Documentation
+    #
+    class CreateDatasetExportJobRequest < Struct.new(
+      :job_name,
+      :dataset_arn,
+      :ingestion_mode,
+      :role_arn,
+      :job_output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_export_job_arn
+    #   The Amazon Resource Name (ARN) of the dataset export job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateDatasetExportJobResponse AWS API Documentation
+    #
+    class CreateDatasetExportJobResponse < Struct.new(
+      :dataset_export_job_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1268,7 +1343,7 @@ module Aws::Personalize
     #   The path to the Amazon S3 bucket where the data that you want to
     #   upload to your dataset is stored. For example:
     #
-    #   `s3://bucket-name/training-data.csv`
+    #   `s3://bucket-name/folder-name/`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DataSource AWS API Documentation
@@ -1338,6 +1413,163 @@ module Aws::Personalize
       :status,
       :creation_date_time,
       :last_updated_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a job that exports a dataset to an Amazon S3 bucket. For
+    # more information, see CreateDatasetExportJob.
+    #
+    # A dataset export job can be in one of the following states:
+    #
+    # * CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE
+    #   FAILED
+    #
+    # ^
+    #
+    # @!attribute [rw] job_name
+    #   The name of the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_export_job_arn
+    #   The Amazon Resource Name (ARN) of the dataset export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset to export.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingestion_mode
+    #   The data to export, based on how you imported the data. You can
+    #   choose to export `BULK` data that you imported using a dataset
+    #   import job, `PUT` data that you imported incrementally (using the
+    #   console, PutEvents, PutUsers and PutItems operations), or `ALL` for
+    #   both types. The default value is `PUT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management service role that has permissions to add data to your
+    #   output Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the dataset export job.
+    #
+    #   A dataset export job can be in one of the following states:
+    #
+    #   * CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE
+    #     FAILED
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] job_output
+    #   The path to the Amazon S3 bucket where the job's output is stored.
+    #   For example:
+    #
+    #   `s3://bucket-name/folder-name/`
+    #   @return [Types::DatasetExportJobOutput]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The creation date and time (in Unix time) of the dataset export job.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time (in Unix time) the status of the dataset export
+    #   job was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   If a dataset export job fails, provides the reason why.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DatasetExportJob AWS API Documentation
+    #
+    class DatasetExportJob < Struct.new(
+      :job_name,
+      :dataset_export_job_arn,
+      :dataset_arn,
+      :ingestion_mode,
+      :role_arn,
+      :status,
+      :job_output,
+      :creation_date_time,
+      :last_updated_date_time,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The output configuration parameters of a dataset export job.
+    #
+    # @note When making an API call, you may pass DatasetExportJobOutput
+    #   data as a hash:
+    #
+    #       {
+    #         s3_data_destination: { # required
+    #           path: "S3Location", # required
+    #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_data_destination
+    #   The configuration details of an Amazon S3 input or output bucket.
+    #   @return [Types::S3DataConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DatasetExportJobOutput AWS API Documentation
+    #
+    class DatasetExportJobOutput < Struct.new(
+      :s3_data_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a summary of the properties of a dataset export job. For a
+    # complete listing, call the DescribeDatasetExportJob API.
+    #
+    # @!attribute [rw] dataset_export_job_arn
+    #   The Amazon Resource Name (ARN) of the dataset export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name of the dataset export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the dataset export job.
+    #
+    #   A dataset export job can be in one of the following states:
+    #
+    #   * CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE
+    #     FAILED
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time (in Unix time) that the dataset export job was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time (in Unix time) that the dataset export job status
+    #   was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   If a dataset export job fails, the reason behind the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DatasetExportJobSummary AWS API Documentation
+    #
+    class DatasetExportJobSummary < Struct.new(
+      :dataset_export_job_arn,
+      :job_name,
+      :status,
+      :creation_date_time,
+      :last_updated_date_time,
+      :failure_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1556,7 +1788,8 @@ module Aws::Personalize
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_date_time
-    #   The date and time (in Unix time) that the dataset was last updated.
+    #   The date and time (in Unix time) that the dataset import job status
+    #   was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] failure_reason
@@ -2033,6 +2266,48 @@ module Aws::Personalize
     #
     class DescribeCampaignResponse < Struct.new(
       :campaign)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeDatasetExportJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dataset_export_job_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] dataset_export_job_arn
+    #   The Amazon Resource Name (ARN) of the dataset export job to
+    #   describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeDatasetExportJobRequest AWS API Documentation
+    #
+    class DescribeDatasetExportJobRequest < Struct.new(
+      :dataset_export_job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_export_job
+    #   Information about the dataset export job, including the status.
+    #
+    #   The status is one of the following values:
+    #
+    #   * CREATE PENDING
+    #
+    #   * CREATE IN\_PROGRESS
+    #
+    #   * ACTIVE
+    #
+    #   * CREATE FAILED
+    #   @return [Types::DatasetExportJob]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeDatasetExportJobResponse AWS API Documentation
+    #
+    class DescribeDatasetExportJobResponse < Struct.new(
+      :dataset_export_job)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2947,7 +3222,7 @@ module Aws::Personalize
     #   @return [Array<Types::BatchInferenceJobSummary>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retreive the next page of results. The value is
+    #   The token to use to retrieve the next page of results. The value is
     #   `null` when there are no more results to return.
     #   @return [String]
     #
@@ -3006,6 +3281,57 @@ module Aws::Personalize
     #
     class ListCampaignsResponse < Struct.new(
       :campaigns,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListDatasetExportJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dataset_arn: "Arn",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset to list the dataset
+    #   export jobs for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token returned from the previous call to `ListDatasetExportJobs`
+    #   for getting the next set of dataset export jobs (if they exist).
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of dataset export jobs to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListDatasetExportJobsRequest AWS API Documentation
+    #
+    class ListDatasetExportJobsRequest < Struct.new(
+      :dataset_arn,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_export_jobs
+    #   The list of dataset export jobs.
+    #   @return [Array<Types::DatasetExportJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token for getting the next set of dataset export jobs (if they
+    #   exist).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListDatasetExportJobsResponse AWS API Documentation
+    #
+    class ListDatasetExportJobsResponse < Struct.new(
+      :dataset_export_jobs,
       :next_token)
       SENSITIVE = []
       include Aws::Structure

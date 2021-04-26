@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2021-04-26)
+------------------
+
+* Feature - Documentation updates for mediaconvert
+
 1.65.0 (2021-04-01)
 ------------------
 

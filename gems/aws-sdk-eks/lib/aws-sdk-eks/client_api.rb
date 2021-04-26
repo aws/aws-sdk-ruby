@@ -172,6 +172,7 @@ module Aws::EKS
     UpdateType = Shapes::StringShape.new(name: 'UpdateType')
     VpcConfigRequest = Shapes::StructureShape.new(name: 'VpcConfigRequest')
     VpcConfigResponse = Shapes::StructureShape.new(name: 'VpcConfigResponse')
+    ZeroCapacity = Shapes::IntegerShape.new(name: 'ZeroCapacity')
     configStatus = Shapes::StringShape.new(name: 'configStatus')
     labelKey = Shapes::StringShape.new(name: 'labelKey')
     labelValue = Shapes::StringShape.new(name: 'labelValue')
@@ -602,9 +603,9 @@ module Aws::EKS
     NodegroupResources.add_member(:remote_access_security_group, Shapes::ShapeRef.new(shape: String, location_name: "remoteAccessSecurityGroup"))
     NodegroupResources.struct_class = Types::NodegroupResources
 
-    NodegroupScalingConfig.add_member(:min_size, Shapes::ShapeRef.new(shape: Capacity, location_name: "minSize"))
+    NodegroupScalingConfig.add_member(:min_size, Shapes::ShapeRef.new(shape: ZeroCapacity, location_name: "minSize"))
     NodegroupScalingConfig.add_member(:max_size, Shapes::ShapeRef.new(shape: Capacity, location_name: "maxSize"))
-    NodegroupScalingConfig.add_member(:desired_size, Shapes::ShapeRef.new(shape: Capacity, location_name: "desiredSize"))
+    NodegroupScalingConfig.add_member(:desired_size, Shapes::ShapeRef.new(shape: ZeroCapacity, location_name: "desiredSize"))
     NodegroupScalingConfig.struct_class = Types::NodegroupScalingConfig
 
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))

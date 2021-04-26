@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2021-04-26)
+------------------
+
+* Feature - Adding Kafka Client Auth Related Parameters
+
 1.86.0 (2021-03-29)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2021-04-26)
+------------------
+
+* Feature - Include KMS Key Details in Repository Association APIs to enable usage of customer managed KMS Keys.
+
 1.16.0 (2021-03-10)
 ------------------
 

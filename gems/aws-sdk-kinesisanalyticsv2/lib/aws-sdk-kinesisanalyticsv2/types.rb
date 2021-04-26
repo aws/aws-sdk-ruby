@@ -1024,8 +1024,8 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     #
     # @!attribute [rw] runtime_environment
-    #   The runtime environment for the application (`SQL-1.0`, `FLINK-1_6`,
-    #   or `FLINK-1_8`).
+    #   The runtime environment for the application (`SQL-1_0`, `FLINK-1_6`,
+    #   `FLINK-1_8`, or `FLINK-1_11`).
     #   @return [String]
     #
     # @!attribute [rw] service_execution_role
@@ -1060,6 +1060,10 @@ module Aws::KinesisAnalyticsV2
     #   Describes the application Amazon CloudWatch logging options.
     #   @return [Array<Types::CloudWatchLoggingOptionDescription>]
     #
+    # @!attribute [rw] application_maintenance_configuration_description
+    #   Describes the time window for automatic application maintenance.
+    #   @return [Types::ApplicationMaintenanceConfigurationDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationDetail AWS API Documentation
     #
     class ApplicationDetail < Struct.new(
@@ -1073,7 +1077,49 @@ module Aws::KinesisAnalyticsV2
       :create_timestamp,
       :last_update_timestamp,
       :application_configuration_description,
-      :cloud_watch_logging_option_descriptions)
+      :cloud_watch_logging_option_descriptions,
+      :application_maintenance_configuration_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the time window for automatic application maintenance.
+    #
+    # @!attribute [rw] application_maintenance_window_start_time
+    #   The start time for the automatic maintenance window.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_maintenance_window_end_time
+    #   The end time for the automatic maintenance window.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationMaintenanceConfigurationDescription AWS API Documentation
+    #
+    class ApplicationMaintenanceConfigurationDescription < Struct.new(
+      :application_maintenance_window_start_time,
+      :application_maintenance_window_end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the updated time window for automatic application
+    # maintenance.
+    #
+    # @note When making an API call, you may pass ApplicationMaintenanceConfigurationUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         application_maintenance_window_start_time_update: "ApplicationMaintenanceWindowStartTime", # required
+    #       }
+    #
+    # @!attribute [rw] application_maintenance_window_start_time_update
+    #   The updated start time for the automatic maintenance window.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationMaintenanceConfigurationUpdate AWS API Documentation
+    #
+    class ApplicationMaintenanceConfigurationUpdate < Struct.new(
+      :application_maintenance_window_start_time_update)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1191,8 +1237,8 @@ module Aws::KinesisAnalyticsV2
     #   @return [Integer]
     #
     # @!attribute [rw] runtime_environment
-    #   The runtime environment for the application (`SQL-1.0`, `FLINK-1_6`,
-    #   or `FLINK-1_8`).
+    #   The runtime environment for the application (`SQL-1_0`, `FLINK-1_6`,
+    #   `FLINK-1_8`, or `FLINK-1_11`).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationSummary AWS API Documentation
@@ -1300,7 +1346,7 @@ module Aws::KinesisAnalyticsV2
     #   operations.
     #
     #   <note markdown="1"> If `CheckpointConfiguration.ConfigurationType` is `DEFAULT`, the
-    #   application will use a `CheckpointInterval` vaue of 60000, even if
+    #   application will use a `CheckpointInterval` value of 60000, even if
     #   this value is set to another value using this API or in application
     #   code.
     #
@@ -1375,7 +1421,7 @@ module Aws::KinesisAnalyticsV2
     #   operations.
     #
     #   <note markdown="1"> If `CheckpointConfiguration.ConfigurationType` is `DEFAULT`, the
-    #   application will use a `CheckpointInterval` vaue of 60000, even if
+    #   application will use a `CheckpointInterval` value of 60000, even if
     #   this value is set to another value using this API or in application
     #   code.
     #
@@ -1453,7 +1499,7 @@ module Aws::KinesisAnalyticsV2
     #   operations.
     #
     #   <note markdown="1"> If `CheckpointConfiguration.ConfigurationType` is `DEFAULT`, the
-    #   application will use a `CheckpointInterval` vaue of 60000, even if
+    #   application will use a `CheckpointInterval` value of 60000, even if
     #   this value is set to another value using this API or in application
     #   code.
     #
@@ -1923,8 +1969,8 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     #
     # @!attribute [rw] runtime_environment
-    #   The runtime environment for the application (`SQL-1.0`, `FLINK-1_6`,
-    #   or `FLINK-1_8`).
+    #   The runtime environment for the application (`SQL-1_0`, `FLINK-1_6`,
+    #   `FLINK-1_8`, or `FLINK-1_11`).
     #   @return [String]
     #
     # @!attribute [rw] service_execution_role
@@ -4317,8 +4363,8 @@ module Aws::KinesisAnalyticsV2
     end
 
     # Describes parameters for how a Flink-based Kinesis Data Analytics
-    # application application executes multiple tasks simultaneously. For
-    # more information about parallelism, see [Parallel Execution][1] in the
+    # application executes multiple tasks simultaneously. For more
+    # information about parallelism, see [Parallel Execution][1] in the
     # [Apache Flink Documentation][2].
     #
     #
@@ -5811,6 +5857,52 @@ module Aws::KinesisAnalyticsV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateApplicationMaintenanceConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_name: "ApplicationName", # required
+    #         application_maintenance_configuration_update: { # required
+    #           application_maintenance_window_start_time_update: "ApplicationMaintenanceWindowStartTime", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] application_name
+    #   The name of the application for which you want to update the
+    #   maintenance time window.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_maintenance_configuration_update
+    #   Describes the application maintenance configuration update.
+    #   @return [Types::ApplicationMaintenanceConfigurationUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UpdateApplicationMaintenanceConfigurationRequest AWS API Documentation
+    #
+    class UpdateApplicationMaintenanceConfigurationRequest < Struct.new(
+      :application_name,
+      :application_maintenance_configuration_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_maintenance_configuration_description
+    #   The application maintenance configuration description after the
+    #   update.
+    #   @return [Types::ApplicationMaintenanceConfigurationDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UpdateApplicationMaintenanceConfigurationResponse AWS API Documentation
+    #
+    class UpdateApplicationMaintenanceConfigurationResponse < Struct.new(
+      :application_arn,
+      :application_maintenance_configuration_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateApplicationRequest
     #   data as a hash:

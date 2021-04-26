@@ -22160,11 +22160,12 @@ module Aws::EC2
     #     holders and are for use with Amazon VPC (`Linux/UNIX` \| `Linux/UNIX
     #     (Amazon VPC)` \| `SUSE Linux` \| `SUSE Linux (Amazon VPC)` \| `Red
     #     Hat Enterprise Linux` \| `Red Hat Enterprise Linux (Amazon VPC)` \|
-    #     `Windows` \| `Windows (Amazon VPC)` \| `Windows with SQL Server
-    #     Standard` \| `Windows with SQL Server Standard (Amazon VPC)` \|
-    #     `Windows with SQL Server Web` \| `Windows with SQL Server Web
-    #     (Amazon VPC)` \| `Windows with SQL Server Enterprise` \| `Windows
-    #     with SQL Server Enterprise (Amazon VPC)`).
+    #     `Red Hat Enterprise Linux with HA (Amazon VPC)` \| `Windows` \|
+    #     `Windows (Amazon VPC)` \| `Windows with SQL Server Standard` \|
+    #     `Windows with SQL Server Standard (Amazon VPC)` \| `Windows with SQL
+    #     Server Web` \| `Windows with SQL Server Web (Amazon VPC)` \|
+    #     `Windows with SQL Server Enterprise` \| `Windows with SQL Server
+    #     Enterprise (Amazon VPC)`).
     #
     #   * `reserved-instances-id` - The ID of the Reserved Instance.
     #
@@ -22510,11 +22511,12 @@ module Aws::EC2
     #     holders and are for use with Amazon VPC. (`Linux/UNIX` \|
     #     `Linux/UNIX (Amazon VPC)` \| `SUSE Linux` \| `SUSE Linux (Amazon
     #     VPC)` \| `Red Hat Enterprise Linux` \| `Red Hat Enterprise Linux
-    #     (Amazon VPC)` \| `Windows` \| `Windows (Amazon VPC)` \| `Windows
-    #     with SQL Server Standard` \| `Windows with SQL Server Standard
-    #     (Amazon VPC)` \| `Windows with SQL Server Web` \| ` Windows with SQL
-    #     Server Web (Amazon VPC)` \| `Windows with SQL Server Enterprise` \|
-    #     `Windows with SQL Server Enterprise (Amazon VPC)`)
+    #     (Amazon VPC)` \| `Red Hat Enterprise Linux with HA (Amazon VPC)` \|
+    #     `Windows` \| `Windows (Amazon VPC)` \| `Windows with SQL Server
+    #     Standard` \| `Windows with SQL Server Standard (Amazon VPC)` \|
+    #     `Windows with SQL Server Web` \| ` Windows with SQL Server Web
+    #     (Amazon VPC)` \| `Windows with SQL Server Enterprise` \| `Windows
+    #     with SQL Server Enterprise (Amazon VPC)`)
     #
     #   * `reserved-instances-offering-id` - The Reserved Instances offering
     #     ID.
@@ -41869,7 +41871,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.234.0'
+      context[:gem_version] = '1.235.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
