@@ -153,21 +153,35 @@ module Aws
       #     obj.presigned_url(:put, acl: 'public-read')
       #     #=> "https://bucket-name.s3.amazonaws.com/object-key?..."
       #
-      # @param [Symbol] http_method
-      #   The HTTP method to generate a presigned URL for. Valid values
-      #   are `:get`, `:put`, `:head`, and `:delete`.
+      # @example Pre-signed UploadPart PUT
+      #
+      #     # the object uploaded using this URL will be publicly accessible
+      #     obj.presigned_url(:upload_part, part_number: 1, upload_id: 'uploadIdToken')
+      #     #=> "https://bucket-name.s3.amazonaws.com/object-key?..."
+      #
+      # @param [Symbol] method
+      #   The S3 operation to generate a presigned URL for. Valid values
+      #   are `:get`, `:put`, `:head`, `:delete`, `:create_multipart_upload`, 
+      #   `:list_multipart_uploads`, `:complete_multipart_upload`,
+      #   `:abort_multipart_upload`, `:list_parts`, and `:upload_part`.
       #
       # @param [Hash] params
       #   Additional request parameters to use when generating the pre-signed
       #   URL. See the related documentation in {Client} for accepted
       #   params.
       #
-      #   | HTTP Method   | Client Method          |
-      #   |---------------|------------------------|
-      #   | `:get`        | {Client#get_object}    |
-      #   | `:put`        | {Client#put_object}    |
-      #   | `:head`       | {Client#head_object}   |
-      #   | `:delete`     | {Client#delete_object} |
+      #   | Method                       | Client Method                      |
+      #   |------------------------------|------------------------------------|
+      #   | `:get`                       | {Client#get_object}                |
+      #   | `:put`                       | {Client#put_object}                |
+      #   | `:head`                      | {Client#head_object}               |
+      #   | `:delete`                    | {Client#delete_object}             |
+      #   | `:create_multipart_upload`   | {Client#create_multipart_upload}   |
+      #   | `:list_multipart_uploads`    | {Client#list_multipart_uploads}    |
+      #   | `:complete_multipart_upload` | {Client#complete_multipart_upload} |
+      #   | `:abort_multipart_upload`    | {Client#abort_multipart_upload}    |
+      #   | `:list_parts`                | {Client#list_parts}                |
+      #   | `:upload_part`               | {Client#upload_part}               |
       #
       # @option params [Boolean] :virtual_host (false) When `true` the
       #   presigned URL will use the bucket name as a virtual host.
@@ -188,10 +202,15 @@ module Aws
       #
       # @return [String]
       #
-      def presigned_url(http_method, params = {})
+      def presigned_url(method, params = {})
         presigner = Presigner.new(client: client)
+
+        if %w(delete head get put).include?(method.to_s)
+          method = "#{method}_object".to_sym
+        end
+
         presigner.presigned_url(
-          "#{http_method.downcase}_object",
+          method.downcase,
           params.merge(bucket: bucket_name, key: key)
         )
       end

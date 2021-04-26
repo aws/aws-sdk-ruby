@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Allow S3 Presigner to sign non http verbs like (upload_part, multipart_upload_abort, etc.) #2511
+
 1.93.1 (2021-04-12)
 ------------------
 
