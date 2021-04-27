@@ -3769,7 +3769,7 @@ module Aws::AuditManager
     #   data as a hash:
     #
     #       {
-    #         id: "UUID",
+    #         id: "ControlSetName",
     #         name: "ControlSetName",
     #         controls: [
     #           {
@@ -3810,7 +3810,7 @@ module Aws::AuditManager
     #         compliance_type: "ComplianceType",
     #         control_sets: [ # required
     #           {
-    #             id: "UUID",
+    #             id: "ControlSetName",
     #             name: "ControlSetName",
     #             controls: [
     #               {

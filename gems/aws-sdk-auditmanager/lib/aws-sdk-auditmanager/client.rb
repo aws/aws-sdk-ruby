@@ -2641,7 +2641,7 @@ module Aws::AuditManager
     #     compliance_type: "ComplianceType",
     #     control_sets: [ # required
     #       {
-    #         id: "UUID",
+    #         id: "ControlSetName",
     #         name: "ControlSetName",
     #         controls: [
     #           {
@@ -3013,7 +3013,7 @@ module Aws::AuditManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-auditmanager'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
