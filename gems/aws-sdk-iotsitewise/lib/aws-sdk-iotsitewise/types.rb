@@ -3448,6 +3448,121 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetInterpolatedAssetPropertyValuesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         asset_id: "ID",
+    #         property_id: "ID",
+    #         property_alias: "AssetPropertyAlias",
+    #         start_time_in_seconds: 1, # required
+    #         start_time_offset_in_nanos: 1,
+    #         end_time_in_seconds: 1, # required
+    #         end_time_offset_in_nanos: 1,
+    #         quality: "GOOD", # required, accepts GOOD, BAD, UNCERTAIN
+    #         interval_in_seconds: 1, # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         type: "InterpolationType", # required
+    #       }
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_id
+    #   The ID of the asset property.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_alias
+    #   The property alias that identifies the property, such as an OPC-UA
+    #   server data stream path (for example,
+    #   `/company/windfarm/3/turbine/7/temperature`). For more information,
+    #   see [Mapping industrial data streams to asset properties][1] in the
+    #   *AWS IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time_in_seconds
+    #   The exclusive start of the range from which to interpolate data,
+    #   expressed in seconds in Unix epoch time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_time_offset_in_nanos
+    #   The nanosecond offset converted from `startTimeInSeconds`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_time_in_seconds
+    #   The inclusive end of the range from which to interpolate data,
+    #   expressed in seconds in Unix epoch time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_time_offset_in_nanos
+    #   The nanosecond offset converted from `endTimeInSeconds`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] quality
+    #   The quality of the asset property value. You can use this parameter
+    #   as a filter to choose only the asset property values that have a
+    #   specific quality.
+    #   @return [String]
+    #
+    # @!attribute [rw] interval_in_seconds
+    #   The time interval in seconds over which to interpolate data. Each
+    #   interval starts when the previous one ends.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per paginated request.
+    #   If not specified, the default value is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] type
+    #   The interpolation type.
+    #
+    #   Valid values: `LINEAR_INTERPOLATION`
+    #   @return [String]
+    #
+    class GetInterpolatedAssetPropertyValuesRequest < Struct.new(
+      :asset_id,
+      :property_id,
+      :property_alias,
+      :start_time_in_seconds,
+      :start_time_offset_in_nanos,
+      :end_time_in_seconds,
+      :end_time_offset_in_nanos,
+      :quality,
+      :interval_in_seconds,
+      :next_token,
+      :max_results,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] interpolated_asset_property_values
+    #   The requested interpolated values.
+    #   @return [Array<Types::InterpolatedAssetPropertyValue>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    class GetInterpolatedAssetPropertyValuesResponse < Struct.new(
+      :interpolated_asset_property_values,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details for a gateway that runs on AWS IoT Greengrass. To
     # create a gateway that runs on AWS IoT Greengrass, you must add the IoT
     # SiteWise connector to a Greengrass group and deploy it. Your
@@ -3524,7 +3639,7 @@ module Aws::IoTSiteWise
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.htmll#identifiers-arns
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
     class IAMRoleIdentity < Struct.new(
@@ -3707,6 +3822,23 @@ module Aws::IoTSiteWise
     #
     class InternalFailureException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an interpolated asset property value.
+    #
+    # @!attribute [rw] timestamp
+    #   Contains a timestamp with optional nanosecond granularity.
+    #   @return [Types::TimeInNanos]
+    #
+    # @!attribute [rw] value
+    #   Contains an asset property value (of a single type only).
+    #   @return [Types::Variant]
+    #
+    class InterpolatedAssetPropertyValue < Struct.new(
+      :timestamp,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end

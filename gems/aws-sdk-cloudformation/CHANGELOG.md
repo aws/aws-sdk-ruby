@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2021-04-28)
+------------------
+
+* Feature - Add CallAs parameter to GetTemplateSummary to enable use with StackSets delegated administrator integration
+
 1.51.0 (2021-04-21)
 ------------------
 

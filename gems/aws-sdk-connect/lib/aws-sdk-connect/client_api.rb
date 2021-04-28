@@ -1511,7 +1511,7 @@ module Aws::Connect
 
     UpdateQueueMaxContactsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     UpdateQueueMaxContactsRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "QueueId"))
-    UpdateQueueMaxContactsRequest.add_member(:max_contacts, Shapes::ShapeRef.new(shape: QueueMaxContacts, required: true, location_name: "MaxContacts", metadata: {"box"=>true}))
+    UpdateQueueMaxContactsRequest.add_member(:max_contacts, Shapes::ShapeRef.new(shape: QueueMaxContacts, location_name: "MaxContacts", metadata: {"box"=>true}))
     UpdateQueueMaxContactsRequest.struct_class = Types::UpdateQueueMaxContactsRequest
 
     UpdateQueueNameRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))

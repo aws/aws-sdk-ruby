@@ -164,6 +164,8 @@ module Aws::IoTSiteWise
     GetAssetPropertyValueHistoryResponse = Shapes::StructureShape.new(name: 'GetAssetPropertyValueHistoryResponse')
     GetAssetPropertyValueRequest = Shapes::StructureShape.new(name: 'GetAssetPropertyValueRequest')
     GetAssetPropertyValueResponse = Shapes::StructureShape.new(name: 'GetAssetPropertyValueResponse')
+    GetInterpolatedAssetPropertyValuesRequest = Shapes::StructureShape.new(name: 'GetInterpolatedAssetPropertyValuesRequest')
+    GetInterpolatedAssetPropertyValuesResponse = Shapes::StructureShape.new(name: 'GetInterpolatedAssetPropertyValuesResponse')
     Greengrass = Shapes::StructureShape.new(name: 'Greengrass')
     GroupIdentity = Shapes::StructureShape.new(name: 'GroupIdentity')
     IAMRoleIdentity = Shapes::StructureShape.new(name: 'IAMRoleIdentity')
@@ -179,7 +181,11 @@ module Aws::IoTSiteWise
     ImageFileType = Shapes::StringShape.new(name: 'ImageFileType')
     ImageLocation = Shapes::StructureShape.new(name: 'ImageLocation')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
+    InterpolatedAssetPropertyValue = Shapes::StructureShape.new(name: 'InterpolatedAssetPropertyValue')
+    InterpolatedAssetPropertyValues = Shapes::ListShape.new(name: 'InterpolatedAssetPropertyValues')
+    InterpolationType = Shapes::StringShape.new(name: 'InterpolationType')
     Interval = Shapes::StringShape.new(name: 'Interval')
+    IntervalInSeconds = Shapes::IntegerShape.new(name: 'IntervalInSeconds')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -209,6 +215,7 @@ module Aws::IoTSiteWise
     LoggingLevel = Shapes::StringShape.new(name: 'LoggingLevel')
     LoggingOptions = Shapes::StructureShape.new(name: 'LoggingOptions')
     Macro = Shapes::StringShape.new(name: 'Macro')
+    MaxInterpolatedResults = Shapes::IntegerShape.new(name: 'MaxInterpolatedResults')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Measurement = Shapes::StructureShape.new(name: 'Measurement')
     Metric = Shapes::StructureShape.new(name: 'Metric')
@@ -875,6 +882,24 @@ module Aws::IoTSiteWise
     GetAssetPropertyValueResponse.add_member(:property_value, Shapes::ShapeRef.new(shape: AssetPropertyValue, location_name: "propertyValue"))
     GetAssetPropertyValueResponse.struct_class = Types::GetAssetPropertyValueResponse
 
+    GetInterpolatedAssetPropertyValuesRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, location: "querystring", location_name: "assetId"))
+    GetInterpolatedAssetPropertyValuesRequest.add_member(:property_id, Shapes::ShapeRef.new(shape: ID, location: "querystring", location_name: "propertyId"))
+    GetInterpolatedAssetPropertyValuesRequest.add_member(:property_alias, Shapes::ShapeRef.new(shape: AssetPropertyAlias, location: "querystring", location_name: "propertyAlias"))
+    GetInterpolatedAssetPropertyValuesRequest.add_member(:start_time_in_seconds, Shapes::ShapeRef.new(shape: TimeInSeconds, required: true, location: "querystring", location_name: "startTimeInSeconds"))
+    GetInterpolatedAssetPropertyValuesRequest.add_member(:start_time_offset_in_nanos, Shapes::ShapeRef.new(shape: OffsetInNanos, location: "querystring", location_name: "startTimeOffsetInNanos"))
+    GetInterpolatedAssetPropertyValuesRequest.add_member(:end_time_in_seconds, Shapes::ShapeRef.new(shape: TimeInSeconds, required: true, location: "querystring", location_name: "endTimeInSeconds"))
+    GetInterpolatedAssetPropertyValuesRequest.add_member(:end_time_offset_in_nanos, Shapes::ShapeRef.new(shape: OffsetInNanos, location: "querystring", location_name: "endTimeOffsetInNanos"))
+    GetInterpolatedAssetPropertyValuesRequest.add_member(:quality, Shapes::ShapeRef.new(shape: Quality, required: true, location: "querystring", location_name: "quality"))
+    GetInterpolatedAssetPropertyValuesRequest.add_member(:interval_in_seconds, Shapes::ShapeRef.new(shape: IntervalInSeconds, required: true, location: "querystring", location_name: "intervalInSeconds"))
+    GetInterpolatedAssetPropertyValuesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    GetInterpolatedAssetPropertyValuesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxInterpolatedResults, location: "querystring", location_name: "maxResults"))
+    GetInterpolatedAssetPropertyValuesRequest.add_member(:type, Shapes::ShapeRef.new(shape: InterpolationType, required: true, location: "querystring", location_name: "type"))
+    GetInterpolatedAssetPropertyValuesRequest.struct_class = Types::GetInterpolatedAssetPropertyValuesRequest
+
+    GetInterpolatedAssetPropertyValuesResponse.add_member(:interpolated_asset_property_values, Shapes::ShapeRef.new(shape: InterpolatedAssetPropertyValues, required: true, location_name: "interpolatedAssetPropertyValues"))
+    GetInterpolatedAssetPropertyValuesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetInterpolatedAssetPropertyValuesResponse.struct_class = Types::GetInterpolatedAssetPropertyValuesResponse
+
     Greengrass.add_member(:group_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "groupArn"))
     Greengrass.struct_class = Types::Greengrass
 
@@ -909,6 +934,12 @@ module Aws::IoTSiteWise
 
     InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     InternalFailureException.struct_class = Types::InternalFailureException
+
+    InterpolatedAssetPropertyValue.add_member(:timestamp, Shapes::ShapeRef.new(shape: TimeInNanos, required: true, location_name: "timestamp"))
+    InterpolatedAssetPropertyValue.add_member(:value, Shapes::ShapeRef.new(shape: Variant, required: true, location_name: "value"))
+    InterpolatedAssetPropertyValue.struct_class = Types::InterpolatedAssetPropertyValue
+
+    InterpolatedAssetPropertyValues.member = Shapes::ShapeRef.new(shape: InterpolatedAssetPropertyValue)
 
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
@@ -1787,6 +1818,28 @@ module Aws::IoTSiteWise
         }
         o.input = Shapes::ShapeRef.new(shape: GetAssetPropertyValueHistoryRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAssetPropertyValueHistoryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_interpolated_asset_property_values, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetInterpolatedAssetPropertyValues"
+        o.http_method = "GET"
+        o.http_request_uri = "/properties/interpolated"
+        o.endpoint_pattern = {
+          "hostPrefix" => "data.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetInterpolatedAssetPropertyValuesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetInterpolatedAssetPropertyValuesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)

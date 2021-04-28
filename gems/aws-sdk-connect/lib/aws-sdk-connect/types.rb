@@ -6282,7 +6282,7 @@ module Aws::Connect
     #       {
     #         instance_id: "InstanceId", # required
     #         queue_id: "QueueId", # required
-    #         max_contacts: 1, # required
+    #         max_contacts: 1,
     #       }
     #
     # @!attribute [rw] instance_id

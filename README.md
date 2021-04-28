@@ -541,6 +541,7 @@ RubyGems.org page under "LINKS" section.
 | AmazonApiGatewayV2                                    | Aws::ApiGatewayV2                    | aws-sdk-apigatewayv2                    | 2018-11-29  |
 | AmazonMQ                                              | Aws::MQ                              | aws-sdk-mq                              | 2017-11-27  |
 | AmazonMWAA                                            | Aws::MWAA                            | aws-sdk-mwaa                            | 2020-07-01  |
+| AmazonNimbleStudio                                    | Aws::NimbleStudio                    | aws-sdk-nimblestudio                    | 2020-08-01  |
 | AmplifyBackend                                        | Aws::AmplifyBackend                  | aws-sdk-amplifybackend                  | 2020-08-11  |
 | Application Auto Scaling                              | Aws::ApplicationAutoScaling          | aws-sdk-applicationautoscaling          | 2016-02-06  |
 | Application Migration Service                         | Aws::Mgn                             | aws-sdk-mgn                             | 2020-02-26  |

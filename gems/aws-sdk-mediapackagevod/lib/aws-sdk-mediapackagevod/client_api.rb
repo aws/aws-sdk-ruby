@@ -147,6 +147,7 @@ module Aws::MediaPackageVod
 
     CmafPackage.add_member(:encryption, Shapes::ShapeRef.new(shape: CmafEncryption, location_name: "encryption"))
     CmafPackage.add_member(:hls_manifests, Shapes::ShapeRef.new(shape: __listOfHlsManifest, required: true, location_name: "hlsManifests"))
+    CmafPackage.add_member(:include_encoder_configuration_in_segments, Shapes::ShapeRef.new(shape: __boolean, location_name: "includeEncoderConfigurationInSegments"))
     CmafPackage.add_member(:segment_duration_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "segmentDurationSeconds"))
     CmafPackage.struct_class = Types::CmafPackage
 
@@ -229,6 +230,7 @@ module Aws::MediaPackageVod
 
     DashPackage.add_member(:dash_manifests, Shapes::ShapeRef.new(shape: __listOfDashManifest, required: true, location_name: "dashManifests"))
     DashPackage.add_member(:encryption, Shapes::ShapeRef.new(shape: DashEncryption, location_name: "encryption"))
+    DashPackage.add_member(:include_encoder_configuration_in_segments, Shapes::ShapeRef.new(shape: __boolean, location_name: "includeEncoderConfigurationInSegments"))
     DashPackage.add_member(:period_triggers, Shapes::ShapeRef.new(shape: __listOf__PeriodTriggersElement, location_name: "periodTriggers"))
     DashPackage.add_member(:segment_duration_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "segmentDurationSeconds"))
     DashPackage.add_member(:segment_template_format, Shapes::ShapeRef.new(shape: SegmentTemplateFormat, location_name: "segmentTemplateFormat"))

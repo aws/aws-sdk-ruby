@@ -1891,6 +1891,7 @@ module Aws::CloudFormation
     #   @return [Array<String>]
     #
     # @!attribute [rw] accounts_url
+    #   Returns the value of the AccountsUrl property.
     #   @return [String]
     #
     # @!attribute [rw] organizational_unit_ids
@@ -3497,6 +3498,7 @@ module Aws::CloudFormation
     #         template_url: "TemplateURL",
     #         stack_name: "StackNameOrId",
     #         stack_set_name: "StackSetNameOrId",
+    #         call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
     #       }
     #
     # @!attribute [rw] template_body
@@ -3546,13 +3548,37 @@ module Aws::CloudFormation
     #   `StackName`, `StackSetName`, `TemplateBody`, or `TemplateURL`.
     #   @return [String]
     #
+    # @!attribute [rw] call_as
+    #   \[Service-managed permissions\] Specifies whether you are acting as
+    #   an account administrator in the organization's management account
+    #   or as a delegated administrator in a member account.
+    #
+    #   By default, `SELF` is specified. Use `SELF` for stack sets with
+    #   self-managed permissions.
+    #
+    #   * If you are signed in to the management account, specify `SELF`.
+    #
+    #   * If you are signed in to a delegated administrator account, specify
+    #     `DELEGATED_ADMIN`.
+    #
+    #     Your AWS account must be registered as a delegated administrator
+    #     in the management account. For more information, see [Register a
+    #     delegated administrator][1] in the *AWS CloudFormation User
+    #     Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateSummaryInput AWS API Documentation
     #
     class GetTemplateSummaryInput < Struct.new(
       :template_body,
       :template_url,
       :stack_name,
-      :stack_set_name)
+      :stack_set_name,
+      :call_as)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7179,6 +7205,8 @@ module Aws::CloudFormation
     #       }
     #
     # @!attribute [rw] region_concurrency_type
+    #   The concurrency type of deploying StackSets operations in regions,
+    #   could be in parallel or one region at a time.
     #   @return [String]
     #
     # @!attribute [rw] region_order

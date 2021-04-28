@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2021-04-28)
+------------------
+
+* Feature - AWS IoT SiteWise interpolation API will get interpolated values for an asset property per specified time interval during a period of time.
+
 1.20.0 (2021-03-10)
 ------------------
 

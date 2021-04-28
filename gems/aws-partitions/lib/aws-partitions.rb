@@ -406,6 +406,7 @@ module Aws
             'Neptune' => 'rds',
             'NetworkFirewall' => 'network-firewall',
             'NetworkManager' => 'networkmanager',
+            'NimbleStudio' => 'nimble',
             'OpsWorks' => 'opsworks',
             'OpsWorksCM' => 'opsworks-cm',
             'Organizations' => 'organizations',

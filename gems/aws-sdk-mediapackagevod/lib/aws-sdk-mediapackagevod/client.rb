@@ -494,6 +494,7 @@ module Aws::MediaPackageVod
     #           },
     #         },
     #       ],
+    #       include_encoder_configuration_in_segments: false,
     #       segment_duration_seconds: 1,
     #     },
     #     dash_package: {
@@ -517,6 +518,7 @@ module Aws::MediaPackageVod
     #           url: "__string", # required
     #         },
     #       },
+    #       include_encoder_configuration_in_segments: false,
     #       period_triggers: ["ADS"], # accepts ADS
     #       segment_duration_seconds: 1,
     #       segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
@@ -591,6 +593,7 @@ module Aws::MediaPackageVod
     #   resp.cmaf_package.hls_manifests[0].stream_selection.max_video_bits_per_second #=> Integer
     #   resp.cmaf_package.hls_manifests[0].stream_selection.min_video_bits_per_second #=> Integer
     #   resp.cmaf_package.hls_manifests[0].stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
+    #   resp.cmaf_package.include_encoder_configuration_in_segments #=> Boolean
     #   resp.cmaf_package.segment_duration_seconds #=> Integer
     #   resp.dash_package.dash_manifests #=> Array
     #   resp.dash_package.dash_manifests[0].manifest_layout #=> String, one of "FULL", "COMPACT"
@@ -604,6 +607,7 @@ module Aws::MediaPackageVod
     #   resp.dash_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.dash_package.encryption.speke_key_provider.url #=> String
+    #   resp.dash_package.include_encoder_configuration_in_segments #=> Boolean
     #   resp.dash_package.period_triggers #=> Array
     #   resp.dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.dash_package.segment_duration_seconds #=> Integer
@@ -854,6 +858,7 @@ module Aws::MediaPackageVod
     #   resp.cmaf_package.hls_manifests[0].stream_selection.max_video_bits_per_second #=> Integer
     #   resp.cmaf_package.hls_manifests[0].stream_selection.min_video_bits_per_second #=> Integer
     #   resp.cmaf_package.hls_manifests[0].stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
+    #   resp.cmaf_package.include_encoder_configuration_in_segments #=> Boolean
     #   resp.cmaf_package.segment_duration_seconds #=> Integer
     #   resp.dash_package.dash_manifests #=> Array
     #   resp.dash_package.dash_manifests[0].manifest_layout #=> String, one of "FULL", "COMPACT"
@@ -867,6 +872,7 @@ module Aws::MediaPackageVod
     #   resp.dash_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.dash_package.encryption.speke_key_provider.url #=> String
+    #   resp.dash_package.include_encoder_configuration_in_segments #=> Boolean
     #   resp.dash_package.period_triggers #=> Array
     #   resp.dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.dash_package.segment_duration_seconds #=> Integer
@@ -1039,6 +1045,7 @@ module Aws::MediaPackageVod
     #   resp.packaging_configurations[0].cmaf_package.hls_manifests[0].stream_selection.max_video_bits_per_second #=> Integer
     #   resp.packaging_configurations[0].cmaf_package.hls_manifests[0].stream_selection.min_video_bits_per_second #=> Integer
     #   resp.packaging_configurations[0].cmaf_package.hls_manifests[0].stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
+    #   resp.packaging_configurations[0].cmaf_package.include_encoder_configuration_in_segments #=> Boolean
     #   resp.packaging_configurations[0].cmaf_package.segment_duration_seconds #=> Integer
     #   resp.packaging_configurations[0].dash_package.dash_manifests #=> Array
     #   resp.packaging_configurations[0].dash_package.dash_manifests[0].manifest_layout #=> String, one of "FULL", "COMPACT"
@@ -1052,6 +1059,7 @@ module Aws::MediaPackageVod
     #   resp.packaging_configurations[0].dash_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.packaging_configurations[0].dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.packaging_configurations[0].dash_package.encryption.speke_key_provider.url #=> String
+    #   resp.packaging_configurations[0].dash_package.include_encoder_configuration_in_segments #=> Boolean
     #   resp.packaging_configurations[0].dash_package.period_triggers #=> Array
     #   resp.packaging_configurations[0].dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.packaging_configurations[0].dash_package.segment_duration_seconds #=> Integer
@@ -1279,7 +1287,7 @@ module Aws::MediaPackageVod
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackagevod'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

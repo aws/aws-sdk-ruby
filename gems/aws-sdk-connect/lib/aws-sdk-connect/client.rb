@@ -4587,7 +4587,7 @@ module Aws::Connect
     # @option params [required, String] :queue_id
     #   The identifier for the queue.
     #
-    # @option params [required, Integer] :max_contacts
+    # @option params [Integer] :max_contacts
     #   The maximum number of contacts that can be in the queue before it is
     #   considered full.
     #
@@ -4598,7 +4598,7 @@ module Aws::Connect
     #   resp = client.update_queue_max_contacts({
     #     instance_id: "InstanceId", # required
     #     queue_id: "QueueId", # required
-    #     max_contacts: 1, # required
+    #     max_contacts: 1,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateQueueMaxContacts AWS API Documentation
@@ -5207,7 +5207,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

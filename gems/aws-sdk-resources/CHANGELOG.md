@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.99.0 (2021-04-28)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-nimblestudio` gem.
+
 3.98.0 (2021-04-08)
 ------------------
 

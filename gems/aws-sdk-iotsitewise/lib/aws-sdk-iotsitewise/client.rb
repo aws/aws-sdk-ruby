@@ -2325,6 +2325,117 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Get interpolated values for an asset property for a specified time
+    # interval, during a period of time. For example, you can use the this
+    # operation to return the interpolated temperature values for a wind
+    # turbine every 24 hours over a duration of 7 days.
+    #
+    # To identify an asset property, you must specify one of the following:
+    #
+    # * The `assetId` and `propertyId` of an asset property.
+    #
+    # * A `propertyAlias`, which is a data stream alias (for example,
+    #   `/company/windfarm/3/turbine/7/temperature`). To define an asset
+    #   property's alias, see [UpdateAssetProperty][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html
+    #
+    # @option params [String] :asset_id
+    #   The ID of the asset.
+    #
+    # @option params [String] :property_id
+    #   The ID of the asset property.
+    #
+    # @option params [String] :property_alias
+    #   The property alias that identifies the property, such as an OPC-UA
+    #   server data stream path (for example,
+    #   `/company/windfarm/3/turbine/7/temperature`). For more information,
+    #   see [Mapping industrial data streams to asset properties][1] in the
+    #   *AWS IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html
+    #
+    # @option params [required, Integer] :start_time_in_seconds
+    #   The exclusive start of the range from which to interpolate data,
+    #   expressed in seconds in Unix epoch time.
+    #
+    # @option params [Integer] :start_time_offset_in_nanos
+    #   The nanosecond offset converted from `startTimeInSeconds`.
+    #
+    # @option params [required, Integer] :end_time_in_seconds
+    #   The inclusive end of the range from which to interpolate data,
+    #   expressed in seconds in Unix epoch time.
+    #
+    # @option params [Integer] :end_time_offset_in_nanos
+    #   The nanosecond offset converted from `endTimeInSeconds`.
+    #
+    # @option params [required, String] :quality
+    #   The quality of the asset property value. You can use this parameter as
+    #   a filter to choose only the asset property values that have a specific
+    #   quality.
+    #
+    # @option params [required, Integer] :interval_in_seconds
+    #   The time interval in seconds over which to interpolate data. Each
+    #   interval starts when the previous one ends.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per paginated request. If
+    #   not specified, the default value is 10.
+    #
+    # @option params [required, String] :type
+    #   The interpolation type.
+    #
+    #   Valid values: `LINEAR_INTERPOLATION`
+    #
+    # @return [Types::GetInterpolatedAssetPropertyValuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInterpolatedAssetPropertyValuesResponse#interpolated_asset_property_values #interpolated_asset_property_values} => Array&lt;Types::InterpolatedAssetPropertyValue&gt;
+    #   * {Types::GetInterpolatedAssetPropertyValuesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_interpolated_asset_property_values({
+    #     asset_id: "ID",
+    #     property_id: "ID",
+    #     property_alias: "AssetPropertyAlias",
+    #     start_time_in_seconds: 1, # required
+    #     start_time_offset_in_nanos: 1,
+    #     end_time_in_seconds: 1, # required
+    #     end_time_offset_in_nanos: 1,
+    #     quality: "GOOD", # required, accepts GOOD, BAD, UNCERTAIN
+    #     interval_in_seconds: 1, # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     type: "InterpolationType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.interpolated_asset_property_values #=> Array
+    #   resp.interpolated_asset_property_values[0].timestamp.time_in_seconds #=> Integer
+    #   resp.interpolated_asset_property_values[0].timestamp.offset_in_nanos #=> Integer
+    #   resp.interpolated_asset_property_values[0].value.string_value #=> String
+    #   resp.interpolated_asset_property_values[0].value.integer_value #=> Integer
+    #   resp.interpolated_asset_property_values[0].value.double_value #=> Float
+    #   resp.interpolated_asset_property_values[0].value.boolean_value #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @overload get_interpolated_asset_property_values(params = {})
+    # @param [Hash] params ({})
+    def get_interpolated_asset_property_values(params = {}, options = {})
+      req = build_request(:get_interpolated_asset_property_values, params)
+      req.send_request(options)
+    end
+
     # Retrieves a paginated list of access policies for an identity (an AWS
     # SSO user, an AWS SSO group, or an IAM user) or an AWS IoT SiteWise
     # Monitor resource (a portal or project).
@@ -3697,7 +3808,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

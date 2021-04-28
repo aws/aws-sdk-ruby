@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.449.0 (2021-04-28)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::NimbleStudio`.
+
 1.448.0 (2021-04-27)
 ------------------
 

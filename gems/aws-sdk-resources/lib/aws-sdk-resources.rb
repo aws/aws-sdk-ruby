@@ -189,6 +189,7 @@ module Aws
   autoload :Neptune, 'aws-sdk-neptune'
   autoload :NetworkFirewall, 'aws-sdk-networkfirewall'
   autoload :NetworkManager, 'aws-sdk-networkmanager'
+  autoload :NimbleStudio, 'aws-sdk-nimblestudio'
   autoload :OpsWorks, 'aws-sdk-opsworks'
   autoload :OpsWorksCM, 'aws-sdk-opsworkscm'
   autoload :Organizations, 'aws-sdk-organizations'

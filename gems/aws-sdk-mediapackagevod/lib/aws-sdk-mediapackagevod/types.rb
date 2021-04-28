@@ -255,6 +255,7 @@ module Aws::MediaPackageVod
     #             },
     #           },
     #         ],
+    #         include_encoder_configuration_in_segments: false,
     #         segment_duration_seconds: 1,
     #       }
     #
@@ -266,6 +267,15 @@ module Aws::MediaPackageVod
     #   A list of HLS manifest configurations.
     #   @return [Array<Types::HlsManifest>]
     #
+    # @!attribute [rw] include_encoder_configuration_in_segments
+    #   When includeEncoderConfigurationInSegments is set to true,
+    #   MediaPackage places your encoder's Sequence Parameter Set (SPS),
+    #   Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata
+    #   in every video segment instead of in the init fragment. This lets
+    #   you use different SPS/PPS/VPS settings for your assets during
+    #   content playback.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] segment_duration_seconds
     #   Duration (in seconds) of each fragment. Actual fragments will be
     #   rounded to the nearest multiple of the source fragment duration.
@@ -276,6 +286,7 @@ module Aws::MediaPackageVod
     class CmafPackage < Struct.new(
       :encryption,
       :hls_manifests,
+      :include_encoder_configuration_in_segments,
       :segment_duration_seconds)
       SENSITIVE = []
       include Aws::Structure
@@ -471,6 +482,7 @@ module Aws::MediaPackageVod
     #               },
     #             },
     #           ],
+    #           include_encoder_configuration_in_segments: false,
     #           segment_duration_seconds: 1,
     #         },
     #         dash_package: {
@@ -494,6 +506,7 @@ module Aws::MediaPackageVod
     #               url: "__string", # required
     #             },
     #           },
+    #           include_encoder_configuration_in_segments: false,
     #           period_triggers: ["ADS"], # accepts ADS
     #           segment_duration_seconds: 1,
     #           segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
@@ -824,6 +837,7 @@ module Aws::MediaPackageVod
     #             url: "__string", # required
     #           },
     #         },
+    #         include_encoder_configuration_in_segments: false,
     #         period_triggers: ["ADS"], # accepts ADS
     #         segment_duration_seconds: 1,
     #         segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
@@ -837,6 +851,15 @@ module Aws::MediaPackageVod
     #   A Dynamic Adaptive Streaming over HTTP (DASH) encryption
     #   configuration.
     #   @return [Types::DashEncryption]
+    #
+    # @!attribute [rw] include_encoder_configuration_in_segments
+    #   When includeEncoderConfigurationInSegments is set to true,
+    #   MediaPackage places your encoder's Sequence Parameter Set (SPS),
+    #   Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata
+    #   in every video segment instead of in the init fragment. This lets
+    #   you use different SPS/PPS/VPS settings for your assets during
+    #   content playback.
+    #   @return [Boolean]
     #
     # @!attribute [rw] period_triggers
     #   A list of triggers that controls when the outgoing Dynamic Adaptive
@@ -867,6 +890,7 @@ module Aws::MediaPackageVod
     class DashPackage < Struct.new(
       :dash_manifests,
       :encryption,
+      :include_encoder_configuration_in_segments,
       :period_triggers,
       :segment_duration_seconds,
       :segment_template_format)
