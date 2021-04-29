@@ -21,6 +21,7 @@ module Aws::Macie2
     AccountLevelPermissions = Shapes::StructureShape.new(name: 'AccountLevelPermissions')
     AdminAccount = Shapes::StructureShape.new(name: 'AdminAccount')
     AdminStatus = Shapes::StringShape.new(name: 'AdminStatus')
+    AllowsUnencryptedObjectUploads = Shapes::StringShape.new(name: 'AllowsUnencryptedObjectUploads')
     ApiCallDetails = Shapes::StructureShape.new(name: 'ApiCallDetails')
     AssumedRole = Shapes::StructureShape.new(name: 'AssumedRole')
     AwsAccount = Shapes::StructureShape.new(name: 'AwsAccount')
@@ -32,6 +33,7 @@ module Aws::Macie2
     BucketCountByEffectivePermission = Shapes::StructureShape.new(name: 'BucketCountByEffectivePermission')
     BucketCountByEncryptionType = Shapes::StructureShape.new(name: 'BucketCountByEncryptionType')
     BucketCountBySharedAccessType = Shapes::StructureShape.new(name: 'BucketCountBySharedAccessType')
+    BucketCountPolicyAllowsUnencryptedObjectUploads = Shapes::StructureShape.new(name: 'BucketCountPolicyAllowsUnencryptedObjectUploads')
     BucketCriteria = Shapes::MapShape.new(name: 'BucketCriteria')
     BucketCriteriaAdditionalProperties = Shapes::StructureShape.new(name: 'BucketCriteriaAdditionalProperties')
     BucketLevelPermissions = Shapes::StructureShape.new(name: 'BucketLevelPermissions')
@@ -385,6 +387,7 @@ module Aws::Macie2
     BucketCountByEncryptionType.add_member(:kms_managed, Shapes::ShapeRef.new(shape: __long, location_name: "kmsManaged"))
     BucketCountByEncryptionType.add_member(:s3_managed, Shapes::ShapeRef.new(shape: __long, location_name: "s3Managed"))
     BucketCountByEncryptionType.add_member(:unencrypted, Shapes::ShapeRef.new(shape: __long, location_name: "unencrypted"))
+    BucketCountByEncryptionType.add_member(:unknown, Shapes::ShapeRef.new(shape: __long, location_name: "unknown"))
     BucketCountByEncryptionType.struct_class = Types::BucketCountByEncryptionType
 
     BucketCountBySharedAccessType.add_member(:external, Shapes::ShapeRef.new(shape: __long, location_name: "external"))
@@ -392,6 +395,11 @@ module Aws::Macie2
     BucketCountBySharedAccessType.add_member(:not_shared, Shapes::ShapeRef.new(shape: __long, location_name: "notShared"))
     BucketCountBySharedAccessType.add_member(:unknown, Shapes::ShapeRef.new(shape: __long, location_name: "unknown"))
     BucketCountBySharedAccessType.struct_class = Types::BucketCountBySharedAccessType
+
+    BucketCountPolicyAllowsUnencryptedObjectUploads.add_member(:allows_unencrypted_object_uploads, Shapes::ShapeRef.new(shape: __long, location_name: "allowsUnencryptedObjectUploads"))
+    BucketCountPolicyAllowsUnencryptedObjectUploads.add_member(:denies_unencrypted_object_uploads, Shapes::ShapeRef.new(shape: __long, location_name: "deniesUnencryptedObjectUploads"))
+    BucketCountPolicyAllowsUnencryptedObjectUploads.add_member(:unknown, Shapes::ShapeRef.new(shape: __long, location_name: "unknown"))
+    BucketCountPolicyAllowsUnencryptedObjectUploads.struct_class = Types::BucketCountPolicyAllowsUnencryptedObjectUploads
 
     BucketCriteria.key = Shapes::ShapeRef.new(shape: __string)
     BucketCriteria.value = Shapes::ShapeRef.new(shape: BucketCriteriaAdditionalProperties)
@@ -411,6 +419,7 @@ module Aws::Macie2
     BucketLevelPermissions.struct_class = Types::BucketLevelPermissions
 
     BucketMetadata.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
+    BucketMetadata.add_member(:allows_unencrypted_object_uploads, Shapes::ShapeRef.new(shape: AllowsUnencryptedObjectUploads, location_name: "allowsUnencryptedObjectUploads"))
     BucketMetadata.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: __string, location_name: "bucketArn"))
     BucketMetadata.add_member(:bucket_created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "bucketCreatedAt"))
     BucketMetadata.add_member(:bucket_name, Shapes::ShapeRef.new(shape: __string, location_name: "bucketName"))
@@ -754,6 +763,7 @@ module Aws::Macie2
     GetBucketStatisticsResponse.add_member(:bucket_count, Shapes::ShapeRef.new(shape: __long, location_name: "bucketCount"))
     GetBucketStatisticsResponse.add_member(:bucket_count_by_effective_permission, Shapes::ShapeRef.new(shape: BucketCountByEffectivePermission, location_name: "bucketCountByEffectivePermission"))
     GetBucketStatisticsResponse.add_member(:bucket_count_by_encryption_type, Shapes::ShapeRef.new(shape: BucketCountByEncryptionType, location_name: "bucketCountByEncryptionType"))
+    GetBucketStatisticsResponse.add_member(:bucket_count_by_object_encryption_requirement, Shapes::ShapeRef.new(shape: BucketCountPolicyAllowsUnencryptedObjectUploads, location_name: "bucketCountByObjectEncryptionRequirement"))
     GetBucketStatisticsResponse.add_member(:bucket_count_by_shared_access_type, Shapes::ShapeRef.new(shape: BucketCountBySharedAccessType, location_name: "bucketCountBySharedAccessType"))
     GetBucketStatisticsResponse.add_member(:classifiable_object_count, Shapes::ShapeRef.new(shape: __long, location_name: "classifiableObjectCount"))
     GetBucketStatisticsResponse.add_member(:classifiable_size_in_bytes, Shapes::ShapeRef.new(shape: __long, location_name: "classifiableSizeInBytes"))
@@ -1050,6 +1060,7 @@ module Aws::Macie2
     ObjectCountByEncryptionType.add_member(:kms_managed, Shapes::ShapeRef.new(shape: __long, location_name: "kmsManaged"))
     ObjectCountByEncryptionType.add_member(:s3_managed, Shapes::ShapeRef.new(shape: __long, location_name: "s3Managed"))
     ObjectCountByEncryptionType.add_member(:unencrypted, Shapes::ShapeRef.new(shape: __long, location_name: "unencrypted"))
+    ObjectCountByEncryptionType.add_member(:unknown, Shapes::ShapeRef.new(shape: __long, location_name: "unknown"))
     ObjectCountByEncryptionType.struct_class = Types::ObjectCountByEncryptionType
 
     ObjectLevelStatistics.add_member(:file_type, Shapes::ShapeRef.new(shape: __long, location_name: "fileType"))
@@ -1112,6 +1123,7 @@ module Aws::Macie2
     ResourcesAffected.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "s3Object"))
     ResourcesAffected.struct_class = Types::ResourcesAffected
 
+    S3Bucket.add_member(:allows_unencrypted_object_uploads, Shapes::ShapeRef.new(shape: AllowsUnencryptedObjectUploads, location_name: "allowsUnencryptedObjectUploads"))
     S3Bucket.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     S3Bucket.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
     S3Bucket.add_member(:default_server_side_encryption, Shapes::ShapeRef.new(shape: ServerSideEncryption, location_name: "defaultServerSideEncryption"))

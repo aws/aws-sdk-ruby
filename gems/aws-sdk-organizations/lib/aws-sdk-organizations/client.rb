@@ -701,7 +701,7 @@ module Aws::Organizations
     #
     # * Check the AWS CloudTrail log for the `CreateAccountResult` event.
     #   For information on using AWS CloudTrail with AWS Organizations, see
-    #   [Monitoring the Activity in Your Organization][1] in the *AWS
+    #   [Logging and monitoring in AWS Organizations][1] in the *AWS
     #   Organizations User Guide.*
     #
     # The user who calls the API to create an account must have the
@@ -764,7 +764,7 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html
+    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration
     # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs
     # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html
     # [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
@@ -3087,6 +3087,10 @@ module Aws::Organizations
     # * After the account leaves the organization, all tags that were
     #   attached to the account object in the organization are deleted. AWS
     #   accounts outside of an organization do not support tags.
+    #
+    # * A newly created account has a waiting period before it can be
+    #   removed from its organization. If you get an error that indicates
+    #   that a wait period is required, then try again in a few days.
     #
     #
     #
@@ -5424,7 +5428,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

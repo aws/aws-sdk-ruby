@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2021-04-29)
+------------------
+
+* Feature - Add support for EphemeralStorage on TaskDefinition and TaskOverride
+
 1.76.0 (2021-03-15)
 ------------------
 

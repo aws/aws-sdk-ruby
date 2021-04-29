@@ -424,7 +424,7 @@ module Aws::Organizations
     #
     #  </note>
     #
-    # * ACCOUNT\_CANNOT\_LEAVE\_ORGANIZAION: You attempted to remove the
+    # * ACCOUNT\_CANNOT\_LEAVE\_ORGANIZATION: You attempted to remove the
     #   management account from the organization. You can't remove the
     #   management account. Instead, after you remove all member accounts,
     #   delete the organization itself.
@@ -503,7 +503,7 @@ module Aws::Organizations
     #   the same marketplace.
     #
     # * MASTER\_ACCOUNT\_MISSING\_BUSINESS\_LICENSE: Applies only to the AWS
-    #   Regions in China. To create an organization, the master must have an
+    #   Regions in China. To create an organization, the master must have a
     #   valid business license. For more information, contact customer
     #   support.
     #
@@ -744,7 +744,7 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The status of the request.
+    #   The status of the asynchronous request to create an AWS account.
     #   @return [String]
     #
     # @!attribute [rw] requested_timestamp
@@ -777,8 +777,8 @@ module Aws::Organizations
     # @!attribute [rw] failure_reason
     #   If the request failed, a description of the reason for the failure.
     #
-    #   * ACCOUNT\_LIMIT\_EXCEEDED: The account could not be created because
-    #     you have reached the limit on the number of accounts in your
+    #   * ACCOUNT\_LIMIT\_EXCEEDED: The account couldn't be created because
+    #     you reached the limit on the number of accounts in your
     #     organization.
     #
     #   * CONCURRENT\_ACCOUNT\_MODIFICATION: You already submitted a request
@@ -806,7 +806,7 @@ module Aws::Organizations
     #
     #   * INTERNAL\_FAILURE: The account could not be created because of an
     #     internal failure. Try again later. If the problem persists,
-    #     contact Customer Support.
+    #     contact AWS Customer Support.
     #
     #   * MISSING\_BUSINESS\_VALIDATION: The AWS account that owns your
     #     organization has not received Business Validation.
@@ -1312,7 +1312,7 @@ module Aws::Organizations
     # delegated administrator.
     #
     # @!attribute [rw] service_principal
-    #   The name of a service that can request an operation for the
+    #   The name of an AWS service that can request an operation for the
     #   specified service. This is typically in the form of a URL, such as:
     #   ` servicename.amazonaws.com`.
     #   @return [String]
@@ -2124,9 +2124,9 @@ module Aws::Organizations
     # accounts exchange information as a series of handshake requests and
     # responses.
     #
-    # **Note:** Handshakes that are CANCELED, ACCEPTED, or DECLINED show up
-    # in lists for only 30 days after entering that state After that they
-    # are deleted.
+    # **Note:** Handshakes that are `CANCELED`, `ACCEPTED`, or `DECLINED`
+    # show up in lists for only 30 days after entering that state After that
+    # they are deleted.
     #
     # @!attribute [rw] id
     #   The unique identifier (ID) of a handshake. The originating account

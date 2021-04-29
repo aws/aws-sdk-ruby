@@ -136,6 +136,7 @@ module Aws::ECS
     EnvironmentFileType = Shapes::StringShape.new(name: 'EnvironmentFileType')
     EnvironmentFiles = Shapes::ListShape.new(name: 'EnvironmentFiles')
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
+    EphemeralStorage = Shapes::StructureShape.new(name: 'EphemeralStorage')
     ExecuteCommandConfiguration = Shapes::StructureShape.new(name: 'ExecuteCommandConfiguration')
     ExecuteCommandLogConfiguration = Shapes::StructureShape.new(name: 'ExecuteCommandLogConfiguration')
     ExecuteCommandLogging = Shapes::StringShape.new(name: 'ExecuteCommandLogging')
@@ -839,6 +840,9 @@ module Aws::ECS
 
     EnvironmentVariables.member = Shapes::ShapeRef.new(shape: KeyValuePair)
 
+    EphemeralStorage.add_member(:size_in_gi_b, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "sizeInGiB"))
+    EphemeralStorage.struct_class = Types::EphemeralStorage
+
     ExecuteCommandConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
     ExecuteCommandConfiguration.add_member(:logging, Shapes::ShapeRef.new(shape: ExecuteCommandLogging, location_name: "logging"))
     ExecuteCommandConfiguration.add_member(:log_configuration, Shapes::ShapeRef.new(shape: ExecuteCommandLogConfiguration, location_name: "logConfiguration"))
@@ -1199,6 +1203,7 @@ module Aws::ECS
     RegisterTaskDefinitionRequest.add_member(:ipc_mode, Shapes::ShapeRef.new(shape: IpcMode, location_name: "ipcMode"))
     RegisterTaskDefinitionRequest.add_member(:proxy_configuration, Shapes::ShapeRef.new(shape: ProxyConfiguration, location_name: "proxyConfiguration"))
     RegisterTaskDefinitionRequest.add_member(:inference_accelerators, Shapes::ShapeRef.new(shape: InferenceAccelerators, location_name: "inferenceAccelerators"))
+    RegisterTaskDefinitionRequest.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "ephemeralStorage"))
     RegisterTaskDefinitionRequest.struct_class = Types::RegisterTaskDefinitionRequest
 
     RegisterTaskDefinitionResponse.add_member(:task_definition, Shapes::ShapeRef.new(shape: TaskDefinition, location_name: "taskDefinition"))
@@ -1459,6 +1464,7 @@ module Aws::ECS
     Task.add_member(:task_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskArn"))
     Task.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskDefinitionArn"))
     Task.add_member(:version, Shapes::ShapeRef.new(shape: Long, location_name: "version"))
+    Task.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "ephemeralStorage"))
     Task.struct_class = Types::Task
 
     TaskDefinition.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskDefinitionArn"))
@@ -1483,6 +1489,7 @@ module Aws::ECS
     TaskDefinition.add_member(:registered_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "registeredAt"))
     TaskDefinition.add_member(:deregistered_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "deregisteredAt"))
     TaskDefinition.add_member(:registered_by, Shapes::ShapeRef.new(shape: String, location_name: "registeredBy"))
+    TaskDefinition.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "ephemeralStorage"))
     TaskDefinition.struct_class = Types::TaskDefinition
 
     TaskDefinitionFieldList.member = Shapes::ShapeRef.new(shape: TaskDefinitionField)
@@ -1501,6 +1508,7 @@ module Aws::ECS
     TaskOverride.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "executionRoleArn"))
     TaskOverride.add_member(:memory, Shapes::ShapeRef.new(shape: String, location_name: "memory"))
     TaskOverride.add_member(:task_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskRoleArn"))
+    TaskOverride.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "ephemeralStorage"))
     TaskOverride.struct_class = Types::TaskOverride
 
     TaskSet.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))

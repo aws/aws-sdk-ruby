@@ -919,6 +919,7 @@ module Aws::Macie2
     #
     #   resp.buckets #=> Array
     #   resp.buckets[0].account_id #=> String
+    #   resp.buckets[0].allows_unencrypted_object_uploads #=> String, one of "TRUE", "FALSE", "UNKNOWN"
     #   resp.buckets[0].bucket_arn #=> String
     #   resp.buckets[0].bucket_created_at #=> Time
     #   resp.buckets[0].bucket_name #=> String
@@ -934,6 +935,7 @@ module Aws::Macie2
     #   resp.buckets[0].object_count_by_encryption_type.kms_managed #=> Integer
     #   resp.buckets[0].object_count_by_encryption_type.s3_managed #=> Integer
     #   resp.buckets[0].object_count_by_encryption_type.unencrypted #=> Integer
+    #   resp.buckets[0].object_count_by_encryption_type.unknown #=> Integer
     #   resp.buckets[0].public_access.effective_permission #=> String, one of "PUBLIC", "NOT_PUBLIC", "UNKNOWN"
     #   resp.buckets[0].public_access.permission_configuration.account_level_permissions.block_public_access.block_public_acls #=> Boolean
     #   resp.buckets[0].public_access.permission_configuration.account_level_permissions.block_public_access.block_public_policy #=> Boolean
@@ -1281,6 +1283,7 @@ module Aws::Macie2
     #   * {Types::GetBucketStatisticsResponse#bucket_count #bucket_count} => Integer
     #   * {Types::GetBucketStatisticsResponse#bucket_count_by_effective_permission #bucket_count_by_effective_permission} => Types::BucketCountByEffectivePermission
     #   * {Types::GetBucketStatisticsResponse#bucket_count_by_encryption_type #bucket_count_by_encryption_type} => Types::BucketCountByEncryptionType
+    #   * {Types::GetBucketStatisticsResponse#bucket_count_by_object_encryption_requirement #bucket_count_by_object_encryption_requirement} => Types::BucketCountPolicyAllowsUnencryptedObjectUploads
     #   * {Types::GetBucketStatisticsResponse#bucket_count_by_shared_access_type #bucket_count_by_shared_access_type} => Types::BucketCountBySharedAccessType
     #   * {Types::GetBucketStatisticsResponse#classifiable_object_count #classifiable_object_count} => Integer
     #   * {Types::GetBucketStatisticsResponse#classifiable_size_in_bytes #classifiable_size_in_bytes} => Integer
@@ -1307,6 +1310,10 @@ module Aws::Macie2
     #   resp.bucket_count_by_encryption_type.kms_managed #=> Integer
     #   resp.bucket_count_by_encryption_type.s3_managed #=> Integer
     #   resp.bucket_count_by_encryption_type.unencrypted #=> Integer
+    #   resp.bucket_count_by_encryption_type.unknown #=> Integer
+    #   resp.bucket_count_by_object_encryption_requirement.allows_unencrypted_object_uploads #=> Integer
+    #   resp.bucket_count_by_object_encryption_requirement.denies_unencrypted_object_uploads #=> Integer
+    #   resp.bucket_count_by_object_encryption_requirement.unknown #=> Integer
     #   resp.bucket_count_by_shared_access_type.external #=> Integer
     #   resp.bucket_count_by_shared_access_type.internal #=> Integer
     #   resp.bucket_count_by_shared_access_type.not_shared #=> Integer
@@ -1612,6 +1619,7 @@ module Aws::Macie2
     #   resp.findings[0].policy_details.actor.user_identity.root.principal_id #=> String
     #   resp.findings[0].policy_details.actor.user_identity.type #=> String, one of "AssumedRole", "IAMUser", "FederatedUser", "Root", "AWSAccount", "AWSService"
     #   resp.findings[0].region #=> String
+    #   resp.findings[0].resources_affected.s3_bucket.allows_unencrypted_object_uploads #=> String, one of "TRUE", "FALSE", "UNKNOWN"
     #   resp.findings[0].resources_affected.s3_bucket.arn #=> String
     #   resp.findings[0].resources_affected.s3_bucket.created_at #=> Time
     #   resp.findings[0].resources_affected.s3_bucket.default_server_side_encryption.encryption_type #=> String, one of "NONE", "AES256", "aws:kms", "UNKNOWN"
@@ -2683,7 +2691,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

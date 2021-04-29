@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2021-04-29)
+------------------
+
+* Feature - Minor text updates for AWS Organizations API Reference
+
 1.58.0 (2021-03-10)
 ------------------
 

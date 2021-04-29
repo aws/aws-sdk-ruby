@@ -222,21 +222,6 @@ module Aws::ECS
     # @!attribute [rw] managed_scaling
     #   The managed scaling settings for the Auto Scaling group capacity
     #   provider.
-    #
-    #   When managed scaling is enabled, Amazon ECS manages the scale-in and
-    #   scale-out actions of the Auto Scaling group. Amazon ECS manages a
-    #   target tracking scaling policy using an Amazon ECS-managed
-    #   CloudWatch metric with the specified `targetCapacity` value as the
-    #   target value for the metric. For more information, see [Using
-    #   Managed Scaling][1] in the *Amazon Elastic Container Service
-    #   Developer Guide*.
-    #
-    #   If managed scaling is disabled, the user must manage the scaling of
-    #   the Auto Scaling group.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/asg-capacity-providers.html#asg-capacity-providers-managed-scaling
     #   @return [Types::ManagedScaling]
     #
     # @!attribute [rw] managed_termination_protection
@@ -1255,8 +1240,7 @@ module Aws::ECS
     #   container][2] section of the [Docker Remote API][3] and the `--link`
     #   option to [docker run][4].
     #
-    #   <note markdown="1"> This parameter is not supported for Windows containers or tasks that
-    #   use the awsvpc network mode.
+    #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
     #    </note>
     #
@@ -1604,8 +1588,7 @@ module Aws::ECS
     #
     #   * `uid:group`
     #
-    #   <note markdown="1"> This parameter is not supported for Windows containers or tasks that
-    #   use the awsvpc network mode.
+    #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
     #    </note>
     #
@@ -1634,8 +1617,7 @@ module Aws::ECS
     #   container. This parameter maps to `NetworkDisabled` in the [Create a
     #   container][1] section of the [Docker Remote API][2].
     #
-    #   <note markdown="1"> This parameter is not supported for Windows containers or tasks that
-    #   use the awsvpc network mode.
+    #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
     #    </note>
     #
@@ -1670,8 +1652,7 @@ module Aws::ECS
     #   the [Create a container][1] section of the [Docker Remote API][2]
     #   and the `--read-only` option to [docker run][3].
     #
-    #   <note markdown="1"> This parameter is not supported for Windows containers or tasks that
-    #   use the awsvpc network mode.
+    #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
     #    </note>
     #
@@ -1688,8 +1669,7 @@ module Aws::ECS
     #   the [Docker Remote API][2] and the `--dns` option to [docker
     #   run][3].
     #
-    #   <note markdown="1"> This parameter is not supported for Windows containers or tasks that
-    #   use the awsvpc network mode.
+    #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
     #    </note>
     #
@@ -1706,8 +1686,7 @@ module Aws::ECS
     #   section of the [Docker Remote API][2] and the `--dns-search` option
     #   to [docker run][3].
     #
-    #   <note markdown="1"> This parameter is not supported for Windows containers or tasks that
-    #   use the awsvpc network mode.
+    #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
     #    </note>
     #
@@ -1824,14 +1803,22 @@ module Aws::ECS
     #   set by Docker. This parameter maps to `Ulimits` in the [Create a
     #   container][1] section of the [Docker Remote API][2] and the
     #   `--ulimit` option to [docker run][3]. Valid naming values are
-    #   displayed in the Ulimit data type. This parameter requires version
-    #   1.18 of the Docker Remote API or greater on your container instance.
-    #   To check the Docker Remote API version on your container instance,
-    #   log in to your container instance and run the following command:
-    #   `sudo docker version --format '\{\{.Server.APIVersion\}\}'`
+    #   displayed in the Ulimit data type.
     #
-    #   <note markdown="1"> This parameter is not supported for Windows containers or tasks that
-    #   use the awsvpc network mode.
+    #   Amazon ECS tasks hosted on Fargate use the default resource limit
+    #   values set by the operating system with the exception of the
+    #   `nofile` resource limit parameter which Fargate overrides. The
+    #   `nofile` resource limit sets a restriction on the number of open
+    #   files that a container can use. The default `nofile` soft limit is
+    #   `1024` and hard limit is `4096`.
+    #
+    #   This parameter requires version 1.18 of the Docker Remote API or
+    #   greater on your container instance. To check the Docker Remote API
+    #   version on your container instance, log in to your container
+    #   instance and run the following command: `sudo docker version
+    #   --format '\{\{.Server.APIVersion\}\}'`
+    #
+    #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
     #    </note>
     #
@@ -2806,19 +2793,17 @@ module Aws::ECS
     #   @return [Array<Types::LoadBalancer>]
     #
     # @!attribute [rw] service_registries
-    #   The details of the service discovery registries to assign to this
+    #   The details of the service discovery registry to associate with this
     #   service. For more information, see [Service discovery][1].
     #
-    #   <note markdown="1"> Service discovery is supported for Fargate tasks if you are using
-    #   platform version v1.1.0 or later. For more information, see [AWS
-    #   Fargate platform versions][2].
+    #   <note markdown="1"> Each service may be associated with one service registry. Multiple
+    #   service registries per service isn't supported.
     #
     #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
-    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [Array<Types::ServiceRegistry>]
     #
     # @!attribute [rw] desired_count
@@ -2993,7 +2978,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] deployment_controller
-    #   The deployment controller to use for the service.
+    #   The deployment controller to use for the service. If no deployment
+    #   controller is specified, the default value of `ECS` is used.
     #   @return [Types::DeploymentController]
     #
     # @!attribute [rw] tags
@@ -3179,8 +3165,7 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] network_configuration
-    #   An object representing the network configuration for a task or
-    #   service.
+    #   An object representing the network configuration for a task set.
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] load_balancers
@@ -3312,9 +3297,9 @@ module Aws::ECS
 
     # @!attribute [rw] task_set
     #   Information about a set of Amazon ECS tasks in either an AWS
-    #   CodeDeploy or an `EXTERNAL` deployment. An Amazon ECS task set
-    #   includes details such as the desired number of tasks, how many tasks
-    #   are running, and whether the task set serves production traffic.
+    #   CodeDeploy or an `EXTERNAL` deployment. A task set includes details
+    #   such as the desired number of tasks, how many tasks are running, and
+    #   whether the task set serves production traffic.
     #   @return [Types::TaskSet]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateTaskSetResponse AWS API Documentation
@@ -3446,7 +3431,7 @@ module Aws::ECS
     end
 
     # @!attribute [rw] capacity_provider
-    #   The details of a capacity provider.
+    #   The details of the capacity provider.
     #   @return [Types::CapacityProvider]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteCapacityProviderResponse AWS API Documentation
@@ -3578,10 +3563,7 @@ module Aws::ECS
     end
 
     # @!attribute [rw] task_set
-    #   Information about a set of Amazon ECS tasks in either an AWS
-    #   CodeDeploy or an `EXTERNAL` deployment. An Amazon ECS task set
-    #   includes details such as the desired number of tasks, how many tasks
-    #   are running, and whether the task set serves production traffic.
+    #   Details about the task set.
     #   @return [Types::TaskSet]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteTaskSetResponse AWS API Documentation
@@ -4830,6 +4812,42 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The amount of ephemeral storage to allocate for the task. This
+    # parameter is used to expand the total amount of ephemeral storage
+    # available, beyond the default amount, for tasks hosted on AWS Fargate.
+    # For more information, see [Fargate task storage][1] in the *Amazon ECS
+    # User Guide for AWS Fargate*.
+    #
+    # <note markdown="1"> This parameter is only supported for tasks hosted on AWS Fargate using
+    # platform version `1.4.0` or later.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html
+    #
+    # @note When making an API call, you may pass EphemeralStorage
+    #   data as a hash:
+    #
+    #       {
+    #         size_in_gi_b: 1, # required
+    #       }
+    #
+    # @!attribute [rw] size_in_gi_b
+    #   The total amount, in GiB, of ephemeral storage to set for the task.
+    #   The minimum supported value is `21` GiB and the maximum supported
+    #   value is `200` GiB.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/EphemeralStorage AWS API Documentation
+    #
+    class EphemeralStorage < Struct.new(
+      :size_in_gi_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of the execute command configuration.
     #
     # @note When making an API call, you may pass ExecuteCommandConfiguration
@@ -5775,6 +5793,11 @@ module Aws::ECS
     #   The ARN of the principal, which can be an IAM user, IAM role, or the
     #   root user. If this field is omitted, the account settings are listed
     #   only for the authenticated user.
+    #
+    #   <note markdown="1"> Federated users assume the account setting of the root user and
+    #   can't have explicit account settings set for them.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] effective_settings
@@ -7164,6 +7187,11 @@ module Aws::ECS
     # The `hostPort` can be left blank or it must be the same value as the
     # `containerPort`.
     #
+    # <note markdown="1"> You cannot expose the same container port for multiple protocols. An
+    # error will be returned if this is attempted
+    #
+    #  </note>
+    #
     # After a task reaches the `RUNNING` status, manual and automatic host
     # and container port assignments are visible in the `networkBindings`
     # section of DescribeTasks API responses.
@@ -7363,7 +7391,7 @@ module Aws::ECS
     end
 
     # @!attribute [rw] setting
-    #   The current account setting for a resource.
+    #   The current setting for a resource.
     #   @return [Types::Setting]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAccountSettingDefaultResponse AWS API Documentation
@@ -7408,6 +7436,11 @@ module Aws::ECS
     #   account unless an IAM user or role explicitly overrides these
     #   settings. If this field is omitted, the setting is changed only for
     #   the authenticated user.
+    #
+    #   <note markdown="1"> Federated users assume the account setting of the root user and
+    #   can't have explicit account settings set for them.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAccountSettingRequest AWS API Documentation
@@ -7552,11 +7585,7 @@ module Aws::ECS
     end
 
     # @!attribute [rw] cluster
-    #   A regional grouping of one or more container instances on which you
-    #   can run task requests. Each account receives a default cluster the
-    #   first time you use the Amazon ECS service, but you may also create
-    #   other clusters. Clusters may contain more than one instance type
-    #   simultaneously.
+    #   Details about the cluster.
     #   @return [Types::Cluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutClusterCapacityProvidersResponse AWS API Documentation
@@ -7942,6 +7971,9 @@ module Aws::ECS
     #             device_type: "String", # required
     #           },
     #         ],
+    #         ephemeral_storage: {
+    #           size_in_gi_b: 1, # required
+    #         },
     #       }
     #
     # @!attribute [rw] family
@@ -8230,23 +8262,41 @@ module Aws::ECS
     # @!attribute [rw] proxy_configuration
     #   The configuration details for the App Mesh proxy.
     #
-    #   For tasks using the EC2 launch type, the container instances require
-    #   at least version 1.26.0 of the container agent and at least version
-    #   1.26.0-1 of the `ecs-init` package to enable a proxy configuration.
-    #   If your container instances are launched from the Amazon
-    #   ECS-optimized AMI version `20190301` or later, then they contain the
-    #   required versions of the container agent and `ecs-init`. For more
-    #   information, see [Amazon ECS-optimized Linux AMI][1]
+    #   For tasks hosted on Amazon EC2 instances, the container instances
+    #   require at least version `1.26.0` of the container agent and at
+    #   least version `1.26.0-1` of the `ecs-init` package to enable a proxy
+    #   configuration. If your container instances are launched from the
+    #   Amazon ECS-optimized AMI version `20190301` or later, then they
+    #   contain the required versions of the container agent and `ecs-init`.
+    #   For more information, see [Amazon ECS-optimized AMI versions][1] in
+    #   the *Amazon Elastic Container Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-ami-versions.html
     #   @return [Types::ProxyConfiguration]
     #
     # @!attribute [rw] inference_accelerators
     #   The Elastic Inference accelerators to use for the containers in the
     #   task.
     #   @return [Array<Types::InferenceAccelerator>]
+    #
+    # @!attribute [rw] ephemeral_storage
+    #   The amount of ephemeral storage to allocate for the task. This
+    #   parameter is used to expand the total amount of ephemeral storage
+    #   available, beyond the default amount, for tasks hosted on AWS
+    #   Fargate. For more information, see [Fargate task storage][1] in the
+    #   *Amazon ECS User Guide for AWS Fargate*.
+    #
+    #   <note markdown="1"> This parameter is only supported for tasks hosted on AWS Fargate
+    #   using platform version `1.4.0` or later.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html
+    #   @return [Types::EphemeralStorage]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinitionRequest AWS API Documentation
     #
@@ -8265,7 +8315,8 @@ module Aws::ECS
       :pid_mode,
       :ipc_mode,
       :proxy_configuration,
-      :inference_accelerators)
+      :inference_accelerators,
+      :ephemeral_storage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8495,6 +8546,9 @@ module Aws::ECS
     #           execution_role_arn: "String",
     #           memory: "String",
     #           task_role_arn: "String",
+    #           ephemeral_storage: {
+    #             size_in_gi_b: 1, # required
+    #           },
     #         },
     #         placement_constraints: [
     #           {
@@ -9320,6 +9374,9 @@ module Aws::ECS
     #           execution_role_arn: "String",
     #           memory: "String",
     #           task_role_arn: "String",
+    #           ephemeral_storage: {
+    #             size_in_gi_b: 1, # required
+    #           },
     #         },
     #         propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE
     #         reference_id: "String",
@@ -10237,6 +10294,10 @@ module Aws::ECS
     #   version in your event stream is current.
     #   @return [Integer]
     #
+    # @!attribute [rw] ephemeral_storage
+    #   The ephemeral storage settings for the task.
+    #   @return [Types::EphemeralStorage]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Task AWS API Documentation
     #
     class Task < Struct.new(
@@ -10273,7 +10334,8 @@ module Aws::ECS
       :tags,
       :task_arn,
       :task_definition_arn,
-      :version)
+      :version,
+      :ephemeral_storage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10629,6 +10691,11 @@ module Aws::ECS
     #   The principal that registered the task definition.
     #   @return [String]
     #
+    # @!attribute [rw] ephemeral_storage
+    #   The ephemeral storage settings to use for tasks run with the task
+    #   definition.
+    #   @return [Types::EphemeralStorage]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskDefinition AWS API Documentation
     #
     class TaskDefinition < Struct.new(
@@ -10653,7 +10720,8 @@ module Aws::ECS
       :proxy_configuration,
       :registered_at,
       :deregistered_at,
-      :registered_by)
+      :registered_by,
+      :ephemeral_storage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10746,6 +10814,9 @@ module Aws::ECS
     #         execution_role_arn: "String",
     #         memory: "String",
     #         task_role_arn: "String",
+    #         ephemeral_storage: {
+    #           size_in_gi_b: 1, # required
+    #         },
     #       }
     #
     # @!attribute [rw] container_overrides
@@ -10775,6 +10846,15 @@ module Aws::ECS
     #   permissions that are specified in this role.
     #   @return [String]
     #
+    # @!attribute [rw] ephemeral_storage
+    #   The ephemeral storage setting override for the task.
+    #
+    #   <note markdown="1"> This parameter is only supported for tasks hosted on AWS Fargate
+    #   using platform version `1.4.0` or later.
+    #
+    #    </note>
+    #   @return [Types::EphemeralStorage]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskOverride AWS API Documentation
     #
     class TaskOverride < Struct.new(
@@ -10783,7 +10863,8 @@ module Aws::ECS
       :inference_accelerator_overrides,
       :execution_role_arn,
       :memory,
-      :task_role_arn)
+      :task_role_arn,
+      :ephemeral_storage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11065,6 +11146,13 @@ module Aws::ECS
 
     # The `ulimit` settings to pass to the container.
     #
+    # Amazon ECS tasks hosted on Fargate use the default resource limit
+    # values set by the operating system with the exception of the `nofile`
+    # resource limit parameter which Fargate overrides. The `nofile`
+    # resource limit sets a restriction on the number of open files that a
+    # container can use. The default `nofile` soft limit is `1024` and hard
+    # limit is `4096`.
+    #
     # @note When making an API call, you may pass Ulimit
     #   data as a hash:
     #
@@ -11170,7 +11258,7 @@ module Aws::ECS
     end
 
     # @!attribute [rw] capacity_provider
-    #   The details of a capacity provider.
+    #   Details about the capacity provider.
     #   @return [Types::CapacityProvider]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateCapacityProviderResponse AWS API Documentation
@@ -11230,11 +11318,7 @@ module Aws::ECS
     end
 
     # @!attribute [rw] cluster
-    #   A regional grouping of one or more container instances on which you
-    #   can run task requests. Each account receives a default cluster the
-    #   first time you use the Amazon ECS service, but you may also create
-    #   other clusters. Clusters may contain more than one instance type
-    #   simultaneously.
+    #   Details about the cluster.
     #   @return [Types::Cluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateClusterResponse AWS API Documentation
@@ -11279,11 +11363,7 @@ module Aws::ECS
     end
 
     # @!attribute [rw] cluster
-    #   A regional grouping of one or more container instances on which you
-    #   can run task requests. Each account receives a default cluster the
-    #   first time you use the Amazon ECS service, but you may also create
-    #   other clusters. Clusters may contain more than one instance type
-    #   simultaneously.
+    #   Details about the cluster
     #   @return [Types::Cluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateClusterSettingsResponse AWS API Documentation
@@ -11437,10 +11517,7 @@ module Aws::ECS
     end
 
     # @!attribute [rw] task_set
-    #   Information about a set of Amazon ECS tasks in either an AWS
-    #   CodeDeploy or an `EXTERNAL` deployment. An Amazon ECS task set
-    #   includes details such as the desired number of tasks, how many tasks
-    #   are running, and whether the task set serves production traffic.
+    #   Details about the task set.
     #   @return [Types::TaskSet]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServicePrimaryTaskSetResponse AWS API Documentation
@@ -11562,8 +11639,7 @@ module Aws::ECS
     #   @return [Types::DeploymentConfiguration]
     #
     # @!attribute [rw] network_configuration
-    #   An object representing the network configuration for a task or
-    #   service.
+    #   An object representing the network configuration for the service.
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] placement_constraints
@@ -11711,10 +11787,7 @@ module Aws::ECS
     end
 
     # @!attribute [rw] task_set
-    #   Information about a set of Amazon ECS tasks in either an AWS
-    #   CodeDeploy or an `EXTERNAL` deployment. An Amazon ECS task set
-    #   includes details such as the desired number of tasks, how many tasks
-    #   are running, and whether the task set serves production traffic.
+    #   Details about the task set.
     #   @return [Types::TaskSet]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateTaskSetResponse AWS API Documentation

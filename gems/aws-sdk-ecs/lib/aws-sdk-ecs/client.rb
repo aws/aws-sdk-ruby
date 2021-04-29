@@ -850,19 +850,17 @@ module Aws::ECS
     #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
     #
     # @option params [Array<Types::ServiceRegistry>] :service_registries
-    #   The details of the service discovery registries to assign to this
+    #   The details of the service discovery registry to associate with this
     #   service. For more information, see [Service discovery][1].
     #
-    #   <note markdown="1"> Service discovery is supported for Fargate tasks if you are using
-    #   platform version v1.1.0 or later. For more information, see [AWS
-    #   Fargate platform versions][2].
+    #   <note markdown="1"> Each service may be associated with one service registry. Multiple
+    #   service registries per service isn't supported.
     #
     #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
-    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #
     # @option params [Integer] :desired_count
     #   The number of instantiations of the specified task definition to place
@@ -1018,7 +1016,8 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
     #
     # @option params [Types::DeploymentController] :deployment_controller
-    #   The deployment controller to use for the service.
+    #   The deployment controller to use for the service. If no deployment
+    #   controller is specified, the default value of `ECS` is used.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the service to help you categorize and
@@ -1432,8 +1431,7 @@ module Aws::ECS
     #   The task definition for the tasks in the task set to use.
     #
     # @option params [Types::NetworkConfiguration] :network_configuration
-    #   An object representing the network configuration for a task or
-    #   service.
+    #   An object representing the network configuration for a task set.
     #
     # @option params [Array<Types::LoadBalancer>] :load_balancers
     #   A load balancer object representing the load balancer to use with the
@@ -2540,6 +2538,7 @@ module Aws::ECS
     #   resp.task_definition.registered_at #=> Time
     #   resp.task_definition.deregistered_at #=> Time
     #   resp.task_definition.registered_by #=> String
+    #   resp.task_definition.ephemeral_storage.size_in_gi_b #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinition AWS API Documentation
     #
@@ -3429,6 +3428,7 @@ module Aws::ECS
     #   resp.task_definition.registered_at #=> Time
     #   resp.task_definition.deregistered_at #=> Time
     #   resp.task_definition.registered_by #=> String
+    #   resp.task_definition.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -3706,6 +3706,7 @@ module Aws::ECS
     #   resp.tasks[0].overrides.execution_role_arn #=> String
     #   resp.tasks[0].overrides.memory #=> String
     #   resp.tasks[0].overrides.task_role_arn #=> String
+    #   resp.tasks[0].overrides.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.tasks[0].platform_version #=> String
     #   resp.tasks[0].pull_started_at #=> Time
     #   resp.tasks[0].pull_stopped_at #=> Time
@@ -3721,6 +3722,7 @@ module Aws::ECS
     #   resp.tasks[0].task_arn #=> String
     #   resp.tasks[0].task_definition_arn #=> String
     #   resp.tasks[0].version #=> Integer
+    #   resp.tasks[0].ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -3859,6 +3861,11 @@ module Aws::ECS
     #   The ARN of the principal, which can be an IAM user, IAM role, or the
     #   root user. If this field is omitted, the account settings are listed
     #   only for the authenticated user.
+    #
+    #   <note markdown="1"> Federated users assume the account setting of the root user and can't
+    #   have explicit account settings set for them.
+    #
+    #    </note>
     #
     # @option params [Boolean] :effective_settings
     #   Specifies whether to return the effective settings. If `true`, the
@@ -4818,6 +4825,11 @@ module Aws::ECS
     #   this field is omitted, the setting is changed only for the
     #   authenticated user.
     #
+    #   <note markdown="1"> Federated users assume the account setting of the root user and can't
+    #   have explicit account settings set for them.
+    #
+    #    </note>
+    #
     # @return [Types::PutAccountSettingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutAccountSettingResponse#setting #setting} => Types::Setting
@@ -5614,21 +5626,38 @@ module Aws::ECS
     # @option params [Types::ProxyConfiguration] :proxy_configuration
     #   The configuration details for the App Mesh proxy.
     #
-    #   For tasks using the EC2 launch type, the container instances require
-    #   at least version 1.26.0 of the container agent and at least version
-    #   1.26.0-1 of the `ecs-init` package to enable a proxy configuration. If
-    #   your container instances are launched from the Amazon ECS-optimized
-    #   AMI version `20190301` or later, then they contain the required
-    #   versions of the container agent and `ecs-init`. For more information,
-    #   see [Amazon ECS-optimized Linux AMI][1]
+    #   For tasks hosted on Amazon EC2 instances, the container instances
+    #   require at least version `1.26.0` of the container agent and at least
+    #   version `1.26.0-1` of the `ecs-init` package to enable a proxy
+    #   configuration. If your container instances are launched from the
+    #   Amazon ECS-optimized AMI version `20190301` or later, then they
+    #   contain the required versions of the container agent and `ecs-init`.
+    #   For more information, see [Amazon ECS-optimized AMI versions][1] in
+    #   the *Amazon Elastic Container Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-ami-versions.html
     #
     # @option params [Array<Types::InferenceAccelerator>] :inference_accelerators
     #   The Elastic Inference accelerators to use for the containers in the
     #   task.
+    #
+    # @option params [Types::EphemeralStorage] :ephemeral_storage
+    #   The amount of ephemeral storage to allocate for the task. This
+    #   parameter is used to expand the total amount of ephemeral storage
+    #   available, beyond the default amount, for tasks hosted on AWS Fargate.
+    #   For more information, see [Fargate task storage][1] in the *Amazon ECS
+    #   User Guide for AWS Fargate*.
+    #
+    #   <note markdown="1"> This parameter is only supported for tasks hosted on AWS Fargate using
+    #   platform version `1.4.0` or later.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html
     #
     # @return [Types::RegisterTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5919,6 +5948,9 @@ module Aws::ECS
     #         device_type: "String", # required
     #       },
     #     ],
+    #     ephemeral_storage: {
+    #       size_in_gi_b: 1, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -6078,6 +6110,7 @@ module Aws::ECS
     #   resp.task_definition.registered_at #=> Time
     #   resp.task_definition.deregistered_at #=> Time
     #   resp.task_definition.registered_by #=> String
+    #   resp.task_definition.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -6393,6 +6426,9 @@ module Aws::ECS
     #       execution_role_arn: "String",
     #       memory: "String",
     #       task_role_arn: "String",
+    #       ephemeral_storage: {
+    #         size_in_gi_b: 1, # required
+    #       },
     #     },
     #     placement_constraints: [
     #       {
@@ -6506,6 +6542,7 @@ module Aws::ECS
     #   resp.tasks[0].overrides.execution_role_arn #=> String
     #   resp.tasks[0].overrides.memory #=> String
     #   resp.tasks[0].overrides.task_role_arn #=> String
+    #   resp.tasks[0].overrides.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.tasks[0].platform_version #=> String
     #   resp.tasks[0].pull_started_at #=> Time
     #   resp.tasks[0].pull_stopped_at #=> Time
@@ -6521,6 +6558,7 @@ module Aws::ECS
     #   resp.tasks[0].task_arn #=> String
     #   resp.tasks[0].task_definition_arn #=> String
     #   resp.tasks[0].version #=> Integer
+    #   resp.tasks[0].ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -6708,6 +6746,9 @@ module Aws::ECS
     #       execution_role_arn: "String",
     #       memory: "String",
     #       task_role_arn: "String",
+    #       ephemeral_storage: {
+    #         size_in_gi_b: 1, # required
+    #       },
     #     },
     #     propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE
     #     reference_id: "String",
@@ -6808,6 +6849,7 @@ module Aws::ECS
     #   resp.tasks[0].overrides.execution_role_arn #=> String
     #   resp.tasks[0].overrides.memory #=> String
     #   resp.tasks[0].overrides.task_role_arn #=> String
+    #   resp.tasks[0].overrides.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.tasks[0].platform_version #=> String
     #   resp.tasks[0].pull_started_at #=> Time
     #   resp.tasks[0].pull_stopped_at #=> Time
@@ -6823,6 +6865,7 @@ module Aws::ECS
     #   resp.tasks[0].task_arn #=> String
     #   resp.tasks[0].task_definition_arn #=> String
     #   resp.tasks[0].version #=> Integer
+    #   resp.tasks[0].ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -6971,6 +7014,7 @@ module Aws::ECS
     #   resp.task.overrides.execution_role_arn #=> String
     #   resp.task.overrides.memory #=> String
     #   resp.task.overrides.task_role_arn #=> String
+    #   resp.task.overrides.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.task.platform_version #=> String
     #   resp.task.pull_started_at #=> Time
     #   resp.task.pull_stopped_at #=> Time
@@ -6986,6 +7030,7 @@ module Aws::ECS
     #   resp.task.task_arn #=> String
     #   resp.task.task_definition_arn #=> String
     #   resp.task.version #=> Integer
+    #   resp.task.ephemeral_storage.size_in_gi_b #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask AWS API Documentation
     #
@@ -7560,15 +7605,25 @@ module Aws::ECS
     # instance was launched with the Amazon ECS-optimized AMI or another
     # operating system.
     #
-    # `UpdateContainerAgent` requires the Amazon ECS-optimized AMI or Amazon
-    # Linux with the `ecs-init` service installed and running. For help
-    # updating the Amazon ECS container agent on other operating systems,
-    # see [Manually Updating the Amazon ECS Container Agent][1] in the
-    # *Amazon Elastic Container Service Developer Guide*.
+    # <note markdown="1"> The `UpdateContainerAgent` API isn't supported for container
+    # instances using the Amazon ECS-optimized Amazon Linux 2 (arm64) AMI.
+    # To update the container agent, you can update the `ecs-init` package
+    # which will update the agent. For more information, see [Updating the
+    # Amazon ECS container agent][1] in the *Amazon Elastic Container
+    # Service Developer Guide*.
+    #
+    #  </note>
+    #
+    # The `UpdateContainerAgent` API requires an Amazon ECS-optimized AMI or
+    # Amazon Linux AMI with the `ecs-init` service installed and running.
+    # For help updating the Amazon ECS container agent on other operating
+    # systems, see [Manually updating the Amazon ECS container agent][2] in
+    # the *Amazon Elastic Container Service Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/agent-update-ecs-ami.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -7969,8 +8024,7 @@ module Aws::ECS
     #   the deployment and the ordering of stopping and starting tasks.
     #
     # @option params [Types::NetworkConfiguration] :network_configuration
-    #   An object representing the network configuration for a task or
-    #   service.
+    #   An object representing the network configuration for the service.
     #
     # @option params [Array<Types::PlacementConstraint>] :placement_constraints
     #   An array of task placement constraint objects to update the service to
@@ -8436,7 +8490,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

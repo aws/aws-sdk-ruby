@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2021-04-29)
+------------------
+
+* Feature - Increase AppInstanceUserId length to 64 characters
+
 1.42.0 (2021-03-10)
 ------------------
 

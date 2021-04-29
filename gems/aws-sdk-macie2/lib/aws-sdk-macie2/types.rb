@@ -376,7 +376,13 @@ module Aws::Macie2
 
     # Provides information about the number of S3 buckets that use certain
     # types of server-side encryption by default or don't encrypt new
-    # objects by default.
+    # objects by default. For detailed information about these settings, see
+    # [Setting default server-side encryption behavior for Amazon S3
+    # buckets][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html
     #
     # @!attribute [rw] kms_managed
     #   @return [Integer]
@@ -387,18 +393,22 @@ module Aws::Macie2
     # @!attribute [rw] unencrypted
     #   @return [Integer]
     #
+    # @!attribute [rw] unknown
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BucketCountByEncryptionType AWS API Documentation
     #
     class BucketCountByEncryptionType < Struct.new(
       :kms_managed,
       :s3_managed,
-      :unencrypted)
+      :unencrypted,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Provides information about the number of S3 buckets that are shared
-    # with other AWS accounts.
+    # Provides information about the number of S3 buckets that are and
+    # aren't shared with other AWS accounts.
     #
     # @!attribute [rw] external
     #   @return [Integer]
@@ -418,6 +428,29 @@ module Aws::Macie2
       :external,
       :internal,
       :not_shared,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the number of S3 buckets whose bucket
+    # policies do and don't require server-side encryption of objects when
+    # objects are uploaded to the buckets.
+    #
+    # @!attribute [rw] allows_unencrypted_object_uploads
+    #   @return [Integer]
+    #
+    # @!attribute [rw] denies_unencrypted_object_uploads
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unknown
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BucketCountPolicyAllowsUnencryptedObjectUploads AWS API Documentation
+    #
+    class BucketCountPolicyAllowsUnencryptedObjectUploads < Struct.new(
+      :allows_unencrypted_object_uploads,
+      :denies_unencrypted_object_uploads,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -495,7 +528,7 @@ module Aws::Macie2
     #   @return [Types::BlockPublicAccess]
     #
     # @!attribute [rw] bucket_policy
-    #   Provides information about the permissions settings of a bucket
+    #   Provides information about the permissions settings of the bucket
     #   policy for an S3 bucket.
     #   @return [Types::BucketPolicy]
     #
@@ -513,6 +546,9 @@ module Aws::Macie2
     # analyzes.
     #
     # @!attribute [rw] account_id
+    #   @return [String]
+    #
+    # @!attribute [rw] allows_unencrypted_object_uploads
     #   @return [String]
     #
     # @!attribute [rw] bucket_arn
@@ -613,6 +649,7 @@ module Aws::Macie2
     #
     class BucketMetadata < Struct.new(
       :account_id,
+      :allows_unencrypted_object_uploads,
       :bucket_arn,
       :bucket_created_at,
       :bucket_name,
@@ -659,8 +696,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about the permissions settings of a bucket policy
-    # for an S3 bucket.
+    # Provides information about the permissions settings of the bucket
+    # policy for an S3 bucket.
     #
     # @!attribute [rw] allows_public_read_access
     #   @return [Boolean]
@@ -2402,12 +2439,24 @@ module Aws::Macie2
     # @!attribute [rw] bucket_count_by_encryption_type
     #   Provides information about the number of S3 buckets that use certain
     #   types of server-side encryption by default or don't encrypt new
-    #   objects by default.
+    #   objects by default. For detailed information about these settings,
+    #   see [Setting default server-side encryption behavior for Amazon S3
+    #   buckets][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html
     #   @return [Types::BucketCountByEncryptionType]
     #
+    # @!attribute [rw] bucket_count_by_object_encryption_requirement
+    #   Provides information about the number of S3 buckets whose bucket
+    #   policies do and don't require server-side encryption of objects
+    #   when objects are uploaded to the buckets.
+    #   @return [Types::BucketCountPolicyAllowsUnencryptedObjectUploads]
+    #
     # @!attribute [rw] bucket_count_by_shared_access_type
-    #   Provides information about the number of S3 buckets that are shared
-    #   with other AWS accounts.
+    #   Provides information about the number of S3 buckets that are and
+    #   aren't shared with other AWS accounts.
     #   @return [Types::BucketCountBySharedAccessType]
     #
     # @!attribute [rw] classifiable_object_count
@@ -2454,6 +2503,7 @@ module Aws::Macie2
       :bucket_count,
       :bucket_count_by_effective_permission,
       :bucket_count_by_encryption_type,
+      :bucket_count_by_object_encryption_requirement,
       :bucket_count_by_shared_access_type,
       :classifiable_object_count,
       :classifiable_size_in_bytes,
@@ -4088,13 +4138,17 @@ module Aws::Macie2
     # @!attribute [rw] unencrypted
     #   @return [Integer]
     #
+    # @!attribute [rw] unknown
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ObjectCountByEncryptionType AWS API Documentation
     #
     class ObjectCountByEncryptionType < Struct.new(
       :customer_managed,
       :kms_managed,
       :s3_managed,
-      :unencrypted)
+      :unencrypted,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4410,6 +4464,9 @@ module Aws::Macie2
 
     # Provides information about an S3 bucket that a finding applies to.
     #
+    # @!attribute [rw] allows_unencrypted_object_uploads
+    #   @return [String]
+    #
     # @!attribute [rw] arn
     #   @return [String]
     #
@@ -4442,6 +4499,7 @@ module Aws::Macie2
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/S3Bucket AWS API Documentation
     #
     class S3Bucket < Struct.new(
+      :allows_unencrypted_object_uploads,
       :arn,
       :created_at,
       :default_server_side_encryption,
