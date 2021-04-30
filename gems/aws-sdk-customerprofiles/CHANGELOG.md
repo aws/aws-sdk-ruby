@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2021-04-30)
+------------------
+
+* Feature - This release introduces GetMatches and MergeProfiles APIs to fetch and merge duplicate profiles
+
 1.6.0 (2021-04-08)
 ------------------
 

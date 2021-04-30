@@ -413,6 +413,7 @@ module Aws::MarketplaceCatalog
     #   resp.change_set[0].error_detail_list #=> Array
     #   resp.change_set[0].error_detail_list[0].error_code #=> String
     #   resp.change_set[0].error_detail_list[0].error_message #=> String
+    #   resp.change_set[0].change_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/DescribeChangeSet AWS API Documentation
     #
@@ -505,7 +506,7 @@ module Aws::MarketplaceCatalog
     #     filter_list: [
     #       {
     #         name: "FilterName",
-    #         value_list: ["StringValue"],
+    #         value_list: ["FilterValueContent"],
     #       },
     #     ],
     #     sort: {
@@ -577,7 +578,7 @@ module Aws::MarketplaceCatalog
     #     filter_list: [
     #       {
     #         name: "FilterName",
-    #         value_list: ["StringValue"],
+    #         value_list: ["FilterValueContent"],
     #       },
     #     ],
     #     sort: {
@@ -617,12 +618,17 @@ module Aws::MarketplaceCatalog
     # that is already locked, you will receive a `ResourceInUseException`.
     #
     # For example, you cannot start the ChangeSet described in the
-    # [example][1] below because it contains two changes to execute the same
-    # change type (`AddRevisions`) against the same entity (`entity-id@1)`.
+    # [example][1] later in this topic, because it contains two changes to
+    # execute the same change type (`AddRevisions`) against the same entity
+    # (`entity-id@1)`.
+    #
+    # For more information about working with change sets, see [ Working
+    # with change sets][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples
+    # [2]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets
     #
     # @option params [required, String] :catalog
     #   The catalog related to the request. Fixed value: `AWSMarketplace`
@@ -654,6 +660,7 @@ module Aws::MarketplaceCatalog
     #           identifier: "Identifier",
     #         },
     #         details: "Json", # required
+    #         change_name: "ChangeName",
     #       },
     #     ],
     #     change_set_name: "ChangeSetName",
@@ -687,7 +694,7 @@ module Aws::MarketplaceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacecatalog'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

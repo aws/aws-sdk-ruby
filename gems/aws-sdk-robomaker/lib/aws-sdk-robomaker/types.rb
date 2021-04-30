@@ -548,7 +548,7 @@ module Aws::RoboMaker
     #         ],
     #         robot_software_suite: { # required
     #           name: "ROS", # accepts ROS, ROS2
-    #           version: "Kinetic", # accepts Kinetic, Melodic, Dashing
+    #           version: "Kinetic", # accepts Kinetic, Melodic, Dashing, Foxy
     #         },
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -801,7 +801,7 @@ module Aws::RoboMaker
     #         },
     #         robot_software_suite: { # required
     #           name: "ROS", # accepts ROS, ROS2
-    #           version: "Kinetic", # accepts Kinetic, Melodic, Dashing
+    #           version: "Kinetic", # accepts Kinetic, Melodic, Dashing, Foxy
     #         },
     #         rendering_engine: {
     #           name: "OGRE", # accepts OGRE
@@ -4979,7 +4979,7 @@ module Aws::RoboMaker
     #
     #       {
     #         name: "ROS", # accepts ROS, ROS2
-    #         version: "Kinetic", # accepts Kinetic, Melodic, Dashing
+    #         version: "Kinetic", # accepts Kinetic, Melodic, Dashing, Foxy
     #       }
     #
     # @!attribute [rw] name
@@ -6405,7 +6405,7 @@ module Aws::RoboMaker
     #         ],
     #         robot_software_suite: { # required
     #           name: "ROS", # accepts ROS, ROS2
-    #           version: "Kinetic", # accepts Kinetic, Melodic, Dashing
+    #           version: "Kinetic", # accepts Kinetic, Melodic, Dashing, Foxy
     #         },
     #         current_revision_id: "RevisionId",
     #       }
@@ -6500,7 +6500,7 @@ module Aws::RoboMaker
     #         },
     #         robot_software_suite: { # required
     #           name: "ROS", # accepts ROS, ROS2
-    #           version: "Kinetic", # accepts Kinetic, Melodic, Dashing
+    #           version: "Kinetic", # accepts Kinetic, Melodic, Dashing, Foxy
     #         },
     #         rendering_engine: {
     #           name: "OGRE", # accepts OGRE

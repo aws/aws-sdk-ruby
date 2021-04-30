@@ -616,6 +616,15 @@ module Aws::CloudFront
     #             },
     #           ],
     #         },
+    #         function_associations: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               function_arn: "FunctionARN", # required
+    #               event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #             },
+    #           ],
+    #         },
     #         field_level_encryption_id: "string",
     #         realtime_log_config_arn: "string",
     #         cache_policy_id: "string",
@@ -676,6 +685,15 @@ module Aws::CloudFront
     #                   lambda_function_arn: "LambdaFunctionARN", # required
     #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                   include_body: false,
+    #                 },
+    #               ],
+    #             },
+    #             function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   function_arn: "FunctionARN", # required
+    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                 },
     #               ],
     #             },
@@ -830,6 +848,10 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.items[0].function_arn #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.cache_policy_id #=> String
@@ -874,6 +896,10 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.items[0].function_arn #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].cache_policy_id #=> String
@@ -1050,6 +1076,15 @@ module Aws::CloudFront
     #               },
     #             ],
     #           },
+    #           function_associations: {
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 function_arn: "FunctionARN", # required
+    #                 event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #               },
+    #             ],
+    #           },
     #           field_level_encryption_id: "string",
     #           realtime_log_config_arn: "string",
     #           cache_policy_id: "string",
@@ -1110,6 +1145,15 @@ module Aws::CloudFront
     #                     lambda_function_arn: "LambdaFunctionARN", # required
     #                     event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                     include_body: false,
+    #                   },
+    #                 ],
+    #               },
+    #               function_associations: {
+    #                 quantity: 1, # required
+    #                 items: [
+    #                   {
+    #                     function_arn: "FunctionARN", # required
+    #                     event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                   },
     #                 ],
     #               },
@@ -1273,6 +1317,10 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.items[0].function_arn #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.cache_policy_id #=> String
@@ -1317,6 +1365,10 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.items[0].function_arn #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].cache_policy_id #=> String
@@ -1508,6 +1560,76 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def create_field_level_encryption_profile(params = {}, options = {})
       req = build_request(:create_field_level_encryption_profile, params)
+      req.send_request(options)
+    end
+
+    # Creates a CloudFront function.
+    #
+    # To create a function, you provide the function code and some
+    # configuration information about the function. The response contains an
+    # Amazon Resource Name (ARN) that uniquely identifies the function.
+    #
+    # When you create a function, it’s in the `DEVELOPMENT` stage. In this
+    # stage, you can test the function with `TestFunction`, and update it
+    # with `UpdateFunction`.
+    #
+    # When you’re ready to use your function with a CloudFront distribution,
+    # use `PublishFunction` to copy the function from the `DEVELOPMENT`
+    # stage to `LIVE`. When it’s live, you can attach the function to a
+    # distribution’s cache behavior, using the function’s ARN.
+    #
+    # @option params [required, String] :name
+    #   A name to identify the function.
+    #
+    # @option params [required, Types::FunctionConfig] :function_config
+    #   Configuration information about the function, including an optional
+    #   comment and the function’s runtime.
+    #
+    # @option params [required, String, StringIO, File] :function_code
+    #   The function code. For more information about writing a CloudFront
+    #   function, see [Writing function code for CloudFront Functions][1] in
+    #   the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html
+    #
+    # @return [Types::CreateFunctionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFunctionResult#function_summary #function_summary} => Types::FunctionSummary
+    #   * {Types::CreateFunctionResult#location #location} => String
+    #   * {Types::CreateFunctionResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_function({
+    #     name: "FunctionName", # required
+    #     function_config: { # required
+    #       comment: "string", # required
+    #       runtime: "cloudfront-js-1.0", # required, accepts cloudfront-js-1.0
+    #     },
+    #     function_code: "data", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_summary.name #=> String
+    #   resp.function_summary.status #=> String
+    #   resp.function_summary.function_config.comment #=> String
+    #   resp.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0"
+    #   resp.function_summary.function_metadata.function_arn #=> String
+    #   resp.function_summary.function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
+    #   resp.function_summary.function_metadata.created_time #=> Time
+    #   resp.function_summary.function_metadata.last_modified_time #=> Time
+    #   resp.location #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateFunction2020_05_31 AWS API Documentation
+    #
+    # @overload create_function(params = {})
+    # @param [Hash] params ({})
+    def create_function(params = {}, options = {})
+      req = build_request(:create_function, params)
       req.send_request(options)
     end
 
@@ -2218,6 +2340,41 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Deletes a CloudFront function.
+    #
+    # You cannot delete a function if it’s associated with a cache behavior.
+    # First, update your distributions to remove the function association
+    # from all cache behaviors, then delete the function.
+    #
+    # To delete a function, you must provide the function’s name and version
+    # (`ETag` value). To get these values, you can use `ListFunctions` and
+    # `DescribeFunction`.
+    #
+    # @option params [required, String] :name
+    #   The name of the function that you are deleting.
+    #
+    # @option params [required, String] :if_match
+    #   The current version (`ETag` value) of the function that you are
+    #   deleting, which you can get using `DescribeFunction`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_function({
+    #     name: "string", # required
+    #     if_match: "string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteFunction2020_05_31 AWS API Documentation
+    #
+    # @overload delete_function(params = {})
+    # @param [Hash] params ({})
+    def delete_function(params = {}, options = {})
+      req = build_request(:delete_function, params)
+      req.send_request(options)
+    end
+
     # Deletes a key group.
     #
     # You cannot delete a key group that is referenced in a cache behavior.
@@ -2449,6 +2606,53 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def delete_streaming_distribution(params = {}, options = {})
       req = build_request(:delete_streaming_distribution, params)
+      req.send_request(options)
+    end
+
+    # Gets configuration information and metadata about a CloudFront
+    # function, but not the function’s code. To get a function’s code, use
+    # `GetFunction`.
+    #
+    # To get configuration information and metadata about a function, you
+    # must provide the function’s name and stage. To get these values, you
+    # can use `ListFunctions`.
+    #
+    # @option params [required, String] :name
+    #   The name of the function that you are getting information about.
+    #
+    # @option params [String] :stage
+    #   The function’s stage, either `DEVELOPMENT` or `LIVE`.
+    #
+    # @return [Types::DescribeFunctionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFunctionResult#function_summary #function_summary} => Types::FunctionSummary
+    #   * {Types::DescribeFunctionResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_function({
+    #     name: "string", # required
+    #     stage: "DEVELOPMENT", # accepts DEVELOPMENT, LIVE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_summary.name #=> String
+    #   resp.function_summary.status #=> String
+    #   resp.function_summary.function_config.comment #=> String
+    #   resp.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0"
+    #   resp.function_summary.function_metadata.function_arn #=> String
+    #   resp.function_summary.function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
+    #   resp.function_summary.function_metadata.created_time #=> Time
+    #   resp.function_summary.function_metadata.last_modified_time #=> Time
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DescribeFunction2020_05_31 AWS API Documentation
+    #
+    # @overload describe_function(params = {})
+    # @param [Hash] params ({})
+    def describe_function(params = {}, options = {})
+      req = build_request(:describe_function, params)
       req.send_request(options)
     end
 
@@ -2737,6 +2941,10 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.items[0].function_arn #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.cache_policy_id #=> String
@@ -2781,6 +2989,10 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.items[0].function_arn #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].cache_policy_id #=> String
@@ -2923,6 +3135,10 @@ module Aws::CloudFront
     #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution_config.default_cache_behavior.function_associations.quantity #=> Integer
+    #   resp.distribution_config.default_cache_behavior.function_associations.items #=> Array
+    #   resp.distribution_config.default_cache_behavior.function_associations.items[0].function_arn #=> String
+    #   resp.distribution_config.default_cache_behavior.function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution_config.default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution_config.default_cache_behavior.cache_policy_id #=> String
@@ -2967,6 +3183,10 @@ module Aws::CloudFront
     #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution_config.cache_behaviors.items[0].function_associations.quantity #=> Integer
+    #   resp.distribution_config.cache_behaviors.items[0].function_associations.items #=> Array
+    #   resp.distribution_config.cache_behaviors.items[0].function_associations.items[0].function_arn #=> String
+    #   resp.distribution_config.cache_behaviors.items[0].function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution_config.cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution_config.cache_behaviors.items[0].cache_policy_id #=> String
@@ -3189,6 +3409,46 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def get_field_level_encryption_profile_config(params = {}, options = {})
       req = build_request(:get_field_level_encryption_profile_config, params)
+      req.send_request(options)
+    end
+
+    # Gets the code of a CloudFront function. To get configuration
+    # information and metadata about a function, use `DescribeFunction`.
+    #
+    # To get a function’s code, you must provide the function’s name and
+    # stage. To get these values, you can use `ListFunctions`.
+    #
+    # @option params [required, String] :name
+    #   The name of the function whose code you are getting.
+    #
+    # @option params [String] :stage
+    #   The function’s stage, either `DEVELOPMENT` or `LIVE`.
+    #
+    # @return [Types::GetFunctionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFunctionResult#function_code #function_code} => String
+    #   * {Types::GetFunctionResult#etag #etag} => String
+    #   * {Types::GetFunctionResult#content_type #content_type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_function({
+    #     name: "string", # required
+    #     stage: "DEVELOPMENT", # accepts DEVELOPMENT, LIVE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_code #=> String
+    #   resp.etag #=> String
+    #   resp.content_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFunction2020_05_31 AWS API Documentation
+    #
+    # @overload get_function(params = {})
+    # @param [Hash] params ({})
+    def get_function(params = {}, options = {})
+      req = build_request(:get_function, params)
       req.send_request(options)
     end
 
@@ -3913,6 +4173,10 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.function_associations.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.function_associations.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.function_associations.items[0].function_arn #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution_list.items[0].default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.cache_policy_id #=> String
@@ -3957,6 +4221,10 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].function_associations.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].function_associations.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].function_associations.items[0].function_arn #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution_list.items[0].cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].cache_policy_id #=> String
@@ -4292,6 +4560,10 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.function_associations.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.function_associations.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.function_associations.items[0].function_arn #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution_list.items[0].default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.cache_policy_id #=> String
@@ -4336,6 +4608,10 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].function_associations.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].function_associations.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].function_associations.items[0].function_arn #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution_list.items[0].cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].cache_policy_id #=> String
@@ -4492,6 +4768,10 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.function_associations.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.function_associations.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.function_associations.items[0].function_arn #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution_list.items[0].default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.cache_policy_id #=> String
@@ -4536,6 +4816,10 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].function_associations.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].function_associations.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].function_associations.items[0].function_arn #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution_list.items[0].cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].cache_policy_id #=> String
@@ -4695,6 +4979,68 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def list_field_level_encryption_profiles(params = {}, options = {})
       req = build_request(:list_field_level_encryption_profiles, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of all CloudFront functions in your AWS account.
+    #
+    # You can optionally apply a filter to return only the functions that
+    # are in the specified stage, either `DEVELOPMENT` or `LIVE`.
+    #
+    # You can optionally specify the maximum number of items to receive in
+    # the response. If the total number of items in the list exceeds the
+    # maximum that you specify, or the default maximum, the response is
+    # paginated. To get the next page of items, send a subsequent request
+    # that specifies the `NextMarker` value from the current response as the
+    # `Marker` value in the subsequent request.
+    #
+    # @option params [String] :marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of functions. The response includes functions in the list
+    #   that occur after the marker. To get the next page of the list, set
+    #   this field’s value to the value of `NextMarker` from the current
+    #   page’s response.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of functions that you want in the response.
+    #
+    # @option params [String] :stage
+    #   An optional filter to return only the functions that are in the
+    #   specified stage, either `DEVELOPMENT` or `LIVE`.
+    #
+    # @return [Types::ListFunctionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFunctionsResult#function_list #function_list} => Types::FunctionList
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_functions({
+    #     marker: "string",
+    #     max_items: 1,
+    #     stage: "DEVELOPMENT", # accepts DEVELOPMENT, LIVE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_list.next_marker #=> String
+    #   resp.function_list.max_items #=> Integer
+    #   resp.function_list.quantity #=> Integer
+    #   resp.function_list.items #=> Array
+    #   resp.function_list.items[0].name #=> String
+    #   resp.function_list.items[0].status #=> String
+    #   resp.function_list.items[0].function_config.comment #=> String
+    #   resp.function_list.items[0].function_config.runtime #=> String, one of "cloudfront-js-1.0"
+    #   resp.function_list.items[0].function_metadata.function_arn #=> String
+    #   resp.function_list.items[0].function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
+    #   resp.function_list.items[0].function_metadata.created_time #=> Time
+    #   resp.function_list.items[0].function_metadata.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListFunctions2020_05_31 AWS API Documentation
+    #
+    # @overload list_functions(params = {})
+    # @param [Hash] params ({})
+    def list_functions(params = {}, options = {})
+      req = build_request(:list_functions, params)
       req.send_request(options)
     end
 
@@ -5070,6 +5416,57 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Publishes a CloudFront function by copying the function code from the
+    # `DEVELOPMENT` stage to `LIVE`. This automatically updates all cache
+    # behaviors that are using this function to use the newly published copy
+    # in the `LIVE` stage.
+    #
+    # When a function is published to the `LIVE` stage, you can attach the
+    # function to a distribution’s cache behavior, using the function’s
+    # Amazon Resource Name (ARN).
+    #
+    # To publish a function, you must provide the function’s name and
+    # version (`ETag` value). To get these values, you can use
+    # `ListFunctions` and `DescribeFunction`.
+    #
+    # @option params [required, String] :name
+    #   The name of the function that you are publishing.
+    #
+    # @option params [required, String] :if_match
+    #   The current version (`ETag` value) of the function that you are
+    #   publishing, which you can get using `DescribeFunction`.
+    #
+    # @return [Types::PublishFunctionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PublishFunctionResult#function_summary #function_summary} => Types::FunctionSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.publish_function({
+    #     name: "string", # required
+    #     if_match: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_summary.name #=> String
+    #   resp.function_summary.status #=> String
+    #   resp.function_summary.function_config.comment #=> String
+    #   resp.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0"
+    #   resp.function_summary.function_metadata.function_arn #=> String
+    #   resp.function_summary.function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
+    #   resp.function_summary.function_metadata.created_time #=> Time
+    #   resp.function_summary.function_metadata.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublishFunction2020_05_31 AWS API Documentation
+    #
+    # @overload publish_function(params = {})
+    # @param [Hash] params ({})
+    def publish_function(params = {}, options = {})
+      req = build_request(:publish_function, params)
+      req.send_request(options)
+    end
+
     # Add tags to a CloudFront resource.
     #
     # @option params [required, String] :resource
@@ -5100,6 +5497,83 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def tag_resource(params = {}, options = {})
       req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Tests a CloudFront function.
+    #
+    # To test a function, you provide an *event object* that represents an
+    # HTTP request or response that your CloudFront distribution could
+    # receive in production. CloudFront runs the function, passing it the
+    # event object that you provided, and returns the function’s result (the
+    # modified event object) in the response. The response also contains
+    # function logs and error messages, if any exist. For more information
+    # about testing functions, see [Testing functions][1] in the *Amazon
+    # CloudFront Developer Guide*.
+    #
+    # To test a function, you provide the function’s name and version
+    # (`ETag` value) along with the event object. To get the function’s name
+    # and version, you can use `ListFunctions` and `DescribeFunction`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/managing-functions.html#test-function
+    #
+    # @option params [required, String] :name
+    #   The name of the function that you are testing.
+    #
+    # @option params [required, String] :if_match
+    #   The current version (`ETag` value) of the function that you are
+    #   testing, which you can get using `DescribeFunction`.
+    #
+    # @option params [String] :stage
+    #   The stage of the function that you are testing, either `DEVELOPMENT`
+    #   or `LIVE`.
+    #
+    # @option params [required, String, StringIO, File] :event_object
+    #   The event object to test the function with. For more information about
+    #   the structure of the event object, see [Testing functions][1] in the
+    #   *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/managing-functions.html#test-function
+    #
+    # @return [Types::TestFunctionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TestFunctionResult#test_result #test_result} => Types::TestResult
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.test_function({
+    #     name: "string", # required
+    #     if_match: "string", # required
+    #     stage: "DEVELOPMENT", # accepts DEVELOPMENT, LIVE
+    #     event_object: "data", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_result.function_summary.name #=> String
+    #   resp.test_result.function_summary.status #=> String
+    #   resp.test_result.function_summary.function_config.comment #=> String
+    #   resp.test_result.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0"
+    #   resp.test_result.function_summary.function_metadata.function_arn #=> String
+    #   resp.test_result.function_summary.function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
+    #   resp.test_result.function_summary.function_metadata.created_time #=> Time
+    #   resp.test_result.function_summary.function_metadata.last_modified_time #=> Time
+    #   resp.test_result.compute_utilization #=> String
+    #   resp.test_result.function_execution_logs #=> Array
+    #   resp.test_result.function_execution_logs[0] #=> String
+    #   resp.test_result.function_error_message #=> String
+    #   resp.test_result.function_output #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TestFunction2020_05_31 AWS API Documentation
+    #
+    # @overload test_function(params = {})
+    # @param [Hash] params ({})
+    def test_function(params = {}, options = {})
+      req = build_request(:test_function, params)
       req.send_request(options)
     end
 
@@ -5479,6 +5953,15 @@ module Aws::CloudFront
     #             },
     #           ],
     #         },
+    #         function_associations: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               function_arn: "FunctionARN", # required
+    #               event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #             },
+    #           ],
+    #         },
     #         field_level_encryption_id: "string",
     #         realtime_log_config_arn: "string",
     #         cache_policy_id: "string",
@@ -5539,6 +6022,15 @@ module Aws::CloudFront
     #                   lambda_function_arn: "LambdaFunctionARN", # required
     #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                   include_body: false,
+    #                 },
+    #               ],
+    #             },
+    #             function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   function_arn: "FunctionARN", # required
+    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                 },
     #               ],
     #             },
@@ -5695,6 +6187,10 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.items[0].function_arn #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.cache_policy_id #=> String
@@ -5739,6 +6235,10 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.items[0].function_arn #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].cache_policy_id #=> String
@@ -5943,6 +6443,72 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def update_field_level_encryption_profile(params = {}, options = {})
       req = build_request(:update_field_level_encryption_profile, params)
+      req.send_request(options)
+    end
+
+    # Updates a CloudFront function.
+    #
+    # You can update a function’s code or the comment that describes the
+    # function. You cannot update a function’s name.
+    #
+    # To update a function, you provide the function’s name and version
+    # (`ETag` value) along with the updated function code. To get the name
+    # and version, you can use `ListFunctions` and `DescribeFunction`.
+    #
+    # @option params [required, String] :name
+    #   The name of the function that you are updating.
+    #
+    # @option params [required, String] :if_match
+    #   The current version (`ETag` value) of the function that you are
+    #   updating, which you can get using `DescribeFunction`.
+    #
+    # @option params [required, Types::FunctionConfig] :function_config
+    #   Configuration information about the function.
+    #
+    # @option params [required, String, StringIO, File] :function_code
+    #   The function code. For more information about writing a CloudFront
+    #   function, see [Writing function code for CloudFront Functions][1] in
+    #   the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html
+    #
+    # @return [Types::UpdateFunctionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFunctionResult#function_summary #function_summary} => Types::FunctionSummary
+    #   * {Types::UpdateFunctionResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_function({
+    #     name: "string", # required
+    #     if_match: "string", # required
+    #     function_config: { # required
+    #       comment: "string", # required
+    #       runtime: "cloudfront-js-1.0", # required, accepts cloudfront-js-1.0
+    #     },
+    #     function_code: "data", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_summary.name #=> String
+    #   resp.function_summary.status #=> String
+    #   resp.function_summary.function_config.comment #=> String
+    #   resp.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0"
+    #   resp.function_summary.function_metadata.function_arn #=> String
+    #   resp.function_summary.function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
+    #   resp.function_summary.function_metadata.created_time #=> Time
+    #   resp.function_summary.function_metadata.last_modified_time #=> Time
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateFunction2020_05_31 AWS API Documentation
+    #
+    # @overload update_function(params = {})
+    # @param [Hash] params ({})
+    def update_function(params = {}, options = {})
+      req = build_request(:update_function, params)
       req.send_request(options)
     end
 
@@ -6345,7 +6911,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

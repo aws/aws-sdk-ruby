@@ -401,6 +401,10 @@ module Aws::CustomerProfiles
     #   operation to enable Amazon Connect Customer Profiles to send messages
     #   to the DeadLetterQueue.
     #
+    # @option params [Types::MatchingRequest] :matching
+    #   The process of matching duplicate profiles. This process runs every
+    #   Saturday at 12AM.
+    #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
     #
@@ -410,6 +414,7 @@ module Aws::CustomerProfiles
     #   * {Types::CreateDomainResponse#default_expiration_days #default_expiration_days} => Integer
     #   * {Types::CreateDomainResponse#default_encryption_key #default_encryption_key} => String
     #   * {Types::CreateDomainResponse#dead_letter_queue_url #dead_letter_queue_url} => String
+    #   * {Types::CreateDomainResponse#matching #matching} => Types::MatchingResponse
     #   * {Types::CreateDomainResponse#created_at #created_at} => Time
     #   * {Types::CreateDomainResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::CreateDomainResponse#tags #tags} => Hash&lt;String,String&gt;
@@ -421,6 +426,9 @@ module Aws::CustomerProfiles
     #     default_expiration_days: 1, # required
     #     default_encryption_key: "encryptionKey",
     #     dead_letter_queue_url: "sqsQueueUrl",
+    #     matching: {
+    #       enabled: false, # required
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -432,6 +440,7 @@ module Aws::CustomerProfiles
     #   resp.default_expiration_days #=> Integer
     #   resp.default_encryption_key #=> String
     #   resp.dead_letter_queue_url #=> String
+    #   resp.matching.enabled #=> Boolean
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.tags #=> Hash
@@ -458,7 +467,7 @@ module Aws::CustomerProfiles
     #   A unique account number that you have given to the customer.
     #
     # @option params [String] :additional_information
-    #   Any additional information relevant to the customer's profile.
+    #   Any additional information relevant to the customer’s profile.
     #
     # @option params [String] :party_type
     #   The type of profile used to describe the customer.
@@ -482,8 +491,8 @@ module Aws::CustomerProfiles
     #   The gender with which the customer identifies.
     #
     # @option params [String] :phone_number
-    #   The customer's phone number, which has not been specified as a
-    #   mobile, home, or business number.
+    #   The customer’s phone number, which has not been specified as a mobile,
+    #   home, or business number.
     #
     # @option params [String] :mobile_phone_number
     #   The customer’s mobile phone number.
@@ -495,7 +504,7 @@ module Aws::CustomerProfiles
     #   The customer’s business phone number.
     #
     # @option params [String] :email_address
-    #   The customer's email address, which has not been specified as a
+    #   The customer’s email address, which has not been specified as a
     #   personal or business address.
     #
     # @option params [String] :personal_email_address
@@ -824,7 +833,7 @@ module Aws::CustomerProfiles
     # Returns information about a specific domain.
     #
     # @option params [required, String] :domain_name
-    #   A unique name for the domain.
+    #   The unique name of the domain.
     #
     # @return [Types::GetDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -833,6 +842,7 @@ module Aws::CustomerProfiles
     #   * {Types::GetDomainResponse#default_encryption_key #default_encryption_key} => String
     #   * {Types::GetDomainResponse#dead_letter_queue_url #dead_letter_queue_url} => String
     #   * {Types::GetDomainResponse#stats #stats} => Types::DomainStats
+    #   * {Types::GetDomainResponse#matching #matching} => Types::MatchingResponse
     #   * {Types::GetDomainResponse#created_at #created_at} => Time
     #   * {Types::GetDomainResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::GetDomainResponse#tags #tags} => Hash&lt;String,String&gt;
@@ -853,6 +863,7 @@ module Aws::CustomerProfiles
     #   resp.stats.metering_profile_count #=> Integer
     #   resp.stats.object_count #=> Integer
     #   resp.stats.total_size #=> Integer
+    #   resp.matching.enabled #=> Boolean
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.tags #=> Hash
@@ -907,6 +918,90 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def get_integration(params = {}, options = {})
       req = build_request(:get_integration, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and subject to
+    # change.
+    #
+    # Before calling this API, use [CreateDomain][1] or [UpdateDomain][2] to
+    # enable identity resolution: set `Matching` to true.
+    #
+    # GetMatches returns potentially matching profiles, based on the results
+    # of the latest run of a machine learning process.
+    #
+    # Amazon Connect runs a batch process every Saturday at 12AM UTC to
+    # identify matching profiles. The results are returned up to seven days
+    # after the Saturday run.
+    #
+    # Amazon Connect uses the following profile attributes to identify
+    # matches:
+    #
+    # * PhoneNumber
+    #
+    # * HomePhoneNumber
+    #
+    # * BusinessPhoneNumber
+    #
+    # * MobilePhoneNumber
+    #
+    # * EmailAddress
+    #
+    # * PersonalEmailAddress
+    #
+    # * BusinessEmailAddress
+    #
+    # * FullName
+    #
+    # * BusinessName
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html
+    # [2]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @return [Types::GetMatchesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMatchesResponse#next_token #next_token} => String
+    #   * {Types::GetMatchesResponse#match_generation_date #match_generation_date} => Time
+    #   * {Types::GetMatchesResponse#potential_matches #potential_matches} => Integer
+    #   * {Types::GetMatchesResponse#matches #matches} => Array&lt;Types::MatchItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_matches({
+    #     next_token: "token",
+    #     max_results: 1,
+    #     domain_name: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.match_generation_date #=> Time
+    #   resp.potential_matches #=> Integer
+    #   resp.matches #=> Array
+    #   resp.matches[0].match_id #=> String
+    #   resp.matches[0].profile_ids #=> Array
+    #   resp.matches[0].profile_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetMatches AWS API Documentation
+    #
+    # @overload get_matches(params = {})
+    # @param [Hash] params ({})
+    def get_matches(params = {}, options = {})
+      req = build_request(:get_matches, params)
       req.send_request(options)
     end
 
@@ -1315,6 +1410,109 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and subject to
+    # change.
+    #
+    # Runs an AWS Lambda job that does the following:
+    #
+    # 1.  All the profileKeys in the `ProfileToBeMerged` will be moved to
+    #     the main profile.
+    #
+    # 2.  All the objects in the `ProfileToBeMerged` will be moved to the
+    #     main profile.
+    #
+    # 3.  All the `ProfileToBeMerged` will be deleted at the end.
+    #
+    # 4.  All the profileKeys in the `ProfileIdsToBeMerged` will be moved to
+    #     the main profile.
+    #
+    # 5.  Standard fields are merged as follows:
+    #
+    #     1.  Fields are always "union"-ed if there are no conflicts in
+    #         standard fields or attributeKeys.
+    #
+    #     2.  When there are conflicting fields:
+    #
+    #         1.  If no `SourceProfileIds` entry is specified, the main
+    #             Profile value is always taken.
+    #
+    #         2.  If a `SourceProfileIds` entry is specified, the specified
+    #             profileId is always taken, even if it is a NULL value.
+    #
+    # You can use MergeProfiles together with [GetMatches][1], which returns
+    # potentially matching profiles, or use it with the results of another
+    # matching system. After profiles have been merged, they cannot be
+    # separated (unmerged).
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :main_profile_id
+    #   The identifier of the profile to be taken.
+    #
+    # @option params [required, Array<String>] :profile_ids_to_be_merged
+    #   The identifier of the profile to be merged into MainProfileId.
+    #
+    # @option params [Types::FieldSourceProfileIds] :field_source_profile_ids
+    #   The identifiers of the fields in the profile that has the information
+    #   you want to apply to the merge. For example, say you want to merge
+    #   EmailAddress from Profile1 into MainProfile. This would be the
+    #   identifier of the EmailAddress field in Profile1.
+    #
+    # @return [Types::MergeProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::MergeProfilesResponse#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.merge_profiles({
+    #     domain_name: "name", # required
+    #     main_profile_id: "uuid", # required
+    #     profile_ids_to_be_merged: ["uuid"], # required
+    #     field_source_profile_ids: {
+    #       account_number: "uuid",
+    #       additional_information: "uuid",
+    #       party_type: "uuid",
+    #       business_name: "uuid",
+    #       first_name: "uuid",
+    #       middle_name: "uuid",
+    #       last_name: "uuid",
+    #       birth_date: "uuid",
+    #       gender: "uuid",
+    #       phone_number: "uuid",
+    #       mobile_phone_number: "uuid",
+    #       home_phone_number: "uuid",
+    #       business_phone_number: "uuid",
+    #       email_address: "uuid",
+    #       personal_email_address: "uuid",
+    #       business_email_address: "uuid",
+    #       address: "uuid",
+    #       shipping_address: "uuid",
+    #       mailing_address: "uuid",
+    #       billing_address: "uuid",
+    #       attributes: {
+    #         "string1To255" => "uuid",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/MergeProfiles AWS API Documentation
+    #
+    # @overload merge_profiles(params = {})
+    # @param [Hash] params ({})
+    def merge_profiles(params = {}, options = {})
+      req = build_request(:merge_profiles, params)
       req.send_request(options)
     end
 
@@ -1789,10 +1987,10 @@ module Aws::CustomerProfiles
     # Updates the properties of a domain, including creating or selecting a
     # dead letter queue or an encryption key.
     #
-    # Once a domain is created, the name can’t be changed.
+    # After a domain is created, the name can’t be changed.
     #
     # @option params [required, String] :domain_name
-    #   The unique name for the domain.
+    #   The unique name of the domain.
     #
     # @option params [Integer] :default_expiration_days
     #   The default number of days until the data within the domain expires.
@@ -1811,6 +2009,10 @@ module Aws::CustomerProfiles
     #   operation to enable Amazon Connect Customer Profiles to send messages
     #   to the DeadLetterQueue.
     #
+    # @option params [Types::MatchingRequest] :matching
+    #   The process of matching duplicate profiles. This process runs every
+    #   Saturday at 12AM.
+    #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
     #
@@ -1820,6 +2022,7 @@ module Aws::CustomerProfiles
     #   * {Types::UpdateDomainResponse#default_expiration_days #default_expiration_days} => Integer
     #   * {Types::UpdateDomainResponse#default_encryption_key #default_encryption_key} => String
     #   * {Types::UpdateDomainResponse#dead_letter_queue_url #dead_letter_queue_url} => String
+    #   * {Types::UpdateDomainResponse#matching #matching} => Types::MatchingResponse
     #   * {Types::UpdateDomainResponse#created_at #created_at} => Time
     #   * {Types::UpdateDomainResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::UpdateDomainResponse#tags #tags} => Hash&lt;String,String&gt;
@@ -1831,6 +2034,9 @@ module Aws::CustomerProfiles
     #     default_expiration_days: 1,
     #     default_encryption_key: "encryptionKey",
     #     dead_letter_queue_url: "sqsQueueUrl",
+    #     matching: {
+    #       enabled: false, # required
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1842,6 +2048,7 @@ module Aws::CustomerProfiles
     #   resp.default_expiration_days #=> Integer
     #   resp.default_encryption_key #=> String
     #   resp.dead_letter_queue_url #=> String
+    #   resp.matching.enabled #=> Boolean
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.tags #=> Hash
@@ -1870,7 +2077,7 @@ module Aws::CustomerProfiles
     #   The unique identifier of a customer profile.
     #
     # @option params [String] :additional_information
-    #   Any additional information relevant to the customer's profile.
+    #   Any additional information relevant to the customer’s profile.
     #
     # @option params [String] :account_number
     #   A unique account number that you have given to the customer.
@@ -1897,8 +2104,8 @@ module Aws::CustomerProfiles
     #   The gender with which the customer identifies.
     #
     # @option params [String] :phone_number
-    #   The customer's phone number, which has not been specified as a
-    #   mobile, home, or business number.
+    #   The customer’s phone number, which has not been specified as a mobile,
+    #   home, or business number.
     #
     # @option params [String] :mobile_phone_number
     #   The customer’s mobile phone number.
@@ -1910,7 +2117,7 @@ module Aws::CustomerProfiles
     #   The customer’s business phone number.
     #
     # @option params [String] :email_address
-    #   The customer's email address, which has not been specified as a
+    #   The customer’s email address, which has not been specified as a
     #   personal or business address.
     #
     # @option params [String] :personal_email_address
@@ -2039,7 +2246,7 @@ module Aws::CustomerProfiles
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

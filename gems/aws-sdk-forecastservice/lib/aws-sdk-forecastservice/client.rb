@@ -1545,6 +1545,53 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
+    # Deletes an entire resource tree. This operation will delete the parent
+    # resource and its child resources.
+    #
+    # Child resources are resources that were created from another resource.
+    # For example, when a forecast is generated from a predictor, the
+    # forecast is the child resource and the predictor is the parent
+    # resource.
+    #
+    # Amazon Forecast resources possess the following parent-child resource
+    # hierarchies:
+    #
+    # * **Dataset Group**\: predictors, predictor backtest export jobs,
+    #   forecasts, forecast export jobs
+    #
+    # * **Dataset**\: dataset import jobs
+    #
+    # * **Predictor**\: predictor backtest export jobs, forecasts, forecast
+    #   export jobs
+    #
+    # * **Forecast**\: forecast export jobs
+    #
+    # <note markdown="1"> `DeleteResourceTree` will only delete Amazon Forecast resources, and
+    # will not delete datasets or exported files stored in Amazon S3.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the parent resource to delete. All
+    #   child resources of the parent resource will also be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_tree({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DeleteResourceTree AWS API Documentation
+    #
+    # @overload delete_resource_tree(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_tree(params = {}, options = {})
+      req = build_request(:delete_resource_tree, params)
+      req.send_request(options)
+    end
+
     # Describes an Amazon Forecast dataset created using the CreateDataset
     # operation.
     #
@@ -2824,7 +2871,7 @@ module Aws::ForecastService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-forecastservice'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -222,6 +222,9 @@ module Aws::CustomerProfiles
     #         default_expiration_days: 1, # required
     #         default_encryption_key: "encryptionKey",
     #         dead_letter_queue_url: "sqsQueueUrl",
+    #         matching: {
+    #           enabled: false, # required
+    #         },
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -250,6 +253,11 @@ module Aws::CustomerProfiles
     #   messages to the DeadLetterQueue.
     #   @return [String]
     #
+    # @!attribute [rw] matching
+    #   The process of matching duplicate profiles. This process runs every
+    #   Saturday at 12AM.
+    #   @return [Types::MatchingRequest]
+    #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
     #   resource.
@@ -262,6 +270,7 @@ module Aws::CustomerProfiles
       :default_expiration_days,
       :default_encryption_key,
       :dead_letter_queue_url,
+      :matching,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -287,6 +296,11 @@ module Aws::CustomerProfiles
     #   errors associated with ingesting data from third party applications.
     #   @return [String]
     #
+    # @!attribute [rw] matching
+    #   The process of matching duplicate profiles. This process runs every
+    #   Saturday at 12AM.
+    #   @return [Types::MatchingResponse]
+    #
     # @!attribute [rw] created_at
     #   The timestamp of when the domain was created.
     #   @return [Time]
@@ -307,6 +321,7 @@ module Aws::CustomerProfiles
       :default_expiration_days,
       :default_encryption_key,
       :dead_letter_queue_url,
+      :matching,
       :created_at,
       :last_updated_at,
       :tags)
@@ -397,7 +412,7 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] additional_information
-    #   Any additional information relevant to the customer's profile.
+    #   Any additional information relevant to the customer’s profile.
     #   @return [String]
     #
     # @!attribute [rw] party_type
@@ -429,7 +444,7 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] phone_number
-    #   The customer's phone number, which has not been specified as a
+    #   The customer’s phone number, which has not been specified as a
     #   mobile, home, or business number.
     #   @return [String]
     #
@@ -446,7 +461,7 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] email_address
-    #   The customer's email address, which has not been specified as a
+    #   The customer’s email address, which has not been specified as a
     #   personal or business address.
     #   @return [String]
     #
@@ -793,6 +808,152 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # A duplicate customer profile that is to be merged into a main profile.
+    #
+    # @note When making an API call, you may pass FieldSourceProfileIds
+    #   data as a hash:
+    #
+    #       {
+    #         account_number: "uuid",
+    #         additional_information: "uuid",
+    #         party_type: "uuid",
+    #         business_name: "uuid",
+    #         first_name: "uuid",
+    #         middle_name: "uuid",
+    #         last_name: "uuid",
+    #         birth_date: "uuid",
+    #         gender: "uuid",
+    #         phone_number: "uuid",
+    #         mobile_phone_number: "uuid",
+    #         home_phone_number: "uuid",
+    #         business_phone_number: "uuid",
+    #         email_address: "uuid",
+    #         personal_email_address: "uuid",
+    #         business_email_address: "uuid",
+    #         address: "uuid",
+    #         shipping_address: "uuid",
+    #         mailing_address: "uuid",
+    #         billing_address: "uuid",
+    #         attributes: {
+    #           "string1To255" => "uuid",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] account_number
+    #   A unique identifier for the account number field to be merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_information
+    #   A unique identifier for the additional information field to be
+    #   merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] party_type
+    #   A unique identifier for the party type field to be merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] business_name
+    #   A unique identifier for the business name field to be merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_name
+    #   A unique identifier for the first name field to be merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] middle_name
+    #   A unique identifier for the middle name field to be merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_name
+    #   A unique identifier for the last name field to be merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] birth_date
+    #   A unique identifier for the birthdate field to be merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] gender
+    #   A unique identifier for the gender field to be merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number
+    #   A unique identifier for the phone number field to be merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] mobile_phone_number
+    #   A unique identifier for the mobile phone number field to be merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] home_phone_number
+    #   A unique identifier for the home phone number field to be merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] business_phone_number
+    #   A unique identifier for the business phone number field to be
+    #   merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_address
+    #   A unique identifier for the email address field to be merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] personal_email_address
+    #   A unique identifier for the personal email address field to be
+    #   merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] business_email_address
+    #   A unique identifier for the party type field to be merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] address
+    #   A unique identifier for the party type field to be merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] shipping_address
+    #   A unique identifier for the shipping address field to be merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] mailing_address
+    #   A unique identifier for the mailing address field to be merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_address
+    #   A unique identifier for the billing type field to be merged.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   A unique identifier for the attributes field to be merged.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/FieldSourceProfileIds AWS API Documentation
+    #
+    class FieldSourceProfileIds < Struct.new(
+      :account_number,
+      :additional_information,
+      :party_type,
+      :business_name,
+      :first_name,
+      :middle_name,
+      :last_name,
+      :birth_date,
+      :gender,
+      :phone_number,
+      :mobile_phone_number,
+      :home_phone_number,
+      :business_phone_number,
+      :email_address,
+      :personal_email_address,
+      :business_email_address,
+      :address,
+      :shipping_address,
+      :mailing_address,
+      :billing_address,
+      :attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configurations that control how Customer Profiles retrieves data
     # from the source, Amazon AppFlow. Customer Profiles uses this
     # information to create an AppFlow flow on behalf of customers.
@@ -913,7 +1074,7 @@ module Aws::CustomerProfiles
     #       }
     #
     # @!attribute [rw] domain_name
-    #   A unique name for the domain.
+    #   The unique name of the domain.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetDomainRequest AWS API Documentation
@@ -948,6 +1109,11 @@ module Aws::CustomerProfiles
     #   Usage-specific statistics about the domain.
     #   @return [Types::DomainStats]
     #
+    # @!attribute [rw] matching
+    #   The process of matching duplicate profiles. This process runs every
+    #   Saturday at 12AM.
+    #   @return [Types::MatchingResponse]
+    #
     # @!attribute [rw] created_at
     #   The timestamp of when the domain was created.
     #   @return [Time]
@@ -969,6 +1135,7 @@ module Aws::CustomerProfiles
       :default_encryption_key,
       :dead_letter_queue_url,
       :stats,
+      :matching,
       :created_at,
       :last_updated_at,
       :tags)
@@ -1035,6 +1202,67 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetMatchesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "token",
+    #         max_results: 1,
+    #         domain_name: "name", # required
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetMatchesRequest AWS API Documentation
+    #
+    class GetMatchesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :domain_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] match_generation_date
+    #   The timestamp this version of Match Result generated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] potential_matches
+    #   The number of potential matches found.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] matches
+    #   The list of matched profiles for this instance.
+    #   @return [Array<Types::MatchItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetMatchesResponse AWS API Documentation
+    #
+    class GetMatchesResponse < Struct.new(
+      :next_token,
+      :match_generation_date,
+      :potential_matches,
+      :matches)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1730,6 +1958,136 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # The Match group object.
+    #
+    # @!attribute [rw] match_id
+    #   The unique identifiers for this group of profiles that match.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_ids
+    #   A list of identifiers for profiles that match.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/MatchItem AWS API Documentation
+    #
+    class MatchItem < Struct.new(
+      :match_id,
+      :profile_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The flag that enables the matching process of duplicate profiles.
+    #
+    # @note When making an API call, you may pass MatchingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   The flag that enables the matching process of duplicate profiles.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/MatchingRequest AWS API Documentation
+    #
+    class MatchingRequest < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The flag that enables the matching process of duplicate profiles.
+    #
+    # @!attribute [rw] enabled
+    #   The flag that enables the matching process of duplicate profiles.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/MatchingResponse AWS API Documentation
+    #
+    class MatchingResponse < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass MergeProfilesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "name", # required
+    #         main_profile_id: "uuid", # required
+    #         profile_ids_to_be_merged: ["uuid"], # required
+    #         field_source_profile_ids: {
+    #           account_number: "uuid",
+    #           additional_information: "uuid",
+    #           party_type: "uuid",
+    #           business_name: "uuid",
+    #           first_name: "uuid",
+    #           middle_name: "uuid",
+    #           last_name: "uuid",
+    #           birth_date: "uuid",
+    #           gender: "uuid",
+    #           phone_number: "uuid",
+    #           mobile_phone_number: "uuid",
+    #           home_phone_number: "uuid",
+    #           business_phone_number: "uuid",
+    #           email_address: "uuid",
+    #           personal_email_address: "uuid",
+    #           business_email_address: "uuid",
+    #           address: "uuid",
+    #           shipping_address: "uuid",
+    #           mailing_address: "uuid",
+    #           billing_address: "uuid",
+    #           attributes: {
+    #             "string1To255" => "uuid",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] main_profile_id
+    #   The identifier of the profile to be taken.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_ids_to_be_merged
+    #   The identifier of the profile to be merged into MainProfileId.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] field_source_profile_ids
+    #   The identifiers of the fields in the profile that has the
+    #   information you want to apply to the merge. For example, say you
+    #   want to merge EmailAddress from Profile1 into MainProfile. This
+    #   would be the identifier of the EmailAddress field in Profile1.
+    #   @return [Types::FieldSourceProfileIds]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/MergeProfilesRequest AWS API Documentation
+    #
+    class MergeProfilesRequest < Struct.new(
+      :domain_name,
+      :main_profile_id,
+      :profile_ids_to_be_merged,
+      :field_source_profile_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   A message that indicates the merge request is complete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/MergeProfilesResponse AWS API Documentation
+    #
+    class MergeProfilesResponse < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a field in a ProfileObjectType.
     #
     # @note When making an API call, you may pass ObjectTypeField
@@ -1815,7 +2173,7 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] additional_information
-    #   Any additional information relevant to the customer's profile.
+    #   Any additional information relevant to the customer’s profile.
     #   @return [String]
     #
     # @!attribute [rw] party_type
@@ -1864,7 +2222,7 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] email_address
-    #   The customer's email address, which has not been specified as a
+    #   The customer’s email address, which has not been specified as a
     #   personal or business address.
     #   @return [String]
     #
@@ -2925,13 +3283,16 @@ module Aws::CustomerProfiles
     #         default_expiration_days: 1,
     #         default_encryption_key: "encryptionKey",
     #         dead_letter_queue_url: "sqsQueueUrl",
+    #         matching: {
+    #           enabled: false, # required
+    #         },
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The unique name for the domain.
+    #   The unique name of the domain.
     #   @return [String]
     #
     # @!attribute [rw] default_expiration_days
@@ -2955,6 +3316,11 @@ module Aws::CustomerProfiles
     #   messages to the DeadLetterQueue.
     #   @return [String]
     #
+    # @!attribute [rw] matching
+    #   The process of matching duplicate profiles. This process runs every
+    #   Saturday at 12AM.
+    #   @return [Types::MatchingRequest]
+    #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
     #   resource.
@@ -2967,13 +3333,14 @@ module Aws::CustomerProfiles
       :default_expiration_days,
       :default_encryption_key,
       :dead_letter_queue_url,
+      :matching,
       :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] domain_name
-    #   The unique name for the domain.
+    #   The unique name of the domain.
     #   @return [String]
     #
     # @!attribute [rw] default_expiration_days
@@ -2991,6 +3358,11 @@ module Aws::CustomerProfiles
     #   The URL of the SQS dead letter queue, which is used for reporting
     #   errors associated with ingesting data from third party applications.
     #   @return [String]
+    #
+    # @!attribute [rw] matching
+    #   The process of matching duplicate profiles. This process runs every
+    #   Saturday at 12AM.
+    #   @return [Types::MatchingResponse]
     #
     # @!attribute [rw] created_at
     #   The timestamp of when the domain was created.
@@ -3012,6 +3384,7 @@ module Aws::CustomerProfiles
       :default_expiration_days,
       :default_encryption_key,
       :dead_letter_queue_url,
+      :matching,
       :created_at,
       :last_updated_at,
       :tags)
@@ -3103,7 +3476,7 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] additional_information
-    #   Any additional information relevant to the customer's profile.
+    #   Any additional information relevant to the customer’s profile.
     #   @return [String]
     #
     # @!attribute [rw] account_number
@@ -3139,7 +3512,7 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] phone_number
-    #   The customer's phone number, which has not been specified as a
+    #   The customer’s phone number, which has not been specified as a
     #   mobile, home, or business number.
     #   @return [String]
     #
@@ -3156,7 +3529,7 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] email_address
-    #   The customer's email address, which has not been specified as a
+    #   The customer’s email address, which has not been specified as a
     #   personal or business address.
     #   @return [String]
     #

@@ -605,9 +605,8 @@ module Aws::Personalize
     # bucket. To allow Amazon Personalize to export the training data, you
     # must specify an service-linked AWS Identity and Access Management
     # (IAM) role that gives Amazon Personalize `PutObject` permissions for
-    # your Amazon S3 bucket. For information, see [Dataset export job
-    # permissions requirements][1] in the Amazon Personalize developer
-    # guide.
+    # your Amazon S3 bucket. For information, see [Exporting a dataset][1]
+    # in the Amazon Personalize developer guide.
     #
     # **Status**
     #
@@ -626,7 +625,7 @@ module Aws::Personalize
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/export-permissions.html
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/export-data.html
     #
     # @option params [required, String] :job_name
     #   The name for the dataset export job.
@@ -2778,7 +2777,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -19,6 +19,7 @@ module Aws::MarketplaceCatalog
     CancelChangeSetResponse = Shapes::StructureShape.new(name: 'CancelChangeSetResponse')
     Catalog = Shapes::StringShape.new(name: 'Catalog')
     Change = Shapes::StructureShape.new(name: 'Change')
+    ChangeName = Shapes::StringShape.new(name: 'ChangeName')
     ChangeSetDescription = Shapes::ListShape.new(name: 'ChangeSetDescription')
     ChangeSetName = Shapes::StringShape.new(name: 'ChangeSetName')
     ChangeSetSummaryList = Shapes::ListShape.new(name: 'ChangeSetSummaryList')
@@ -33,15 +34,19 @@ module Aws::MarketplaceCatalog
     DescribeEntityRequest = Shapes::StructureShape.new(name: 'DescribeEntityRequest')
     DescribeEntityResponse = Shapes::StructureShape.new(name: 'DescribeEntityResponse')
     Entity = Shapes::StructureShape.new(name: 'Entity')
+    EntityNameString = Shapes::StringShape.new(name: 'EntityNameString')
     EntitySummary = Shapes::StructureShape.new(name: 'EntitySummary')
     EntitySummaryList = Shapes::ListShape.new(name: 'EntitySummaryList')
     EntityType = Shapes::StringShape.new(name: 'EntityType')
+    ErrorCodeString = Shapes::StringShape.new(name: 'ErrorCodeString')
     ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
     ErrorDetailList = Shapes::ListShape.new(name: 'ErrorDetailList')
+    ExceptionMessageContent = Shapes::StringShape.new(name: 'ExceptionMessageContent')
     FailureCode = Shapes::StringShape.new(name: 'FailureCode')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterName = Shapes::StringShape.new(name: 'FilterName')
+    FilterValueContent = Shapes::StringShape.new(name: 'FilterValueContent')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     Json = Shapes::StringShape.new(name: 'Json')
@@ -63,12 +68,12 @@ module Aws::MarketplaceCatalog
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     StartChangeSetRequest = Shapes::StructureShape.new(name: 'StartChangeSetRequest')
     StartChangeSetResponse = Shapes::StructureShape.new(name: 'StartChangeSetResponse')
-    StringValue = Shapes::StringShape.new(name: 'StringValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValueList = Shapes::ListShape.new(name: 'ValueList')
+    VisibilityValue = Shapes::StringShape.new(name: 'VisibilityValue')
 
-    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: StringValue, location_name: "Message"))
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
     CancelChangeSetRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location: "querystring", location_name: "catalog"))
@@ -82,6 +87,7 @@ module Aws::MarketplaceCatalog
     Change.add_member(:change_type, Shapes::ShapeRef.new(shape: ChangeType, required: true, location_name: "ChangeType"))
     Change.add_member(:entity, Shapes::ShapeRef.new(shape: Entity, required: true, location_name: "Entity"))
     Change.add_member(:details, Shapes::ShapeRef.new(shape: Json, required: true, location_name: "Details"))
+    Change.add_member(:change_name, Shapes::ShapeRef.new(shape: ChangeName, location_name: "ChangeName"))
     Change.struct_class = Types::Change
 
     ChangeSetDescription.member = Shapes::ShapeRef.new(shape: ChangeSummary)
@@ -102,6 +108,7 @@ module Aws::MarketplaceCatalog
     ChangeSummary.add_member(:entity, Shapes::ShapeRef.new(shape: Entity, location_name: "Entity"))
     ChangeSummary.add_member(:details, Shapes::ShapeRef.new(shape: Json, location_name: "Details"))
     ChangeSummary.add_member(:error_detail_list, Shapes::ShapeRef.new(shape: ErrorDetailList, location_name: "ErrorDetailList"))
+    ChangeSummary.add_member(:change_name, Shapes::ShapeRef.new(shape: ChangeName, location_name: "ChangeName"))
     ChangeSummary.struct_class = Types::ChangeSummary
 
     DescribeChangeSetRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location: "querystring", location_name: "catalog"))
@@ -115,7 +122,7 @@ module Aws::MarketplaceCatalog
     DescribeChangeSetResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "EndTime"))
     DescribeChangeSetResponse.add_member(:status, Shapes::ShapeRef.new(shape: ChangeStatus, location_name: "Status"))
     DescribeChangeSetResponse.add_member(:failure_code, Shapes::ShapeRef.new(shape: FailureCode, location_name: "FailureCode"))
-    DescribeChangeSetResponse.add_member(:failure_description, Shapes::ShapeRef.new(shape: StringValue, location_name: "FailureDescription"))
+    DescribeChangeSetResponse.add_member(:failure_description, Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "FailureDescription"))
     DescribeChangeSetResponse.add_member(:change_set, Shapes::ShapeRef.new(shape: ChangeSetDescription, location_name: "ChangeSet"))
     DescribeChangeSetResponse.struct_class = Types::DescribeChangeSetResponse
 
@@ -126,7 +133,7 @@ module Aws::MarketplaceCatalog
     DescribeEntityResponse.add_member(:entity_type, Shapes::ShapeRef.new(shape: EntityType, location_name: "EntityType"))
     DescribeEntityResponse.add_member(:entity_identifier, Shapes::ShapeRef.new(shape: Identifier, location_name: "EntityIdentifier"))
     DescribeEntityResponse.add_member(:entity_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "EntityArn"))
-    DescribeEntityResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: StringValue, location_name: "LastModifiedDate"))
+    DescribeEntityResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "LastModifiedDate"))
     DescribeEntityResponse.add_member(:details, Shapes::ShapeRef.new(shape: Json, location_name: "Details"))
     DescribeEntityResponse.struct_class = Types::DescribeEntityResponse
 
@@ -134,18 +141,18 @@ module Aws::MarketplaceCatalog
     Entity.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, location_name: "Identifier"))
     Entity.struct_class = Types::Entity
 
-    EntitySummary.add_member(:name, Shapes::ShapeRef.new(shape: StringValue, location_name: "Name"))
+    EntitySummary.add_member(:name, Shapes::ShapeRef.new(shape: EntityNameString, location_name: "Name"))
     EntitySummary.add_member(:entity_type, Shapes::ShapeRef.new(shape: EntityType, location_name: "EntityType"))
     EntitySummary.add_member(:entity_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "EntityId"))
     EntitySummary.add_member(:entity_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "EntityArn"))
-    EntitySummary.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: StringValue, location_name: "LastModifiedDate"))
-    EntitySummary.add_member(:visibility, Shapes::ShapeRef.new(shape: StringValue, location_name: "Visibility"))
+    EntitySummary.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "LastModifiedDate"))
+    EntitySummary.add_member(:visibility, Shapes::ShapeRef.new(shape: VisibilityValue, location_name: "Visibility"))
     EntitySummary.struct_class = Types::EntitySummary
 
     EntitySummaryList.member = Shapes::ShapeRef.new(shape: EntitySummary)
 
-    ErrorDetail.add_member(:error_code, Shapes::ShapeRef.new(shape: StringValue, location_name: "ErrorCode"))
-    ErrorDetail.add_member(:error_message, Shapes::ShapeRef.new(shape: StringValue, location_name: "ErrorMessage"))
+    ErrorDetail.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCodeString, location_name: "ErrorCode"))
+    ErrorDetail.add_member(:error_message, Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "ErrorMessage"))
     ErrorDetail.struct_class = Types::ErrorDetail
 
     ErrorDetailList.member = Shapes::ShapeRef.new(shape: ErrorDetail)
@@ -156,7 +163,7 @@ module Aws::MarketplaceCatalog
 
     FilterList.member = Shapes::ShapeRef.new(shape: Filter)
 
-    InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: StringValue, location_name: "Message"))
+    InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
     InternalServiceException.struct_class = Types::InternalServiceException
 
     ListChangeSetsRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "Catalog"))
@@ -186,16 +193,16 @@ module Aws::MarketplaceCatalog
 
     ResourceIdList.member = Shapes::ShapeRef.new(shape: ResourceId)
 
-    ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: StringValue, location_name: "Message"))
+    ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
     ResourceInUseException.struct_class = Types::ResourceInUseException
 
-    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: StringValue, location_name: "Message"))
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
-    ResourceNotSupportedException.add_member(:message, Shapes::ShapeRef.new(shape: StringValue, location_name: "Message"))
+    ResourceNotSupportedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
     ResourceNotSupportedException.struct_class = Types::ResourceNotSupportedException
 
-    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: StringValue, location_name: "Message"))
+    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     Sort.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortBy, location_name: "SortBy"))
@@ -212,13 +219,13 @@ module Aws::MarketplaceCatalog
     StartChangeSetResponse.add_member(:change_set_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ChangeSetArn"))
     StartChangeSetResponse.struct_class = Types::StartChangeSetResponse
 
-    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: StringValue, location_name: "Message"))
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
-    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: StringValue, location_name: "Message"))
+    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
 
-    ValueList.member = Shapes::ShapeRef.new(shape: StringValue)
+    ValueList.member = Shapes::ShapeRef.new(shape: FilterValueContent)
 
 
     # @api private

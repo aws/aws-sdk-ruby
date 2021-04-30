@@ -327,6 +327,15 @@ module Aws::CloudFront
     #             },
     #           ],
     #         },
+    #         function_associations: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               function_arn: "FunctionARN", # required
+    #               event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #             },
+    #           ],
+    #         },
     #         field_level_encryption_id: "string",
     #         realtime_log_config_arn: "string",
     #         cache_policy_id: "string",
@@ -503,6 +512,12 @@ module Aws::CloudFront
     #   associations for a cache behavior.
     #   @return [Types::LambdaFunctionAssociations]
     #
+    # @!attribute [rw] function_associations
+    #   A list of CloudFront functions that are associated with this cache
+    #   behavior. CloudFront functions must be published to the `LIVE` stage
+    #   to associate them with a cache behavior.
+    #   @return [Types::FunctionAssociations]
+    #
     # @!attribute [rw] field_level_encryption_id
     #   The value of `ID` for the field-level encryption configuration that
     #   you want CloudFront to use for encrypting specific fields of data
@@ -524,6 +539,9 @@ module Aws::CloudFront
     #   cache behavior. For more information, see [Creating cache
     #   policies][1] or [Using the managed cache policies][2] in the *Amazon
     #   CloudFront Developer Guide*.
+    #
+    #   A `CacheBehavior` must include either a `CachePolicyId` or
+    #   `ForwardedValues`. We recommend that you use a `CachePolicyId`.
     #
     #
     #
@@ -558,6 +576,9 @@ module Aws::CloudFront
     #   cache key, use an origin request policy. For more information, see
     #   [Creating origin request policies][4] or [Using the managed origin
     #   request policies][5] in the *Amazon CloudFront Developer Guide*.
+    #
+    #   A `CacheBehavior` must include either a `CachePolicyId` or
+    #   `ForwardedValues`. We recommend that you use a `CachePolicyId`.
     #
     #   A complex type that specifies how CloudFront handles query strings,
     #   cookies, and HTTP headers.
@@ -650,6 +671,7 @@ module Aws::CloudFront
       :smooth_streaming,
       :compress,
       :lambda_function_associations,
+      :function_associations,
       :field_level_encryption_id,
       :realtime_log_config_arn,
       :cache_policy_id,
@@ -701,6 +723,15 @@ module Aws::CloudFront
     #                   lambda_function_arn: "LambdaFunctionARN", # required
     #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                   include_body: false,
+    #                 },
+    #               ],
+    #             },
+    #             function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   function_arn: "FunctionARN", # required
+    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                 },
     #               ],
     #             },
@@ -864,7 +895,8 @@ module Aws::CloudFront
     #       }
     #
     # @!attribute [rw] comment
-    #   A comment to describe the cache policy.
+    #   A comment to describe the cache policy. The comment cannot be longer
+    #   than 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1298,7 +1330,8 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] comment
-    #   Any comments you want to include about the origin access identity.
+    #   An optional comment to describe the origin access identity. The
+    #   comment cannot be longer than 128 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CloudFrontOriginAccessIdentityConfig AWS API Documentation
@@ -1885,6 +1918,15 @@ module Aws::CloudFront
     #                 },
     #               ],
     #             },
+    #             function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   function_arn: "FunctionARN", # required
+    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                 },
+    #               ],
+    #             },
     #             field_level_encryption_id: "string",
     #             realtime_log_config_arn: "string",
     #             cache_policy_id: "string",
@@ -1945,6 +1987,15 @@ module Aws::CloudFront
     #                       lambda_function_arn: "LambdaFunctionARN", # required
     #                       event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                       include_body: false,
+    #                     },
+    #                   ],
+    #                 },
+    #                 function_associations: {
+    #                   quantity: 1, # required
+    #                   items: [
+    #                     {
+    #                       function_arn: "FunctionARN", # required
+    #                       event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                     },
     #                   ],
     #                 },
@@ -2163,6 +2214,15 @@ module Aws::CloudFront
     #                   },
     #                 ],
     #               },
+    #               function_associations: {
+    #                 quantity: 1, # required
+    #                 items: [
+    #                   {
+    #                     function_arn: "FunctionARN", # required
+    #                     event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                   },
+    #                 ],
+    #               },
     #               field_level_encryption_id: "string",
     #               realtime_log_config_arn: "string",
     #               cache_policy_id: "string",
@@ -2223,6 +2283,15 @@ module Aws::CloudFront
     #                         lambda_function_arn: "LambdaFunctionARN", # required
     #                         event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                         include_body: false,
+    #                       },
+    #                     ],
+    #                   },
+    #                   function_associations: {
+    #                     quantity: 1, # required
+    #                     items: [
+    #                       {
+    #                         function_arn: "FunctionARN", # required
+    #                         event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                       },
     #                     ],
     #                   },
@@ -2466,6 +2535,72 @@ module Aws::CloudFront
     #
     class CreateFieldLevelEncryptionProfileResult < Struct.new(
       :field_level_encryption_profile,
+      :location,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateFunctionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "FunctionName", # required
+    #         function_config: { # required
+    #           comment: "string", # required
+    #           runtime: "cloudfront-js-1.0", # required, accepts cloudfront-js-1.0
+    #         },
+    #         function_code: "data", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A name to identify the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_config
+    #   Configuration information about the function, including an optional
+    #   comment and the function’s runtime.
+    #   @return [Types::FunctionConfig]
+    #
+    # @!attribute [rw] function_code
+    #   The function code. For more information about writing a CloudFront
+    #   function, see [Writing function code for CloudFront Functions][1] in
+    #   the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateFunctionRequest AWS API Documentation
+    #
+    class CreateFunctionRequest < Struct.new(
+      :name,
+      :function_config,
+      :function_code)
+      SENSITIVE = [:function_code]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_summary
+    #   Contains configuration information and metadata about a CloudFront
+    #   function.
+    #   @return [Types::FunctionSummary]
+    #
+    # @!attribute [rw] location
+    #   The URL of the CloudFront function. Use the URL to manage the
+    #   function with the CloudFront API.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the CloudFront
+    #   function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateFunctionResult AWS API Documentation
+    #
+    class CreateFunctionResult < Struct.new(
+      :function_summary,
       :location,
       :etag)
       SENSITIVE = []
@@ -3279,6 +3414,15 @@ module Aws::CloudFront
     #             },
     #           ],
     #         },
+    #         function_associations: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               function_arn: "FunctionARN", # required
+    #               event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #             },
+    #           ],
+    #         },
     #         field_level_encryption_id: "string",
     #         realtime_log_config_arn: "string",
     #         cache_policy_id: "string",
@@ -3430,6 +3574,12 @@ module Aws::CloudFront
     #   associations for a cache behavior.
     #   @return [Types::LambdaFunctionAssociations]
     #
+    # @!attribute [rw] function_associations
+    #   A list of CloudFront functions that are associated with this cache
+    #   behavior. CloudFront functions must be published to the `LIVE` stage
+    #   to associate them with a cache behavior.
+    #   @return [Types::FunctionAssociations]
+    #
     # @!attribute [rw] field_level_encryption_id
     #   The value of `ID` for the field-level encryption configuration that
     #   you want CloudFront to use for encrypting specific fields of data
@@ -3451,6 +3601,9 @@ module Aws::CloudFront
     #   default cache behavior. For more information, see [Creating cache
     #   policies][1] or [Using the managed cache policies][2] in the *Amazon
     #   CloudFront Developer Guide*.
+    #
+    #   A `DefaultCacheBehavior` must include either a `CachePolicyId` or
+    #   `ForwardedValues`. We recommend that you use a `CachePolicyId`.
     #
     #
     #
@@ -3485,6 +3638,9 @@ module Aws::CloudFront
     #   cache key, use an origin request policy. For more information, see
     #   [Creating origin request policies][4] or [Using the managed origin
     #   request policies][5] in the *Amazon CloudFront Developer Guide*.
+    #
+    #   A `DefaultCacheBehavior` must include either a `CachePolicyId` or
+    #   `ForwardedValues`. We recommend that you use a `CachePolicyId`.
     #
     #   A complex type that specifies how CloudFront handles query strings,
     #   cookies, and HTTP headers.
@@ -3576,6 +3732,7 @@ module Aws::CloudFront
       :smooth_streaming,
       :compress,
       :lambda_function_associations,
+      :function_associations,
       :field_level_encryption_id,
       :realtime_log_config_arn,
       :cache_policy_id,
@@ -3766,6 +3923,32 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteFunctionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "string", # required
+    #         if_match: "string", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the function that you are deleting.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The current version (`ETag` value) of the function that you are
+    #   deleting, which you can get using `DescribeFunction`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteFunctionRequest AWS API Documentation
+    #
+    class DeleteFunctionRequest < Struct.new(
+      :name,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteKeyGroupRequest
     #   data as a hash:
     #
@@ -3923,6 +4106,50 @@ module Aws::CloudFront
     class DeleteStreamingDistributionRequest < Struct.new(
       :id,
       :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFunctionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "string", # required
+    #         stage: "DEVELOPMENT", # accepts DEVELOPMENT, LIVE
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the function that you are getting information about.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage
+    #   The function’s stage, either `DEVELOPMENT` or `LIVE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DescribeFunctionRequest AWS API Documentation
+    #
+    class DescribeFunctionRequest < Struct.new(
+      :name,
+      :stage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_summary
+    #   Contains configuration information and metadata about a CloudFront
+    #   function.
+    #   @return [Types::FunctionSummary]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the CloudFront
+    #   function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DescribeFunctionResult AWS API Documentation
+    #
+    class DescribeFunctionResult < Struct.new(
+      :function_summary,
+      :etag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4136,6 +4363,15 @@ module Aws::CloudFront
     #               },
     #             ],
     #           },
+    #           function_associations: {
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 function_arn: "FunctionARN", # required
+    #                 event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #               },
+    #             ],
+    #           },
     #           field_level_encryption_id: "string",
     #           realtime_log_config_arn: "string",
     #           cache_policy_id: "string",
@@ -4196,6 +4432,15 @@ module Aws::CloudFront
     #                     lambda_function_arn: "LambdaFunctionARN", # required
     #                     event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                     include_body: false,
+    #                   },
+    #                 ],
+    #               },
+    #               function_associations: {
+    #                 quantity: 1, # required
+    #                 items: [
+    #                   {
+    #                     function_arn: "FunctionARN", # required
+    #                     event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                   },
     #                 ],
     #               },
@@ -4355,16 +4600,8 @@ module Aws::CloudFront
     #   @return [Types::CustomErrorResponses]
     #
     # @!attribute [rw] comment
-    #   Any comments you want to include about the distribution.
-    #
-    #   If you don't want to specify a comment, include an empty `Comment`
-    #   element.
-    #
-    #   To delete an existing comment, update the distribution configuration
-    #   and include an empty `Comment` element.
-    #
-    #   To add or change a comment, update the distribution configuration
-    #   and specify the new comment.
+    #   An optional comment to describe the distribution. The comment cannot
+    #   be longer than 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] logging
@@ -4631,6 +4868,15 @@ module Aws::CloudFront
     #                 },
     #               ],
     #             },
+    #             function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   function_arn: "FunctionARN", # required
+    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                 },
+    #               ],
+    #             },
     #             field_level_encryption_id: "string",
     #             realtime_log_config_arn: "string",
     #             cache_policy_id: "string",
@@ -4691,6 +4937,15 @@ module Aws::CloudFront
     #                       lambda_function_arn: "LambdaFunctionARN", # required
     #                       event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                       include_body: false,
+    #                     },
+    #                   ],
+    #                 },
+    #                 function_associations: {
+    #                   quantity: 1, # required
+    #                   items: [
+    #                     {
+    #                       function_arn: "FunctionARN", # required
+    #                       event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                     },
     #                   ],
     #                 },
@@ -5220,7 +5475,8 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] comment
-    #   An optional comment about the configuration.
+    #   An optional comment about the configuration. The comment cannot be
+    #   longer than 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] query_arg_profile_config
@@ -5377,7 +5633,8 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] comment
-    #   An optional comment for the field-level encryption profile.
+    #   An optional comment for the field-level encryption profile. The
+    #   comment cannot be longer than 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] encryption_entities
@@ -5478,6 +5735,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] comment
     #   An optional comment for the field-level encryption profile summary.
+    #   The comment cannot be longer than 128 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FieldLevelEncryptionProfileSummary AWS API Documentation
@@ -5504,7 +5762,8 @@ module Aws::CloudFront
     #   @return [Time]
     #
     # @!attribute [rw] comment
-    #   An optional comment about the field-level encryption item.
+    #   An optional comment about the field-level encryption item. The
+    #   comment cannot be longer than 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] query_arg_profile_config
@@ -5728,6 +5987,245 @@ module Aws::CloudFront
       :cookies,
       :headers,
       :query_string_cache_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A function with the same name already exists in this AWS account. To
+    # create a function, you must provide a unique name. To update an
+    # existing function, use `UpdateFunction`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FunctionAlreadyExists AWS API Documentation
+    #
+    class FunctionAlreadyExists < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A CloudFront function that is associated with a cache behavior in a
+    # CloudFront distribution.
+    #
+    # @note When making an API call, you may pass FunctionAssociation
+    #   data as a hash:
+    #
+    #       {
+    #         function_arn: "FunctionARN", # required
+    #         event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #       }
+    #
+    # @!attribute [rw] function_arn
+    #   The Amazon Resource Name (ARN) of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type
+    #   The event type of the function, either `viewer-request` or
+    #   `viewer-response`. You cannot use origin-facing event types
+    #   (`origin-request` and `origin-response`) with a CloudFront function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FunctionAssociation AWS API Documentation
+    #
+    class FunctionAssociation < Struct.new(
+      :function_arn,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of CloudFront functions that are associated with a cache
+    # behavior in a CloudFront distribution. CloudFront functions must be
+    # published to the `LIVE` stage to associate them with a cache behavior.
+    #
+    # @note When making an API call, you may pass FunctionAssociations
+    #   data as a hash:
+    #
+    #       {
+    #         quantity: 1, # required
+    #         items: [
+    #           {
+    #             function_arn: "FunctionARN", # required
+    #             event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] quantity
+    #   The number of CloudFront functions in the list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   The CloudFront functions that are associated with a cache behavior
+    #   in a CloudFront distribution. CloudFront functions must be published
+    #   to the `LIVE` stage to associate them with a cache behavior.
+    #   @return [Array<Types::FunctionAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FunctionAssociations AWS API Documentation
+    #
+    class FunctionAssociations < Struct.new(
+      :quantity,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configuration information about a CloudFront function.
+    #
+    # @note When making an API call, you may pass FunctionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         comment: "string", # required
+    #         runtime: "cloudfront-js-1.0", # required, accepts cloudfront-js-1.0
+    #       }
+    #
+    # @!attribute [rw] comment
+    #   A comment to describe the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime
+    #   The function’s runtime environment. The only valid value is
+    #   `cloudfront-js-1.0`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FunctionConfig AWS API Documentation
+    #
+    class FunctionConfig < Struct.new(
+      :comment,
+      :runtime)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Cannot delete the function because it’s attached to one or more cache
+    # behaviors.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FunctionInUse AWS API Documentation
+    #
+    class FunctionInUse < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of CloudFront functions.
+    #
+    # @!attribute [rw] next_marker
+    #   If there are more items in the list than are in this response, this
+    #   element is present. It contains the value that you should use in the
+    #   `Marker` field of a subsequent request to continue listing functions
+    #   where you left off.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of functions requested.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] quantity
+    #   The number of functions returned in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   Contains the functions in the list.
+    #   @return [Array<Types::FunctionSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FunctionList AWS API Documentation
+    #
+    class FunctionList < Struct.new(
+      :next_marker,
+      :max_items,
+      :quantity,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata about a CloudFront function.
+    #
+    # @!attribute [rw] function_arn
+    #   The Amazon Resource Name (ARN) of the function. The ARN uniquely
+    #   identifies the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage
+    #   The stage that the function is in, either `DEVELOPMENT` or `LIVE`.
+    #
+    #   When a function is in the `DEVELOPMENT` stage, you can test the
+    #   function with `TestFunction`, and update it with `UpdateFunction`.
+    #
+    #   When a function is in the `LIVE` stage, you can attach the function
+    #   to a distribution’s cache behavior, using the function’s ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time when the function was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time when the function was most recently updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FunctionMetadata AWS API Documentation
+    #
+    class FunctionMetadata < Struct.new(
+      :function_arn,
+      :stage,
+      :created_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The function is too large. For more information, see [Quotas][1]
+    # (formerly known as limits) in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FunctionSizeLimitExceeded AWS API Documentation
+    #
+    class FunctionSizeLimitExceeded < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configuration information and metadata about a CloudFront
+    # function.
+    #
+    # @!attribute [rw] name
+    #   The name of the CloudFront function.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the CloudFront function.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_config
+    #   Contains configuration information about a CloudFront function.
+    #   @return [Types::FunctionConfig]
+    #
+    # @!attribute [rw] function_metadata
+    #   Contains metadata about a CloudFront function.
+    #   @return [Types::FunctionMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/FunctionSummary AWS API Documentation
+    #
+    class FunctionSummary < Struct.new(
+      :name,
+      :status,
+      :function_config,
+      :function_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6190,6 +6688,54 @@ module Aws::CloudFront
       :field_level_encryption,
       :etag)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetFunctionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "string", # required
+    #         stage: "DEVELOPMENT", # accepts DEVELOPMENT, LIVE
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the function whose code you are getting.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage
+    #   The function’s stage, either `DEVELOPMENT` or `LIVE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFunctionRequest AWS API Documentation
+    #
+    class GetFunctionRequest < Struct.new(
+      :name,
+      :stage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_code
+    #   The function code of a CloudFront function.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the CloudFront
+    #   function.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   The content type (media type) of the response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFunctionResult AWS API Documentation
+    #
+    class GetFunctionResult < Struct.new(
+      :function_code,
+      :etag,
+      :content_type)
+      SENSITIVE = [:function_code]
       include Aws::Structure
     end
 
@@ -6759,6 +7305,19 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # A CloudFront function association is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/InvalidFunctionAssociation AWS API Documentation
+    #
+    class InvalidFunctionAssociation < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified geo restriction parameter is not valid.
     #
     # @!attribute [rw] message
@@ -7270,7 +7829,8 @@ module Aws::CloudFront
     #   @return [Array<String>]
     #
     # @!attribute [rw] comment
-    #   A comment to describe the key group.
+    #   A comment to describe the key group. The comment cannot be longer
+    #   than 128 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/KeyGroupConfig AWS API Documentation
@@ -7988,6 +8548,54 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListFunctionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         marker: "string",
+    #         max_items: 1,
+    #         stage: "DEVELOPMENT", # accepts DEVELOPMENT, LIVE
+    #       }
+    #
+    # @!attribute [rw] marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of functions. The response includes functions in the list
+    #   that occur after the marker. To get the next page of the list, set
+    #   this field’s value to the value of `NextMarker` from the current
+    #   page’s response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of functions that you want in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stage
+    #   An optional filter to return only the functions that are in the
+    #   specified stage, either `DEVELOPMENT` or `LIVE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListFunctionsRequest AWS API Documentation
+    #
+    class ListFunctionsRequest < Struct.new(
+      :marker,
+      :max_items,
+      :stage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_list
+    #   A list of CloudFront functions.
+    #   @return [Types::FunctionList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListFunctionsResult AWS API Documentation
+    #
+    class ListFunctionsResult < Struct.new(
+      :function_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request to list invalidations.
     #
     # @note When making an API call, you may pass ListInvalidationsRequest
@@ -8455,6 +9063,19 @@ module Aws::CloudFront
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/NoSuchFieldLevelEncryptionProfile AWS API Documentation
     #
     class NoSuchFieldLevelEncryptionProfile < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The function does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/NoSuchFunctionExists AWS API Documentation
+    #
+    class NoSuchFunctionExists < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -9063,7 +9684,8 @@ module Aws::CloudFront
     #       }
     #
     # @!attribute [rw] comment
-    #   A comment to describe the origin request policy.
+    #   A comment to describe the origin request policy. The comment cannot
+    #   be longer than 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -9637,8 +10259,8 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # The precondition given in one or more of the request header fields
-    # evaluated to `false`.
+    # The precondition in one or more of the request fields evaluated to
+    # `false`.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -9740,7 +10362,8 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] comment
-    #   A comment to describe the public key.
+    #   A comment to describe the public key. The comment cannot be longer
+    #   than 128 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublicKeyConfig AWS API Documentation
@@ -9823,7 +10446,8 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] comment
-    #   A comment to describe the public key.
+    #   A comment to describe the public key. The comment cannot be longer
+    #   than 128 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublicKeySummary AWS API Documentation
@@ -9834,6 +10458,45 @@ module Aws::CloudFront
       :created_time,
       :encoded_key,
       :comment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PublishFunctionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "string", # required
+    #         if_match: "string", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the function that you are publishing.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The current version (`ETag` value) of the function that you are
+    #   publishing, which you can get using `DescribeFunction`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublishFunctionRequest AWS API Documentation
+    #
+    class PublishFunctionRequest < Struct.new(
+      :name,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_summary
+    #   Contains configuration information and metadata about a CloudFront
+    #   function.
+    #   @return [Types::FunctionSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublishFunctionResult AWS API Documentation
+    #
+    class PublishFunctionResult < Struct.new(
+      :function_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10093,6 +10756,20 @@ module Aws::CloudFront
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/RealtimeLogConfigInUse AWS API Documentation
     #
     class RealtimeLogConfigInUse < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified real-time log configuration belongs to a different AWS
+    # account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/RealtimeLogConfigOwnerMismatch AWS API Documentation
+    #
+    class RealtimeLogConfigOwnerMismatch < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -10914,6 +11591,124 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # The CloudFront function failed.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TestFunctionFailed AWS API Documentation
+    #
+    class TestFunctionFailed < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TestFunctionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "string", # required
+    #         if_match: "string", # required
+    #         stage: "DEVELOPMENT", # accepts DEVELOPMENT, LIVE
+    #         event_object: "data", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the function that you are testing.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The current version (`ETag` value) of the function that you are
+    #   testing, which you can get using `DescribeFunction`.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage
+    #   The stage of the function that you are testing, either `DEVELOPMENT`
+    #   or `LIVE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_object
+    #   The event object to test the function with. For more information
+    #   about the structure of the event object, see [Testing functions][1]
+    #   in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/managing-functions.html#test-function
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TestFunctionRequest AWS API Documentation
+    #
+    class TestFunctionRequest < Struct.new(
+      :name,
+      :if_match,
+      :stage,
+      :event_object)
+      SENSITIVE = [:event_object]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_result
+    #   An object that represents the result of running the function with
+    #   the provided event object.
+    #   @return [Types::TestResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TestFunctionResult AWS API Documentation
+    #
+    class TestFunctionResult < Struct.new(
+      :test_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the result of testing a CloudFront function with
+    # `TestFunction`.
+    #
+    # @!attribute [rw] function_summary
+    #   Contains configuration information and metadata about the CloudFront
+    #   function that was tested.
+    #   @return [Types::FunctionSummary]
+    #
+    # @!attribute [rw] compute_utilization
+    #   The amount of time that the function took to run as a percentage of
+    #   the maximum allowed time. For example, a compute utilization of 35
+    #   means that the function completed in 35% of the maximum allowed
+    #   time.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_execution_logs
+    #   Contains the log lines that the function wrote (if any) when running
+    #   the test.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] function_error_message
+    #   If the result of testing the function was an error, this field
+    #   contains the error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_output
+    #   The event object returned by the function. For more information
+    #   about the structure of the event object, see [Event object
+    #   structure][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/functions-event-structure.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TestResult AWS API Documentation
+    #
+    class TestResult < Struct.new(
+      :function_summary,
+      :compute_utilization,
+      :function_execution_logs,
+      :function_error_message,
+      :function_output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You cannot create more cache behaviors for the distribution.
     #
     # @!attribute [rw] message
@@ -11123,6 +11918,26 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # You have reached the maximum number of distributions that are
+    # associated with a CloudFront function. For more information, see
+    # [Quotas][1] (formerly known as limits) in the *Amazon CloudFront
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyDistributionsWithFunctionAssociations AWS API Documentation
+    #
+    class TooManyDistributionsWithFunctionAssociations < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Processing your request would cause the maximum number of
     # distributions with Lambda function associations per owner to be
     # exceeded.
@@ -11231,6 +12046,45 @@ module Aws::CloudFront
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyFieldLevelEncryptionQueryArgProfiles AWS API Documentation
     #
     class TooManyFieldLevelEncryptionQueryArgProfiles < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You have reached the maximum number of CloudFront function
+    # associations for this distribution. For more information, see
+    # [Quotas][1] (formerly known as limits) in the *Amazon CloudFront
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyFunctionAssociations AWS API Documentation
+    #
+    class TooManyFunctionAssociations < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You have reached the maximum number of CloudFront functions for this
+    # AWS account. For more information, see [Quotas][1] (formerly known as
+    # limits) in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooManyFunctions AWS API Documentation
+    #
+    class TooManyFunctions < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -11654,6 +12508,19 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # This operation is not supported in this region.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UnsupportedOperation AWS API Documentation
+    #
+    class UnsupportedOperation < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request to remove tags from a CloudFront resource.
     #
     # @note When making an API call, you may pass UntagResourceRequest
@@ -11930,6 +12797,15 @@ module Aws::CloudFront
     #                 },
     #               ],
     #             },
+    #             function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   function_arn: "FunctionARN", # required
+    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                 },
+    #               ],
+    #             },
     #             field_level_encryption_id: "string",
     #             realtime_log_config_arn: "string",
     #             cache_policy_id: "string",
@@ -11990,6 +12866,15 @@ module Aws::CloudFront
     #                       lambda_function_arn: "LambdaFunctionARN", # required
     #                       event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                       include_body: false,
+    #                     },
+    #                   ],
+    #                 },
+    #                 function_associations: {
+    #                   quantity: 1, # required
+    #                   items: [
+    #                     {
+    #                       function_arn: "FunctionARN", # required
+    #                       event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                     },
     #                   ],
     #                 },
@@ -12247,6 +13132,72 @@ module Aws::CloudFront
     #
     class UpdateFieldLevelEncryptionProfileResult < Struct.new(
       :field_level_encryption_profile,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateFunctionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "string", # required
+    #         if_match: "string", # required
+    #         function_config: { # required
+    #           comment: "string", # required
+    #           runtime: "cloudfront-js-1.0", # required, accepts cloudfront-js-1.0
+    #         },
+    #         function_code: "data", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the function that you are updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The current version (`ETag` value) of the function that you are
+    #   updating, which you can get using `DescribeFunction`.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_config
+    #   Configuration information about the function.
+    #   @return [Types::FunctionConfig]
+    #
+    # @!attribute [rw] function_code
+    #   The function code. For more information about writing a CloudFront
+    #   function, see [Writing function code for CloudFront Functions][1] in
+    #   the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateFunctionRequest AWS API Documentation
+    #
+    class UpdateFunctionRequest < Struct.new(
+      :name,
+      :if_match,
+      :function_config,
+      :function_code)
+      SENSITIVE = [:function_code]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_summary
+    #   Contains configuration information and metadata about a CloudFront
+    #   function.
+    #   @return [Types::FunctionSummary]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the CloudFront
+    #   function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateFunctionResult AWS API Documentation
+    #
+    class UpdateFunctionResult < Struct.new(
+      :function_summary,
       :etag)
       SENSITIVE = []
       include Aws::Structure

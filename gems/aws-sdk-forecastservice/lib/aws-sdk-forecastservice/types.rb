@@ -1385,6 +1385,26 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteResourceTreeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the parent resource to delete. All
+    #   child resources of the parent resource will also be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DeleteResourceTreeRequest AWS API Documentation
+    #
+    class DeleteResourceTreeRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeDatasetGroupRequest
     #   data as a hash:
     #
@@ -1537,8 +1557,8 @@ module Aws::ForecastService
     #   @return [Types::DataSource]
     #
     # @!attribute [rw] estimated_time_remaining_in_minutes
-    #   The estimated time in minutes for the dataset import job to
-    #   complete.
+    #   The estimated time remaining in minutes for the dataset import job
+    #   to complete.
     #   @return [Integer]
     #
     # @!attribute [rw] field_statistics
@@ -1847,7 +1867,8 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] estimated_time_remaining_in_minutes
-    #   The estimated time in minutes for the forecast job to complete.
+    #   The estimated time remaining in minutes for the forecast job to
+    #   complete.
     #   @return [Integer]
     #
     # @!attribute [rw] status
@@ -2089,8 +2110,8 @@ module Aws::ForecastService
     #   @return [Types::PredictorExecutionDetails]
     #
     # @!attribute [rw] estimated_time_remaining_in_minutes
-    #   The estimated time in minutes for the predictor training job to
-    #   complete.
+    #   The estimated time remaining in minutes for the predictor training
+    #   job to complete.
     #   @return [Integer]
     #
     # @!attribute [rw] dataset_import_job_arns

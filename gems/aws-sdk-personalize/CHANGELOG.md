@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2021-04-30)
+------------------
+
+* Feature - Update URL for dataset export job documentation.
+
 1.23.0 (2021-04-26)
 ------------------
 

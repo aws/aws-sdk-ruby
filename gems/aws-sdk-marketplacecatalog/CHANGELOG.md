@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2021-04-30)
+------------------
+
+* Feature - Allows user defined names for Changes in a ChangeSet. Users can use ChangeNames to reference properties in another Change within a ChangeSet. This feature allows users to make changes to an entity when the entity identifier is not yet available while constructing the StartChangeSet request.
+
 1.11.0 (2021-03-10)
 ------------------
 

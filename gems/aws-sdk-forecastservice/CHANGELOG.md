@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2021-04-30)
+------------------
+
+* Feature - Added new DeleteResourceTree operation that helps in deleting all the child resources of a given resource including the given resource.
+
 1.18.0 (2021-04-22)
 ------------------
 

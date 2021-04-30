@@ -17,6 +17,7 @@ module Aws::CustomerProfiles
     AddProfileKeyRequest = Shapes::StructureShape.new(name: 'AddProfileKeyRequest')
     AddProfileKeyResponse = Shapes::StructureShape.new(name: 'AddProfileKeyResponse')
     Address = Shapes::StructureShape.new(name: 'Address')
+    AttributeSourceIdMap = Shapes::MapShape.new(name: 'AttributeSourceIdMap')
     Attributes = Shapes::MapShape.new(name: 'Attributes')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
@@ -48,6 +49,7 @@ module Aws::CustomerProfiles
     FieldContentType = Shapes::StringShape.new(name: 'FieldContentType')
     FieldMap = Shapes::MapShape.new(name: 'FieldMap')
     FieldNameList = Shapes::ListShape.new(name: 'FieldNameList')
+    FieldSourceProfileIds = Shapes::StructureShape.new(name: 'FieldSourceProfileIds')
     FlowDefinition = Shapes::StructureShape.new(name: 'FlowDefinition')
     FlowDescription = Shapes::StringShape.new(name: 'FlowDescription')
     FlowName = Shapes::StringShape.new(name: 'FlowName')
@@ -56,6 +58,8 @@ module Aws::CustomerProfiles
     GetDomainResponse = Shapes::StructureShape.new(name: 'GetDomainResponse')
     GetIntegrationRequest = Shapes::StructureShape.new(name: 'GetIntegrationRequest')
     GetIntegrationResponse = Shapes::StructureShape.new(name: 'GetIntegrationResponse')
+    GetMatchesRequest = Shapes::StructureShape.new(name: 'GetMatchesRequest')
+    GetMatchesResponse = Shapes::StructureShape.new(name: 'GetMatchesResponse')
     GetProfileObjectTypeRequest = Shapes::StructureShape.new(name: 'GetProfileObjectTypeRequest')
     GetProfileObjectTypeResponse = Shapes::StructureShape.new(name: 'GetProfileObjectTypeResponse')
     GetProfileObjectTypeTemplateRequest = Shapes::StructureShape.new(name: 'GetProfileObjectTypeTemplateRequest')
@@ -86,6 +90,12 @@ module Aws::CustomerProfiles
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MarketoConnectorOperator = Shapes::StringShape.new(name: 'MarketoConnectorOperator')
     MarketoSourceProperties = Shapes::StructureShape.new(name: 'MarketoSourceProperties')
+    MatchItem = Shapes::StructureShape.new(name: 'MatchItem')
+    MatchesList = Shapes::ListShape.new(name: 'MatchesList')
+    MatchingRequest = Shapes::StructureShape.new(name: 'MatchingRequest')
+    MatchingResponse = Shapes::StructureShape.new(name: 'MatchingResponse')
+    MergeProfilesRequest = Shapes::StructureShape.new(name: 'MergeProfilesRequest')
+    MergeProfilesResponse = Shapes::StructureShape.new(name: 'MergeProfilesResponse')
     Object = Shapes::StringShape.new(name: 'Object')
     ObjectTypeField = Shapes::StructureShape.new(name: 'ObjectTypeField')
     ObjectTypeKey = Shapes::StructureShape.new(name: 'ObjectTypeKey')
@@ -93,6 +103,8 @@ module Aws::CustomerProfiles
     OperatorPropertiesKeys = Shapes::StringShape.new(name: 'OperatorPropertiesKeys')
     PartyType = Shapes::StringShape.new(name: 'PartyType')
     Profile = Shapes::StructureShape.new(name: 'Profile')
+    ProfileIdList = Shapes::ListShape.new(name: 'ProfileIdList')
+    ProfileIdToBeMergedList = Shapes::ListShape.new(name: 'ProfileIdToBeMergedList')
     ProfileList = Shapes::ListShape.new(name: 'ProfileList')
     ProfileObjectList = Shapes::ListShape.new(name: 'ProfileObjectList')
     ProfileObjectTypeList = Shapes::ListShape.new(name: 'ProfileObjectTypeList')
@@ -152,9 +164,11 @@ module Aws::CustomerProfiles
     encryptionKey = Shapes::StringShape.new(name: 'encryptionKey')
     expirationDaysInteger = Shapes::IntegerShape.new(name: 'expirationDaysInteger')
     long = Shapes::IntegerShape.new(name: 'long')
+    matchesNumber = Shapes::IntegerShape.new(name: 'matchesNumber')
     maxSize100 = Shapes::IntegerShape.new(name: 'maxSize100')
     message = Shapes::StringShape.new(name: 'message')
     name = Shapes::StringShape.new(name: 'name')
+    optionalBoolean = Shapes::BooleanShape.new(name: 'optionalBoolean')
     requestValueList = Shapes::ListShape.new(name: 'requestValueList')
     sqsQueueUrl = Shapes::StringShape.new(name: 'sqsQueueUrl')
     string0To1000 = Shapes::StringShape.new(name: 'string0To1000')
@@ -194,6 +208,9 @@ module Aws::CustomerProfiles
     Address.add_member(:postal_code, Shapes::ShapeRef.new(shape: string1To255, location_name: "PostalCode"))
     Address.struct_class = Types::Address
 
+    AttributeSourceIdMap.key = Shapes::ShapeRef.new(shape: string1To255)
+    AttributeSourceIdMap.value = Shapes::ShapeRef.new(shape: uuid)
+
     Attributes.key = Shapes::ShapeRef.new(shape: string1To255)
     Attributes.value = Shapes::ShapeRef.new(shape: string1To255)
 
@@ -211,6 +228,7 @@ module Aws::CustomerProfiles
     CreateDomainRequest.add_member(:default_expiration_days, Shapes::ShapeRef.new(shape: expirationDaysInteger, required: true, location_name: "DefaultExpirationDays"))
     CreateDomainRequest.add_member(:default_encryption_key, Shapes::ShapeRef.new(shape: encryptionKey, location_name: "DefaultEncryptionKey"))
     CreateDomainRequest.add_member(:dead_letter_queue_url, Shapes::ShapeRef.new(shape: sqsQueueUrl, location_name: "DeadLetterQueueUrl"))
+    CreateDomainRequest.add_member(:matching, Shapes::ShapeRef.new(shape: MatchingRequest, location_name: "Matching"))
     CreateDomainRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateDomainRequest.struct_class = Types::CreateDomainRequest
 
@@ -218,6 +236,7 @@ module Aws::CustomerProfiles
     CreateDomainResponse.add_member(:default_expiration_days, Shapes::ShapeRef.new(shape: expirationDaysInteger, required: true, location_name: "DefaultExpirationDays"))
     CreateDomainResponse.add_member(:default_encryption_key, Shapes::ShapeRef.new(shape: encryptionKey, location_name: "DefaultEncryptionKey"))
     CreateDomainResponse.add_member(:dead_letter_queue_url, Shapes::ShapeRef.new(shape: sqsQueueUrl, location_name: "DeadLetterQueueUrl"))
+    CreateDomainResponse.add_member(:matching, Shapes::ShapeRef.new(shape: MatchingResponse, location_name: "Matching"))
     CreateDomainResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "CreatedAt"))
     CreateDomainResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastUpdatedAt"))
     CreateDomainResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -308,6 +327,29 @@ module Aws::CustomerProfiles
 
     FieldNameList.member = Shapes::ShapeRef.new(shape: name)
 
+    FieldSourceProfileIds.add_member(:account_number, Shapes::ShapeRef.new(shape: uuid, location_name: "AccountNumber"))
+    FieldSourceProfileIds.add_member(:additional_information, Shapes::ShapeRef.new(shape: uuid, location_name: "AdditionalInformation"))
+    FieldSourceProfileIds.add_member(:party_type, Shapes::ShapeRef.new(shape: uuid, location_name: "PartyType"))
+    FieldSourceProfileIds.add_member(:business_name, Shapes::ShapeRef.new(shape: uuid, location_name: "BusinessName"))
+    FieldSourceProfileIds.add_member(:first_name, Shapes::ShapeRef.new(shape: uuid, location_name: "FirstName"))
+    FieldSourceProfileIds.add_member(:middle_name, Shapes::ShapeRef.new(shape: uuid, location_name: "MiddleName"))
+    FieldSourceProfileIds.add_member(:last_name, Shapes::ShapeRef.new(shape: uuid, location_name: "LastName"))
+    FieldSourceProfileIds.add_member(:birth_date, Shapes::ShapeRef.new(shape: uuid, location_name: "BirthDate"))
+    FieldSourceProfileIds.add_member(:gender, Shapes::ShapeRef.new(shape: uuid, location_name: "Gender"))
+    FieldSourceProfileIds.add_member(:phone_number, Shapes::ShapeRef.new(shape: uuid, location_name: "PhoneNumber"))
+    FieldSourceProfileIds.add_member(:mobile_phone_number, Shapes::ShapeRef.new(shape: uuid, location_name: "MobilePhoneNumber"))
+    FieldSourceProfileIds.add_member(:home_phone_number, Shapes::ShapeRef.new(shape: uuid, location_name: "HomePhoneNumber"))
+    FieldSourceProfileIds.add_member(:business_phone_number, Shapes::ShapeRef.new(shape: uuid, location_name: "BusinessPhoneNumber"))
+    FieldSourceProfileIds.add_member(:email_address, Shapes::ShapeRef.new(shape: uuid, location_name: "EmailAddress"))
+    FieldSourceProfileIds.add_member(:personal_email_address, Shapes::ShapeRef.new(shape: uuid, location_name: "PersonalEmailAddress"))
+    FieldSourceProfileIds.add_member(:business_email_address, Shapes::ShapeRef.new(shape: uuid, location_name: "BusinessEmailAddress"))
+    FieldSourceProfileIds.add_member(:address, Shapes::ShapeRef.new(shape: uuid, location_name: "Address"))
+    FieldSourceProfileIds.add_member(:shipping_address, Shapes::ShapeRef.new(shape: uuid, location_name: "ShippingAddress"))
+    FieldSourceProfileIds.add_member(:mailing_address, Shapes::ShapeRef.new(shape: uuid, location_name: "MailingAddress"))
+    FieldSourceProfileIds.add_member(:billing_address, Shapes::ShapeRef.new(shape: uuid, location_name: "BillingAddress"))
+    FieldSourceProfileIds.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeSourceIdMap, location_name: "Attributes"))
+    FieldSourceProfileIds.struct_class = Types::FieldSourceProfileIds
+
     FlowDefinition.add_member(:description, Shapes::ShapeRef.new(shape: FlowDescription, location_name: "Description"))
     FlowDefinition.add_member(:flow_name, Shapes::ShapeRef.new(shape: FlowName, required: true, location_name: "FlowName"))
     FlowDefinition.add_member(:kms_arn, Shapes::ShapeRef.new(shape: KmsArn, required: true, location_name: "KmsArn"))
@@ -324,6 +366,7 @@ module Aws::CustomerProfiles
     GetDomainResponse.add_member(:default_encryption_key, Shapes::ShapeRef.new(shape: encryptionKey, location_name: "DefaultEncryptionKey"))
     GetDomainResponse.add_member(:dead_letter_queue_url, Shapes::ShapeRef.new(shape: sqsQueueUrl, location_name: "DeadLetterQueueUrl"))
     GetDomainResponse.add_member(:stats, Shapes::ShapeRef.new(shape: DomainStats, location_name: "Stats"))
+    GetDomainResponse.add_member(:matching, Shapes::ShapeRef.new(shape: MatchingResponse, location_name: "Matching"))
     GetDomainResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "CreatedAt"))
     GetDomainResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastUpdatedAt"))
     GetDomainResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -340,6 +383,17 @@ module Aws::CustomerProfiles
     GetIntegrationResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastUpdatedAt"))
     GetIntegrationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     GetIntegrationResponse.struct_class = Types::GetIntegrationResponse
+
+    GetMatchesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
+    GetMatchesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxSize100, location: "querystring", location_name: "max-results"))
+    GetMatchesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    GetMatchesRequest.struct_class = Types::GetMatchesRequest
+
+    GetMatchesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
+    GetMatchesResponse.add_member(:match_generation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "MatchGenerationDate"))
+    GetMatchesResponse.add_member(:potential_matches, Shapes::ShapeRef.new(shape: matchesNumber, location_name: "PotentialMatches"))
+    GetMatchesResponse.add_member(:matches, Shapes::ShapeRef.new(shape: MatchesList, location_name: "Matches"))
+    GetMatchesResponse.struct_class = Types::GetMatchesResponse
 
     GetProfileObjectTypeRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     GetProfileObjectTypeRequest.add_member(:object_type_name, Shapes::ShapeRef.new(shape: typeName, required: true, location: "uri", location_name: "ObjectTypeName"))
@@ -474,6 +528,27 @@ module Aws::CustomerProfiles
     MarketoSourceProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "Object"))
     MarketoSourceProperties.struct_class = Types::MarketoSourceProperties
 
+    MatchItem.add_member(:match_id, Shapes::ShapeRef.new(shape: string1To255, location_name: "MatchId"))
+    MatchItem.add_member(:profile_ids, Shapes::ShapeRef.new(shape: ProfileIdList, location_name: "ProfileIds"))
+    MatchItem.struct_class = Types::MatchItem
+
+    MatchesList.member = Shapes::ShapeRef.new(shape: MatchItem)
+
+    MatchingRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: optionalBoolean, required: true, location_name: "Enabled"))
+    MatchingRequest.struct_class = Types::MatchingRequest
+
+    MatchingResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: optionalBoolean, location_name: "Enabled"))
+    MatchingResponse.struct_class = Types::MatchingResponse
+
+    MergeProfilesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    MergeProfilesRequest.add_member(:main_profile_id, Shapes::ShapeRef.new(shape: uuid, required: true, location_name: "MainProfileId"))
+    MergeProfilesRequest.add_member(:profile_ids_to_be_merged, Shapes::ShapeRef.new(shape: ProfileIdToBeMergedList, required: true, location_name: "ProfileIdsToBeMerged"))
+    MergeProfilesRequest.add_member(:field_source_profile_ids, Shapes::ShapeRef.new(shape: FieldSourceProfileIds, location_name: "FieldSourceProfileIds"))
+    MergeProfilesRequest.struct_class = Types::MergeProfilesRequest
+
+    MergeProfilesResponse.add_member(:message, Shapes::ShapeRef.new(shape: message, location_name: "Message"))
+    MergeProfilesResponse.struct_class = Types::MergeProfilesResponse
+
     ObjectTypeField.add_member(:source, Shapes::ShapeRef.new(shape: text, location_name: "Source"))
     ObjectTypeField.add_member(:target, Shapes::ShapeRef.new(shape: text, location_name: "Target"))
     ObjectTypeField.add_member(:content_type, Shapes::ShapeRef.new(shape: FieldContentType, location_name: "ContentType"))
@@ -508,6 +583,10 @@ module Aws::CustomerProfiles
     Profile.add_member(:billing_address, Shapes::ShapeRef.new(shape: Address, location_name: "BillingAddress"))
     Profile.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
     Profile.struct_class = Types::Profile
+
+    ProfileIdList.member = Shapes::ShapeRef.new(shape: uuid)
+
+    ProfileIdToBeMergedList.member = Shapes::ShapeRef.new(shape: uuid)
 
     ProfileList.member = Shapes::ShapeRef.new(shape: Profile)
 
@@ -675,6 +754,7 @@ module Aws::CustomerProfiles
     UpdateDomainRequest.add_member(:default_expiration_days, Shapes::ShapeRef.new(shape: expirationDaysInteger, location_name: "DefaultExpirationDays"))
     UpdateDomainRequest.add_member(:default_encryption_key, Shapes::ShapeRef.new(shape: encryptionKey, location_name: "DefaultEncryptionKey"))
     UpdateDomainRequest.add_member(:dead_letter_queue_url, Shapes::ShapeRef.new(shape: sqsQueueUrl, location_name: "DeadLetterQueueUrl"))
+    UpdateDomainRequest.add_member(:matching, Shapes::ShapeRef.new(shape: MatchingRequest, location_name: "Matching"))
     UpdateDomainRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     UpdateDomainRequest.struct_class = Types::UpdateDomainRequest
 
@@ -682,6 +762,7 @@ module Aws::CustomerProfiles
     UpdateDomainResponse.add_member(:default_expiration_days, Shapes::ShapeRef.new(shape: expirationDaysInteger, location_name: "DefaultExpirationDays"))
     UpdateDomainResponse.add_member(:default_encryption_key, Shapes::ShapeRef.new(shape: encryptionKey, location_name: "DefaultEncryptionKey"))
     UpdateDomainResponse.add_member(:dead_letter_queue_url, Shapes::ShapeRef.new(shape: sqsQueueUrl, location_name: "DeadLetterQueueUrl"))
+    UpdateDomainResponse.add_member(:matching, Shapes::ShapeRef.new(shape: MatchingResponse, location_name: "Matching"))
     UpdateDomainResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "CreatedAt"))
     UpdateDomainResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastUpdatedAt"))
     UpdateDomainResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -882,6 +963,19 @@ module Aws::CustomerProfiles
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_matches, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMatches"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{DomainName}/matches"
+        o.input = Shapes::ShapeRef.new(shape: GetMatchesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMatchesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_profile_object_type, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetProfileObjectType"
         o.http_method = "GET"
@@ -995,6 +1089,18 @@ module Aws::CustomerProfiles
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:merge_profiles, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "MergeProfiles"
+        o.http_method = "POST"
+        o.http_request_uri = "/domains/{DomainName}/profiles/objects/merge"
+        o.input = Shapes::ShapeRef.new(shape: MergeProfilesRequest)
+        o.output = Shapes::ShapeRef.new(shape: MergeProfilesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:put_integration, Seahorse::Model::Operation.new.tap do |o|

@@ -42,6 +42,9 @@ module Aws::CloudFront
   # * {FieldLevelEncryptionProfileAlreadyExists}
   # * {FieldLevelEncryptionProfileInUse}
   # * {FieldLevelEncryptionProfileSizeExceeded}
+  # * {FunctionAlreadyExists}
+  # * {FunctionInUse}
+  # * {FunctionSizeLimitExceeded}
   # * {IllegalDelete}
   # * {IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior}
   # * {IllegalUpdate}
@@ -50,6 +53,7 @@ module Aws::CloudFront
   # * {InvalidDefaultRootObject}
   # * {InvalidErrorCode}
   # * {InvalidForwardCookies}
+  # * {InvalidFunctionAssociation}
   # * {InvalidGeoRestrictionParameter}
   # * {InvalidHeadersForS3Origin}
   # * {InvalidIfMatchVersion}
@@ -76,6 +80,7 @@ module Aws::CloudFront
   # * {NoSuchDistribution}
   # * {NoSuchFieldLevelEncryptionConfig}
   # * {NoSuchFieldLevelEncryptionProfile}
+  # * {NoSuchFunctionExists}
   # * {NoSuchInvalidation}
   # * {NoSuchOrigin}
   # * {NoSuchOriginRequestPolicy}
@@ -91,9 +96,11 @@ module Aws::CloudFront
   # * {QueryArgProfileEmpty}
   # * {RealtimeLogConfigAlreadyExists}
   # * {RealtimeLogConfigInUse}
+  # * {RealtimeLogConfigOwnerMismatch}
   # * {ResourceInUse}
   # * {StreamingDistributionAlreadyExists}
   # * {StreamingDistributionNotDisabled}
+  # * {TestFunctionFailed}
   # * {TooManyCacheBehaviors}
   # * {TooManyCachePolicies}
   # * {TooManyCertificates}
@@ -107,6 +114,7 @@ module Aws::CloudFront
   # * {TooManyDistributionsAssociatedToFieldLevelEncryptionConfig}
   # * {TooManyDistributionsAssociatedToKeyGroup}
   # * {TooManyDistributionsAssociatedToOriginRequestPolicy}
+  # * {TooManyDistributionsWithFunctionAssociations}
   # * {TooManyDistributionsWithLambdaAssociations}
   # * {TooManyDistributionsWithSingleFunctionARN}
   # * {TooManyFieldLevelEncryptionConfigs}
@@ -115,6 +123,8 @@ module Aws::CloudFront
   # * {TooManyFieldLevelEncryptionFieldPatterns}
   # * {TooManyFieldLevelEncryptionProfiles}
   # * {TooManyFieldLevelEncryptionQueryArgProfiles}
+  # * {TooManyFunctionAssociations}
+  # * {TooManyFunctions}
   # * {TooManyHeadersInCachePolicy}
   # * {TooManyHeadersInForwardedValues}
   # * {TooManyHeadersInOriginRequestPolicy}
@@ -137,6 +147,7 @@ module Aws::CloudFront
   # * {TooManyTrustedSigners}
   # * {TrustedKeyGroupDoesNotExist}
   # * {TrustedSignerDoesNotExist}
+  # * {UnsupportedOperation}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -369,6 +380,51 @@ module Aws::CloudFront
       end
     end
 
+    class FunctionAlreadyExists < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::FunctionAlreadyExists] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class FunctionInUse < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::FunctionInUse] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class FunctionSizeLimitExceeded < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::FunctionSizeLimitExceeded] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class IllegalDelete < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -479,6 +535,21 @@ module Aws::CloudFront
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::InvalidForwardCookies] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidFunctionAssociation < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::InvalidFunctionAssociation] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -879,6 +950,21 @@ module Aws::CloudFront
       end
     end
 
+    class NoSuchFunctionExists < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::NoSuchFunctionExists] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class NoSuchInvalidation < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1104,6 +1190,21 @@ module Aws::CloudFront
       end
     end
 
+    class RealtimeLogConfigOwnerMismatch < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::RealtimeLogConfigOwnerMismatch] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class ResourceInUse < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1139,6 +1240,21 @@ module Aws::CloudFront
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::StreamingDistributionNotDisabled] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TestFunctionFailed < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::TestFunctionFailed] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -1344,6 +1460,21 @@ module Aws::CloudFront
       end
     end
 
+    class TooManyDistributionsWithFunctionAssociations < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::TooManyDistributionsWithFunctionAssociations] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class TooManyDistributionsWithLambdaAssociations < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1454,6 +1585,36 @@ module Aws::CloudFront
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::TooManyFieldLevelEncryptionQueryArgProfiles] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyFunctionAssociations < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::TooManyFunctionAssociations] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyFunctions < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::TooManyFunctions] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -1784,6 +1945,21 @@ module Aws::CloudFront
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::TrustedSignerDoesNotExist] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class UnsupportedOperation < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::UnsupportedOperation] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
