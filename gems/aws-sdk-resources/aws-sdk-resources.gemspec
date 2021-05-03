@@ -114,6 +114,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-fis', '~> 1')
   spec.add_dependency('aws-sdk-fms', '~> 1')
   spec.add_dependency('aws-sdk-fsx', '~> 1')
+  spec.add_dependency('aws-sdk-finspacedata', '~> 1')
   spec.add_dependency('aws-sdk-finspace', '~> 1')
   spec.add_dependency('aws-sdk-firehose', '~> 1')
   spec.add_dependency('aws-sdk-forecastqueryservice', '~> 1')

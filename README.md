@@ -551,6 +551,7 @@ RubyGems.org page under "LINKS" section.
 | EC2 Image Builder                                     | Aws::Imagebuilder                    | aws-sdk-imagebuilder                    | 2019-12-02  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancing            | aws-sdk-elasticloadbalancing            | 2012-06-01  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
+| FinSpace Public API                                   | Aws::FinSpaceData                    | aws-sdk-finspacedata                    | 2020-07-13  |
 | FinSpace User Environment Management service          | Aws::Finspace                        | aws-sdk-finspace                        | 2021-03-12  |
 | Firewall Management Service                           | Aws::FMS                             | aws-sdk-fms                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Aws::Kafka                           | aws-sdk-kafka                           | 2018-11-14  |

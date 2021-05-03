@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.451.0 (2021-05-03)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::FinSpaceData`.
+
 1.450.0 (2021-05-03)
 ------------------
 

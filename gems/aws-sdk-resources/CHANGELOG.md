@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.101.0 (2021-05-03)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-finspacedata` gem.
+
 3.100.0 (2021-05-03)
 ------------------
 

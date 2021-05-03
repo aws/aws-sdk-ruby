@@ -30,12 +30,12 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration.add_identifier(:finspace)
+Aws::Plugins::GlobalConfiguration.add_identifier(:finspacedata)
 
-module Aws::Finspace
-  # An API client for Finspace.  To construct a client, you need to configure a `:region` and `:credentials`.
+module Aws::FinSpaceData
+  # An API client for FinSpaceData.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
-  #     client = Aws::Finspace::Client.new(
+  #     client = Aws::FinSpaceData::Client.new(
   #       region: region_name,
   #       credentials: credentials,
   #       # ...
@@ -49,7 +49,7 @@ module Aws::Finspace
 
     include Aws::ClientStubs
 
-    @identifier = :finspace
+    @identifier = :finspacedata
 
     set_api(ClientApi::API)
 
@@ -327,354 +327,168 @@ module Aws::Finspace
 
     # @!group API Operations
 
-    # Create a new FinSpace environment.
+    # Creates a new changeset in a FinSpace dataset.
     #
-    # @option params [required, String] :name
-    #   The name of the FinSpace environment to be created.
+    # @option params [required, String] :dataset_id
+    #   The unique identifier for the FinSpace dataset in which the changeset
+    #   will be created.
     #
-    # @option params [String] :description
-    #   The description of the FinSpace environment to be created.
+    # @option params [required, String] :change_type
+    #   Option to indicate how a changeset will be applied to a dataset.
     #
-    # @option params [String] :kms_key_id
-    #   The KMS key id to encrypt your data in the FinSpace environment.
+    #   * `REPLACE` - Changeset will be considered as a replacement to all
+    #     prior loaded changesets.
+    #
+    #   * `APPEND` - Changeset will be considered as an addition to the end of
+    #     all prior loaded changesets.
+    #
+    # @option params [required, String] :source_type
+    #   Type of the data source from which the files to create the changeset
+    #   will be sourced.
+    #
+    #   * `S3` - Amazon S3.
+    #
+    #   ^
+    #
+    # @option params [required, Hash<String,String>] :source_params
+    #   Source path from which the files to create the changeset will be
+    #   sourced.
+    #
+    # @option params [String] :format_type
+    #   Format type of the input files being loaded into the changeset.
+    #
+    # @option params [Hash<String,String>] :format_params
+    #   Options that define the structure of the source file(s).
     #
     # @option params [Hash<String,String>] :tags
-    #   Add tags to your FinSpace environment.
+    #   Metadata tags to apply to this changeset.
     #
-    # @option params [String] :federation_mode
-    #   Authentication mode for the environment.
+    # @return [Types::CreateChangesetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * `FEDERATED` - Users access FinSpace through Single Sign On (SSO) via
-    #     your Identity provider.
-    #
-    #   * `LOCAL` - Users access FinSpace via email and password managed
-    #     within the FinSpace environment.
-    #
-    # @option params [Types::FederationParameters] :federation_parameters
-    #   Configuration information when authentication mode is FEDERATED.
-    #
-    # @return [Types::CreateEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::CreateEnvironmentResponse#environment_id #environment_id} => String
-    #   * {Types::CreateEnvironmentResponse#environment_arn #environment_arn} => String
-    #   * {Types::CreateEnvironmentResponse#environment_url #environment_url} => String
+    #   * {Types::CreateChangesetResponse#changeset #changeset} => Types::ChangesetInfo
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.create_environment({
-    #     name: "EnvironmentName", # required
-    #     description: "Description",
-    #     kms_key_id: "KmsKeyId",
+    #   resp = client.create_changeset({
+    #     dataset_id: "IdType", # required
+    #     change_type: "REPLACE", # required, accepts REPLACE, APPEND, MODIFY
+    #     source_type: "S3", # required, accepts S3
+    #     source_params: { # required
+    #       "stringMapKey" => "stringMapValue",
+    #     },
+    #     format_type: "CSV", # accepts CSV, JSON, PARQUET, XML
+    #     format_params: {
+    #       "stringMapKey" => "stringMapValue",
+    #     },
     #     tags: {
-    #       "TagKey" => "TagValue",
-    #     },
-    #     federation_mode: "FEDERATED", # accepts FEDERATED, LOCAL
-    #     federation_parameters: {
-    #       saml_metadata_document: "SamlMetadataDocument",
-    #       saml_metadata_url: "url",
-    #       application_call_back_url: "url",
-    #       federation_urn: "urn",
-    #       federation_provider_name: "FederationProviderName",
-    #       attribute_map: {
-    #         "FederationAttributeKey" => "url",
-    #       },
+    #       "stringMapKey" => "stringMapValue",
     #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.environment_id #=> String
-    #   resp.environment_arn #=> String
-    #   resp.environment_url #=> String
+    #   resp.changeset.id #=> String
+    #   resp.changeset.changeset_arn #=> String
+    #   resp.changeset.dataset_id #=> String
+    #   resp.changeset.change_type #=> String, one of "REPLACE", "APPEND", "MODIFY"
+    #   resp.changeset.source_type #=> String, one of "S3"
+    #   resp.changeset.source_params #=> Hash
+    #   resp.changeset.source_params["stringMapKey"] #=> String
+    #   resp.changeset.format_type #=> String, one of "CSV", "JSON", "PARQUET", "XML"
+    #   resp.changeset.format_params #=> Hash
+    #   resp.changeset.format_params["stringMapKey"] #=> String
+    #   resp.changeset.create_timestamp #=> Time
+    #   resp.changeset.status #=> String, one of "PENDING", "FAILED", "SUCCESS", "RUNNING", "STOP_REQUESTED"
+    #   resp.changeset.error_info.error_message #=> String
+    #   resp.changeset.error_info.error_category #=> String, one of "The_inputs_to_this_request_are_invalid", "Service_limits_have_been_exceeded", "Missing_required_permission_to_perform_this_request", "One_or_more_inputs_to_this_request_were_not_found", "The_system_temporarily_lacks_sufficient_resources_to_process_the_request", "An_internal_error_has_occurred", "Cancelled", "A_user_recoverable_error_has_occurred"
+    #   resp.changeset.changeset_labels #=> Hash
+    #   resp.changeset.changeset_labels["stringMapKey"] #=> String
+    #   resp.changeset.updates_changeset_id #=> String
+    #   resp.changeset.updated_by_changeset_id #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/CreateEnvironment AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/CreateChangeset AWS API Documentation
     #
-    # @overload create_environment(params = {})
+    # @overload create_changeset(params = {})
     # @param [Hash] params ({})
-    def create_environment(params = {}, options = {})
-      req = build_request(:create_environment, params)
+    def create_changeset(params = {}, options = {})
+      req = build_request(:create_changeset, params)
       req.send_request(options)
     end
 
-    # Delete an FinSpace environment.
+    # Request programmatic credentials to use with Habanero SDK.
+    #
+    # @option params [Integer] :duration_in_minutes
+    #   The time duration in which the credentials remain valid.
     #
     # @option params [required, String] :environment_id
-    #   The identifier for the FinSpace environment.
+    #   The habanero environment identifier.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::GetProgrammaticAccessCredentialsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProgrammaticAccessCredentialsResponse#credentials #credentials} => Types::Credentials
+    #   * {Types::GetProgrammaticAccessCredentialsResponse#duration_in_minutes #duration_in_minutes} => Integer
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.delete_environment({
-    #     environment_id: "IdType", # required
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteEnvironment AWS API Documentation
-    #
-    # @overload delete_environment(params = {})
-    # @param [Hash] params ({})
-    def delete_environment(params = {}, options = {})
-      req = build_request(:delete_environment, params)
-      req.send_request(options)
-    end
-
-    # Returns the FinSpace environment object.
-    #
-    # @option params [required, String] :environment_id
-    #   The identifier of the FinSpace environment.
-    #
-    # @return [Types::GetEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::GetEnvironmentResponse#environment #environment} => Types::Environment
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.get_environment({
+    #   resp = client.get_programmatic_access_credentials({
+    #     duration_in_minutes: 1,
     #     environment_id: "IdType", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.environment.name #=> String
-    #   resp.environment.environment_id #=> String
-    #   resp.environment.aws_account_id #=> String
-    #   resp.environment.status #=> String, one of "CREATE_REQUESTED", "CREATING", "CREATED", "DELETE_REQUESTED", "DELETING", "DELETED", "FAILED_CREATION", "RETRY_DELETION", "FAILED_DELETION", "SUSPENDED"
-    #   resp.environment.environment_url #=> String
-    #   resp.environment.description #=> String
-    #   resp.environment.environment_arn #=> String
-    #   resp.environment.sage_maker_studio_domain_url #=> String
-    #   resp.environment.kms_key_id #=> String
-    #   resp.environment.dedicated_service_account_id #=> String
-    #   resp.environment.federation_mode #=> String, one of "FEDERATED", "LOCAL"
-    #   resp.environment.federation_parameters.saml_metadata_document #=> String
-    #   resp.environment.federation_parameters.saml_metadata_url #=> String
-    #   resp.environment.federation_parameters.application_call_back_url #=> String
-    #   resp.environment.federation_parameters.federation_urn #=> String
-    #   resp.environment.federation_parameters.federation_provider_name #=> String
-    #   resp.environment.federation_parameters.attribute_map #=> Hash
-    #   resp.environment.federation_parameters.attribute_map["FederationAttributeKey"] #=> String
+    #   resp.credentials.access_key_id #=> String
+    #   resp.credentials.secret_access_key #=> String
+    #   resp.credentials.session_token #=> String
+    #   resp.duration_in_minutes #=> Integer
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/GetEnvironment AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/GetProgrammaticAccessCredentials AWS API Documentation
     #
-    # @overload get_environment(params = {})
+    # @overload get_programmatic_access_credentials(params = {})
     # @param [Hash] params ({})
-    def get_environment(params = {}, options = {})
-      req = build_request(:get_environment, params)
+    def get_programmatic_access_credentials(params = {}, options = {})
+      req = build_request(:get_programmatic_access_credentials, params)
       req.send_request(options)
     end
 
-    # A list of all of your FinSpace environments.
+    # A temporary Amazon S3 location to copy your files from a source
+    # location to stage or use as a scratch space in Habanero notebook.
     #
-    # @option params [String] :next_token
-    #   A token generated by FinSpace that specifies where to continue
-    #   pagination if a previous request was truncated. To get the next set of
-    #   pages, pass in the nextToken value from the response object of the
-    #   previous page call.
+    # @option params [String] :location_type
+    #   Specify the type of the working location.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to return in this request.
+    #   * `SAGEMAKER` - Use the Amazon S3 location as a temporary location to
+    #     store data content when working with FinSpace Notebooks that run on
+    #     SageMaker studio.
     #
-    # @return [Types::ListEnvironmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #   * `INGESTION` - Use the Amazon S3 location as a staging location to
+    #     copy your data content and then use the location with the changeset
+    #     creation operation.
     #
-    #   * {Types::ListEnvironmentsResponse#environments #environments} => Array&lt;Types::Environment&gt;
-    #   * {Types::ListEnvironmentsResponse#next_token #next_token} => String
+    # @return [Types::GetWorkingLocationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetWorkingLocationResponse#s3_uri #s3_uri} => String
+    #   * {Types::GetWorkingLocationResponse#s3_path #s3_path} => String
+    #   * {Types::GetWorkingLocationResponse#s3_bucket #s3_bucket} => String
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.list_environments({
-    #     next_token: "PaginationToken",
-    #     max_results: 1,
+    #   resp = client.get_working_location({
+    #     location_type: "INGESTION", # accepts INGESTION, SAGEMAKER
     #   })
     #
     # @example Response structure
     #
-    #   resp.environments #=> Array
-    #   resp.environments[0].name #=> String
-    #   resp.environments[0].environment_id #=> String
-    #   resp.environments[0].aws_account_id #=> String
-    #   resp.environments[0].status #=> String, one of "CREATE_REQUESTED", "CREATING", "CREATED", "DELETE_REQUESTED", "DELETING", "DELETED", "FAILED_CREATION", "RETRY_DELETION", "FAILED_DELETION", "SUSPENDED"
-    #   resp.environments[0].environment_url #=> String
-    #   resp.environments[0].description #=> String
-    #   resp.environments[0].environment_arn #=> String
-    #   resp.environments[0].sage_maker_studio_domain_url #=> String
-    #   resp.environments[0].kms_key_id #=> String
-    #   resp.environments[0].dedicated_service_account_id #=> String
-    #   resp.environments[0].federation_mode #=> String, one of "FEDERATED", "LOCAL"
-    #   resp.environments[0].federation_parameters.saml_metadata_document #=> String
-    #   resp.environments[0].federation_parameters.saml_metadata_url #=> String
-    #   resp.environments[0].federation_parameters.application_call_back_url #=> String
-    #   resp.environments[0].federation_parameters.federation_urn #=> String
-    #   resp.environments[0].federation_parameters.federation_provider_name #=> String
-    #   resp.environments[0].federation_parameters.attribute_map #=> Hash
-    #   resp.environments[0].federation_parameters.attribute_map["FederationAttributeKey"] #=> String
-    #   resp.next_token #=> String
+    #   resp.s3_uri #=> String
+    #   resp.s3_path #=> String
+    #   resp.s3_bucket #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/ListEnvironments AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/GetWorkingLocation AWS API Documentation
     #
-    # @overload list_environments(params = {})
+    # @overload get_working_location(params = {})
     # @param [Hash] params ({})
-    def list_environments(params = {}, options = {})
-      req = build_request(:list_environments, params)
-      req.send_request(options)
-    end
-
-    # A list of all tags for a resource.
-    #
-    # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name of the resource.
-    #
-    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.list_tags_for_resource({
-    #     resource_arn: "EnvironmentArn", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.tags #=> Hash
-    #   resp.tags["TagKey"] #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/ListTagsForResource AWS API Documentation
-    #
-    # @overload list_tags_for_resource(params = {})
-    # @param [Hash] params ({})
-    def list_tags_for_resource(params = {}, options = {})
-      req = build_request(:list_tags_for_resource, params)
-      req.send_request(options)
-    end
-
-    # Adds metadata tags to a FinSpace resource.
-    #
-    # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) for the resource.
-    #
-    # @option params [required, Hash<String,String>] :tags
-    #   One or more tags to be assigned to the resource.
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.tag_resource({
-    #     resource_arn: "EnvironmentArn", # required
-    #     tags: { # required
-    #       "TagKey" => "TagValue",
-    #     },
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/TagResource AWS API Documentation
-    #
-    # @overload tag_resource(params = {})
-    # @param [Hash] params ({})
-    def tag_resource(params = {}, options = {})
-      req = build_request(:tag_resource, params)
-      req.send_request(options)
-    end
-
-    # Removes metadata tags from a FinSpace resource.
-    #
-    # @option params [required, String] :resource_arn
-    #   A FinSpace resource from which you want to remove a tag or tags. The
-    #   value for this parameter is an Amazon Resource Name (ARN).
-    #
-    # @option params [required, Array<String>] :tag_keys
-    #   The tag keys (names) of one or more tags to be removed.
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.untag_resource({
-    #     resource_arn: "EnvironmentArn", # required
-    #     tag_keys: ["TagKey"], # required
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UntagResource AWS API Documentation
-    #
-    # @overload untag_resource(params = {})
-    # @param [Hash] params ({})
-    def untag_resource(params = {}, options = {})
-      req = build_request(:untag_resource, params)
-      req.send_request(options)
-    end
-
-    # Update your FinSpace environment.
-    #
-    # @option params [required, String] :environment_id
-    #   The identifier of the FinSpace environment.
-    #
-    # @option params [String] :name
-    #   The name of the environment.
-    #
-    # @option params [String] :description
-    #   The description of the environment.
-    #
-    # @option params [String] :federation_mode
-    #   Authentication mode for the environment.
-    #
-    #   * `FEDERATED` - Users access FinSpace through Single Sign On (SSO) via
-    #     your Identity provider.
-    #
-    #   * `LOCAL` - Users access FinSpace via email and password managed
-    #     within the FinSpace environment.
-    #
-    # @option params [Types::FederationParameters] :federation_parameters
-    #   Configuration information when authentication mode is FEDERATED.
-    #
-    # @return [Types::UpdateEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::UpdateEnvironmentResponse#environment #environment} => Types::Environment
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.update_environment({
-    #     environment_id: "IdType", # required
-    #     name: "EnvironmentName",
-    #     description: "Description",
-    #     federation_mode: "FEDERATED", # accepts FEDERATED, LOCAL
-    #     federation_parameters: {
-    #       saml_metadata_document: "SamlMetadataDocument",
-    #       saml_metadata_url: "url",
-    #       application_call_back_url: "url",
-    #       federation_urn: "urn",
-    #       federation_provider_name: "FederationProviderName",
-    #       attribute_map: {
-    #         "FederationAttributeKey" => "url",
-    #       },
-    #     },
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.environment.name #=> String
-    #   resp.environment.environment_id #=> String
-    #   resp.environment.aws_account_id #=> String
-    #   resp.environment.status #=> String, one of "CREATE_REQUESTED", "CREATING", "CREATED", "DELETE_REQUESTED", "DELETING", "DELETED", "FAILED_CREATION", "RETRY_DELETION", "FAILED_DELETION", "SUSPENDED"
-    #   resp.environment.environment_url #=> String
-    #   resp.environment.description #=> String
-    #   resp.environment.environment_arn #=> String
-    #   resp.environment.sage_maker_studio_domain_url #=> String
-    #   resp.environment.kms_key_id #=> String
-    #   resp.environment.dedicated_service_account_id #=> String
-    #   resp.environment.federation_mode #=> String, one of "FEDERATED", "LOCAL"
-    #   resp.environment.federation_parameters.saml_metadata_document #=> String
-    #   resp.environment.federation_parameters.saml_metadata_url #=> String
-    #   resp.environment.federation_parameters.application_call_back_url #=> String
-    #   resp.environment.federation_parameters.federation_urn #=> String
-    #   resp.environment.federation_parameters.federation_provider_name #=> String
-    #   resp.environment.federation_parameters.attribute_map #=> Hash
-    #   resp.environment.federation_parameters.attribute_map["FederationAttributeKey"] #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateEnvironment AWS API Documentation
-    #
-    # @overload update_environment(params = {})
-    # @param [Hash] params ({})
-    def update_environment(params = {}, options = {})
-      req = build_request(:update_environment, params)
+    def get_working_location(params = {}, options = {})
+      req = build_request(:get_working_location, params)
       req.send_request(options)
     end
 
@@ -690,8 +504,8 @@ module Aws::Finspace
         client: self,
         params: params,
         config: config)
-      context[:gem_name] = 'aws-sdk-finspace'
-      context[:gem_version] = '1.1.0'
+      context[:gem_name] = 'aws-sdk-finspacedata'
+      context[:gem_version] = '1.0.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

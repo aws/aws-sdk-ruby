@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2021-05-03)
+------------------
+
+* Feature - Updated ASFF to add the following new resource details objects: AwsEc2NetworkAcl, AwsEc2Subnet, and AwsElasticBeanstalkEnvironment.
+
 1.44.0 (2021-05-03)
 ------------------
 
