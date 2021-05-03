@@ -50,9 +50,14 @@ module Aws::Chime
     AttendeeTagKeyList = Shapes::ListShape.new(name: 'AttendeeTagKeyList')
     AttendeeTagList = Shapes::ListShape.new(name: 'AttendeeTagList')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    BatchChannelMemberships = Shapes::StructureShape.new(name: 'BatchChannelMemberships')
     BatchCreateAttendeeErrorList = Shapes::ListShape.new(name: 'BatchCreateAttendeeErrorList')
     BatchCreateAttendeeRequest = Shapes::StructureShape.new(name: 'BatchCreateAttendeeRequest')
     BatchCreateAttendeeResponse = Shapes::StructureShape.new(name: 'BatchCreateAttendeeResponse')
+    BatchCreateChannelMembershipError = Shapes::StructureShape.new(name: 'BatchCreateChannelMembershipError')
+    BatchCreateChannelMembershipErrors = Shapes::ListShape.new(name: 'BatchCreateChannelMembershipErrors')
+    BatchCreateChannelMembershipRequest = Shapes::StructureShape.new(name: 'BatchCreateChannelMembershipRequest')
+    BatchCreateChannelMembershipResponse = Shapes::StructureShape.new(name: 'BatchCreateChannelMembershipResponse')
     BatchCreateRoomMembershipRequest = Shapes::StructureShape.new(name: 'BatchCreateRoomMembershipRequest')
     BatchCreateRoomMembershipResponse = Shapes::StructureShape.new(name: 'BatchCreateRoomMembershipResponse')
     BatchDeletePhoneNumberRequest = Shapes::StructureShape.new(name: 'BatchDeletePhoneNumberRequest')
@@ -370,9 +375,11 @@ module Aws::Chime
     MeetingTagKeyList = Shapes::ListShape.new(name: 'MeetingTagKeyList')
     MeetingTagList = Shapes::ListShape.new(name: 'MeetingTagList')
     Member = Shapes::StructureShape.new(name: 'Member')
+    MemberArns = Shapes::ListShape.new(name: 'MemberArns')
     MemberError = Shapes::StructureShape.new(name: 'MemberError')
     MemberErrorList = Shapes::ListShape.new(name: 'MemberErrorList')
     MemberType = Shapes::StringShape.new(name: 'MemberType')
+    Members = Shapes::ListShape.new(name: 'Members')
     MembershipItem = Shapes::StructureShape.new(name: 'MembershipItem')
     MembershipItemList = Shapes::ListShape.new(name: 'MembershipItemList')
     MessageId = Shapes::StringShape.new(name: 'MessageId')
@@ -706,6 +713,12 @@ module Aws::Chime
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     BadRequestException.struct_class = Types::BadRequestException
 
+    BatchChannelMemberships.add_member(:invited_by, Shapes::ShapeRef.new(shape: Identity, location_name: "InvitedBy"))
+    BatchChannelMemberships.add_member(:type, Shapes::ShapeRef.new(shape: ChannelMembershipType, location_name: "Type"))
+    BatchChannelMemberships.add_member(:members, Shapes::ShapeRef.new(shape: Members, location_name: "Members"))
+    BatchChannelMemberships.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
+    BatchChannelMemberships.struct_class = Types::BatchChannelMemberships
+
     BatchCreateAttendeeErrorList.member = Shapes::ShapeRef.new(shape: CreateAttendeeError)
 
     BatchCreateAttendeeRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
@@ -715,6 +728,23 @@ module Aws::Chime
     BatchCreateAttendeeResponse.add_member(:attendees, Shapes::ShapeRef.new(shape: AttendeeList, location_name: "Attendees"))
     BatchCreateAttendeeResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchCreateAttendeeErrorList, location_name: "Errors"))
     BatchCreateAttendeeResponse.struct_class = Types::BatchCreateAttendeeResponse
+
+    BatchCreateChannelMembershipError.add_member(:member_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "MemberArn"))
+    BatchCreateChannelMembershipError.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    BatchCreateChannelMembershipError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    BatchCreateChannelMembershipError.struct_class = Types::BatchCreateChannelMembershipError
+
+    BatchCreateChannelMembershipErrors.member = Shapes::ShapeRef.new(shape: BatchCreateChannelMembershipError)
+
+    BatchCreateChannelMembershipRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    BatchCreateChannelMembershipRequest.add_member(:type, Shapes::ShapeRef.new(shape: ChannelMembershipType, location_name: "Type"))
+    BatchCreateChannelMembershipRequest.add_member(:member_arns, Shapes::ShapeRef.new(shape: MemberArns, required: true, location_name: "MemberArns"))
+    BatchCreateChannelMembershipRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    BatchCreateChannelMembershipRequest.struct_class = Types::BatchCreateChannelMembershipRequest
+
+    BatchCreateChannelMembershipResponse.add_member(:batch_channel_memberships, Shapes::ShapeRef.new(shape: BatchChannelMemberships, location_name: "BatchChannelMemberships"))
+    BatchCreateChannelMembershipResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchCreateChannelMembershipErrors, location_name: "Errors"))
+    BatchCreateChannelMembershipResponse.struct_class = Types::BatchCreateChannelMembershipResponse
 
     BatchCreateRoomMembershipRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     BatchCreateRoomMembershipRequest.add_member(:room_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "roomId"))
@@ -1847,12 +1877,16 @@ module Aws::Chime
     Member.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AccountId"))
     Member.struct_class = Types::Member
 
+    MemberArns.member = Shapes::ShapeRef.new(shape: ChimeArn)
+
     MemberError.add_member(:member_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MemberId"))
     MemberError.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
     MemberError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
     MemberError.struct_class = Types::MemberError
 
     MemberErrorList.member = Shapes::ShapeRef.new(shape: MemberError)
+
+    Members.member = Shapes::ShapeRef.new(shape: Identity)
 
     MembershipItem.add_member(:member_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MemberId"))
     MembershipItem.add_member(:role, Shapes::ShapeRef.new(shape: RoomMembershipRole, location_name: "Role"))
@@ -2606,6 +2640,23 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:batch_create_channel_membership, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchCreateChannelMembership"
+        o.http_method = "POST"
+        o.http_request_uri = "/channels/{channelArn}/memberships?operation=batch-create"
+        o.endpoint_pattern = {
+          "hostPrefix" => "messaging-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: BatchCreateChannelMembershipRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchCreateChannelMembershipResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+      end)
+
       api.add_operation(:batch_create_room_membership, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchCreateRoomMembership"
         o.http_method = "POST"
@@ -3226,6 +3277,7 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)

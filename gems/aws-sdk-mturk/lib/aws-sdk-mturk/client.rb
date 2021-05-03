@@ -1375,8 +1375,13 @@ module Aws::MTurk
       req.send_request(options)
     end
 
-    # The `GetAccountBalance` operation retrieves the amount of money in
-    # your Amazon Mechanical Turk account.
+    # The `GetAccountBalance` operation retrieves the Prepaid HITs balance
+    # in your Amazon Mechanical Turk account if you are a Prepaid Requester.
+    # Alternatively, this operation will retrieve the remaining available
+    # AWS Billing usage if you have enabled AWS Billing. Note: If you have
+    # enabled AWS Billing and still have a remaining Prepaid HITs balance,
+    # this balance can be viewed on the My Account page in the Requester
+    # console.
     #
     # @return [Types::GetAccountBalanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2859,7 +2864,7 @@ module Aws::MTurk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mturk'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

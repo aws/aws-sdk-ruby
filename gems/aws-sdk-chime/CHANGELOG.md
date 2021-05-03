@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2021-05-03)
+------------------
+
+* Feature - Added new BatchCreateChannelMembership API to support multiple membership creation for channels
+
 1.43.0 (2021-04-29)
 ------------------
 

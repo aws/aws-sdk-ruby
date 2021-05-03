@@ -830,7 +830,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # contains information about a REST API in version 1 of Amazon API
+    # Contains information about a REST API in version 1 of Amazon API
     # Gateway.
     #
     # @note When making an API call, you may pass AwsApiGatewayRestApiDetails
@@ -3849,6 +3849,189 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # An association between the network ACL and a subnet.
+    #
+    # @note When making an API call, you may pass AwsEc2NetworkAclAssociation
+    #   data as a hash:
+    #
+    #       {
+    #         network_acl_association_id: "NonEmptyString",
+    #         network_acl_id: "NonEmptyString",
+    #         subnet_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] network_acl_association_id
+    #   The identifier of the association between the network ACL and the
+    #   subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_acl_id
+    #   The identifier of the network ACL.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The identifier of the subnet that is associated with the network
+    #   ACL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2NetworkAclAssociation AWS API Documentation
+    #
+    class AwsEc2NetworkAclAssociation < Struct.new(
+      :network_acl_association_id,
+      :network_acl_id,
+      :subnet_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about an EC2 network access control list (ACL).
+    #
+    # @note When making an API call, you may pass AwsEc2NetworkAclDetails
+    #   data as a hash:
+    #
+    #       {
+    #         is_default: false,
+    #         network_acl_id: "NonEmptyString",
+    #         owner_id: "NonEmptyString",
+    #         vpc_id: "NonEmptyString",
+    #         associations: [
+    #           {
+    #             network_acl_association_id: "NonEmptyString",
+    #             network_acl_id: "NonEmptyString",
+    #             subnet_id: "NonEmptyString",
+    #           },
+    #         ],
+    #         entries: [
+    #           {
+    #             cidr_block: "NonEmptyString",
+    #             egress: false,
+    #             icmp_type_code: {
+    #               code: 1,
+    #               type: 1,
+    #             },
+    #             ipv_6_cidr_block: "NonEmptyString",
+    #             port_range: {
+    #               from: 1,
+    #               to: 1,
+    #             },
+    #             protocol: "NonEmptyString",
+    #             rule_action: "NonEmptyString",
+    #             rule_number: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] is_default
+    #   Whether this is the default network ACL for the VPC.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] network_acl_id
+    #   The identifier of the network ACL.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The identifier of the AWS account that owns the network ACL.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The identifier of the VPC for the network ACL.
+    #   @return [String]
+    #
+    # @!attribute [rw] associations
+    #   Associations between the network ACL and subnets.
+    #   @return [Array<Types::AwsEc2NetworkAclAssociation>]
+    #
+    # @!attribute [rw] entries
+    #   The set of rules in the network ACL.
+    #   @return [Array<Types::AwsEc2NetworkAclEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2NetworkAclDetails AWS API Documentation
+    #
+    class AwsEc2NetworkAclDetails < Struct.new(
+      :is_default,
+      :network_acl_id,
+      :owner_id,
+      :vpc_id,
+      :associations,
+      :entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A rule for the network ACL. Each rule allows or denies access based on
+    # the IP address, traffic direction, port, and protocol.
+    #
+    # @note When making an API call, you may pass AwsEc2NetworkAclEntry
+    #   data as a hash:
+    #
+    #       {
+    #         cidr_block: "NonEmptyString",
+    #         egress: false,
+    #         icmp_type_code: {
+    #           code: 1,
+    #           type: 1,
+    #         },
+    #         ipv_6_cidr_block: "NonEmptyString",
+    #         port_range: {
+    #           from: 1,
+    #           to: 1,
+    #         },
+    #         protocol: "NonEmptyString",
+    #         rule_action: "NonEmptyString",
+    #         rule_number: 1,
+    #       }
+    #
+    # @!attribute [rw] cidr_block
+    #   The IPV4 network range for which to deny or allow access.
+    #   @return [String]
+    #
+    # @!attribute [rw] egress
+    #   Whether the rule is an egress rule. An egress rule is a rule that
+    #   applies to traffic that leaves the subnet.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] icmp_type_code
+    #   The Internet Control Message Protocol (ICMP) type and code for which
+    #   to deny or allow access.
+    #   @return [Types::IcmpTypeCode]
+    #
+    # @!attribute [rw] ipv_6_cidr_block
+    #   The IPV6 network range for which to deny or allow access.
+    #   @return [String]
+    #
+    # @!attribute [rw] port_range
+    #   For TCP or UDP protocols, the range of ports that the rule applies
+    #   to.
+    #   @return [Types::PortRangeFromTo]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol that the rule applies to. To deny or allow access to
+    #   all protocols, use the value -1.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_action
+    #   Whether the rule is used to allow access or deny access.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_number
+    #   The rule number. The rules are processed in order by their number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2NetworkAclEntry AWS API Documentation
+    #
+    class AwsEc2NetworkAclEntry < Struct.new(
+      :cidr_block,
+      :egress,
+      :icmp_type_code,
+      :ipv_6_cidr_block,
+      :port_range,
+      :protocol,
+      :rule_action,
+      :rule_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the network interface attachment.
     #
     # @note When making an API call, you may pass AwsEc2NetworkInterfaceAttachment
@@ -4418,6 +4601,107 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Contains information about a subnet in EC2.
+    #
+    # @note When making an API call, you may pass AwsEc2SubnetDetails
+    #   data as a hash:
+    #
+    #       {
+    #         assign_ipv_6_address_on_creation: false,
+    #         availability_zone: "NonEmptyString",
+    #         availability_zone_id: "NonEmptyString",
+    #         available_ip_address_count: 1,
+    #         cidr_block: "NonEmptyString",
+    #         default_for_az: false,
+    #         map_public_ip_on_launch: false,
+    #         owner_id: "NonEmptyString",
+    #         state: "NonEmptyString",
+    #         subnet_arn: "NonEmptyString",
+    #         subnet_id: "NonEmptyString",
+    #         vpc_id: "NonEmptyString",
+    #         ipv_6_cidr_block_association_set: [
+    #           {
+    #             association_id: "NonEmptyString",
+    #             ipv_6_cidr_block: "NonEmptyString",
+    #             cidr_block_state: "NonEmptyString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] assign_ipv_6_address_on_creation
+    #   Whether to assign an IPV6 address to a network interface that is
+    #   created in this subnet.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone for the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The identifier of the Availability Zone for the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] available_ip_address_count
+    #   The number of available IPV4 addresses in the subnet. Does not
+    #   include addresses for stopped instances.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cidr_block
+    #   The IPV4 CIDR block that is assigned to the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_for_az
+    #   Whether this subnet is the default subnet for the Availability Zone.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] map_public_ip_on_launch
+    #   Whether instances in this subnet receive a public IP address.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] owner_id
+    #   The identifier of the AWS account that owns the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_arn
+    #   The ARN of the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The identifier of the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The identifier of the VPC that contains the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_6_cidr_block_association_set
+    #   The IPV6 CIDR blocks that are associated with the subnet.
+    #   @return [Array<Types::Ipv6CidrBlockAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2SubnetDetails AWS API Documentation
+    #
+    class AwsEc2SubnetDetails < Struct.new(
+      :assign_ipv_6_address_on_creation,
+      :availability_zone,
+      :availability_zone_id,
+      :available_ip_address_count,
+      :cidr_block,
+      :default_for_az,
+      :map_public_ip_on_launch,
+      :owner_id,
+      :state,
+      :subnet_arn,
+      :subnet_id,
+      :vpc_id,
+      :ipv_6_cidr_block_association_set)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An attachment to an AWS EC2 volume.
     #
     # @note When making an API call, you may pass AwsEc2VolumeAttachment
@@ -4581,6 +4865,237 @@ module Aws::SecurityHub
       :ipv_6_cidr_block_association_set,
       :dhcp_options_id,
       :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about an Elastic Beanstalk environment.
+    #
+    # @note When making an API call, you may pass AwsElasticBeanstalkEnvironmentDetails
+    #   data as a hash:
+    #
+    #       {
+    #         application_name: "NonEmptyString",
+    #         cname: "NonEmptyString",
+    #         date_created: "NonEmptyString",
+    #         date_updated: "NonEmptyString",
+    #         description: "NonEmptyString",
+    #         endpoint_url: "NonEmptyString",
+    #         environment_arn: "NonEmptyString",
+    #         environment_id: "NonEmptyString",
+    #         environment_links: [
+    #           {
+    #             environment_name: "NonEmptyString",
+    #             link_name: "NonEmptyString",
+    #           },
+    #         ],
+    #         environment_name: "NonEmptyString",
+    #         option_settings: [
+    #           {
+    #             namespace: "NonEmptyString",
+    #             option_name: "NonEmptyString",
+    #             resource_name: "NonEmptyString",
+    #             value: "NonEmptyString",
+    #           },
+    #         ],
+    #         platform_arn: "NonEmptyString",
+    #         solution_stack_name: "NonEmptyString",
+    #         status: "NonEmptyString",
+    #         tier: {
+    #           name: "NonEmptyString",
+    #           type: "NonEmptyString",
+    #           version: "NonEmptyString",
+    #         },
+    #         version_label: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] application_name
+    #   The name of the application that is associated with the environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] cname
+    #   The URL to the CNAME for this environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_created
+    #   The creation date for this environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_updated
+    #   The date when this environment was last modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_url
+    #   For load-balanced, autoscaling environments, the URL to the load
+    #   balancer. For single-instance environments, the IP address of the
+    #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_arn
+    #   The ARN of the environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_id
+    #   The identifier of the environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_links
+    #   Links to other environments in the same group.
+    #   @return [Array<Types::AwsElasticBeanstalkEnvironmentEnvironmentLink>]
+    #
+    # @!attribute [rw] environment_name
+    #   The name of the environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] option_settings
+    #   The configuration setting for the environment.
+    #   @return [Array<Types::AwsElasticBeanstalkEnvironmentOptionSetting>]
+    #
+    # @!attribute [rw] platform_arn
+    #   The ARN of the platform version for the environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] solution_stack_name
+    #   The name of the solution stack that is deployed with the
+    #   environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current operational status of the environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] tier
+    #   The tier of the environment.
+    #   @return [Types::AwsElasticBeanstalkEnvironmentTier]
+    #
+    # @!attribute [rw] version_label
+    #   The application version of the environment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElasticBeanstalkEnvironmentDetails AWS API Documentation
+    #
+    class AwsElasticBeanstalkEnvironmentDetails < Struct.new(
+      :application_name,
+      :cname,
+      :date_created,
+      :date_updated,
+      :description,
+      :endpoint_url,
+      :environment_arn,
+      :environment_id,
+      :environment_links,
+      :environment_name,
+      :option_settings,
+      :platform_arn,
+      :solution_stack_name,
+      :status,
+      :tier,
+      :version_label)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a link to another environment that is in
+    # the same group.
+    #
+    # @note When making an API call, you may pass AwsElasticBeanstalkEnvironmentEnvironmentLink
+    #   data as a hash:
+    #
+    #       {
+    #         environment_name: "NonEmptyString",
+    #         link_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] environment_name
+    #   The name of the linked environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_name
+    #   The name of the environment link.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElasticBeanstalkEnvironmentEnvironmentLink AWS API Documentation
+    #
+    class AwsElasticBeanstalkEnvironmentEnvironmentLink < Struct.new(
+      :environment_name,
+      :link_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A configuration option setting for the environment.
+    #
+    # @note When making an API call, you may pass AwsElasticBeanstalkEnvironmentOptionSetting
+    #   data as a hash:
+    #
+    #       {
+    #         namespace: "NonEmptyString",
+    #         option_name: "NonEmptyString",
+    #         resource_name: "NonEmptyString",
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] namespace
+    #   The type of resource that the configuration option is associated
+    #   with.
+    #   @return [String]
+    #
+    # @!attribute [rw] option_name
+    #   The name of the option.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the configuration setting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElasticBeanstalkEnvironmentOptionSetting AWS API Documentation
+    #
+    class AwsElasticBeanstalkEnvironmentOptionSetting < Struct.new(
+      :namespace,
+      :option_name,
+      :resource_name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the tier of the environment.
+    #
+    # @note When making an API call, you may pass AwsElasticBeanstalkEnvironmentTier
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString",
+    #         type: "NonEmptyString",
+    #         version: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the environment tier.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of environment tier.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the environment tier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElasticBeanstalkEnvironmentTier AWS API Documentation
+    #
+    class AwsElasticBeanstalkEnvironmentTier < Struct.new(
+      :name,
+      :type,
+      :version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10659,6 +11174,58 @@ module Aws::SecurityHub
     #                 network_interface_owner_id: "NonEmptyString",
     #                 private_ip_address: "NonEmptyString",
     #               },
+    #               aws_ec2_subnet: {
+    #                 assign_ipv_6_address_on_creation: false,
+    #                 availability_zone: "NonEmptyString",
+    #                 availability_zone_id: "NonEmptyString",
+    #                 available_ip_address_count: 1,
+    #                 cidr_block: "NonEmptyString",
+    #                 default_for_az: false,
+    #                 map_public_ip_on_launch: false,
+    #                 owner_id: "NonEmptyString",
+    #                 state: "NonEmptyString",
+    #                 subnet_arn: "NonEmptyString",
+    #                 subnet_id: "NonEmptyString",
+    #                 vpc_id: "NonEmptyString",
+    #                 ipv_6_cidr_block_association_set: [
+    #                   {
+    #                     association_id: "NonEmptyString",
+    #                     ipv_6_cidr_block: "NonEmptyString",
+    #                     cidr_block_state: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
+    #               aws_ec2_network_acl: {
+    #                 is_default: false,
+    #                 network_acl_id: "NonEmptyString",
+    #                 owner_id: "NonEmptyString",
+    #                 vpc_id: "NonEmptyString",
+    #                 associations: [
+    #                   {
+    #                     network_acl_association_id: "NonEmptyString",
+    #                     network_acl_id: "NonEmptyString",
+    #                     subnet_id: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 entries: [
+    #                   {
+    #                     cidr_block: "NonEmptyString",
+    #                     egress: false,
+    #                     icmp_type_code: {
+    #                       code: 1,
+    #                       type: 1,
+    #                     },
+    #                     ipv_6_cidr_block: "NonEmptyString",
+    #                     port_range: {
+    #                       from: 1,
+    #                       to: 1,
+    #                     },
+    #                     protocol: "NonEmptyString",
+    #                     rule_action: "NonEmptyString",
+    #                     rule_number: 1,
+    #                   },
+    #                 ],
+    #               },
     #               aws_elbv_2_load_balancer: {
     #                 availability_zones: [
     #                   {
@@ -10678,6 +11245,40 @@ module Aws::SecurityHub
     #                 },
     #                 type: "NonEmptyString",
     #                 vpc_id: "NonEmptyString",
+    #               },
+    #               aws_elastic_beanstalk_environment: {
+    #                 application_name: "NonEmptyString",
+    #                 cname: "NonEmptyString",
+    #                 date_created: "NonEmptyString",
+    #                 date_updated: "NonEmptyString",
+    #                 description: "NonEmptyString",
+    #                 endpoint_url: "NonEmptyString",
+    #                 environment_arn: "NonEmptyString",
+    #                 environment_id: "NonEmptyString",
+    #                 environment_links: [
+    #                   {
+    #                     environment_name: "NonEmptyString",
+    #                     link_name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 environment_name: "NonEmptyString",
+    #                 option_settings: [
+    #                   {
+    #                     namespace: "NonEmptyString",
+    #                     option_name: "NonEmptyString",
+    #                     resource_name: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 platform_arn: "NonEmptyString",
+    #                 solution_stack_name: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #                 tier: {
+    #                   name: "NonEmptyString",
+    #                   type: "NonEmptyString",
+    #                   version: "NonEmptyString",
+    #                 },
+    #                 version_label: "NonEmptyString",
     #               },
     #               aws_elasticsearch_domain: {
     #                 access_policies: "NonEmptyString",
@@ -14499,6 +15100,58 @@ module Aws::SecurityHub
     #                     network_interface_owner_id: "NonEmptyString",
     #                     private_ip_address: "NonEmptyString",
     #                   },
+    #                   aws_ec2_subnet: {
+    #                     assign_ipv_6_address_on_creation: false,
+    #                     availability_zone: "NonEmptyString",
+    #                     availability_zone_id: "NonEmptyString",
+    #                     available_ip_address_count: 1,
+    #                     cidr_block: "NonEmptyString",
+    #                     default_for_az: false,
+    #                     map_public_ip_on_launch: false,
+    #                     owner_id: "NonEmptyString",
+    #                     state: "NonEmptyString",
+    #                     subnet_arn: "NonEmptyString",
+    #                     subnet_id: "NonEmptyString",
+    #                     vpc_id: "NonEmptyString",
+    #                     ipv_6_cidr_block_association_set: [
+    #                       {
+    #                         association_id: "NonEmptyString",
+    #                         ipv_6_cidr_block: "NonEmptyString",
+    #                         cidr_block_state: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                   },
+    #                   aws_ec2_network_acl: {
+    #                     is_default: false,
+    #                     network_acl_id: "NonEmptyString",
+    #                     owner_id: "NonEmptyString",
+    #                     vpc_id: "NonEmptyString",
+    #                     associations: [
+    #                       {
+    #                         network_acl_association_id: "NonEmptyString",
+    #                         network_acl_id: "NonEmptyString",
+    #                         subnet_id: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     entries: [
+    #                       {
+    #                         cidr_block: "NonEmptyString",
+    #                         egress: false,
+    #                         icmp_type_code: {
+    #                           code: 1,
+    #                           type: 1,
+    #                         },
+    #                         ipv_6_cidr_block: "NonEmptyString",
+    #                         port_range: {
+    #                           from: 1,
+    #                           to: 1,
+    #                         },
+    #                         protocol: "NonEmptyString",
+    #                         rule_action: "NonEmptyString",
+    #                         rule_number: 1,
+    #                       },
+    #                     ],
+    #                   },
     #                   aws_elbv_2_load_balancer: {
     #                     availability_zones: [
     #                       {
@@ -14518,6 +15171,40 @@ module Aws::SecurityHub
     #                     },
     #                     type: "NonEmptyString",
     #                     vpc_id: "NonEmptyString",
+    #                   },
+    #                   aws_elastic_beanstalk_environment: {
+    #                     application_name: "NonEmptyString",
+    #                     cname: "NonEmptyString",
+    #                     date_created: "NonEmptyString",
+    #                     date_updated: "NonEmptyString",
+    #                     description: "NonEmptyString",
+    #                     endpoint_url: "NonEmptyString",
+    #                     environment_arn: "NonEmptyString",
+    #                     environment_id: "NonEmptyString",
+    #                     environment_links: [
+    #                       {
+    #                         environment_name: "NonEmptyString",
+    #                         link_name: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     environment_name: "NonEmptyString",
+    #                     option_settings: [
+    #                       {
+    #                         namespace: "NonEmptyString",
+    #                         option_name: "NonEmptyString",
+    #                         resource_name: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     platform_arn: "NonEmptyString",
+    #                     solution_stack_name: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                     tier: {
+    #                       name: "NonEmptyString",
+    #                       type: "NonEmptyString",
+    #                       version: "NonEmptyString",
+    #                     },
+    #                     version_label: "NonEmptyString",
     #                   },
     #                   aws_elasticsearch_domain: {
     #                     access_policies: "NonEmptyString",
@@ -19317,6 +20004,35 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # An Internet Control Message Protocol (ICMP) type and code.
+    #
+    # @note When making an API call, you may pass IcmpTypeCode
+    #   data as a hash:
+    #
+    #       {
+    #         code: 1,
+    #         type: 1,
+    #       }
+    #
+    # @!attribute [rw] code
+    #   The ICMP code for which to deny or allow access. To deny or allow
+    #   all codes, use the value -1.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] type
+    #   The ICMP type for which to deny or allow access. To deny or allow
+    #   all types, use the value -1.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/IcmpTypeCode AWS API Documentation
+    #
+    class IcmpTypeCode < Struct.new(
+      :code,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The list of the findings that cannot be imported. For each finding,
     # the list provides the error.
     #
@@ -20948,6 +21664,33 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # A range of ports.
+    #
+    # @note When making an API call, you may pass PortRangeFromTo
+    #   data as a hash:
+    #
+    #       {
+    #         from: 1,
+    #         to: 1,
+    #       }
+    #
+    # @!attribute [rw] from
+    #   The first port in the port range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to
+    #   The last port in the port range.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/PortRangeFromTo AWS API Documentation
+    #
+    class PortRangeFromTo < Struct.new(
+      :from,
+      :to)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of process-related information about a finding.
     #
     # @note When making an API call, you may pass ProcessDetails
@@ -21616,6 +22359,58 @@ module Aws::SecurityHub
     #             network_interface_owner_id: "NonEmptyString",
     #             private_ip_address: "NonEmptyString",
     #           },
+    #           aws_ec2_subnet: {
+    #             assign_ipv_6_address_on_creation: false,
+    #             availability_zone: "NonEmptyString",
+    #             availability_zone_id: "NonEmptyString",
+    #             available_ip_address_count: 1,
+    #             cidr_block: "NonEmptyString",
+    #             default_for_az: false,
+    #             map_public_ip_on_launch: false,
+    #             owner_id: "NonEmptyString",
+    #             state: "NonEmptyString",
+    #             subnet_arn: "NonEmptyString",
+    #             subnet_id: "NonEmptyString",
+    #             vpc_id: "NonEmptyString",
+    #             ipv_6_cidr_block_association_set: [
+    #               {
+    #                 association_id: "NonEmptyString",
+    #                 ipv_6_cidr_block: "NonEmptyString",
+    #                 cidr_block_state: "NonEmptyString",
+    #               },
+    #             ],
+    #           },
+    #           aws_ec2_network_acl: {
+    #             is_default: false,
+    #             network_acl_id: "NonEmptyString",
+    #             owner_id: "NonEmptyString",
+    #             vpc_id: "NonEmptyString",
+    #             associations: [
+    #               {
+    #                 network_acl_association_id: "NonEmptyString",
+    #                 network_acl_id: "NonEmptyString",
+    #                 subnet_id: "NonEmptyString",
+    #               },
+    #             ],
+    #             entries: [
+    #               {
+    #                 cidr_block: "NonEmptyString",
+    #                 egress: false,
+    #                 icmp_type_code: {
+    #                   code: 1,
+    #                   type: 1,
+    #                 },
+    #                 ipv_6_cidr_block: "NonEmptyString",
+    #                 port_range: {
+    #                   from: 1,
+    #                   to: 1,
+    #                 },
+    #                 protocol: "NonEmptyString",
+    #                 rule_action: "NonEmptyString",
+    #                 rule_number: 1,
+    #               },
+    #             ],
+    #           },
     #           aws_elbv_2_load_balancer: {
     #             availability_zones: [
     #               {
@@ -21635,6 +22430,40 @@ module Aws::SecurityHub
     #             },
     #             type: "NonEmptyString",
     #             vpc_id: "NonEmptyString",
+    #           },
+    #           aws_elastic_beanstalk_environment: {
+    #             application_name: "NonEmptyString",
+    #             cname: "NonEmptyString",
+    #             date_created: "NonEmptyString",
+    #             date_updated: "NonEmptyString",
+    #             description: "NonEmptyString",
+    #             endpoint_url: "NonEmptyString",
+    #             environment_arn: "NonEmptyString",
+    #             environment_id: "NonEmptyString",
+    #             environment_links: [
+    #               {
+    #                 environment_name: "NonEmptyString",
+    #                 link_name: "NonEmptyString",
+    #               },
+    #             ],
+    #             environment_name: "NonEmptyString",
+    #             option_settings: [
+    #               {
+    #                 namespace: "NonEmptyString",
+    #                 option_name: "NonEmptyString",
+    #                 resource_name: "NonEmptyString",
+    #                 value: "NonEmptyString",
+    #               },
+    #             ],
+    #             platform_arn: "NonEmptyString",
+    #             solution_stack_name: "NonEmptyString",
+    #             status: "NonEmptyString",
+    #             tier: {
+    #               name: "NonEmptyString",
+    #               type: "NonEmptyString",
+    #               version: "NonEmptyString",
+    #             },
+    #             version_label: "NonEmptyString",
     #           },
     #           aws_elasticsearch_domain: {
     #             access_policies: "NonEmptyString",
@@ -23072,6 +23901,58 @@ module Aws::SecurityHub
     #           network_interface_owner_id: "NonEmptyString",
     #           private_ip_address: "NonEmptyString",
     #         },
+    #         aws_ec2_subnet: {
+    #           assign_ipv_6_address_on_creation: false,
+    #           availability_zone: "NonEmptyString",
+    #           availability_zone_id: "NonEmptyString",
+    #           available_ip_address_count: 1,
+    #           cidr_block: "NonEmptyString",
+    #           default_for_az: false,
+    #           map_public_ip_on_launch: false,
+    #           owner_id: "NonEmptyString",
+    #           state: "NonEmptyString",
+    #           subnet_arn: "NonEmptyString",
+    #           subnet_id: "NonEmptyString",
+    #           vpc_id: "NonEmptyString",
+    #           ipv_6_cidr_block_association_set: [
+    #             {
+    #               association_id: "NonEmptyString",
+    #               ipv_6_cidr_block: "NonEmptyString",
+    #               cidr_block_state: "NonEmptyString",
+    #             },
+    #           ],
+    #         },
+    #         aws_ec2_network_acl: {
+    #           is_default: false,
+    #           network_acl_id: "NonEmptyString",
+    #           owner_id: "NonEmptyString",
+    #           vpc_id: "NonEmptyString",
+    #           associations: [
+    #             {
+    #               network_acl_association_id: "NonEmptyString",
+    #               network_acl_id: "NonEmptyString",
+    #               subnet_id: "NonEmptyString",
+    #             },
+    #           ],
+    #           entries: [
+    #             {
+    #               cidr_block: "NonEmptyString",
+    #               egress: false,
+    #               icmp_type_code: {
+    #                 code: 1,
+    #                 type: 1,
+    #               },
+    #               ipv_6_cidr_block: "NonEmptyString",
+    #               port_range: {
+    #                 from: 1,
+    #                 to: 1,
+    #               },
+    #               protocol: "NonEmptyString",
+    #               rule_action: "NonEmptyString",
+    #               rule_number: 1,
+    #             },
+    #           ],
+    #         },
     #         aws_elbv_2_load_balancer: {
     #           availability_zones: [
     #             {
@@ -23091,6 +23972,40 @@ module Aws::SecurityHub
     #           },
     #           type: "NonEmptyString",
     #           vpc_id: "NonEmptyString",
+    #         },
+    #         aws_elastic_beanstalk_environment: {
+    #           application_name: "NonEmptyString",
+    #           cname: "NonEmptyString",
+    #           date_created: "NonEmptyString",
+    #           date_updated: "NonEmptyString",
+    #           description: "NonEmptyString",
+    #           endpoint_url: "NonEmptyString",
+    #           environment_arn: "NonEmptyString",
+    #           environment_id: "NonEmptyString",
+    #           environment_links: [
+    #             {
+    #               environment_name: "NonEmptyString",
+    #               link_name: "NonEmptyString",
+    #             },
+    #           ],
+    #           environment_name: "NonEmptyString",
+    #           option_settings: [
+    #             {
+    #               namespace: "NonEmptyString",
+    #               option_name: "NonEmptyString",
+    #               resource_name: "NonEmptyString",
+    #               value: "NonEmptyString",
+    #             },
+    #           ],
+    #           platform_arn: "NonEmptyString",
+    #           solution_stack_name: "NonEmptyString",
+    #           status: "NonEmptyString",
+    #           tier: {
+    #             name: "NonEmptyString",
+    #             type: "NonEmptyString",
+    #             version: "NonEmptyString",
+    #           },
+    #           version_label: "NonEmptyString",
     #         },
     #         aws_elasticsearch_domain: {
     #           access_policies: "NonEmptyString",
@@ -24232,9 +25147,21 @@ module Aws::SecurityHub
     #   Details about an Elastic IP address.
     #   @return [Types::AwsEc2EipDetails]
     #
+    # @!attribute [rw] aws_ec2_subnet
+    #   Details about a subnet in EC2.
+    #   @return [Types::AwsEc2SubnetDetails]
+    #
+    # @!attribute [rw] aws_ec2_network_acl
+    #   Details about an EC2 network access control list (ACL).
+    #   @return [Types::AwsEc2NetworkAclDetails]
+    #
     # @!attribute [rw] aws_elbv_2_load_balancer
     #   Details about a load balancer.
     #   @return [Types::AwsElbv2LoadBalancerDetails]
+    #
+    # @!attribute [rw] aws_elastic_beanstalk_environment
+    #   Details about an Elastic Beanstalk environment.
+    #   @return [Types::AwsElasticBeanstalkEnvironmentDetails]
     #
     # @!attribute [rw] aws_elasticsearch_domain
     #   Details for an Elasticsearch domain.
@@ -24389,7 +25316,10 @@ module Aws::SecurityHub
       :aws_ec2_volume,
       :aws_ec2_vpc,
       :aws_ec2_eip,
+      :aws_ec2_subnet,
+      :aws_ec2_network_acl,
       :aws_elbv_2_load_balancer,
+      :aws_elastic_beanstalk_environment,
       :aws_elasticsearch_domain,
       :aws_s3_bucket,
       :aws_s3_account_public_access_block,

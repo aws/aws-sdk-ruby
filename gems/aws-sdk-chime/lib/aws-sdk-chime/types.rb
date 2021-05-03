@@ -592,6 +592,36 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # The membership information, including member ARNs, the channel ARN,
+    # and membership types.
+    #
+    # @!attribute [rw] invited_by
+    #   The details of a user.
+    #   @return [Types::Identity]
+    #
+    # @!attribute [rw] type
+    #   The membership types set for the channel users.
+    #   @return [String]
+    #
+    # @!attribute [rw] members
+    #   The users successfully added to the request.
+    #   @return [Array<Types::Identity>]
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel to which you're adding users.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchChannelMemberships AWS API Documentation
+    #
+    class BatchChannelMemberships < Struct.new(
+      :invited_by,
+      :type,
+      :members,
+      :channel_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BatchCreateAttendeeRequest
     #   data as a hash:
     #
@@ -641,6 +671,90 @@ module Aws::Chime
     #
     class BatchCreateAttendeeResponse < Struct.new(
       :attendees,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of failed member ARNs, error codes, and error messages.
+    #
+    # @!attribute [rw] member_arn
+    #   The ARN of the member that the service couldn't add.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchCreateChannelMembershipError AWS API Documentation
+    #
+    class BatchCreateChannelMembershipError < Struct.new(
+      :member_arn,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchCreateChannelMembershipRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         type: "DEFAULT", # accepts DEFAULT, HIDDEN
+    #         member_arns: ["ChimeArn"], # required
+    #         chime_bearer: "ChimeArn",
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel to which you're adding users.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The membership type of a user, `DEFAULT` or `HIDDEN`. Default
+    #   members are always returned as part of `ListChannelMemberships`.
+    #   Hidden members are only returned if the type filter in
+    #   `ListChannelMemberships` equals `HIDDEN`. Otherwise hidden members
+    #   are not returned. This is only supported by moderators.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_arns
+    #   The ARNs of the members you want to add to the channel.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] chime_bearer
+    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchCreateChannelMembershipRequest AWS API Documentation
+    #
+    class BatchCreateChannelMembershipRequest < Struct.new(
+      :channel_arn,
+      :type,
+      :member_arns,
+      :chime_bearer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] batch_channel_memberships
+    #   The list of channel memberships in the response.
+    #   @return [Types::BatchChannelMemberships]
+    #
+    # @!attribute [rw] errors
+    #   If the action fails for one or more of the memberships in the
+    #   request, a list of the memberships is returned, along with error
+    #   codes and error messages.
+    #   @return [Array<Types::BatchCreateChannelMembershipError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchCreateChannelMembershipResponse AWS API Documentation
+    #
+    class BatchCreateChannelMembershipResponse < Struct.new(
+      :batch_channel_memberships,
       :errors)
       SENSITIVE = []
       include Aws::Structure
@@ -2041,7 +2155,7 @@ module Aws::Chime
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/chime/latest/APIReference/API_Attendee.htmlCreateAttendee
+    #   [1]: https://docs.aws.amazon.com/chime/latest/APIReference/API_CreateAttendee.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateMeetingDialOutRequest AWS API Documentation
@@ -2478,12 +2592,12 @@ module Aws::Chime
     #       }
     #
     # @!attribute [rw] from_phone_number
-    #   The phone number that a user calls from.
+    #   The phone number that a user calls from. This is a phone number in
+    #   your Amazon Chime phone number inventory.
     #   @return [String]
     #
     # @!attribute [rw] to_phone_number
-    #   The phone number that the user dials in order to connect to a
-    #   meeting.
+    #   The phone number that the service should call.
     #   @return [String]
     #
     # @!attribute [rw] sip_media_application_id
@@ -6670,11 +6784,10 @@ module Aws::Chime
     #
     # @!attribute [rw] media_region
     #   The Region in which you create the meeting. Available values:
-    #   `af-south-1` , `ap-northeast-1` , `ap-northeast-2` , `ap-south-1` ,
-    #   `ap-southeast-1` , `ap-southeast-2` , `ca-central-1` ,
-    #   `eu-central-1` , `eu-north-1` , `eu-south-1` , `eu-west-1` ,
-    #   `eu-west-2` , `eu-west-3` , `sa-east-1` , `us-east-1` , `us-east-2`
-    #   , `us-west-1` , `us-west-2` .
+    #   `af-south-1`, `ap-northeast-1`, `ap-northeast-2`, `ap-south-1`,
+    #   `ap-southeast-1`, `ap-southeast-2`, `ca-central-1`, `eu-central-1`,
+    #   `eu-north-1`, `eu-south-1`, `eu-west-1`, `eu-west-2`, `eu-west-3`,
+    #   `sa-east-1`, `us-east-1`, `us-east-2`, `us-west-1`, `us-west-2`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Meeting AWS API Documentation

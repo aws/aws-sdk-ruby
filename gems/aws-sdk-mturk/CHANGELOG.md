@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2021-05-03)
+------------------
+
+* Feature - Documentation updates for Amazon Mechanical Turk, GetAccountBalanceOperation operation
+
 1.29.0 (2021-03-10)
 ------------------
 

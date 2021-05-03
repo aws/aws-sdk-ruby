@@ -322,6 +322,7 @@ module Aws
             'FIS' => 'fis',
             'FMS' => 'fms',
             'FSx' => 'fsx',
+            'Finspace' => 'finspace',
             'Firehose' => 'firehose',
             'ForecastQueryService' => 'forecastquery',
             'ForecastService' => 'forecast',

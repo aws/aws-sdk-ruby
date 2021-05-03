@@ -328,6 +328,12 @@
   "FSx": {
     "models": "fsx/2018-03-01"
   },
+  "FinSpace": {
+    "models": "finspace-data/2020-07-13"
+  },
+  "Finspace": {
+    "models": "finspace/2021-03-12"
+  },
   "Firehose": {
     "models": "firehose/2015-08-04"
   },

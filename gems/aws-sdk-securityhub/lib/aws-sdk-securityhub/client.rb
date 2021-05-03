@@ -366,6 +366,14 @@ module Aws::SecurityHub
     # This method is deprecated. Instead, use
     # `AcceptAdministratorInvitation`.
     #
+    # The Security Hub console continues to use `AcceptInvitation`. It will
+    # eventually change to use `AcceptAdministratorInvitation`. Any IAM
+    # policies that specifically control access to this function must
+    # continue to use `AcceptInvitation`. You should also add
+    # `AcceptAdministratorInvitation` to your policies to ensure that the
+    # correct permissions are in place after the console begins to use
+    # `AcceptAdministratorInvitation`.
+    #
     # Accepts the invitation to be a member account and be monitored by the
     # Security Hub administrator account that the invitation was sent from.
     #
@@ -1045,6 +1053,58 @@ module Aws::SecurityHub
     #                 network_interface_owner_id: "NonEmptyString",
     #                 private_ip_address: "NonEmptyString",
     #               },
+    #               aws_ec2_subnet: {
+    #                 assign_ipv_6_address_on_creation: false,
+    #                 availability_zone: "NonEmptyString",
+    #                 availability_zone_id: "NonEmptyString",
+    #                 available_ip_address_count: 1,
+    #                 cidr_block: "NonEmptyString",
+    #                 default_for_az: false,
+    #                 map_public_ip_on_launch: false,
+    #                 owner_id: "NonEmptyString",
+    #                 state: "NonEmptyString",
+    #                 subnet_arn: "NonEmptyString",
+    #                 subnet_id: "NonEmptyString",
+    #                 vpc_id: "NonEmptyString",
+    #                 ipv_6_cidr_block_association_set: [
+    #                   {
+    #                     association_id: "NonEmptyString",
+    #                     ipv_6_cidr_block: "NonEmptyString",
+    #                     cidr_block_state: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
+    #               aws_ec2_network_acl: {
+    #                 is_default: false,
+    #                 network_acl_id: "NonEmptyString",
+    #                 owner_id: "NonEmptyString",
+    #                 vpc_id: "NonEmptyString",
+    #                 associations: [
+    #                   {
+    #                     network_acl_association_id: "NonEmptyString",
+    #                     network_acl_id: "NonEmptyString",
+    #                     subnet_id: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 entries: [
+    #                   {
+    #                     cidr_block: "NonEmptyString",
+    #                     egress: false,
+    #                     icmp_type_code: {
+    #                       code: 1,
+    #                       type: 1,
+    #                     },
+    #                     ipv_6_cidr_block: "NonEmptyString",
+    #                     port_range: {
+    #                       from: 1,
+    #                       to: 1,
+    #                     },
+    #                     protocol: "NonEmptyString",
+    #                     rule_action: "NonEmptyString",
+    #                     rule_number: 1,
+    #                   },
+    #                 ],
+    #               },
     #               aws_elbv_2_load_balancer: {
     #                 availability_zones: [
     #                   {
@@ -1064,6 +1124,40 @@ module Aws::SecurityHub
     #                 },
     #                 type: "NonEmptyString",
     #                 vpc_id: "NonEmptyString",
+    #               },
+    #               aws_elastic_beanstalk_environment: {
+    #                 application_name: "NonEmptyString",
+    #                 cname: "NonEmptyString",
+    #                 date_created: "NonEmptyString",
+    #                 date_updated: "NonEmptyString",
+    #                 description: "NonEmptyString",
+    #                 endpoint_url: "NonEmptyString",
+    #                 environment_arn: "NonEmptyString",
+    #                 environment_id: "NonEmptyString",
+    #                 environment_links: [
+    #                   {
+    #                     environment_name: "NonEmptyString",
+    #                     link_name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 environment_name: "NonEmptyString",
+    #                 option_settings: [
+    #                   {
+    #                     namespace: "NonEmptyString",
+    #                     option_name: "NonEmptyString",
+    #                     resource_name: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 platform_arn: "NonEmptyString",
+    #                 solution_stack_name: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #                 tier: {
+    #                   name: "NonEmptyString",
+    #                   type: "NonEmptyString",
+    #                   version: "NonEmptyString",
+    #                 },
+    #                 version_label: "NonEmptyString",
     #               },
     #               aws_elasticsearch_domain: {
     #                 access_policies: "NonEmptyString",
@@ -3852,6 +3946,15 @@ module Aws::SecurityHub
     # This method is deprecated. Instead, use
     # `DisassociateFromAdministratorAccount`.
     #
+    # The Security Hub console continues to use
+    # `DisassociateFromMasterAccount`. It will eventually change to use
+    # `DisassociateFromAdministratorAccount`. Any IAM policies that
+    # specifically control access to this function must continue to use
+    # `DisassociateFromMasterAccount`. You should also add
+    # `DisassociateFromAdministratorAccount` to your policies to ensure that
+    # the correct permissions are in place after the console begins to use
+    # `DisassociateFromAdministratorAccount`.
+    #
     # Disassociates the current Security Hub member account from the
     # associated administrator account.
     #
@@ -5041,6 +5144,41 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_ec2_eip.network_interface_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_eip.network_interface_owner_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_eip.private_ip_address #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.assign_ipv_6_address_on_creation #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.availability_zone #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.availability_zone_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.available_ip_address_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.cidr_block #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.default_for_az #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.map_public_ip_on_launch #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.owner_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.state #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.subnet_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.subnet_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.vpc_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.ipv_6_cidr_block_association_set #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.ipv_6_cidr_block_association_set[0].association_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_subnet.ipv_6_cidr_block_association_set[0].cidr_block_state #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.is_default #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.network_acl_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.owner_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.vpc_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.associations #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.associations[0].network_acl_association_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.associations[0].network_acl_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.associations[0].subnet_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.entries #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.entries[0].cidr_block #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.entries[0].egress #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.entries[0].icmp_type_code.code #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.entries[0].icmp_type_code.type #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.entries[0].ipv_6_cidr_block #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.entries[0].port_range.from #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.entries[0].port_range.to #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.entries[0].protocol #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.entries[0].rule_action #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_acl.entries[0].rule_number #=> Integer
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.availability_zones #=> Array
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.availability_zones[0].zone_name #=> String
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.availability_zones[0].subnet_id #=> String
@@ -5055,6 +5193,30 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.state.reason #=> String
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.type #=> String
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.vpc_id #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.application_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.cname #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.date_created #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.date_updated #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.description #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.endpoint_url #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.environment_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.environment_id #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.environment_links #=> Array
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.environment_links[0].environment_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.environment_links[0].link_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.environment_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.option_settings #=> Array
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.option_settings[0].namespace #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.option_settings[0].option_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.option_settings[0].resource_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.option_settings[0].value #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.platform_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.solution_stack_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.status #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.tier.name #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.tier.type #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.tier.version #=> String
+    #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.version_label #=> String
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.access_policies #=> String
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.domain_endpoint_options.enforce_https #=> Boolean
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.domain_endpoint_options.tls_security_policy #=> String
@@ -6361,6 +6523,13 @@ module Aws::SecurityHub
     end
 
     # This method is deprecated. Instead, use `GetAdministratorAccount`.
+    #
+    # The Security Hub console continues to use `GetMasterAccount`. It will
+    # eventually change to use `GetAdministratorAccount`. Any IAM policies
+    # that specifically control access to this function must continue to use
+    # `GetMasterAccount`. You should also add `GetAdministratorAccount` to
+    # your policies to ensure that the correct permissions are in place
+    # after the console begins to use `GetAdministratorAccount`.
     #
     # Provides the details for the Security Hub administrator account for
     # the current member account.
@@ -8168,7 +8337,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

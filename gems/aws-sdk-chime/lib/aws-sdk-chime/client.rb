@@ -530,6 +530,61 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Adds a specified number of users to a channel.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel to which you're adding users.
+    #
+    # @option params [String] :type
+    #   The membership type of a user, `DEFAULT` or `HIDDEN`. Default members
+    #   are always returned as part of `ListChannelMemberships`. Hidden
+    #   members are only returned if the type filter in
+    #   `ListChannelMemberships` equals `HIDDEN`. Otherwise hidden members are
+    #   not returned. This is only supported by moderators.
+    #
+    # @option params [required, Array<String>] :member_arns
+    #   The ARNs of the members you want to add to the channel.
+    #
+    # @option params [String] :chime_bearer
+    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #
+    # @return [Types::BatchCreateChannelMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchCreateChannelMembershipResponse#batch_channel_memberships #batch_channel_memberships} => Types::BatchChannelMemberships
+    #   * {Types::BatchCreateChannelMembershipResponse#errors #errors} => Array&lt;Types::BatchCreateChannelMembershipError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_create_channel_membership({
+    #     channel_arn: "ChimeArn", # required
+    #     type: "DEFAULT", # accepts DEFAULT, HIDDEN
+    #     member_arns: ["ChimeArn"], # required
+    #     chime_bearer: "ChimeArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.batch_channel_memberships.invited_by.arn #=> String
+    #   resp.batch_channel_memberships.invited_by.name #=> String
+    #   resp.batch_channel_memberships.type #=> String, one of "DEFAULT", "HIDDEN"
+    #   resp.batch_channel_memberships.members #=> Array
+    #   resp.batch_channel_memberships.members[0].arn #=> String
+    #   resp.batch_channel_memberships.members[0].name #=> String
+    #   resp.batch_channel_memberships.channel_arn #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].member_arn #=> String
+    #   resp.errors[0].error_code #=> String, one of "BadRequest", "Conflict", "Forbidden", "NotFound", "PreconditionFailed", "ResourceLimitExceeded", "ServiceFailure", "AccessDenied", "ServiceUnavailable", "Throttled", "Throttling", "Unauthorized", "Unprocessable", "VoiceConnectorGroupAssociationsExist", "PhoneNumberAssociationsExist"
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchCreateChannelMembership AWS API Documentation
+    #
+    # @overload batch_create_channel_membership(params = {})
+    # @param [Hash] params ({})
+    def batch_create_channel_membership(params = {}, options = {})
+      req = build_request(:batch_create_channel_membership, params)
+      req.send_request(options)
+    end
+
     # Adds up to 50 members to a chat room in an Amazon Chime Enterprise
     # account. Members can be users or bots. The member role designates
     # whether the member is a chat room administrator or a general chat room
@@ -1465,7 +1520,7 @@ module Aws::Chime
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/chime/latest/APIReference/API_Attendee.htmlCreateAttendee
+    #   [1]: https://docs.aws.amazon.com/chime/latest/APIReference/API_CreateAttendee.html
     #
     # @return [Types::CreateMeetingDialOutResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1871,10 +1926,11 @@ module Aws::Chime
     # `sipMediaApplicationId`.
     #
     # @option params [required, String] :from_phone_number
-    #   The phone number that a user calls from.
+    #   The phone number that a user calls from. This is a phone number in
+    #   your Amazon Chime phone number inventory.
     #
     # @option params [required, String] :to_phone_number
-    #   The phone number that the user dials in order to connect to a meeting.
+    #   The phone number that the service should call.
     #
     # @option params [required, String] :sip_media_application_id
     #   The ID of the SIP media application.
@@ -2257,10 +2313,10 @@ module Aws::Chime
     end
 
     # Deletes an attendee from the specified Amazon Chime SDK meeting and
-    # deletes their `JoinToken` . Attendees are automatically deleted when a
+    # deletes their `JoinToken`. Attendees are automatically deleted when a
     # Amazon Chime SDK meeting is deleted. For more information about the
     # Amazon Chime SDK, see [Using the Amazon Chime SDK][1] in the *Amazon
-    # Chime Developer Guide* .
+    # Chime Developer Guide*.
     #
     #
     #
@@ -2496,11 +2552,11 @@ module Aws::Chime
       req.send_request(options)
     end
 
-    # Deletes the specified Amazon Chime SDK meeting. When a meeting is
-    # deleted, its attendees are also deleted, clients connected to the
-    # meeting are disconnected, and clients can no longer join the meeting.
-    # For more information about the Amazon Chime SDK, see [Using the Amazon
-    # Chime SDK][1] in the *Amazon Chime Developer Guide*.
+    # Deletes the specified Amazon Chime SDK meeting. The operation deletes
+    # all attendees, disconnects all clients, and prevents new clients from
+    # joining the meeting. For more information about the Amazon Chime SDK,
+    # see [Using the Amazon Chime SDK][1] in the *Amazon Chime Developer
+    # Guide*.
     #
     #
     #
@@ -4551,7 +4607,7 @@ module Aws::Chime
 
     # Lists the Amazon Chime accounts under the administrator's AWS
     # account. You can filter accounts by account name prefix. To find out
-    # which Amazon Chime account a user belongs to, toucan filter by the
+    # which Amazon Chime account a user belongs to, you can filter by the
     # user's email address, which returns one account result.
     #
     # @option params [String] :name
@@ -5195,7 +5251,7 @@ module Aws::Chime
     # **Functionality &amp; restrictions**
     #
     # * Use privacy = `PUBLIC` to retrieve all public channels in the
-    #   account
+    #   account.
     #
     # * Only an `AppInstanceAdmin` can set privacy = `PRIVATE` to list the
     #   private channels in an account.
@@ -8018,7 +8074,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

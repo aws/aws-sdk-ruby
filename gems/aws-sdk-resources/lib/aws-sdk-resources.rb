@@ -104,6 +104,7 @@ module Aws
   autoload :FIS, 'aws-sdk-fis'
   autoload :FMS, 'aws-sdk-fms'
   autoload :FSx, 'aws-sdk-fsx'
+  autoload :Finspace, 'aws-sdk-finspace'
   autoload :Firehose, 'aws-sdk-firehose'
   autoload :ForecastQueryService, 'aws-sdk-forecastqueryservice'
   autoload :ForecastService, 'aws-sdk-forecastservice'
