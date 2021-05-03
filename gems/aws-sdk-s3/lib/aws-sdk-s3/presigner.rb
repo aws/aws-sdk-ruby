@@ -195,6 +195,15 @@ module Aws
         req.handlers.remove(Aws::S3::Plugins::S3Signer::V4Handler)
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
 
+        # Used for excluding presigned_urls from API request count.
+        #
+        # Store context information as early as possible, to allow
+        # handlers to perform decisions based on this flag if need.
+        req.handle(step: :initialize, priority: 98) do |context|
+          context[:presigned_url] = true
+          @handler.call(context)
+        end
+
         req.handle(step: :send) do |context|
           if scheme != http_req.endpoint.scheme
             endpoint = http_req.endpoint.dup
@@ -241,9 +250,6 @@ module Aws
             expires_in: expires_in,
             time: time
           ).to_s
-
-          # Used for excluding presigned_urls from API request count
-          context[:presigned_url] = true
 
           Seahorse::Client::Response.new(context: context, data: url)
         end
