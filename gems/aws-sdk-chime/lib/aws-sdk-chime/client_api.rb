@@ -354,6 +354,8 @@ module Aws::Chime
     ListSipMediaApplicationsResponse = Shapes::StructureShape.new(name: 'ListSipMediaApplicationsResponse')
     ListSipRulesRequest = Shapes::StructureShape.new(name: 'ListSipRulesRequest')
     ListSipRulesResponse = Shapes::StructureShape.new(name: 'ListSipRulesResponse')
+    ListSupportedPhoneNumberCountriesRequest = Shapes::StructureShape.new(name: 'ListSupportedPhoneNumberCountriesRequest')
+    ListSupportedPhoneNumberCountriesResponse = Shapes::StructureShape.new(name: 'ListSupportedPhoneNumberCountriesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListUsersRequest = Shapes::StructureShape.new(name: 'ListUsersRequest')
@@ -414,6 +416,8 @@ module Aws::Chime
     PhoneNumberAssociationList = Shapes::ListShape.new(name: 'PhoneNumberAssociationList')
     PhoneNumberAssociationName = Shapes::StringShape.new(name: 'PhoneNumberAssociationName')
     PhoneNumberCapabilities = Shapes::StructureShape.new(name: 'PhoneNumberCapabilities')
+    PhoneNumberCountriesList = Shapes::ListShape.new(name: 'PhoneNumberCountriesList')
+    PhoneNumberCountry = Shapes::StructureShape.new(name: 'PhoneNumberCountry')
     PhoneNumberError = Shapes::StructureShape.new(name: 'PhoneNumberError')
     PhoneNumberErrorList = Shapes::ListShape.new(name: 'PhoneNumberErrorList')
     PhoneNumberList = Shapes::ListShape.new(name: 'PhoneNumberList')
@@ -424,6 +428,7 @@ module Aws::Chime
     PhoneNumberProductType = Shapes::StringShape.new(name: 'PhoneNumberProductType')
     PhoneNumberStatus = Shapes::StringShape.new(name: 'PhoneNumberStatus')
     PhoneNumberType = Shapes::StringShape.new(name: 'PhoneNumberType')
+    PhoneNumberTypeList = Shapes::ListShape.new(name: 'PhoneNumberTypeList')
     Port = Shapes::IntegerShape.new(name: 'Port')
     PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
     ProfileServiceMaxResults = Shapes::IntegerShape.new(name: 'ProfileServiceMaxResults')
@@ -1797,6 +1802,12 @@ module Aws::Chime
     ListSipRulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location_name: "NextToken"))
     ListSipRulesResponse.struct_class = Types::ListSipRulesResponse
 
+    ListSupportedPhoneNumberCountriesRequest.add_member(:product_type, Shapes::ShapeRef.new(shape: PhoneNumberProductType, required: true, location: "querystring", location_name: "product-type"))
+    ListSupportedPhoneNumberCountriesRequest.struct_class = Types::ListSupportedPhoneNumberCountriesRequest
+
+    ListSupportedPhoneNumberCountriesResponse.add_member(:phone_number_countries, Shapes::ShapeRef.new(shape: PhoneNumberCountriesList, location_name: "PhoneNumberCountries"))
+    ListSupportedPhoneNumberCountriesResponse.struct_class = Types::ListSupportedPhoneNumberCountriesResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "arn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -1932,6 +1943,7 @@ module Aws::Chime
 
     PhoneNumber.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: String, location_name: "PhoneNumberId"))
     PhoneNumber.add_member(:e164_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, location_name: "E164PhoneNumber"))
+    PhoneNumber.add_member(:country, Shapes::ShapeRef.new(shape: Alpha2CountryCode, location_name: "Country"))
     PhoneNumber.add_member(:type, Shapes::ShapeRef.new(shape: PhoneNumberType, location_name: "Type"))
     PhoneNumber.add_member(:product_type, Shapes::ShapeRef.new(shape: PhoneNumberProductType, location_name: "ProductType"))
     PhoneNumber.add_member(:status, Shapes::ShapeRef.new(shape: PhoneNumberStatus, location_name: "Status"))
@@ -1959,6 +1971,12 @@ module Aws::Chime
     PhoneNumberCapabilities.add_member(:outbound_mms, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "OutboundMMS"))
     PhoneNumberCapabilities.struct_class = Types::PhoneNumberCapabilities
 
+    PhoneNumberCountriesList.member = Shapes::ShapeRef.new(shape: PhoneNumberCountry)
+
+    PhoneNumberCountry.add_member(:country_code, Shapes::ShapeRef.new(shape: Alpha2CountryCode, location_name: "CountryCode"))
+    PhoneNumberCountry.add_member(:supported_phone_number_types, Shapes::ShapeRef.new(shape: PhoneNumberTypeList, location_name: "SupportedPhoneNumberTypes"))
+    PhoneNumberCountry.struct_class = Types::PhoneNumberCountry
+
     PhoneNumberError.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PhoneNumberId"))
     PhoneNumberError.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
     PhoneNumberError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
@@ -1977,6 +1995,8 @@ module Aws::Chime
     PhoneNumberOrder.struct_class = Types::PhoneNumberOrder
 
     PhoneNumberOrderList.member = Shapes::ShapeRef.new(shape: PhoneNumberOrder)
+
+    PhoneNumberTypeList.member = Shapes::ShapeRef.new(shape: PhoneNumberType)
 
     Proxy.add_member(:default_session_expiry_minutes, Shapes::ShapeRef.new(shape: Integer, location_name: "DefaultSessionExpiryMinutes"))
     Proxy.add_member(:disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Disabled"))
@@ -2164,14 +2184,16 @@ module Aws::Chime
 
     SearchAvailablePhoneNumbersRequest.add_member(:area_code, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "area-code"))
     SearchAvailablePhoneNumbersRequest.add_member(:city, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "city"))
-    SearchAvailablePhoneNumbersRequest.add_member(:country, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "country"))
+    SearchAvailablePhoneNumbersRequest.add_member(:country, Shapes::ShapeRef.new(shape: Alpha2CountryCode, location: "querystring", location_name: "country"))
     SearchAvailablePhoneNumbersRequest.add_member(:state, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "state"))
     SearchAvailablePhoneNumbersRequest.add_member(:toll_free_prefix, Shapes::ShapeRef.new(shape: TollFreePrefix, location: "querystring", location_name: "toll-free-prefix"))
+    SearchAvailablePhoneNumbersRequest.add_member(:phone_number_type, Shapes::ShapeRef.new(shape: PhoneNumberType, location: "querystring", location_name: "phone-number-type"))
     SearchAvailablePhoneNumbersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PhoneNumberMaxResults, location: "querystring", location_name: "max-results"))
     SearchAvailablePhoneNumbersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     SearchAvailablePhoneNumbersRequest.struct_class = Types::SearchAvailablePhoneNumbersRequest
 
     SearchAvailablePhoneNumbersResponse.add_member(:e164_phone_numbers, Shapes::ShapeRef.new(shape: E164PhoneNumberList, location_name: "E164PhoneNumbers"))
+    SearchAvailablePhoneNumbersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     SearchAvailablePhoneNumbersResponse.struct_class = Types::SearchAvailablePhoneNumbersResponse
 
     SendChannelMessageRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
@@ -4748,6 +4770,21 @@ module Aws::Chime
         )
       end)
 
+      api.add_operation(:list_supported_phone_number_countries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSupportedPhoneNumberCountries"
+        o.http_method = "GET"
+        o.http_request_uri = "/phone-number-countries"
+        o.input = Shapes::ShapeRef.new(shape: ListSupportedPhoneNumberCountriesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSupportedPhoneNumberCountriesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -5146,6 +5183,12 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:send_channel_message, Seahorse::Model::Operation.new.tap do |o|

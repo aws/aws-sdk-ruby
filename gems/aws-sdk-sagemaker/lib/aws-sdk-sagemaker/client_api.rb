@@ -862,6 +862,7 @@ module Aws::SageMaker
     MaxRuntimePerTrainingJobInSeconds = Shapes::IntegerShape.new(name: 'MaxRuntimePerTrainingJobInSeconds')
     MaxWaitTimeInSeconds = Shapes::IntegerShape.new(name: 'MaxWaitTimeInSeconds')
     MaximumExecutionTimeoutInSeconds = Shapes::IntegerShape.new(name: 'MaximumExecutionTimeoutInSeconds')
+    MaximumRetryAttempts = Shapes::IntegerShape.new(name: 'MaximumRetryAttempts')
     MediaType = Shapes::StringShape.new(name: 'MediaType')
     MemberDefinition = Shapes::StructureShape.new(name: 'MemberDefinition')
     MemberDefinitions = Shapes::ListShape.new(name: 'MemberDefinitions')
@@ -1152,6 +1153,7 @@ module Aws::SageMaker
     ResponseMIMETypes = Shapes::ListShape.new(name: 'ResponseMIMETypes')
     RetentionPolicy = Shapes::StructureShape.new(name: 'RetentionPolicy')
     RetentionType = Shapes::StringShape.new(name: 'RetentionType')
+    RetryStrategy = Shapes::StructureShape.new(name: 'RetryStrategy')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RootAccess = Shapes::StringShape.new(name: 'RootAccess')
     RuleConfigurationName = Shapes::StringShape.new(name: 'RuleConfigurationName')
@@ -2277,6 +2279,7 @@ module Aws::SageMaker
     CreateTrainingJobRequest.add_member(:profiler_config, Shapes::ShapeRef.new(shape: ProfilerConfig, location_name: "ProfilerConfig"))
     CreateTrainingJobRequest.add_member(:profiler_rule_configurations, Shapes::ShapeRef.new(shape: ProfilerRuleConfigurations, location_name: "ProfilerRuleConfigurations"))
     CreateTrainingJobRequest.add_member(:environment, Shapes::ShapeRef.new(shape: TrainingEnvironmentMap, location_name: "Environment"))
+    CreateTrainingJobRequest.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: RetryStrategy, location_name: "RetryStrategy"))
     CreateTrainingJobRequest.struct_class = Types::CreateTrainingJobRequest
 
     CreateTrainingJobResponse.add_member(:training_job_arn, Shapes::ShapeRef.new(shape: TrainingJobArn, required: true, location_name: "TrainingJobArn"))
@@ -3282,6 +3285,7 @@ module Aws::SageMaker
     DescribeTrainingJobResponse.add_member(:profiler_rule_configurations, Shapes::ShapeRef.new(shape: ProfilerRuleConfigurations, location_name: "ProfilerRuleConfigurations"))
     DescribeTrainingJobResponse.add_member(:profiler_rule_evaluation_statuses, Shapes::ShapeRef.new(shape: ProfilerRuleEvaluationStatuses, location_name: "ProfilerRuleEvaluationStatuses"))
     DescribeTrainingJobResponse.add_member(:profiling_status, Shapes::ShapeRef.new(shape: ProfilingStatus, location_name: "ProfilingStatus"))
+    DescribeTrainingJobResponse.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: RetryStrategy, location_name: "RetryStrategy"))
     DescribeTrainingJobResponse.add_member(:environment, Shapes::ShapeRef.new(shape: TrainingEnvironmentMap, location_name: "Environment"))
     DescribeTrainingJobResponse.struct_class = Types::DescribeTrainingJobResponse
 
@@ -3753,6 +3757,7 @@ module Aws::SageMaker
     HyperParameterTrainingJobDefinition.add_member(:enable_inter_container_traffic_encryption, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableInterContainerTrafficEncryption"))
     HyperParameterTrainingJobDefinition.add_member(:enable_managed_spot_training, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableManagedSpotTraining"))
     HyperParameterTrainingJobDefinition.add_member(:checkpoint_config, Shapes::ShapeRef.new(shape: CheckpointConfig, location_name: "CheckpointConfig"))
+    HyperParameterTrainingJobDefinition.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: RetryStrategy, location_name: "RetryStrategy"))
     HyperParameterTrainingJobDefinition.struct_class = Types::HyperParameterTrainingJobDefinition
 
     HyperParameterTrainingJobDefinitions.member = Shapes::ShapeRef.new(shape: HyperParameterTrainingJobDefinition)
@@ -5477,6 +5482,9 @@ module Aws::SageMaker
     RetentionPolicy.add_member(:home_efs_file_system, Shapes::ShapeRef.new(shape: RetentionType, location_name: "HomeEfsFileSystem"))
     RetentionPolicy.struct_class = Types::RetentionPolicy
 
+    RetryStrategy.add_member(:maximum_retry_attempts, Shapes::ShapeRef.new(shape: MaximumRetryAttempts, required: true, location_name: "MaximumRetryAttempts"))
+    RetryStrategy.struct_class = Types::RetryStrategy
+
     RuleParameters.key = Shapes::ShapeRef.new(shape: ConfigKey)
     RuleParameters.value = Shapes::ShapeRef.new(shape: ConfigValue)
 
@@ -5706,6 +5714,7 @@ module Aws::SageMaker
     TrainingJob.add_member(:tensor_board_output_config, Shapes::ShapeRef.new(shape: TensorBoardOutputConfig, location_name: "TensorBoardOutputConfig"))
     TrainingJob.add_member(:debug_rule_evaluation_statuses, Shapes::ShapeRef.new(shape: DebugRuleEvaluationStatuses, location_name: "DebugRuleEvaluationStatuses"))
     TrainingJob.add_member(:environment, Shapes::ShapeRef.new(shape: TrainingEnvironmentMap, location_name: "Environment"))
+    TrainingJob.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: RetryStrategy, location_name: "RetryStrategy"))
     TrainingJob.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     TrainingJob.struct_class = Types::TrainingJob
 

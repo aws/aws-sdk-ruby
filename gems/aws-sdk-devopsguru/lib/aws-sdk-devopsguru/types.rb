@@ -105,9 +105,10 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # Information about AWS CloudFormation stacks. You can use stacks to
-    # specify which AWS resources in your account to analyze. For more
-    # information, see [Stacks][1] in the *AWS CloudFormation User Guide*.
+    # Information about AWS CloudFormation stacks. You can use up to 500
+    # stacks to specify which AWS resources in your account to analyze. For
+    # more information, see [Stacks][1] in the *AWS CloudFormation User
+    # Guide*.
     #
     #
     #
@@ -132,9 +133,10 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # Information about AWS CloudFormation stacks. You can use stacks to
-    # specify which AWS resources in your account to analyze. For more
-    # information, see [Stacks][1] in the *AWS CloudFormation User Guide*.
+    # Information about AWS CloudFormation stacks. You can use up to 500
+    # stacks to specify which AWS resources in your account to analyze. For
+    # more information, see [Stacks][1] in the *AWS CloudFormation User
+    # Guide*.
     #
     #
     #
@@ -147,6 +149,36 @@ module Aws::DevOpsGuru
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/CloudFormationCollectionFilter AWS API Documentation
     #
     class CloudFormationCollectionFilter < Struct.new(
+      :stack_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an AWS CloudFormation stack used to create a monthly
+    # cost estimate for DevOps Guru to analyze AWS resources. The maximum
+    # number of stacks you can specify for a cost estimate is one. The
+    # estimate created is for the cost to analyze the AWS resources defined
+    # by the stack. For more information, see [Stacks][1] in the *AWS
+    # CloudFormation User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html
+    #
+    # @note When making an API call, you may pass CloudFormationCostEstimationResourceCollectionFilter
+    #   data as a hash:
+    #
+    #       {
+    #         stack_names: ["StackName"],
+    #       }
+    #
+    # @!attribute [rw] stack_names
+    #   An array of CloudFormation stack names. Its size is fixed at 1 item.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/CloudFormationCostEstimationResourceCollectionFilter AWS API Documentation
+    #
+    class CloudFormationCostEstimationResourceCollectionFilter < Struct.new(
       :stack_names)
       SENSITIVE = []
       include Aws::Structure
@@ -274,6 +306,57 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # Information about a filter used to specify which AWS resources are
+    # analyzed to create a monthly DevOps Guru cost estimate. For more
+    # information, see [Estimate your Amazon DevOps Guru costs][1] and
+    # [Amazon DevOps Guru pricing][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html
+    # [2]: http://aws.amazon.com/devops-guru/pricing/
+    #
+    # @note When making an API call, you may pass CostEstimationResourceCollectionFilter
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_formation: {
+    #           stack_names: ["StackName"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cloud_formation
+    #   An object that specifies the CloudFormation stack that defines the
+    #   AWS resources used to create a monthly estimate for DevOps Guru.
+    #   @return [Types::CloudFormationCostEstimationResourceCollectionFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/CostEstimationResourceCollectionFilter AWS API Documentation
+    #
+    class CostEstimationResourceCollectionFilter < Struct.new(
+      :cloud_formation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The time range of a cost estimation.
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the cost estimation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the cost estimation.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/CostEstimationTimeRange AWS API Documentation
+    #
+    class CostEstimationTimeRange < Struct.new(
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeAccountHealthRequest AWS API Documentation
@@ -386,11 +469,11 @@ module Aws::DevOpsGuru
     end
 
     # @!attribute [rw] proactive_anomaly
-    #   An `ReactiveAnomaly` object that represents the requested anomaly.
+    #   A `ReactiveAnomaly` object that represents the requested anomaly.
     #   @return [Types::ProactiveAnomaly]
     #
     # @!attribute [rw] reactive_anomaly
-    #   An `ProactiveAnomaly` object that represents the requested anomaly.
+    #   A `ProactiveAnomaly` object that represents the requested anomaly.
     #   @return [Types::ReactiveAnomaly]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeAnomalyResponse AWS API Documentation
@@ -453,11 +536,11 @@ module Aws::DevOpsGuru
     end
 
     # @!attribute [rw] proactive_insight
-    #   An `ProactiveInsight` object that represents the requested insight.
+    #   A `ProactiveInsight` object that represents the requested insight.
     #   @return [Types::ProactiveInsight]
     #
     # @!attribute [rw] reactive_insight
-    #   An `ReactiveInsight` object that represents the requested insight.
+    #   A `ReactiveInsight` object that represents the requested insight.
     #   @return [Types::ReactiveInsight]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeInsightResponse AWS API Documentation
@@ -473,7 +556,7 @@ module Aws::DevOpsGuru
     #   data as a hash:
     #
     #       {
-    #         resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION
+    #         resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION, AWS_SERVICE
     #         next_token: "UuidNextToken",
     #       }
     #
@@ -482,7 +565,7 @@ module Aws::DevOpsGuru
     #   AWS resources are defined. The one type of AWS resource collection
     #   supported is AWS CloudFormation stacks. DevOps Guru can be
     #   configured to analyze only the AWS resources that are defined in the
-    #   stacks.
+    #   stacks. You can specify up to 500 AWS CloudFormation stacks.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -505,6 +588,11 @@ module Aws::DevOpsGuru
     #   information.
     #   @return [Array<Types::CloudFormationHealth>]
     #
+    # @!attribute [rw] service
+    #   An array of `ServiceHealth` objects that describes the health of the
+    #   AWS services associated with the resources in the collection.
+    #   @return [Array<Types::ServiceHealth>]
+    #
     # @!attribute [rw] next_token
     #   The pagination token to use to retrieve the next page of results for
     #   this operation. If there are no more pages, this value is null.
@@ -514,6 +602,7 @@ module Aws::DevOpsGuru
     #
     class DescribeResourceCollectionHealthResponse < Struct.new(
       :cloud_formation,
+      :service,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -574,7 +663,8 @@ module Aws::DevOpsGuru
     #   A collection of AWS resources supported by DevOps Guru. The one type
     #   of AWS resource collection supported is AWS CloudFormation stacks.
     #   DevOps Guru can be configured to analyze only the AWS resources that
-    #   are defined in the stacks.
+    #   are defined in the stacks. You can specify up to 500 AWS
+    #   CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
     # @!attribute [rw] id
@@ -680,11 +770,75 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetCostEstimationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "UuidNextToken",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/GetCostEstimationRequest AWS API Documentation
+    #
+    class GetCostEstimationRequest < Struct.new(
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_collection
+    #   The collection of the AWS resources used to create your monthly
+    #   DevOps Guru cost estimate.
+    #   @return [Types::CostEstimationResourceCollectionFilter]
+    #
+    # @!attribute [rw] status
+    #   The status of creating this cost estimate. If it's still in
+    #   progress, the status `ONGOING` is returned. If it is finished, the
+    #   status `COMPLETED` is returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] costs
+    #   An array of `ResourceCost` objects that each contains details about
+    #   the monthly cost estimate to analyze one of your AWS resources.
+    #   @return [Array<Types::ServiceResourceCost>]
+    #
+    # @!attribute [rw] time_range
+    #   The start and end time of the cost estimation.
+    #   @return [Types::CostEstimationTimeRange]
+    #
+    # @!attribute [rw] total_cost
+    #   The estimated monthly cost to analyze the AWS resources. This value
+    #   is the sum of the estimated costs to analyze each resource in the
+    #   `Costs` object in this response.
+    #   @return [Float]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If there are no more pages, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/GetCostEstimationResponse AWS API Documentation
+    #
+    class GetCostEstimationResponse < Struct.new(
+      :resource_collection,
+      :status,
+      :costs,
+      :time_range,
+      :total_cost,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetResourceCollectionRequest
     #   data as a hash:
     #
     #       {
-    #         resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION
+    #         resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION, AWS_SERVICE
     #         next_token: "UuidNextToken",
     #       }
     #
@@ -711,7 +865,8 @@ module Aws::DevOpsGuru
     #   The requested list of AWS resource collections. The one type of AWS
     #   resource collection supported is AWS CloudFormation stacks. DevOps
     #   Guru can be configured to analyze only the AWS resources that are
-    #   defined in the stacks.
+    #   defined in the stacks. You can specify up to 500 AWS CloudFormation
+    #   stacks.
     #   @return [Types::ResourceCollectionFilter]
     #
     # @!attribute [rw] next_token
@@ -939,7 +1094,8 @@ module Aws::DevOpsGuru
     #   A collection of AWS resources supported by DevOps Guru. The one type
     #   of AWS resource collection supported is AWS CloudFormation stacks.
     #   DevOps Guru can be configured to analyze only the AWS resources that
-    #   are defined in the stacks.
+    #   are defined in the stacks. You can specify up to 500 AWS
+    #   CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListEventsFilters AWS API Documentation
@@ -1274,6 +1430,7 @@ module Aws::DevOpsGuru
     #       {
     #         insight_id: "InsightId", # required
     #         next_token: "UuidNextToken",
+    #         locale: "DE_DE", # accepts DE_DE, EN_US, EN_GB, ES_ES, FR_FR, IT_IT, JA_JP, KO_KR, PT_BR, ZH_CN, ZH_TW
     #       }
     #
     # @!attribute [rw] insight_id
@@ -1285,11 +1442,16 @@ module Aws::DevOpsGuru
     #   this operation. If this value is null, it retrieves the first page.
     #   @return [String]
     #
+    # @!attribute [rw] locale
+    #   A locale that specifies the language to use for recommendations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListRecommendationsRequest AWS API Documentation
     #
     class ListRecommendationsRequest < Struct.new(
       :insight_id,
-      :next_token)
+      :next_token,
+      :locale)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1499,7 +1661,8 @@ module Aws::DevOpsGuru
     #   A collection of AWS resources supported by DevOps Guru. The one type
     #   of AWS resource collection supported is AWS CloudFormation stacks.
     #   DevOps Guru can be configured to analyze only the AWS resources that
-    #   are defined in the stacks.
+    #   are defined in the stacks. You can specify up to 500 AWS
+    #   CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
     # @!attribute [rw] limit
@@ -1569,7 +1732,8 @@ module Aws::DevOpsGuru
     #   A collection of AWS resources supported by DevOps Guru. The one type
     #   of AWS resource collection supported is AWS CloudFormation stacks.
     #   DevOps Guru can be configured to analyze only the AWS resources that
-    #   are defined in the stacks.
+    #   are defined in the stacks. You can specify up to 500 AWS
+    #   CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
     # @!attribute [rw] limit
@@ -1628,7 +1792,8 @@ module Aws::DevOpsGuru
     #   A collection of AWS resources supported by DevOps Guru. The one type
     #   of AWS resource collection supported is AWS CloudFormation stacks.
     #   DevOps Guru can be configured to analyze only the AWS resources that
-    #   are defined in the stacks.
+    #   are defined in the stacks. You can specify up to 500 AWS
+    #   CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
     # @!attribute [rw] ssm_ops_item_id
@@ -1685,8 +1850,13 @@ module Aws::DevOpsGuru
     #   A collection of AWS resources supported by DevOps Guru. The one type
     #   of AWS resource collection supported is AWS CloudFormation stacks.
     #   DevOps Guru can be configured to analyze only the AWS resources that
-    #   are defined in the stacks.
+    #   are defined in the stacks. You can specify up to 500 AWS
+    #   CloudFormation stacks.
     #   @return [Types::ResourceCollection]
+    #
+    # @!attribute [rw] service_collection
+    #   A collection of the names of AWS services.
+    #   @return [Types::ServiceCollection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ProactiveInsightSummary AWS API Documentation
     #
@@ -1697,7 +1867,8 @@ module Aws::DevOpsGuru
       :status,
       :insight_time_range,
       :prediction_time_range,
-      :resource_collection)
+      :resource_collection,
+      :service_collection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1764,7 +1935,8 @@ module Aws::DevOpsGuru
     #   A collection of AWS resources supported by DevOps Guru. The one type
     #   of AWS resource collection supported is AWS CloudFormation stacks.
     #   DevOps Guru can be configured to analyze only the AWS resources that
-    #   are defined in the stacks.
+    #   are defined in the stacks. You can specify up to 500 AWS
+    #   CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ReactiveAnomaly AWS API Documentation
@@ -1816,7 +1988,8 @@ module Aws::DevOpsGuru
     #   A collection of AWS resources supported by DevOps Guru. The one type
     #   of AWS resource collection supported is AWS CloudFormation stacks.
     #   DevOps Guru can be configured to analyze only the AWS resources that
-    #   are defined in the stacks.
+    #   are defined in the stacks. You can specify up to 500 AWS
+    #   CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ReactiveAnomalySummary AWS API Documentation
@@ -1861,7 +2034,8 @@ module Aws::DevOpsGuru
     #   A collection of AWS resources supported by DevOps Guru. The one type
     #   of AWS resource collection supported is AWS CloudFormation stacks.
     #   DevOps Guru can be configured to analyze only the AWS resources that
-    #   are defined in the stacks.
+    #   are defined in the stacks. You can specify up to 500 AWS
+    #   CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
     # @!attribute [rw] ssm_ops_item_id
@@ -1912,8 +2086,13 @@ module Aws::DevOpsGuru
     #   A collection of AWS resources supported by DevOps Guru. The one type
     #   of AWS resource collection supported is AWS CloudFormation stacks.
     #   DevOps Guru can be configured to analyze only the AWS resources that
-    #   are defined in the stacks.
+    #   are defined in the stacks. You can specify up to 500 AWS
+    #   CloudFormation stacks.
     #   @return [Types::ResourceCollection]
+    #
+    # @!attribute [rw] service_collection
+    #   A collection of the names of AWS services.
+    #   @return [Types::ServiceCollection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ReactiveInsightSummary AWS API Documentation
     #
@@ -1923,7 +2102,8 @@ module Aws::DevOpsGuru
       :severity,
       :status,
       :insight_time_range,
-      :resource_collection)
+      :resource_collection,
+      :service_collection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2062,7 +2242,8 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] resources
     #   A `ResourceCollection` object that contains arrays of the names of
-    #   AWS CloudFormation stacks.
+    #   AWS CloudFormation stacks. You can specify up to 500 AWS
+    #   CloudFormation stacks.
     #   @return [Array<Types::RecommendationRelatedEventResource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/RecommendationRelatedEvent AWS API Documentation
@@ -2122,7 +2303,8 @@ module Aws::DevOpsGuru
     # A collection of AWS resources supported by DevOps Guru. The one type
     # of AWS resource collection supported is AWS CloudFormation stacks.
     # DevOps Guru can be configured to analyze only the AWS resources that
-    # are defined in the stacks.
+    # are defined in the stacks. You can specify up to 500 AWS
+    # CloudFormation stacks.
     #
     # @note When making an API call, you may pass ResourceCollection
     #   data as a hash:
@@ -2135,7 +2317,8 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] cloud_formation
     #   An array of the names of AWS CloudFormation stacks. The stacks
-    #   define AWS resources that DevOps Guru analyzes.
+    #   define AWS resources that DevOps Guru analyzes. You can specify up
+    #   to 500 AWS CloudFormation stacks.
     #   @return [Types::CloudFormationCollection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ResourceCollection AWS API Documentation
@@ -2150,9 +2333,10 @@ module Aws::DevOpsGuru
     # analyzed for anomalous behavior by DevOps Guru.
     #
     # @!attribute [rw] cloud_formation
-    #   Information about AWS CloudFormation stacks. You can use stacks to
-    #   specify which AWS resources in your account to analyze. For more
-    #   information, see [Stacks][1] in the *AWS CloudFormation User Guide*.
+    #   Information about AWS CloudFormation stacks. You can use up to 500
+    #   stacks to specify which AWS resources in your account to analyze.
+    #   For more information, see [Stacks][1] in the *AWS CloudFormation
+    #   User Guide*.
     #
     #
     #
@@ -2204,6 +2388,9 @@ module Aws::DevOpsGuru
     #             stack_names: ["StackName"],
     #           },
     #         },
+    #         service_collection: {
+    #           service_names: ["API_GATEWAY"], # accepts API_GATEWAY, APPLICATION_ELB, AUTO_SCALING_GROUP, CLOUD_FRONT, DYNAMO_DB, EC2, ECS, EKS, ELASTIC_BEANSTALK, ELASTI_CACHE, ELB, ES, KINESIS, LAMBDA, NAT_GATEWAY, NETWORK_ELB, RDS, REDSHIFT, ROUTE_53, S3, SAGE_MAKER, SNS, SQS, STEP_FUNCTIONS, SWF
+    #         },
     #       }
     #
     # @!attribute [rw] severities
@@ -2218,15 +2405,21 @@ module Aws::DevOpsGuru
     #   A collection of AWS resources supported by DevOps Guru. The one type
     #   of AWS resource collection supported is AWS CloudFormation stacks.
     #   DevOps Guru can be configured to analyze only the AWS resources that
-    #   are defined in the stacks.
+    #   are defined in the stacks. You can specify up to 500 AWS
+    #   CloudFormation stacks.
     #   @return [Types::ResourceCollection]
+    #
+    # @!attribute [rw] service_collection
+    #   A collection of the names of AWS services.
+    #   @return [Types::ServiceCollection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/SearchInsightsFilters AWS API Documentation
     #
     class SearchInsightsFilters < Struct.new(
       :severities,
       :statuses,
-      :resource_collection)
+      :resource_collection,
+      :service_collection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2246,6 +2439,9 @@ module Aws::DevOpsGuru
     #             cloud_formation: {
     #               stack_names: ["StackName"],
     #             },
+    #           },
+    #           service_collection: {
+    #             service_names: ["API_GATEWAY"], # accepts API_GATEWAY, APPLICATION_ELB, AUTO_SCALING_GROUP, CLOUD_FRONT, DYNAMO_DB, EC2, ECS, EKS, ELASTIC_BEANSTALK, ELASTI_CACHE, ELB, ES, KINESIS, LAMBDA, NAT_GATEWAY, NETWORK_ELB, RDS, REDSHIFT, ROUTE_53, S3, SAGE_MAKER, SNS, SQS, STEP_FUNCTIONS, SWF
     #           },
     #         },
     #         max_results: 1,
@@ -2314,6 +2510,68 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # A collection of the names of AWS services.
+    #
+    # @note When making an API call, you may pass ServiceCollection
+    #   data as a hash:
+    #
+    #       {
+    #         service_names: ["API_GATEWAY"], # accepts API_GATEWAY, APPLICATION_ELB, AUTO_SCALING_GROUP, CLOUD_FRONT, DYNAMO_DB, EC2, ECS, EKS, ELASTIC_BEANSTALK, ELASTI_CACHE, ELB, ES, KINESIS, LAMBDA, NAT_GATEWAY, NETWORK_ELB, RDS, REDSHIFT, ROUTE_53, S3, SAGE_MAKER, SNS, SQS, STEP_FUNCTIONS, SWF
+    #       }
+    #
+    # @!attribute [rw] service_names
+    #   An array of strings that each specifies the name of an AWS service.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ServiceCollection AWS API Documentation
+    #
+    class ServiceCollection < Struct.new(
+      :service_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the health of an AWS service.
+    #
+    # @!attribute [rw] service_name
+    #   The name of the AWS service.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight
+    #   Represents the health of an AWS service. This is a
+    #   `ServiceInsightHealth` that contains the number of open proactive
+    #   and reactive insights for this service.
+    #   @return [Types::ServiceInsightHealth]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ServiceHealth AWS API Documentation
+    #
+    class ServiceHealth < Struct.new(
+      :service_name,
+      :insight)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the number of open proactive and reactive insights in an
+    # analyzed AWS service.
+    #
+    # @!attribute [rw] open_proactive_insights
+    #   The number of open proactive insights in the AWS service
+    #   @return [Integer]
+    #
+    # @!attribute [rw] open_reactive_insights
+    #   The number of open reactive insights in the AWS service
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ServiceInsightHealth AWS API Documentation
+    #
+    class ServiceInsightHealth < Struct.new(
+      :open_proactive_insights,
+      :open_reactive_insights)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the integration of DevOps Guru with another AWS
     # service, such as AWS Systems Manager.
     #
@@ -2339,6 +2597,59 @@ module Aws::DevOpsGuru
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information about the estimated monthly cost
+    # to analyze an AWS resource. For more information, see [Estimate your
+    # Amazon DevOps Guru costs][1] and [Amazon DevOps Guru pricing][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html
+    # [2]: http://aws.amazon.com/devops-guru/pricing/
+    #
+    # @!attribute [rw] type
+    #   The type of the AWS resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the resource. The resource is `ACTIVE` if it produces
+    #   metrics, events, or logs within an hour, otherwise it is `INACTIVE`.
+    #   You pay for the number of active AWS resource hours analyzed for
+    #   each resource. Inactive resources are not charged.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of active resources analyzed for this service to create a
+    #   monthly cost estimate.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unit_cost
+    #   The price per hour to analyze the resources in the service. For more
+    #   information, see [Estimate your Amazon DevOps Guru costs][1] and
+    #   [Amazon DevOps Guru pricing][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html
+    #   [2]: http://aws.amazon.com/devops-guru/pricing/
+    #   @return [Float]
+    #
+    # @!attribute [rw] cost
+    #   The total estimated monthly cost to analyze the active resources for
+    #   this resource.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ServiceResourceCost AWS API Documentation
+    #
+    class ServiceResourceCost < Struct.new(
+      :type,
+      :state,
+      :count,
+      :unit_cost,
+      :cost)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2381,6 +2692,43 @@ module Aws::DevOpsGuru
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass StartCostEstimationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_collection: { # required
+    #           cloud_formation: {
+    #             stack_names: ["StackName"],
+    #           },
+    #         },
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] resource_collection
+    #   The collection of AWS resources used to create a monthly DevOps Guru
+    #   cost estimate.
+    #   @return [Types::CostEstimationResourceCollectionFilter]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token used to identify each cost estimate request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/StartCostEstimationRequest AWS API Documentation
+    #
+    class StartCostEstimationRequest < Struct.new(
+      :resource_collection,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/StartCostEstimationResponse AWS API Documentation
+    #
+    class StartCostEstimationResponse < Aws::EmptyStructure; end
 
     # A time range used to specify when the behavior of an insight or
     # anomaly started.
@@ -2441,7 +2789,8 @@ module Aws::DevOpsGuru
     end
 
     # Contains the names of AWS CloudFormation stacks used to update a
-    # collection of stacks.
+    # collection of stacks. You can specify up to 500 AWS CloudFormation
+    # stacks.
     #
     # @note When making an API call, you may pass UpdateCloudFormationCollectionFilter
     #   data as a hash:
@@ -2451,7 +2800,8 @@ module Aws::DevOpsGuru
     #       }
     #
     # @!attribute [rw] stack_names
-    #   An array of the name of stacks to update.
+    #   An array of the names of the AWS CloudFormation stacks to update.
+    #   You can specify up to 500 AWS CloudFormation stacks.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateCloudFormationCollectionFilter AWS API Documentation
@@ -2474,7 +2824,8 @@ module Aws::DevOpsGuru
     #       }
     #
     # @!attribute [rw] cloud_formation
-    #   An collection of AWS CloudFormation stacks.
+    #   An collection of AWS CloudFormation stacks. You can specify up to
+    #   500 AWS CloudFormation stacks.
     #   @return [Types::UpdateCloudFormationCollectionFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateResourceCollectionFilter AWS API Documentation

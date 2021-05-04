@@ -23,8 +23,10 @@ module Aws::DevOpsGuru
     AnomalyStatus = Shapes::StringShape.new(name: 'AnomalyStatus')
     AnomalyTimeRange = Shapes::StructureShape.new(name: 'AnomalyTimeRange')
     Channels = Shapes::ListShape.new(name: 'Channels')
+    ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CloudFormationCollection = Shapes::StructureShape.new(name: 'CloudFormationCollection')
     CloudFormationCollectionFilter = Shapes::StructureShape.new(name: 'CloudFormationCollectionFilter')
+    CloudFormationCostEstimationResourceCollectionFilter = Shapes::StructureShape.new(name: 'CloudFormationCostEstimationResourceCollectionFilter')
     CloudFormationHealth = Shapes::StructureShape.new(name: 'CloudFormationHealth')
     CloudFormationHealths = Shapes::ListShape.new(name: 'CloudFormationHealths')
     CloudWatchMetricsDetail = Shapes::StructureShape.new(name: 'CloudWatchMetricsDetail')
@@ -39,6 +41,13 @@ module Aws::DevOpsGuru
     CloudWatchMetricsStat = Shapes::StringShape.new(name: 'CloudWatchMetricsStat')
     CloudWatchMetricsUnit = Shapes::StringShape.new(name: 'CloudWatchMetricsUnit')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    Cost = Shapes::FloatShape.new(name: 'Cost')
+    CostEstimationResourceCollectionFilter = Shapes::StructureShape.new(name: 'CostEstimationResourceCollectionFilter')
+    CostEstimationServiceResourceCount = Shapes::IntegerShape.new(name: 'CostEstimationServiceResourceCount')
+    CostEstimationServiceResourceState = Shapes::StringShape.new(name: 'CostEstimationServiceResourceState')
+    CostEstimationStackNames = Shapes::ListShape.new(name: 'CostEstimationStackNames')
+    CostEstimationStatus = Shapes::StringShape.new(name: 'CostEstimationStatus')
+    CostEstimationTimeRange = Shapes::StructureShape.new(name: 'CostEstimationTimeRange')
     DescribeAccountHealthRequest = Shapes::StructureShape.new(name: 'DescribeAccountHealthRequest')
     DescribeAccountHealthResponse = Shapes::StructureShape.new(name: 'DescribeAccountHealthResponse')
     DescribeAccountOverviewRequest = Shapes::StructureShape.new(name: 'DescribeAccountOverviewRequest')
@@ -71,6 +80,8 @@ module Aws::DevOpsGuru
     EventSource = Shapes::StringShape.new(name: 'EventSource')
     EventTimeRange = Shapes::StructureShape.new(name: 'EventTimeRange')
     Events = Shapes::ListShape.new(name: 'Events')
+    GetCostEstimationRequest = Shapes::StructureShape.new(name: 'GetCostEstimationRequest')
+    GetCostEstimationResponse = Shapes::StructureShape.new(name: 'GetCostEstimationResponse')
     GetResourceCollectionRequest = Shapes::StructureShape.new(name: 'GetResourceCollectionRequest')
     GetResourceCollectionResponse = Shapes::StructureShape.new(name: 'GetResourceCollectionResponse')
     InsightFeedback = Shapes::StructureShape.new(name: 'InsightFeedback')
@@ -103,6 +114,7 @@ module Aws::DevOpsGuru
     ListNotificationChannelsResponse = Shapes::StructureShape.new(name: 'ListNotificationChannelsResponse')
     ListRecommendationsRequest = Shapes::StructureShape.new(name: 'ListRecommendationsRequest')
     ListRecommendationsResponse = Shapes::StructureShape.new(name: 'ListRecommendationsResponse')
+    Locale = Shapes::StringShape.new(name: 'Locale')
     MeanTimeToRecoverInMilliseconds = Shapes::IntegerShape.new(name: 'MeanTimeToRecoverInMilliseconds')
     NotificationChannel = Shapes::StructureShape.new(name: 'NotificationChannel')
     NotificationChannelConfig = Shapes::StructureShape.new(name: 'NotificationChannelConfig')
@@ -164,17 +176,28 @@ module Aws::DevOpsGuru
     ResourceIdString = Shapes::StringShape.new(name: 'ResourceIdString')
     ResourceIdType = Shapes::StringShape.new(name: 'ResourceIdType')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     RetryAfterSeconds = Shapes::IntegerShape.new(name: 'RetryAfterSeconds')
     SearchInsightsFilters = Shapes::StructureShape.new(name: 'SearchInsightsFilters')
     SearchInsightsMaxResults = Shapes::IntegerShape.new(name: 'SearchInsightsMaxResults')
     SearchInsightsRequest = Shapes::StructureShape.new(name: 'SearchInsightsRequest')
     SearchInsightsResponse = Shapes::StructureShape.new(name: 'SearchInsightsResponse')
+    ServiceCollection = Shapes::StructureShape.new(name: 'ServiceCollection')
+    ServiceHealth = Shapes::StructureShape.new(name: 'ServiceHealth')
+    ServiceHealths = Shapes::ListShape.new(name: 'ServiceHealths')
+    ServiceInsightHealth = Shapes::StructureShape.new(name: 'ServiceInsightHealth')
     ServiceIntegrationConfig = Shapes::StructureShape.new(name: 'ServiceIntegrationConfig')
+    ServiceName = Shapes::StringShape.new(name: 'ServiceName')
+    ServiceNames = Shapes::ListShape.new(name: 'ServiceNames')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    ServiceResourceCost = Shapes::StructureShape.new(name: 'ServiceResourceCost')
+    ServiceResourceCosts = Shapes::ListShape.new(name: 'ServiceResourceCosts')
     SnsChannelConfig = Shapes::StructureShape.new(name: 'SnsChannelConfig')
     SsmOpsItemId = Shapes::StringShape.new(name: 'SsmOpsItemId')
     StackName = Shapes::StringShape.new(name: 'StackName')
     StackNames = Shapes::ListShape.new(name: 'StackNames')
+    StartCostEstimationRequest = Shapes::StructureShape.new(name: 'StartCostEstimationRequest')
+    StartCostEstimationResponse = Shapes::StructureShape.new(name: 'StartCostEstimationResponse')
     StartTimeRange = Shapes::StructureShape.new(name: 'StartTimeRange')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -218,6 +241,9 @@ module Aws::DevOpsGuru
     CloudFormationCollectionFilter.add_member(:stack_names, Shapes::ShapeRef.new(shape: StackNames, location_name: "StackNames"))
     CloudFormationCollectionFilter.struct_class = Types::CloudFormationCollectionFilter
 
+    CloudFormationCostEstimationResourceCollectionFilter.add_member(:stack_names, Shapes::ShapeRef.new(shape: CostEstimationStackNames, location_name: "StackNames"))
+    CloudFormationCostEstimationResourceCollectionFilter.struct_class = Types::CloudFormationCostEstimationResourceCollectionFilter
+
     CloudFormationHealth.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, location_name: "StackName"))
     CloudFormationHealth.add_member(:insight, Shapes::ShapeRef.new(shape: InsightHealth, location_name: "Insight"))
     CloudFormationHealth.struct_class = Types::CloudFormationHealth
@@ -244,6 +270,15 @@ module Aws::DevOpsGuru
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location_name: "ResourceId"))
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceIdType, required: true, location_name: "ResourceType"))
     ConflictException.struct_class = Types::ConflictException
+
+    CostEstimationResourceCollectionFilter.add_member(:cloud_formation, Shapes::ShapeRef.new(shape: CloudFormationCostEstimationResourceCollectionFilter, location_name: "CloudFormation"))
+    CostEstimationResourceCollectionFilter.struct_class = Types::CostEstimationResourceCollectionFilter
+
+    CostEstimationStackNames.member = Shapes::ShapeRef.new(shape: StackName)
+
+    CostEstimationTimeRange.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    CostEstimationTimeRange.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    CostEstimationTimeRange.struct_class = Types::CostEstimationTimeRange
 
     DescribeAccountHealthRequest.struct_class = Types::DescribeAccountHealthRequest
 
@@ -287,6 +322,7 @@ module Aws::DevOpsGuru
     DescribeResourceCollectionHealthRequest.struct_class = Types::DescribeResourceCollectionHealthRequest
 
     DescribeResourceCollectionHealthResponse.add_member(:cloud_formation, Shapes::ShapeRef.new(shape: CloudFormationHealths, required: true, location_name: "CloudFormation"))
+    DescribeResourceCollectionHealthResponse.add_member(:service, Shapes::ShapeRef.new(shape: ServiceHealths, location_name: "Service"))
     DescribeResourceCollectionHealthResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
     DescribeResourceCollectionHealthResponse.struct_class = Types::DescribeResourceCollectionHealthResponse
 
@@ -321,6 +357,17 @@ module Aws::DevOpsGuru
     EventTimeRange.struct_class = Types::EventTimeRange
 
     Events.member = Shapes::ShapeRef.new(shape: Event)
+
+    GetCostEstimationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location: "querystring", location_name: "NextToken"))
+    GetCostEstimationRequest.struct_class = Types::GetCostEstimationRequest
+
+    GetCostEstimationResponse.add_member(:resource_collection, Shapes::ShapeRef.new(shape: CostEstimationResourceCollectionFilter, location_name: "ResourceCollection"))
+    GetCostEstimationResponse.add_member(:status, Shapes::ShapeRef.new(shape: CostEstimationStatus, location_name: "Status"))
+    GetCostEstimationResponse.add_member(:costs, Shapes::ShapeRef.new(shape: ServiceResourceCosts, location_name: "Costs"))
+    GetCostEstimationResponse.add_member(:time_range, Shapes::ShapeRef.new(shape: CostEstimationTimeRange, location_name: "TimeRange"))
+    GetCostEstimationResponse.add_member(:total_cost, Shapes::ShapeRef.new(shape: Cost, location_name: "TotalCost"))
+    GetCostEstimationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
+    GetCostEstimationResponse.struct_class = Types::GetCostEstimationResponse
 
     GetResourceCollectionRequest.add_member(:resource_collection_type, Shapes::ShapeRef.new(shape: ResourceCollectionType, required: true, location: "uri", location_name: "ResourceCollectionType"))
     GetResourceCollectionRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location: "querystring", location_name: "NextToken"))
@@ -414,6 +461,7 @@ module Aws::DevOpsGuru
 
     ListRecommendationsRequest.add_member(:insight_id, Shapes::ShapeRef.new(shape: InsightId, required: true, location_name: "InsightId"))
     ListRecommendationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
+    ListRecommendationsRequest.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "Locale"))
     ListRecommendationsRequest.struct_class = Types::ListRecommendationsRequest
 
     ListRecommendationsResponse.add_member(:recommendations, Shapes::ShapeRef.new(shape: Recommendations, location_name: "Recommendations"))
@@ -480,6 +528,7 @@ module Aws::DevOpsGuru
     ProactiveInsightSummary.add_member(:insight_time_range, Shapes::ShapeRef.new(shape: InsightTimeRange, location_name: "InsightTimeRange"))
     ProactiveInsightSummary.add_member(:prediction_time_range, Shapes::ShapeRef.new(shape: PredictionTimeRange, location_name: "PredictionTimeRange"))
     ProactiveInsightSummary.add_member(:resource_collection, Shapes::ShapeRef.new(shape: ResourceCollection, location_name: "ResourceCollection"))
+    ProactiveInsightSummary.add_member(:service_collection, Shapes::ShapeRef.new(shape: ServiceCollection, location_name: "ServiceCollection"))
     ProactiveInsightSummary.struct_class = Types::ProactiveInsightSummary
 
     ProactiveInsights.member = Shapes::ShapeRef.new(shape: ProactiveInsightSummary)
@@ -524,6 +573,7 @@ module Aws::DevOpsGuru
     ReactiveInsightSummary.add_member(:status, Shapes::ShapeRef.new(shape: InsightStatus, location_name: "Status"))
     ReactiveInsightSummary.add_member(:insight_time_range, Shapes::ShapeRef.new(shape: InsightTimeRange, location_name: "InsightTimeRange"))
     ReactiveInsightSummary.add_member(:resource_collection, Shapes::ShapeRef.new(shape: ResourceCollection, location_name: "ResourceCollection"))
+    ReactiveInsightSummary.add_member(:service_collection, Shapes::ShapeRef.new(shape: ServiceCollection, location_name: "ServiceCollection"))
     ReactiveInsightSummary.struct_class = Types::ReactiveInsightSummary
 
     ReactiveInsights.member = Shapes::ShapeRef.new(shape: ReactiveInsightSummary)
@@ -592,6 +642,7 @@ module Aws::DevOpsGuru
     SearchInsightsFilters.add_member(:severities, Shapes::ShapeRef.new(shape: InsightSeverities, location_name: "Severities"))
     SearchInsightsFilters.add_member(:statuses, Shapes::ShapeRef.new(shape: InsightStatuses, location_name: "Statuses"))
     SearchInsightsFilters.add_member(:resource_collection, Shapes::ShapeRef.new(shape: ResourceCollection, location_name: "ResourceCollection"))
+    SearchInsightsFilters.add_member(:service_collection, Shapes::ShapeRef.new(shape: ServiceCollection, location_name: "ServiceCollection"))
     SearchInsightsFilters.struct_class = Types::SearchInsightsFilters
 
     SearchInsightsRequest.add_member(:start_time_range, Shapes::ShapeRef.new(shape: StartTimeRange, required: true, location_name: "StartTimeRange"))
@@ -606,16 +657,46 @@ module Aws::DevOpsGuru
     SearchInsightsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
     SearchInsightsResponse.struct_class = Types::SearchInsightsResponse
 
+    ServiceCollection.add_member(:service_names, Shapes::ShapeRef.new(shape: ServiceNames, location_name: "ServiceNames"))
+    ServiceCollection.struct_class = Types::ServiceCollection
+
+    ServiceHealth.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, location_name: "ServiceName"))
+    ServiceHealth.add_member(:insight, Shapes::ShapeRef.new(shape: ServiceInsightHealth, location_name: "Insight"))
+    ServiceHealth.struct_class = Types::ServiceHealth
+
+    ServiceHealths.member = Shapes::ShapeRef.new(shape: ServiceHealth)
+
+    ServiceInsightHealth.add_member(:open_proactive_insights, Shapes::ShapeRef.new(shape: NumOpenProactiveInsights, location_name: "OpenProactiveInsights"))
+    ServiceInsightHealth.add_member(:open_reactive_insights, Shapes::ShapeRef.new(shape: NumOpenReactiveInsights, location_name: "OpenReactiveInsights"))
+    ServiceInsightHealth.struct_class = Types::ServiceInsightHealth
+
     ServiceIntegrationConfig.add_member(:ops_center, Shapes::ShapeRef.new(shape: OpsCenterIntegration, location_name: "OpsCenter"))
     ServiceIntegrationConfig.struct_class = Types::ServiceIntegrationConfig
 
+    ServiceNames.member = Shapes::ShapeRef.new(shape: ServiceName)
+
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageString, location_name: "Message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    ServiceResourceCost.add_member(:type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "Type"))
+    ServiceResourceCost.add_member(:state, Shapes::ShapeRef.new(shape: CostEstimationServiceResourceState, location_name: "State"))
+    ServiceResourceCost.add_member(:count, Shapes::ShapeRef.new(shape: CostEstimationServiceResourceCount, location_name: "Count"))
+    ServiceResourceCost.add_member(:unit_cost, Shapes::ShapeRef.new(shape: Cost, location_name: "UnitCost"))
+    ServiceResourceCost.add_member(:cost, Shapes::ShapeRef.new(shape: Cost, location_name: "Cost"))
+    ServiceResourceCost.struct_class = Types::ServiceResourceCost
+
+    ServiceResourceCosts.member = Shapes::ShapeRef.new(shape: ServiceResourceCost)
 
     SnsChannelConfig.add_member(:topic_arn, Shapes::ShapeRef.new(shape: TopicArn, location_name: "TopicArn"))
     SnsChannelConfig.struct_class = Types::SnsChannelConfig
 
     StackNames.member = Shapes::ShapeRef.new(shape: StackName)
+
+    StartCostEstimationRequest.add_member(:resource_collection, Shapes::ShapeRef.new(shape: CostEstimationResourceCollectionFilter, required: true, location_name: "ResourceCollection"))
+    StartCostEstimationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartCostEstimationRequest.struct_class = Types::StartCostEstimationRequest
+
+    StartCostEstimationResponse.struct_class = Types::StartCostEstimationResponse
 
     StartTimeRange.add_member(:from_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "FromTime"))
     StartTimeRange.add_member(:to_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ToTime"))
@@ -785,6 +866,24 @@ module Aws::DevOpsGuru
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:get_cost_estimation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCostEstimation"
+        o.http_method = "GET"
+        o.http_request_uri = "/cost-estimation"
+        o.input = Shapes::ShapeRef.new(shape: GetCostEstimationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCostEstimationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:get_resource_collection, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetResourceCollection"
         o.http_method = "GET"
@@ -938,6 +1037,20 @@ module Aws::DevOpsGuru
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:start_cost_estimation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartCostEstimation"
+        o.http_method = "PUT"
+        o.http_request_uri = "/cost-estimation"
+        o.input = Shapes::ShapeRef.new(shape: StartCostEstimationRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartCostEstimationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:update_resource_collection, Seahorse::Model::Operation.new.tap do |o|

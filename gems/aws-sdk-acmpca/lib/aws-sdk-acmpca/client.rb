@@ -350,7 +350,7 @@ module Aws::ACMPCA
     # successful, this action returns the Amazon Resource Name (ARN) of the
     # CA.
     #
-    # ACM Private CAA assets that are stored in Amazon S3 can be protected
+    # ACM Private CA assets that are stored in Amazon S3 can be protected
     # with encryption. For more information, see [Encrypting Your CRLs][1].
     #
     # <note markdown="1"> Both PCA and the IAM principal must have permission to write to the S3
@@ -393,6 +393,19 @@ module Aws::ACMPCA
     #   that you are requesting only certificate authority and will issue only
     #   one. If you change the idempotency token for each call, PCA recognizes
     #   that you are requesting multiple certificate authorities.
+    #
+    # @option params [String] :key_storage_security_standard
+    #   Specifies a cryptographic key management compliance standard used for
+    #   handling CA keys.
+    #
+    #   Default: FIPS\_140\_2\_LEVEL\_3\_OR\_HIGHER
+    #
+    #   Note: AWS Region ap-northeast-3 supports only
+    #   FIPS\_140\_2\_LEVEL\_2\_OR\_HIGHER. You must explicitly specify this
+    #   parameter and value when creating a CA in that Region. Specifying a
+    #   different value (or no value) results in an `InvalidArgsException`
+    #   with the message "A certificate authority cannot be created in this
+    #   region with the specified security standard."
     #
     # @option params [Array<Types::Tag>] :tags
     #   Key-value pairs that will be attached to the new private CA. You can
@@ -493,6 +506,7 @@ module Aws::ACMPCA
     #     },
     #     certificate_authority_type: "ROOT", # required, accepts ROOT, SUBORDINATE
     #     idempotency_token: "IdempotencyToken",
+    #     key_storage_security_standard: "FIPS_140_2_LEVEL_2_OR_HIGHER", # accepts FIPS_140_2_LEVEL_2_OR_HIGHER, FIPS_140_2_LEVEL_3_OR_HIGHER
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -526,7 +540,7 @@ module Aws::ACMPCA
     #
     #  </note>
     #
-    # ACM Private CAA assets that are stored in Amazon S3 can be protected
+    # ACM Private CA assets that are stored in Amazon S3 can be protected
     # with encryption. For more information, see [Encrypting Your Audit
     # Reports][4].
     #
@@ -983,6 +997,7 @@ module Aws::ACMPCA
     #   resp.certificate_authority.revocation_configuration.crl_configuration.custom_cname #=> String
     #   resp.certificate_authority.revocation_configuration.crl_configuration.s3_bucket_name #=> String
     #   resp.certificate_authority.restorable_until #=> Time
+    #   resp.certificate_authority.key_storage_security_standard #=> String, one of "FIPS_140_2_LEVEL_2_OR_HIGHER", "FIPS_140_2_LEVEL_3_OR_HIGHER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/DescribeCertificateAuthority AWS API Documentation
     #
@@ -1440,11 +1455,12 @@ module Aws::ACMPCA
     #
     #   If conflicting or duplicate certificate information is supplied during
     #   certificate issuance, ACM Private CA applies [order of operation
-    #   rules](xxxxx) to determine what information is used.
+    #   rules][2] to determine what information is used.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html
+    #   [2]: https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-order-of-operations
     #
     # @option params [required, String] :certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called
@@ -1786,6 +1802,7 @@ module Aws::ACMPCA
     #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.custom_cname #=> String
     #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.s3_bucket_name #=> String
     #   resp.certificate_authorities[0].restorable_until #=> Time
+    #   resp.certificate_authorities[0].key_storage_security_standard #=> String, one of "FIPS_140_2_LEVEL_2_OR_HIGHER", "FIPS_140_2_LEVEL_3_OR_HIGHER"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ListCertificateAuthorities AWS API Documentation
@@ -2339,7 +2356,7 @@ module Aws::ACMPCA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acmpca'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

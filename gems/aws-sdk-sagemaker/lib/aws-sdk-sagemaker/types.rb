@@ -2912,8 +2912,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # There was a conflict when you attempted to modify an experiment,
-    # trial, or trial component.
+    # There was a conflict when you attempted to modify a SageMaker entity
+    # such as an `Experiment` or `Artifact`.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4494,6 +4494,9 @@ module Aws::SageMaker
     #   Tags to associated with the Domain. Each tag consists of a key and
     #   an optional value. Tag keys must be unique per resource. Tags are
     #   searchable using the `Search` API.
+    #
+    #   Tags that you specify for the Domain are also added to all Apps that
+    #   the Domain launches.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] app_network_access_type
@@ -5348,6 +5351,9 @@ module Aws::SageMaker
     #             s3_uri: "S3Uri", # required
     #             local_path: "DirectoryPath",
     #           },
+    #           retry_strategy: {
+    #             maximum_retry_attempts: 1, # required
+    #           },
     #         },
     #         training_job_definitions: [
     #           {
@@ -5445,6 +5451,9 @@ module Aws::SageMaker
     #             checkpoint_config: {
     #               s3_uri: "S3Uri", # required
     #               local_path: "DirectoryPath",
+    #             },
+    #             retry_strategy: {
+    #               maximum_retry_attempts: 1, # required
     #             },
     #           },
     #         ],
@@ -7823,6 +7832,9 @@ module Aws::SageMaker
     #         environment: {
     #           "TrainingEnvironmentKey" => "TrainingEnvironmentValue",
     #         },
+    #         retry_strategy: {
+    #           maximum_retry_attempts: 1, # required
+    #         },
     #       }
     #
     # @!attribute [rw] training_job_name
@@ -7929,9 +7941,10 @@ module Aws::SageMaker
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] stopping_condition
-    #   Specifies a limit to how long a model training job can run. When the
-    #   job reaches the time limit, Amazon SageMaker ends the training job.
-    #   Use this API to cap model training costs.
+    #   Specifies a limit to how long a model training job can run. It also
+    #   specifies how long a managed Spot training job has to complete. When
+    #   the job reaches the time limit, Amazon SageMaker ends the training
+    #   job. Use this API to cap model training costs.
     #
     #   To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
     #   signal, which delays job termination for 120 seconds. Algorithms can
@@ -8040,6 +8053,11 @@ module Aws::SageMaker
     #   The environment variables to set in the Docker container.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] retry_strategy
+    #   The number of times to retry the job when the job fails due to an
+    #   `InternalServerError`.
+    #   @return [Types::RetryStrategy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingJobRequest AWS API Documentation
     #
     class CreateTrainingJobRequest < Struct.new(
@@ -8063,7 +8081,8 @@ module Aws::SageMaker
       :experiment_config,
       :profiler_config,
       :profiler_rule_configurations,
-      :environment)
+      :environment,
+      :retry_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8541,7 +8560,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] user_profile_name
-    #   A name for the UserProfile.
+    #   A name for the UserProfile. This value is not case sensitive.
     #   @return [String]
     #
     # @!attribute [rw] single_sign_on_user_identifier
@@ -8563,6 +8582,9 @@ module Aws::SageMaker
     # @!attribute [rw] tags
     #   Each tag consists of a key and an optional value. Tag keys must be
     #   unique per resource.
+    #
+    #   Tags that you specify for the User Profile are also added to all
+    #   Apps that the User Profile launches.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] user_settings
@@ -14141,9 +14163,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] stopping_condition
     #   Specifies a limit to how long a model training job can run. It also
-    #   specifies the maximum time to wait for a spot instance. When the job
-    #   reaches the time limit, Amazon SageMaker ends the training job. Use
-    #   this API to cap model training costs.
+    #   specifies how long a managed Spot training job has to complete. When
+    #   the job reaches the time limit, Amazon SageMaker ends the training
+    #   job. Use this API to cap model training costs.
     #
     #   To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
     #   signal, which delays job termination for 120 seconds. Algorithms can
@@ -14292,6 +14314,11 @@ module Aws::SageMaker
     #   Profiling status of a training job.
     #   @return [String]
     #
+    # @!attribute [rw] retry_strategy
+    #   The number of times to retry the job when the job fails due to an
+    #   `InternalServerError`.
+    #   @return [Types::RetryStrategy]
+    #
     # @!attribute [rw] environment
     #   The environment variables to set in the Docker container.
     #   @return [Hash<String,String>]
@@ -14337,6 +14364,7 @@ module Aws::SageMaker
       :profiler_rule_configurations,
       :profiler_rule_evaluation_statuses,
       :profiling_status,
+      :retry_strategy,
       :environment)
       SENSITIVE = []
       include Aws::Structure
@@ -14719,7 +14747,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] user_profile_name
-    #   The user profile name.
+    #   The user profile name. This value is not case sensitive.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeUserProfileRequest AWS API Documentation
@@ -15443,7 +15471,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] s3_data_distribution_type
     #   Whether input data distributed in Amazon S3 is fully replicated or
-    #   sharded by an S3 key. Defauts to `FullyReplicated`
+    #   sharded by an S3 key. Defaults to `FullyReplicated`
     #   @return [String]
     #
     # @!attribute [rw] features_attribute
@@ -17989,6 +18017,9 @@ module Aws::SageMaker
     #           s3_uri: "S3Uri", # required
     #           local_path: "DirectoryPath",
     #         },
+    #         retry_strategy: {
+    #           maximum_retry_attempts: 1, # required
+    #         },
     #       }
     #
     # @!attribute [rw] definition_name
@@ -18070,10 +18101,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] stopping_condition
     #   Specifies a limit to how long a model hyperparameter training job
-    #   can run. It also specifies how long you are willing to wait for a
-    #   managed spot training job to complete. When the job reaches the a
-    #   limit, Amazon SageMaker ends the training job. Use this API to cap
-    #   model training costs.
+    #   can run. It also specifies how long a managed spot training job has
+    #   to complete. When the job reaches the time limit, Amazon SageMaker
+    #   ends the training job. Use this API to cap model training costs.
     #   @return [Types::StoppingCondition]
     #
     # @!attribute [rw] enable_network_isolation
@@ -18105,6 +18135,11 @@ module Aws::SageMaker
     #   training checkpoint data.
     #   @return [Types::CheckpointConfig]
     #
+    # @!attribute [rw] retry_strategy
+    #   The number of times to retry the job when the job fails due to an
+    #   `InternalServerError`.
+    #   @return [Types::RetryStrategy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTrainingJobDefinition AWS API Documentation
     #
     class HyperParameterTrainingJobDefinition < Struct.new(
@@ -18122,7 +18157,8 @@ module Aws::SageMaker
       :enable_network_isolation,
       :enable_inter_container_traffic_encryption,
       :enable_managed_spot_training,
-      :checkpoint_config)
+      :checkpoint_config,
+      :retry_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19526,6 +19562,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] sns_topic_arn
     #   An Amazon Simple Notification Service (Amazon SNS) output topic ARN.
+    #   Provide a `SnsTopicArn` if you want to do real time chaining to
+    #   another streaming job and receive an Amazon SNS notifications each
+    #   time a data object is submitted by a worker.
     #
     #   If you provide an `SnsTopicArn` in `OutputConfig`, when workers
     #   complete labeling tasks, Ground Truth will send labeling task output
@@ -21245,7 +21284,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of endpoints to return in the response.
+    #   The maximum number of endpoints to return in the response. This
+    #   value defaults to 10.
     #   @return [Integer]
     #
     # @!attribute [rw] name_contains
@@ -26503,6 +26543,13 @@ module Aws::SageMaker
     #
     # @!attribute [rw] max_runtime_in_seconds
     #   The maximum runtime allowed in seconds.
+    #
+    #   <note markdown="1"> The `MaxRuntimeInSeconds` cannot exceed the frequency of the job.
+    #   For data quality and model explainability, this can be up to 3600
+    #   seconds for an hourly schedule. For model bias and model quality
+    #   hourly schedules, this can be up to 1800 seconds.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MonitoringStoppingCondition AWS API Documentation
@@ -29741,7 +29788,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Resource being accessed is in use.
+    # The resource being accessed is in use.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -29798,7 +29845,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Resource being access is not found.
+    # The resource being accessed was not found.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -29866,6 +29913,32 @@ module Aws::SageMaker
     #
     class RetentionPolicy < Struct.new(
       :home_efs_file_system)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The retry strategy to use when a training job fails due to an
+    # `InternalServerError`. `RetryStrategy` is specified as part of the
+    # `CreateTrainingJob` and `CreateHyperParameterTuningJob` requests. You
+    # can add the `StoppingCondition` parameter to the request to limit the
+    # training time for the complete job.
+    #
+    # @note When making an API call, you may pass RetryStrategy
+    #   data as a hash:
+    #
+    #       {
+    #         maximum_retry_attempts: 1, # required
+    #       }
+    #
+    # @!attribute [rw] maximum_retry_attempts
+    #   The number of times to retry the job. When the job is retried, it's
+    #   `SecondaryStatus` is changed to `STARTING`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RetryStrategy AWS API Documentation
+    #
+    class RetryStrategy < Struct.new(
+      :maximum_retry_attempts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31102,11 +31175,11 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies a limit to how long a model training or compilation job can
-    # run. It also specifies how long you are willing to wait for a managed
-    # spot training job to complete. When the job reaches the time limit,
-    # Amazon SageMaker ends the training or compilation job. Use this API to
-    # cap model training costs.
+    # Specifies a limit to how long a model training job, model compilation
+    # job, or hyperparameter tuning job can run. It also specifies how long
+    # a managed Spot training job has to complete. When the job reaches the
+    # time limit, Amazon SageMaker ends the training or compilation job. Use
+    # this API to cap model training costs.
     #
     # To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
     # signal, which delays job termination for 120 seconds. Algorithms can
@@ -31136,18 +31209,27 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] max_runtime_in_seconds
-    #   The maximum length of time, in seconds, that the training or
-    #   compilation job can run. If job does not complete during this time,
-    #   Amazon SageMaker ends the job. If value is not specified, default
-    #   value is 1 day. The maximum value is 28 days.
+    #   The maximum length of time, in seconds, that a training or
+    #   compilation job can run. If the job does not complete during this
+    #   time, Amazon SageMaker ends the job.
+    #
+    #   When `RetryStrategy` is specified in the job request,
+    #   `MaxRuntimeInSeconds` specifies the maximum time for all of the
+    #   attempts in total, not each individual attempt.
+    #
+    #   The default value is 1 day. The maximum value is 28 days.
     #   @return [Integer]
     #
     # @!attribute [rw] max_wait_time_in_seconds
-    #   The maximum length of time, in seconds, how long you are willing to
-    #   wait for a managed spot training job to complete. It is the amount
-    #   of time spent waiting for Spot capacity plus the amount of time the
-    #   training job runs. It must be equal to or greater than
-    #   `MaxRuntimeInSeconds`.
+    #   The maximum length of time, in seconds, that a managed Spot training
+    #   job has to complete. It is the amount of time spent waiting for Spot
+    #   capacity plus the amount of time the job can run. It must be equal
+    #   to or greater than `MaxRuntimeInSeconds`. If the job does not
+    #   complete during this time, Amazon SageMaker ends the job.
+    #
+    #   When `RetryStrategy` is specified in the job request,
+    #   `MaxWaitTimeInSeconds` specifies the maximum time for all of the
+    #   attempts in total, not each individual attempt.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StoppingCondition AWS API Documentation
@@ -31542,9 +31624,10 @@ module Aws::SageMaker
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] stopping_condition
-    #   Specifies a limit to how long a model training job can run. When the
-    #   job reaches the time limit, Amazon SageMaker ends the training job.
-    #   Use this API to cap model training costs.
+    #   Specifies a limit to how long a model training job can run. It also
+    #   specifies how long a managed Spot training job has to complete. When
+    #   the job reaches the time limit, Amazon SageMaker ends the training
+    #   job. Use this API to cap model training costs.
     #
     #   To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
     #   signal, which delays job termination for 120 seconds. Algorithms can
@@ -31669,6 +31752,11 @@ module Aws::SageMaker
     #   The environment variables to set in the Docker container.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] retry_strategy
+    #   The number of times to retry the job when the job fails due to an
+    #   `InternalServerError`.
+    #   @return [Types::RetryStrategy]
+    #
     # @!attribute [rw] tags
     #   An array of key-value pairs. You can use tags to categorize your AWS
     #   resources in different ways, for example, by purpose, owner, or
@@ -31717,6 +31805,7 @@ module Aws::SageMaker
       :tensor_board_output_config,
       :debug_rule_evaluation_statuses,
       :environment,
+      :retry_strategy,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -31810,9 +31899,10 @@ module Aws::SageMaker
     #   @return [Types::ResourceConfig]
     #
     # @!attribute [rw] stopping_condition
-    #   Specifies a limit to how long a model training job can run. When the
-    #   job reaches the time limit, Amazon SageMaker ends the training job.
-    #   Use this API to cap model training costs.
+    #   Specifies a limit to how long a model training job can run. It also
+    #   specifies how long a managed Spot training job has to complete. When
+    #   the job reaches the time limit, Amazon SageMaker ends the training
+    #   job. Use this API to cap model training costs.
     #
     #   To stop a job, Amazon SageMaker sends the algorithm the SIGTERM
     #   signal, which delays job termination for 120 seconds. Algorithms can
@@ -32145,7 +32235,7 @@ module Aws::SageMaker
     #
     #
     #   [1]: https://mxnet.apache.org/api/faq/recordio
-    #   [2]: https://www.tensorflow.org/guide/datasets#consuming_tfrecord_data
+    #   [2]: https://www.tensorflow.org/guide/data#consuming_tfrecord_data
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformInput AWS API Documentation

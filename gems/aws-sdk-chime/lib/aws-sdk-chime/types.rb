@@ -928,7 +928,7 @@ module Aws::Chime
     #         update_phone_number_request_items: [ # required
     #           {
     #             phone_number_id: "NonEmptyString", # required
-    #             product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector
+    #             product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector, SipMediaApplicationDialIn
     #             calling_name: "CallingName",
     #           },
     #         ],
@@ -2376,7 +2376,7 @@ module Aws::Chime
     #   data as a hash:
     #
     #       {
-    #         product_type: "BusinessCalling", # required, accepts BusinessCalling, VoiceConnector
+    #         product_type: "BusinessCalling", # required, accepts BusinessCalling, VoiceConnector, SipMediaApplicationDialIn
     #         e164_phone_numbers: ["E164PhoneNumber"], # required
     #       }
     #
@@ -3702,7 +3702,7 @@ module Aws::Chime
     end
 
     # @!attribute [rw] channel_ban
-    #   The the details of the ban.
+    #   The details of the ban.
     #   @return [Types::ChannelBan]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DescribeChannelBanResponse AWS API Documentation
@@ -6148,7 +6148,7 @@ module Aws::Chime
     #
     #       {
     #         status: "AcquireInProgress", # accepts AcquireInProgress, AcquireFailed, Unassigned, Assigned, ReleaseInProgress, DeleteInProgress, ReleaseFailed, DeleteFailed
-    #         product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector
+    #         product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector, SipMediaApplicationDialIn
     #         filter_name: "AccountId", # accepts AccountId, UserId, VoiceConnectorId, VoiceConnectorGroupId, SipRuleId
     #         filter_value: "String",
     #         max_results: 1,
@@ -6459,6 +6459,37 @@ module Aws::Chime
     class ListSipRulesResponse < Struct.new(
       :sip_rules,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListSupportedPhoneNumberCountriesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         product_type: "BusinessCalling", # required, accepts BusinessCalling, VoiceConnector, SipMediaApplicationDialIn
+    #       }
+    #
+    # @!attribute [rw] product_type
+    #   The phone number product type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListSupportedPhoneNumberCountriesRequest AWS API Documentation
+    #
+    class ListSupportedPhoneNumberCountriesRequest < Struct.new(
+      :product_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] phone_number_countries
+    #   The supported phone number countries.
+    #   @return [Array<Types::PhoneNumberCountry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListSupportedPhoneNumberCountriesResponse AWS API Documentation
+    #
+    class ListSupportedPhoneNumberCountriesResponse < Struct.new(
+      :phone_number_countries)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7088,6 +7119,10 @@ module Aws::Chime
     #   The phone number, in E.164 format.
     #   @return [String]
     #
+    # @!attribute [rw] country
+    #   The phone number country. Format: ISO 3166-1 alpha-2.
+    #   @return [String]
+    #
     # @!attribute [rw] type
     #   The phone number type.
     #   @return [String]
@@ -7133,6 +7168,7 @@ module Aws::Chime
     class PhoneNumber < Struct.new(
       :phone_number_id,
       :e164_phone_number,
+      :country,
       :type,
       :product_type,
       :status,
@@ -7216,6 +7252,25 @@ module Aws::Chime
       :outbound_sms,
       :inbound_mms,
       :outbound_mms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The phone number country.
+    #
+    # @!attribute [rw] country_code
+    #   The phone number country code. Format: ISO 3166-1 alpha-2.
+    #   @return [String]
+    #
+    # @!attribute [rw] supported_phone_number_types
+    #   The supported phone number types.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PhoneNumberCountry AWS API Documentation
+    #
+    class PhoneNumberCountry < Struct.new(
+      :country_code,
+      :supported_phone_number_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8303,31 +8358,40 @@ module Aws::Chime
     #       {
     #         area_code: "String",
     #         city: "String",
-    #         country: "String",
+    #         country: "Alpha2CountryCode",
     #         state: "String",
     #         toll_free_prefix: "TollFreePrefix",
+    #         phone_number_type: "Local", # accepts Local, TollFree
     #         max_results: 1,
     #         next_token: "String",
     #       }
     #
     # @!attribute [rw] area_code
-    #   The area code used to filter results.
+    #   The area code used to filter results. Only applies to the US.
     #   @return [String]
     #
     # @!attribute [rw] city
-    #   The city used to filter results.
+    #   The city used to filter results. Only applies to the US.
     #   @return [String]
     #
     # @!attribute [rw] country
-    #   The country used to filter results.
+    #   The country used to filter results. Defaults to the US Format: ISO
+    #   3166-1 alpha-2.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state used to filter results.
+    #   The state used to filter results. Required only if you provide
+    #   `City`. Only applies to the US.
     #   @return [String]
     #
     # @!attribute [rw] toll_free_prefix
-    #   The toll-free prefix that you use to filter results.
+    #   The toll-free prefix that you use to filter results. Only applies to
+    #   the US.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_type
+    #   The phone number type used to filter results. Required for non-US
+    #   numbers.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -8335,7 +8399,7 @@ module Aws::Chime
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results.
+    #   The token used to retrieve the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/SearchAvailablePhoneNumbersRequest AWS API Documentation
@@ -8346,6 +8410,7 @@ module Aws::Chime
       :country,
       :state,
       :toll_free_prefix,
+      :phone_number_type,
       :max_results,
       :next_token)
       SENSITIVE = []
@@ -8356,10 +8421,15 @@ module Aws::Chime
     #   List of phone numbers, in E.164 format.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] next_token
+    #   The token used to retrieve the next page of search results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/SearchAvailablePhoneNumbersResponse AWS API Documentation
     #
     class SearchAvailablePhoneNumbersResponse < Struct.new(
-      :e164_phone_numbers)
+      :e164_phone_numbers,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9494,7 +9564,7 @@ module Aws::Chime
     #
     #       {
     #         phone_number_id: "String", # required
-    #         product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector
+    #         product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector, SipMediaApplicationDialIn
     #         calling_name: "CallingName",
     #       }
     #
@@ -9528,7 +9598,7 @@ module Aws::Chime
     #
     #       {
     #         phone_number_id: "NonEmptyString", # required
-    #         product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector
+    #         product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector, SipMediaApplicationDialIn
     #         calling_name: "CallingName",
     #       }
     #

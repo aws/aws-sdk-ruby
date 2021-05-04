@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2021-05-04)
+------------------
+
+* Feature - Enable retrying Training and Tuning Jobs that fail with InternalServerError by setting RetryStrategy.
+
 1.85.0 (2021-03-30)
 ------------------
 

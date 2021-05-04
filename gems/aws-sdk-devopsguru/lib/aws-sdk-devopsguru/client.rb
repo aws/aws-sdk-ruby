@@ -600,13 +600,15 @@ module Aws::DevOpsGuru
     # resource collections in your account. You specify the type of AWS
     # resources collection. The one type of AWS resource collection
     # supported is AWS CloudFormation stacks. DevOps Guru can be configured
-    # to analyze only the AWS resources that are defined in the stacks.
+    # to analyze only the AWS resources that are defined in the stacks. You
+    # can specify up to 500 AWS CloudFormation stacks.
     #
     # @option params [required, String] :resource_collection_type
     #   An AWS resource collection type. This type specifies how analyzed AWS
     #   resources are defined. The one type of AWS resource collection
     #   supported is AWS CloudFormation stacks. DevOps Guru can be configured
-    #   to analyze only the AWS resources that are defined in the stacks.
+    #   to analyze only the AWS resources that are defined in the stacks. You
+    #   can specify up to 500 AWS CloudFormation stacks.
     #
     # @option params [String] :next_token
     #   The pagination token to use to retrieve the next page of results for
@@ -615,6 +617,7 @@ module Aws::DevOpsGuru
     # @return [Types::DescribeResourceCollectionHealthResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeResourceCollectionHealthResponse#cloud_formation #cloud_formation} => Array&lt;Types::CloudFormationHealth&gt;
+    #   * {Types::DescribeResourceCollectionHealthResponse#service #service} => Array&lt;Types::ServiceHealth&gt;
     #   * {Types::DescribeResourceCollectionHealthResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
@@ -622,7 +625,7 @@ module Aws::DevOpsGuru
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_resource_collection_health({
-    #     resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION
+    #     resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION, AWS_SERVICE
     #     next_token: "UuidNextToken",
     #   })
     #
@@ -633,6 +636,10 @@ module Aws::DevOpsGuru
     #   resp.cloud_formation[0].insight.open_proactive_insights #=> Integer
     #   resp.cloud_formation[0].insight.open_reactive_insights #=> Integer
     #   resp.cloud_formation[0].insight.mean_time_to_recover_in_milliseconds #=> Integer
+    #   resp.service #=> Array
+    #   resp.service[0].service_name #=> String, one of "API_GATEWAY", "APPLICATION_ELB", "AUTO_SCALING_GROUP", "CLOUD_FRONT", "DYNAMO_DB", "EC2", "ECS", "EKS", "ELASTIC_BEANSTALK", "ELASTI_CACHE", "ELB", "ES", "KINESIS", "LAMBDA", "NAT_GATEWAY", "NETWORK_ELB", "RDS", "REDSHIFT", "ROUTE_53", "S3", "SAGE_MAKER", "SNS", "SQS", "STEP_FUNCTIONS", "SWF"
+    #   resp.service[0].insight.open_proactive_insights #=> Integer
+    #   resp.service[0].insight.open_reactive_insights #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeResourceCollectionHealth AWS API Documentation
@@ -666,10 +673,66 @@ module Aws::DevOpsGuru
       req.send_request(options)
     end
 
+    # Returns an estimate of the monthly cost for DevOps Guru to analyze
+    # your AWS resources. For more information, see [Estimate your Amazon
+    # DevOps Guru costs][1] and [Amazon DevOps Guru pricing][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html
+    # [2]: http://aws.amazon.com/devops-guru/pricing/
+    #
+    # @option params [String] :next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #
+    # @return [Types::GetCostEstimationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCostEstimationResponse#resource_collection #resource_collection} => Types::CostEstimationResourceCollectionFilter
+    #   * {Types::GetCostEstimationResponse#status #status} => String
+    #   * {Types::GetCostEstimationResponse#costs #costs} => Array&lt;Types::ServiceResourceCost&gt;
+    #   * {Types::GetCostEstimationResponse#time_range #time_range} => Types::CostEstimationTimeRange
+    #   * {Types::GetCostEstimationResponse#total_cost #total_cost} => Float
+    #   * {Types::GetCostEstimationResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cost_estimation({
+    #     next_token: "UuidNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_collection.cloud_formation.stack_names #=> Array
+    #   resp.resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.status #=> String, one of "ONGOING", "COMPLETED"
+    #   resp.costs #=> Array
+    #   resp.costs[0].type #=> String
+    #   resp.costs[0].state #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.costs[0].count #=> Integer
+    #   resp.costs[0].unit_cost #=> Float
+    #   resp.costs[0].cost #=> Float
+    #   resp.time_range.start_time #=> Time
+    #   resp.time_range.end_time #=> Time
+    #   resp.total_cost #=> Float
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/GetCostEstimation AWS API Documentation
+    #
+    # @overload get_cost_estimation(params = {})
+    # @param [Hash] params ({})
+    def get_cost_estimation(params = {}, options = {})
+      req = build_request(:get_cost_estimation, params)
+      req.send_request(options)
+    end
+
     # Returns lists AWS resources that are of the specified resource
     # collection type. The one type of AWS resource collection supported is
     # AWS CloudFormation stacks. DevOps Guru can be configured to analyze
-    # only the AWS resources that are defined in the stacks.
+    # only the AWS resources that are defined in the stacks. You can specify
+    # up to 500 AWS CloudFormation stacks.
     #
     # @option params [required, String] :resource_collection_type
     #   The type of AWS resource collections to return. The one valid value is
@@ -689,7 +752,7 @@ module Aws::DevOpsGuru
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_resource_collection({
-    #     resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION
+    #     resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION, AWS_SERVICE
     #     next_token: "UuidNextToken",
     #   })
     #
@@ -935,6 +998,8 @@ module Aws::DevOpsGuru
     #   resp.proactive_insights[0].prediction_time_range.end_time #=> Time
     #   resp.proactive_insights[0].resource_collection.cloud_formation.stack_names #=> Array
     #   resp.proactive_insights[0].resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.proactive_insights[0].service_collection.service_names #=> Array
+    #   resp.proactive_insights[0].service_collection.service_names[0] #=> String, one of "API_GATEWAY", "APPLICATION_ELB", "AUTO_SCALING_GROUP", "CLOUD_FRONT", "DYNAMO_DB", "EC2", "ECS", "EKS", "ELASTIC_BEANSTALK", "ELASTI_CACHE", "ELB", "ES", "KINESIS", "LAMBDA", "NAT_GATEWAY", "NETWORK_ELB", "RDS", "REDSHIFT", "ROUTE_53", "S3", "SAGE_MAKER", "SNS", "SQS", "STEP_FUNCTIONS", "SWF"
     #   resp.reactive_insights #=> Array
     #   resp.reactive_insights[0].id #=> String
     #   resp.reactive_insights[0].name #=> String
@@ -944,6 +1009,8 @@ module Aws::DevOpsGuru
     #   resp.reactive_insights[0].insight_time_range.end_time #=> Time
     #   resp.reactive_insights[0].resource_collection.cloud_formation.stack_names #=> Array
     #   resp.reactive_insights[0].resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.reactive_insights[0].service_collection.service_names #=> Array
+    #   resp.reactive_insights[0].service_collection.service_names[0] #=> String, one of "API_GATEWAY", "APPLICATION_ELB", "AUTO_SCALING_GROUP", "CLOUD_FRONT", "DYNAMO_DB", "EC2", "ECS", "EKS", "ELASTIC_BEANSTALK", "ELASTI_CACHE", "ELB", "ES", "KINESIS", "LAMBDA", "NAT_GATEWAY", "NETWORK_ELB", "RDS", "REDSHIFT", "ROUTE_53", "S3", "SAGE_MAKER", "SNS", "SQS", "STEP_FUNCTIONS", "SWF"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListInsights AWS API Documentation
@@ -1005,6 +1072,9 @@ module Aws::DevOpsGuru
     #   The pagination token to use to retrieve the next page of results for
     #   this operation. If this value is null, it retrieves the first page.
     #
+    # @option params [String] :locale
+    #   A locale that specifies the language to use for recommendations.
+    #
     # @return [Types::ListRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListRecommendationsResponse#recommendations #recommendations} => Array&lt;Types::Recommendation&gt;
@@ -1017,6 +1087,7 @@ module Aws::DevOpsGuru
     #   resp = client.list_recommendations({
     #     insight_id: "InsightId", # required
     #     next_token: "UuidNextToken",
+    #     locale: "DE_DE", # accepts DE_DE, EN_US, EN_GB, ES_ES, FR_FR, IT_IT, JA_JP, KO_KR, PT_BR, ZH_CN, ZH_TW
     #   })
     #
     # @example Response structure
@@ -1153,6 +1224,9 @@ module Aws::DevOpsGuru
     #           stack_names: ["StackName"],
     #         },
     #       },
+    #       service_collection: {
+    #         service_names: ["API_GATEWAY"], # accepts API_GATEWAY, APPLICATION_ELB, AUTO_SCALING_GROUP, CLOUD_FRONT, DYNAMO_DB, EC2, ECS, EKS, ELASTIC_BEANSTALK, ELASTI_CACHE, ELB, ES, KINESIS, LAMBDA, NAT_GATEWAY, NETWORK_ELB, RDS, REDSHIFT, ROUTE_53, S3, SAGE_MAKER, SNS, SQS, STEP_FUNCTIONS, SWF
+    #       },
     #     },
     #     max_results: 1,
     #     next_token: "UuidNextToken",
@@ -1172,6 +1246,8 @@ module Aws::DevOpsGuru
     #   resp.proactive_insights[0].prediction_time_range.end_time #=> Time
     #   resp.proactive_insights[0].resource_collection.cloud_formation.stack_names #=> Array
     #   resp.proactive_insights[0].resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.proactive_insights[0].service_collection.service_names #=> Array
+    #   resp.proactive_insights[0].service_collection.service_names[0] #=> String, one of "API_GATEWAY", "APPLICATION_ELB", "AUTO_SCALING_GROUP", "CLOUD_FRONT", "DYNAMO_DB", "EC2", "ECS", "EKS", "ELASTIC_BEANSTALK", "ELASTI_CACHE", "ELB", "ES", "KINESIS", "LAMBDA", "NAT_GATEWAY", "NETWORK_ELB", "RDS", "REDSHIFT", "ROUTE_53", "S3", "SAGE_MAKER", "SNS", "SQS", "STEP_FUNCTIONS", "SWF"
     #   resp.reactive_insights #=> Array
     #   resp.reactive_insights[0].id #=> String
     #   resp.reactive_insights[0].name #=> String
@@ -1181,6 +1257,8 @@ module Aws::DevOpsGuru
     #   resp.reactive_insights[0].insight_time_range.end_time #=> Time
     #   resp.reactive_insights[0].resource_collection.cloud_formation.stack_names #=> Array
     #   resp.reactive_insights[0].resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.reactive_insights[0].service_collection.service_names #=> Array
+    #   resp.reactive_insights[0].service_collection.service_names[0] #=> String, one of "API_GATEWAY", "APPLICATION_ELB", "AUTO_SCALING_GROUP", "CLOUD_FRONT", "DYNAMO_DB", "EC2", "ECS", "EKS", "ELASTIC_BEANSTALK", "ELASTI_CACHE", "ELB", "ES", "KINESIS", "LAMBDA", "NAT_GATEWAY", "NETWORK_ELB", "RDS", "REDSHIFT", "ROUTE_53", "S3", "SAGE_MAKER", "SNS", "SQS", "STEP_FUNCTIONS", "SWF"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/SearchInsights AWS API Documentation
@@ -1192,11 +1270,47 @@ module Aws::DevOpsGuru
       req.send_request(options)
     end
 
+    # Starts the creation of an estimate of the monthly cost to analyze your
+    # AWS resources.
+    #
+    # @option params [required, Types::CostEstimationResourceCollectionFilter] :resource_collection
+    #   The collection of AWS resources used to create a monthly DevOps Guru
+    #   cost estimate.
+    #
+    # @option params [String] :client_token
+    #   The idempotency token used to identify each cost estimate request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_cost_estimation({
+    #     resource_collection: { # required
+    #       cloud_formation: {
+    #         stack_names: ["StackName"],
+    #       },
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/StartCostEstimation AWS API Documentation
+    #
+    # @overload start_cost_estimation(params = {})
+    # @param [Hash] params ({})
+    def start_cost_estimation(params = {}, options = {})
+      req = build_request(:start_cost_estimation, params)
+      req.send_request(options)
+    end
+
     # Updates the collection of resources that DevOps Guru analyzes. The one
     # type of AWS resource collection supported is AWS CloudFormation
     # stacks. DevOps Guru can be configured to analyze only the AWS
-    # resources that are defined in the stacks. This method also creates the
-    # IAM role required for you to use DevOps Guru.
+    # resources that are defined in the stacks. You can specify up to 500
+    # AWS CloudFormation stacks. This method also creates the IAM role
+    # required for you to use DevOps Guru.
     #
     # @option params [required, String] :action
     #   Specifies if the resource collection in the request is added or
@@ -1271,7 +1385,7 @@ module Aws::DevOpsGuru
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devopsguru'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

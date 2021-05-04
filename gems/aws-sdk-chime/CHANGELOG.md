@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2021-05-04)
+------------------
+
+* Feature - This release adds the ability to search for and order international phone numbers for Amazon Chime SIP media applications.
+
 1.45.0 (2021-05-03)
 ------------------
 

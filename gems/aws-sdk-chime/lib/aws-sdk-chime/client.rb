@@ -771,14 +771,14 @@ module Aws::Chime
     end
 
     # Updates phone number product types or calling names. You can update
-    # one attribute at a time for each `UpdatePhoneNumberRequestItem` . For
-    # example, you can update either the product type or the calling name.
+    # one attribute at a time for each `UpdatePhoneNumberRequestItem`. For
+    # example, you can update the product type or the calling name.
     #
-    # For product types, choose from Amazon Chime Business Calling and
-    # Amazon Chime Voice Connector. For toll-free numbers, you must use the
-    # Amazon Chime Voice Connector product type.
+    # For toll-free numbers, you cannot use the Amazon Chime Business
+    # Calling product type. For numbers outside the US, you must use the
+    # Amazon Chime SIP Media Application Dial-In product type.
     #
-    # Updates to outbound calling names can take up to 72 hours to complete.
+    # Updates to outbound calling names can take 72 hours to complete.
     # Pending updates to outbound calling names must be complete before you
     # can request another update.
     #
@@ -796,7 +796,7 @@ module Aws::Chime
     #     update_phone_number_request_items: [ # required
     #       {
     #         phone_number_id: "NonEmptyString", # required
-    #         product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector
+    #         product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector, SipMediaApplicationDialIn
     #         calling_name: "CallingName",
     #       },
     #     ],
@@ -1659,10 +1659,10 @@ module Aws::Chime
       req.send_request(options)
     end
 
-    # Creates an order for phone numbers to be provisioned. Choose from
-    # Amazon Chime Business Calling and Amazon Chime Voice Connector product
-    # types. For toll-free numbers, you must use the Amazon Chime Voice
-    # Connector product type.
+    # Creates an order for phone numbers to be provisioned. For toll-free
+    # numbers, you cannot use the Amazon Chime Business Calling product
+    # type. For numbers outside the US, you must use the Amazon Chime SIP
+    # Media Application Dial-In product type.
     #
     # @option params [required, String] :product_type
     #   The phone number product type.
@@ -1677,14 +1677,14 @@ module Aws::Chime
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_phone_number_order({
-    #     product_type: "BusinessCalling", # required, accepts BusinessCalling, VoiceConnector
+    #     product_type: "BusinessCalling", # required, accepts BusinessCalling, VoiceConnector, SipMediaApplicationDialIn
     #     e164_phone_numbers: ["E164PhoneNumber"], # required
     #   })
     #
     # @example Response structure
     #
     #   resp.phone_number_order.phone_number_order_id #=> String
-    #   resp.phone_number_order.product_type #=> String, one of "BusinessCalling", "VoiceConnector"
+    #   resp.phone_number_order.product_type #=> String, one of "BusinessCalling", "VoiceConnector", "SipMediaApplicationDialIn"
     #   resp.phone_number_order.status #=> String, one of "Processing", "Successful", "Failed", "Partial"
     #   resp.phone_number_order.ordered_phone_numbers #=> Array
     #   resp.phone_number_order.ordered_phone_numbers[0].e164_phone_number #=> String
@@ -2582,7 +2582,7 @@ module Aws::Chime
       req.send_request(options)
     end
 
-    # Moves the specified phone number into the **Deletionqueue**. A phone
+    # Moves the specified phone number into the **Deletion queue**. A phone
     # number must be disassociated from any users or Amazon Chime Voice
     # Connectors before it can be deleted.
     #
@@ -3864,8 +3864,9 @@ module Aws::Chime
     #
     #   resp.phone_number.phone_number_id #=> String
     #   resp.phone_number.e164_phone_number #=> String
+    #   resp.phone_number.country #=> String
     #   resp.phone_number.type #=> String, one of "Local", "TollFree"
-    #   resp.phone_number.product_type #=> String, one of "BusinessCalling", "VoiceConnector"
+    #   resp.phone_number.product_type #=> String, one of "BusinessCalling", "VoiceConnector", "SipMediaApplicationDialIn"
     #   resp.phone_number.status #=> String, one of "AcquireInProgress", "AcquireFailed", "Unassigned", "Assigned", "ReleaseInProgress", "DeleteInProgress", "ReleaseFailed", "DeleteFailed"
     #   resp.phone_number.capabilities.inbound_call #=> Boolean
     #   resp.phone_number.capabilities.outbound_call #=> Boolean
@@ -3912,7 +3913,7 @@ module Aws::Chime
     # @example Response structure
     #
     #   resp.phone_number_order.phone_number_order_id #=> String
-    #   resp.phone_number_order.product_type #=> String, one of "BusinessCalling", "VoiceConnector"
+    #   resp.phone_number_order.product_type #=> String, one of "BusinessCalling", "VoiceConnector", "SipMediaApplicationDialIn"
     #   resp.phone_number_order.status #=> String, one of "Processing", "Successful", "Failed", "Partial"
     #   resp.phone_number_order.ordered_phone_numbers #=> Array
     #   resp.phone_number_order.ordered_phone_numbers[0].e164_phone_number #=> String
@@ -5110,7 +5111,7 @@ module Aws::Chime
 
     # List all the messages in a channel. Returns a paginated list of
     # `ChannelMessages`. By default, sorted by creation timestamp in
-    # descending order .
+    # descending order.
     #
     # <note markdown="1"> Redacted messages appear in the results as empty, since they are only
     # redacted, not deleted. Deleted messages do not appear in the results.
@@ -5483,7 +5484,7 @@ module Aws::Chime
     #
     #   resp.phone_number_orders #=> Array
     #   resp.phone_number_orders[0].phone_number_order_id #=> String
-    #   resp.phone_number_orders[0].product_type #=> String, one of "BusinessCalling", "VoiceConnector"
+    #   resp.phone_number_orders[0].product_type #=> String, one of "BusinessCalling", "VoiceConnector", "SipMediaApplicationDialIn"
     #   resp.phone_number_orders[0].status #=> String, one of "Processing", "Successful", "Failed", "Partial"
     #   resp.phone_number_orders[0].ordered_phone_numbers #=> Array
     #   resp.phone_number_orders[0].ordered_phone_numbers[0].e164_phone_number #=> String
@@ -5534,7 +5535,7 @@ module Aws::Chime
     #
     #   resp = client.list_phone_numbers({
     #     status: "AcquireInProgress", # accepts AcquireInProgress, AcquireFailed, Unassigned, Assigned, ReleaseInProgress, DeleteInProgress, ReleaseFailed, DeleteFailed
-    #     product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector
+    #     product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector, SipMediaApplicationDialIn
     #     filter_name: "AccountId", # accepts AccountId, UserId, VoiceConnectorId, VoiceConnectorGroupId, SipRuleId
     #     filter_value: "String",
     #     max_results: 1,
@@ -5546,8 +5547,9 @@ module Aws::Chime
     #   resp.phone_numbers #=> Array
     #   resp.phone_numbers[0].phone_number_id #=> String
     #   resp.phone_numbers[0].e164_phone_number #=> String
+    #   resp.phone_numbers[0].country #=> String
     #   resp.phone_numbers[0].type #=> String, one of "Local", "TollFree"
-    #   resp.phone_numbers[0].product_type #=> String, one of "BusinessCalling", "VoiceConnector"
+    #   resp.phone_numbers[0].product_type #=> String, one of "BusinessCalling", "VoiceConnector", "SipMediaApplicationDialIn"
     #   resp.phone_numbers[0].status #=> String, one of "AcquireInProgress", "AcquireFailed", "Unassigned", "Assigned", "ReleaseInProgress", "DeleteInProgress", "ReleaseFailed", "DeleteFailed"
     #   resp.phone_numbers[0].capabilities.inbound_call #=> Boolean
     #   resp.phone_numbers[0].capabilities.outbound_call #=> Boolean
@@ -5838,6 +5840,37 @@ module Aws::Chime
     # @param [Hash] params ({})
     def list_sip_rules(params = {}, options = {})
       req = build_request(:list_sip_rules, params)
+      req.send_request(options)
+    end
+
+    # Lists supported phone number countries.
+    #
+    # @option params [required, String] :product_type
+    #   The phone number product type.
+    #
+    # @return [Types::ListSupportedPhoneNumberCountriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSupportedPhoneNumberCountriesResponse#phone_number_countries #phone_number_countries} => Array&lt;Types::PhoneNumberCountry&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_supported_phone_number_countries({
+    #     product_type: "BusinessCalling", # required, accepts BusinessCalling, VoiceConnector, SipMediaApplicationDialIn
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.phone_number_countries #=> Array
+    #   resp.phone_number_countries[0].country_code #=> String
+    #   resp.phone_number_countries[0].supported_phone_number_types #=> Array
+    #   resp.phone_number_countries[0].supported_phone_number_types[0] #=> String, one of "Local", "TollFree"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListSupportedPhoneNumberCountries AWS API Documentation
+    #
+    # @overload list_supported_phone_number_countries(params = {})
+    # @param [Hash] params ({})
+    def list_supported_phone_number_countries(params = {}, options = {})
+      req = build_request(:list_supported_phone_number_countries, params)
       req.send_request(options)
     end
 
@@ -6828,8 +6861,9 @@ module Aws::Chime
     #
     #   resp.phone_number.phone_number_id #=> String
     #   resp.phone_number.e164_phone_number #=> String
+    #   resp.phone_number.country #=> String
     #   resp.phone_number.type #=> String, one of "Local", "TollFree"
-    #   resp.phone_number.product_type #=> String, one of "BusinessCalling", "VoiceConnector"
+    #   resp.phone_number.product_type #=> String, one of "BusinessCalling", "VoiceConnector", "SipMediaApplicationDialIn"
     #   resp.phone_number.status #=> String, one of "AcquireInProgress", "AcquireFailed", "Unassigned", "Assigned", "ReleaseInProgress", "DeleteInProgress", "ReleaseFailed", "DeleteFailed"
     #   resp.phone_number.capabilities.inbound_call #=> Boolean
     #   resp.phone_number.capabilities.outbound_call #=> Boolean
@@ -6856,41 +6890,56 @@ module Aws::Chime
       req.send_request(options)
     end
 
-    # Searches phone numbers that can be ordered.
+    # Searches for phone numbers that can be ordered. For US numbers,
+    # provide at least one of the following search filters: `AreaCode`,
+    # `City`, `State`, or `TollFreePrefix`. If you provide `City`, you must
+    # also provide `State`. Numbers outside the US only support the
+    # `PhoneNumberType` filter, which you must use.
     #
     # @option params [String] :area_code
-    #   The area code used to filter results.
+    #   The area code used to filter results. Only applies to the US.
     #
     # @option params [String] :city
-    #   The city used to filter results.
+    #   The city used to filter results. Only applies to the US.
     #
     # @option params [String] :country
-    #   The country used to filter results.
+    #   The country used to filter results. Defaults to the US Format: ISO
+    #   3166-1 alpha-2.
     #
     # @option params [String] :state
-    #   The state used to filter results.
+    #   The state used to filter results. Required only if you provide `City`.
+    #   Only applies to the US.
     #
     # @option params [String] :toll_free_prefix
-    #   The toll-free prefix that you use to filter results.
+    #   The toll-free prefix that you use to filter results. Only applies to
+    #   the US.
+    #
+    # @option params [String] :phone_number_type
+    #   The phone number type used to filter results. Required for non-US
+    #   numbers.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call.
     #
     # @option params [String] :next_token
-    #   The token to use to retrieve the next page of results.
+    #   The token used to retrieve the next page of results.
     #
     # @return [Types::SearchAvailablePhoneNumbersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SearchAvailablePhoneNumbersResponse#e164_phone_numbers #e164_phone_numbers} => Array&lt;String&gt;
+    #   * {Types::SearchAvailablePhoneNumbersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_available_phone_numbers({
     #     area_code: "String",
     #     city: "String",
-    #     country: "String",
+    #     country: "Alpha2CountryCode",
     #     state: "String",
     #     toll_free_prefix: "TollFreePrefix",
+    #     phone_number_type: "Local", # accepts Local, TollFree
     #     max_results: 1,
     #     next_token: "String",
     #   })
@@ -6899,6 +6948,7 @@ module Aws::Chime
     #
     #   resp.e164_phone_numbers #=> Array
     #   resp.e164_phone_numbers[0] #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/SearchAvailablePhoneNumbers AWS API Documentation
     #
@@ -7534,10 +7584,11 @@ module Aws::Chime
     # detail at a time. For example, you can update either the product type
     # or the calling name in one action.
     #
-    # For toll-free numbers, you must use the Amazon Chime Voice Connector
-    # product type.
+    # For toll-free numbers, you cannot use the Amazon Chime Business
+    # Calling product type. For numbers outside the U.S., you must use the
+    # Amazon Chime SIP Media Application Dial-In product type.
     #
-    # Updates to outbound calling names can take up to 72 hours to complete.
+    # Updates to outbound calling names can take 72 hours to complete.
     # Pending updates to outbound calling names must be complete before you
     # can request another update.
     #
@@ -7558,7 +7609,7 @@ module Aws::Chime
     #
     #   resp = client.update_phone_number({
     #     phone_number_id: "String", # required
-    #     product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector
+    #     product_type: "BusinessCalling", # accepts BusinessCalling, VoiceConnector, SipMediaApplicationDialIn
     #     calling_name: "CallingName",
     #   })
     #
@@ -7566,8 +7617,9 @@ module Aws::Chime
     #
     #   resp.phone_number.phone_number_id #=> String
     #   resp.phone_number.e164_phone_number #=> String
+    #   resp.phone_number.country #=> String
     #   resp.phone_number.type #=> String, one of "Local", "TollFree"
-    #   resp.phone_number.product_type #=> String, one of "BusinessCalling", "VoiceConnector"
+    #   resp.phone_number.product_type #=> String, one of "BusinessCalling", "VoiceConnector", "SipMediaApplicationDialIn"
     #   resp.phone_number.status #=> String, one of "AcquireInProgress", "AcquireFailed", "Unassigned", "Assigned", "ReleaseInProgress", "DeleteInProgress", "ReleaseFailed", "DeleteFailed"
     #   resp.phone_number.capabilities.inbound_call #=> Boolean
     #   resp.phone_number.capabilities.outbound_call #=> Boolean
@@ -8074,7 +8126,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

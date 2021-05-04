@@ -236,8 +236,12 @@ module Aws::ACMPCA
     # variant must be selected, or else this parameter is ignored.
     #
     # If conflicting or duplicate certificate information is supplied from
-    # other sources, ACM Private CA applies [order of operation
-    # rules](xxxxx) to determine what information is used.
+    # other sources, ACM Private CA applies [order of operation rules][1] to
+    # determine what information is used.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-order-of-operations
     #
     # @note When making an API call, you may pass ApiPassthrough
     #   data as a hash:
@@ -428,6 +432,20 @@ module Aws::ACMPCA
     #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeleteCertificateAuthorityRequest.html
     #   @return [Time]
     #
+    # @!attribute [rw] key_storage_security_standard
+    #   Defines a cryptographic key management compliance standard used for
+    #   handling CA keys.
+    #
+    #   Default: FIPS\_140\_2\_LEVEL\_3\_OR\_HIGHER
+    #
+    #   Note: AWS Region ap-northeast-3 supports only
+    #   FIPS\_140\_2\_LEVEL\_2\_OR\_HIGHER. You must explicitly specify this
+    #   parameter and value when creating a CA in that Region. Specifying a
+    #   different value (or no value) results in an `InvalidArgsException`
+    #   with the message "A certificate authority cannot be created in this
+    #   region with the specified security standard."
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CertificateAuthority AWS API Documentation
     #
     class CertificateAuthority < Struct.new(
@@ -443,7 +461,8 @@ module Aws::ACMPCA
       :failure_reason,
       :certificate_authority_configuration,
       :revocation_configuration,
-      :restorable_until)
+      :restorable_until,
+      :key_storage_security_standard)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -739,6 +758,7 @@ module Aws::ACMPCA
     #         },
     #         certificate_authority_type: "ROOT", # required, accepts ROOT, SUBORDINATE
     #         idempotency_token: "IdempotencyToken",
+    #         key_storage_security_standard: "FIPS_140_2_LEVEL_2_OR_HIGHER", # accepts FIPS_140_2_LEVEL_2_OR_HIGHER, FIPS_140_2_LEVEL_3_OR_HIGHER
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -781,6 +801,20 @@ module Aws::ACMPCA
     #   authorities.
     #   @return [String]
     #
+    # @!attribute [rw] key_storage_security_standard
+    #   Specifies a cryptographic key management compliance standard used
+    #   for handling CA keys.
+    #
+    #   Default: FIPS\_140\_2\_LEVEL\_3\_OR\_HIGHER
+    #
+    #   Note: AWS Region ap-northeast-3 supports only
+    #   FIPS\_140\_2\_LEVEL\_2\_OR\_HIGHER. You must explicitly specify this
+    #   parameter and value when creating a CA in that Region. Specifying a
+    #   different value (or no value) results in an `InvalidArgsException`
+    #   with the message "A certificate authority cannot be created in this
+    #   region with the specified security standard."
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   Key-value pairs that will be attached to the new private CA. You can
     #   associate up to 50 tags with a private CA. For information using
@@ -799,6 +833,7 @@ module Aws::ACMPCA
       :revocation_configuration,
       :certificate_authority_type,
       :idempotency_token,
+      :key_storage_security_standard,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -880,7 +915,7 @@ module Aws::ACMPCA
     # Points** extension of each certificate it issues. Your S3 bucket
     # policy must give write permission to ACM Private CA.
     #
-    # ACM Private CAA assets that are stored in Amazon S3 can be protected
+    # ACM Private CA assets that are stored in Amazon S3 can be protected
     # with encryption. For more information, see [Encrypting Your CRLs][1].
     #
     # Your private CA uses the value in the **ExpirationInDays** parameter
@@ -2014,11 +2049,12 @@ module Aws::ACMPCA
     #
     #   If conflicting or duplicate certificate information is supplied
     #   during certificate issuance, ACM Private CA applies [order of
-    #   operation rules](xxxxx) to determine what information is used.
+    #   operation rules][2] to determine what information is used.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html
+    #   [2]: https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-order-of-operations
     #   @return [Types::ApiPassthrough]
     #
     # @!attribute [rw] certificate_authority_arn

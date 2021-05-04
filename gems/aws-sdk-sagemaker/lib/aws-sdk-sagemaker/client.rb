@@ -508,6 +508,13 @@ module Aws::SageMaker
     # artifact. For more information, see [Amazon SageMaker ML Lineage
     # Tracking][1].
     #
+    # <note markdown="1"> `CreateAction` can only be invoked from within an SageMaker managed
+    # environment. This includes SageMaker training jobs, processing jobs,
+    # transform jobs, and SageMaker notebooks. A call to `CreateAction` from
+    # outside one of these environments results in an error.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html
@@ -952,6 +959,13 @@ module Aws::SageMaker
     # URI of a dataset and the ECR registry path of an image. For more
     # information, see [Amazon SageMaker ML Lineage Tracking][1].
     #
+    # <note markdown="1"> `CreateArtifact` can only be invoked from within an SageMaker managed
+    # environment. This includes SageMaker training jobs, processing jobs,
+    # transform jobs, and SageMaker notebooks. A call to `CreateArtifact`
+    # from outside one of these environments results in an error.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html
@@ -1350,6 +1364,13 @@ module Aws::SageMaker
     # entities. Some examples are an endpoint and a model package. For more
     # information, see [Amazon SageMaker ML Lineage Tracking][1].
     #
+    # <note markdown="1"> `CreateContext` can only be invoked from within an SageMaker managed
+    # environment. This includes SageMaker training jobs, processing jobs,
+    # transform jobs, and SageMaker notebooks. A call to `CreateContext`
+    # from outside one of these environments results in an error.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html
@@ -1678,6 +1699,9 @@ module Aws::SageMaker
     #   Tags to associated with the Domain. Each tag consists of a key and an
     #   optional value. Tag keys must be unique per resource. Tags are
     #   searchable using the `Search` API.
+    #
+    #   Tags that you specify for the Domain are also added to all Apps that
+    #   the Domain launches.
     #
     # @option params [String] :app_network_access_type
     #   Specifies the VPC used for non-EFS traffic. The default value is
@@ -2155,10 +2179,10 @@ module Aws::SageMaker
     # measuring the impact of a change to one or more inputs, while keeping
     # the remaining inputs constant.
     #
-    # When you use Amazon SageMaker Studio or the Amazon SageMaker Python
-    # SDK, all experiments, trials, and trial components are automatically
-    # tracked, logged, and indexed. When you use the AWS SDK for Python
-    # (Boto), you must use the logging APIs provided by the SDK.
+    # When you use SageMaker Studio or the SageMaker Python SDK, all
+    # experiments, trials, and trial components are automatically tracked,
+    # logged, and indexed. When you use the AWS SDK for Python (Boto), you
+    # must use the logging APIs provided by the SDK.
     #
     # You can add tags to experiments, trials, trial components and then use
     # the Search API to search for the tags.
@@ -2736,6 +2760,9 @@ module Aws::SageMaker
     #         s3_uri: "S3Uri", # required
     #         local_path: "DirectoryPath",
     #       },
+    #       retry_strategy: {
+    #         maximum_retry_attempts: 1, # required
+    #       },
     #     },
     #     training_job_definitions: [
     #       {
@@ -2833,6 +2860,9 @@ module Aws::SageMaker
     #         checkpoint_config: {
     #           s3_uri: "S3Uri", # required
     #           local_path: "DirectoryPath",
+    #         },
+    #         retry_strategy: {
+    #           maximum_retry_attempts: 1, # required
     #         },
     #       },
     #     ],
@@ -4983,8 +5013,6 @@ module Aws::SageMaker
     # * `OutputDataConfig` - Identifies the Amazon S3 bucket where you want
     #   Amazon SageMaker to save the results of model training.
     #
-    #
-    #
     # * `ResourceConfig` - Identifies the resources, ML compute instances,
     #   and ML storage volumes to deploy for model training. In distributed
     #   training, you specify more than one instance.
@@ -5000,11 +5028,14 @@ module Aws::SageMaker
     #
     # * `StoppingCondition` - To help cap training costs, use
     #   `MaxRuntimeInSeconds` to set a time limit for training. Use
-    #   `MaxWaitTimeInSeconds` to specify how long you are willing to wait
-    #   for a managed spot training job to complete.
+    #   `MaxWaitTimeInSeconds` to specify how long a managed spot training
+    #   job has to complete.
     #
     # * `Environment` - The environment variables to set in the Docker
     #   container.
+    #
+    # * `RetryStrategy` - The number of times to retry the job when the job
+    #   fails due to an `InternalServerError`.
     #
     # For more information about Amazon SageMaker, see [How It Works][3].
     #
@@ -5109,9 +5140,10 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
     #
     # @option params [required, Types::StoppingCondition] :stopping_condition
-    #   Specifies a limit to how long a model training job can run. When the
-    #   job reaches the time limit, Amazon SageMaker ends the training job.
-    #   Use this API to cap model training costs.
+    #   Specifies a limit to how long a model training job can run. It also
+    #   specifies how long a managed Spot training job has to complete. When
+    #   the job reaches the time limit, Amazon SageMaker ends the training
+    #   job. Use this API to cap model training costs.
     #
     #   To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
     #   signal, which delays job termination for 120 seconds. Algorithms can
@@ -5205,6 +5237,10 @@ module Aws::SageMaker
     #
     # @option params [Hash<String,String>] :environment
     #   The environment variables to set in the Docker container.
+    #
+    # @option params [Types::RetryStrategy] :retry_strategy
+    #   The number of times to retry the job when the job fails due to an
+    #   `InternalServerError`.
     #
     # @return [Types::CreateTrainingJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5346,6 +5382,9 @@ module Aws::SageMaker
     #     ],
     #     environment: {
     #       "TrainingEnvironmentKey" => "TrainingEnvironmentValue",
+    #     },
+    #     retry_strategy: {
+    #       maximum_retry_attempts: 1, # required
     #     },
     #   })
     #
@@ -5572,14 +5611,14 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates an Amazon SageMaker *trial*. A trial is a set of steps called
-    # *trial components* that produce a machine learning model. A trial is
-    # part of a single Amazon SageMaker *experiment*.
+    # Creates an SageMaker *trial*. A trial is a set of steps called *trial
+    # components* that produce a machine learning model. A trial is part of
+    # a single SageMaker *experiment*.
     #
-    # When you use Amazon SageMaker Studio or the Amazon SageMaker Python
-    # SDK, all experiments, trials, and trial components are automatically
-    # tracked, logged, and indexed. When you use the AWS SDK for Python
-    # (Boto), you must use the logging APIs provided by the SDK.
+    # When you use SageMaker Studio or the SageMaker Python SDK, all
+    # experiments, trials, and trial components are automatically tracked,
+    # logged, and indexed. When you use the AWS SDK for Python (Boto), you
+    # must use the logging APIs provided by the SDK.
     #
     # You can add tags to a trial and then use the Search API to search for
     # the tags.
@@ -5650,19 +5689,19 @@ module Aws::SageMaker
     # Trial components include pre-processing jobs, training jobs, and batch
     # transform jobs.
     #
-    # When you use Amazon SageMaker Studio or the Amazon SageMaker Python
-    # SDK, all experiments, trials, and trial components are automatically
-    # tracked, logged, and indexed. When you use the AWS SDK for Python
-    # (Boto), you must use the logging APIs provided by the SDK.
+    # When you use SageMaker Studio or the SageMaker Python SDK, all
+    # experiments, trials, and trial components are automatically tracked,
+    # logged, and indexed. When you use the AWS SDK for Python (Boto), you
+    # must use the logging APIs provided by the SDK.
     #
     # You can add tags to a trial component and then use the Search API to
     # search for the tags.
     #
-    # <note markdown="1"> `CreateTrialComponent` can only be invoked from within an Amazon
-    # SageMaker managed environment. This includes Amazon SageMaker training
-    # jobs, processing jobs, transform jobs, and Amazon SageMaker notebooks.
-    # A call to `CreateTrialComponent` from outside one of these
-    # environments results in an error.
+    # <note markdown="1"> `CreateTrialComponent` can only be invoked from within an SageMaker
+    # managed environment. This includes SageMaker training jobs, processing
+    # jobs, transform jobs, and SageMaker notebooks. A call to
+    # `CreateTrialComponent` from outside one of these environments results
+    # in an error.
     #
     #  </note>
     #
@@ -5782,7 +5821,7 @@ module Aws::SageMaker
     #   The ID of the associated Domain.
     #
     # @option params [required, String] :user_profile_name
-    #   A name for the UserProfile.
+    #   A name for the UserProfile. This value is not case sensitive.
     #
     # @option params [String] :single_sign_on_user_identifier
     #   A specifier for the type of value specified in SingleSignOnUserValue.
@@ -5799,6 +5838,9 @@ module Aws::SageMaker
     # @option params [Array<Types::Tag>] :tags
     #   Each tag consists of a key and an optional value. Tag keys must be
     #   unique per resource.
+    #
+    #   Tags that you specify for the User Profile are also added to all Apps
+    #   that the User Profile launches.
     #
     # @option params [Types::UserSettings] :user_settings
     #   A collection of settings.
@@ -6450,7 +6492,7 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Deletes an Amazon SageMaker experiment. All trials associated with the
+    # Deletes an SageMaker experiment. All trials associated with the
     # experiment must be deleted first. Use the ListTrials API to get a list
     # of the trials associated with the experiment.
     #
@@ -6845,7 +6887,10 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Deletes a pipeline if there are no in-progress executions.
+    # Deletes a pipeline if there are no running instances of the pipeline.
+    # To delete a pipeline, you must stop all running instances of the
+    # pipeline using the `StopPipelineExecution` API. When you delete a
+    # pipeline, all instances of the pipeline are deleted.
     #
     # @option params [required, String] :pipeline_name
     #   The name of the pipeline to delete.
@@ -8515,6 +8560,7 @@ module Aws::SageMaker
     #   resp.training_job_definition.enable_managed_spot_training #=> Boolean
     #   resp.training_job_definition.checkpoint_config.s3_uri #=> String
     #   resp.training_job_definition.checkpoint_config.local_path #=> String
+    #   resp.training_job_definition.retry_strategy.maximum_retry_attempts #=> Integer
     #   resp.training_job_definitions #=> Array
     #   resp.training_job_definitions[0].definition_name #=> String
     #   resp.training_job_definitions[0].tuning_objective.type #=> String, one of "Maximize", "Minimize"
@@ -8575,6 +8621,7 @@ module Aws::SageMaker
     #   resp.training_job_definitions[0].enable_managed_spot_training #=> Boolean
     #   resp.training_job_definitions[0].checkpoint_config.s3_uri #=> String
     #   resp.training_job_definitions[0].checkpoint_config.local_path #=> String
+    #   resp.training_job_definitions[0].retry_strategy.maximum_retry_attempts #=> Integer
     #   resp.hyper_parameter_tuning_job_status #=> String, one of "Completed", "InProgress", "Failed", "Stopped", "Stopping"
     #   resp.creation_time #=> Time
     #   resp.hyper_parameter_tuning_end_time #=> Time
@@ -9898,6 +9945,7 @@ module Aws::SageMaker
     #   * {Types::DescribeTrainingJobResponse#profiler_rule_configurations #profiler_rule_configurations} => Array&lt;Types::ProfilerRuleConfiguration&gt;
     #   * {Types::DescribeTrainingJobResponse#profiler_rule_evaluation_statuses #profiler_rule_evaluation_statuses} => Array&lt;Types::ProfilerRuleEvaluationStatus&gt;
     #   * {Types::DescribeTrainingJobResponse#profiling_status #profiling_status} => String
+    #   * {Types::DescribeTrainingJobResponse#retry_strategy #retry_strategy} => Types::RetryStrategy
     #   * {Types::DescribeTrainingJobResponse#environment #environment} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -9915,7 +9963,7 @@ module Aws::SageMaker
     #   resp.auto_ml_job_arn #=> String
     #   resp.model_artifacts.s3_model_artifacts #=> String
     #   resp.training_job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
-    #   resp.secondary_status #=> String, one of "Starting", "LaunchingMLInstances", "PreparingTrainingStack", "Downloading", "DownloadingTrainingImage", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Completed", "Failed", "Interrupted", "MaxWaitTimeExceeded", "Updating"
+    #   resp.secondary_status #=> String, one of "Starting", "LaunchingMLInstances", "PreparingTrainingStack", "Downloading", "DownloadingTrainingImage", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Completed", "Failed", "Interrupted", "MaxWaitTimeExceeded", "Updating", "Restarting"
     #   resp.failure_reason #=> String
     #   resp.hyper_parameters #=> Hash
     #   resp.hyper_parameters["HyperParameterKey"] #=> String
@@ -9960,7 +10008,7 @@ module Aws::SageMaker
     #   resp.training_end_time #=> Time
     #   resp.last_modified_time #=> Time
     #   resp.secondary_status_transitions #=> Array
-    #   resp.secondary_status_transitions[0].status #=> String, one of "Starting", "LaunchingMLInstances", "PreparingTrainingStack", "Downloading", "DownloadingTrainingImage", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Completed", "Failed", "Interrupted", "MaxWaitTimeExceeded", "Updating"
+    #   resp.secondary_status_transitions[0].status #=> String, one of "Starting", "LaunchingMLInstances", "PreparingTrainingStack", "Downloading", "DownloadingTrainingImage", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Completed", "Failed", "Interrupted", "MaxWaitTimeExceeded", "Updating", "Restarting"
     #   resp.secondary_status_transitions[0].start_time #=> Time
     #   resp.secondary_status_transitions[0].end_time #=> Time
     #   resp.secondary_status_transitions[0].status_message #=> String
@@ -10023,6 +10071,7 @@ module Aws::SageMaker
     #   resp.profiler_rule_evaluation_statuses[0].status_details #=> String
     #   resp.profiler_rule_evaluation_statuses[0].last_modified_time #=> Time
     #   resp.profiling_status #=> String, one of "Enabled", "Disabled"
+    #   resp.retry_strategy.maximum_retry_attempts #=> Integer
     #   resp.environment #=> Hash
     #   resp.environment["TrainingEnvironmentKey"] #=> String
     #
@@ -10269,7 +10318,7 @@ module Aws::SageMaker
     #   The domain ID.
     #
     # @option params [required, String] :user_profile_name
-    #   The user profile name.
+    #   The user profile name. This value is not case sensitive.
     #
     # @return [Types::DescribeUserProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11910,7 +11959,8 @@ module Aws::SageMaker
     #   token in the next request.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of endpoints to return in the response.
+    #   The maximum number of endpoints to return in the response. This value
+    #   defaults to 10.
     #
     # @option params [String] :name_contains
     #   A string in endpoint names. This filter returns only endpoints whose
@@ -13979,16 +14029,17 @@ module Aws::SageMaker
     # <note markdown="1"> When `StatusEquals` and `MaxResults` are set at the same time, the
     # `MaxResults` number of training jobs are first retrieved ignoring the
     # `StatusEquals` parameter and then they are filtered by the
-    # `StatusEquals` parameter, which is returned as a response. For
-    # example, if `ListTrainingJobs` is invoked with the following
+    # `StatusEquals` parameter, which is returned as a response.
+    #
+    #  For example, if `ListTrainingJobs` is invoked with the following
     # parameters:
     #
     #  `\{ ... MaxResults: 100, StatusEquals: InProgress ... \}`
     #
-    #  Then, 100 trainings jobs with any status including those other than
-    # `InProgress` are selected first (sorted according the creation time,
-    # from the latest to the oldest) and those with status `InProgress` are
-    # returned.
+    #  First, 100 trainings jobs with any status, including those other than
+    # `InProgress`, are selected (sorted according to the creation time,
+    # from the most current to the oldest). Next, those with a status of
+    # `InProgress` are returned.
     #
     #  You can quickly test the API using the following AWS CLI code.
     #
@@ -14832,7 +14883,7 @@ module Aws::SageMaker
     #   resp.results[0].training_job.auto_ml_job_arn #=> String
     #   resp.results[0].training_job.model_artifacts.s3_model_artifacts #=> String
     #   resp.results[0].training_job.training_job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
-    #   resp.results[0].training_job.secondary_status #=> String, one of "Starting", "LaunchingMLInstances", "PreparingTrainingStack", "Downloading", "DownloadingTrainingImage", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Completed", "Failed", "Interrupted", "MaxWaitTimeExceeded", "Updating"
+    #   resp.results[0].training_job.secondary_status #=> String, one of "Starting", "LaunchingMLInstances", "PreparingTrainingStack", "Downloading", "DownloadingTrainingImage", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Completed", "Failed", "Interrupted", "MaxWaitTimeExceeded", "Updating", "Restarting"
     #   resp.results[0].training_job.failure_reason #=> String
     #   resp.results[0].training_job.hyper_parameters #=> Hash
     #   resp.results[0].training_job.hyper_parameters["HyperParameterKey"] #=> String
@@ -14877,7 +14928,7 @@ module Aws::SageMaker
     #   resp.results[0].training_job.training_end_time #=> Time
     #   resp.results[0].training_job.last_modified_time #=> Time
     #   resp.results[0].training_job.secondary_status_transitions #=> Array
-    #   resp.results[0].training_job.secondary_status_transitions[0].status #=> String, one of "Starting", "LaunchingMLInstances", "PreparingTrainingStack", "Downloading", "DownloadingTrainingImage", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Completed", "Failed", "Interrupted", "MaxWaitTimeExceeded", "Updating"
+    #   resp.results[0].training_job.secondary_status_transitions[0].status #=> String, one of "Starting", "LaunchingMLInstances", "PreparingTrainingStack", "Downloading", "DownloadingTrainingImage", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Completed", "Failed", "Interrupted", "MaxWaitTimeExceeded", "Updating", "Restarting"
     #   resp.results[0].training_job.secondary_status_transitions[0].start_time #=> Time
     #   resp.results[0].training_job.secondary_status_transitions[0].end_time #=> Time
     #   resp.results[0].training_job.secondary_status_transitions[0].status_message #=> String
@@ -14922,6 +14973,7 @@ module Aws::SageMaker
     #   resp.results[0].training_job.debug_rule_evaluation_statuses[0].last_modified_time #=> Time
     #   resp.results[0].training_job.environment #=> Hash
     #   resp.results[0].training_job.environment["TrainingEnvironmentKey"] #=> String
+    #   resp.results[0].training_job.retry_strategy.maximum_retry_attempts #=> Integer
     #   resp.results[0].training_job.tags #=> Array
     #   resp.results[0].training_job.tags[0].key #=> String
     #   resp.results[0].training_job.tags[0].value #=> String
@@ -15020,7 +15072,7 @@ module Aws::SageMaker
     #   resp.results[0].trial_component.source_detail.training_job.auto_ml_job_arn #=> String
     #   resp.results[0].trial_component.source_detail.training_job.model_artifacts.s3_model_artifacts #=> String
     #   resp.results[0].trial_component.source_detail.training_job.training_job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
-    #   resp.results[0].trial_component.source_detail.training_job.secondary_status #=> String, one of "Starting", "LaunchingMLInstances", "PreparingTrainingStack", "Downloading", "DownloadingTrainingImage", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Completed", "Failed", "Interrupted", "MaxWaitTimeExceeded", "Updating"
+    #   resp.results[0].trial_component.source_detail.training_job.secondary_status #=> String, one of "Starting", "LaunchingMLInstances", "PreparingTrainingStack", "Downloading", "DownloadingTrainingImage", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Completed", "Failed", "Interrupted", "MaxWaitTimeExceeded", "Updating", "Restarting"
     #   resp.results[0].trial_component.source_detail.training_job.failure_reason #=> String
     #   resp.results[0].trial_component.source_detail.training_job.hyper_parameters #=> Hash
     #   resp.results[0].trial_component.source_detail.training_job.hyper_parameters["HyperParameterKey"] #=> String
@@ -15065,7 +15117,7 @@ module Aws::SageMaker
     #   resp.results[0].trial_component.source_detail.training_job.training_end_time #=> Time
     #   resp.results[0].trial_component.source_detail.training_job.last_modified_time #=> Time
     #   resp.results[0].trial_component.source_detail.training_job.secondary_status_transitions #=> Array
-    #   resp.results[0].trial_component.source_detail.training_job.secondary_status_transitions[0].status #=> String, one of "Starting", "LaunchingMLInstances", "PreparingTrainingStack", "Downloading", "DownloadingTrainingImage", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Completed", "Failed", "Interrupted", "MaxWaitTimeExceeded", "Updating"
+    #   resp.results[0].trial_component.source_detail.training_job.secondary_status_transitions[0].status #=> String, one of "Starting", "LaunchingMLInstances", "PreparingTrainingStack", "Downloading", "DownloadingTrainingImage", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Completed", "Failed", "Interrupted", "MaxWaitTimeExceeded", "Updating", "Restarting"
     #   resp.results[0].trial_component.source_detail.training_job.secondary_status_transitions[0].start_time #=> Time
     #   resp.results[0].trial_component.source_detail.training_job.secondary_status_transitions[0].end_time #=> Time
     #   resp.results[0].trial_component.source_detail.training_job.secondary_status_transitions[0].status_message #=> String
@@ -15110,6 +15162,7 @@ module Aws::SageMaker
     #   resp.results[0].trial_component.source_detail.training_job.debug_rule_evaluation_statuses[0].last_modified_time #=> Time
     #   resp.results[0].trial_component.source_detail.training_job.environment #=> Hash
     #   resp.results[0].trial_component.source_detail.training_job.environment["TrainingEnvironmentKey"] #=> String
+    #   resp.results[0].trial_component.source_detail.training_job.retry_strategy.maximum_retry_attempts #=> Integer
     #   resp.results[0].trial_component.source_detail.training_job.tags #=> Array
     #   resp.results[0].trial_component.source_detail.training_job.tags[0].key #=> String
     #   resp.results[0].trial_component.source_detail.training_job.tags[0].value #=> String
@@ -17355,7 +17408,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
