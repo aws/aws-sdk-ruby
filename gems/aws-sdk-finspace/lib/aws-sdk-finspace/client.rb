@@ -29,6 +29,7 @@ require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
+require 'aws-sdk-finspace/plugins/content_type.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:finspace)
 
@@ -75,6 +76,7 @@ module Aws::Finspace
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
+    add_plugin(Aws::Finspace::Plugins::ContentType)
 
     # @overload initialize(options)
     #   @param [Hash] options
