@@ -29,7 +29,7 @@ module Aws
         private
 
         def content_type(api)
-          "application/x-amz-json-#{api.metadata['jsonVerison']}"
+          "application/x-amz-json-#{api.metadata['jsonVersion']}"
         end
 
         def build_body(operation, data)
