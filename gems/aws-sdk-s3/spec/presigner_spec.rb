@@ -47,6 +47,14 @@ module Aws
           expect(client.api_requests.size).to eq(1)
         end
 
+        it 'labels context as a presigned request before handlers are invoked' do
+          expect do |block|
+            client.handle_request(&block)
+
+            subject.presigned_url(:get_object, bucket: 'bkt', key: 'k')
+          end.to yield_with_args { |c| c[:presigned_url] == true }
+        end
+
         it 'can be excluded from being tracked as an api request' do
           subject.presigned_url(:get_object, bucket: 'bkt', key: 'k')
           expect(client.api_requests(exclude_presign: true)).to be_empty
@@ -160,6 +168,14 @@ module Aws
         it 'will be tracked as an api request' do
           subject.presigned_request(:get_object, bucket: 'bkt', key: 'k')
           expect(client.api_requests.size).to eq(1)
+        end
+
+        it 'labels context as a presigned request before handlers are invoked' do
+          expect do |block|
+            client.handle_request(&block)
+
+            subject.presigned_request(:get_object, bucket: 'bkt', key: 'k')
+          end.to yield_with_args { |c| c[:presigned_url] == true }
         end
 
         it 'can be excluded from being tracked as an api request' do

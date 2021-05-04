@@ -138,6 +138,7 @@ module Aws
 
         req = @client.build_request(method, params)
         use_bucket_as_hostname(req) if virtual_host
+        mark_context_as_presigned_url(req)
 
         x_amz_headers = sign_but_dont_send(
           req, expires_in, scheme, time, unsigned_headers, hoist
@@ -179,6 +180,17 @@ module Aws
           uri = context.http_request.endpoint
           uri.host = context.params[:bucket]
           uri.path.sub!("/#{context.params[:bucket]}", '')
+          @handler.call(context)
+        end
+      end
+
+      # Used for excluding presigned_urls from API request count.
+      #
+      # Store context information as early as possible, to allow
+      # handlers to perform decisions based on this flag if need.
+      def mark_context_as_presigned_url(req)
+        req.handle(step: :initialize, priority: 98) do |context|
+          context[:presigned_url] = true
           @handler.call(context)
         end
       end
@@ -241,9 +253,6 @@ module Aws
             expires_in: expires_in,
             time: time
           ).to_s
-
-          # Used for excluding presigned_urls from API request count
-          context[:presigned_url] = true
 
           Seahorse::Client::Response.new(context: context, data: url)
         end
