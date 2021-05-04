@@ -138,7 +138,7 @@ module Aws
 
         req = @client.build_request(method, params)
         use_bucket_as_hostname(req) if virtual_host
-        mark_context_as_presigned_url(req)
+        handle_presigned_url_context(req)
 
         x_amz_headers = sign_but_dont_send(
           req, expires_in, scheme, time, unsigned_headers, hoist
@@ -188,7 +188,7 @@ module Aws
       #
       # Store context information as early as possible, to allow
       # handlers to perform decisions based on this flag if need.
-      def mark_context_as_presigned_url(req)
+      def handle_presigned_url_context(req)
         req.handle(step: :initialize, priority: 98) do |context|
           context[:presigned_url] = true
           @handler.call(context)
