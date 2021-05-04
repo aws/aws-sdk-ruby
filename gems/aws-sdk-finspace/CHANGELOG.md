@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Add a `Content-Type` header to mitigate a service side issue.
+
 1.1.0 (2021-05-03)
 ------------------
 
@@ -10,4 +12,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-finspace`.
-
