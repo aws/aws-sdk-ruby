@@ -138,6 +138,7 @@ module Aws
 
         req = @client.build_request(method, params)
         use_bucket_as_hostname(req) if virtual_host
+        mark_context_as_presigned_url(req)
 
         x_amz_headers = sign_but_dont_send(
           req, expires_in, scheme, time, unsigned_headers, hoist
@@ -183,6 +184,17 @@ module Aws
         end
       end
 
+      # Used for excluding presigned_urls from API request count.
+      #
+      # Store context information as early as possible, to allow
+      # handlers to perform decisions based on this flag if need.
+      def mark_context_as_presigned_url(req)
+        req.handle(step: :initialize, priority: 98) do |context|
+          context[:presigned_url] = true
+          @handler.call(context)
+        end
+      end
+
       # @param [Seahorse::Client::Request] req
       def sign_but_dont_send(
         req, expires_in, scheme, time, unsigned_headers, hoist = true
@@ -194,15 +206,6 @@ module Aws
         req.handlers.remove(Aws::S3::Plugins::S3Signer::LegacyHandler)
         req.handlers.remove(Aws::S3::Plugins::S3Signer::V4Handler)
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
-
-        # Used for excluding presigned_urls from API request count.
-        #
-        # Store context information as early as possible, to allow
-        # handlers to perform decisions based on this flag if need.
-        req.handle(step: :initialize, priority: 98) do |context|
-          context[:presigned_url] = true
-          @handler.call(context)
-        end
 
         req.handle(step: :send) do |context|
           if scheme != http_req.endpoint.scheme
