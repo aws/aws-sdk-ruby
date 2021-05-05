@@ -9,8 +9,7 @@ module Aws
           CONTENT_TYPE = 'application/x-amz-json-%s'
 
           def call(context)
-            json_version = context.config.api.metadata['jsonVersion']
-            content_type = CONTENT_TYPE % [json_version]
+            content_type = CONTENT_TYPE % [context.config.api.metadata['jsonVersion']]
             context.http_request.headers['Content-Type'] = content_type
             @handler.call(context)
           end
