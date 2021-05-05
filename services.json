@@ -329,16 +329,10 @@
     "models": "fsx/2018-03-01"
   },
   "FinSpaceData": {
-    "models": "finspace-data/2020-07-13",
-    "addPlugins": [
-      "Aws::FinSpaceData::Plugins::ContentType"
-    ]
+    "models": "finspace-data/2020-07-13"
   },
   "Finspace": {
-    "models": "finspace/2021-03-12",
-    "addPlugins": [
-      "Aws::Finspace::Plugins::ContentType"
-    ]
+    "models": "finspace/2021-03-12"
   },
   "Firehose": {
     "models": "firehose/2015-08-04"
@@ -500,10 +494,7 @@
     "models": "lex-models/2017-04-19"
   },
   "LexModelsV2": {
-    "models": "models.lex.v2/2020-08-07",
-    "addPlugins": [
-      "Aws::LexModelsV2::Plugins::ContentType"
-    ]
+    "models": "models.lex.v2/2020-08-07"
   },
   "LexRuntimeV2": {
     "models": "runtime.lex.v2/2020-08-07"
@@ -521,10 +512,7 @@
     "models": "lookoutequipment/2020-12-15"
   },
   "LookoutMetrics": {
-    "models": "lookoutmetrics/2017-07-25",
-    "addPlugins": [
-      "Aws::LookoutMetrics::Plugins::ContentType"
-    ]
+    "models": "lookoutmetrics/2017-07-25"
   },
   "LookoutforVision": {
     "models": "lookoutvision/2020-11-20"
@@ -784,9 +772,6 @@
   },
   "SSO": {
     "models": "sso/2019-06-10",
-    "addPlugins": [
-      "Aws::SSO::Plugins::ContentType"
-    ],
     "gemName": "aws-sdk-core"
   },
   "SSOAdmin": {

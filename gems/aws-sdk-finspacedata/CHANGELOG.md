@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Remove a plugin that sets the `Content-Type` header and instead depend on a new version of `aws-sdk-core` that does.
+
 1.1.0 (2021-05-05)
 ------------------
 
