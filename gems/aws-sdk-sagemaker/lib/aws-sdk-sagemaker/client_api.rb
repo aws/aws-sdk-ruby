@@ -87,6 +87,7 @@ module Aws::SageMaker
     AttributeName = Shapes::StringShape.new(name: 'AttributeName')
     AttributeNames = Shapes::ListShape.new(name: 'AttributeNames')
     AuthMode = Shapes::StringShape.new(name: 'AuthMode')
+    AutoGenerateEndpointName = Shapes::BooleanShape.new(name: 'AutoGenerateEndpointName')
     AutoMLCandidate = Shapes::StructureShape.new(name: 'AutoMLCandidate')
     AutoMLCandidateStep = Shapes::StructureShape.new(name: 'AutoMLCandidateStep')
     AutoMLCandidates = Shapes::ListShape.new(name: 'AutoMLCandidates')
@@ -884,6 +885,8 @@ module Aws::SageMaker
     ModelCacheSetting = Shapes::StringShape.new(name: 'ModelCacheSetting')
     ModelClientConfig = Shapes::StructureShape.new(name: 'ModelClientConfig')
     ModelDataQuality = Shapes::StructureShape.new(name: 'ModelDataQuality')
+    ModelDeployConfig = Shapes::StructureShape.new(name: 'ModelDeployConfig')
+    ModelDeployResult = Shapes::StructureShape.new(name: 'ModelDeployResult')
     ModelDigests = Shapes::StructureShape.new(name: 'ModelDigests')
     ModelExplainabilityAppSpecification = Shapes::StructureShape.new(name: 'ModelExplainabilityAppSpecification')
     ModelExplainabilityBaselineConfig = Shapes::StructureShape.new(name: 'ModelExplainabilityBaselineConfig')
@@ -1899,6 +1902,7 @@ module Aws::SageMaker
     CreateAutoMLJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     CreateAutoMLJobRequest.add_member(:generate_candidate_definitions_only, Shapes::ShapeRef.new(shape: GenerateCandidateDefinitionsOnly, location_name: "GenerateCandidateDefinitionsOnly"))
     CreateAutoMLJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateAutoMLJobRequest.add_member(:model_deploy_config, Shapes::ShapeRef.new(shape: ModelDeployConfig, location_name: "ModelDeployConfig"))
     CreateAutoMLJobRequest.struct_class = Types::CreateAutoMLJobRequest
 
     CreateAutoMLJobResponse.add_member(:auto_ml_job_arn, Shapes::ShapeRef.new(shape: AutoMLJobArn, required: true, location_name: "AutoMLJobArn"))
@@ -2722,6 +2726,8 @@ module Aws::SageMaker
     DescribeAutoMLJobResponse.add_member(:generate_candidate_definitions_only, Shapes::ShapeRef.new(shape: GenerateCandidateDefinitionsOnly, location_name: "GenerateCandidateDefinitionsOnly"))
     DescribeAutoMLJobResponse.add_member(:auto_ml_job_artifacts, Shapes::ShapeRef.new(shape: AutoMLJobArtifacts, location_name: "AutoMLJobArtifacts"))
     DescribeAutoMLJobResponse.add_member(:resolved_attributes, Shapes::ShapeRef.new(shape: ResolvedAttributes, location_name: "ResolvedAttributes"))
+    DescribeAutoMLJobResponse.add_member(:model_deploy_config, Shapes::ShapeRef.new(shape: ModelDeployConfig, location_name: "ModelDeployConfig"))
+    DescribeAutoMLJobResponse.add_member(:model_deploy_result, Shapes::ShapeRef.new(shape: ModelDeployResult, location_name: "ModelDeployResult"))
     DescribeAutoMLJobResponse.struct_class = Types::DescribeAutoMLJobResponse
 
     DescribeCodeRepositoryInput.add_member(:code_repository_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "CodeRepositoryName"))
@@ -4762,6 +4768,13 @@ module Aws::SageMaker
     ModelDataQuality.add_member(:statistics, Shapes::ShapeRef.new(shape: MetricsSource, location_name: "Statistics"))
     ModelDataQuality.add_member(:constraints, Shapes::ShapeRef.new(shape: MetricsSource, location_name: "Constraints"))
     ModelDataQuality.struct_class = Types::ModelDataQuality
+
+    ModelDeployConfig.add_member(:auto_generate_endpoint_name, Shapes::ShapeRef.new(shape: AutoGenerateEndpointName, location_name: "AutoGenerateEndpointName"))
+    ModelDeployConfig.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, location_name: "EndpointName"))
+    ModelDeployConfig.struct_class = Types::ModelDeployConfig
+
+    ModelDeployResult.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, location_name: "EndpointName"))
+    ModelDeployResult.struct_class = Types::ModelDeployResult
 
     ModelDigests.add_member(:artifact_digest, Shapes::ShapeRef.new(shape: ArtifactDigest, location_name: "ArtifactDigest"))
     ModelDigests.struct_class = Types::ModelDigests
