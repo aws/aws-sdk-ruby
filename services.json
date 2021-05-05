@@ -602,7 +602,10 @@
     "models": "networkmanager/2019-07-05"
   },
   "NimbleStudio": {
-    "models": "nimble/2020-08-01"
+    "models": "nimble/2020-08-01",
+    "addPlugins": [
+      "Aws::NimbleStudio::Plugins::ContentType"
+    ]
   },
   "OpsWorks": {
     "models": "opsworks/2013-02-18"
