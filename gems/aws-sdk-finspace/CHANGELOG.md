@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2021-05-05)
+------------------
+
+* Feature - Documentation updates for FinSpace API.
+
 * Issue - Add a `Content-Type` header to mitigate a service side issue.
 
 1.1.0 (2021-05-03)

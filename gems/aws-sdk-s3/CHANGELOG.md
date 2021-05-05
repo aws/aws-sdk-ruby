@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.94.1 (2021-05-05)
+------------------
+
 * Issue - Expose presigned request status to the request handler stack #2513
 
 1.94.0 (2021-04-27)
