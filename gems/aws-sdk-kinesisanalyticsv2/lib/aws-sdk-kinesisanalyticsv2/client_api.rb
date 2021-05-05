@@ -69,6 +69,7 @@ module Aws::KinesisAnalyticsV2
     CodeSize = Shapes::IntegerShape.new(name: 'CodeSize')
     CodeValidationException = Shapes::StructureShape.new(name: 'CodeValidationException')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
+    ConditionalToken = Shapes::StringShape.new(name: 'ConditionalToken')
     ConfigurationType = Shapes::StringShape.new(name: 'ConfigurationType')
     CreateApplicationPresignedUrlRequest = Shapes::StructureShape.new(name: 'CreateApplicationPresignedUrlRequest')
     CreateApplicationPresignedUrlResponse = Shapes::StructureShape.new(name: 'CreateApplicationPresignedUrlResponse')
@@ -213,6 +214,8 @@ module Aws::KinesisAnalyticsV2
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceProvisionedThroughputExceededException = Shapes::StructureShape.new(name: 'ResourceProvisionedThroughputExceededException')
     RoleARN = Shapes::StringShape.new(name: 'RoleARN')
+    RollbackApplicationRequest = Shapes::StructureShape.new(name: 'RollbackApplicationRequest')
+    RollbackApplicationResponse = Shapes::StructureShape.new(name: 'RollbackApplicationResponse')
     RunConfiguration = Shapes::StructureShape.new(name: 'RunConfiguration')
     RunConfigurationDescription = Shapes::StructureShape.new(name: 'RunConfigurationDescription')
     RunConfigurationUpdate = Shapes::StructureShape.new(name: 'RunConfigurationUpdate')
@@ -273,8 +276,9 @@ module Aws::KinesisAnalyticsV2
     ZipFileContent = Shapes::BlobShape.new(name: 'ZipFileContent')
 
     AddApplicationCloudWatchLoggingOptionRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
-    AddApplicationCloudWatchLoggingOptionRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "CurrentApplicationVersionId"))
+    AddApplicationCloudWatchLoggingOptionRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, location_name: "CurrentApplicationVersionId"))
     AddApplicationCloudWatchLoggingOptionRequest.add_member(:cloud_watch_logging_option, Shapes::ShapeRef.new(shape: CloudWatchLoggingOption, required: true, location_name: "CloudWatchLoggingOption"))
+    AddApplicationCloudWatchLoggingOptionRequest.add_member(:conditional_token, Shapes::ShapeRef.new(shape: ConditionalToken, location_name: "ConditionalToken"))
     AddApplicationCloudWatchLoggingOptionRequest.struct_class = Types::AddApplicationCloudWatchLoggingOptionRequest
 
     AddApplicationCloudWatchLoggingOptionResponse.add_member(:application_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ApplicationARN"))
@@ -325,8 +329,9 @@ module Aws::KinesisAnalyticsV2
     AddApplicationReferenceDataSourceResponse.struct_class = Types::AddApplicationReferenceDataSourceResponse
 
     AddApplicationVpcConfigurationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
-    AddApplicationVpcConfigurationRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "CurrentApplicationVersionId"))
+    AddApplicationVpcConfigurationRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, location_name: "CurrentApplicationVersionId"))
     AddApplicationVpcConfigurationRequest.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, required: true, location_name: "VpcConfiguration"))
+    AddApplicationVpcConfigurationRequest.add_member(:conditional_token, Shapes::ShapeRef.new(shape: ConditionalToken, location_name: "ConditionalToken"))
     AddApplicationVpcConfigurationRequest.struct_class = Types::AddApplicationVpcConfigurationRequest
 
     AddApplicationVpcConfigurationResponse.add_member(:application_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ApplicationARN"))
@@ -383,6 +388,9 @@ module Aws::KinesisAnalyticsV2
     ApplicationDetail.add_member(:application_configuration_description, Shapes::ShapeRef.new(shape: ApplicationConfigurationDescription, location_name: "ApplicationConfigurationDescription"))
     ApplicationDetail.add_member(:cloud_watch_logging_option_descriptions, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptionDescriptions, location_name: "CloudWatchLoggingOptionDescriptions"))
     ApplicationDetail.add_member(:application_maintenance_configuration_description, Shapes::ShapeRef.new(shape: ApplicationMaintenanceConfigurationDescription, location_name: "ApplicationMaintenanceConfigurationDescription"))
+    ApplicationDetail.add_member(:application_version_updated_from, Shapes::ShapeRef.new(shape: ApplicationVersionId, location_name: "ApplicationVersionUpdatedFrom"))
+    ApplicationDetail.add_member(:application_version_rolled_back_from, Shapes::ShapeRef.new(shape: ApplicationVersionId, location_name: "ApplicationVersionRolledBackFrom"))
+    ApplicationDetail.add_member(:conditional_token, Shapes::ShapeRef.new(shape: ConditionalToken, location_name: "ConditionalToken"))
     ApplicationDetail.struct_class = Types::ApplicationDetail
 
     ApplicationMaintenanceConfigurationDescription.add_member(:application_maintenance_window_start_time, Shapes::ShapeRef.new(shape: ApplicationMaintenanceWindowStartTime, required: true, location_name: "ApplicationMaintenanceWindowStartTime"))
@@ -503,8 +511,9 @@ module Aws::KinesisAnalyticsV2
     CreateApplicationSnapshotResponse.struct_class = Types::CreateApplicationSnapshotResponse
 
     DeleteApplicationCloudWatchLoggingOptionRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
-    DeleteApplicationCloudWatchLoggingOptionRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "CurrentApplicationVersionId"))
+    DeleteApplicationCloudWatchLoggingOptionRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, location_name: "CurrentApplicationVersionId"))
     DeleteApplicationCloudWatchLoggingOptionRequest.add_member(:cloud_watch_logging_option_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "CloudWatchLoggingOptionId"))
+    DeleteApplicationCloudWatchLoggingOptionRequest.add_member(:conditional_token, Shapes::ShapeRef.new(shape: ConditionalToken, location_name: "ConditionalToken"))
     DeleteApplicationCloudWatchLoggingOptionRequest.struct_class = Types::DeleteApplicationCloudWatchLoggingOptionRequest
 
     DeleteApplicationCloudWatchLoggingOptionResponse.add_member(:application_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ApplicationARN"))
@@ -553,8 +562,9 @@ module Aws::KinesisAnalyticsV2
     DeleteApplicationSnapshotResponse.struct_class = Types::DeleteApplicationSnapshotResponse
 
     DeleteApplicationVpcConfigurationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
-    DeleteApplicationVpcConfigurationRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "CurrentApplicationVersionId"))
+    DeleteApplicationVpcConfigurationRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, location_name: "CurrentApplicationVersionId"))
     DeleteApplicationVpcConfigurationRequest.add_member(:vpc_configuration_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "VpcConfigurationId"))
+    DeleteApplicationVpcConfigurationRequest.add_member(:conditional_token, Shapes::ShapeRef.new(shape: ConditionalToken, location_name: "ConditionalToken"))
     DeleteApplicationVpcConfigurationRequest.struct_class = Types::DeleteApplicationVpcConfigurationRequest
 
     DeleteApplicationVpcConfigurationResponse.add_member(:application_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ApplicationARN"))
@@ -903,6 +913,13 @@ module Aws::KinesisAnalyticsV2
     ResourceProvisionedThroughputExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceProvisionedThroughputExceededException.struct_class = Types::ResourceProvisionedThroughputExceededException
 
+    RollbackApplicationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
+    RollbackApplicationRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "CurrentApplicationVersionId"))
+    RollbackApplicationRequest.struct_class = Types::RollbackApplicationRequest
+
+    RollbackApplicationResponse.add_member(:application_detail, Shapes::ShapeRef.new(shape: ApplicationDetail, required: true, location_name: "ApplicationDetail"))
+    RollbackApplicationResponse.struct_class = Types::RollbackApplicationResponse
+
     RunConfiguration.add_member(:flink_run_configuration, Shapes::ShapeRef.new(shape: FlinkRunConfiguration, location_name: "FlinkRunConfiguration"))
     RunConfiguration.add_member(:sql_run_configurations, Shapes::ShapeRef.new(shape: SqlRunConfigurations, location_name: "SqlRunConfigurations"))
     RunConfiguration.add_member(:application_restore_configuration, Shapes::ShapeRef.new(shape: ApplicationRestoreConfiguration, location_name: "ApplicationRestoreConfiguration"))
@@ -1041,11 +1058,12 @@ module Aws::KinesisAnalyticsV2
     UpdateApplicationMaintenanceConfigurationResponse.struct_class = Types::UpdateApplicationMaintenanceConfigurationResponse
 
     UpdateApplicationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
-    UpdateApplicationRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "CurrentApplicationVersionId"))
+    UpdateApplicationRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, location_name: "CurrentApplicationVersionId"))
     UpdateApplicationRequest.add_member(:application_configuration_update, Shapes::ShapeRef.new(shape: ApplicationConfigurationUpdate, location_name: "ApplicationConfigurationUpdate"))
     UpdateApplicationRequest.add_member(:service_execution_role_update, Shapes::ShapeRef.new(shape: RoleARN, location_name: "ServiceExecutionRoleUpdate"))
     UpdateApplicationRequest.add_member(:run_configuration_update, Shapes::ShapeRef.new(shape: RunConfigurationUpdate, location_name: "RunConfigurationUpdate"))
     UpdateApplicationRequest.add_member(:cloud_watch_logging_option_updates, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptionUpdates, location_name: "CloudWatchLoggingOptionUpdates"))
+    UpdateApplicationRequest.add_member(:conditional_token, Shapes::ShapeRef.new(shape: ConditionalToken, location_name: "ConditionalToken"))
     UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
 
     UpdateApplicationResponse.add_member(:application_detail, Shapes::ShapeRef.new(shape: ApplicationDetail, required: true, location_name: "ApplicationDetail"))
@@ -1369,6 +1387,20 @@ module Aws::KinesisAnalyticsV2
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:rollback_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RollbackApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RollbackApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: RollbackApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:start_application, Seahorse::Model::Operation.new.tap do |o|

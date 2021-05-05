@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2021-05-05)
+------------------
+
+* Feature - Amazon SageMaker Autopilot now provides the ability to automatically deploy the best model to an endpoint
+
 1.86.0 (2021-05-04)
 ------------------
 

@@ -419,6 +419,17 @@ module Aws::SageMaker
     #
     #  </note>
     #
+    # <note markdown="1"> Tags that you add to a SageMaker Studio Domain or User Profile by
+    # calling this API are also added to any Apps that the Domain or User
+    # Profile launches after you call this API, but not to Apps that the
+    # Domain or User Profile launched before you called this API. To make
+    # sure that the tags associated with a Domain or User Profile are also
+    # added to all Apps that the Domain or User Profile launches, add the
+    # tags when you first create the Domain or User Profile by specifying
+    # them in the `Tags` parameter of CreateDomain or CreateUserProfile.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
@@ -1064,11 +1075,15 @@ module Aws::SageMaker
     #   needed to store artifacts from an AutoML job. Format(s) supported:
     #   CSV.
     #
+    #   &lt;para&gt;Specifies whether to automatically deploy the best
+    #   &amp;ATP; model to an endpoint and the name of that endpoint if
+    #   deployed automatically.&lt;/para&gt;
+    #
     # @option params [String] :problem_type
     #   Defines the type of supervised learning available for the candidates.
-    #   Options include: BinaryClassification, MulticlassClassification, and
-    #   Regression. For more information, see [ Amazon SageMaker Autopilot
-    #   problem types and algorithm support][1].
+    #   Options include: `BinaryClassification`, `MulticlassClassification`,
+    #   and `Regression`. For more information, see [ Amazon SageMaker
+    #   Autopilot problem types and algorithm support][1].
     #
     #
     #
@@ -1076,15 +1091,19 @@ module Aws::SageMaker
     #
     # @option params [Types::AutoMLJobObjective] :auto_ml_job_objective
     #   Defines the objective metric used to measure the predictive quality of
-    #   an AutoML job. You provide a AutoMLJobObjective$MetricName and
+    #   an AutoML job. You provide an AutoMLJobObjective$MetricName and
     #   Autopilot infers whether to minimize or maximize it.
     #
     # @option params [Types::AutoMLJobConfig] :auto_ml_job_config
-    #   Contains CompletionCriteria and SecurityConfig settings for the AutoML
-    #   job.
+    #   Contains `CompletionCriteria` and `SecurityConfig` settings for the
+    #   AutoML job.
     #
     # @option params [required, String] :role_arn
     #   The ARN of the role that is used to access the data.
+    #
+    #   &lt;para&gt;Specifies whether to automatically deploy the best
+    #   &amp;ATP; model to an endpoint and the name of that endpoint if
+    #   deployed automatically.&lt;/para&gt;
     #
     # @option params [Boolean] :generate_candidate_definitions_only
     #   Generates possible candidates without training the models. A candidate
@@ -1094,6 +1113,10 @@ module Aws::SageMaker
     # @option params [Array<Types::Tag>] :tags
     #   Each tag consists of a key and an optional value. Tag keys must be
     #   unique per resource.
+    #
+    # @option params [Types::ModelDeployConfig] :model_deploy_config
+    #   Specifies how to generate the endpoint name for an automatic one-click
+    #   Autopilot model deployment.
     #
     # @return [Types::CreateAutoMLJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1146,6 +1169,10 @@ module Aws::SageMaker
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     model_deploy_config: {
+    #       auto_generate_endpoint_name: false,
+    #       endpoint_name: "EndpointName",
+    #     },
     #   })
     #
     # @example Response structure
@@ -4386,10 +4413,10 @@ module Aws::SageMaker
     #
     # @option params [String] :direct_internet_access
     #   Sets whether Amazon SageMaker provides internet access to the notebook
-    #   instance. If you set this to `Disabled` this notebook instance will be
-    #   able to access resources only in your VPC, and will not be able to
-    #   connect to Amazon SageMaker training and endpoint services unless your
-    #   configure a NAT Gateway in your VPC.
+    #   instance. If you set this to `Disabled` this notebook instance is able
+    #   to access resources only in your VPC, and is not be able to connect to
+    #   Amazon SageMaker training and endpoint services unless you configure a
+    #   NAT Gateway in your VPC.
     #
     #   For more information, see [Notebook Instances Are Internet-Enabled by
     #   Default][1]. You can set the value of this parameter to `Disabled`
@@ -6959,6 +6986,13 @@ module Aws::SageMaker
     #
     #  </note>
     #
+    # <note markdown="1"> When you call this API to delete tags from a SageMaker Studio Domain
+    # or User Profile, the deleted tags are not removed from Apps that the
+    # SageMaker Studio Domain or User Profile launched before you called
+    # this API.
+    #
+    #  </note>
+    #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource whose tags you want to
     #   delete.
@@ -7553,6 +7587,8 @@ module Aws::SageMaker
     #   * {Types::DescribeAutoMLJobResponse#generate_candidate_definitions_only #generate_candidate_definitions_only} => Boolean
     #   * {Types::DescribeAutoMLJobResponse#auto_ml_job_artifacts #auto_ml_job_artifacts} => Types::AutoMLJobArtifacts
     #   * {Types::DescribeAutoMLJobResponse#resolved_attributes #resolved_attributes} => Types::ResolvedAttributes
+    #   * {Types::DescribeAutoMLJobResponse#model_deploy_config #model_deploy_config} => Types::ModelDeployConfig
+    #   * {Types::DescribeAutoMLJobResponse#model_deploy_result #model_deploy_result} => Types::ModelDeployResult
     #
     # @example Request syntax with placeholder values
     #
@@ -7610,7 +7646,7 @@ module Aws::SageMaker
     #   resp.best_candidate.failure_reason #=> String
     #   resp.best_candidate.candidate_properties.candidate_artifact_locations.explainability #=> String
     #   resp.auto_ml_job_status #=> String, one of "Completed", "InProgress", "Failed", "Stopped", "Stopping"
-    #   resp.auto_ml_job_secondary_status #=> String, one of "Starting", "AnalyzingData", "FeatureEngineering", "ModelTuning", "MaxCandidatesReached", "Failed", "Stopped", "MaxAutoMLJobRuntimeReached", "Stopping", "CandidateDefinitionsGenerated", "GeneratingExplainabilityReport", "Completed", "ExplainabilityError"
+    #   resp.auto_ml_job_secondary_status #=> String, one of "Starting", "AnalyzingData", "FeatureEngineering", "ModelTuning", "MaxCandidatesReached", "Failed", "Stopped", "MaxAutoMLJobRuntimeReached", "Stopping", "CandidateDefinitionsGenerated", "GeneratingExplainabilityReport", "Completed", "ExplainabilityError", "DeployingModel", "ModelDeploymentError"
     #   resp.generate_candidate_definitions_only #=> Boolean
     #   resp.auto_ml_job_artifacts.candidate_definition_notebook_location #=> String
     #   resp.auto_ml_job_artifacts.data_exploration_notebook_location #=> String
@@ -7619,6 +7655,9 @@ module Aws::SageMaker
     #   resp.resolved_attributes.completion_criteria.max_candidates #=> Integer
     #   resp.resolved_attributes.completion_criteria.max_runtime_per_training_job_in_seconds #=> Integer
     #   resp.resolved_attributes.completion_criteria.max_auto_ml_job_runtime_in_seconds #=> Integer
+    #   resp.model_deploy_config.auto_generate_endpoint_name #=> Boolean
+    #   resp.model_deploy_config.endpoint_name #=> String
+    #   resp.model_deploy_result.endpoint_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAutoMLJob AWS API Documentation
     #
@@ -11173,11 +11212,10 @@ module Aws::SageMaker
     #   Request a list of jobs, using a filter for status.
     #
     # @option params [String] :sort_order
-    #   The sort order for the results. The default is Descending.
+    #   The sort order for the results. The default is `Descending`.
     #
     # @option params [String] :sort_by
-    #   The parameter by which to sort the results. The default is
-    #   AutoMLJobName.
+    #   The parameter by which to sort the results. The default is `Name`.
     #
     # @option params [Integer] :max_results
     #   Request a list of jobs up to a specified limit.
@@ -11214,7 +11252,7 @@ module Aws::SageMaker
     #   resp.auto_ml_job_summaries[0].auto_ml_job_name #=> String
     #   resp.auto_ml_job_summaries[0].auto_ml_job_arn #=> String
     #   resp.auto_ml_job_summaries[0].auto_ml_job_status #=> String, one of "Completed", "InProgress", "Failed", "Stopped", "Stopping"
-    #   resp.auto_ml_job_summaries[0].auto_ml_job_secondary_status #=> String, one of "Starting", "AnalyzingData", "FeatureEngineering", "ModelTuning", "MaxCandidatesReached", "Failed", "Stopped", "MaxAutoMLJobRuntimeReached", "Stopping", "CandidateDefinitionsGenerated", "GeneratingExplainabilityReport", "Completed", "ExplainabilityError"
+    #   resp.auto_ml_job_summaries[0].auto_ml_job_secondary_status #=> String, one of "Starting", "AnalyzingData", "FeatureEngineering", "ModelTuning", "MaxCandidatesReached", "Failed", "Stopped", "MaxAutoMLJobRuntimeReached", "Stopping", "CandidateDefinitionsGenerated", "GeneratingExplainabilityReport", "Completed", "ExplainabilityError", "DeployingModel", "ModelDeploymentError"
     #   resp.auto_ml_job_summaries[0].creation_time #=> Time
     #   resp.auto_ml_job_summaries[0].end_time #=> Time
     #   resp.auto_ml_job_summaries[0].last_modified_time #=> Time
@@ -17408,7 +17446,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

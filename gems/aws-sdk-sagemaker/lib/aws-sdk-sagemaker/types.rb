@@ -1706,10 +1706,10 @@ module Aws::SageMaker
     end
 
     # An Autopilot job returns recommendations, or candidates. Each
-    # candidate has futher details about the steps involed, and the status.
+    # candidate has futher details about the steps involved and the status.
     #
     # @!attribute [rw] candidate_name
-    #   The candidate name.
+    #   The name of the candidate.
     #   @return [String]
     #
     # @!attribute [rw] final_auto_ml_job_objective_metric
@@ -1717,11 +1717,11 @@ module Aws::SageMaker
     #   @return [Types::FinalAutoMLJobObjectiveMetric]
     #
     # @!attribute [rw] objective_status
-    #   The objective status.
+    #   The objective's status.
     #   @return [String]
     #
     # @!attribute [rw] candidate_steps
-    #   The candidate's steps.
+    #   Information about the candidate's steps.
     #   @return [Array<Types::AutoMLCandidateStep>]
     #
     # @!attribute [rw] candidate_status
@@ -1729,7 +1729,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] inference_containers
-    #   The inference containers.
+    #   Information about the inference container definitions.
     #   @return [Array<Types::AutoMLContainerDefinition>]
     #
     # @!attribute [rw] creation_time
@@ -1770,20 +1770,20 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Information about the steps for a Candidate, and what step it is
+    # Information about the steps for a candidate and what step it is
     # working on.
     #
     # @!attribute [rw] candidate_step_type
-    #   Whether the Candidate is at the transform, training, or processing
+    #   Whether the candidate is at the transform, training, or processing
     #   step.
     #   @return [String]
     #
     # @!attribute [rw] candidate_step_arn
-    #   The ARN for the Candidate's step.
+    #   The ARN for the candidate's step.
     #   @return [String]
     #
     # @!attribute [rw] candidate_step_name
-    #   The name for the Candidate's step.
+    #   The name for the candidate's step.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLCandidateStep AWS API Documentation
@@ -1848,8 +1848,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] environment
-    #   Environment variables to set in the container. For more information,
-    #   see .
+    #   The environment variables to set in the container. For more
+    #   information, see .
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLContainerDefinition AWS API Documentation
@@ -1890,14 +1890,14 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Artifacts that are generation during a job.
+    # The artifacts that are generated during an AutoML job.
     #
     # @!attribute [rw] candidate_definition_notebook_location
-    #   The URL to the notebook location.
+    #   The URL of the notebook location.
     #   @return [String]
     #
     # @!attribute [rw] data_exploration_notebook_location
-    #   The URL to the notebook location.
+    #   The URL of the notebook location.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLJobArtifacts AWS API Documentation
@@ -1972,7 +1972,7 @@ module Aws::SageMaker
     #   @return [Types::AutoMLJobCompletionCriteria]
     #
     # @!attribute [rw] security_config
-    #   Security configuration for traffic encryption or Amazon VPC
+    #   The security configuration for traffic encryption or Amazon VPC
     #   settings.
     #   @return [Types::AutoMLSecurityConfig]
     #
@@ -2004,23 +2004,23 @@ module Aws::SageMaker
     #
     #   * `MSE`\: The mean squared error (MSE) is the average of the squared
     #     differences between the predicted and actual values. It is used
-    #     for regression. MSE values are always positive, the better a model
-    #     is at predicting the actual values the smaller the MSE value. When
-    #     the data contains outliers, they tend to dominate the MSE which
-    #     might cause subpar prediction performance.
+    #     for regression. MSE values are always positive: the better a model
+    #     is at predicting the actual values, the smaller the MSE value.
+    #     When the data contains outliers, they tend to dominate the MSE,
+    #     which might cause subpar prediction performance.
     #
-    #   * `Accuracy`\: The ratio of the number correctly classified items to
-    #     the total number (correctly and incorrectly) classified. It is
-    #     used for binary and multiclass classification. Measures how close
-    #     the predicted class values are to the actual values. Accuracy
-    #     values vary between zero and one, one being perfect accuracy and
-    #     zero perfect inaccuracy.
+    #   * `Accuracy`\: The ratio of the number of correctly classified items
+    #     to the total number of (correctly and incorrectly) classified
+    #     items. It is used for binary and multiclass classification. It
+    #     measures how close the predicted class values are to the actual
+    #     values. Accuracy values vary between zero and one: one indicates
+    #     perfect accuracy and zero indicates perfect inaccuracy.
     #
     #   * `F1`\: The F1 score is the harmonic mean of the precision and
     #     recall. It is used for binary classification into classes
     #     traditionally referred to as positive and negative. Predictions
-    #     are said to be true when they match their actual (correct) class;
-    #     false when they do not. Precision is the ratio of the true
+    #     are said to be true when they match their actual (correct) class
+    #     and false when they do not. Precision is the ratio of the true
     #     positive predictions to all positive predictions (including the
     #     false positives) in a data set and measures the quality of the
     #     prediction when it predicts the positive class. Recall (or
@@ -2029,7 +2029,7 @@ module Aws::SageMaker
     #     predicts the actual class members in a data set. The standard F1
     #     score weighs precision and recall equally. But which metric is
     #     paramount typically depends on specific aspects of a problem. F1
-    #     scores vary between zero and one, one being the best possible
+    #     scores vary between zero and one: one indicates the best possible
     #     performance and zero the worst.
     #
     #   * `AUC`\: The area under the curve (AUC) metric is used to compare
@@ -2047,20 +2047,21 @@ module Aws::SageMaker
     #     The AUC score can also be interpreted as the probability that a
     #     randomly selected positive data point is more likely to be
     #     predicted positive than a randomly selected negative example. AUC
-    #     scores vary between zero and one, one being perfect accuracy and
-    #     one half not better than a random classifier. Values less that one
-    #     half predict worse than a random predictor and such consistently
-    #     bad predictors can be inverted to obtain better than random
+    #     scores vary between zero and one: a score of one indicates perfect
+    #     accuracy and a score of one half indicates that the prediction is
+    #     not better than a random classifier. Values under one half predict
+    #     less accurately than a random predictor. But such consistently bad
+    #     predictors can simply be inverted to obtain better than random
     #     predictors.
     #
     #   * `F1macro`\: The F1macro score applies F1 scoring to multiclass
     #     classification. In this context, you have multiple classes to
     #     predict. You just calculate the precision and recall for each
     #     class as you did for the positive class in binary classification.
-    #     Then used these values to calculate the F1 score for each class
+    #     Then, use these values to calculate the F1 score for each class
     #     and average them to obtain the F1macro score. F1macro scores vary
-    #     between zero and one, one being the best possible performance and
-    #     zero the worst.
+    #     between zero and one: one indicates the best possible performance
+    #     and zero the worst.
     #
     #   If you do not specify a metric explicitly, the default behavior is
     #   to automatically use:
@@ -2226,7 +2227,7 @@ module Aws::SageMaker
     #   @return [Boolean]
     #
     # @!attribute [rw] vpc_config
-    #   VPC configuration.
+    #   The VPC configuration.
     #   @return [Types::VpcConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLSecurityConfig AWS API Documentation
@@ -2339,11 +2340,11 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Location of artifacts for an AutoML candidate job.
+    # The location of artifacts for an AutoML candidate job.
     #
     # @!attribute [rw] explainability
-    #   The S3 prefix to the explainability artifacts generated for the
-    #   AutoML candidate.
+    #   The Amazon S3 prefix to the explainability artifacts generated for
+    #   the AutoML candidate.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CandidateArtifactLocations AWS API Documentation
@@ -2357,7 +2358,8 @@ module Aws::SageMaker
     # The properties of an AutoML candidate job.
     #
     # @!attribute [rw] candidate_artifact_locations
-    #   The S3 prefix to the artifacts generated for an AutoML candidate.
+    #   The Amazon S3 prefix to the artifacts generated for an AutoML
+    #   candidate.
     #   @return [Types::CandidateArtifactLocations]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CandidateProperties AWS API Documentation
@@ -3853,6 +3855,10 @@ module Aws::SageMaker
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         model_deploy_config: {
+    #           auto_generate_endpoint_name: false,
+    #           endpoint_name: "EndpointName",
+    #         },
     #       }
     #
     # @!attribute [rw] auto_ml_job_name
@@ -3871,13 +3877,17 @@ module Aws::SageMaker
     #   Provides information about encryption and the Amazon S3 output path
     #   needed to store artifacts from an AutoML job. Format(s) supported:
     #   CSV.
+    #
+    #   &lt;para&gt;Specifies whether to automatically deploy the best
+    #   &amp;ATP; model to an endpoint and the name of that endpoint if
+    #   deployed automatically.&lt;/para&gt;
     #   @return [Types::AutoMLOutputDataConfig]
     #
     # @!attribute [rw] problem_type
     #   Defines the type of supervised learning available for the
-    #   candidates. Options include: BinaryClassification,
-    #   MulticlassClassification, and Regression. For more information, see
-    #   [ Amazon SageMaker Autopilot problem types and algorithm
+    #   candidates. Options include: `BinaryClassification`,
+    #   `MulticlassClassification`, and `Regression`. For more information,
+    #   see [ Amazon SageMaker Autopilot problem types and algorithm
     #   support][1].
     #
     #
@@ -3887,17 +3897,21 @@ module Aws::SageMaker
     #
     # @!attribute [rw] auto_ml_job_objective
     #   Defines the objective metric used to measure the predictive quality
-    #   of an AutoML job. You provide a AutoMLJobObjective$MetricName and
+    #   of an AutoML job. You provide an AutoMLJobObjective$MetricName and
     #   Autopilot infers whether to minimize or maximize it.
     #   @return [Types::AutoMLJobObjective]
     #
     # @!attribute [rw] auto_ml_job_config
-    #   Contains CompletionCriteria and SecurityConfig settings for the
+    #   Contains `CompletionCriteria` and `SecurityConfig` settings for the
     #   AutoML job.
     #   @return [Types::AutoMLJobConfig]
     #
     # @!attribute [rw] role_arn
     #   The ARN of the role that is used to access the data.
+    #
+    #   &lt;para&gt;Specifies whether to automatically deploy the best
+    #   &amp;ATP; model to an endpoint and the name of that endpoint if
+    #   deployed automatically.&lt;/para&gt;
     #   @return [String]
     #
     # @!attribute [rw] generate_candidate_definitions_only
@@ -3911,6 +3925,11 @@ module Aws::SageMaker
     #   unique per resource.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] model_deploy_config
+    #   Specifies how to generate the endpoint name for an automatic
+    #   one-click Autopilot model deployment.
+    #   @return [Types::ModelDeployConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAutoMLJobRequest AWS API Documentation
     #
     class CreateAutoMLJobRequest < Struct.new(
@@ -3922,7 +3941,8 @@ module Aws::SageMaker
       :auto_ml_job_config,
       :role_arn,
       :generate_candidate_definitions_only,
-      :tags)
+      :tags,
+      :model_deploy_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7090,9 +7110,9 @@ module Aws::SageMaker
     # @!attribute [rw] direct_internet_access
     #   Sets whether Amazon SageMaker provides internet access to the
     #   notebook instance. If you set this to `Disabled` this notebook
-    #   instance will be able to access resources only in your VPC, and will
-    #   not be able to connect to Amazon SageMaker training and endpoint
-    #   services unless your configure a NAT Gateway in your VPC.
+    #   instance is able to access resources only in your VPC, and is not be
+    #   able to connect to Amazon SageMaker training and endpoint services
+    #   unless you configure a NAT Gateway in your VPC.
     #
     #   For more information, see [Notebook Instances Are Internet-Enabled
     #   by Default][1]. You can set the value of this parameter to
@@ -9029,7 +9049,9 @@ module Aws::SageMaker
     #   The valid values are `None` and `Input`. The default value is
     #   `None`, which specifies not to join the input with the transformed
     #   data. If you want the batch transform job to join the original input
-    #   data with the transformed data, set `JoinSource` to `Input`.
+    #   data with the transformed data, set `JoinSource` to `Input`. You can
+    #   specify `OutputFilter` as an additional filter to select a portion
+    #   of the joined dataset and store it in the output file.
     #
     #   For JSON or JSONLines objects, such as a JSON array, Amazon
     #   SageMaker adds the transformed data to the input JSON object in an
@@ -9039,10 +9061,18 @@ module Aws::SageMaker
     #   file, and the input data is stored under the `SageMakerInput` key
     #   and the results are stored in `SageMakerOutput`.
     #
-    #   For CSV files, Amazon SageMaker combines the transformed data with
-    #   the input data at the end of the input data and stores it in the
-    #   output file. The joined data has the joined input data followed by
-    #   the transformed data and the output is a CSV file.
+    #   For CSV data, Amazon SageMaker takes each row as a JSON array and
+    #   joins the transformed data with the input by appending each
+    #   transformed row to the end of the input. The joined data has the
+    #   original input data followed by the transformed data and the output
+    #   is a CSV file.
+    #
+    #   For information on how joining in applied, see [Workflow for
+    #   Associating Inferences with Input Records][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#batch-transform-data-processing-workflow
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DataProcessing AWS API Documentation
@@ -10968,7 +10998,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] failure_reason
-    #   Returns the job's FailureReason.
+    #   Returns the failure reason for an AutoML job, when applicable.
     #   @return [String]
     #
     # @!attribute [rw] partial_failure_reasons
@@ -10976,11 +11006,11 @@ module Aws::SageMaker
     #   @return [Array<Types::AutoMLPartialFailureReason>]
     #
     # @!attribute [rw] best_candidate
-    #   Returns the job's BestCandidate.
+    #   Returns the job's best `AutoMLCandidate`.
     #   @return [Types::AutoMLCandidate]
     #
     # @!attribute [rw] auto_ml_job_status
-    #   Returns the status of the AutoML job's AutoMLJobStatus.
+    #   Returns the status of the AutoML job.
     #   @return [String]
     #
     # @!attribute [rw] auto_ml_job_secondary_status
@@ -10988,20 +11018,30 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] generate_candidate_definitions_only
-    #   Returns the job's output from GenerateCandidateDefinitionsOnly.
+    #   Indicates whether the output for an AutoML job generates candidate
+    #   definitions only.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_ml_job_artifacts
     #   Returns information on the job's artifacts found in
-    #   AutoMLJobArtifacts.
+    #   `AutoMLJobArtifacts`.
     #   @return [Types::AutoMLJobArtifacts]
     #
     # @!attribute [rw] resolved_attributes
-    #   This contains ProblemType, AutoMLJobObjective and
-    #   CompletionCriteria. If you do not provide these values, they are
-    #   auto-inferred. If you do provide them, they are the values you
-    #   provide.
+    #   This contains `ProblemType`, `AutoMLJobObjective` and
+    #   `CompletionCriteria`. If you do not provide these values, they are
+    #   auto-inferred. If you do provide them, the values used are the ones
+    #   you provide.
     #   @return [Types::ResolvedAttributes]
+    #
+    # @!attribute [rw] model_deploy_config
+    #   Indicates whether the model was deployed automatically to an
+    #   endpoint and the name of that endpoint if deployed automatically.
+    #   @return [Types::ModelDeployConfig]
+    #
+    # @!attribute [rw] model_deploy_result
+    #   Provides information about endpoint for the model deployment.
+    #   @return [Types::ModelDeployResult]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAutoMLJobResponse AWS API Documentation
     #
@@ -11024,7 +11064,9 @@ module Aws::SageMaker
       :auto_ml_job_secondary_status,
       :generate_candidate_definitions_only,
       :auto_ml_job_artifacts,
-      :resolved_attributes)
+      :resolved_attributes,
+      :model_deploy_config,
+      :model_deploy_result)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14112,7 +14154,7 @@ module Aws::SageMaker
     #
     #   * `LaunchingMLInstances`
     #
-    #   * `PreparingTrainingStack`
+    #   * `PreparingTraining`
     #
     #   * `DownloadingTrainingImage`
     #   @return [String]
@@ -19438,6 +19480,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] work_requester_account_id
+    #   The AWS account ID of the account used to start the labeling job.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -20372,12 +20415,11 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] sort_order
-    #   The sort order for the results. The default is Descending.
+    #   The sort order for the results. The default is `Descending`.
     #   @return [String]
     #
     # @!attribute [rw] sort_by
-    #   The parameter by which to sort the results. The default is
-    #   AutoMLJobName.
+    #   The parameter by which to sort the results. The default is `Name`.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -20483,7 +20525,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] candidates
-    #   Summaries about the Candidates.
+    #   Summaries about the `AutoMLCandidates`.
     #   @return [Array<Types::AutoMLCandidate>]
     #
     # @!attribute [rw] next_token
@@ -24520,7 +24562,7 @@ module Aws::SageMaker
     #
     # Model artifacts are the output that results from training a model, and
     # typically consist of trained parameters, a model defintion that
-    # desribes how to compute inferences, and other metadata.
+    # describes how to compute inferences, and other metadata.
     #
     # @!attribute [rw] s3_model_artifacts
     #   The path of the S3 object that contains the model artifacts. For
@@ -24704,6 +24746,66 @@ module Aws::SageMaker
     class ModelDataQuality < Struct.new(
       :statistics,
       :constraints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies how to generate the endpoint name for an automatic one-click
+    # Autopilot model deployment.
+    #
+    # @note When making an API call, you may pass ModelDeployConfig
+    #   data as a hash:
+    #
+    #       {
+    #         auto_generate_endpoint_name: false,
+    #         endpoint_name: "EndpointName",
+    #       }
+    #
+    # @!attribute [rw] auto_generate_endpoint_name
+    #   Set to `True` to automatically generate an endpoint name for a
+    #   one-click Autopilot model deployment; set to `False` otherwise. The
+    #   default value is `True`.
+    #
+    #   <note markdown="1"> If you set `AutoGenerateEndpointName` to `True`, do not specify the
+    #   `EndpointName`; otherwise a 400 error is thrown.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] endpoint_name
+    #   Specifies the endpoint name to use for a one-click Autopilot model
+    #   deployment if the endpoint name is not generated automatically.
+    #
+    #   <note markdown="1"> Specify the `EndpointName` if and only if you set
+    #   `AutoGenerateEndpointName` to `False`; otherwise a 400 error is
+    #   thrown.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelDeployConfig AWS API Documentation
+    #
+    class ModelDeployConfig < Struct.new(
+      :auto_generate_endpoint_name,
+      :endpoint_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the endpoint of the model deployment.
+    #
+    # @!attribute [rw] endpoint_name
+    #   The name of the endpoint to which the model has been deployed.
+    #
+    #   <note markdown="1"> If model deployment fails, this field is omitted from the response.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelDeployResult AWS API Documentation
+    #
+    class ModelDeployResult < Struct.new(
+      :endpoint_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27487,7 +27589,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/mazonS3/latest/dev/UsingKMSEncryption.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
     #   @return [String]
     #
@@ -29788,7 +29890,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The resource being accessed is in use.
+    # Resource being accessed is in use.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -29845,7 +29947,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The resource being accessed was not found.
+    # Resource being access is not found.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -33380,7 +33482,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Represents an amount of money in United States dollars/
+    # Represents an amount of money in United States dollars.
     #
     # @note When making an API call, you may pass USD
     #   data as a hash:

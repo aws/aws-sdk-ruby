@@ -15,10 +15,11 @@ module Aws::KinesisAnalyticsV2
     #
     #       {
     #         application_name: "ApplicationName", # required
-    #         current_application_version_id: 1, # required
+    #         current_application_version_id: 1,
     #         cloud_watch_logging_option: { # required
     #           log_stream_arn: "LogStreamARN", # required
     #         },
+    #         conditional_token: "ConditionalToken",
     #       }
     #
     # @!attribute [rw] application_name
@@ -26,7 +27,8 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     #
     # @!attribute [rw] current_application_version_id
-    #   The version ID of the Kinesis Data Analytics application. You can
+    #   The version ID of the Kinesis Data Analytics application. You must
+    #   provide the `ApplicationVersionID` or the `ConditionalToken`.You can
     #   retrieve the application version ID using DescribeApplication.
     #   @return [Integer]
     #
@@ -35,12 +37,20 @@ module Aws::KinesisAnalyticsV2
     #   (ARN).
     #   @return [Types::CloudWatchLoggingOption]
     #
+    # @!attribute [rw] conditional_token
+    #   A value you use to implement strong concurrency for application
+    #   updates. You must provide the `ApplicationVersionID` or the
+    #   `ConditionalToken`. You get the application's current
+    #   `ConditionalToken` using DescribeApplication.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationCloudWatchLoggingOptionRequest AWS API Documentation
     #
     class AddApplicationCloudWatchLoggingOptionRequest < Struct.new(
       :application_name,
       :current_application_version_id,
-      :cloud_watch_logging_option)
+      :cloud_watch_logging_option,
+      :conditional_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -91,9 +101,10 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] current_application_version_id
     #   The version of the application to which you want to add the input
-    #   processing configuration. You can use the DescribeApplication
-    #   operation to get the current application version. If the version
-    #   specified is not the current version, the
+    #   processing configuration. You must provide the
+    #   `ApplicationVersionID` or the `ConditionalToken`. You can use the
+    #   DescribeApplication operation to get the current application
+    #   version. If the version specified is not the current version, the
     #   `ConcurrentModificationException` is returned.
     #   @return [Integer]
     #
@@ -201,7 +212,8 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     #
     # @!attribute [rw] current_application_version_id
-    #   The current version of your application. You can use the
+    #   The current version of your application. You must provide the
+    #   `ApplicationVersionID` or the `ConditionalToken`.You can use the
     #   DescribeApplication operation to find the current application
     #   version.
     #   @return [Integer]
@@ -272,9 +284,11 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] current_application_version_id
     #   The version of the application to which you want to add the output
-    #   configuration. You can use the DescribeApplication operation to get
-    #   the current application version. If the version specified is not the
-    #   current version, the `ConcurrentModificationException` is returned.
+    #   configuration. You must provide the `ApplicationVersionID` or the
+    #   `ConditionalToken`. You can use the DescribeApplication operation to
+    #   get the current application version. If the version specified is not
+    #   the current version, the `ConcurrentModificationException` is
+    #   returned.
     #   @return [Integer]
     #
     # @!attribute [rw] output
@@ -418,11 +432,12 @@ module Aws::KinesisAnalyticsV2
     #
     #       {
     #         application_name: "ApplicationName", # required
-    #         current_application_version_id: 1, # required
+    #         current_application_version_id: 1,
     #         vpc_configuration: { # required
     #           subnet_ids: ["SubnetId"], # required
     #           security_group_ids: ["SecurityGroupId"], # required
     #         },
+    #         conditional_token: "ConditionalToken",
     #       }
     #
     # @!attribute [rw] application_name
@@ -431,21 +446,31 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] current_application_version_id
     #   The version of the application to which you want to add the VPC
-    #   configuration. You can use the DescribeApplication operation to get
-    #   the current application version. If the version specified is not the
-    #   current version, the `ConcurrentModificationException` is returned.
+    #   configuration. You must provide the `ApplicationVersionID` or the
+    #   `ConditionalToken`. You can use the DescribeApplication operation to
+    #   get the current application version. If the version specified is not
+    #   the current version, the `ConcurrentModificationException` is
+    #   returned.
     #   @return [Integer]
     #
     # @!attribute [rw] vpc_configuration
     #   Description of the VPC to add to the application.
     #   @return [Types::VpcConfiguration]
     #
+    # @!attribute [rw] conditional_token
+    #   A value you use to implement strong concurrency for application
+    #   updates. You must provide the `ApplicationVersionID` or the
+    #   `ConditionalToken`. You get the application's current
+    #   `ConditionalToken` using DescribeApplication.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationVpcConfigurationRequest AWS API Documentation
     #
     class AddApplicationVpcConfigurationRequest < Struct.new(
       :application_name,
       :current_application_version_id,
-      :vpc_configuration)
+      :vpc_configuration,
+      :conditional_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1064,6 +1089,21 @@ module Aws::KinesisAnalyticsV2
     #   Describes the time window for automatic application maintenance.
     #   @return [Types::ApplicationMaintenanceConfigurationDescription]
     #
+    # @!attribute [rw] application_version_updated_from
+    #   The previous application version before the latest application
+    #   update. RollbackApplication reverts the application to this version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] application_version_rolled_back_from
+    #   If you reverted the application using RollbackApplication, the
+    #   application version when `RollbackApplication` was called.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] conditional_token
+    #   A value you use to implement strong concurrency for application
+    #   updates.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationDetail AWS API Documentation
     #
     class ApplicationDetail < Struct.new(
@@ -1078,7 +1118,10 @@ module Aws::KinesisAnalyticsV2
       :last_update_timestamp,
       :application_configuration_description,
       :cloud_watch_logging_option_descriptions,
-      :application_maintenance_configuration_description)
+      :application_maintenance_configuration_description,
+      :application_version_updated_from,
+      :application_version_rolled_back_from,
+      :conditional_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2062,8 +2105,9 @@ module Aws::KinesisAnalyticsV2
     #
     #       {
     #         application_name: "ApplicationName", # required
-    #         current_application_version_id: 1, # required
+    #         current_application_version_id: 1,
     #         cloud_watch_logging_option_id: "Id", # required
+    #         conditional_token: "ConditionalToken",
     #       }
     #
     # @!attribute [rw] application_name
@@ -2071,8 +2115,9 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     #
     # @!attribute [rw] current_application_version_id
-    #   The version ID of the application. You can retrieve the application
-    #   version ID using DescribeApplication.
+    #   The version ID of the application. You must provide the
+    #   `ApplicationVersionID` or the `ConditionalToken`. You can retrieve
+    #   the application version ID using DescribeApplication.
     #   @return [Integer]
     #
     # @!attribute [rw] cloud_watch_logging_option_id
@@ -2081,12 +2126,20 @@ module Aws::KinesisAnalyticsV2
     #   using the DescribeApplication operation.
     #   @return [String]
     #
+    # @!attribute [rw] conditional_token
+    #   A value you use to implement strong concurrency for application
+    #   updates. You must provide the `ApplicationVersionID` or the
+    #   `ConditionalToken`. You get the application's current
+    #   `ConditionalToken` using DescribeApplication.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationCloudWatchLoggingOptionRequest AWS API Documentation
     #
     class DeleteApplicationCloudWatchLoggingOptionRequest < Struct.new(
       :application_name,
       :current_application_version_id,
-      :cloud_watch_logging_option_id)
+      :cloud_watch_logging_option_id,
+      :conditional_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2351,8 +2404,9 @@ module Aws::KinesisAnalyticsV2
     #
     #       {
     #         application_name: "ApplicationName", # required
-    #         current_application_version_id: 1, # required
+    #         current_application_version_id: 1,
     #         vpc_configuration_id: "Id", # required
+    #         conditional_token: "ConditionalToken",
     #       }
     #
     # @!attribute [rw] application_name
@@ -2360,12 +2414,20 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     #
     # @!attribute [rw] current_application_version_id
-    #   The current application version ID. You can retrieve the application
-    #   version ID using DescribeApplication.
+    #   The current application version ID. You must provide the
+    #   `ApplicationVersionID` or the `ConditionalToken`.You can retrieve
+    #   the application version ID using DescribeApplication.
     #   @return [Integer]
     #
     # @!attribute [rw] vpc_configuration_id
     #   The ID of the VPC configuration to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] conditional_token
+    #   A value you use to implement strong concurrency for application
+    #   updates. You must provide the `ApplicationVersionID` or the
+    #   `ConditionalToken`. You get the application's current
+    #   `ConditionalToken` using DescribeApplication.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationVpcConfigurationRequest AWS API Documentation
@@ -2373,7 +2435,8 @@ module Aws::KinesisAnalyticsV2
     class DeleteApplicationVpcConfigurationRequest < Struct.new(
       :application_name,
       :current_application_version_id,
-      :vpc_configuration_id)
+      :vpc_configuration_id,
+      :conditional_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4880,6 +4943,46 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RollbackApplicationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_name: "ApplicationName", # required
+    #         current_application_version_id: 1, # required
+    #       }
+    #
+    # @!attribute [rw] application_name
+    #   The name of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_application_version_id
+    #   The current application version ID. You can retrieve the application
+    #   version ID using DescribeApplication.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/RollbackApplicationRequest AWS API Documentation
+    #
+    class RollbackApplicationRequest < Struct.new(
+      :application_name,
+      :current_application_version_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_detail
+    #   Describes the application, including the application Amazon Resource
+    #   Name (ARN), status, latest version, and input and output
+    #   configurations.
+    #   @return [Types::ApplicationDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/RollbackApplicationResponse AWS API Documentation
+    #
+    class RollbackApplicationResponse < Struct.new(
+      :application_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the starting parameters for an Kinesis Data Analytics
     # application.
     #
@@ -5909,7 +6012,7 @@ module Aws::KinesisAnalyticsV2
     #
     #       {
     #         application_name: "ApplicationName", # required
-    #         current_application_version_id: 1, # required
+    #         current_application_version_id: 1,
     #         application_configuration_update: {
     #           sql_application_configuration_update: {
     #             input_updates: [
@@ -6073,6 +6176,7 @@ module Aws::KinesisAnalyticsV2
     #             log_stream_arn_update: "LogStreamARN",
     #           },
     #         ],
+    #         conditional_token: "ConditionalToken",
     #       }
     #
     # @!attribute [rw] application_name
@@ -6080,8 +6184,9 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     #
     # @!attribute [rw] current_application_version_id
-    #   The current application version ID. You can retrieve the application
-    #   version ID using DescribeApplication.
+    #   The current application version ID. You must provide the
+    #   `ApplicationVersionID` or the `ConditionalToken`.You can retrieve
+    #   the application version ID using DescribeApplication.
     #   @return [Integer]
     #
     # @!attribute [rw] application_configuration_update
@@ -6103,6 +6208,13 @@ module Aws::KinesisAnalyticsV2
     #   AddApplicationCloudWatchLoggingOption.
     #   @return [Array<Types::CloudWatchLoggingOptionUpdate>]
     #
+    # @!attribute [rw] conditional_token
+    #   A value you use to implement strong concurrency for application
+    #   updates. You must provide the `ApplicationVersionID` or the
+    #   `ConditionalToken`. You get the application's current
+    #   `ConditionalToken` using DescribeApplication.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UpdateApplicationRequest AWS API Documentation
     #
     class UpdateApplicationRequest < Struct.new(
@@ -6111,7 +6223,8 @@ module Aws::KinesisAnalyticsV2
       :application_configuration_update,
       :service_execution_role_update,
       :run_configuration_update,
-      :cloud_watch_logging_option_updates)
+      :cloud_watch_logging_option_updates,
+      :conditional_token)
       SENSITIVE = []
       include Aws::Structure
     end

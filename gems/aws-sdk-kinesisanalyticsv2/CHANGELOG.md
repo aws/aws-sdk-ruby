@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2021-05-05)
+------------------
+
+* Feature - Amazon Kinesis Analytics now supports RollbackApplication for Apache Flink applications to revert the application to the previous running version
+
 1.27.0 (2021-04-26)
 ------------------
 

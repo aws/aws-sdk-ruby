@@ -1368,7 +1368,7 @@ module Aws::AuditManager
     #   data as a hash:
     #
     #       {
-    #         name: "ControlSetName",
+    #         name: "ControlSetName", # required
     #         controls: [
     #           {
     #             id: "UUID",
@@ -1403,7 +1403,7 @@ module Aws::AuditManager
     #         compliance_type: "ComplianceType",
     #         control_sets: [ # required
     #           {
-    #             name: "ControlSetName",
+    #             name: "ControlSetName", # required
     #             controls: [
     #               {
     #                 id: "UUID",
@@ -2153,7 +2153,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] assessment_report_selection
-    #   Specifies whether the evidence is inclded in the assessment report.
+    #   Specifies whether the evidence is included in the assessment report.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/Evidence AWS API Documentation
@@ -3770,7 +3770,7 @@ module Aws::AuditManager
     #
     #       {
     #         id: "ControlSetName",
-    #         name: "ControlSetName",
+    #         name: "ControlSetName", # required
     #         controls: [
     #           {
     #             id: "UUID",
@@ -3811,7 +3811,7 @@ module Aws::AuditManager
     #         control_sets: [ # required
     #           {
     #             id: "ControlSetName",
-    #             name: "ControlSetName",
+    #             name: "ControlSetName", # required
     #             controls: [
     #               {
     #                 id: "UUID",
