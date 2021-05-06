@@ -395,6 +395,17 @@ module Aws::SSM
     #   supported for rate expressions.
     #   @return [Boolean]
     #
+    # @!attribute [rw] calendar_names
+    #   The names or Amazon Resource Names (ARNs) of the Systems Manager
+    #   Change Calendar type documents your associations are gated under.
+    #   The associations only run when that Change Calendar is open. For
+    #   more information, see [AWS Systems Manager Change Calendar][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] target_locations
     #   The combination of AWS Regions and AWS accounts where you want to
     #   run the association.
@@ -425,6 +436,7 @@ module Aws::SSM
       :compliance_severity,
       :sync_compliance,
       :apply_only_at_cron_interval,
+      :calendar_names,
       :target_locations)
       SENSITIVE = []
       include Aws::Structure
@@ -832,6 +844,18 @@ module Aws::SSM
     #   supported for rate expressions.
     #   @return [Boolean]
     #
+    # @!attribute [rw] calendar_names
+    #   The names or Amazon Resource Names (ARNs) of the Systems Manager
+    #   Change Calendar type documents your associations are gated under.
+    #   The associations for this version only run when that Change Calendar
+    #   is open. For more information, see [AWS Systems Manager Change
+    #   Calendar][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] target_locations
     #   The combination of AWS Regions and AWS accounts where you wanted to
     #   run the association when this association version was created.
@@ -855,6 +879,7 @@ module Aws::SSM
       :compliance_severity,
       :sync_compliance,
       :apply_only_at_cron_interval,
+      :calendar_names,
       :target_locations)
       SENSITIVE = []
       include Aws::Structure
@@ -2672,6 +2697,7 @@ module Aws::SSM
     #             compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #             sync_compliance: "AUTO", # accepts AUTO, MANUAL
     #             apply_only_at_cron_interval: false,
+    #             calendar_names: ["CalendarNameOrARN"],
     #             target_locations: [
     #               {
     #                 accounts: ["Account"],
@@ -2731,6 +2757,7 @@ module Aws::SSM
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #         sync_compliance: "AUTO", # accepts AUTO, MANUAL
     #         apply_only_at_cron_interval: false,
+    #         calendar_names: ["CalendarNameOrARN"],
     #         target_locations: [
     #           {
     #             accounts: ["Account"],
@@ -2859,6 +2886,17 @@ module Aws::SSM
     #   supported for rate expressions.
     #   @return [Boolean]
     #
+    # @!attribute [rw] calendar_names
+    #   The names or Amazon Resource Names (ARNs) of the Systems Manager
+    #   Change Calendar type documents your associations are gated under.
+    #   The associations only run when that Change Calendar is open. For
+    #   more information, see [AWS Systems Manager Change Calendar][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] target_locations
     #   Use this action to create an association in multiple Regions and
     #   multiple accounts.
@@ -2881,6 +2919,7 @@ module Aws::SSM
       :compliance_severity,
       :sync_compliance,
       :apply_only_at_cron_interval,
+      :calendar_names,
       :target_locations)
       SENSITIVE = []
       include Aws::Structure
@@ -2934,6 +2973,7 @@ module Aws::SSM
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #         sync_compliance: "AUTO", # accepts AUTO, MANUAL
     #         apply_only_at_cron_interval: false,
+    #         calendar_names: ["CalendarNameOrARN"],
     #         target_locations: [
     #           {
     #             accounts: ["Account"],
@@ -3076,12 +3116,23 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] apply_only_at_cron_interval
-    #   By default, when you create a new associations, the system runs it
+    #   By default, when you create a new association, the system runs it
     #   immediately after it is created and then according to the schedule
     #   you specified. Specify this option if you don't want an association
     #   to run immediately after you create it. This parameter is not
     #   supported for rate expressions.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] calendar_names
+    #   The names or Amazon Resource Names (ARNs) of the Systems Manager
+    #   Change Calendar type documents you want to gate your associations
+    #   under. The associations only run when that Change Calendar is open.
+    #   For more information, see [AWS Systems Manager Change Calendar][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar
+    #   @return [Array<String>]
     #
     # @!attribute [rw] target_locations
     #   A location is a combination of AWS Regions and AWS accounts where
@@ -3106,6 +3157,7 @@ module Aws::SSM
       :compliance_severity,
       :sync_compliance,
       :apply_only_at_cron_interval,
+      :calendar_names,
       :target_locations)
       SENSITIVE = []
       include Aws::Structure
@@ -18805,6 +18857,7 @@ module Aws::SSM
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #         sync_compliance: "AUTO", # accepts AUTO, MANUAL
     #         apply_only_at_cron_interval: false,
+    #         calendar_names: ["CalendarNameOrARN"],
     #         target_locations: [
     #           {
     #             accounts: ["Account"],
@@ -18949,6 +19002,17 @@ module Aws::SSM
     #   the interval specified.
     #   @return [Boolean]
     #
+    # @!attribute [rw] calendar_names
+    #   The names or Amazon Resource Names (ARNs) of the Systems Manager
+    #   Change Calendar type documents you want to gate your associations
+    #   under. The associations only run when that Change Calendar is open.
+    #   For more information, see [AWS Systems Manager Change Calendar][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] target_locations
     #   A location is a combination of AWS Regions and AWS accounts where
     #   you want to run the association. Use this action to update an
@@ -18973,6 +19037,7 @@ module Aws::SSM
       :compliance_severity,
       :sync_compliance,
       :apply_only_at_cron_interval,
+      :calendar_names,
       :target_locations)
       SENSITIVE = []
       include Aws::Structure

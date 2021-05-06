@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2021-05-06)
+------------------
+
+* Feature - SSM feature release - ChangeCalendar integration with StateManager.
+
 1.108.0 (2021-04-06)
 ------------------
 

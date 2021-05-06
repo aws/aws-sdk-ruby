@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2021-05-06)
+------------------
+
+* Feature - AWS Snow Family adds APIs for ordering and managing Snow jobs with long term pricing
+
 1.37.0 (2021-03-10)
 ------------------
 

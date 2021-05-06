@@ -69,6 +69,7 @@ module Aws::ServiceDiscovery
     HttpProperties = Shapes::StructureShape.new(name: 'HttpProperties')
     Instance = Shapes::StructureShape.new(name: 'Instance')
     InstanceHealthStatusMap = Shapes::MapShape.new(name: 'InstanceHealthStatusMap')
+    InstanceId = Shapes::StringShape.new(name: 'InstanceId')
     InstanceIdList = Shapes::ListShape.new(name: 'InstanceIdList')
     InstanceNotFound = Shapes::StructureShape.new(name: 'InstanceNotFound')
     InstanceSummary = Shapes::StructureShape.new(name: 'InstanceSummary')
@@ -444,7 +445,7 @@ module Aws::ServiceDiscovery
     OperationTargetsMap.value = Shapes::ShapeRef.new(shape: ResourceId)
 
     RegisterInstanceRequest.add_member(:service_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ServiceId"))
-    RegisterInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "InstanceId"))
+    RegisterInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     RegisterInstanceRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId", metadata: {"idempotencyToken"=>true}))
     RegisterInstanceRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, required: true, location_name: "Attributes"))
     RegisterInstanceRequest.struct_class = Types::RegisterInstanceRequest

@@ -736,11 +736,21 @@ module Aws::SSM
     #   By default, all associations use `AUTO` mode.
     #
     # @option params [Boolean] :apply_only_at_cron_interval
-    #   By default, when you create a new associations, the system runs it
+    #   By default, when you create a new association, the system runs it
     #   immediately after it is created and then according to the schedule you
     #   specified. Specify this option if you don't want an association to
     #   run immediately after you create it. This parameter is not supported
     #   for rate expressions.
+    #
+    # @option params [Array<String>] :calendar_names
+    #   The names or Amazon Resource Names (ARNs) of the Systems Manager
+    #   Change Calendar type documents you want to gate your associations
+    #   under. The associations only run when that Change Calendar is open.
+    #   For more information, see [AWS Systems Manager Change Calendar][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar
     #
     # @option params [Array<Types::TargetLocation>] :target_locations
     #   A location is a combination of AWS Regions and AWS accounts where you
@@ -781,6 +791,7 @@ module Aws::SSM
     #     compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #     sync_compliance: "AUTO", # accepts AUTO, MANUAL
     #     apply_only_at_cron_interval: false,
+    #     calendar_names: ["CalendarNameOrARN"],
     #     target_locations: [
     #       {
     #         accounts: ["Account"],
@@ -829,6 +840,8 @@ module Aws::SSM
     #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.association_description.sync_compliance #=> String, one of "AUTO", "MANUAL"
     #   resp.association_description.apply_only_at_cron_interval #=> Boolean
+    #   resp.association_description.calendar_names #=> Array
+    #   resp.association_description.calendar_names[0] #=> String
     #   resp.association_description.target_locations #=> Array
     #   resp.association_description.target_locations[0].accounts #=> Array
     #   resp.association_description.target_locations[0].accounts[0] #=> String
@@ -898,6 +911,7 @@ module Aws::SSM
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #         sync_compliance: "AUTO", # accepts AUTO, MANUAL
     #         apply_only_at_cron_interval: false,
+    #         calendar_names: ["CalendarNameOrARN"],
     #         target_locations: [
     #           {
     #             accounts: ["Account"],
@@ -949,6 +963,8 @@ module Aws::SSM
     #   resp.successful[0].compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.successful[0].sync_compliance #=> String, one of "AUTO", "MANUAL"
     #   resp.successful[0].apply_only_at_cron_interval #=> Boolean
+    #   resp.successful[0].calendar_names #=> Array
+    #   resp.successful[0].calendar_names[0] #=> String
     #   resp.successful[0].target_locations #=> Array
     #   resp.successful[0].target_locations[0].accounts #=> Array
     #   resp.successful[0].target_locations[0].accounts[0] #=> String
@@ -979,6 +995,8 @@ module Aws::SSM
     #   resp.failed[0].entry.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.failed[0].entry.sync_compliance #=> String, one of "AUTO", "MANUAL"
     #   resp.failed[0].entry.apply_only_at_cron_interval #=> Boolean
+    #   resp.failed[0].entry.calendar_names #=> Array
+    #   resp.failed[0].entry.calendar_names[0] #=> String
     #   resp.failed[0].entry.target_locations #=> Array
     #   resp.failed[0].entry.target_locations[0].accounts #=> Array
     #   resp.failed[0].entry.target_locations[0].accounts[0] #=> String
@@ -2435,6 +2453,8 @@ module Aws::SSM
     #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.association_description.sync_compliance #=> String, one of "AUTO", "MANUAL"
     #   resp.association_description.apply_only_at_cron_interval #=> Boolean
+    #   resp.association_description.calendar_names #=> Array
+    #   resp.association_description.calendar_names[0] #=> String
     #   resp.association_description.target_locations #=> Array
     #   resp.association_description.target_locations[0].accounts #=> Array
     #   resp.association_description.target_locations[0].accounts[0] #=> String
@@ -6398,6 +6418,8 @@ module Aws::SSM
     #   resp.association_versions[0].compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.association_versions[0].sync_compliance #=> String, one of "AUTO", "MANUAL"
     #   resp.association_versions[0].apply_only_at_cron_interval #=> Boolean
+    #   resp.association_versions[0].calendar_names #=> Array
+    #   resp.association_versions[0].calendar_names[0] #=> String
     #   resp.association_versions[0].target_locations #=> Array
     #   resp.association_versions[0].target_locations[0].accounts #=> Array
     #   resp.association_versions[0].target_locations[0].accounts[0] #=> String
@@ -9334,6 +9356,16 @@ module Aws::SSM
     #   association to run immediately after updating it and according to the
     #   interval specified.
     #
+    # @option params [Array<String>] :calendar_names
+    #   The names or Amazon Resource Names (ARNs) of the Systems Manager
+    #   Change Calendar type documents you want to gate your associations
+    #   under. The associations only run when that Change Calendar is open.
+    #   For more information, see [AWS Systems Manager Change Calendar][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar
+    #
     # @option params [Array<Types::TargetLocation>] :target_locations
     #   A location is a combination of AWS Regions and AWS accounts where you
     #   want to run the association. Use this action to update an association
@@ -9374,6 +9406,7 @@ module Aws::SSM
     #     compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #     sync_compliance: "AUTO", # accepts AUTO, MANUAL
     #     apply_only_at_cron_interval: false,
+    #     calendar_names: ["CalendarNameOrARN"],
     #     target_locations: [
     #       {
     #         accounts: ["Account"],
@@ -9422,6 +9455,8 @@ module Aws::SSM
     #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.association_description.sync_compliance #=> String, one of "AUTO", "MANUAL"
     #   resp.association_description.apply_only_at_cron_interval #=> Boolean
+    #   resp.association_description.calendar_names #=> Array
+    #   resp.association_description.calendar_names[0] #=> String
     #   resp.association_description.target_locations #=> Array
     #   resp.association_description.target_locations[0].accounts #=> Array
     #   resp.association_description.target_locations[0].accounts[0] #=> String
@@ -9506,6 +9541,8 @@ module Aws::SSM
     #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.association_description.sync_compliance #=> String, one of "AUTO", "MANUAL"
     #   resp.association_description.apply_only_at_cron_interval #=> Boolean
+    #   resp.association_description.calendar_names #=> Array
+    #   resp.association_description.calendar_names[0] #=> String
     #   resp.association_description.target_locations #=> Array
     #   resp.association_description.target_locations[0].accounts #=> Array
     #   resp.association_description.target_locations[0].accounts[0] #=> String
@@ -10811,7 +10848,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.108.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

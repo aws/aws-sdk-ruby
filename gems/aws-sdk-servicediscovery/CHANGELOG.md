@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2021-05-06)
+------------------
+
+* Feature - Bugfix: Improved input validation for RegisterInstance action, InstanceId field
+
 1.34.0 (2021-03-10)
 ------------------
 

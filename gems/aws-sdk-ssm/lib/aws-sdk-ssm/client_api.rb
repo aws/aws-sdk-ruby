@@ -1208,6 +1208,7 @@ module Aws::SSM
     AssociationDescription.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
     AssociationDescription.add_member(:sync_compliance, Shapes::ShapeRef.new(shape: AssociationSyncCompliance, location_name: "SyncCompliance"))
     AssociationDescription.add_member(:apply_only_at_cron_interval, Shapes::ShapeRef.new(shape: ApplyOnlyAtCronInterval, location_name: "ApplyOnlyAtCronInterval"))
+    AssociationDescription.add_member(:calendar_names, Shapes::ShapeRef.new(shape: CalendarNameOrARNList, location_name: "CalendarNames"))
     AssociationDescription.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations"))
     AssociationDescription.struct_class = Types::AssociationDescription
 
@@ -1298,6 +1299,7 @@ module Aws::SSM
     AssociationVersionInfo.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
     AssociationVersionInfo.add_member(:sync_compliance, Shapes::ShapeRef.new(shape: AssociationSyncCompliance, location_name: "SyncCompliance"))
     AssociationVersionInfo.add_member(:apply_only_at_cron_interval, Shapes::ShapeRef.new(shape: ApplyOnlyAtCronInterval, location_name: "ApplyOnlyAtCronInterval"))
+    AssociationVersionInfo.add_member(:calendar_names, Shapes::ShapeRef.new(shape: CalendarNameOrARNList, location_name: "CalendarNames"))
     AssociationVersionInfo.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations"))
     AssociationVersionInfo.struct_class = Types::AssociationVersionInfo
 
@@ -1612,6 +1614,7 @@ module Aws::SSM
     CreateAssociationBatchRequestEntry.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
     CreateAssociationBatchRequestEntry.add_member(:sync_compliance, Shapes::ShapeRef.new(shape: AssociationSyncCompliance, location_name: "SyncCompliance"))
     CreateAssociationBatchRequestEntry.add_member(:apply_only_at_cron_interval, Shapes::ShapeRef.new(shape: ApplyOnlyAtCronInterval, location_name: "ApplyOnlyAtCronInterval"))
+    CreateAssociationBatchRequestEntry.add_member(:calendar_names, Shapes::ShapeRef.new(shape: CalendarNameOrARNList, location_name: "CalendarNames"))
     CreateAssociationBatchRequestEntry.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations"))
     CreateAssociationBatchRequestEntry.struct_class = Types::CreateAssociationBatchRequestEntry
 
@@ -1633,6 +1636,7 @@ module Aws::SSM
     CreateAssociationRequest.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
     CreateAssociationRequest.add_member(:sync_compliance, Shapes::ShapeRef.new(shape: AssociationSyncCompliance, location_name: "SyncCompliance"))
     CreateAssociationRequest.add_member(:apply_only_at_cron_interval, Shapes::ShapeRef.new(shape: ApplyOnlyAtCronInterval, location_name: "ApplyOnlyAtCronInterval"))
+    CreateAssociationRequest.add_member(:calendar_names, Shapes::ShapeRef.new(shape: CalendarNameOrARNList, location_name: "CalendarNames"))
     CreateAssociationRequest.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations"))
     CreateAssociationRequest.struct_class = Types::CreateAssociationRequest
 
@@ -4230,6 +4234,7 @@ module Aws::SSM
     UpdateAssociationRequest.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
     UpdateAssociationRequest.add_member(:sync_compliance, Shapes::ShapeRef.new(shape: AssociationSyncCompliance, location_name: "SyncCompliance"))
     UpdateAssociationRequest.add_member(:apply_only_at_cron_interval, Shapes::ShapeRef.new(shape: ApplyOnlyAtCronInterval, location_name: "ApplyOnlyAtCronInterval"))
+    UpdateAssociationRequest.add_member(:calendar_names, Shapes::ShapeRef.new(shape: CalendarNameOrARNList, location_name: "CalendarNames"))
     UpdateAssociationRequest.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations"))
     UpdateAssociationRequest.struct_class = Types::UpdateAssociationRequest
 
