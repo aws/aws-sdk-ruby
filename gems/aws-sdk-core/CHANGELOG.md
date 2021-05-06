@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix an issue where Rest JSON services do not have a `Content-Type` header.
+
 3.114.0 (2021-04-13)
 ------------------
 
