@@ -576,6 +576,9 @@ module Aws::Connect
     #         source_application_url: "URI", # required
     #         source_application_name: "SourceApplicationName", # required
     #         source_type: "SALESFORCE", # required, accepts SALESFORCE, ZENDESK
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] instance_id
@@ -602,6 +605,10 @@ module Aws::Connect
     #   The type of the data source.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateIntegrationAssociationRequest AWS API Documentation
     #
     class CreateIntegrationAssociationRequest < Struct.new(
@@ -610,7 +617,8 @@ module Aws::Connect
       :integration_arn,
       :source_application_url,
       :source_application_name,
-      :source_type)
+      :source_type,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -891,6 +899,9 @@ module Aws::Connect
     #         instance_id: "InstanceId", # required
     #         integration_association_id: "IntegrationAssociationId", # required
     #         use_case_type: "RULES_EVALUATION", # required, accepts RULES_EVALUATION
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] instance_id
@@ -907,12 +918,17 @@ module Aws::Connect
     #   type.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUseCaseRequest AWS API Documentation
     #
     class CreateUseCaseRequest < Struct.new(
       :instance_id,
       :integration_association_id,
-      :use_case_type)
+      :use_case_type,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2398,6 +2414,11 @@ module Aws::Connect
     #   with the queues or channels included in the filter. You can include
     #   both queue IDs and queue ARNs in the same request. VOICE, CHAT, and
     #   TASK channels are supported.
+    #
+    #   <note markdown="1"> To filter by `Queues`, enter the queue ID/ARN, not the name of the
+    #   queue.
+    #
+    #    </note>
     #   @return [Types::Filters]
     #
     # @!attribute [rw] groupings
@@ -2405,8 +2426,6 @@ module Aws::Connect
     #   results are grouped by queue, the metrics returned are grouped by
     #   queue. The values returned apply to the metrics for each queue
     #   rather than aggregated for all queues.
-    #
-    #   The only supported grouping is `QUEUE`.
     #
     #   If no grouping is specified, a summary of metrics for all queues is
     #   returned.
@@ -2564,13 +2583,15 @@ module Aws::Connect
     #
     #   SERVICE\_LEVEL
     #
-    #   : Unit: PERCENT
+    #   : You can include up to 20 SERVICE\_LEVEL metrics in a request.
+    #
+    #     Unit: PERCENT
     #
     #     Statistic: AVG
     #
-    #     Threshold: Only "Less than" comparisons are supported, with the
-    #     following service level thresholds: 15, 20, 25, 30, 45, 60, 90,
-    #     120, 180, 240, 300, 600
+    #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
+    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
+    #     `LT` (for "Less than").
     #
     #
     #
@@ -4654,6 +4675,12 @@ module Aws::Connect
     # @!attribute [rw] concurrency
     #   The number of contacts an agent can have on a channel
     #   simultaneously.
+    #
+    #   Valid Range for `VOICE`\: Minimum value of 1. Maximum value of 1.
+    #
+    #   Valid Range for `CHAT`\: Minimum value of 1. Maximum value of 5.
+    #
+    #   Valid Range for `TASK`\: Minimum value of 1. Maximum value of 10.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/MediaConcurrency AWS API Documentation

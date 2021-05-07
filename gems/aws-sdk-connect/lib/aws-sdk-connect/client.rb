@@ -672,6 +672,13 @@ module Aws::Connect
     # Service (Amazon S3) or Amazon Kinesis. It also does not allow for any
     # configurations on features, such as Contact Lens for Amazon Connect.
     #
+    # Amazon Connect enforces a limit on the total number of instances that
+    # you can create or delete in 30 days. If you exceed this limit, you
+    # will get an error message indicating there has been an excessive
+    # number of attempts at creating or deleting instances. You must wait 30
+    # days before you can restart creating and deleting instances in your
+    # account.
+    #
     # @option params [String] :client_token
     #   The idempotency token.
     #
@@ -720,9 +727,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Create an AppIntegration association with an Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
@@ -743,6 +747,9 @@ module Aws::Connect
     # @option params [required, String] :source_type
     #   The type of the data source.
     #
+    # @option params [Hash<String,String>] :tags
+    #   One or more tags.
+    #
     # @return [Types::CreateIntegrationAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIntegrationAssociationResponse#integration_association_id #integration_association_id} => String
@@ -757,6 +764,9 @@ module Aws::Connect
     #     source_application_url: "URI", # required
     #     source_application_name: "SourceApplicationName", # required
     #     source_type: "SALESFORCE", # required, accepts SALESFORCE, ZENDESK
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -978,9 +988,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Creates a use case for an AppIntegration association.
     #
     # @option params [required, String] :instance_id
@@ -994,6 +1001,9 @@ module Aws::Connect
     #   Each AppIntegration association can have only one of each use case
     #   type.
     #
+    # @option params [Hash<String,String>] :tags
+    #   One or more tags.
+    #
     # @return [Types::CreateUseCaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUseCaseResponse#use_case_id #use_case_id} => String
@@ -1005,6 +1015,9 @@ module Aws::Connect
     #     instance_id: "InstanceId", # required
     #     integration_association_id: "IntegrationAssociationId", # required
     #     use_case_type: "RULES_EVALUATION", # required, accepts RULES_EVALUATION
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1166,6 +1179,13 @@ module Aws::Connect
     #
     # Deletes the Amazon Connect instance.
     #
+    # Amazon Connect enforces a limit on the total number of instances that
+    # you can create or delete in 30 days. If you exceed this limit, you
+    # will get an error message indicating there has been an excessive
+    # number of attempts at creating or deleting instances. You must wait 30
+    # days before you can restart creating and deleting instances in your
+    # account.
+    #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
     #
@@ -1186,9 +1206,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Deletes an AppIntegration association from an Amazon Connect instance.
     # The association must not have any use cases associated with it.
     #
@@ -1245,9 +1262,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Deletes a use case from an AppIntegration association.
     #
     # @option params [required, String] :instance_id
@@ -2306,6 +2320,15 @@ module Aws::Connect
 
     # Retrieves a token for federation.
     #
+    # <note markdown="1"> This API doesn't support root users. If you try to invoke
+    # GetFederationToken with root credentials, an error message similar to
+    # the following one appears:
+    #
+    #  `Provided identity: Principal: .... User: .... cannot be used for
+    # federation with Amazon Connect`
+    #
+    #  </note>
+    #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
     #
@@ -2373,13 +2396,16 @@ module Aws::Connect
     #   both queue IDs and queue ARNs in the same request. VOICE, CHAT, and
     #   TASK channels are supported.
     #
+    #   <note markdown="1"> To filter by `Queues`, enter the queue ID/ARN, not the name of the
+    #   queue.
+    #
+    #    </note>
+    #
     # @option params [Array<String>] :groupings
     #   The grouping applied to the metrics returned. For example, when
     #   results are grouped by queue, the metrics returned are grouped by
     #   queue. The values returned apply to the metrics for each queue rather
     #   than aggregated for all queues.
-    #
-    #   The only supported grouping is `QUEUE`.
     #
     #   If no grouping is specified, a summary of metrics for all queues is
     #   returned.
@@ -2536,13 +2562,15 @@ module Aws::Connect
     #
     #   SERVICE\_LEVEL
     #
-    #   : Unit: PERCENT
+    #   : You can include up to 20 SERVICE\_LEVEL metrics in a request.
+    #
+    #     Unit: PERCENT
     #
     #     Statistic: AVG
     #
-    #     Threshold: Only "Less than" comparisons are supported, with the
-    #     following service level thresholds: 15, 20, 25, 30, 45, 60, 90, 120,
-    #     180, 240, 300, 600
+    #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
+    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
+    #     `LT` (for "Less than").
     #
     #
     #
@@ -2938,9 +2966,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Provides summary information about the AppIntegration associations for
     # the specified Amazon Connect instance.
     #
@@ -3252,6 +3277,11 @@ module Aws::Connect
 
     # Provides information about the queues for the specified Amazon Connect
     # instance.
+    #
+    # If you do not specify a `QueueTypes` parameter, both standard and
+    # agent queues are returned. This might cause an unexpected truncation
+    # of results if you have more than 1000 agents and you limit the number
+    # of results of the API call in code.
     #
     # For more information about queues, see [Queues: Standard and Agent][1]
     # in the *Amazon Connect Administrator Guide*.
@@ -3610,9 +3640,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Lists the use cases.
     #
     # @option params [required, String] :instance_id
@@ -3809,7 +3836,7 @@ module Aws::Connect
     # A 429 error occurs in two situations:
     #
     # * API rate limit is exceeded. API TPS throttling returns a
-    #   `TooManyRequests` exception from the API Gateway.
+    #   `TooManyRequests` exception.
     #
     # * The [quota for concurrent active chats][2] is exceeded. Active chat
     #   throttling returns a `LimitExceededException`.
@@ -4300,21 +4327,23 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Creates or updates the contact attributes associated with the
+    # Creates or updates user-defined contact attributes associated with the
     # specified contact.
     #
-    # You can add or update attributes for both ongoing and completed
-    # contacts. For example, while the call is active, you can update the
-    # customer's name or the reason the customer called. You can add notes
-    # about steps that the agent took during the call that display to the
-    # next agent that takes the call. You can also update attributes for a
-    # contact using data from your CRM application and save the data with
-    # the contact in Amazon Connect. You could also flag calls for
+    # You can create or update user-defined attributes for both ongoing and
+    # completed contacts. For example, while the call is active, you can
+    # update the customer's name or the reason the customer called. You can
+    # add notes about steps that the agent took during the call that display
+    # to the next agent that takes the call. You can also update attributes
+    # for a contact using data from your CRM application and save the data
+    # with the contact in Amazon Connect. You could also flag calls for
     # additional analysis, such as legal review or to identify abusive
     # callers.
     #
     # Contact attributes are available in Amazon Connect for 24 months, and
-    # are then deleted.
+    # are then deleted. For information about CTR retention and the maximum
+    # size of the CTR attributes section, see [Feature specifications][1] in
+    # the *Amazon Connect Administrator Guide*.
     #
     # **Important:** You cannot use the operation to update attributes for
     # contacts that occurred prior to the release of the API, which was
@@ -4324,6 +4353,10 @@ module Aws::Connect
     # API, a 400 error is returned. This applies also to queued callbacks
     # that were initiated prior to the release of the API but are still
     # active in your instance.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits
     #
     # @option params [required, String] :initial_contact_id
     #   The identifier of the contact. This is the identifier of the contact
@@ -5207,7 +5240,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

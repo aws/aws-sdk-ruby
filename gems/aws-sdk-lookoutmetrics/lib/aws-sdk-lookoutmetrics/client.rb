@@ -675,6 +675,11 @@ module Aws::LookoutMetrics
 
     # Describes an alert.
     #
+    # Amazon Lookout for Metrics API actions are eventually consistent. If
+    # you do a read operation on a resource immediately after creating or
+    # modifying it, use retries to allow time for the write operation to
+    # complete.
+    #
     # @option params [required, String] :alert_arn
     #   The ARN of the alert to describe.
     #
@@ -764,6 +769,11 @@ module Aws::LookoutMetrics
 
     # Describes a detector.
     #
+    # Amazon Lookout for Metrics API actions are eventually consistent. If
+    # you do a read operation on a resource immediately after creating or
+    # modifying it, use retries to allow time for the write operation to
+    # complete.
+    #
     # @option params [required, String] :anomaly_detector_arn
     #   The ARN of the detector to describe.
     #
@@ -807,6 +817,11 @@ module Aws::LookoutMetrics
     end
 
     # Describes a dataset.
+    #
+    # Amazon Lookout for Metrics API actions are eventually consistent. If
+    # you do a read operation on a resource immediately after creating or
+    # modifying it, use retries to allow time for the write operation to
+    # complete.
     #
     # @option params [required, String] :metric_set_arn
     #   The ARN of the dataset.
@@ -1048,6 +1063,11 @@ module Aws::LookoutMetrics
 
     # Lists the alerts attached to a detector.
     #
+    # Amazon Lookout for Metrics API actions are eventually consistent. If
+    # you do a read operation on a resource immediately after creating or
+    # modifying it, use retries to allow time for the write operation to
+    # complete.
+    #
     # @option params [String] :anomaly_detector_arn
     #   The ARN of the alert's detector.
     #
@@ -1099,6 +1119,11 @@ module Aws::LookoutMetrics
     end
 
     # Lists the detectors in the current AWS Region.
+    #
+    # Amazon Lookout for Metrics API actions are eventually consistent. If
+    # you do a read operation on a resource immediately after creating or
+    # modifying it, use retries to allow time for the write operation to
+    # complete.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
@@ -1263,6 +1288,11 @@ module Aws::LookoutMetrics
     end
 
     # Lists the datasets in the current AWS Region.
+    #
+    # Amazon Lookout for Metrics API actions are eventually consistent. If
+    # you do a read operation on a resource immediately after creating or
+    # modifying it, use retries to allow time for the write operation to
+    # complete.
     #
     # @option params [String] :anomaly_detector_arn
     #   The ARN of the anomaly detector containing the metrics sets to list.
@@ -1614,7 +1644,7 @@ module Aws::LookoutMetrics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutmetrics'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

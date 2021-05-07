@@ -453,7 +453,7 @@ module Aws::LookoutMetrics
     #   @return [String]
     #
     # @!attribute [rw] flow_name
-    #   The name of the flow.
+    #   name of the flow.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/AppFlowConfig AWS API Documentation
@@ -2333,7 +2333,7 @@ module Aws::LookoutMetrics
     #       }
     #
     # @!attribute [rw] role_arn
-    #   THe ARN of the IAM role that has access to the target SNS topic.
+    #   The ARN of the IAM role that has access to the target SNS topic.
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arn

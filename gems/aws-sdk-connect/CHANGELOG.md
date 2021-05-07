@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2021-05-07)
+------------------
+
+* Feature - Adds tagging support for Connect APIs CreateIntegrationAssociation and CreateUseCase.
+
 1.43.0 (2021-04-28)
 ------------------
 

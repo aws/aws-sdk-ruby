@@ -28,7 +28,7 @@ require_relative 'aws-sdk-lakeformation/customizations'
 # structure.
 #
 #     lake_formation = Aws::LakeFormation::Client.new
-#     resp = lake_formation.batch_grant_permissions(params)
+#     resp = lake_formation.add_lf_tags_to_resource(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-lakeformation/customizations'
 # @!group service
 module Aws::LakeFormation
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.14.0'
 
 end

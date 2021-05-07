@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2021-05-07)
+------------------
+
+* Feature - This release adds Tag Based Access Control to AWS Lake Formation service
+
 1.13.0 (2021-03-10)
 ------------------
 
