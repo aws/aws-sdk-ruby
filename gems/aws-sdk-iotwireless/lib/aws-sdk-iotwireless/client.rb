@@ -780,6 +780,11 @@ module Aws::IoTWireless
     #     lo_ra_wan: { # required
     #       gateway_eui: "GatewayEui",
     #       rf_region: "RfRegion",
+    #       join_eui_filters: [
+    #         ["JoinEui"],
+    #       ],
+    #       net_id_filters: ["NetId"],
+    #       sub_bands: [1],
     #     },
     #     tags: [
     #       {
@@ -1484,6 +1489,13 @@ module Aws::IoTWireless
     #   resp.description #=> String
     #   resp.lo_ra_wan.gateway_eui #=> String
     #   resp.lo_ra_wan.rf_region #=> String
+    #   resp.lo_ra_wan.join_eui_filters #=> Array
+    #   resp.lo_ra_wan.join_eui_filters[0] #=> Array
+    #   resp.lo_ra_wan.join_eui_filters[0][0] #=> String
+    #   resp.lo_ra_wan.net_id_filters #=> Array
+    #   resp.lo_ra_wan.net_id_filters[0] #=> String
+    #   resp.lo_ra_wan.sub_bands #=> Array
+    #   resp.lo_ra_wan.sub_bands[0] #=> Integer
     #   resp.arn #=> String
     #   resp.thing_name #=> String
     #   resp.thing_arn #=> String
@@ -1993,6 +2005,13 @@ module Aws::IoTWireless
     #   resp.wireless_gateway_list[0].description #=> String
     #   resp.wireless_gateway_list[0].lo_ra_wan.gateway_eui #=> String
     #   resp.wireless_gateway_list[0].lo_ra_wan.rf_region #=> String
+    #   resp.wireless_gateway_list[0].lo_ra_wan.join_eui_filters #=> Array
+    #   resp.wireless_gateway_list[0].lo_ra_wan.join_eui_filters[0] #=> Array
+    #   resp.wireless_gateway_list[0].lo_ra_wan.join_eui_filters[0][0] #=> String
+    #   resp.wireless_gateway_list[0].lo_ra_wan.net_id_filters #=> Array
+    #   resp.wireless_gateway_list[0].lo_ra_wan.net_id_filters[0] #=> String
+    #   resp.wireless_gateway_list[0].lo_ra_wan.sub_bands #=> Array
+    #   resp.wireless_gateway_list[0].lo_ra_wan.sub_bands[0] #=> Integer
     #   resp.wireless_gateway_list[0].last_uplink_received_at #=> String
     #
     # @overload list_wireless_gateways(params = {})
@@ -2246,6 +2265,13 @@ module Aws::IoTWireless
     # @option params [String] :description
     #   A new description of the resource.
     #
+    # @option params [Array<Array>] :join_eui_filters
+    #   A list of JoinEuiRange used by LoRa gateways to filter LoRa frames.
+    #
+    # @option params [Array<String>] :net_id_filters
+    #   A list of NetId values that are used by LoRa gateways to filter the
+    #   uplink frames.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2254,6 +2280,10 @@ module Aws::IoTWireless
     #     id: "WirelessGatewayId", # required
     #     name: "WirelessGatewayName",
     #     description: "Description",
+    #     join_eui_filters: [
+    #       ["JoinEui"],
+    #     ],
+    #     net_id_filters: ["NetId"],
     #   })
     #
     # @overload update_wireless_gateway(params = {})
@@ -2276,7 +2306,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

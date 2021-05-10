@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2021-05-10)
+------------------
+
+* Feature - Add three new optional fields to support filtering and configurable sub-band in WirelessGateway APIs. The filtering is for all the RF region supported. The sub-band configuration is only applicable to LoRa gateways of US915 or AU915 RF region.
+
 1.8.0 (2021-04-26)
 ------------------
 

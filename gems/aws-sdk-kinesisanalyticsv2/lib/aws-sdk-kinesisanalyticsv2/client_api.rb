@@ -47,6 +47,8 @@ module Aws::KinesisAnalyticsV2
     ApplicationSummaries = Shapes::ListShape.new(name: 'ApplicationSummaries')
     ApplicationSummary = Shapes::StructureShape.new(name: 'ApplicationSummary')
     ApplicationVersionId = Shapes::IntegerShape.new(name: 'ApplicationVersionId')
+    ApplicationVersionSummaries = Shapes::ListShape.new(name: 'ApplicationVersionSummaries')
+    ApplicationVersionSummary = Shapes::StructureShape.new(name: 'ApplicationVersionSummary')
     AuthorizedUrl = Shapes::StringShape.new(name: 'AuthorizedUrl')
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
     BucketARN = Shapes::StringShape.new(name: 'BucketARN')
@@ -95,6 +97,8 @@ module Aws::KinesisAnalyticsV2
     DescribeApplicationResponse = Shapes::StructureShape.new(name: 'DescribeApplicationResponse')
     DescribeApplicationSnapshotRequest = Shapes::StructureShape.new(name: 'DescribeApplicationSnapshotRequest')
     DescribeApplicationSnapshotResponse = Shapes::StructureShape.new(name: 'DescribeApplicationSnapshotResponse')
+    DescribeApplicationVersionRequest = Shapes::StructureShape.new(name: 'DescribeApplicationVersionRequest')
+    DescribeApplicationVersionResponse = Shapes::StructureShape.new(name: 'DescribeApplicationVersionResponse')
     DestinationSchema = Shapes::StructureShape.new(name: 'DestinationSchema')
     DiscoverInputSchemaRequest = Shapes::StructureShape.new(name: 'DiscoverInputSchemaRequest')
     DiscoverInputSchemaResponse = Shapes::StructureShape.new(name: 'DiscoverInputSchemaResponse')
@@ -153,6 +157,9 @@ module Aws::KinesisAnalyticsV2
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListApplicationSnapshotsRequest = Shapes::StructureShape.new(name: 'ListApplicationSnapshotsRequest')
     ListApplicationSnapshotsResponse = Shapes::StructureShape.new(name: 'ListApplicationSnapshotsResponse')
+    ListApplicationVersionsInputLimit = Shapes::IntegerShape.new(name: 'ListApplicationVersionsInputLimit')
+    ListApplicationVersionsRequest = Shapes::StructureShape.new(name: 'ListApplicationVersionsRequest')
+    ListApplicationVersionsResponse = Shapes::StructureShape.new(name: 'ListApplicationVersionsResponse')
     ListApplicationsInputLimit = Shapes::IntegerShape.new(name: 'ListApplicationsInputLimit')
     ListApplicationsRequest = Shapes::StructureShape.new(name: 'ListApplicationsRequest')
     ListApplicationsResponse = Shapes::StructureShape.new(name: 'ListApplicationsResponse')
@@ -391,6 +398,7 @@ module Aws::KinesisAnalyticsV2
     ApplicationDetail.add_member(:application_version_updated_from, Shapes::ShapeRef.new(shape: ApplicationVersionId, location_name: "ApplicationVersionUpdatedFrom"))
     ApplicationDetail.add_member(:application_version_rolled_back_from, Shapes::ShapeRef.new(shape: ApplicationVersionId, location_name: "ApplicationVersionRolledBackFrom"))
     ApplicationDetail.add_member(:conditional_token, Shapes::ShapeRef.new(shape: ConditionalToken, location_name: "ConditionalToken"))
+    ApplicationDetail.add_member(:application_version_rolled_back_to, Shapes::ShapeRef.new(shape: ApplicationVersionId, location_name: "ApplicationVersionRolledBackTo"))
     ApplicationDetail.struct_class = Types::ApplicationDetail
 
     ApplicationMaintenanceConfigurationDescription.add_member(:application_maintenance_window_start_time, Shapes::ShapeRef.new(shape: ApplicationMaintenanceWindowStartTime, required: true, location_name: "ApplicationMaintenanceWindowStartTime"))
@@ -421,6 +429,12 @@ module Aws::KinesisAnalyticsV2
     ApplicationSummary.add_member(:application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "ApplicationVersionId"))
     ApplicationSummary.add_member(:runtime_environment, Shapes::ShapeRef.new(shape: RuntimeEnvironment, required: true, location_name: "RuntimeEnvironment"))
     ApplicationSummary.struct_class = Types::ApplicationSummary
+
+    ApplicationVersionSummaries.member = Shapes::ShapeRef.new(shape: ApplicationVersionSummary)
+
+    ApplicationVersionSummary.add_member(:application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "ApplicationVersionId"))
+    ApplicationVersionSummary.add_member(:application_status, Shapes::ShapeRef.new(shape: ApplicationStatus, required: true, location_name: "ApplicationStatus"))
+    ApplicationVersionSummary.struct_class = Types::ApplicationVersionSummary
 
     CSVMappingParameters.add_member(:record_row_delimiter, Shapes::ShapeRef.new(shape: RecordRowDelimiter, required: true, location_name: "RecordRowDelimiter"))
     CSVMappingParameters.add_member(:record_column_delimiter, Shapes::ShapeRef.new(shape: RecordColumnDelimiter, required: true, location_name: "RecordColumnDelimiter"))
@@ -584,6 +598,13 @@ module Aws::KinesisAnalyticsV2
 
     DescribeApplicationSnapshotResponse.add_member(:snapshot_details, Shapes::ShapeRef.new(shape: SnapshotDetails, required: true, location_name: "SnapshotDetails"))
     DescribeApplicationSnapshotResponse.struct_class = Types::DescribeApplicationSnapshotResponse
+
+    DescribeApplicationVersionRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
+    DescribeApplicationVersionRequest.add_member(:application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "ApplicationVersionId"))
+    DescribeApplicationVersionRequest.struct_class = Types::DescribeApplicationVersionRequest
+
+    DescribeApplicationVersionResponse.add_member(:application_version_detail, Shapes::ShapeRef.new(shape: ApplicationDetail, location_name: "ApplicationVersionDetail"))
+    DescribeApplicationVersionResponse.struct_class = Types::DescribeApplicationVersionResponse
 
     DestinationSchema.add_member(:record_format_type, Shapes::ShapeRef.new(shape: RecordFormatType, required: true, location_name: "RecordFormatType"))
     DestinationSchema.struct_class = Types::DestinationSchema
@@ -771,6 +792,15 @@ module Aws::KinesisAnalyticsV2
     ListApplicationSnapshotsResponse.add_member(:snapshot_summaries, Shapes::ShapeRef.new(shape: SnapshotSummaries, location_name: "SnapshotSummaries"))
     ListApplicationSnapshotsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListApplicationSnapshotsResponse.struct_class = Types::ListApplicationSnapshotsResponse
+
+    ListApplicationVersionsRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
+    ListApplicationVersionsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: ListApplicationVersionsInputLimit, location_name: "Limit"))
+    ListApplicationVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListApplicationVersionsRequest.struct_class = Types::ListApplicationVersionsRequest
+
+    ListApplicationVersionsResponse.add_member(:application_version_summaries, Shapes::ShapeRef.new(shape: ApplicationVersionSummaries, location_name: "ApplicationVersionSummaries"))
+    ListApplicationVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListApplicationVersionsResponse.struct_class = Types::ListApplicationVersionsResponse
 
     ListApplicationsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: ListApplicationsInputLimit, location_name: "Limit"))
     ListApplicationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "NextToken"))
@@ -1346,6 +1376,17 @@ module Aws::KinesisAnalyticsV2
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
+      api.add_operation(:describe_application_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeApplicationVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeApplicationVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeApplicationVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
       api.add_operation(:discover_input_schema, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DiscoverInputSchema"
         o.http_method = "POST"
@@ -1366,6 +1407,17 @@ module Aws::KinesisAnalyticsV2
         o.input = Shapes::ShapeRef.new(shape: ListApplicationSnapshotsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListApplicationSnapshotsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
+      api.add_operation(:list_application_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListApplicationVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListApplicationVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListApplicationVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 

@@ -461,7 +461,8 @@ module Aws::ECS
     # @option params [String] :cluster_name
     #   The name of your cluster. If you do not specify a name for your
     #   cluster, you create a cluster named `default`. Up to 255 letters
-    #   (uppercase and lowercase), numbers, and hyphens are allowed.
+    #   (uppercase and lowercase), numbers, underscores, and hyphens are
+    #   allowed.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the cluster to help you categorize and
@@ -778,9 +779,9 @@ module Aws::ECS
     #
     # @option params [required, String] :service_name
     #   The name of your service. Up to 255 letters (uppercase and lowercase),
-    #   numbers, and hyphens are allowed. Service names must be unique within
-    #   a cluster, but you can have similarly named services in multiple
-    #   clusters within a Region or across multiple Regions.
+    #   numbers, underscores, and hyphens are allowed. Service names must be
+    #   unique within a cluster, but you can have similarly named services in
+    #   multiple clusters within a Region or across multiple Regions.
     #
     # @option params [String] :task_definition
     #   The `family` and `revision` (`family:revision`) or full ARN of the
@@ -5361,7 +5362,7 @@ module Aws::ECS
     #   You must specify a `family` for a task definition, which allows you to
     #   track multiple versions of the same task definition. The `family` is
     #   used as a name for your task definition. Up to 255 letters (uppercase
-    #   and lowercase), numbers, and hyphens are allowed.
+    #   and lowercase), numbers, underscores, and hyphens are allowed.
     #
     # @option params [String] :task_role_arn
     #   The short name or full Amazon Resource Name (ARN) of the IAM role that
@@ -8490,7 +8491,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

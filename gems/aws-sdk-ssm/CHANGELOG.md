@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2021-05-10)
+------------------
+
+* Feature - This release adds new APIs to associate, disassociate and list related items in SSM OpsCenter; and this release adds DisplayName as a version-level attribute for SSM Documents and introduces two new document types: ProblemAnalysis, ProblemAnalysisTemplate.
+
 1.109.0 (2021-05-06)
 ------------------
 

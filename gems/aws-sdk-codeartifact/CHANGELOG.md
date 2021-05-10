@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2021-05-10)
+------------------
+
+* Feature - Documentation updates for CodeArtifact
+
 1.9.0 (2021-03-22)
 ------------------
 

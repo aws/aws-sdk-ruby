@@ -149,6 +149,8 @@ module Aws::EKS
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Taint = Shapes::StructureShape.new(name: 'Taint')
+    TaintEffect = Shapes::StringShape.new(name: 'TaintEffect')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UnsupportedAvailabilityZoneException = Shapes::StructureShape.new(name: 'UnsupportedAvailabilityZoneException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -169,6 +171,7 @@ module Aws::EKS
     UpdateParamType = Shapes::StringShape.new(name: 'UpdateParamType')
     UpdateParams = Shapes::ListShape.new(name: 'UpdateParams')
     UpdateStatus = Shapes::StringShape.new(name: 'UpdateStatus')
+    UpdateTaintsPayload = Shapes::StructureShape.new(name: 'UpdateTaintsPayload')
     UpdateType = Shapes::StringShape.new(name: 'UpdateType')
     VpcConfigRequest = Shapes::StructureShape.new(name: 'VpcConfigRequest')
     VpcConfigResponse = Shapes::StructureShape.new(name: 'VpcConfigResponse')
@@ -181,6 +184,9 @@ module Aws::EKS
     requiredClaimsKey = Shapes::StringShape.new(name: 'requiredClaimsKey')
     requiredClaimsMap = Shapes::MapShape.new(name: 'requiredClaimsMap')
     requiredClaimsValue = Shapes::StringShape.new(name: 'requiredClaimsValue')
+    taintKey = Shapes::StringShape.new(name: 'taintKey')
+    taintValue = Shapes::StringShape.new(name: 'taintValue')
+    taintsList = Shapes::ListShape.new(name: 'taintsList')
 
     Addon.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, location_name: "addonName"))
     Addon.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterName, location_name: "clusterName"))
@@ -326,6 +332,7 @@ module Aws::EKS
     CreateNodegroupRequest.add_member(:remote_access, Shapes::ShapeRef.new(shape: RemoteAccessConfig, location_name: "remoteAccess"))
     CreateNodegroupRequest.add_member(:node_role, Shapes::ShapeRef.new(shape: String, required: true, location_name: "nodeRole"))
     CreateNodegroupRequest.add_member(:labels, Shapes::ShapeRef.new(shape: labelsMap, location_name: "labels"))
+    CreateNodegroupRequest.add_member(:taints, Shapes::ShapeRef.new(shape: taintsList, location_name: "taints"))
     CreateNodegroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateNodegroupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateNodegroupRequest.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "launchTemplate"))
@@ -589,6 +596,7 @@ module Aws::EKS
     Nodegroup.add_member(:ami_type, Shapes::ShapeRef.new(shape: AMITypes, location_name: "amiType"))
     Nodegroup.add_member(:node_role, Shapes::ShapeRef.new(shape: String, location_name: "nodeRole"))
     Nodegroup.add_member(:labels, Shapes::ShapeRef.new(shape: labelsMap, location_name: "labels"))
+    Nodegroup.add_member(:taints, Shapes::ShapeRef.new(shape: taintsList, location_name: "taints"))
     Nodegroup.add_member(:resources, Shapes::ShapeRef.new(shape: NodegroupResources, location_name: "resources"))
     Nodegroup.add_member(:disk_size, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "diskSize"))
     Nodegroup.add_member(:health, Shapes::ShapeRef.new(shape: NodegroupHealth, location_name: "health"))
@@ -685,6 +693,11 @@ module Aws::EKS
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    Taint.add_member(:key, Shapes::ShapeRef.new(shape: taintKey, location_name: "key"))
+    Taint.add_member(:value, Shapes::ShapeRef.new(shape: taintValue, location_name: "value"))
+    Taint.add_member(:effect, Shapes::ShapeRef.new(shape: TaintEffect, location_name: "effect"))
+    Taint.struct_class = Types::Taint
+
     UnsupportedAvailabilityZoneException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     UnsupportedAvailabilityZoneException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
     UnsupportedAvailabilityZoneException.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
@@ -740,6 +753,7 @@ module Aws::EKS
     UpdateNodegroupConfigRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     UpdateNodegroupConfigRequest.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "nodegroupName"))
     UpdateNodegroupConfigRequest.add_member(:labels, Shapes::ShapeRef.new(shape: UpdateLabelsPayload, location_name: "labels"))
+    UpdateNodegroupConfigRequest.add_member(:taints, Shapes::ShapeRef.new(shape: UpdateTaintsPayload, location_name: "taints"))
     UpdateNodegroupConfigRequest.add_member(:scaling_config, Shapes::ShapeRef.new(shape: NodegroupScalingConfig, location_name: "scalingConfig"))
     UpdateNodegroupConfigRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     UpdateNodegroupConfigRequest.struct_class = Types::UpdateNodegroupConfigRequest
@@ -765,6 +779,10 @@ module Aws::EKS
 
     UpdateParams.member = Shapes::ShapeRef.new(shape: UpdateParam)
 
+    UpdateTaintsPayload.add_member(:add_or_update_taints, Shapes::ShapeRef.new(shape: taintsList, location_name: "addOrUpdateTaints"))
+    UpdateTaintsPayload.add_member(:remove_taints, Shapes::ShapeRef.new(shape: taintsList, location_name: "removeTaints"))
+    UpdateTaintsPayload.struct_class = Types::UpdateTaintsPayload
+
     VpcConfigRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "subnetIds"))
     VpcConfigRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "securityGroupIds"))
     VpcConfigRequest.add_member(:endpoint_public_access, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "endpointPublicAccess"))
@@ -788,6 +806,8 @@ module Aws::EKS
 
     requiredClaimsMap.key = Shapes::ShapeRef.new(shape: requiredClaimsKey)
     requiredClaimsMap.value = Shapes::ShapeRef.new(shape: requiredClaimsValue)
+
+    taintsList.member = Shapes::ShapeRef.new(shape: Taint)
 
 
     # @api private

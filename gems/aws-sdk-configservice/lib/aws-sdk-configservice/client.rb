@@ -977,6 +977,8 @@ module Aws::ConfigService
     #   * {Types::DescribeAggregateComplianceByConfigRulesResponse#aggregate_compliance_by_config_rules #aggregate_compliance_by_config_rules} => Array&lt;Types::AggregateComplianceByConfigRule&gt;
     #   * {Types::DescribeAggregateComplianceByConfigRulesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_aggregate_compliance_by_config_rules({
@@ -1043,6 +1045,8 @@ module Aws::ConfigService
     #   * {Types::DescribeAggregateComplianceByConformancePacksResponse#aggregate_compliance_by_conformance_packs #aggregate_compliance_by_conformance_packs} => Array&lt;Types::AggregateComplianceByConformancePack&gt;
     #   * {Types::DescribeAggregateComplianceByConformancePacksResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_aggregate_compliance_by_conformance_packs({
@@ -1093,6 +1097,8 @@ module Aws::ConfigService
     #
     #   * {Types::DescribeAggregationAuthorizationsResponse#aggregation_authorizations #aggregation_authorizations} => Array&lt;Types::AggregationAuthorization&gt;
     #   * {Types::DescribeAggregationAuthorizationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1162,6 +1168,8 @@ module Aws::ConfigService
     #
     #   * {Types::DescribeComplianceByConfigRuleResponse#compliance_by_config_rules #compliance_by_config_rules} => Array&lt;Types::ComplianceByConfigRule&gt;
     #   * {Types::DescribeComplianceByConfigRuleResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1247,6 +1255,8 @@ module Aws::ConfigService
     #   * {Types::DescribeComplianceByResourceResponse#compliance_by_resources #compliance_by_resources} => Array&lt;Types::ComplianceByResource&gt;
     #   * {Types::DescribeComplianceByResourceResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_compliance_by_resource({
@@ -1308,6 +1318,8 @@ module Aws::ConfigService
     #   * {Types::DescribeConfigRuleEvaluationStatusResponse#config_rules_evaluation_status #config_rules_evaluation_status} => Array&lt;Types::ConfigRuleEvaluationStatus&gt;
     #   * {Types::DescribeConfigRuleEvaluationStatusResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_config_rule_evaluation_status({
@@ -1357,6 +1369,8 @@ module Aws::ConfigService
     #
     #   * {Types::DescribeConfigRulesResponse#config_rules #config_rules} => Array&lt;Types::ConfigRule&gt;
     #   * {Types::DescribeConfigRulesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1429,6 +1443,8 @@ module Aws::ConfigService
     #   * {Types::DescribeConfigurationAggregatorSourcesStatusResponse#aggregated_source_status_list #aggregated_source_status_list} => Array&lt;Types::AggregatedSourceStatus&gt;
     #   * {Types::DescribeConfigurationAggregatorSourcesStatusResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_configuration_aggregator_sources_status({
@@ -1479,6 +1495,8 @@ module Aws::ConfigService
     #
     #   * {Types::DescribeConfigurationAggregatorsResponse#configuration_aggregators #configuration_aggregators} => Array&lt;Types::ConfigurationAggregator&gt;
     #   * {Types::DescribeConfigurationAggregatorsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1629,6 +1647,8 @@ module Aws::ConfigService
     #   * {Types::DescribeConformancePackComplianceResponse#conformance_pack_rule_compliance_list #conformance_pack_rule_compliance_list} => Array&lt;Types::ConformancePackRuleCompliance&gt;
     #   * {Types::DescribeConformancePackComplianceResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_conformance_pack_compliance({
@@ -1681,6 +1701,8 @@ module Aws::ConfigService
     #   * {Types::DescribeConformancePackStatusResponse#conformance_pack_status_details #conformance_pack_status_details} => Array&lt;Types::ConformancePackStatusDetail&gt;
     #   * {Types::DescribeConformancePackStatusResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_conformance_pack_status({
@@ -1729,6 +1751,8 @@ module Aws::ConfigService
     #
     #   * {Types::DescribeConformancePacksResponse#conformance_pack_details #conformance_pack_details} => Array&lt;Types::ConformancePackDetail&gt;
     #   * {Types::DescribeConformancePacksResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1888,6 +1912,8 @@ module Aws::ConfigService
     #   * {Types::DescribeOrganizationConfigRuleStatusesResponse#organization_config_rule_statuses #organization_config_rule_statuses} => Array&lt;Types::OrganizationConfigRuleStatus&gt;
     #   * {Types::DescribeOrganizationConfigRuleStatusesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_organization_config_rule_statuses({
@@ -1942,6 +1968,8 @@ module Aws::ConfigService
     #
     #   * {Types::DescribeOrganizationConfigRulesResponse#organization_config_rules #organization_config_rules} => Array&lt;Types::OrganizationConfigRule&gt;
     #   * {Types::DescribeOrganizationConfigRulesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2023,6 +2051,8 @@ module Aws::ConfigService
     #   * {Types::DescribeOrganizationConformancePackStatusesResponse#organization_conformance_pack_statuses #organization_conformance_pack_statuses} => Array&lt;Types::OrganizationConformancePackStatus&gt;
     #   * {Types::DescribeOrganizationConformancePackStatusesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_organization_conformance_pack_statuses({
@@ -2078,6 +2108,8 @@ module Aws::ConfigService
     #   * {Types::DescribeOrganizationConformancePacksResponse#organization_conformance_packs #organization_conformance_packs} => Array&lt;Types::OrganizationConformancePack&gt;
     #   * {Types::DescribeOrganizationConformancePacksResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_organization_conformance_packs({
@@ -2124,6 +2156,8 @@ module Aws::ConfigService
     #
     #   * {Types::DescribePendingAggregationRequestsResponse#pending_aggregation_requests #pending_aggregation_requests} => Array&lt;Types::PendingAggregationRequest&gt;
     #   * {Types::DescribePendingAggregationRequestsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2364,6 +2398,8 @@ module Aws::ConfigService
     #   * {Types::DescribeRetentionConfigurationsResponse#retention_configurations #retention_configurations} => Array&lt;Types::RetentionConfiguration&gt;
     #   * {Types::DescribeRetentionConfigurationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_retention_configurations({
@@ -2434,6 +2470,8 @@ module Aws::ConfigService
     #   * {Types::GetAggregateComplianceDetailsByConfigRuleResponse#aggregate_evaluation_results #aggregate_evaluation_results} => Array&lt;Types::AggregateEvaluationResult&gt;
     #   * {Types::GetAggregateComplianceDetailsByConfigRuleResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_aggregate_compliance_details_by_config_rule({
@@ -2503,6 +2541,8 @@ module Aws::ConfigService
     #   * {Types::GetAggregateConfigRuleComplianceSummaryResponse#aggregate_compliance_counts #aggregate_compliance_counts} => Array&lt;Types::AggregateComplianceCount&gt;
     #   * {Types::GetAggregateConfigRuleComplianceSummaryResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_aggregate_config_rule_compliance_summary({
@@ -2570,6 +2610,8 @@ module Aws::ConfigService
     #   * {Types::GetAggregateConformancePackComplianceSummaryResponse#group_by_key #group_by_key} => String
     #   * {Types::GetAggregateConformancePackComplianceSummaryResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_aggregate_conformance_pack_compliance_summary({
@@ -2635,6 +2677,8 @@ module Aws::ConfigService
     #   * {Types::GetAggregateDiscoveredResourceCountsResponse#group_by_key #group_by_key} => String
     #   * {Types::GetAggregateDiscoveredResourceCountsResponse#grouped_resource_counts #grouped_resource_counts} => Array&lt;Types::GroupedResourceCount&gt;
     #   * {Types::GetAggregateDiscoveredResourceCountsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2760,6 +2804,8 @@ module Aws::ConfigService
     #   * {Types::GetComplianceDetailsByConfigRuleResponse#evaluation_results #evaluation_results} => Array&lt;Types::EvaluationResult&gt;
     #   * {Types::GetComplianceDetailsByConfigRuleResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_compliance_details_by_config_rule({
@@ -2818,6 +2864,8 @@ module Aws::ConfigService
     #
     #   * {Types::GetComplianceDetailsByResourceResponse#evaluation_results #evaluation_results} => Array&lt;Types::EvaluationResult&gt;
     #   * {Types::GetComplianceDetailsByResourceResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2942,6 +2990,8 @@ module Aws::ConfigService
     #   * {Types::GetConformancePackComplianceDetailsResponse#conformance_pack_rule_evaluation_results #conformance_pack_rule_evaluation_results} => Array&lt;Types::ConformancePackEvaluationResult&gt;
     #   * {Types::GetConformancePackComplianceDetailsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_conformance_pack_compliance_details({
@@ -2997,6 +3047,8 @@ module Aws::ConfigService
     #
     #   * {Types::GetConformancePackComplianceSummaryResponse#conformance_pack_compliance_summary_list #conformance_pack_compliance_summary_list} => Array&lt;Types::ConformancePackComplianceSummary&gt;
     #   * {Types::GetConformancePackComplianceSummaryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3094,6 +3146,8 @@ module Aws::ConfigService
     #   * {Types::GetDiscoveredResourceCountsResponse#resource_counts #resource_counts} => Array&lt;Types::ResourceCount&gt;
     #   * {Types::GetDiscoveredResourceCountsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_discovered_resource_counts({
@@ -3142,6 +3196,8 @@ module Aws::ConfigService
     #
     #   * {Types::GetOrganizationConfigRuleDetailedStatusResponse#organization_config_rule_detailed_status #organization_config_rule_detailed_status} => Array&lt;Types::MemberAccountStatus&gt;
     #   * {Types::GetOrganizationConfigRuleDetailedStatusResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3198,6 +3254,8 @@ module Aws::ConfigService
     #
     #   * {Types::GetOrganizationConformancePackDetailedStatusResponse#organization_conformance_pack_detailed_statuses #organization_conformance_pack_detailed_statuses} => Array&lt;Types::OrganizationConformancePackDetailedStatus&gt;
     #   * {Types::GetOrganizationConformancePackDetailedStatusResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3406,6 +3464,8 @@ module Aws::ConfigService
     #   * {Types::ListAggregateDiscoveredResourcesResponse#resource_identifiers #resource_identifiers} => Array&lt;Types::AggregateResourceIdentifier&gt;
     #   * {Types::ListAggregateDiscoveredResourcesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_aggregate_discovered_resources({
@@ -3490,6 +3550,8 @@ module Aws::ConfigService
     #
     #   * {Types::ListDiscoveredResourcesResponse#resource_identifiers #resource_identifiers} => Array&lt;Types::ResourceIdentifier&gt;
     #   * {Types::ListDiscoveredResourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3582,6 +3644,8 @@ module Aws::ConfigService
     #
     #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4745,6 +4809,8 @@ module Aws::ConfigService
     #   * {Types::SelectResourceConfigResponse#query_info #query_info} => Types::QueryInfo
     #   * {Types::SelectResourceConfigResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.select_resource_config({
@@ -5007,7 +5073,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

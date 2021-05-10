@@ -245,9 +245,11 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] resource_id
+    #   Id of the resource in the conflicting operation.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
+    #   Type of the resource in the conflicting operation.
     #   @return [String]
     #
     class ConflictException < Struct.new(
@@ -604,6 +606,11 @@ module Aws::IoTWireless
     #         lo_ra_wan: { # required
     #           gateway_eui: "GatewayEui",
     #           rf_region: "RfRegion",
+    #           join_eui_filters: [
+    #             ["JoinEui"],
+    #           ],
+    #           net_id_filters: ["NetId"],
+    #           sub_bands: [1],
     #         },
     #         tags: [
     #           {
@@ -2262,6 +2269,11 @@ module Aws::IoTWireless
     #       {
     #         gateway_eui: "GatewayEui",
     #         rf_region: "RfRegion",
+    #         join_eui_filters: [
+    #           ["JoinEui"],
+    #         ],
+    #         net_id_filters: ["NetId"],
+    #         sub_bands: [1],
     #       }
     #
     # @!attribute [rw] gateway_eui
@@ -2272,9 +2284,26 @@ module Aws::IoTWireless
     #   The frequency band (RFRegion) value.
     #   @return [String]
     #
+    # @!attribute [rw] join_eui_filters
+    #   A list of JoinEuiRange used by LoRa gateways to filter LoRa frames.
+    #   @return [Array<Array<String>>]
+    #
+    # @!attribute [rw] net_id_filters
+    #   A list of NetId values that are used by LoRa gateways to filter the
+    #   uplink frames.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] sub_bands
+    #   A list of integer indicating which sub bands are supported by LoRa
+    #   gateway.
+    #   @return [Array<Integer>]
+    #
     class LoRaWANGateway < Struct.new(
       :gateway_eui,
-      :rf_region)
+      :rf_region,
+      :join_eui_filters,
+      :net_id_filters,
+      :sub_bands)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2648,9 +2677,11 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] resource_id
+    #   Id of the not found resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
+    #   Type of the font found resource.
     #   @return [String]
     #
     class ResourceNotFoundException < Struct.new(
@@ -3068,6 +3099,7 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] resource_name
+    #   Name of the resource that exceeds maximum number of tags allowed.
     #   @return [String]
     #
     class TooManyTagsException < Struct.new(
@@ -3231,6 +3263,10 @@ module Aws::IoTWireless
     #         id: "WirelessGatewayId", # required
     #         name: "WirelessGatewayName",
     #         description: "Description",
+    #         join_eui_filters: [
+    #           ["JoinEui"],
+    #         ],
+    #         net_id_filters: ["NetId"],
     #       }
     #
     # @!attribute [rw] id
@@ -3245,10 +3281,21 @@ module Aws::IoTWireless
     #   A new description of the resource.
     #   @return [String]
     #
+    # @!attribute [rw] join_eui_filters
+    #   A list of JoinEuiRange used by LoRa gateways to filter LoRa frames.
+    #   @return [Array<Array<String>>]
+    #
+    # @!attribute [rw] net_id_filters
+    #   A list of NetId values that are used by LoRa gateways to filter the
+    #   uplink frames.
+    #   @return [Array<String>]
+    #
     class UpdateWirelessGatewayRequest < Struct.new(
       :id,
       :name,
-      :description)
+      :description,
+      :join_eui_filters,
+      :net_id_filters)
       SENSITIVE = []
       include Aws::Structure
     end

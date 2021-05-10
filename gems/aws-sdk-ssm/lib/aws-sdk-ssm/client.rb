@@ -428,6 +428,59 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Associates a related resource to a Systems Manager OpsCenter OpsItem.
+    # For example, you can associate an Incident Manager incident or
+    # analysis with an OpsItem. Incident Manager is a capability of AWS
+    # Systems Manager.
+    #
+    # @option params [required, String] :ops_item_id
+    #   The ID of the OpsItem to which you want to associate a resource as a
+    #   related item.
+    #
+    # @option params [required, String] :association_type
+    #   The type of association that you want to create between an OpsItem and
+    #   a resource. OpsCenter supports `IsParentOf` and `RelatesTo`
+    #   association types.
+    #
+    # @option params [required, String] :resource_type
+    #   The type of resource that you want to associate with an OpsItem.
+    #   OpsCenter supports the following types:
+    #
+    #   `AWS::SSMIncidents::IncidentRecord`\: an Incident Manager incident.
+    #   Incident Manager is a capability of AWS Systems Manager.
+    #
+    #   `AWS::SSM::Document`\: a Systems Manager (SSM) document.
+    #
+    # @option params [required, String] :resource_uri
+    #   The Amazon Resource Name (ARN) of the AWS resource that you want to
+    #   associate with the OpsItem.
+    #
+    # @return [Types::AssociateOpsItemRelatedItemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateOpsItemRelatedItemResponse#association_id #association_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_ops_item_related_item({
+    #     ops_item_id: "OpsItemId", # required
+    #     association_type: "OpsItemRelatedItemAssociationType", # required
+    #     resource_type: "OpsItemRelatedItemAssociationResourceType", # required
+    #     resource_uri: "OpsItemRelatedItemAssociationResourceUri", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociateOpsItemRelatedItem AWS API Documentation
+    #
+    # @overload associate_ops_item_related_item(params = {})
+    # @param [Hash] params ({})
+    def associate_ops_item_related_item(params = {}, options = {})
+      req = build_request(:associate_ops_item_related_item, params)
+      req.send_request(options)
+    end
+
     # Attempts to cancel the command specified by the Command ID. There is
     # no guarantee that the command will be terminated and the underlying
     # process stopped.
@@ -1076,6 +1129,12 @@ module Aws::SSM
     #
     #   * `amzn`
     #
+    # @option params [String] :display_name
+    #   An optional field where you can specify a friendly name for the
+    #   Systems Manager document. This value can differ for each version of
+    #   the document. You can update this value at a later time using the
+    #   UpdateDocument action.
+    #
     # @option params [String] :version_name
     #   An optional field specifying the version of the artifact you are
     #   creating with the document. For example, "Release 12, Update 6".
@@ -1140,8 +1199,9 @@ module Aws::SSM
     #       },
     #     ],
     #     name: "DocumentName", # required
+    #     display_name: "DocumentDisplayName",
     #     version_name: "DocumentVersionName",
-    #     document_type: "Command", # accepts Command, Policy, Automation, Session, Package, ApplicationConfiguration, ApplicationConfigurationSchema, DeploymentStrategy, ChangeCalendar, Automation.ChangeTemplate
+    #     document_type: "Command", # accepts Command, Policy, Automation, Session, Package, ApplicationConfiguration, ApplicationConfigurationSchema, DeploymentStrategy, ChangeCalendar, Automation.ChangeTemplate, ProblemAnalysis, ProblemAnalysisTemplate
     #     document_format: "YAML", # accepts YAML, JSON, TEXT
     #     target_type: "TargetType",
     #     tags: [
@@ -1158,6 +1218,7 @@ module Aws::SSM
     #   resp.document_description.hash #=> String
     #   resp.document_description.hash_type #=> String, one of "Sha256", "Sha1"
     #   resp.document_description.name #=> String
+    #   resp.document_description.display_name #=> String
     #   resp.document_description.version_name #=> String
     #   resp.document_description.owner #=> String
     #   resp.document_description.created_date #=> Time
@@ -1172,7 +1233,7 @@ module Aws::SSM
     #   resp.document_description.parameters[0].default_value #=> String
     #   resp.document_description.platform_types #=> Array
     #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux"
-    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate"
+    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate"
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
@@ -2746,8 +2807,8 @@ module Aws::SSM
     #   next set of results.
     #
     # @option params [Boolean] :reverse_order
-    #   A boolean that indicates whether to list step executions in reverse
-    #   order by start time. The default value is 'false'.
+    #   Indicates whether to list step executions in reverse order by start
+    #   time. The default value is 'false'.
     #
     # @return [Types::DescribeAutomationStepExecutionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2930,6 +2991,7 @@ module Aws::SSM
     #   resp.document.hash #=> String
     #   resp.document.hash_type #=> String, one of "Sha256", "Sha1"
     #   resp.document.name #=> String
+    #   resp.document.display_name #=> String
     #   resp.document.version_name #=> String
     #   resp.document.owner #=> String
     #   resp.document.created_date #=> Time
@@ -2944,7 +3006,7 @@ module Aws::SSM
     #   resp.document.parameters[0].default_value #=> String
     #   resp.document.platform_types #=> Array
     #   resp.document.platform_types[0] #=> String, one of "Windows", "Linux"
-    #   resp.document.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate"
+    #   resp.document.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate"
     #   resp.document.schema_version #=> String
     #   resp.document.latest_version #=> String
     #   resp.document.default_version #=> String
@@ -4675,6 +4737,36 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Deletes the association between an OpsItem and a related resource. For
+    # example, this API action can delete an Incident Manager incident from
+    # an OpsItem. Incident Manager is a capability of AWS Systems Manager.
+    #
+    # @option params [required, String] :ops_item_id
+    #   The ID of the OpsItem for which you want to delete an association
+    #   between the OpsItem and a related resource.
+    #
+    # @option params [required, String] :association_id
+    #   The ID of the association for which you want to delete an association
+    #   between the OpsItem and a related resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_ops_item_related_item({
+    #     ops_item_id: "OpsItemId", # required
+    #     association_id: "OpsItemRelatedItemAssociationId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DisassociateOpsItemRelatedItem AWS API Documentation
+    #
+    # @overload disassociate_ops_item_related_item(params = {})
+    # @param [Hash] params ({})
+    def disassociate_ops_item_related_item(params = {}, options = {})
+      req = build_request(:disassociate_ops_item_related_item, params)
+      req.send_request(options)
+    end
+
     # Get detailed information about a particular Automation execution.
     #
     # @option params [required, String] :automation_execution_id
@@ -5148,6 +5240,8 @@ module Aws::SSM
     # @return [Types::GetDocumentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDocumentResult#name #name} => String
+    #   * {Types::GetDocumentResult#created_date #created_date} => Time
+    #   * {Types::GetDocumentResult#display_name #display_name} => String
     #   * {Types::GetDocumentResult#version_name #version_name} => String
     #   * {Types::GetDocumentResult#document_version #document_version} => String
     #   * {Types::GetDocumentResult#status #status} => String
@@ -5171,12 +5265,14 @@ module Aws::SSM
     # @example Response structure
     #
     #   resp.name #=> String
+    #   resp.created_date #=> Time
+    #   resp.display_name #=> String
     #   resp.version_name #=> String
     #   resp.document_version #=> String
     #   resp.status #=> String, one of "Creating", "Active", "Updating", "Deleting", "Failed"
     #   resp.status_information #=> String
     #   resp.content #=> String
-    #   resp.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate"
+    #   resp.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate"
     #   resp.document_format #=> String, one of "YAML", "JSON", "TEXT"
     #   resp.requires #=> Array
     #   resp.requires[0].name #=> String
@@ -6949,6 +7045,7 @@ module Aws::SSM
     #
     #   resp.document_versions #=> Array
     #   resp.document_versions[0].name #=> String
+    #   resp.document_versions[0].display_name #=> String
     #   resp.document_versions[0].document_version #=> String
     #   resp.document_versions[0].version_name #=> String
     #   resp.document_versions[0].created_date #=> Time
@@ -7029,12 +7126,14 @@ module Aws::SSM
     #
     #   resp.document_identifiers #=> Array
     #   resp.document_identifiers[0].name #=> String
+    #   resp.document_identifiers[0].created_date #=> Time
+    #   resp.document_identifiers[0].display_name #=> String
     #   resp.document_identifiers[0].owner #=> String
     #   resp.document_identifiers[0].version_name #=> String
     #   resp.document_identifiers[0].platform_types #=> Array
     #   resp.document_identifiers[0].platform_types[0] #=> String, one of "Windows", "Linux"
     #   resp.document_identifiers[0].document_version #=> String
-    #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate"
+    #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate"
     #   resp.document_identifiers[0].schema_version #=> String
     #   resp.document_identifiers[0].document_format #=> String, one of "YAML", "JSON", "TEXT"
     #   resp.document_identifiers[0].target_type #=> String
@@ -7179,6 +7278,70 @@ module Aws::SSM
     # @param [Hash] params ({})
     def list_ops_item_events(params = {}, options = {})
       req = build_request(:list_ops_item_events, params)
+      req.send_request(options)
+    end
+
+    # Lists all related-item resources associated with an OpsItem.
+    #
+    # @option params [String] :ops_item_id
+    #   The ID of the OpsItem for which you want to list all related-item
+    #   resources.
+    #
+    # @option params [Array<Types::OpsItemRelatedItemsFilter>] :filters
+    #   One or more OpsItem filters. Use a filter to return a more specific
+    #   list of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
+    # @return [Types::ListOpsItemRelatedItemsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOpsItemRelatedItemsResponse#next_token #next_token} => String
+    #   * {Types::ListOpsItemRelatedItemsResponse#summaries #summaries} => Array&lt;Types::OpsItemRelatedItemSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_ops_item_related_items({
+    #     ops_item_id: "OpsItemId",
+    #     filters: [
+    #       {
+    #         key: "ResourceType", # required, accepts ResourceType, AssociationId, ResourceUri
+    #         values: ["OpsItemRelatedItemsFilterValue"], # required
+    #         operator: "Equal", # required, accepts Equal
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.summaries #=> Array
+    #   resp.summaries[0].ops_item_id #=> String
+    #   resp.summaries[0].association_id #=> String
+    #   resp.summaries[0].resource_type #=> String
+    #   resp.summaries[0].association_type #=> String
+    #   resp.summaries[0].resource_uri #=> String
+    #   resp.summaries[0].created_by.arn #=> String
+    #   resp.summaries[0].created_time #=> Time
+    #   resp.summaries[0].last_modified_by.arn #=> String
+    #   resp.summaries[0].last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListOpsItemRelatedItems AWS API Documentation
+    #
+    # @overload list_ops_item_related_items(params = {})
+    # @param [Hash] params ({})
+    def list_ops_item_related_items(params = {}, options = {})
+      req = build_request(:list_ops_item_related_items, params)
       req.send_request(options)
     end
 
@@ -9571,7 +9734,13 @@ module Aws::SSM
     #   of a document.
     #
     # @option params [required, String] :name
-    #   The name of the document that you want to update.
+    #   The name of the Systems Manager document that you want to update.
+    #
+    # @option params [String] :display_name
+    #   The friendly name of the Systems Manager document that you want to
+    #   update. This value can differ for each version of the document. If you
+    #   do not specify a value for this parameter in your request, the
+    #   existing value is applied to the new document version.
     #
     # @option params [String] :version_name
     #   An optional field specifying the version of the artifact you are
@@ -9608,6 +9777,7 @@ module Aws::SSM
     #       },
     #     ],
     #     name: "DocumentName", # required
+    #     display_name: "DocumentDisplayName",
     #     version_name: "DocumentVersionName",
     #     document_version: "DocumentVersion",
     #     document_format: "YAML", # accepts YAML, JSON, TEXT
@@ -9620,6 +9790,7 @@ module Aws::SSM
     #   resp.document_description.hash #=> String
     #   resp.document_description.hash_type #=> String, one of "Sha256", "Sha1"
     #   resp.document_description.name #=> String
+    #   resp.document_description.display_name #=> String
     #   resp.document_description.version_name #=> String
     #   resp.document_description.owner #=> String
     #   resp.document_description.created_date #=> Time
@@ -9634,7 +9805,7 @@ module Aws::SSM
     #   resp.document_description.parameters[0].default_value #=> String
     #   resp.document_description.platform_types #=> Array
     #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux"
-    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate"
+    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate"
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
@@ -10848,7 +11019,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.109.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2021-05-10)
+------------------
+
+* Feature - Amazon Kinesis Analytics now supports ListApplicationVersions and DescribeApplicationVersion API for Apache Flink applications
+
 1.28.0 (2021-05-05)
 ------------------
 

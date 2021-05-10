@@ -634,9 +634,25 @@ module Aws::MediaConvert
     #             pid: 1,
     #             program_number: 1,
     #             rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
+    #             sample_range: "FOLLOW", # accepts FOLLOW, FULL_RANGE, LIMITED_RANGE
     #           },
     #         },
     #       ],
+    #       kantar_watermark: {
+    #         channel_name: "__stringMin1Max20",
+    #         content_reference: "__stringMin1Max50PatternAZAZ09",
+    #         credentials_secret_name: "__stringMin1Max512PatternAZAZ09",
+    #         file_offset: 1.0,
+    #         kantar_license_id: 1,
+    #         kantar_server_url: "__stringPatternHttpsKantarmediaCom",
+    #         log_destination: "__stringPatternS3",
+    #         metadata_3: "__stringMin1Max50",
+    #         metadata_4: "__stringMin1Max50",
+    #         metadata_5: "__stringMin1Max50",
+    #         metadata_6: "__stringMin1Max50",
+    #         metadata_7: "__stringMin1Max50",
+    #         metadata_8: "__stringMin1Max50",
+    #       },
     #       motion_image_inserter: {
     #         framerate: {
     #           framerate_denominator: 1,
@@ -1054,11 +1070,15 @@ module Aws::MediaConvert
     #                       alignment: "CENTERED", # accepts CENTERED, LEFT
     #                       background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                       background_opacity: 1,
+    #                       dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                       dds_x_coordinate: 1,
+    #                       dds_y_coordinate: 1,
     #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                       font_opacity: 1,
     #                       font_resolution: 1,
     #                       font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                       font_size: 1,
+    #                       height: 1,
     #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                       outline_size: 1,
     #                       shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -1067,6 +1087,7 @@ module Aws::MediaConvert
     #                       shadow_y_offset: 1,
     #                       subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                       teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                       width: 1,
     #                       x_position: 1,
     #                       y_position: 1,
     #                     },
@@ -1166,6 +1187,7 @@ module Aws::MediaConvert
     #                   audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                   audio_frames_per_pes: 1,
     #                   audio_pids: [1],
+    #                   max_pcr_interval: 1,
     #                   nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                   pat_interval: 1,
     #                   pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -1718,6 +1740,20 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job.settings.inputs[0].video_selector.program_number #=> Integer
     #   resp.job.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
+    #   resp.job.settings.inputs[0].video_selector.sample_range #=> String, one of "FOLLOW", "FULL_RANGE", "LIMITED_RANGE"
+    #   resp.job.settings.kantar_watermark.channel_name #=> String
+    #   resp.job.settings.kantar_watermark.content_reference #=> String
+    #   resp.job.settings.kantar_watermark.credentials_secret_name #=> String
+    #   resp.job.settings.kantar_watermark.file_offset #=> Float
+    #   resp.job.settings.kantar_watermark.kantar_license_id #=> Integer
+    #   resp.job.settings.kantar_watermark.kantar_server_url #=> String
+    #   resp.job.settings.kantar_watermark.log_destination #=> String
+    #   resp.job.settings.kantar_watermark.metadata_3 #=> String
+    #   resp.job.settings.kantar_watermark.metadata_4 #=> String
+    #   resp.job.settings.kantar_watermark.metadata_5 #=> String
+    #   resp.job.settings.kantar_watermark.metadata_6 #=> String
+    #   resp.job.settings.kantar_watermark.metadata_7 #=> String
+    #   resp.job.settings.kantar_watermark.metadata_8 #=> String
     #   resp.job.settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
     #   resp.job.settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
     #   resp.job.settings.motion_image_inserter.input #=> String
@@ -2003,11 +2039,15 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.height #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
@@ -2016,6 +2056,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.width #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
@@ -2087,6 +2128,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
@@ -2639,9 +2681,25 @@ module Aws::MediaConvert
     #             pid: 1,
     #             program_number: 1,
     #             rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
+    #             sample_range: "FOLLOW", # accepts FOLLOW, FULL_RANGE, LIMITED_RANGE
     #           },
     #         },
     #       ],
+    #       kantar_watermark: {
+    #         channel_name: "__stringMin1Max20",
+    #         content_reference: "__stringMin1Max50PatternAZAZ09",
+    #         credentials_secret_name: "__stringMin1Max512PatternAZAZ09",
+    #         file_offset: 1.0,
+    #         kantar_license_id: 1,
+    #         kantar_server_url: "__stringPatternHttpsKantarmediaCom",
+    #         log_destination: "__stringPatternS3",
+    #         metadata_3: "__stringMin1Max50",
+    #         metadata_4: "__stringMin1Max50",
+    #         metadata_5: "__stringMin1Max50",
+    #         metadata_6: "__stringMin1Max50",
+    #         metadata_7: "__stringMin1Max50",
+    #         metadata_8: "__stringMin1Max50",
+    #       },
     #       motion_image_inserter: {
     #         framerate: {
     #           framerate_denominator: 1,
@@ -3059,11 +3117,15 @@ module Aws::MediaConvert
     #                       alignment: "CENTERED", # accepts CENTERED, LEFT
     #                       background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                       background_opacity: 1,
+    #                       dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                       dds_x_coordinate: 1,
+    #                       dds_y_coordinate: 1,
     #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                       font_opacity: 1,
     #                       font_resolution: 1,
     #                       font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                       font_size: 1,
+    #                       height: 1,
     #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                       outline_size: 1,
     #                       shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -3072,6 +3134,7 @@ module Aws::MediaConvert
     #                       shadow_y_offset: 1,
     #                       subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                       teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                       width: 1,
     #                       x_position: 1,
     #                       y_position: 1,
     #                     },
@@ -3171,6 +3234,7 @@ module Aws::MediaConvert
     #                   audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                   audio_frames_per_pes: 1,
     #                   audio_pids: [1],
+    #                   max_pcr_interval: 1,
     #                   nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                   pat_interval: 1,
     #                   pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -3693,6 +3757,20 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.program_number #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
+    #   resp.job_template.settings.inputs[0].video_selector.sample_range #=> String, one of "FOLLOW", "FULL_RANGE", "LIMITED_RANGE"
+    #   resp.job_template.settings.kantar_watermark.channel_name #=> String
+    #   resp.job_template.settings.kantar_watermark.content_reference #=> String
+    #   resp.job_template.settings.kantar_watermark.credentials_secret_name #=> String
+    #   resp.job_template.settings.kantar_watermark.file_offset #=> Float
+    #   resp.job_template.settings.kantar_watermark.kantar_license_id #=> Integer
+    #   resp.job_template.settings.kantar_watermark.kantar_server_url #=> String
+    #   resp.job_template.settings.kantar_watermark.log_destination #=> String
+    #   resp.job_template.settings.kantar_watermark.metadata_3 #=> String
+    #   resp.job_template.settings.kantar_watermark.metadata_4 #=> String
+    #   resp.job_template.settings.kantar_watermark.metadata_5 #=> String
+    #   resp.job_template.settings.kantar_watermark.metadata_6 #=> String
+    #   resp.job_template.settings.kantar_watermark.metadata_7 #=> String
+    #   resp.job_template.settings.kantar_watermark.metadata_8 #=> String
     #   resp.job_template.settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
     #   resp.job_template.settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.motion_image_inserter.input #=> String
@@ -3978,11 +4056,15 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.height #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
@@ -3991,6 +4073,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.width #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
@@ -4062,6 +4145,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
@@ -4577,11 +4661,15 @@ module Aws::MediaConvert
     #               alignment: "CENTERED", # accepts CENTERED, LEFT
     #               background_color: "NONE", # accepts NONE, BLACK, WHITE
     #               background_opacity: 1,
+    #               dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #               dds_x_coordinate: 1,
+    #               dds_y_coordinate: 1,
     #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #               font_opacity: 1,
     #               font_resolution: 1,
     #               font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #               font_size: 1,
+    #               height: 1,
     #               outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #               outline_size: 1,
     #               shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -4590,6 +4678,7 @@ module Aws::MediaConvert
     #               shadow_y_offset: 1,
     #               subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #               teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #               width: 1,
     #               x_position: 1,
     #               y_position: 1,
     #             },
@@ -4689,6 +4778,7 @@ module Aws::MediaConvert
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           audio_frames_per_pes: 1,
     #           audio_pids: [1],
+    #           max_pcr_interval: 1,
     #           nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #           pat_interval: 1,
     #           pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -5196,11 +5286,15 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.height #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
@@ -5209,6 +5303,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.width #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
@@ -5280,6 +5375,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.preset.settings.container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
@@ -5956,6 +6052,20 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job.settings.inputs[0].video_selector.program_number #=> Integer
     #   resp.job.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
+    #   resp.job.settings.inputs[0].video_selector.sample_range #=> String, one of "FOLLOW", "FULL_RANGE", "LIMITED_RANGE"
+    #   resp.job.settings.kantar_watermark.channel_name #=> String
+    #   resp.job.settings.kantar_watermark.content_reference #=> String
+    #   resp.job.settings.kantar_watermark.credentials_secret_name #=> String
+    #   resp.job.settings.kantar_watermark.file_offset #=> Float
+    #   resp.job.settings.kantar_watermark.kantar_license_id #=> Integer
+    #   resp.job.settings.kantar_watermark.kantar_server_url #=> String
+    #   resp.job.settings.kantar_watermark.log_destination #=> String
+    #   resp.job.settings.kantar_watermark.metadata_3 #=> String
+    #   resp.job.settings.kantar_watermark.metadata_4 #=> String
+    #   resp.job.settings.kantar_watermark.metadata_5 #=> String
+    #   resp.job.settings.kantar_watermark.metadata_6 #=> String
+    #   resp.job.settings.kantar_watermark.metadata_7 #=> String
+    #   resp.job.settings.kantar_watermark.metadata_8 #=> String
     #   resp.job.settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
     #   resp.job.settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
     #   resp.job.settings.motion_image_inserter.input #=> String
@@ -6241,11 +6351,15 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.height #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
@@ -6254,6 +6368,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.width #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
@@ -6325,6 +6440,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
@@ -6781,6 +6897,20 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.program_number #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
+    #   resp.job_template.settings.inputs[0].video_selector.sample_range #=> String, one of "FOLLOW", "FULL_RANGE", "LIMITED_RANGE"
+    #   resp.job_template.settings.kantar_watermark.channel_name #=> String
+    #   resp.job_template.settings.kantar_watermark.content_reference #=> String
+    #   resp.job_template.settings.kantar_watermark.credentials_secret_name #=> String
+    #   resp.job_template.settings.kantar_watermark.file_offset #=> Float
+    #   resp.job_template.settings.kantar_watermark.kantar_license_id #=> Integer
+    #   resp.job_template.settings.kantar_watermark.kantar_server_url #=> String
+    #   resp.job_template.settings.kantar_watermark.log_destination #=> String
+    #   resp.job_template.settings.kantar_watermark.metadata_3 #=> String
+    #   resp.job_template.settings.kantar_watermark.metadata_4 #=> String
+    #   resp.job_template.settings.kantar_watermark.metadata_5 #=> String
+    #   resp.job_template.settings.kantar_watermark.metadata_6 #=> String
+    #   resp.job_template.settings.kantar_watermark.metadata_7 #=> String
+    #   resp.job_template.settings.kantar_watermark.metadata_8 #=> String
     #   resp.job_template.settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
     #   resp.job_template.settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.motion_image_inserter.input #=> String
@@ -7066,11 +7196,15 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.height #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
@@ -7079,6 +7213,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.width #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
@@ -7150,6 +7285,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
@@ -7618,11 +7754,15 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.height #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
@@ -7631,6 +7771,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.width #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
@@ -7702,6 +7843,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.preset.settings.container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
@@ -8207,6 +8349,20 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_templates[0].settings.inputs[0].video_selector.program_number #=> Integer
     #   resp.job_templates[0].settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
+    #   resp.job_templates[0].settings.inputs[0].video_selector.sample_range #=> String, one of "FOLLOW", "FULL_RANGE", "LIMITED_RANGE"
+    #   resp.job_templates[0].settings.kantar_watermark.channel_name #=> String
+    #   resp.job_templates[0].settings.kantar_watermark.content_reference #=> String
+    #   resp.job_templates[0].settings.kantar_watermark.credentials_secret_name #=> String
+    #   resp.job_templates[0].settings.kantar_watermark.file_offset #=> Float
+    #   resp.job_templates[0].settings.kantar_watermark.kantar_license_id #=> Integer
+    #   resp.job_templates[0].settings.kantar_watermark.kantar_server_url #=> String
+    #   resp.job_templates[0].settings.kantar_watermark.log_destination #=> String
+    #   resp.job_templates[0].settings.kantar_watermark.metadata_3 #=> String
+    #   resp.job_templates[0].settings.kantar_watermark.metadata_4 #=> String
+    #   resp.job_templates[0].settings.kantar_watermark.metadata_5 #=> String
+    #   resp.job_templates[0].settings.kantar_watermark.metadata_6 #=> String
+    #   resp.job_templates[0].settings.kantar_watermark.metadata_7 #=> String
+    #   resp.job_templates[0].settings.kantar_watermark.metadata_8 #=> String
     #   resp.job_templates[0].settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
     #   resp.job_templates[0].settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
     #   resp.job_templates[0].settings.motion_image_inserter.input #=> String
@@ -8492,11 +8648,15 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.height #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
@@ -8505,6 +8665,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.width #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
@@ -8576,6 +8737,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
@@ -9082,6 +9244,20 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].video_selector.pid #=> Integer
     #   resp.jobs[0].settings.inputs[0].video_selector.program_number #=> Integer
     #   resp.jobs[0].settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
+    #   resp.jobs[0].settings.inputs[0].video_selector.sample_range #=> String, one of "FOLLOW", "FULL_RANGE", "LIMITED_RANGE"
+    #   resp.jobs[0].settings.kantar_watermark.channel_name #=> String
+    #   resp.jobs[0].settings.kantar_watermark.content_reference #=> String
+    #   resp.jobs[0].settings.kantar_watermark.credentials_secret_name #=> String
+    #   resp.jobs[0].settings.kantar_watermark.file_offset #=> Float
+    #   resp.jobs[0].settings.kantar_watermark.kantar_license_id #=> Integer
+    #   resp.jobs[0].settings.kantar_watermark.kantar_server_url #=> String
+    #   resp.jobs[0].settings.kantar_watermark.log_destination #=> String
+    #   resp.jobs[0].settings.kantar_watermark.metadata_3 #=> String
+    #   resp.jobs[0].settings.kantar_watermark.metadata_4 #=> String
+    #   resp.jobs[0].settings.kantar_watermark.metadata_5 #=> String
+    #   resp.jobs[0].settings.kantar_watermark.metadata_6 #=> String
+    #   resp.jobs[0].settings.kantar_watermark.metadata_7 #=> String
+    #   resp.jobs[0].settings.kantar_watermark.metadata_8 #=> String
     #   resp.jobs[0].settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
     #   resp.jobs[0].settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
     #   resp.jobs[0].settings.motion_image_inserter.input #=> String
@@ -9367,11 +9543,15 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.height #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
@@ -9380,6 +9560,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.width #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
@@ -9451,6 +9632,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
@@ -9957,11 +10139,15 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.height #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
@@ -9970,6 +10156,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.width #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
@@ -10041,6 +10228,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.presets[0].settings.container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.presets[0].settings.container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.presets[0].settings.container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.presets[0].settings.container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.presets[0].settings.container_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.presets[0].settings.container_settings.m3u_8_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
@@ -10718,9 +10906,25 @@ module Aws::MediaConvert
     #             pid: 1,
     #             program_number: 1,
     #             rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
+    #             sample_range: "FOLLOW", # accepts FOLLOW, FULL_RANGE, LIMITED_RANGE
     #           },
     #         },
     #       ],
+    #       kantar_watermark: {
+    #         channel_name: "__stringMin1Max20",
+    #         content_reference: "__stringMin1Max50PatternAZAZ09",
+    #         credentials_secret_name: "__stringMin1Max512PatternAZAZ09",
+    #         file_offset: 1.0,
+    #         kantar_license_id: 1,
+    #         kantar_server_url: "__stringPatternHttpsKantarmediaCom",
+    #         log_destination: "__stringPatternS3",
+    #         metadata_3: "__stringMin1Max50",
+    #         metadata_4: "__stringMin1Max50",
+    #         metadata_5: "__stringMin1Max50",
+    #         metadata_6: "__stringMin1Max50",
+    #         metadata_7: "__stringMin1Max50",
+    #         metadata_8: "__stringMin1Max50",
+    #       },
     #       motion_image_inserter: {
     #         framerate: {
     #           framerate_denominator: 1,
@@ -11138,11 +11342,15 @@ module Aws::MediaConvert
     #                       alignment: "CENTERED", # accepts CENTERED, LEFT
     #                       background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                       background_opacity: 1,
+    #                       dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                       dds_x_coordinate: 1,
+    #                       dds_y_coordinate: 1,
     #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                       font_opacity: 1,
     #                       font_resolution: 1,
     #                       font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                       font_size: 1,
+    #                       height: 1,
     #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                       outline_size: 1,
     #                       shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -11151,6 +11359,7 @@ module Aws::MediaConvert
     #                       shadow_y_offset: 1,
     #                       subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                       teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                       width: 1,
     #                       x_position: 1,
     #                       y_position: 1,
     #                     },
@@ -11250,6 +11459,7 @@ module Aws::MediaConvert
     #                   audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                   audio_frames_per_pes: 1,
     #                   audio_pids: [1],
+    #                   max_pcr_interval: 1,
     #                   nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                   pat_interval: 1,
     #                   pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -11769,6 +11979,20 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.program_number #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
+    #   resp.job_template.settings.inputs[0].video_selector.sample_range #=> String, one of "FOLLOW", "FULL_RANGE", "LIMITED_RANGE"
+    #   resp.job_template.settings.kantar_watermark.channel_name #=> String
+    #   resp.job_template.settings.kantar_watermark.content_reference #=> String
+    #   resp.job_template.settings.kantar_watermark.credentials_secret_name #=> String
+    #   resp.job_template.settings.kantar_watermark.file_offset #=> Float
+    #   resp.job_template.settings.kantar_watermark.kantar_license_id #=> Integer
+    #   resp.job_template.settings.kantar_watermark.kantar_server_url #=> String
+    #   resp.job_template.settings.kantar_watermark.log_destination #=> String
+    #   resp.job_template.settings.kantar_watermark.metadata_3 #=> String
+    #   resp.job_template.settings.kantar_watermark.metadata_4 #=> String
+    #   resp.job_template.settings.kantar_watermark.metadata_5 #=> String
+    #   resp.job_template.settings.kantar_watermark.metadata_6 #=> String
+    #   resp.job_template.settings.kantar_watermark.metadata_7 #=> String
+    #   resp.job_template.settings.kantar_watermark.metadata_8 #=> String
     #   resp.job_template.settings.motion_image_inserter.framerate.framerate_denominator #=> Integer
     #   resp.job_template.settings.motion_image_inserter.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.motion_image_inserter.input #=> String
@@ -12054,11 +12278,15 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.height #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
@@ -12067,6 +12295,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.width #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
@@ -12138,6 +12367,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
@@ -12647,11 +12877,15 @@ module Aws::MediaConvert
     #               alignment: "CENTERED", # accepts CENTERED, LEFT
     #               background_color: "NONE", # accepts NONE, BLACK, WHITE
     #               background_opacity: 1,
+    #               dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #               dds_x_coordinate: 1,
+    #               dds_y_coordinate: 1,
     #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #               font_opacity: 1,
     #               font_resolution: 1,
     #               font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #               font_size: 1,
+    #               height: 1,
     #               outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #               outline_size: 1,
     #               shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -12660,6 +12894,7 @@ module Aws::MediaConvert
     #               shadow_y_offset: 1,
     #               subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #               teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #               width: 1,
     #               x_position: 1,
     #               y_position: 1,
     #             },
@@ -12759,6 +12994,7 @@ module Aws::MediaConvert
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           audio_frames_per_pes: 1,
     #           audio_pids: [1],
+    #           max_pcr_interval: 1,
     #           nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #           pat_interval: 1,
     #           pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -13263,11 +13499,15 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.height #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
@@ -13276,6 +13516,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.width #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_608_channel_number #=> Integer
@@ -13347,6 +13588,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.preset.settings.container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
@@ -13732,7 +13974,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

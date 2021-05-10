@@ -1043,9 +1043,9 @@ module Aws::ECS
     #   together in a task definition, the `name` of one container can be
     #   entered in the `links` of another container to connect the
     #   containers. Up to 255 letters (uppercase and lowercase), numbers,
-    #   and hyphens are allowed. This parameter maps to `name` in the
-    #   [Create a container][1] section of the [Docker Remote API][2] and
-    #   the `--name` option to [docker run][3].
+    #   underscores, and hyphens are allowed. This parameter maps to `name`
+    #   in the [Create a container][1] section of the [Docker Remote API][2]
+    #   and the `--name` option to [docker run][3].
     #
     #
     #
@@ -1233,12 +1233,12 @@ module Aws::ECS
     #   other without the need for port mappings. This parameter is only
     #   supported if the network mode of a task definition is `bridge`. The
     #   `name:internalName` construct is analogous to `name:alias` in Docker
-    #   links. Up to 255 letters (uppercase and lowercase), numbers, and
-    #   hyphens are allowed. For more information about linking Docker
-    #   containers, go to [Legacy container links][1] in the Docker
-    #   documentation. This parameter maps to `Links` in the [Create a
-    #   container][2] section of the [Docker Remote API][3] and the `--link`
-    #   option to [docker run][4].
+    #   links. Up to 255 letters (uppercase and lowercase), numbers,
+    #   underscores, and hyphens are allowed. For more information about
+    #   linking Docker containers, go to [Legacy container links][1] in the
+    #   Docker documentation. This parameter maps to `Links` in the [Create
+    #   a container][2] section of the [Docker Remote API][3] and the
+    #   `--link` option to [docker run][4].
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
@@ -2525,7 +2525,8 @@ module Aws::ECS
     # @!attribute [rw] cluster_name
     #   The name of your cluster. If you do not specify a name for your
     #   cluster, you create a cluster named `default`. Up to 255 letters
-    #   (uppercase and lowercase), numbers, and hyphens are allowed.
+    #   (uppercase and lowercase), numbers, underscores, and hyphens are
+    #   allowed.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2716,9 +2717,10 @@ module Aws::ECS
     #
     # @!attribute [rw] service_name
     #   The name of your service. Up to 255 letters (uppercase and
-    #   lowercase), numbers, and hyphens are allowed. Service names must be
-    #   unique within a cluster, but you can have similarly named services
-    #   in multiple clusters within a Region or across multiple Regions.
+    #   lowercase), numbers, underscores, and hyphens are allowed. Service
+    #   names must be unique within a cluster, but you can have similarly
+    #   named services in multiple clusters within a Region or across
+    #   multiple Regions.
     #   @return [String]
     #
     # @!attribute [rw] task_definition
@@ -5021,7 +5023,8 @@ module Aws::ECS
     #
     # @!attribute [rw] interactive
     #   Whether or not the execute command session is running in interactive
-    #   mode.
+    #   mode. Amazon ECS only supports initiating interactive sessions, so
+    #   you must specify `true` for this value.
     #   @return [Boolean]
     #
     # @!attribute [rw] session
@@ -7980,7 +7983,8 @@ module Aws::ECS
     #   You must specify a `family` for a task definition, which allows you
     #   to track multiple versions of the same task definition. The `family`
     #   is used as a name for your task definition. Up to 255 letters
-    #   (uppercase and lowercase), numbers, and hyphens are allowed.
+    #   (uppercase and lowercase), numbers, underscores, and hyphens are
+    #   allowed.
     #   @return [String]
     #
     # @!attribute [rw] task_role_arn
@@ -8902,9 +8906,10 @@ module Aws::ECS
     #
     # @!attribute [rw] service_name
     #   The name of your service. Up to 255 letters (uppercase and
-    #   lowercase), numbers, and hyphens are allowed. Service names must be
-    #   unique within a cluster, but you can have similarly named services
-    #   in multiple clusters within a Region or across multiple Regions.
+    #   lowercase), numbers, underscores, and hyphens are allowed. Service
+    #   names must be unique within a cluster, but you can have similarly
+    #   named services in multiple clusters within a Region or across
+    #   multiple Regions.
     #   @return [String]
     #
     # @!attribute [rw] cluster_arn
@@ -11891,8 +11896,9 @@ module Aws::ECS
     #
     # @!attribute [rw] name
     #   The name of the volume. Up to 255 letters (uppercase and lowercase),
-    #   numbers, and hyphens are allowed. This name is referenced in the
-    #   `sourceVolume` parameter of container definition `mountPoints`.
+    #   numbers, underscores, and hyphens are allowed. This name is
+    #   referenced in the `sourceVolume` parameter of container definition
+    #   `mountPoints`.
     #   @return [String]
     #
     # @!attribute [rw] host

@@ -50,9 +50,9 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The metadata that you apply to the cluster to assist with
+    #   The metadata that you apply to the add-on to assist with
     #   categorization and organization. Each tag consists of a key and an
-    #   optional value, both of which you define. Cluster tags do not
+    #   optional value, both of which you define. Add-on tags do not
     #   propagate to any other resources associated with the cluster.
     #   @return [Hash<String,String>]
     #
@@ -872,6 +872,13 @@ module Aws::EKS
     #         labels: {
     #           "labelKey" => "labelValue",
     #         },
+    #         taints: [
+    #           {
+    #             key: "taintKey",
+    #             value: "taintValue",
+    #             effect: "NO_SCHEDULE", # accepts NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE
+    #           },
+    #         ],
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -913,13 +920,11 @@ module Aws::EKS
     #
     # @!attribute [rw] subnets
     #   The subnets to use for the Auto Scaling group that is created for
-    #   your node group. These subnets must have the tag key
-    #   `kubernetes.io/cluster/CLUSTER_NAME` with a value of `shared`, where
-    #   `CLUSTER_NAME` is replaced with the name of your cluster. If you
-    #   specify `launchTemplate`, then don't specify [ `SubnetId` ][1] in
-    #   your launch template, or the node group deployment will fail. For
-    #   more information about using launch templates with Amazon EKS, see
-    #   [Launch template support][2] in the Amazon EKS User Guide.
+    #   your node group. If you specify `launchTemplate`, then don't
+    #   specify [ `SubnetId` ][1] in your launch template, or the node group
+    #   deployment will fail. For more information about using launch
+    #   templates with Amazon EKS, see [Launch template support][2] in the
+    #   Amazon EKS User Guide.
     #
     #
     #
@@ -1002,6 +1007,10 @@ module Aws::EKS
     #   when they are created.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] taints
+    #   The Kubernetes taints to be applied to the nodes in the node group.
+    #   @return [Array<Types::Taint>]
+    #
     # @!attribute [rw] tags
     #   The metadata to apply to the node group to assist with
     #   categorization and organization. Each tag consists of a key and an
@@ -1073,6 +1082,7 @@ module Aws::EKS
       :remote_access,
       :node_role,
       :labels,
+      :taints,
       :tags,
       :client_request_token,
       :launch_template,
@@ -1636,8 +1646,8 @@ module Aws::EKS
     #   @return [Array<String>]
     #
     # @!attribute [rw] provider
-    #   AWS Key Management Service (AWS KMS) customer master key (CMK).
-    #   Either the ARN or the alias can be used.
+    #   AWS Key Management Service (AWS KMS) key. Either the ARN or the
+    #   alias can be used.
     #   @return [Types::Provider]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/EncryptionConfig AWS API Documentation
@@ -2707,6 +2717,14 @@ module Aws::EKS
     #    </note>
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] taints
+    #   The Kubernetes taints to be applied to the nodes in the node group
+    #   when they are created. Effect is one of `NoSchedule`,
+    #   `PreferNoSchedule`, or `NoExecute`. Kubernetes taints can be used
+    #   together with tolerations to control how workloads are scheduled to
+    #   your nodes.
+    #   @return [Array<Types::Taint>]
+    #
     # @!attribute [rw] resources
     #   The resources associated with the node group, such as Auto Scaling
     #   groups and security groups for remote access.
@@ -2755,6 +2773,7 @@ module Aws::EKS
       :ami_type,
       :node_role,
       :labels,
+      :taints,
       :resources,
       :disk_size,
       :health,
@@ -2800,9 +2819,9 @@ module Aws::EKS
     end
 
     # An object representing the scaling configuration details for the Auto
-    # Scaling group that is associated with your node group. If you specify
-    # a value for any property, then you must specify values for all of the
-    # properties.
+    # Scaling group that is associated with your node group. When creating a
+    # node group, you must specify all or none of the properties. When
+    # updating a node group, you can specify any or none of the properties.
     #
     # @note When making an API call, you may pass NodegroupScalingConfig
     #   data as a hash:
@@ -3058,8 +3077,8 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # Identifies the AWS Key Management Service (AWS KMS) customer master
-    # key (CMK) used to encrypt the secrets.
+    # Identifies the AWS Key Management Service (AWS KMS) key used to
+    # encrypt the secrets.
     #
     # @note When making an API call, you may pass Provider
     #   data as a hash:
@@ -3069,11 +3088,11 @@ module Aws::EKS
     #       }
     #
     # @!attribute [rw] key_arn
-    #   Amazon Resource Name (ARN) or alias of the customer master key
-    #   (CMK). The CMK must be symmetric, created in the same region as the
-    #   cluster, and if the CMK was created in a different account, the user
-    #   must have access to the CMK. For more information, see [Allowing
-    #   Users in Other Accounts to Use a CMK][1] in the *AWS Key Management
+    #   Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must
+    #   be symmetric, created in the same region as the cluster, and if the
+    #   KMS key was created in a different account, the user must have
+    #   access to the KMS key. For more information, see [Allowing Users in
+    #   Other Accounts to Use a KMS key][1] in the *AWS Key Management
     #   Service Developer Guide*.
     #
     #
@@ -3291,6 +3310,39 @@ module Aws::EKS
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # A property that allows a node to repel a set of pods.
+    #
+    # @note When making an API call, you may pass Taint
+    #   data as a hash:
+    #
+    #       {
+    #         key: "taintKey",
+    #         value: "taintValue",
+    #         effect: "NO_SCHEDULE", # accepts NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key of the taint.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the taint.
+    #   @return [String]
+    #
+    # @!attribute [rw] effect
+    #   The effect of the taint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Taint AWS API Documentation
+    #
+    class Taint < Struct.new(
+      :key,
+      :value,
+      :effect)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # At least one of your specified cluster subnets is in an Availability
     # Zone that does not support Amazon EKS. The exception output specifies
@@ -3659,6 +3711,22 @@ module Aws::EKS
     #           },
     #           remove_labels: ["String"],
     #         },
+    #         taints: {
+    #           add_or_update_taints: [
+    #             {
+    #               key: "taintKey",
+    #               value: "taintValue",
+    #               effect: "NO_SCHEDULE", # accepts NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE
+    #             },
+    #           ],
+    #           remove_taints: [
+    #             {
+    #               key: "taintKey",
+    #               value: "taintValue",
+    #               effect: "NO_SCHEDULE", # accepts NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE
+    #             },
+    #           ],
+    #         },
     #         scaling_config: {
     #           min_size: 1,
     #           max_size: 1,
@@ -3681,6 +3749,11 @@ module Aws::EKS
     #   after the update.
     #   @return [Types::UpdateLabelsPayload]
     #
+    # @!attribute [rw] taints
+    #   The Kubernetes taints to be applied to the nodes in the node group
+    #   after the update.
+    #   @return [Types::UpdateTaintsPayload]
+    #
     # @!attribute [rw] scaling_config
     #   The scaling configuration details for the Auto Scaling group after
     #   the update.
@@ -3700,6 +3773,7 @@ module Aws::EKS
       :cluster_name,
       :nodegroup_name,
       :labels,
+      :taints,
       :scaling_config,
       :client_request_token)
       SENSITIVE = []
@@ -3841,6 +3915,45 @@ module Aws::EKS
     class UpdateParam < Struct.new(
       :type,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing the details of an update to a taints payload.
+    #
+    # @note When making an API call, you may pass UpdateTaintsPayload
+    #   data as a hash:
+    #
+    #       {
+    #         add_or_update_taints: [
+    #           {
+    #             key: "taintKey",
+    #             value: "taintValue",
+    #             effect: "NO_SCHEDULE", # accepts NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE
+    #           },
+    #         ],
+    #         remove_taints: [
+    #           {
+    #             key: "taintKey",
+    #             value: "taintValue",
+    #             effect: "NO_SCHEDULE", # accepts NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] add_or_update_taints
+    #   Kubernetes taints to be added or updated.
+    #   @return [Array<Types::Taint>]
+    #
+    # @!attribute [rw] remove_taints
+    #   Kubernetes taints to be removed.
+    #   @return [Array<Types::Taint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateTaintsPayload AWS API Documentation
+    #
+    class UpdateTaintsPayload < Struct.new(
+      :add_or_update_taints,
+      :remove_taints)
       SENSITIVE = []
       include Aws::Structure
     end

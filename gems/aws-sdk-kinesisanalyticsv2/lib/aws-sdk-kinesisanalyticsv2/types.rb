@@ -1086,7 +1086,7 @@ module Aws::KinesisAnalyticsV2
     #   @return [Array<Types::CloudWatchLoggingOptionDescription>]
     #
     # @!attribute [rw] application_maintenance_configuration_description
-    #   Describes the time window for automatic application maintenance.
+    #   The details of the maintenance configuration for the application.
     #   @return [Types::ApplicationMaintenanceConfigurationDescription]
     #
     # @!attribute [rw] application_version_updated_from
@@ -1103,6 +1103,10 @@ module Aws::KinesisAnalyticsV2
     #   A value you use to implement strong concurrency for application
     #   updates.
     #   @return [String]
+    #
+    # @!attribute [rw] application_version_rolled_back_to
+    #   The version to which you want to roll back the application.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationDetail AWS API Documentation
     #
@@ -1121,19 +1125,20 @@ module Aws::KinesisAnalyticsV2
       :application_maintenance_configuration_description,
       :application_version_updated_from,
       :application_version_rolled_back_from,
-      :conditional_token)
+      :conditional_token,
+      :application_version_rolled_back_to)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Describes the time window for automatic application maintenance.
+    # The details of the maintenance configuration for the application.
     #
     # @!attribute [rw] application_maintenance_window_start_time
-    #   The start time for the automatic maintenance window.
+    #   The start time for the maintenance window.
     #   @return [String]
     #
     # @!attribute [rw] application_maintenance_window_end_time
-    #   The end time for the automatic maintenance window.
+    #   The end time for the maintenance window.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationMaintenanceConfigurationDescription AWS API Documentation
@@ -1145,8 +1150,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes the updated time window for automatic application
-    # maintenance.
+    # Describes the updated maintenance configuration for the application.
     #
     # @note When making an API call, you may pass ApplicationMaintenanceConfigurationUpdate
     #   data as a hash:
@@ -1156,7 +1160,7 @@ module Aws::KinesisAnalyticsV2
     #       }
     #
     # @!attribute [rw] application_maintenance_window_start_time_update
-    #   The updated start time for the automatic maintenance window.
+    #   The updated start time for the maintenance window.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationMaintenanceConfigurationUpdate AWS API Documentation
@@ -1292,6 +1296,26 @@ module Aws::KinesisAnalyticsV2
       :application_status,
       :application_version_id,
       :runtime_environment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of the application version.
+    #
+    # @!attribute [rw] application_version_id
+    #   The ID of the application version. Kinesis Data Analytics updates
+    #   the `ApplicationVersionId` each time you update the application.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] application_status
+    #   The status of the application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationVersionSummary AWS API Documentation
+    #
+    class ApplicationVersionSummary < Struct.new(
+      :application_version_id,
+      :application_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2532,6 +2556,47 @@ module Aws::KinesisAnalyticsV2
     #
     class DescribeApplicationSnapshotResponse < Struct.new(
       :snapshot_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeApplicationVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_name: "ApplicationName", # required
+    #         application_version_id: 1, # required
+    #       }
+    #
+    # @!attribute [rw] application_name
+    #   The name of the application for which you want to get the version
+    #   description.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_version_id
+    #   The ID of the application version for which you want to get the
+    #   description.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeApplicationVersionRequest AWS API Documentation
+    #
+    class DescribeApplicationVersionRequest < Struct.new(
+      :application_name,
+      :application_version_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_version_detail
+    #   Describes the application, including the application Amazon Resource
+    #   Name (ARN), status, latest version, and input and output
+    #   configurations.
+    #   @return [Types::ApplicationDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeApplicationVersionResponse AWS API Documentation
+    #
+    class DescribeApplicationVersionResponse < Struct.new(
+      :application_version_detail)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4014,6 +4079,75 @@ module Aws::KinesisAnalyticsV2
     #
     class ListApplicationSnapshotsResponse < Struct.new(
       :snapshot_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListApplicationVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_name: "ApplicationName", # required
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] application_name
+    #   The name of the application for which you want to list all versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of versions to list in this invocation of the
+    #   operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If a previous invocation of this operation returned a pagination
+    #   token, pass it into this value to retrieve the next set of results.
+    #   For more information about pagination, see [Using the AWS Command
+    #   Line Interface's Pagination Options][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/pagination.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListApplicationVersionsRequest AWS API Documentation
+    #
+    class ListApplicationVersionsRequest < Struct.new(
+      :application_name,
+      :limit,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_version_summaries
+    #   A list of the application versions and the associated configuration
+    #   summaries. The list includes application versions that were rolled
+    #   back.
+    #
+    #   To get the complete description of a specific application version,
+    #   invoke the DescribeApplicationVersion operation.
+    #   @return [Array<Types::ApplicationVersionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token for the next set of results, or `null` if there
+    #   are no additional results. To retrieve the next set of items, pass
+    #   this token into a subsequent invocation of this operation. For more
+    #   information about pagination, see [Using the AWS Command Line
+    #   Interface's Pagination Options][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/pagination.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListApplicationVersionsResponse AWS API Documentation
+    #
+    class ListApplicationVersionsResponse < Struct.new(
+      :application_version_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -5973,7 +6107,7 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] application_name
     #   The name of the application for which you want to update the
-    #   maintenance time window.
+    #   maintenance configuration.
     #   @return [String]
     #
     # @!attribute [rw] application_maintenance_configuration_update

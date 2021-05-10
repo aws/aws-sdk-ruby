@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2021-05-10)
+------------------
+
+* Feature - This release contains updates for Amazon ECS.
+
 1.77.0 (2021-04-29)
 ------------------
 

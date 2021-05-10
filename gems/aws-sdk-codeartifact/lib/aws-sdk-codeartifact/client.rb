@@ -967,7 +967,7 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
-    # Returns a [ `DomainDescription` ][1] object that contains information
+    # Returns a [DomainDescription][1] object that contains information
     # about the requested domain.
     #
     #
@@ -1013,7 +1013,7 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
-    # Returns a [ `PackageVersionDescription` ][1] object that contains
+    # Returns a [PackageVersionDescription][1] object that contains
     # information about the requested package version.
     #
     #
@@ -1207,12 +1207,12 @@ module Aws::CodeArtifact
     # status to `Disposed`. A disposed package version cannot be restored in
     # your repository because its assets are deleted.
     #
-    # To view all disposed package versions in a repository, use [
-    # `ListPackageVersions` ][1] and set the [ `status` ][2] parameter to
+    # To view all disposed package versions in a repository, use
+    # [ListPackageVersions][1] and set the [status][2] parameter to
     # `Disposed`.
     #
-    # To view information about a disposed package version, use [
-    # `DescribePackageVersion` ][3]..
+    # To view information about a disposed package version, use
+    # [DescribePackageVersion][3].
     #
     #
     #
@@ -1754,8 +1754,8 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
-    # Returns a list of [ `AssetSummary` ][1] objects for assets in a
-    # package version.
+    # Returns a list of [AssetSummary][1] objects for assets in a package
+    # version.
     #
     #
     #
@@ -1860,7 +1860,7 @@ module Aws::CodeArtifact
     end
 
     # Returns the direct dependencies for a package version. The
-    # dependencies are returned as [ `PackageDependency` ][1] objects.
+    # dependencies are returned as [PackageDependency][1] objects.
     # CodeArtifact extracts the dependencies for a package version from the
     # metadata file for the package format (for example, the `package.json`
     # file for npm packages and the `pom.xml` file for Maven). Any package
@@ -1962,7 +1962,7 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
-    # Returns a list of [ `PackageVersionSummary` ][1] objects for package
+    # Returns a list of [PackageVersionSummary][1] objects for package
     # versions in a repository that match the request parameters.
     #
     #
@@ -2077,7 +2077,7 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
-    # Returns a list of [ `PackageSummary` ][1] objects for packages in a
+    # Returns a list of [PackageSummary][1] objects for packages in a
     # repository that match the request parameters.
     #
     #
@@ -2165,7 +2165,7 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
-    # Returns a list of [ `RepositorySummary` ][1] objects. Each
+    # Returns a list of [RepositorySummary][1] objects. Each
     # `RepositorySummary` contains information about a repository in the
     # specified AWS account and that matches the input parameters.
     #
@@ -2220,7 +2220,7 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
-    # Returns a list of [ `RepositorySummary` ][1] objects. Each
+    # Returns a list of [RepositorySummary][1] objects. Each
     # `RepositorySummary` contains information about a repository in the
     # specified domain and that matches the input parameters.
     #
@@ -2668,7 +2668,7 @@ module Aws::CodeArtifact
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codeartifact'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

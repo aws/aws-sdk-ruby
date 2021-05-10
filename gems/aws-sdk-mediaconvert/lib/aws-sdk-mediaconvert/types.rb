@@ -1804,11 +1804,15 @@ module Aws::MediaConvert
     #             alignment: "CENTERED", # accepts CENTERED, LEFT
     #             background_color: "NONE", # accepts NONE, BLACK, WHITE
     #             background_opacity: 1,
+    #             dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #             dds_x_coordinate: 1,
+    #             dds_y_coordinate: 1,
     #             font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #             font_opacity: 1,
     #             font_resolution: 1,
     #             font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #             font_size: 1,
+    #             height: 1,
     #             outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #             outline_size: 1,
     #             shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -1817,6 +1821,7 @@ module Aws::MediaConvert
     #             shadow_y_offset: 1,
     #             subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #             teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #             width: 1,
     #             x_position: 1,
     #             y_position: 1,
     #           },
@@ -1932,11 +1937,15 @@ module Aws::MediaConvert
     #             alignment: "CENTERED", # accepts CENTERED, LEFT
     #             background_color: "NONE", # accepts NONE, BLACK, WHITE
     #             background_opacity: 1,
+    #             dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #             dds_x_coordinate: 1,
+    #             dds_y_coordinate: 1,
     #             font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #             font_opacity: 1,
     #             font_resolution: 1,
     #             font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #             font_size: 1,
+    #             height: 1,
     #             outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #             outline_size: 1,
     #             shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -1945,6 +1954,7 @@ module Aws::MediaConvert
     #             shadow_y_offset: 1,
     #             subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #             teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #             width: 1,
     #             x_position: 1,
     #             y_position: 1,
     #           },
@@ -2059,11 +2069,15 @@ module Aws::MediaConvert
     #           alignment: "CENTERED", # accepts CENTERED, LEFT
     #           background_color: "NONE", # accepts NONE, BLACK, WHITE
     #           background_opacity: 1,
+    #           dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #           dds_x_coordinate: 1,
+    #           dds_y_coordinate: 1,
     #           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #           font_opacity: 1,
     #           font_resolution: 1,
     #           font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #           font_size: 1,
+    #           height: 1,
     #           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #           outline_size: 1,
     #           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -2072,6 +2086,7 @@ module Aws::MediaConvert
     #           shadow_y_offset: 1,
     #           subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #           width: 1,
     #           x_position: 1,
     #           y_position: 1,
     #         },
@@ -3130,6 +3145,7 @@ module Aws::MediaConvert
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           audio_frames_per_pes: 1,
     #           audio_pids: [1],
+    #           max_pcr_interval: 1,
     #           nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #           pat_interval: 1,
     #           pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -3422,9 +3438,25 @@ module Aws::MediaConvert
     #                 pid: 1,
     #                 program_number: 1,
     #                 rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
+    #                 sample_range: "FOLLOW", # accepts FOLLOW, FULL_RANGE, LIMITED_RANGE
     #               },
     #             },
     #           ],
+    #           kantar_watermark: {
+    #             channel_name: "__stringMin1Max20",
+    #             content_reference: "__stringMin1Max50PatternAZAZ09",
+    #             credentials_secret_name: "__stringMin1Max512PatternAZAZ09",
+    #             file_offset: 1.0,
+    #             kantar_license_id: 1,
+    #             kantar_server_url: "__stringPatternHttpsKantarmediaCom",
+    #             log_destination: "__stringPatternS3",
+    #             metadata_3: "__stringMin1Max50",
+    #             metadata_4: "__stringMin1Max50",
+    #             metadata_5: "__stringMin1Max50",
+    #             metadata_6: "__stringMin1Max50",
+    #             metadata_7: "__stringMin1Max50",
+    #             metadata_8: "__stringMin1Max50",
+    #           },
     #           motion_image_inserter: {
     #             framerate: {
     #               framerate_denominator: 1,
@@ -3842,11 +3874,15 @@ module Aws::MediaConvert
     #                           alignment: "CENTERED", # accepts CENTERED, LEFT
     #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                           background_opacity: 1,
+    #                           dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                           dds_x_coordinate: 1,
+    #                           dds_y_coordinate: 1,
     #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                           font_opacity: 1,
     #                           font_resolution: 1,
     #                           font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                           font_size: 1,
+    #                           height: 1,
     #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                           outline_size: 1,
     #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -3855,6 +3891,7 @@ module Aws::MediaConvert
     #                           shadow_y_offset: 1,
     #                           subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                           width: 1,
     #                           x_position: 1,
     #                           y_position: 1,
     #                         },
@@ -3954,6 +3991,7 @@ module Aws::MediaConvert
     #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
+    #                       max_pcr_interval: 1,
     #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                       pat_interval: 1,
     #                       pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -4666,9 +4704,25 @@ module Aws::MediaConvert
     #                 pid: 1,
     #                 program_number: 1,
     #                 rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
+    #                 sample_range: "FOLLOW", # accepts FOLLOW, FULL_RANGE, LIMITED_RANGE
     #               },
     #             },
     #           ],
+    #           kantar_watermark: {
+    #             channel_name: "__stringMin1Max20",
+    #             content_reference: "__stringMin1Max50PatternAZAZ09",
+    #             credentials_secret_name: "__stringMin1Max512PatternAZAZ09",
+    #             file_offset: 1.0,
+    #             kantar_license_id: 1,
+    #             kantar_server_url: "__stringPatternHttpsKantarmediaCom",
+    #             log_destination: "__stringPatternS3",
+    #             metadata_3: "__stringMin1Max50",
+    #             metadata_4: "__stringMin1Max50",
+    #             metadata_5: "__stringMin1Max50",
+    #             metadata_6: "__stringMin1Max50",
+    #             metadata_7: "__stringMin1Max50",
+    #             metadata_8: "__stringMin1Max50",
+    #           },
     #           motion_image_inserter: {
     #             framerate: {
     #               framerate_denominator: 1,
@@ -5086,11 +5140,15 @@ module Aws::MediaConvert
     #                           alignment: "CENTERED", # accepts CENTERED, LEFT
     #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                           background_opacity: 1,
+    #                           dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                           dds_x_coordinate: 1,
+    #                           dds_y_coordinate: 1,
     #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                           font_opacity: 1,
     #                           font_resolution: 1,
     #                           font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                           font_size: 1,
+    #                           height: 1,
     #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                           outline_size: 1,
     #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -5099,6 +5157,7 @@ module Aws::MediaConvert
     #                           shadow_y_offset: 1,
     #                           subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                           width: 1,
     #                           x_position: 1,
     #                           y_position: 1,
     #                         },
@@ -5198,6 +5257,7 @@ module Aws::MediaConvert
     #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
+    #                       max_pcr_interval: 1,
     #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                       pat_interval: 1,
     #                       pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -5871,11 +5931,15 @@ module Aws::MediaConvert
     #                   alignment: "CENTERED", # accepts CENTERED, LEFT
     #                   background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                   background_opacity: 1,
+    #                   dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                   dds_x_coordinate: 1,
+    #                   dds_y_coordinate: 1,
     #                   font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                   font_opacity: 1,
     #                   font_resolution: 1,
     #                   font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                   font_size: 1,
+    #                   height: 1,
     #                   outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                   outline_size: 1,
     #                   shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -5884,6 +5948,7 @@ module Aws::MediaConvert
     #                   shadow_y_offset: 1,
     #                   subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                   teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                   width: 1,
     #                   x_position: 1,
     #                   y_position: 1,
     #                 },
@@ -5983,6 +6048,7 @@ module Aws::MediaConvert
     #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               audio_frames_per_pes: 1,
     #               audio_pids: [1],
+    #               max_pcr_interval: 1,
     #               nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #               pat_interval: 1,
     #               pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -7216,11 +7282,15 @@ module Aws::MediaConvert
     #         alignment: "CENTERED", # accepts CENTERED, LEFT
     #         background_color: "NONE", # accepts NONE, BLACK, WHITE
     #         background_opacity: 1,
+    #         dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #         dds_x_coordinate: 1,
+    #         dds_y_coordinate: 1,
     #         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #         font_opacity: 1,
     #         font_resolution: 1,
     #         font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #         font_size: 1,
+    #         height: 1,
     #         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #         outline_size: 1,
     #         shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -7229,6 +7299,7 @@ module Aws::MediaConvert
     #         shadow_y_offset: 1,
     #         subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #         teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #         width: 1,
     #         x_position: 1,
     #         y_position: 1,
     #       }
@@ -7255,6 +7326,53 @@ module Aws::MediaConvert
     #   Specifies the opacity of the background rectangle. 255 is opaque; 0
     #   is transparent. Leaving this parameter blank is equivalent to
     #   setting it to 0 (transparent). All burn-in and DVB-Sub font settings
+    #   must match.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dds_handling
+    #   Specify how MediaConvert handles the display definition segment
+    #   (DDS). Keep the default, None (NONE), to exclude the DDS from this
+    #   set of captions. Choose No display window (NO\_DISPLAY\_WINDOW) to
+    #   have MediaConvert include the DDS but not include display window
+    #   data. In this case, MediaConvert writes that information to the page
+    #   composition segment (PCS) instead. Choose Specify (SPECIFIED) to
+    #   have MediaConvert set up the display window based on the values that
+    #   you specify in related job settings. For video resolutions that are
+    #   576 pixels or smaller in height, MediaConvert doesn't include the
+    #   DDS, regardless of the value you choose for DDS handling
+    #   (ddsHandling). In this case, it doesn't write the display window
+    #   data to the PCS either. Related settings: Use the settings DDS
+    #   x-coordinate (ddsXCoordinate) and DDS y-coordinate (ddsYCoordinate)
+    #   to specify the offset between the top left corner of the display
+    #   window and the top left corner of the video frame. All burn-in and
+    #   DVB-Sub font settings must match.
+    #   @return [String]
+    #
+    # @!attribute [rw] dds_x_coordinate
+    #   Use this setting, along with DDS y-coordinate (ddsYCoordinate), to
+    #   specify the upper left corner of the display definition segment
+    #   (DDS) display window. With this setting, specify the distance, in
+    #   pixels, between the left side of the frame and the left side of the
+    #   DDS display window. Keep the default value, 0, to have MediaConvert
+    #   automatically choose this offset. Related setting: When you use this
+    #   setting, you must set DDS handling (ddsHandling) to a value other
+    #   than None (NONE). MediaConvert uses these values to determine
+    #   whether to write page position data to the DDS or to the page
+    #   composition segment (PCS). All burn-in and DVB-Sub font settings
+    #   must match.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dds_y_coordinate
+    #   Use this setting, along with DDS x-coordinate (ddsXCoordinate), to
+    #   specify the upper left corner of the display definition segment
+    #   (DDS) display window. With this setting, specify the distance, in
+    #   pixels, between the top of the frame and the top of the DDS display
+    #   window. Keep the default value, 0, to have MediaConvert
+    #   automatically choose this offset. Related setting: When you use this
+    #   setting, you must set DDS handling (ddsHandling) to a value other
+    #   than None (NONE). MediaConvert uses these values to determine
+    #   whether to write page position data to the DDS or to the page
+    #   composition segment (PCS). All burn-in and DVB-Sub font settings
     #   must match.
     #   @return [Integer]
     #
@@ -7287,6 +7405,13 @@ module Aws::MediaConvert
     #   A positive integer indicates the exact font size in points. Set to 0
     #   for automatic font size selection. All burn-in and DVB-Sub font
     #   settings must match.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] height
+    #   Specify the height, in pixels, of this set of DVB-Sub captions. The
+    #   default value is 576 pixels. Related setting: When you use this
+    #   setting, you must set DDS handling (ddsHandling) to a value other
+    #   than None (NONE). All burn-in and DVB-Sub font settings must match.
     #   @return [Integer]
     #
     # @!attribute [rw] outline_color
@@ -7344,6 +7469,13 @@ module Aws::MediaConvert
     #   if the captions are closed caption.
     #   @return [String]
     #
+    # @!attribute [rw] width
+    #   Specify the width, in pixels, of this set of DVB-Sub captions. The
+    #   default value is 720 pixels. Related setting: When you use this
+    #   setting, you must set DDS handling (ddsHandling) to a value other
+    #   than None (NONE). All burn-in and DVB-Sub font settings must match.
+    #   @return [Integer]
+    #
     # @!attribute [rw] x_position
     #   Specifies the horizontal position of the caption relative to the
     #   left side of the output in pixels. A value of 10 would result in the
@@ -7372,11 +7504,15 @@ module Aws::MediaConvert
       :alignment,
       :background_color,
       :background_opacity,
+      :dds_handling,
+      :dds_x_coordinate,
+      :dds_y_coordinate,
       :font_color,
       :font_opacity,
       :font_resolution,
       :font_script,
       :font_size,
+      :height,
       :outline_color,
       :outline_size,
       :shadow_color,
@@ -7385,6 +7521,7 @@ module Aws::MediaConvert
       :shadow_y_offset,
       :subtitling_type,
       :teletext_spacing,
+      :width,
       :x_position,
       :y_position)
       SENSITIVE = []
@@ -10369,6 +10506,7 @@ module Aws::MediaConvert
     #           pid: 1,
     #           program_number: 1,
     #           rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
+    #           sample_range: "FOLLOW", # accepts FOLLOW, FULL_RANGE, LIMITED_RANGE
     #         },
     #       }
     #
@@ -10806,6 +10944,7 @@ module Aws::MediaConvert
     #           pid: 1,
     #           program_number: 1,
     #           rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
+    #           sample_range: "FOLLOW", # accepts FOLLOW, FULL_RANGE, LIMITED_RANGE
     #         },
     #       }
     #
@@ -11457,9 +11596,25 @@ module Aws::MediaConvert
     #               pid: 1,
     #               program_number: 1,
     #               rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
+    #               sample_range: "FOLLOW", # accepts FOLLOW, FULL_RANGE, LIMITED_RANGE
     #             },
     #           },
     #         ],
+    #         kantar_watermark: {
+    #           channel_name: "__stringMin1Max20",
+    #           content_reference: "__stringMin1Max50PatternAZAZ09",
+    #           credentials_secret_name: "__stringMin1Max512PatternAZAZ09",
+    #           file_offset: 1.0,
+    #           kantar_license_id: 1,
+    #           kantar_server_url: "__stringPatternHttpsKantarmediaCom",
+    #           log_destination: "__stringPatternS3",
+    #           metadata_3: "__stringMin1Max50",
+    #           metadata_4: "__stringMin1Max50",
+    #           metadata_5: "__stringMin1Max50",
+    #           metadata_6: "__stringMin1Max50",
+    #           metadata_7: "__stringMin1Max50",
+    #           metadata_8: "__stringMin1Max50",
+    #         },
     #         motion_image_inserter: {
     #           framerate: {
     #             framerate_denominator: 1,
@@ -11877,11 +12032,15 @@ module Aws::MediaConvert
     #                         alignment: "CENTERED", # accepts CENTERED, LEFT
     #                         background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                         background_opacity: 1,
+    #                         dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                         dds_x_coordinate: 1,
+    #                         dds_y_coordinate: 1,
     #                         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                         font_opacity: 1,
     #                         font_resolution: 1,
     #                         font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                         font_size: 1,
+    #                         height: 1,
     #                         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                         outline_size: 1,
     #                         shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -11890,6 +12049,7 @@ module Aws::MediaConvert
     #                         shadow_y_offset: 1,
     #                         subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                         teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                         width: 1,
     #                         x_position: 1,
     #                         y_position: 1,
     #                       },
@@ -11989,6 +12149,7 @@ module Aws::MediaConvert
     #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     audio_frames_per_pes: 1,
     #                     audio_pids: [1],
+    #                     max_pcr_interval: 1,
     #                     nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                     pat_interval: 1,
     #                     pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -12415,6 +12576,16 @@ module Aws::MediaConvert
     #   concantenated together to create the output.
     #   @return [Array<Types::Input>]
     #
+    # @!attribute [rw] kantar_watermark
+    #   Use these settings only when you use Kantar watermarking. Specify
+    #   the values that MediaConvert uses to generate and place Kantar
+    #   watermarks in your output audio. These settings apply to every
+    #   output in your job. In addition to specifying these values, you also
+    #   need to store your Kantar credentials in AWS Secrets Manager. For
+    #   more information, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html.
+    #   @return [Types::KantarWatermarkSettings]
+    #
     # @!attribute [rw] motion_image_inserter
     #   Overlay motion graphics on top of your video. The motion graphics
     #   that you specify here appear on all outputs in all output groups.
@@ -12479,6 +12650,7 @@ module Aws::MediaConvert
       :avail_blanking,
       :esam,
       :inputs,
+      :kantar_watermark,
       :motion_image_inserter,
       :nielsen_configuration,
       :nielsen_non_linear_watermark,
@@ -12730,9 +12902,25 @@ module Aws::MediaConvert
     #               pid: 1,
     #               program_number: 1,
     #               rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
+    #               sample_range: "FOLLOW", # accepts FOLLOW, FULL_RANGE, LIMITED_RANGE
     #             },
     #           },
     #         ],
+    #         kantar_watermark: {
+    #           channel_name: "__stringMin1Max20",
+    #           content_reference: "__stringMin1Max50PatternAZAZ09",
+    #           credentials_secret_name: "__stringMin1Max512PatternAZAZ09",
+    #           file_offset: 1.0,
+    #           kantar_license_id: 1,
+    #           kantar_server_url: "__stringPatternHttpsKantarmediaCom",
+    #           log_destination: "__stringPatternS3",
+    #           metadata_3: "__stringMin1Max50",
+    #           metadata_4: "__stringMin1Max50",
+    #           metadata_5: "__stringMin1Max50",
+    #           metadata_6: "__stringMin1Max50",
+    #           metadata_7: "__stringMin1Max50",
+    #           metadata_8: "__stringMin1Max50",
+    #         },
     #         motion_image_inserter: {
     #           framerate: {
     #             framerate_denominator: 1,
@@ -13150,11 +13338,15 @@ module Aws::MediaConvert
     #                         alignment: "CENTERED", # accepts CENTERED, LEFT
     #                         background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                         background_opacity: 1,
+    #                         dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                         dds_x_coordinate: 1,
+    #                         dds_y_coordinate: 1,
     #                         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                         font_opacity: 1,
     #                         font_resolution: 1,
     #                         font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                         font_size: 1,
+    #                         height: 1,
     #                         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                         outline_size: 1,
     #                         shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -13163,6 +13355,7 @@ module Aws::MediaConvert
     #                         shadow_y_offset: 1,
     #                         subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                         teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                         width: 1,
     #                         x_position: 1,
     #                         y_position: 1,
     #                       },
@@ -13262,6 +13455,7 @@ module Aws::MediaConvert
     #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     audio_frames_per_pes: 1,
     #                     audio_pids: [1],
+    #                     max_pcr_interval: 1,
     #                     nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                     pat_interval: 1,
     #                     pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -13688,6 +13882,16 @@ module Aws::MediaConvert
     #   you can include multiple inputs when referencing a job template.
     #   @return [Array<Types::InputTemplate>]
     #
+    # @!attribute [rw] kantar_watermark
+    #   Use these settings only when you use Kantar watermarking. Specify
+    #   the values that MediaConvert uses to generate and place Kantar
+    #   watermarks in your output audio. These settings apply to every
+    #   output in your job. In addition to specifying these values, you also
+    #   need to store your Kantar credentials in AWS Secrets Manager. For
+    #   more information, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html.
+    #   @return [Types::KantarWatermarkSettings]
+    #
     # @!attribute [rw] motion_image_inserter
     #   Overlay motion graphics on top of your video. The motion graphics
     #   that you specify here appear on all outputs in all output groups.
@@ -13752,12 +13956,138 @@ module Aws::MediaConvert
       :avail_blanking,
       :esam,
       :inputs,
+      :kantar_watermark,
       :motion_image_inserter,
       :nielsen_configuration,
       :nielsen_non_linear_watermark,
       :output_groups,
       :timecode_config,
       :timed_metadata_insertion)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Use these settings only when you use Kantar watermarking. Specify the
+    # values that MediaConvert uses to generate and place Kantar watermarks
+    # in your output audio. These settings apply to every output in your
+    # job. In addition to specifying these values, you also need to store
+    # your Kantar credentials in AWS Secrets Manager. For more information,
+    # see
+    # https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html.
+    #
+    # @note When making an API call, you may pass KantarWatermarkSettings
+    #   data as a hash:
+    #
+    #       {
+    #         channel_name: "__stringMin1Max20",
+    #         content_reference: "__stringMin1Max50PatternAZAZ09",
+    #         credentials_secret_name: "__stringMin1Max512PatternAZAZ09",
+    #         file_offset: 1.0,
+    #         kantar_license_id: 1,
+    #         kantar_server_url: "__stringPatternHttpsKantarmediaCom",
+    #         log_destination: "__stringPatternS3",
+    #         metadata_3: "__stringMin1Max50",
+    #         metadata_4: "__stringMin1Max50",
+    #         metadata_5: "__stringMin1Max50",
+    #         metadata_6: "__stringMin1Max50",
+    #         metadata_7: "__stringMin1Max50",
+    #         metadata_8: "__stringMin1Max50",
+    #       }
+    #
+    # @!attribute [rw] channel_name
+    #   Provide an audio channel name from your Kantar audio license.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_reference
+    #   Specify a unique identifier for Kantar to use for this piece of
+    #   content.
+    #   @return [String]
+    #
+    # @!attribute [rw] credentials_secret_name
+    #   Provide the name of the AWS Secrets Manager secret where your Kantar
+    #   credentials are stored. Note that your MediaConvert service role
+    #   must provide access to this secret. For more information, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/granting-permissions-for-mediaconvert-to-access-secrets-manager-secret.html.
+    #   For instructions on creating a secret, see
+    #   https://docs.aws.amazon.com/secretsmanager/latest/userguide/tutorials\_basic.html,
+    #   in the AWS Secrets Manager User Guide.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_offset
+    #   Optional. Specify an offset, in whole seconds, from the start of
+    #   your output and the beginning of the watermarking. When you don't
+    #   specify an offset, Kantar defaults to zero.
+    #   @return [Float]
+    #
+    # @!attribute [rw] kantar_license_id
+    #   Provide your Kantar license ID number. You should get this number
+    #   from Kantar.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] kantar_server_url
+    #   Provide the HTTPS endpoint to the Kantar server. You should get this
+    #   endpoint from Kantar.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_destination
+    #   Optional. Specify the Amazon S3 bucket where you want MediaConvert
+    #   to store your Kantar watermark XML logs. When you don't specify a
+    #   bucket, MediaConvert doesn't save these logs. Note that your
+    #   MediaConvert service role must provide access to this location. For
+    #   more information, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_3
+    #   You can optionally use this field to specify the first timestamp
+    #   that Kantar embeds during watermarking. Kantar suggests that you be
+    #   very cautious when using this Kantar feature, and that you use it
+    #   only on channels that are managed specifically for use with this
+    #   feature by your Audience Measurement Operator. For more information
+    #   about this feature, contact Kantar technical support.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_4
+    #   Additional metadata that MediaConvert sends to Kantar. Maximum
+    #   length is 50 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_5
+    #   Additional metadata that MediaConvert sends to Kantar. Maximum
+    #   length is 50 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_6
+    #   Additional metadata that MediaConvert sends to Kantar. Maximum
+    #   length is 50 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_7
+    #   Additional metadata that MediaConvert sends to Kantar. Maximum
+    #   length is 50 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_8
+    #   Additional metadata that MediaConvert sends to Kantar. Maximum
+    #   length is 50 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/KantarWatermarkSettings AWS API Documentation
+    #
+    class KantarWatermarkSettings < Struct.new(
+      :channel_name,
+      :content_reference,
+      :credentials_secret_name,
+      :file_offset,
+      :kantar_license_id,
+      :kantar_server_url,
+      :log_destination,
+      :metadata_3,
+      :metadata_4,
+      :metadata_5,
+      :metadata_6,
+      :metadata_7,
+      :metadata_8)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14505,6 +14835,7 @@ module Aws::MediaConvert
     #         audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #         audio_frames_per_pes: 1,
     #         audio_pids: [1],
+    #         max_pcr_interval: 1,
     #         nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #         pat_interval: 1,
     #         pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -14549,6 +14880,11 @@ module Aws::MediaConvert
     #   transport stream. Multiple values are accepted, and can be entered
     #   in ranges and/or by comma separation.
     #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] max_pcr_interval
+    #   Specify the maximum time, in milliseconds, between Program Clock
+    #   References (PCRs) inserted into the transport stream.
+    #   @return [Integer]
     #
     # @!attribute [rw] nielsen_id_3
     #   If INSERT, Nielsen inaudible tones for media tracking will be
@@ -14636,6 +14972,7 @@ module Aws::MediaConvert
       :audio_duration,
       :audio_frames_per_pes,
       :audio_pids,
+      :max_pcr_interval,
       :nielsen_id_3,
       :pat_interval,
       :pcr_control,
@@ -16330,11 +16667,15 @@ module Aws::MediaConvert
     #                 alignment: "CENTERED", # accepts CENTERED, LEFT
     #                 background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                 background_opacity: 1,
+    #                 dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                 dds_x_coordinate: 1,
+    #                 dds_y_coordinate: 1,
     #                 font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                 font_opacity: 1,
     #                 font_resolution: 1,
     #                 font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                 font_size: 1,
+    #                 height: 1,
     #                 outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                 outline_size: 1,
     #                 shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -16343,6 +16684,7 @@ module Aws::MediaConvert
     #                 shadow_y_offset: 1,
     #                 subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                 teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                 width: 1,
     #                 x_position: 1,
     #                 y_position: 1,
     #               },
@@ -16442,6 +16784,7 @@ module Aws::MediaConvert
     #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             audio_frames_per_pes: 1,
     #             audio_pids: [1],
+    #             max_pcr_interval: 1,
     #             nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #             pat_interval: 1,
     #             pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -17339,11 +17682,15 @@ module Aws::MediaConvert
     #                     alignment: "CENTERED", # accepts CENTERED, LEFT
     #                     background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                     background_opacity: 1,
+    #                     dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                     dds_x_coordinate: 1,
+    #                     dds_y_coordinate: 1,
     #                     font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                     font_opacity: 1,
     #                     font_resolution: 1,
     #                     font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                     font_size: 1,
+    #                     height: 1,
     #                     outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                     outline_size: 1,
     #                     shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -17352,6 +17699,7 @@ module Aws::MediaConvert
     #                     shadow_y_offset: 1,
     #                     subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                     teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                     width: 1,
     #                     x_position: 1,
     #                     y_position: 1,
     #                   },
@@ -17451,6 +17799,7 @@ module Aws::MediaConvert
     #                 audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                 audio_frames_per_pes: 1,
     #                 audio_pids: [1],
+    #                 max_pcr_interval: 1,
     #                 nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                 pat_interval: 1,
     #                 pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -18451,11 +18800,15 @@ module Aws::MediaConvert
     #                 alignment: "CENTERED", # accepts CENTERED, LEFT
     #                 background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                 background_opacity: 1,
+    #                 dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                 dds_x_coordinate: 1,
+    #                 dds_y_coordinate: 1,
     #                 font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                 font_opacity: 1,
     #                 font_resolution: 1,
     #                 font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                 font_size: 1,
+    #                 height: 1,
     #                 outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                 outline_size: 1,
     #                 shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -18464,6 +18817,7 @@ module Aws::MediaConvert
     #                 shadow_y_offset: 1,
     #                 subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                 teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                 width: 1,
     #                 x_position: 1,
     #                 y_position: 1,
     #               },
@@ -18563,6 +18917,7 @@ module Aws::MediaConvert
     #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             audio_frames_per_pes: 1,
     #             audio_pids: [1],
+    #             max_pcr_interval: 1,
     #             nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #             pat_interval: 1,
     #             pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -20332,9 +20687,25 @@ module Aws::MediaConvert
     #                 pid: 1,
     #                 program_number: 1,
     #                 rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
+    #                 sample_range: "FOLLOW", # accepts FOLLOW, FULL_RANGE, LIMITED_RANGE
     #               },
     #             },
     #           ],
+    #           kantar_watermark: {
+    #             channel_name: "__stringMin1Max20",
+    #             content_reference: "__stringMin1Max50PatternAZAZ09",
+    #             credentials_secret_name: "__stringMin1Max512PatternAZAZ09",
+    #             file_offset: 1.0,
+    #             kantar_license_id: 1,
+    #             kantar_server_url: "__stringPatternHttpsKantarmediaCom",
+    #             log_destination: "__stringPatternS3",
+    #             metadata_3: "__stringMin1Max50",
+    #             metadata_4: "__stringMin1Max50",
+    #             metadata_5: "__stringMin1Max50",
+    #             metadata_6: "__stringMin1Max50",
+    #             metadata_7: "__stringMin1Max50",
+    #             metadata_8: "__stringMin1Max50",
+    #           },
     #           motion_image_inserter: {
     #             framerate: {
     #               framerate_denominator: 1,
@@ -20752,11 +21123,15 @@ module Aws::MediaConvert
     #                           alignment: "CENTERED", # accepts CENTERED, LEFT
     #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                           background_opacity: 1,
+    #                           dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                           dds_x_coordinate: 1,
+    #                           dds_y_coordinate: 1,
     #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                           font_opacity: 1,
     #                           font_resolution: 1,
     #                           font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                           font_size: 1,
+    #                           height: 1,
     #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                           outline_size: 1,
     #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -20765,6 +21140,7 @@ module Aws::MediaConvert
     #                           shadow_y_offset: 1,
     #                           subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                           width: 1,
     #                           x_position: 1,
     #                           y_position: 1,
     #                         },
@@ -20864,6 +21240,7 @@ module Aws::MediaConvert
     #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
+    #                       max_pcr_interval: 1,
     #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                       pat_interval: 1,
     #                       pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -21524,11 +21901,15 @@ module Aws::MediaConvert
     #                   alignment: "CENTERED", # accepts CENTERED, LEFT
     #                   background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                   background_opacity: 1,
+    #                   dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #                   dds_x_coordinate: 1,
+    #                   dds_y_coordinate: 1,
     #                   font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
     #                   font_opacity: 1,
     #                   font_resolution: 1,
     #                   font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                   font_size: 1,
+    #                   height: 1,
     #                   outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
     #                   outline_size: 1,
     #                   shadow_color: "NONE", # accepts NONE, BLACK, WHITE
@@ -21537,6 +21918,7 @@ module Aws::MediaConvert
     #                   shadow_y_offset: 1,
     #                   subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                   teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                   width: 1,
     #                   x_position: 1,
     #                   y_position: 1,
     #                 },
@@ -21636,6 +22018,7 @@ module Aws::MediaConvert
     #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               audio_frames_per_pes: 1,
     #               audio_pids: [1],
+    #               max_pcr_interval: 1,
     #               nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #               pat_interval: 1,
     #               pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -23254,6 +23637,7 @@ module Aws::MediaConvert
     #         pid: 1,
     #         program_number: 1,
     #         rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
+    #         sample_range: "FOLLOW", # accepts FOLLOW, FULL_RANGE, LIMITED_RANGE
     #       }
     #
     # @!attribute [rw] alpha_behavior
@@ -23338,6 +23722,21 @@ module Aws::MediaConvert
     #   service doesn't pass through rotation metadata.
     #   @return [String]
     #
+    # @!attribute [rw] sample_range
+    #   Use this setting when your input video codec is AVC-Intra. Ignore
+    #   this setting for all other inputs. If the sample range metadata in
+    #   your input video is accurate, or if you don't know about sample
+    #   range, keep the default value, Follow (FOLLOW), for this setting.
+    #   When you do, the service automatically detects your input sample
+    #   range. If your input video has metadata indicating the wrong sample
+    #   range, specify the accurate sample range here. When you do,
+    #   MediaConvert ignores any sample range information in the input
+    #   metadata. Regardless of whether MediaConvert uses the input sample
+    #   range or the sample range that you specify, MediaConvert uses the
+    #   sample range for transcoding and also writes it to the output
+    #   metadata.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoSelector AWS API Documentation
     #
     class VideoSelector < Struct.new(
@@ -23347,7 +23746,8 @@ module Aws::MediaConvert
       :hdr_10_metadata,
       :pid,
       :program_number,
-      :rotate)
+      :rotate,
+      :sample_range)
       SENSITIVE = []
       include Aws::Structure
     end

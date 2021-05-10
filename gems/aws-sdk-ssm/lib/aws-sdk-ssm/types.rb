@@ -186,6 +186,65 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociateOpsItemRelatedItemRequest
+    #   data as a hash:
+    #
+    #       {
+    #         ops_item_id: "OpsItemId", # required
+    #         association_type: "OpsItemRelatedItemAssociationType", # required
+    #         resource_type: "OpsItemRelatedItemAssociationResourceType", # required
+    #         resource_uri: "OpsItemRelatedItemAssociationResourceUri", # required
+    #       }
+    #
+    # @!attribute [rw] ops_item_id
+    #   The ID of the OpsItem to which you want to associate a resource as a
+    #   related item.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_type
+    #   The type of association that you want to create between an OpsItem
+    #   and a resource. OpsCenter supports `IsParentOf` and `RelatesTo`
+    #   association types.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource that you want to associate with an OpsItem.
+    #   OpsCenter supports the following types:
+    #
+    #   `AWS::SSMIncidents::IncidentRecord`\: an Incident Manager incident.
+    #   Incident Manager is a capability of AWS Systems Manager.
+    #
+    #   `AWS::SSM::Document`\: a Systems Manager (SSM) document.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_uri
+    #   The Amazon Resource Name (ARN) of the AWS resource that you want to
+    #   associate with the OpsItem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociateOpsItemRelatedItemRequest AWS API Documentation
+    #
+    class AssociateOpsItemRelatedItemRequest < Struct.new(
+      :ops_item_id,
+      :association_type,
+      :resource_type,
+      :resource_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] association_id
+    #   The association ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociateOpsItemRelatedItemResponse AWS API Documentation
+    #
+    class AssociateOpsItemRelatedItemResponse < Struct.new(
+      :association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You must disassociate a document from all instances before you can
     # delete it.
     #
@@ -3194,8 +3253,9 @@ module Aws::SSM
     #           },
     #         ],
     #         name: "DocumentName", # required
+    #         display_name: "DocumentDisplayName",
     #         version_name: "DocumentVersionName",
-    #         document_type: "Command", # accepts Command, Policy, Automation, Session, Package, ApplicationConfiguration, ApplicationConfigurationSchema, DeploymentStrategy, ChangeCalendar, Automation.ChangeTemplate
+    #         document_type: "Command", # accepts Command, Policy, Automation, Session, Package, ApplicationConfiguration, ApplicationConfigurationSchema, DeploymentStrategy, ChangeCalendar, Automation.ChangeTemplate, ProblemAnalysis, ProblemAnalysisTemplate
     #         document_format: "YAML", # accepts YAML, JSON, TEXT
     #         target_type: "TargetType",
     #         tags: [
@@ -3259,6 +3319,13 @@ module Aws::SSM
     #   * `amzn`
     #   @return [String]
     #
+    # @!attribute [rw] display_name
+    #   An optional field where you can specify a friendly name for the
+    #   Systems Manager document. This value can differ for each version of
+    #   the document. You can update this value at a later time using the
+    #   UpdateDocument action.
+    #   @return [String]
+    #
     # @!attribute [rw] version_name
     #   An optional field specifying the version of the artifact you are
     #   creating with the document. For example, "Release 12, Update 6".
@@ -3314,6 +3381,7 @@ module Aws::SSM
       :requires,
       :attachments,
       :name,
+      :display_name,
       :version_name,
       :document_type,
       :document_format,
@@ -4931,8 +4999,8 @@ module Aws::SSM
     #   @return [Integer]
     #
     # @!attribute [rw] reverse_order
-    #   A boolean that indicates whether to list step executions in reverse
-    #   order by start time. The default value is 'false'.
+    #   Indicates whether to list step executions in reverse order by start
+    #   time. The default value is 'false'.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationStepExecutionsRequest AWS API Documentation
@@ -6731,6 +6799,37 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisassociateOpsItemRelatedItemRequest
+    #   data as a hash:
+    #
+    #       {
+    #         ops_item_id: "OpsItemId", # required
+    #         association_id: "OpsItemRelatedItemAssociationId", # required
+    #       }
+    #
+    # @!attribute [rw] ops_item_id
+    #   The ID of the OpsItem for which you want to delete an association
+    #   between the OpsItem and a related resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_id
+    #   The ID of the association for which you want to delete an
+    #   association between the OpsItem and a related resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DisassociateOpsItemRelatedItemRequest AWS API Documentation
+    #
+    class DisassociateOpsItemRelatedItemRequest < Struct.new(
+      :ops_item_id,
+      :association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DisassociateOpsItemRelatedItemResponse AWS API Documentation
+    #
+    class DisassociateOpsItemRelatedItemResponse < Aws::EmptyStructure; end
+
     # The specified document already exists.
     #
     # @!attribute [rw] message
@@ -6794,6 +6893,12 @@ module Aws::SSM
     #
     # @!attribute [rw] name
     #   The name of the Systems Manager document.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The friendly name of the Systems Manager document. This value can
+    #   differ for each version of the document. If you want to update this
+    #   value, see UpdateDocument.
     #   @return [String]
     #
     # @!attribute [rw] version_name
@@ -6910,6 +7015,7 @@ module Aws::SSM
       :hash,
       :hash_type,
       :name,
+      :display_name,
       :version_name,
       :owner,
       :created_date,
@@ -6968,6 +7074,16 @@ module Aws::SSM
     #
     # @!attribute [rw] name
     #   The name of the Systems Manager document.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_date
+    #   The date the Systems Manager document was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] display_name
+    #   An optional field where you can specify a friendly name for the
+    #   Systems Manager document. This value can differ for each version of
+    #   the document. If you want to update this value, see UpdateDocument.
     #   @return [String]
     #
     # @!attribute [rw] owner
@@ -7033,6 +7149,8 @@ module Aws::SSM
     #
     class DocumentIdentifier < Struct.new(
       :name,
+      :created_date,
+      :display_name,
       :owner,
       :version_name,
       :platform_types,
@@ -7370,6 +7488,12 @@ module Aws::SSM
     #   The document name.
     #   @return [String]
     #
+    # @!attribute [rw] display_name
+    #   The friendly name of the Systems Manager document. This value can
+    #   differ for each version of the document. If you want to update this
+    #   value, see UpdateDocument.
+    #   @return [String]
+    #
     # @!attribute [rw] document_version
     #   The document version.
     #   @return [String]
@@ -7413,6 +7537,7 @@ module Aws::SSM
     #
     class DocumentVersionInfo < Struct.new(
       :name,
+      :display_name,
       :document_version,
       :version_name,
       :created_date,
@@ -8135,6 +8260,16 @@ module Aws::SSM
     #   The name of the Systems Manager document.
     #   @return [String]
     #
+    # @!attribute [rw] created_date
+    #   The date the Systems Manager document was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] display_name
+    #   The friendly name of the Systems Manager document. This value can
+    #   differ for each version of the document. If you want to update this
+    #   value, see UpdateDocument.
+    #   @return [String]
+    #
     # @!attribute [rw] version_name
     #   The version of the artifact associated with the document. For
     #   example, "Release 12, Update 6". This value is unique across all
@@ -8197,6 +8332,8 @@ module Aws::SSM
     #
     class GetDocumentResult < Struct.new(
       :name,
+      :created_date,
+      :display_name,
       :version_name,
       :document_version,
       :status,
@@ -12166,6 +12303,72 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListOpsItemRelatedItemsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         ops_item_id: "OpsItemId",
+    #         filters: [
+    #           {
+    #             key: "ResourceType", # required, accepts ResourceType, AssociationId, ResourceUri
+    #             values: ["OpsItemRelatedItemsFilterValue"], # required
+    #             operator: "Equal", # required, accepts Equal
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] ops_item_id
+    #   The ID of the OpsItem for which you want to list all related-item
+    #   resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more OpsItem filters. Use a filter to return a more specific
+    #   list of results.
+    #   @return [Array<Types::OpsItemRelatedItemsFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListOpsItemRelatedItemsRequest AWS API Documentation
+    #
+    class ListOpsItemRelatedItemsRequest < Struct.new(
+      :ops_item_id,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] summaries
+    #   A list of related-item resources for the specified OpsItem.
+    #   @return [Array<Types::OpsItemRelatedItemSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListOpsItemRelatedItemsResponse AWS API Documentation
+    #
+    class ListOpsItemRelatedItemsResponse < Struct.new(
+      :next_token,
+      :summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListOpsMetadataRequest
     #   data as a hash:
     #
@@ -13813,7 +14016,8 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Summary information about an OpsItem event.
+    # Summary information about an OpsItem event or that associated an
+    # OpsItem with a related item.
     #
     # @!attribute [rw] ops_item_id
     #   The ID of the OpsItem.
@@ -13986,6 +14190,132 @@ module Aws::SSM
     #
     class OpsItemNotification < Struct.new(
       :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon Resource Name (ARN) is already associated with the OpsItem.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_uri
+    #   @return [String]
+    #
+    # @!attribute [rw] ops_item_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemRelatedItemAlreadyExistsException AWS API Documentation
+    #
+    class OpsItemRelatedItemAlreadyExistsException < Struct.new(
+      :message,
+      :resource_uri,
+      :ops_item_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The association was not found using the parameters you specified in
+    # the call. Verify the information and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemRelatedItemAssociationNotFoundException AWS API Documentation
+    #
+    class OpsItemRelatedItemAssociationNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about related-item resources for an OpsItem.
+    #
+    # @!attribute [rw] ops_item_id
+    #   The OpsItem ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_id
+    #   The association ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_type
+    #   The association type.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_uri
+    #   The Amazon Resource Name (ARN) of the related-item resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   Information about the user or resource that created an OpsItem
+    #   event.
+    #   @return [Types::OpsItemIdentity]
+    #
+    # @!attribute [rw] created_time
+    #   The time the related-item association was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Information about the user or resource that created an OpsItem
+    #   event.
+    #   @return [Types::OpsItemIdentity]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time the related-item association was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemRelatedItemSummary AWS API Documentation
+    #
+    class OpsItemRelatedItemSummary < Struct.new(
+      :ops_item_id,
+      :association_id,
+      :resource_type,
+      :association_type,
+      :resource_uri,
+      :created_by,
+      :created_time,
+      :last_modified_by,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a filter for a specific list of related-item resources.
+    #
+    # @note When making an API call, you may pass OpsItemRelatedItemsFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "ResourceType", # required, accepts ResourceType, AssociationId, ResourceUri
+    #         values: ["OpsItemRelatedItemsFilterValue"], # required
+    #         operator: "Equal", # required, accepts Equal
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The name of the filter key. Supported values include `ResourceUri`,
+    #   `ResourceType`, or `AssociationId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values for the filter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] operator
+    #   The operator used by the filter call. The only supported operator is
+    #   `EQUAL`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemRelatedItemsFilter AWS API Documentation
+    #
+    class OpsItemRelatedItemsFilter < Struct.new(
+      :key,
+      :values,
+      :operator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19199,6 +19529,7 @@ module Aws::SSM
     #           },
     #         ],
     #         name: "DocumentName", # required
+    #         display_name: "DocumentDisplayName",
     #         version_name: "DocumentVersionName",
     #         document_version: "DocumentVersion",
     #         document_format: "YAML", # accepts YAML, JSON, TEXT
@@ -19215,7 +19546,14 @@ module Aws::SSM
     #   @return [Array<Types::AttachmentsSource>]
     #
     # @!attribute [rw] name
-    #   The name of the document that you want to update.
+    #   The name of the Systems Manager document that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The friendly name of the Systems Manager document that you want to
+    #   update. This value can differ for each version of the document. If
+    #   you do not specify a value for this parameter in your request, the
+    #   existing value is applied to the new document version.
     #   @return [String]
     #
     # @!attribute [rw] version_name
@@ -19248,6 +19586,7 @@ module Aws::SSM
       :content,
       :attachments,
       :name,
+      :display_name,
       :version_name,
       :document_version,
       :document_format,

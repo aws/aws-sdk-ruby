@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2021-05-10)
+------------------
+
+* Feature - This release updates create-nodegroup and update-nodegroup-config APIs for adding/updating taints on managed nodegroups.
+
 1.52.0 (2021-04-26)
 ------------------
 

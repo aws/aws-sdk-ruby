@@ -143,6 +143,8 @@ module Aws::IoTWireless
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     IotCertificateId = Shapes::StringShape.new(name: 'IotCertificateId')
     JoinEui = Shapes::StringShape.new(name: 'JoinEui')
+    JoinEuiFilters = Shapes::ListShape.new(name: 'JoinEuiFilters')
+    JoinEuiRange = Shapes::ListShape.new(name: 'JoinEuiRange')
     ListDestinationsRequest = Shapes::StructureShape.new(name: 'ListDestinationsRequest')
     ListDestinationsResponse = Shapes::StructureShape.new(name: 'ListDestinationsResponse')
     ListDeviceProfilesRequest = Shapes::StructureShape.new(name: 'ListDeviceProfilesRequest')
@@ -183,6 +185,8 @@ module Aws::IoTWireless
     MessageType = Shapes::StringShape.new(name: 'MessageType')
     MinGwDiversity = Shapes::IntegerShape.new(name: 'MinGwDiversity')
     Model = Shapes::StringShape.new(name: 'Model')
+    NetId = Shapes::StringShape.new(name: 'NetId')
+    NetIdFilters = Shapes::ListShape.new(name: 'NetIdFilters')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NwkGeoLoc = Shapes::BooleanShape.new(name: 'NwkGeoLoc')
     NwkKey = Shapes::StringShape.new(name: 'NwkKey')
@@ -237,6 +241,8 @@ module Aws::IoTWireless
     SidewalkUpdateAccount = Shapes::StructureShape.new(name: 'SidewalkUpdateAccount')
     SigningAlg = Shapes::StringShape.new(name: 'SigningAlg')
     Station = Shapes::StringShape.new(name: 'Station')
+    SubBand = Shapes::IntegerShape.new(name: 'SubBand')
+    SubBands = Shapes::ListShape.new(name: 'SubBands')
     Supports32BitFCnt = Shapes::BooleanShape.new(name: 'Supports32BitFCnt')
     SupportsClassB = Shapes::BooleanShape.new(name: 'SupportsClassB')
     SupportsClassC = Shapes::BooleanShape.new(name: 'SupportsClassC')
@@ -623,6 +629,10 @@ module Aws::IoTWireless
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    JoinEuiFilters.member = Shapes::ShapeRef.new(shape: JoinEuiRange)
+
+    JoinEuiRange.member = Shapes::ShapeRef.new(shape: JoinEui)
+
     ListDestinationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListDestinationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListDestinationsRequest.struct_class = Types::ListDestinationsRequest
@@ -730,6 +740,9 @@ module Aws::IoTWireless
 
     LoRaWANGateway.add_member(:gateway_eui, Shapes::ShapeRef.new(shape: GatewayEui, location_name: "GatewayEui"))
     LoRaWANGateway.add_member(:rf_region, Shapes::ShapeRef.new(shape: RfRegion, location_name: "RfRegion"))
+    LoRaWANGateway.add_member(:join_eui_filters, Shapes::ShapeRef.new(shape: JoinEuiFilters, location_name: "JoinEuiFilters"))
+    LoRaWANGateway.add_member(:net_id_filters, Shapes::ShapeRef.new(shape: NetIdFilters, location_name: "NetIdFilters"))
+    LoRaWANGateway.add_member(:sub_bands, Shapes::ShapeRef.new(shape: SubBands, location_name: "SubBands"))
     LoRaWANGateway.struct_class = Types::LoRaWANGateway
 
     LoRaWANGatewayCurrentVersion.add_member(:current_version, Shapes::ShapeRef.new(shape: LoRaWANGatewayVersion, location_name: "CurrentVersion"))
@@ -790,6 +803,8 @@ module Aws::IoTWireless
     LoRaWANUpdateGatewayTaskEntry.add_member(:current_version, Shapes::ShapeRef.new(shape: LoRaWANGatewayVersion, location_name: "CurrentVersion"))
     LoRaWANUpdateGatewayTaskEntry.add_member(:update_version, Shapes::ShapeRef.new(shape: LoRaWANGatewayVersion, location_name: "UpdateVersion"))
     LoRaWANUpdateGatewayTaskEntry.struct_class = Types::LoRaWANUpdateGatewayTaskEntry
+
+    NetIdFilters.member = Shapes::ShapeRef.new(shape: NetId)
 
     OtaaV1_0_x.add_member(:app_key, Shapes::ShapeRef.new(shape: AppKey, location_name: "AppKey"))
     OtaaV1_0_x.add_member(:app_eui, Shapes::ShapeRef.new(shape: AppEui, location_name: "AppEui"))
@@ -866,6 +881,8 @@ module Aws::IoTWireless
     SidewalkUpdateAccount.add_member(:app_server_private_key, Shapes::ShapeRef.new(shape: AppServerPrivateKey, location_name: "AppServerPrivateKey"))
     SidewalkUpdateAccount.struct_class = Types::SidewalkUpdateAccount
 
+    SubBands.member = Shapes::ShapeRef.new(shape: SubBand)
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
     Tag.struct_class = Types::Tag
@@ -927,6 +944,8 @@ module Aws::IoTWireless
     UpdateWirelessGatewayRequest.add_member(:id, Shapes::ShapeRef.new(shape: WirelessGatewayId, required: true, location: "uri", location_name: "Id"))
     UpdateWirelessGatewayRequest.add_member(:name, Shapes::ShapeRef.new(shape: WirelessGatewayName, location_name: "Name"))
     UpdateWirelessGatewayRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    UpdateWirelessGatewayRequest.add_member(:join_eui_filters, Shapes::ShapeRef.new(shape: JoinEuiFilters, location_name: "JoinEuiFilters"))
+    UpdateWirelessGatewayRequest.add_member(:net_id_filters, Shapes::ShapeRef.new(shape: NetIdFilters, location_name: "NetIdFilters"))
     UpdateWirelessGatewayRequest.struct_class = Types::UpdateWirelessGatewayRequest
 
     UpdateWirelessGatewayResponse.struct_class = Types::UpdateWirelessGatewayResponse
