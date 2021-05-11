@@ -230,6 +230,8 @@ module Aws
   autoload :SNS, 'aws-sdk-sns'
   autoload :SQS, 'aws-sdk-sqs'
   autoload :SSM, 'aws-sdk-ssm'
+  autoload :SSMContacts, 'aws-sdk-ssmcontacts'
+  autoload :SSMIncidents, 'aws-sdk-ssmincidents'
   autoload :SSO, 'aws-sdk-core'
   autoload :SSOAdmin, 'aws-sdk-ssoadmin'
   autoload :SSOOIDC, 'aws-sdk-ssooidc'

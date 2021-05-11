@@ -572,6 +572,19 @@ module Aws::TranscribeStreamingService
     # @option params [Integer] :number_of_channels
     #   The number of channels that are in your audio stream.
     #
+    # @option params [Boolean] :enable_partial_results_stabilization
+    #   When `true`, instructs Amazon Transcribe to present transcription
+    #   results that have the partial results stabilized. Normally, any word
+    #   or phrase from one partial result can change in a subsequent partial
+    #   result. With partial results stabilization enabled, only the last few
+    #   words of one partial result can change in another partial result.
+    #
+    # @option params [String] :partial_results_stability
+    #   You can use this field to set the stability level of the transcription
+    #   results. A higher stability level means that the transcription results
+    #   are less likely to change. Higher stability levels can come with lower
+    #   overall transcription accuracy.
+    #
     # @return [Types::StartStreamTranscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartStreamTranscriptionResponse#request_id #request_id} => String
@@ -586,6 +599,8 @@ module Aws::TranscribeStreamingService
     #   * {Types::StartStreamTranscriptionResponse#show_speaker_label #show_speaker_label} => Boolean
     #   * {Types::StartStreamTranscriptionResponse#enable_channel_identification #enable_channel_identification} => Boolean
     #   * {Types::StartStreamTranscriptionResponse#number_of_channels #number_of_channels} => Integer
+    #   * {Types::StartStreamTranscriptionResponse#enable_partial_results_stabilization #enable_partial_results_stabilization} => Boolean
+    #   * {Types::StartStreamTranscriptionResponse#partial_results_stability #partial_results_stability} => String
     #
     # @example Bi-directional EventStream Operation Example
     #
@@ -693,6 +708,8 @@ module Aws::TranscribeStreamingService
     #     show_speaker_label: false,
     #     enable_channel_identification: false,
     #     number_of_channels: 1,
+    #     enable_partial_results_stabilization: false,
+    #     partial_results_stability: "high", # accepts high, medium, low
     #   })
     #   # => Seahorse::Client::AsyncResponse
     #   async_resp.wait
@@ -727,6 +744,7 @@ module Aws::TranscribeStreamingService
     #   event.transcript.results[0].alternatives[0].items[0].vocabulary_filter_match #=> Boolean
     #   event.transcript.results[0].alternatives[0].items[0].speaker #=> String
     #   event.transcript.results[0].alternatives[0].items[0].confidence #=> Float
+    #   event.transcript.results[0].alternatives[0].items[0].stable #=> Boolean
     #   event.transcript.results[0].channel_id #=> String
     #
     #   For :bad_request_exception event available at #on_bad_request_exception_event callback and response eventstream enumerator:
@@ -749,6 +767,8 @@ module Aws::TranscribeStreamingService
     #   resp.show_speaker_label #=> Boolean
     #   resp.enable_channel_identification #=> Boolean
     #   resp.number_of_channels #=> Integer
+    #   resp.enable_partial_results_stabilization #=> Boolean
+    #   resp.partial_results_stability #=> String, one of "high", "medium", "low"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscription AWS API Documentation
     #
@@ -793,7 +813,7 @@ module Aws::TranscribeStreamingService
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2021-05-11)
+------------------
+
+* Feature - Amazon Transcribe supports partial results stabilization for streaming transcription.
+
 1.28.0 (2021-03-15)
 ------------------
 

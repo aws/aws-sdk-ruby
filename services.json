@@ -785,6 +785,12 @@
   "SSM": {
     "models": "ssm/2014-11-06"
   },
+  "SSMContacts": {
+    "models": "ssm-contacts/2021-05-03"
+  },
+  "SSMIncidents": {
+    "models": "ssm-incidents/2018-05-10"
+  },
   "SSO": {
     "models": "sso/2019-06-10",
     "addPlugins": [

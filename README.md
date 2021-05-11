@@ -402,6 +402,8 @@ RubyGems.org page under "LINKS" section.
 | AWS Step Functions                                    | Aws::States                          | aws-sdk-states                          | 2016-11-23  |
 | AWS Storage Gateway                                   | Aws::StorageGateway                  | aws-sdk-storagegateway                  | 2013-06-30  |
 | AWS Support                                           | Aws::Support                         | aws-sdk-support                         | 2013-04-15  |
+| AWS Systems Manager Incident Manager                  | Aws::SSMIncidents                    | aws-sdk-ssmincidents                    | 2018-05-10  |
+| AWS Systems Manager Incident Manager Contacts         | Aws::SSMContacts                     | aws-sdk-ssmcontacts                     | 2021-05-03  |
 | AWS Transfer Family                                   | Aws::Transfer                        | aws-sdk-transfer                        | 2018-11-05  |
 | AWS WAF                                               | Aws::WAF                             | aws-sdk-waf                             | 2015-08-24  |
 | AWS WAF Regional                                      | Aws::WAFRegional                     | aws-sdk-wafregional                     | 2016-11-28  |

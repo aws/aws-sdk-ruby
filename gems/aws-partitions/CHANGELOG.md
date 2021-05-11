@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.454.0 (2021-05-11)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SSMIncidents`.
+
+* Feature - Added support for enumerating regions for `Aws::SSMContacts`.
+
 1.453.0 (2021-05-10)
 ------------------
 

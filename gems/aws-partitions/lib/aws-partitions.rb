@@ -447,6 +447,8 @@ module Aws
             'SNS' => 'sns',
             'SQS' => 'sqs',
             'SSM' => 'ssm',
+            'SSMContacts' => 'ssm-contacts',
+            'SSMIncidents' => 'ssm-incidents',
             'SSO' => 'portal.sso',
             'SSOAdmin' => 'sso',
             'SSOOIDC' => 'oidc',

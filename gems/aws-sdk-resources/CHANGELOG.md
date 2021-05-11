@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.102.0 (2021-05-11)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-ssmincidents` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-ssmcontacts` gem.
+
 3.101.0 (2021-05-03)
 ------------------
 

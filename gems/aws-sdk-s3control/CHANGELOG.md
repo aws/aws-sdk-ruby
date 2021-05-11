@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2021-05-11)
+------------------
+
+* Feature - Documentation updates for Amazon S3-control
+
 1.32.0 (2021-03-24)
 ------------------
 

@@ -50,6 +50,11 @@ module Aws::S3Control
     # @!attribute [rw] vpc_configuration
     #   The virtual private cloud (VPC) configuration for this access point,
     #   if one exists.
+    #
+    #   <note markdown="1"> This element is empty if this access point is an Amazon S3 on
+    #   Outposts access point that is used by other AWS services.
+    #
+    #    </note>
     #   @return [Types::VpcConfiguration]
     #
     # @!attribute [rw] bucket
@@ -699,8 +704,7 @@ module Aws::S3Control
     # @!attribute [rw] operation
     #   The action that you want this job to perform on every object listed
     #   in the manifest. For more information about the available actions,
-    #   see [Operations][1] in the *Amazon Simple Storage Service User
-    #   Guide*.
+    #   see [Operations][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1429,7 +1433,7 @@ module Aws::S3Control
     #   Indicates whether this access point policy is public. For more
     #   information about how Amazon S3 evaluates policies to determine
     #   whether they are public, see [The Meaning of "Public"][1] in the
-    #   *Amazon Simple Storage Service User Guide*.
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -1543,6 +1547,11 @@ module Aws::S3Control
     # @!attribute [rw] vpc_configuration
     #   Contains the virtual private cloud (VPC) configuration for the
     #   specified access point.
+    #
+    #   <note markdown="1"> This element is empty if this access point is an Amazon S3 on
+    #   Outposts access point that is used by other AWS services.
+    #
+    #    </note>
     #   @return [Types::VpcConfiguration]
     #
     # @!attribute [rw] public_access_block_configuration
@@ -1550,7 +1559,7 @@ module Aws::S3Control
     #   Amazon S3 account. You can enable the configuration options in any
     #   combination. For more information about when Amazon S3 considers a
     #   bucket or object public, see [The Meaning of "Public"][1] in the
-    #   *Amazon Simple Storage Service Developer Guide*.
+    #   *Amazon S3 User Guide*.
     #
     #   This is not supported for Amazon S3 on Outposts.
     #
@@ -2295,7 +2304,7 @@ module Aws::S3Control
 
     # The operation that you want this job to perform on every object listed
     # in the manifest. For more information about the available operations,
-    # see [Operations][1] in the *Amazon Simple Storage Service User Guide*.
+    # see [Operations][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2438,7 +2447,7 @@ module Aws::S3Control
     #   operation that an S3 Batch Operations job passes every object to the
     #   underlying `PutObjectLegalHold` API. For more information, see
     #   [Using S3 Object Lock legal hold with S3 Batch Operations][1] in the
-    #   *Amazon Simple Storage Service User Guide*.
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -2450,7 +2459,7 @@ module Aws::S3Control
     #   action for an S3 Batch Operations job. Batch Operations passes every
     #   object to the underlying `PutObjectRetention` API. For more
     #   information, see [Using S3 Object Lock retention with S3 Batch
-    #   Operations][1] in the *Amazon Simple Storage Service User Guide*.
+    #   Operations][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2786,7 +2795,7 @@ module Aws::S3Control
     #   upload that Amazon S3 waits before permanently removing all parts of
     #   the upload. For more information, see [ Aborting Incomplete
     #   Multipart Uploads Using a Bucket Lifecycle Policy][1] in the *Amazon
-    #   Simple Storage Service Developer Guide*.
+    #   S3 User Guide*.
     #
     #
     #
@@ -3257,8 +3266,7 @@ module Aws::S3Control
     #   Specifies the number of days an object is noncurrent before Amazon
     #   S3 can perform the associated action. For information about the
     #   noncurrent days calculations, see [How Amazon S3 Calculates When an
-    #   Object Became Noncurrent][1] in the *Amazon Simple Storage Service
-    #   Developer Guide*.
+    #   Object Became Noncurrent][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -3287,8 +3295,8 @@ module Aws::S3Control
     #   Specifies the number of days an object is noncurrent before Amazon
     #   S3 can perform the associated action. For information about the
     #   noncurrent days calculations, see [ How Amazon S3 Calculates How
-    #   Long an Object Has Been Noncurrent][1] in the *Amazon Simple Storage
-    #   Service Developer Guide*.
+    #   Long an Object Has Been Noncurrent][1] in the *Amazon S3 User
+    #   Guide*.
     #
     #
     #
@@ -3454,7 +3462,7 @@ module Aws::S3Control
     # Indicates whether this access point policy is public. For more
     # information about how Amazon S3 evaluates policies to determine
     # whether they are public, see [The Meaning of "Public"][1] in the
-    # *Amazon Simple Storage Service User Guide*.
+    # *Amazon S3 User Guide*.
     #
     #
     #
@@ -3534,7 +3542,7 @@ module Aws::S3Control
     # Amazon S3 account. You can enable the configuration options in any
     # combination. For more information about when Amazon S3 considers a
     # bucket or object public, see [The Meaning of "Public"][1] in the
-    # *Amazon Simple Storage Service Developer Guide*.
+    # *Amazon S3 User Guide*.
     #
     # This is not supported for Amazon S3 on Outposts.
     #
@@ -3731,8 +3739,8 @@ module Aws::S3Control
     # @!attribute [rw] policy
     #   The policy that you want to apply to the specified access point. For
     #   more information about access point policies, see [Managing data
-    #   access with Amazon S3 Access Points][1] in the *Amazon Simple
-    #   Storage Service User Guide*.
+    #   access with Amazon S3 access points][1] in the *Amazon S3 User
+    #   Guide*.
     #
     #
     #
@@ -4696,8 +4704,8 @@ module Aws::S3Control
     # objects in the S3 Batch Operations job. If you don't provide `Mode`
     # and `RetainUntilDate` data types in your operation, you will remove
     # the retention from your objects. For more information, see [Using S3
-    # Object Lock retention with S3 Batch Operations][1] in the *Amazon
-    # Simple Storage Service User Guide*.
+    # Object Lock retention with S3 Batch Operations][1] in the *Amazon S3
+    # User Guide*.
     #
     #
     #
@@ -4778,8 +4786,8 @@ module Aws::S3Control
     # Contains the configuration for an S3 Object Lock legal hold operation
     # that an S3 Batch Operations job passes every object to the underlying
     # `PutObjectLegalHold` API. For more information, see [Using S3 Object
-    # Lock legal hold with S3 Batch Operations][1] in the *Amazon Simple
-    # Storage Service User Guide*.
+    # Lock legal hold with S3 Batch Operations][1] in the *Amazon S3 User
+    # Guide*.
     #
     #
     #
@@ -4811,7 +4819,7 @@ module Aws::S3Control
     # action for an S3 Batch Operations job. Batch Operations passes every
     # object to the underlying `PutObjectRetention` API. For more
     # information, see [Using S3 Object Lock retention with S3 Batch
-    # Operations][1] in the *Amazon Simple Storage Service User Guide*.
+    # Operations][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -4837,8 +4845,8 @@ module Aws::S3Control
     # @!attribute [rw] retention
     #   Contains the Object Lock retention mode to be applied to all objects
     #   in the Batch Operations job. For more information, see [Using S3
-    #   Object Lock retention with S3 Batch Operations][1] in the *Amazon
-    #   Simple Storage Service User Guide*.
+    #   Object Lock retention with S3 Batch Operations][1] in the *Amazon S3
+    #   User Guide*.
     #
     #
     #
@@ -5257,8 +5265,8 @@ module Aws::S3Control
 
     # Specifies when an object transitions to a specified storage class. For
     # more information about Amazon S3 Lifecycle configuration rules, see [
-    # Transitioning objects using Amazon S3 Lifecycle][1] in the *Amazon
-    # Simple Storage Service User Guide*.
+    # Transitioning objects using Amazon S3 Lifecycle][1] in the *Amazon S3
+    # User Guide*.
     #
     #
     #
