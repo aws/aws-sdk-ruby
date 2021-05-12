@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.236.0 (2021-05-12)
+------------------
+
+* Feature - High Memory virtual instances are powered by Intel Sky Lake CPUs and offer up to 12TB of memory.
+
 1.235.0 (2021-04-26)
 ------------------
 
