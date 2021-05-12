@@ -80,6 +80,9 @@ module Aws
       #
       # @option options [STS::CognitoIdentity] :client Optional CognitoIdentity
       #   client. If not provided, a client will be constructed.
+      #
+      # @option options [Integer] (300) :credential_expiration_buffer Credentials
+      #   will refresh if they are within this many seconds of expiring.
       def initialize(options = {})
         @identity_pool_id = options.delete(:identity_pool_id)
         @identity_id = options.delete(:identity_id)

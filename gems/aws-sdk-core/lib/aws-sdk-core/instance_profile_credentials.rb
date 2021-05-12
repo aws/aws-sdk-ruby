@@ -58,6 +58,8 @@ module Aws
     # @option options [Integer] :token_ttl Time-to-Live in seconds for EC2
     #   Metadata Token used for fetching Metadata Profile Credentials, defaults
     #   to 21600 seconds
+    # @option options [Integer] (300) :credential_expiration_buffer Credentials
+    #   will refresh if they are within this many seconds of expiring.
     def initialize(options = {})
       @retries = options[:retries] || 1
       @ip_address = options[:ip_address] || '169.254.169.254'

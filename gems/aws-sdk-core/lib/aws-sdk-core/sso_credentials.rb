@@ -64,6 +64,9 @@ module Aws
     #
     # @option options [SSO::Client] :client Optional `SSO::Client`.  If not
     #   provided, a client will be constructed.
+    #
+    # @option options [Integer] (300) :credential_expiration_buffer Credentials
+    #   will refresh if they are within this many seconds of expiring.
     def initialize(options = {})
 
       missing_keys = SSO_REQUIRED_OPTS.select { |k| options[k].nil? }

@@ -140,7 +140,29 @@ module Aws
 
       end
 
-      describe 'failure cases' do
+      describe 'auto refreshing configuration' do
+
+        let(:expiration) { Time.now.utc + 599 }
+
+        it 'refreshes if within the buffer' do
+          c = ECSCredentials.new({ credential_expiration_buffer: 600 })
+          expect(c.credentials.access_key_id).to eq('akid-2')
+          expect(c.credentials.secret_access_key).to eq('secret-2')
+          expect(c.credentials.session_token).to eq('session-token-2')
+          expect(c.expiration.to_s).to eq(expiration2.to_s)
+        end
+
+        it 'does not refresh before entering the buffer' do
+          c = ECSCredentials.new({ credential_expiration_buffer: 599 })
+          expect(c.credentials.access_key_id).to eq('akid')
+          expect(c.credentials.secret_access_key).to eq('secret')
+          expect(c.credentials.session_token).to eq('session-token')
+          expect(c.expiration.to_s).to eq(expiration.to_s)
+        end
+
+      end
+
+    describe 'failure cases' do
 
         let(:resp) { '{}' }
 
