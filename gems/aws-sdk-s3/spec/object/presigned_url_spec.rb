@@ -27,6 +27,10 @@ module Aws
           end
 
           method_expectations = {
+            'DELETE' => :delete_object,
+            'HEAD' => :head_object,
+            'GET' => :get_object,
+            'PUT' => :put_object,
             # HTTP Methods
             delete: :delete_object,
             head: :head_object,

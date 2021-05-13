@@ -161,7 +161,7 @@ module Aws
       #
       # @param [Symbol] method
       #   The S3 operation to generate a presigned URL for. Valid values
-      #   are `:get`, `:put`, `:head`, `:delete`, `:create_multipart_upload`, 
+      #   are `:get`, `:put`, `:head`, `:delete`, `:create_multipart_upload`,
       #   `:list_multipart_uploads`, `:complete_multipart_upload`,
       #   `:abort_multipart_upload`, `:list_parts`, and `:upload_part`.
       #
@@ -205,7 +205,7 @@ module Aws
       def presigned_url(method, params = {})
         presigner = Presigner.new(client: client)
 
-        if %w(delete head get put).include?(method.to_s)
+        if %w(delete head get put).include?(method.downcase.to_s)
           method = "#{method}_object".to_sym
         end
 

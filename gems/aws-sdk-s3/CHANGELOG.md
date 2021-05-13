@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Downcase the method used for a resource Object pre-signer.
+
 1.94.1 (2021-05-05)
 ------------------
 
