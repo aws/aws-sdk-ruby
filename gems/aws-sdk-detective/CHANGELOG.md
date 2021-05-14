@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2021-05-14)
+------------------
+
+* Feature - Updated descriptions of array parameters to add the restrictions on the array and value lengths.
+
 1.17.0 (2021-04-21)
 ------------------
 

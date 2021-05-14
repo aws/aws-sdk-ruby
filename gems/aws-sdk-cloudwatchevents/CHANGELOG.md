@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2021-05-14)
+------------------
+
+* Feature - Update InputTransformer variable limit from 10 to 100 variables.
+
 1.45.0 (2021-03-26)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2021-05-14)
+------------------
+
+* Feature - This release of the Amazon Macie API adds support for defining run-time, S3 bucket criteria for classification jobs. It also adds resources for querying data about AWS resources that Macie monitors.
+
 1.27.0 (2021-04-29)
 ------------------
 

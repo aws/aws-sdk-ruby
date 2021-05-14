@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2021-05-14)
+------------------
+
+* Feature - Updated descriptions to add notes on array lengths.
+
 1.45.0 (2021-05-03)
 ------------------
 

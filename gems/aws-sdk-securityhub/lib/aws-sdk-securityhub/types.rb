@@ -26107,7 +26107,9 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to add to the resource.
+    #   The tags to add to the resource. You can add up to 50 tags at a
+    #   time. The tag keys can be no longer than 128 characters. The tag
+    #   values can be no longer than 256 characters.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/TagResourceRequest AWS API Documentation
@@ -26198,6 +26200,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] tag_keys
     #   The tag keys associated with the tags to remove from the resource.
+    #   You can remove up to 50 tags at a time.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UntagResourceRequest AWS API Documentation

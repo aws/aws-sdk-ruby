@@ -83,8 +83,10 @@ module Aws::Detective
     #       }
     #
     # @!attribute [rw] tags
-    #   The tags to assign to the new behavior graph. For each tag, you
-    #   provide the tag key and the tag value.
+    #   The tags to assign to the new behavior graph. You can add up to 50
+    #   tags. For each tag, you provide the tag key and the tag value. Each
+    #   tag key can contain up to 128 characters. Each tag value can contain
+    #   up to 256 characters.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/CreateGraphRequest AWS API Documentation
@@ -140,8 +142,9 @@ module Aws::Detective
     #
     # @!attribute [rw] accounts
     #   The list of AWS accounts to invite to become member accounts in the
-    #   behavior graph. For each invited account, the account list contains
-    #   the account identifier and the AWS account root user email address.
+    #   behavior graph. You can invite up to 50 accounts at a time. For each
+    #   invited account, the account list contains the account identifier
+    #   and the AWS account root user email address.
     #   @return [Array<Types::Account>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/CreateMembersRequest AWS API Documentation
@@ -211,7 +214,8 @@ module Aws::Detective
     #
     # @!attribute [rw] account_ids
     #   The list of AWS account identifiers for the member accounts to
-    #   delete from the behavior graph.
+    #   delete from the behavior graph. You can delete up to 50 member
+    #   accounts at a time.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/DeleteMembersRequest AWS API Documentation
@@ -280,7 +284,8 @@ module Aws::Detective
     #
     # @!attribute [rw] account_ids
     #   The list of AWS account identifiers for the member account for which
-    #   to return member details.
+    #   to return member details. You can request details for up to 50
+    #   member accounts at a time.
     #
     #   You cannot use `GetMembers` to retrieve information about member
     #   accounts that were removed from the behavior graph.
@@ -529,7 +534,8 @@ module Aws::Detective
     end
 
     # @!attribute [rw] tags
-    #   The tag values that are assigned to the behavior graph.
+    #   The tag values that are assigned to the behavior graph. The request
+    #   returns up to 50 tag values.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListTagsForResourceResponse AWS API Documentation
@@ -770,7 +776,10 @@ module Aws::Detective
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tag values to assign to the behavior graph.
+    #   The tags to assign to the behavior graph. You can add up to 50 tags.
+    #   For each tag, you provide the tag key and the tag value. Each tag
+    #   key can contain up to 128 characters. Each tag value can contain up
+    #   to 256 characters.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/TagResourceRequest AWS API Documentation
@@ -820,7 +829,8 @@ module Aws::Detective
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   The tag keys of the tags to remove from the behavior graph.
+    #   The tag keys of the tags to remove from the behavior graph. You can
+    #   remove up to 50 tags at a time.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/UntagResourceRequest AWS API Documentation

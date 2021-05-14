@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2021-05-14)
+------------------
+
+* Feature - Transcribe Medical now supports identification of PHI entities within transcripts
+
 1.54.0 (2021-03-31)
 ------------------
 

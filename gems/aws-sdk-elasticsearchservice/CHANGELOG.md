@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2021-05-14)
+------------------
+
+* Feature - Adds support for cold storage.
+
 1.51.0 (2021-03-10)
 ------------------
 

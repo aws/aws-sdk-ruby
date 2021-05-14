@@ -75,6 +75,7 @@ module Aws::TranscribeService
     Media = Shapes::StructureShape.new(name: 'Media')
     MediaFormat = Shapes::StringShape.new(name: 'MediaFormat')
     MediaSampleRateHertz = Shapes::IntegerShape.new(name: 'MediaSampleRateHertz')
+    MedicalContentIdentificationType = Shapes::StringShape.new(name: 'MedicalContentIdentificationType')
     MedicalTranscript = Shapes::StructureShape.new(name: 'MedicalTranscript')
     MedicalTranscriptionJob = Shapes::StructureShape.new(name: 'MedicalTranscriptionJob')
     MedicalTranscriptionJobSummaries = Shapes::ListShape.new(name: 'MedicalTranscriptionJobSummaries')
@@ -360,6 +361,7 @@ module Aws::TranscribeService
     MedicalTranscriptionJob.add_member(:completion_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CompletionTime"))
     MedicalTranscriptionJob.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     MedicalTranscriptionJob.add_member(:settings, Shapes::ShapeRef.new(shape: MedicalTranscriptionSetting, location_name: "Settings"))
+    MedicalTranscriptionJob.add_member(:content_identification_type, Shapes::ShapeRef.new(shape: MedicalContentIdentificationType, location_name: "ContentIdentificationType"))
     MedicalTranscriptionJob.add_member(:specialty, Shapes::ShapeRef.new(shape: Specialty, location_name: "Specialty"))
     MedicalTranscriptionJob.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "Type"))
     MedicalTranscriptionJob.struct_class = Types::MedicalTranscriptionJob
@@ -375,6 +377,7 @@ module Aws::TranscribeService
     MedicalTranscriptionJobSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     MedicalTranscriptionJobSummary.add_member(:output_location_type, Shapes::ShapeRef.new(shape: OutputLocationType, location_name: "OutputLocationType"))
     MedicalTranscriptionJobSummary.add_member(:specialty, Shapes::ShapeRef.new(shape: Specialty, location_name: "Specialty"))
+    MedicalTranscriptionJobSummary.add_member(:content_identification_type, Shapes::ShapeRef.new(shape: MedicalContentIdentificationType, location_name: "ContentIdentificationType"))
     MedicalTranscriptionJobSummary.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "Type"))
     MedicalTranscriptionJobSummary.struct_class = Types::MedicalTranscriptionJobSummary
 
@@ -415,6 +418,7 @@ module Aws::TranscribeService
     StartMedicalTranscriptionJobRequest.add_member(:output_key, Shapes::ShapeRef.new(shape: OutputKey, location_name: "OutputKey"))
     StartMedicalTranscriptionJobRequest.add_member(:output_encryption_kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "OutputEncryptionKMSKeyId"))
     StartMedicalTranscriptionJobRequest.add_member(:settings, Shapes::ShapeRef.new(shape: MedicalTranscriptionSetting, location_name: "Settings"))
+    StartMedicalTranscriptionJobRequest.add_member(:content_identification_type, Shapes::ShapeRef.new(shape: MedicalContentIdentificationType, location_name: "ContentIdentificationType"))
     StartMedicalTranscriptionJobRequest.add_member(:specialty, Shapes::ShapeRef.new(shape: Specialty, required: true, location_name: "Specialty"))
     StartMedicalTranscriptionJobRequest.add_member(:type, Shapes::ShapeRef.new(shape: Type, required: true, location_name: "Type"))
     StartMedicalTranscriptionJobRequest.struct_class = Types::StartMedicalTranscriptionJobRequest

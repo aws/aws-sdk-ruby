@@ -410,7 +410,12 @@ module Aws::Macie2
     #
     # @option params [required, Types::S3JobDefinition] :s3_job_definition
     #   Specifies which S3 buckets contain the objects that a classification
-    #   job analyzes, and the scope of that analysis.
+    #   job analyzes, and the scope of that analysis. The bucket specification
+    #   can be static (bucketDefinitions) or dynamic (bucketCriteria). If
+    #   it's static, the job analyzes objects in the same predefined set of
+    #   buckets each time the job runs. If it's dynamic, the job analyzes
+    #   objects in any buckets that match the specified criteria each time the
+    #   job starts to run.
     #
     # @option params [Integer] :sampling_percentage
     #
@@ -484,6 +489,48 @@ module Aws::Macie2
     #                   },
     #                 ],
     #                 target: "S3_OBJECT", # accepts S3_OBJECT
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       bucket_criteria: {
+    #         excludes: {
+    #           and: [
+    #             {
+    #               simple_criterion: {
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                 key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #                 values: ["__string"],
+    #               },
+    #               tag_criterion: {
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                 tag_values: [
+    #                   {
+    #                     key: "__string",
+    #                     value: "__string",
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         includes: {
+    #           and: [
+    #             {
+    #               simple_criterion: {
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                 key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #                 values: ["__string"],
+    #               },
+    #               tag_criterion: {
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                 tag_values: [
+    #                   {
+    #                     key: "__string",
+    #                     value: "__string",
+    #                   },
+    #                 ],
     #               },
     #             },
     #           ],
@@ -1052,6 +1099,24 @@ module Aws::Macie2
     #   resp.s3_job_definition.scoping.includes.and[0].tag_scope_term.tag_values[0].key #=> String
     #   resp.s3_job_definition.scoping.includes.and[0].tag_scope_term.tag_values[0].value #=> String
     #   resp.s3_job_definition.scoping.includes.and[0].tag_scope_term.target #=> String, one of "S3_OBJECT"
+    #   resp.s3_job_definition.bucket_criteria.excludes.and #=> Array
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].simple_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].simple_criterion.key #=> String, one of "ACCOUNT_ID", "S3_BUCKET_NAME", "S3_BUCKET_EFFECTIVE_PERMISSION", "S3_BUCKET_SHARED_ACCESS"
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].simple_criterion.values #=> Array
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].simple_criterion.values[0] #=> String
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].tag_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].tag_criterion.tag_values #=> Array
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].tag_criterion.tag_values[0].key #=> String
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].tag_criterion.tag_values[0].value #=> String
+    #   resp.s3_job_definition.bucket_criteria.includes.and #=> Array
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].simple_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].simple_criterion.key #=> String, one of "ACCOUNT_ID", "S3_BUCKET_NAME", "S3_BUCKET_EFFECTIVE_PERMISSION", "S3_BUCKET_SHARED_ACCESS"
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].simple_criterion.values #=> Array
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].simple_criterion.values[0] #=> String
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].tag_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].tag_criterion.tag_values #=> Array
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].tag_criterion.tag_values[0].key #=> String
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].tag_criterion.tag_values[0].value #=> String
     #   resp.sampling_percentage #=> Integer
     #   resp.schedule_frequency.monthly_schedule.day_of_month #=> Integer
     #   resp.schedule_frequency.weekly_schedule.day_of_week #=> String, one of "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
@@ -2032,6 +2097,24 @@ module Aws::Macie2
     #   resp.items[0].user_paused_details.job_expires_at #=> Time
     #   resp.items[0].user_paused_details.job_imminent_expiration_health_event_arn #=> String
     #   resp.items[0].user_paused_details.job_paused_at #=> Time
+    #   resp.items[0].bucket_criteria.excludes.and #=> Array
+    #   resp.items[0].bucket_criteria.excludes.and[0].simple_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.items[0].bucket_criteria.excludes.and[0].simple_criterion.key #=> String, one of "ACCOUNT_ID", "S3_BUCKET_NAME", "S3_BUCKET_EFFECTIVE_PERMISSION", "S3_BUCKET_SHARED_ACCESS"
+    #   resp.items[0].bucket_criteria.excludes.and[0].simple_criterion.values #=> Array
+    #   resp.items[0].bucket_criteria.excludes.and[0].simple_criterion.values[0] #=> String
+    #   resp.items[0].bucket_criteria.excludes.and[0].tag_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.items[0].bucket_criteria.excludes.and[0].tag_criterion.tag_values #=> Array
+    #   resp.items[0].bucket_criteria.excludes.and[0].tag_criterion.tag_values[0].key #=> String
+    #   resp.items[0].bucket_criteria.excludes.and[0].tag_criterion.tag_values[0].value #=> String
+    #   resp.items[0].bucket_criteria.includes.and #=> Array
+    #   resp.items[0].bucket_criteria.includes.and[0].simple_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.items[0].bucket_criteria.includes.and[0].simple_criterion.key #=> String, one of "ACCOUNT_ID", "S3_BUCKET_NAME", "S3_BUCKET_EFFECTIVE_PERMISSION", "S3_BUCKET_SHARED_ACCESS"
+    #   resp.items[0].bucket_criteria.includes.and[0].simple_criterion.values #=> Array
+    #   resp.items[0].bucket_criteria.includes.and[0].simple_criterion.values[0] #=> String
+    #   resp.items[0].bucket_criteria.includes.and[0].tag_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.items[0].bucket_criteria.includes.and[0].tag_criterion.tag_values #=> Array
+    #   resp.items[0].bucket_criteria.includes.and[0].tag_criterion.tag_values[0].key #=> String
+    #   resp.items[0].bucket_criteria.includes.and[0].tag_criterion.tag_values[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListClassificationJobs AWS API Documentation
@@ -2414,6 +2497,118 @@ module Aws::Macie2
       req.send_request(options)
     end
 
+    # Retrieves (queries) statistical data and other information about AWS
+    # resources that Amazon Macie monitors and analyzes.
+    #
+    # @option params [Types::SearchResourcesBucketCriteria] :bucket_criteria
+    #   Specifies property- and tag-based conditions that define filter
+    #   criteria for including or excluding S3 buckets from the query results.
+    #   Exclude conditions take precedence over include conditions.
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [Types::SearchResourcesSortCriteria] :sort_criteria
+    #   Specifies criteria for sorting the results of a query for information
+    #   about AWS resources that Amazon Macie monitors and analyzes.
+    #
+    # @return [Types::SearchResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchResourcesResponse#matching_resources #matching_resources} => Array&lt;Types::MatchingResource&gt;
+    #   * {Types::SearchResourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_resources({
+    #     bucket_criteria: {
+    #       excludes: {
+    #         and: [
+    #           {
+    #             simple_criterion: {
+    #               comparator: "EQ", # accepts EQ, NE
+    #               key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #               values: ["__string"],
+    #             },
+    #             tag_criterion: {
+    #               comparator: "EQ", # accepts EQ, NE
+    #               tag_values: [
+    #                 {
+    #                   key: "__string",
+    #                   value: "__string",
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         ],
+    #       },
+    #       includes: {
+    #         and: [
+    #           {
+    #             simple_criterion: {
+    #               comparator: "EQ", # accepts EQ, NE
+    #               key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #               values: ["__string"],
+    #             },
+    #             tag_criterion: {
+    #               comparator: "EQ", # accepts EQ, NE
+    #               tag_values: [
+    #                 {
+    #                   key: "__string",
+    #                   value: "__string",
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     sort_criteria: {
+    #       attribute_name: "ACCOUNT_ID", # accepts ACCOUNT_ID, RESOURCE_NAME, S3_CLASSIFIABLE_OBJECT_COUNT, S3_CLASSIFIABLE_SIZE_IN_BYTES
+    #       order_by: "ASC", # accepts ASC, DESC
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.matching_resources #=> Array
+    #   resp.matching_resources[0].matching_bucket.account_id #=> String
+    #   resp.matching_resources[0].matching_bucket.bucket_name #=> String
+    #   resp.matching_resources[0].matching_bucket.classifiable_object_count #=> Integer
+    #   resp.matching_resources[0].matching_bucket.classifiable_size_in_bytes #=> Integer
+    #   resp.matching_resources[0].matching_bucket.job_details.is_defined_in_job #=> String, one of "TRUE", "FALSE", "UNKNOWN"
+    #   resp.matching_resources[0].matching_bucket.job_details.is_monitored_by_job #=> String, one of "TRUE", "FALSE", "UNKNOWN"
+    #   resp.matching_resources[0].matching_bucket.job_details.last_job_id #=> String
+    #   resp.matching_resources[0].matching_bucket.job_details.last_job_run_time #=> Time
+    #   resp.matching_resources[0].matching_bucket.object_count #=> Integer
+    #   resp.matching_resources[0].matching_bucket.object_count_by_encryption_type.customer_managed #=> Integer
+    #   resp.matching_resources[0].matching_bucket.object_count_by_encryption_type.kms_managed #=> Integer
+    #   resp.matching_resources[0].matching_bucket.object_count_by_encryption_type.s3_managed #=> Integer
+    #   resp.matching_resources[0].matching_bucket.object_count_by_encryption_type.unencrypted #=> Integer
+    #   resp.matching_resources[0].matching_bucket.object_count_by_encryption_type.unknown #=> Integer
+    #   resp.matching_resources[0].matching_bucket.size_in_bytes #=> Integer
+    #   resp.matching_resources[0].matching_bucket.size_in_bytes_compressed #=> Integer
+    #   resp.matching_resources[0].matching_bucket.unclassifiable_object_count.file_type #=> Integer
+    #   resp.matching_resources[0].matching_bucket.unclassifiable_object_count.storage_class #=> Integer
+    #   resp.matching_resources[0].matching_bucket.unclassifiable_object_count.total #=> Integer
+    #   resp.matching_resources[0].matching_bucket.unclassifiable_object_size_in_bytes.file_type #=> Integer
+    #   resp.matching_resources[0].matching_bucket.unclassifiable_object_size_in_bytes.storage_class #=> Integer
+    #   resp.matching_resources[0].matching_bucket.unclassifiable_object_size_in_bytes.total #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/SearchResources AWS API Documentation
+    #
+    # @overload search_resources(params = {})
+    # @param [Hash] params ({})
+    def search_resources(params = {}, options = {})
+      req = build_request(:search_resources, params)
+      req.send_request(options)
+    end
+
     # Adds or updates one or more tags (keys and values) that are associated
     # with a classification job, custom data identifier, findings filter, or
     # member account.
@@ -2691,7 +2886,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

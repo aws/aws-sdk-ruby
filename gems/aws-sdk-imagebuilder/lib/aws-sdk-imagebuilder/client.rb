@@ -675,7 +675,8 @@ module Aws::Imagebuilder
 
     # Creates a new image. This request will create a new image along with
     # all of the configured output resources defined in the distribution
-    # configuration.
+    # configuration. You must specify exactly one recipe for your image,
+    # using either a ContainerRecipeArn or an ImageRecipeArn.
     #
     # @option params [String] :image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe that defines how
@@ -867,7 +868,7 @@ module Aws::Imagebuilder
     #   The parent image of the image recipe. The value of the string can be
     #   the ARN of the parent image or an AMI ID. The format for the ARN
     #   follows this example:
-    #   `arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/xxxx.x.x`.
+    #   `arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/x.x.x`.
     #   You can provide the specific version that you want to use, or you can
     #   use a wildcard in all of the fields. If you enter an AMI ID for the
     #   string value, you must have access to the AMI, and the AMI must be in
@@ -3069,8 +3070,14 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Updates a new image pipeline. Image pipelines enable you to automate
-    # the creation and distribution of images.
+    # Updates an image pipeline. Image pipelines enable you to automate the
+    # creation and distribution of images.
+    #
+    # <note markdown="1"> UpdateImagePipeline does not support selective updates for the
+    # pipeline. You must specify all of the required properties in the
+    # update request, not just the properties that have changed.
+    #
+    #  </note>
     #
     # @option params [required, String] :image_pipeline_arn
     #   The Amazon Resource Name (ARN) of the image pipeline that you want to
@@ -3270,7 +3277,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2021-05-14)
+------------------
+
+* Feature - Text-only updates for bundled documentation feedback tickets - spring 2021.
+
 1.21.0 (2021-04-02)
 ------------------
 

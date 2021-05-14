@@ -6886,7 +6886,9 @@ module Aws::SecurityHub
     #   The ARN of the resource to apply the tags to.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   The tags to add to the resource.
+    #   The tags to add to the resource. You can add up to 50 tags at a time.
+    #   The tag keys can be no longer than 128 characters. The tag values can
+    #   be no longer than 256 characters.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6914,7 +6916,8 @@ module Aws::SecurityHub
     #   The ARN of the resource to remove the tags from.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   The tag keys associated with the tags to remove from the resource.
+    #   The tag keys associated with the tags to remove from the resource. You
+    #   can remove up to 50 tags at a time.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -8337,7 +8340,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
