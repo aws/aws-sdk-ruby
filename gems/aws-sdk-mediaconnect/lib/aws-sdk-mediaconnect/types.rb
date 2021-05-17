@@ -10,6 +10,73 @@
 module Aws::MediaConnect
   module Types
 
+    # Adds media streams to an existing flow.
+    #
+    # @note When making an API call, you may pass AddFlowMediaStreamsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         flow_arn: "__string", # required
+    #         media_streams: [ # required
+    #           {
+    #             attributes: {
+    #               fmtp: {
+    #                 channel_order: "__string",
+    #                 colorimetry: "BT601", # accepts BT601, BT709, BT2020, BT2100, ST2065-1, ST2065-3, XYZ
+    #                 exact_framerate: "__string",
+    #                 par: "__string",
+    #                 range: "NARROW", # accepts NARROW, FULL, FULLPROTECT
+    #                 scan_mode: "progressive", # accepts progressive, interlace, progressive-segmented-frame
+    #                 tcs: "SDR", # accepts SDR, PQ, HLG, LINEAR, BT2100LINPQ, BT2100LINHLG, ST2065-1, ST428-1, DENSITY
+    #               },
+    #               lang: "__string",
+    #             },
+    #             clock_rate: 1,
+    #             description: "__string",
+    #             media_stream_id: 1, # required
+    #             media_stream_name: "__string", # required
+    #             media_stream_type: "video", # required, accepts video, audio, ancillary-data
+    #             video_format: "__string",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] flow_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] media_streams
+    #   The media streams that you want to add to the flow.
+    #   @return [Array<Types::AddMediaStreamRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowMediaStreamsRequest AWS API Documentation
+    #
+    class AddFlowMediaStreamsRequest < Struct.new(
+      :flow_arn,
+      :media_streams)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a successful AddFlowMediaStreamsRequest request. The
+    # response includes the details of the newly added media streams.
+    #
+    # @!attribute [rw] flow_arn
+    #   The ARN of the flow that you added media streams to.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_streams
+    #   The media streams that you added to the flow.
+    #   @return [Array<Types::MediaStream>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowMediaStreamsResponse AWS API Documentation
+    #
+    class AddFlowMediaStreamsResponse < Struct.new(
+      :flow_arn,
+      :media_streams)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Exception raised by AWS Elemental MediaConnect. See the error message
     # and documentation for the operation for more information on the cause
     # of this exception.
@@ -50,10 +117,29 @@ module Aws::MediaConnect
     #               url: "__string",
     #             },
     #             max_latency: 1,
+    #             media_stream_output_configurations: [
+    #               {
+    #                 destination_configurations: [
+    #                   {
+    #                     destination_ip: "__string", # required
+    #                     destination_port: 1, # required
+    #                     interface: { # required
+    #                       name: "__string", # required
+    #                     },
+    #                   },
+    #                 ],
+    #                 encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
+    #                 encoding_parameters: {
+    #                   compression_factor: 1.0, # required
+    #                   encoder_profile: "main", # required, accepts main, high
+    #                 },
+    #                 media_stream_name: "__string", # required
+    #               },
+    #             ],
     #             min_latency: 1,
     #             name: "__string",
     #             port: 1,
-    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
+    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
     #             remote_id: "__string",
     #             smoothing_latency: 1,
     #             stream_id: "__string",
@@ -125,9 +211,24 @@ module Aws::MediaConnect
     #             ingest_port: 1,
     #             max_bitrate: 1,
     #             max_latency: 1,
+    #             max_sync_buffer: 1,
+    #             media_stream_source_configurations: [
+    #               {
+    #                 encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
+    #                 input_configurations: [
+    #                   {
+    #                     input_port: 1, # required
+    #                     interface: { # required
+    #                       name: "__string", # required
+    #                     },
+    #                   },
+    #                 ],
+    #                 media_stream_name: "__string", # required
+    #               },
+    #             ],
     #             min_latency: 1,
     #             name: "__string",
-    #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
+    #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
     #             stream_id: "__string",
     #             vpc_interface_name: "__string",
     #             whitelist_cidr: "__string",
@@ -181,6 +282,7 @@ module Aws::MediaConnect
     #         vpc_interfaces: [ # required
     #           {
     #             name: "__string", # required
+    #             network_interface_type: "ena", # accepts ena, efa
     #             role_arn: "__string", # required
     #             security_group_ids: ["__string"], # required
     #             subnet_id: "__string", # required
@@ -224,6 +326,77 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The media stream that you want to add to the flow.
+    #
+    # @note When making an API call, you may pass AddMediaStreamRequest
+    #   data as a hash:
+    #
+    #       {
+    #         attributes: {
+    #           fmtp: {
+    #             channel_order: "__string",
+    #             colorimetry: "BT601", # accepts BT601, BT709, BT2020, BT2100, ST2065-1, ST2065-3, XYZ
+    #             exact_framerate: "__string",
+    #             par: "__string",
+    #             range: "NARROW", # accepts NARROW, FULL, FULLPROTECT
+    #             scan_mode: "progressive", # accepts progressive, interlace, progressive-segmented-frame
+    #             tcs: "SDR", # accepts SDR, PQ, HLG, LINEAR, BT2100LINPQ, BT2100LINHLG, ST2065-1, ST428-1, DENSITY
+    #           },
+    #           lang: "__string",
+    #         },
+    #         clock_rate: 1,
+    #         description: "__string",
+    #         media_stream_id: 1, # required
+    #         media_stream_name: "__string", # required
+    #         media_stream_type: "video", # required, accepts video, audio, ancillary-data
+    #         video_format: "__string",
+    #       }
+    #
+    # @!attribute [rw] attributes
+    #   The attributes that you want to assign to the new media stream.
+    #   @return [Types::MediaStreamAttributesRequest]
+    #
+    # @!attribute [rw] clock_rate
+    #   The sample rate (in Hz) for the stream. If the media stream type is
+    #   video or ancillary data, set this value to 90000. If the media
+    #   stream type is audio, set this value to either 48000 or 96000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   A description that can help you quickly identify what your media
+    #   stream is used for.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_stream_id
+    #   A unique identifier for the media stream.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] media_stream_name
+    #   A name that helps you distinguish one media stream from another.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_stream_type
+    #   The type of media stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] video_format
+    #   The resolution of the video.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddMediaStreamRequest AWS API Documentation
+    #
+    class AddMediaStreamRequest < Struct.new(
+      :attributes,
+      :clock_rate,
+      :description,
+      :media_stream_id,
+      :media_stream_name,
+      :media_stream_type,
+      :video_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The output that you want to add to this flow.
     #
     # @note When making an API call, you may pass AddOutputRequest
@@ -245,10 +418,29 @@ module Aws::MediaConnect
     #           url: "__string",
     #         },
     #         max_latency: 1,
+    #         media_stream_output_configurations: [
+    #           {
+    #             destination_configurations: [
+    #               {
+    #                 destination_ip: "__string", # required
+    #                 destination_port: 1, # required
+    #                 interface: { # required
+    #                   name: "__string", # required
+    #                 },
+    #               },
+    #             ],
+    #             encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
+    #             encoding_parameters: {
+    #               compression_factor: 1.0, # required
+    #               encoder_profile: "main", # required, accepts main, high
+    #             },
+    #             media_stream_name: "__string", # required
+    #           },
+    #         ],
     #         min_latency: 1,
     #         name: "__string",
     #         port: 1,
-    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
+    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
     #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
@@ -282,6 +474,11 @@ module Aws::MediaConnect
     # @!attribute [rw] max_latency
     #   The maximum latency in milliseconds for Zixi-based streams.
     #   @return [Integer]
+    #
+    # @!attribute [rw] media_stream_output_configurations
+    #   The media streams that are associated with the output, and the
+    #   parameters for those associations.
+    #   @return [Array<Types::MediaStreamOutputConfigurationRequest>]
     #
     # @!attribute [rw] min_latency
     #   The minimum latency in milliseconds for SRT-based streams. In
@@ -331,6 +528,7 @@ module Aws::MediaConnect
       :destination,
       :encryption,
       :max_latency,
+      :media_stream_output_configurations,
       :min_latency,
       :name,
       :port,
@@ -374,7 +572,7 @@ module Aws::MediaConnect
     end
 
     # Creates a new flow. The request must include one source. The request
-    # optionally can include outputs (up to 50) and one entitlement.
+    # optionally can include outputs (up to 50) and entitlements (up to 50.)
     #
     # @note When making an API call, you may pass CreateFlowRequest
     #   data as a hash:
@@ -401,6 +599,28 @@ module Aws::MediaConnect
     #             subscribers: ["__string"], # required
     #           },
     #         ],
+    #         media_streams: [
+    #           {
+    #             attributes: {
+    #               fmtp: {
+    #                 channel_order: "__string",
+    #                 colorimetry: "BT601", # accepts BT601, BT709, BT2020, BT2100, ST2065-1, ST2065-3, XYZ
+    #                 exact_framerate: "__string",
+    #                 par: "__string",
+    #                 range: "NARROW", # accepts NARROW, FULL, FULLPROTECT
+    #                 scan_mode: "progressive", # accepts progressive, interlace, progressive-segmented-frame
+    #                 tcs: "SDR", # accepts SDR, PQ, HLG, LINEAR, BT2100LINPQ, BT2100LINHLG, ST2065-1, ST428-1, DENSITY
+    #               },
+    #               lang: "__string",
+    #             },
+    #             clock_rate: 1,
+    #             description: "__string",
+    #             media_stream_id: 1, # required
+    #             media_stream_name: "__string", # required
+    #             media_stream_type: "video", # required, accepts video, audio, ancillary-data
+    #             video_format: "__string",
+    #           },
+    #         ],
     #         name: "__string", # required
     #         outputs: [
     #           {
@@ -419,10 +639,29 @@ module Aws::MediaConnect
     #               url: "__string",
     #             },
     #             max_latency: 1,
+    #             media_stream_output_configurations: [
+    #               {
+    #                 destination_configurations: [
+    #                   {
+    #                     destination_ip: "__string", # required
+    #                     destination_port: 1, # required
+    #                     interface: { # required
+    #                       name: "__string", # required
+    #                     },
+    #                   },
+    #                 ],
+    #                 encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
+    #                 encoding_parameters: {
+    #                   compression_factor: 1.0, # required
+    #                   encoder_profile: "main", # required, accepts main, high
+    #                 },
+    #                 media_stream_name: "__string", # required
+    #               },
+    #             ],
     #             min_latency: 1,
     #             name: "__string",
     #             port: 1,
-    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
+    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
     #             remote_id: "__string",
     #             smoothing_latency: 1,
     #             stream_id: "__string",
@@ -448,9 +687,24 @@ module Aws::MediaConnect
     #           ingest_port: 1,
     #           max_bitrate: 1,
     #           max_latency: 1,
+    #           max_sync_buffer: 1,
+    #           media_stream_source_configurations: [
+    #             {
+    #               encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
+    #               input_configurations: [
+    #                 {
+    #                   input_port: 1, # required
+    #                   interface: { # required
+    #                     name: "__string", # required
+    #                   },
+    #                 },
+    #               ],
+    #               media_stream_name: "__string", # required
+    #             },
+    #           ],
     #           min_latency: 1,
     #           name: "__string",
-    #           protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
+    #           protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
     #           stream_id: "__string",
     #           vpc_interface_name: "__string",
     #           whitelist_cidr: "__string",
@@ -477,9 +731,24 @@ module Aws::MediaConnect
     #             ingest_port: 1,
     #             max_bitrate: 1,
     #             max_latency: 1,
+    #             max_sync_buffer: 1,
+    #             media_stream_source_configurations: [
+    #               {
+    #                 encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
+    #                 input_configurations: [
+    #                   {
+    #                     input_port: 1, # required
+    #                     interface: { # required
+    #                       name: "__string", # required
+    #                     },
+    #                   },
+    #                 ],
+    #                 media_stream_name: "__string", # required
+    #               },
+    #             ],
     #             min_latency: 1,
     #             name: "__string",
-    #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
+    #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
     #             stream_id: "__string",
     #             vpc_interface_name: "__string",
     #             whitelist_cidr: "__string",
@@ -488,6 +757,7 @@ module Aws::MediaConnect
     #         vpc_interfaces: [
     #           {
     #             name: "__string", # required
+    #             network_interface_type: "ena", # accepts ena, efa
     #             role_arn: "__string", # required
     #             security_group_ids: ["__string"], # required
     #             subnet_id: "__string", # required
@@ -504,6 +774,11 @@ module Aws::MediaConnect
     # @!attribute [rw] entitlements
     #   The entitlements that you want to grant on a flow.
     #   @return [Array<Types::GrantEntitlementRequest>]
+    #
+    # @!attribute [rw] media_streams
+    #   The media streams that you want to add to the flow. You can
+    #   associate these media streams with sources and outputs on the flow.
+    #   @return [Array<Types::AddMediaStreamRequest>]
     #
     # @!attribute [rw] name
     #   The name of the flow.
@@ -533,6 +808,7 @@ module Aws::MediaConnect
     class CreateFlowRequest < Struct.new(
       :availability_zone,
       :entitlements,
+      :media_streams,
       :name,
       :outputs,
       :source,
@@ -700,6 +976,146 @@ module Aws::MediaConnect
     #
     class DescribeReservationResponse < Struct.new(
       :reservation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The transport parameters that are associated with an outbound media
+    # stream.
+    #
+    # @!attribute [rw] destination_ip
+    #   The IP address where contents of the media stream will be sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_port
+    #   The port to use when the content of the media stream is distributed
+    #   to the output.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] interface
+    #   The VPC interface that is used for the media stream associated with
+    #   the output.
+    #   @return [Types::Interface]
+    #
+    # @!attribute [rw] outbound_ip
+    #   The IP address that the receiver requires in order to establish a
+    #   connection with the flow. This value is represented by the elastic
+    #   network interface IP address of the VPC. This field applies only to
+    #   outputs that use the CDI or ST 2110 JPEG XS protocol.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DestinationConfiguration AWS API Documentation
+    #
+    class DestinationConfiguration < Struct.new(
+      :destination_ip,
+      :destination_port,
+      :interface,
+      :outbound_ip)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The transport parameters that you want to associate with an outbound
+    # media stream.
+    #
+    # @note When making an API call, you may pass DestinationConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         destination_ip: "__string", # required
+    #         destination_port: 1, # required
+    #         interface: { # required
+    #           name: "__string", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] destination_ip
+    #   The IP address where you want MediaConnect to send contents of the
+    #   media stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_port
+    #   The port that you want MediaConnect to use when it distributes the
+    #   media stream to the output.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] interface
+    #   The VPC interface that you want to use for the media stream
+    #   associated with the output.
+    #   @return [Types::InterfaceRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DestinationConfigurationRequest AWS API Documentation
+    #
+    class DestinationConfigurationRequest < Struct.new(
+      :destination_ip,
+      :destination_port,
+      :interface)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A collection of parameters that determine how MediaConnect will
+    # convert the content. These fields only apply to outputs on flows that
+    # have a CDI source.
+    #
+    # @!attribute [rw] compression_factor
+    #   A value that is used to calculate compression for an output. The
+    #   bitrate of the output is calculated as follows: Output bitrate = (1
+    #   / compressionFactor) * (source bitrate) This property only applies
+    #   to outputs that use the ST 2110 JPEG XS protocol, with a flow source
+    #   that uses the CDI protocol. Valid values are floating point numbers
+    #   in the range of 3.0 to 10.0, inclusive.
+    #   @return [Float]
+    #
+    # @!attribute [rw] encoder_profile
+    #   A setting on the encoder that drives compression settings. This
+    #   property only applies to video media streams associated with outputs
+    #   that use the ST 2110 JPEG XS protocol, with a flow source that uses
+    #   the CDI protocol.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/EncodingParameters AWS API Documentation
+    #
+    class EncodingParameters < Struct.new(
+      :compression_factor,
+      :encoder_profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A collection of parameters that determine how MediaConnect will
+    # convert the content. These fields only apply to outputs on flows that
+    # have a CDI source.
+    #
+    # @note When making an API call, you may pass EncodingParametersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         compression_factor: 1.0, # required
+    #         encoder_profile: "main", # required, accepts main, high
+    #       }
+    #
+    # @!attribute [rw] compression_factor
+    #   A value that is used to calculate compression for an output. The
+    #   bitrate of the output is calculated as follows: Output bitrate = (1
+    #   / compressionFactor) * (source bitrate) This property only applies
+    #   to outputs that use the ST 2110 JPEG XS protocol, with a flow source
+    #   that uses the CDI protocol. Valid values are floating point numbers
+    #   in the range of 3.0 to 10.0, inclusive.
+    #   @return [Float]
+    #
+    # @!attribute [rw] encoder_profile
+    #   A setting on the encoder that drives compression settings. This
+    #   property only applies to video media streams associated with outputs
+    #   that use the ST 2110 JPEG XS protocol, if at least one source on the
+    #   flow uses the CDI protocol.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/EncodingParametersRequest AWS API Documentation
+    #
+    class EncodingParametersRequest < Struct.new(
+      :compression_factor,
+      :encoder_profile)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -891,6 +1307,12 @@ module Aws::MediaConnect
     #   resource, of the flow.
     #   @return [String]
     #
+    # @!attribute [rw] media_streams
+    #   The media streams that are associated with the flow. After you
+    #   associate a media stream with a source, you can also associate it
+    #   with outputs on the flow.
+    #   @return [Array<Types::MediaStream>]
+    #
     # @!attribute [rw] name
     #   The name of the flow.
     #   @return [String]
@@ -926,6 +1348,7 @@ module Aws::MediaConnect
       :egress_ip,
       :entitlements,
       :flow_arn,
+      :media_streams,
       :name,
       :outputs,
       :source,
@@ -933,6 +1356,115 @@ module Aws::MediaConnect
       :sources,
       :status,
       :vpc_interfaces)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # FMTP
+    #
+    # @!attribute [rw] channel_order
+    #   The format of the audio channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] colorimetry
+    #   The format that is used for the representation of color.
+    #   @return [String]
+    #
+    # @!attribute [rw] exact_framerate
+    #   The frame rate for the video stream, in frames/second. For example:
+    #   60000/1001. If you specify a whole number, MediaConnect uses a ratio
+    #   of N/1. For example, if you specify 60, MediaConnect uses 60/1 as
+    #   the exactFramerate.
+    #   @return [String]
+    #
+    # @!attribute [rw] par
+    #   The pixel aspect ratio (PAR) of the video.
+    #   @return [String]
+    #
+    # @!attribute [rw] range
+    #   The encoding range of the video.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_mode
+    #   The type of compression that was used to smooth the video’s
+    #   appearance
+    #   @return [String]
+    #
+    # @!attribute [rw] tcs
+    #   The transfer characteristic system (TCS) that is used in the video.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Fmtp AWS API Documentation
+    #
+    class Fmtp < Struct.new(
+      :channel_order,
+      :colorimetry,
+      :exact_framerate,
+      :par,
+      :range,
+      :scan_mode,
+      :tcs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The settings that you want to use to define the media stream.
+    #
+    # @note When making an API call, you may pass FmtpRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_order: "__string",
+    #         colorimetry: "BT601", # accepts BT601, BT709, BT2020, BT2100, ST2065-1, ST2065-3, XYZ
+    #         exact_framerate: "__string",
+    #         par: "__string",
+    #         range: "NARROW", # accepts NARROW, FULL, FULLPROTECT
+    #         scan_mode: "progressive", # accepts progressive, interlace, progressive-segmented-frame
+    #         tcs: "SDR", # accepts SDR, PQ, HLG, LINEAR, BT2100LINPQ, BT2100LINHLG, ST2065-1, ST428-1, DENSITY
+    #       }
+    #
+    # @!attribute [rw] channel_order
+    #   The format of the audio channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] colorimetry
+    #   The format that is used for the representation of color.
+    #   @return [String]
+    #
+    # @!attribute [rw] exact_framerate
+    #   The frame rate for the video stream, in frames/second. For example:
+    #   60000/1001. If you specify a whole number, MediaConnect uses a ratio
+    #   of N/1. For example, if you specify 60, MediaConnect uses 60/1 as
+    #   the exactFramerate.
+    #   @return [String]
+    #
+    # @!attribute [rw] par
+    #   The pixel aspect ratio (PAR) of the video.
+    #   @return [String]
+    #
+    # @!attribute [rw] range
+    #   The encoding range of the video.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_mode
+    #   The type of compression that was used to smooth the video’s
+    #   appearance.
+    #   @return [String]
+    #
+    # @!attribute [rw] tcs
+    #   The transfer characteristic system (TCS) that is used in the video.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/FmtpRequest AWS API Documentation
+    #
+    class FmtpRequest < Struct.new(
+      :channel_order,
+      :colorimetry,
+      :exact_framerate,
+      :par,
+      :range,
+      :scan_mode,
+      :tcs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1098,6 +1630,101 @@ module Aws::MediaConnect
     class GrantFlowEntitlementsResponse < Struct.new(
       :entitlements,
       :flow_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The transport parameters that are associated with an incoming media
+    # stream.
+    #
+    # @!attribute [rw] input_ip
+    #   The IP address that the flow listens on for incoming content for a
+    #   media stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_port
+    #   The port that the flow listens on for an incoming media stream.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] interface
+    #   The VPC interface where the media stream comes in from.
+    #   @return [Types::Interface]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/InputConfiguration AWS API Documentation
+    #
+    class InputConfiguration < Struct.new(
+      :input_ip,
+      :input_port,
+      :interface)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The transport parameters that you want to associate with an incoming
+    # media stream.
+    #
+    # @note When making an API call, you may pass InputConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         input_port: 1, # required
+    #         interface: { # required
+    #           name: "__string", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] input_port
+    #   The port that you want the flow to listen on for an incoming media
+    #   stream.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] interface
+    #   The VPC interface that you want to use for the incoming media
+    #   stream.
+    #   @return [Types::InterfaceRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/InputConfigurationRequest AWS API Documentation
+    #
+    class InputConfigurationRequest < Struct.new(
+      :input_port,
+      :interface)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The VPC interface that is used for the media stream associated with
+    # the source or output.
+    #
+    # @!attribute [rw] name
+    #   The name of the VPC interface.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Interface AWS API Documentation
+    #
+    class Interface < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The VPC interface that you want to designate where the media stream is
+    # coming from or going to.
+    #
+    # @note When making an API call, you may pass InterfaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the VPC interface.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/InterfaceRequest AWS API Documentation
+    #
+    class InterfaceRequest < Struct.new(
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1423,6 +2050,286 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # A single track or stream of media that contains video, audio, or
+    # ancillary data. After you add a media stream to a flow, you can
+    # associate it with sources and outputs on that flow, as long as they
+    # use the CDI protocol or the ST 2110 JPEG XS protocol. Each source or
+    # output can consist of one or many media streams.
+    #
+    # @!attribute [rw] attributes
+    #   Attributes that are related to the media stream.
+    #   @return [Types::MediaStreamAttributes]
+    #
+    # @!attribute [rw] clock_rate
+    #   The sample rate for the stream. This value is measured in Hz.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   A description that can help you quickly identify what your media
+    #   stream is used for.
+    #   @return [String]
+    #
+    # @!attribute [rw] fmt
+    #   The format type number (sometimes referred to as RTP payload type)
+    #   of the media stream. MediaConnect assigns this value to the media
+    #   stream. For ST 2110 JPEG XS outputs, you need to provide this value
+    #   to the receiver.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] media_stream_id
+    #   A unique identifier for the media stream.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] media_stream_name
+    #   A name that helps you distinguish one media stream from another.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_stream_type
+    #   The type of media stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] video_format
+    #   The resolution of the video.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/MediaStream AWS API Documentation
+    #
+    class MediaStream < Struct.new(
+      :attributes,
+      :clock_rate,
+      :description,
+      :fmt,
+      :media_stream_id,
+      :media_stream_name,
+      :media_stream_type,
+      :video_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Attributes that are related to the media stream.
+    #
+    # @!attribute [rw] fmtp
+    #   A set of parameters that define the media stream.
+    #   @return [Types::Fmtp]
+    #
+    # @!attribute [rw] lang
+    #   The audio language, in a format that is recognized by the receiver.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/MediaStreamAttributes AWS API Documentation
+    #
+    class MediaStreamAttributes < Struct.new(
+      :fmtp,
+      :lang)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Attributes that are related to the media stream.
+    #
+    # @note When making an API call, you may pass MediaStreamAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         fmtp: {
+    #           channel_order: "__string",
+    #           colorimetry: "BT601", # accepts BT601, BT709, BT2020, BT2100, ST2065-1, ST2065-3, XYZ
+    #           exact_framerate: "__string",
+    #           par: "__string",
+    #           range: "NARROW", # accepts NARROW, FULL, FULLPROTECT
+    #           scan_mode: "progressive", # accepts progressive, interlace, progressive-segmented-frame
+    #           tcs: "SDR", # accepts SDR, PQ, HLG, LINEAR, BT2100LINPQ, BT2100LINHLG, ST2065-1, ST428-1, DENSITY
+    #         },
+    #         lang: "__string",
+    #       }
+    #
+    # @!attribute [rw] fmtp
+    #   The settings that you want to use to define the media stream.
+    #   @return [Types::FmtpRequest]
+    #
+    # @!attribute [rw] lang
+    #   The audio language, in a format that is recognized by the receiver.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/MediaStreamAttributesRequest AWS API Documentation
+    #
+    class MediaStreamAttributesRequest < Struct.new(
+      :fmtp,
+      :lang)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The media stream that is associated with the output, and the
+    # parameters for that association.
+    #
+    # @!attribute [rw] destination_configurations
+    #   The transport parameters that are associated with each outbound
+    #   media stream.
+    #   @return [Array<Types::DestinationConfiguration>]
+    #
+    # @!attribute [rw] encoding_name
+    #   The format that was used to encode the data. For ancillary data
+    #   streams, set the encoding name to smpte291. For audio streams, set
+    #   the encoding name to pcm. For video, 2110 streams, set the encoding
+    #   name to raw. For video, JPEG XS streams, set the encoding name to
+    #   jxsv.
+    #   @return [String]
+    #
+    # @!attribute [rw] encoding_parameters
+    #   Encoding parameters
+    #   @return [Types::EncodingParameters]
+    #
+    # @!attribute [rw] media_stream_name
+    #   The name of the media stream.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/MediaStreamOutputConfiguration AWS API Documentation
+    #
+    class MediaStreamOutputConfiguration < Struct.new(
+      :destination_configurations,
+      :encoding_name,
+      :encoding_parameters,
+      :media_stream_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The media stream that you want to associate with the output, and the
+    # parameters for that association.
+    #
+    # @note When making an API call, you may pass MediaStreamOutputConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         destination_configurations: [
+    #           {
+    #             destination_ip: "__string", # required
+    #             destination_port: 1, # required
+    #             interface: { # required
+    #               name: "__string", # required
+    #             },
+    #           },
+    #         ],
+    #         encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
+    #         encoding_parameters: {
+    #           compression_factor: 1.0, # required
+    #           encoder_profile: "main", # required, accepts main, high
+    #         },
+    #         media_stream_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] destination_configurations
+    #   The transport parameters that you want to associate with the media
+    #   stream.
+    #   @return [Array<Types::DestinationConfigurationRequest>]
+    #
+    # @!attribute [rw] encoding_name
+    #   The format that will be used to encode the data. For ancillary data
+    #   streams, set the encoding name to smpte291. For audio streams, set
+    #   the encoding name to pcm. For video, 2110 streams, set the encoding
+    #   name to raw. For video, JPEG XS streams, set the encoding name to
+    #   jxsv.
+    #   @return [String]
+    #
+    # @!attribute [rw] encoding_parameters
+    #   A collection of parameters that determine how MediaConnect will
+    #   convert the content. These fields only apply to outputs on flows
+    #   that have a CDI source.
+    #   @return [Types::EncodingParametersRequest]
+    #
+    # @!attribute [rw] media_stream_name
+    #   The name of the media stream that is associated with the output.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/MediaStreamOutputConfigurationRequest AWS API Documentation
+    #
+    class MediaStreamOutputConfigurationRequest < Struct.new(
+      :destination_configurations,
+      :encoding_name,
+      :encoding_parameters,
+      :media_stream_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The media stream that is associated with the source, and the
+    # parameters for that association.
+    #
+    # @!attribute [rw] encoding_name
+    #   The format that was used to encode the data. For ancillary data
+    #   streams, set the encoding name to smpte291. For audio streams, set
+    #   the encoding name to pcm. For video, 2110 streams, set the encoding
+    #   name to raw. For video, JPEG XS streams, set the encoding name to
+    #   jxsv.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_configurations
+    #   The transport parameters that are associated with an incoming media
+    #   stream.
+    #   @return [Array<Types::InputConfiguration>]
+    #
+    # @!attribute [rw] media_stream_name
+    #   The name of the media stream.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/MediaStreamSourceConfiguration AWS API Documentation
+    #
+    class MediaStreamSourceConfiguration < Struct.new(
+      :encoding_name,
+      :input_configurations,
+      :media_stream_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition of a media stream that you want to associate with the
+    # source.
+    #
+    # @note When making an API call, you may pass MediaStreamSourceConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
+    #         input_configurations: [
+    #           {
+    #             input_port: 1, # required
+    #             interface: { # required
+    #               name: "__string", # required
+    #             },
+    #           },
+    #         ],
+    #         media_stream_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] encoding_name
+    #   The format you want to use to encode the data. For ancillary data
+    #   streams, set the encoding name to smpte291. For audio streams, set
+    #   the encoding name to pcm. For video, 2110 streams, set the encoding
+    #   name to raw. For video, JPEG XS streams, set the encoding name to
+    #   jxsv.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_configurations
+    #   The transport parameters that you want to associate with the media
+    #   stream.
+    #   @return [Array<Types::InputConfigurationRequest>]
+    #
+    # @!attribute [rw] media_stream_name
+    #   The name of the media stream.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/MediaStreamSourceConfigurationRequest AWS API Documentation
+    #
+    class MediaStreamSourceConfigurationRequest < Struct.new(
+      :encoding_name,
+      :input_configurations,
+      :media_stream_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Messages that provide the state of the flow.
     #
     # @!attribute [rw] errors
@@ -1548,6 +2455,11 @@ module Aws::MediaConnect
     #   input.
     #   @return [String]
     #
+    # @!attribute [rw] media_stream_output_configurations
+    #   The configuration for each media stream that is associated with the
+    #   output.
+    #   @return [Array<Types::MediaStreamOutputConfiguration>]
+    #
     # @!attribute [rw] name
     #   The name of the output. This value must be unique within the current
     #   flow.
@@ -1580,6 +2492,7 @@ module Aws::MediaConnect
       :entitlement_arn,
       :listener_address,
       :media_live_input_arn,
+      :media_stream_output_configurations,
       :name,
       :output_arn,
       :port,
@@ -1645,6 +2558,48 @@ module Aws::MediaConnect
     #
     class PurchaseOfferingResponse < Struct.new(
       :reservation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RemoveFlowMediaStreamRequest
+    #   data as a hash:
+    #
+    #       {
+    #         flow_arn: "__string", # required
+    #         media_stream_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] flow_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] media_stream_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveFlowMediaStreamRequest AWS API Documentation
+    #
+    class RemoveFlowMediaStreamRequest < Struct.new(
+      :flow_arn,
+      :media_stream_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a successful RemoveFlowMediaStream request.
+    #
+    # @!attribute [rw] flow_arn
+    #   The Amazon Resource Name (ARN) of the flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_stream_name
+    #   The name of the media stream that was removed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveFlowMediaStreamResponse AWS API Documentation
+    #
+    class RemoveFlowMediaStreamResponse < Struct.new(
+      :flow_arn,
+      :media_stream_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1998,9 +2953,24 @@ module Aws::MediaConnect
     #         ingest_port: 1,
     #         max_bitrate: 1,
     #         max_latency: 1,
+    #         max_sync_buffer: 1,
+    #         media_stream_source_configurations: [
+    #           {
+    #             encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
+    #             input_configurations: [
+    #               {
+    #                 input_port: 1, # required
+    #                 interface: { # required
+    #                   name: "__string", # required
+    #                 },
+    #               },
+    #             ],
+    #             media_stream_name: "__string", # required
+    #           },
+    #         ],
     #         min_latency: 1,
     #         name: "__string",
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
     #         stream_id: "__string",
     #         vpc_interface_name: "__string",
     #         whitelist_cidr: "__string",
@@ -2034,6 +3004,16 @@ module Aws::MediaConnect
     #   The maximum latency in milliseconds. This parameter applies only to
     #   RIST-based and Zixi-based streams.
     #   @return [Integer]
+    #
+    # @!attribute [rw] max_sync_buffer
+    #   The size of the buffer (in milliseconds) to use to sync incoming
+    #   source data.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] media_stream_source_configurations
+    #   The media streams that are associated with the source, and the
+    #   parameters for those associations.
+    #   @return [Array<Types::MediaStreamSourceConfigurationRequest>]
     #
     # @!attribute [rw] min_latency
     #   The minimum latency in milliseconds for SRT-based streams. In
@@ -2077,6 +3057,8 @@ module Aws::MediaConnect
       :ingest_port,
       :max_bitrate,
       :max_latency,
+      :max_sync_buffer,
+      :media_stream_source_configurations,
       :min_latency,
       :name,
       :protocol,
@@ -2120,6 +3102,11 @@ module Aws::MediaConnect
     #   The port that the flow will be listening on for incoming content.
     #   @return [Integer]
     #
+    # @!attribute [rw] media_stream_source_configurations
+    #   The media streams that are associated with the source, and the
+    #   parameters for those associations.
+    #   @return [Array<Types::MediaStreamSourceConfiguration>]
+    #
     # @!attribute [rw] name
     #   The name of the source.
     #   @return [String]
@@ -2134,7 +3121,7 @@ module Aws::MediaConnect
     #   @return [Types::Transport]
     #
     # @!attribute [rw] vpc_interface_name
-    #   The name of the VPC Interface this Source is configured with.
+    #   The name of the VPC interface that is used for this source.
     #   @return [String]
     #
     # @!attribute [rw] whitelist_cidr
@@ -2153,6 +3140,7 @@ module Aws::MediaConnect
       :entitlement_arn,
       :ingest_ip,
       :ingest_port,
+      :media_stream_source_configurations,
       :name,
       :source_arn,
       :transport,
@@ -2302,6 +3290,11 @@ module Aws::MediaConnect
     #   RIST-based and Zixi-based streams.
     #   @return [Integer]
     #
+    # @!attribute [rw] max_sync_buffer
+    #   The size of the buffer (in milliseconds) to use to sync incoming
+    #   source data.
+    #   @return [Integer]
+    #
     # @!attribute [rw] min_latency
     #   The minimum latency in milliseconds for SRT-based streams. In
     #   streams that use the SRT protocol, this value that you set on your
@@ -2335,6 +3328,7 @@ module Aws::MediaConnect
       :cidr_allow_list,
       :max_bitrate,
       :max_latency,
+      :max_sync_buffer,
       :min_latency,
       :protocol,
       :remote_id,
@@ -2567,6 +3561,94 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # Update a media stream on a flow.
+    #
+    # @note When making an API call, you may pass UpdateFlowMediaStreamRequest
+    #   data as a hash:
+    #
+    #       {
+    #         attributes: {
+    #           fmtp: {
+    #             channel_order: "__string",
+    #             colorimetry: "BT601", # accepts BT601, BT709, BT2020, BT2100, ST2065-1, ST2065-3, XYZ
+    #             exact_framerate: "__string",
+    #             par: "__string",
+    #             range: "NARROW", # accepts NARROW, FULL, FULLPROTECT
+    #             scan_mode: "progressive", # accepts progressive, interlace, progressive-segmented-frame
+    #             tcs: "SDR", # accepts SDR, PQ, HLG, LINEAR, BT2100LINPQ, BT2100LINHLG, ST2065-1, ST428-1, DENSITY
+    #           },
+    #           lang: "__string",
+    #         },
+    #         clock_rate: 1,
+    #         description: "__string",
+    #         flow_arn: "__string", # required
+    #         media_stream_name: "__string", # required
+    #         media_stream_type: "video", # accepts video, audio, ancillary-data
+    #         video_format: "__string",
+    #       }
+    #
+    # @!attribute [rw] attributes
+    #   The attributes that you want to assign to the media stream.
+    #   @return [Types::MediaStreamAttributesRequest]
+    #
+    # @!attribute [rw] clock_rate
+    #   The sample rate (in Hz) for the stream. If the media stream type is
+    #   video or ancillary data, set this value to 90000. If the media
+    #   stream type is audio, set this value to either 48000 or 96000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   Description
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] media_stream_name
+    #   @return [String]
+    #
+    # @!attribute [rw] media_stream_type
+    #   The type of media stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] video_format
+    #   The resolution of the video.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowMediaStreamRequest AWS API Documentation
+    #
+    class UpdateFlowMediaStreamRequest < Struct.new(
+      :attributes,
+      :clock_rate,
+      :description,
+      :flow_arn,
+      :media_stream_name,
+      :media_stream_type,
+      :video_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Update response
+    #
+    # @!attribute [rw] flow_arn
+    #   The ARN of the flow that is associated with the media stream that
+    #   you updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_stream
+    #   The media stream that you updated.
+    #   @return [Types::MediaStream]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowMediaStreamResponse AWS API Documentation
+    #
+    class UpdateFlowMediaStreamResponse < Struct.new(
+      :flow_arn,
+      :media_stream)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The updates that you want to make to an existing output of an existing
     # flow.
     #
@@ -2590,10 +3672,29 @@ module Aws::MediaConnect
     #         },
     #         flow_arn: "__string", # required
     #         max_latency: 1,
+    #         media_stream_output_configurations: [
+    #           {
+    #             destination_configurations: [
+    #               {
+    #                 destination_ip: "__string", # required
+    #                 destination_port: 1, # required
+    #                 interface: { # required
+    #                   name: "__string", # required
+    #                 },
+    #               },
+    #             ],
+    #             encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
+    #             encoding_parameters: {
+    #               compression_factor: 1.0, # required
+    #               encoder_profile: "main", # required, accepts main, high
+    #             },
+    #             media_stream_name: "__string", # required
+    #           },
+    #         ],
     #         min_latency: 1,
     #         output_arn: "__string", # required
     #         port: 1,
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
     #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
@@ -2630,6 +3731,11 @@ module Aws::MediaConnect
     # @!attribute [rw] max_latency
     #   The maximum latency in milliseconds for Zixi-based streams.
     #   @return [Integer]
+    #
+    # @!attribute [rw] media_stream_output_configurations
+    #   The media streams that are associated with the output, and the
+    #   parameters for those associations.
+    #   @return [Array<Types::MediaStreamOutputConfigurationRequest>]
     #
     # @!attribute [rw] min_latency
     #   The minimum latency in milliseconds for SRT-based streams. In
@@ -2678,6 +3784,7 @@ module Aws::MediaConnect
       :encryption,
       :flow_arn,
       :max_latency,
+      :media_stream_output_configurations,
       :min_latency,
       :output_arn,
       :port,
@@ -2754,7 +3861,8 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The settings for the updated source of the flow.
+    # The updates that you want to make to an existing source of an existing
+    # flow.
     #
     # @note When making an API call, you may pass UpdateFlowSourceRequest
     #   data as a hash:
@@ -2777,8 +3885,23 @@ module Aws::MediaConnect
     #         ingest_port: 1,
     #         max_bitrate: 1,
     #         max_latency: 1,
+    #         max_sync_buffer: 1,
+    #         media_stream_source_configurations: [
+    #           {
+    #             encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
+    #             input_configurations: [
+    #               {
+    #                 input_port: 1, # required
+    #                 interface: { # required
+    #                   name: "__string", # required
+    #                 },
+    #               },
+    #             ],
+    #             media_stream_name: "__string", # required
+    #           },
+    #         ],
     #         min_latency: 1,
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
     #         source_arn: "__string", # required
     #         stream_id: "__string",
     #         vpc_interface_name: "__string",
@@ -2817,6 +3940,16 @@ module Aws::MediaConnect
     #   RIST-based and Zixi-based streams.
     #   @return [Integer]
     #
+    # @!attribute [rw] max_sync_buffer
+    #   The size of the buffer (in milliseconds) to use to sync incoming
+    #   source data.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] media_stream_source_configurations
+    #   The media streams that are associated with the source, and the
+    #   parameters for those associations.
+    #   @return [Array<Types::MediaStreamSourceConfigurationRequest>]
+    #
     # @!attribute [rw] min_latency
     #   The minimum latency in milliseconds for SRT-based streams. In
     #   streams that use the SRT protocol, this value that you set on your
@@ -2839,7 +3972,7 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] vpc_interface_name
-    #   The name of the VPC Interface to configure this Source with.
+    #   The name of the VPC interface to use for this source.
     #   @return [String]
     #
     # @!attribute [rw] whitelist_cidr
@@ -2859,6 +3992,8 @@ module Aws::MediaConnect
       :ingest_port,
       :max_bitrate,
       :max_latency,
+      :max_sync_buffer,
+      :media_stream_source_configurations,
       :min_latency,
       :protocol,
       :source_arn,
@@ -2902,6 +4037,10 @@ module Aws::MediaConnect
     #   MediaConnect.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] network_interface_type
+    #   The type of network interface.
+    #   @return [String]
+    #
     # @!attribute [rw] role_arn
     #   Role Arn MediaConnect can assumes to create ENIs in customer's
     #   account
@@ -2920,6 +4059,7 @@ module Aws::MediaConnect
     class VpcInterface < Struct.new(
       :name,
       :network_interface_ids,
+      :network_interface_type,
       :role_arn,
       :security_group_ids,
       :subnet_id)
@@ -2955,6 +4095,7 @@ module Aws::MediaConnect
     #
     #       {
     #         name: "__string", # required
+    #         network_interface_type: "ena", # accepts ena, efa
     #         role_arn: "__string", # required
     #         security_group_ids: ["__string"], # required
     #         subnet_id: "__string", # required
@@ -2963,6 +4104,11 @@ module Aws::MediaConnect
     # @!attribute [rw] name
     #   The name of the VPC Interface. This value must be unique within the
     #   current flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_type
+    #   The type of network interface. If this value is not included in the
+    #   request, MediaConnect uses ENA as the networkInterfaceType.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -2982,6 +4128,7 @@ module Aws::MediaConnect
     #
     class VpcInterfaceRequest < Struct.new(
       :name,
+      :network_interface_type,
       :role_arn,
       :security_group_ids,
       :subnet_id)

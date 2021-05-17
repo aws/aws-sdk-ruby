@@ -54,6 +54,9 @@
     "models": "application-autoscaling/2016-02-06",
     "partitionsKey": "application-autoscaling"
   },
+  "ApplicationCostProfiler": {
+    "models": "applicationcostprofiler/2020-09-10"
+  },
   "ApplicationDiscoveryService": {
     "models": "discovery/2015-11-01"
   },

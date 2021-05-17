@@ -241,6 +241,7 @@ module Aws
             'AppSync' => 'appsync',
             'Appflow' => 'appflow',
             'ApplicationAutoScaling' => 'application-autoscaling',
+            'ApplicationCostProfiler' => 'application-cost-profiler',
             'ApplicationDiscoveryService' => 'discovery',
             'ApplicationInsights' => 'applicationinsights',
             'Athena' => 'athena',

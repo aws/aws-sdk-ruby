@@ -1005,7 +1005,7 @@ module Aws::ElastiCache
     #   For clusters running Redis, this value must be 1. For clusters running
     #   Memcached, this value must be between 1 and 40.
     #
-    #   If you need more than 20 nodes for your Memcached cluster, please fill
+    #   If you need more than 40 nodes for your Memcached cluster, please fill
     #   out the ElastiCache Limit Increase Request form at
     #   [http://aws.amazon.com/contact-us/elasticache-node-limit-request/][1].
     #
@@ -2321,7 +2321,7 @@ module Aws::ElastiCache
     #   The ID of the KMS key used to encrypt the disk in the cluster.
     #
     # @option params [Array<String>] :user_group_ids
-    #   The list of user groups to associate with the replication group.
+    #   The user group to associate with the replication group.
     #
     # @option params [Array<Types::LogDeliveryConfigurationRequest>] :log_delivery_configurations
     #   Specifies the destination, format and type of the logs.
@@ -8830,11 +8830,11 @@ module Aws::ElastiCache
     #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
     #
     # @option params [Array<String>] :user_group_ids_to_add
-    #   A list of user group IDs.
+    #   The user group you are associating with the replication group.
     #
     # @option params [Array<String>] :user_group_ids_to_remove
-    #   A list of users groups to remove, meaning the users in the group no
-    #   longer can access thereplication group.
+    #   The user group to remove, meaning the users in the group no longer can
+    #   access the replication group.
     #
     # @option params [Boolean] :remove_user_groups
     #   Removes the user groups that can access this replication group.
@@ -10086,7 +10086,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.103.0 (2021-05-17)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-applicationcostprofiler` gem.
+
 3.102.0 (2021-05-11)
 ------------------
 

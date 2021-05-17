@@ -22,6 +22,7 @@ module Aws
   autoload :AppSync, 'aws-sdk-appsync'
   autoload :Appflow, 'aws-sdk-appflow'
   autoload :ApplicationAutoScaling, 'aws-sdk-applicationautoscaling'
+  autoload :ApplicationCostProfiler, 'aws-sdk-applicationcostprofiler'
   autoload :ApplicationDiscoveryService, 'aws-sdk-applicationdiscoveryservice'
   autoload :ApplicationInsights, 'aws-sdk-applicationinsights'
   autoload :Athena, 'aws-sdk-athena'

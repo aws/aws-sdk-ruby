@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.457.0 (2021-05-17)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ApplicationCostProfiler`.
+
 1.456.0 (2021-05-14)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2021-05-17)
+------------------
+
+* Feature - Documentation updates for Amazon A2I Runtime model
+
 1.12.0 (2021-03-10)
 ------------------
 

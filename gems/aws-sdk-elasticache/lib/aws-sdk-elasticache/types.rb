@@ -1667,7 +1667,7 @@ module Aws::ElastiCache
     #   For clusters running Redis, this value must be 1. For clusters
     #   running Memcached, this value must be between 1 and 40.
     #
-    #   If you need more than 20 nodes for your Memcached cluster, please
+    #   If you need more than 40 nodes for your Memcached cluster, please
     #   fill out the ElastiCache Limit Increase Request form at
     #   [http://aws.amazon.com/contact-us/elasticache-node-limit-request/][1].
     #
@@ -2787,7 +2787,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] user_group_ids
-    #   The list of user groups to associate with the replication group.
+    #   The user group to associate with the replication group.
     #   @return [Array<String>]
     #
     # @!attribute [rw] log_delivery_configurations
@@ -6575,12 +6575,12 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] user_group_ids_to_add
-    #   A list of user group IDs.
+    #   The user group you are associating with the replication group.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_group_ids_to_remove
-    #   A list of users groups to remove, meaning the users in the group no
-    #   longer can access thereplication group.
+    #   The user group to remove, meaning the users in the group no longer
+    #   can access the replication group.
     #   @return [Array<String>]
     #
     # @!attribute [rw] remove_user_groups
