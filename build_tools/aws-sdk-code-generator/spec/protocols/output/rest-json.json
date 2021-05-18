@@ -707,6 +707,134 @@
     ]
   },
   {
+    "description": "Document Type",
+    "metadata": {
+      "protocol": "rest-json"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "Foo": { "shape": "DocumentType" },
+          "Bar": { "shape":  "StringType" }
+        }
+      },
+      "DocumentType": {
+        "type": "structure",
+        "document": true
+      },
+      "StringType": { "type":  "string" }
+    },
+    "cases": [
+      {
+        "description": "Deserializes strings",
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "Foo": "string value",
+          "Bar": "other value"
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"Foo\":\"string value\",\"Bar\":\"other value\"}"
+        }
+      },
+      {
+        "description": "Deserializes numbers",
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "Foo": 123
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"Foo\": 123}"
+        }
+      },
+      {
+        "description": "Deserializes booleans",
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "Foo": true
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"Foo\":true}"
+        }
+      },
+      {
+        "description": "Deserializes nulls",
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": { },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"Foo\":null}"
+        }
+      },
+      {
+        "description": "Deserializes arrays",
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "Foo": [1, 2, 3]
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"Foo\":[1,2,3]}"
+        }
+      },
+      {
+        "description": "Deserializes complex objects/maps",
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "Foo": {
+            "String": "string value",
+            "Number": 123,
+            "Nested": { "Nested1":  1 },
+            "Array": [1, 2, 3]
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"Foo\":{\"String\":\"string value\",\"Number\":123,\"Nested\":{\"Nested1\":1},\"Array\":[1,2,3]}}"
+        }
+      }
+    ]
+  },
+  {
     "description": "Enum",
     "metadata": {
       "protocol": "rest-json",

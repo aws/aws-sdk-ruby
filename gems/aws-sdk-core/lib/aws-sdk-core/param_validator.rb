@@ -117,11 +117,19 @@ module Aws
       end
     end
 
+    def document(ref, values, errors, context)
+      document_types = [Hash, Array, Numeric, String, TrueClass, FalseClass, NilClass]
+      unless document_types.any? { |t| values.is_a?(t) }
+        errors << expected_got(context, "one of #{document_types.join(', ')}", values)
+      end
+    end
+
     def shape(ref, value, errors, context)
       case ref.shape
       when StructureShape then structure(ref, value, errors, context)
       when ListShape then list(ref, value, errors, context)
       when MapShape then map(ref, value, errors, context)
+      when DocumentShape then document(ref, value, errors, context)
       when StringShape
         unless value.is_a?(String)
           errors << expected_got(context, "a String", value)

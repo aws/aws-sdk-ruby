@@ -31,6 +31,7 @@ module AwsSdkCodeGenerator
         'xmlNamespace' => true,
         'streaming' => true, # transfer-encoding
         'requiresLength' => true, # transder-encoding
+        'document' => true,
         # event stream modeling
         'event' => false,
         'eventstream' => false,
@@ -128,7 +129,7 @@ module AwsSdkCodeGenerator
             shape_name = lstrip_prefix(upcase_first(shape_name))
           end
           lines = []
-          if non_error_struct?(shape)
+          if non_error_struct?(shape) && !document_struct?(shape)
             required = Set.new(shape['required'] || [])
             unless shape['members'].nil?
               shape['members'].each do |member_name, member_ref|
@@ -259,7 +260,9 @@ module AwsSdkCodeGenerator
         if @service.protocol == 'api-gateway' && type == 'timestamp'
           shape['timestampFormat'] = 'iso8601'
         end
-        if SHAPE_CLASSES.key?(type)
+        if type == 'structure' && shape['document']
+          ["Shapes::DocumentShape", shape]
+        elsif SHAPE_CLASSES.key?(type)
           ["Shapes::#{SHAPE_CLASSES[type]}", shape]
         else
           raise ArgumentError, "unsupported shape type `#{type}'"
@@ -314,6 +317,10 @@ module AwsSdkCodeGenerator
       def error_struct?(shape)
         shape['type'] == 'structure' && !!!shape['event'] &&
           (shape['error'] || shape['exception'])
+      end
+
+      def document_struct?(shape)
+        shape['type'] == 'structure' && shape['document']
       end
 
       def structure_shape_enum

@@ -1179,6 +1179,145 @@
     ]
   },
   {
+    "description": "Document Type",
+    "metadata": {
+      "protocol": "rest-json"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "Foo": {
+            "shape": "DocumentType"
+          },
+          "Bar": {
+            "shape": "StringType"
+          }
+        }
+      },
+      "DocumentType": {
+        "type": "structure",
+        "document": true
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "description": "Serializes strings",
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "Foo": "string value",
+          "Bar": "other value"
+        },
+        "serialized": {
+          "uri": "/",
+          "headers": {},
+          "body": "{\"Foo\":\"string value\",\"Bar\":\"other value\"}"
+        }
+      },
+      {
+        "description": "Serializes numbers",
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "Foo": 1
+        },
+        "serialized": {
+          "uri": "/",
+          "headers": {},
+          "body": "{\"Foo\": 1}"
+        }
+      },
+      {
+        "description": "Serializes booleans",
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "Foo": true
+        },
+        "serialized": {
+          "uri": "/",
+          "headers": {},
+          "body": "{\"Foo\": true}"
+        }
+      },
+      {
+        "description": "Serializes arrays",
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "Foo": [1,2,3]
+        },
+        "serialized": {
+          "uri": "/",
+          "headers": {},
+          "body": "{\"Foo\": [1,2,3]}"
+        }
+      },
+      {
+        "description": "Serializes complex objects/maps",
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "Foo": {
+            "String": "string value",
+            "Number": 123,
+            "Nested": { "Nested1":  1 },
+            "Array": [1, 2, 3]
+          }
+        },
+        "serialized": {
+          "uri": "/",
+          "headers": {},
+          "body": "{\"Foo\":{\"String\":\"string value\",\"Number\":123,\"Nested\":{\"Nested1\":1},\"Array\":[1,2,3]}}"
+        }
+      }
+    ]
+  },
+  {
     "description": "Enum",
     "metadata": {
       "protocol": "rest-json",
