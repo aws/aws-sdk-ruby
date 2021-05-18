@@ -89,6 +89,7 @@ module AwsSdkCodeGenerator
         shape = Api.shape(operation['input'], api)
         return if shape['members'].nil?
         shape['members'].map do |member_name, member_ref|
+
           next if member_ref['documented'] === false
           # input eventstream is not provided by params
           member_shape = Api.shape(member_ref['shape'], api)
@@ -100,8 +101,8 @@ module AwsSdkCodeGenerator
           if member_ref['jsonvalue']
             docstring = docstring.to_s + "<p><b>SDK automatically handles json encoding and base64 encoding for you when the required value (Hash, Array, etc.) is provided according to the description.</b></p>"
           end
-          if member_ref['document']
-            docstring = docstring.to_s + "<p>DOCUMENT TYPE DOCUMENTATION....</p>"
+          if member_shape['document']
+            docstring = docstring.to_s + "<p>Document type which accepts Open Content - unescaped/unencoded JSON data</p>"
           end
           YardOptionTag.new(
             name: Underscore.underscore(member_name),
