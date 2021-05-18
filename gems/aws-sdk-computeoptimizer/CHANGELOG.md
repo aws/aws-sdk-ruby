@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2021-05-18)
+------------------
+
+* Feature - This release enables compute optimizer to support exporting  recommendations to Amazon S3 for EBS volumes and Lambda Functions.
+
 1.16.0 (2021-03-10)
 ------------------
 

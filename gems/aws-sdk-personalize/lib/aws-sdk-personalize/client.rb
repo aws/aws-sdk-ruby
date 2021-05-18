@@ -1169,6 +1169,10 @@ module Aws::Personalize
     #         metric_name: "MetricName",
     #         recipe_list: ["Arn"],
     #       },
+    #       optimization_objective: {
+    #         item_attribute: "ItemAttribute",
+    #         objective_sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH, OFF
+    #       },
     #     },
     #   })
     #
@@ -1996,6 +2000,8 @@ module Aws::Personalize
     #   resp.solution.solution_config.auto_ml_config.metric_name #=> String
     #   resp.solution.solution_config.auto_ml_config.recipe_list #=> Array
     #   resp.solution.solution_config.auto_ml_config.recipe_list[0] #=> String
+    #   resp.solution.solution_config.optimization_objective.item_attribute #=> String
+    #   resp.solution.solution_config.optimization_objective.objective_sensitivity #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
     #   resp.solution.auto_ml_result.best_recipe_arn #=> String
     #   resp.solution.status #=> String
     #   resp.solution.creation_date_time #=> Time
@@ -2065,6 +2071,8 @@ module Aws::Personalize
     #   resp.solution_version.solution_config.auto_ml_config.metric_name #=> String
     #   resp.solution_version.solution_config.auto_ml_config.recipe_list #=> Array
     #   resp.solution_version.solution_config.auto_ml_config.recipe_list[0] #=> String
+    #   resp.solution_version.solution_config.optimization_objective.item_attribute #=> String
+    #   resp.solution_version.solution_config.optimization_objective.objective_sensitivity #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
     #   resp.solution_version.training_hours #=> Float
     #   resp.solution_version.training_mode #=> String, one of "FULL", "UPDATE"
     #   resp.solution_version.tuned_hpo_params.algorithm_hyper_parameters #=> Hash
@@ -2777,7 +2785,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

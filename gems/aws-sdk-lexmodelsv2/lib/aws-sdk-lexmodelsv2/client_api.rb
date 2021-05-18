@@ -28,10 +28,13 @@ module Aws::LexModelsV2
     BotAliasStatus = Shapes::StringShape.new(name: 'BotAliasStatus')
     BotAliasSummary = Shapes::StructureShape.new(name: 'BotAliasSummary')
     BotAliasSummaryList = Shapes::ListShape.new(name: 'BotAliasSummaryList')
+    BotExportSpecification = Shapes::StructureShape.new(name: 'BotExportSpecification')
     BotFilter = Shapes::StructureShape.new(name: 'BotFilter')
     BotFilterName = Shapes::StringShape.new(name: 'BotFilterName')
     BotFilterOperator = Shapes::StringShape.new(name: 'BotFilterOperator')
     BotFilters = Shapes::ListShape.new(name: 'BotFilters')
+    BotImportSpecification = Shapes::StructureShape.new(name: 'BotImportSpecification')
+    BotLocaleExportSpecification = Shapes::StructureShape.new(name: 'BotLocaleExportSpecification')
     BotLocaleFilter = Shapes::StructureShape.new(name: 'BotLocaleFilter')
     BotLocaleFilterName = Shapes::StringShape.new(name: 'BotLocaleFilterName')
     BotLocaleFilterOperator = Shapes::StringShape.new(name: 'BotLocaleFilterOperator')
@@ -39,6 +42,7 @@ module Aws::LexModelsV2
     BotLocaleHistoryEvent = Shapes::StructureShape.new(name: 'BotLocaleHistoryEvent')
     BotLocaleHistoryEventDescription = Shapes::StringShape.new(name: 'BotLocaleHistoryEventDescription')
     BotLocaleHistoryEventsList = Shapes::ListShape.new(name: 'BotLocaleHistoryEventsList')
+    BotLocaleImportSpecification = Shapes::StructureShape.new(name: 'BotLocaleImportSpecification')
     BotLocaleSortAttribute = Shapes::StringShape.new(name: 'BotLocaleSortAttribute')
     BotLocaleSortBy = Shapes::StructureShape.new(name: 'BotLocaleSortBy')
     BotLocaleStatus = Shapes::StringShape.new(name: 'BotLocaleStatus')
@@ -91,12 +95,16 @@ module Aws::LexModelsV2
     CreateBotResponse = Shapes::StructureShape.new(name: 'CreateBotResponse')
     CreateBotVersionRequest = Shapes::StructureShape.new(name: 'CreateBotVersionRequest')
     CreateBotVersionResponse = Shapes::StructureShape.new(name: 'CreateBotVersionResponse')
+    CreateExportRequest = Shapes::StructureShape.new(name: 'CreateExportRequest')
+    CreateExportResponse = Shapes::StructureShape.new(name: 'CreateExportResponse')
     CreateIntentRequest = Shapes::StructureShape.new(name: 'CreateIntentRequest')
     CreateIntentResponse = Shapes::StructureShape.new(name: 'CreateIntentResponse')
     CreateSlotRequest = Shapes::StructureShape.new(name: 'CreateSlotRequest')
     CreateSlotResponse = Shapes::StructureShape.new(name: 'CreateSlotResponse')
     CreateSlotTypeRequest = Shapes::StructureShape.new(name: 'CreateSlotTypeRequest')
     CreateSlotTypeResponse = Shapes::StructureShape.new(name: 'CreateSlotTypeResponse')
+    CreateUploadUrlRequest = Shapes::StructureShape.new(name: 'CreateUploadUrlRequest')
+    CreateUploadUrlResponse = Shapes::StructureShape.new(name: 'CreateUploadUrlResponse')
     CustomPayload = Shapes::StructureShape.new(name: 'CustomPayload')
     CustomPayloadValue = Shapes::StringShape.new(name: 'CustomPayloadValue')
     DataPrivacy = Shapes::StructureShape.new(name: 'DataPrivacy')
@@ -108,6 +116,10 @@ module Aws::LexModelsV2
     DeleteBotResponse = Shapes::StructureShape.new(name: 'DeleteBotResponse')
     DeleteBotVersionRequest = Shapes::StructureShape.new(name: 'DeleteBotVersionRequest')
     DeleteBotVersionResponse = Shapes::StructureShape.new(name: 'DeleteBotVersionResponse')
+    DeleteExportRequest = Shapes::StructureShape.new(name: 'DeleteExportRequest')
+    DeleteExportResponse = Shapes::StructureShape.new(name: 'DeleteExportResponse')
+    DeleteImportRequest = Shapes::StructureShape.new(name: 'DeleteImportRequest')
+    DeleteImportResponse = Shapes::StructureShape.new(name: 'DeleteImportResponse')
     DeleteIntentRequest = Shapes::StructureShape.new(name: 'DeleteIntentRequest')
     DeleteSlotRequest = Shapes::StructureShape.new(name: 'DeleteSlotRequest')
     DeleteSlotTypeRequest = Shapes::StructureShape.new(name: 'DeleteSlotTypeRequest')
@@ -119,6 +131,10 @@ module Aws::LexModelsV2
     DescribeBotResponse = Shapes::StructureShape.new(name: 'DescribeBotResponse')
     DescribeBotVersionRequest = Shapes::StructureShape.new(name: 'DescribeBotVersionRequest')
     DescribeBotVersionResponse = Shapes::StructureShape.new(name: 'DescribeBotVersionResponse')
+    DescribeExportRequest = Shapes::StructureShape.new(name: 'DescribeExportRequest')
+    DescribeExportResponse = Shapes::StructureShape.new(name: 'DescribeExportResponse')
+    DescribeImportRequest = Shapes::StructureShape.new(name: 'DescribeImportRequest')
+    DescribeImportResponse = Shapes::StructureShape.new(name: 'DescribeImportResponse')
     DescribeIntentRequest = Shapes::StructureShape.new(name: 'DescribeIntentRequest')
     DescribeIntentResponse = Shapes::StructureShape.new(name: 'DescribeIntentResponse')
     DescribeSlotRequest = Shapes::StructureShape.new(name: 'DescribeSlotRequest')
@@ -129,6 +145,16 @@ module Aws::LexModelsV2
     DialogCodeHookSettings = Shapes::StructureShape.new(name: 'DialogCodeHookSettings')
     DraftBotVersion = Shapes::StringShape.new(name: 'DraftBotVersion')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
+    ExportFilter = Shapes::StructureShape.new(name: 'ExportFilter')
+    ExportFilterName = Shapes::StringShape.new(name: 'ExportFilterName')
+    ExportFilterOperator = Shapes::StringShape.new(name: 'ExportFilterOperator')
+    ExportFilters = Shapes::ListShape.new(name: 'ExportFilters')
+    ExportResourceSpecification = Shapes::StructureShape.new(name: 'ExportResourceSpecification')
+    ExportSortAttribute = Shapes::StringShape.new(name: 'ExportSortAttribute')
+    ExportSortBy = Shapes::StructureShape.new(name: 'ExportSortBy')
+    ExportStatus = Shapes::StringShape.new(name: 'ExportStatus')
+    ExportSummary = Shapes::StructureShape.new(name: 'ExportSummary')
+    ExportSummaryList = Shapes::ListShape.new(name: 'ExportSummaryList')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     FailureReasons = Shapes::ListShape.new(name: 'FailureReasons')
     FilterValue = Shapes::StringShape.new(name: 'FilterValue')
@@ -136,6 +162,19 @@ module Aws::LexModelsV2
     FulfillmentCodeHookSettings = Shapes::StructureShape.new(name: 'FulfillmentCodeHookSettings')
     Id = Shapes::StringShape.new(name: 'Id')
     ImageResponseCard = Shapes::StructureShape.new(name: 'ImageResponseCard')
+    ImportExportFileFormat = Shapes::StringShape.new(name: 'ImportExportFileFormat')
+    ImportExportFilePassword = Shapes::StringShape.new(name: 'ImportExportFilePassword')
+    ImportFilter = Shapes::StructureShape.new(name: 'ImportFilter')
+    ImportFilterName = Shapes::StringShape.new(name: 'ImportFilterName')
+    ImportFilterOperator = Shapes::StringShape.new(name: 'ImportFilterOperator')
+    ImportFilters = Shapes::ListShape.new(name: 'ImportFilters')
+    ImportResourceSpecification = Shapes::StructureShape.new(name: 'ImportResourceSpecification')
+    ImportSortAttribute = Shapes::StringShape.new(name: 'ImportSortAttribute')
+    ImportSortBy = Shapes::StructureShape.new(name: 'ImportSortBy')
+    ImportStatus = Shapes::StringShape.new(name: 'ImportStatus')
+    ImportSummary = Shapes::StructureShape.new(name: 'ImportSummary')
+    ImportSummaryList = Shapes::ListShape.new(name: 'ImportSummaryList')
+    ImportedResourceId = Shapes::StringShape.new(name: 'ImportedResourceId')
     InputContext = Shapes::StructureShape.new(name: 'InputContext')
     InputContextsList = Shapes::ListShape.new(name: 'InputContextsList')
     IntentClosingSetting = Shapes::StructureShape.new(name: 'IntentClosingSetting')
@@ -167,6 +206,10 @@ module Aws::LexModelsV2
     ListBuiltInIntentsResponse = Shapes::StructureShape.new(name: 'ListBuiltInIntentsResponse')
     ListBuiltInSlotTypesRequest = Shapes::StructureShape.new(name: 'ListBuiltInSlotTypesRequest')
     ListBuiltInSlotTypesResponse = Shapes::StructureShape.new(name: 'ListBuiltInSlotTypesResponse')
+    ListExportsRequest = Shapes::StructureShape.new(name: 'ListExportsRequest')
+    ListExportsResponse = Shapes::StructureShape.new(name: 'ListExportsResponse')
+    ListImportsRequest = Shapes::StructureShape.new(name: 'ListImportsRequest')
+    ListImportsResponse = Shapes::StructureShape.new(name: 'ListImportsResponse')
     ListIntentsRequest = Shapes::StructureShape.new(name: 'ListIntentsRequest')
     ListIntentsResponse = Shapes::StructureShape.new(name: 'ListIntentsResponse')
     ListSlotTypesRequest = Shapes::StructureShape.new(name: 'ListSlotTypesRequest')
@@ -179,6 +222,7 @@ module Aws::LexModelsV2
     LocaleName = Shapes::StringShape.new(name: 'LocaleName')
     LogPrefix = Shapes::StringShape.new(name: 'LogPrefix')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MergeStrategy = Shapes::StringShape.new(name: 'MergeStrategy')
     Message = Shapes::StructureShape.new(name: 'Message')
     MessageGroup = Shapes::StructureShape.new(name: 'MessageGroup')
     MessageGroupsList = Shapes::ListShape.new(name: 'MessageGroupsList')
@@ -193,6 +237,7 @@ module Aws::LexModelsV2
     PlainTextMessage = Shapes::StructureShape.new(name: 'PlainTextMessage')
     PlainTextMessageValue = Shapes::StringShape.new(name: 'PlainTextMessageValue')
     PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
+    PresignedS3Url = Shapes::StringShape.new(name: 'PresignedS3Url')
     PriorityValue = Shapes::IntegerShape.new(name: 'PriorityValue')
     PromptMaxRetries = Shapes::IntegerShape.new(name: 'PromptMaxRetries')
     PromptSpecification = Shapes::StructureShape.new(name: 'PromptSpecification')
@@ -245,6 +290,8 @@ module Aws::LexModelsV2
     SlotValueResolutionStrategy = Shapes::StringShape.new(name: 'SlotValueResolutionStrategy')
     SlotValueSelectionSetting = Shapes::StructureShape.new(name: 'SlotValueSelectionSetting')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
+    StartImportRequest = Shapes::StructureShape.new(name: 'StartImportRequest')
+    StartImportResponse = Shapes::StructureShape.new(name: 'StartImportResponse')
     StillWaitingResponseFrequency = Shapes::IntegerShape.new(name: 'StillWaitingResponseFrequency')
     StillWaitingResponseSpecification = Shapes::StructureShape.new(name: 'StillWaitingResponseSpecification')
     StillWaitingResponseTimeout = Shapes::IntegerShape.new(name: 'StillWaitingResponseTimeout')
@@ -268,6 +315,8 @@ module Aws::LexModelsV2
     UpdateBotLocaleResponse = Shapes::StructureShape.new(name: 'UpdateBotLocaleResponse')
     UpdateBotRequest = Shapes::StructureShape.new(name: 'UpdateBotRequest')
     UpdateBotResponse = Shapes::StructureShape.new(name: 'UpdateBotResponse')
+    UpdateExportRequest = Shapes::StructureShape.new(name: 'UpdateExportRequest')
+    UpdateExportResponse = Shapes::StructureShape.new(name: 'UpdateExportResponse')
     UpdateIntentRequest = Shapes::StructureShape.new(name: 'UpdateIntentRequest')
     UpdateIntentResponse = Shapes::StructureShape.new(name: 'UpdateIntentResponse')
     UpdateSlotRequest = Shapes::StructureShape.new(name: 'UpdateSlotRequest')
@@ -315,12 +364,29 @@ module Aws::LexModelsV2
 
     BotAliasSummaryList.member = Shapes::ShapeRef.new(shape: BotAliasSummary)
 
+    BotExportSpecification.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "botId"))
+    BotExportSpecification.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, required: true, location_name: "botVersion"))
+    BotExportSpecification.struct_class = Types::BotExportSpecification
+
     BotFilter.add_member(:name, Shapes::ShapeRef.new(shape: BotFilterName, required: true, location_name: "name"))
     BotFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, required: true, location_name: "values"))
     BotFilter.add_member(:operator, Shapes::ShapeRef.new(shape: BotFilterOperator, required: true, location_name: "operator"))
     BotFilter.struct_class = Types::BotFilter
 
     BotFilters.member = Shapes::ShapeRef.new(shape: BotFilter)
+
+    BotImportSpecification.add_member(:bot_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "botName"))
+    BotImportSpecification.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    BotImportSpecification.add_member(:data_privacy, Shapes::ShapeRef.new(shape: DataPrivacy, required: true, location_name: "dataPrivacy"))
+    BotImportSpecification.add_member(:idle_session_ttl_in_seconds, Shapes::ShapeRef.new(shape: SessionTTL, location_name: "idleSessionTTLInSeconds"))
+    BotImportSpecification.add_member(:bot_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "botTags"))
+    BotImportSpecification.add_member(:test_bot_alias_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "testBotAliasTags"))
+    BotImportSpecification.struct_class = Types::BotImportSpecification
+
+    BotLocaleExportSpecification.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "botId"))
+    BotLocaleExportSpecification.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, required: true, location_name: "botVersion"))
+    BotLocaleExportSpecification.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location_name: "localeId"))
+    BotLocaleExportSpecification.struct_class = Types::BotLocaleExportSpecification
 
     BotLocaleFilter.add_member(:name, Shapes::ShapeRef.new(shape: BotLocaleFilterName, required: true, location_name: "name"))
     BotLocaleFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, required: true, location_name: "values"))
@@ -334,6 +400,13 @@ module Aws::LexModelsV2
     BotLocaleHistoryEvent.struct_class = Types::BotLocaleHistoryEvent
 
     BotLocaleHistoryEventsList.member = Shapes::ShapeRef.new(shape: BotLocaleHistoryEvent)
+
+    BotLocaleImportSpecification.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "botId"))
+    BotLocaleImportSpecification.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, required: true, location_name: "botVersion"))
+    BotLocaleImportSpecification.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location_name: "localeId"))
+    BotLocaleImportSpecification.add_member(:nlu_intent_confidence_threshold, Shapes::ShapeRef.new(shape: ConfidenceThreshold, location_name: "nluIntentConfidenceThreshold"))
+    BotLocaleImportSpecification.add_member(:voice_settings, Shapes::ShapeRef.new(shape: VoiceSettings, location_name: "voiceSettings"))
+    BotLocaleImportSpecification.struct_class = Types::BotLocaleImportSpecification
 
     BotLocaleSortBy.add_member(:attribute, Shapes::ShapeRef.new(shape: BotLocaleSortAttribute, required: true, location_name: "attribute"))
     BotLocaleSortBy.add_member(:order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "order"))
@@ -510,6 +583,18 @@ module Aws::LexModelsV2
     CreateBotVersionResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     CreateBotVersionResponse.struct_class = Types::CreateBotVersionResponse
 
+    CreateExportRequest.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ExportResourceSpecification, required: true, location_name: "resourceSpecification"))
+    CreateExportRequest.add_member(:file_format, Shapes::ShapeRef.new(shape: ImportExportFileFormat, required: true, location_name: "fileFormat"))
+    CreateExportRequest.add_member(:file_password, Shapes::ShapeRef.new(shape: ImportExportFilePassword, location_name: "filePassword"))
+    CreateExportRequest.struct_class = Types::CreateExportRequest
+
+    CreateExportResponse.add_member(:export_id, Shapes::ShapeRef.new(shape: Id, location_name: "exportId"))
+    CreateExportResponse.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ExportResourceSpecification, location_name: "resourceSpecification"))
+    CreateExportResponse.add_member(:file_format, Shapes::ShapeRef.new(shape: ImportExportFileFormat, location_name: "fileFormat"))
+    CreateExportResponse.add_member(:export_status, Shapes::ShapeRef.new(shape: ExportStatus, location_name: "exportStatus"))
+    CreateExportResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    CreateExportResponse.struct_class = Types::CreateExportResponse
+
     CreateIntentRequest.add_member(:intent_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "intentName"))
     CreateIntentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateIntentRequest.add_member(:parent_intent_signature, Shapes::ShapeRef.new(shape: IntentSignature, location_name: "parentIntentSignature"))
@@ -590,6 +675,12 @@ module Aws::LexModelsV2
     CreateSlotTypeResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     CreateSlotTypeResponse.struct_class = Types::CreateSlotTypeResponse
 
+    CreateUploadUrlRequest.struct_class = Types::CreateUploadUrlRequest
+
+    CreateUploadUrlResponse.add_member(:import_id, Shapes::ShapeRef.new(shape: Id, location_name: "importId"))
+    CreateUploadUrlResponse.add_member(:upload_url, Shapes::ShapeRef.new(shape: PresignedS3Url, location_name: "uploadUrl"))
+    CreateUploadUrlResponse.struct_class = Types::CreateUploadUrlResponse
+
     CustomPayload.add_member(:value, Shapes::ShapeRef.new(shape: CustomPayloadValue, required: true, location_name: "value"))
     CustomPayload.struct_class = Types::CustomPayload
 
@@ -634,6 +725,20 @@ module Aws::LexModelsV2
     DeleteBotVersionResponse.add_member(:bot_version, Shapes::ShapeRef.new(shape: NumericalBotVersion, location_name: "botVersion"))
     DeleteBotVersionResponse.add_member(:bot_status, Shapes::ShapeRef.new(shape: BotStatus, location_name: "botStatus"))
     DeleteBotVersionResponse.struct_class = Types::DeleteBotVersionResponse
+
+    DeleteExportRequest.add_member(:export_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "exportId"))
+    DeleteExportRequest.struct_class = Types::DeleteExportRequest
+
+    DeleteExportResponse.add_member(:export_id, Shapes::ShapeRef.new(shape: Id, location_name: "exportId"))
+    DeleteExportResponse.add_member(:export_status, Shapes::ShapeRef.new(shape: ExportStatus, location_name: "exportStatus"))
+    DeleteExportResponse.struct_class = Types::DeleteExportResponse
+
+    DeleteImportRequest.add_member(:import_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "importId"))
+    DeleteImportRequest.struct_class = Types::DeleteImportRequest
+
+    DeleteImportResponse.add_member(:import_id, Shapes::ShapeRef.new(shape: Id, location_name: "importId"))
+    DeleteImportResponse.add_member(:import_status, Shapes::ShapeRef.new(shape: ImportStatus, location_name: "importStatus"))
+    DeleteImportResponse.struct_class = Types::DeleteImportResponse
 
     DeleteIntentRequest.add_member(:intent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "intentId"))
     DeleteIntentRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
@@ -725,6 +830,33 @@ module Aws::LexModelsV2
     DescribeBotVersionResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     DescribeBotVersionResponse.struct_class = Types::DescribeBotVersionResponse
 
+    DescribeExportRequest.add_member(:export_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "exportId"))
+    DescribeExportRequest.struct_class = Types::DescribeExportRequest
+
+    DescribeExportResponse.add_member(:export_id, Shapes::ShapeRef.new(shape: Id, location_name: "exportId"))
+    DescribeExportResponse.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ExportResourceSpecification, location_name: "resourceSpecification"))
+    DescribeExportResponse.add_member(:file_format, Shapes::ShapeRef.new(shape: ImportExportFileFormat, location_name: "fileFormat"))
+    DescribeExportResponse.add_member(:export_status, Shapes::ShapeRef.new(shape: ExportStatus, location_name: "exportStatus"))
+    DescribeExportResponse.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
+    DescribeExportResponse.add_member(:download_url, Shapes::ShapeRef.new(shape: PresignedS3Url, location_name: "downloadUrl"))
+    DescribeExportResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    DescribeExportResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
+    DescribeExportResponse.struct_class = Types::DescribeExportResponse
+
+    DescribeImportRequest.add_member(:import_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "importId"))
+    DescribeImportRequest.struct_class = Types::DescribeImportRequest
+
+    DescribeImportResponse.add_member(:import_id, Shapes::ShapeRef.new(shape: Id, location_name: "importId"))
+    DescribeImportResponse.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ImportResourceSpecification, location_name: "resourceSpecification"))
+    DescribeImportResponse.add_member(:imported_resource_id, Shapes::ShapeRef.new(shape: ImportedResourceId, location_name: "importedResourceId"))
+    DescribeImportResponse.add_member(:imported_resource_name, Shapes::ShapeRef.new(shape: Name, location_name: "importedResourceName"))
+    DescribeImportResponse.add_member(:merge_strategy, Shapes::ShapeRef.new(shape: MergeStrategy, location_name: "mergeStrategy"))
+    DescribeImportResponse.add_member(:import_status, Shapes::ShapeRef.new(shape: ImportStatus, location_name: "importStatus"))
+    DescribeImportResponse.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
+    DescribeImportResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    DescribeImportResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
+    DescribeImportResponse.struct_class = Types::DescribeImportResponse
+
     DescribeIntentRequest.add_member(:intent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "intentId"))
     DescribeIntentRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
     DescribeIntentRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, required: true, location: "uri", location_name: "botVersion"))
@@ -794,6 +926,31 @@ module Aws::LexModelsV2
     DialogCodeHookSettings.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
     DialogCodeHookSettings.struct_class = Types::DialogCodeHookSettings
 
+    ExportFilter.add_member(:name, Shapes::ShapeRef.new(shape: ExportFilterName, required: true, location_name: "name"))
+    ExportFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, required: true, location_name: "values"))
+    ExportFilter.add_member(:operator, Shapes::ShapeRef.new(shape: ExportFilterOperator, required: true, location_name: "operator"))
+    ExportFilter.struct_class = Types::ExportFilter
+
+    ExportFilters.member = Shapes::ShapeRef.new(shape: ExportFilter)
+
+    ExportResourceSpecification.add_member(:bot_export_specification, Shapes::ShapeRef.new(shape: BotExportSpecification, location_name: "botExportSpecification"))
+    ExportResourceSpecification.add_member(:bot_locale_export_specification, Shapes::ShapeRef.new(shape: BotLocaleExportSpecification, location_name: "botLocaleExportSpecification"))
+    ExportResourceSpecification.struct_class = Types::ExportResourceSpecification
+
+    ExportSortBy.add_member(:attribute, Shapes::ShapeRef.new(shape: ExportSortAttribute, required: true, location_name: "attribute"))
+    ExportSortBy.add_member(:order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "order"))
+    ExportSortBy.struct_class = Types::ExportSortBy
+
+    ExportSummary.add_member(:export_id, Shapes::ShapeRef.new(shape: Id, location_name: "exportId"))
+    ExportSummary.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ExportResourceSpecification, location_name: "resourceSpecification"))
+    ExportSummary.add_member(:file_format, Shapes::ShapeRef.new(shape: ImportExportFileFormat, location_name: "fileFormat"))
+    ExportSummary.add_member(:export_status, Shapes::ShapeRef.new(shape: ExportStatus, location_name: "exportStatus"))
+    ExportSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    ExportSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
+    ExportSummary.struct_class = Types::ExportSummary
+
+    ExportSummaryList.member = Shapes::ShapeRef.new(shape: ExportSummary)
+
     FailureReasons.member = Shapes::ShapeRef.new(shape: FailureReason)
 
     FilterValues.member = Shapes::ShapeRef.new(shape: FilterValue)
@@ -806,6 +963,32 @@ module Aws::LexModelsV2
     ImageResponseCard.add_member(:image_url, Shapes::ShapeRef.new(shape: AttachmentUrl, location_name: "imageUrl"))
     ImageResponseCard.add_member(:buttons, Shapes::ShapeRef.new(shape: ButtonsList, location_name: "buttons"))
     ImageResponseCard.struct_class = Types::ImageResponseCard
+
+    ImportFilter.add_member(:name, Shapes::ShapeRef.new(shape: ImportFilterName, required: true, location_name: "name"))
+    ImportFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, required: true, location_name: "values"))
+    ImportFilter.add_member(:operator, Shapes::ShapeRef.new(shape: ImportFilterOperator, required: true, location_name: "operator"))
+    ImportFilter.struct_class = Types::ImportFilter
+
+    ImportFilters.member = Shapes::ShapeRef.new(shape: ImportFilter)
+
+    ImportResourceSpecification.add_member(:bot_import_specification, Shapes::ShapeRef.new(shape: BotImportSpecification, location_name: "botImportSpecification"))
+    ImportResourceSpecification.add_member(:bot_locale_import_specification, Shapes::ShapeRef.new(shape: BotLocaleImportSpecification, location_name: "botLocaleImportSpecification"))
+    ImportResourceSpecification.struct_class = Types::ImportResourceSpecification
+
+    ImportSortBy.add_member(:attribute, Shapes::ShapeRef.new(shape: ImportSortAttribute, required: true, location_name: "attribute"))
+    ImportSortBy.add_member(:order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "order"))
+    ImportSortBy.struct_class = Types::ImportSortBy
+
+    ImportSummary.add_member(:import_id, Shapes::ShapeRef.new(shape: Id, location_name: "importId"))
+    ImportSummary.add_member(:imported_resource_id, Shapes::ShapeRef.new(shape: ImportedResourceId, location_name: "importedResourceId"))
+    ImportSummary.add_member(:imported_resource_name, Shapes::ShapeRef.new(shape: Name, location_name: "importedResourceName"))
+    ImportSummary.add_member(:import_status, Shapes::ShapeRef.new(shape: ImportStatus, location_name: "importStatus"))
+    ImportSummary.add_member(:merge_strategy, Shapes::ShapeRef.new(shape: MergeStrategy, location_name: "mergeStrategy"))
+    ImportSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    ImportSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
+    ImportSummary.struct_class = Types::ImportSummary
+
+    ImportSummaryList.member = Shapes::ShapeRef.new(shape: ImportSummary)
 
     InputContext.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     InputContext.struct_class = Types::InputContext
@@ -919,6 +1102,34 @@ module Aws::LexModelsV2
     ListBuiltInSlotTypesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListBuiltInSlotTypesResponse.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
     ListBuiltInSlotTypesResponse.struct_class = Types::ListBuiltInSlotTypesResponse
+
+    ListExportsRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    ListExportsRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, location_name: "botVersion"))
+    ListExportsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: ExportSortBy, location_name: "sortBy"))
+    ListExportsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ExportFilters, location_name: "filters"))
+    ListExportsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListExportsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListExportsRequest.struct_class = Types::ListExportsRequest
+
+    ListExportsResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    ListExportsResponse.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, location_name: "botVersion"))
+    ListExportsResponse.add_member(:export_summaries, Shapes::ShapeRef.new(shape: ExportSummaryList, location_name: "exportSummaries"))
+    ListExportsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListExportsResponse.struct_class = Types::ListExportsResponse
+
+    ListImportsRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    ListImportsRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, location_name: "botVersion"))
+    ListImportsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: ImportSortBy, location_name: "sortBy"))
+    ListImportsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ImportFilters, location_name: "filters"))
+    ListImportsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListImportsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListImportsRequest.struct_class = Types::ListImportsRequest
+
+    ListImportsResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    ListImportsResponse.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, location_name: "botVersion"))
+    ListImportsResponse.add_member(:import_summaries, Shapes::ShapeRef.new(shape: ImportSummaryList, location_name: "importSummaries"))
+    ListImportsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListImportsResponse.struct_class = Types::ListImportsResponse
 
     ListIntentsRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
     ListIntentsRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, required: true, location: "uri", location_name: "botVersion"))
@@ -1116,6 +1327,19 @@ module Aws::LexModelsV2
     SlotValueSelectionSetting.add_member(:regex_filter, Shapes::ShapeRef.new(shape: SlotValueRegexFilter, location_name: "regexFilter"))
     SlotValueSelectionSetting.struct_class = Types::SlotValueSelectionSetting
 
+    StartImportRequest.add_member(:import_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "importId"))
+    StartImportRequest.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ImportResourceSpecification, required: true, location_name: "resourceSpecification"))
+    StartImportRequest.add_member(:merge_strategy, Shapes::ShapeRef.new(shape: MergeStrategy, required: true, location_name: "mergeStrategy"))
+    StartImportRequest.add_member(:file_password, Shapes::ShapeRef.new(shape: ImportExportFilePassword, location_name: "filePassword"))
+    StartImportRequest.struct_class = Types::StartImportRequest
+
+    StartImportResponse.add_member(:import_id, Shapes::ShapeRef.new(shape: Id, location_name: "importId"))
+    StartImportResponse.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ImportResourceSpecification, location_name: "resourceSpecification"))
+    StartImportResponse.add_member(:merge_strategy, Shapes::ShapeRef.new(shape: MergeStrategy, location_name: "mergeStrategy"))
+    StartImportResponse.add_member(:import_status, Shapes::ShapeRef.new(shape: ImportStatus, location_name: "importStatus"))
+    StartImportResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    StartImportResponse.struct_class = Types::StartImportResponse
+
     StillWaitingResponseSpecification.add_member(:message_groups, Shapes::ShapeRef.new(shape: MessageGroupsList, required: true, location_name: "messageGroups"))
     StillWaitingResponseSpecification.add_member(:frequency_in_seconds, Shapes::ShapeRef.new(shape: StillWaitingResponseFrequency, required: true, location_name: "frequencyInSeconds"))
     StillWaitingResponseSpecification.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: StillWaitingResponseTimeout, required: true, location_name: "timeoutInSeconds"))
@@ -1216,6 +1440,18 @@ module Aws::LexModelsV2
     UpdateBotResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     UpdateBotResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
     UpdateBotResponse.struct_class = Types::UpdateBotResponse
+
+    UpdateExportRequest.add_member(:export_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "exportId"))
+    UpdateExportRequest.add_member(:file_password, Shapes::ShapeRef.new(shape: ImportExportFilePassword, location_name: "filePassword"))
+    UpdateExportRequest.struct_class = Types::UpdateExportRequest
+
+    UpdateExportResponse.add_member(:export_id, Shapes::ShapeRef.new(shape: Id, location_name: "exportId"))
+    UpdateExportResponse.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ExportResourceSpecification, location_name: "resourceSpecification"))
+    UpdateExportResponse.add_member(:file_format, Shapes::ShapeRef.new(shape: ImportExportFileFormat, location_name: "fileFormat"))
+    UpdateExportResponse.add_member(:export_status, Shapes::ShapeRef.new(shape: ExportStatus, location_name: "exportStatus"))
+    UpdateExportResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    UpdateExportResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
+    UpdateExportResponse.struct_class = Types::UpdateExportResponse
 
     UpdateIntentRequest.add_member(:intent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "intentId"))
     UpdateIntentRequest.add_member(:intent_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "intentName"))
@@ -1405,6 +1641,20 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:create_export, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateExport"
+        o.http_method = "PUT"
+        o.http_request_uri = "/exports/"
+        o.input = Shapes::ShapeRef.new(shape: CreateExportRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateExportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_intent, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateIntent"
         o.http_method = "PUT"
@@ -1443,6 +1693,19 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_upload_url, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateUploadUrl"
+        o.http_method = "POST"
+        o.http_request_uri = "/createuploadurl/"
+        o.input = Shapes::ShapeRef.new(shape: CreateUploadUrlRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateUploadUrlResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
@@ -1499,6 +1762,32 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_export, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteExport"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/exports/{exportId}/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteExportRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteExportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_import, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteImport"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/imports/{importId}/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteImportRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteImportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
@@ -1592,6 +1881,30 @@ module Aws::LexModelsV2
         o.output = Shapes::ShapeRef.new(shape: DescribeBotVersionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_export, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeExport"
+        o.http_method = "GET"
+        o.http_request_uri = "/exports/{exportId}/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeExportRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeExportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_import, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeImport"
+        o.http_method = "GET"
+        o.http_request_uri = "/imports/{importId}/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeImportRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeImportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1744,6 +2057,40 @@ module Aws::LexModelsV2
         )
       end)
 
+      api.add_operation(:list_exports, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListExports"
+        o.http_method = "POST"
+        o.http_request_uri = "/exports/"
+        o.input = Shapes::ShapeRef.new(shape: ListExportsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListExportsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_imports, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListImports"
+        o.http_method = "POST"
+        o.http_request_uri = "/imports/"
+        o.input = Shapes::ShapeRef.new(shape: ListImportsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListImportsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_intents, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListIntents"
         o.http_method = "POST"
@@ -1810,6 +2157,20 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:start_import, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartImport"
+        o.http_method = "PUT"
+        o.http_request_uri = "/imports/"
+        o.input = Shapes::ShapeRef.new(shape: StartImportRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartImportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
@@ -1872,6 +2233,20 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_export, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateExport"
+        o.http_method = "PUT"
+        o.http_request_uri = "/exports/{exportId}/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateExportRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateExportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)

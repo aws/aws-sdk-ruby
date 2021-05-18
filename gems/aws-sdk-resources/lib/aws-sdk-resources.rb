@@ -18,6 +18,7 @@ module Aws
   autoload :AppIntegrationsService, 'aws-sdk-appintegrationsservice'
   autoload :AppMesh, 'aws-sdk-appmesh'
   autoload :AppRegistry, 'aws-sdk-appregistry'
+  autoload :AppRunner, 'aws-sdk-apprunner'
   autoload :AppStream, 'aws-sdk-appstream'
   autoload :AppSync, 'aws-sdk-appsync'
   autoload :Appflow, 'aws-sdk-appflow'

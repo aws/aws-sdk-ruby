@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2021-05-18)
+------------------
+
+* Feature - Documentation updates for AWS IoT SiteWise.
+
 1.21.0 (2021-04-28)
 ------------------
 

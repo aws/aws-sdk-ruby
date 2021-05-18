@@ -237,6 +237,7 @@ module Aws
             'AppIntegrationsService' => 'app-integrations',
             'AppMesh' => 'appmesh',
             'AppRegistry' => 'servicecatalog-appregistry',
+            'AppRunner' => 'apprunner',
             'AppStream' => 'appstream2',
             'AppSync' => 'appsync',
             'Appflow' => 'appflow',

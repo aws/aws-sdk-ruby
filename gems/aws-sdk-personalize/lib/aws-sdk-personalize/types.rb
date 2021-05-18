@@ -1192,6 +1192,10 @@ module Aws::Personalize
     #             metric_name: "MetricName",
     #             recipe_list: ["Arn"],
     #           },
+    #           optimization_objective: {
+    #             item_attribute: "ItemAttribute",
+    #             objective_sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH, OFF
+    #           },
     #         },
     #       }
     #
@@ -3771,6 +3775,42 @@ module Aws::Personalize
       include Aws::Structure
     end
 
+    # Describes the additional objective for the solution, such as
+    # maximizing streaming minutes or increasing revenue. For more
+    # information see [Optimizing a solution][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html
+    #
+    # @note When making an API call, you may pass OptimizationObjective
+    #   data as a hash:
+    #
+    #       {
+    #         item_attribute: "ItemAttribute",
+    #         objective_sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH, OFF
+    #       }
+    #
+    # @!attribute [rw] item_attribute
+    #   The numerical metadata column in an Items dataset related to the
+    #   optimization objective. For example, VIDEO\_LENGTH (to maximize
+    #   streaming minutes), or PRICE (to maximize revenue).
+    #   @return [String]
+    #
+    # @!attribute [rw] objective_sensitivity
+    #   Specifies how Amazon Personalize balances the importance of your
+    #   optimization objective versus relevance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/OptimizationObjective AWS API Documentation
+    #
+    class OptimizationObjective < Struct.new(
+      :item_attribute,
+      :objective_sensitivity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about a recipe. Each recipe provides an algorithm
     # that Amazon Personalize uses in model training when you use the
     # CreateSolution operation.
@@ -4078,6 +4118,10 @@ module Aws::Personalize
     #           metric_name: "MetricName",
     #           recipe_list: ["Arn"],
     #         },
+    #         optimization_objective: {
+    #           item_attribute: "ItemAttribute",
+    #           objective_sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH, OFF
+    #         },
     #       }
     #
     # @!attribute [rw] event_value_threshold
@@ -4102,6 +4146,16 @@ module Aws::Personalize
     #   AutoML is performed.
     #   @return [Types::AutoMLConfig]
     #
+    # @!attribute [rw] optimization_objective
+    #   Describes the additional objective for the solution, such as
+    #   maximizing streaming minutes or increasing revenue. For more
+    #   information see [Optimizing a solution][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html
+    #   @return [Types::OptimizationObjective]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/SolutionConfig AWS API Documentation
     #
     class SolutionConfig < Struct.new(
@@ -4109,7 +4163,8 @@ module Aws::Personalize
       :hpo_config,
       :algorithm_hyper_parameters,
       :feature_transformation_parameters,
-      :auto_ml_config)
+      :auto_ml_config,
+      :optimization_objective)
       SENSITIVE = []
       include Aws::Structure
     end

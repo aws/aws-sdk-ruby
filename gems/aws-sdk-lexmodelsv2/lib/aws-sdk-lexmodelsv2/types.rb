@@ -182,6 +182,34 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Provided the identity of a the bot that was exported.
+    #
+    # @note When making an API call, you may pass BotExportSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         bot_id: "Id", # required
+    #         bot_version: "BotVersion", # required
+    #       }
+    #
+    # @!attribute [rw] bot_id
+    #   The identifier of the bot assigned by Amazon Lex.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot that was exported. This will be either
+    #   `DRAFT` or the version number.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BotExportSpecification AWS API Documentation
+    #
+    class BotExportSpecification < Struct.new(
+      :bot_id,
+      :bot_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Filters the responses returned by the `ListBots` operation.
     #
     # @note When making an API call, you may pass BotFilter
@@ -214,6 +242,113 @@ module Aws::LexModelsV2
       :name,
       :values,
       :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the bot parameters required for importing a bot.
+    #
+    # @note When making an API call, you may pass BotImportSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         bot_name: "Name", # required
+    #         role_arn: "RoleArn", # required
+    #         data_privacy: { # required
+    #           child_directed: false, # required
+    #         },
+    #         idle_session_ttl_in_seconds: 1,
+    #         bot_tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #         test_bot_alias_tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] bot_name
+    #   The name that Amazon Lex should use for the bot.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role used to build and run
+    #   the bot.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_privacy
+    #   By default, data stored by Amazon Lex is encrypted. The
+    #   `DataPrivacy` structure provides settings that determine how Amazon
+    #   Lex handles special cases of securing the data for your bot.
+    #   @return [Types::DataPrivacy]
+    #
+    # @!attribute [rw] idle_session_ttl_in_seconds
+    #   The time, in seconds, that Amazon Lex should keep information about
+    #   a user's conversation with the bot.
+    #
+    #   A user interaction remains active for the amount of time specified.
+    #   If no conversation occurs during this time, the session expires and
+    #   Amazon Lex deletes any data provided before the timeout.
+    #
+    #   You can specify between 60 (1 minute) and 86,400 (24 hours) seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bot_tags
+    #   A list of tags to add to the bot. You can only add tags when you
+    #   import a bot. You can't use the `UpdateBot` operation to update
+    #   tags. To update tags, use the `TagResource` operation.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] test_bot_alias_tags
+    #   A list of tags to add to the test alias for a bot. You can only add
+    #   tags when you import a bot. You can't use the `UpdateAlias`
+    #   operation to update tags. To update tags on the test alias, use the
+    #   `TagResource` operation.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BotImportSpecification AWS API Documentation
+    #
+    class BotImportSpecification < Struct.new(
+      :bot_name,
+      :role_arn,
+      :data_privacy,
+      :idle_session_ttl_in_seconds,
+      :bot_tags,
+      :test_bot_alias_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the bot locale parameters required for exporting a bot
+    # locale.
+    #
+    # @note When making an API call, you may pass BotLocaleExportSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         bot_id: "Id", # required
+    #         bot_version: "BotVersion", # required
+    #         locale_id: "LocaleId", # required
+    #       }
+    #
+    # @!attribute [rw] bot_id
+    #   The identifier of the bot to create the locale for.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot to export.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The identifier of the language and locale to export. The string must
+    #   match one of the locales in the bot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BotLocaleExportSpecification AWS API Documentation
+    #
+    class BotLocaleExportSpecification < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -270,6 +405,81 @@ module Aws::LexModelsV2
     class BotLocaleHistoryEvent < Struct.new(
       :event,
       :event_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the bot locale parameters required for importing a bot
+    # locale.
+    #
+    # @note When making an API call, you may pass BotLocaleImportSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         bot_id: "Id", # required
+    #         bot_version: "DraftBotVersion", # required
+    #         locale_id: "LocaleId", # required
+    #         nlu_intent_confidence_threshold: 1.0,
+    #         voice_settings: {
+    #           voice_id: "VoiceId", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] bot_id
+    #   The identifier of the bot to import the locale to.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot to import the locale to. This can only be the
+    #   `DRAFT` version of the bot.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The identifier of the language and locale that the bot will be used
+    #   in. The string must match one of the supported locales. All of the
+    #   intents, slot types, and slots used in the bot must have the same
+    #   locale. For more information, see [Supported languages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
+    #   @return [String]
+    #
+    # @!attribute [rw] nlu_intent_confidence_threshold
+    #   Determines the threshold where Amazon Lex will insert the
+    #   `AMAZON.FallbackIntent`, `AMAZON.KendraSearchIntent`, or both when
+    #   returning alternative intents. `AMAZON.FallbackIntent` and
+    #   `AMAZON.KendraSearchIntent` are only inserted if they are configured
+    #   for the bot.
+    #
+    #   For example, suppose a bot is configured with the confidence
+    #   threshold of 0.80 and the `AMAZON.FallbackIntent`. Amazon Lex
+    #   returns three alternative intents with the following confidence
+    #   scores: IntentA (0.70), IntentB (0.60), IntentC (0.50). The response
+    #   from the `PostText` operation would be:
+    #
+    #   * `AMAZON.FallbackIntent`
+    #
+    #   * `IntentA`
+    #
+    #   * `IntentB`
+    #
+    #   * `IntentC`
+    #   @return [Float]
+    #
+    # @!attribute [rw] voice_settings
+    #   Defines settings for using an Amazon Polly voice to communicate with
+    #   a user.
+    #   @return [Types::VoiceSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BotLocaleImportSpecification AWS API Documentation
+    #
+    class BotLocaleImportSpecification < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :nlu_intent_confidence_threshold,
+      :voice_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -521,12 +731,11 @@ module Aws::LexModelsV2
     #   The identifier of the language and locale that the bot will be used
     #   in. The string must match one of the supported locales. All of the
     #   intents, slot types, and slots used in the bot must have the same
-    #   locale. For more information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   locale. For more information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BuildBotLocaleRequest AWS API Documentation
@@ -1023,12 +1232,11 @@ module Aws::LexModelsV2
     #   The identifier of the language and locale that the bot will be used
     #   in. The string must match one of the supported locales. All of the
     #   intents, slot types, and slots used in the bot must have the same
-    #   locale. For more information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   locale. For more information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1360,6 +1568,85 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateExportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_specification: { # required
+    #           bot_export_specification: {
+    #             bot_id: "Id", # required
+    #             bot_version: "BotVersion", # required
+    #           },
+    #           bot_locale_export_specification: {
+    #             bot_id: "Id", # required
+    #             bot_version: "BotVersion", # required
+    #             locale_id: "LocaleId", # required
+    #           },
+    #         },
+    #         file_format: "LexJson", # required, accepts LexJson
+    #         file_password: "ImportExportFilePassword",
+    #       }
+    #
+    # @!attribute [rw] resource_specification
+    #   Specifies the type of resource to export, either a bot or a bot
+    #   locale. You can only specify one type of resource to export.
+    #   @return [Types::ExportResourceSpecification]
+    #
+    # @!attribute [rw] file_format
+    #   The file format of the bot or bot locale definition files.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_password
+    #   An password to use to encrypt the exported archive. Using a password
+    #   is optional, but you should encrypt the archive to protect the data
+    #   in transit between Amazon Lex and your local computer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateExportRequest AWS API Documentation
+    #
+    class CreateExportRequest < Struct.new(
+      :resource_specification,
+      :file_format,
+      :file_password)
+      SENSITIVE = [:file_password]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_id
+    #   An identifier for a specific request to create an export.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_specification
+    #   A description of the type of resource that was exported, either a
+    #   bot or a bot locale.
+    #   @return [Types::ExportResourceSpecification]
+    #
+    # @!attribute [rw] file_format
+    #   The file format used for the bot or bot locale definition files.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_status
+    #   The status of the export. When the status is `Completed`, you can
+    #   use the operation to get the pre-signed S3 URL link to your exported
+    #   bot or bot locale.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time that the request to export a bot was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateExportResponse AWS API Documentation
+    #
+    class CreateExportResponse < Struct.new(
+      :export_id,
+      :resource_specification,
+      :file_format,
+      :export_status,
+      :creation_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateIntentRequest
     #   data as a hash:
     #
@@ -1678,7 +1965,11 @@ module Aws::LexModelsV2
     # @!attribute [rw] locale_id
     #   The identifier of the language and locale where this intent is used.
     #   All of the bots, slot types, and slots used by the intent must have
-    #   the same locale.
+    #   the same locale. For more information, see [Supported languages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateIntentRequest AWS API Documentation
@@ -2081,12 +2372,11 @@ module Aws::LexModelsV2
     #   The identifier of the language and locale that the slot will be used
     #   in. The string must match one of the supported locales. All of the
     #   bots, intents, slot types used by the slot must have the same
-    #   locale. For more information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   locale. For more information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @!attribute [rw] intent_id
@@ -2256,12 +2546,11 @@ module Aws::LexModelsV2
     #   The identifier of the language and locale that the slot type will be
     #   used in. The string must match one of the supported locales. All of
     #   the bots, intents, and slots used by the slot type must have the
-    #   same locale. For more information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   same locale. For more information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateSlotTypeRequest AWS API Documentation
@@ -2335,6 +2624,31 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :creation_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateUploadUrlRequest AWS API Documentation
+    #
+    class CreateUploadUrlRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] import_id
+    #   An identifier for a unique import job. Use it when you call the
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] upload_url
+    #   A pre-signed S3 write URL. Upload the zip archive file that contains
+    #   the definition of your bot or bot locale.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateUploadUrlResponse AWS API Documentation
+    #
+    class CreateUploadUrlResponse < Struct.new(
+      :import_id,
+      :upload_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2490,12 +2804,11 @@ module Aws::LexModelsV2
     # @!attribute [rw] locale_id
     #   The identifier of the language and locale that will be deleted. The
     #   string must match one of the supported locales. For more
-    #   information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteBotLocaleRequest AWS API Documentation
@@ -2638,6 +2951,82 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteExportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         export_id: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] export_id
+    #   The unique identifier of the export to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteExportRequest AWS API Documentation
+    #
+    class DeleteExportRequest < Struct.new(
+      :export_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_id
+    #   The unique identifier of the deleted export.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_status
+    #   The current status of the deletion. When the deletion is complete,
+    #   the export will no longer be returned by the operation and calls to
+    #   the with the export identifier will fail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteExportResponse AWS API Documentation
+    #
+    class DeleteExportResponse < Struct.new(
+      :export_id,
+      :export_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteImportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         import_id: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] import_id
+    #   The unique identifier of the import to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteImportRequest AWS API Documentation
+    #
+    class DeleteImportRequest < Struct.new(
+      :import_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_id
+    #   The unique identifier of the deleted import.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_status
+    #   The current status of the deletion. When the deletion is complete,
+    #   the import will no longer be returned by the operation and calls to
+    #   the with the import identifier will fail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteImportResponse AWS API Documentation
+    #
+    class DeleteImportResponse < Struct.new(
+      :import_id,
+      :import_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteIntentRequest
     #   data as a hash:
     #
@@ -2663,12 +3052,11 @@ module Aws::LexModelsV2
     # @!attribute [rw] locale_id
     #   The identifier of the language and locale where the bot will be
     #   deleted. The string must match one of the supported locales. For
-    #   more information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   more information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteIntentRequest AWS API Documentation
@@ -2708,12 +3096,11 @@ module Aws::LexModelsV2
     # @!attribute [rw] locale_id
     #   The identifier of the language and locale that the slot will be
     #   deleted from. The string must match one of the supported locales.
-    #   For more information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   For more information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @!attribute [rw] intent_id
@@ -2758,12 +3145,11 @@ module Aws::LexModelsV2
     # @!attribute [rw] locale_id
     #   The identifier of the language and locale that the slot type will be
     #   deleted from. The string must match one of the supported locales.
-    #   For more information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   For more information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @!attribute [rw] skip_resource_in_use_check
@@ -2901,11 +3287,11 @@ module Aws::LexModelsV2
     # @!attribute [rw] locale_id
     #   The unique identifier of the locale to describe. The string must
     #   match one of the supported locales. For more information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotLocaleRequest AWS API Documentation
@@ -3168,6 +3554,155 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeExportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         export_id: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] export_id
+    #   The unique identifier of the export to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeExportRequest AWS API Documentation
+    #
+    class DescribeExportRequest < Struct.new(
+      :export_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_id
+    #   The unique identifier of the described export.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_specification
+    #   The bot, bot ID, and optional locale ID of the exported bot or bot
+    #   locale.
+    #   @return [Types::ExportResourceSpecification]
+    #
+    # @!attribute [rw] file_format
+    #   The file format used in the files that describe the bot or bot
+    #   locale.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_status
+    #   The status of the export. When the status is `Complete` the export
+    #   archive file is available for download.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reasons
+    #   If the `exportStatus` is failed, contains one or more reasons why
+    #   the export could not be completed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] download_url
+    #   A pre-signed S3 URL that points to the bot or bot locale archive.
+    #   The URL is only available for 5 minutes after calling the
+    #   `DescribeExport` operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time that the export was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The last date and time that the export was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeExportResponse AWS API Documentation
+    #
+    class DescribeExportResponse < Struct.new(
+      :export_id,
+      :resource_specification,
+      :file_format,
+      :export_status,
+      :failure_reasons,
+      :download_url,
+      :creation_date_time,
+      :last_updated_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeImportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         import_id: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] import_id
+    #   The unique identifier of the import to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeImportRequest AWS API Documentation
+    #
+    class DescribeImportRequest < Struct.new(
+      :import_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_id
+    #   The unique identifier of the described import.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_specification
+    #   The specifications of the imported bot or bot locale.
+    #   @return [Types::ImportResourceSpecification]
+    #
+    # @!attribute [rw] imported_resource_id
+    #   The unique identifier that Amazon Lex assigned to the resource
+    #   created by the import.
+    #   @return [String]
+    #
+    # @!attribute [rw] imported_resource_name
+    #   The name of the imported resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] merge_strategy
+    #   The strategy used when there was a name conflict between the
+    #   imported resource and an existing resource. When the merge strategy
+    #   is `FailOnConflict` existing resources are not overwritten and the
+    #   import fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_status
+    #   The status of the import process. When the status is `Completed` the
+    #   resource is imported and ready for use.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reasons
+    #   If the `importStatus` field is `Failed`, this provides one or more
+    #   reasons for the failture.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time that the import was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time that the import was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeImportResponse AWS API Documentation
+    #
+    class DescribeImportResponse < Struct.new(
+      :import_id,
+      :resource_specification,
+      :imported_resource_id,
+      :imported_resource_name,
+      :merge_strategy,
+      :import_status,
+      :failure_reasons,
+      :creation_date_time,
+      :last_updated_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeIntentRequest
     #   data as a hash:
     #
@@ -3193,12 +3728,11 @@ module Aws::LexModelsV2
     # @!attribute [rw] locale_id
     #   The identifier of the language and locale of the intent to describe.
     #   The string must match one of the supported locales. For more
-    #   information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeIntentRequest AWS API Documentation
@@ -3342,12 +3876,11 @@ module Aws::LexModelsV2
     # @!attribute [rw] locale_id
     #   The identifier of the language and locale of the slot to describe.
     #   The string must match one of the supported locales. For more
-    #   information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @!attribute [rw] intent_id
@@ -3460,12 +3993,11 @@ module Aws::LexModelsV2
     # @!attribute [rw] locale_id
     #   The identifier of the language and locale of the slot type to
     #   describe. The string must match one of the supported locales. For
-    #   more information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   more information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeSlotTypeRequest AWS API Documentation
@@ -3566,6 +4098,145 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Filtes the response form the operation
+    #
+    # @note When making an API call, you may pass ExportFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ExportResourceType", # required, accepts ExportResourceType
+    #         values: ["FilterValue"], # required
+    #         operator: "CO", # required, accepts CO, EQ
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the field to use for filtering.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values to use to fileter the response.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] operator
+    #   The operator to use for the filter. Specify EQ when the
+    #   `ListExports` operation should return only resource types that equal
+    #   the specified value. Specify CO when the `ListExports` operation
+    #   should return resource types that contain the specified value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ExportFilter AWS API Documentation
+    #
+    class ExportFilter < Struct.new(
+      :name,
+      :values,
+      :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the bot or bot locale that you want to
+    # export. You can specify the `botExportSpecification` or the
+    # `botLocaleExportSpecification`, but not both.
+    #
+    # @note When making an API call, you may pass ExportResourceSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         bot_export_specification: {
+    #           bot_id: "Id", # required
+    #           bot_version: "BotVersion", # required
+    #         },
+    #         bot_locale_export_specification: {
+    #           bot_id: "Id", # required
+    #           bot_version: "BotVersion", # required
+    #           locale_id: "LocaleId", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] bot_export_specification
+    #   Parameters for exporting a bot.
+    #   @return [Types::BotExportSpecification]
+    #
+    # @!attribute [rw] bot_locale_export_specification
+    #   Parameters for exporting a bot locale.
+    #   @return [Types::BotLocaleExportSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ExportResourceSpecification AWS API Documentation
+    #
+    class ExportResourceSpecification < Struct.new(
+      :bot_export_specification,
+      :bot_locale_export_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about sorting a list of exports.
+    #
+    # @note When making an API call, you may pass ExportSortBy
+    #   data as a hash:
+    #
+    #       {
+    #         attribute: "LastUpdatedDateTime", # required, accepts LastUpdatedDateTime
+    #         order: "Ascending", # required, accepts Ascending, Descending
+    #       }
+    #
+    # @!attribute [rw] attribute
+    #   The export field to use for sorting.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   The order to sort the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ExportSortBy AWS API Documentation
+    #
+    class ExportSortBy < Struct.new(
+      :attribute,
+      :order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides summary information about an export in an export list.
+    #
+    # @!attribute [rw] export_id
+    #   The unique identifier that Amazon Lex assigned to the export.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_specification
+    #   Information about the bot or bot locale that was exported.
+    #   @return [Types::ExportResourceSpecification]
+    #
+    # @!attribute [rw] file_format
+    #   The file format used in the export files.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_status
+    #   The status of the export. When the status is `Completed` the export
+    #   is ready to download.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time that the export was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time that the export was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ExportSummary AWS API Documentation
+    #
+    class ExportSummary < Struct.new(
+      :export_id,
+      :resource_specification,
+      :file_format,
+      :export_status,
+      :creation_date_time,
+      :last_updated_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Determines if a Lambda function should be invoked for a specific
     # intent.
     #
@@ -3639,6 +4310,166 @@ module Aws::LexModelsV2
       :subtitle,
       :image_url,
       :buttons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters the response from the operation.
+    #
+    # @note When making an API call, you may pass ImportFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ImportResourceType", # required, accepts ImportResourceType
+    #         values: ["FilterValue"], # required
+    #         operator: "CO", # required, accepts CO, EQ
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the field to use for filtering.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values to use to filter the response.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] operator
+    #   The operator to use for the filter. Specify EQ when the
+    #   `ListImports` operation should return only resource types that equal
+    #   the specified value. Specify CO when the `ListImports` operation
+    #   should return resource types that contain the specified value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ImportFilter AWS API Documentation
+    #
+    class ImportFilter < Struct.new(
+      :name,
+      :values,
+      :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the bot or bot locale that you want to
+    # import. You can sepcifiy the `botImportSpecification` or the
+    # `botLocaleImportSpecification`, but not both.
+    #
+    # @note When making an API call, you may pass ImportResourceSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         bot_import_specification: {
+    #           bot_name: "Name", # required
+    #           role_arn: "RoleArn", # required
+    #           data_privacy: { # required
+    #             child_directed: false, # required
+    #           },
+    #           idle_session_ttl_in_seconds: 1,
+    #           bot_tags: {
+    #             "TagKey" => "TagValue",
+    #           },
+    #           test_bot_alias_tags: {
+    #             "TagKey" => "TagValue",
+    #           },
+    #         },
+    #         bot_locale_import_specification: {
+    #           bot_id: "Id", # required
+    #           bot_version: "DraftBotVersion", # required
+    #           locale_id: "LocaleId", # required
+    #           nlu_intent_confidence_threshold: 1.0,
+    #           voice_settings: {
+    #             voice_id: "VoiceId", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] bot_import_specification
+    #   Parameters for importing a bot.
+    #   @return [Types::BotImportSpecification]
+    #
+    # @!attribute [rw] bot_locale_import_specification
+    #   Parameters for importing a bot locale.
+    #   @return [Types::BotLocaleImportSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ImportResourceSpecification AWS API Documentation
+    #
+    class ImportResourceSpecification < Struct.new(
+      :bot_import_specification,
+      :bot_locale_import_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information for sorting a list of imports.
+    #
+    # @note When making an API call, you may pass ImportSortBy
+    #   data as a hash:
+    #
+    #       {
+    #         attribute: "LastUpdatedDateTime", # required, accepts LastUpdatedDateTime
+    #         order: "Ascending", # required, accepts Ascending, Descending
+    #       }
+    #
+    # @!attribute [rw] attribute
+    #   The export field to use for sorting.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   The order to sort the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ImportSortBy AWS API Documentation
+    #
+    class ImportSortBy < Struct.new(
+      :attribute,
+      :order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides summary information about an import in an import list.
+    #
+    # @!attribute [rw] import_id
+    #   The unique identifier that Amazon Lex assigned to the import.
+    #   @return [String]
+    #
+    # @!attribute [rw] imported_resource_id
+    #   The unique identifier that Amazon Lex assigned to the imported
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] imported_resource_name
+    #   The name that you gave the imported resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_status
+    #   The status of the resource. When the status is `Completed` the
+    #   resource is ready to build.
+    #   @return [String]
+    #
+    # @!attribute [rw] merge_strategy
+    #   The strategy used to merge existing bot or bot locale definitions
+    #   with the imported definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time that the import was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time that the import was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ImportSummary AWS API Documentation
+    #
+    class ImportSummary < Struct.new(
+      :import_id,
+      :imported_resource_id,
+      :imported_resource_name,
+      :import_status,
+      :merge_strategy,
+      :creation_date_time,
+      :last_updated_date_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4418,12 +5249,11 @@ module Aws::LexModelsV2
     # @!attribute [rw] locale_id
     #   The identifier of the language and locale of the intents to list.
     #   The string must match one of the supported locales. For more
-    #   information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @!attribute [rw] sort_by
@@ -4502,12 +5332,11 @@ module Aws::LexModelsV2
     # @!attribute [rw] locale_id
     #   The identifier of the language and locale of the slot types to list.
     #   The string must match one of the supported locales. For more
-    #   information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @!attribute [rw] sort_by
@@ -4570,6 +5399,206 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListExportsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bot_id: "Id",
+    #         bot_version: "BotVersion",
+    #         sort_by: {
+    #           attribute: "LastUpdatedDateTime", # required, accepts LastUpdatedDateTime
+    #           order: "Ascending", # required, accepts Ascending, Descending
+    #         },
+    #         filters: [
+    #           {
+    #             name: "ExportResourceType", # required, accepts ExportResourceType
+    #             values: ["FilterValue"], # required
+    #             operator: "CO", # required, accepts CO, EQ
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] bot_id
+    #   The unique identifier that Amazon Lex assigned to the bot.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot to list exports for.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   Determines the field that the list of exports is sorted by. You can
+    #   sort by the `LastUpdatedDateTime` field in ascending or descending
+    #   order.
+    #   @return [Types::ExportSortBy]
+    #
+    # @!attribute [rw] filters
+    #   Provides the specification of a filter used to limit the exports in
+    #   the response to only those that match the filter specification. You
+    #   can only specify one filter and one string to filter on.
+    #   @return [Array<Types::ExportFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of exports to return in each page of results. If
+    #   there are fewer results than the max page size, only the actual
+    #   number of results are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from the `ListExports` operation contans more
+    #   results that specified in the `maxResults` parameter, a token is
+    #   returned in the response. Use that token in the `nextToken`
+    #   parameter to return the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListExportsRequest AWS API Documentation
+    #
+    class ListExportsRequest < Struct.new(
+      :bot_id,
+      :bot_version,
+      :sort_by,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier assigned to the bot by Amazon Lex.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot that was exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_summaries
+    #   Summary information for the exports that meet the filter criteria
+    #   specified in the request. The length of the list is specified in the
+    #   `maxResults` parameter. If there are more exports available, the
+    #   `nextToken` field contains a token to get the next page of results.
+    #   @return [Array<Types::ExportSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates whether there are more results to return in a
+    #   response to the `ListExports` operation. If the `nextToken` field is
+    #   present, you send the contents as the `nextToken` parameter of a
+    #   `ListExports` operation request to get the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListExportsResponse AWS API Documentation
+    #
+    class ListExportsResponse < Struct.new(
+      :bot_id,
+      :bot_version,
+      :export_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListImportsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bot_id: "Id",
+    #         bot_version: "DraftBotVersion",
+    #         sort_by: {
+    #           attribute: "LastUpdatedDateTime", # required, accepts LastUpdatedDateTime
+    #           order: "Ascending", # required, accepts Ascending, Descending
+    #         },
+    #         filters: [
+    #           {
+    #             name: "ImportResourceType", # required, accepts ImportResourceType
+    #             values: ["FilterValue"], # required
+    #             operator: "CO", # required, accepts CO, EQ
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] bot_id
+    #   The unique identifier that Amazon Lex assigned to the bot.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot to list imports for.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   Determines the field that the list of imports is sorted by. You can
+    #   sort by the `LastUpdatedDateTime` field in ascending or descending
+    #   order.
+    #   @return [Types::ImportSortBy]
+    #
+    # @!attribute [rw] filters
+    #   Provides the specification of a filter used to limit the bots in the
+    #   response to only those that match the filter specification. You can
+    #   only specify one filter and one string to filter on.
+    #   @return [Array<Types::ImportFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of imports to return in each page of results. If
+    #   there are fewer results than the max page size, only the actual
+    #   number of results are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from the `ListImports` operation contains more
+    #   results than specified in the `maxResults` parameter, a token is
+    #   returned in the response. Use that token in the `nextToken`
+    #   parameter to return the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListImportsRequest AWS API Documentation
+    #
+    class ListImportsRequest < Struct.new(
+      :bot_id,
+      :bot_version,
+      :sort_by,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier assigned by Amazon Lex to the bot.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot that was imported. It will always be `DRAFT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_summaries
+    #   Summary information for the imports that meet the filter criteria
+    #   specified in the request. The length of the list is specified in the
+    #   `maxResults` parameter. If there are more imports available, the
+    #   `nextToken` field contains a token to get the next page of results.
+    #   @return [Array<Types::ImportSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates whether there are more results to return in a
+    #   response to the `ListImports` operation. If the `nextToken` field is
+    #   present, you send the contents as the `nextToken` parameter of a
+    #   `ListImports` operation request to get the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListImportsResponse AWS API Documentation
+    #
+    class ListImportsResponse < Struct.new(
+      :bot_id,
+      :bot_version,
+      :import_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListIntentsRequest
     #   data as a hash:
     #
@@ -4603,12 +5632,11 @@ module Aws::LexModelsV2
     # @!attribute [rw] locale_id
     #   The identifier of the language and locale of the intents to list.
     #   The string must match one of the supported locales. For more
-    #   information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @!attribute [rw] sort_by
@@ -4722,12 +5750,11 @@ module Aws::LexModelsV2
     # @!attribute [rw] locale_id
     #   The identifier of the language and locale of the slot types to list.
     #   The string must match one of the supported locales. For more
-    #   information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @!attribute [rw] sort_by
@@ -4842,12 +5869,11 @@ module Aws::LexModelsV2
     # @!attribute [rw] locale_id
     #   The identifier of the language and locale of the slots to list. The
     #   string must match one of the supported locales. For more
-    #   information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @!attribute [rw] intent_id
@@ -6181,6 +7207,109 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartImportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         import_id: "Id", # required
+    #         resource_specification: { # required
+    #           bot_import_specification: {
+    #             bot_name: "Name", # required
+    #             role_arn: "RoleArn", # required
+    #             data_privacy: { # required
+    #               child_directed: false, # required
+    #             },
+    #             idle_session_ttl_in_seconds: 1,
+    #             bot_tags: {
+    #               "TagKey" => "TagValue",
+    #             },
+    #             test_bot_alias_tags: {
+    #               "TagKey" => "TagValue",
+    #             },
+    #           },
+    #           bot_locale_import_specification: {
+    #             bot_id: "Id", # required
+    #             bot_version: "DraftBotVersion", # required
+    #             locale_id: "LocaleId", # required
+    #             nlu_intent_confidence_threshold: 1.0,
+    #             voice_settings: {
+    #               voice_id: "VoiceId", # required
+    #             },
+    #           },
+    #         },
+    #         merge_strategy: "Overwrite", # required, accepts Overwrite, FailOnConflict
+    #         file_password: "ImportExportFilePassword",
+    #       }
+    #
+    # @!attribute [rw] import_id
+    #   The unique identifier for the import. It is included in the response
+    #   from the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_specification
+    #   Parameters for creating the bot or bot locale.
+    #   @return [Types::ImportResourceSpecification]
+    #
+    # @!attribute [rw] merge_strategy
+    #   The strategy to use when there is a name conflict between the
+    #   imported resource and an existing resource. When the merge strategy
+    #   is `FailOnConflict` existing resources are not overwritten and the
+    #   import fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_password
+    #   The password used to encrypt the zip archive that contains the bot
+    #   or bot locale definition. You should always encrypt the zip archive
+    #   to protect it during transit between your site and Amazon Lex.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StartImportRequest AWS API Documentation
+    #
+    class StartImportRequest < Struct.new(
+      :import_id,
+      :resource_specification,
+      :merge_strategy,
+      :file_password)
+      SENSITIVE = [:file_password]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_id
+    #   A unique identifier for the import.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_specification
+    #   The parameters used when importing the bot or bot locale.
+    #   @return [Types::ImportResourceSpecification]
+    #
+    # @!attribute [rw] merge_strategy
+    #   The strategy used when there was a name conflict between the
+    #   imported resource and an existing resource. When the merge strategy
+    #   is `FailOnConflict` existing resources are not overwritten and the
+    #   import fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_status
+    #   The current status of the import. When the status is `Complete` the
+    #   bot or bot alias is ready to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time that the import request was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StartImportResponse AWS API Documentation
+    #
+    class StartImportResponse < Struct.new(
+      :import_id,
+      :resource_specification,
+      :merge_strategy,
+      :import_status,
+      :creation_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the messages that Amazon Lex sends to a user to remind them
     # that the bot is waiting for a response.
     #
@@ -6603,11 +7732,11 @@ module Aws::LexModelsV2
     # @!attribute [rw] locale_id
     #   The identifier of the language and locale to update. The string must
     #   match one of the supported locales. For more information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -6817,6 +7946,70 @@ module Aws::LexModelsV2
       :data_privacy,
       :idle_session_ttl_in_seconds,
       :bot_status,
+      :creation_date_time,
+      :last_updated_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateExportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         export_id: "Id", # required
+    #         file_password: "ImportExportFilePassword",
+    #       }
+    #
+    # @!attribute [rw] export_id
+    #   The unique identifier Amazon Lex assigned to the export.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_password
+    #   The new password to use to encrypt the export zip archive.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateExportRequest AWS API Documentation
+    #
+    class UpdateExportRequest < Struct.new(
+      :export_id,
+      :file_password)
+      SENSITIVE = [:file_password]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_id
+    #   The unique identifier Amazon Lex assigned to the export.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_specification
+    #   A description of the type of resource that was exported, either a
+    #   bot or a bot locale.
+    #   @return [Types::ExportResourceSpecification]
+    #
+    # @!attribute [rw] file_format
+    #   The file format used for the files that define the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_status
+    #   The status of the export. When the status is `Completed` the export
+    #   archive is available for download.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time that the export was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time that the export was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateExportResponse AWS API Documentation
+    #
+    class UpdateExportResponse < Struct.new(
+      :export_id,
+      :resource_specification,
+      :file_format,
+      :export_status,
       :creation_date_time,
       :last_updated_date_time)
       SENSITIVE = []
@@ -7105,12 +8298,11 @@ module Aws::LexModelsV2
     # @!attribute [rw] locale_id
     #   The identifier of the language and locale where this intent is used.
     #   The string must match one of the supported locales. For more
-    #   information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateIntentRequest AWS API Documentation
@@ -7530,12 +8722,11 @@ module Aws::LexModelsV2
     # @!attribute [rw] locale_id
     #   The identifier of the language and locale that contains the slot.
     #   The string must match one of the supported locales. For more
-    #   information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @!attribute [rw] intent_id
@@ -7699,12 +8890,11 @@ module Aws::LexModelsV2
     # @!attribute [rw] locale_id
     #   The identifier of the language and locale that contains the slot
     #   type. The string must match one of the supported locales. For more
-    #   information, see
-    #   [https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html][1].
+    #   information, see [Supported languages][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateSlotTypeRequest AWS API Documentation

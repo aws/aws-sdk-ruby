@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2021-05-18)
+------------------
+
+* Feature - Amazon Personalize now supports the ability to optimize a solution for a custom objective in addition to maximizing relevance.
+
 1.24.0 (2021-04-30)
 ------------------
 

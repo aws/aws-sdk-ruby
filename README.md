@@ -294,6 +294,7 @@ RubyGems.org page under "LINKS" section.
 | ----------------------------------------------------- | ------------------------------------ | --------------------------------------- | ----------- |
 | AWS Amplify                                           | Aws::Amplify                         | aws-sdk-amplify                         | 2017-07-25  |
 | AWS App Mesh                                          | Aws::AppMesh                         | aws-sdk-appmesh                         | 2019-01-25  |
+| AWS App Runner                                        | Aws::AppRunner                       | aws-sdk-apprunner                       | 2020-05-15  |
 | AWS AppSync                                           | Aws::AppSync                         | aws-sdk-appsync                         | 2017-07-25  |
 | AWS Application Cost Profiler                         | Aws::ApplicationCostProfiler         | aws-sdk-applicationcostprofiler         | 2020-09-10  |
 | AWS Application Discovery Service                     | Aws::ApplicationDiscoveryService     | aws-sdk-applicationdiscoveryservice     | 2015-11-01  |

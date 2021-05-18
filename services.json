@@ -41,6 +41,9 @@
   "AppRegistry": {
     "models": "servicecatalog-appregistry/2020-06-24"
   },
+  "AppRunner": {
+    "models": "apprunner/2020-05-15"
+  },
   "AppStream": {
     "models": "appstream/2016-12-01"
   },

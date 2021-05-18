@@ -155,6 +155,7 @@ module Aws::Personalize
     IntegerMinValue = Shapes::IntegerShape.new(name: 'IntegerMinValue')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
+    ItemAttribute = Shapes::StringShape.new(name: 'ItemAttribute')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListBatchInferenceJobsRequest = Shapes::StructureShape.new(name: 'ListBatchInferenceJobsRequest')
@@ -189,6 +190,8 @@ module Aws::Personalize
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NumBatchResults = Shapes::IntegerShape.new(name: 'NumBatchResults')
+    ObjectiveSensitivity = Shapes::StringShape.new(name: 'ObjectiveSensitivity')
+    OptimizationObjective = Shapes::StructureShape.new(name: 'OptimizationObjective')
     ParameterName = Shapes::StringShape.new(name: 'ParameterName')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     PerformAutoML = Shapes::BooleanShape.new(name: 'PerformAutoML')
@@ -876,6 +879,10 @@ module Aws::Personalize
     Metrics.key = Shapes::ShapeRef.new(shape: MetricName)
     Metrics.value = Shapes::ShapeRef.new(shape: MetricValue)
 
+    OptimizationObjective.add_member(:item_attribute, Shapes::ShapeRef.new(shape: ItemAttribute, location_name: "itemAttribute"))
+    OptimizationObjective.add_member(:objective_sensitivity, Shapes::ShapeRef.new(shape: ObjectiveSensitivity, location_name: "objectiveSensitivity"))
+    OptimizationObjective.struct_class = Types::OptimizationObjective
+
     Recipe.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     Recipe.add_member(:recipe_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "recipeArn"))
     Recipe.add_member(:algorithm_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "algorithmArn"))
@@ -934,6 +941,7 @@ module Aws::Personalize
     SolutionConfig.add_member(:algorithm_hyper_parameters, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "algorithmHyperParameters"))
     SolutionConfig.add_member(:feature_transformation_parameters, Shapes::ShapeRef.new(shape: FeatureTransformationParameters, location_name: "featureTransformationParameters"))
     SolutionConfig.add_member(:auto_ml_config, Shapes::ShapeRef.new(shape: AutoMLConfig, location_name: "autoMLConfig"))
+    SolutionConfig.add_member(:optimization_objective, Shapes::ShapeRef.new(shape: OptimizationObjective, location_name: "optimizationObjective"))
     SolutionConfig.struct_class = Types::SolutionConfig
 
     SolutionSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))

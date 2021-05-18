@@ -438,7 +438,11 @@ module Aws::ComputeOptimizer
     #   member accounts of the organization if your account is the
     #   management account of an organization.
     #
-    #   The member accounts must also be opted in to Compute Optimizer.
+    #   The member accounts must also be opted in to Compute Optimizer, and
+    #   trusted access for Compute Optimizer must be enabled in the
+    #   organization account. For more information, see [Compute Optimizer
+    #   and AWS Organizations trusted access][1] in the *AWS Compute
+    #   Optimizer User Guide*.
     #
     #   Recommendations for member accounts of the organization are not
     #   included in the export file if this parameter is omitted.
@@ -448,6 +452,10 @@ module Aws::ComputeOptimizer
     #
     #   Recommendations for member accounts are not included in the export
     #   if this parameter, or the account IDs parameter, is omitted.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportAutoScalingGroupRecommendationsRequest AWS API Documentation
@@ -497,6 +505,144 @@ module Aws::ComputeOptimizer
     #
     class ExportDestination < Struct.new(
       :s3)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ExportEBSVolumeRecommendationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_ids: ["AccountId"],
+    #         filters: [
+    #           {
+    #             name: "Finding", # accepts Finding
+    #             values: ["FilterValue"],
+    #           },
+    #         ],
+    #         fields_to_export: ["AccountId"], # accepts AccountId, VolumeArn, Finding, UtilizationMetricsVolumeReadOpsPerSecondMaximum, UtilizationMetricsVolumeWriteOpsPerSecondMaximum, UtilizationMetricsVolumeReadBytesPerSecondMaximum, UtilizationMetricsVolumeWriteBytesPerSecondMaximum, LookbackPeriodInDays, CurrentConfigurationVolumeType, CurrentConfigurationVolumeBaselineIOPS, CurrentConfigurationVolumeBaselineThroughput, CurrentConfigurationVolumeBurstIOPS, CurrentConfigurationVolumeBurstThroughput, CurrentConfigurationVolumeSize, CurrentMonthlyPrice, RecommendationOptionsConfigurationVolumeType, RecommendationOptionsConfigurationVolumeBaselineIOPS, RecommendationOptionsConfigurationVolumeBaselineThroughput, RecommendationOptionsConfigurationVolumeBurstIOPS, RecommendationOptionsConfigurationVolumeBurstThroughput, RecommendationOptionsConfigurationVolumeSize, RecommendationOptionsMonthlyPrice, RecommendationOptionsPerformanceRisk, LastRefreshTimestamp
+    #         s3_destination_config: { # required
+    #           bucket: "DestinationBucket",
+    #           key_prefix: "DestinationKeyPrefix",
+    #         },
+    #         file_format: "Csv", # accepts Csv
+    #         include_member_accounts: false,
+    #       }
+    #
+    # @!attribute [rw] account_ids
+    #   The IDs of the AWS accounts for which to export Amazon EBS volume
+    #   recommendations.
+    #
+    #   If your account is the management account of an organization, use
+    #   this parameter to specify the member account for which you want to
+    #   export recommendations.
+    #
+    #   This parameter cannot be specified together with the include member
+    #   accounts parameter. The parameters are mutually exclusive.
+    #
+    #   Recommendations for member accounts are not included in the export
+    #   if this parameter, or the include member accounts parameter, is
+    #   omitted.
+    #
+    #   You can specify multiple account IDs per request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   An array of objects that describe a filter to export a more specific
+    #   set of Amazon EBS volume recommendations.
+    #   @return [Array<Types::EBSFilter>]
+    #
+    # @!attribute [rw] fields_to_export
+    #   The recommendations data to include in the export file. For more
+    #   information about the fields that can be exported, see [Exported
+    #   files][1] in the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] s3_destination_config
+    #   Describes the destination Amazon Simple Storage Service (Amazon S3)
+    #   bucket name and key prefix for a recommendations export job.
+    #
+    #   You must create the destination Amazon S3 bucket for your
+    #   recommendations export before you create the export job. Compute
+    #   Optimizer does not create the S3 bucket for you. After you create
+    #   the S3 bucket, ensure that it has the required permission policy to
+    #   allow Compute Optimizer to write the export file to it. If you plan
+    #   to specify an object prefix when you create the export job, you must
+    #   include the object prefix in the policy that you add to the S3
+    #   bucket. For more information, see [Amazon S3 Bucket Policy for
+    #   Compute Optimizer][1] in the *Compute Optimizer user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html
+    #   @return [Types::S3DestinationConfig]
+    #
+    # @!attribute [rw] file_format
+    #   The format of the export file.
+    #
+    #   The only export file format currently supported is `Csv`.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_member_accounts
+    #   Indicates whether to include recommendations for resources in all
+    #   member accounts of the organization if your account is the
+    #   management account of an organization.
+    #
+    #   The member accounts must also be opted in to Compute Optimizer, and
+    #   trusted access for Compute Optimizer must be enabled in the
+    #   organization account. For more information, see [Compute Optimizer
+    #   and AWS Organizations trusted access][1] in the *AWS Compute
+    #   Optimizer User Guide*.
+    #
+    #   Recommendations for member accounts of the organization are not
+    #   included in the export file if this parameter is omitted.
+    #
+    #   This parameter cannot be specified together with the account IDs
+    #   parameter. The parameters are mutually exclusive.
+    #
+    #   Recommendations for member accounts are not included in the export
+    #   if this parameter, or the account IDs parameter, is omitted.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportEBSVolumeRecommendationsRequest AWS API Documentation
+    #
+    class ExportEBSVolumeRecommendationsRequest < Struct.new(
+      :account_ids,
+      :filters,
+      :fields_to_export,
+      :s3_destination_config,
+      :file_format,
+      :include_member_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identification number of the export job.
+    #
+    #   Use the `DescribeRecommendationExportJobs` action, and specify the
+    #   job ID to view the status of an export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_destination
+    #   Describes the destination Amazon Simple Storage Service (Amazon S3)
+    #   bucket name and object keys of a recommendations export file, and
+    #   its associated metadata file.
+    #   @return [Types::S3Destination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportEBSVolumeRecommendationsResponse AWS API Documentation
+    #
+    class ExportEBSVolumeRecommendationsResponse < Struct.new(
+      :job_id,
+      :s3_destination)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -584,13 +730,21 @@ module Aws::ComputeOptimizer
     #   member accounts of the organization if your account is the
     #   management account of an organization.
     #
-    #   The member accounts must also be opted in to Compute Optimizer.
+    #   The member accounts must also be opted in to Compute Optimizer, and
+    #   trusted access for Compute Optimizer must be enabled in the
+    #   organization account. For more information, see [Compute Optimizer
+    #   and AWS Organizations trusted access][1] in the *AWS Compute
+    #   Optimizer User Guide*.
     #
     #   Recommendations for member accounts of the organization are not
     #   included in the export file if this parameter is omitted.
     #
     #   Recommendations for member accounts are not included in the export
     #   if this parameter, or the account IDs parameter, is omitted.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportEC2InstanceRecommendationsRequest AWS API Documentation
@@ -621,6 +775,144 @@ module Aws::ComputeOptimizer
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportEC2InstanceRecommendationsResponse AWS API Documentation
     #
     class ExportEC2InstanceRecommendationsResponse < Struct.new(
+      :job_id,
+      :s3_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ExportLambdaFunctionRecommendationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_ids: ["AccountId"],
+    #         filters: [
+    #           {
+    #             name: "Finding", # accepts Finding, FindingReasonCode
+    #             values: ["FilterValue"],
+    #           },
+    #         ],
+    #         fields_to_export: ["AccountId"], # accepts AccountId, FunctionArn, FunctionVersion, Finding, FindingReasonCodes, NumberOfInvocations, UtilizationMetricsDurationMaximum, UtilizationMetricsDurationAverage, UtilizationMetricsMemoryMaximum, UtilizationMetricsMemoryAverage, LookbackPeriodInDays, CurrentConfigurationMemorySize, CurrentConfigurationTimeout, CurrentCostTotal, CurrentCostAverage, RecommendationOptionsConfigurationMemorySize, RecommendationOptionsCostLow, RecommendationOptionsCostHigh, RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound, RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound, RecommendationOptionsProjectedUtilizationMetricsDurationExpected, LastRefreshTimestamp
+    #         s3_destination_config: { # required
+    #           bucket: "DestinationBucket",
+    #           key_prefix: "DestinationKeyPrefix",
+    #         },
+    #         file_format: "Csv", # accepts Csv
+    #         include_member_accounts: false,
+    #       }
+    #
+    # @!attribute [rw] account_ids
+    #   The IDs of the AWS accounts for which to export Lambda function
+    #   recommendations.
+    #
+    #   If your account is the management account of an organization, use
+    #   this parameter to specify the member account for which you want to
+    #   export recommendations.
+    #
+    #   This parameter cannot be specified together with the include member
+    #   accounts parameter. The parameters are mutually exclusive.
+    #
+    #   Recommendations for member accounts are not included in the export
+    #   if this parameter, or the include member accounts parameter, is
+    #   omitted.
+    #
+    #   You can specify multiple account IDs per request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   An array of objects that describe a filter to export a more specific
+    #   set of Lambda function recommendations.
+    #   @return [Array<Types::LambdaFunctionRecommendationFilter>]
+    #
+    # @!attribute [rw] fields_to_export
+    #   The recommendations data to include in the export file. For more
+    #   information about the fields that can be exported, see [Exported
+    #   files][1] in the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] s3_destination_config
+    #   Describes the destination Amazon Simple Storage Service (Amazon S3)
+    #   bucket name and key prefix for a recommendations export job.
+    #
+    #   You must create the destination Amazon S3 bucket for your
+    #   recommendations export before you create the export job. Compute
+    #   Optimizer does not create the S3 bucket for you. After you create
+    #   the S3 bucket, ensure that it has the required permission policy to
+    #   allow Compute Optimizer to write the export file to it. If you plan
+    #   to specify an object prefix when you create the export job, you must
+    #   include the object prefix in the policy that you add to the S3
+    #   bucket. For more information, see [Amazon S3 Bucket Policy for
+    #   Compute Optimizer][1] in the *Compute Optimizer user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html
+    #   @return [Types::S3DestinationConfig]
+    #
+    # @!attribute [rw] file_format
+    #   The format of the export file.
+    #
+    #   The only export file format currently supported is `Csv`.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_member_accounts
+    #   Indicates whether to include recommendations for resources in all
+    #   member accounts of the organization if your account is the
+    #   management account of an organization.
+    #
+    #   The member accounts must also be opted in to Compute Optimizer, and
+    #   trusted access for Compute Optimizer must be enabled in the
+    #   organization account. For more information, see [Compute Optimizer
+    #   and AWS Organizations trusted access][1] in the *AWS Compute
+    #   Optimizer User Guide*.
+    #
+    #   Recommendations for member accounts of the organization are not
+    #   included in the export file if this parameter is omitted.
+    #
+    #   This parameter cannot be specified together with the account IDs
+    #   parameter. The parameters are mutually exclusive.
+    #
+    #   Recommendations for member accounts are not included in the export
+    #   if this parameter, or the account IDs parameter, is omitted.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportLambdaFunctionRecommendationsRequest AWS API Documentation
+    #
+    class ExportLambdaFunctionRecommendationsRequest < Struct.new(
+      :account_ids,
+      :filters,
+      :fields_to_export,
+      :s3_destination_config,
+      :file_format,
+      :include_member_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identification number of the export job.
+    #
+    #   Use the `DescribeRecommendationExportJobs` action, and specify the
+    #   job ID to view the status of an export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_destination
+    #   Describes the destination Amazon Simple Storage Service (Amazon S3)
+    #   bucket name and object keys of a recommendations export file, and
+    #   its associated metadata file.
+    #   @return [Types::S3Destination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportLambdaFunctionRecommendationsResponse AWS API Documentation
+    #
+    class ExportLambdaFunctionRecommendationsResponse < Struct.new(
       :job_id,
       :s3_destination)
       SENSITIVE = []
@@ -2147,7 +2439,7 @@ module Aws::ComputeOptimizer
     #     Compute Optimizer begins analyzing the configuration and
     #     utilization metrics of your AWS resources after you opt in. For
     #     more information, see [Metrics analyzed by AWS Compute
-    #     Optimizer][1] in the *Compute Optimizer User Guide*.
+    #     Optimizer][1] in the *AWS Compute Optimizer User Guide*.
     #
     #   * `Inactive` - Opts out your account from the Compute Optimizer
     #     service. Your account's recommendations and related metrics data
@@ -2161,7 +2453,7 @@ module Aws::ComputeOptimizer
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/compute-optimizer/ug/metrics.html
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html
     #   @return [String]
     #
     # @!attribute [rw] include_member_accounts

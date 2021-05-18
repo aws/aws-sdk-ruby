@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.458.0 (2021-05-18)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::AppRunner`.
+
 1.457.0 (2021-05-17)
 ------------------
 
