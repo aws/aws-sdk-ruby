@@ -1187,10 +1187,10 @@
       "InputShape": {
         "type": "structure",
         "members": {
-          "Foo": {
+          "documentValue": {
             "shape": "DocumentType"
           },
-          "Bar": {
+          "stringValue": {
             "shape": "StringType"
           }
         }
@@ -1217,13 +1217,13 @@
           "name": "OperationName"
         },
         "params": {
-          "Foo": "string value",
-          "Bar": "other value"
+          "documentValue": "string value",
+          "stringValue": "other value"
         },
         "serialized": {
           "uri": "/",
           "headers": {},
-          "body": "{\"Foo\":\"string value\",\"Bar\":\"other value\"}"
+          "body": "{\"documentValue\":\"string value\",\"stringValue\":\"other value\"}"
         }
       },
       {
@@ -1239,12 +1239,12 @@
           "name": "OperationName"
         },
         "params": {
-          "Foo": 1
+          "documentValue": 1
         },
         "serialized": {
           "uri": "/",
           "headers": {},
-          "body": "{\"Foo\": 1}"
+          "body": "{\"documentValue\": 1}"
         }
       },
       {
@@ -1260,12 +1260,12 @@
           "name": "OperationName"
         },
         "params": {
-          "Foo": true
+          "documentValue": true
         },
         "serialized": {
           "uri": "/",
           "headers": {},
-          "body": "{\"Foo\": true}"
+          "body": "{\"documentValue\": true}"
         }
       },
       {
@@ -1281,12 +1281,12 @@
           "name": "OperationName"
         },
         "params": {
-          "Foo": [1,2,3]
+          "documentValue": [1,2,3]
         },
         "serialized": {
           "uri": "/",
           "headers": {},
-          "body": "{\"Foo\": [1,2,3]}"
+          "body": "{\"documentValue\": [1,2,3]}"
         }
       },
       {
@@ -1302,7 +1302,7 @@
           "name": "OperationName"
         },
         "params": {
-          "Foo": {
+          "documentValue": {
             "String": "string value",
             "Number": 123,
             "Nested": { "Nested1":  1 },
@@ -1312,7 +1312,7 @@
         "serialized": {
           "uri": "/",
           "headers": {},
-          "body": "{\"Foo\":{\"String\":\"string value\",\"Number\":123,\"Nested\":{\"Nested1\":1},\"Array\":[1,2,3]}}"
+          "body": "{\"documentValue\":{\"String\":\"string value\",\"Number\":123,\"Nested\":{\"Nested1\":1},\"Array\":[1,2,3]}}"
         }
       }
     ]

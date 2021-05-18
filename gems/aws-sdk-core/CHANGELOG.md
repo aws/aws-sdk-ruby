@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support Document Types. (#2523)
+
 3.114.0 (2021-04-13)
 ------------------
 

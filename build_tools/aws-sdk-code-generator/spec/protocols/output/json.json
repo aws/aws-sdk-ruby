@@ -818,8 +818,8 @@
       "OutputShape": {
         "type": "structure",
         "members": {
-          "Foo": { "shape": "DocumentType" },
-          "Bar": { "shape":  "StringType" }
+          "documentValue": { "shape": "DocumentType" },
+          "stringValue": { "shape":  "StringType" }
         }
       },
       "DocumentType": {
@@ -838,13 +838,13 @@
           "name": "OperationName"
         },
         "result": {
-          "Foo": "string value",
-          "Bar": "other value"
+          "documentValue": "string value",
+          "stringValue": "other value"
         },
         "response": {
           "status_code": 200,
           "headers": {},
-          "body": "{\"Foo\":\"string value\",\"Bar\":\"other value\"}"
+          "body": "{\"documentValue\":\"string value\",\"stringValue\":\"other value\"}"
         }
       },
       {
@@ -856,12 +856,12 @@
           "name": "OperationName"
         },
         "result": {
-          "Foo": 123
+          "documentValue": 123
         },
         "response": {
           "status_code": 200,
           "headers": {},
-          "body": "{\"Foo\": 123}"
+          "body": "{\"documentValue\": 123}"
         }
       },
       {
@@ -873,12 +873,12 @@
           "name": "OperationName"
         },
         "result": {
-          "Foo": true
+          "documentValue": true
         },
         "response": {
           "status_code": 200,
           "headers": {},
-          "body": "{\"Foo\":true}"
+          "body": "{\"documentValue\":true}"
         }
       },
       {
@@ -890,12 +890,12 @@
           "name": "OperationName"
         },
         "result": {
-          "Foo": [1, 2, 3]
+          "documentValue": [1, 2, 3]
         },
         "response": {
           "status_code": 200,
           "headers": {},
-          "body": "{\"Foo\":[1,2,3]}"
+          "body": "{\"documentValue\":[1,2,3]}"
         }
       },
       {
@@ -907,7 +907,7 @@
           "name": "OperationName"
         },
         "result": {
-          "Foo": {
+          "documentValue": {
             "String": "string value",
             "Number": 123,
             "Nested": { "Nested1":  1 },
@@ -917,7 +917,7 @@
         "response": {
           "status_code": 200,
           "headers": {},
-          "body": "{\"Foo\":{\"String\":\"string value\",\"Number\":123,\"Nested\":{\"Nested1\":1},\"Array\":[1,2,3]}}"
+          "body": "{\"documentValue\":{\"String\":\"string value\",\"Number\":123,\"Nested\":{\"Nested1\":1},\"Array\":[1,2,3]}}"
         }
       }
     ]

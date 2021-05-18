@@ -260,7 +260,7 @@ module AwsSdkCodeGenerator
         if @service.protocol == 'api-gateway' && type == 'timestamp'
           shape['timestampFormat'] = 'iso8601'
         end
-        if type == 'structure' && shape['document']
+        if document_struct?(shape)
           ["Shapes::DocumentShape", shape]
         elsif SHAPE_CLASSES.key?(type)
           ["Shapes::#{SHAPE_CLASSES[type]}", shape]
