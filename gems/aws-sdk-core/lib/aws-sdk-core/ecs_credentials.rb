@@ -43,6 +43,8 @@ module Aws
     # @option options [IO] :http_debug_output (nil) HTTP wire
     #   traces are sent to this object.  You can specify something
     #   like $stdout.
+    # @option options [Integer] (300) :credential_expiration_buffer Credentials
+    #   will refresh if they are within this many seconds of expiring.
     def initialize options = {}
       @retries = options[:retries] || 5
       @ip_address = options[:ip_address] || '169.254.170.2'

@@ -17,7 +17,7 @@ module Aws
   #       ...
   #     )
   #     For full list of parameters accepted
-  #     @see Aws::STS::Client#assume_role_with_web_identity 
+  #     @see Aws::STS::Client#assume_role_with_web_identity
   #
   #
   # If you omit `:client` option, a new {STS::Client} object will be
@@ -39,6 +39,9 @@ module Aws
     #   encoded UUID is generated as the session name
     #
     # @option options [STS::Client] :client
+    #
+    # @option options [Integer] (300) :credential_expiration_buffer Credentials
+    #   will refresh if they are within this many seconds of expiring.
     def initialize(options = {})
       client_opts = {}
       @assume_role_web_identity_params = {}

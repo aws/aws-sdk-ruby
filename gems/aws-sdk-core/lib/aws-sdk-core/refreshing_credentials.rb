@@ -19,6 +19,10 @@ module Aws
 
     def initialize(options = {})
       @mutex = Mutex.new
+      # This option is exposed through public APIs, if the default value is
+      # changed, we should update the public documentation
+      @credential_expiration_buffer =
+        (options.is_a?(Hash) && options[:credential_expiration_buffer]) || (5 * 60)
       refresh
     end
 
@@ -43,7 +47,7 @@ module Aws
     private
 
     # Refreshes instance metadata credentials if they are within
-    # 5 minutes of expiration.
+    # the configured amount of time to expiration.
     def refresh_if_near_expiration
       if near_expiration?
         @mutex.synchronize do
@@ -54,8 +58,8 @@ module Aws
 
     def near_expiration?
       if @expiration
-        # are we within 5 minutes of expiration?
-        (Time.now.to_i + 5 * 60) > @expiration.to_i
+        # do we have the required buffer before expiration?
+        (Time.now.to_i + @credential_expiration_buffer) > @expiration.to_i
       else
         true
       end

@@ -28,6 +28,8 @@ module Aws
     # @option options [Integer] :duration_seconds
     # @option options [String] :external_id
     # @option options [STS::Client] :client
+    # @option options [Integer] (300) :credential_expiration_buffer Credentials
+    #   will refresh if they are within this many seconds of expiring.
     def initialize(options = {})
       client_opts = {}
       @assume_role_params = {}

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Provide an option `:credential_expiration_buffer` for `Aws::AssumeRoleCredentials`, `Aws::AssumeRoleWebIdentityCredentials`, `Aws::ECSCredentials`,  and `Aws::InstanceProfileCredentials` to ensure credentials are refreshed if they are a certain number of seconds before expiring.
+
 3.114.0 (2021-04-13)
 ------------------
 
