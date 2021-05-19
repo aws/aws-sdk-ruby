@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2021-05-19)
+------------------
+
+* Feature - Add pagination to ListUserTags operation
+
 1.52.0 (2021-03-29)
 ------------------
 

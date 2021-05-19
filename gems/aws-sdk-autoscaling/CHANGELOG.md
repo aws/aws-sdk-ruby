@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2021-05-19)
+------------------
+
+* Feature - With this release, customers can easily use Predictive Scaling as a policy directly through Amazon EC2 Auto Scaling configurations to proactively scale their applications ahead of predicted demand.
+
 1.60.0 (2021-04-08)
 ------------------
 

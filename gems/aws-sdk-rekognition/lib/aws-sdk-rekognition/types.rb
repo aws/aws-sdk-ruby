@@ -636,6 +636,7 @@ module Aws::Rekognition
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] project_arn
@@ -664,13 +665,27 @@ module Aws::Rekognition
     #   model.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] kms_key_id
+    #   The identifier for your AWS Key Management Service (AWS KMS)
+    #   customer master key (CMK). You can supply the Amazon Resource Name
+    #   (ARN) of your CMK, the ID of your CMK, or an alias for your CMK. The
+    #   key is used to encrypt training and test images copied into the
+    #   service for model training. Your source images are unaffected. The
+    #   key is also used to encrypt training results and manifest files
+    #   written to the output Amazon S3 bucket (`OutputConfig`).
+    #
+    #   If you don't specify a value for `KmsKeyId`, images copied into the
+    #   service are encrypted using a key that AWS owns and manages.
+    #   @return [String]
+    #
     class CreateProjectVersionRequest < Struct.new(
       :project_arn,
       :version_name,
       :output_config,
       :training_data,
       :testing_data,
-      :tags)
+      :tags,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3889,6 +3904,11 @@ module Aws::Rekognition
     #   datasets.
     #   @return [Types::GroundTruthManifest]
     #
+    # @!attribute [rw] kms_key_id
+    #   The identifer for the AWS Key Management Service (AWS KMS) customer
+    #   master key that was used to encrypt the model during training.
+    #   @return [String]
+    #
     class ProjectVersionDescription < Struct.new(
       :project_version_arn,
       :creation_timestamp,
@@ -3901,7 +3921,8 @@ module Aws::Rekognition
       :training_data_result,
       :testing_data_result,
       :evaluation_result,
-      :manifest_summary)
+      :manifest_summary,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4158,7 +4179,7 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # A collection with the specified ID already exists.
+    # A resource with the specified ID already exists.
     #
     class ResourceAlreadyExistsException < Aws::EmptyStructure; end
 
@@ -4166,7 +4187,7 @@ module Aws::Rekognition
     #
     class ResourceInUseException < Aws::EmptyStructure; end
 
-    # The collection specified in the request cannot be found.
+    # The resource specified in the request cannot be found.
     #
     class ResourceNotFoundException < Aws::EmptyStructure; end
 
@@ -4459,8 +4480,8 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # The size of the collection or tag list exceeds the allowed limit. For
-    # more information, see Limits in Amazon Rekognition in the Amazon
+    # The size of the collection exceeds the allowed limit. For more
+    # information, see Limits in Amazon Rekognition in the Amazon
     # Rekognition Developer Guide.
     #
     class ServiceQuotaExceededException < Aws::EmptyStructure; end

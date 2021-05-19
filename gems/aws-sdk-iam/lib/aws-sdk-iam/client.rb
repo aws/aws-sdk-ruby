@@ -8841,6 +8841,8 @@ module Aws::IAM
     #   * {Types::ListUserTagsResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListUserTagsResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list the tags attached to an IAM user
     #
@@ -13056,7 +13058,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -37,6 +37,7 @@ module Aws::KinesisAnalyticsV2
     ApplicationMaintenanceConfigurationUpdate = Shapes::StructureShape.new(name: 'ApplicationMaintenanceConfigurationUpdate')
     ApplicationMaintenanceWindowEndTime = Shapes::StringShape.new(name: 'ApplicationMaintenanceWindowEndTime')
     ApplicationMaintenanceWindowStartTime = Shapes::StringShape.new(name: 'ApplicationMaintenanceWindowStartTime')
+    ApplicationMode = Shapes::StringShape.new(name: 'ApplicationMode')
     ApplicationName = Shapes::StringShape.new(name: 'ApplicationName')
     ApplicationRestoreConfiguration = Shapes::StructureShape.new(name: 'ApplicationRestoreConfiguration')
     ApplicationRestoreType = Shapes::StringShape.new(name: 'ApplicationRestoreType')
@@ -49,10 +50,15 @@ module Aws::KinesisAnalyticsV2
     ApplicationVersionId = Shapes::IntegerShape.new(name: 'ApplicationVersionId')
     ApplicationVersionSummaries = Shapes::ListShape.new(name: 'ApplicationVersionSummaries')
     ApplicationVersionSummary = Shapes::StructureShape.new(name: 'ApplicationVersionSummary')
+    ArtifactType = Shapes::StringShape.new(name: 'ArtifactType')
     AuthorizedUrl = Shapes::StringShape.new(name: 'AuthorizedUrl')
+    BasePath = Shapes::StringShape.new(name: 'BasePath')
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
     BucketARN = Shapes::StringShape.new(name: 'BucketARN')
     CSVMappingParameters = Shapes::StructureShape.new(name: 'CSVMappingParameters')
+    CatalogConfiguration = Shapes::StructureShape.new(name: 'CatalogConfiguration')
+    CatalogConfigurationDescription = Shapes::StructureShape.new(name: 'CatalogConfigurationDescription')
+    CatalogConfigurationUpdate = Shapes::StructureShape.new(name: 'CatalogConfigurationUpdate')
     CheckpointConfiguration = Shapes::StructureShape.new(name: 'CheckpointConfiguration')
     CheckpointConfigurationDescription = Shapes::StructureShape.new(name: 'CheckpointConfigurationDescription')
     CheckpointConfigurationUpdate = Shapes::StructureShape.new(name: 'CheckpointConfigurationUpdate')
@@ -79,6 +85,11 @@ module Aws::KinesisAnalyticsV2
     CreateApplicationResponse = Shapes::StructureShape.new(name: 'CreateApplicationResponse')
     CreateApplicationSnapshotRequest = Shapes::StructureShape.new(name: 'CreateApplicationSnapshotRequest')
     CreateApplicationSnapshotResponse = Shapes::StructureShape.new(name: 'CreateApplicationSnapshotResponse')
+    CustomArtifactConfiguration = Shapes::StructureShape.new(name: 'CustomArtifactConfiguration')
+    CustomArtifactConfigurationDescription = Shapes::StructureShape.new(name: 'CustomArtifactConfigurationDescription')
+    CustomArtifactsConfigurationDescriptionList = Shapes::ListShape.new(name: 'CustomArtifactsConfigurationDescriptionList')
+    CustomArtifactsConfigurationList = Shapes::ListShape.new(name: 'CustomArtifactsConfigurationList')
+    DatabaseARN = Shapes::StringShape.new(name: 'DatabaseARN')
     DeleteApplicationCloudWatchLoggingOptionRequest = Shapes::StructureShape.new(name: 'DeleteApplicationCloudWatchLoggingOptionRequest')
     DeleteApplicationCloudWatchLoggingOptionResponse = Shapes::StructureShape.new(name: 'DeleteApplicationCloudWatchLoggingOptionResponse')
     DeleteApplicationInputProcessingConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteApplicationInputProcessingConfigurationRequest')
@@ -93,6 +104,9 @@ module Aws::KinesisAnalyticsV2
     DeleteApplicationSnapshotResponse = Shapes::StructureShape.new(name: 'DeleteApplicationSnapshotResponse')
     DeleteApplicationVpcConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteApplicationVpcConfigurationRequest')
     DeleteApplicationVpcConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteApplicationVpcConfigurationResponse')
+    DeployAsApplicationConfiguration = Shapes::StructureShape.new(name: 'DeployAsApplicationConfiguration')
+    DeployAsApplicationConfigurationDescription = Shapes::StructureShape.new(name: 'DeployAsApplicationConfigurationDescription')
+    DeployAsApplicationConfigurationUpdate = Shapes::StructureShape.new(name: 'DeployAsApplicationConfigurationUpdate')
     DescribeApplicationRequest = Shapes::StructureShape.new(name: 'DescribeApplicationRequest')
     DescribeApplicationResponse = Shapes::StructureShape.new(name: 'DescribeApplicationResponse')
     DescribeApplicationSnapshotRequest = Shapes::StructureShape.new(name: 'DescribeApplicationSnapshotRequest')
@@ -111,6 +125,9 @@ module Aws::KinesisAnalyticsV2
     FlinkApplicationConfigurationDescription = Shapes::StructureShape.new(name: 'FlinkApplicationConfigurationDescription')
     FlinkApplicationConfigurationUpdate = Shapes::StructureShape.new(name: 'FlinkApplicationConfigurationUpdate')
     FlinkRunConfiguration = Shapes::StructureShape.new(name: 'FlinkRunConfiguration')
+    GlueDataCatalogConfiguration = Shapes::StructureShape.new(name: 'GlueDataCatalogConfiguration')
+    GlueDataCatalogConfigurationDescription = Shapes::StructureShape.new(name: 'GlueDataCatalogConfigurationDescription')
+    GlueDataCatalogConfigurationUpdate = Shapes::StructureShape.new(name: 'GlueDataCatalogConfigurationUpdate')
     Id = Shapes::StringShape.new(name: 'Id')
     InAppStreamName = Shapes::StringShape.new(name: 'InAppStreamName')
     InAppStreamNames = Shapes::ListShape.new(name: 'InAppStreamNames')
@@ -169,6 +186,10 @@ module Aws::KinesisAnalyticsV2
     LogLevel = Shapes::StringShape.new(name: 'LogLevel')
     LogStreamARN = Shapes::StringShape.new(name: 'LogStreamARN')
     MappingParameters = Shapes::StructureShape.new(name: 'MappingParameters')
+    MavenArtifactId = Shapes::StringShape.new(name: 'MavenArtifactId')
+    MavenGroupId = Shapes::StringShape.new(name: 'MavenGroupId')
+    MavenReference = Shapes::StructureShape.new(name: 'MavenReference')
+    MavenVersion = Shapes::StringShape.new(name: 'MavenVersion')
     MetricsLevel = Shapes::StringShape.new(name: 'MetricsLevel')
     MinPauseBetweenCheckpoints = Shapes::IntegerShape.new(name: 'MinPauseBetweenCheckpoints')
     MonitoringConfiguration = Shapes::StructureShape.new(name: 'MonitoringConfiguration')
@@ -229,6 +250,9 @@ module Aws::KinesisAnalyticsV2
     RuntimeEnvironment = Shapes::StringShape.new(name: 'RuntimeEnvironment')
     S3ApplicationCodeLocationDescription = Shapes::StructureShape.new(name: 'S3ApplicationCodeLocationDescription')
     S3Configuration = Shapes::StructureShape.new(name: 'S3Configuration')
+    S3ContentBaseLocation = Shapes::StructureShape.new(name: 'S3ContentBaseLocation')
+    S3ContentBaseLocationDescription = Shapes::StructureShape.new(name: 'S3ContentBaseLocationDescription')
+    S3ContentBaseLocationUpdate = Shapes::StructureShape.new(name: 'S3ContentBaseLocationUpdate')
     S3ContentLocation = Shapes::StructureShape.new(name: 'S3ContentLocation')
     S3ContentLocationUpdate = Shapes::StructureShape.new(name: 'S3ContentLocationUpdate')
     S3ReferenceDataSource = Shapes::StructureShape.new(name: 'S3ReferenceDataSource')
@@ -280,6 +304,12 @@ module Aws::KinesisAnalyticsV2
     VpcConfigurationUpdates = Shapes::ListShape.new(name: 'VpcConfigurationUpdates')
     VpcConfigurations = Shapes::ListShape.new(name: 'VpcConfigurations')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
+    ZeppelinApplicationConfiguration = Shapes::StructureShape.new(name: 'ZeppelinApplicationConfiguration')
+    ZeppelinApplicationConfigurationDescription = Shapes::StructureShape.new(name: 'ZeppelinApplicationConfigurationDescription')
+    ZeppelinApplicationConfigurationUpdate = Shapes::StructureShape.new(name: 'ZeppelinApplicationConfigurationUpdate')
+    ZeppelinMonitoringConfiguration = Shapes::StructureShape.new(name: 'ZeppelinMonitoringConfiguration')
+    ZeppelinMonitoringConfigurationDescription = Shapes::StructureShape.new(name: 'ZeppelinMonitoringConfigurationDescription')
+    ZeppelinMonitoringConfigurationUpdate = Shapes::StructureShape.new(name: 'ZeppelinMonitoringConfigurationUpdate')
     ZipFileContent = Shapes::BlobShape.new(name: 'ZipFileContent')
 
     AddApplicationCloudWatchLoggingOptionRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
@@ -361,9 +391,10 @@ module Aws::KinesisAnalyticsV2
     ApplicationConfiguration.add_member(:sql_application_configuration, Shapes::ShapeRef.new(shape: SqlApplicationConfiguration, location_name: "SqlApplicationConfiguration"))
     ApplicationConfiguration.add_member(:flink_application_configuration, Shapes::ShapeRef.new(shape: FlinkApplicationConfiguration, location_name: "FlinkApplicationConfiguration"))
     ApplicationConfiguration.add_member(:environment_properties, Shapes::ShapeRef.new(shape: EnvironmentProperties, location_name: "EnvironmentProperties"))
-    ApplicationConfiguration.add_member(:application_code_configuration, Shapes::ShapeRef.new(shape: ApplicationCodeConfiguration, required: true, location_name: "ApplicationCodeConfiguration"))
+    ApplicationConfiguration.add_member(:application_code_configuration, Shapes::ShapeRef.new(shape: ApplicationCodeConfiguration, location_name: "ApplicationCodeConfiguration"))
     ApplicationConfiguration.add_member(:application_snapshot_configuration, Shapes::ShapeRef.new(shape: ApplicationSnapshotConfiguration, location_name: "ApplicationSnapshotConfiguration"))
     ApplicationConfiguration.add_member(:vpc_configurations, Shapes::ShapeRef.new(shape: VpcConfigurations, location_name: "VpcConfigurations"))
+    ApplicationConfiguration.add_member(:zeppelin_application_configuration, Shapes::ShapeRef.new(shape: ZeppelinApplicationConfiguration, location_name: "ZeppelinApplicationConfiguration"))
     ApplicationConfiguration.struct_class = Types::ApplicationConfiguration
 
     ApplicationConfigurationDescription.add_member(:sql_application_configuration_description, Shapes::ShapeRef.new(shape: SqlApplicationConfigurationDescription, location_name: "SqlApplicationConfigurationDescription"))
@@ -373,6 +404,7 @@ module Aws::KinesisAnalyticsV2
     ApplicationConfigurationDescription.add_member(:environment_property_descriptions, Shapes::ShapeRef.new(shape: EnvironmentPropertyDescriptions, location_name: "EnvironmentPropertyDescriptions"))
     ApplicationConfigurationDescription.add_member(:application_snapshot_configuration_description, Shapes::ShapeRef.new(shape: ApplicationSnapshotConfigurationDescription, location_name: "ApplicationSnapshotConfigurationDescription"))
     ApplicationConfigurationDescription.add_member(:vpc_configuration_descriptions, Shapes::ShapeRef.new(shape: VpcConfigurationDescriptions, location_name: "VpcConfigurationDescriptions"))
+    ApplicationConfigurationDescription.add_member(:zeppelin_application_configuration_description, Shapes::ShapeRef.new(shape: ZeppelinApplicationConfigurationDescription, location_name: "ZeppelinApplicationConfigurationDescription"))
     ApplicationConfigurationDescription.struct_class = Types::ApplicationConfigurationDescription
 
     ApplicationConfigurationUpdate.add_member(:sql_application_configuration_update, Shapes::ShapeRef.new(shape: SqlApplicationConfigurationUpdate, location_name: "SqlApplicationConfigurationUpdate"))
@@ -381,6 +413,7 @@ module Aws::KinesisAnalyticsV2
     ApplicationConfigurationUpdate.add_member(:environment_property_updates, Shapes::ShapeRef.new(shape: EnvironmentPropertyUpdates, location_name: "EnvironmentPropertyUpdates"))
     ApplicationConfigurationUpdate.add_member(:application_snapshot_configuration_update, Shapes::ShapeRef.new(shape: ApplicationSnapshotConfigurationUpdate, location_name: "ApplicationSnapshotConfigurationUpdate"))
     ApplicationConfigurationUpdate.add_member(:vpc_configuration_updates, Shapes::ShapeRef.new(shape: VpcConfigurationUpdates, location_name: "VpcConfigurationUpdates"))
+    ApplicationConfigurationUpdate.add_member(:zeppelin_application_configuration_update, Shapes::ShapeRef.new(shape: ZeppelinApplicationConfigurationUpdate, location_name: "ZeppelinApplicationConfigurationUpdate"))
     ApplicationConfigurationUpdate.struct_class = Types::ApplicationConfigurationUpdate
 
     ApplicationDetail.add_member(:application_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ApplicationARN"))
@@ -399,6 +432,7 @@ module Aws::KinesisAnalyticsV2
     ApplicationDetail.add_member(:application_version_rolled_back_from, Shapes::ShapeRef.new(shape: ApplicationVersionId, location_name: "ApplicationVersionRolledBackFrom"))
     ApplicationDetail.add_member(:conditional_token, Shapes::ShapeRef.new(shape: ConditionalToken, location_name: "ConditionalToken"))
     ApplicationDetail.add_member(:application_version_rolled_back_to, Shapes::ShapeRef.new(shape: ApplicationVersionId, location_name: "ApplicationVersionRolledBackTo"))
+    ApplicationDetail.add_member(:application_mode, Shapes::ShapeRef.new(shape: ApplicationMode, location_name: "ApplicationMode"))
     ApplicationDetail.struct_class = Types::ApplicationDetail
 
     ApplicationMaintenanceConfigurationDescription.add_member(:application_maintenance_window_start_time, Shapes::ShapeRef.new(shape: ApplicationMaintenanceWindowStartTime, required: true, location_name: "ApplicationMaintenanceWindowStartTime"))
@@ -428,6 +462,7 @@ module Aws::KinesisAnalyticsV2
     ApplicationSummary.add_member(:application_status, Shapes::ShapeRef.new(shape: ApplicationStatus, required: true, location_name: "ApplicationStatus"))
     ApplicationSummary.add_member(:application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "ApplicationVersionId"))
     ApplicationSummary.add_member(:runtime_environment, Shapes::ShapeRef.new(shape: RuntimeEnvironment, required: true, location_name: "RuntimeEnvironment"))
+    ApplicationSummary.add_member(:application_mode, Shapes::ShapeRef.new(shape: ApplicationMode, location_name: "ApplicationMode"))
     ApplicationSummary.struct_class = Types::ApplicationSummary
 
     ApplicationVersionSummaries.member = Shapes::ShapeRef.new(shape: ApplicationVersionSummary)
@@ -439,6 +474,15 @@ module Aws::KinesisAnalyticsV2
     CSVMappingParameters.add_member(:record_row_delimiter, Shapes::ShapeRef.new(shape: RecordRowDelimiter, required: true, location_name: "RecordRowDelimiter"))
     CSVMappingParameters.add_member(:record_column_delimiter, Shapes::ShapeRef.new(shape: RecordColumnDelimiter, required: true, location_name: "RecordColumnDelimiter"))
     CSVMappingParameters.struct_class = Types::CSVMappingParameters
+
+    CatalogConfiguration.add_member(:glue_data_catalog_configuration, Shapes::ShapeRef.new(shape: GlueDataCatalogConfiguration, required: true, location_name: "GlueDataCatalogConfiguration"))
+    CatalogConfiguration.struct_class = Types::CatalogConfiguration
+
+    CatalogConfigurationDescription.add_member(:glue_data_catalog_configuration_description, Shapes::ShapeRef.new(shape: GlueDataCatalogConfigurationDescription, required: true, location_name: "GlueDataCatalogConfigurationDescription"))
+    CatalogConfigurationDescription.struct_class = Types::CatalogConfigurationDescription
+
+    CatalogConfigurationUpdate.add_member(:glue_data_catalog_configuration_update, Shapes::ShapeRef.new(shape: GlueDataCatalogConfigurationUpdate, required: true, location_name: "GlueDataCatalogConfigurationUpdate"))
+    CatalogConfigurationUpdate.struct_class = Types::CatalogConfigurationUpdate
 
     CheckpointConfiguration.add_member(:configuration_type, Shapes::ShapeRef.new(shape: ConfigurationType, required: true, location_name: "ConfigurationType"))
     CheckpointConfiguration.add_member(:checkpointing_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "CheckpointingEnabled"))
@@ -513,6 +557,7 @@ module Aws::KinesisAnalyticsV2
     CreateApplicationRequest.add_member(:application_configuration, Shapes::ShapeRef.new(shape: ApplicationConfiguration, location_name: "ApplicationConfiguration"))
     CreateApplicationRequest.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
     CreateApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateApplicationRequest.add_member(:application_mode, Shapes::ShapeRef.new(shape: ApplicationMode, location_name: "ApplicationMode"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:application_detail, Shapes::ShapeRef.new(shape: ApplicationDetail, required: true, location_name: "ApplicationDetail"))
@@ -523,6 +568,20 @@ module Aws::KinesisAnalyticsV2
     CreateApplicationSnapshotRequest.struct_class = Types::CreateApplicationSnapshotRequest
 
     CreateApplicationSnapshotResponse.struct_class = Types::CreateApplicationSnapshotResponse
+
+    CustomArtifactConfiguration.add_member(:artifact_type, Shapes::ShapeRef.new(shape: ArtifactType, required: true, location_name: "ArtifactType"))
+    CustomArtifactConfiguration.add_member(:s3_content_location, Shapes::ShapeRef.new(shape: S3ContentLocation, location_name: "S3ContentLocation"))
+    CustomArtifactConfiguration.add_member(:maven_reference, Shapes::ShapeRef.new(shape: MavenReference, location_name: "MavenReference"))
+    CustomArtifactConfiguration.struct_class = Types::CustomArtifactConfiguration
+
+    CustomArtifactConfigurationDescription.add_member(:artifact_type, Shapes::ShapeRef.new(shape: ArtifactType, location_name: "ArtifactType"))
+    CustomArtifactConfigurationDescription.add_member(:s3_content_location_description, Shapes::ShapeRef.new(shape: S3ContentLocation, location_name: "S3ContentLocationDescription"))
+    CustomArtifactConfigurationDescription.add_member(:maven_reference_description, Shapes::ShapeRef.new(shape: MavenReference, location_name: "MavenReferenceDescription"))
+    CustomArtifactConfigurationDescription.struct_class = Types::CustomArtifactConfigurationDescription
+
+    CustomArtifactsConfigurationDescriptionList.member = Shapes::ShapeRef.new(shape: CustomArtifactConfigurationDescription)
+
+    CustomArtifactsConfigurationList.member = Shapes::ShapeRef.new(shape: CustomArtifactConfiguration)
 
     DeleteApplicationCloudWatchLoggingOptionRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     DeleteApplicationCloudWatchLoggingOptionRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, location_name: "CurrentApplicationVersionId"))
@@ -584,6 +643,15 @@ module Aws::KinesisAnalyticsV2
     DeleteApplicationVpcConfigurationResponse.add_member(:application_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ApplicationARN"))
     DeleteApplicationVpcConfigurationResponse.add_member(:application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, location_name: "ApplicationVersionId"))
     DeleteApplicationVpcConfigurationResponse.struct_class = Types::DeleteApplicationVpcConfigurationResponse
+
+    DeployAsApplicationConfiguration.add_member(:s3_content_location, Shapes::ShapeRef.new(shape: S3ContentBaseLocation, required: true, location_name: "S3ContentLocation"))
+    DeployAsApplicationConfiguration.struct_class = Types::DeployAsApplicationConfiguration
+
+    DeployAsApplicationConfigurationDescription.add_member(:s3_content_location_description, Shapes::ShapeRef.new(shape: S3ContentBaseLocationDescription, required: true, location_name: "S3ContentLocationDescription"))
+    DeployAsApplicationConfigurationDescription.struct_class = Types::DeployAsApplicationConfigurationDescription
+
+    DeployAsApplicationConfigurationUpdate.add_member(:s3_content_location_update, Shapes::ShapeRef.new(shape: S3ContentBaseLocationUpdate, required: true, location_name: "S3ContentLocationUpdate"))
+    DeployAsApplicationConfigurationUpdate.struct_class = Types::DeployAsApplicationConfigurationUpdate
 
     DescribeApplicationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     DescribeApplicationRequest.add_member(:include_additional_details, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "IncludeAdditionalDetails"))
@@ -649,6 +717,15 @@ module Aws::KinesisAnalyticsV2
 
     FlinkRunConfiguration.add_member(:allow_non_restored_state, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "AllowNonRestoredState"))
     FlinkRunConfiguration.struct_class = Types::FlinkRunConfiguration
+
+    GlueDataCatalogConfiguration.add_member(:database_arn, Shapes::ShapeRef.new(shape: DatabaseARN, required: true, location_name: "DatabaseARN"))
+    GlueDataCatalogConfiguration.struct_class = Types::GlueDataCatalogConfiguration
+
+    GlueDataCatalogConfigurationDescription.add_member(:database_arn, Shapes::ShapeRef.new(shape: DatabaseARN, required: true, location_name: "DatabaseARN"))
+    GlueDataCatalogConfigurationDescription.struct_class = Types::GlueDataCatalogConfigurationDescription
+
+    GlueDataCatalogConfigurationUpdate.add_member(:database_arn_update, Shapes::ShapeRef.new(shape: DatabaseARN, location_name: "DatabaseARNUpdate"))
+    GlueDataCatalogConfigurationUpdate.struct_class = Types::GlueDataCatalogConfigurationUpdate
 
     InAppStreamNames.member = Shapes::ShapeRef.new(shape: InAppStreamName)
 
@@ -820,6 +897,11 @@ module Aws::KinesisAnalyticsV2
     MappingParameters.add_member(:csv_mapping_parameters, Shapes::ShapeRef.new(shape: CSVMappingParameters, location_name: "CSVMappingParameters"))
     MappingParameters.struct_class = Types::MappingParameters
 
+    MavenReference.add_member(:group_id, Shapes::ShapeRef.new(shape: MavenGroupId, required: true, location_name: "GroupId"))
+    MavenReference.add_member(:artifact_id, Shapes::ShapeRef.new(shape: MavenArtifactId, required: true, location_name: "ArtifactId"))
+    MavenReference.add_member(:version, Shapes::ShapeRef.new(shape: MavenVersion, required: true, location_name: "Version"))
+    MavenReference.struct_class = Types::MavenReference
+
     MonitoringConfiguration.add_member(:configuration_type, Shapes::ShapeRef.new(shape: ConfigurationType, required: true, location_name: "ConfigurationType"))
     MonitoringConfiguration.add_member(:metrics_level, Shapes::ShapeRef.new(shape: MetricsLevel, location_name: "MetricsLevel"))
     MonitoringConfiguration.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "LogLevel"))
@@ -972,6 +1054,18 @@ module Aws::KinesisAnalyticsV2
     S3Configuration.add_member(:file_key, Shapes::ShapeRef.new(shape: FileKey, required: true, location_name: "FileKey"))
     S3Configuration.struct_class = Types::S3Configuration
 
+    S3ContentBaseLocation.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, required: true, location_name: "BucketARN"))
+    S3ContentBaseLocation.add_member(:base_path, Shapes::ShapeRef.new(shape: BasePath, location_name: "BasePath"))
+    S3ContentBaseLocation.struct_class = Types::S3ContentBaseLocation
+
+    S3ContentBaseLocationDescription.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, required: true, location_name: "BucketARN"))
+    S3ContentBaseLocationDescription.add_member(:base_path, Shapes::ShapeRef.new(shape: BasePath, location_name: "BasePath"))
+    S3ContentBaseLocationDescription.struct_class = Types::S3ContentBaseLocationDescription
+
+    S3ContentBaseLocationUpdate.add_member(:bucket_arn_update, Shapes::ShapeRef.new(shape: BucketARN, required: true, location_name: "BucketARNUpdate"))
+    S3ContentBaseLocationUpdate.add_member(:base_path_update, Shapes::ShapeRef.new(shape: BasePath, location_name: "BasePathUpdate"))
+    S3ContentBaseLocationUpdate.struct_class = Types::S3ContentBaseLocationUpdate
+
     S3ContentLocation.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, required: true, location_name: "BucketARN"))
     S3ContentLocation.add_member(:file_key, Shapes::ShapeRef.new(shape: FileKey, required: true, location_name: "FileKey"))
     S3ContentLocation.add_member(:object_version, Shapes::ShapeRef.new(shape: ObjectVersion, location_name: "ObjectVersion"))
@@ -1035,7 +1129,7 @@ module Aws::KinesisAnalyticsV2
     SqlRunConfigurations.member = Shapes::ShapeRef.new(shape: SqlRunConfiguration)
 
     StartApplicationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
-    StartApplicationRequest.add_member(:run_configuration, Shapes::ShapeRef.new(shape: RunConfiguration, required: true, location_name: "RunConfiguration"))
+    StartApplicationRequest.add_member(:run_configuration, Shapes::ShapeRef.new(shape: RunConfiguration, location_name: "RunConfiguration"))
     StartApplicationRequest.struct_class = Types::StartApplicationRequest
 
     StartApplicationResponse.struct_class = Types::StartApplicationResponse
@@ -1119,6 +1213,33 @@ module Aws::KinesisAnalyticsV2
     VpcConfigurationUpdates.member = Shapes::ShapeRef.new(shape: VpcConfigurationUpdate)
 
     VpcConfigurations.member = Shapes::ShapeRef.new(shape: VpcConfiguration)
+
+    ZeppelinApplicationConfiguration.add_member(:monitoring_configuration, Shapes::ShapeRef.new(shape: ZeppelinMonitoringConfiguration, location_name: "MonitoringConfiguration"))
+    ZeppelinApplicationConfiguration.add_member(:catalog_configuration, Shapes::ShapeRef.new(shape: CatalogConfiguration, location_name: "CatalogConfiguration"))
+    ZeppelinApplicationConfiguration.add_member(:deploy_as_application_configuration, Shapes::ShapeRef.new(shape: DeployAsApplicationConfiguration, location_name: "DeployAsApplicationConfiguration"))
+    ZeppelinApplicationConfiguration.add_member(:custom_artifacts_configuration, Shapes::ShapeRef.new(shape: CustomArtifactsConfigurationList, location_name: "CustomArtifactsConfiguration"))
+    ZeppelinApplicationConfiguration.struct_class = Types::ZeppelinApplicationConfiguration
+
+    ZeppelinApplicationConfigurationDescription.add_member(:monitoring_configuration_description, Shapes::ShapeRef.new(shape: ZeppelinMonitoringConfigurationDescription, required: true, location_name: "MonitoringConfigurationDescription"))
+    ZeppelinApplicationConfigurationDescription.add_member(:catalog_configuration_description, Shapes::ShapeRef.new(shape: CatalogConfigurationDescription, location_name: "CatalogConfigurationDescription"))
+    ZeppelinApplicationConfigurationDescription.add_member(:deploy_as_application_configuration_description, Shapes::ShapeRef.new(shape: DeployAsApplicationConfigurationDescription, location_name: "DeployAsApplicationConfigurationDescription"))
+    ZeppelinApplicationConfigurationDescription.add_member(:custom_artifacts_configuration_description, Shapes::ShapeRef.new(shape: CustomArtifactsConfigurationDescriptionList, location_name: "CustomArtifactsConfigurationDescription"))
+    ZeppelinApplicationConfigurationDescription.struct_class = Types::ZeppelinApplicationConfigurationDescription
+
+    ZeppelinApplicationConfigurationUpdate.add_member(:monitoring_configuration_update, Shapes::ShapeRef.new(shape: ZeppelinMonitoringConfigurationUpdate, location_name: "MonitoringConfigurationUpdate"))
+    ZeppelinApplicationConfigurationUpdate.add_member(:catalog_configuration_update, Shapes::ShapeRef.new(shape: CatalogConfigurationUpdate, location_name: "CatalogConfigurationUpdate"))
+    ZeppelinApplicationConfigurationUpdate.add_member(:deploy_as_application_configuration_update, Shapes::ShapeRef.new(shape: DeployAsApplicationConfigurationUpdate, location_name: "DeployAsApplicationConfigurationUpdate"))
+    ZeppelinApplicationConfigurationUpdate.add_member(:custom_artifacts_configuration_update, Shapes::ShapeRef.new(shape: CustomArtifactsConfigurationList, location_name: "CustomArtifactsConfigurationUpdate"))
+    ZeppelinApplicationConfigurationUpdate.struct_class = Types::ZeppelinApplicationConfigurationUpdate
+
+    ZeppelinMonitoringConfiguration.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, required: true, location_name: "LogLevel"))
+    ZeppelinMonitoringConfiguration.struct_class = Types::ZeppelinMonitoringConfiguration
+
+    ZeppelinMonitoringConfigurationDescription.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "LogLevel"))
+    ZeppelinMonitoringConfigurationDescription.struct_class = Types::ZeppelinMonitoringConfigurationDescription
+
+    ZeppelinMonitoringConfigurationUpdate.add_member(:log_level_update, Shapes::ShapeRef.new(shape: LogLevel, required: true, location_name: "LogLevelUpdate"))
+    ZeppelinMonitoringConfigurationUpdate.struct_class = Types::ZeppelinMonitoringConfigurationUpdate
 
 
     # @api private

@@ -101,6 +101,12 @@ module Aws::EKS
                 "argument" => "addon.status"
               },
               {
+                "expected" => "DEGRADED",
+                "matcher" => "path",
+                "state" => "failure",
+                "argument" => "addon.status"
+              },
+              {
                 "expected" => "ACTIVE",
                 "matcher" => "path",
                 "state" => "success",

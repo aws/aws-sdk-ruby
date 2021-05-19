@@ -799,7 +799,7 @@ module Aws::AutoScaling
     #   specify an unknown policy name, it is ignored with no error.
     # @option options [Array<String>] :policy_types
     #   One or more policy types. The valid values are `SimpleScaling`,
-    #   `StepScaling`, and `TargetTrackingScaling`.
+    #   `StepScaling`, `TargetTrackingScaling`, and `PredictiveScaling`.
     # @return [ScalingPolicy::Collection]
     def policies(options = {})
       batches = Enumerator.new do |y|
