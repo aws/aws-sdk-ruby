@@ -82,6 +82,11 @@ module Aws::LexModelsV2
     CloudWatchLogGroupLogDestination = Shapes::StructureShape.new(name: 'CloudWatchLogGroupLogDestination')
     CodeHookInterfaceVersion = Shapes::StringShape.new(name: 'CodeHookInterfaceVersion')
     CodeHookSpecification = Shapes::StructureShape.new(name: 'CodeHookSpecification')
+    ConditionKey = Shapes::StringShape.new(name: 'ConditionKey')
+    ConditionKeyValueMap = Shapes::MapShape.new(name: 'ConditionKeyValueMap')
+    ConditionMap = Shapes::MapShape.new(name: 'ConditionMap')
+    ConditionOperator = Shapes::StringShape.new(name: 'ConditionOperator')
+    ConditionValue = Shapes::StringShape.new(name: 'ConditionValue')
     ConfidenceThreshold = Shapes::FloatShape.new(name: 'ConfidenceThreshold')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContextTimeToLiveInSeconds = Shapes::IntegerShape.new(name: 'ContextTimeToLiveInSeconds')
@@ -99,6 +104,10 @@ module Aws::LexModelsV2
     CreateExportResponse = Shapes::StructureShape.new(name: 'CreateExportResponse')
     CreateIntentRequest = Shapes::StructureShape.new(name: 'CreateIntentRequest')
     CreateIntentResponse = Shapes::StructureShape.new(name: 'CreateIntentResponse')
+    CreateResourcePolicyRequest = Shapes::StructureShape.new(name: 'CreateResourcePolicyRequest')
+    CreateResourcePolicyResponse = Shapes::StructureShape.new(name: 'CreateResourcePolicyResponse')
+    CreateResourcePolicyStatementRequest = Shapes::StructureShape.new(name: 'CreateResourcePolicyStatementRequest')
+    CreateResourcePolicyStatementResponse = Shapes::StructureShape.new(name: 'CreateResourcePolicyStatementResponse')
     CreateSlotRequest = Shapes::StructureShape.new(name: 'CreateSlotRequest')
     CreateSlotResponse = Shapes::StructureShape.new(name: 'CreateSlotResponse')
     CreateSlotTypeRequest = Shapes::StructureShape.new(name: 'CreateSlotTypeRequest')
@@ -121,6 +130,10 @@ module Aws::LexModelsV2
     DeleteImportRequest = Shapes::StructureShape.new(name: 'DeleteImportRequest')
     DeleteImportResponse = Shapes::StructureShape.new(name: 'DeleteImportResponse')
     DeleteIntentRequest = Shapes::StructureShape.new(name: 'DeleteIntentRequest')
+    DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
+    DeleteResourcePolicyResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResponse')
+    DeleteResourcePolicyStatementRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyStatementRequest')
+    DeleteResourcePolicyStatementResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyStatementResponse')
     DeleteSlotRequest = Shapes::StructureShape.new(name: 'DeleteSlotRequest')
     DeleteSlotTypeRequest = Shapes::StructureShape.new(name: 'DeleteSlotTypeRequest')
     DescribeBotAliasRequest = Shapes::StructureShape.new(name: 'DescribeBotAliasRequest')
@@ -137,6 +150,8 @@ module Aws::LexModelsV2
     DescribeImportResponse = Shapes::StructureShape.new(name: 'DescribeImportResponse')
     DescribeIntentRequest = Shapes::StructureShape.new(name: 'DescribeIntentRequest')
     DescribeIntentResponse = Shapes::StructureShape.new(name: 'DescribeIntentResponse')
+    DescribeResourcePolicyRequest = Shapes::StructureShape.new(name: 'DescribeResourcePolicyRequest')
+    DescribeResourcePolicyResponse = Shapes::StructureShape.new(name: 'DescribeResourcePolicyResponse')
     DescribeSlotRequest = Shapes::StructureShape.new(name: 'DescribeSlotRequest')
     DescribeSlotResponse = Shapes::StructureShape.new(name: 'DescribeSlotResponse')
     DescribeSlotTypeRequest = Shapes::StructureShape.new(name: 'DescribeSlotTypeRequest')
@@ -144,6 +159,7 @@ module Aws::LexModelsV2
     Description = Shapes::StringShape.new(name: 'Description')
     DialogCodeHookSettings = Shapes::StructureShape.new(name: 'DialogCodeHookSettings')
     DraftBotVersion = Shapes::StringShape.new(name: 'DraftBotVersion')
+    Effect = Shapes::StringShape.new(name: 'Effect')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     ExportFilter = Shapes::StructureShape.new(name: 'ExportFilter')
     ExportFilterName = Shapes::StringShape.new(name: 'ExportFilterName')
@@ -232,12 +248,18 @@ module Aws::LexModelsV2
     NumericalBotVersion = Shapes::StringShape.new(name: 'NumericalBotVersion')
     ObfuscationSetting = Shapes::StructureShape.new(name: 'ObfuscationSetting')
     ObfuscationSettingType = Shapes::StringShape.new(name: 'ObfuscationSettingType')
+    Operation = Shapes::StringShape.new(name: 'Operation')
+    OperationList = Shapes::ListShape.new(name: 'OperationList')
     OutputContext = Shapes::StructureShape.new(name: 'OutputContext')
     OutputContextsList = Shapes::ListShape.new(name: 'OutputContextsList')
     PlainTextMessage = Shapes::StructureShape.new(name: 'PlainTextMessage')
     PlainTextMessageValue = Shapes::StringShape.new(name: 'PlainTextMessageValue')
+    Policy = Shapes::StringShape.new(name: 'Policy')
     PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
     PresignedS3Url = Shapes::StringShape.new(name: 'PresignedS3Url')
+    Principal = Shapes::StructureShape.new(name: 'Principal')
+    PrincipalArn = Shapes::StringShape.new(name: 'PrincipalArn')
+    PrincipalList = Shapes::ListShape.new(name: 'PrincipalList')
     PriorityValue = Shapes::IntegerShape.new(name: 'PriorityValue')
     PromptMaxRetries = Shapes::IntegerShape.new(name: 'PromptMaxRetries')
     PromptSpecification = Shapes::StructureShape.new(name: 'PromptSpecification')
@@ -247,6 +269,7 @@ module Aws::LexModelsV2
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResponseSpecification = Shapes::StructureShape.new(name: 'ResponseSpecification')
     RetryAfterSeconds = Shapes::IntegerShape.new(name: 'RetryAfterSeconds')
+    RevisionId = Shapes::StringShape.new(name: 'RevisionId')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3BucketArn = Shapes::StringShape.new(name: 'S3BucketArn')
     S3BucketLogDestination = Shapes::StructureShape.new(name: 'S3BucketLogDestination')
@@ -256,6 +279,7 @@ module Aws::LexModelsV2
     SampleUtterancesList = Shapes::ListShape.new(name: 'SampleUtterancesList')
     SampleValue = Shapes::StructureShape.new(name: 'SampleValue')
     SentimentAnalysisSettings = Shapes::StructureShape.new(name: 'SentimentAnalysisSettings')
+    ServicePrincipal = Shapes::StringShape.new(name: 'ServicePrincipal')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SessionTTL = Shapes::IntegerShape.new(name: 'SessionTTL')
     SkipResourceInUseCheck = Shapes::BooleanShape.new(name: 'SkipResourceInUseCheck')
@@ -319,6 +343,8 @@ module Aws::LexModelsV2
     UpdateExportResponse = Shapes::StructureShape.new(name: 'UpdateExportResponse')
     UpdateIntentRequest = Shapes::StructureShape.new(name: 'UpdateIntentRequest')
     UpdateIntentResponse = Shapes::StructureShape.new(name: 'UpdateIntentResponse')
+    UpdateResourcePolicyRequest = Shapes::StructureShape.new(name: 'UpdateResourcePolicyRequest')
+    UpdateResourcePolicyResponse = Shapes::StructureShape.new(name: 'UpdateResourcePolicyResponse')
     UpdateSlotRequest = Shapes::StructureShape.new(name: 'UpdateSlotRequest')
     UpdateSlotResponse = Shapes::StructureShape.new(name: 'UpdateSlotResponse')
     UpdateSlotTypeRequest = Shapes::StructureShape.new(name: 'UpdateSlotTypeRequest')
@@ -500,6 +526,12 @@ module Aws::LexModelsV2
     CodeHookSpecification.add_member(:lambda_code_hook, Shapes::ShapeRef.new(shape: LambdaCodeHook, required: true, location_name: "lambdaCodeHook"))
     CodeHookSpecification.struct_class = Types::CodeHookSpecification
 
+    ConditionKeyValueMap.key = Shapes::ShapeRef.new(shape: ConditionKey)
+    ConditionKeyValueMap.value = Shapes::ShapeRef.new(shape: ConditionValue)
+
+    ConditionMap.key = Shapes::ShapeRef.new(shape: ConditionOperator)
+    ConditionMap.value = Shapes::ShapeRef.new(shape: ConditionKeyValueMap)
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
@@ -629,6 +661,27 @@ module Aws::LexModelsV2
     CreateIntentResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     CreateIntentResponse.struct_class = Types::CreateIntentResponse
 
+    CreateResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
+    CreateResourcePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "policy"))
+    CreateResourcePolicyRequest.struct_class = Types::CreateResourcePolicyRequest
+
+    CreateResourcePolicyResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "resourceArn"))
+    CreateResourcePolicyResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
+    CreateResourcePolicyResponse.struct_class = Types::CreateResourcePolicyResponse
+
+    CreateResourcePolicyStatementRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
+    CreateResourcePolicyStatementRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "statementId"))
+    CreateResourcePolicyStatementRequest.add_member(:effect, Shapes::ShapeRef.new(shape: Effect, required: true, location_name: "effect"))
+    CreateResourcePolicyStatementRequest.add_member(:principal, Shapes::ShapeRef.new(shape: PrincipalList, required: true, location_name: "principal"))
+    CreateResourcePolicyStatementRequest.add_member(:action, Shapes::ShapeRef.new(shape: OperationList, required: true, location_name: "action"))
+    CreateResourcePolicyStatementRequest.add_member(:condition, Shapes::ShapeRef.new(shape: ConditionMap, location_name: "condition"))
+    CreateResourcePolicyStatementRequest.add_member(:expected_revision_id, Shapes::ShapeRef.new(shape: RevisionId, location: "querystring", location_name: "expectedRevisionId"))
+    CreateResourcePolicyStatementRequest.struct_class = Types::CreateResourcePolicyStatementRequest
+
+    CreateResourcePolicyStatementResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "resourceArn"))
+    CreateResourcePolicyStatementResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
+    CreateResourcePolicyStatementResponse.struct_class = Types::CreateResourcePolicyStatementResponse
+
     CreateSlotRequest.add_member(:slot_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "slotName"))
     CreateSlotRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateSlotRequest.add_member(:slot_type_id, Shapes::ShapeRef.new(shape: BuiltInOrCustomSlotTypeId, required: true, location_name: "slotTypeId"))
@@ -745,6 +798,23 @@ module Aws::LexModelsV2
     DeleteIntentRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, required: true, location: "uri", location_name: "botVersion"))
     DeleteIntentRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
     DeleteIntentRequest.struct_class = Types::DeleteIntentRequest
+
+    DeleteResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
+    DeleteResourcePolicyRequest.add_member(:expected_revision_id, Shapes::ShapeRef.new(shape: RevisionId, location: "querystring", location_name: "expectedRevisionId"))
+    DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
+
+    DeleteResourcePolicyResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "resourceArn"))
+    DeleteResourcePolicyResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
+    DeleteResourcePolicyResponse.struct_class = Types::DeleteResourcePolicyResponse
+
+    DeleteResourcePolicyStatementRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
+    DeleteResourcePolicyStatementRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "statementId"))
+    DeleteResourcePolicyStatementRequest.add_member(:expected_revision_id, Shapes::ShapeRef.new(shape: RevisionId, location: "querystring", location_name: "expectedRevisionId"))
+    DeleteResourcePolicyStatementRequest.struct_class = Types::DeleteResourcePolicyStatementRequest
+
+    DeleteResourcePolicyStatementResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "resourceArn"))
+    DeleteResourcePolicyStatementResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
+    DeleteResourcePolicyStatementResponse.struct_class = Types::DeleteResourcePolicyStatementResponse
 
     DeleteSlotRequest.add_member(:slot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "slotId"))
     DeleteSlotRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
@@ -882,6 +952,14 @@ module Aws::LexModelsV2
     DescribeIntentResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     DescribeIntentResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
     DescribeIntentResponse.struct_class = Types::DescribeIntentResponse
+
+    DescribeResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
+    DescribeResourcePolicyRequest.struct_class = Types::DescribeResourcePolicyRequest
+
+    DescribeResourcePolicyResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "resourceArn"))
+    DescribeResourcePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "policy"))
+    DescribeResourcePolicyResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
+    DescribeResourcePolicyResponse.struct_class = Types::DescribeResourcePolicyResponse
 
     DescribeSlotRequest.add_member(:slot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "slotId"))
     DescribeSlotRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
@@ -1204,6 +1282,8 @@ module Aws::LexModelsV2
     ObfuscationSetting.add_member(:obfuscation_setting_type, Shapes::ShapeRef.new(shape: ObfuscationSettingType, required: true, location_name: "obfuscationSettingType"))
     ObfuscationSetting.struct_class = Types::ObfuscationSetting
 
+    OperationList.member = Shapes::ShapeRef.new(shape: Operation)
+
     OutputContext.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     OutputContext.add_member(:time_to_live_in_seconds, Shapes::ShapeRef.new(shape: ContextTimeToLiveInSeconds, required: true, location_name: "timeToLiveInSeconds"))
     OutputContext.add_member(:turns_to_live, Shapes::ShapeRef.new(shape: ContextTurnsToLive, required: true, location_name: "turnsToLive"))
@@ -1216,6 +1296,12 @@ module Aws::LexModelsV2
 
     PreconditionFailedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     PreconditionFailedException.struct_class = Types::PreconditionFailedException
+
+    Principal.add_member(:service, Shapes::ShapeRef.new(shape: ServicePrincipal, location_name: "service"))
+    Principal.add_member(:arn, Shapes::ShapeRef.new(shape: PrincipalArn, location_name: "arn"))
+    Principal.struct_class = Types::Principal
+
+    PrincipalList.member = Shapes::ShapeRef.new(shape: Principal)
 
     PromptSpecification.add_member(:message_groups, Shapes::ShapeRef.new(shape: MessageGroupsList, required: true, location_name: "messageGroups"))
     PromptSpecification.add_member(:max_retries, Shapes::ShapeRef.new(shape: PromptMaxRetries, required: true, location_name: "maxRetries"))
@@ -1491,6 +1577,15 @@ module Aws::LexModelsV2
     UpdateIntentResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
     UpdateIntentResponse.struct_class = Types::UpdateIntentResponse
 
+    UpdateResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
+    UpdateResourcePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "policy"))
+    UpdateResourcePolicyRequest.add_member(:expected_revision_id, Shapes::ShapeRef.new(shape: RevisionId, location: "querystring", location_name: "expectedRevisionId"))
+    UpdateResourcePolicyRequest.struct_class = Types::UpdateResourcePolicyRequest
+
+    UpdateResourcePolicyResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "resourceArn"))
+    UpdateResourcePolicyResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
+    UpdateResourcePolicyResponse.struct_class = Types::UpdateResourcePolicyResponse
+
     UpdateSlotRequest.add_member(:slot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "slotId"))
     UpdateSlotRequest.add_member(:slot_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "slotName"))
     UpdateSlotRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -1669,6 +1764,35 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:create_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/policy/{resourceArn}/"
+        o.input = Shapes::ShapeRef.new(shape: CreateResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_resource_policy_statement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateResourcePolicyStatement"
+        o.http_method = "POST"
+        o.http_request_uri = "/policy/{resourceArn}/statements/"
+        o.input = Shapes::ShapeRef.new(shape: CreateResourcePolicyStatementRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateResourcePolicyStatementResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:create_slot, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateSlot"
         o.http_method = "PUT"
@@ -1806,6 +1930,30 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourcePolicy"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/policy/{resourceArn}/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_resource_policy_statement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourcePolicyStatement"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/policy/{resourceArn}/statements/{statementId}/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyStatementRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteResourcePolicyStatementResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:delete_slot, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteSlot"
         o.http_method = "DELETE"
@@ -1921,6 +2069,17 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeResourcePolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/policy/{resourceArn}/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:describe_slot, Seahorse::Model::Operation.new.tap do |o|
@@ -2263,6 +2422,20 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateResourcePolicy"
+        o.http_method = "PUT"
+        o.http_request_uri = "/policy/{resourceArn}/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_slot, Seahorse::Model::Operation.new.tap do |o|

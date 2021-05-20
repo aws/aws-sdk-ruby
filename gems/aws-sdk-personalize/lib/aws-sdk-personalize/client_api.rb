@@ -217,6 +217,7 @@ module Aws::Personalize
     SolutionVersions = Shapes::ListShape.new(name: 'SolutionVersions')
     Solutions = Shapes::ListShape.new(name: 'Solutions')
     Status = Shapes::StringShape.new(name: 'Status')
+    StopSolutionVersionCreationRequest = Shapes::StructureShape.new(name: 'StopSolutionVersionCreationRequest')
     TrackingId = Shapes::StringShape.new(name: 'TrackingId')
     TrainingHours = Shapes::FloatShape.new(name: 'TrainingHours')
     TrainingInputMode = Shapes::StringShape.new(name: 'TrainingInputMode')
@@ -979,6 +980,9 @@ module Aws::Personalize
 
     Solutions.member = Shapes::ShapeRef.new(shape: SolutionSummary)
 
+    StopSolutionVersionCreationRequest.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "solutionVersionArn"))
+    StopSolutionVersionCreationRequest.struct_class = Types::StopSolutionVersionCreationRequest
+
     TunedHPOParams.add_member(:algorithm_hyper_parameters, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "algorithmHyperParameters"))
     TunedHPOParams.struct_class = Types::TunedHPOParams
 
@@ -1563,6 +1567,17 @@ module Aws::Personalize
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:stop_solution_version_creation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopSolutionVersionCreation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopSolutionVersionCreationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:update_campaign, Seahorse::Model::Operation.new.tap do |o|

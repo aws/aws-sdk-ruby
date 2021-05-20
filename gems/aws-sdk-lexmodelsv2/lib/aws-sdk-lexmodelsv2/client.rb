@@ -1305,6 +1305,154 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # Creates a new resource policy with the specified policy statements.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that the
+    #   resource policy is attached to.
+    #
+    # @option params [required, String] :policy
+    #   A resource policy to add to the resource. The policy is a JSON
+    #   structure that contains one or more statements that define the policy.
+    #   The policy must follow the IAM syntax. For more information about the
+    #   contents of a JSON policy document, see [ IAM JSON policy reference
+    #   ][1].
+    #
+    #   If the policy isn't valid, Amazon Lex returns a validation exception.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
+    #
+    # @return [Types::CreateResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateResourcePolicyResponse#resource_arn #resource_arn} => String
+    #   * {Types::CreateResourcePolicyResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_resource_policy({
+    #     resource_arn: "AmazonResourceName", # required
+    #     policy: "Policy", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateResourcePolicy AWS API Documentation
+    #
+    # @overload create_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def create_resource_policy(params = {}, options = {})
+      req = build_request(:create_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Adds a new resource policy statement to a bot or bot alias. If a
+    # resource policy exists, the statement is added to the current resource
+    # policy. If a policy doesn't exist, a new policy is created.
+    #
+    # You can create a resource policy statement that allows cross-account
+    # access.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that the
+    #   resource policy is attached to.
+    #
+    # @option params [required, String] :statement_id
+    #   The name of the statement. The ID is the same as the `Sid` IAM
+    #   property. The statement name must be unique within the policy. For
+    #   more information, see [IAM JSON policy elements: Sid][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_sid.html
+    #
+    # @option params [required, String] :effect
+    #   Determines whether the statement allows or denies access to the
+    #   resource.
+    #
+    # @option params [required, Array<Types::Principal>] :principal
+    #   An IAM principal, such as an IAM users, IAM roles, or AWS services
+    #   that is allowed or denied access to a resource. For more information,
+    #   see [AWS JSON policy elements: Principal][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html
+    #
+    # @option params [required, Array<String>] :action
+    #   The Amazon Lex action that this policy either allows or denies. The
+    #   action must apply to the resource type of the specified ARN. For more
+    #   information, see [ Actions, resources, and condition keys for Amazon
+    #   Lex V2][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonlexv2.html
+    #
+    # @option params [Hash<String,Hash>] :condition
+    #   Specifies a condition when the policy is in effect. If the principal
+    #   of the policy is a service principal, you must provide two condition
+    #   blocks, one with a SourceAccount global condition key and one with a
+    #   SourceArn global condition key.
+    #
+    #   For more information, see [IAM JSON policy elements: Condition ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html
+    #
+    # @option params [String] :expected_revision_id
+    #   The identifier of the revision of the policy to edit. If this revision
+    #   ID doesn't match the current revision ID, Amazon Lex throws an
+    #   exception.
+    #
+    #   If you don't specify a revision, Amazon Lex overwrites the contents
+    #   of the policy with the new values.
+    #
+    # @return [Types::CreateResourcePolicyStatementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateResourcePolicyStatementResponse#resource_arn #resource_arn} => String
+    #   * {Types::CreateResourcePolicyStatementResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_resource_policy_statement({
+    #     resource_arn: "AmazonResourceName", # required
+    #     statement_id: "Name", # required
+    #     effect: "Allow", # required, accepts Allow, Deny
+    #     principal: [ # required
+    #       {
+    #         service: "ServicePrincipal",
+    #         arn: "PrincipalArn",
+    #       },
+    #     ],
+    #     action: ["Operation"], # required
+    #     condition: {
+    #       "ConditionOperator" => {
+    #         "ConditionKey" => "ConditionValue",
+    #       },
+    #     },
+    #     expected_revision_id: "RevisionId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateResourcePolicyStatement AWS API Documentation
+    #
+    # @overload create_resource_policy_statement(params = {})
+    # @param [Hash] params ({})
+    def create_resource_policy_statement(params = {}, options = {})
+      req = build_request(:create_resource_policy_statement, params)
+      req.send_request(options)
+    end
+
     # Creates a slot in an intent. A slot is a variable needed to fulfill an
     # intent. For example, an `OrderPizza` intent might need slots for size,
     # crust, and number of pizzas. For each slot, you define one or more
@@ -2161,6 +2309,94 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # Removes an existing policy from a bot or bot alias. If the resource
+    # doesn't have a policy attached, Amazon Lex returns an exception.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that has the
+    #   resource policy attached.
+    #
+    # @option params [String] :expected_revision_id
+    #   The identifier of the revision to edit. If this ID doesn't match the
+    #   current revision number, Amazon Lex returns an exception
+    #
+    #   If you don't specify a revision ID, Amazon Lex will delete the
+    #   current policy.
+    #
+    # @return [Types::DeleteResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteResourcePolicyResponse#resource_arn #resource_arn} => String
+    #   * {Types::DeleteResourcePolicyResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     resource_arn: "AmazonResourceName", # required
+    #     expected_revision_id: "RevisionId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Deletes a policy statement from a resource policy. If you delete the
+    # last statement from a policy, the policy is deleted. If you specify a
+    # statement ID that doesn't exist in the policy, or if the bot or bot
+    # alias doesn't have a policy attached, Amazon Lex returns an
+    # exception.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that the
+    #   resource policy is attached to.
+    #
+    # @option params [required, String] :statement_id
+    #   The name of the statement (SID) to delete from the policy.
+    #
+    # @option params [String] :expected_revision_id
+    #   The identifier of the revision of the policy to delete the statement
+    #   from. If this revision ID doesn't match the current revision ID,
+    #   Amazon Lex throws an exception.
+    #
+    #   If you don't specify a revision, Amazon Lex removes the current
+    #   contents of the statement.
+    #
+    # @return [Types::DeleteResourcePolicyStatementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteResourcePolicyStatementResponse#resource_arn #resource_arn} => String
+    #   * {Types::DeleteResourcePolicyStatementResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy_statement({
+    #     resource_arn: "AmazonResourceName", # required
+    #     statement_id: "Name", # required
+    #     expected_revision_id: "RevisionId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteResourcePolicyStatement AWS API Documentation
+    #
+    # @overload delete_resource_policy_statement(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy_statement(params = {}, options = {})
+      req = build_request(:delete_resource_policy_statement, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified slot from an intent.
     #
     # @option params [required, String] :slot_id
@@ -2745,6 +2981,39 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def describe_intent(params = {}, options = {})
       req = build_request(:describe_intent, params)
+      req.send_request(options)
+    end
+
+    # Gets the resource policy and policy revision for a bot or bot alias.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that the
+    #   resource policy is attached to.
+    #
+    # @return [Types::DescribeResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeResourcePolicyResponse#resource_arn #resource_arn} => String
+    #   * {Types::DescribeResourcePolicyResponse#policy #policy} => String
+    #   * {Types::DescribeResourcePolicyResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_resource_policy({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.policy #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeResourcePolicy AWS API Documentation
+    #
+    # @overload describe_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def describe_resource_policy(params = {}, options = {})
+      req = build_request(:describe_resource_policy, params)
       req.send_request(options)
     end
 
@@ -4765,6 +5034,62 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # Replaces the existing resource policy for a bot or bot alias with a
+    # new one. If the policy doesn't exist, Amazon Lex returns an
+    # exception.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that the
+    #   resource policy is attached to.
+    #
+    # @option params [required, String] :policy
+    #   A resource policy to add to the resource. The policy is a JSON
+    #   structure that contains one or more statements that define the policy.
+    #   The policy must follow the IAM syntax. For more information about the
+    #   contents of a JSON policy document, see [ IAM JSON policy reference
+    #   ][1].
+    #
+    #   If the policy isn't valid, Amazon Lex returns a validation exception.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
+    #
+    # @option params [String] :expected_revision_id
+    #   The identifier of the revision of the policy to update. If this
+    #   revision ID doesn't match the current revision ID, Amazon Lex throws
+    #   an exception.
+    #
+    #   If you don't specify a revision, Amazon Lex overwrites the contents
+    #   of the policy with the new values.
+    #
+    # @return [Types::UpdateResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateResourcePolicyResponse#resource_arn #resource_arn} => String
+    #   * {Types::UpdateResourcePolicyResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_resource_policy({
+    #     resource_arn: "AmazonResourceName", # required
+    #     policy: "Policy", # required
+    #     expected_revision_id: "RevisionId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateResourcePolicy AWS API Documentation
+    #
+    # @overload update_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def update_resource_policy(params = {}, options = {})
+      req = build_request(:update_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Updates the settings for a slot.
     #
     # @option params [required, String] :slot_id
@@ -5306,7 +5631,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -4294,6 +4294,10 @@ module Aws::Personalize
     #   * ACTIVE
     #
     #   * CREATE FAILED
+    #
+    #   * CREATE STOPPING
+    #
+    #   * CREATE STOPPED
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
@@ -4371,6 +4375,26 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopSolutionVersionCreationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         solution_version_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] solution_version_arn
+    #   The Amazon Resource Name (ARN) of the solution version you want to
+    #   stop creating.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/StopSolutionVersionCreationRequest AWS API Documentation
+    #
+    class StopSolutionVersionCreationRequest < Struct.new(
+      :solution_version_arn)
       SENSITIVE = []
       include Aws::Structure
     end

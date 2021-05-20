@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2021-05-20)
+------------------
+
+* Feature - Added new API to stop a solution version creation that is pending or in progress for Amazon Personalize
+
 1.25.0 (2021-05-18)
 ------------------
 

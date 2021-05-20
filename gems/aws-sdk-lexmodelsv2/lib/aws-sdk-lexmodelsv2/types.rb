@@ -2081,6 +2081,184 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         policy: "Policy", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that the
+    #   resource policy is attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   A resource policy to add to the resource. The policy is a JSON
+    #   structure that contains one or more statements that define the
+    #   policy. The policy must follow the IAM syntax. For more information
+    #   about the contents of a JSON policy document, see [ IAM JSON policy
+    #   reference ][1].
+    #
+    #   If the policy isn't valid, Amazon Lex returns a validation
+    #   exception.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateResourcePolicyRequest AWS API Documentation
+    #
+    class CreateResourcePolicyRequest < Struct.new(
+      :resource_arn,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that the
+    #   resource policy was attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The current revision of the resource policy. Use the revision ID to
+    #   make sure that you are updating the most current version of a
+    #   resource policy when you add a policy statement to a resource,
+    #   delete a resource, or update a resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateResourcePolicyResponse AWS API Documentation
+    #
+    class CreateResourcePolicyResponse < Struct.new(
+      :resource_arn,
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateResourcePolicyStatementRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         statement_id: "Name", # required
+    #         effect: "Allow", # required, accepts Allow, Deny
+    #         principal: [ # required
+    #           {
+    #             service: "ServicePrincipal",
+    #             arn: "PrincipalArn",
+    #           },
+    #         ],
+    #         action: ["Operation"], # required
+    #         condition: {
+    #           "ConditionOperator" => {
+    #             "ConditionKey" => "ConditionValue",
+    #           },
+    #         },
+    #         expected_revision_id: "RevisionId",
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that the
+    #   resource policy is attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] statement_id
+    #   The name of the statement. The ID is the same as the `Sid` IAM
+    #   property. The statement name must be unique within the policy. For
+    #   more information, see [IAM JSON policy elements: Sid][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_sid.html
+    #   @return [String]
+    #
+    # @!attribute [rw] effect
+    #   Determines whether the statement allows or denies access to the
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal
+    #   An IAM principal, such as an IAM users, IAM roles, or AWS services
+    #   that is allowed or denied access to a resource. For more
+    #   information, see [AWS JSON policy elements: Principal][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html
+    #   @return [Array<Types::Principal>]
+    #
+    # @!attribute [rw] action
+    #   The Amazon Lex action that this policy either allows or denies. The
+    #   action must apply to the resource type of the specified ARN. For
+    #   more information, see [ Actions, resources, and condition keys for
+    #   Amazon Lex V2][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonlexv2.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] condition
+    #   Specifies a condition when the policy is in effect. If the principal
+    #   of the policy is a service principal, you must provide two condition
+    #   blocks, one with a SourceAccount global condition key and one with a
+    #   SourceArn global condition key.
+    #
+    #   For more information, see [IAM JSON policy elements: Condition ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html
+    #   @return [Hash<String,Hash<String,String>>]
+    #
+    # @!attribute [rw] expected_revision_id
+    #   The identifier of the revision of the policy to edit. If this
+    #   revision ID doesn't match the current revision ID, Amazon Lex
+    #   throws an exception.
+    #
+    #   If you don't specify a revision, Amazon Lex overwrites the contents
+    #   of the policy with the new values.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateResourcePolicyStatementRequest AWS API Documentation
+    #
+    class CreateResourcePolicyStatementRequest < Struct.new(
+      :resource_arn,
+      :statement_id,
+      :effect,
+      :principal,
+      :action,
+      :condition,
+      :expected_revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that the
+    #   resource policy is attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The current revision of the resource policy. Use the revision ID to
+    #   make sure that you are updating the most current version of a
+    #   resource policy when you add a policy statement to a resource,
+    #   delete a resource, or update a resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateResourcePolicyStatementResponse AWS API Documentation
+    #
+    class CreateResourcePolicyStatementResponse < Struct.new(
+      :resource_arn,
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateSlotRequest
     #   data as a hash:
     #
@@ -3070,6 +3248,115 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         expected_revision_id: "RevisionId",
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that has the
+    #   resource policy attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_revision_id
+    #   The identifier of the revision to edit. If this ID doesn't match
+    #   the current revision number, Amazon Lex returns an exception
+    #
+    #   If you don't specify a revision ID, Amazon Lex will delete the
+    #   current policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteResourcePolicyRequest AWS API Documentation
+    #
+    class DeleteResourcePolicyRequest < Struct.new(
+      :resource_arn,
+      :expected_revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that the
+    #   resource policy was deleted from.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The current revision of the resource policy. Use the revision ID to
+    #   make sure that you are updating the most current version of a
+    #   resource policy when you add a policy statement to a resource,
+    #   delete a resource, or update a resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteResourcePolicyResponse AWS API Documentation
+    #
+    class DeleteResourcePolicyResponse < Struct.new(
+      :resource_arn,
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteResourcePolicyStatementRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         statement_id: "Name", # required
+    #         expected_revision_id: "RevisionId",
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that the
+    #   resource policy is attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] statement_id
+    #   The name of the statement (SID) to delete from the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_revision_id
+    #   The identifier of the revision of the policy to delete the statement
+    #   from. If this revision ID doesn't match the current revision ID,
+    #   Amazon Lex throws an exception.
+    #
+    #   If you don't specify a revision, Amazon Lex removes the current
+    #   contents of the statement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteResourcePolicyStatementRequest AWS API Documentation
+    #
+    class DeleteResourcePolicyStatementRequest < Struct.new(
+      :resource_arn,
+      :statement_id,
+      :expected_revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that the
+    #   resource policy statement was removed from.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The current revision of the resource policy. Use the revision ID to
+    #   make sure that you are updating the most current version of a
+    #   resource policy when you add a policy statement to a resource,
+    #   delete a resource, or update a resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteResourcePolicyStatementResponse AWS API Documentation
+    #
+    class DeleteResourcePolicyStatementResponse < Struct.new(
+      :resource_arn,
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteSlotRequest
     #   data as a hash:
     #
@@ -3846,6 +4133,58 @@ module Aws::LexModelsV2
       :locale_id,
       :creation_date_time,
       :last_updated_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that the
+    #   resource policy is attached to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeResourcePolicyRequest AWS API Documentation
+    #
+    class DescribeResourcePolicyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that the
+    #   resource policy is attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The JSON structure that contains the resource policy. For more
+    #   information about the contents of a JSON policy document, see [ IAM
+    #   JSON policy reference ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The current revision of the resource policy. Use the revision ID to
+    #   make sure that you are updating the most current version of a
+    #   resource policy when you add a policy statement to a resource,
+    #   delete a resource, or update a resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeResourcePolicyResponse AWS API Documentation
+    #
+    class DescribeResourcePolicyResponse < Struct.new(
+      :resource_arn,
+      :policy,
+      :revision_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6218,6 +6557,41 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # The IAM principal that you allowing or denying access to an Amazon Lex
+    # action. You must provide a `service` or an `arn`, but not both in the
+    # same statement. For more information, see [ AWS JSON policy elements:
+    # Principal ][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html
+    #
+    # @note When making an API call, you may pass Principal
+    #   data as a hash:
+    #
+    #       {
+    #         service: "ServicePrincipal",
+    #         arn: "PrincipalArn",
+    #       }
+    #
+    # @!attribute [rw] service
+    #   The name of the AWS service that should allowed or denied access to
+    #   an Amazon Lex action.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the principal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/Principal AWS API Documentation
+    #
+    class Principal < Struct.new(
+      :service,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies a list of message groups that Amazon Lex sends to a user to
     # elicit a response.
     #
@@ -8430,6 +8804,75 @@ module Aws::LexModelsV2
       :locale_id,
       :creation_date_time,
       :last_updated_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         policy: "Policy", # required
+    #         expected_revision_id: "RevisionId",
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that the
+    #   resource policy is attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   A resource policy to add to the resource. The policy is a JSON
+    #   structure that contains one or more statements that define the
+    #   policy. The policy must follow the IAM syntax. For more information
+    #   about the contents of a JSON policy document, see [ IAM JSON policy
+    #   reference ][1].
+    #
+    #   If the policy isn't valid, Amazon Lex returns a validation
+    #   exception.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_revision_id
+    #   The identifier of the revision of the policy to update. If this
+    #   revision ID doesn't match the current revision ID, Amazon Lex
+    #   throws an exception.
+    #
+    #   If you don't specify a revision, Amazon Lex overwrites the contents
+    #   of the policy with the new values.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateResourcePolicyRequest AWS API Documentation
+    #
+    class UpdateResourcePolicyRequest < Struct.new(
+      :resource_arn,
+      :policy,
+      :expected_revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the bot or bot alias that the
+    #   resource policy is attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The current revision of the resource policy. Use the revision ID to
+    #   make sure that you are updating the most current version of a
+    #   resource policy when you add a policy statement to a resource,
+    #   delete a resource, or update a resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateResourcePolicyResponse AWS API Documentation
+    #
+    class UpdateResourcePolicyResponse < Struct.new(
+      :resource_arn,
+      :revision_id)
       SENSITIVE = []
       include Aws::Structure
     end
