@@ -155,6 +155,7 @@ module Aws::Personalize
     IntegerMinValue = Shapes::IntegerShape.new(name: 'IntegerMinValue')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
+    ItemAttribute = Shapes::StringShape.new(name: 'ItemAttribute')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListBatchInferenceJobsRequest = Shapes::StructureShape.new(name: 'ListBatchInferenceJobsRequest')
@@ -189,6 +190,8 @@ module Aws::Personalize
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NumBatchResults = Shapes::IntegerShape.new(name: 'NumBatchResults')
+    ObjectiveSensitivity = Shapes::StringShape.new(name: 'ObjectiveSensitivity')
+    OptimizationObjective = Shapes::StructureShape.new(name: 'OptimizationObjective')
     ParameterName = Shapes::StringShape.new(name: 'ParameterName')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     PerformAutoML = Shapes::BooleanShape.new(name: 'PerformAutoML')
@@ -214,6 +217,7 @@ module Aws::Personalize
     SolutionVersions = Shapes::ListShape.new(name: 'SolutionVersions')
     Solutions = Shapes::ListShape.new(name: 'Solutions')
     Status = Shapes::StringShape.new(name: 'Status')
+    StopSolutionVersionCreationRequest = Shapes::StructureShape.new(name: 'StopSolutionVersionCreationRequest')
     TrackingId = Shapes::StringShape.new(name: 'TrackingId')
     TrainingHours = Shapes::FloatShape.new(name: 'TrainingHours')
     TrainingInputMode = Shapes::StringShape.new(name: 'TrainingInputMode')
@@ -876,6 +880,10 @@ module Aws::Personalize
     Metrics.key = Shapes::ShapeRef.new(shape: MetricName)
     Metrics.value = Shapes::ShapeRef.new(shape: MetricValue)
 
+    OptimizationObjective.add_member(:item_attribute, Shapes::ShapeRef.new(shape: ItemAttribute, location_name: "itemAttribute"))
+    OptimizationObjective.add_member(:objective_sensitivity, Shapes::ShapeRef.new(shape: ObjectiveSensitivity, location_name: "objectiveSensitivity"))
+    OptimizationObjective.struct_class = Types::OptimizationObjective
+
     Recipe.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     Recipe.add_member(:recipe_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "recipeArn"))
     Recipe.add_member(:algorithm_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "algorithmArn"))
@@ -934,6 +942,7 @@ module Aws::Personalize
     SolutionConfig.add_member(:algorithm_hyper_parameters, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "algorithmHyperParameters"))
     SolutionConfig.add_member(:feature_transformation_parameters, Shapes::ShapeRef.new(shape: FeatureTransformationParameters, location_name: "featureTransformationParameters"))
     SolutionConfig.add_member(:auto_ml_config, Shapes::ShapeRef.new(shape: AutoMLConfig, location_name: "autoMLConfig"))
+    SolutionConfig.add_member(:optimization_objective, Shapes::ShapeRef.new(shape: OptimizationObjective, location_name: "optimizationObjective"))
     SolutionConfig.struct_class = Types::SolutionConfig
 
     SolutionSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -970,6 +979,9 @@ module Aws::Personalize
     SolutionVersions.member = Shapes::ShapeRef.new(shape: SolutionVersionSummary)
 
     Solutions.member = Shapes::ShapeRef.new(shape: SolutionSummary)
+
+    StopSolutionVersionCreationRequest.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "solutionVersionArn"))
+    StopSolutionVersionCreationRequest.struct_class = Types::StopSolutionVersionCreationRequest
 
     TunedHPOParams.add_member(:algorithm_hyper_parameters, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "algorithmHyperParameters"))
     TunedHPOParams.struct_class = Types::TunedHPOParams
@@ -1555,6 +1567,17 @@ module Aws::Personalize
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:stop_solution_version_creation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopSolutionVersionCreation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopSolutionVersionCreationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:update_campaign, Seahorse::Model::Operation.new.tap do |o|

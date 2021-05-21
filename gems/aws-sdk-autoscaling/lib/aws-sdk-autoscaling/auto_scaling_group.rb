@@ -77,6 +77,13 @@ module Aws::AutoScaling
       data[:desired_capacity]
     end
 
+    # The predicted capacity of the group when it has a predictive scaling
+    # policy.
+    # @return [Integer]
+    def predicted_capacity
+      data[:predicted_capacity]
+    end
+
     # The duration of the default cooldown period, in seconds.
     # @return [Integer]
     def default_cooldown
@@ -627,6 +634,29 @@ module Aws::AutoScaling
     #       disable_scale_in: false,
     #     },
     #     enabled: false,
+    #     predictive_scaling_configuration: {
+    #       metric_specifications: [ # required
+    #         {
+    #           target_value: 1.0, # required
+    #           predefined_metric_pair_specification: {
+    #             predefined_metric_type: "ASGCPUUtilization", # required, accepts ASGCPUUtilization, ASGNetworkIn, ASGNetworkOut, ALBRequestCount
+    #             resource_label: "XmlStringMaxLen1023",
+    #           },
+    #           predefined_scaling_metric_specification: {
+    #             predefined_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, ALBRequestCountPerTarget
+    #             resource_label: "XmlStringMaxLen1023",
+    #           },
+    #           predefined_load_metric_specification: {
+    #             predefined_metric_type: "ASGTotalCPUUtilization", # required, accepts ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut, ALBTargetGroupRequestCount
+    #             resource_label: "XmlStringMaxLen1023",
+    #           },
+    #         },
+    #       ],
+    #       mode: "ForecastAndScale", # accepts ForecastAndScale, ForecastOnly
+    #       scheduling_buffer_time: 1,
+    #       max_capacity_breach_behavior: "HonorMaxCapacity", # accepts HonorMaxCapacity, IncreaseMaxCapacity
+    #       max_capacity_buffer: 1,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :policy_name
@@ -639,6 +669,8 @@ module Aws::AutoScaling
     #   * `StepScaling`
     #
     #   * `SimpleScaling` (default)
+    #
+    #   * `PredictiveScaling`
     # @option options [String] :adjustment_type
     #   Specifies how the scaling adjustment is interpreted (for example, an
     #   absolute number or a percentage). The valid values are
@@ -717,7 +749,7 @@ module Aws::AutoScaling
     #   Valid only if the policy type is `TargetTrackingScaling` or
     #   `StepScaling`.
     # @option options [Types::TargetTrackingConfiguration] :target_tracking_configuration
-    #   A target tracking scaling policy. Includes support for predefined or
+    #   A target tracking scaling policy. Provides support for predefined or
     #   customized metrics.
     #
     #   The following predefined metrics are available:
@@ -751,6 +783,21 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enable-disable-scaling-policy.html
+    # @option options [Types::PredictiveScalingConfiguration] :predictive_scaling_configuration
+    #   A predictive scaling policy. Provides support for only predefined
+    #   metrics.
+    #
+    #   Predictive scaling works with CPU utilization, network in/out, and the
+    #   Application Load Balancer request count.
+    #
+    #   For more information, see [PredictiveScalingConfiguration][1] in the
+    #   *Amazon EC2 Auto Scaling API Reference*.
+    #
+    #   Required if the policy type is `PredictiveScaling`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_PredictiveScalingConfiguration.html
     # @return [ScalingPolicy]
     def put_scaling_policy(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -1310,7 +1357,7 @@ module Aws::AutoScaling
     #   specify an unknown policy name, it is ignored with no error.
     # @option options [Array<String>] :policy_types
     #   One or more policy types. The valid values are `SimpleScaling`,
-    #   `StepScaling`, and `TargetTrackingScaling`.
+    #   `StepScaling`, `TargetTrackingScaling`, and `PredictiveScaling`.
     # @return [ScalingPolicy::Collection]
     def policies(options = {})
       batches = Enumerator.new do |y|

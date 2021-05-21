@@ -283,6 +283,7 @@ module Aws::OpsWorksCM
     RestoreServerRequest.add_member(:key_pair, Shapes::ShapeRef.new(shape: KeyPair, location_name: "KeyPair"))
     RestoreServerRequest.struct_class = Types::RestoreServerRequest
 
+    RestoreServerResponse.add_member(:server, Shapes::ShapeRef.new(shape: Server, location_name: "Server"))
     RestoreServerResponse.struct_class = Types::RestoreServerResponse
 
     Server.add_member(:associate_public_ip_address, Shapes::ShapeRef.new(shape: Boolean, location_name: "AssociatePublicIpAddress"))

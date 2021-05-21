@@ -1227,6 +1227,14 @@ module Aws::IAM
     # principal in a role's trust policy. Such a policy establishes a trust
     # relationship between AWS and the OIDC provider.
     #
+    # If you are using an OIDC identity provider from Google, Facebook, or
+    # Amazon Cognito, you don't need to create a separate IAM identity
+    # provider. These OIDC identity providers are already built-in to AWS
+    # and are available for your use. Instead, you can move directly to
+    # creating new roles using your identity provider. To learn more, see
+    # [Creating a role for web identity or OpenID connect federation][2] in
+    # the *IAM User Guide*.
+    #
     # When you create the IAM OIDC provider, you specify the following:
     #
     # * The URL of the OIDC identity provider (IdP) to trust
@@ -1250,6 +1258,7 @@ module Aws::IAM
     #
     #
     # [1]: http://openid.net/connect/
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html
     #
     # @option params [required, String] :url
     #   The URL of the identity provider. The URL must begin with `https://`
@@ -8841,6 +8850,8 @@ module Aws::IAM
     #   * {Types::ListUserTagsResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListUserTagsResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list the tags attached to an IAM user
     #
@@ -13056,7 +13067,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

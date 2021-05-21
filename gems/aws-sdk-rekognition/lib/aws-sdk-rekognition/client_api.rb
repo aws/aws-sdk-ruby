@@ -176,6 +176,7 @@ module Aws::Rekognition
     KinesisDataStream = Shapes::StructureShape.new(name: 'KinesisDataStream')
     KinesisVideoArn = Shapes::StringShape.new(name: 'KinesisVideoArn')
     KinesisVideoStream = Shapes::StructureShape.new(name: 'KinesisVideoStream')
+    KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     Label = Shapes::StructureShape.new(name: 'Label')
     LabelDetection = Shapes::StructureShape.new(name: 'LabelDetection')
     LabelDetectionSortBy = Shapes::StringShape.new(name: 'LabelDetectionSortBy')
@@ -474,6 +475,7 @@ module Aws::Rekognition
     CreateProjectVersionRequest.add_member(:training_data, Shapes::ShapeRef.new(shape: TrainingData, required: true, location_name: "TrainingData"))
     CreateProjectVersionRequest.add_member(:testing_data, Shapes::ShapeRef.new(shape: TestingData, required: true, location_name: "TestingData"))
     CreateProjectVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateProjectVersionRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     CreateProjectVersionRequest.struct_class = Types::CreateProjectVersionRequest
 
     CreateProjectVersionResponse.add_member(:project_version_arn, Shapes::ShapeRef.new(shape: ProjectVersionArn, location_name: "ProjectVersionArn"))
@@ -1036,6 +1038,7 @@ module Aws::Rekognition
     ProjectVersionDescription.add_member(:testing_data_result, Shapes::ShapeRef.new(shape: TestingDataResult, location_name: "TestingDataResult"))
     ProjectVersionDescription.add_member(:evaluation_result, Shapes::ShapeRef.new(shape: EvaluationResult, location_name: "EvaluationResult"))
     ProjectVersionDescription.add_member(:manifest_summary, Shapes::ShapeRef.new(shape: GroundTruthManifest, location_name: "ManifestSummary"))
+    ProjectVersionDescription.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     ProjectVersionDescription.struct_class = Types::ProjectVersionDescription
 
     ProjectVersionDescriptions.member = Shapes::ShapeRef.new(shape: ProjectVersionDescription)

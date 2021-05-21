@@ -478,8 +478,8 @@ module Aws::IoTSiteWise
     #
     # With respect to Unix epoch time, AWS IoT SiteWise accepts only TQVs
     # that have a timestamp of no more than 7 days in the past and no more
-    # than 5 minutes in the future. AWS IoT SiteWise rejects timestamps
-    # outside of the inclusive range of \[-7 days, +5 minutes\] and returns
+    # than 10 minutes in the future. AWS IoT SiteWise rejects timestamps
+    # outside of the inclusive range of \[-7 days, +10 minutes\] and returns
     # a `TimestampOutOfRangeException` error.
     #
     #  For each asset property, AWS IoT SiteWise overwrites TQVs with
@@ -2330,6 +2330,10 @@ module Aws::IoTSiteWise
     # operation to return the interpolated temperature values for a wind
     # turbine every 24 hours over a duration of 7 days.
     #
+    # <note markdown="1"> This API isn't available in China (Beijing).
+    #
+    #  </note>
+    #
     # To identify an asset property, you must specify one of the following:
     #
     # * The `assetId` and `propertyId` of an asset property.
@@ -3808,7 +3812,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

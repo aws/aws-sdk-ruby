@@ -661,6 +661,20 @@
       ],
       "idempotent":true
     },
+    "StopSolutionVersionCreation":{
+      "name":"StopSolutionVersionCreation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StopSolutionVersionCreationRequest"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceInUseException"}
+      ],
+      "idempotent":true
+    },
     "UpdateCampaign":{
       "name":"UpdateCampaign",
       "http":{
@@ -1734,6 +1748,11 @@
       },
       "exception":true
     },
+    "ItemAttribute":{
+      "type":"string",
+      "max":150,
+      "min":1
+    },
     "KmsKeyArn":{"type":"string"},
     "LimitExceededException":{
       "type":"structure",
@@ -1951,6 +1970,22 @@
       "max":1300
     },
     "NumBatchResults":{"type":"integer"},
+    "ObjectiveSensitivity":{
+      "type":"string",
+      "enum":[
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "OFF"
+      ]
+    },
+    "OptimizationObjective":{
+      "type":"structure",
+      "members":{
+        "itemAttribute":{"shape":"ItemAttribute"},
+        "objectiveSensitivity":{"shape":"ObjectiveSensitivity"}
+      }
+    },
     "ParameterName":{
       "type":"string",
       "max":256
@@ -2072,7 +2107,8 @@
         "hpoConfig":{"shape":"HPOConfig"},
         "algorithmHyperParameters":{"shape":"HyperParameters"},
         "featureTransformationParameters":{"shape":"FeatureTransformationParameters"},
-        "autoMLConfig":{"shape":"AutoMLConfig"}
+        "autoMLConfig":{"shape":"AutoMLConfig"},
+        "optimizationObjective":{"shape":"OptimizationObjective"}
       }
     },
     "SolutionSummary":{
@@ -2128,6 +2164,13 @@
     "Status":{
       "type":"string",
       "max":256
+    },
+    "StopSolutionVersionCreationRequest":{
+      "type":"structure",
+      "required":["solutionVersionArn"],
+      "members":{
+        "solutionVersionArn":{"shape":"Arn"}
+      }
     },
     "TrackingId":{
       "type":"string",

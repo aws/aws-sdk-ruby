@@ -8556,7 +8556,7 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Returns information about a specific static IP.
+    # Returns information about an Amazon Lightsail static IP.
     #
     # @option params [required, String] :static_ip_name
     #   The name of the static IP in Lightsail.
@@ -10593,7 +10593,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

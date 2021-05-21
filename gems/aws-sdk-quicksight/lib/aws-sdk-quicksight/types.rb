@@ -1444,6 +1444,7 @@ module Aws::QuickSight
     #           namespace: "Namespace",
     #           arn: "Arn", # required
     #           permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
+    #           format_version: "VERSION_1", # accepts VERSION_1, VERSION_2
     #         },
     #         column_level_permission_rules: [
     #           {
@@ -9281,6 +9282,7 @@ module Aws::QuickSight
     #         namespace: "Namespace",
     #         arn: "Arn", # required
     #         permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
+    #         format_version: "VERSION_1", # accepts VERSION_1, VERSION_2
     #       }
     #
     # @!attribute [rw] namespace
@@ -9298,12 +9300,23 @@ module Aws::QuickSight
     #   for RLS. `DENY_ACCESS` is included for backward compatibility only.
     #   @return [String]
     #
+    # @!attribute [rw] format_version
+    #   The user or group rules associated with the dataset that contains
+    #   permissions for RLS.
+    #
+    #   By default, `FormatVersion` is `VERSION_1`. When `FormatVersion` is
+    #   `VERSION_1`, `UserName` and `GroupName` are required. When
+    #   `FormatVersion` is `VERSION_2`, `UserARN` and `GroupARN` are
+    #   required, and `Namespace` must not exist.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RowLevelPermissionDataSet AWS API Documentation
     #
     class RowLevelPermissionDataSet < Struct.new(
       :namespace,
       :arn,
-      :permission_policy)
+      :permission_policy,
+      :format_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11808,6 +11821,7 @@ module Aws::QuickSight
     #           namespace: "Namespace",
     #           arn: "Arn", # required
     #           permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
+    #           format_version: "VERSION_1", # accepts VERSION_1, VERSION_2
     #         },
     #         column_level_permission_rules: [
     #           {

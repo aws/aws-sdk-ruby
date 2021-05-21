@@ -44,12 +44,20 @@ module Aws::ComputeOptimizer
     ExportAutoScalingGroupRecommendationsRequest = Shapes::StructureShape.new(name: 'ExportAutoScalingGroupRecommendationsRequest')
     ExportAutoScalingGroupRecommendationsResponse = Shapes::StructureShape.new(name: 'ExportAutoScalingGroupRecommendationsResponse')
     ExportDestination = Shapes::StructureShape.new(name: 'ExportDestination')
+    ExportEBSVolumeRecommendationsRequest = Shapes::StructureShape.new(name: 'ExportEBSVolumeRecommendationsRequest')
+    ExportEBSVolumeRecommendationsResponse = Shapes::StructureShape.new(name: 'ExportEBSVolumeRecommendationsResponse')
     ExportEC2InstanceRecommendationsRequest = Shapes::StructureShape.new(name: 'ExportEC2InstanceRecommendationsRequest')
     ExportEC2InstanceRecommendationsResponse = Shapes::StructureShape.new(name: 'ExportEC2InstanceRecommendationsResponse')
+    ExportLambdaFunctionRecommendationsRequest = Shapes::StructureShape.new(name: 'ExportLambdaFunctionRecommendationsRequest')
+    ExportLambdaFunctionRecommendationsResponse = Shapes::StructureShape.new(name: 'ExportLambdaFunctionRecommendationsResponse')
     ExportableAutoScalingGroupField = Shapes::StringShape.new(name: 'ExportableAutoScalingGroupField')
     ExportableAutoScalingGroupFields = Shapes::ListShape.new(name: 'ExportableAutoScalingGroupFields')
     ExportableInstanceField = Shapes::StringShape.new(name: 'ExportableInstanceField')
     ExportableInstanceFields = Shapes::ListShape.new(name: 'ExportableInstanceFields')
+    ExportableLambdaFunctionField = Shapes::StringShape.new(name: 'ExportableLambdaFunctionField')
+    ExportableLambdaFunctionFields = Shapes::ListShape.new(name: 'ExportableLambdaFunctionFields')
+    ExportableVolumeField = Shapes::StringShape.new(name: 'ExportableVolumeField')
+    ExportableVolumeFields = Shapes::ListShape.new(name: 'ExportableVolumeFields')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     FileFormat = Shapes::StringShape.new(name: 'FileFormat')
     Filter = Shapes::StructureShape.new(name: 'Filter')
@@ -255,6 +263,18 @@ module Aws::ComputeOptimizer
     ExportDestination.add_member(:s3, Shapes::ShapeRef.new(shape: S3Destination, location_name: "s3"))
     ExportDestination.struct_class = Types::ExportDestination
 
+    ExportEBSVolumeRecommendationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    ExportEBSVolumeRecommendationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: EBSFilters, location_name: "filters"))
+    ExportEBSVolumeRecommendationsRequest.add_member(:fields_to_export, Shapes::ShapeRef.new(shape: ExportableVolumeFields, location_name: "fieldsToExport"))
+    ExportEBSVolumeRecommendationsRequest.add_member(:s3_destination_config, Shapes::ShapeRef.new(shape: S3DestinationConfig, required: true, location_name: "s3DestinationConfig"))
+    ExportEBSVolumeRecommendationsRequest.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, location_name: "fileFormat"))
+    ExportEBSVolumeRecommendationsRequest.add_member(:include_member_accounts, Shapes::ShapeRef.new(shape: IncludeMemberAccounts, location_name: "includeMemberAccounts"))
+    ExportEBSVolumeRecommendationsRequest.struct_class = Types::ExportEBSVolumeRecommendationsRequest
+
+    ExportEBSVolumeRecommendationsResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
+    ExportEBSVolumeRecommendationsResponse.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3Destination, location_name: "s3Destination"))
+    ExportEBSVolumeRecommendationsResponse.struct_class = Types::ExportEBSVolumeRecommendationsResponse
+
     ExportEC2InstanceRecommendationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
     ExportEC2InstanceRecommendationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "filters"))
     ExportEC2InstanceRecommendationsRequest.add_member(:fields_to_export, Shapes::ShapeRef.new(shape: ExportableInstanceFields, location_name: "fieldsToExport"))
@@ -267,9 +287,25 @@ module Aws::ComputeOptimizer
     ExportEC2InstanceRecommendationsResponse.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3Destination, location_name: "s3Destination"))
     ExportEC2InstanceRecommendationsResponse.struct_class = Types::ExportEC2InstanceRecommendationsResponse
 
+    ExportLambdaFunctionRecommendationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    ExportLambdaFunctionRecommendationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: LambdaFunctionRecommendationFilters, location_name: "filters"))
+    ExportLambdaFunctionRecommendationsRequest.add_member(:fields_to_export, Shapes::ShapeRef.new(shape: ExportableLambdaFunctionFields, location_name: "fieldsToExport"))
+    ExportLambdaFunctionRecommendationsRequest.add_member(:s3_destination_config, Shapes::ShapeRef.new(shape: S3DestinationConfig, required: true, location_name: "s3DestinationConfig"))
+    ExportLambdaFunctionRecommendationsRequest.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, location_name: "fileFormat"))
+    ExportLambdaFunctionRecommendationsRequest.add_member(:include_member_accounts, Shapes::ShapeRef.new(shape: IncludeMemberAccounts, location_name: "includeMemberAccounts"))
+    ExportLambdaFunctionRecommendationsRequest.struct_class = Types::ExportLambdaFunctionRecommendationsRequest
+
+    ExportLambdaFunctionRecommendationsResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
+    ExportLambdaFunctionRecommendationsResponse.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3Destination, location_name: "s3Destination"))
+    ExportLambdaFunctionRecommendationsResponse.struct_class = Types::ExportLambdaFunctionRecommendationsResponse
+
     ExportableAutoScalingGroupFields.member = Shapes::ShapeRef.new(shape: ExportableAutoScalingGroupField)
 
     ExportableInstanceFields.member = Shapes::ShapeRef.new(shape: ExportableInstanceField)
+
+    ExportableLambdaFunctionFields.member = Shapes::ShapeRef.new(shape: ExportableLambdaFunctionField)
+
+    ExportableVolumeFields.member = Shapes::ShapeRef.new(shape: ExportableVolumeField)
 
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, location_name: "name"))
     Filter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, location_name: "values"))
@@ -622,12 +658,44 @@ module Aws::ComputeOptimizer
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
+      api.add_operation(:export_ebs_volume_recommendations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExportEBSVolumeRecommendations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ExportEBSVolumeRecommendationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ExportEBSVolumeRecommendationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingAuthenticationToken)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:export_ec2_instance_recommendations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ExportEC2InstanceRecommendations"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ExportEC2InstanceRecommendationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ExportEC2InstanceRecommendationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingAuthenticationToken)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:export_lambda_function_recommendations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExportLambdaFunctionRecommendations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ExportLambdaFunctionRecommendationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ExportLambdaFunctionRecommendationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)

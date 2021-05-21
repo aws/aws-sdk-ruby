@@ -34,6 +34,7 @@ module Aws::LicenseManager
     CheckoutLicenseRequest = Shapes::StructureShape.new(name: 'CheckoutLicenseRequest')
     CheckoutLicenseResponse = Shapes::StructureShape.new(name: 'CheckoutLicenseResponse')
     CheckoutType = Shapes::StringShape.new(name: 'CheckoutType')
+    ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConsumedLicenseSummary = Shapes::StructureShape.new(name: 'ConsumedLicenseSummary')
@@ -45,6 +46,8 @@ module Aws::LicenseManager
     CreateGrantVersionResponse = Shapes::StructureShape.new(name: 'CreateGrantVersionResponse')
     CreateLicenseConfigurationRequest = Shapes::StructureShape.new(name: 'CreateLicenseConfigurationRequest')
     CreateLicenseConfigurationResponse = Shapes::StructureShape.new(name: 'CreateLicenseConfigurationResponse')
+    CreateLicenseManagerReportGeneratorRequest = Shapes::StructureShape.new(name: 'CreateLicenseManagerReportGeneratorRequest')
+    CreateLicenseManagerReportGeneratorResponse = Shapes::StructureShape.new(name: 'CreateLicenseManagerReportGeneratorResponse')
     CreateLicenseRequest = Shapes::StructureShape.new(name: 'CreateLicenseRequest')
     CreateLicenseResponse = Shapes::StructureShape.new(name: 'CreateLicenseResponse')
     CreateLicenseVersionRequest = Shapes::StructureShape.new(name: 'CreateLicenseVersionRequest')
@@ -57,6 +60,8 @@ module Aws::LicenseManager
     DeleteGrantResponse = Shapes::StructureShape.new(name: 'DeleteGrantResponse')
     DeleteLicenseConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteLicenseConfigurationRequest')
     DeleteLicenseConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteLicenseConfigurationResponse')
+    DeleteLicenseManagerReportGeneratorRequest = Shapes::StructureShape.new(name: 'DeleteLicenseManagerReportGeneratorRequest')
+    DeleteLicenseManagerReportGeneratorResponse = Shapes::StructureShape.new(name: 'DeleteLicenseManagerReportGeneratorResponse')
     DeleteLicenseRequest = Shapes::StructureShape.new(name: 'DeleteLicenseRequest')
     DeleteLicenseResponse = Shapes::StructureShape.new(name: 'DeleteLicenseResponse')
     DeleteTokenRequest = Shapes::StructureShape.new(name: 'DeleteTokenRequest')
@@ -87,6 +92,8 @@ module Aws::LicenseManager
     GetGrantResponse = Shapes::StructureShape.new(name: 'GetGrantResponse')
     GetLicenseConfigurationRequest = Shapes::StructureShape.new(name: 'GetLicenseConfigurationRequest')
     GetLicenseConfigurationResponse = Shapes::StructureShape.new(name: 'GetLicenseConfigurationResponse')
+    GetLicenseManagerReportGeneratorRequest = Shapes::StructureShape.new(name: 'GetLicenseManagerReportGeneratorRequest')
+    GetLicenseManagerReportGeneratorResponse = Shapes::StructureShape.new(name: 'GetLicenseManagerReportGeneratorResponse')
     GetLicenseRequest = Shapes::StructureShape.new(name: 'GetLicenseRequest')
     GetLicenseResponse = Shapes::StructureShape.new(name: 'GetLicenseResponse')
     GetLicenseUsageRequest = Shapes::StructureShape.new(name: 'GetLicenseUsageRequest')
@@ -134,6 +141,8 @@ module Aws::LicenseManager
     ListFailuresForLicenseConfigurationOperationsResponse = Shapes::StructureShape.new(name: 'ListFailuresForLicenseConfigurationOperationsResponse')
     ListLicenseConfigurationsRequest = Shapes::StructureShape.new(name: 'ListLicenseConfigurationsRequest')
     ListLicenseConfigurationsResponse = Shapes::StructureShape.new(name: 'ListLicenseConfigurationsResponse')
+    ListLicenseManagerReportGeneratorsRequest = Shapes::StructureShape.new(name: 'ListLicenseManagerReportGeneratorsRequest')
+    ListLicenseManagerReportGeneratorsResponse = Shapes::StructureShape.new(name: 'ListLicenseManagerReportGeneratorsResponse')
     ListLicenseSpecificationsForResourceRequest = Shapes::StructureShape.new(name: 'ListLicenseSpecificationsForResourceRequest')
     ListLicenseSpecificationsForResourceResponse = Shapes::StructureShape.new(name: 'ListLicenseSpecificationsForResourceResponse')
     ListLicenseVersionsRequest = Shapes::StructureShape.new(name: 'ListLicenseVersionsRequest')
@@ -176,11 +185,20 @@ module Aws::LicenseManager
     RejectGrantRequest = Shapes::StructureShape.new(name: 'RejectGrantRequest')
     RejectGrantResponse = Shapes::StructureShape.new(name: 'RejectGrantResponse')
     RenewType = Shapes::StringShape.new(name: 'RenewType')
+    ReportContext = Shapes::StructureShape.new(name: 'ReportContext')
+    ReportFrequency = Shapes::StructureShape.new(name: 'ReportFrequency')
+    ReportFrequencyType = Shapes::StringShape.new(name: 'ReportFrequencyType')
+    ReportGenerator = Shapes::StructureShape.new(name: 'ReportGenerator')
+    ReportGeneratorList = Shapes::ListShape.new(name: 'ReportGeneratorList')
+    ReportGeneratorName = Shapes::StringShape.new(name: 'ReportGeneratorName')
+    ReportType = Shapes::StringShape.new(name: 'ReportType')
+    ReportTypeList = Shapes::ListShape.new(name: 'ReportTypeList')
     ResourceInventory = Shapes::StructureShape.new(name: 'ResourceInventory')
     ResourceInventoryList = Shapes::ListShape.new(name: 'ResourceInventoryList')
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    S3Location = Shapes::StructureShape.new(name: 'S3Location')
     ServerInternalException = Shapes::StructureShape.new(name: 'ServerInternalException')
     SignedToken = Shapes::StringShape.new(name: 'SignedToken')
     String = Shapes::StringShape.new(name: 'String')
@@ -199,6 +217,8 @@ module Aws::LicenseManager
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateLicenseConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateLicenseConfigurationRequest')
     UpdateLicenseConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateLicenseConfigurationResponse')
+    UpdateLicenseManagerReportGeneratorRequest = Shapes::StructureShape.new(name: 'UpdateLicenseManagerReportGeneratorRequest')
+    UpdateLicenseManagerReportGeneratorResponse = Shapes::StructureShape.new(name: 'UpdateLicenseManagerReportGeneratorResponse')
     UpdateLicenseSpecificationsForResourceRequest = Shapes::StructureShape.new(name: 'UpdateLicenseSpecificationsForResourceRequest')
     UpdateLicenseSpecificationsForResourceResponse = Shapes::StructureShape.new(name: 'UpdateLicenseSpecificationsForResourceResponse')
     UpdateServiceSettingsRequest = Shapes::StructureShape.new(name: 'UpdateServiceSettingsRequest')
@@ -326,6 +346,18 @@ module Aws::LicenseManager
     CreateLicenseConfigurationResponse.add_member(:license_configuration_arn, Shapes::ShapeRef.new(shape: String, location_name: "LicenseConfigurationArn"))
     CreateLicenseConfigurationResponse.struct_class = Types::CreateLicenseConfigurationResponse
 
+    CreateLicenseManagerReportGeneratorRequest.add_member(:report_generator_name, Shapes::ShapeRef.new(shape: ReportGeneratorName, required: true, location_name: "ReportGeneratorName"))
+    CreateLicenseManagerReportGeneratorRequest.add_member(:type, Shapes::ShapeRef.new(shape: ReportTypeList, required: true, location_name: "Type"))
+    CreateLicenseManagerReportGeneratorRequest.add_member(:report_context, Shapes::ShapeRef.new(shape: ReportContext, required: true, location_name: "ReportContext"))
+    CreateLicenseManagerReportGeneratorRequest.add_member(:report_frequency, Shapes::ShapeRef.new(shape: ReportFrequency, required: true, location_name: "ReportFrequency"))
+    CreateLicenseManagerReportGeneratorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientToken"))
+    CreateLicenseManagerReportGeneratorRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateLicenseManagerReportGeneratorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateLicenseManagerReportGeneratorRequest.struct_class = Types::CreateLicenseManagerReportGeneratorRequest
+
+    CreateLicenseManagerReportGeneratorResponse.add_member(:license_manager_report_generator_arn, Shapes::ShapeRef.new(shape: String, location_name: "LicenseManagerReportGeneratorArn"))
+    CreateLicenseManagerReportGeneratorResponse.struct_class = Types::CreateLicenseManagerReportGeneratorResponse
+
     CreateLicenseRequest.add_member(:license_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "LicenseName"))
     CreateLicenseRequest.add_member(:product_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ProductName"))
     CreateLicenseRequest.add_member(:product_sku, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ProductSKU"))
@@ -392,6 +424,11 @@ module Aws::LicenseManager
     DeleteLicenseConfigurationRequest.struct_class = Types::DeleteLicenseConfigurationRequest
 
     DeleteLicenseConfigurationResponse.struct_class = Types::DeleteLicenseConfigurationResponse
+
+    DeleteLicenseManagerReportGeneratorRequest.add_member(:license_manager_report_generator_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "LicenseManagerReportGeneratorArn"))
+    DeleteLicenseManagerReportGeneratorRequest.struct_class = Types::DeleteLicenseManagerReportGeneratorRequest
+
+    DeleteLicenseManagerReportGeneratorResponse.struct_class = Types::DeleteLicenseManagerReportGeneratorResponse
 
     DeleteLicenseRequest.add_member(:license_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "LicenseArn"))
     DeleteLicenseRequest.add_member(:source_version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceVersion"))
@@ -494,6 +531,12 @@ module Aws::LicenseManager
     GetLicenseConfigurationResponse.add_member(:automated_discovery_information, Shapes::ShapeRef.new(shape: AutomatedDiscoveryInformation, location_name: "AutomatedDiscoveryInformation"))
     GetLicenseConfigurationResponse.add_member(:disassociate_when_not_found, Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "DisassociateWhenNotFound"))
     GetLicenseConfigurationResponse.struct_class = Types::GetLicenseConfigurationResponse
+
+    GetLicenseManagerReportGeneratorRequest.add_member(:license_manager_report_generator_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "LicenseManagerReportGeneratorArn"))
+    GetLicenseManagerReportGeneratorRequest.struct_class = Types::GetLicenseManagerReportGeneratorRequest
+
+    GetLicenseManagerReportGeneratorResponse.add_member(:report_generator, Shapes::ShapeRef.new(shape: ReportGenerator, location_name: "ReportGenerator"))
+    GetLicenseManagerReportGeneratorResponse.struct_class = Types::GetLicenseManagerReportGeneratorResponse
 
     GetLicenseRequest.add_member(:license_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "LicenseArn"))
     GetLicenseRequest.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "Version"))
@@ -691,6 +734,15 @@ module Aws::LicenseManager
     ListLicenseConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListLicenseConfigurationsResponse.struct_class = Types::ListLicenseConfigurationsResponse
 
+    ListLicenseManagerReportGeneratorsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    ListLicenseManagerReportGeneratorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListLicenseManagerReportGeneratorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxSize100, location_name: "MaxResults"))
+    ListLicenseManagerReportGeneratorsRequest.struct_class = Types::ListLicenseManagerReportGeneratorsRequest
+
+    ListLicenseManagerReportGeneratorsResponse.add_member(:report_generators, Shapes::ShapeRef.new(shape: ReportGeneratorList, location_name: "ReportGenerators"))
+    ListLicenseManagerReportGeneratorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListLicenseManagerReportGeneratorsResponse.struct_class = Types::ListLicenseManagerReportGeneratorsResponse
+
     ListLicenseSpecificationsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceArn"))
     ListLicenseSpecificationsForResourceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxInteger, location_name: "MaxResults"))
     ListLicenseSpecificationsForResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -831,6 +883,32 @@ module Aws::LicenseManager
     RejectGrantResponse.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "Version"))
     RejectGrantResponse.struct_class = Types::RejectGrantResponse
 
+    ReportContext.add_member(:license_configuration_arns, Shapes::ShapeRef.new(shape: ArnList, required: true, location_name: "licenseConfigurationArns"))
+    ReportContext.struct_class = Types::ReportContext
+
+    ReportFrequency.add_member(:value, Shapes::ShapeRef.new(shape: Integer, location_name: "value"))
+    ReportFrequency.add_member(:period, Shapes::ShapeRef.new(shape: ReportFrequencyType, location_name: "period"))
+    ReportFrequency.struct_class = Types::ReportFrequency
+
+    ReportGenerator.add_member(:report_generator_name, Shapes::ShapeRef.new(shape: String, location_name: "ReportGeneratorName"))
+    ReportGenerator.add_member(:report_type, Shapes::ShapeRef.new(shape: ReportTypeList, location_name: "ReportType"))
+    ReportGenerator.add_member(:report_context, Shapes::ShapeRef.new(shape: ReportContext, location_name: "ReportContext"))
+    ReportGenerator.add_member(:report_frequency, Shapes::ShapeRef.new(shape: ReportFrequency, location_name: "ReportFrequency"))
+    ReportGenerator.add_member(:license_manager_report_generator_arn, Shapes::ShapeRef.new(shape: String, location_name: "LicenseManagerReportGeneratorArn"))
+    ReportGenerator.add_member(:last_run_status, Shapes::ShapeRef.new(shape: String, location_name: "LastRunStatus"))
+    ReportGenerator.add_member(:last_run_failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "LastRunFailureReason"))
+    ReportGenerator.add_member(:last_report_generation_time, Shapes::ShapeRef.new(shape: String, location_name: "LastReportGenerationTime"))
+    ReportGenerator.add_member(:report_creator_account, Shapes::ShapeRef.new(shape: String, location_name: "ReportCreatorAccount"))
+    ReportGenerator.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ReportGenerator.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "S3Location"))
+    ReportGenerator.add_member(:create_time, Shapes::ShapeRef.new(shape: String, location_name: "CreateTime"))
+    ReportGenerator.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ReportGenerator.struct_class = Types::ReportGenerator
+
+    ReportGeneratorList.member = Shapes::ShapeRef.new(shape: ReportGenerator)
+
+    ReportTypeList.member = Shapes::ShapeRef.new(shape: ReportType)
+
     ResourceInventory.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
     ResourceInventory.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ResourceInventory.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
@@ -846,6 +924,10 @@ module Aws::LicenseManager
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    S3Location.add_member(:bucket, Shapes::ShapeRef.new(shape: String, location_name: "bucket"))
+    S3Location.add_member(:key_prefix, Shapes::ShapeRef.new(shape: String, location_name: "keyPrefix"))
+    S3Location.struct_class = Types::S3Location
 
     ServerInternalException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ServerInternalException.struct_class = Types::ServerInternalException
@@ -898,6 +980,17 @@ module Aws::LicenseManager
     UpdateLicenseConfigurationRequest.struct_class = Types::UpdateLicenseConfigurationRequest
 
     UpdateLicenseConfigurationResponse.struct_class = Types::UpdateLicenseConfigurationResponse
+
+    UpdateLicenseManagerReportGeneratorRequest.add_member(:license_manager_report_generator_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "LicenseManagerReportGeneratorArn"))
+    UpdateLicenseManagerReportGeneratorRequest.add_member(:report_generator_name, Shapes::ShapeRef.new(shape: ReportGeneratorName, required: true, location_name: "ReportGeneratorName"))
+    UpdateLicenseManagerReportGeneratorRequest.add_member(:type, Shapes::ShapeRef.new(shape: ReportTypeList, required: true, location_name: "Type"))
+    UpdateLicenseManagerReportGeneratorRequest.add_member(:report_context, Shapes::ShapeRef.new(shape: ReportContext, required: true, location_name: "ReportContext"))
+    UpdateLicenseManagerReportGeneratorRequest.add_member(:report_frequency, Shapes::ShapeRef.new(shape: ReportFrequency, required: true, location_name: "ReportFrequency"))
+    UpdateLicenseManagerReportGeneratorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientToken"))
+    UpdateLicenseManagerReportGeneratorRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    UpdateLicenseManagerReportGeneratorRequest.struct_class = Types::UpdateLicenseManagerReportGeneratorRequest
+
+    UpdateLicenseManagerReportGeneratorResponse.struct_class = Types::UpdateLicenseManagerReportGeneratorResponse
 
     UpdateLicenseSpecificationsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceArn"))
     UpdateLicenseSpecificationsForResourceRequest.add_member(:add_license_specifications, Shapes::ShapeRef.new(shape: LicenseSpecifications, location_name: "AddLicenseSpecifications"))
@@ -1059,6 +1152,22 @@ module Aws::LicenseManager
         o.errors << Shapes::ShapeRef.new(shape: RateLimitExceededException)
       end)
 
+      api.add_operation(:create_license_manager_report_generator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLicenseManagerReportGenerator"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateLicenseManagerReportGeneratorRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLicenseManagerReportGeneratorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationException)
+        o.errors << Shapes::ShapeRef.new(shape: RateLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:create_license_version, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateLicenseVersion"
         o.http_method = "POST"
@@ -1133,6 +1242,22 @@ module Aws::LicenseManager
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: RateLimitExceededException)
+      end)
+
+      api.add_operation(:delete_license_manager_report_generator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLicenseManagerReportGenerator"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLicenseManagerReportGeneratorRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteLicenseManagerReportGeneratorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationException)
+        o.errors << Shapes::ShapeRef.new(shape: RateLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:delete_token, Seahorse::Model::Operation.new.tap do |o|
@@ -1220,6 +1345,22 @@ module Aws::LicenseManager
         o.errors << Shapes::ShapeRef.new(shape: RateLimitExceededException)
       end)
 
+      api.add_operation(:get_license_manager_report_generator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLicenseManagerReportGenerator"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetLicenseManagerReportGeneratorRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLicenseManagerReportGeneratorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationException)
+        o.errors << Shapes::ShapeRef.new(shape: RateLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:get_license_usage, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetLicenseUsage"
         o.http_method = "POST"
@@ -1300,6 +1441,22 @@ module Aws::LicenseManager
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: RateLimitExceededException)
+      end)
+
+      api.add_operation(:list_license_manager_report_generators, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListLicenseManagerReportGenerators"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListLicenseManagerReportGeneratorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListLicenseManagerReportGeneratorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationException)
+        o.errors << Shapes::ShapeRef.new(shape: RateLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:list_license_specifications_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1479,6 +1636,22 @@ module Aws::LicenseManager
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: RateLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+      end)
+
+      api.add_operation(:update_license_manager_report_generator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateLicenseManagerReportGenerator"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateLicenseManagerReportGeneratorRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateLicenseManagerReportGeneratorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: RateLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
       end)
 

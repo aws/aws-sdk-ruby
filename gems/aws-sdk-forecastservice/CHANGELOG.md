@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2021-05-21)
+------------------
+
+* Feature - Updated attribute statistics in DescribeDatasetImportJob response to support Long values
+
 1.19.0 (2021-04-30)
 ------------------
 

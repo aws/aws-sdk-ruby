@@ -1169,6 +1169,10 @@ module Aws::Personalize
     #         metric_name: "MetricName",
     #         recipe_list: ["Arn"],
     #       },
+    #       optimization_objective: {
+    #         item_attribute: "ItemAttribute",
+    #         objective_sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH, OFF
+    #       },
     #     },
     #   })
     #
@@ -1194,10 +1198,17 @@ module Aws::Personalize
     #
     # A solution version can be in one of the following states:
     #
-    # * CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE
-    #   FAILED
+    # * CREATE PENDING
     #
-    # ^
+    # * CREATE IN\_PROGRESS
+    #
+    # * ACTIVE
+    #
+    # * CREATE FAILED
+    #
+    # * CREATE STOPPING
+    #
+    # * CREATE STOPPED
     #
     # To get the status of the version, call DescribeSolutionVersion. Wait
     # until the status shows as ACTIVE before calling `CreateCampaign`.
@@ -1996,6 +2007,8 @@ module Aws::Personalize
     #   resp.solution.solution_config.auto_ml_config.metric_name #=> String
     #   resp.solution.solution_config.auto_ml_config.recipe_list #=> Array
     #   resp.solution.solution_config.auto_ml_config.recipe_list[0] #=> String
+    #   resp.solution.solution_config.optimization_objective.item_attribute #=> String
+    #   resp.solution.solution_config.optimization_objective.objective_sensitivity #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
     #   resp.solution.auto_ml_result.best_recipe_arn #=> String
     #   resp.solution.status #=> String
     #   resp.solution.creation_date_time #=> Time
@@ -2065,6 +2078,8 @@ module Aws::Personalize
     #   resp.solution_version.solution_config.auto_ml_config.metric_name #=> String
     #   resp.solution_version.solution_config.auto_ml_config.recipe_list #=> Array
     #   resp.solution_version.solution_config.auto_ml_config.recipe_list[0] #=> String
+    #   resp.solution_version.solution_config.optimization_objective.item_attribute #=> String
+    #   resp.solution_version.solution_config.optimization_objective.objective_sensitivity #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
     #   resp.solution_version.training_hours #=> Float
     #   resp.solution_version.training_mode #=> String, one of "FULL", "UPDATE"
     #   resp.solution_version.tuned_hpo_params.algorithm_hyper_parameters #=> Hash
@@ -2708,6 +2723,43 @@ module Aws::Personalize
       req.send_request(options)
     end
 
+    # Stops creating a solution version that is in a state of
+    # CREATE\_PENDING or CREATE IN\_PROGRESS.
+    #
+    # Depending on the current state of the solution version, the solution
+    # version state changes as follows:
+    #
+    # * CREATE\_PENDING &gt; CREATE\_STOPPED
+    #
+    #   or
+    #
+    # * CREATE\_IN\_PROGRESS &gt; CREATE\_STOPPING &gt; CREATE\_STOPPED
+    #
+    # You are billed for all of the training completed up until you stop the
+    # solution version creation. You cannot resume creating a solution
+    # version once it has been stopped.
+    #
+    # @option params [required, String] :solution_version_arn
+    #   The Amazon Resource Name (ARN) of the solution version you want to
+    #   stop creating.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_solution_version_creation({
+    #     solution_version_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/StopSolutionVersionCreation AWS API Documentation
+    #
+    # @overload stop_solution_version_creation(params = {})
+    # @param [Hash] params ({})
+    def stop_solution_version_creation(params = {}, options = {})
+      req = build_request(:stop_solution_version_creation, params)
+      req.send_request(options)
+    end
+
     # Updates a campaign by either deploying a new solution or changing the
     # value of the campaign's `minProvisionedTPS` parameter.
     #
@@ -2777,7 +2829,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

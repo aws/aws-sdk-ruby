@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2021-05-20)
+------------------
+
+* Feature - Add ARN based Row Level Security support to CreateDataSet/UpdateDataSet APIs.
+
 1.44.0 (2021-03-10)
 ------------------
 

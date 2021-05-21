@@ -945,6 +945,7 @@ module Aws::QuickSight
     #       namespace: "Namespace",
     #       arn: "Arn", # required
     #       permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
+    #       format_version: "VERSION_1", # accepts VERSION_1, VERSION_2
     #     },
     #     column_level_permission_rules: [
     #       {
@@ -3022,6 +3023,7 @@ module Aws::QuickSight
     #   resp.data_set.row_level_permission_data_set.namespace #=> String
     #   resp.data_set.row_level_permission_data_set.arn #=> String
     #   resp.data_set.row_level_permission_data_set.permission_policy #=> String, one of "GRANT_ACCESS", "DENY_ACCESS"
+    #   resp.data_set.row_level_permission_data_set.format_version #=> String, one of "VERSION_1", "VERSION_2"
     #   resp.data_set.column_level_permission_rules #=> Array
     #   resp.data_set.column_level_permission_rules[0].principals #=> Array
     #   resp.data_set.column_level_permission_rules[0].principals[0] #=> String
@@ -4279,6 +4281,7 @@ module Aws::QuickSight
     #   resp.data_set_summaries[0].row_level_permission_data_set.namespace #=> String
     #   resp.data_set_summaries[0].row_level_permission_data_set.arn #=> String
     #   resp.data_set_summaries[0].row_level_permission_data_set.permission_policy #=> String, one of "GRANT_ACCESS", "DENY_ACCESS"
+    #   resp.data_set_summaries[0].row_level_permission_data_set.format_version #=> String, one of "VERSION_1", "VERSION_2"
     #   resp.data_set_summaries[0].column_level_permission_rules_applied #=> Boolean
     #   resp.next_token #=> String
     #   resp.request_id #=> String
@@ -6343,6 +6346,7 @@ module Aws::QuickSight
     #       namespace: "Namespace",
     #       arn: "Arn", # required
     #       permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
+    #       format_version: "VERSION_1", # accepts VERSION_1, VERSION_2
     #     },
     #     column_level_permission_rules: [
     #       {
@@ -7443,7 +7447,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

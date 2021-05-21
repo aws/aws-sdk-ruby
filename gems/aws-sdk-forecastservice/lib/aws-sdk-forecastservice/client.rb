@@ -1556,10 +1556,10 @@ module Aws::ForecastService
     # Amazon Forecast resources possess the following parent-child resource
     # hierarchies:
     #
+    # * **Dataset**\: dataset import jobs
+    #
     # * **Dataset Group**\: predictors, predictor backtest export jobs,
     #   forecasts, forecast export jobs
-    #
-    # * **Dataset**\: dataset import jobs
     #
     # * **Predictor**\: predictor backtest export jobs, forecasts, forecast
     #   export jobs
@@ -1773,6 +1773,10 @@ module Aws::ForecastService
     #   resp.field_statistics["String"].max #=> String
     #   resp.field_statistics["String"].avg #=> Float
     #   resp.field_statistics["String"].stddev #=> Float
+    #   resp.field_statistics["String"].count_long #=> Integer
+    #   resp.field_statistics["String"].count_distinct_long #=> Integer
+    #   resp.field_statistics["String"].count_null_long #=> Integer
+    #   resp.field_statistics["String"].count_nan_long #=> Integer
     #   resp.data_size #=> Float
     #   resp.status #=> String
     #   resp.message #=> String
@@ -2871,7 +2875,7 @@ module Aws::ForecastService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-forecastservice'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Issue - Raise an error when FIPS is in the ARN's region for Access Point and Object Lambda.
 
+1.95.0 (2021-05-21)
+------------------
+
+* Feature - Documentation updates for Amazon S3
+
 1.94.1 (2021-05-05)
 ------------------
 

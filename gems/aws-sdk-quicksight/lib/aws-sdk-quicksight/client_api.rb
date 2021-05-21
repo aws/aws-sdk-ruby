@@ -399,6 +399,7 @@ module Aws::QuickSight
     RoleSessionName = Shapes::StringShape.new(name: 'RoleSessionName')
     RowInfo = Shapes::StructureShape.new(name: 'RowInfo')
     RowLevelPermissionDataSet = Shapes::StructureShape.new(name: 'RowLevelPermissionDataSet')
+    RowLevelPermissionFormatVersion = Shapes::StringShape.new(name: 'RowLevelPermissionFormatVersion')
     RowLevelPermissionPolicy = Shapes::StringShape.new(name: 'RowLevelPermissionPolicy')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
@@ -2043,6 +2044,7 @@ module Aws::QuickSight
     RowLevelPermissionDataSet.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
     RowLevelPermissionDataSet.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
     RowLevelPermissionDataSet.add_member(:permission_policy, Shapes::ShapeRef.new(shape: RowLevelPermissionPolicy, required: true, location_name: "PermissionPolicy"))
+    RowLevelPermissionDataSet.add_member(:format_version, Shapes::ShapeRef.new(shape: RowLevelPermissionFormatVersion, location_name: "FormatVersion"))
     RowLevelPermissionDataSet.struct_class = Types::RowLevelPermissionDataSet
 
     S3Parameters.add_member(:manifest_file_location, Shapes::ShapeRef.new(shape: ManifestFileLocation, required: true, location_name: "ManifestFileLocation"))

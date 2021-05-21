@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2021-05-18)
+------------------
+
+* Feature - AWS License Manager now supports periodic report generation.
+
 1.26.0 (2021-03-10)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2021-05-20)
+------------------
+
+* Feature - Added new API to stop a solution version creation that is pending or in progress for Amazon Personalize
+
+1.25.0 (2021-05-18)
+------------------
+
+* Feature - Amazon Personalize now supports the ability to optimize a solution for a custom objective in addition to maximizing relevance.
+
 1.24.0 (2021-04-30)
 ------------------
 

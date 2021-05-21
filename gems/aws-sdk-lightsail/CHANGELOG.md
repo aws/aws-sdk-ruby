@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2021-05-19)
+------------------
+
+* Feature - Documentation updates for Amazon Lightsail.
+
 1.48.0 (2021-04-13)
 ------------------
 

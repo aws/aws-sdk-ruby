@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.104.0 (2021-05-18)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-apprunner` gem.
+
 3.103.0 (2021-05-17)
 ------------------
 

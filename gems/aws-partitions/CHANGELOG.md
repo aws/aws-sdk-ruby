@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.461.0 (2021-05-21)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.460.0 (2021-05-20)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.459.0 (2021-05-19)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.458.0 (2021-05-18)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::AppRunner`.
+
 1.457.0 (2021-05-17)
 ------------------
 
