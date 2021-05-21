@@ -694,6 +694,10 @@ module Aws::ForecastService
     Statistics.add_member(:max, Shapes::ShapeRef.new(shape: String, location_name: "Max"))
     Statistics.add_member(:avg, Shapes::ShapeRef.new(shape: Double, location_name: "Avg"))
     Statistics.add_member(:stddev, Shapes::ShapeRef.new(shape: Double, location_name: "Stddev"))
+    Statistics.add_member(:count_long, Shapes::ShapeRef.new(shape: Long, location_name: "CountLong"))
+    Statistics.add_member(:count_distinct_long, Shapes::ShapeRef.new(shape: Long, location_name: "CountDistinctLong"))
+    Statistics.add_member(:count_null_long, Shapes::ShapeRef.new(shape: Long, location_name: "CountNullLong"))
+    Statistics.add_member(:count_nan_long, Shapes::ShapeRef.new(shape: Long, location_name: "CountNanLong"))
     Statistics.struct_class = Types::Statistics
 
     StopResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))

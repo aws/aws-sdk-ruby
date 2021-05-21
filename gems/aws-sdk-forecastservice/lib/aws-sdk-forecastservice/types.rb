@@ -3884,19 +3884,23 @@ module Aws::ForecastService
     # Forecast dataset with the CreateDatasetImportJob operation.
     #
     # @!attribute [rw] count
-    #   The number of values in the field.
+    #   The number of values in the field. If the response value is -1,
+    #   refer to `CountLong`.
     #   @return [Integer]
     #
     # @!attribute [rw] count_distinct
-    #   The number of distinct values in the field.
+    #   The number of distinct values in the field. If the response value is
+    #   -1, refer to `CountDistinctLong`.
     #   @return [Integer]
     #
     # @!attribute [rw] count_null
-    #   The number of null values in the field.
+    #   The number of null values in the field. If the response value is -1,
+    #   refer to `CountNullLong`.
     #   @return [Integer]
     #
     # @!attribute [rw] count_nan
-    #   The number of NAN (not a number) values in the field.
+    #   The number of NAN (not a number) values in the field. If the
+    #   response value is -1, refer to `CountNanLong`.
     #   @return [Integer]
     #
     # @!attribute [rw] min
@@ -3915,6 +3919,28 @@ module Aws::ForecastService
     #   For a numeric field, the standard deviation.
     #   @return [Float]
     #
+    # @!attribute [rw] count_long
+    #   The number of values in the field. `CountLong` is used instead of
+    #   `Count` if the value is greater than 2,147,483,647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] count_distinct_long
+    #   The number of distinct values in the field. `CountDistinctLong` is
+    #   used instead of `CountDistinct` if the value is greater than
+    #   2,147,483,647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] count_null_long
+    #   The number of null values in the field. `CountNullLong` is used
+    #   instead of `CountNull` if the value is greater than 2,147,483,647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] count_nan_long
+    #   The number of NAN (not a number) values in the field. `CountNanLong`
+    #   is used instead of `CountNan` if the value is greater than
+    #   2,147,483,647.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/Statistics AWS API Documentation
     #
     class Statistics < Struct.new(
@@ -3925,7 +3951,11 @@ module Aws::ForecastService
       :min,
       :max,
       :avg,
-      :stddev)
+      :stddev,
+      :count_long,
+      :count_distinct_long,
+      :count_null_long,
+      :count_nan_long)
       SENSITIVE = []
       include Aws::Structure
     end
