@@ -3845,6 +3845,9 @@ module Aws::QuickSight
     #   resp.user.active #=> Boolean
     #   resp.user.principal_id #=> String
     #   resp.user.custom_permissions_name #=> String
+    #   resp.user.external_login_federation_provider_type #=> String
+    #   resp.user.external_login_federation_provider_url #=> String
+    #   resp.user.external_login_id #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -5244,6 +5247,9 @@ module Aws::QuickSight
     #   resp.user_list[0].active #=> Boolean
     #   resp.user_list[0].principal_id #=> String
     #   resp.user_list[0].custom_permissions_name #=> String
+    #   resp.user_list[0].external_login_federation_provider_type #=> String
+    #   resp.user_list[0].external_login_federation_provider_url #=> String
+    #   resp.user_list[0].external_login_id #=> String
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -5349,6 +5355,31 @@ module Aws::QuickSight
     #   subscriptions that use SAML 2.0-Based Federation for Single Sign-On
     #   (SSO).
     #
+    # @option params [String] :external_login_federation_provider_type
+    #   The type of supported external login provider that provides identity
+    #   to let a user federate into Amazon QuickSight with an associated AWS
+    #   Identity and Access Management (IAM) role. The type of supported
+    #   external login provider can be one of the following.
+    #
+    #   * `COGNITO`\: Amazon Cognito. The provider URL is
+    #     cognito-identity.amazonaws.com. When choosing the `COGNITO` provider
+    #     type, don’t use the "CustomFederationProviderUrl" parameter which
+    #     is only needed when the external provider is custom.
+    #
+    #   * `CUSTOM_OIDC`\: Custom OpenID Connect (OIDC) provider. When choosing
+    #     `CUSTOM_OIDC` type, use the `CustomFederationProviderUrl` parameter
+    #     to provide the custom OIDC provider URL.
+    #
+    # @option params [String] :custom_federation_provider_url
+    #   The URL of the custom OpenID Connect (OIDC) provider that provides
+    #   identity to let a user federate into QuickSight with an associated AWS
+    #   Identity and Access Management (IAM) role. This parameter should only
+    #   be used when `ExternalLoginFederationProviderType` parameter is set to
+    #   `CUSTOM_OIDC`.
+    #
+    # @option params [String] :external_login_id
+    #   The identity ID for a user in the external login provider.
+    #
     # @return [Types::RegisterUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterUserResponse#user #user} => Types::User
@@ -5368,6 +5399,9 @@ module Aws::QuickSight
     #     namespace: "Namespace", # required
     #     user_name: "UserName",
     #     custom_permissions_name: "RoleName",
+    #     external_login_federation_provider_type: "String",
+    #     custom_federation_provider_url: "String",
+    #     external_login_id: "String",
     #   })
     #
     # @example Response structure
@@ -5380,6 +5414,9 @@ module Aws::QuickSight
     #   resp.user.active #=> Boolean
     #   resp.user.principal_id #=> String
     #   resp.user.custom_permissions_name #=> String
+    #   resp.user.external_login_federation_provider_type #=> String
+    #   resp.user.external_login_federation_provider_url #=> String
+    #   resp.user.external_login_id #=> String
     #   resp.user_invitation_url #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -7394,6 +7431,35 @@ module Aws::QuickSight
     #   This parameter defaults to NULL and it doesn't accept any other
     #   value.
     #
+    # @option params [String] :external_login_federation_provider_type
+    #   The type of supported external login provider that provides identity
+    #   to let a user federate into QuickSight with an associated AWS Identity
+    #   and Access Management (IAM) role. The type of supported external login
+    #   provider can be one of the following.
+    #
+    #   * `COGNITO`\: Amazon Cognito. The provider URL is
+    #     cognito-identity.amazonaws.com. When choosing the `COGNITO` provider
+    #     type, don’t use the "CustomFederationProviderUrl" parameter which
+    #     is only needed when the external provider is custom.
+    #
+    #   * `CUSTOM_OIDC`\: Custom OpenID Connect (OIDC) provider. When choosing
+    #     `CUSTOM_OIDC` type, use the `CustomFederationProviderUrl` parameter
+    #     to provide the custom OIDC provider URL.
+    #
+    #   * `NONE`\: This clears all the previously saved external login
+    #     information for a user. Use ` DescribeUser ` API to check the
+    #     external login information.
+    #
+    # @option params [String] :custom_federation_provider_url
+    #   The URL of the custom OpenID Connect (OIDC) provider that provides
+    #   identity to let a user federate into QuickSight with an associated AWS
+    #   Identity and Access Management (IAM) role. This parameter should only
+    #   be used when `ExternalLoginFederationProviderType` parameter is set to
+    #   `CUSTOM_OIDC`.
+    #
+    # @option params [String] :external_login_id
+    #   The identity ID for a user in the external login provider.
+    #
     # @return [Types::UpdateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateUserResponse#user #user} => Types::User
@@ -7410,6 +7476,9 @@ module Aws::QuickSight
     #     role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER, RESTRICTED_AUTHOR, RESTRICTED_READER
     #     custom_permissions_name: "RoleName",
     #     unapply_custom_permissions: false,
+    #     external_login_federation_provider_type: "String",
+    #     custom_federation_provider_url: "String",
+    #     external_login_id: "String",
     #   })
     #
     # @example Response structure
@@ -7422,6 +7491,9 @@ module Aws::QuickSight
     #   resp.user.active #=> Boolean
     #   resp.user.principal_id #=> String
     #   resp.user.custom_permissions_name #=> String
+    #   resp.user.external_login_federation_provider_type #=> String
+    #   resp.user.external_login_federation_provider_url #=> String
+    #   resp.user.external_login_id #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -7447,7 +7519,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

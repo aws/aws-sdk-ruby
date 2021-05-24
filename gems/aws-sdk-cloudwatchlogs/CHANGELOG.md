@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2021-05-24)
+------------------
+
+* Feature - This release provides dimensions and unit support for metric filters.
+
 1.40.0 (2021-03-10)
 ------------------
 

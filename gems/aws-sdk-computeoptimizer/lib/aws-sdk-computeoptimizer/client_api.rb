@@ -92,6 +92,8 @@ module Aws::ComputeOptimizer
     InstanceArns = Shapes::ListShape.new(name: 'InstanceArns')
     InstanceName = Shapes::StringShape.new(name: 'InstanceName')
     InstanceRecommendation = Shapes::StructureShape.new(name: 'InstanceRecommendation')
+    InstanceRecommendationFindingReasonCode = Shapes::StringShape.new(name: 'InstanceRecommendationFindingReasonCode')
+    InstanceRecommendationFindingReasonCodes = Shapes::ListShape.new(name: 'InstanceRecommendationFindingReasonCodes')
     InstanceRecommendationOption = Shapes::StructureShape.new(name: 'InstanceRecommendationOption')
     InstanceRecommendations = Shapes::ListShape.new(name: 'InstanceRecommendations')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
@@ -142,6 +144,8 @@ module Aws::ComputeOptimizer
     OptInRequiredException = Shapes::StructureShape.new(name: 'OptInRequiredException')
     PerformanceRisk = Shapes::FloatShape.new(name: 'PerformanceRisk')
     Period = Shapes::IntegerShape.new(name: 'Period')
+    PlatformDifference = Shapes::StringShape.new(name: 'PlatformDifference')
+    PlatformDifferences = Shapes::ListShape.new(name: 'PlatformDifferences')
     ProjectedMetric = Shapes::StructureShape.new(name: 'ProjectedMetric')
     ProjectedMetrics = Shapes::ListShape.new(name: 'ProjectedMetrics')
     ProjectedUtilizationMetrics = Shapes::ListShape.new(name: 'ProjectedUtilizationMetrics')
@@ -404,6 +408,7 @@ module Aws::ComputeOptimizer
     InstanceRecommendation.add_member(:instance_name, Shapes::ShapeRef.new(shape: InstanceName, location_name: "instanceName"))
     InstanceRecommendation.add_member(:current_instance_type, Shapes::ShapeRef.new(shape: CurrentInstanceType, location_name: "currentInstanceType"))
     InstanceRecommendation.add_member(:finding, Shapes::ShapeRef.new(shape: Finding, location_name: "finding"))
+    InstanceRecommendation.add_member(:finding_reason_codes, Shapes::ShapeRef.new(shape: InstanceRecommendationFindingReasonCodes, location_name: "findingReasonCodes"))
     InstanceRecommendation.add_member(:utilization_metrics, Shapes::ShapeRef.new(shape: UtilizationMetrics, location_name: "utilizationMetrics"))
     InstanceRecommendation.add_member(:look_back_period_in_days, Shapes::ShapeRef.new(shape: LookBackPeriodInDays, location_name: "lookBackPeriodInDays"))
     InstanceRecommendation.add_member(:recommendation_options, Shapes::ShapeRef.new(shape: RecommendationOptions, location_name: "recommendationOptions"))
@@ -411,8 +416,11 @@ module Aws::ComputeOptimizer
     InstanceRecommendation.add_member(:last_refresh_timestamp, Shapes::ShapeRef.new(shape: LastRefreshTimestamp, location_name: "lastRefreshTimestamp"))
     InstanceRecommendation.struct_class = Types::InstanceRecommendation
 
+    InstanceRecommendationFindingReasonCodes.member = Shapes::ShapeRef.new(shape: InstanceRecommendationFindingReasonCode)
+
     InstanceRecommendationOption.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
     InstanceRecommendationOption.add_member(:projected_utilization_metrics, Shapes::ShapeRef.new(shape: ProjectedUtilizationMetrics, location_name: "projectedUtilizationMetrics"))
+    InstanceRecommendationOption.add_member(:platform_differences, Shapes::ShapeRef.new(shape: PlatformDifferences, location_name: "platformDifferences"))
     InstanceRecommendationOption.add_member(:performance_risk, Shapes::ShapeRef.new(shape: PerformanceRisk, location_name: "performanceRisk"))
     InstanceRecommendationOption.add_member(:rank, Shapes::ShapeRef.new(shape: Rank, location_name: "rank"))
     InstanceRecommendationOption.struct_class = Types::InstanceRecommendationOption
@@ -487,6 +495,8 @@ module Aws::ComputeOptimizer
 
     OptInRequiredException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     OptInRequiredException.struct_class = Types::OptInRequiredException
+
+    PlatformDifferences.member = Shapes::ShapeRef.new(shape: PlatformDifference)
 
     ProjectedMetric.add_member(:name, Shapes::ShapeRef.new(shape: MetricName, location_name: "name"))
     ProjectedMetric.add_member(:timestamps, Shapes::ShapeRef.new(shape: Timestamps, location_name: "timestamps"))

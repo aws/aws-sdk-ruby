@@ -1682,12 +1682,12 @@ module Aws::EC2
     # single IPv6 CIDR block with your subnet. An IPv6 CIDR block must have
     # a prefix length of /64.
     #
-    # @option params [required, String] :subnet_id
-    #   The ID of your subnet.
-    #
     # @option params [required, String] :ipv_6_cidr_block
     #   The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix
     #   length.
+    #
+    # @option params [required, String] :subnet_id
+    #   The ID of your subnet.
     #
     # @return [Types::AssociateSubnetCidrBlockResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1697,8 +1697,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_subnet_cidr_block({
-    #     subnet_id: "SubnetId", # required
     #     ipv_6_cidr_block: "String", # required
+    #     subnet_id: "SubnetId", # required
     #   })
     #
     # @example Response structure
@@ -3848,6 +3848,10 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [String] :outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost on which to create the
+    #   Capacity Reservation.
+    #
     # @return [Types::CreateCapacityReservationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCapacityReservationResult#capacity_reservation #capacity_reservation} => Types::CapacityReservation
@@ -3879,6 +3883,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
+    #     outpost_arn: "OutpostArn",
     #   })
     #
     # @example Response structure
@@ -3904,6 +3909,7 @@ module Aws::EC2
     #   resp.capacity_reservation.tags #=> Array
     #   resp.capacity_reservation.tags[0].key #=> String
     #   resp.capacity_reservation.tags[0].value #=> String
+    #   resp.capacity_reservation.outpost_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCapacityReservation AWS API Documentation
     #
@@ -8483,6 +8489,12 @@ module Aws::EC2
     # @option params [String] :availability_zone_id
     #   The AZ ID or the Local Zone ID of the subnet.
     #
+    # @option params [required, String] :cidr_block
+    #   The IPv4 network range for the subnet, in CIDR notation. For example,
+    #   `10.0.0.0/24`. We modify the specified CIDR block to its canonical
+    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
+    #   `100.68.0.0/18`.
+    #
     # @option params [String] :ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
@@ -8500,12 +8512,6 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [required, String] :cidr_block
-    #   The IPv4 network range for the subnet, in CIDR notation. For example,
-    #   `10.0.0.0/24`. We modify the specified CIDR block to its canonical
-    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
-    #   `100.68.0.0/18`.
     #
     # @return [Types::CreateSubnetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8550,11 +8556,11 @@ module Aws::EC2
     #     ],
     #     availability_zone: "String",
     #     availability_zone_id: "String",
+    #     cidr_block: "String", # required
     #     ipv_6_cidr_block: "String",
     #     outpost_arn: "String",
     #     vpc_id: "VpcId", # required
     #     dry_run: false,
-    #     cidr_block: "String", # required
     #   })
     #
     # @example Response structure
@@ -14599,6 +14605,9 @@ module Aws::EC2
     #     * `dedicated` - The Capacity Reservation is created on single-tenant
     #       hardware that is dedicated to a single AWS account.
     #
+    #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost on
+    #     which the Capacity Reservation was created.
+    #
     #   * `state` - The current state of the Capacity Reservation. A Capacity
     #     Reservation can be in one of the following states:
     #
@@ -14707,6 +14716,7 @@ module Aws::EC2
     #   resp.capacity_reservations[0].tags #=> Array
     #   resp.capacity_reservations[0].tags[0].key #=> String
     #   resp.capacity_reservations[0].tags[0].value #=> String
+    #   resp.capacity_reservations[0].outpost_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityReservations AWS API Documentation
     #
@@ -22160,11 +22170,12 @@ module Aws::EC2
     #     holders and are for use with Amazon VPC (`Linux/UNIX` \| `Linux/UNIX
     #     (Amazon VPC)` \| `SUSE Linux` \| `SUSE Linux (Amazon VPC)` \| `Red
     #     Hat Enterprise Linux` \| `Red Hat Enterprise Linux (Amazon VPC)` \|
-    #     `Windows` \| `Windows (Amazon VPC)` \| `Windows with SQL Server
-    #     Standard` \| `Windows with SQL Server Standard (Amazon VPC)` \|
-    #     `Windows with SQL Server Web` \| `Windows with SQL Server Web
-    #     (Amazon VPC)` \| `Windows with SQL Server Enterprise` \| `Windows
-    #     with SQL Server Enterprise (Amazon VPC)`).
+    #     `Red Hat Enterprise Linux with HA (Amazon VPC)` \| `Windows` \|
+    #     `Windows (Amazon VPC)` \| `Windows with SQL Server Standard` \|
+    #     `Windows with SQL Server Standard (Amazon VPC)` \| `Windows with SQL
+    #     Server Web` \| `Windows with SQL Server Web (Amazon VPC)` \|
+    #     `Windows with SQL Server Enterprise` \| `Windows with SQL Server
+    #     Enterprise (Amazon VPC)`).
     #
     #   * `reserved-instances-id` - The ID of the Reserved Instance.
     #
@@ -22510,11 +22521,12 @@ module Aws::EC2
     #     holders and are for use with Amazon VPC. (`Linux/UNIX` \|
     #     `Linux/UNIX (Amazon VPC)` \| `SUSE Linux` \| `SUSE Linux (Amazon
     #     VPC)` \| `Red Hat Enterprise Linux` \| `Red Hat Enterprise Linux
-    #     (Amazon VPC)` \| `Windows` \| `Windows (Amazon VPC)` \| `Windows
-    #     with SQL Server Standard` \| `Windows with SQL Server Standard
-    #     (Amazon VPC)` \| `Windows with SQL Server Web` \| ` Windows with SQL
-    #     Server Web (Amazon VPC)` \| `Windows with SQL Server Enterprise` \|
-    #     `Windows with SQL Server Enterprise (Amazon VPC)`)
+    #     (Amazon VPC)` \| `Red Hat Enterprise Linux with HA (Amazon VPC)` \|
+    #     `Windows` \| `Windows (Amazon VPC)` \| `Windows with SQL Server
+    #     Standard` \| `Windows with SQL Server Standard (Amazon VPC)` \|
+    #     `Windows with SQL Server Web` \| ` Windows with SQL Server Web
+    #     (Amazon VPC)` \| `Windows with SQL Server Enterprise` \| `Windows
+    #     with SQL Server Enterprise (Amazon VPC)`)
     #
     #   * `reserved-instances-offering-id` - The Reserved Instances offering
     #     ID.
@@ -41869,7 +41881,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.236.0'
+      context[:gem_version] = '1.237.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

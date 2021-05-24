@@ -1987,6 +1987,9 @@ module Aws::QuickSight
     RegisterUserRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
     RegisterUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, location_name: "UserName"))
     RegisterUserRequest.add_member(:custom_permissions_name, Shapes::ShapeRef.new(shape: RoleName, location_name: "CustomPermissionsName"))
+    RegisterUserRequest.add_member(:external_login_federation_provider_type, Shapes::ShapeRef.new(shape: String, location_name: "ExternalLoginFederationProviderType"))
+    RegisterUserRequest.add_member(:custom_federation_provider_url, Shapes::ShapeRef.new(shape: String, location_name: "CustomFederationProviderUrl"))
+    RegisterUserRequest.add_member(:external_login_id, Shapes::ShapeRef.new(shape: String, location_name: "ExternalLoginId"))
     RegisterUserRequest.struct_class = Types::RegisterUserRequest
 
     RegisterUserResponse.add_member(:user, Shapes::ShapeRef.new(shape: User, location_name: "User"))
@@ -2596,6 +2599,9 @@ module Aws::QuickSight
     UpdateUserRequest.add_member(:role, Shapes::ShapeRef.new(shape: UserRole, required: true, location_name: "Role"))
     UpdateUserRequest.add_member(:custom_permissions_name, Shapes::ShapeRef.new(shape: RoleName, location_name: "CustomPermissionsName"))
     UpdateUserRequest.add_member(:unapply_custom_permissions, Shapes::ShapeRef.new(shape: Boolean, location_name: "UnapplyCustomPermissions"))
+    UpdateUserRequest.add_member(:external_login_federation_provider_type, Shapes::ShapeRef.new(shape: String, location_name: "ExternalLoginFederationProviderType"))
+    UpdateUserRequest.add_member(:custom_federation_provider_url, Shapes::ShapeRef.new(shape: String, location_name: "CustomFederationProviderUrl"))
+    UpdateUserRequest.add_member(:external_login_id, Shapes::ShapeRef.new(shape: String, location_name: "ExternalLoginId"))
     UpdateUserRequest.struct_class = Types::UpdateUserRequest
 
     UpdateUserResponse.add_member(:user, Shapes::ShapeRef.new(shape: User, location_name: "User"))
@@ -2618,6 +2624,9 @@ module Aws::QuickSight
     User.add_member(:active, Shapes::ShapeRef.new(shape: Boolean, location_name: "Active"))
     User.add_member(:principal_id, Shapes::ShapeRef.new(shape: String, location_name: "PrincipalId"))
     User.add_member(:custom_permissions_name, Shapes::ShapeRef.new(shape: RoleName, location_name: "CustomPermissionsName"))
+    User.add_member(:external_login_federation_provider_type, Shapes::ShapeRef.new(shape: String, location_name: "ExternalLoginFederationProviderType"))
+    User.add_member(:external_login_federation_provider_url, Shapes::ShapeRef.new(shape: String, location_name: "ExternalLoginFederationProviderUrl"))
+    User.add_member(:external_login_id, Shapes::ShapeRef.new(shape: String, location_name: "ExternalLoginId"))
     User.struct_class = Types::User
 
     UserList.member = Shapes::ShapeRef.new(shape: User)

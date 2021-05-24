@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.95.1 (2021-05-24)
+------------------
+
 * Issue - Raise an error when FIPS is in the ARN's region for Access Point and Object Lambda.
 
 1.95.0 (2021-05-21)

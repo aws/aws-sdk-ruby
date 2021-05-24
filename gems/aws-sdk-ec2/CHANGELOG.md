@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.237.0 (2021-05-24)
+------------------
+
+* Feature - This release adds support for creating and managing EC2 On-Demand Capacity Reservations on Outposts.
+
 1.236.0 (2021-05-12)
 ------------------
 

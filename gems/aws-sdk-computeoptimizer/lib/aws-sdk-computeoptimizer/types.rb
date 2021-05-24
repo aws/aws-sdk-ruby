@@ -70,7 +70,7 @@ module Aws::ComputeOptimizer
     #   @return [String]
     #
     # @!attribute [rw] finding
-    #   The finding classification for the Auto Scaling group.
+    #   The finding classification of the Auto Scaling group.
     #
     #   Findings for Auto Scaling groups include:
     #
@@ -155,11 +155,20 @@ module Aws::ComputeOptimizer
     #   The performance risk of the Auto Scaling group configuration
     #   recommendation.
     #
-    #   Performance risk is the likelihood of the recommended instance type
-    #   not meeting the performance requirement of your workload.
+    #   Performance risk indicates the likelihood of the recommended
+    #   instance type not meeting the resource needs of your workload.
+    #   Compute Optimizer calculates an individual performance risk score
+    #   for each specification of the recommended instance, including CPU,
+    #   memory, EBS throughput, EBS IOPS, disk throughput, disk IOPS,
+    #   network throughput, and network PPS. The performance risk of the
+    #   recommended instance is calculated as the maximum performance risk
+    #   score across the analyzed resource specifications.
     #
-    #   The lowest performance risk is categorized as `0`, and the highest
-    #   as `5`.
+    #   The value ranges from 0 to 5, with 0 meaning that the recommended
+    #   resource is predicted to always provide enough hardware capability.
+    #   The higher the performance risk is, the more likely you should
+    #   validate whether the recommended resource meets the performance
+    #   requirements of your workload before migrating your resource.
     #   @return [Float]
     #
     # @!attribute [rw] rank
@@ -253,9 +262,14 @@ module Aws::ComputeOptimizer
     end
 
     # Describes a filter that returns a more specific list of Amazon Elastic
-    # Block Store (Amazon EBS) volume recommendations.
+    # Block Store (Amazon EBS) volume recommendations. Use this filter with
+    # the `GetEBSVolumeRecommendations` action.
     #
-    # This filter is used with the `GetEBSVolumeRecommendations` action.
+    # You can use `LambdaFunctionRecommendationFilter` with the
+    # `GetLambdaFunctionRecommendations` action, `JobFilter` with the
+    # `DescribeRecommendationExportJobs` action, and `Filter` with the
+    # `GetAutoScalingGroupRecommendations` and
+    # `GetEC2InstanceRecommendations` actions.
     #
     # @note When making an API call, you may pass EBSFilter
     #   data as a hash:
@@ -269,7 +283,7 @@ module Aws::ComputeOptimizer
     #   The name of the filter.
     #
     #   Specify `Finding` to return recommendations with a specific finding
-    #   classification (e.g., `Optimized`).
+    #   classification (e.g., `NotOptimized`).
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -362,11 +376,11 @@ module Aws::ComputeOptimizer
     #         account_ids: ["AccountId"],
     #         filters: [
     #           {
-    #             name: "Finding", # accepts Finding, RecommendationSourceType
+    #             name: "Finding", # accepts Finding, FindingReasonCodes, RecommendationSourceType
     #             values: ["FilterValue"],
     #           },
     #         ],
-    #         fields_to_export: ["AccountId"], # accepts AccountId, AutoScalingGroupArn, AutoScalingGroupName, Finding, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, LookbackPeriodInDays, CurrentConfigurationInstanceType, CurrentConfigurationDesiredCapacity, CurrentConfigurationMinSize, CurrentConfigurationMaxSize, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsConfigurationInstanceType, RecommendationOptionsConfigurationDesiredCapacity, RecommendationOptionsConfigurationMinSize, RecommendationOptionsConfigurationMaxSize, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, LastRefreshTimestamp
+    #         fields_to_export: ["AccountId"], # accepts AccountId, AutoScalingGroupArn, AutoScalingGroupName, Finding, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, LookbackPeriodInDays, CurrentConfigurationInstanceType, CurrentConfigurationDesiredCapacity, CurrentConfigurationMinSize, CurrentConfigurationMaxSize, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsConfigurationInstanceType, RecommendationOptionsConfigurationDesiredCapacity, RecommendationOptionsConfigurationMinSize, RecommendationOptionsConfigurationMaxSize, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, LastRefreshTimestamp
     #         s3_destination_config: { # required
     #           bucket: "DestinationBucket",
     #           key_prefix: "DestinationKeyPrefix",
@@ -654,11 +668,11 @@ module Aws::ComputeOptimizer
     #         account_ids: ["AccountId"],
     #         filters: [
     #           {
-    #             name: "Finding", # accepts Finding, RecommendationSourceType
+    #             name: "Finding", # accepts Finding, FindingReasonCodes, RecommendationSourceType
     #             values: ["FilterValue"],
     #           },
     #         ],
-    #         fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp
+    #         fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, FindingReasonCodes, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPlatformDifferences, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp
     #         s3_destination_config: { # required
     #           bucket: "DestinationBucket",
     #           key_prefix: "DestinationKeyPrefix",
@@ -920,16 +934,20 @@ module Aws::ComputeOptimizer
     end
 
     # Describes a filter that returns a more specific list of
-    # recommendations.
-    #
-    # This filter is used with the `GetAutoScalingGroupRecommendations` and
+    # recommendations. Use this filter with the
+    # `GetAutoScalingGroupRecommendations` and
     # `GetEC2InstanceRecommendations` actions.
+    #
+    # You can use `EBSFilter` with the `GetEBSVolumeRecommendations` action,
+    # `LambdaFunctionRecommendationFilter` with the
+    # `GetLambdaFunctionRecommendations` action, and `JobFilter` with the
+    # `DescribeRecommendationExportJobs` action.
     #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
     #
     #       {
-    #         name: "Finding", # accepts Finding, RecommendationSourceType
+    #         name: "Finding", # accepts Finding, FindingReasonCodes, RecommendationSourceType
     #         values: ["FilterValue"],
     #       }
     #
@@ -937,10 +955,13 @@ module Aws::ComputeOptimizer
     #   The name of the filter.
     #
     #   Specify `Finding` to return recommendations with a specific finding
-    #   classification (e.g., `Overprovisioned`).
+    #   classification (e.g., `Underprovisioned`).
     #
     #   Specify `RecommendationSourceType` to return recommendations of a
-    #   specific resource type (e.g., `AutoScalingGroup`).
+    #   specific resource type (e.g., `Ec2Instance`).
+    #
+    #   Specify `FindingReasonCodes` to return recommendations with a
+    #   specific finding reason code (e.g., `CPUUnderprovisioned`).
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -950,16 +971,98 @@ module Aws::ComputeOptimizer
     #   what you specify for the `name` parameter and the resource type that
     #   you wish to filter results for:
     #
-    #   * Specify `Optimized` or `NotOptimized` if you specified the `name`
+    #   * Specify `Optimized` or `NotOptimized` if you specify the `name`
     #     parameter as `Finding` and you want to filter results for Auto
     #     Scaling groups.
     #
     #   * Specify `Underprovisioned`, `Overprovisioned`, or `Optimized` if
-    #     you specified the `name` parameter as `Finding` and you want to
+    #     you specify the `name` parameter as `Finding` and you want to
     #     filter results for EC2 instances.
     #
-    #   * Specify `Ec2Instance` or `AutoScalingGroup` if you specified the
+    #   * Specify `Ec2Instance` or `AutoScalingGroup` if you specify the
     #     `name` parameter as `RecommendationSourceType`.
+    #
+    #   * Specify one of the following options if you specify the `name`
+    #     parameter as `FindingReasonCodes`\:
+    #
+    #     * <b> <code>CPUOverprovisioned</code> </b> — The instance’s CPU
+    #       configuration can be sized down while still meeting the
+    #       performance requirements of your workload.
+    #
+    #     * <b> <code>CPUUnderprovisioned</code> </b> — The instance’s CPU
+    #       configuration doesn't meet the performance requirements of your
+    #       workload and there is an alternative instance type that provides
+    #       better CPU performance.
+    #
+    #     * <b> <code>MemoryOverprovisioned</code> </b> — The instance’s
+    #       memory configuration can be sized down while still meeting the
+    #       performance requirements of your workload.
+    #
+    #     * <b> <code>MemoryUnderprovisioned</code> </b> — The instance’s
+    #       memory configuration doesn't meet the performance requirements
+    #       of your workload and there is an alternative instance type that
+    #       provides better memory performance.
+    #
+    #     * <b> <code>EBSThroughputOverprovisioned</code> </b> — The
+    #       instance’s EBS throughput configuration can be sized down while
+    #       still meeting the performance requirements of your workload.
+    #
+    #     * <b> <code>EBSThroughputUnderprovisioned</code> </b> — The
+    #       instance’s EBS throughput configuration doesn't meet the
+    #       performance requirements of your workload and there is an
+    #       alternative instance type that provides better EBS throughput
+    #       performance.
+    #
+    #     * <b> <code>EBSIOPSOverprovisioned</code> </b> — The instance’s
+    #       EBS IOPS configuration can be sized down while still meeting the
+    #       performance requirements of your workload.
+    #
+    #     * <b> <code>EBSIOPSUnderprovisioned</code> </b> — The instance’s
+    #       EBS IOPS configuration doesn't meet the performance
+    #       requirements of your workload and there is an alternative
+    #       instance type that provides better EBS IOPS performance.
+    #
+    #     * <b> <code>NetworkBandwidthOverprovisioned</code> </b> — The
+    #       instance’s network bandwidth configuration can be sized down
+    #       while still meeting the performance requirements of your
+    #       workload.
+    #
+    #     * <b> <code>NetworkBandwidthUnderprovisioned</code> </b> — The
+    #       instance’s network bandwidth configuration doesn't meet the
+    #       performance requirements of your workload and there is an
+    #       alternative instance type that provides better network bandwidth
+    #       performance. This finding reason happens when the `NetworkIn` or
+    #       `NetworkOut` performance of an instance is impacted.
+    #
+    #     * <b> <code>NetworkPPSOverprovisioned</code> </b> — The instance’s
+    #       network PPS (packets per second) configuration can be sized down
+    #       while still meeting the performance requirements of your
+    #       workload.
+    #
+    #     * <b> <code>NetworkPPSUnderprovisioned</code> </b> — The
+    #       instance’s network PPS (packets per second) configuration
+    #       doesn't meet the performance requirements of your workload and
+    #       there is an alternative instance type that provides better
+    #       network PPS performance.
+    #
+    #     * <b> <code>DiskIOPSOverprovisioned</code> </b> — The instance’s
+    #       disk IOPS configuration can be sized down while still meeting
+    #       the performance requirements of your workload.
+    #
+    #     * <b> <code>DiskIOPSUnderprovisioned</code> </b> — The instance’s
+    #       disk IOPS configuration doesn't meet the performance
+    #       requirements of your workload and there is an alternative
+    #       instance type that provides better disk IOPS performance.
+    #
+    #     * <b> <code>DiskThroughputOverprovisioned</code> </b> — The
+    #       instance’s disk throughput configuration can be sized down while
+    #       still meeting the performance requirements of your workload.
+    #
+    #     * <b> <code>DiskThroughputUnderprovisioned</code> </b> — The
+    #       instance’s disk throughput configuration doesn't meet the
+    #       performance requirements of your workload and there is an
+    #       alternative instance type that provides better disk throughput
+    #       performance.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/Filter AWS API Documentation
@@ -981,7 +1084,7 @@ module Aws::ComputeOptimizer
     #         max_results: 1,
     #         filters: [
     #           {
-    #             name: "Finding", # accepts Finding, RecommendationSourceType
+    #             name: "Finding", # accepts Finding, FindingReasonCodes, RecommendationSourceType
     #             values: ["FilterValue"],
     #           },
     #         ],
@@ -1162,7 +1265,7 @@ module Aws::ComputeOptimizer
     #         max_results: 1,
     #         filters: [
     #           {
-    #             name: "Finding", # accepts Finding, RecommendationSourceType
+    #             name: "Finding", # accepts Finding, FindingReasonCodes, RecommendationSourceType
     #             values: ["FilterValue"],
     #           },
     #         ],
@@ -1538,7 +1641,7 @@ module Aws::ComputeOptimizer
     #   @return [String]
     #
     # @!attribute [rw] finding
-    #   The finding classification for the instance.
+    #   The finding classification of the instance.
     #
     #   Findings for instances include:
     #
@@ -1558,11 +1661,155 @@ module Aws::ComputeOptimizer
     #   * <b> <code>Optimized</code> </b>—An instance is considered
     #     optimized when all specifications of your instance, such as CPU,
     #     memory, and network, meet the performance requirements of your
-    #     workload and is not over provisioned. An optimized instance runs
-    #     your workloads with optimal performance and infrastructure cost.
-    #     For optimized resources, AWS Compute Optimizer might recommend a
-    #     new generation instance type.
+    #     workload and is not over provisioned. For optimized resources, AWS
+    #     Compute Optimizer might recommend a new generation instance type.
     #   @return [String]
+    #
+    # @!attribute [rw] finding_reason_codes
+    #   The reason for the finding classification of the instance.
+    #
+    #   Finding reason codes for instances include:
+    #
+    #   * <b> <code>CPUOverprovisioned</code> </b> — The instance’s CPU
+    #     configuration can be sized down while still meeting the
+    #     performance requirements of your workload. This is identified by
+    #     analyzing the `CPUUtilization` metric of the current instance
+    #     during the look-back period.
+    #
+    #   * <b> <code>CPUUnderprovisioned</code> </b> — The instance’s CPU
+    #     configuration doesn't meet the performance requirements of your
+    #     workload and there is an alternative instance type that provides
+    #     better CPU performance. This is identified by analyzing the
+    #     `CPUUtilization` metric of the current instance during the
+    #     look-back period.
+    #
+    #   * <b> <code>MemoryOverprovisioned</code> </b> — The instance’s
+    #     memory configuration can be sized down while still meeting the
+    #     performance requirements of your workload. This is identified by
+    #     analyzing the memory utilization metric of the current instance
+    #     during the look-back period.
+    #
+    #   * <b> <code>MemoryUnderprovisioned</code> </b> — The instance’s
+    #     memory configuration doesn't meet the performance requirements of
+    #     your workload and there is an alternative instance type that
+    #     provides better memory performance. This is identified by
+    #     analyzing the memory utilization metric of the current instance
+    #     during the look-back period.
+    #
+    #     <note markdown="1"> Memory utilization is analyzed only for resources that have the
+    #     unified CloudWatch agent installed on them. For more information,
+    #     see [Enabling memory utilization with the Amazon CloudWatch
+    #     Agent][1] in the *AWS Compute Optimizer User Guide*. On Linux
+    #     instances, Compute Optimizer analyses the `mem_used_percent`
+    #     metric in the `CWAgent` namespace, or the legacy
+    #     `MemoryUtilization` metric in the `System/Linux` namespace. On
+    #     Windows instances, Compute Optimizer analyses the `Memory %
+    #     Committed Bytes In Use` metric in the `CWAgent` namespace.
+    #
+    #      </note>
+    #
+    #   * <b> <code>EBSThroughputOverprovisioned</code> </b> — The
+    #     instance’s EBS throughput configuration can be sized down while
+    #     still meeting the performance requirements of your workload. This
+    #     is identified by analyzing the `VolumeReadOps` and
+    #     `VolumeWriteOps` metrics of EBS volumes attached to the current
+    #     instance during the look-back period.
+    #
+    #   * <b> <code>EBSThroughputUnderprovisioned</code> </b> — The
+    #     instance’s EBS throughput configuration doesn't meet the
+    #     performance requirements of your workload and there is an
+    #     alternative instance type that provides better EBS throughput
+    #     performance. This is identified by analyzing the `VolumeReadOps`
+    #     and `VolumeWriteOps` metrics of EBS volumes attached to the
+    #     current instance during the look-back period.
+    #
+    #   * <b> <code>EBSIOPSOverprovisioned</code> </b> — The instance’s EBS
+    #     IOPS configuration can be sized down while still meeting the
+    #     performance requirements of your workload. This is identified by
+    #     analyzing the `VolumeReadBytes` and `VolumeWriteBytes` metric of
+    #     EBS volumes attached to the current instance during the look-back
+    #     period.
+    #
+    #   * <b> <code>EBSIOPSUnderprovisioned</code> </b> — The instance’s EBS
+    #     IOPS configuration doesn't meet the performance requirements of
+    #     your workload and there is an alternative instance type that
+    #     provides better EBS IOPS performance. This is identified by
+    #     analyzing the `VolumeReadBytes` and `VolumeWriteBytes` metric of
+    #     EBS volumes attached to the current instance during the look-back
+    #     period.
+    #
+    #   * <b> <code>NetworkBandwidthOverprovisioned</code> </b> — The
+    #     instance’s network bandwidth configuration can be sized down while
+    #     still meeting the performance requirements of your workload. This
+    #     is identified by analyzing the `NetworkIn` and `NetworkOut`
+    #     metrics of the current instance during the look-back period.
+    #
+    #   * <b> <code>NetworkBandwidthUnderprovisioned</code> </b> — The
+    #     instance’s network bandwidth configuration doesn't meet the
+    #     performance requirements of your workload and there is an
+    #     alternative instance type that provides better network bandwidth
+    #     performance. This is identified by analyzing the `NetworkIn` and
+    #     `NetworkOut` metrics of the current instance during the look-back
+    #     period. This finding reason happens when the `NetworkIn` or
+    #     `NetworkOut` performance of an instance is impacted.
+    #
+    #   * <b> <code>NetworkPPSOverprovisioned</code> </b> — The instance’s
+    #     network PPS (packets per second) configuration can be sized down
+    #     while still meeting the performance requirements of your workload.
+    #     This is identified by analyzing the `NetworkPacketsIn` and
+    #     `NetworkPacketsIn` metrics of the current instance during the
+    #     look-back period.
+    #
+    #   * <b> <code>NetworkPPSUnderprovisioned</code> </b> — The instance’s
+    #     network PPS (packets per second) configuration doesn't meet the
+    #     performance requirements of your workload and there is an
+    #     alternative instance type that provides better network PPS
+    #     performance. This is identified by analyzing the
+    #     `NetworkPacketsIn` and `NetworkPacketsIn` metrics of the current
+    #     instance during the look-back period.
+    #
+    #   * <b> <code>DiskIOPSOverprovisioned</code> </b> — The instance’s
+    #     disk IOPS configuration can be sized down while still meeting the
+    #     performance requirements of your workload. This is identified by
+    #     analyzing the `DiskReadOps` and `DiskWriteOps` metrics of the
+    #     current instance during the look-back period.
+    #
+    #   * <b> <code>DiskIOPSUnderprovisioned</code> </b> — The instance’s
+    #     disk IOPS configuration doesn't meet the performance requirements
+    #     of your workload and there is an alternative instance type that
+    #     provides better disk IOPS performance. This is identified by
+    #     analyzing the `DiskReadOps` and `DiskWriteOps` metrics of the
+    #     current instance during the look-back period.
+    #
+    #   * <b> <code>DiskThroughputOverprovisioned</code> </b> — The
+    #     instance’s disk throughput configuration can be sized down while
+    #     still meeting the performance requirements of your workload. This
+    #     is identified by analyzing the `DiskReadBytes` and
+    #     `DiskWriteBytes` metrics of the current instance during the
+    #     look-back period.
+    #
+    #   * <b> <code>DiskThroughputUnderprovisioned</code> </b> — The
+    #     instance’s disk throughput configuration doesn't meet the
+    #     performance requirements of your workload and there is an
+    #     alternative instance type that provides better disk throughput
+    #     performance. This is identified by analyzing the `DiskReadBytes`
+    #     and `DiskWriteBytes` metrics of the current instance during the
+    #     look-back period.
+    #
+    #   <note markdown="1"> For more information about instance metrics, see [List the available
+    #   CloudWatch metrics for your instances][2] in the *Amazon Elastic
+    #   Compute Cloud User Guide*. For more information about EBS volume
+    #   metrics, see [Amazon CloudWatch metrics for Amazon EBS][3] in the
+    #   *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/viewing_metrics_with_cloudwatch.html
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cloudwatch_ebs.html
+    #   @return [Array<String>]
     #
     # @!attribute [rw] utilization_metrics
     #   An array of objects that describe the utilization metrics of the
@@ -1597,6 +1844,7 @@ module Aws::ComputeOptimizer
       :instance_name,
       :current_instance_type,
       :finding,
+      :finding_reason_codes,
       :utilization_metrics,
       :look_back_period_in_days,
       :recommendation_options,
@@ -1629,14 +1877,110 @@ module Aws::ComputeOptimizer
     #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent
     #   @return [Array<Types::UtilizationMetric>]
     #
+    # @!attribute [rw] platform_differences
+    #   Describes the configuration differences between the current instance
+    #   and the recommended instance type. You should consider the
+    #   configuration differences before migrating your workloads from the
+    #   current instance to the recommended instance type. The [Change the
+    #   instance type guide for Linux][1] and [Change the instance type
+    #   guide for Windows][2] provide general guidance for getting started
+    #   with an instance migration.
+    #
+    #   Platform differences include:
+    #
+    #   * <b> <code>Hypervisor</code> </b> — The hypervisor of the
+    #     recommended instance type is different than that of the current
+    #     instance. For example, the recommended instance type uses a Nitro
+    #     hypervisor and the current instance uses a Xen hypervisor. The
+    #     differences that you should consider between these hypervisors are
+    #     covered in the [Nitro Hypervisor][3] section of the Amazon EC2
+    #     frequently asked questions. For more information, see [Instances
+    #     built on the Nitro System][4] in the *Amazon EC2 User Guide for
+    #     Linux*, or [Instances built on the Nitro System][5] in the *Amazon
+    #     EC2 User Guide for Windows*.
+    #
+    #   * <b> <code>NetworkInterface</code> </b> — The network interface of
+    #     the recommended instance type is different than that of the
+    #     current instance. For example, the recommended instance type
+    #     supports enhanced networking and the current instance might not.
+    #     To enable enhanced networking for the recommended instance type,
+    #     you will need to install the Elastic Network Adapter (ENA) driver
+    #     or the Intel 82599 Virtual Function driver. For more information,
+    #     see [Networking and storage features][6] and [Enhanced networking
+    #     on Linux][7] in the *Amazon EC2 User Guide for Linux*, or
+    #     [Networking and storage features][8] and [Enhanced networking on
+    #     Windows][9] in the *Amazon EC2 User Guide for Windows*.
+    #
+    #   * <b> <code>StorageInterface</code> </b> — The storage interface of
+    #     the recommended instance type is different than that of the
+    #     current instance. For example, the recommended instance type uses
+    #     an NVMe storage interface and the current instance does not. To
+    #     access NVMe volumes for the recommended instance type, you will
+    #     need to install or upgrade the NVMe driver. For more information,
+    #     see [Networking and storage features][6] and [Amazon EBS and NVMe
+    #     on Linux instances][10] in the *Amazon EC2 User Guide for Linux*,
+    #     or [Networking and storage features][8] and [Amazon EBS and NVMe
+    #     on Windows instances][11] in the *Amazon EC2 User Guide for
+    #     Windows*.
+    #
+    #   * <b> <code>InstanceStoreAvailability</code> </b> — The recommended
+    #     instance type does not support instance store volumes and the
+    #     current instance does. Before migrating, you might need to back up
+    #     the data on your instance store volumes if you want to preserve
+    #     them. For more information, see [How do I back up an instance
+    #     store volume on my Amazon EC2 instance to Amazon EBS?][12] in the
+    #     *AWS Premium Support Knowledge Base*. For more information, see
+    #     [Networking and storage features][6] and [Amazon EC2 instance
+    #     store][13] in the *Amazon EC2 User Guide for Linux*, or see
+    #     [Networking and storage features][8] and [Amazon EC2 instance
+    #     store][14] in the *Amazon EC2 User Guide for Windows*.
+    #
+    #   * <b> <code>VirtualizationType</code> </b> — The recommended
+    #     instance type uses the hardware virtual machine (HVM)
+    #     virtualization type and the current instance uses the paravirtual
+    #     (PV) virtualization type. For more information about the
+    #     differences between these virtualization types, see [Linux AMI
+    #     virtualization types][15] in the *Amazon EC2 User Guide for
+    #     Linux*, or [Windows AMI virtualization types][16] in the *Amazon
+    #     EC2 User Guide for Windows*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-resize.html
+    #   [3]: http://aws.amazon.com/ec2/faqs/#Nitro_Hypervisor
+    #   [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [5]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/instance-types.html#ec2-nitro-instances
+    #   [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#instance-networking-storage
+    #   [7]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enhanced-networking.html
+    #   [8]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/instance-types.html#instance-networking-storage
+    #   [9]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/enhanced-networking.html
+    #   [10]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nvme-ebs-volumes.html
+    #   [11]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/nvme-ebs-volumes.html
+    #   [12]: https://aws.amazon.com/premiumsupport/knowledge-center/back-up-instance-store-ebs/
+    #   [13]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html
+    #   [14]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/InstanceStorage.html
+    #   [15]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/virtualization_types.html
+    #   [16]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/windows-ami-version-history.html#virtualization-types
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] performance_risk
     #   The performance risk of the instance recommendation option.
     #
-    #   Performance risk is the likelihood of the recommended instance type
-    #   not meeting the performance requirement of your workload.
+    #   Performance risk indicates the likelihood of the recommended
+    #   instance type not meeting the resource needs of your workload.
+    #   Compute Optimizer calculates an individual performance risk score
+    #   for each specification of the recommended instance, including CPU,
+    #   memory, EBS throughput, EBS IOPS, disk throughput, disk IOPS,
+    #   network throughput, and network PPS. The performance risk of the
+    #   recommended instance is calculated as the maximum performance risk
+    #   score across the analyzed resource specifications.
     #
-    #   The lowest performance risk is categorized as `0`, and the highest
-    #   as `5`.
+    #   The value ranges from `0` to `5`, with `0` meaning that the
+    #   recommended resource is predicted to always provide enough hardware
+    #   capability. The higher the performance risk is, the more likely you
+    #   should validate whether the recommendation will meet the performance
+    #   requirements of your workload before migrating your resource.
     #   @return [Float]
     #
     # @!attribute [rw] rank
@@ -1650,6 +1994,7 @@ module Aws::ComputeOptimizer
     class InstanceRecommendationOption < Struct.new(
       :instance_type,
       :projected_utilization_metrics,
+      :platform_differences,
       :performance_risk,
       :rank)
       SENSITIVE = []
@@ -1683,10 +2028,14 @@ module Aws::ComputeOptimizer
     end
 
     # Describes a filter that returns a more specific list of recommendation
-    # export jobs.
+    # export jobs. Use this filter with the
+    # `DescribeRecommendationExportJobs` action.
     #
-    # This filter is used with the `DescribeRecommendationExportJobs`
-    # action.
+    # You can use `EBSFilter` with the `GetEBSVolumeRecommendations` action,
+    # `LambdaFunctionRecommendationFilter` with the
+    # `GetLambdaFunctionRecommendations` action, and `Filter` with the
+    # `GetAutoScalingGroupRecommendations` and
+    # `GetEC2InstanceRecommendations` actions.
     #
     # @note When making an API call, you may pass JobFilter
     #   data as a hash:
@@ -1712,13 +2061,13 @@ module Aws::ComputeOptimizer
     #   The valid values for this parameter are as follows, depending on
     #   what you specify for the `name` parameter:
     #
-    #   * Specify `Ec2Instance` or `AutoScalingGroup` if you specified the
+    #   * Specify `Ec2Instance` or `AutoScalingGroup` if you specify the
     #     `name` parameter as `ResourceType`. There is no filter for EBS
     #     volumes because volume recommendations cannot be exported at this
     #     time.
     #
     #   * Specify `Queued`, `InProgress`, `Complete`, or `Failed` if you
-    #     specified the `name` parameter as `JobStatus`.
+    #     specify the `name` parameter as `JobStatus`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/JobFilter AWS API Documentation
@@ -1822,7 +2171,7 @@ module Aws::ComputeOptimizer
     #   @return [Time]
     #
     # @!attribute [rw] finding
-    #   The finding classification for the function.
+    #   The finding classification of the function.
     #
     #   Findings for functions include:
     #
@@ -1863,7 +2212,7 @@ module Aws::ComputeOptimizer
     #
     #    </note>
     #
-    #   Reason codes include:
+    #   Finding reason codes for functions include:
     #
     #   * <b> <code>MemoryOverprovisioned</code> </b> — The function is
     #     over-provisioned when its memory configuration can be sized down
@@ -1919,7 +2268,13 @@ module Aws::ComputeOptimizer
     end
 
     # Describes a filter that returns a more specific list of AWS Lambda
-    # function recommendations.
+    # function recommendations. Use this filter with the
+    # `GetLambdaFunctionRecommendations` action.
+    #
+    # You can use `EBSFilter` with the `GetEBSVolumeRecommendations` action,
+    # `JobFilter` with the `DescribeRecommendationExportJobs` action, and
+    # `Filter` with the `GetAutoScalingGroupRecommendations` and
+    # `GetEC2InstanceRecommendations` actions.
     #
     # @note When making an API call, you may pass LambdaFunctionRecommendationFilter
     #   data as a hash:
@@ -1946,10 +2301,10 @@ module Aws::ComputeOptimizer
     #   what you specify for the `name` parameter:
     #
     #   * Specify `Optimized`, `NotOptimized`, or `Unavailable` if you
-    #     specified the `name` parameter as `Finding`.
+    #     specify the `name` parameter as `Finding`.
     #
     #   * Specify `MemoryOverprovisioned`, `MemoryUnderprovisioned`,
-    #     `InsufficientData`, or `Inconclusive` if you specified the `name`
+    #     `InsufficientData`, or `Inconclusive` if you specify the `name`
     #     parameter as `FindingReasonCode`.
     #   @return [Array<String>]
     #
@@ -2545,6 +2900,56 @@ module Aws::ComputeOptimizer
     #
     #     Unit: Bytes
     #
+    #   * `DISK_READ_OPS_PER_SECOND` - The completed read operations from
+    #     all instance store volumes available to the instance in a
+    #     specified period of time.
+    #
+    #     If there are no instance store volumes, either the value is `0` or
+    #     the metric is not reported.
+    #
+    #   * `DISK_WRITE_OPS_PER_SECOND` - The completed write operations from
+    #     all instance store volumes available to the instance in a
+    #     specified period of time.
+    #
+    #     If there are no instance store volumes, either the value is `0` or
+    #     the metric is not reported.
+    #
+    #   * `DISK_READ_BYTES_PER_SECOND` - The bytes read from all instance
+    #     store volumes available to the instance. This metric is used to
+    #     determine the volume of the data the application reads from the
+    #     disk of the instance. This can be used to determine the speed of
+    #     the application.
+    #
+    #     If there are no instance store volumes, either the value is `0` or
+    #     the metric is not reported.
+    #
+    #   * `DISK_WRITE_BYTES_PER_SECOND` - The bytes written to all instance
+    #     store volumes available to the instance. This metric is used to
+    #     determine the volume of the data the application writes onto the
+    #     disk of the instance. This can be used to determine the speed of
+    #     the application.
+    #
+    #     If there are no instance store volumes, either the value is `0` or
+    #     the metric is not reported.
+    #
+    #   * `NETWORK_IN_BYTES_PER_SECOND` - The number of bytes received by
+    #     the instance on all network interfaces. This metric identifies the
+    #     volume of incoming network traffic to a single instance.
+    #
+    #   * `NETWORK_OUT_BYTES_PER_SECOND` - The number of bytes sent out by
+    #     the instance on all network interfaces. This metric identifies the
+    #     volume of outgoing network traffic from a single instance.
+    #
+    #   * `NETWORK_PACKETS_IN_PER_SECOND` - The number of packets received
+    #     by the instance on all network interfaces. This metric identifies
+    #     the volume of incoming traffic in terms of the number of packets
+    #     on a single instance.
+    #
+    #   * `NETWORK_PACKETS_OUT_PER_SECOND` - The number of packets sent out
+    #     by the instance on all network interfaces. This metric identifies
+    #     the volume of outgoing traffic in terms of the number of packets
+    #     on a single instance.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent
@@ -2646,7 +3051,7 @@ module Aws::ComputeOptimizer
     #   @return [Types::VolumeConfiguration]
     #
     # @!attribute [rw] finding
-    #   The finding classification for the volume.
+    #   The finding classification of the volume.
     #
     #   Findings for volumes include:
     #
@@ -2706,10 +3111,13 @@ module Aws::ComputeOptimizer
     #   The performance risk of the volume recommendation option.
     #
     #   Performance risk is the likelihood of the recommended volume type
-    #   not meeting the performance requirement of your workload.
+    #   meeting the performance requirement of your workload.
     #
-    #   The lowest performance risk is categorized as `0`, and the highest
-    #   as `5`.
+    #   The value ranges from `0` to `5`, with `0` meaning that the
+    #   recommended resource is predicted to always provide enough hardware
+    #   capability. The higher the performance risk is, the more likely you
+    #   should validate whether the recommendation will meet the performance
+    #   requirements of your workload before migrating your resource.
     #   @return [Float]
     #
     # @!attribute [rw] rank

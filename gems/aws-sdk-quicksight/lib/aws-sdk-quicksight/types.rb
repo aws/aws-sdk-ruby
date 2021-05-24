@@ -8856,6 +8856,9 @@ module Aws::QuickSight
     #         namespace: "Namespace", # required
     #         user_name: "UserName",
     #         custom_permissions_name: "RoleName",
+    #         external_login_federation_provider_type: "String",
+    #         custom_federation_provider_url: "String",
+    #         external_login_id: "String",
     #       }
     #
     # @!attribute [rw] identity_type
@@ -8959,6 +8962,35 @@ module Aws::QuickSight
     #   (SSO).
     #   @return [String]
     #
+    # @!attribute [rw] external_login_federation_provider_type
+    #   The type of supported external login provider that provides identity
+    #   to let a user federate into Amazon QuickSight with an associated AWS
+    #   Identity and Access Management (IAM) role. The type of supported
+    #   external login provider can be one of the following.
+    #
+    #   * `COGNITO`\: Amazon Cognito. The provider URL is
+    #     cognito-identity.amazonaws.com. When choosing the `COGNITO`
+    #     provider type, don’t use the "CustomFederationProviderUrl"
+    #     parameter which is only needed when the external provider is
+    #     custom.
+    #
+    #   * `CUSTOM_OIDC`\: Custom OpenID Connect (OIDC) provider. When
+    #     choosing `CUSTOM_OIDC` type, use the `CustomFederationProviderUrl`
+    #     parameter to provide the custom OIDC provider URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_federation_provider_url
+    #   The URL of the custom OpenID Connect (OIDC) provider that provides
+    #   identity to let a user federate into QuickSight with an associated
+    #   AWS Identity and Access Management (IAM) role. This parameter should
+    #   only be used when `ExternalLoginFederationProviderType` parameter is
+    #   set to `CUSTOM_OIDC`.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_login_id
+    #   The identity ID for a user in the external login provider.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisterUserRequest AWS API Documentation
     #
     class RegisterUserRequest < Struct.new(
@@ -8970,7 +9002,10 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       :user_name,
-      :custom_permissions_name)
+      :custom_permissions_name,
+      :external_login_federation_provider_type,
+      :custom_federation_provider_url,
+      :external_login_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13011,6 +13046,9 @@ module Aws::QuickSight
     #         role: "ADMIN", # required, accepts ADMIN, AUTHOR, READER, RESTRICTED_AUTHOR, RESTRICTED_READER
     #         custom_permissions_name: "RoleName",
     #         unapply_custom_permissions: false,
+    #         external_login_federation_provider_type: "String",
+    #         custom_federation_provider_url: "String",
+    #         external_login_id: "String",
     #       }
     #
     # @!attribute [rw] user_name
@@ -13085,6 +13123,39 @@ module Aws::QuickSight
     #   value.
     #   @return [Boolean]
     #
+    # @!attribute [rw] external_login_federation_provider_type
+    #   The type of supported external login provider that provides identity
+    #   to let a user federate into QuickSight with an associated AWS
+    #   Identity and Access Management (IAM) role. The type of supported
+    #   external login provider can be one of the following.
+    #
+    #   * `COGNITO`\: Amazon Cognito. The provider URL is
+    #     cognito-identity.amazonaws.com. When choosing the `COGNITO`
+    #     provider type, don’t use the "CustomFederationProviderUrl"
+    #     parameter which is only needed when the external provider is
+    #     custom.
+    #
+    #   * `CUSTOM_OIDC`\: Custom OpenID Connect (OIDC) provider. When
+    #     choosing `CUSTOM_OIDC` type, use the `CustomFederationProviderUrl`
+    #     parameter to provide the custom OIDC provider URL.
+    #
+    #   * `NONE`\: This clears all the previously saved external login
+    #     information for a user. Use ` DescribeUser ` API to check the
+    #     external login information.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_federation_provider_url
+    #   The URL of the custom OpenID Connect (OIDC) provider that provides
+    #   identity to let a user federate into QuickSight with an associated
+    #   AWS Identity and Access Management (IAM) role. This parameter should
+    #   only be used when `ExternalLoginFederationProviderType` parameter is
+    #   set to `CUSTOM_OIDC`.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_login_id
+    #   The identity ID for a user in the external login provider.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateUserRequest AWS API Documentation
     #
     class UpdateUserRequest < Struct.new(
@@ -13094,7 +13165,10 @@ module Aws::QuickSight
       :email,
       :role,
       :custom_permissions_name,
-      :unapply_custom_permissions)
+      :unapply_custom_permissions,
+      :external_login_federation_provider_type,
+      :custom_federation_provider_url,
+      :external_login_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13218,6 +13292,25 @@ module Aws::QuickSight
     #   The custom permissions profile associated with this user.
     #   @return [String]
     #
+    # @!attribute [rw] external_login_federation_provider_type
+    #   The type of supported external login provider that provides identity
+    #   to let the user federate into Amazon QuickSight with an associated
+    #   IAM role. The type can be one of the following.
+    #
+    #   * `COGNITO`\: Amazon Cognito. The provider URL is
+    #     cognito-identity.amazonaws.com.
+    #
+    #   * `CUSTOM_OIDC`\: Custom OpenID Connect (OIDC) provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_login_federation_provider_url
+    #   The URL of the external login provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_login_id
+    #   The identity ID for the user in the external login provider.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/User AWS API Documentation
     #
     class User < Struct.new(
@@ -13228,7 +13321,10 @@ module Aws::QuickSight
       :identity_type,
       :active,
       :principal_id,
-      :custom_permissions_name)
+      :custom_permissions_name,
+      :external_login_federation_provider_type,
+      :external_login_federation_provider_url,
+      :external_login_id)
       SENSITIVE = []
       include Aws::Structure
     end
