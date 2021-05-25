@@ -788,7 +788,8 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] target
-    #   The [identity][1] to which the policy is attached.
+    #   The [identity][1] to which the policy is attached. For example, a
+    #   thing group or a certificate.
     #
     #
     #
@@ -2608,6 +2609,17 @@ module Aws::IoT
 
     class ConfirmTopicRuleDestinationResponse < Aws::EmptyStructure; end
 
+    # A resource with the same name already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A conflicting resource update exception. This exception is thrown when
     # two pending updates cause a conflict.
     #
@@ -3280,6 +3292,7 @@ module Aws::IoT
     #           },
     #         ],
     #         namespace_id: "NamespaceId",
+    #         job_template_arn: "JobTemplateArn",
     #       }
     #
     # @!attribute [rw] job_id
@@ -3293,11 +3306,8 @@ module Aws::IoT
     #   @return [Array<String>]
     #
     # @!attribute [rw] document_source
-    #   An S3 link to the job document.
-    #   @return [String]
-    #
-    # @!attribute [rw] document
-    #   The job document.
+    #   An S3 link to the job document. Required if you don't specify a
+    #   value for `document`.
     #
     #   <note markdown="1"> If the job document resides in an S3 bucket, you must use a
     #   placeholder link when specifying the document.
@@ -3310,6 +3320,11 @@ module Aws::IoT
     #   bucket to which you are linking.
     #
     #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] document
+    #   The job document. Required if you don't specify a value for
+    #   `documentSource`.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3363,6 +3378,10 @@ module Aws::IoT
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] job_template_arn
+    #   The ARN of the job template used to create the job.
+    #   @return [String]
+    #
     class CreateJobRequest < Struct.new(
       :job_id,
       :targets,
@@ -3375,7 +3394,8 @@ module Aws::IoT
       :abort_config,
       :timeout_config,
       :tags,
-      :namespace_id)
+      :namespace_id,
+      :job_template_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3396,6 +3416,140 @@ module Aws::IoT
       :job_arn,
       :job_id,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateJobTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_template_id: "JobTemplateId", # required
+    #         job_arn: "JobArn",
+    #         document_source: "JobDocumentSource",
+    #         document: "JobDocument",
+    #         description: "JobDescription", # required
+    #         presigned_url_config: {
+    #           role_arn: "RoleArn",
+    #           expires_in_sec: 1,
+    #         },
+    #         job_executions_rollout_config: {
+    #           maximum_per_minute: 1,
+    #           exponential_rate: {
+    #             base_rate_per_minute: 1, # required
+    #             increment_factor: 1.0, # required
+    #             rate_increase_criteria: { # required
+    #               number_of_notified_things: 1,
+    #               number_of_succeeded_things: 1,
+    #             },
+    #           },
+    #         },
+    #         abort_config: {
+    #           criteria_list: [ # required
+    #             {
+    #               failure_type: "FAILED", # required, accepts FAILED, REJECTED, TIMED_OUT, ALL
+    #               action: "CANCEL", # required, accepts CANCEL
+    #               threshold_percentage: 1.0, # required
+    #               min_number_of_executed_things: 1, # required
+    #             },
+    #           ],
+    #         },
+    #         timeout_config: {
+    #           in_progress_timeout_in_minutes: 1,
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] job_template_id
+    #   A unique identifier for the job template. We recommend using a UUID.
+    #   Alpha-numeric characters, "-", and "\_" are valid for use here.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_arn
+    #   The ARN of the job to use as the basis for the job template.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_source
+    #   An S3 link to the job document to use in the template. Required if
+    #   you don't specify a value for `document`.
+    #
+    #   <note markdown="1"> If the job document resides in an S3 bucket, you must use a
+    #   placeholder link when specifying the document.
+    #
+    #    The placeholder link is of the following form:
+    #
+    #    `$\{aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key\}`
+    #
+    #    where *bucket* is your bucket name and *key* is the object in the
+    #   bucket to which you are linking.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] document
+    #   The job document. Required if you don't specify a value for
+    #   `documentSource`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the job document.
+    #   @return [String]
+    #
+    # @!attribute [rw] presigned_url_config
+    #   Configuration for pre-signed S3 URLs.
+    #   @return [Types::PresignedUrlConfig]
+    #
+    # @!attribute [rw] job_executions_rollout_config
+    #   Allows you to create a staged rollout of a job.
+    #   @return [Types::JobExecutionsRolloutConfig]
+    #
+    # @!attribute [rw] abort_config
+    #   The criteria that determine when and how a job abort takes place.
+    #   @return [Types::AbortConfig]
+    #
+    # @!attribute [rw] timeout_config
+    #   Specifies the amount of time each device has to finish its execution
+    #   of the job. A timer is started when the job execution status is set
+    #   to `IN_PROGRESS`. If the job execution status is not set to another
+    #   terminal state before the timer expires, it will be automatically
+    #   set to `TIMED_OUT`.
+    #   @return [Types::TimeoutConfig]
+    #
+    # @!attribute [rw] tags
+    #   Metadata that can be used to manage the job template.
+    #   @return [Array<Types::Tag>]
+    #
+    class CreateJobTemplateRequest < Struct.new(
+      :job_template_id,
+      :job_arn,
+      :document_source,
+      :document,
+      :description,
+      :presigned_url_config,
+      :job_executions_rollout_config,
+      :abort_config,
+      :timeout_config,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_template_arn
+    #   The ARN of the job template.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_template_id
+    #   The unique identifier of the job template.
+    #   @return [String]
+    #
+    class CreateJobTemplateResponse < Struct.new(
+      :job_template_arn,
+      :job_template_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5458,6 +5612,23 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteJobTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_template_id: "JobTemplateId", # required
+    #       }
+    #
+    # @!attribute [rw] job_template_id
+    #   The unique identifier of the job template to delete.
+    #   @return [String]
+    #
+    class DeleteJobTemplateRequest < Struct.new(
+      :job_template_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteMitigationActionRequest
     #   data as a hash:
     #
@@ -6706,6 +6877,83 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeJobTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_template_id: "JobTemplateId", # required
+    #       }
+    #
+    # @!attribute [rw] job_template_id
+    #   The unique identifier of the job template.
+    #   @return [String]
+    #
+    class DescribeJobTemplateRequest < Struct.new(
+      :job_template_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_template_arn
+    #   The ARN of the job template.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_template_id
+    #   The unique identifier of the job template.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the job template.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_source
+    #   An S3 link to the job document.
+    #   @return [String]
+    #
+    # @!attribute [rw] document
+    #   The job document.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time, in seconds since the epoch, when the job template was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] presigned_url_config
+    #   Configuration for pre-signed S3 URLs.
+    #   @return [Types::PresignedUrlConfig]
+    #
+    # @!attribute [rw] job_executions_rollout_config
+    #   Allows you to create a staged rollout of a job.
+    #   @return [Types::JobExecutionsRolloutConfig]
+    #
+    # @!attribute [rw] abort_config
+    #   The criteria that determine when and how a job abort takes place.
+    #   @return [Types::AbortConfig]
+    #
+    # @!attribute [rw] timeout_config
+    #   Specifies the amount of time each device has to finish its execution
+    #   of the job. A timer is started when the job execution status is set
+    #   to `IN_PROGRESS`. If the job execution status is not set to another
+    #   terminal state before the timer expires, it will be automatically
+    #   set to `TIMED_OUT`.
+    #   @return [Types::TimeoutConfig]
+    #
+    class DescribeJobTemplateResponse < Struct.new(
+      :job_template_arn,
+      :job_template_id,
+      :description,
+      :document_source,
+      :document,
+      :created_at,
+      :presigned_url_config,
+      :job_executions_rollout_config,
+      :abort_config,
+      :timeout_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeMitigationActionRequest
     #   data as a hash:
     #
@@ -7712,11 +7960,6 @@ module Aws::IoT
     # * Jobs
     #
     # * CredentialProvider
-    #
-    # <note markdown="1"> The domain configuration feature is in public preview and is subject
-    # to change.
-    #
-    #  </note>
     #
     # @!attribute [rw] domain_configuration_name
     #   The name of the domain configuration. This value must be unique to a
@@ -9292,6 +9535,10 @@ module Aws::IoT
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] job_template_arn
+    #   The ARN of the job template used to create the job.
+    #   @return [String]
+    #
     class Job < Struct.new(
       :job_arn,
       :job_id,
@@ -9310,7 +9557,8 @@ module Aws::IoT
       :completed_at,
       :job_process_details,
       :timeout_config,
-      :namespace_id)
+      :namespace_id,
+      :job_template_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9616,6 +9864,34 @@ module Aws::IoT
       :created_at,
       :last_updated_at,
       :completed_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information about the job template.
+    #
+    # @!attribute [rw] job_template_arn
+    #   The ARN of the job template.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_template_id
+    #   The unique identifier of the job template.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the job template.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time, in seconds since the epoch, when the job template was
+    #   created.
+    #   @return [Time]
+    #
+    class JobTemplateSummary < Struct.new(
+      :job_template_arn,
+      :job_template_id,
+      :description,
+      :created_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10908,6 +11184,45 @@ module Aws::IoT
     #
     class ListJobExecutionsForThingResponse < Struct.new(
       :execution_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListJobTemplatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to return the next set of results in the list.
+    #   @return [String]
+    #
+    class ListJobTemplatesRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_templates
+    #   A list of objects that contain information about the job templates.
+    #   @return [Array<Types::JobTemplateSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or **null** if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    class ListJobTemplatesResponse < Struct.new(
+      :job_templates,
       :next_token)
       SENSITIVE = []
       include Aws::Structure

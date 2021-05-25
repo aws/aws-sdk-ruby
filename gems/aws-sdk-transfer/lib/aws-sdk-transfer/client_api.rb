@@ -19,26 +19,34 @@ module Aws::Transfer
     Arn = Shapes::StringShape.new(name: 'Arn')
     Certificate = Shapes::StringShape.new(name: 'Certificate')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CreateAccessRequest = Shapes::StructureShape.new(name: 'CreateAccessRequest')
+    CreateAccessResponse = Shapes::StructureShape.new(name: 'CreateAccessResponse')
     CreateServerRequest = Shapes::StructureShape.new(name: 'CreateServerRequest')
     CreateServerResponse = Shapes::StructureShape.new(name: 'CreateServerResponse')
     CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
     CreateUserResponse = Shapes::StructureShape.new(name: 'CreateUserResponse')
     DateImported = Shapes::TimestampShape.new(name: 'DateImported')
+    DeleteAccessRequest = Shapes::StructureShape.new(name: 'DeleteAccessRequest')
     DeleteServerRequest = Shapes::StructureShape.new(name: 'DeleteServerRequest')
     DeleteSshPublicKeyRequest = Shapes::StructureShape.new(name: 'DeleteSshPublicKeyRequest')
     DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
+    DescribeAccessRequest = Shapes::StructureShape.new(name: 'DescribeAccessRequest')
+    DescribeAccessResponse = Shapes::StructureShape.new(name: 'DescribeAccessResponse')
     DescribeSecurityPolicyRequest = Shapes::StructureShape.new(name: 'DescribeSecurityPolicyRequest')
     DescribeSecurityPolicyResponse = Shapes::StructureShape.new(name: 'DescribeSecurityPolicyResponse')
     DescribeServerRequest = Shapes::StructureShape.new(name: 'DescribeServerRequest')
     DescribeServerResponse = Shapes::StructureShape.new(name: 'DescribeServerResponse')
     DescribeUserRequest = Shapes::StructureShape.new(name: 'DescribeUserRequest')
     DescribeUserResponse = Shapes::StructureShape.new(name: 'DescribeUserResponse')
+    DescribedAccess = Shapes::StructureShape.new(name: 'DescribedAccess')
     DescribedSecurityPolicy = Shapes::StructureShape.new(name: 'DescribedSecurityPolicy')
     DescribedServer = Shapes::StructureShape.new(name: 'DescribedServer')
     DescribedUser = Shapes::StructureShape.new(name: 'DescribedUser')
+    DirectoryId = Shapes::StringShape.new(name: 'DirectoryId')
     Domain = Shapes::StringShape.new(name: 'Domain')
     EndpointDetails = Shapes::StructureShape.new(name: 'EndpointDetails')
     EndpointType = Shapes::StringShape.new(name: 'EndpointType')
+    ExternalId = Shapes::StringShape.new(name: 'ExternalId')
     Fips = Shapes::BooleanShape.new(name: 'Fips')
     HomeDirectory = Shapes::StringShape.new(name: 'HomeDirectory')
     HomeDirectoryMapEntry = Shapes::StructureShape.new(name: 'HomeDirectoryMapEntry')
@@ -53,6 +61,8 @@ module Aws::Transfer
     InternalServiceError = Shapes::StructureShape.new(name: 'InternalServiceError')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    ListAccessesRequest = Shapes::StructureShape.new(name: 'ListAccessesRequest')
+    ListAccessesResponse = Shapes::StructureShape.new(name: 'ListAccessesResponse')
     ListSecurityPoliciesRequest = Shapes::StructureShape.new(name: 'ListSecurityPoliciesRequest')
     ListSecurityPoliciesResponse = Shapes::StructureShape.new(name: 'ListSecurityPoliciesResponse')
     ListServersRequest = Shapes::StructureShape.new(name: 'ListServersRequest')
@@ -61,6 +71,8 @@ module Aws::Transfer
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListUsersRequest = Shapes::StructureShape.new(name: 'ListUsersRequest')
     ListUsersResponse = Shapes::StructureShape.new(name: 'ListUsersResponse')
+    ListedAccess = Shapes::StructureShape.new(name: 'ListedAccess')
+    ListedAccesses = Shapes::ListShape.new(name: 'ListedAccesses')
     ListedServer = Shapes::StructureShape.new(name: 'ListedServer')
     ListedServers = Shapes::ListShape.new(name: 'ListedServers')
     ListedUser = Shapes::StructureShape.new(name: 'ListedUser')
@@ -115,6 +127,8 @@ module Aws::Transfer
     TestIdentityProviderResponse = Shapes::StructureShape.new(name: 'TestIdentityProviderResponse')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UpdateAccessRequest = Shapes::StructureShape.new(name: 'UpdateAccessRequest')
+    UpdateAccessResponse = Shapes::StructureShape.new(name: 'UpdateAccessResponse')
     UpdateServerRequest = Shapes::StructureShape.new(name: 'UpdateServerRequest')
     UpdateServerResponse = Shapes::StructureShape.new(name: 'UpdateServerResponse')
     UpdateUserRequest = Shapes::StructureShape.new(name: 'UpdateUserRequest')
@@ -133,6 +147,20 @@ module Aws::Transfer
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
+
+    CreateAccessRequest.add_member(:home_directory, Shapes::ShapeRef.new(shape: HomeDirectory, location_name: "HomeDirectory"))
+    CreateAccessRequest.add_member(:home_directory_type, Shapes::ShapeRef.new(shape: HomeDirectoryType, location_name: "HomeDirectoryType"))
+    CreateAccessRequest.add_member(:home_directory_mappings, Shapes::ShapeRef.new(shape: HomeDirectoryMappings, location_name: "HomeDirectoryMappings"))
+    CreateAccessRequest.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "Policy"))
+    CreateAccessRequest.add_member(:posix_profile, Shapes::ShapeRef.new(shape: PosixProfile, location_name: "PosixProfile"))
+    CreateAccessRequest.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "Role"))
+    CreateAccessRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
+    CreateAccessRequest.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, required: true, location_name: "ExternalId"))
+    CreateAccessRequest.struct_class = Types::CreateAccessRequest
+
+    CreateAccessResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
+    CreateAccessResponse.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, required: true, location_name: "ExternalId"))
+    CreateAccessResponse.struct_class = Types::CreateAccessResponse
 
     CreateServerRequest.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate"))
     CreateServerRequest.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, location_name: "Domain"))
@@ -166,6 +194,10 @@ module Aws::Transfer
     CreateUserResponse.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, required: true, location_name: "UserName"))
     CreateUserResponse.struct_class = Types::CreateUserResponse
 
+    DeleteAccessRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
+    DeleteAccessRequest.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, required: true, location_name: "ExternalId"))
+    DeleteAccessRequest.struct_class = Types::DeleteAccessRequest
+
     DeleteServerRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
     DeleteServerRequest.struct_class = Types::DeleteServerRequest
 
@@ -177,6 +209,14 @@ module Aws::Transfer
     DeleteUserRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
     DeleteUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, required: true, location_name: "UserName"))
     DeleteUserRequest.struct_class = Types::DeleteUserRequest
+
+    DescribeAccessRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
+    DescribeAccessRequest.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, required: true, location_name: "ExternalId"))
+    DescribeAccessRequest.struct_class = Types::DescribeAccessRequest
+
+    DescribeAccessResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
+    DescribeAccessResponse.add_member(:access, Shapes::ShapeRef.new(shape: DescribedAccess, required: true, location_name: "Access"))
+    DescribeAccessResponse.struct_class = Types::DescribeAccessResponse
 
     DescribeSecurityPolicyRequest.add_member(:security_policy_name, Shapes::ShapeRef.new(shape: SecurityPolicyName, required: true, location_name: "SecurityPolicyName"))
     DescribeSecurityPolicyRequest.struct_class = Types::DescribeSecurityPolicyRequest
@@ -197,6 +237,15 @@ module Aws::Transfer
     DescribeUserResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
     DescribeUserResponse.add_member(:user, Shapes::ShapeRef.new(shape: DescribedUser, required: true, location_name: "User"))
     DescribeUserResponse.struct_class = Types::DescribeUserResponse
+
+    DescribedAccess.add_member(:home_directory, Shapes::ShapeRef.new(shape: HomeDirectory, location_name: "HomeDirectory"))
+    DescribedAccess.add_member(:home_directory_mappings, Shapes::ShapeRef.new(shape: HomeDirectoryMappings, location_name: "HomeDirectoryMappings"))
+    DescribedAccess.add_member(:home_directory_type, Shapes::ShapeRef.new(shape: HomeDirectoryType, location_name: "HomeDirectoryType"))
+    DescribedAccess.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "Policy"))
+    DescribedAccess.add_member(:posix_profile, Shapes::ShapeRef.new(shape: PosixProfile, location_name: "PosixProfile"))
+    DescribedAccess.add_member(:role, Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
+    DescribedAccess.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "ExternalId"))
+    DescribedAccess.struct_class = Types::DescribedAccess
 
     DescribedSecurityPolicy.add_member(:fips, Shapes::ShapeRef.new(shape: Fips, location_name: "Fips"))
     DescribedSecurityPolicy.add_member(:security_policy_name, Shapes::ShapeRef.new(shape: SecurityPolicyName, required: true, location_name: "SecurityPolicyName"))
@@ -250,6 +299,7 @@ module Aws::Transfer
 
     IdentityProviderDetails.add_member(:url, Shapes::ShapeRef.new(shape: Url, location_name: "Url"))
     IdentityProviderDetails.add_member(:invocation_role, Shapes::ShapeRef.new(shape: Role, location_name: "InvocationRole"))
+    IdentityProviderDetails.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
     IdentityProviderDetails.struct_class = Types::IdentityProviderDetails
 
     ImportSshPublicKeyRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
@@ -270,6 +320,16 @@ module Aws::Transfer
 
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
+
+    ListAccessesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListAccessesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAccessesRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
+    ListAccessesRequest.struct_class = Types::ListAccessesRequest
+
+    ListAccessesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAccessesResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
+    ListAccessesResponse.add_member(:accesses, Shapes::ShapeRef.new(shape: ListedAccesses, required: true, location_name: "Accesses"))
+    ListAccessesResponse.struct_class = Types::ListAccessesResponse
 
     ListSecurityPoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListSecurityPoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -306,6 +366,14 @@ module Aws::Transfer
     ListUsersResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
     ListUsersResponse.add_member(:users, Shapes::ShapeRef.new(shape: ListedUsers, required: true, location_name: "Users"))
     ListUsersResponse.struct_class = Types::ListUsersResponse
+
+    ListedAccess.add_member(:home_directory, Shapes::ShapeRef.new(shape: HomeDirectory, location_name: "HomeDirectory"))
+    ListedAccess.add_member(:home_directory_type, Shapes::ShapeRef.new(shape: HomeDirectoryType, location_name: "HomeDirectoryType"))
+    ListedAccess.add_member(:role, Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
+    ListedAccess.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "ExternalId"))
+    ListedAccess.struct_class = Types::ListedAccess
+
+    ListedAccesses.member = Shapes::ShapeRef.new(shape: ListedAccess)
 
     ListedServer.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
     ListedServer.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, location_name: "Domain"))
@@ -404,6 +472,20 @@ module Aws::Transfer
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "TagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
+    UpdateAccessRequest.add_member(:home_directory, Shapes::ShapeRef.new(shape: HomeDirectory, location_name: "HomeDirectory"))
+    UpdateAccessRequest.add_member(:home_directory_type, Shapes::ShapeRef.new(shape: HomeDirectoryType, location_name: "HomeDirectoryType"))
+    UpdateAccessRequest.add_member(:home_directory_mappings, Shapes::ShapeRef.new(shape: HomeDirectoryMappings, location_name: "HomeDirectoryMappings"))
+    UpdateAccessRequest.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "Policy"))
+    UpdateAccessRequest.add_member(:posix_profile, Shapes::ShapeRef.new(shape: PosixProfile, location_name: "PosixProfile"))
+    UpdateAccessRequest.add_member(:role, Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
+    UpdateAccessRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
+    UpdateAccessRequest.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, required: true, location_name: "ExternalId"))
+    UpdateAccessRequest.struct_class = Types::UpdateAccessRequest
+
+    UpdateAccessResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
+    UpdateAccessResponse.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, required: true, location_name: "ExternalId"))
+    UpdateAccessResponse.struct_class = Types::UpdateAccessResponse
+
     UpdateServerRequest.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate"))
     UpdateServerRequest.add_member(:endpoint_details, Shapes::ShapeRef.new(shape: EndpointDetails, location_name: "EndpointDetails"))
     UpdateServerRequest.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
@@ -452,6 +534,19 @@ module Aws::Transfer
         "uid" => "transfer-2018-11-05",
       }
 
+      api.add_operation(:create_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateAccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAccessResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:create_server, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateServer"
         o.http_method = "POST"
@@ -476,6 +571,18 @@ module Aws::Transfer
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -511,6 +618,18 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteUserRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:describe_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAccessResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -565,6 +684,25 @@ module Aws::Transfer
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:list_accesses, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAccesses"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAccessesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAccessesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_security_policies, Seahorse::Model::Operation.new.tap do |o|
@@ -699,6 +837,19 @@ module Aws::Transfer
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAccessResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
