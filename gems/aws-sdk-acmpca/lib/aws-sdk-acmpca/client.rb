@@ -400,12 +400,13 @@ module Aws::ACMPCA
     #
     #   Default: FIPS\_140\_2\_LEVEL\_3\_OR\_HIGHER
     #
-    #   Note: AWS Region ap-northeast-3 supports only
-    #   FIPS\_140\_2\_LEVEL\_2\_OR\_HIGHER. You must explicitly specify this
-    #   parameter and value when creating a CA in that Region. Specifying a
-    #   different value (or no value) results in an `InvalidArgsException`
-    #   with the message "A certificate authority cannot be created in this
-    #   region with the specified security standard."
+    #   Note: `FIPS_140_2_LEVEL_3_OR_HIGHER` is not supported in Region
+    #   ap-northeast-3. When creating a CA in the ap-northeast-3, you must
+    #   provide `FIPS_140_2_LEVEL_2_OR_HIGHER` as the argument for
+    #   `KeyStorageSecurityStandard`. Failure to do this results in an
+    #   `InvalidArgsException` with the message, "A certificate authority
+    #   cannot be created in this region with the specified security
+    #   standard."
     #
     # @option params [Array<Types::Tag>] :tags
     #   Key-value pairs that will be attached to the new private CA. You can
@@ -502,6 +503,7 @@ module Aws::ACMPCA
     #         expiration_in_days: 1,
     #         custom_cname: "String253",
     #         s3_bucket_name: "String3To255",
+    #         s3_object_acl: "PUBLIC_READ", # accepts PUBLIC_READ, BUCKET_OWNER_FULL_CONTROL
     #       },
     #     },
     #     certificate_authority_type: "ROOT", # required, accepts ROOT, SUBORDINATE
@@ -996,6 +998,7 @@ module Aws::ACMPCA
     #   resp.certificate_authority.revocation_configuration.crl_configuration.expiration_in_days #=> Integer
     #   resp.certificate_authority.revocation_configuration.crl_configuration.custom_cname #=> String
     #   resp.certificate_authority.revocation_configuration.crl_configuration.s3_bucket_name #=> String
+    #   resp.certificate_authority.revocation_configuration.crl_configuration.s3_object_acl #=> String, one of "PUBLIC_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.certificate_authority.restorable_until #=> Time
     #   resp.certificate_authority.key_storage_security_standard #=> String, one of "FIPS_140_2_LEVEL_2_OR_HIGHER", "FIPS_140_2_LEVEL_3_OR_HIGHER"
     #
@@ -1801,6 +1804,7 @@ module Aws::ACMPCA
     #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.expiration_in_days #=> Integer
     #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.custom_cname #=> String
     #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.s3_bucket_name #=> String
+    #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.s3_object_acl #=> String, one of "PUBLIC_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.certificate_authorities[0].restorable_until #=> Time
     #   resp.certificate_authorities[0].key_storage_security_standard #=> String, one of "FIPS_140_2_LEVEL_2_OR_HIGHER", "FIPS_140_2_LEVEL_3_OR_HIGHER"
     #   resp.next_token #=> String
@@ -2329,6 +2333,7 @@ module Aws::ACMPCA
     #         expiration_in_days: 1,
     #         custom_cname: "String253",
     #         s3_bucket_name: "String3To255",
+    #         s3_object_acl: "PUBLIC_READ", # accepts PUBLIC_READ, BUCKET_OWNER_FULL_CONTROL
     #       },
     #     },
     #     status: "CREATING", # accepts CREATING, PENDING_CERTIFICATE, ACTIVE, DELETED, DISABLED, EXPIRED, FAILED
@@ -2356,7 +2361,7 @@ module Aws::ACMPCA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acmpca'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

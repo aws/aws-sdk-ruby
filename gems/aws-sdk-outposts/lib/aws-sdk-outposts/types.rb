@@ -23,6 +23,29 @@ module Aws::Outposts
       include Aws::Structure
     end
 
+    # Updating or deleting this resource can cause an inconsistent state.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource causing the conflict.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource causing the conflict.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message,
+      :resource_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateOutpostInput
     #   data as a hash:
     #
@@ -426,6 +449,10 @@ module Aws::Outposts
     #   The Outpost tags.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] site_arn
+    #   The Amazon Resource Name (ARN) of the site.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/Outpost AWS API Documentation
     #
     class Outpost < Struct.new(
@@ -438,7 +465,8 @@ module Aws::Outposts
       :life_cycle_status,
       :availability_zone,
       :availability_zone_id,
-      :tags)
+      :tags,
+      :site_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -478,6 +506,10 @@ module Aws::Outposts
     #   The site tags.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] site_arn
+    #   The Amazon Resource Name (ARN) of the site.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/Site AWS API Documentation
     #
     class Site < Struct.new(
@@ -485,7 +517,8 @@ module Aws::Outposts
       :account_id,
       :name,
       :description,
-      :tags)
+      :tags,
+      :site_arn)
       SENSITIVE = []
       include Aws::Structure
     end

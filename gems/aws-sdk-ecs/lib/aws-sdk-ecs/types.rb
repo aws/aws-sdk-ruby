@@ -2656,7 +2656,7 @@ module Aws::ECS
     #         ],
     #         desired_count: 1,
     #         client_token: "String",
-    #         launch_type: "EC2", # accepts EC2, FARGATE
+    #         launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
     #         capacity_provider_strategy: [
     #           {
     #             capacity_provider: "String", # required
@@ -2823,25 +2823,34 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] launch_type
-    #   The launch type on which to run your service. The accepted values
-    #   are `FARGATE` and `EC2`. For more information, see [Amazon ECS
-    #   launch types][1] in the *Amazon Elastic Container Service Developer
-    #   Guide*.
+    #   The infrastructure on which to run your service. For more
+    #   information, see [Amazon ECS launch types][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
     #
-    #   When a value of `FARGATE` is specified, your tasks are launched on
-    #   AWS Fargate On-Demand infrastructure. To use Fargate Spot, you must
-    #   use a capacity provider strategy with the `FARGATE_SPOT` capacity
-    #   provider.
+    #   The `FARGATE` launch type runs your tasks on AWS Fargate On-Demand
+    #   infrastructure.
     #
-    #   When a value of `EC2` is specified, your tasks are launched on
-    #   Amazon EC2 instances registered to your cluster.
+    #   <note markdown="1"> Fargate Spot infrastructure is available for use but a capacity
+    #   provider strategy must be used. For more information, see [AWS
+    #   Fargate capacity providers][2] in the *Amazon ECS User Guide for AWS
+    #   Fargate*.
     #
-    #   If a `launchType` is specified, the `capacityProviderStrategy`
-    #   parameter must be omitted.
+    #    </note>
+    #
+    #   The `EC2` launch type runs your tasks on Amazon EC2 instances
+    #   registered to your cluster.
+    #
+    #   The `EXTERNAL` launch type runs your tasks on your on-premise server
+    #   or virtual machine (VM) capacity registered to your cluster.
+    #
+    #   A service can use either a launch type or a capacity provider
+    #   strategy. If a `launchType` is specified, the
+    #   `capacityProviderStrategy` parameter must be omitted.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-capacity-providers.html
     #   @return [String]
     #
     # @!attribute [rw] capacity_provider_strategy
@@ -3122,7 +3131,7 @@ module Aws::ECS
     #             container_port: 1,
     #           },
     #         ],
-    #         launch_type: "EC2", # accepts EC2, FARGATE
+    #         launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
     #         capacity_provider_strategy: [
     #           {
     #             capacity_provider: "String", # required
@@ -6125,14 +6134,14 @@ module Aws::ECS
     #         cluster: "String",
     #         next_token: "String",
     #         max_results: 1,
-    #         launch_type: "EC2", # accepts EC2, FARGATE
+    #         launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
     #         scheduling_strategy: "REPLICA", # accepts REPLICA, DAEMON
     #       }
     #
     # @!attribute [rw] cluster
-    #   The short name or full Amazon Resource Name (ARN) of the cluster
-    #   that hosts the services to list. If you do not specify a cluster,
-    #   the default cluster is assumed.
+    #   The short name or full Amazon Resource Name (ARN) of the cluster to
+    #   use when filtering the `ListServices` results. If you do not specify
+    #   a cluster, the default cluster is assumed.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -6160,11 +6169,12 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] launch_type
-    #   The launch type for the services to list.
+    #   The launch type to use when filtering the `ListServices` results.
     #   @return [String]
     #
     # @!attribute [rw] scheduling_strategy
-    #   The scheduling strategy for services to list.
+    #   The scheduling strategy to use when filtering the `ListServices`
+    #   results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServicesRequest AWS API Documentation
@@ -6430,26 +6440,26 @@ module Aws::ECS
     #         started_by: "String",
     #         service_name: "String",
     #         desired_status: "RUNNING", # accepts RUNNING, PENDING, STOPPED
-    #         launch_type: "EC2", # accepts EC2, FARGATE
+    #         launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
     #       }
     #
     # @!attribute [rw] cluster
-    #   The short name or full Amazon Resource Name (ARN) of the cluster
-    #   that hosts the tasks to list. If you do not specify a cluster, the
-    #   default cluster is assumed.
+    #   The short name or full Amazon Resource Name (ARN) of the cluster to
+    #   use when filtering the `ListTasks` results. If you do not specify a
+    #   cluster, the default cluster is assumed.
     #   @return [String]
     #
     # @!attribute [rw] container_instance
-    #   The container instance ID or full ARN of the container instance with
-    #   which to filter the `ListTasks` results. Specifying a
+    #   The container instance ID or full ARN of the container instance to
+    #   use when filtering the `ListTasks` results. Specifying a
     #   `containerInstance` limits the results to tasks that belong to that
     #   container instance.
     #   @return [String]
     #
     # @!attribute [rw] family
-    #   The name of the family with which to filter the `ListTasks` results.
-    #   Specifying a `family` limits the results to tasks that belong to
-    #   that family.
+    #   The name of the task definition family to use when filtering the
+    #   `ListTasks` results. Specifying a `family` limits the results to
+    #   tasks that belong to that family.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -6483,13 +6493,13 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] service_name
-    #   The name of the service with which to filter the `ListTasks`
+    #   The name of the service to use when filtering the `ListTasks`
     #   results. Specifying a `serviceName` limits the results to tasks that
     #   belong to that service.
     #   @return [String]
     #
     # @!attribute [rw] desired_status
-    #   The task desired status with which to filter the `ListTasks`
+    #   The task desired status to use when filtering the `ListTasks`
     #   results. Specifying a `desiredStatus` of `STOPPED` limits the
     #   results to tasks that Amazon ECS has set the desired status to
     #   `STOPPED`. This can be useful for debugging tasks that are not
@@ -6506,7 +6516,7 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] launch_type
-    #   The launch type for services to list.
+    #   The launch type to use when filtering the `ListTasks` results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTasksRequest AWS API Documentation
@@ -7947,7 +7957,7 @@ module Aws::ECS
     #             expression: "String",
     #           },
     #         ],
-    #         requires_compatibilities: ["EC2"], # accepts EC2, FARGATE
+    #         requires_compatibilities: ["EC2"], # accepts EC2, FARGATE, EXTERNAL
     #         cpu: "String",
     #         memory: "String",
     #         tags: [
@@ -8504,7 +8514,7 @@ module Aws::ECS
     #         enable_ecs_managed_tags: false,
     #         enable_execute_command: false,
     #         group: "String",
-    #         launch_type: "EC2", # accepts EC2, FARGATE
+    #         launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
     #         network_configuration: {
     #           awsvpc_configuration: {
     #             subnets: ["String"], # required
@@ -8622,24 +8632,34 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] launch_type
-    #   The launch type on which to run your task. The accepted values are
-    #   `FARGATE` and `EC2`. For more information, see [Amazon ECS Launch
-    #   Types][1] in the *Amazon Elastic Container Service Developer Guide*.
+    #   The infrastructure on which to run your standalone task. For more
+    #   information, see [Amazon ECS launch types][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
     #
-    #   When a value of `FARGATE` is specified, your tasks are launched on
-    #   AWS Fargate On-Demand infrastructure. To use Fargate Spot, you must
-    #   use a capacity provider strategy with the `FARGATE_SPOT` capacity
-    #   provider.
+    #   The `FARGATE` launch type runs your tasks on AWS Fargate On-Demand
+    #   infrastructure.
     #
-    #   When a value of `EC2` is specified, your tasks are launched on
-    #   Amazon EC2 instances registered to your cluster.
+    #   <note markdown="1"> Fargate Spot infrastructure is available for use but a capacity
+    #   provider strategy must be used. For more information, see [AWS
+    #   Fargate capacity providers][2] in the *Amazon ECS User Guide for AWS
+    #   Fargate*.
     #
+    #    </note>
+    #
+    #   The `EC2` launch type runs your tasks on Amazon EC2 instances
+    #   registered to your cluster.
+    #
+    #   The `EXTERNAL` launch type runs your tasks on your on-premise server
+    #   or virtual machine (VM) capacity registered to your cluster.
+    #
+    #   A task can use either a launch type or a capacity provider strategy.
     #   If a `launchType` is specified, the `capacityProviderStrategy`
     #   parameter must be omitted.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-capacity-providers.html
     #   @return [String]
     #
     # @!attribute [rw] network_configuration
@@ -8954,10 +8974,9 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] launch_type
-    #   The launch type on which your service is running. If no value is
-    #   specified, it will default to `EC2`. Valid values include `EC2` and
-    #   `FARGATE`. For more information, see [Amazon ECS Launch Types][1] in
-    #   the *Amazon Elastic Container Service Developer Guide*.
+    #   The infrastructure on which your service is running. For more
+    #   information, see [Amazon ECS launch types][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
     #
     #
     #
@@ -10157,9 +10176,9 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] launch_type
-    #   The launch type on which your task is running. For more information,
-    #   see [Amazon ECS Launch Types][1] in the *Amazon Elastic Container
-    #   Service Developer Guide*.
+    #   The infrastructure on which your task is running. For more
+    #   information, see [Amazon ECS launch types][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
     #
     #
     #

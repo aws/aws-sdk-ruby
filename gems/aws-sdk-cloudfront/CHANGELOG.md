@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2021-05-26)
+------------------
+
+* Feature - Documentation fix for CloudFront
+
 1.50.0 (2021-04-30)
 ------------------
 

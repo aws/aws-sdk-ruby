@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2021-05-26)
+------------------
+
+* Feature - Support STANDARD permissions mode in CreateLedger and DescribeLedger. Add UpdateLedgerPermissionsMode to update permissions mode on existing ledgers.
+
 1.13.0 (2021-03-10)
 ------------------
 

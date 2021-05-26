@@ -384,6 +384,31 @@ module Aws::QLDB
     #
     # @option params [required, String] :permissions_mode
     #   The permissions mode to assign to the ledger that you want to create.
+    #   This parameter can have one of the following values:
+    #
+    #   * `ALLOW_ALL`\: A legacy permissions mode that enables access control
+    #     with API-level granularity for ledgers.
+    #
+    #     This mode allows users who have `SendCommand` permissions for this
+    #     ledger to run all PartiQL commands (hence, `ALLOW_ALL`) on any
+    #     tables in the specified ledger. This mode disregards any table-level
+    #     or command-level IAM permissions policies that you create for the
+    #     ledger.
+    #
+    #   * `STANDARD`\: (*Recommended*) A permissions mode that enables access
+    #     control with finer granularity for ledgers, tables, and PartiQL
+    #     commands.
+    #
+    #     By default, this mode denies all user requests to run any PartiQL
+    #     commands on any tables in this ledger. To allow PartiQL commands to
+    #     run, you must create IAM permissions policies for specific table
+    #     resources and PartiQL actions, in addition to `SendCommand` API
+    #     permissions for the ledger.
+    #
+    #   <note markdown="1"> We strongly recommend using the `STANDARD` permissions mode to
+    #   maximize the security of your ledger data.
+    #
+    #    </note>
     #
     # @option params [Boolean] :deletion_protection
     #   The flag that prevents a ledger from being deleted by any user. If not
@@ -402,6 +427,7 @@ module Aws::QLDB
     #   * {Types::CreateLedgerResponse#arn #arn} => String
     #   * {Types::CreateLedgerResponse#state #state} => String
     #   * {Types::CreateLedgerResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::CreateLedgerResponse#permissions_mode #permissions_mode} => String
     #   * {Types::CreateLedgerResponse#deletion_protection #deletion_protection} => Boolean
     #
     # @example Request syntax with placeholder values
@@ -411,7 +437,7 @@ module Aws::QLDB
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     permissions_mode: "ALLOW_ALL", # required, accepts ALLOW_ALL
+    #     permissions_mode: "ALLOW_ALL", # required, accepts ALLOW_ALL, STANDARD
     #     deletion_protection: false,
     #   })
     #
@@ -421,6 +447,7 @@ module Aws::QLDB
     #   resp.arn #=> String
     #   resp.state #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED"
     #   resp.creation_date_time #=> Time
+    #   resp.permissions_mode #=> String, one of "ALLOW_ALL", "STANDARD"
     #   resp.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/CreateLedger AWS API Documentation
@@ -576,6 +603,7 @@ module Aws::QLDB
     #   * {Types::DescribeLedgerResponse#arn #arn} => String
     #   * {Types::DescribeLedgerResponse#state #state} => String
     #   * {Types::DescribeLedgerResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::DescribeLedgerResponse#permissions_mode #permissions_mode} => String
     #   * {Types::DescribeLedgerResponse#deletion_protection #deletion_protection} => Boolean
     #
     # @example Request syntax with placeholder values
@@ -590,6 +618,7 @@ module Aws::QLDB
     #   resp.arn #=> String
     #   resp.state #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED"
     #   resp.creation_date_time #=> Time
+    #   resp.permissions_mode #=> String, one of "ALLOW_ALL", "STANDARD"
     #   resp.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/DescribeLedger AWS API Documentation
@@ -1330,6 +1359,67 @@ module Aws::QLDB
       req.send_request(options)
     end
 
+    # Updates the permissions mode of a ledger.
+    #
+    # @option params [required, String] :name
+    #   The name of the ledger.
+    #
+    # @option params [required, String] :permissions_mode
+    #   The permissions mode to assign to the ledger. This parameter can have
+    #   one of the following values:
+    #
+    #   * `ALLOW_ALL`\: A legacy permissions mode that enables access control
+    #     with API-level granularity for ledgers.
+    #
+    #     This mode allows users who have `SendCommand` permissions for this
+    #     ledger to run all PartiQL commands (hence, `ALLOW_ALL`) on any
+    #     tables in the specified ledger. This mode disregards any table-level
+    #     or command-level IAM permissions policies that you create for the
+    #     ledger.
+    #
+    #   * `STANDARD`\: (*Recommended*) A permissions mode that enables access
+    #     control with finer granularity for ledgers, tables, and PartiQL
+    #     commands.
+    #
+    #     By default, this mode denies all user requests to run any PartiQL
+    #     commands on any tables in this ledger. To allow PartiQL commands to
+    #     run, you must create IAM permissions policies for specific table
+    #     resources and PartiQL actions, in addition to `SendCommand` API
+    #     permissions for the ledger.
+    #
+    #   <note markdown="1"> We strongly recommend using the `STANDARD` permissions mode to
+    #   maximize the security of your ledger data.
+    #
+    #    </note>
+    #
+    # @return [Types::UpdateLedgerPermissionsModeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateLedgerPermissionsModeResponse#name #name} => String
+    #   * {Types::UpdateLedgerPermissionsModeResponse#arn #arn} => String
+    #   * {Types::UpdateLedgerPermissionsModeResponse#permissions_mode #permissions_mode} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_ledger_permissions_mode({
+    #     name: "LedgerName", # required
+    #     permissions_mode: "ALLOW_ALL", # required, accepts ALLOW_ALL, STANDARD
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.permissions_mode #=> String, one of "ALLOW_ALL", "STANDARD"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/UpdateLedgerPermissionsMode AWS API Documentation
+    #
+    # @overload update_ledger_permissions_mode(params = {})
+    # @param [Hash] params ({})
+    def update_ledger_permissions_mode(params = {}, options = {})
+      req = build_request(:update_ledger_permissions_mode, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1343,7 +1433,7 @@ module Aws::QLDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-qldb'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

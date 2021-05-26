@@ -1330,8 +1330,8 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] comment
-    #   An optional comment to describe the origin access identity. The
-    #   comment cannot be longer than 128 characters.
+    #   A comment to describe the origin access identity. The comment cannot
+    #   be longer than 128 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CloudFrontOriginAccessIdentityConfig AWS API Documentation

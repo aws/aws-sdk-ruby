@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2021-05-26)
+------------------
+
+* Feature - Add ConflictException to DeleteOutpost, CreateOutpost
+
 1.15.0 (2021-03-10)
 ------------------
 

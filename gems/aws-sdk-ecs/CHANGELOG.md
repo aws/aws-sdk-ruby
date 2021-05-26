@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2021-05-26)
+------------------
+
+* Feature - The release adds support for registering External instances to your Amazon ECS clusters.
+
 1.78.0 (2021-05-10)
 ------------------
 

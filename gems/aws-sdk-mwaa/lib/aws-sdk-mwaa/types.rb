@@ -117,6 +117,7 @@ module Aws::MWAA
     #         plugins_s3_path: "RelativePath",
     #         requirements_s3_object_version: "S3ObjectVersion",
     #         requirements_s3_path: "RelativePath",
+    #         schedulers: 1,
     #         source_bucket_arn: "S3BucketArn", # required
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -126,9 +127,9 @@ module Aws::MWAA
     #       }
     #
     # @!attribute [rw] airflow_configuration_options
-    #   The Apache Airflow configuration setting you want to override in
-    #   your environment. For more information, see [Environment
-    #   configuration][1].
+    #   A list of key-value pairs containing the Apache Airflow
+    #   configuration options you want to attach to your environment. To
+    #   learn more, see [Apache Airflow configuration options][1].
     #
     #
     #
@@ -136,23 +137,27 @@ module Aws::MWAA
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] airflow_version
-    #   The Apache Airflow version you want to use for your environment.
+    #   The Apache Airflow version for your environment. For example,
+    #   `v1.10.12`. If no value is specified, defaults to the latest
+    #   version. Valid values: `v1.10.12`.
     #   @return [String]
     #
     # @!attribute [rw] dag_s3_path
-    #   The relative path to the DAG folder on your Amazon S3 storage
-    #   bucket. For example, `dags`. For more information, see [Importing
-    #   DAGs on Amazon MWAA][1].
+    #   The relative path to the DAGs folder on your Amazon S3 bucket. For
+    #   example, `dags`. To learn more, see [Adding or updating DAGs][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import.html
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html
     #   @return [String]
     #
     # @!attribute [rw] environment_class
-    #   The environment class you want to use for your environment. The
-    #   environment class determines the size of the containers and database
-    #   used for your Apache Airflow services.
+    #   The environment class type. Valid values: `mw1.small`, `mw1.medium`,
+    #   `mw1.large`. To learn more, see [Amazon MWAA environment class][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html
     #   @return [String]
     #
     # @!attribute [rw] execution_role_arn
@@ -160,104 +165,126 @@ module Aws::MWAA
     #   environment. An execution role is an AWS Identity and Access
     #   Management (IAM) role that grants MWAA permission to access AWS
     #   services and resources used by your environment. For example,
-    #   `arn:aws:iam::123456789:role/my-execution-role`. For more
-    #   information, see [Managing access to Amazon Managed Workflows for
-    #   Apache Airflow][1].
+    #   `arn:aws:iam::123456789:role/my-execution-role`. To learn more, see
+    #   [Amazon MWAA Execution role][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/manage-access.html
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html
     #   @return [String]
     #
     # @!attribute [rw] kms_key
-    #   The AWS Key Management Service (KMS) key to encrypt and decrypt the
-    #   data in your environment. You can use an AWS KMS key managed by
-    #   MWAA, or a custom KMS key (advanced). For more information, see
-    #   [Customer master keys (CMKs)][1] in the AWS KMS developer guide.
+    #   The AWS Key Management Service (KMS) key to encrypt the data in your
+    #   environment. You can use an AWS owned CMK, or a Customer managed CMK
+    #   (advanced). To learn more, see [Get started with Amazon Managed
+    #   Workflows for Apache Airflow][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html?icmpid=docs_console_unmapped#master_keys
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/get-started.html
     #   @return [String]
     #
     # @!attribute [rw] logging_configuration
-    #   The Apache Airflow logs you want to send to Amazon CloudWatch Logs.
+    #   Defines the Apache Airflow logs to send to CloudWatch Logs:
+    #   `DagProcessingLogs`, `SchedulerLogs`, `TaskLogs`, `WebserverLogs`,
+    #   `WorkerLogs`.
     #   @return [Types::LoggingConfigurationInput]
     #
     # @!attribute [rw] max_workers
     #   The maximum number of workers that you want to run in your
-    #   environment. MWAA scales the number of Apache Airflow workers and
-    #   the Fargate containers that run your tasks up to the number you
-    #   specify in this field. When there are no more tasks running, and no
-    #   more in the queue, MWAA disposes of the extra containers leaving the
-    #   one worker that is included with your environment.
+    #   environment. MWAA scales the number of Apache Airflow workers up to
+    #   the number you specify in the `MaxWorkers` field. For example, `20`.
+    #   When there are no more tasks running, and no more in the queue, MWAA
+    #   disposes of the extra workers leaving the one worker that is
+    #   included with your environment, or the number you specify in
+    #   `MinWorkers`.
     #   @return [Integer]
     #
     # @!attribute [rw] min_workers
     #   The minimum number of workers that you want to run in your
-    #   environment. MWAA scales the number of Apache Airflow workers and
-    #   the Fargate containers that run your tasks up to the number you
-    #   specify in the `MaxWorkers` field. When there are no more tasks
-    #   running, and no more in the queue, MWAA disposes of the extra
-    #   containers leaving the worker count you specify in the `MinWorkers`
-    #   field.
+    #   environment. MWAA scales the number of Apache Airflow workers up to
+    #   the number you specify in the `MaxWorkers` field. When there are no
+    #   more tasks running, and no more in the queue, MWAA disposes of the
+    #   extra workers leaving the worker count you specify in the
+    #   `MinWorkers` field. For example, `2`.
     #   @return [Integer]
     #
     # @!attribute [rw] name
-    #   The name of your MWAA environment.
+    #   The name of the Amazon MWAA environment. For example,
+    #   `MyMWAAEnvironment`.
     #   @return [String]
     #
     # @!attribute [rw] network_configuration
-    #   The VPC networking components you want to use for your environment.
-    #   At least two private subnet identifiers and one VPC security group
-    #   identifier are required to create an environment. For more
-    #   information, see [Creating the VPC network for a MWAA
-    #   environment][1].
+    #   The VPC networking components used to secure and enable network
+    #   traffic between the AWS resources for your environment. To learn
+    #   more, see [About networking on Amazon MWAA][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-mwaa.html
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] plugins_s3_object_version
-    #   The `plugins.zip` file version you want to use.
+    #   The version of the plugins.zip file on your Amazon S3 bucket. A
+    #   version must be specified each time a plugins.zip file is updated.
+    #   To learn more, see [How S3 Versioning works][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html
     #   @return [String]
     #
     # @!attribute [rw] plugins_s3_path
     #   The relative path to the `plugins.zip` file on your Amazon S3
-    #   storage bucket. For example, `plugins.zip`. If a relative path is
-    #   provided in the request, then `PluginsS3ObjectVersion` is required.
-    #   For more information, see [Importing DAGs on Amazon MWAA][1].
+    #   bucket. For example, `plugins.zip`. If specified, then the
+    #   plugins.zip version is required. To learn more, see [Installing
+    #   custom plugins][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import.html
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html
     #   @return [String]
     #
     # @!attribute [rw] requirements_s3_object_version
-    #   The `requirements.txt` file version you want to use.
+    #   The version of the requirements.txt file on your Amazon S3 bucket. A
+    #   version must be specified each time a requirements.txt file is
+    #   updated. To learn more, see [How S3 Versioning works][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html
     #   @return [String]
     #
     # @!attribute [rw] requirements_s3_path
     #   The relative path to the `requirements.txt` file on your Amazon S3
-    #   storage bucket. For example, `requirements.txt`. If a relative path
-    #   is provided in the request, then `RequirementsS3ObjectVersion` is
-    #   required. For more information, see [Importing DAGs on Amazon
-    #   MWAA][1].
+    #   bucket. For example, `requirements.txt`. If specified, then a file
+    #   version is required. To learn more, see [Installing Python
+    #   dependencies][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import.html
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html
     #   @return [String]
     #
+    # @!attribute [rw] schedulers
+    #   The number of Apache Airflow schedulers to run in your environment.
+    #   @return [Integer]
+    #
     # @!attribute [rw] source_bucket_arn
-    #   The Amazon Resource Name (ARN) of your Amazon S3 storage bucket. For
-    #   example, `arn:aws:s3:::airflow-mybucketname`.
+    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket where your
+    #   DAG code and supporting files are stored. For example,
+    #   `arn:aws:s3:::my-airflow-bucket-unique-name`. To learn more, see
+    #   [Create an Amazon S3 bucket for Amazon MWAA][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The metadata tags you want to attach to your environment. For more
-    #   information, see [Tagging AWS resources][1].
+    #   The key-value tag pairs you want to associate to your environment.
+    #   For example, `"Environment": "Staging"`. To learn more, see [Tagging
+    #   AWS resources][1].
     #
     #
     #
@@ -265,21 +292,23 @@ module Aws::MWAA
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] webserver_access_mode
-    #   The networking access of your Apache Airflow web server. A public
-    #   network allows your Airflow UI to be accessed over the Internet by
-    #   users granted access in your IAM policy. A private network limits
-    #   access of your Airflow UI to users within your VPC. For more
-    #   information, see [Creating the VPC network for a MWAA
-    #   environment][1].
+    #   The Apache Airflow *Web server* access mode. To learn more, see
+    #   [Apache Airflow access modes][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-mwaa.html
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html
     #   @return [String]
     #
     # @!attribute [rw] weekly_maintenance_window_start
-    #   The day and time you want MWAA to start weekly maintenance updates
-    #   on your environment.
+    #   The day and time of the week to start weekly maintenance updates of
+    #   your environment in the following format: `DAY:HH:MM`. For example:
+    #   `TUE:03:30`. You can specify a start time in 30 minute increments
+    #   only. Supported input includes the following:
+    #
+    #   * MON\|TUE\|WED\|THU\|FRI\|SAT\|SUN:(\[01\]\\\\d\|2\[0-3\]):(00\|30)
+    #
+    #   ^
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/CreateEnvironmentInput AWS API Documentation
@@ -300,6 +329,7 @@ module Aws::MWAA
       :plugins_s3_path,
       :requirements_s3_object_version,
       :requirements_s3_path,
+      :schedulers,
       :source_bucket_arn,
       :tags,
       :webserver_access_mode,
@@ -309,7 +339,8 @@ module Aws::MWAA
     end
 
     # @!attribute [rw] arn
-    #   The resulting Amazon MWAA envirnonment ARN.
+    #   The Amazon Resource Name (ARN) returned in the response for the
+    #   environment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/CreateEnvironmentOutput AWS API Documentation
@@ -366,7 +397,8 @@ module Aws::MWAA
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the environment to delete.
+    #   The name of the Amazon MWAA environment. For example,
+    #   `MyMWAAEnvironment`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/DeleteEnvironmentInput AWS API Documentation
@@ -408,111 +440,234 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # An Amazon MWAA environment.
+    # The Amazon Managed Workflows for Apache Airflow (MWAA) environment.
     #
     # @!attribute [rw] airflow_configuration_options
-    #   The Airflow Configuration Options of the Amazon MWAA Environment.
+    #   A list of key-value pairs containing the Apache Airflow
+    #   configuration options attached to your environment. To learn more,
+    #   see [Apache Airflow configuration options][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] airflow_version
-    #   The AirflowV ersion of the Amazon MWAA Environment.
+    #   The Apache Airflow version on your environment. For example,
+    #   `v1.10.12`.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The ARN of the Amazon MWAA Environment.
+    #   The Amazon Resource Name (ARN) of the Amazon MWAA environment.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The Created At date of the Amazon MWAA Environment.
+    #   The day and time the environment was created.
     #   @return [Time]
     #
     # @!attribute [rw] dag_s3_path
-    #   The Dags S3 Path of the Amazon MWAA Environment.
+    #   The relative path to the DAGs folder on your Amazon S3 bucket. For
+    #   example, `dags`. To learn more, see [Adding or updating DAGs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html
     #   @return [String]
     #
     # @!attribute [rw] environment_class
-    #   The Environment Class (size) of the Amazon MWAA Environment.
+    #   The environment class type. Valid values: `mw1.small`, `mw1.medium`,
+    #   `mw1.large`. To learn more, see [Amazon MWAA environment class][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html
     #   @return [String]
     #
     # @!attribute [rw] execution_role_arn
-    #   The Execution Role ARN of the Amazon MWAA Environment.
+    #   The Amazon Resource Name (ARN) of the execution role in IAM that
+    #   allows MWAA to access AWS resources in your environment. For
+    #   example, `arn:aws:iam::123456789:role/my-execution-role`. To learn
+    #   more, see [Amazon MWAA Execution role][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html
     #   @return [String]
     #
     # @!attribute [rw] kms_key
-    #   The Kms Key of the Amazon MWAA Environment.
+    #   The Key Management Service (KMS) encryption key used to encrypt the
+    #   data in your environment.
     #   @return [String]
     #
     # @!attribute [rw] last_update
-    #   Last update information for the environment.
+    #   The status of the last update on the environment, and any errors
+    #   that were encountered.
     #   @return [Types::LastUpdate]
     #
     # @!attribute [rw] logging_configuration
-    #   The Logging Configuration of the Amazon MWAA Environment.
+    #   The Apache Airflow logs being sent to CloudWatch Logs:
+    #   `DagProcessingLogs`, `SchedulerLogs`, `TaskLogs`, `WebserverLogs`,
+    #   `WorkerLogs`.
     #   @return [Types::LoggingConfiguration]
     #
     # @!attribute [rw] max_workers
-    #   The maximum number of workers to run in your Amazon MWAA
-    #   Environment.
+    #   The maximum number of workers that run in your environment. For
+    #   example, `20`.
     #   @return [Integer]
     #
     # @!attribute [rw] min_workers
-    #   The minimum number of workers to run in your Amazon MWAA
-    #   Environment.
+    #   The minimum number of workers that run in your environment. For
+    #   example, `2`.
     #   @return [Integer]
     #
     # @!attribute [rw] name
-    #   The name of the Amazon MWAA Environment.
+    #   The name of the Amazon MWAA environment. For example,
+    #   `MyMWAAEnvironment`.
     #   @return [String]
     #
     # @!attribute [rw] network_configuration
-    #   Provide the security group and subnet IDs for the workers and
-    #   scheduler.
+    #   The VPC networking components used to secure and enable network
+    #   traffic between the AWS resources for your environment. To learn
+    #   more, see [About networking on Amazon MWAA][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] plugins_s3_object_version
-    #   The Plugins.zip S3 Object Version of the Amazon MWAA Environment.
+    #   The version of the plugins.zip file on your Amazon S3 bucket. To
+    #   learn more, see [Installing custom plugins][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html
     #   @return [String]
     #
     # @!attribute [rw] plugins_s3_path
-    #   The Plugins.zip S3 Path of the Amazon MWAA Environment.
+    #   The relative path to the `plugins.zip` file on your Amazon S3
+    #   bucket. For example, `plugins.zip`. To learn more, see [Installing
+    #   custom plugins][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html
     #   @return [String]
     #
     # @!attribute [rw] requirements_s3_object_version
-    #   The Requirements.txt file S3 Object Version of the Amazon MWAA
-    #   Environment.
+    #   The version of the requirements.txt file on your Amazon S3 bucket.
+    #   To learn more, see [Installing Python dependencies][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html
     #   @return [String]
     #
     # @!attribute [rw] requirements_s3_path
-    #   The Requirement.txt S3 Path of the Amazon MWAA Environment.
+    #   The relative path to the `requirements.txt` file on your Amazon S3
+    #   bucket. For example, `requirements.txt`. To learn more, see
+    #   [Installing Python dependencies][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html
     #   @return [String]
     #
+    # @!attribute [rw] schedulers
+    #   The number of Apache Airflow schedulers that run in your Amazon MWAA
+    #   environment.
+    #   @return [Integer]
+    #
     # @!attribute [rw] service_role_arn
-    #   The Service Role ARN of the Amazon MWAA Environment.
+    #   The Amazon Resource Name (ARN) for the service-linked role of the
+    #   environment. To learn more, see [Amazon MWAA Service-linked
+    #   role][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-slr.html
     #   @return [String]
     #
     # @!attribute [rw] source_bucket_arn
-    #   The Source S3 Bucket ARN of the Amazon MWAA Environment.
+    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket where your
+    #   DAG code and supporting files are stored. For example,
+    #   `arn:aws:s3:::my-airflow-bucket-unique-name`. To learn more, see
+    #   [Create an Amazon S3 bucket for Amazon MWAA][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the Amazon MWAA Environment.
+    #   The status of the Amazon MWAA environment. Valid values:
+    #
+    #   * `CREATING` - Indicates the request to create the environment is in
+    #     progress.
+    #
+    #   * `CREATE_FAILED` - Indicates the request to create the environment
+    #     failed, and the environment could not be created.
+    #
+    #   * `AVAILABLE` - Indicates the request was successful and the
+    #     environment is ready to use.
+    #
+    #   * `UPDATING` - Indicates the request to update the environment is in
+    #     progress.
+    #
+    #   * `DELETING` - Indicates the request to delete the environment is in
+    #     progress.
+    #
+    #   * `DELETED` - Indicates the request to delete the environment is
+    #     complete, and the environment has been deleted.
+    #
+    #   * `UNAVAILABLE` - Indicates the request failed, but the environment
+    #     was unable to rollback and is not in a stable state.
+    #
+    #   * `UPDATE_FAILED` - Indicates the request to update the environment
+    #     failed, and the environment has rolled back successfully and is
+    #     ready to use.
+    #
+    #   We recommend reviewing our troubleshooting guide for a list of
+    #   common errors and their solutions. To learn more, see [Amazon MWAA
+    #   troubleshooting][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/troubleshooting.html
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The Tags of the Amazon MWAA Environment.
+    #   The key-value tag pairs associated to your environment. For example,
+    #   `"Environment": "Staging"`. To learn more, see [Tagging AWS
+    #   resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] webserver_access_mode
-    #   The Webserver Access Mode of the Amazon MWAA Environment (public or
-    #   private only).
+    #   The Apache Airflow *Web server* access mode. To learn more, see
+    #   [Apache Airflow access modes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html
     #   @return [String]
     #
     # @!attribute [rw] webserver_url
-    #   The Webserver URL of the Amazon MWAA Environment.
+    #   The Apache Airflow *Web server* host name for the Amazon MWAA
+    #   environment. To learn more, see [Accessing the Apache Airflow
+    #   UI][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/access-airflow-ui.html
     #   @return [String]
     #
     # @!attribute [rw] weekly_maintenance_window_start
-    #   The Weekly Maintenance Window Start of the Amazon MWAA Environment.
+    #   The day and time of the week that weekly maintenance updates are
+    #   scheduled. For example: `TUE:03:30`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/Environment AWS API Documentation
@@ -536,6 +691,7 @@ module Aws::MWAA
       :plugins_s3_path,
       :requirements_s3_object_version,
       :requirements_s3_path,
+      :schedulers,
       :service_role_arn,
       :source_bucket_arn,
       :status,
@@ -555,7 +711,8 @@ module Aws::MWAA
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the environment to retrieve.
+    #   The name of the Amazon MWAA environment. For example,
+    #   `MyMWAAEnvironment`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/GetEnvironmentInput AWS API Documentation
@@ -567,7 +724,7 @@ module Aws::MWAA
     end
 
     # @!attribute [rw] environment
-    #   A JSON blob with environment details.
+    #   An object containing all available details about the environment.
     #   @return [Types::Environment]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/GetEnvironmentOutput AWS API Documentation
@@ -591,18 +748,21 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # Last update information for the environment.
+    # The status of the last update on the environment, and any errors that
+    # were encountered.
     #
     # @!attribute [rw] created_at
-    #   Time that last update occurred.
+    #   The day and time of the last update on the environment.
     #   @return [Time]
     #
     # @!attribute [rw] error
-    #   Error string of last update, if applicable.
+    #   The error that was encountered during the last update of the
+    #   environment.
     #   @return [Types::UpdateError]
     #
     # @!attribute [rw] status
-    #   Status of last update of SUCCESS, FAILED, CREATING, DELETING.
+    #   The status of the last update on the environment. Valid values:
+    #   `SUCCESS`, `PENDING`, `FAILED`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/LastUpdate AWS API Documentation
@@ -624,11 +784,12 @@ module Aws::MWAA
     #       }
     #
     # @!attribute [rw] max_results
-    #   The maximum results when listing MWAA environments.
+    #   The maximum number of results to retrieve per page. For example, `5`
+    #   environments per page.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The Next Token when listing MWAA environments.
+    #   Retrieves the next page of the results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/ListEnvironmentsInput AWS API Documentation
@@ -641,11 +802,11 @@ module Aws::MWAA
     end
 
     # @!attribute [rw] environments
-    #   The list of Amazon MWAA Environments.
+    #   Returns the list of Amazon MWAA environments.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The Next Token when listing MWAA environments.
+    #   Retrieves the next page of the results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/ListEnvironmentsOutput AWS API Documentation
@@ -665,7 +826,9 @@ module Aws::MWAA
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the MWAA environment.
+    #   The Amazon Resource Name (ARN) of the Amazon MWAA environment. For
+    #   example,
+    #   `arn:aws:airflow:us-east-1:123456789012:environment/MyMWAAEnvironment`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/ListTagsForResourceInput AWS API Documentation
@@ -677,7 +840,12 @@ module Aws::MWAA
     end
 
     # @!attribute [rw] tags
-    #   The tags of the MWAA environments.
+    #   The key-value tag pairs associated to your environment. To learn
+    #   more, see [Tagging AWS resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/ListTagsForResourceOutput AWS API Documentation
@@ -688,36 +856,38 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # The Logging Configuration of your Amazon MWAA environment.
+    # Defines the Apache Airflow logs to send to CloudWatch Logs:
+    # `DagProcessingLogs`, `SchedulerLogs`, `TaskLogs`, `WebserverLogs`,
+    # `WorkerLogs`.
     #
     # @!attribute [rw] dag_processing_logs
-    #   A JSON blob that provides configuration to use for logging with
-    #   respect to the various Apache Airflow services: DagProcessingLogs,
-    #   SchedulerLogs, TaskLogs, WebserverLogs, and WorkerLogs.
+    #   Defines the type of logs to send for the Apache Airflow log type
+    #   (e.g. `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
+    #   `Enabled`, `LogLevel`.
     #   @return [Types::ModuleLoggingConfiguration]
     #
     # @!attribute [rw] scheduler_logs
-    #   A JSON blob that provides configuration to use for logging with
-    #   respect to the various Apache Airflow services: DagProcessingLogs,
-    #   SchedulerLogs, TaskLogs, WebserverLogs, and WorkerLogs.
+    #   Defines the type of logs to send for the Apache Airflow log type
+    #   (e.g. `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
+    #   `Enabled`, `LogLevel`.
     #   @return [Types::ModuleLoggingConfiguration]
     #
     # @!attribute [rw] task_logs
-    #   A JSON blob that provides configuration to use for logging with
-    #   respect to the various Apache Airflow services: DagProcessingLogs,
-    #   SchedulerLogs, TaskLogs, WebserverLogs, and WorkerLogs.
+    #   Defines the type of logs to send for the Apache Airflow log type
+    #   (e.g. `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
+    #   `Enabled`, `LogLevel`.
     #   @return [Types::ModuleLoggingConfiguration]
     #
     # @!attribute [rw] webserver_logs
-    #   A JSON blob that provides configuration to use for logging with
-    #   respect to the various Apache Airflow services: DagProcessingLogs,
-    #   SchedulerLogs, TaskLogs, WebserverLogs, and WorkerLogs.
+    #   Defines the type of logs to send for the Apache Airflow log type
+    #   (e.g. `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
+    #   `Enabled`, `LogLevel`.
     #   @return [Types::ModuleLoggingConfiguration]
     #
     # @!attribute [rw] worker_logs
-    #   A JSON blob that provides configuration to use for logging with
-    #   respect to the various Apache Airflow services: DagProcessingLogs,
-    #   SchedulerLogs, TaskLogs, WebserverLogs, and WorkerLogs.
+    #   Defines the type of logs to send for the Apache Airflow log type
+    #   (e.g. `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
+    #   `Enabled`, `LogLevel`.
     #   @return [Types::ModuleLoggingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/LoggingConfiguration AWS API Documentation
@@ -732,7 +902,9 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # The Logging Configuration of your Amazon MWAA environment.
+    # Defines the Apache Airflow logs to send to CloudWatch Logs:
+    # `DagProcessingLogs`, `SchedulerLogs`, `TaskLogs`, `WebserverLogs`,
+    # `WorkerLogs`.
     #
     # @note When making an API call, you may pass LoggingConfigurationInput
     #   data as a hash:
@@ -761,33 +933,33 @@ module Aws::MWAA
     #       }
     #
     # @!attribute [rw] dag_processing_logs
-    #   A JSON blob that provides configuration to use for logging with
-    #   respect to the various Apache Airflow services: DagProcessingLogs,
-    #   SchedulerLogs, TaskLogs, WebserverLogs, and WorkerLogs.
+    #   Defines the type of logs to send for the Apache Airflow log type
+    #   (e.g. `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
+    #   `Enabled`, `LogLevel`.
     #   @return [Types::ModuleLoggingConfigurationInput]
     #
     # @!attribute [rw] scheduler_logs
-    #   A JSON blob that provides configuration to use for logging with
-    #   respect to the various Apache Airflow services: DagProcessingLogs,
-    #   SchedulerLogs, TaskLogs, WebserverLogs, and WorkerLogs.
+    #   Defines the type of logs to send for the Apache Airflow log type
+    #   (e.g. `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
+    #   `Enabled`, `LogLevel`.
     #   @return [Types::ModuleLoggingConfigurationInput]
     #
     # @!attribute [rw] task_logs
-    #   A JSON blob that provides configuration to use for logging with
-    #   respect to the various Apache Airflow services: DagProcessingLogs,
-    #   SchedulerLogs, TaskLogs, WebserverLogs, and WorkerLogs.
+    #   Defines the type of logs to send for the Apache Airflow log type
+    #   (e.g. `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
+    #   `Enabled`, `LogLevel`.
     #   @return [Types::ModuleLoggingConfigurationInput]
     #
     # @!attribute [rw] webserver_logs
-    #   A JSON blob that provides configuration to use for logging with
-    #   respect to the various Apache Airflow services: DagProcessingLogs,
-    #   SchedulerLogs, TaskLogs, WebserverLogs, and WorkerLogs.
+    #   Defines the type of logs to send for the Apache Airflow log type
+    #   (e.g. `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
+    #   `Enabled`, `LogLevel`.
     #   @return [Types::ModuleLoggingConfigurationInput]
     #
     # @!attribute [rw] worker_logs
-    #   A JSON blob that provides configuration to use for logging with
-    #   respect to the various Apache Airflow services: DagProcessingLogs,
-    #   SchedulerLogs, TaskLogs, WebserverLogs, and WorkerLogs.
+    #   Defines the type of logs to send for the Apache Airflow log type
+    #   (e.g. `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
+    #   `Enabled`, `LogLevel`.
     #   @return [Types::ModuleLoggingConfigurationInput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/LoggingConfigurationInput AWS API Documentation
@@ -863,22 +1035,26 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # A JSON blob that provides configuration to use for logging with
-    # respect to the various Apache Airflow services: DagProcessingLogs,
-    # SchedulerLogs, TaskLogs, WebserverLogs, and WorkerLogs.
+    # Defines the type of logs to send for the Apache Airflow log type (e.g.
+    # `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
+    # `Enabled`, `LogLevel`.
     #
     # @!attribute [rw] cloud_watch_log_group_arn
-    #   Provides the ARN for the CloudWatch group where the logs will be
-    #   published.
+    #   The Amazon Resource Name (ARN) for the CloudWatch Logs group where
+    #   the Apache Airflow log type (e.g. `DagProcessingLogs`) is published.
+    #   For example,
+    #   `arn:aws:logs:us-east-1:123456789012:log-group:airflow-MyMWAAEnvironment-MwaaEnvironment-DAGProcessing:*`.
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   Defines that the logging module is enabled.
+    #   Indicates whether to enable the Apache Airflow log type (e.g.
+    #   `DagProcessingLogs`) in CloudWatch Logs.
     #   @return [Boolean]
     #
     # @!attribute [rw] log_level
-    #   Defines the log level, which can be CRITICAL, ERROR, WARNING, or
-    #   INFO.
+    #   Defines the Apache Airflow logs to send for the log type (e.g.
+    #   `DagProcessingLogs`) to CloudWatch Logs. Valid values: `CRITICAL`,
+    #   `ERROR`, `WARNING`, `INFO`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/ModuleLoggingConfiguration AWS API Documentation
@@ -891,9 +1067,9 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # A JSON blob that provides configuration to use for logging with
-    # respect to the various Apache Airflow services: DagProcessingLogs,
-    # SchedulerLogs, TaskLogs, WebserverLogs, and WorkerLogs.
+    # Defines the type of logs to send for the Apache Airflow log type (e.g.
+    # `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
+    # `Enabled`, `LogLevel`.
     #
     # @note When making an API call, you may pass ModuleLoggingConfigurationInput
     #   data as a hash:
@@ -904,12 +1080,14 @@ module Aws::MWAA
     #       }
     #
     # @!attribute [rw] enabled
-    #   Defines that the logging module is enabled.
+    #   Indicates whether to enable the Apache Airflow log type (e.g.
+    #   `DagProcessingLogs`) in CloudWatch Logs.
     #   @return [Boolean]
     #
     # @!attribute [rw] log_level
-    #   Defines the log level, which can be CRITICAL, ERROR, WARNING, or
-    #   INFO.
+    #   Defines the Apache Airflow logs to send for the log type (e.g.
+    #   `DagProcessingLogs`) to CloudWatch Logs. Valid values: `CRITICAL`,
+    #   `ERROR`, `WARNING`, `INFO`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/ModuleLoggingConfigurationInput AWS API Documentation
@@ -921,8 +1099,13 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # Provide the security group and subnet IDs for the workers and
-    # scheduler.
+    # The VPC networking components used to secure and enable network
+    # traffic between the AWS resources for your environment. To learn more,
+    # see [About networking on Amazon MWAA][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html
     #
     # @note When making an API call, you may pass NetworkConfiguration
     #   data as a hash:
@@ -933,13 +1116,20 @@ module Aws::MWAA
     #       }
     #
     # @!attribute [rw] security_group_ids
-    #   A JSON list of 1 or more security groups IDs by name, in the same
-    #   VPC as the subnets.
+    #   A list of 1 or more security group IDs. Accepts up to 5 security
+    #   group IDs. A security group must be attached to the same VPC as the
+    #   subnets. To learn more, see [Security in your VPC on Amazon
+    #   MWAA][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_ids
-    #   Provide a JSON list of 2 subnet IDs by name. These must be private
-    #   subnets, in the same VPC, in two different availability zones.
+    #   A list of 2 subnet IDs. **Required** to create an environment. Must
+    #   be private subnets in two different availability zones. A subnet
+    #   must be attached to the same VPC as the security group.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/NetworkConfiguration AWS API Documentation
@@ -1063,11 +1253,19 @@ module Aws::MWAA
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The tag resource ARN of the MWAA environments.
+    #   The Amazon Resource Name (ARN) of the Amazon MWAA environment. For
+    #   example,
+    #   `arn:aws:airflow:us-east-1:123456789012:environment/MyMWAAEnvironment`.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tag resource tag of the MWAA environments.
+    #   The key-value tag pairs you want to associate to your environment.
+    #   For example, `"Environment": "Staging"`. To learn more, see [Tagging
+    #   AWS resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/TagResourceInput AWS API Documentation
@@ -1092,11 +1290,14 @@ module Aws::MWAA
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The tag resource ARN of the MWAA environments.
+    #   The Amazon Resource Name (ARN) of the Amazon MWAA environment. For
+    #   example,
+    #   `arn:aws:airflow:us-east-1:123456789012:environment/MyMWAAEnvironment`.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   The tag resource key of the MWAA environments.
+    #   The key-value tag pair you want to remove. For example,
+    #   `"Environment": "Staging"`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/UntagResourceInput AWS API Documentation
@@ -1155,84 +1356,173 @@ module Aws::MWAA
     #         plugins_s3_path: "RelativePath",
     #         requirements_s3_object_version: "S3ObjectVersion",
     #         requirements_s3_path: "RelativePath",
+    #         schedulers: 1,
     #         source_bucket_arn: "S3BucketArn",
     #         webserver_access_mode: "PRIVATE_ONLY", # accepts PRIVATE_ONLY, PUBLIC_ONLY
     #         weekly_maintenance_window_start: "WeeklyMaintenanceWindowStart",
     #       }
     #
     # @!attribute [rw] airflow_configuration_options
-    #   The Airflow Configuration Options to update of your Amazon MWAA
-    #   environment.
+    #   A list of key-value pairs containing the Apache Airflow
+    #   configuration options you want to attach to your environment. To
+    #   learn more, see [Apache Airflow configuration options][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] airflow_version
-    #   The Airflow Version to update of your Amazon MWAA environment.
+    #   The Apache Airflow version for your environment. For example,
+    #   `v1.10.12`. If no value is specified, defaults to the latest
+    #   version. Valid values: `v1.10.12`.
     #   @return [String]
     #
     # @!attribute [rw] dag_s3_path
-    #   The Dags folder S3 Path to update of your Amazon MWAA environment.
+    #   The relative path to the DAGs folder on your Amazon S3 bucket. For
+    #   example, `dags`. To learn more, see [Adding or updating DAGs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html
     #   @return [String]
     #
     # @!attribute [rw] environment_class
-    #   The Environment Class to update of your Amazon MWAA environment.
+    #   The environment class type. Valid values: `mw1.small`, `mw1.medium`,
+    #   `mw1.large`. To learn more, see [Amazon MWAA environment class][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html
     #   @return [String]
     #
     # @!attribute [rw] execution_role_arn
-    #   The Executio Role ARN to update of your Amazon MWAA environment.
+    #   The Amazon Resource Name (ARN) of the execution role in IAM that
+    #   allows MWAA to access AWS resources in your environment. For
+    #   example, `arn:aws:iam::123456789:role/my-execution-role`. To learn
+    #   more, see [Amazon MWAA Execution role][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html
     #   @return [String]
     #
     # @!attribute [rw] logging_configuration
-    #   The Logging Configuration to update of your Amazon MWAA environment.
+    #   Defines the Apache Airflow logs to send to CloudWatch Logs:
+    #   `DagProcessingLogs`, `SchedulerLogs`, `TaskLogs`, `WebserverLogs`,
+    #   `WorkerLogs`.
     #   @return [Types::LoggingConfigurationInput]
     #
     # @!attribute [rw] max_workers
-    #   The maximum number of workers to update of your Amazon MWAA
-    #   environment.
+    #   The maximum number of workers that you want to run in your
+    #   environment. MWAA scales the number of Apache Airflow workers up to
+    #   the number you specify in the `MaxWorkers` field. For example, `20`.
+    #   When there are no more tasks running, and no more in the queue, MWAA
+    #   disposes of the extra workers leaving the one worker that is
+    #   included with your environment, or the number you specify in
+    #   `MinWorkers`.
     #   @return [Integer]
     #
     # @!attribute [rw] min_workers
-    #   The minimum number of workers to update of your Amazon MWAA
-    #   environment.
+    #   The minimum number of workers that you want to run in your
+    #   environment. MWAA scales the number of Apache Airflow workers up to
+    #   the number you specify in the `MaxWorkers` field. When there are no
+    #   more tasks running, and no more in the queue, MWAA disposes of the
+    #   extra workers leaving the worker count you specify in the
+    #   `MinWorkers` field. For example, `2`.
     #   @return [Integer]
     #
     # @!attribute [rw] name
-    #   The name of your Amazon MWAA environment that you wish to update.
+    #   The name of your Amazon MWAA environment. For example,
+    #   `MyMWAAEnvironment`.
     #   @return [String]
     #
     # @!attribute [rw] network_configuration
-    #   The Network Configuration to update of your Amazon MWAA environment.
+    #   The VPC networking components used to secure and enable network
+    #   traffic between the AWS resources for your environment. To learn
+    #   more, see [About networking on Amazon MWAA][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html
     #   @return [Types::UpdateNetworkConfigurationInput]
     #
     # @!attribute [rw] plugins_s3_object_version
-    #   The Plugins.zip S3 Object Version to update of your Amazon MWAA
-    #   environment.
+    #   The version of the plugins.zip file on your Amazon S3 bucket. A
+    #   version must be specified each time a plugins.zip file is updated.
+    #   To learn more, see [How S3 Versioning works][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html
     #   @return [String]
     #
     # @!attribute [rw] plugins_s3_path
-    #   The Plugins.zip S3 Path to update of your Amazon MWAA environment.
+    #   The relative path to the `plugins.zip` file on your Amazon S3
+    #   bucket. For example, `plugins.zip`. If specified, then the
+    #   plugins.zip version is required. To learn more, see [Installing
+    #   custom plugins][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html
     #   @return [String]
     #
     # @!attribute [rw] requirements_s3_object_version
-    #   The Requirements.txt S3 ObjectV ersion to update of your Amazon MWAA
-    #   environment.
+    #   The version of the requirements.txt file on your Amazon S3 bucket. A
+    #   version must be specified each time a requirements.txt file is
+    #   updated. To learn more, see [How S3 Versioning works][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html
     #   @return [String]
     #
     # @!attribute [rw] requirements_s3_path
-    #   The Requirements.txt S3 Path to update of your Amazon MWAA
-    #   environment.
+    #   The relative path to the `requirements.txt` file on your Amazon S3
+    #   bucket. For example, `requirements.txt`. If specified, then a file
+    #   version is required. To learn more, see [Installing Python
+    #   dependencies][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html
     #   @return [String]
     #
+    # @!attribute [rw] schedulers
+    #   The number of Apache Airflow schedulers to run in your Amazon MWAA
+    #   environment.
+    #   @return [Integer]
+    #
     # @!attribute [rw] source_bucket_arn
-    #   The S3 Source Bucket ARN to update of your Amazon MWAA environment.
+    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket where your
+    #   DAG code and supporting files are stored. For example,
+    #   `arn:aws:s3:::my-airflow-bucket-unique-name`. To learn more, see
+    #   [Create an Amazon S3 bucket for Amazon MWAA][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html
     #   @return [String]
     #
     # @!attribute [rw] webserver_access_mode
-    #   The Webserver Access Mode to update of your Amazon MWAA environment.
+    #   The Apache Airflow *Web server* access mode. To learn more, see
+    #   [Apache Airflow access modes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html
     #   @return [String]
     #
     # @!attribute [rw] weekly_maintenance_window_start
-    #   The Weekly Maintenance Window Start to update of your Amazon MWAA
-    #   environment.
+    #   The day and time of the week to start weekly maintenance updates of
+    #   your environment in the following format: `DAY:HH:MM`. For example:
+    #   `TUE:03:30`. You can specify a start time in 30 minute increments
+    #   only. Supported input includes the following:
+    #
+    #   * MON\|TUE\|WED\|THU\|FRI\|SAT\|SUN:(\[01\]\\\\d\|2\[0-3\]):(00\|30)
+    #
+    #   ^
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/UpdateEnvironmentInput AWS API Documentation
@@ -1252,6 +1542,7 @@ module Aws::MWAA
       :plugins_s3_path,
       :requirements_s3_object_version,
       :requirements_s3_path,
+      :schedulers,
       :source_bucket_arn,
       :webserver_access_mode,
       :weekly_maintenance_window_start)
@@ -1260,7 +1551,9 @@ module Aws::MWAA
     end
 
     # @!attribute [rw] arn
-    #   The ARN to update of your Amazon MWAA environment.
+    #   The Amazon Resource Name (ARN) of the Amazon MWAA environment. For
+    #   example,
+    #   `arn:aws:airflow:us-east-1:123456789012:environment/MyMWAAEnvironment`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/UpdateEnvironmentOutput AWS API Documentation
@@ -1271,14 +1564,15 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # Error information of update, if applicable.
+    # An object containing the error encountered with the last update:
+    # `ErrorCode`, `ErrorMessage`.
     #
     # @!attribute [rw] error_code
-    #   Error code of update.
+    #   The error code that corresponds to the error with the last update.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   Error message of update.
+    #   The error message that corresponds to the error code.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/UpdateError AWS API Documentation
@@ -1290,8 +1584,13 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # Provide the security group and subnet IDs for the workers and
-    # scheduler.
+    # The VPC networking components used to secure and enable network
+    # traffic between the AWS resources for your environment. To learn more,
+    # see [About networking on Amazon MWAA][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html
     #
     # @note When making an API call, you may pass UpdateNetworkConfigurationInput
     #   data as a hash:
@@ -1301,8 +1600,14 @@ module Aws::MWAA
     #       }
     #
     # @!attribute [rw] security_group_ids
-    #   Provide a JSON list of 1 or more security groups IDs by name, in the
-    #   same VPC as the subnets.
+    #   A list of 1 or more security group IDs. Accepts up to 5 security
+    #   group IDs. A security group must be attached to the same VPC as the
+    #   subnets. To learn more, see [Security in your VPC on Amazon
+    #   MWAA][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/UpdateNetworkConfigurationInput AWS API Documentation

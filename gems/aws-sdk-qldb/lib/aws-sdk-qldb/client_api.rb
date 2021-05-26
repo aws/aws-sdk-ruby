@@ -90,6 +90,8 @@ module Aws::QLDB
     UniqueId = Shapes::StringShape.new(name: 'UniqueId')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateLedgerPermissionsModeRequest = Shapes::StructureShape.new(name: 'UpdateLedgerPermissionsModeRequest')
+    UpdateLedgerPermissionsModeResponse = Shapes::StructureShape.new(name: 'UpdateLedgerPermissionsModeResponse')
     UpdateLedgerRequest = Shapes::StructureShape.new(name: 'UpdateLedgerRequest')
     UpdateLedgerResponse = Shapes::StructureShape.new(name: 'UpdateLedgerResponse')
     ValueHolder = Shapes::StructureShape.new(name: 'ValueHolder')
@@ -111,6 +113,7 @@ module Aws::QLDB
     CreateLedgerResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     CreateLedgerResponse.add_member(:state, Shapes::ShapeRef.new(shape: LedgerState, location_name: "State"))
     CreateLedgerResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDateTime"))
+    CreateLedgerResponse.add_member(:permissions_mode, Shapes::ShapeRef.new(shape: PermissionsMode, location_name: "PermissionsMode"))
     CreateLedgerResponse.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: DeletionProtection, location_name: "DeletionProtection"))
     CreateLedgerResponse.struct_class = Types::CreateLedgerResponse
 
@@ -138,6 +141,7 @@ module Aws::QLDB
     DescribeLedgerResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     DescribeLedgerResponse.add_member(:state, Shapes::ShapeRef.new(shape: LedgerState, location_name: "State"))
     DescribeLedgerResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDateTime"))
+    DescribeLedgerResponse.add_member(:permissions_mode, Shapes::ShapeRef.new(shape: PermissionsMode, location_name: "PermissionsMode"))
     DescribeLedgerResponse.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: DeletionProtection, location_name: "DeletionProtection"))
     DescribeLedgerResponse.struct_class = Types::DescribeLedgerResponse
 
@@ -320,6 +324,15 @@ module Aws::QLDB
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateLedgerPermissionsModeRequest.add_member(:name, Shapes::ShapeRef.new(shape: LedgerName, required: true, location: "uri", location_name: "name"))
+    UpdateLedgerPermissionsModeRequest.add_member(:permissions_mode, Shapes::ShapeRef.new(shape: PermissionsMode, required: true, location_name: "PermissionsMode"))
+    UpdateLedgerPermissionsModeRequest.struct_class = Types::UpdateLedgerPermissionsModeRequest
+
+    UpdateLedgerPermissionsModeResponse.add_member(:name, Shapes::ShapeRef.new(shape: LedgerName, location_name: "Name"))
+    UpdateLedgerPermissionsModeResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    UpdateLedgerPermissionsModeResponse.add_member(:permissions_mode, Shapes::ShapeRef.new(shape: PermissionsMode, location_name: "PermissionsMode"))
+    UpdateLedgerPermissionsModeResponse.struct_class = Types::UpdateLedgerPermissionsModeResponse
 
     UpdateLedgerRequest.add_member(:name, Shapes::ShapeRef.new(shape: LedgerName, required: true, location: "uri", location_name: "name"))
     UpdateLedgerRequest.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: DeletionProtection, location_name: "DeletionProtection"))
@@ -568,6 +581,16 @@ module Aws::QLDB
         o.http_request_uri = "/ledgers/{name}"
         o.input = Shapes::ShapeRef.new(shape: UpdateLedgerRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateLedgerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_ledger_permissions_mode, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateLedgerPermissionsMode"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/ledgers/{name}/permissions-mode"
+        o.input = Shapes::ShapeRef.new(shape: UpdateLedgerPermissionsModeRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateLedgerPermissionsModeResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)

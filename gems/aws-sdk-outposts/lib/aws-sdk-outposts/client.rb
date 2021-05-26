@@ -381,6 +381,7 @@ module Aws::Outposts
     #   resp.outpost.availability_zone_id #=> String
     #   resp.outpost.tags #=> Hash
     #   resp.outpost.tags["TagKey"] #=> String
+    #   resp.outpost.site_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreateOutpost AWS API Documentation
     #
@@ -463,6 +464,7 @@ module Aws::Outposts
     #   resp.outpost.availability_zone_id #=> String
     #   resp.outpost.tags #=> Hash
     #   resp.outpost.tags["TagKey"] #=> String
+    #   resp.outpost.site_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOutpost AWS API Documentation
     #
@@ -552,6 +554,7 @@ module Aws::Outposts
     #   resp.outposts[0].availability_zone_id #=> String
     #   resp.outposts[0].tags #=> Hash
     #   resp.outposts[0].tags["TagKey"] #=> String
+    #   resp.outposts[0].site_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListOutposts AWS API Documentation
@@ -594,6 +597,7 @@ module Aws::Outposts
     #   resp.sites[0].description #=> String
     #   resp.sites[0].tags #=> Hash
     #   resp.sites[0].tags["TagKey"] #=> String
+    #   resp.sites[0].site_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListSites AWS API Documentation
@@ -701,7 +705,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
