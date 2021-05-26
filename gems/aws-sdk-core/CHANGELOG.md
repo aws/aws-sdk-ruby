@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Change XML Builder to not indent by default
+
 3.114.0 (2021-04-13)
 ------------------
 
