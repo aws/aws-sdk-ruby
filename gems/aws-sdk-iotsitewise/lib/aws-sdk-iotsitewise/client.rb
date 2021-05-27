@@ -1097,6 +1097,23 @@ module Aws::IoTSiteWise
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso
     #
+    # @option params [String] :notification_sender_email
+    #   The email address that sends alarm notifications.
+    #
+    #   If you use the AWS IoT Events managed AWS Lambda function to manage
+    #   your emails, you must [verify the sender email address in Amazon
+    #   SES][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html
+    #
+    # @option params [Types::Alarms] :alarms
+    #   Contains the configuration information of an alarm created in an AWS
+    #   IoT SiteWise Monitor portal. You can use the alarm to monitor an asset
+    #   property and get notified when the asset property value is outside a
+    #   specified range. For more information, see .
+    #
     # @return [Types::CreatePortalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePortalResponse#portal_id #portal_id} => String
@@ -1121,6 +1138,11 @@ module Aws::IoTSiteWise
     #       "TagKey" => "TagValue",
     #     },
     #     portal_auth_mode: "IAM", # accepts IAM, SSO
+    #     notification_sender_email: "Email",
+    #     alarms: {
+    #       alarm_role_arn: "ARN", # required
+    #       notification_lambda_arn: "ARN",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1936,6 +1958,8 @@ module Aws::IoTSiteWise
     #   * {Types::DescribePortalResponse#portal_logo_image_location #portal_logo_image_location} => Types::ImageLocation
     #   * {Types::DescribePortalResponse#role_arn #role_arn} => String
     #   * {Types::DescribePortalResponse#portal_auth_mode #portal_auth_mode} => String
+    #   * {Types::DescribePortalResponse#notification_sender_email #notification_sender_email} => String
+    #   * {Types::DescribePortalResponse#alarms #alarms} => Types::Alarms
     #
     # @example Request syntax with placeholder values
     #
@@ -1961,6 +1985,9 @@ module Aws::IoTSiteWise
     #   resp.portal_logo_image_location.url #=> String
     #   resp.role_arn #=> String
     #   resp.portal_auth_mode #=> String, one of "IAM", "SSO"
+    #   resp.notification_sender_email #=> String
+    #   resp.alarms.alarm_role_arn #=> String
+    #   resp.alarms.notification_lambda_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3727,6 +3754,15 @@ module Aws::IoTSiteWise
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :notification_sender_email
+    #   The email address that sends alarm notifications.
+    #
+    # @option params [Types::Alarms] :alarms
+    #   Contains the configuration information of an alarm created in an AWS
+    #   IoT SiteWise Monitor portal. You can use the alarm to monitor an asset
+    #   property and get notified when the asset property value is outside a
+    #   specified range. For more information, see .
+    #
     # @return [Types::UpdatePortalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePortalResponse#portal_status #portal_status} => Types::PortalStatus
@@ -3747,6 +3783,11 @@ module Aws::IoTSiteWise
     #     },
     #     role_arn: "ARN", # required
     #     client_token: "ClientToken",
+    #     notification_sender_email: "Email",
+    #     alarms: {
+    #       alarm_role_arn: "ARN", # required
+    #       notification_lambda_arn: "ARN",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3812,7 +3853,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -36,6 +36,7 @@ module Aws::Kendra
     CapacityUnitsConfiguration = Shapes::StructureShape.new(name: 'CapacityUnitsConfiguration')
     ChangeDetectingColumns = Shapes::ListShape.new(name: 'ChangeDetectingColumns')
     ClaimRegex = Shapes::StringShape.new(name: 'ClaimRegex')
+    ClearQuerySuggestionsRequest = Shapes::StructureShape.new(name: 'ClearQuerySuggestionsRequest')
     ClickFeedback = Shapes::StructureShape.new(name: 'ClickFeedback')
     ClickFeedbackList = Shapes::ListShape.new(name: 'ClickFeedbackList')
     ClientTokenName = Shapes::StringShape.new(name: 'ClientTokenName')
@@ -70,6 +71,8 @@ module Aws::Kendra
     CreateFaqResponse = Shapes::StructureShape.new(name: 'CreateFaqResponse')
     CreateIndexRequest = Shapes::StructureShape.new(name: 'CreateIndexRequest')
     CreateIndexResponse = Shapes::StructureShape.new(name: 'CreateIndexResponse')
+    CreateQuerySuggestionsBlockListRequest = Shapes::StructureShape.new(name: 'CreateQuerySuggestionsBlockListRequest')
+    CreateQuerySuggestionsBlockListResponse = Shapes::StructureShape.new(name: 'CreateQuerySuggestionsBlockListResponse')
     CreateThesaurusRequest = Shapes::StructureShape.new(name: 'CreateThesaurusRequest')
     CreateThesaurusResponse = Shapes::StructureShape.new(name: 'CreateThesaurusResponse')
     DataSourceConfiguration = Shapes::StructureShape.new(name: 'DataSourceConfiguration')
@@ -100,6 +103,7 @@ module Aws::Kendra
     DeleteDataSourceRequest = Shapes::StructureShape.new(name: 'DeleteDataSourceRequest')
     DeleteFaqRequest = Shapes::StructureShape.new(name: 'DeleteFaqRequest')
     DeleteIndexRequest = Shapes::StructureShape.new(name: 'DeleteIndexRequest')
+    DeleteQuerySuggestionsBlockListRequest = Shapes::StructureShape.new(name: 'DeleteQuerySuggestionsBlockListRequest')
     DeleteThesaurusRequest = Shapes::StructureShape.new(name: 'DeleteThesaurusRequest')
     DescribeDataSourceRequest = Shapes::StructureShape.new(name: 'DescribeDataSourceRequest')
     DescribeDataSourceResponse = Shapes::StructureShape.new(name: 'DescribeDataSourceResponse')
@@ -107,6 +111,10 @@ module Aws::Kendra
     DescribeFaqResponse = Shapes::StructureShape.new(name: 'DescribeFaqResponse')
     DescribeIndexRequest = Shapes::StructureShape.new(name: 'DescribeIndexRequest')
     DescribeIndexResponse = Shapes::StructureShape.new(name: 'DescribeIndexResponse')
+    DescribeQuerySuggestionsBlockListRequest = Shapes::StructureShape.new(name: 'DescribeQuerySuggestionsBlockListRequest')
+    DescribeQuerySuggestionsBlockListResponse = Shapes::StructureShape.new(name: 'DescribeQuerySuggestionsBlockListResponse')
+    DescribeQuerySuggestionsConfigRequest = Shapes::StructureShape.new(name: 'DescribeQuerySuggestionsConfigRequest')
+    DescribeQuerySuggestionsConfigResponse = Shapes::StructureShape.new(name: 'DescribeQuerySuggestionsConfigResponse')
     DescribeThesaurusRequest = Shapes::StructureShape.new(name: 'DescribeThesaurusRequest')
     DescribeThesaurusResponse = Shapes::StructureShape.new(name: 'DescribeThesaurusResponse')
     Description = Shapes::StringShape.new(name: 'Description')
@@ -149,6 +157,8 @@ module Aws::Kendra
     FaqSummary = Shapes::StructureShape.new(name: 'FaqSummary')
     FaqSummaryItems = Shapes::ListShape.new(name: 'FaqSummaryItems')
     FeedbackToken = Shapes::StringShape.new(name: 'FeedbackToken')
+    GetQuerySuggestionsRequest = Shapes::StructureShape.new(name: 'GetQuerySuggestionsRequest')
+    GetQuerySuggestionsResponse = Shapes::StructureShape.new(name: 'GetQuerySuggestionsResponse')
     GoogleDriveConfiguration = Shapes::StructureShape.new(name: 'GoogleDriveConfiguration')
     GroupAttributeField = Shapes::StringShape.new(name: 'GroupAttributeField')
     Highlight = Shapes::StructureShape.new(name: 'Highlight')
@@ -181,6 +191,8 @@ module Aws::Kendra
     ListFaqsResponse = Shapes::StructureShape.new(name: 'ListFaqsResponse')
     ListIndicesRequest = Shapes::StructureShape.new(name: 'ListIndicesRequest')
     ListIndicesResponse = Shapes::StructureShape.new(name: 'ListIndicesResponse')
+    ListQuerySuggestionsBlockListsRequest = Shapes::StructureShape.new(name: 'ListQuerySuggestionsBlockListsRequest')
+    ListQuerySuggestionsBlockListsResponse = Shapes::StructureShape.new(name: 'ListQuerySuggestionsBlockListsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListThesauriRequest = Shapes::StructureShape.new(name: 'ListThesauriRequest')
@@ -190,10 +202,15 @@ module Aws::Kendra
     MaxResultsIntegerForListDataSourcesRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListDataSourcesRequest')
     MaxResultsIntegerForListFaqsRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListFaqsRequest')
     MaxResultsIntegerForListIndicesRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListIndicesRequest')
+    MaxResultsIntegerForListQuerySuggestionsBlockLists = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListQuerySuggestionsBlockLists')
     MaxResultsIntegerForListThesauriRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListThesauriRequest')
     MetricValue = Shapes::StringShape.new(name: 'MetricValue')
     MimeType = Shapes::StringShape.new(name: 'MimeType')
+    MinimumNumberOfQueryingUsers = Shapes::IntegerShape.new(name: 'MinimumNumberOfQueryingUsers')
+    MinimumQueryCount = Shapes::IntegerShape.new(name: 'MinimumQueryCount')
+    Mode = Shapes::StringShape.new(name: 'Mode')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    ObjectBoolean = Shapes::BooleanShape.new(name: 'ObjectBoolean')
     OneDriveConfiguration = Shapes::StructureShape.new(name: 'OneDriveConfiguration')
     OneDriveUser = Shapes::StringShape.new(name: 'OneDriveUser')
     OneDriveUserList = Shapes::ListShape.new(name: 'OneDriveUserList')
@@ -211,6 +228,13 @@ module Aws::Kendra
     QueryResultItem = Shapes::StructureShape.new(name: 'QueryResultItem')
     QueryResultItemList = Shapes::ListShape.new(name: 'QueryResultItemList')
     QueryResultType = Shapes::StringShape.new(name: 'QueryResultType')
+    QuerySuggestionsBlockListId = Shapes::StringShape.new(name: 'QuerySuggestionsBlockListId')
+    QuerySuggestionsBlockListName = Shapes::StringShape.new(name: 'QuerySuggestionsBlockListName')
+    QuerySuggestionsBlockListStatus = Shapes::StringShape.new(name: 'QuerySuggestionsBlockListStatus')
+    QuerySuggestionsBlockListSummary = Shapes::StructureShape.new(name: 'QuerySuggestionsBlockListSummary')
+    QuerySuggestionsBlockListSummaryItems = Shapes::ListShape.new(name: 'QuerySuggestionsBlockListSummaryItems')
+    QuerySuggestionsId = Shapes::StringShape.new(name: 'QuerySuggestionsId')
+    QuerySuggestionsStatus = Shapes::StringShape.new(name: 'QuerySuggestionsStatus')
     QueryText = Shapes::StringShape.new(name: 'QueryText')
     ReadAccessType = Shapes::StringShape.new(name: 'ReadAccessType')
     Relevance = Shapes::StructureShape.new(name: 'Relevance')
@@ -272,6 +296,13 @@ module Aws::Kendra
     SubmitFeedbackRequest = Shapes::StructureShape.new(name: 'SubmitFeedbackRequest')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
+    Suggestion = Shapes::StructureShape.new(name: 'Suggestion')
+    SuggestionHighlight = Shapes::StructureShape.new(name: 'SuggestionHighlight')
+    SuggestionHighlightList = Shapes::ListShape.new(name: 'SuggestionHighlightList')
+    SuggestionList = Shapes::ListShape.new(name: 'SuggestionList')
+    SuggestionQueryText = Shapes::StringShape.new(name: 'SuggestionQueryText')
+    SuggestionTextWithHighlights = Shapes::StructureShape.new(name: 'SuggestionTextWithHighlights')
+    SuggestionValue = Shapes::StructureShape.new(name: 'SuggestionValue')
     TableName = Shapes::StringShape.new(name: 'TableName')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -297,6 +328,8 @@ module Aws::Kendra
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateDataSourceRequest = Shapes::StructureShape.new(name: 'UpdateDataSourceRequest')
     UpdateIndexRequest = Shapes::StructureShape.new(name: 'UpdateIndexRequest')
+    UpdateQuerySuggestionsBlockListRequest = Shapes::StructureShape.new(name: 'UpdateQuerySuggestionsBlockListRequest')
+    UpdateQuerySuggestionsConfigRequest = Shapes::StructureShape.new(name: 'UpdateQuerySuggestionsConfigRequest')
     UpdateThesaurusRequest = Shapes::StructureShape.new(name: 'UpdateThesaurusRequest')
     Url = Shapes::StringShape.new(name: 'Url')
     UserAccount = Shapes::StringShape.new(name: 'UserAccount')
@@ -379,6 +412,9 @@ module Aws::Kendra
     CapacityUnitsConfiguration.struct_class = Types::CapacityUnitsConfiguration
 
     ChangeDetectingColumns.member = Shapes::ShapeRef.new(shape: ColumnName)
+
+    ClearQuerySuggestionsRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    ClearQuerySuggestionsRequest.struct_class = Types::ClearQuerySuggestionsRequest
 
     ClickFeedback.add_member(:result_id, Shapes::ShapeRef.new(shape: ResultId, required: true, location_name: "ResultId"))
     ClickFeedback.add_member(:click_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ClickTime"))
@@ -503,6 +539,18 @@ module Aws::Kendra
     CreateIndexResponse.add_member(:id, Shapes::ShapeRef.new(shape: IndexId, location_name: "Id"))
     CreateIndexResponse.struct_class = Types::CreateIndexResponse
 
+    CreateQuerySuggestionsBlockListRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    CreateQuerySuggestionsBlockListRequest.add_member(:name, Shapes::ShapeRef.new(shape: QuerySuggestionsBlockListName, required: true, location_name: "Name"))
+    CreateQuerySuggestionsBlockListRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateQuerySuggestionsBlockListRequest.add_member(:source_s3_path, Shapes::ShapeRef.new(shape: S3Path, required: true, location_name: "SourceS3Path"))
+    CreateQuerySuggestionsBlockListRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateQuerySuggestionsBlockListRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    CreateQuerySuggestionsBlockListRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateQuerySuggestionsBlockListRequest.struct_class = Types::CreateQuerySuggestionsBlockListRequest
+
+    CreateQuerySuggestionsBlockListResponse.add_member(:id, Shapes::ShapeRef.new(shape: QuerySuggestionsBlockListId, location_name: "Id"))
+    CreateQuerySuggestionsBlockListResponse.struct_class = Types::CreateQuerySuggestionsBlockListResponse
+
     CreateThesaurusRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     CreateThesaurusRequest.add_member(:name, Shapes::ShapeRef.new(shape: ThesaurusName, required: true, location_name: "Name"))
     CreateThesaurusRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -550,7 +598,7 @@ module Aws::Kendra
     DataSourceSyncJobHistoryList.member = Shapes::ShapeRef.new(shape: DataSourceSyncJob)
 
     DataSourceSyncJobMetricTarget.add_member(:data_source_id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location_name: "DataSourceId"))
-    DataSourceSyncJobMetricTarget.add_member(:data_source_sync_job_id, Shapes::ShapeRef.new(shape: DataSourceSyncJobId, required: true, location_name: "DataSourceSyncJobId"))
+    DataSourceSyncJobMetricTarget.add_member(:data_source_sync_job_id, Shapes::ShapeRef.new(shape: DataSourceSyncJobId, location_name: "DataSourceSyncJobId"))
     DataSourceSyncJobMetricTarget.struct_class = Types::DataSourceSyncJobMetricTarget
 
     DataSourceSyncJobMetrics.add_member(:documents_added, Shapes::ShapeRef.new(shape: MetricValue, location_name: "DocumentsAdded"))
@@ -589,6 +637,10 @@ module Aws::Kendra
 
     DeleteIndexRequest.add_member(:id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "Id"))
     DeleteIndexRequest.struct_class = Types::DeleteIndexRequest
+
+    DeleteQuerySuggestionsBlockListRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    DeleteQuerySuggestionsBlockListRequest.add_member(:id, Shapes::ShapeRef.new(shape: QuerySuggestionsBlockListId, required: true, location_name: "Id"))
+    DeleteQuerySuggestionsBlockListRequest.struct_class = Types::DeleteQuerySuggestionsBlockListRequest
 
     DeleteThesaurusRequest.add_member(:id, Shapes::ShapeRef.new(shape: ThesaurusId, required: true, location_name: "Id"))
     DeleteThesaurusRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
@@ -648,6 +700,38 @@ module Aws::Kendra
     DescribeIndexResponse.add_member(:user_token_configurations, Shapes::ShapeRef.new(shape: UserTokenConfigurationList, location_name: "UserTokenConfigurations"))
     DescribeIndexResponse.add_member(:user_context_policy, Shapes::ShapeRef.new(shape: UserContextPolicy, location_name: "UserContextPolicy"))
     DescribeIndexResponse.struct_class = Types::DescribeIndexResponse
+
+    DescribeQuerySuggestionsBlockListRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    DescribeQuerySuggestionsBlockListRequest.add_member(:id, Shapes::ShapeRef.new(shape: QuerySuggestionsBlockListId, required: true, location_name: "Id"))
+    DescribeQuerySuggestionsBlockListRequest.struct_class = Types::DescribeQuerySuggestionsBlockListRequest
+
+    DescribeQuerySuggestionsBlockListResponse.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, location_name: "IndexId"))
+    DescribeQuerySuggestionsBlockListResponse.add_member(:id, Shapes::ShapeRef.new(shape: QuerySuggestionsBlockListId, location_name: "Id"))
+    DescribeQuerySuggestionsBlockListResponse.add_member(:name, Shapes::ShapeRef.new(shape: QuerySuggestionsBlockListName, location_name: "Name"))
+    DescribeQuerySuggestionsBlockListResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    DescribeQuerySuggestionsBlockListResponse.add_member(:status, Shapes::ShapeRef.new(shape: QuerySuggestionsBlockListStatus, location_name: "Status"))
+    DescribeQuerySuggestionsBlockListResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    DescribeQuerySuggestionsBlockListResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    DescribeQuerySuggestionsBlockListResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    DescribeQuerySuggestionsBlockListResponse.add_member(:source_s3_path, Shapes::ShapeRef.new(shape: S3Path, location_name: "SourceS3Path"))
+    DescribeQuerySuggestionsBlockListResponse.add_member(:item_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ItemCount"))
+    DescribeQuerySuggestionsBlockListResponse.add_member(:file_size_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "FileSizeBytes"))
+    DescribeQuerySuggestionsBlockListResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    DescribeQuerySuggestionsBlockListResponse.struct_class = Types::DescribeQuerySuggestionsBlockListResponse
+
+    DescribeQuerySuggestionsConfigRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    DescribeQuerySuggestionsConfigRequest.struct_class = Types::DescribeQuerySuggestionsConfigRequest
+
+    DescribeQuerySuggestionsConfigResponse.add_member(:mode, Shapes::ShapeRef.new(shape: Mode, location_name: "Mode"))
+    DescribeQuerySuggestionsConfigResponse.add_member(:status, Shapes::ShapeRef.new(shape: QuerySuggestionsStatus, location_name: "Status"))
+    DescribeQuerySuggestionsConfigResponse.add_member(:query_log_look_back_window_in_days, Shapes::ShapeRef.new(shape: Integer, location_name: "QueryLogLookBackWindowInDays"))
+    DescribeQuerySuggestionsConfigResponse.add_member(:include_queries_without_user_information, Shapes::ShapeRef.new(shape: ObjectBoolean, location_name: "IncludeQueriesWithoutUserInformation"))
+    DescribeQuerySuggestionsConfigResponse.add_member(:minimum_number_of_querying_users, Shapes::ShapeRef.new(shape: MinimumNumberOfQueryingUsers, location_name: "MinimumNumberOfQueryingUsers"))
+    DescribeQuerySuggestionsConfigResponse.add_member(:minimum_query_count, Shapes::ShapeRef.new(shape: MinimumQueryCount, location_name: "MinimumQueryCount"))
+    DescribeQuerySuggestionsConfigResponse.add_member(:last_suggestions_build_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastSuggestionsBuildTime"))
+    DescribeQuerySuggestionsConfigResponse.add_member(:last_clear_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastClearTime"))
+    DescribeQuerySuggestionsConfigResponse.add_member(:total_suggestions_count, Shapes::ShapeRef.new(shape: Integer, location_name: "TotalSuggestionsCount"))
+    DescribeQuerySuggestionsConfigResponse.struct_class = Types::DescribeQuerySuggestionsConfigResponse
 
     DescribeThesaurusRequest.add_member(:id, Shapes::ShapeRef.new(shape: ThesaurusId, required: true, location_name: "Id"))
     DescribeThesaurusRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
@@ -751,6 +835,15 @@ module Aws::Kendra
 
     FaqSummaryItems.member = Shapes::ShapeRef.new(shape: FaqSummary)
 
+    GetQuerySuggestionsRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    GetQuerySuggestionsRequest.add_member(:query_text, Shapes::ShapeRef.new(shape: SuggestionQueryText, required: true, location_name: "QueryText"))
+    GetQuerySuggestionsRequest.add_member(:max_suggestions_count, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxSuggestionsCount"))
+    GetQuerySuggestionsRequest.struct_class = Types::GetQuerySuggestionsRequest
+
+    GetQuerySuggestionsResponse.add_member(:query_suggestions_id, Shapes::ShapeRef.new(shape: QuerySuggestionsId, location_name: "QuerySuggestionsId"))
+    GetQuerySuggestionsResponse.add_member(:suggestions, Shapes::ShapeRef.new(shape: SuggestionList, location_name: "Suggestions"))
+    GetQuerySuggestionsResponse.struct_class = Types::GetQuerySuggestionsResponse
+
     GoogleDriveConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
     GoogleDriveConfiguration.add_member(:inclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPatterns"))
     GoogleDriveConfiguration.add_member(:exclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExclusionPatterns"))
@@ -836,6 +929,15 @@ module Aws::Kendra
     ListIndicesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListIndicesResponse.struct_class = Types::ListIndicesResponse
 
+    ListQuerySuggestionsBlockListsRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    ListQuerySuggestionsBlockListsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListQuerySuggestionsBlockListsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsIntegerForListQuerySuggestionsBlockLists, location_name: "MaxResults"))
+    ListQuerySuggestionsBlockListsRequest.struct_class = Types::ListQuerySuggestionsBlockListsRequest
+
+    ListQuerySuggestionsBlockListsResponse.add_member(:block_list_summary_items, Shapes::ShapeRef.new(shape: QuerySuggestionsBlockListSummaryItems, location_name: "BlockListSummaryItems"))
+    ListQuerySuggestionsBlockListsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListQuerySuggestionsBlockListsResponse.struct_class = Types::ListQuerySuggestionsBlockListsResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -906,6 +1008,16 @@ module Aws::Kendra
     QueryResultItem.struct_class = Types::QueryResultItem
 
     QueryResultItemList.member = Shapes::ShapeRef.new(shape: QueryResultItem)
+
+    QuerySuggestionsBlockListSummary.add_member(:id, Shapes::ShapeRef.new(shape: QuerySuggestionsBlockListId, location_name: "Id"))
+    QuerySuggestionsBlockListSummary.add_member(:name, Shapes::ShapeRef.new(shape: QuerySuggestionsBlockListName, location_name: "Name"))
+    QuerySuggestionsBlockListSummary.add_member(:status, Shapes::ShapeRef.new(shape: QuerySuggestionsBlockListStatus, location_name: "Status"))
+    QuerySuggestionsBlockListSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    QuerySuggestionsBlockListSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    QuerySuggestionsBlockListSummary.add_member(:item_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ItemCount"))
+    QuerySuggestionsBlockListSummary.struct_class = Types::QuerySuggestionsBlockListSummary
+
+    QuerySuggestionsBlockListSummaryItems.member = Shapes::ShapeRef.new(shape: QuerySuggestionsBlockListSummary)
 
     Relevance.add_member(:freshness, Shapes::ShapeRef.new(shape: DocumentMetadataBoolean, location_name: "Freshness"))
     Relevance.add_member(:importance, Shapes::ShapeRef.new(shape: Importance, location_name: "Importance"))
@@ -1078,6 +1190,25 @@ module Aws::Kendra
 
     SubnetIdList.member = Shapes::ShapeRef.new(shape: SubnetId)
 
+    Suggestion.add_member(:id, Shapes::ShapeRef.new(shape: ResultId, location_name: "Id"))
+    Suggestion.add_member(:value, Shapes::ShapeRef.new(shape: SuggestionValue, location_name: "Value"))
+    Suggestion.struct_class = Types::Suggestion
+
+    SuggestionHighlight.add_member(:begin_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "BeginOffset"))
+    SuggestionHighlight.add_member(:end_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "EndOffset"))
+    SuggestionHighlight.struct_class = Types::SuggestionHighlight
+
+    SuggestionHighlightList.member = Shapes::ShapeRef.new(shape: SuggestionHighlight)
+
+    SuggestionList.member = Shapes::ShapeRef.new(shape: Suggestion)
+
+    SuggestionTextWithHighlights.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
+    SuggestionTextWithHighlights.add_member(:highlights, Shapes::ShapeRef.new(shape: SuggestionHighlightList, location_name: "Highlights"))
+    SuggestionTextWithHighlights.struct_class = Types::SuggestionTextWithHighlights
+
+    SuggestionValue.add_member(:text, Shapes::ShapeRef.new(shape: SuggestionTextWithHighlights, location_name: "Text"))
+    SuggestionValue.struct_class = Types::SuggestionValue
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
     Tag.struct_class = Types::Tag
@@ -1140,6 +1271,22 @@ module Aws::Kendra
     UpdateIndexRequest.add_member(:user_token_configurations, Shapes::ShapeRef.new(shape: UserTokenConfigurationList, location_name: "UserTokenConfigurations"))
     UpdateIndexRequest.add_member(:user_context_policy, Shapes::ShapeRef.new(shape: UserContextPolicy, location_name: "UserContextPolicy"))
     UpdateIndexRequest.struct_class = Types::UpdateIndexRequest
+
+    UpdateQuerySuggestionsBlockListRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    UpdateQuerySuggestionsBlockListRequest.add_member(:id, Shapes::ShapeRef.new(shape: QuerySuggestionsBlockListId, required: true, location_name: "Id"))
+    UpdateQuerySuggestionsBlockListRequest.add_member(:name, Shapes::ShapeRef.new(shape: QuerySuggestionsBlockListName, location_name: "Name"))
+    UpdateQuerySuggestionsBlockListRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    UpdateQuerySuggestionsBlockListRequest.add_member(:source_s3_path, Shapes::ShapeRef.new(shape: S3Path, location_name: "SourceS3Path"))
+    UpdateQuerySuggestionsBlockListRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    UpdateQuerySuggestionsBlockListRequest.struct_class = Types::UpdateQuerySuggestionsBlockListRequest
+
+    UpdateQuerySuggestionsConfigRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    UpdateQuerySuggestionsConfigRequest.add_member(:mode, Shapes::ShapeRef.new(shape: Mode, location_name: "Mode"))
+    UpdateQuerySuggestionsConfigRequest.add_member(:query_log_look_back_window_in_days, Shapes::ShapeRef.new(shape: Integer, location_name: "QueryLogLookBackWindowInDays"))
+    UpdateQuerySuggestionsConfigRequest.add_member(:include_queries_without_user_information, Shapes::ShapeRef.new(shape: ObjectBoolean, location_name: "IncludeQueriesWithoutUserInformation"))
+    UpdateQuerySuggestionsConfigRequest.add_member(:minimum_number_of_querying_users, Shapes::ShapeRef.new(shape: MinimumNumberOfQueryingUsers, location_name: "MinimumNumberOfQueryingUsers"))
+    UpdateQuerySuggestionsConfigRequest.add_member(:minimum_query_count, Shapes::ShapeRef.new(shape: MinimumQueryCount, location_name: "MinimumQueryCount"))
+    UpdateQuerySuggestionsConfigRequest.struct_class = Types::UpdateQuerySuggestionsConfigRequest
 
     UpdateThesaurusRequest.add_member(:id, Shapes::ShapeRef.new(shape: ThesaurusId, required: true, location_name: "Id"))
     UpdateThesaurusRequest.add_member(:name, Shapes::ShapeRef.new(shape: ThesaurusName, location_name: "Name"))
@@ -1213,6 +1360,20 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:clear_query_suggestions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ClearQuerySuggestions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ClearQuerySuggestionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_data_source, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDataSource"
         o.http_method = "POST"
@@ -1255,6 +1416,21 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_query_suggestions_block_list, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateQuerySuggestionsBlockList"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateQuerySuggestionsBlockListRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateQuerySuggestionsBlockListResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
@@ -1316,6 +1492,20 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:delete_query_suggestions_block_list, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteQuerySuggestionsBlockList"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteQuerySuggestionsBlockListRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_thesaurus, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteThesaurus"
         o.http_method = "POST"
@@ -1369,6 +1559,32 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:describe_query_suggestions_block_list, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeQuerySuggestionsBlockList"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeQuerySuggestionsBlockListRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeQuerySuggestionsBlockListResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_query_suggestions_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeQuerySuggestionsConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeQuerySuggestionsConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeQuerySuggestionsConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:describe_thesaurus, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeThesaurus"
         o.http_method = "POST"
@@ -1379,6 +1595,21 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_query_suggestions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetQuerySuggestions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetQuerySuggestionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetQuerySuggestionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -1450,6 +1681,19 @@ module Aws::Kendra
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_query_suggestions_block_lists, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListQuerySuggestionsBlockLists"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListQuerySuggestionsBlockListsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListQuerySuggestionsBlockListsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1587,6 +1831,34 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_query_suggestions_block_list, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateQuerySuggestionsBlockList"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateQuerySuggestionsBlockListRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_query_suggestions_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateQuerySuggestionsConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateQuerySuggestionsConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

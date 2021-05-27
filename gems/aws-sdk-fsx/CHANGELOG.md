@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2021-05-27)
+------------------
+
+* Feature - This release adds LZ4 data compression support to FSx for Lustre to reduce storage consumption of both file system storage and file system backups.
+
 1.36.0 (2021-04-12)
 ------------------
 

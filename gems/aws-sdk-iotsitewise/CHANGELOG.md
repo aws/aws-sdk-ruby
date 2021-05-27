@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2021-05-27)
+------------------
+
+* Feature - IoT SiteWise Monitor Portal API updates to add alarms feature configuration.
+
 1.22.0 (2021-05-18)
 ------------------
 

@@ -2100,7 +2100,8 @@ module Aws::Lightsail
     #   <note markdown="1"> You cannot register a new domain name using Lightsail. You must
     #   register a domain name using Amazon Route 53 or another domain name
     #   registrar. If you have already registered your domain, you can enter
-    #   its name in this parameter to manage the DNS records for that domain.
+    #   its name in this parameter to manage the DNS records for that domain
+    #   using Lightsail.
     #
     #    </note>
     #
@@ -10593,7 +10594,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

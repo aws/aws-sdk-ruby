@@ -364,7 +364,7 @@ module Aws::Kendra
     #     document_id_list: ["DocumentId"], # required
     #     data_source_sync_job_metric_target: {
     #       data_source_id: "DataSourceId", # required
-    #       data_source_sync_job_id: "DataSourceSyncJobId", # required
+    #       data_source_sync_job_id: "DataSourceSyncJobId",
     #     },
     #   })
     #
@@ -411,6 +411,12 @@ module Aws::Kendra
     #
     # @option params [required, Array<Types::Document>] :documents
     #   One or more documents to add to the index.
+    #
+    #   Documents can include custom attributes. For example, 'DataSourceId'
+    #   and 'DataSourceSyncJobId' are custom attributes that provide
+    #   information on the synchronization of documents running on a data
+    #   source. Note, 'DataSourceSyncJobId' could be an optional custom
+    #   attribute as Amazon Kendra will use the ID of a running sync job.
     #
     #   Documents have the following file size limits.
     #
@@ -481,6 +487,34 @@ module Aws::Kendra
     # @param [Hash] params ({})
     def batch_put_document(params = {}, options = {})
       req = build_request(:batch_put_document, params)
+      req.send_request(options)
+    end
+
+    # Clears existing query suggestions from an index.
+    #
+    # This deletes existing suggestions only, not the queries in the query
+    # log. After you clear suggestions, Amazon Kendra learns new suggestions
+    # based on new queries added to the query log from the time you cleared
+    # suggestions. If you do not see any new suggestions, then please allow
+    # Amazon Kendra to collect enough queries to learn new suggestions.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index you want to clear query suggestions from.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.clear_query_suggestions({
+    #     index_id: "IndexId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ClearQuerySuggestions AWS API Documentation
+    #
+    # @overload clear_query_suggestions(params = {})
+    # @param [Hash] params ({})
+    def clear_query_suggestions(params = {}, options = {})
+      req = build_request(:clear_query_suggestions, params)
       req.send_request(options)
     end
 
@@ -1065,6 +1099,107 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Creates a block list to exlcude certain queries from suggestions.
+    #
+    # Any query that contains words or phrases specified in the block list
+    # is blocked or filtered out from being shown as a suggestion.
+    #
+    # You need to provide the file location of your block list text file in
+    # your S3 bucket. In your text file, enter each block word or phrase on
+    # a separate line.
+    #
+    # For information on the current quota limits for block lists, see
+    # [Quotas for Amazon Kendra][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index you want to create a query suggestions
+    #   block list for.
+    #
+    # @option params [required, String] :name
+    #   A user friendly name for the block list.
+    #
+    #   For example, the block list named 'offensive-words' includes all
+    #   offensive words that could appear in user queries and need to be
+    #   blocked from suggestions.
+    #
+    # @option params [String] :description
+    #   A user-friendly description for the block list.
+    #
+    #   For example, the description "List of all offensive words that can
+    #   appear in user queries and need to be blocked from suggestions."
+    #
+    # @option params [required, Types::S3Path] :source_s3_path
+    #   The S3 path to your block list text file in your S3 bucket.
+    #
+    #   Each block word or phrase should be on a separate line in a text file.
+    #
+    #   For information on the current quota limits for block lists, see
+    #   [Quotas for Amazon Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
+    #
+    # @option params [String] :client_token
+    #   A token that you provide to identify the request to create a query
+    #   suggestions block list.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :role_arn
+    #   The IAM (Identity and Access Management) role used by Amazon Kendra to
+    #   access the block list text file in your S3 bucket.
+    #
+    #   You need permissions to the role ARN (Amazon Resource Name). The role
+    #   needs S3 read permissions to your file in S3 and needs to give STS
+    #   (Security Token Service) assume role permissions to Amazon Kendra.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A tag that you can assign to a block list that categorizes the block
+    #   list.
+    #
+    # @return [Types::CreateQuerySuggestionsBlockListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateQuerySuggestionsBlockListResponse#id #id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_query_suggestions_block_list({
+    #     index_id: "IndexId", # required
+    #     name: "QuerySuggestionsBlockListName", # required
+    #     description: "Description",
+    #     source_s3_path: { # required
+    #       bucket: "S3BucketName", # required
+    #       key: "S3ObjectKey", # required
+    #     },
+    #     client_token: "ClientTokenName",
+    #     role_arn: "RoleArn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateQuerySuggestionsBlockList AWS API Documentation
+    #
+    # @overload create_query_suggestions_block_list(params = {})
+    # @param [Hash] params ({})
+    def create_query_suggestions_block_list(params = {}, options = {})
+      req = build_request(:create_query_suggestions_block_list, params)
+      req.send_request(options)
+    end
+
     # Creates a thesaurus for an index. The thesaurus contains a list of
     # synonyms in Solr format.
     #
@@ -1217,6 +1352,36 @@ module Aws::Kendra
     # @param [Hash] params ({})
     def delete_index(params = {}, options = {})
       req = build_request(:delete_index, params)
+      req.send_request(options)
+    end
+
+    # Deletes a block list used for query suggestions for an index.
+    #
+    # A deleted block list might not take effect right away. Amazon Kendra
+    # needs to refresh the entire suggestions list to add back the queries
+    # that were previously blocked.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the you want to delete a block list from.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier of the block list that needs to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_query_suggestions_block_list({
+    #     index_id: "IndexId", # required
+    #     id: "QuerySuggestionsBlockListId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteQuerySuggestionsBlockList AWS API Documentation
+    #
+    # @overload delete_query_suggestions_block_list(params = {})
+    # @param [Hash] params ({})
+    def delete_query_suggestions_block_list(params = {}, options = {})
+      req = build_request(:delete_query_suggestions_block_list, params)
       req.send_request(options)
     end
 
@@ -1617,6 +1782,112 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Describes a block list used for query suggestions for an index.
+    #
+    # This is used to check the current settings that are applied to a block
+    # list.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index for the block list.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier of the block list.
+    #
+    # @return [Types::DescribeQuerySuggestionsBlockListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeQuerySuggestionsBlockListResponse#index_id #index_id} => String
+    #   * {Types::DescribeQuerySuggestionsBlockListResponse#id #id} => String
+    #   * {Types::DescribeQuerySuggestionsBlockListResponse#name #name} => String
+    #   * {Types::DescribeQuerySuggestionsBlockListResponse#description #description} => String
+    #   * {Types::DescribeQuerySuggestionsBlockListResponse#status #status} => String
+    #   * {Types::DescribeQuerySuggestionsBlockListResponse#error_message #error_message} => String
+    #   * {Types::DescribeQuerySuggestionsBlockListResponse#created_at #created_at} => Time
+    #   * {Types::DescribeQuerySuggestionsBlockListResponse#updated_at #updated_at} => Time
+    #   * {Types::DescribeQuerySuggestionsBlockListResponse#source_s3_path #source_s3_path} => Types::S3Path
+    #   * {Types::DescribeQuerySuggestionsBlockListResponse#item_count #item_count} => Integer
+    #   * {Types::DescribeQuerySuggestionsBlockListResponse#file_size_bytes #file_size_bytes} => Integer
+    #   * {Types::DescribeQuerySuggestionsBlockListResponse#role_arn #role_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_query_suggestions_block_list({
+    #     index_id: "IndexId", # required
+    #     id: "QuerySuggestionsBlockListId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.index_id #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "UPDATING", "ACTIVE_BUT_UPDATE_FAILED", "FAILED"
+    #   resp.error_message #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.source_s3_path.bucket #=> String
+    #   resp.source_s3_path.key #=> String
+    #   resp.item_count #=> Integer
+    #   resp.file_size_bytes #=> Integer
+    #   resp.role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeQuerySuggestionsBlockList AWS API Documentation
+    #
+    # @overload describe_query_suggestions_block_list(params = {})
+    # @param [Hash] params ({})
+    def describe_query_suggestions_block_list(params = {}, options = {})
+      req = build_request(:describe_query_suggestions_block_list, params)
+      req.send_request(options)
+    end
+
+    # Describes the settings of query suggestions for an index.
+    #
+    # This is used to check the current settings applied to query
+    # suggestions.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index you want to describe query suggestions
+    #   settings for.
+    #
+    # @return [Types::DescribeQuerySuggestionsConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeQuerySuggestionsConfigResponse#mode #mode} => String
+    #   * {Types::DescribeQuerySuggestionsConfigResponse#status #status} => String
+    #   * {Types::DescribeQuerySuggestionsConfigResponse#query_log_look_back_window_in_days #query_log_look_back_window_in_days} => Integer
+    #   * {Types::DescribeQuerySuggestionsConfigResponse#include_queries_without_user_information #include_queries_without_user_information} => Boolean
+    #   * {Types::DescribeQuerySuggestionsConfigResponse#minimum_number_of_querying_users #minimum_number_of_querying_users} => Integer
+    #   * {Types::DescribeQuerySuggestionsConfigResponse#minimum_query_count #minimum_query_count} => Integer
+    #   * {Types::DescribeQuerySuggestionsConfigResponse#last_suggestions_build_time #last_suggestions_build_time} => Time
+    #   * {Types::DescribeQuerySuggestionsConfigResponse#last_clear_time #last_clear_time} => Time
+    #   * {Types::DescribeQuerySuggestionsConfigResponse#total_suggestions_count #total_suggestions_count} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_query_suggestions_config({
+    #     index_id: "IndexId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.mode #=> String, one of "ENABLED", "LEARN_ONLY"
+    #   resp.status #=> String, one of "ACTIVE", "UPDATING"
+    #   resp.query_log_look_back_window_in_days #=> Integer
+    #   resp.include_queries_without_user_information #=> Boolean
+    #   resp.minimum_number_of_querying_users #=> Integer
+    #   resp.minimum_query_count #=> Integer
+    #   resp.last_suggestions_build_time #=> Time
+    #   resp.last_clear_time #=> Time
+    #   resp.total_suggestions_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeQuerySuggestionsConfig AWS API Documentation
+    #
+    # @overload describe_query_suggestions_config(params = {})
+    # @param [Hash] params ({})
+    def describe_query_suggestions_config(params = {}, options = {})
+      req = build_request(:describe_query_suggestions_config, params)
+      req.send_request(options)
+    end
+
     # Describes an existing Amazon Kendra thesaurus.
     #
     # @option params [required, String] :id
@@ -1671,6 +1942,58 @@ module Aws::Kendra
     # @param [Hash] params ({})
     def describe_thesaurus(params = {}, options = {})
       req = build_request(:describe_thesaurus, params)
+      req.send_request(options)
+    end
+
+    # Fetches the queries that are suggested to your users.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index you want to get query suggestions from.
+    #
+    # @option params [required, String] :query_text
+    #   The text of a user's query to generate query suggestions.
+    #
+    #   A query is suggested if the query prefix matches what a user starts to
+    #   type as their query.
+    #
+    #   Amazon Kendra does not show any suggestions if a user types fewer than
+    #   two characters or more than 60 characters. A query must also have at
+    #   least one search result and contain at least one word of more than
+    #   four characters.
+    #
+    # @option params [Integer] :max_suggestions_count
+    #   The maximum number of query suggestions you want to show to your
+    #   users.
+    #
+    # @return [Types::GetQuerySuggestionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQuerySuggestionsResponse#query_suggestions_id #query_suggestions_id} => String
+    #   * {Types::GetQuerySuggestionsResponse#suggestions #suggestions} => Array&lt;Types::Suggestion&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_query_suggestions({
+    #     index_id: "IndexId", # required
+    #     query_text: "SuggestionQueryText", # required
+    #     max_suggestions_count: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.query_suggestions_id #=> String
+    #   resp.suggestions #=> Array
+    #   resp.suggestions[0].id #=> String
+    #   resp.suggestions[0].value.text.text #=> String
+    #   resp.suggestions[0].value.text.highlights #=> Array
+    #   resp.suggestions[0].value.text.highlights[0].begin_offset #=> Integer
+    #   resp.suggestions[0].value.text.highlights[0].end_offset #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GetQuerySuggestions AWS API Documentation
+    #
+    # @overload get_query_suggestions(params = {})
+    # @param [Hash] params ({})
+    def get_query_suggestions(params = {}, options = {})
+      req = build_request(:get_query_suggestions, params)
       req.send_request(options)
     end
 
@@ -1884,6 +2207,68 @@ module Aws::Kendra
     # @param [Hash] params ({})
     def list_indices(params = {}, options = {})
       req = build_request(:list_indices, params)
+      req.send_request(options)
+    end
+
+    # Lists the block lists used for query suggestions for an index.
+    #
+    # For information on the current quota limits for block lists, see
+    # [Quotas for Amazon Kendra][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index for a list of all block lists that exist
+    #   for that index.
+    #
+    #   For information on the current quota limits for block lists, see
+    #   [Quotas for Amazon Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there is more data to
+    #   retrieve), Amazon Kendra returns a pagination token in the response.
+    #   You can use this pagination token to retrieve the next set of block
+    #   lists (`BlockListSummaryItems`).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of block lists to return.
+    #
+    # @return [Types::ListQuerySuggestionsBlockListsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListQuerySuggestionsBlockListsResponse#block_list_summary_items #block_list_summary_items} => Array&lt;Types::QuerySuggestionsBlockListSummary&gt;
+    #   * {Types::ListQuerySuggestionsBlockListsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_query_suggestions_block_lists({
+    #     index_id: "IndexId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.block_list_summary_items #=> Array
+    #   resp.block_list_summary_items[0].id #=> String
+    #   resp.block_list_summary_items[0].name #=> String
+    #   resp.block_list_summary_items[0].status #=> String, one of "ACTIVE", "CREATING", "DELETING", "UPDATING", "ACTIVE_BUT_UPDATE_FAILED", "FAILED"
+    #   resp.block_list_summary_items[0].created_at #=> Time
+    #   resp.block_list_summary_items[0].updated_at #=> Time
+    #   resp.block_list_summary_items[0].item_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListQuerySuggestionsBlockLists AWS API Documentation
+    #
+    # @overload list_query_suggestions_block_lists(params = {})
+    # @param [Hash] params ({})
+    def list_query_suggestions_block_lists(params = {}, options = {})
+      req = build_request(:list_query_suggestions_block_lists, params)
       req.send_request(options)
     end
 
@@ -2826,6 +3211,167 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Updates a block list used for query suggestions for an index.
+    #
+    # Updates to a block list might not take effect right away. Amazon
+    # Kendra needs to refresh the entire suggestions list to apply any
+    # updates to the block list. Other changes not related to the block list
+    # apply immediately.
+    #
+    # If a block list is updating, then you need to wait for the first
+    # update to finish before submitting another update.
+    #
+    # Amazon Kendra supports partial updates, so you only need to provide
+    # the fields you want to update.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index for a block list.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier of a block list.
+    #
+    # @option params [String] :name
+    #   The name of a block list.
+    #
+    # @option params [String] :description
+    #   The description for a block list.
+    #
+    # @option params [Types::S3Path] :source_s3_path
+    #   The S3 path where your block list text file sits in S3.
+    #
+    #   If you update your block list and provide the same path to the block
+    #   list text file in S3, then Amazon Kendra reloads the file to refresh
+    #   the block list. Amazon Kendra does not automatically refresh your
+    #   block list. You need to call the `UpdateQuerySuggestionsBlockList` API
+    #   to refresh you block list.
+    #
+    #   If you update your block list, then Amazon Kendra asynchronously
+    #   refreshes all query suggestions with the latest content in the S3
+    #   file. This means changes might not take effect immediately.
+    #
+    # @option params [String] :role_arn
+    #   The IAM (Identity and Access Management) role used to access the block
+    #   list text file in S3.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_query_suggestions_block_list({
+    #     index_id: "IndexId", # required
+    #     id: "QuerySuggestionsBlockListId", # required
+    #     name: "QuerySuggestionsBlockListName",
+    #     description: "Description",
+    #     source_s3_path: {
+    #       bucket: "S3BucketName", # required
+    #       key: "S3ObjectKey", # required
+    #     },
+    #     role_arn: "RoleArn",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateQuerySuggestionsBlockList AWS API Documentation
+    #
+    # @overload update_query_suggestions_block_list(params = {})
+    # @param [Hash] params ({})
+    def update_query_suggestions_block_list(params = {}, options = {})
+      req = build_request(:update_query_suggestions_block_list, params)
+      req.send_request(options)
+    end
+
+    # Updates the settings of query suggestions for an index.
+    #
+    # Amazon Kendra supports partial updates, so you only need to provide
+    # the fields you want to update.
+    #
+    # If an update is currently processing (i.e. 'happening'), you need to
+    # wait for the update to finish before making another update.
+    #
+    # Updates to query suggestions settings might not take effect right
+    # away. The time for your updated settings to take effect depends on the
+    # updates made and the number of search queries in your index.
+    #
+    # You can still enable/disable query suggestions at any time.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index you want to update query suggestions
+    #   settings for.
+    #
+    # @option params [String] :mode
+    #   Set the mode to `ENABLED` or `LEARN_ONLY`.
+    #
+    #   By default, Amazon Kendra enables query suggestions. `LEARN_ONLY` mode
+    #   allows you to turn off query suggestions. You can to update this at
+    #   any time.
+    #
+    #   In `LEARN_ONLY` mode, Amazon Kendra continues to learn from new
+    #   queries to keep suggestions up to date for when you are ready to
+    #   switch to ENABLED mode again.
+    #
+    # @option params [Integer] :query_log_look_back_window_in_days
+    #   How recent your queries are in your query log time window.
+    #
+    #   The time window is the number of days from current day to past days.
+    #
+    #   By default, Amazon Kendra sets this to 180.
+    #
+    # @option params [Boolean] :include_queries_without_user_information
+    #   `TRUE` to include queries without user information (i.e. all queries,
+    #   irrespective of the user), otherwise `FALSE` to only include queries
+    #   with user information.
+    #
+    #   If you pass user information to Amazon Kendra along with the queries,
+    #   you can set this flag to `FALSE` and instruct Amazon Kendra to only
+    #   consider queries with user information.
+    #
+    #   If you set to `FALSE`, Amazon Kendra only considers queries searched
+    #   at least `MinimumQueryCount` times across
+    #   `MinimumNumberOfQueryingUsers` unique users for suggestions.
+    #
+    #   If you set to `TRUE`, Amazon Kendra ignores all user information and
+    #   learns from all queries.
+    #
+    # @option params [Integer] :minimum_number_of_querying_users
+    #   The minimum number of unique users who must search a query in order
+    #   for the query to be eligible to suggest to your users.
+    #
+    #   Increasing this number might decrease the number of suggestions.
+    #   However, this ensures a query is searched by many users and is truly
+    #   popular to suggest to users.
+    #
+    #   How you tune this setting depends on your specific needs.
+    #
+    # @option params [Integer] :minimum_query_count
+    #   The the minimum number of times a query must be searched in order to
+    #   be eligible to suggest to your users.
+    #
+    #   Decreasing this number increases the number of suggestions. However,
+    #   this affects the quality of suggestions as it sets a low bar for a
+    #   query to be considered popular to suggest to users.
+    #
+    #   How you tune this setting depends on your specific needs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_query_suggestions_config({
+    #     index_id: "IndexId", # required
+    #     mode: "ENABLED", # accepts ENABLED, LEARN_ONLY
+    #     query_log_look_back_window_in_days: 1,
+    #     include_queries_without_user_information: false,
+    #     minimum_number_of_querying_users: 1,
+    #     minimum_query_count: 1,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateQuerySuggestionsConfig AWS API Documentation
+    #
+    # @overload update_query_suggestions_config(params = {})
+    # @param [Hash] params ({})
+    def update_query_suggestions_config(params = {}, options = {})
+      req = build_request(:update_query_suggestions_config, params)
+      req.send_request(options)
+    end
+
     # Updates a thesaurus file associated with an index.
     #
     # @option params [required, String] :id
@@ -2884,7 +3430,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

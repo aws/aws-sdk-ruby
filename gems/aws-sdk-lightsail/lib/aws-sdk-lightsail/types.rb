@@ -3290,8 +3290,8 @@ module Aws::Lightsail
     #   <note markdown="1"> You cannot register a new domain name using Lightsail. You must
     #   register a domain name using Amazon Route 53 or another domain name
     #   registrar. If you have already registered your domain, you can enter
-    #   its name in this parameter to manage the DNS records for that
-    #   domain.
+    #   its name in this parameter to manage the DNS records for that domain
+    #   using Lightsail.
     #
     #    </note>
     #   @return [String]
@@ -5781,12 +5781,17 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] target
-    #   The target AWS name server (e.g., `ns-111.awsdns-22.com.`).
+    #   The target IP address (e.g., `192.0.2.0`), or AWS name server (e.g.,
+    #   `ns-111.awsdns-22.com.`).
     #
     #   For Lightsail load balancers, the value looks like
     #   `ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com`.
+    #   For Lightsail distributions, the value looks like
+    #   `exampled1182ne.cloudfront.net`. For Lightsail container services,
+    #   the value looks like
+    #   `container-service-1.example23scljs.us-west-2.cs.amazonlightsail.com`.
     #   Be sure to also set `isAlias` to `true` when setting up an A record
-    #   for a load balancer.
+    #   for a Lightsail load balancer, distribution, or container service.
     #   @return [String]
     #
     # @!attribute [rw] is_alias
@@ -5797,13 +5802,16 @@ module Aws::Lightsail
     #   @return [Boolean]
     #
     # @!attribute [rw] type
-    #   The type of domain entry, such as address (A), canonical name
-    #   (CNAME), mail exchanger (MX), name server (NS), start of authority
-    #   (SOA), service locator (SRV), or text (TXT).
+    #   The type of domain entry, such as address for IPv4 (A), address for
+    #   IPv6 (AAAA), canonical name (CNAME), mail exchanger (MX), name
+    #   server (NS), start of authority (SOA), service locator (SRV), or
+    #   text (TXT).
     #
     #   The following domain entry types can be used:
     #
     #   * `A`
+    #
+    #   * `AAA`
     #
     #   * `CNAME`
     #

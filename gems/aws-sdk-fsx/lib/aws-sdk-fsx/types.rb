@@ -932,6 +932,7 @@ module Aws::FSx
     #           automatic_backup_retention_days: 1,
     #           copy_tags_to_backups: false,
     #           drive_cache_type: "NONE", # accepts NONE, READ
+    #           data_compression_type: "NONE", # accepts NONE, LZ4
     #         },
     #         storage_type: "SSD", # accepts SSD, HDD
     #         kms_key_id: "KmsKeyId",
@@ -1070,6 +1071,7 @@ module Aws::FSx
     #         automatic_backup_retention_days: 1,
     #         copy_tags_to_backups: false,
     #         drive_cache_type: "NONE", # accepts NONE, READ
+    #         data_compression_type: "NONE", # accepts NONE, LZ4
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -1233,6 +1235,22 @@ module Aws::FSx
     #   This parameter is required when `StorageType` is set to HDD.
     #   @return [String]
     #
+    # @!attribute [rw] data_compression_type
+    #   Sets the data compression configuration for the file system.
+    #   `DataCompressionType` can have the following values:
+    #
+    #   * `NONE` - (Default) Data compression is turned off when the file
+    #     system is created.
+    #
+    #   * `LZ4` - Data compression is turned on with the LZ4 algorithm.
+    #
+    #   For more information, see [Lustre data compression][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemLustreConfiguration AWS API Documentation
     #
     class CreateFileSystemLustreConfiguration < Struct.new(
@@ -1246,7 +1264,8 @@ module Aws::FSx
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
       :copy_tags_to_backups,
-      :drive_cache_type)
+      :drive_cache_type,
+      :data_compression_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1301,6 +1320,7 @@ module Aws::FSx
     #           automatic_backup_retention_days: 1,
     #           copy_tags_to_backups: false,
     #           drive_cache_type: "NONE", # accepts NONE, READ
+    #           data_compression_type: "NONE", # accepts NONE, LZ4
     #         },
     #       }
     #
@@ -3145,6 +3165,21 @@ module Aws::FSx
     #   This parameter is required when `StorageType` is set to HDD.
     #   @return [String]
     #
+    # @!attribute [rw] data_compression_type
+    #   The data compression configuration for the file system.
+    #   `DataCompressionType` can have the following values:
+    #
+    #   * `NONE` - Data compression is turned off for the file system.
+    #
+    #   * `LZ4` - Data compression is turned on with the LZ4 algorithm.
+    #
+    #   For more information, see [Lustre data compression][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/LustreFileSystemConfiguration AWS API Documentation
     #
     class LustreFileSystemConfiguration < Struct.new(
@@ -3156,7 +3191,8 @@ module Aws::FSx
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
       :copy_tags_to_backups,
-      :drive_cache_type)
+      :drive_cache_type,
+      :data_compression_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3572,6 +3608,7 @@ module Aws::FSx
     #         daily_automatic_backup_start_time: "DailyTime",
     #         automatic_backup_retention_days: 1,
     #         auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED
+    #         data_compression_type: "NONE", # accepts NONE, LZ4
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -3621,13 +3658,32 @@ module Aws::FSx
     #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html
     #   @return [String]
     #
+    # @!attribute [rw] data_compression_type
+    #   Sets the data compression configuration for the file system.
+    #   `DataCompressionType` can have the following values:
+    #
+    #   * `NONE` - Data compression is turned off for the file system.
+    #
+    #   * `LZ4` - Data compression is turned on with the LZ4 algorithm.
+    #
+    #   If you don't use `DataCompressionType`, the file system retains its
+    #   current data compression configuration.
+    #
+    #   For more information, see [Lustre data compression][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemLustreConfiguration AWS API Documentation
     #
     class UpdateFileSystemLustreConfiguration < Struct.new(
       :weekly_maintenance_start_time,
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
-      :auto_import_policy)
+      :auto_import_policy,
+      :data_compression_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3657,6 +3713,7 @@ module Aws::FSx
     #           daily_automatic_backup_start_time: "DailyTime",
     #           automatic_backup_retention_days: 1,
     #           auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED
+    #           data_compression_type: "NONE", # accepts NONE, LZ4
     #         },
     #       }
     #

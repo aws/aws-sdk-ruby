@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2021-05-27)
+------------------
+
+* Feature - Amazon Kendra now suggests popular queries in order to help guide query typing and help overall accuracy.
+
 1.24.0 (2021-04-21)
 ------------------
 

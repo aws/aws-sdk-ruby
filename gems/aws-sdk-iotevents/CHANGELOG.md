@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2021-05-27)
+------------------
+
+* Feature - Releasing new APIs for AWS IoT Events Alarms
+
 1.23.0 (2021-03-10)
 ------------------
 

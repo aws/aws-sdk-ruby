@@ -500,7 +500,7 @@ module Aws::Kendra
     #         document_id_list: ["DocumentId"], # required
     #         data_source_sync_job_metric_target: {
     #           data_source_id: "DataSourceId", # required
-    #           data_source_sync_job_id: "DataSourceSyncJobId", # required
+    #           data_source_sync_job_id: "DataSourceSyncJobId",
     #         },
     #       }
     #
@@ -624,6 +624,13 @@ module Aws::Kendra
     # @!attribute [rw] documents
     #   One or more documents to add to the index.
     #
+    #   Documents can include custom attributes. For example,
+    #   'DataSourceId' and 'DataSourceSyncJobId' are custom attributes
+    #   that provide information on the synchronization of documents running
+    #   on a data source. Note, 'DataSourceSyncJobId' could be an optional
+    #   custom attribute as Amazon Kendra will use the ID of a running sync
+    #   job.
+    #
     #   Documents have the following file size limits.
     #
     #   * 5 MB total size for inline documents
@@ -724,6 +731,26 @@ module Aws::Kendra
     class CapacityUnitsConfiguration < Struct.new(
       :storage_capacity_units,
       :query_capacity_units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ClearQuerySuggestionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index you want to clear query suggestions
+    #   from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ClearQuerySuggestionsRequest AWS API Documentation
+    #
+    class ClearQuerySuggestionsRequest < Struct.new(
+      :index_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1991,6 +2018,110 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateQuerySuggestionsBlockListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         name: "QuerySuggestionsBlockListName", # required
+    #         description: "Description",
+    #         source_s3_path: { # required
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #         },
+    #         client_token: "ClientTokenName",
+    #         role_arn: "RoleArn", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index you want to create a query suggestions
+    #   block list for.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A user friendly name for the block list.
+    #
+    #   For example, the block list named 'offensive-words' includes all
+    #   offensive words that could appear in user queries and need to be
+    #   blocked from suggestions.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A user-friendly description for the block list.
+    #
+    #   For example, the description "List of all offensive words that can
+    #   appear in user queries and need to be blocked from suggestions."
+    #   @return [String]
+    #
+    # @!attribute [rw] source_s3_path
+    #   The S3 path to your block list text file in your S3 bucket.
+    #
+    #   Each block word or phrase should be on a separate line in a text
+    #   file.
+    #
+    #   For information on the current quota limits for block lists, see
+    #   [Quotas for Amazon Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
+    #   @return [Types::S3Path]
+    #
+    # @!attribute [rw] client_token
+    #   A token that you provide to identify the request to create a query
+    #   suggestions block list.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The IAM (Identity and Access Management) role used by Amazon Kendra
+    #   to access the block list text file in your S3 bucket.
+    #
+    #   You need permissions to the role ARN (Amazon Resource Name). The
+    #   role needs S3 read permissions to your file in S3 and needs to give
+    #   STS (Security Token Service) assume role permissions to Amazon
+    #   Kendra.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A tag that you can assign to a block list that categorizes the block
+    #   list.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateQuerySuggestionsBlockListRequest AWS API Documentation
+    #
+    class CreateQuerySuggestionsBlockListRequest < Struct.new(
+      :index_id,
+      :name,
+      :description,
+      :source_s3_path,
+      :client_token,
+      :role_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The unique identifier of the created block list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateQuerySuggestionsBlockListResponse AWS API Documentation
+    #
+    class CreateQuerySuggestionsBlockListResponse < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateThesaurusRequest
     #   data as a hash:
     #
@@ -2506,7 +2637,7 @@ module Aws::Kendra
     #
     #       {
     #         data_source_id: "DataSourceId", # required
-    #         data_source_sync_job_id: "DataSourceSyncJobId", # required
+    #         data_source_sync_job_id: "DataSourceSyncJobId",
     #       }
     #
     # @!attribute [rw] data_source_id
@@ -2515,6 +2646,15 @@ module Aws::Kendra
     #
     # @!attribute [rw] data_source_sync_job_id
     #   The ID of the sync job that is running on the data source.
+    #
+    #   If the ID of a sync job is not provided and there is a sync job
+    #   running, then the ID of this sync job is used and metrics are
+    #   generated for this sync job.
+    #
+    #   If the ID of a sync job is not provided and there is no sync job
+    #   running, then no metrics are generated and documents are
+    #   indexed/deleted at the index level without sync job metrics
+    #   included.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DataSourceSyncJobMetricTarget AWS API Documentation
@@ -2776,6 +2916,31 @@ module Aws::Kendra
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteIndexRequest AWS API Documentation
     #
     class DeleteIndexRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteQuerySuggestionsBlockListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         id: "QuerySuggestionsBlockListId", # required
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the you want to delete a block list from.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the block list that needs to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteQuerySuggestionsBlockListRequest AWS API Documentation
+    #
+    class DeleteQuerySuggestionsBlockListRequest < Struct.new(
+      :index_id,
       :id)
       SENSITIVE = []
       include Aws::Structure
@@ -3105,6 +3270,218 @@ module Aws::Kendra
       :capacity_units,
       :user_token_configurations,
       :user_context_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeQuerySuggestionsBlockListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         id: "QuerySuggestionsBlockListId", # required
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for the block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the block list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeQuerySuggestionsBlockListRequest AWS API Documentation
+    #
+    class DescribeQuerySuggestionsBlockListRequest < Struct.new(
+      :index_id,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] index_id
+    #   Shows the identifier of the index for the block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   Shows the unique identifier of the block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Shows the name of the block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Shows the description for the block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Shows whether the current status of the block list is `ACTIVE` or
+    #   `INACTIVE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Shows the error message with details when there are issues in
+    #   processing the block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Shows the date-time a block list for query suggestions was last
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   Shows the date-time a block list for query suggestions was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] source_s3_path
+    #   Shows the current S3 path to your block list text file in your S3
+    #   bucket.
+    #
+    #   Each block word or phrase should be on a separate line in a text
+    #   file.
+    #
+    #   For information on the current quota limits for block lists, see
+    #   [Quotas for Amazon Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
+    #   @return [Types::S3Path]
+    #
+    # @!attribute [rw] item_count
+    #   Shows the current number of valid, non-empty words or phrases in the
+    #   block list text file.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] file_size_bytes
+    #   Shows the current size of the block list text file in S3.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] role_arn
+    #   Shows the current IAM (Identity and Access Management) role used by
+    #   Amazon Kendra to access the block list text file in S3.
+    #
+    #   The role needs S3 read permissions to your file in S3 and needs to
+    #   give STS (Security Token Service) assume role permissions to Amazon
+    #   Kendra.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeQuerySuggestionsBlockListResponse AWS API Documentation
+    #
+    class DescribeQuerySuggestionsBlockListResponse < Struct.new(
+      :index_id,
+      :id,
+      :name,
+      :description,
+      :status,
+      :error_message,
+      :created_at,
+      :updated_at,
+      :source_s3_path,
+      :item_count,
+      :file_size_bytes,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeQuerySuggestionsConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index you want to describe query suggestions
+    #   settings for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeQuerySuggestionsConfigRequest AWS API Documentation
+    #
+    class DescribeQuerySuggestionsConfigRequest < Struct.new(
+      :index_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] mode
+    #   Shows whether query suggestions are currently in `ENABLED` mode or
+    #   `LEARN_ONLY` mode.
+    #
+    #   By default, Amazon Kendra enables query suggestions.`LEARN_ONLY`
+    #   turns off query suggestions for your users. You can change the mode
+    #   using the [UpdateQuerySuggestionsConfig][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Shows whether the status of query suggestions settings is currently
+    #   Active or Updating.
+    #
+    #   Active means the current settings apply and Updating means your
+    #   changed settings are in the process of applying.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_log_look_back_window_in_days
+    #   Shows how recent your queries are in your query log time window (in
+    #   days).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] include_queries_without_user_information
+    #   Shows whether Amazon Kendra uses all queries or only uses queries
+    #   that include user information to generate query suggestions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] minimum_number_of_querying_users
+    #   Shows the minimum number of unique users who must search a query in
+    #   order for the query to be eligible to suggest to your users.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minimum_query_count
+    #   Shows the minimum number of times a query must be searched in order
+    #   for the query to be eligible to suggest to your users.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_suggestions_build_time
+    #   Shows the date-time query suggestions for an index was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_clear_time
+    #   Shows the date-time query suggestions for an index was last cleared.
+    #
+    #   After you clear suggestions, Amazon Kendra learns new suggestions
+    #   based on new queries added to the query log from the time you
+    #   cleared suggestions. Amazon Kendra only considers re-occurences of a
+    #   query from the time you cleared suggestions.
+    #   @return [Time]
+    #
+    # @!attribute [rw] total_suggestions_count
+    #   Shows the current total count of query suggestions for an index.
+    #
+    #   This count can change when you update your query suggestions
+    #   settings, if you filter out certain queries from suggestions using a
+    #   block list, and as the query log accumulates more queries for Amazon
+    #   Kendra to learn from.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeQuerySuggestionsConfigResponse AWS API Documentation
+    #
+    class DescribeQuerySuggestionsConfigResponse < Struct.new(
+      :mode,
+      :status,
+      :query_log_look_back_window_in_days,
+      :include_queries_without_user_information,
+      :minimum_number_of_querying_users,
+      :minimum_query_count,
+      :last_suggestions_build_time,
+      :last_clear_time,
+      :total_suggestions_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3617,6 +3994,63 @@ module Aws::Kendra
       :created_at,
       :updated_at,
       :file_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetQuerySuggestionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         query_text: "SuggestionQueryText", # required
+    #         max_suggestions_count: 1,
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index you want to get query suggestions from.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_text
+    #   The text of a user's query to generate query suggestions.
+    #
+    #   A query is suggested if the query prefix matches what a user starts
+    #   to type as their query.
+    #
+    #   Amazon Kendra does not show any suggestions if a user types fewer
+    #   than two characters or more than 60 characters. A query must also
+    #   have at least one search result and contain at least one word of
+    #   more than four characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_suggestions_count
+    #   The maximum number of query suggestions you want to show to your
+    #   users.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GetQuerySuggestionsRequest AWS API Documentation
+    #
+    class GetQuerySuggestionsRequest < Struct.new(
+      :index_id,
+      :query_text,
+      :max_suggestions_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_suggestions_id
+    #   The unique identifier for a list of query suggestions for an index.
+    #   @return [String]
+    #
+    # @!attribute [rw] suggestions
+    #   A list of query suggestions for an index.
+    #   @return [Array<Types::Suggestion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GetQuerySuggestionsResponse AWS API Documentation
+    #
+    class GetQuerySuggestionsResponse < Struct.new(
+      :query_suggestions_id,
+      :suggestions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4140,6 +4574,78 @@ module Aws::Kendra
     #
     class ListIndicesResponse < Struct.new(
       :index_configuration_summary_items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListQuerySuggestionsBlockListsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for a list of all block lists that exist
+    #   for that index.
+    #
+    #   For information on the current quota limits for block lists, see
+    #   [Quotas for Amazon Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more data
+    #   to retrieve), Amazon Kendra returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of block lists (`BlockListSummaryItems`).
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of block lists to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListQuerySuggestionsBlockListsRequest AWS API Documentation
+    #
+    class ListQuerySuggestionsBlockListsRequest < Struct.new(
+      :index_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] block_list_summary_items
+    #   Summary items for a block list.
+    #
+    #   This includes summary items on the block list ID, block list name,
+    #   when the block list was created, when the block list was last
+    #   updated, and the count of block words/phrases in the block list.
+    #
+    #   For information on the current quota limits for block lists, see
+    #   [Quotas for Amazon Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
+    #   @return [Array<Types::QuerySuggestionsBlockListSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon Kendra returns this token that
+    #   you can use in the subsequent request to retrieve the next set of
+    #   block lists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListQuerySuggestionsBlockListsResponse AWS API Documentation
+    #
+    class ListQuerySuggestionsBlockListsResponse < Struct.new(
+      :block_list_summary_items,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4726,6 +5232,57 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Summary information on a query suggestions block list.
+    #
+    # This includes information on the block list ID, block list name, when
+    # the block list was created, when the block list was last updated, and
+    # the count of block words/phrases in the block list.
+    #
+    # For information on the current quota limits for block lists, see
+    # [Quotas for Amazon Kendra][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
+    #
+    # @!attribute [rw] id
+    #   The identifier of a block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date-time summary information for a query suggestions block list
+    #   was last created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date-time the block list was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] item_count
+    #   The number of items in the block list file.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QuerySuggestionsBlockListSummary AWS API Documentation
+    #
+    class QuerySuggestionsBlockListSummary < Struct.new(
+      :id,
+      :name,
+      :status,
+      :created_at,
+      :updated_at,
+      :item_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information for manually tuning the relevance of a field in a
     # search. When a query includes terms that match the field, the results
     # are given a boost in the response based on these tuning parameters.
@@ -4916,12 +5473,21 @@ module Aws::Kendra
     #   document that matches an inclusion pattern also matches an exclusion
     #   pattern, the document is not indexed.
     #
-    #   For more information about glob patterns, see [glob
-    #   (programming)][1] in *Wikipedia*.
+    #   Some [examples][1] are:
+    #
+    #   * **.txt* will include all text files in a directory (files with
+    #     the extension .txt).
+    #
+    #   * ***/*.txt* will include all text files in a directory and its
+    #     subdirectories.
+    #
+    #   * **tax** will include all files in a directory that contain
+    #     'tax' in the file name, such as 'tax', 'taxes',
+    #     'income\_tax'.
     #
     #
     #
-    #   [1]: https://en.wikipedia.org/wiki/Glob_(programming)
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclusion_patterns
@@ -4929,12 +5495,21 @@ module Aws::Kendra
     #   a document that matches an inclusion prefix or inclusion pattern
     #   also matches an exclusion pattern, the document is not indexed.
     #
-    #   For more information about glob patterns, see [glob
-    #   (programming)][1] in *Wikipedia*.
+    #   Some [examples][1] are:
+    #
+    #   * **.png , *.jpg* will exclude all PNG and JPEG image files in a
+    #     directory (files with the extensions .png and .jpg).
+    #
+    #   * **internal** will exclude all files in a directory that contain
+    #     'internal' in the file name, such as 'internal',
+    #     'internal\_only', 'company\_internal'.
+    #
+    #   * ***/*internal** will exclude all internal-related files in a
+    #     directory and its subdirectories.
     #
     #
     #
-    #   [1]: https://en.wikipedia.org/wiki/Glob_(programming)
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters
     #   @return [Array<String>]
     #
     # @!attribute [rw] documents_metadata_configuration
@@ -5021,7 +5596,7 @@ module Aws::Kendra
     # @!attribute [rw] document_title_field_name
     #   The name of the column in the Salesforce FeedItem table that
     #   contains the title of the document. This is typically the `Title`
-    #   collumn.
+    #   column.
     #   @return [String]
     #
     # @!attribute [rw] field_mappings
@@ -6151,6 +6726,86 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # A single query suggestion.
+    #
+    # @!attribute [rw] id
+    #   The unique UUID (universally unique identifier) of a single query
+    #   suggestion.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value for the unique UUID (universally unique identifier) of a
+    #   single query suggestion.
+    #
+    #   The value is the text string of a suggestion.
+    #   @return [Types::SuggestionValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Suggestion AWS API Documentation
+    #
+    class Suggestion < Struct.new(
+      :id,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The text highlights for a single query suggestion.
+    #
+    # @!attribute [rw] begin_offset
+    #   The zero-based location in the response string where the highlight
+    #   starts.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_offset
+    #   The zero-based location in the response string where the highlight
+    #   ends.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SuggestionHighlight AWS API Documentation
+    #
+    class SuggestionHighlight < Struct.new(
+      :begin_offset,
+      :end_offset)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides text and information about where to highlight the query
+    # suggestion text.
+    #
+    # @!attribute [rw] text
+    #   The query suggestion text to display to the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] highlights
+    #   The beginning and end of the query suggestion text that should be
+    #   highlighted.
+    #   @return [Array<Types::SuggestionHighlight>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SuggestionTextWithHighlights AWS API Documentation
+    #
+    class SuggestionTextWithHighlights < Struct.new(
+      :text,
+      :highlights)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The `SuggestionTextWithHighlights` structure information.
+    #
+    # @!attribute [rw] text
+    #   The `SuggestionTextWithHighlights` structure that contains the query
+    #   suggestion text and highlights.
+    #   @return [Types::SuggestionTextWithHighlights]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SuggestionValue AWS API Documentation
+    #
+    class SuggestionValue < Struct.new(
+      :text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of key/value pairs that identify an index, FAQ, or data source.
     # Tag keys and values can consist of Unicode letters, digits, white
     # space, and any of the following symbols: \_ . : / = + - @.
@@ -6783,6 +7438,158 @@ module Aws::Kendra
       :capacity_units,
       :user_token_configurations,
       :user_context_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateQuerySuggestionsBlockListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         id: "QuerySuggestionsBlockListId", # required
+    #         name: "QuerySuggestionsBlockListName",
+    #         description: "Description",
+    #         source_s3_path: {
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #         },
+    #         role_arn: "RoleArn",
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for a block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of a block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of a block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for a block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_s3_path
+    #   The S3 path where your block list text file sits in S3.
+    #
+    #   If you update your block list and provide the same path to the block
+    #   list text file in S3, then Amazon Kendra reloads the file to refresh
+    #   the block list. Amazon Kendra does not automatically refresh your
+    #   block list. You need to call the `UpdateQuerySuggestionsBlockList`
+    #   API to refresh you block list.
+    #
+    #   If you update your block list, then Amazon Kendra asynchronously
+    #   refreshes all query suggestions with the latest content in the S3
+    #   file. This means changes might not take effect immediately.
+    #   @return [Types::S3Path]
+    #
+    # @!attribute [rw] role_arn
+    #   The IAM (Identity and Access Management) role used to access the
+    #   block list text file in S3.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateQuerySuggestionsBlockListRequest AWS API Documentation
+    #
+    class UpdateQuerySuggestionsBlockListRequest < Struct.new(
+      :index_id,
+      :id,
+      :name,
+      :description,
+      :source_s3_path,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateQuerySuggestionsConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         mode: "ENABLED", # accepts ENABLED, LEARN_ONLY
+    #         query_log_look_back_window_in_days: 1,
+    #         include_queries_without_user_information: false,
+    #         minimum_number_of_querying_users: 1,
+    #         minimum_query_count: 1,
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index you want to update query suggestions
+    #   settings for.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   Set the mode to `ENABLED` or `LEARN_ONLY`.
+    #
+    #   By default, Amazon Kendra enables query suggestions. `LEARN_ONLY`
+    #   mode allows you to turn off query suggestions. You can to update
+    #   this at any time.
+    #
+    #   In `LEARN_ONLY` mode, Amazon Kendra continues to learn from new
+    #   queries to keep suggestions up to date for when you are ready to
+    #   switch to ENABLED mode again.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_log_look_back_window_in_days
+    #   How recent your queries are in your query log time window.
+    #
+    #   The time window is the number of days from current day to past days.
+    #
+    #   By default, Amazon Kendra sets this to 180.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] include_queries_without_user_information
+    #   `TRUE` to include queries without user information (i.e. all
+    #   queries, irrespective of the user), otherwise `FALSE` to only
+    #   include queries with user information.
+    #
+    #   If you pass user information to Amazon Kendra along with the
+    #   queries, you can set this flag to `FALSE` and instruct Amazon Kendra
+    #   to only consider queries with user information.
+    #
+    #   If you set to `FALSE`, Amazon Kendra only considers queries searched
+    #   at least `MinimumQueryCount` times across
+    #   `MinimumNumberOfQueryingUsers` unique users for suggestions.
+    #
+    #   If you set to `TRUE`, Amazon Kendra ignores all user information and
+    #   learns from all queries.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] minimum_number_of_querying_users
+    #   The minimum number of unique users who must search a query in order
+    #   for the query to be eligible to suggest to your users.
+    #
+    #   Increasing this number might decrease the number of suggestions.
+    #   However, this ensures a query is searched by many users and is truly
+    #   popular to suggest to users.
+    #
+    #   How you tune this setting depends on your specific needs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minimum_query_count
+    #   The the minimum number of times a query must be searched in order to
+    #   be eligible to suggest to your users.
+    #
+    #   Decreasing this number increases the number of suggestions. However,
+    #   this affects the quality of suggestions as it sets a low bar for a
+    #   query to be considered popular to suggest to users.
+    #
+    #   How you tune this setting depends on your specific needs.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateQuerySuggestionsConfigRequest AWS API Documentation
+    #
+    class UpdateQuerySuggestionsConfigRequest < Struct.new(
+      :index_id,
+      :mode,
+      :query_log_look_back_window_in_days,
+      :include_queries_without_user_information,
+      :minimum_number_of_querying_users,
+      :minimum_query_count)
       SENSITIVE = []
       include Aws::Structure
     end

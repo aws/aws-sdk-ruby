@@ -112,6 +112,46 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # Contains the configuration information of an alarm created in an AWS
+    # IoT SiteWise Monitor portal. You can use the alarm to monitor an asset
+    # property and get notified when the asset property value is outside a
+    # specified range. For more information, see .
+    #
+    # @note When making an API call, you may pass Alarms
+    #   data as a hash:
+    #
+    #       {
+    #         alarm_role_arn: "ARN", # required
+    #         notification_lambda_arn: "ARN",
+    #       }
+    #
+    # @!attribute [rw] alarm_role_arn
+    #   The [ARN][1] of the IAM role that allows the alarm to perform
+    #   actions and access AWS resources, including AWS IoT Events.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_lambda_arn
+    #   The [ARN][1] of the AWS Lambda function that manages alarm
+    #   notifications. For more information, see [Managing alarm
+    #   notifications][2] in the *AWS IoT Events Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://docs.aws.amazon.com/
+    #   @return [String]
+    #
+    class Alarms < Struct.new(
+      :alarm_role_arn,
+      :notification_lambda_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a composite model in an asset. This object
     # contains the asset's properties that you define in the composite
     # model.
@@ -1842,6 +1882,11 @@ module Aws::IoTSiteWise
     #           "TagKey" => "TagValue",
     #         },
     #         portal_auth_mode: "IAM", # accepts IAM, SSO
+    #         notification_sender_email: "Email",
+    #         alarms: {
+    #           alarm_role_arn: "ARN", # required
+    #           notification_lambda_arn: "ARN",
+    #         },
     #       }
     #
     # @!attribute [rw] portal_name
@@ -1916,6 +1961,25 @@ module Aws::IoTSiteWise
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso
     #   @return [String]
     #
+    # @!attribute [rw] notification_sender_email
+    #   The email address that sends alarm notifications.
+    #
+    #   If you use the AWS IoT Events managed AWS Lambda function to manage
+    #   your emails, you must [verify the sender email address in Amazon
+    #   SES][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html
+    #   @return [String]
+    #
+    # @!attribute [rw] alarms
+    #   Contains the configuration information of an alarm created in an AWS
+    #   IoT SiteWise Monitor portal. You can use the alarm to monitor an
+    #   asset property and get notified when the asset property value is
+    #   outside a specified range. For more information, see .
+    #   @return [Types::Alarms]
+    #
     class CreatePortalRequest < Struct.new(
       :portal_name,
       :portal_description,
@@ -1924,7 +1988,9 @@ module Aws::IoTSiteWise
       :portal_logo_image_file,
       :role_arn,
       :tags,
-      :portal_auth_mode)
+      :portal_auth_mode,
+      :notification_sender_email,
+      :alarms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2934,6 +3000,15 @@ module Aws::IoTSiteWise
     #   The service to use to authenticate users to the portal.
     #   @return [String]
     #
+    # @!attribute [rw] notification_sender_email
+    #   The email address that sends alarm notifications.
+    #   @return [String]
+    #
+    # @!attribute [rw] alarms
+    #   Contains the configuration information of an alarm created in a AWS
+    #   IoT SiteWise Monitor portal.
+    #   @return [Types::Alarms]
+    #
     class DescribePortalResponse < Struct.new(
       :portal_id,
       :portal_arn,
@@ -2947,7 +3022,9 @@ module Aws::IoTSiteWise
       :portal_last_update_date,
       :portal_logo_image_location,
       :role_arn,
-      :portal_auth_mode)
+      :portal_auth_mode,
+      :notification_sender_email,
+      :alarms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5894,6 +5971,11 @@ module Aws::IoTSiteWise
     #         },
     #         role_arn: "ARN", # required
     #         client_token: "ClientToken",
+    #         notification_sender_email: "Email",
+    #         alarms: {
+    #           alarm_role_arn: "ARN", # required
+    #           notification_lambda_arn: "ARN",
+    #         },
     #       }
     #
     # @!attribute [rw] portal_id
@@ -5942,6 +6024,17 @@ module Aws::IoTSiteWise
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] notification_sender_email
+    #   The email address that sends alarm notifications.
+    #   @return [String]
+    #
+    # @!attribute [rw] alarms
+    #   Contains the configuration information of an alarm created in an AWS
+    #   IoT SiteWise Monitor portal. You can use the alarm to monitor an
+    #   asset property and get notified when the asset property value is
+    #   outside a specified range. For more information, see .
+    #   @return [Types::Alarms]
+    #
     class UpdatePortalRequest < Struct.new(
       :portal_id,
       :portal_name,
@@ -5949,7 +6042,9 @@ module Aws::IoTSiteWise
       :portal_contact_email,
       :portal_logo_image,
       :role_arn,
-      :client_token)
+      :client_token,
+      :notification_sender_email,
+      :alarms)
       SENSITIVE = []
       include Aws::Structure
     end

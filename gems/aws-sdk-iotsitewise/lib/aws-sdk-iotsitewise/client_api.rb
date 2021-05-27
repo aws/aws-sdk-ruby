@@ -22,6 +22,7 @@ module Aws::IoTSiteWise
     AggregatedValue = Shapes::StructureShape.new(name: 'AggregatedValue')
     AggregatedValues = Shapes::ListShape.new(name: 'AggregatedValues')
     Aggregates = Shapes::StructureShape.new(name: 'Aggregates')
+    Alarms = Shapes::StructureShape.new(name: 'Alarms')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AssetCompositeModel = Shapes::StructureShape.new(name: 'AssetCompositeModel')
     AssetCompositeModels = Shapes::ListShape.new(name: 'AssetCompositeModels')
@@ -334,6 +335,10 @@ module Aws::IoTSiteWise
     Aggregates.add_member(:standard_deviation, Shapes::ShapeRef.new(shape: AggregatedDoubleValue, location_name: "standardDeviation"))
     Aggregates.struct_class = Types::Aggregates
 
+    Alarms.add_member(:alarm_role_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "alarmRoleArn"))
+    Alarms.add_member(:notification_lambda_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "notificationLambdaArn"))
+    Alarms.struct_class = Types::Alarms
+
     AssetCompositeModel.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     AssetCompositeModel.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     AssetCompositeModel.add_member(:type, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "type"))
@@ -607,6 +612,8 @@ module Aws::IoTSiteWise
     CreatePortalRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "roleArn"))
     CreatePortalRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreatePortalRequest.add_member(:portal_auth_mode, Shapes::ShapeRef.new(shape: AuthMode, location_name: "portalAuthMode"))
+    CreatePortalRequest.add_member(:notification_sender_email, Shapes::ShapeRef.new(shape: Email, location_name: "notificationSenderEmail"))
+    CreatePortalRequest.add_member(:alarms, Shapes::ShapeRef.new(shape: Alarms, location_name: "alarms"))
     CreatePortalRequest.struct_class = Types::CreatePortalRequest
 
     CreatePortalResponse.add_member(:portal_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "portalId"))
@@ -794,6 +801,8 @@ module Aws::IoTSiteWise
     DescribePortalResponse.add_member(:portal_logo_image_location, Shapes::ShapeRef.new(shape: ImageLocation, location_name: "portalLogoImageLocation"))
     DescribePortalResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "roleArn"))
     DescribePortalResponse.add_member(:portal_auth_mode, Shapes::ShapeRef.new(shape: AuthMode, location_name: "portalAuthMode"))
+    DescribePortalResponse.add_member(:notification_sender_email, Shapes::ShapeRef.new(shape: Email, location_name: "notificationSenderEmail"))
+    DescribePortalResponse.add_member(:alarms, Shapes::ShapeRef.new(shape: Alarms, location_name: "alarms"))
     DescribePortalResponse.struct_class = Types::DescribePortalResponse
 
     DescribeProjectRequest.add_member(:project_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "projectId"))
@@ -1260,6 +1269,8 @@ module Aws::IoTSiteWise
     UpdatePortalRequest.add_member(:portal_logo_image, Shapes::ShapeRef.new(shape: Image, location_name: "portalLogoImage"))
     UpdatePortalRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "roleArn"))
     UpdatePortalRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdatePortalRequest.add_member(:notification_sender_email, Shapes::ShapeRef.new(shape: Email, location_name: "notificationSenderEmail"))
+    UpdatePortalRequest.add_member(:alarms, Shapes::ShapeRef.new(shape: Alarms, location_name: "alarms"))
     UpdatePortalRequest.struct_class = Types::UpdatePortalRequest
 
     UpdatePortalResponse.add_member(:portal_status, Shapes::ShapeRef.new(shape: PortalStatus, required: true, location_name: "portalStatus"))

@@ -485,8 +485,8 @@ module Aws::FSx
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/copy-backups.html
-    # [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/copy-backups.html
+    # [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#copy-backups
+    # [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html#copy-backups
     #
     # @option params [String] :client_request_token
     #   (Optional) An idempotency token for resource creation, in a string of
@@ -665,6 +665,7 @@ module Aws::FSx
     #   resp.backup.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backup.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.backup.file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.backup.file_system.administrative_actions #=> Array
     #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION"
     #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -882,6 +883,7 @@ module Aws::FSx
     #   resp.backup.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backup.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.backup.file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.backup.file_system.administrative_actions #=> Array
     #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION"
     #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -1278,6 +1280,7 @@ module Aws::FSx
     #       automatic_backup_retention_days: 1,
     #       copy_tags_to_backups: false,
     #       drive_cache_type: "NONE", # accepts NONE, READ
+    #       data_compression_type: "NONE", # accepts NONE, LZ4
     #     },
     #   })
     #
@@ -1337,6 +1340,7 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.file_system.administrative_actions #=> Array
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -1571,6 +1575,7 @@ module Aws::FSx
     #       automatic_backup_retention_days: 1,
     #       copy_tags_to_backups: false,
     #       drive_cache_type: "NONE", # accepts NONE, READ
+    #       data_compression_type: "NONE", # accepts NONE, LZ4
     #     },
     #     storage_type: "SSD", # accepts SSD, HDD
     #     kms_key_id: "KmsKeyId",
@@ -1632,6 +1637,7 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.file_system.administrative_actions #=> Array
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -1996,6 +2002,7 @@ module Aws::FSx
     #   resp.backups[0].file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backups[0].file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backups[0].file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.backups[0].file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.backups[0].file_system.administrative_actions #=> Array
     #   resp.backups[0].file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION"
     #   resp.backups[0].file_system.administrative_actions[0].progress_percent #=> Integer
@@ -2334,6 +2341,7 @@ module Aws::FSx
     #   resp.file_systems[0].lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_systems[0].lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_systems[0].lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.file_systems[0].lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.file_systems[0].administrative_actions #=> Array
     #   resp.file_systems[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION"
     #   resp.file_systems[0].administrative_actions[0].progress_percent #=> Integer
@@ -2612,6 +2620,8 @@ module Aws::FSx
     #
     # * DailyAutomaticBackupStartTime
     #
+    # * DataCompressionType
+    #
     # * StorageCapacity
     #
     # * WeeklyMaintenanceStartTime
@@ -2741,6 +2751,7 @@ module Aws::FSx
     #       daily_automatic_backup_start_time: "DailyTime",
     #       automatic_backup_retention_days: 1,
     #       auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED
+    #       data_compression_type: "NONE", # accepts NONE, LZ4
     #     },
     #   })
     #
@@ -2800,6 +2811,7 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.file_system.administrative_actions #=> Array
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -2830,7 +2842,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
