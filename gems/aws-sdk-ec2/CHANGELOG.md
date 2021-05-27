@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.239.0 (2021-05-27)
+------------------
+
+* Feature - This release removes resource ids and tagging support for VPC security group rules.
+
 1.238.0 (2021-05-26)
 ------------------
 
