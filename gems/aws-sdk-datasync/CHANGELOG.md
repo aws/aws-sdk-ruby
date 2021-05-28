@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2021-05-28)
+------------------
+
+* Feature - Added SecurityDescriptorCopyFlags option that allows for control of which components of SMB security descriptors are copied from source to destination objects.
+
 1.31.0 (2021-03-10)
 ------------------
 

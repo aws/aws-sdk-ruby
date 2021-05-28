@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2021-05-28)
+------------------
+
+* Feature - Allowing dot(.) character in table name for RDS and Redshift as source connector.
+
 1.2.0 (2021-05-07)
 ------------------
 

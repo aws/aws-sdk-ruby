@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2021-05-28)
+------------------
+
+* Feature - Adds support for calculation of routes, resource tagging and customer provided KMS keys.
+
 1.3.0 (2021-03-29)
 ------------------
 
