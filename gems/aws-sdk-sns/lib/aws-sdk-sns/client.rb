@@ -484,7 +484,7 @@ module Aws::SNS
     #   (Firebase Cloud Messaging).
     #
     # @option params [required, Hash<String,String>] :attributes
-    #   For a list of attributes, see [SetPlatformApplicationAttributes][1]
+    #   For a list of attributes, see [SetPlatformApplicationAttributes][1].
     #
     #
     #
@@ -590,6 +590,49 @@ module Aws::SNS
       req.send_request(options)
     end
 
+    # Adds a destination phone number to an AWS account in the SMS sandbox
+    # and sends a one-time password (OTP) to that phone number.
+    #
+    # When you start using Amazon SNS to send SMS messages, your AWS account
+    # is in the *SMS sandbox*. The SMS sandbox provides a safe environment
+    # for you to try Amazon SNS features without risking your reputation as
+    # an SMS sender. While your account is in the SMS sandbox, you can use
+    # all of the features of Amazon SNS. However, you can send SMS messages
+    # only to verified destination phone numbers. For more information,
+    # including how to move out of the sandbox to send messages without
+    # restrictions, see [SMS sandbox][1] in the *Amazon SNS Developer
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html
+    #
+    # @option params [required, String] :phone_number
+    #   The destination phone number to verify. On verification, Amazon SNS
+    #   adds this phone number to the list of verified phone numbers that you
+    #   can send SMS messages to.
+    #
+    # @option params [String] :language_code
+    #   The language to use for sending the OTP. The default value is `en-US`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_sms_sandbox_phone_number({
+    #     phone_number: "PhoneNumberString", # required
+    #     language_code: "en-US", # accepts en-US, en-GB, es-419, es-ES, de-DE, fr-CA, fr-FR, it-IT, ja-JP, pt-BR, kr-KR, zh-CN, zh-TW
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreateSMSSandboxPhoneNumber AWS API Documentation
+    #
+    # @overload create_sms_sandbox_phone_number(params = {})
+    # @param [Hash] params ({})
+    def create_sms_sandbox_phone_number(params = {}, options = {})
+      req = build_request(:create_sms_sandbox_phone_number, params)
+      req.send_request(options)
+    end
+
     # Creates a topic to which notifications can be published. Users can
     # create at most 100,000 standard topics (at most 1,000 FIFO topics).
     # For more information, see [https://aws.amazon.com/sns][1]. This action
@@ -628,9 +671,9 @@ module Aws::SNS
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the topic.
     #
-    #   The following attribute applies only to [server-side-encryption][1]\:
+    #   The following attribute applies only to [server-side encryption][1]\:
     #
-    #   * `KmsMasterKeyId` – The ID of an AWS-managed customer master key
+    #   * `KmsMasterKeyId` – The ID of an AWS managed customer master key
     #     (CMK) for Amazon SNS or a custom CMK. For more information, see [Key
     #     Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
     #     Management Service API Reference*.
@@ -654,8 +697,8 @@ module Aws::SNS
     #       the body of the message (but not the attributes of the message).
     #
     #       (Optional) To override the generated value, you can specify a
-    #       value for the the `MessageDeduplicationId` parameter for the
-    #       `Publish` action.
+    #       value for the `MessageDeduplicationId` parameter for the `Publish`
+    #       action.
     #
     #
     #
@@ -762,6 +805,43 @@ module Aws::SNS
     # @param [Hash] params ({})
     def delete_platform_application(params = {}, options = {})
       req = build_request(:delete_platform_application, params)
+      req.send_request(options)
+    end
+
+    # Deletes an AWS account's verified or pending phone number from the
+    # SMS sandbox.
+    #
+    # When you start using Amazon SNS to send SMS messages, your AWS account
+    # is in the *SMS sandbox*. The SMS sandbox provides a safe environment
+    # for you to try Amazon SNS features without risking your reputation as
+    # an SMS sender. While your account is in the SMS sandbox, you can use
+    # all of the features of Amazon SNS. However, you can send SMS messages
+    # only to verified destination phone numbers. For more information,
+    # including how to move out of the sandbox to send messages without
+    # restrictions, see [SMS sandbox][1] in the *Amazon SNS Developer
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html
+    #
+    # @option params [required, String] :phone_number
+    #   The destination phone number to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_sms_sandbox_phone_number({
+    #     phone_number: "PhoneNumberString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteSMSSandboxPhoneNumber AWS API Documentation
+    #
+    # @overload delete_sms_sandbox_phone_number(params = {})
+    # @param [Hash] params ({})
+    def delete_sms_sandbox_phone_number(params = {}, options = {})
+      req = build_request(:delete_sms_sandbox_phone_number, params)
       req.send_request(options)
     end
 
@@ -903,6 +983,40 @@ module Aws::SNS
       req.send_request(options)
     end
 
+    # Retrieves the SMS sandbox status for the calling AWS account in the
+    # target AWS Region.
+    #
+    # When you start using Amazon SNS to send SMS messages, your AWS account
+    # is in the *SMS sandbox*. The SMS sandbox provides a safe environment
+    # for you to try Amazon SNS features without risking your reputation as
+    # an SMS sender. While your account is in the SMS sandbox, you can use
+    # all of the features of Amazon SNS. However, you can send SMS messages
+    # only to verified destination phone numbers. For more information,
+    # including how to move out of the sandbox to send messages without
+    # restrictions, see [SMS sandbox][1] in the *Amazon SNS Developer
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html
+    #
+    # @return [Types::GetSMSSandboxAccountStatusResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSMSSandboxAccountStatusResult#is_in_sandbox #is_in_sandbox} => Boolean
+    #
+    # @example Response structure
+    #
+    #   resp.is_in_sandbox #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSMSSandboxAccountStatus AWS API Documentation
+    #
+    # @overload get_sms_sandbox_account_status(params = {})
+    # @param [Hash] params ({})
+    def get_sms_sandbox_account_status(params = {}, options = {})
+      req = build_request(:get_sms_sandbox_account_status, params)
+      req.send_request(options)
+    end
+
     # Returns all of the properties of a subscription.
     #
     # @option params [required, String] :subscription_arn
@@ -1019,6 +1133,55 @@ module Aws::SNS
       req.send_request(options)
     end
 
+    # Lists the calling AWS account's dedicated origination numbers and
+    # their metadata. For more information about origination numbers, see
+    # [Origination numbers][1] in the *Amazon SNS Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/channels-sms-originating-identities-origination-numbers.html
+    #
+    # @option params [String] :next_token
+    #   Token that the previous `ListOriginationNumbers` request returns.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of origination numbers to return.
+    #
+    # @return [Types::ListOriginationNumbersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOriginationNumbersResult#next_token #next_token} => String
+    #   * {Types::ListOriginationNumbersResult#phone_numbers #phone_numbers} => Array&lt;Types::PhoneNumberInformation&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_origination_numbers({
+    #     next_token: "nextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.phone_numbers #=> Array
+    #   resp.phone_numbers[0].created_at #=> Time
+    #   resp.phone_numbers[0].phone_number #=> String
+    #   resp.phone_numbers[0].status #=> String
+    #   resp.phone_numbers[0].iso_2_country_code #=> String
+    #   resp.phone_numbers[0].route_type #=> String, one of "Transactional", "Promotional", "Premium"
+    #   resp.phone_numbers[0].number_capabilities #=> Array
+    #   resp.phone_numbers[0].number_capabilities[0] #=> String, one of "SMS", "MMS", "VOICE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListOriginationNumbers AWS API Documentation
+    #
+    # @overload list_origination_numbers(params = {})
+    # @param [Hash] params ({})
+    def list_origination_numbers(params = {}, options = {})
+      req = build_request(:list_origination_numbers, params)
+      req.send_request(options)
+    end
+
     # Returns a list of phone numbers that are opted out, meaning you cannot
     # send SMS messages to them.
     #
@@ -1110,6 +1273,60 @@ module Aws::SNS
     # @param [Hash] params ({})
     def list_platform_applications(params = {}, options = {})
       req = build_request(:list_platform_applications, params)
+      req.send_request(options)
+    end
+
+    # Lists the calling AWS account's current verified and pending
+    # destination phone numbers in the SMS sandbox.
+    #
+    # When you start using Amazon SNS to send SMS messages, your AWS account
+    # is in the *SMS sandbox*. The SMS sandbox provides a safe environment
+    # for you to try Amazon SNS features without risking your reputation as
+    # an SMS sender. While your account is in the SMS sandbox, you can use
+    # all of the features of Amazon SNS. However, you can send SMS messages
+    # only to verified destination phone numbers. For more information,
+    # including how to move out of the sandbox to send messages without
+    # restrictions, see [SMS sandbox][1] in the *Amazon SNS Developer
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html
+    #
+    # @option params [String] :next_token
+    #   Token that the previous `ListSMSSandboxPhoneNumbersInput` request
+    #   returns.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of phone numbers to return.
+    #
+    # @return [Types::ListSMSSandboxPhoneNumbersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSMSSandboxPhoneNumbersResult#phone_numbers #phone_numbers} => Array&lt;Types::SMSSandboxPhoneNumber&gt;
+    #   * {Types::ListSMSSandboxPhoneNumbersResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_sms_sandbox_phone_numbers({
+    #     next_token: "nextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.phone_numbers #=> Array
+    #   resp.phone_numbers[0].phone_number #=> String
+    #   resp.phone_numbers[0].status #=> String, one of "Pending", "Verified"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSMSSandboxPhoneNumbers AWS API Documentation
+    #
+    # @overload list_sms_sandbox_phone_numbers(params = {})
+    # @param [Hash] params ({})
+    def list_sms_sandbox_phone_numbers(params = {}, options = {})
+      req = build_request(:list_sms_sandbox_phone_numbers, params)
       req.send_request(options)
     end
 
@@ -1882,8 +2099,8 @@ module Aws::SNS
     #       the body of the message (but not the attributes of the message).
     #
     #       (Optional) To override the generated value, you can specify a
-    #       value for the the `MessageDeduplicationId` parameter for the
-    #       `Publish` action.
+    #       value for the `MessageDeduplicationId` parameter for the `Publish`
+    #       action.
     #
     #
     #
@@ -2184,6 +2401,48 @@ module Aws::SNS
       req.send_request(options)
     end
 
+    # Verifies a destination phone number with a one-time password (OTP) for
+    # the calling AWS account.
+    #
+    # When you start using Amazon SNS to send SMS messages, your AWS account
+    # is in the *SMS sandbox*. The SMS sandbox provides a safe environment
+    # for you to try Amazon SNS features without risking your reputation as
+    # an SMS sender. While your account is in the SMS sandbox, you can use
+    # all of the features of Amazon SNS. However, you can send SMS messages
+    # only to verified destination phone numbers. For more information,
+    # including how to move out of the sandbox to send messages without
+    # restrictions, see [SMS sandbox][1] in the *Amazon SNS Developer
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html
+    #
+    # @option params [required, String] :phone_number
+    #   The destination phone number to verify.
+    #
+    # @option params [required, String] :one_time_password
+    #   The OTP sent to the destination number from the
+    #   `CreateSMSSandBoxPhoneNumber` call.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.verify_sms_sandbox_phone_number({
+    #     phone_number: "PhoneNumberString", # required
+    #     one_time_password: "OTPCode", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/VerifySMSSandboxPhoneNumber AWS API Documentation
+    #
+    # @overload verify_sms_sandbox_phone_number(params = {})
+    # @param [Hash] params ({})
+    def verify_sms_sandbox_phone_number(params = {}, options = {})
+      req = build_request(:verify_sms_sandbox_phone_number, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2197,7 +2456,7 @@ module Aws::SNS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sns'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

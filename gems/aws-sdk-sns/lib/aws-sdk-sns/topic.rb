@@ -88,8 +88,8 @@ module Aws::SNS
     #     the body of the message (but not the attributes of the message).
     #
     #     (Optional) To override the generated value, you can specify a
-    #     value for the the `MessageDeduplicationId` parameter for the
-    #     `Publish` action.
+    #     value for the `MessageDeduplicationId` parameter for the `Publish`
+    #     action.
     #
     #
     #
@@ -403,8 +403,8 @@ module Aws::SNS
     #       the body of the message (but not the attributes of the message).
     #
     #       (Optional) To override the generated value, you can specify a
-    #       value for the the `MessageDeduplicationId` parameter for the
-    #       `Publish` action.
+    #       value for the `MessageDeduplicationId` parameter for the `Publish`
+    #       action.
     #
     #
     #

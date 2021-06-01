@@ -8250,6 +8250,7 @@ module Aws::EC2
     #             ],
     #           },
     #         ],
+    #         client_token: "String",
     #       }
     #
     # @!attribute [rw] description
@@ -8329,6 +8330,19 @@ module Aws::EC2
     #   The tags to apply to the new network interface.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInterfaceRequest AWS API Documentation
     #
     class CreateNetworkInterfaceRequest < Struct.new(
@@ -8342,7 +8356,8 @@ module Aws::EC2
       :secondary_private_ip_address_count,
       :interface_type,
       :subnet_id,
-      :tag_specifications)
+      :tag_specifications,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8353,10 +8368,16 @@ module Aws::EC2
     #   Information about the network interface.
     #   @return [Types::NetworkInterface]
     #
+    # @!attribute [rw] client_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInterfaceResult AWS API Documentation
     #
     class CreateNetworkInterfaceResult < Struct.new(
-      :network_interface)
+      :network_interface,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end

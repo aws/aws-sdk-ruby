@@ -7063,9 +7063,22 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the new network interface.
     #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
     # @return [Types::CreateNetworkInterfaceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateNetworkInterfaceResult#network_interface #network_interface} => Types::NetworkInterface
+    #   * {Types::CreateNetworkInterfaceResult#client_token #client_token} => String
     #
     #
     # @example Example: To create a network interface
@@ -7145,6 +7158,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     client_token: "String",
     #   })
     #
     # @example Response structure
@@ -7198,6 +7212,7 @@ module Aws::EC2
     #   resp.network_interface.tag_set[0].key #=> String
     #   resp.network_interface.tag_set[0].value #=> String
     #   resp.network_interface.vpc_id #=> String
+    #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInterface AWS API Documentation
     #
@@ -41881,7 +41896,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.239.0'
+      context[:gem_version] = '1.240.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -740,6 +740,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     client_token: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :description
@@ -796,6 +797,14 @@ module Aws::EC2
     #   The ID of the subnet to associate with the network interface.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the new network interface.
+    # @option options [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     # @return [NetworkInterface]
     def create_network_interface(options = {})
       resp = @client.create_network_interface(options)

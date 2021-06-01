@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.240.0 (2021-06-01)
+------------------
+
+* Feature - Added idempotency to CreateNetworkInterface using the ClientToken parameter.
+
 1.239.0 (2021-05-27)
 ------------------
 

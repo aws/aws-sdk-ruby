@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2021-06-01)
+------------------
+
+* Feature - Amazon Polly adds new Canadian French voice - Gabrielle. Gabrielle is available as Neural voice only.
+
 1.40.0 (2021-03-10)
 ------------------
 

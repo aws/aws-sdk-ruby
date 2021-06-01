@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2021-06-01)
+------------------
+
+* Feature - Added six new public customer logging APIs to allow customers to set/get/reset log levels at resource type and resource id level. The log level set from the APIs will be used to filter log messages that can be emitted to CloudWatch in customer accounts.
+
 1.9.0 (2021-05-10)
 ------------------
 
