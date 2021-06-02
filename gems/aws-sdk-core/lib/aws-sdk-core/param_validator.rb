@@ -117,11 +117,24 @@ module Aws
       end
     end
 
-    def document(ref, values, errors, context)
+    def document(ref, value, errors, context)
       document_types = [Hash, Array, Numeric, String, TrueClass, FalseClass, NilClass]
-      unless document_types.any? { |t| values.is_a?(t) }
-        errors << expected_got(context, "one of #{document_types.join(', ')}", values)
+      unless document_types.any? { |t| value.is_a?(t) }
+        errors << expected_got(context, "one of #{document_types.join(', ')}", value)
       end
+
+      # recursively validate types for aggregated types
+      case value
+      when Hash
+        value.each do |k, v|
+          document(ref, v, errors, context + "[#{k}]")
+        end
+      when Array
+        value.each do |v|
+          document(ref, v, errors, context)
+        end
+      end
+
     end
 
     def shape(ref, value, errors, context)
