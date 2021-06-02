@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2021-06-02)
+------------------
+
+* Feature - You can now launch EC2 instances with GP3 volumes when using Auto Scaling groups with Launch Configurations
+
 1.61.0 (2021-05-19)
 ------------------
 

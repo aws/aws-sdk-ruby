@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2021-06-02)
+------------------
+
+* Feature - Documentation updates for Lightsail
+
 1.50.0 (2021-05-27)
 ------------------
 

@@ -5811,7 +5811,7 @@ module Aws::Lightsail
     #
     #   * `A`
     #
-    #   * `AAA`
+    #   * `AAAA`
     #
     #   * `CNAME`
     #

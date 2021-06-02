@@ -537,8 +537,8 @@ module Aws::DocDB
     #         engine: "String", # required
     #         engine_version: "String",
     #         port: 1,
-    #         master_username: "String", # required
-    #         master_user_password: "String", # required
+    #         master_username: "String",
+    #         master_user_password: "String",
     #         preferred_backup_window: "String",
     #         preferred_maintenance_window: "String",
     #         tags: [
@@ -552,6 +552,7 @@ module Aws::DocDB
     #         pre_signed_url: "String",
     #         enable_cloudwatch_logs_exports: ["String"],
     #         deletion_protection: false,
+    #         global_cluster_identifier: "GlobalClusterIdentifier",
     #         source_region: "String",
     #       }
     #
@@ -731,6 +732,10 @@ module Aws::DocDB
     #   deleted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] global_cluster_identifier
+    #   The cluster identifier of the new global cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -758,6 +763,7 @@ module Aws::DocDB
       :pre_signed_url,
       :enable_cloudwatch_logs_exports,
       :deletion_protection,
+      :global_cluster_identifier,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -1205,6 +1211,80 @@ module Aws::DocDB
       include Aws::Structure
     end
 
+    # Represents the input to CreateGlobalCluster.
+    #
+    # @note When making an API call, you may pass CreateGlobalClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #         source_db_cluster_identifier: "String",
+    #         engine: "String",
+    #         engine_version: "String",
+    #         deletion_protection: false,
+    #         database_name: "String",
+    #         storage_encrypted: false,
+    #       }
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   The cluster identifier of the new global cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_db_cluster_identifier
+    #   The Amazon Resource Name (ARN) to use as the primary cluster of the
+    #   global cluster. This parameter is optional.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The name of the database engine to be used for this cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The engine version of the global cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   The deletion protection setting for the new global cluster. The
+    #   global cluster can't be deleted when deletion protection is
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] database_name
+    #   The name for your database of up to 64 alpha-numeric characters. If
+    #   you do not provide a name, Amazon DocumentDB will not create a
+    #   database in the global cluster you are creating.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_encrypted
+    #   The storage encryption setting for the new global cluster.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateGlobalClusterMessage AWS API Documentation
+    #
+    class CreateGlobalClusterMessage < Struct.new(
+      :global_cluster_identifier,
+      :source_db_cluster_identifier,
+      :engine,
+      :engine_version,
+      :deletion_protection,
+      :database_name,
+      :storage_encrypted)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_cluster
+    #   A data type representing an Amazon DocumentDB global cluster.
+    #   @return [Types::GlobalCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateGlobalClusterResult AWS API Documentation
+    #
+    class CreateGlobalClusterResult < Struct.new(
+      :global_cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Detailed information about a cluster.
     #
     # @!attribute [rw] availability_zones
@@ -1304,6 +1384,16 @@ module Aws::DocDB
     #   occur, in Universal Coordinated Time (UTC).
     #   @return [String]
     #
+    # @!attribute [rw] replication_source_identifier
+    #   Contains the identifier of the source cluster if this cluster is a
+    #   secondary cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] read_replica_identifiers
+    #   Contains one or more identifiers of the secondary clusters that are
+    #   associated with this cluster.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] db_cluster_members
     #   Provides the list of instances that make up the cluster.
     #   @return [Array<Types::DBClusterMember>]
@@ -1383,6 +1473,8 @@ module Aws::DocDB
       :master_username,
       :preferred_backup_window,
       :preferred_maintenance_window,
+      :replication_source_identifier,
+      :read_replica_identifiers,
       :db_cluster_members,
       :vpc_security_groups,
       :hosted_zone_id,
@@ -2482,6 +2574,39 @@ module Aws::DocDB
       include Aws::Structure
     end
 
+    # Represents the input to DeleteGlobalCluster.
+    #
+    # @note When making an API call, you may pass DeleteGlobalClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #       }
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   The cluster identifier of the global cluster being deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteGlobalClusterMessage AWS API Documentation
+    #
+    class DeleteGlobalClusterMessage < Struct.new(
+      :global_cluster_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_cluster
+    #   A data type representing an Amazon DocumentDB global cluster.
+    #   @return [Types::GlobalCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteGlobalClusterResult AWS API Documentation
+    #
+    class DeleteGlobalClusterResult < Struct.new(
+      :global_cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeCertificatesMessage
     #   data as a hash:
     #
@@ -2778,7 +2903,7 @@ module Aws::DocDB
     #   and manual cluster snapshots are returned. You can include shared
     #   cluster snapshots with these results by setting the `IncludeShared`
     #   parameter to `true`. You can include public cluster snapshots with
-    #   these results by setting the `IncludePublic` parameter to `true`.
+    #   these results by setting the`IncludePublic` parameter to `true`.
     #
     #   The `IncludeShared` and `IncludePublic` parameters don't apply for
     #   `SnapshotType` values of `manual` or `automated`. The
@@ -3395,6 +3520,60 @@ module Aws::DocDB
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeGlobalClustersMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_cluster_identifier: "GlobalClusterIdentifier",
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   The user-supplied cluster identifier. If this parameter is
+    #   specified, information from only the specific cluster is returned.
+    #   This parameter isn't case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A filter that specifies one or more global DB clusters to describe.
+    #
+    #   Supported filters: `db-cluster-id` accepts cluster identifiers and
+    #   cluster Amazon Resource Names (ARNs). The results list will only
+    #   include information about the clusters identified by these ARNs.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeGlobalClusters` request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the
+    #   value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeGlobalClustersMessage AWS API Documentation
+    #
+    class DescribeGlobalClustersMessage < Struct.new(
+      :global_cluster_identifier,
+      :filters,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input to DescribeOrderableDBInstanceOptions.
     #
     # @note When making an API call, you may pass DescribeOrderableDBInstanceOptionsMessage
@@ -3871,6 +4050,134 @@ module Aws::DocDB
       include Aws::Structure
     end
 
+    # A data type representing an Amazon DocumentDB global cluster.
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   Contains a user-supplied global cluster identifier. This identifier
+    #   is the unique key that identifies a global cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_cluster_resource_id
+    #   The AWS Region-unique, immutable identifier for the global database
+    #   cluster. This identifier is found in AWS CloudTrail log entries
+    #   whenever the AWS KMS customer master key (CMK) for the cluster is
+    #   accessed.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_cluster_arn
+    #   The Amazon Resource Name (ARN) for the global cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Specifies the current state of this global cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The Amazon DocumentDB database engine used by the global cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   Indicates the database engine version.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The default database name within the new global cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_encrypted
+    #   The storage encryption setting for the global cluster.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] deletion_protection
+    #   The deletion protection setting for the new global cluster.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] global_cluster_members
+    #   The list of cluster IDs for secondary clusters within the global
+    #   cluster. Currently limited to one item.
+    #   @return [Array<Types::GlobalClusterMember>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/GlobalCluster AWS API Documentation
+    #
+    class GlobalCluster < Struct.new(
+      :global_cluster_identifier,
+      :global_cluster_resource_id,
+      :global_cluster_arn,
+      :status,
+      :engine,
+      :engine_version,
+      :database_name,
+      :storage_encrypted,
+      :deletion_protection,
+      :global_cluster_members)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The `GlobalClusterIdentifier` already exists. Choose a new global
+    # cluster identifier (unique name) to create a new global cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/GlobalClusterAlreadyExistsFault AWS API Documentation
+    #
+    class GlobalClusterAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # A data structure with information about any primary and secondary
+    # clusters associated with an Amazon DocumentDB global clusters.
+    #
+    # @!attribute [rw] db_cluster_arn
+    #   The Amazon Resource Name (ARN) for each Amazon DocumentDB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] readers
+    #   The Amazon Resource Name (ARN) for each read-only secondary cluster
+    #   associated with the Aurora global cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] is_writer
+    #   Specifies whether the Amazon DocumentDB cluster is the primary
+    #   cluster (that is, has read-write capability) for the Amazon
+    #   DocumentDB global cluster with which it is associated.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/GlobalClusterMember AWS API Documentation
+    #
+    class GlobalClusterMember < Struct.new(
+      :db_cluster_arn,
+      :readers,
+      :is_writer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The `GlobalClusterIdentifier` doesn't refer to an existing global
+    # cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/GlobalClusterNotFoundFault AWS API Documentation
+    #
+    class GlobalClusterNotFoundFault < Aws::EmptyStructure; end
+
+    # The number of global clusters for this account is already at the
+    # maximum allowed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/GlobalClusterQuotaExceededFault AWS API Documentation
+    #
+    class GlobalClusterQuotaExceededFault < Aws::EmptyStructure; end
+
+    # @!attribute [rw] marker
+    #   @return [String]
+    #
+    # @!attribute [rw] global_clusters
+    #   @return [Array<Types::GlobalCluster>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/GlobalClustersMessage AWS API Documentation
+    #
+    class GlobalClustersMessage < Struct.new(
+      :marker,
+      :global_clusters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request would cause you to exceed the allowed number of instances.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/InstanceQuotaExceededFault AWS API Documentation
@@ -3954,6 +4261,13 @@ module Aws::DocDB
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/InvalidEventSubscriptionStateFault AWS API Documentation
     #
     class InvalidEventSubscriptionStateFault < Aws::EmptyStructure; end
+
+    # The requested operation can't be performed while the cluster is in
+    # this state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/InvalidGlobalClusterStateFault AWS API Documentation
+    #
+    class InvalidGlobalClusterStateFault < Aws::EmptyStructure; end
 
     # You cannot restore from a virtual private cloud (VPC) backup to a
     # non-VPC DB instance.
@@ -4164,9 +4478,8 @@ module Aws::DocDB
     #
     # @!attribute [rw] engine_version
     #   The version number of the database engine to which you want to
-    #   upgrade. Changing this parameter results in an outage. The change is
-    #   applied during the next maintenance window unless the
-    #   `ApplyImmediately` parameter is set to `true`.
+    #   upgrade. Modifying engine version is not supported on Amazon
+    #   DocumentDB.
     #   @return [String]
     #
     # @!attribute [rw] deletion_protection
@@ -4581,6 +4894,69 @@ module Aws::DocDB
       include Aws::Structure
     end
 
+    # Represents the input to ModifyGlobalCluster.
+    #
+    # @note When making an API call, you may pass ModifyGlobalClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #         new_global_cluster_identifier: "GlobalClusterIdentifier",
+    #         deletion_protection: false,
+    #       }
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   The identifier for the global cluster being modified. This parameter
+    #   isn't case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing global cluster.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] new_global_cluster_identifier
+    #   The new identifier for a global cluster when you modify a global
+    #   cluster. This value is stored as a lowercase string.
+    #
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens
+    #
+    #     The first character must be a letter
+    #
+    #     Can't end with a hyphen or contain two consecutive hyphens
+    #
+    #   Example: `my-cluster2`
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates if the global cluster has deletion protection enabled. The
+    #   global cluster can't be deleted when deletion protection is
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyGlobalClusterMessage AWS API Documentation
+    #
+    class ModifyGlobalClusterMessage < Struct.new(
+      :global_cluster_identifier,
+      :new_global_cluster_identifier,
+      :deletion_protection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_cluster
+    #   A data type representing an Amazon DocumentDB global cluster.
+    #   @return [Types::GlobalCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyGlobalClusterResult AWS API Documentation
+    #
+    class ModifyGlobalClusterResult < Struct.new(
+      :global_cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The options that are available for an instance.
     #
     # @!attribute [rw] engine
@@ -4948,6 +5324,47 @@ module Aws::DocDB
     #
     class RebootDBInstanceResult < Struct.new(
       :db_instance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the input to RemoveFromGlobalCluster.
+    #
+    # @note When making an API call, you may pass RemoveFromGlobalClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #         db_cluster_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   The cluster identifier to detach from the Amazon DocumentDB global
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The Amazon Resource Name (ARN) identifying the cluster that was
+    #   detached from the Amazon DocumentDB global cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RemoveFromGlobalClusterMessage AWS API Documentation
+    #
+    class RemoveFromGlobalClusterMessage < Struct.new(
+      :global_cluster_identifier,
+      :db_cluster_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_cluster
+    #   A data type representing an Amazon DocumentDB global cluster.
+    #   @return [Types::GlobalCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RemoveFromGlobalClusterResult AWS API Documentation
+    #
+    class RemoveFromGlobalClusterResult < Struct.new(
+      :global_cluster)
       SENSITIVE = []
       include Aws::Structure
     end

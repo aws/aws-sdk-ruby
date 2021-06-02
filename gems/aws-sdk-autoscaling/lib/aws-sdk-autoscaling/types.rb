@@ -328,9 +328,9 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] health_check_type
     #   The service to use for the health checks. The valid values are `EC2`
-    #   and `ELB`. If you configure an Auto Scaling group to use ELB health
-    #   checks, it considers the instance unhealthy if it fails either the
-    #   EC2 status checks or the load balancer health checks.
+    #   and `ELB`. If you configure an Auto Scaling group to use `ELB`
+    #   health checks, it considers the instance unhealthy if it fails
+    #   either the EC2 status checks or the load balancer health checks.
     #   @return [String]
     #
     # @!attribute [rw] health_check_grace_period
@@ -384,7 +384,8 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] service_linked_role_arn
     #   The Amazon Resource Name (ARN) of the service-linked role that the
-    #   Auto Scaling group uses to call other AWS services on your behalf.
+    #   Auto Scaling group uses to call other Amazon Web Services on your
+    #   behalf.
     #   @return [String]
     #
     # @!attribute [rw] max_instance_lifetime
@@ -708,6 +709,7 @@ module Aws::AutoScaling
     #           delete_on_termination: false,
     #           iops: 1,
     #           encrypted: false,
+    #           throughput: 1,
     #         },
     #         no_device: false,
     #       }
@@ -1193,11 +1195,11 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] service_linked_role_arn
     #   The Amazon Resource Name (ARN) of the service-linked role that the
-    #   Auto Scaling group uses to call other AWS services on your behalf.
-    #   By default, Amazon EC2 Auto Scaling uses a service-linked role named
-    #   AWSServiceRoleForAutoScaling, which it creates if it does not exist.
-    #   For more information, see [Service-linked roles][1] in the *Amazon
-    #   EC2 Auto Scaling User Guide*.
+    #   Auto Scaling group uses to call other Amazon Web Services on your
+    #   behalf. By default, Amazon EC2 Auto Scaling uses a service-linked
+    #   role named AWSServiceRoleForAutoScaling, which it creates if it does
+    #   not exist. For more information, see [Service-linked roles][1] in
+    #   the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -1273,6 +1275,7 @@ module Aws::AutoScaling
     #               delete_on_termination: false,
     #               iops: 1,
     #               encrypted: false,
+    #               throughput: 1,
     #             },
     #             no_device: false,
     #           },
@@ -1880,21 +1883,21 @@ module Aws::AutoScaling
     end
 
     # @!attribute [rw] max_number_of_auto_scaling_groups
-    #   The maximum number of groups allowed for your AWS account. The
-    #   default is 200 groups per AWS Region.
+    #   The maximum number of groups allowed for your account. The default
+    #   is 200 groups per Region.
     #   @return [Integer]
     #
     # @!attribute [rw] max_number_of_launch_configurations
-    #   The maximum number of launch configurations allowed for your AWS
-    #   account. The default is 200 launch configurations per AWS Region.
+    #   The maximum number of launch configurations allowed for your
+    #   account. The default is 200 launch configurations per Region.
     #   @return [Integer]
     #
     # @!attribute [rw] number_of_auto_scaling_groups
-    #   The current number of groups for your AWS account.
+    #   The current number of groups for your account.
     #   @return [Integer]
     #
     # @!attribute [rw] number_of_launch_configurations
-    #   The current number of launch configurations for your AWS account.
+    #   The current number of launch configurations for your account.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAccountLimitsAnswer AWS API Documentation
@@ -1930,10 +1933,11 @@ module Aws::AutoScaling
     #       }
     #
     # @!attribute [rw] instance_ids
-    #   The IDs of the instances. You can specify up to `MaxRecords` IDs. If
-    #   you omit this parameter, all Auto Scaling instances are described.
-    #   If you specify an ID that does not exist, it is ignored with no
-    #   error.
+    #   The IDs of the instances. If you omit this parameter, all Auto
+    #   Scaling instances are described. If you specify an ID that does not
+    #   exist, it is ignored with no error.
+    #
+    #   Array Members: Maximum number of 50 items.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_records
@@ -2275,8 +2279,10 @@ module Aws::AutoScaling
     # @!attribute [rw] policy_names
     #   The names of one or more policies. If you omit this parameter, all
     #   policies are described. If a group name is provided, the results are
-    #   limited to that group. This list is limited to 50 items. If you
-    #   specify an unknown policy name, it is ignored with no error.
+    #   limited to that group. If you specify an unknown policy name, it is
+    #   ignored with no error.
+    #
+    #   Array Members: Maximum number of 50 items.
     #   @return [Array<String>]
     #
     # @!attribute [rw] policy_types
@@ -2318,11 +2324,13 @@ module Aws::AutoScaling
     #       }
     #
     # @!attribute [rw] activity_ids
-    #   The activity IDs of the desired scaling activities. You can specify
-    #   up to 50 IDs. If you omit this parameter, all activities for the
-    #   past six weeks are described. If unknown activities are requested,
-    #   they are ignored with no error. If you specify an Auto Scaling
-    #   group, the results are limited to that group.
+    #   The activity IDs of the desired scaling activities. If you omit this
+    #   parameter, all activities for the past six weeks are described. If
+    #   unknown activities are requested, they are ignored with no error. If
+    #   you specify an Auto Scaling group, the results are limited to that
+    #   group.
+    #
+    #   Array Members: Maximum number of 50 IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] auto_scaling_group_name
@@ -2373,10 +2381,11 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] scheduled_action_names
-    #   The names of one or more scheduled actions. You can specify up to 50
-    #   actions. If you omit this parameter, all scheduled actions are
-    #   described. If you specify an unknown scheduled action, it is ignored
-    #   with no error.
+    #   The names of one or more scheduled actions. If you omit this
+    #   parameter, all scheduled actions are described. If you specify an
+    #   unknown scheduled action, it is ignored with no error.
+    #
+    #   Array Members: Maximum number of 50 actions.
     #   @return [Array<String>]
     #
     # @!attribute [rw] start_time
@@ -2708,6 +2717,7 @@ module Aws::AutoScaling
     #         delete_on_termination: false,
     #         iops: 1,
     #         encrypted: false,
+    #         throughput: 1,
     #       }
     #
     # @!attribute [rw] snapshot_id
@@ -2717,29 +2727,28 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] volume_size
-    #   The volume size, in Gibibytes (GiB).
+    #   The volume size, in GiBs. The following are the supported volumes
+    #   sizes for each volume type:
     #
-    #   This can be a number from 1-1,024 for `standard`, 4-16,384 for
-    #   `io1`, 1-16,384 for `gp2`, and 500-16,384 for `st1` and `sc1`. If
-    #   you specify a snapshot, the volume size must be equal to or larger
-    #   than the snapshot size.
+    #   * `gp2` and `gp3`\: 1-16,384
     #
-    #   Default: If you create a volume from a snapshot and you don't
-    #   specify a volume size, the default is the snapshot size.
+    #   * `io1`\: 4-16,384
     #
-    #   You must specify either a `VolumeSize` or a `SnapshotId`. If you
+    #   * `st1` and `sc1`\: 125-16,384
+    #
+    #   * `standard`\: 1-1,024
+    #
+    #   You must specify either a `SnapshotId` or a `VolumeSize`. If you
     #   specify both `SnapshotId` and `VolumeSize`, the volume size must be
     #   equal or greater than the size of the snapshot.
     #   @return [Integer]
     #
     # @!attribute [rw] volume_type
-    #   The volume type, which can be `standard` for Magnetic, `io1` for
-    #   Provisioned IOPS SSD, `gp2` for General Purpose SSD, `st1` for
-    #   Throughput Optimized HDD, or `sc1` for Cold HDD. For more
-    #   information, see [Amazon EBS Volume Types][1] in the *Amazon EC2
-    #   User Guide for Linux Instances*.
+    #   The volume type. For more information, see [Amazon EBS Volume
+    #   Types][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
-    #   Valid Values: `standard` \| `io1` \| `gp2` \| `st1` \| `sc1`
+    #   Valid Values: `standard` \| `io1` \| `gp2` \| `st1` \| `sc1` \|
+    #   `gp3`
     #
     #
     #
@@ -2752,17 +2761,30 @@ module Aws::AutoScaling
     #   @return [Boolean]
     #
     # @!attribute [rw] iops
-    #   The number of I/O operations per second (IOPS) to provision for the
-    #   volume. The maximum ratio of IOPS to volume size (in GiB) is 50:1.
-    #   For more information, see [Amazon EBS Volume Types][1] in the
-    #   *Amazon EC2 User Guide for Linux Instances*.
+    #   The number of input/output (I/O) operations per second (IOPS) to
+    #   provision for the volume. For `gp3` and `io1` volumes, this
+    #   represents the number of IOPS that are provisioned for the volume.
+    #   For `gp2` volumes, this represents the baseline performance of the
+    #   volume and the rate at which the volume accumulates I/O credits for
+    #   bursting.
     #
-    #   Required when the volume type is `io1`. (Not used with `standard`,
-    #   `gp2`, `st1`, or `sc1` volumes.)
+    #   The following are the supported values for each volume type:
+    #
+    #   * `gp3`\: 3,000-16,000 IOPS
+    #
+    #   * `io1`\: 100-64,000 IOPS
+    #
+    #   For `io1` volumes, we guarantee 64,000 IOPS only for [Instances
+    #   built on the Nitro System][1]. Other instance families guarantee
+    #   performance up to 32,000 IOPS.
+    #
+    #   `Iops` is supported when the volume type is `gp3` or `io1` and
+    #   required only when the volume type is `io1`. (Not used with
+    #   `standard`, `gp2`, `st1`, or `sc1` volumes.)
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
     #   @return [Integer]
     #
     # @!attribute [rw] encrypted
@@ -2802,6 +2824,12 @@ module Aws::AutoScaling
     #   [4]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/key-policy-requirements-EBS-encryption.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] throughput
+    #   The throughput to provision for a `gp3` volume.
+    #
+    #   Valid Range: Minimum value of 125. Maximum value of 1000.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/Ebs AWS API Documentation
     #
     class Ebs < Struct.new(
@@ -2810,7 +2838,8 @@ module Aws::AutoScaling
       :volume_type,
       :delete_on_termination,
       :iops,
-      :encrypted)
+      :encrypted,
+      :throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3922,6 +3951,8 @@ module Aws::AutoScaling
     # @!attribute [rw] launch_configuration_names
     #   The launch configuration names. If you omit this parameter, all
     #   launch configurations are described.
+    #
+    #   Array Members: Maximum number of 50 items.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -4381,17 +4412,6 @@ module Aws::AutoScaling
 
     # Describes the state of a Classic Load Balancer.
     #
-    # If you specify a load balancer when creating the Auto Scaling group,
-    # the state of the load balancer is `InService`.
-    #
-    # If you attach a load balancer to an existing Auto Scaling group, the
-    # initial state is `Adding`. The state transitions to `Added` after all
-    # instances in the group are registered with the load balancer. If
-    # Elastic Load Balancing health checks are enabled for the load
-    # balancer, the state transitions to `InService` after at least one
-    # instance in the group passes the health check. If EC2 health checks
-    # are enabled instead, the load balancer remains in the `Added` state.
-    #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer.
     #   @return [String]
@@ -4399,21 +4419,21 @@ module Aws::AutoScaling
     # @!attribute [rw] state
     #   One of the following load balancer states:
     #
-    #   * `Adding` - The instances in the group are being registered with
+    #   * `Adding` - The Auto Scaling instances are being registered with
     #     the load balancer.
     #
-    #   * `Added` - All instances in the group are registered with the load
+    #   * `Added` - All Auto Scaling instances are registered with the load
     #     balancer.
     #
-    #   * `InService` - At least one instance in the group passed an ELB
+    #   * `InService` - At least one Auto Scaling instance passed an `ELB`
     #     health check.
     #
-    #   * `Removing` - The instances in the group are being deregistered
+    #   * `Removing` - The Auto Scaling instances are being deregistered
     #     from the load balancer. If connection draining is enabled, Elastic
     #     Load Balancing waits for in-flight requests to complete before
     #     deregistering the instances.
     #
-    #   * `Removed` - All instances in the group are deregistered from the
+    #   * `Removed` - All Auto Scaling instances are deregistered from the
     #     load balancer.
     #   @return [String]
     #
@@ -4428,14 +4448,6 @@ module Aws::AutoScaling
 
     # Describes the state of a target group.
     #
-    # If you attach a target group to an existing Auto Scaling group, the
-    # initial state is `Adding`. The state transitions to `Added` after all
-    # Auto Scaling instances are registered with the target group. If
-    # Elastic Load Balancing health checks are enabled, the state
-    # transitions to `InService` after at least one Auto Scaling instance
-    # passes the health check. If EC2 health checks are enabled instead, the
-    # target group remains in the `Added` state.
-    #
     # @!attribute [rw] load_balancer_target_group_arn
     #   The Amazon Resource Name (ARN) of the target group.
     #   @return [String]
@@ -4449,7 +4461,7 @@ module Aws::AutoScaling
     #   * `Added` - All Auto Scaling instances are registered with the
     #     target group.
     #
-    #   * `InService` - At least one Auto Scaling instance passed an ELB
+    #   * `InService` - At least one Auto Scaling instance passed an `ELB`
     #     health check.
     #
     #   * `Removing` - The Auto Scaling instances are being deregistered
@@ -6610,7 +6622,7 @@ module Aws::AutoScaling
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The name of the group.
+    #   The name of the Auto Scaling group.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -6913,9 +6925,9 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] health_check_type
     #   The service to use for the health checks. The valid values are `EC2`
-    #   and `ELB`. If you configure an Auto Scaling group to use ELB health
-    #   checks, it considers the instance unhealthy if it fails either the
-    #   EC2 status checks or the load balancer health checks.
+    #   and `ELB`. If you configure an Auto Scaling group to use `ELB`
+    #   health checks, it considers the instance unhealthy if it fails
+    #   either the EC2 status checks or the load balancer health checks.
     #   @return [String]
     #
     # @!attribute [rw] health_check_grace_period
@@ -6978,9 +6990,9 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] service_linked_role_arn
     #   The Amazon Resource Name (ARN) of the service-linked role that the
-    #   Auto Scaling group uses to call other AWS services on your behalf.
-    #   For more information, see [Service-linked roles][1] in the *Amazon
-    #   EC2 Auto Scaling User Guide*.
+    #   Auto Scaling group uses to call other Amazon Web Services on your
+    #   behalf. For more information, see [Service-linked roles][1] in the
+    #   *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #

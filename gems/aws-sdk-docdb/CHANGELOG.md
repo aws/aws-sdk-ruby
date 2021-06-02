@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2021-06-02)
+------------------
+
+* Feature - This SDK release adds support for DocDB global clusters.
+
 1.30.0 (2021-03-29)
 ------------------
 

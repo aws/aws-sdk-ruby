@@ -338,7 +338,10 @@ module Aws::IAM
     #   in JSON or YAML format. AWS CloudFormation always converts a YAML
     #   policy to JSON format before submitting it to IAM.
     #
-    #   The [regex pattern][1] used to validate this parameter is a string of
+    #   To learn more about JSON policy grammar, see [Grammar of the IAM JSON
+    #   policy language][1] in the *IAM User Guide*.
+    #
+    #   The [regex pattern][2] used to validate this parameter is a string of
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
@@ -352,7 +355,8 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_grammar.html
+    #   [2]: http://wikipedia.org/wiki/regex
     # @option options [String] :description
     #   A friendly description of the policy.
     #

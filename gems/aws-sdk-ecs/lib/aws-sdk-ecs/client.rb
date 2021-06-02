@@ -2653,33 +2653,16 @@ module Aws::ECS
     #   assumed.
     #
     # @option params [Array<String>] :include
-    #   Whether to include additional information about your clusters in the
-    #   response. If this field is omitted, the attachments, statistics, and
-    #   tags are not included.
+    #   Whether to include additional information about the clusters in the
+    #   response. If this field is omitted, this information isn't included.
     #
     #   If `ATTACHMENTS` is specified, the attachments for the container
     #   instances or tasks within the cluster are included.
     #
     #   If `SETTINGS` is specified, the settings for the cluster are included.
     #
-    #   If `STATISTICS` is specified, the following additional information,
-    #   separated by launch type, is included:
-    #
-    #   * runningEC2TasksCount
-    #
-    #   * runningFargateTasksCount
-    #
-    #   * pendingEC2TasksCount
-    #
-    #   * pendingFargateTasksCount
-    #
-    #   * activeEC2ServiceCount
-    #
-    #   * activeFargateServiceCount
-    #
-    #   * drainingEC2ServiceCount
-    #
-    #   * drainingFargateServiceCount
+    #   If `STATISTICS` is specified, the task and service count is included,
+    #   separated by launch type.
     #
     #   If `TAGS` is specified, the metadata tags associated with the cluster
     #   are included.
@@ -2774,8 +2757,7 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # Describes Amazon Elastic Container Service container instances.
-    # Returns metadata about registered and remaining resources on each
+    # Describes one or more container instances. Returns metadata about each
     # container instance requested.
     #
     # @option params [String] :cluster
@@ -8512,7 +8494,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

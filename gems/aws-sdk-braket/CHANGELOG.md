@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2021-06-02)
+------------------
+
+* Feature - Introduction of a RETIRED status for devices.
+
 1.7.0 (2021-03-10)
 ------------------
 

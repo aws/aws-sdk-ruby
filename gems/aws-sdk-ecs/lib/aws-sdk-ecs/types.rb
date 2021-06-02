@@ -2061,7 +2061,9 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] ec2_instance_id
-    #   The EC2 instance ID of the container instance.
+    #   The ID of the container instance. For Amazon EC2 instances, this
+    #   value is the Amazon EC2 instance ID. For external instances, this
+    #   value is the AWS Systems Manager managed instance ID.
     #   @return [String]
     #
     # @!attribute [rw] capacity_provider_name
@@ -4110,9 +4112,9 @@ module Aws::ECS
     #   @return [Array<String>]
     #
     # @!attribute [rw] include
-    #   Whether to include additional information about your clusters in the
-    #   response. If this field is omitted, the attachments, statistics, and
-    #   tags are not included.
+    #   Whether to include additional information about the clusters in the
+    #   response. If this field is omitted, this information isn't
+    #   included.
     #
     #   If `ATTACHMENTS` is specified, the attachments for the container
     #   instances or tasks within the cluster are included.
@@ -4120,24 +4122,8 @@ module Aws::ECS
     #   If `SETTINGS` is specified, the settings for the cluster are
     #   included.
     #
-    #   If `STATISTICS` is specified, the following additional information,
-    #   separated by launch type, is included:
-    #
-    #   * runningEC2TasksCount
-    #
-    #   * runningFargateTasksCount
-    #
-    #   * pendingEC2TasksCount
-    #
-    #   * pendingFargateTasksCount
-    #
-    #   * activeEC2ServiceCount
-    #
-    #   * activeFargateServiceCount
-    #
-    #   * drainingEC2ServiceCount
-    #
-    #   * drainingFargateServiceCount
+    #   If `STATISTICS` is specified, the task and service count is
+    #   included, separated by launch type.
     #
     #   If `TAGS` is specified, the metadata tags associated with the
     #   cluster are included.
