@@ -109,8 +109,15 @@
           },
           "Fourth": {
             "shape": "IntegerType"
+          },
+          "Fifth": {
+            "shape": "DocumentType"
           }
         }
+      },
+      "DocumentType": {
+        "type": "structure",
+        "document": true
       },
       "BoolType": {
         "type": "boolean"
@@ -140,7 +147,8 @@
           "First": true,
           "Second": false,
           "Third": 1.2,
-          "Fourth": 3
+          "Fourth": 3,
+          "Fifth": {"test":  "value"}
         },
         "serialized": {
           "method": "POST",
