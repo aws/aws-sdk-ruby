@@ -901,6 +901,7 @@ module Aws::S3Control
     S3CopyObjectOperation.add_member(:object_lock_legal_hold_status, Shapes::ShapeRef.new(shape: S3ObjectLockLegalHoldStatus, location_name: "ObjectLockLegalHoldStatus"))
     S3CopyObjectOperation.add_member(:object_lock_mode, Shapes::ShapeRef.new(shape: S3ObjectLockMode, location_name: "ObjectLockMode"))
     S3CopyObjectOperation.add_member(:object_lock_retain_until_date, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "ObjectLockRetainUntilDate"))
+    S3CopyObjectOperation.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "BucketKeyEnabled"))
     S3CopyObjectOperation.struct_class = Types::S3CopyObjectOperation
 
     S3DeleteObjectTaggingOperation.struct_class = Types::S3DeleteObjectTaggingOperation

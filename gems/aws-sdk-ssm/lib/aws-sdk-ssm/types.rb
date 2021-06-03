@@ -2154,6 +2154,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] command_plugins
+    #   Plugins processed by the command.
     #   @return [Array<Types::CommandPlugin>]
     #
     # @!attribute [rw] service_role
@@ -3353,7 +3354,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -6969,7 +6970,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -7124,7 +7125,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -7243,7 +7244,7 @@ module Aws::SSM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #
     # @note When making an API call, you may pass DocumentKeyValuesFilter
     #   data as a hash:
@@ -9651,12 +9652,20 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] setting_id
-    #   The ID of the service setting to get. The setting ID can be
-    #   `/ssm/automation/customer-script-log-destination`,
-    #   `/ssm/automation/customer-script-log-group-name`,
-    #   `/ssm/parameter-store/default-parameter-tier`,
-    #   `/ssm/parameter-store/high-throughput-enabled`, or
-    #   `/ssm/managed-instance/activation-tier`.
+    #   The ID of the service setting to get. The setting ID can be one of
+    #   the following.
+    #
+    #   * `/ssm/automation/customer-script-log-destination`
+    #
+    #   * `/ssm/automation/customer-script-log-group-name`
+    #
+    #   * `/ssm/documents/console/public-sharing-permission`
+    #
+    #   * `/ssm/parameter-store/default-parameter-tier`
+    #
+    #   * `/ssm/parameter-store/high-throughput-enabled`
+    #
+    #   * `/ssm/managed-instance/activation-tier`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetServiceSettingRequest AWS API Documentation
@@ -9983,8 +9992,8 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html
-    #   [2]: http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html
+    #   [2]: https://docs.aws.amazon.com/cli/latest/ec2/describe-instances.html
     #   @return [String]
     #
     # @!attribute [rw] registration_date
@@ -10013,10 +10022,10 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-linux.html
-    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-win.html
-    #   [3]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html
-    #   [4]: http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-linux.html
+    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-win.html
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html
+    #   [4]: https://docs.aws.amazon.com/cli/latest/ec2/describe-instances.html
     #   @return [String]
     #
     # @!attribute [rw] ip_address
@@ -10503,6 +10512,8 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # The specified command ID is not valid. Verify the ID and try again.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidCommandId AWS API Documentation
     #
     class InvalidCommandId < Aws::EmptyStructure; end
@@ -14837,13 +14848,13 @@ module Aws::SSM
     # parameters, first move the label from the oldest version of the
     # parameter to a newer one for use in your operations. For information
     # about moving parameter labels, see [Move a parameter label
-    # (console)][1] or [Move a parameter label (CLI) ][2] in the *AWS
-    # Systems Manager User Guide*.
+    # (console)][1] or [Move a parameter label (CLI)][2] in the *AWS Systems
+    # Manager User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html#sysman-paramstore-labels-console-move
-    # [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html#sysman-paramstore-labels-cli-move
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html#sysman-paramstore-labels-console-move
+    # [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html#sysman-paramstore-labels-cli-move
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -16099,7 +16110,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameterRequest AWS API Documentation
@@ -16684,12 +16695,19 @@ module Aws::SSM
     #
     # @!attribute [rw] setting_id
     #   The Amazon Resource Name (ARN) of the service setting to reset. The
-    #   setting ID can be `/ssm/automation/customer-script-log-destination`,
-    #   `/ssm/automation/customer-script-log-group-name`,
-    #   `/ssm/parameter-store/default-parameter-tier`,
-    #   `/ssm/parameter-store/high-throughput-enabled`, or
-    #   `/ssm/managed-instance/activation-tier`. For example,
-    #   `arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled`.
+    #   setting ID can be one of the following.
+    #
+    #   * `/ssm/automation/customer-script-log-destination`
+    #
+    #   * `/ssm/automation/customer-script-log-group-name`
+    #
+    #   * `/ssm/documents/console/public-sharing-permission`
+    #
+    #   * `/ssm/parameter-store/default-parameter-tier`
+    #
+    #   * `/ssm/parameter-store/high-throughput-enabled`
+    #
+    #   * `/ssm/managed-instance/activation-tier`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResetServiceSettingRequest AWS API Documentation
@@ -17089,7 +17107,7 @@ module Aws::SSM
     # @!attribute [rw] source_type
     #   The type of data source for the resource data sync. `SourceType` is
     #   either `AwsOrganizations` (if an organization is present in AWS
-    #   Organizations) or `singleAccountMultiRegions`.
+    #   Organizations) or `SingleAccountMultiRegions`.
     #   @return [String]
     #
     # @!attribute [rw] aws_organizations_source
@@ -20802,6 +20820,8 @@ module Aws::SSM
     #
     #   * `/ssm/automation/customer-script-log-group-name`
     #
+    #   * `/ssm/documents/console/public-sharing-permission`
+    #
     #   * `/ssm/parameter-store/default-parameter-tier`
     #
     #   * `/ssm/parameter-store/high-throughput-enabled`
@@ -20829,6 +20849,9 @@ module Aws::SSM
     #
     #   For the `/ssm/automation/customer-script-log-group-name` setting ID,
     #   the setting value can be the name of a CloudWatch Logs log group.
+    #
+    #   For the `/ssm/documents/console/public-sharing-permission` setting
+    #   ID, the setting value can be Enable or Disable.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateServiceSettingRequest AWS API Documentation

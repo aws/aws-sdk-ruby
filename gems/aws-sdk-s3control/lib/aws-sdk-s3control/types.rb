@@ -612,6 +612,7 @@ module Aws::S3Control
     #             object_lock_legal_hold_status: "OFF", # accepts OFF, ON
     #             object_lock_mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
     #             object_lock_retain_until_date: Time.now,
+    #             bucket_key_enabled: false,
     #           },
     #           s3_put_object_acl: {
     #             access_control_policy: {
@@ -2362,6 +2363,7 @@ module Aws::S3Control
     #           object_lock_legal_hold_status: "OFF", # accepts OFF, ON
     #           object_lock_mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
     #           object_lock_retain_until_date: Time.now,
+    #           bucket_key_enabled: false,
     #         },
     #         s3_put_object_acl: {
     #           access_control_policy: {
@@ -4377,6 +4379,7 @@ module Aws::S3Control
     #         object_lock_legal_hold_status: "OFF", # accepts OFF, ON
     #         object_lock_mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
     #         object_lock_retain_until_date: Time.now,
+    #         bucket_key_enabled: false,
     #       }
     #
     # @!attribute [rw] target_resource
@@ -4444,6 +4447,16 @@ module Aws::S3Control
     #   all objects in the Batch Operations job.
     #   @return [Time]
     #
+    # @!attribute [rw] bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket
+    #   Key for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with an *object* action doesn’t affect
+    #   *bucket-level* settings for S3 Bucket Key.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3CopyObjectOperation AWS API Documentation
     #
     class S3CopyObjectOperation < Struct.new(
@@ -4462,7 +4475,8 @@ module Aws::S3Control
       :target_key_prefix,
       :object_lock_legal_hold_status,
       :object_lock_mode,
-      :object_lock_retain_until_date)
+      :object_lock_retain_until_date,
+      :bucket_key_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

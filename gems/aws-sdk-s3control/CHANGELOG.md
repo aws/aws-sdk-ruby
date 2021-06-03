@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2021-06-03)
+------------------
+
+* Feature - Amazon S3 Batch Operations now supports S3 Bucket Keys.
+
 1.33.0 (2021-05-11)
 ------------------
 

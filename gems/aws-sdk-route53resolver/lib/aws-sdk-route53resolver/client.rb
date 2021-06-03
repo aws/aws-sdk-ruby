@@ -342,7 +342,7 @@ module Aws::Route53Resolver
     #
     # @option params [required, String] :creator_request_id
     #   A unique string that identifies the request and that allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice. `CreatorRequestId` can be any unique string, for example, a
     #   date/time stamp.
     #
@@ -359,14 +359,16 @@ module Aws::Route53Resolver
     # @option params [required, Integer] :priority
     #   The setting that determines the processing order of the rule group
     #   among the rule groups that you associate with the specified VPC. DNS
-    #   Firewall filters VPC traffic starting from rule group with the lowest
-    #   numeric priority setting.
+    #   Firewall filters VPC traffic starting from the rule group with the
+    #   lowest numeric priority setting.
     #
     #   You must specify a unique priority for each rule group that you
     #   associate with a single VPC. To make it easier to insert rule groups
-    #   later, leave space between the numbers, for example, use 100, 200, and
+    #   later, leave space between the numbers, for example, use 101, 200, and
     #   so on. You can change the priority setting for a rule group
     #   association after you create it.
+    #
+    #   The allowed values for `Priority` are between 100 and 9900.
     #
     # @option params [required, String] :name
     #   A name that lets you identify the association, to manage and use it.
@@ -611,9 +613,9 @@ module Aws::Route53Resolver
     #
     # @option params [required, String] :creator_request_id
     #   A unique string that identifies the request and that allows you to
-    #   retry failed requests without the risk of executing the operation
-    #   twice. `CreatorRequestId` can be any unique string, for example, a
-    #   date/time stamp.
+    #   retry failed requests without the risk of running the operation twice.
+    #   `CreatorRequestId` can be any unique string, for example, a date/time
+    #   stamp.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -669,9 +671,9 @@ module Aws::Route53Resolver
     #
     # @option params [required, String] :creator_request_id
     #   A unique string that identifies the request and that allows you to
-    #   retry failed requests without the risk of executing the operation
-    #   twice. `CreatorRequestId` can be any unique string, for example, a
-    #   date/time stamp.
+    #   retry failed requests without the risk of running the operation twice.
+    #   `CreatorRequestId` can be any unique string, for example, a date/time
+    #   stamp.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -699,7 +701,7 @@ module Aws::Route53Resolver
     #
     #   * `ALLOW` - Permit the request to go through.
     #
-    #   * `ALERT` - Permit the request and send metrics and log to Cloud
+    #   * `ALERT` - Permit the request and send metrics and logs to Cloud
     #     Watch.
     #
     #   * `BLOCK` - Disallow the request. This option requires additional
@@ -707,7 +709,7 @@ module Aws::Route53Resolver
     #
     # @option params [String] :block_response
     #   The way that you want DNS Firewall to block the request, used with the
-    #   rule aciton setting `BLOCK`.
+    #   rule action setting `BLOCK`.
     #
     #   * `NODATA` - Respond indicating that the query was successful, but no
     #     response is available for it.
@@ -793,9 +795,8 @@ module Aws::Route53Resolver
     #
     # @option params [required, String] :creator_request_id
     #   A unique string defined by you to identify the request. This allows
-    #   you to retry failed requests without the risk of executing the
-    #   operation twice. This can be any unique string, for example, a
-    #   timestamp.
+    #   you to retry failed requests without the risk of running the operation
+    #   twice. This can be any unique string, for example, a timestamp.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -858,7 +859,7 @@ module Aws::Route53Resolver
     #
     # @option params [required, String] :creator_request_id
     #   A unique string that identifies the request and that allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice. `CreatorRequestId` can be any unique string, for example, a
     #   date/time stamp.
     #
@@ -963,7 +964,7 @@ module Aws::Route53Resolver
     # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverQueryLogConfig.html
     #
     # @option params [required, String] :name
-    #   The name that you want to give the query logging configuration
+    #   The name that you want to give the query logging configuration.
     #
     # @option params [required, String] :destination_arn
     #   The ARN of the resource that you want Resolver to send query logs. You
@@ -989,7 +990,7 @@ module Aws::Route53Resolver
     #
     # @option params [required, String] :creator_request_id
     #   A unique string that identifies the request and that allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice. `CreatorRequestId` can be any unique string, for example, a
     #   date/time stamp.
     #
@@ -1047,7 +1048,7 @@ module Aws::Route53Resolver
     #
     # @option params [required, String] :creator_request_id
     #   A unique string that identifies the request and that allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice. `CreatorRequestId` can be any unique string, for example, a
     #   date/time stamp.
     #
@@ -1080,7 +1081,7 @@ module Aws::Route53Resolver
     #
     # @option params [Array<Types::TargetAddress>] :target_ips
     #   The IPs that you want Resolver to forward DNS queries to. You can
-    #   specify only IPv4 addresses. Separate IP addresses with a comma.
+    #   specify only IPv4 addresses. Separate IP addresses with a space.
     #
     #   `TargetIps` is available only when the value of `Rule type` is
     #   `FORWARD`.
@@ -1525,10 +1526,10 @@ module Aws::Route53Resolver
     # Disassociates a VPC from a query logging configuration.
     #
     # <note markdown="1"> Before you can delete a query logging configuration, you must first
-    # disassociate all VPCs from the configuration. If you used Resource
-    # Access Manager (RAM) to share a query logging configuration with other
-    # accounts, VPCs can be disassociated from the configuration in the
-    # following ways:
+    # disassociate all VPCs from the configuration. If you used AWS Resource
+    # Access Manager (AWS RAM) to share a query logging configuration with
+    # other accounts, VPCs can be disassociated from the configuration in
+    # the following ways:
     #
     #  * The accounts that you shared the configuration with can disassociate
     #   VPCs from the configuration.
@@ -1620,11 +1621,11 @@ module Aws::Route53Resolver
     end
 
     # Retrieves the configuration of the firewall behavior provided by DNS
-    # Firewall for a single Amazon virtual private cloud (VPC).
+    # Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon
+    # VPC).
     #
     # @option params [required, String] :resource_id
-    #   The ID of the Amazon virtual private cloud (VPC) that the
-    #   configuration is for.
+    #   The ID of the VPC from Amazon VPC that the configuration is for.
     #
     # @return [Types::GetFirewallConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1772,7 +1773,7 @@ module Aws::Route53Resolver
 
     # Returns the AWS Identity and Access Management (AWS IAM) policy for
     # sharing the specified rule group. You can use the policy to share the
-    # rule group using AWS Resource Access Manager (RAM).
+    # rule group using AWS Resource Access Manager (AWS RAM).
     #
     # @option params [required, String] :arn
     #   The ARN (Amazon Resource Name) for the rule group.
@@ -2125,7 +2126,8 @@ module Aws::Route53Resolver
     #
     # @option params [required, String] :domain_file_url
     #   The fully qualified URL or URI of the file stored in Amazon Simple
-    #   Storage Service (S3) that contains the list of domains to import.
+    #   Storage Service (Amazon S3) that contains the list of domains to
+    #   import.
     #
     #   The file must be in an S3 bucket that's in the same Region as your
     #   DNS Firewall. The file must be a text file and must contain a single
@@ -2353,8 +2355,8 @@ module Aws::Route53Resolver
     # @option params [Integer] :priority
     #   The setting that determines the processing order of the rule group
     #   among the rule groups that are associated with a single VPC. DNS
-    #   Firewall filters VPC traffic starting from rule group with the lowest
-    #   numeric priority setting.
+    #   Firewall filters VPC traffic starting from the rule group with the
+    #   lowest numeric priority setting.
     #
     # @option params [String] :status
     #   The association `Status` setting that you want DNS Firewall to filter
@@ -3258,7 +3260,7 @@ module Aws::Route53Resolver
 
     # Attaches an AWS Identity and Access Management (AWS IAM) policy for
     # sharing the rule group. You can use the policy to share the rule group
-    # using AWS Resource Access Manager (RAM).
+    # using AWS Resource Access Manager (AWS RAM).
     #
     # @option params [required, String] :arn
     #   The ARN (Amazon Resource Name) for the rule group that you want to
@@ -3501,11 +3503,11 @@ module Aws::Route53Resolver
     end
 
     # Updates the configuration of the firewall behavior provided by DNS
-    # Firewall for a single Amazon virtual private cloud (VPC).
+    # Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon
+    # VPC).
     #
     # @option params [required, String] :resource_id
-    #   The ID of the Amazon virtual private cloud (VPC) that the
-    #   configuration is for.
+    #   The ID of the VPC that the configuration is for.
     #
     # @option params [required, String] :firewall_fail_open
     #   Determines how Route 53 Resolver handles queries during failures, for
@@ -3725,8 +3727,8 @@ module Aws::Route53Resolver
     # @option params [Integer] :priority
     #   The setting that determines the processing order of the rule group
     #   among the rule groups that you associate with the specified VPC. DNS
-    #   Firewall filters VPC traffic starting from rule group with the lowest
-    #   numeric priority setting.
+    #   Firewall filters VPC traffic starting from the rule group with the
+    #   lowest numeric priority setting.
     #
     #   You must specify a unique priority for each rule group that you
     #   associate with a single VPC. To make it easier to insert rule groups
@@ -3934,7 +3936,7 @@ module Aws::Route53Resolver
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53resolver'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

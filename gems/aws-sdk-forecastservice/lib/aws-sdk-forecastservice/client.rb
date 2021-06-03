@@ -1077,6 +1077,13 @@ module Aws::ForecastService
     #   This is a good option if you aren't sure which algorithm is suitable
     #   for your training data. In this case, `PerformHPO` must be false.
     #
+    # @option params [String] :auto_ml_override_strategy
+    #   Used to overide the default AutoML strategy, which is to optimize
+    #   predictor accuracy. To apply an AutoML strategy that minimizes
+    #   training time, use `LatencyOptimized`.
+    #
+    #   This parameter is only valid for predictors trained using AutoML.
+    #
     # @option params [Boolean] :perform_hpo
     #   Whether to perform hyperparameter optimization (HPO). HPO finds
     #   optimal hyperparameter values for your training data. The process of
@@ -1176,6 +1183,7 @@ module Aws::ForecastService
     #     forecast_horizon: 1, # required
     #     forecast_types: ["ForecastType"],
     #     perform_auto_ml: false,
+    #     auto_ml_override_strategy: "LatencyOptimized", # accepts LatencyOptimized
     #     perform_hpo: false,
     #     training_parameters: {
     #       "ParameterKey" => "ParameterValue",
@@ -1942,6 +1950,7 @@ module Aws::ForecastService
     #   * {Types::DescribePredictorResponse#forecast_horizon #forecast_horizon} => Integer
     #   * {Types::DescribePredictorResponse#forecast_types #forecast_types} => Array&lt;String&gt;
     #   * {Types::DescribePredictorResponse#perform_auto_ml #perform_auto_ml} => Boolean
+    #   * {Types::DescribePredictorResponse#auto_ml_override_strategy #auto_ml_override_strategy} => String
     #   * {Types::DescribePredictorResponse#perform_hpo #perform_hpo} => Boolean
     #   * {Types::DescribePredictorResponse#training_parameters #training_parameters} => Hash&lt;String,String&gt;
     #   * {Types::DescribePredictorResponse#evaluation_parameters #evaluation_parameters} => Types::EvaluationParameters
@@ -1973,6 +1982,7 @@ module Aws::ForecastService
     #   resp.forecast_types #=> Array
     #   resp.forecast_types[0] #=> String
     #   resp.perform_auto_ml #=> Boolean
+    #   resp.auto_ml_override_strategy #=> String, one of "LatencyOptimized"
     #   resp.perform_hpo #=> Boolean
     #   resp.training_parameters #=> Hash
     #   resp.training_parameters["ParameterKey"] #=> String
@@ -2124,6 +2134,7 @@ module Aws::ForecastService
     # @return [Types::GetAccuracyMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetAccuracyMetricsResponse#predictor_evaluation_results #predictor_evaluation_results} => Array&lt;Types::EvaluationResult&gt;
+    #   * {Types::GetAccuracyMetricsResponse#auto_ml_override_strategy #auto_ml_override_strategy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2148,6 +2159,7 @@ module Aws::ForecastService
     #   resp.predictor_evaluation_results[0].test_windows[0].metrics.error_metrics[0].forecast_type #=> String
     #   resp.predictor_evaluation_results[0].test_windows[0].metrics.error_metrics[0].wape #=> Float
     #   resp.predictor_evaluation_results[0].test_windows[0].metrics.error_metrics[0].rmse #=> Float
+    #   resp.auto_ml_override_strategy #=> String, one of "LatencyOptimized"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/GetAccuracyMetrics AWS API Documentation
     #
@@ -2875,7 +2887,7 @@ module Aws::ForecastService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-forecastservice'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

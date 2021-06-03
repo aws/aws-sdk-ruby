@@ -16,6 +16,7 @@ module Aws::ForecastService
     Arn = Shapes::StringShape.new(name: 'Arn')
     ArnList = Shapes::ListShape.new(name: 'ArnList')
     AttributeType = Shapes::StringShape.new(name: 'AttributeType')
+    AutoMLOverrideStrategy = Shapes::StringShape.new(name: 'AutoMLOverrideStrategy')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CategoricalParameterRange = Shapes::StructureShape.new(name: 'CategoricalParameterRange')
     CategoricalParameterRanges = Shapes::ListShape.new(name: 'CategoricalParameterRanges')
@@ -261,6 +262,7 @@ module Aws::ForecastService
     CreatePredictorRequest.add_member(:forecast_horizon, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "ForecastHorizon"))
     CreatePredictorRequest.add_member(:forecast_types, Shapes::ShapeRef.new(shape: ForecastTypes, location_name: "ForecastTypes"))
     CreatePredictorRequest.add_member(:perform_auto_ml, Shapes::ShapeRef.new(shape: Boolean, location_name: "PerformAutoML"))
+    CreatePredictorRequest.add_member(:auto_ml_override_strategy, Shapes::ShapeRef.new(shape: AutoMLOverrideStrategy, location_name: "AutoMLOverrideStrategy"))
     CreatePredictorRequest.add_member(:perform_hpo, Shapes::ShapeRef.new(shape: Boolean, location_name: "PerformHPO"))
     CreatePredictorRequest.add_member(:training_parameters, Shapes::ShapeRef.new(shape: TrainingParameters, location_name: "TrainingParameters"))
     CreatePredictorRequest.add_member(:evaluation_parameters, Shapes::ShapeRef.new(shape: EvaluationParameters, location_name: "EvaluationParameters"))
@@ -430,6 +432,7 @@ module Aws::ForecastService
     DescribePredictorResponse.add_member(:forecast_horizon, Shapes::ShapeRef.new(shape: Integer, location_name: "ForecastHorizon"))
     DescribePredictorResponse.add_member(:forecast_types, Shapes::ShapeRef.new(shape: ForecastTypes, location_name: "ForecastTypes"))
     DescribePredictorResponse.add_member(:perform_auto_ml, Shapes::ShapeRef.new(shape: Boolean, location_name: "PerformAutoML"))
+    DescribePredictorResponse.add_member(:auto_ml_override_strategy, Shapes::ShapeRef.new(shape: AutoMLOverrideStrategy, location_name: "AutoMLOverrideStrategy"))
     DescribePredictorResponse.add_member(:perform_hpo, Shapes::ShapeRef.new(shape: Boolean, location_name: "PerformHPO"))
     DescribePredictorResponse.add_member(:training_parameters, Shapes::ShapeRef.new(shape: TrainingParameters, location_name: "TrainingParameters"))
     DescribePredictorResponse.add_member(:evaluation_parameters, Shapes::ShapeRef.new(shape: EvaluationParameters, location_name: "EvaluationParameters"))
@@ -527,6 +530,7 @@ module Aws::ForecastService
     GetAccuracyMetricsRequest.struct_class = Types::GetAccuracyMetricsRequest
 
     GetAccuracyMetricsResponse.add_member(:predictor_evaluation_results, Shapes::ShapeRef.new(shape: PredictorEvaluationResults, location_name: "PredictorEvaluationResults"))
+    GetAccuracyMetricsResponse.add_member(:auto_ml_override_strategy, Shapes::ShapeRef.new(shape: AutoMLOverrideStrategy, location_name: "AutoMLOverrideStrategy"))
     GetAccuracyMetricsResponse.struct_class = Types::GetAccuracyMetricsResponse
 
     HyperParameterTuningJobConfig.add_member(:parameter_ranges, Shapes::ShapeRef.new(shape: ParameterRanges, location_name: "ParameterRanges"))

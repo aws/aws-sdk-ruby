@@ -818,6 +818,7 @@ module Aws::S3Control
     #         object_lock_legal_hold_status: "OFF", # accepts OFF, ON
     #         object_lock_mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
     #         object_lock_retain_until_date: Time.now,
+    #         bucket_key_enabled: false,
     #       },
     #       s3_put_object_acl: {
     #         access_control_policy: {
@@ -1673,6 +1674,7 @@ module Aws::S3Control
     #   resp.job.operation.s3_put_object_copy.object_lock_legal_hold_status #=> String, one of "OFF", "ON"
     #   resp.job.operation.s3_put_object_copy.object_lock_mode #=> String, one of "COMPLIANCE", "GOVERNANCE"
     #   resp.job.operation.s3_put_object_copy.object_lock_retain_until_date #=> Time
+    #   resp.job.operation.s3_put_object_copy.bucket_key_enabled #=> Boolean
     #   resp.job.operation.s3_put_object_acl.access_control_policy.access_control_list.owner.id #=> String
     #   resp.job.operation.s3_put_object_acl.access_control_policy.access_control_list.owner.display_name #=> String
     #   resp.job.operation.s3_put_object_acl.access_control_policy.access_control_list.grants #=> Array
@@ -4024,7 +4026,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

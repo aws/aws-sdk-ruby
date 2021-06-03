@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2021-06-03)
+------------------
+
+* Feature - S3 Inventory now supports Bucket Key Status
+
 1.95.1 (2021-05-24)
 ------------------
 

@@ -1159,7 +1159,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   Optional metadata that you assign to a resource. Tags enable you to
@@ -6353,12 +6353,20 @@ module Aws::SSM
     # Query the current service setting for the account.
     #
     # @option params [required, String] :setting_id
-    #   The ID of the service setting to get. The setting ID can be
-    #   `/ssm/automation/customer-script-log-destination`,
-    #   `/ssm/automation/customer-script-log-group-name`,
-    #   `/ssm/parameter-store/default-parameter-tier`,
-    #   `/ssm/parameter-store/high-throughput-enabled`, or
-    #   `/ssm/managed-instance/activation-tier`.
+    #   The ID of the service setting to get. The setting ID can be one of the
+    #   following.
+    #
+    #   * `/ssm/automation/customer-script-log-destination`
+    #
+    #   * `/ssm/automation/customer-script-log-group-name`
+    #
+    #   * `/ssm/documents/console/public-sharing-permission`
+    #
+    #   * `/ssm/parameter-store/default-parameter-tier`
+    #
+    #   * `/ssm/parameter-store/high-throughput-enabled`
+    #
+    #   * `/ssm/managed-instance/activation-tier`
     #
     # @return [Types::GetServiceSettingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8061,7 +8069,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html
     #
     # @return [Types::PutParameterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8573,12 +8581,19 @@ module Aws::SSM
     #
     # @option params [required, String] :setting_id
     #   The Amazon Resource Name (ARN) of the service setting to reset. The
-    #   setting ID can be `/ssm/automation/customer-script-log-destination`,
-    #   `/ssm/automation/customer-script-log-group-name`,
-    #   `/ssm/parameter-store/default-parameter-tier`,
-    #   `/ssm/parameter-store/high-throughput-enabled`, or
-    #   `/ssm/managed-instance/activation-tier`. For example,
-    #   `arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled`.
+    #   setting ID can be one of the following.
+    #
+    #   * `/ssm/automation/customer-script-log-destination`
+    #
+    #   * `/ssm/automation/customer-script-log-group-name`
+    #
+    #   * `/ssm/documents/console/public-sharing-permission`
+    #
+    #   * `/ssm/parameter-store/default-parameter-tier`
+    #
+    #   * `/ssm/parameter-store/high-throughput-enabled`
+    #
+    #   * `/ssm/managed-instance/activation-tier`
     #
     # @return [Types::ResetServiceSettingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10961,6 +10976,8 @@ module Aws::SSM
     #
     #   * `/ssm/automation/customer-script-log-group-name`
     #
+    #   * `/ssm/documents/console/public-sharing-permission`
+    #
     #   * `/ssm/parameter-store/default-parameter-tier`
     #
     #   * `/ssm/parameter-store/high-throughput-enabled`
@@ -10987,6 +11004,9 @@ module Aws::SSM
     #
     #   For the `/ssm/automation/customer-script-log-group-name` setting ID,
     #   the setting value can be the name of a CloudWatch Logs log group.
+    #
+    #   For the `/ssm/documents/console/public-sharing-permission` setting ID,
+    #   the setting value can be Enable or Disable.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -11019,7 +11039,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

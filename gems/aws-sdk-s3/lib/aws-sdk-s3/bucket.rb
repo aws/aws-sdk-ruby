@@ -552,6 +552,7 @@ module Aws::S3
     #   The Object Lock mode that you want to apply to this object.
     # @option options [Time,DateTime,Date,Integer,String] :object_lock_retain_until_date
     #   The date and time when you want this object's Object Lock to expire.
+    #   Must be formatted as a timestamp parameter.
     # @option options [String] :object_lock_legal_hold_status
     #   Specifies whether a legal hold will be applied to this object. For
     #   more information about S3 Object Lock, see [Object Lock][1].
