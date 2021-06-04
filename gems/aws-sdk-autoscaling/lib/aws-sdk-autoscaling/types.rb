@@ -2825,9 +2825,7 @@ module Aws::AutoScaling
     #   @return [Boolean]
     #
     # @!attribute [rw] throughput
-    #   The throughput to provision for a `gp3` volume.
-    #
-    #   Valid Range: Minimum value of 125. Maximum value of 1000.
+    #   The throughput (MiBps) to provision for a `gp3` volume.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/Ebs AWS API Documentation

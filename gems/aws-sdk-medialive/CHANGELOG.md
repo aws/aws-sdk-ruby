@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2021-06-04)
+------------------
+
+* Feature - Add support for automatically setting the H.264 adaptive quantization and GOP B-frame fields.
+
 1.70.0 (2021-04-06)
 ------------------
 

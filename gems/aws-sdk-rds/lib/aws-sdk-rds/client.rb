@@ -2586,6 +2586,31 @@ module Aws::RDS
     #
     #   Example: `aurora-postgresql9.6`
     #
+    #   To list all of the available parameter group families for a DB engine,
+    #   use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --query
+    #   "DBEngineVersions[].DBParameterGroupFamily" --engine <engine>`
+    #
+    #   For example, to list all of the available parameter group families for
+    #   the Aurora PostgreSQL DB engine, use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --query
+    #   "DBEngineVersions[].DBParameterGroupFamily" --engine
+    #   aurora-postgresql`
+    #
+    #   <note markdown="1"> The output contains duplicates.
+    #
+    #    </note>
+    #
+    #   The following are the valid DB engine values:
+    #
+    #   * `aurora` (for MySQL 5.6-compatible Aurora)
+    #
+    #   * `aurora-mysql` (for MySQL 5.7-compatible Aurora)
+    #
+    #   * `aurora-postgresql`
+    #
     # @option params [required, String] :description
     #   The description for the DB cluster parameter group.
     #
@@ -4586,15 +4611,51 @@ module Aws::RDS
     #   applied only to a DB instance running a database engine and engine
     #   version compatible with that DB parameter group family.
     #
-    #   To list all of the available parameter group families, use the
-    #   following command:
+    #   To list all of the available parameter group families for a DB engine,
+    #   use the following command:
     #
     #   `aws rds describe-db-engine-versions --query
-    #   "DBEngineVersions[].DBParameterGroupFamily"`
+    #   "DBEngineVersions[].DBParameterGroupFamily" --engine <engine>`
+    #
+    #   For example, to list all of the available parameter group families for
+    #   the MySQL DB engine, use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --query
+    #   "DBEngineVersions[].DBParameterGroupFamily" --engine mysql`
     #
     #   <note markdown="1"> The output contains duplicates.
     #
     #    </note>
+    #
+    #   The following are the valid DB engine values:
+    #
+    #   * `aurora` (for MySQL 5.6-compatible Aurora)
+    #
+    #   * `aurora-mysql` (for MySQL 5.7-compatible Aurora)
+    #
+    #   * `aurora-postgresql`
+    #
+    #   * `mariadb`
+    #
+    #   * `mysql`
+    #
+    #   * `oracle-ee`
+    #
+    #   * `oracle-se2`
+    #
+    #   * `oracle-se1`
+    #
+    #   * `oracle-se`
+    #
+    #   * `postgres`
+    #
+    #   * `sqlserver-ee`
+    #
+    #   * `sqlserver-se`
+    #
+    #   * `sqlserver-ex`
+    #
+    #   * `sqlserver-web`
     #
     # @option params [required, String] :description
     #   The description for the DB parameter group.
@@ -12442,12 +12503,6 @@ module Aws::RDS
     # For more information on Amazon Aurora, see [ What Is Amazon
     # Aurora?][1] in the *Amazon Aurora User Guide.*
     #
-    # <note markdown="1"> Changes to dynamic parameters are applied immediately. Changes to
-    # static parameters require a reboot without failover to the DB cluster
-    # associated with the parameter group before the change can take effect.
-    #
-    #  </note>
-    #
     # After you create a DB cluster parameter group, you should wait at
     # least 5 minutes before creating your first DB cluster that uses that
     # DB cluster parameter group as the default parameter group. This allows
@@ -12480,6 +12535,22 @@ module Aws::RDS
     #
     # @option params [required, Array<Types::Parameter>] :parameters
     #   A list of parameters in the DB cluster parameter group to modify.
+    #
+    #   Valid Values (for the application method): `immediate |
+    #   pending-reboot`
+    #
+    #   <note markdown="1"> You can use the `immediate` value with dynamic parameters only. You
+    #   can use the `pending-reboot` value for both dynamic and static
+    #   parameters.
+    #
+    #    When the application method is `immediate`, changes to dynamic
+    #   parameters are applied immediately to the DB clusters associated with
+    #   the parameter group. When the application method is `pending-reboot`,
+    #   changes to dynamic and static parameters are applied after a reboot
+    #   without failover to the DB clusters associated with the parameter
+    #   group.
+    #
+    #    </note>
     #
     # @return [Types::DBClusterParameterGroupNameMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -13579,12 +13650,6 @@ module Aws::RDS
     # `ParameterValue`, and `ApplyMethod`. A maximum of 20 parameters can be
     # modified in a single request.
     #
-    # <note markdown="1"> Changes to dynamic parameters are applied immediately. Changes to
-    # static parameters require a reboot without failover to the DB instance
-    # associated with the parameter group before the change can take effect.
-    #
-    #  </note>
-    #
     # After you modify a DB parameter group, you should wait at least 5
     # minutes before creating your first DB instance that uses that DB
     # parameter group as the default parameter group. This allows Amazon RDS
@@ -13611,18 +13676,25 @@ module Aws::RDS
     #   ^
     #
     # @option params [required, Array<Types::Parameter>] :parameters
-    #   An array of parameter names, values, and the apply method for the
-    #   parameter update. At least one parameter name, value, and apply method
-    #   must be supplied; later arguments are optional. A maximum of 20
-    #   parameters can be modified in a single request.
+    #   An array of parameter names, values, and the application methods for
+    #   the parameter update. At least one parameter name, value, and
+    #   application method method must be supplied; later arguments are
+    #   optional. A maximum of 20 parameters can be modified in a single
+    #   request.
     #
     #   Valid Values (for the application method): `immediate |
     #   pending-reboot`
     #
-    #   <note markdown="1"> You can use the immediate value with dynamic parameters only. You can
-    #   use the pending-reboot value for both dynamic and static parameters,
-    #   and changes are applied when you reboot the DB instance without
-    #   failover.
+    #   <note markdown="1"> You can use the `immediate` value with dynamic parameters only. You
+    #   can use the `pending-reboot` value for both dynamic and static
+    #   parameters.
+    #
+    #    When the application method is `immediate`, changes to dynamic
+    #   parameters are applied immediately to the DB instances associated with
+    #   the parameter group. When the application method is `pending-reboot`,
+    #   changes to dynamic and static parameters are applied after a reboot
+    #   without failover to the DB instances associated with the parameter
+    #   group.
     #
     #    </note>
     #
@@ -19813,7 +19885,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.118.0'
+      context[:gem_version] = '1.119.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

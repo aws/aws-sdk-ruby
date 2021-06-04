@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.119.0 (2021-06-04)
+------------------
+
+* Feature - Documentation updates for RDS: fixing an outdated link to the RDS documentation in DBInstance$DBInstanceStatus
+
 1.118.0 (2021-04-13)
 ------------------
 

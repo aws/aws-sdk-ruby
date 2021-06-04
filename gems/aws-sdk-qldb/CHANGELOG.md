@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2021-06-04)
+------------------
+
+* Feature - Documentation updates for Amazon QLDB
+
 1.14.0 (2021-05-26)
 ------------------
 

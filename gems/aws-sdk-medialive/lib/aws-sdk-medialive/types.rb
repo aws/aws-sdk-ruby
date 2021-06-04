@@ -3760,7 +3760,7 @@ module Aws::MediaLive
     #                   capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #                 },
     #                 h264_settings: {
-    #                   adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #                   adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #                   afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #                   bitrate: 1,
     #                   buf_fill_pct: 1,
@@ -3815,7 +3815,7 @@ module Aws::MediaLive
     #                   timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #                 },
     #                 h265_settings: {
-    #                   adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #                   adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #                   afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #                   alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
     #                   bitrate: 1,
@@ -7030,7 +7030,7 @@ module Aws::MediaLive
     #                 capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #               },
     #               h264_settings: {
-    #                 adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #                 adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #                 afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #                 bitrate: 1,
     #                 buf_fill_pct: 1,
@@ -7085,7 +7085,7 @@ module Aws::MediaLive
     #                 timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #               },
     #               h265_settings: {
-    #                 adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #                 adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #                 afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #                 alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
     #                 bitrate: 1,
@@ -7773,7 +7773,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #         adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #         afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #         bitrate: 1,
     #         buf_fill_pct: 1,
@@ -7829,8 +7829,16 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] adaptive_quantization
-    #   Adaptive quantization. Allows intra-frame quantizers to vary to
-    #   improve visual quality.
+    #   Enables or disables adaptive quantization, which is a technique
+    #   MediaLive can apply to video on a frame-by-frame basis to produce
+    #   more compression without losing quality. There are three types of
+    #   adaptive quantization: flicker, spatial, and temporal. Set the field
+    #   in one of these ways: Set to Auto. Recommended. For each type of AQ,
+    #   MediaLive will determine if AQ is needed, and if so, the appropriate
+    #   strength. Set a strength (a value other than Auto or Disable). This
+    #   strength will apply to any of the AQ fields that you choose to
+    #   enable. Set to Disabled to disable all types of adaptive
+    #   quantization.
     #   @return [String]
     #
     # @!attribute [rw] afd_signaling
@@ -7880,8 +7888,17 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] flicker_aq
-    #   If set to enabled, adjust quantization within each frame to reduce
-    #   flicker or 'pop' on I-frames.
+    #   Flicker AQ makes adjustments within each frame to reduce flicker or
+    #   'pop' on I-frames. The value to enter in this field depends on the
+    #   value in the Adaptive quantization field: If you have set the
+    #   Adaptive quantization field to Auto, MediaLive ignores any value in
+    #   this field. MediaLive will determine if flicker AQ is appropriate
+    #   and will apply the appropriate strength. If you have set the
+    #   Adaptive quantization field to a strength, you can set this field to
+    #   Enabled or Disabled. Enabled: MediaLive will apply flicker AQ using
+    #   the specified strength. Disabled: MediaLive won't apply flicker AQ.
+    #   If you have set the Adaptive quantization to Disabled, MediaLive
+    #   ignores any value in this field and doesn't apply flicker AQ.
     #   @return [String]
     #
     # @!attribute [rw] force_field_pictures
@@ -8006,12 +8023,17 @@ module Aws::MediaLive
     #
     # @!attribute [rw] qvbr_quality_level
     #   Controls the target quality for the video encode. Applies only when
-    #   the rate control mode is QVBR. Set values for the QVBR quality level
-    #   field and Max bitrate field that suit your most important viewing
+    #   the rate control mode is QVBR. You can set a target quality or you
+    #   can let MediaLive determine the best quality. To set a target
+    #   quality, enter values in the QVBR quality level field and the Max
+    #   bitrate field. Enter values that suit your most important viewing
     #   devices. Recommended values are: - Primary screen: Quality level: 8
     #   to 10. Max bitrate: 4M - PC or tablet: Quality level: 7. Max
     #   bitrate: 1.5M to 3M - Smartphone: Quality level: 6. Max bitrate: 1M
-    #   to 1.5M
+    #   to 1.5M To let MediaLive decide, leave the QVBR quality level field
+    #   empty, and in Max bitrate enter the maximum rate you want in the
+    #   video. For more information, see the section called "Video - rate
+    #   control mode" in the MediaLive user guide
     #   @return [Integer]
     #
     # @!attribute [rw] rate_control_mode
@@ -8055,8 +8077,18 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] spatial_aq
-    #   If set to enabled, adjust quantization within each frame based on
-    #   spatial variation of content complexity.
+    #   Spatial AQ makes adjustments within each frame based on spatial
+    #   variation of content complexity. The value to enter in this field
+    #   depends on the value in the Adaptive quantization field: If you have
+    #   set the Adaptive quantization field to Auto, MediaLive ignores any
+    #   value in this field. MediaLive will determine if spatial AQ is
+    #   appropriate and will apply the appropriate strength. If you have set
+    #   the Adaptive quantization field to a strength, you can set this
+    #   field to Enabled or Disabled. Enabled: MediaLive will apply spatial
+    #   AQ using the specified strength. Disabled: MediaLive won't apply
+    #   spatial AQ. If you have set the Adaptive quantization to Disabled,
+    #   MediaLive ignores any value in this field and doesn't apply spatial
+    #   AQ.
     #   @return [String]
     #
     # @!attribute [rw] subgop_length
@@ -8070,8 +8102,18 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] temporal_aq
-    #   If set to enabled, adjust quantization within each frame based on
-    #   temporal variation of content complexity.
+    #   Temporal makes adjustments within each frame based on temporal
+    #   variation of content complexity. The value to enter in this field
+    #   depends on the value in the Adaptive quantization field: If you have
+    #   set the Adaptive quantization field to Auto, MediaLive ignores any
+    #   value in this field. MediaLive will determine if temporal AQ is
+    #   appropriate and will apply the appropriate strength. If you have set
+    #   the Adaptive quantization field to a strength, you can set this
+    #   field to Enabled or Disabled. Enabled: MediaLive will apply temporal
+    #   AQ using the specified strength. Disabled: MediaLive won't apply
+    #   temporal AQ. If you have set the Adaptive quantization to Disabled,
+    #   MediaLive ignores any value in this field and doesn't apply
+    #   temporal AQ.
     #   @return [String]
     #
     # @!attribute [rw] timecode_insertion
@@ -8204,7 +8246,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #         adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #         afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #         alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
     #         bitrate: 1,
@@ -18073,7 +18115,7 @@ module Aws::MediaLive
     #                   capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #                 },
     #                 h264_settings: {
-    #                   adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #                   adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #                   afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #                   bitrate: 1,
     #                   buf_fill_pct: 1,
@@ -18128,7 +18170,7 @@ module Aws::MediaLive
     #                   timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #                 },
     #                 h265_settings: {
-    #                   adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #                   adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #                   afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #                   alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
     #                   bitrate: 1,
@@ -19025,7 +19067,7 @@ module Aws::MediaLive
     #           capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #         },
     #         h264_settings: {
-    #           adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #           adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #           afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #           bitrate: 1,
     #           buf_fill_pct: 1,
@@ -19080,7 +19122,7 @@ module Aws::MediaLive
     #           timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #         },
     #         h265_settings: {
-    #           adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #           adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #           afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #           alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
     #           bitrate: 1,
@@ -19190,7 +19232,7 @@ module Aws::MediaLive
     #             capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #           },
     #           h264_settings: {
-    #             adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #             adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #             afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #             bitrate: 1,
     #             buf_fill_pct: 1,
@@ -19245,7 +19287,7 @@ module Aws::MediaLive
     #             timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #           },
     #           h265_settings: {
-    #             adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #             adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #             afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #             alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
     #             bitrate: 1,
