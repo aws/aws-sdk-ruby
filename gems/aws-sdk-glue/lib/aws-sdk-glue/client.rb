@@ -667,6 +667,7 @@ module Aws::Glue
     #   resp.crawlers[0].targets.s3_targets[0].exclusions #=> Array
     #   resp.crawlers[0].targets.s3_targets[0].exclusions[0] #=> String
     #   resp.crawlers[0].targets.s3_targets[0].connection_name #=> String
+    #   resp.crawlers[0].targets.s3_targets[0].sample_size #=> Integer
     #   resp.crawlers[0].targets.jdbc_targets #=> Array
     #   resp.crawlers[0].targets.jdbc_targets[0].connection_name #=> String
     #   resp.crawlers[0].targets.jdbc_targets[0].path #=> String
@@ -1596,6 +1597,7 @@ module Aws::Glue
     #           path: "Path",
     #           exclusions: ["Path"],
     #           connection_name: "ConnectionName",
+    #           sample_size: 1,
     #         },
     #       ],
     #       jdbc_targets: [
@@ -4270,6 +4272,7 @@ module Aws::Glue
     #   resp.crawler.targets.s3_targets[0].exclusions #=> Array
     #   resp.crawler.targets.s3_targets[0].exclusions[0] #=> String
     #   resp.crawler.targets.s3_targets[0].connection_name #=> String
+    #   resp.crawler.targets.s3_targets[0].sample_size #=> Integer
     #   resp.crawler.targets.jdbc_targets #=> Array
     #   resp.crawler.targets.jdbc_targets[0].connection_name #=> String
     #   resp.crawler.targets.jdbc_targets[0].path #=> String
@@ -4401,6 +4404,7 @@ module Aws::Glue
     #   resp.crawlers[0].targets.s3_targets[0].exclusions #=> Array
     #   resp.crawlers[0].targets.s3_targets[0].exclusions[0] #=> String
     #   resp.crawlers[0].targets.s3_targets[0].connection_name #=> String
+    #   resp.crawlers[0].targets.s3_targets[0].sample_size #=> Integer
     #   resp.crawlers[0].targets.jdbc_targets #=> Array
     #   resp.crawlers[0].targets.jdbc_targets[0].connection_name #=> String
     #   resp.crawlers[0].targets.jdbc_targets[0].path #=> String
@@ -9681,6 +9685,7 @@ module Aws::Glue
     #           path: "Path",
     #           exclusions: ["Path"],
     #           connection_name: "ConnectionName",
+    #           sample_size: 1,
     #         },
     #       ],
     #       jdbc_targets: [
@@ -10599,7 +10604,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

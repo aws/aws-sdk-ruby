@@ -130,6 +130,8 @@ module Aws::SageMaker
     BooleanOperator = Shapes::StringShape.new(name: 'BooleanOperator')
     Branch = Shapes::StringShape.new(name: 'Branch')
     CacheHitResult = Shapes::StructureShape.new(name: 'CacheHitResult')
+    CallbackStepMetadata = Shapes::StructureShape.new(name: 'CallbackStepMetadata')
+    CallbackToken = Shapes::StringShape.new(name: 'CallbackToken')
     CandidateArtifactLocations = Shapes::StructureShape.new(name: 'CandidateArtifactLocations')
     CandidateDefinitionNotebookLocation = Shapes::StringShape.new(name: 'CandidateDefinitionNotebookLocation')
     CandidateName = Shapes::StringShape.new(name: 'CandidateName')
@@ -1016,6 +1018,8 @@ module Aws::SageMaker
     OrderKey = Shapes::StringShape.new(name: 'OrderKey')
     OutputConfig = Shapes::StructureShape.new(name: 'OutputConfig')
     OutputDataConfig = Shapes::StructureShape.new(name: 'OutputDataConfig')
+    OutputParameter = Shapes::StructureShape.new(name: 'OutputParameter')
+    OutputParameterList = Shapes::ListShape.new(name: 'OutputParameterList')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     Parameter = Shapes::StructureShape.new(name: 'Parameter')
     ParameterKey = Shapes::StringShape.new(name: 'ParameterKey')
@@ -1037,6 +1041,7 @@ module Aws::SageMaker
     PipelineExecution = Shapes::StructureShape.new(name: 'PipelineExecution')
     PipelineExecutionArn = Shapes::StringShape.new(name: 'PipelineExecutionArn')
     PipelineExecutionDescription = Shapes::StringShape.new(name: 'PipelineExecutionDescription')
+    PipelineExecutionFailureReason = Shapes::StringShape.new(name: 'PipelineExecutionFailureReason')
     PipelineExecutionName = Shapes::StringShape.new(name: 'PipelineExecutionName')
     PipelineExecutionStatus = Shapes::StringShape.new(name: 'PipelineExecutionStatus')
     PipelineExecutionStep = Shapes::StructureShape.new(name: 'PipelineExecutionStep')
@@ -1044,6 +1049,7 @@ module Aws::SageMaker
     PipelineExecutionStepMetadata = Shapes::StructureShape.new(name: 'PipelineExecutionStepMetadata')
     PipelineExecutionSummary = Shapes::StructureShape.new(name: 'PipelineExecutionSummary')
     PipelineExecutionSummaryList = Shapes::ListShape.new(name: 'PipelineExecutionSummaryList')
+    PipelineExperimentConfig = Shapes::StructureShape.new(name: 'PipelineExperimentConfig')
     PipelineName = Shapes::StringShape.new(name: 'PipelineName')
     PipelineParameterName = Shapes::StringShape.new(name: 'PipelineParameterName')
     PipelineStatus = Shapes::StringShape.new(name: 'PipelineStatus')
@@ -1186,6 +1192,10 @@ module Aws::SageMaker
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     Seed = Shapes::IntegerShape.new(name: 'Seed')
+    SendPipelineExecutionStepFailureRequest = Shapes::StructureShape.new(name: 'SendPipelineExecutionStepFailureRequest')
+    SendPipelineExecutionStepFailureResponse = Shapes::StructureShape.new(name: 'SendPipelineExecutionStepFailureResponse')
+    SendPipelineExecutionStepSuccessRequest = Shapes::StructureShape.new(name: 'SendPipelineExecutionStepSuccessRequest')
+    SendPipelineExecutionStepSuccessResponse = Shapes::StructureShape.new(name: 'SendPipelineExecutionStepSuccessResponse')
     ServiceCatalogEntityId = Shapes::StringShape.new(name: 'ServiceCatalogEntityId')
     ServiceCatalogProvisionedProductDetails = Shapes::StructureShape.new(name: 'ServiceCatalogProvisionedProductDetails')
     ServiceCatalogProvisioningDetails = Shapes::StructureShape.new(name: 'ServiceCatalogProvisioningDetails')
@@ -1685,6 +1695,11 @@ module Aws::SageMaker
 
     CacheHitResult.add_member(:source_pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "SourcePipelineExecutionArn"))
     CacheHitResult.struct_class = Types::CacheHitResult
+
+    CallbackStepMetadata.add_member(:callback_token, Shapes::ShapeRef.new(shape: CallbackToken, location_name: "CallbackToken"))
+    CallbackStepMetadata.add_member(:sqs_queue_url, Shapes::ShapeRef.new(shape: String256, location_name: "SqsQueueUrl"))
+    CallbackStepMetadata.add_member(:output_parameters, Shapes::ShapeRef.new(shape: OutputParameterList, location_name: "OutputParameters"))
+    CallbackStepMetadata.struct_class = Types::CallbackStepMetadata
 
     CandidateArtifactLocations.add_member(:explainability, Shapes::ShapeRef.new(shape: ExplainabilityLocation, required: true, location_name: "Explainability"))
     CandidateArtifactLocations.struct_class = Types::CandidateArtifactLocations
@@ -3181,6 +3196,8 @@ module Aws::SageMaker
     DescribePipelineExecutionResponse.add_member(:pipeline_execution_display_name, Shapes::ShapeRef.new(shape: PipelineExecutionName, location_name: "PipelineExecutionDisplayName"))
     DescribePipelineExecutionResponse.add_member(:pipeline_execution_status, Shapes::ShapeRef.new(shape: PipelineExecutionStatus, location_name: "PipelineExecutionStatus"))
     DescribePipelineExecutionResponse.add_member(:pipeline_execution_description, Shapes::ShapeRef.new(shape: PipelineExecutionDescription, location_name: "PipelineExecutionDescription"))
+    DescribePipelineExecutionResponse.add_member(:pipeline_experiment_config, Shapes::ShapeRef.new(shape: PipelineExperimentConfig, location_name: "PipelineExperimentConfig"))
+    DescribePipelineExecutionResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: PipelineExecutionFailureReason, location_name: "FailureReason"))
     DescribePipelineExecutionResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DescribePipelineExecutionResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     DescribePipelineExecutionResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "CreatedBy"))
@@ -5138,6 +5155,12 @@ module Aws::SageMaker
     OutputDataConfig.add_member(:s3_output_path, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3OutputPath"))
     OutputDataConfig.struct_class = Types::OutputDataConfig
 
+    OutputParameter.add_member(:name, Shapes::ShapeRef.new(shape: String256, required: true, location_name: "Name"))
+    OutputParameter.add_member(:value, Shapes::ShapeRef.new(shape: String1024, required: true, location_name: "Value"))
+    OutputParameter.struct_class = Types::OutputParameter
+
+    OutputParameterList.member = Shapes::ShapeRef.new(shape: OutputParameter)
+
     Parameter.add_member(:name, Shapes::ShapeRef.new(shape: PipelineParameterName, required: true, location_name: "Name"))
     Parameter.add_member(:value, Shapes::ShapeRef.new(shape: String1024, required: true, location_name: "Value"))
     Parameter.struct_class = Types::Parameter
@@ -5186,6 +5209,8 @@ module Aws::SageMaker
     PipelineExecution.add_member(:pipeline_execution_display_name, Shapes::ShapeRef.new(shape: PipelineExecutionName, location_name: "PipelineExecutionDisplayName"))
     PipelineExecution.add_member(:pipeline_execution_status, Shapes::ShapeRef.new(shape: PipelineExecutionStatus, location_name: "PipelineExecutionStatus"))
     PipelineExecution.add_member(:pipeline_execution_description, Shapes::ShapeRef.new(shape: PipelineExecutionDescription, location_name: "PipelineExecutionDescription"))
+    PipelineExecution.add_member(:pipeline_experiment_config, Shapes::ShapeRef.new(shape: PipelineExperimentConfig, location_name: "PipelineExperimentConfig"))
+    PipelineExecution.add_member(:failure_reason, Shapes::ShapeRef.new(shape: PipelineExecutionFailureReason, location_name: "FailureReason"))
     PipelineExecution.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     PipelineExecution.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     PipelineExecution.add_member(:created_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "CreatedBy"))
@@ -5210,6 +5235,7 @@ module Aws::SageMaker
     PipelineExecutionStepMetadata.add_member(:model, Shapes::ShapeRef.new(shape: ModelStepMetadata, location_name: "Model"))
     PipelineExecutionStepMetadata.add_member(:register_model, Shapes::ShapeRef.new(shape: RegisterModelStepMetadata, location_name: "RegisterModel"))
     PipelineExecutionStepMetadata.add_member(:condition, Shapes::ShapeRef.new(shape: ConditionStepMetadata, location_name: "Condition"))
+    PipelineExecutionStepMetadata.add_member(:callback, Shapes::ShapeRef.new(shape: CallbackStepMetadata, location_name: "Callback"))
     PipelineExecutionStepMetadata.struct_class = Types::PipelineExecutionStepMetadata
 
     PipelineExecutionSummary.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))
@@ -5220,6 +5246,10 @@ module Aws::SageMaker
     PipelineExecutionSummary.struct_class = Types::PipelineExecutionSummary
 
     PipelineExecutionSummaryList.member = Shapes::ShapeRef.new(shape: PipelineExecutionSummary)
+
+    PipelineExperimentConfig.add_member(:experiment_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, location_name: "ExperimentName"))
+    PipelineExperimentConfig.add_member(:trial_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, location_name: "TrialName"))
+    PipelineExperimentConfig.struct_class = Types::PipelineExperimentConfig
 
     PipelineSummary.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "PipelineArn"))
     PipelineSummary.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, location_name: "PipelineName"))
@@ -5558,6 +5588,22 @@ module Aws::SageMaker
     SecondaryStatusTransitions.member = Shapes::ShapeRef.new(shape: SecondaryStatusTransition)
 
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
+
+    SendPipelineExecutionStepFailureRequest.add_member(:callback_token, Shapes::ShapeRef.new(shape: CallbackToken, required: true, location_name: "CallbackToken"))
+    SendPipelineExecutionStepFailureRequest.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String256, location_name: "FailureReason"))
+    SendPipelineExecutionStepFailureRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    SendPipelineExecutionStepFailureRequest.struct_class = Types::SendPipelineExecutionStepFailureRequest
+
+    SendPipelineExecutionStepFailureResponse.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))
+    SendPipelineExecutionStepFailureResponse.struct_class = Types::SendPipelineExecutionStepFailureResponse
+
+    SendPipelineExecutionStepSuccessRequest.add_member(:callback_token, Shapes::ShapeRef.new(shape: CallbackToken, required: true, location_name: "CallbackToken"))
+    SendPipelineExecutionStepSuccessRequest.add_member(:output_parameters, Shapes::ShapeRef.new(shape: OutputParameterList, location_name: "OutputParameters"))
+    SendPipelineExecutionStepSuccessRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    SendPipelineExecutionStepSuccessRequest.struct_class = Types::SendPipelineExecutionStepSuccessRequest
+
+    SendPipelineExecutionStepSuccessResponse.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))
+    SendPipelineExecutionStepSuccessResponse.struct_class = Types::SendPipelineExecutionStepSuccessResponse
 
     ServiceCatalogProvisionedProductDetails.add_member(:provisioned_product_id, Shapes::ShapeRef.new(shape: ServiceCatalogEntityId, location_name: "ProvisionedProductId"))
     ServiceCatalogProvisionedProductDetails.add_member(:provisioned_product_status_message, Shapes::ShapeRef.new(shape: ProvisionedProductStatusMessage, location_name: "ProvisionedProductStatusMessage"))
@@ -8298,6 +8344,26 @@ module Aws::SageMaker
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:send_pipeline_execution_step_failure, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendPipelineExecutionStepFailure"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SendPipelineExecutionStepFailureRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendPipelineExecutionStepFailureResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+      end)
+
+      api.add_operation(:send_pipeline_execution_step_success, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendPipelineExecutionStepSuccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SendPipelineExecutionStepSuccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendPipelineExecutionStepSuccessResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
       end)
 
       api.add_operation(:start_monitoring_schedule, Seahorse::Model::Operation.new.tap do |o|

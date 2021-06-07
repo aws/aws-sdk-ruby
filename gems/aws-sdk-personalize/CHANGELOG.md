@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2021-06-07)
+------------------
+
+* Feature - Update regex validation in kmsKeyArn and s3 path API parameters for AWS Personalize APIs
+
 1.26.0 (2021-05-20)
 ------------------
 

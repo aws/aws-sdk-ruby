@@ -888,6 +888,10 @@ module Aws::EKS
     #           version: "String",
     #           id: "String",
     #         },
+    #         update_config: {
+    #           max_unavailable: 1,
+    #           max_unavailable_percentage: 1,
+    #         },
     #         capacity_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT
     #         version: "String",
     #         release_version: "String",
@@ -1034,6 +1038,9 @@ module Aws::EKS
     #   meets the requirements in `launchTemplateSpecification`.
     #   @return [Types::LaunchTemplateSpecification]
     #
+    # @!attribute [rw] update_config
+    #   @return [Types::NodegroupUpdateConfig]
+    #
     # @!attribute [rw] capacity_type
     #   The capacity type for your node group.
     #   @return [String]
@@ -1086,6 +1093,7 @@ module Aws::EKS
       :tags,
       :client_request_token,
       :launch_template,
+      :update_config,
       :capacity_type,
       :version,
       :release_version)
@@ -2741,6 +2749,9 @@ module Aws::EKS
     #   node group's health, they are listed here.
     #   @return [Types::NodegroupHealth]
     #
+    # @!attribute [rw] update_config
+    #   @return [Types::NodegroupUpdateConfig]
+    #
     # @!attribute [rw] launch_template
     #   If a launch template was used to create the node group, then this is
     #   the launch template that was used.
@@ -2777,6 +2788,7 @@ module Aws::EKS
       :resources,
       :disk_size,
       :health,
+      :update_config,
       :launch_template,
       :tags)
       SENSITIVE = []
@@ -2859,6 +2871,29 @@ module Aws::EKS
       :min_size,
       :max_size,
       :desired_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass NodegroupUpdateConfig
+    #   data as a hash:
+    #
+    #       {
+    #         max_unavailable: 1,
+    #         max_unavailable_percentage: 1,
+    #       }
+    #
+    # @!attribute [rw] max_unavailable
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_unavailable_percentage
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/NodegroupUpdateConfig AWS API Documentation
+    #
+    class NodegroupUpdateConfig < Struct.new(
+      :max_unavailable,
+      :max_unavailable_percentage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3732,6 +3767,10 @@ module Aws::EKS
     #           max_size: 1,
     #           desired_size: 1,
     #         },
+    #         update_config: {
+    #           max_unavailable: 1,
+    #           max_unavailable_percentage: 1,
+    #         },
     #         client_request_token: "String",
     #       }
     #
@@ -3759,6 +3798,9 @@ module Aws::EKS
     #   the update.
     #   @return [Types::NodegroupScalingConfig]
     #
+    # @!attribute [rw] update_config
+    #   @return [Types::NodegroupUpdateConfig]
+    #
     # @!attribute [rw] client_request_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -3775,6 +3817,7 @@ module Aws::EKS
       :labels,
       :taints,
       :scaling_config,
+      :update_config,
       :client_request_token)
       SENSITIVE = []
       include Aws::Structure

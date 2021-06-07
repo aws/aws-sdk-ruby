@@ -1075,10 +1075,6 @@ module Aws::SageMaker
     #   needed to store artifacts from an AutoML job. Format(s) supported:
     #   CSV.
     #
-    #   &lt;para&gt;Specifies whether to automatically deploy the best
-    #   &amp;ATP; model to an endpoint and the name of that endpoint if
-    #   deployed automatically.&lt;/para&gt;
-    #
     # @option params [String] :problem_type
     #   Defines the type of supervised learning available for the candidates.
     #   Options include: `BinaryClassification`, `MulticlassClassification`,
@@ -1100,10 +1096,6 @@ module Aws::SageMaker
     #
     # @option params [required, String] :role_arn
     #   The ARN of the role that is used to access the data.
-    #
-    #   &lt;para&gt;Specifies whether to automatically deploy the best
-    #   &amp;ATP; model to an endpoint and the name of that endpoint if
-    #   deployed automatically.&lt;/para&gt;
     #
     # @option params [Boolean] :generate_candidate_definitions_only
     #   Generates possible candidates without training the models. A candidate
@@ -6754,8 +6746,10 @@ module Aws::SageMaker
     # Marketplace to create models in Amazon SageMaker.
     #
     # @option params [required, String] :model_package_name
-    #   The name of the model package. The name must have 1 to 63 characters.
-    #   Valid characters are a-z, A-Z, 0-9, and - (hyphen).
+    #   The name or Amazon Resource Name (ARN) of the model package to delete.
+    #
+    #   When you specify a name, the name must have 1 to 63 characters. Valid
+    #   characters are a-z, A-Z, 0-9, and - (hyphen).
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -9124,7 +9118,11 @@ module Aws::SageMaker
     # packages listed on AWS Marketplace.
     #
     # @option params [required, String] :model_package_name
-    #   The name of the model package to describe.
+    #   The name or Amazon Resource Name (ARN) of the model package to
+    #   describe.
+    #
+    #   When you specify a name, the name must have 1 to 63 characters. Valid
+    #   characters are a-z, A-Z, 0-9, and - (hyphen).
     #
     # @return [Types::DescribeModelPackageOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9687,6 +9685,8 @@ module Aws::SageMaker
     #   * {Types::DescribePipelineExecutionResponse#pipeline_execution_display_name #pipeline_execution_display_name} => String
     #   * {Types::DescribePipelineExecutionResponse#pipeline_execution_status #pipeline_execution_status} => String
     #   * {Types::DescribePipelineExecutionResponse#pipeline_execution_description #pipeline_execution_description} => String
+    #   * {Types::DescribePipelineExecutionResponse#pipeline_experiment_config #pipeline_experiment_config} => Types::PipelineExperimentConfig
+    #   * {Types::DescribePipelineExecutionResponse#failure_reason #failure_reason} => String
     #   * {Types::DescribePipelineExecutionResponse#creation_time #creation_time} => Time
     #   * {Types::DescribePipelineExecutionResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::DescribePipelineExecutionResponse#created_by #created_by} => Types::UserContext
@@ -9705,6 +9705,9 @@ module Aws::SageMaker
     #   resp.pipeline_execution_display_name #=> String
     #   resp.pipeline_execution_status #=> String, one of "Executing", "Stopping", "Stopped", "Failed", "Succeeded"
     #   resp.pipeline_execution_description #=> String
+    #   resp.pipeline_experiment_config.experiment_name #=> String
+    #   resp.pipeline_experiment_config.trial_name #=> String
+    #   resp.failure_reason #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
     #   resp.created_by.user_profile_arn #=> String
@@ -13627,6 +13630,11 @@ module Aws::SageMaker
     #   resp.pipeline_execution_steps[0].metadata.model.arn #=> String
     #   resp.pipeline_execution_steps[0].metadata.register_model.arn #=> String
     #   resp.pipeline_execution_steps[0].metadata.condition.outcome #=> String, one of "True", "False"
+    #   resp.pipeline_execution_steps[0].metadata.callback.callback_token #=> String
+    #   resp.pipeline_execution_steps[0].metadata.callback.sqs_queue_url #=> String
+    #   resp.pipeline_execution_steps[0].metadata.callback.output_parameters #=> Array
+    #   resp.pipeline_execution_steps[0].metadata.callback.output_parameters[0].name #=> String
+    #   resp.pipeline_execution_steps[0].metadata.callback.output_parameters[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListPipelineExecutionSteps AWS API Documentation
@@ -15533,6 +15541,9 @@ module Aws::SageMaker
     #   resp.results[0].pipeline_execution.pipeline_execution_display_name #=> String
     #   resp.results[0].pipeline_execution.pipeline_execution_status #=> String, one of "Executing", "Stopping", "Stopped", "Failed", "Succeeded"
     #   resp.results[0].pipeline_execution.pipeline_execution_description #=> String
+    #   resp.results[0].pipeline_execution.pipeline_experiment_config.experiment_name #=> String
+    #   resp.results[0].pipeline_execution.pipeline_experiment_config.trial_name #=> String
+    #   resp.results[0].pipeline_execution.failure_reason #=> String
     #   resp.results[0].pipeline_execution.creation_time #=> Time
     #   resp.results[0].pipeline_execution.last_modified_time #=> Time
     #   resp.results[0].pipeline_execution.created_by.user_profile_arn #=> String
@@ -15578,6 +15589,99 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def search(params = {}, options = {})
       req = build_request(:search, params)
+      req.send_request(options)
+    end
+
+    # Notifies the pipeline that the execution of a callback step failed,
+    # along with a message describing why. When a callback step is run, the
+    # pipeline generates a callback token and includes the token in a
+    # message sent to Amazon Simple Queue Service (Amazon SQS).
+    #
+    # @option params [required, String] :callback_token
+    #   The pipeline generated token from the Amazon SQS queue.
+    #
+    # @option params [String] :failure_reason
+    #   A message describing why the step failed.
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the operation. An idempotent operation completes no
+    #   more than one time.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::SendPipelineExecutionStepFailureResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendPipelineExecutionStepFailureResponse#pipeline_execution_arn #pipeline_execution_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_pipeline_execution_step_failure({
+    #     callback_token: "CallbackToken", # required
+    #     failure_reason: "String256",
+    #     client_request_token: "IdempotencyToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pipeline_execution_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SendPipelineExecutionStepFailure AWS API Documentation
+    #
+    # @overload send_pipeline_execution_step_failure(params = {})
+    # @param [Hash] params ({})
+    def send_pipeline_execution_step_failure(params = {}, options = {})
+      req = build_request(:send_pipeline_execution_step_failure, params)
+      req.send_request(options)
+    end
+
+    # Notifies the pipeline that the execution of a callback step succeeded
+    # and provides a list of the step's output parameters. When a callback
+    # step is run, the pipeline generates a callback token and includes the
+    # token in a message sent to Amazon Simple Queue Service (Amazon SQS).
+    #
+    # @option params [required, String] :callback_token
+    #   The pipeline generated token from the Amazon SQS queue.
+    #
+    # @option params [Array<Types::OutputParameter>] :output_parameters
+    #   A list of the output parameters of the callback step.
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the operation. An idempotent operation completes no
+    #   more than one time.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::SendPipelineExecutionStepSuccessResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendPipelineExecutionStepSuccessResponse#pipeline_execution_arn #pipeline_execution_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_pipeline_execution_step_success({
+    #     callback_token: "CallbackToken", # required
+    #     output_parameters: [
+    #       {
+    #         name: "String256", # required
+    #         value: "String1024", # required
+    #       },
+    #     ],
+    #     client_request_token: "IdempotencyToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pipeline_execution_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SendPipelineExecutionStepSuccess AWS API Documentation
+    #
+    # @overload send_pipeline_execution_step_success(params = {})
+    # @param [Hash] params ({})
+    def send_pipeline_execution_step_success(params = {}, options = {})
+      req = build_request(:send_pipeline_execution_step_success, params)
       req.send_request(options)
     end
 
@@ -17446,7 +17550,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

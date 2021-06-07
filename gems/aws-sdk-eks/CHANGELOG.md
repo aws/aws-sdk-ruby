@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2021-06-07)
+------------------
+
+* Feature - Added updateConfig option that allows customers to control upgrade velocity in Managed Node Group.
+
 1.54.0 (2021-05-19)
 ------------------
 

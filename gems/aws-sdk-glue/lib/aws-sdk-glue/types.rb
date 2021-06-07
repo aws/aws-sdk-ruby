@@ -2331,11 +2331,11 @@ module Aws::Glue
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
     #   users to specify aspects of a crawler's behavior. For more
-    #   information, see [Configuring a Crawler][1].
+    #   information, see [Include and Exclude Patterns][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/define-crawler.html#crawler-data-stores-exclude
     #   @return [String]
     #
     # @!attribute [rw] crawler_security_configuration
@@ -2487,6 +2487,7 @@ module Aws::Glue
     #             path: "Path",
     #             exclusions: ["Path"],
     #             connection_name: "ConnectionName",
+    #             sample_size: 1,
     #           },
     #         ],
     #         jdbc_targets: [
@@ -2668,6 +2669,7 @@ module Aws::Glue
     #               path: "Path",
     #               exclusions: ["Path"],
     #               connection_name: "ConnectionName",
+    #               sample_size: 1,
     #             },
     #           ],
     #           jdbc_targets: [
@@ -13036,6 +13038,7 @@ module Aws::Glue
     #         path: "Path",
     #         exclusions: ["Path"],
     #         connection_name: "ConnectionName",
+    #         sample_size: 1,
     #       }
     #
     # @!attribute [rw] path
@@ -13057,12 +13060,19 @@ module Aws::Glue
     #   (Amazon VPC).
     #   @return [String]
     #
+    # @!attribute [rw] sample_size
+    #   Sets the number of files in each leaf folder to be crawled when
+    #   crawling sample files in a dataset. If not set, all the files are
+    #   crawled. A valid value is an integer between 1 and 249.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3Target AWS API Documentation
     #
     class S3Target < Struct.new(
       :path,
       :exclusions,
-      :connection_name)
+      :connection_name,
+      :sample_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15665,6 +15675,7 @@ module Aws::Glue
     #               path: "Path",
     #               exclusions: ["Path"],
     #               connection_name: "ConnectionName",
+    #               sample_size: 1,
     #             },
     #           ],
     #           jdbc_targets: [

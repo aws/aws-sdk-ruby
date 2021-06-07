@@ -1926,13 +1926,12 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] max_runtime_per_training_job_in_seconds
-    #   The maximum time, in seconds, a job is allowed to run.
+    #   The maximum time, in seconds, a training job is allowed to run as
+    #   part of an AutoML job.
     #   @return [Integer]
     #
     # @!attribute [rw] max_auto_ml_job_runtime_in_seconds
-    #   The maximum time, in seconds, an AutoML job is allowed to wait for a
-    #   trial to complete. It must be equal to or greater than
-    #   `MaxRuntimePerTrainingJobInSeconds`.
+    #   The maximum runtime, in seconds, an AutoML job has to complete.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLJobCompletionCriteria AWS API Documentation
@@ -2336,6 +2335,31 @@ module Aws::SageMaker
     #
     class CacheHitResult < Struct.new(
       :source_pipeline_execution_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata about a callback step.
+    #
+    # @!attribute [rw] callback_token
+    #   The pipeline generated token from the Amazon SQS queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] sqs_queue_url
+    #   The URL of the Amazon Simple Queue Service (Amazon SQS) queue used
+    #   by the callback step.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_parameters
+    #   A list of the output parameters of the callback step.
+    #   @return [Array<Types::OutputParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CallbackStepMetadata AWS API Documentation
+    #
+    class CallbackStepMetadata < Struct.new(
+      :callback_token,
+      :sqs_queue_url,
+      :output_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3877,10 +3901,6 @@ module Aws::SageMaker
     #   Provides information about encryption and the Amazon S3 output path
     #   needed to store artifacts from an AutoML job. Format(s) supported:
     #   CSV.
-    #
-    #   &lt;para&gt;Specifies whether to automatically deploy the best
-    #   &amp;ATP; model to an endpoint and the name of that endpoint if
-    #   deployed automatically.&lt;/para&gt;
     #   @return [Types::AutoMLOutputDataConfig]
     #
     # @!attribute [rw] problem_type
@@ -3908,10 +3928,6 @@ module Aws::SageMaker
     #
     # @!attribute [rw] role_arn
     #   The ARN of the role that is used to access the data.
-    #
-    #   &lt;para&gt;Specifies whether to automatically deploy the best
-    #   &amp;ATP; model to an endpoint and the name of that endpoint if
-    #   deployed automatically.&lt;/para&gt;
     #   @return [String]
     #
     # @!attribute [rw] generate_candidate_definitions_only
@@ -10103,8 +10119,11 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] model_package_name
-    #   The name of the model package. The name must have 1 to 63
-    #   characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).
+    #   The name or Amazon Resource Name (ARN) of the model package to
+    #   delete.
+    #
+    #   When you specify a name, the name must have 1 to 63 characters.
+    #   Valid characters are a-z, A-Z, 0-9, and - (hyphen).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModelPackageInput AWS API Documentation
@@ -13044,7 +13063,11 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] model_package_name
-    #   The name of the model package to describe.
+    #   The name or Amazon Resource Name (ARN) of the model package to
+    #   describe.
+    #
+    #   When you specify a name, the name must have 1 to 63 characters.
+    #   Valid characters are a-z, A-Z, 0-9, and - (hyphen).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackageInput AWS API Documentation
@@ -13662,6 +13685,15 @@ module Aws::SageMaker
     #   The description of the pipeline execution.
     #   @return [String]
     #
+    # @!attribute [rw] pipeline_experiment_config
+    #   Specifies the names of the experiment and trial created by a
+    #   pipeline.
+    #   @return [Types::PipelineExperimentConfig]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the execution failed, a message describing why.
+    #   @return [String]
+    #
     # @!attribute [rw] creation_time
     #   The time when the pipeline execution was created.
     #   @return [Time]
@@ -13688,6 +13720,8 @@ module Aws::SageMaker
       :pipeline_execution_display_name,
       :pipeline_execution_status,
       :pipeline_execution_description,
+      :pipeline_experiment_config,
+      :failure_reason,
       :creation_time,
       :last_modified_time,
       :created_by,
@@ -19262,7 +19296,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the kernel.
+    #   The name of the Jupyter kernel in the image. This value is case
+    #   sensitive.
     #   @return [String]
     #
     # @!attribute [rw] display_name
@@ -24764,7 +24799,7 @@ module Aws::SageMaker
     # @!attribute [rw] auto_generate_endpoint_name
     #   Set to `True` to automatically generate an endpoint name for a
     #   one-click Autopilot model deployment; set to `False` otherwise. The
-    #   default value is `True`.
+    #   default value is `False`.
     #
     #   <note markdown="1"> If you set `AutoGenerateEndpointName` to `True`, do not specify the
     #   `EndpointName`; otherwise a 400 error is thrown.
@@ -27607,6 +27642,33 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # An output parameter of a pipeline step.
+    #
+    # @note When making an API call, you may pass OutputParameter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String256", # required
+    #         value: "String1024", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the output parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the output parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OutputParameter AWS API Documentation
+    #
+    class OutputParameter < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Assigns a value to a named Pipeline parameter.
     #
     # @note When making an API call, you may pass Parameter
@@ -27886,6 +27948,15 @@ module Aws::SageMaker
     #   The description of the pipeline execution.
     #   @return [String]
     #
+    # @!attribute [rw] pipeline_experiment_config
+    #   Specifies the names of the experiment and trial created by a
+    #   pipeline.
+    #   @return [Types::PipelineExperimentConfig]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the execution failed, a message describing why.
+    #   @return [String]
+    #
     # @!attribute [rw] creation_time
     #   The creation time of the pipeline execution.
     #   @return [Time]
@@ -27916,6 +27987,8 @@ module Aws::SageMaker
       :pipeline_execution_display_name,
       :pipeline_execution_status,
       :pipeline_execution_description,
+      :pipeline_experiment_config,
+      :failure_reason,
       :creation_time,
       :last_modified_time,
       :created_by,
@@ -27954,7 +28027,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] metadata
-    #   The metadata for the step execution.
+    #   Metadata for the step execution.
     #   @return [Types::PipelineExecutionStepMetadata]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExecutionStep AWS API Documentation
@@ -28001,6 +28074,10 @@ module Aws::SageMaker
     #   condition.
     #   @return [Types::ConditionStepMetadata]
     #
+    # @!attribute [rw] callback
+    #   Metadata about a callback step.
+    #   @return [Types::CallbackStepMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExecutionStepMetadata AWS API Documentation
     #
     class PipelineExecutionStepMetadata < Struct.new(
@@ -28009,7 +28086,8 @@ module Aws::SageMaker
       :transform_job,
       :model,
       :register_model,
-      :condition)
+      :condition,
+      :callback)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28044,6 +28122,25 @@ module Aws::SageMaker
       :pipeline_execution_status,
       :pipeline_execution_description,
       :pipeline_execution_display_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the names of the experiment and trial created by a pipeline.
+    #
+    # @!attribute [rw] experiment_name
+    #   The name of the experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] trial_name
+    #   The name of the trial.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExperimentConfig AWS API Documentation
+    #
+    class PipelineExperimentConfig < Struct.new(
+      :experiment_name,
+      :trial_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28717,10 +28814,10 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Identifies a model that you want to host and the resources to deploy
-    # for hosting it. If you are deploying multiple models, tell Amazon
-    # SageMaker how to distribute traffic among the models by specifying
-    # variant weights.
+    # Identifies a model that you want to host and the resources chosen to
+    # deploy for hosting it. If you are deploying multiple models, tell
+    # Amazon SageMaker how to distribute traffic among the models by
+    # specifying variant weights.
     #
     # @note When making an API call, you may pass ProductionVariant
     #   data as a hash:
@@ -30659,6 +30756,107 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass SendPipelineExecutionStepFailureRequest
+    #   data as a hash:
+    #
+    #       {
+    #         callback_token: "CallbackToken", # required
+    #         failure_reason: "String256",
+    #         client_request_token: "IdempotencyToken",
+    #       }
+    #
+    # @!attribute [rw] callback_token
+    #   The pipeline generated token from the Amazon SQS queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   A message describing why the step failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the operation. An idempotent operation completes no
+    #   more than one time.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SendPipelineExecutionStepFailureRequest AWS API Documentation
+    #
+    class SendPipelineExecutionStepFailureRequest < Struct.new(
+      :callback_token,
+      :failure_reason,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pipeline_execution_arn
+    #   The Amazon Resource Name (ARN) of the pipeline execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SendPipelineExecutionStepFailureResponse AWS API Documentation
+    #
+    class SendPipelineExecutionStepFailureResponse < Struct.new(
+      :pipeline_execution_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SendPipelineExecutionStepSuccessRequest
+    #   data as a hash:
+    #
+    #       {
+    #         callback_token: "CallbackToken", # required
+    #         output_parameters: [
+    #           {
+    #             name: "String256", # required
+    #             value: "String1024", # required
+    #           },
+    #         ],
+    #         client_request_token: "IdempotencyToken",
+    #       }
+    #
+    # @!attribute [rw] callback_token
+    #   The pipeline generated token from the Amazon SQS queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_parameters
+    #   A list of the output parameters of the callback step.
+    #   @return [Array<Types::OutputParameter>]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the operation. An idempotent operation completes no
+    #   more than one time.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SendPipelineExecutionStepSuccessRequest AWS API Documentation
+    #
+    class SendPipelineExecutionStepSuccessRequest < Struct.new(
+      :callback_token,
+      :output_parameters,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pipeline_execution_arn
+    #   The Amazon Resource Name (ARN) of the pipeline execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SendPipelineExecutionStepSuccessResponse AWS API Documentation
+    #
+    class SendPipelineExecutionStepSuccessResponse < Struct.new(
+      :pipeline_execution_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details of a provisioned service catalog product. For information
     # about service catalog, see [What is AWS Service Catalog][1].
     #
@@ -31404,7 +31602,23 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Describes a tag.
+    # A tag object that consists of a key and an optional value, used to
+    # manage metadata for Amazon SageMaker AWS resources.
+    #
+    # You can add tags to notebook instances, training jobs, hyperparameter
+    # tuning jobs, batch transform jobs, models, labeling jobs, work teams,
+    # endpoint configurations, and endpoints. For more information on adding
+    # tags to Amazon SageMaker resources, see AddTags.
+    #
+    # For more information on adding metadata to your AWS resources with
+    # tagging, see [Tagging AWS resources][1]. For advice on best practices
+    # for managing AWS resources with tagging, see [Tagging Best Practices:
+    # Implement an Effective AWS Resource Tagging Strategy][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    # [2]: https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -31415,7 +31629,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] key
-    #   The tag key.
+    #   The tag key. Tag keys must be unique per resource.
     #   @return [String]
     #
     # @!attribute [rw] value

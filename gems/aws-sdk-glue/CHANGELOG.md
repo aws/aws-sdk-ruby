@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2021-06-07)
+------------------
+
+* Feature - Add SampleSize variable to S3Target to enable s3-sampling feature through API.
+
 1.87.0 (2021-04-26)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2021-06-07)
+------------------
+
+* Feature - AWS SageMaker - Releasing new APIs related to Callback steps in model building pipelines. Adds experiment integration to model building pipelines.
+
 1.87.0 (2021-05-05)
 ------------------
 
