@@ -126,6 +126,7 @@ module Aws::FSx
     FilterValues = Shapes::ListShape.new(name: 'FilterValues')
     Filters = Shapes::ListShape.new(name: 'Filters')
     Flag = Shapes::BooleanShape.new(name: 'Flag')
+    GeneralARN = Shapes::StringShape.new(name: 'GeneralARN')
     IncompatibleParameterError = Shapes::StructureShape.new(name: 'IncompatibleParameterError')
     IncompatibleRegionForMultiAZ = Shapes::StructureShape.new(name: 'IncompatibleRegionForMultiAZ')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
@@ -198,6 +199,9 @@ module Aws::FSx
     UpdateFileSystemWindowsConfiguration = Shapes::StructureShape.new(name: 'UpdateFileSystemWindowsConfiguration')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
     WeeklyTime = Shapes::StringShape.new(name: 'WeeklyTime')
+    WindowsAccessAuditLogLevel = Shapes::StringShape.new(name: 'WindowsAccessAuditLogLevel')
+    WindowsAuditLogConfiguration = Shapes::StructureShape.new(name: 'WindowsAuditLogConfiguration')
+    WindowsAuditLogCreateConfiguration = Shapes::StructureShape.new(name: 'WindowsAuditLogCreateConfiguration')
     WindowsDeploymentType = Shapes::StringShape.new(name: 'WindowsDeploymentType')
     WindowsFileSystemConfiguration = Shapes::StructureShape.new(name: 'WindowsFileSystemConfiguration')
 
@@ -376,6 +380,7 @@ module Aws::FSx
     CreateFileSystemWindowsConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
     CreateFileSystemWindowsConfiguration.add_member(:copy_tags_to_backups, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
     CreateFileSystemWindowsConfiguration.add_member(:aliases, Shapes::ShapeRef.new(shape: AlternateDNSNames, location_name: "Aliases"))
+    CreateFileSystemWindowsConfiguration.add_member(:audit_log_configuration, Shapes::ShapeRef.new(shape: WindowsAuditLogCreateConfiguration, location_name: "AuditLogConfiguration"))
     CreateFileSystemWindowsConfiguration.struct_class = Types::CreateFileSystemWindowsConfiguration
 
     DataRepositoryConfiguration.add_member(:lifecycle, Shapes::ShapeRef.new(shape: DataRepositoryLifecycle, location_name: "Lifecycle"))
@@ -709,7 +714,18 @@ module Aws::FSx
     UpdateFileSystemWindowsConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
     UpdateFileSystemWindowsConfiguration.add_member(:throughput_capacity, Shapes::ShapeRef.new(shape: MegabytesPerSecond, location_name: "ThroughputCapacity"))
     UpdateFileSystemWindowsConfiguration.add_member(:self_managed_active_directory_configuration, Shapes::ShapeRef.new(shape: SelfManagedActiveDirectoryConfigurationUpdates, location_name: "SelfManagedActiveDirectoryConfiguration"))
+    UpdateFileSystemWindowsConfiguration.add_member(:audit_log_configuration, Shapes::ShapeRef.new(shape: WindowsAuditLogCreateConfiguration, location_name: "AuditLogConfiguration"))
     UpdateFileSystemWindowsConfiguration.struct_class = Types::UpdateFileSystemWindowsConfiguration
+
+    WindowsAuditLogConfiguration.add_member(:file_access_audit_log_level, Shapes::ShapeRef.new(shape: WindowsAccessAuditLogLevel, required: true, location_name: "FileAccessAuditLogLevel"))
+    WindowsAuditLogConfiguration.add_member(:file_share_access_audit_log_level, Shapes::ShapeRef.new(shape: WindowsAccessAuditLogLevel, required: true, location_name: "FileShareAccessAuditLogLevel"))
+    WindowsAuditLogConfiguration.add_member(:audit_log_destination, Shapes::ShapeRef.new(shape: GeneralARN, location_name: "AuditLogDestination"))
+    WindowsAuditLogConfiguration.struct_class = Types::WindowsAuditLogConfiguration
+
+    WindowsAuditLogCreateConfiguration.add_member(:file_access_audit_log_level, Shapes::ShapeRef.new(shape: WindowsAccessAuditLogLevel, required: true, location_name: "FileAccessAuditLogLevel"))
+    WindowsAuditLogCreateConfiguration.add_member(:file_share_access_audit_log_level, Shapes::ShapeRef.new(shape: WindowsAccessAuditLogLevel, required: true, location_name: "FileShareAccessAuditLogLevel"))
+    WindowsAuditLogCreateConfiguration.add_member(:audit_log_destination, Shapes::ShapeRef.new(shape: GeneralARN, location_name: "AuditLogDestination"))
+    WindowsAuditLogCreateConfiguration.struct_class = Types::WindowsAuditLogCreateConfiguration
 
     WindowsFileSystemConfiguration.add_member(:active_directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "ActiveDirectoryId"))
     WindowsFileSystemConfiguration.add_member(:self_managed_active_directory_configuration, Shapes::ShapeRef.new(shape: SelfManagedActiveDirectoryAttributes, location_name: "SelfManagedActiveDirectoryConfiguration"))
@@ -724,6 +740,7 @@ module Aws::FSx
     WindowsFileSystemConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
     WindowsFileSystemConfiguration.add_member(:copy_tags_to_backups, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
     WindowsFileSystemConfiguration.add_member(:aliases, Shapes::ShapeRef.new(shape: Aliases, location_name: "Aliases"))
+    WindowsFileSystemConfiguration.add_member(:audit_log_configuration, Shapes::ShapeRef.new(shape: WindowsAuditLogConfiguration, location_name: "AuditLogConfiguration"))
     WindowsFileSystemConfiguration.struct_class = Types::WindowsFileSystemConfiguration
 
 
