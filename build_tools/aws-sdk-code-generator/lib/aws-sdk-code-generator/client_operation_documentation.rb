@@ -3,6 +3,10 @@
 module AwsSdkCodeGenerator
   class ClientOperationDocumentation
 
+    # get all of the enumerable methods that may conflict with members
+    # count has special handling in UnsafeEnumerableMethods
+    ENUMERABLE_METHODS = Class.new.new.extend(Enumerable).methods - [:count]
+
     # @option options [required, String] :method_name
     # @option options [required, Hash] :operation
     # @option options [required, Hash] :api
@@ -130,7 +134,11 @@ module AwsSdkCodeGenerator
         methods = shape['members'].map do |member_name, member_ref|
           member_type = Docstring.escape_html(Api.ruby_type(member_ref, api))
           method_name = Underscore.underscore(member_name)
-          "#   * {#{type}##{method_name} ##{method_name}} => #{member_type}"
+          if ENUMERABLE_METHODS.include?(method_name.to_sym)
+            "#   * {#{type}##{method_name} #data.#{method_name}} => #{member_type} (This method conflicts with a method on Response, call it through the data member)"
+          else
+            "#   * {#{type}##{method_name} ##{method_name}} => #{member_type}"
+          end
         end
         "# @return [#{type}] Returns a {Seahorse::Client::Response response} object which responds to the following methods:\n#\n" + methods.join("\n")
       else

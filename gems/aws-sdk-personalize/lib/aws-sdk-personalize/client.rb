@@ -1841,7 +1841,7 @@ module Aws::Personalize
     #
     # @return [Types::DescribeFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeFilterResponse#filter #filter} => Types::Filter
+    #   * {Types::DescribeFilterResponse#filter #data.filter} => Types::Filter (This method conflicts with a method on Response, call it through the data member)
     #
     # @example Request syntax with placeholder values
     #
@@ -1851,14 +1851,14 @@ module Aws::Personalize
     #
     # @example Response structure
     #
-    #   resp.filter.name #=> String
-    #   resp.filter.filter_arn #=> String
-    #   resp.filter.creation_date_time #=> Time
-    #   resp.filter.last_updated_date_time #=> Time
-    #   resp.filter.dataset_group_arn #=> String
-    #   resp.filter.failure_reason #=> String
-    #   resp.filter.filter_expression #=> String
-    #   resp.filter.status #=> String
+    #   resp.data.filter.name #=> String
+    #   resp.data.filter.filter_arn #=> String
+    #   resp.data.filter.creation_date_time #=> Time
+    #   resp.data.filter.last_updated_date_time #=> Time
+    #   resp.data.filter.dataset_group_arn #=> String
+    #   resp.data.filter.failure_reason #=> String
+    #   resp.data.filter.filter_expression #=> String
+    #   resp.data.filter.status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeFilter AWS API Documentation
     #

@@ -1269,7 +1269,7 @@ module Aws::IoTAnalytics
     #
     # @return [Types::GetDatasetContentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetDatasetContentResponse#entries #entries} => Array&lt;Types::DatasetEntry&gt;
+    #   * {Types::GetDatasetContentResponse#entries #data.entries} => Array&lt;Types::DatasetEntry&gt; (This method conflicts with a method on Response, call it through the data member)
     #   * {Types::GetDatasetContentResponse#timestamp #timestamp} => Time
     #   * {Types::GetDatasetContentResponse#status #status} => Types::DatasetContentStatus
     #
@@ -1282,9 +1282,9 @@ module Aws::IoTAnalytics
     #
     # @example Response structure
     #
-    #   resp.entries #=> Array
-    #   resp.entries[0].entry_name #=> String
-    #   resp.entries[0].data_uri #=> String
+    #   resp.data.entries #=> Array
+    #   resp.data.entries[0].entry_name #=> String
+    #   resp.data.entries[0].data_uri #=> String
     #   resp.timestamp #=> Time
     #   resp.status.state #=> String, one of "CREATING", "SUCCEEDED", "FAILED"
     #   resp.status.reason #=> String
