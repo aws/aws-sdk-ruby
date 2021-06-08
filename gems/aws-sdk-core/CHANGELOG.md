@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fixed an issue with `Aws::PageableResponse` where intentionally nil tokens were not merged into the params for the next call.
+
 3.114.1 (2021-06-02)
 ------------------
 
