@@ -30863,7 +30863,7 @@ module Aws::EC2
     #
     # @return [Types::GetManagedPrefixListEntriesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetManagedPrefixListEntriesResult#entries #data.entries} => Array&lt;Types::PrefixListEntry&gt; (This method conflicts with a method on Response, call it through the data member)
+    #   * {Types::GetManagedPrefixListEntriesResult#entries #entries} => Array&lt;Types::PrefixListEntry&gt;
     #   * {Types::GetManagedPrefixListEntriesResult#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
@@ -30880,9 +30880,9 @@ module Aws::EC2
     #
     # @example Response structure
     #
-    #   resp.data.entries #=> Array
-    #   resp.data.entries[0].cidr #=> String
-    #   resp.data.entries[0].description #=> String
+    #   resp.entries #=> Array
+    #   resp.entries[0].cidr #=> String
+    #   resp.entries[0].description #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetManagedPrefixListEntries AWS API Documentation

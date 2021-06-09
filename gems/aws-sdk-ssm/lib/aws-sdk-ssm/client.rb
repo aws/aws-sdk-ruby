@@ -7191,7 +7191,7 @@ module Aws::SSM
     #   * {Types::ListInventoryEntriesResult#instance_id #instance_id} => String
     #   * {Types::ListInventoryEntriesResult#schema_version #schema_version} => String
     #   * {Types::ListInventoryEntriesResult#capture_time #capture_time} => String
-    #   * {Types::ListInventoryEntriesResult#entries #data.entries} => Array&lt;Hash&lt;String,String&gt;&gt; (This method conflicts with a method on Response, call it through the data member)
+    #   * {Types::ListInventoryEntriesResult#entries #entries} => Array&lt;Hash&lt;String,String&gt;&gt;
     #   * {Types::ListInventoryEntriesResult#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
@@ -7216,9 +7216,9 @@ module Aws::SSM
     #   resp.instance_id #=> String
     #   resp.schema_version #=> String
     #   resp.capture_time #=> String
-    #   resp.data.entries #=> Array
-    #   resp.data.entries[0] #=> Hash
-    #   resp.data.entries[0]["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.entries #=> Array
+    #   resp.entries[0] #=> Hash
+    #   resp.entries[0]["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListInventoryEntries AWS API Documentation
