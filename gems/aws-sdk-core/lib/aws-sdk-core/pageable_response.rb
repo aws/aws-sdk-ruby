@@ -154,16 +154,16 @@ module Aws
         end
       end
 
-      def entities
-        if data.respond_to?(:entities)
-          data.entities
+      def entries
+        if data.respond_to?(:entries)
+          data.entries
         else
-          raise NoMethodError, "undefined method `entities'"
+          raise NoMethodError, "undefined method `entries'"
         end
       end
 
       def respond_to?(method_name, *args)
-        if [:count, :entities].include?(method_name)
+        if [:count, :entries].include?(method_name)
           data.respond_to?(method_name)
         else
           super

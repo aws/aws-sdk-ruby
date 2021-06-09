@@ -259,7 +259,7 @@ module Aws
 
     end
 
-    describe '#entities' do
+    describe '#entries' do
 
       let(:options) {{
         tokens: {}
@@ -270,16 +270,16 @@ module Aws
         resp = Seahorse::Client::Response.new(data:data)
         page = pageable(resp, pager)
         expect {
-          page.entities
+          page.entries
         }.to raise_error(NoMethodError)
       end
 
-      it 'calls entities method on data' do
-        entities = double('entities')
-        data = double('data', entities: entities)
+      it 'calls entries method on data' do
+        entries = double('entries')
+        data = double('data', entries: entries)
         resp = Seahorse::Client::Response.new(data:data)
         page = pageable(resp, pager)
-        expect(page.entities).to eq(entities)
+        expect(page.entries).to eq(entries)
       end
     end
   end

@@ -5,7 +5,7 @@ module AwsSdkCodeGenerator
 
     # get all of the enumerable methods that may conflict with members
     # count has special handling in UnsafeEnumerableMethods
-    ENUMERABLE_METHODS = Class.new.new.extend(Enumerable).methods - [:count, :entities]
+    ENUMERABLE_METHODS = Class.new.new.extend(Enumerable).methods - [:count, :entries]
 
     # @option options [required, String] :method_name
     # @option options [required, Hash] :operation
