@@ -194,7 +194,7 @@ module Aws
         }.to raise_error(NoMethodError)
       end
 
-      it 'passes count from the raises not implemented error by default' do
+      it 'calls count on data' do
         data = double('data', count: 10)
         resp = Seahorse::Client::Response.new(data:data)
         page = pageable(resp, pager)
@@ -222,6 +222,30 @@ module Aws
         expect(page.respond_to?(:foo)).to be(true)
       end
 
+    end
+
+    describe '#entities' do
+
+      let(:options) {{
+        tokens: {}
+      }}
+
+      it 'raises not implemented error by default' do
+        data = double('data')
+        resp = Seahorse::Client::Response.new(data:data)
+        page = pageable(resp, pager)
+        expect {
+          page.entities
+        }.to raise_error(NoMethodError)
+      end
+
+      it 'calls entities method on data' do
+        entities = double('entities')
+        data = double('data', entities: entities)
+        resp = Seahorse::Client::Response.new(data:data)
+        page = pageable(resp, pager)
+        expect(page.entities).to eq(entities)
+      end
     end
   end
 end
