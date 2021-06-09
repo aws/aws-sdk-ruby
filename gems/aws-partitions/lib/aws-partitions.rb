@@ -425,6 +425,7 @@ module Aws
             'Polly' => 'polly',
             'Pricing' => 'api.pricing',
             'PrometheusService' => 'aps',
+            'Proton' => 'proton',
             'QLDB' => 'qldb',
             'QLDBSession' => 'session.qldb',
             'QuickSight' => 'quicksight',

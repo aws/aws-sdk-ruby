@@ -919,6 +919,11 @@ module Aws::FSx
     #           automatic_backup_retention_days: 1,
     #           copy_tags_to_backups: false,
     #           aliases: ["AlternateDNSName"],
+    #           audit_log_configuration: {
+    #             file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #             file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #             audit_log_destination: "GeneralARN",
+    #           },
     #         },
     #         lustre_configuration: {
     #           weekly_maintenance_start_time: "WeeklyTime",
@@ -1307,6 +1312,11 @@ module Aws::FSx
     #           automatic_backup_retention_days: 1,
     #           copy_tags_to_backups: false,
     #           aliases: ["AlternateDNSName"],
+    #           audit_log_configuration: {
+    #             file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #             file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #             audit_log_destination: "GeneralARN",
+    #           },
     #         },
     #         lustre_configuration: {
     #           weekly_maintenance_start_time: "WeeklyTime",
@@ -1493,6 +1503,11 @@ module Aws::FSx
     #         automatic_backup_retention_days: 1,
     #         copy_tags_to_backups: false,
     #         aliases: ["AlternateDNSName"],
+    #         audit_log_configuration: {
+    #           file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #           file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #           audit_log_destination: "GeneralARN",
+    #         },
     #       }
     #
     # @!attribute [rw] active_directory_id
@@ -1620,6 +1635,12 @@ module Aws::FSx
     #   [2]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] audit_log_configuration
+    #   The configuration that Amazon FSx for Windows File Server uses to
+    #   audit and log user accesses of files, folders, and file shares on
+    #   the Amazon FSx for Windows File Server file system.
+    #   @return [Types::WindowsAuditLogCreateConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemWindowsConfiguration AWS API Documentation
     #
     class CreateFileSystemWindowsConfiguration < Struct.new(
@@ -1632,7 +1653,8 @@ module Aws::FSx
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
       :copy_tags_to_backups,
-      :aliases)
+      :aliases,
+      :audit_log_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3707,6 +3729,11 @@ module Aws::FSx
     #             password: "DirectoryPassword",
     #             dns_ips: ["IpAddress"],
     #           },
+    #           audit_log_configuration: {
+    #             file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #             file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #             audit_log_destination: "GeneralARN",
+    #           },
     #         },
     #         lustre_configuration: {
     #           weekly_maintenance_start_time: "WeeklyTime",
@@ -3822,6 +3849,11 @@ module Aws::FSx
     #           password: "DirectoryPassword",
     #           dns_ips: ["IpAddress"],
     #         },
+    #         audit_log_configuration: {
+    #           file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #           file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #           audit_log_destination: "GeneralARN",
+    #         },
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -3866,6 +3898,12 @@ module Aws::FSx
     #   self-managed Microsoft AD update request in progress.
     #   @return [Types::SelfManagedActiveDirectoryConfigurationUpdates]
     #
+    # @!attribute [rw] audit_log_configuration
+    #   The configuration that Amazon FSx for Windows File Server uses to
+    #   audit and log user accesses of files, folders, and file shares on
+    #   the Amazon FSx for Windows File Server file system..
+    #   @return [Types::WindowsAuditLogCreateConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemWindowsConfiguration AWS API Documentation
     #
     class UpdateFileSystemWindowsConfiguration < Struct.new(
@@ -3873,7 +3911,156 @@ module Aws::FSx
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
       :throughput_capacity,
-      :self_managed_active_directory_configuration)
+      :self_managed_active_directory_configuration,
+      :audit_log_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration that Amazon FSx for Windows File Server uses to
+    # audit and log user accesses of files, folders, and file shares on the
+    # Amazon FSx for Windows File Server file system. For more information,
+    # see [ File access auditing][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/file-access-auditing.html
+    #
+    # @!attribute [rw] file_access_audit_log_level
+    #   Sets which attempt type is logged by Amazon FSx for file and folder
+    #   accesses.
+    #
+    #   * `SUCCESS_ONLY` - only successful attempts to access files or
+    #     folders are logged.
+    #
+    #   * `FAILURE_ONLY` - only failed attempts to access files or folders
+    #     are logged.
+    #
+    #   * `SUCCESS_AND_FAILURE` - both successful attempts and failed
+    #     attempts to access files or folders are logged.
+    #
+    #   * `DISABLED` - access auditing of files and folders is turned off.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_share_access_audit_log_level
+    #   Sets which attempt type is logged by Amazon FSx for file share
+    #   accesses.
+    #
+    #   * `SUCCESS_ONLY` - only successful attempts to access file shares
+    #     are logged.
+    #
+    #   * `FAILURE_ONLY` - only failed attempts to access file shares are
+    #     logged.
+    #
+    #   * `SUCCESS_AND_FAILURE` - both successful attempts and failed
+    #     attempts to access file shares are logged.
+    #
+    #   * `DISABLED` - access auditing of file shares is turned off.
+    #   @return [String]
+    #
+    # @!attribute [rw] audit_log_destination
+    #   The Amazon Resource Name (ARN) for the destination of the audit
+    #   logs. The destination can be any Amazon CloudWatch Logs log group
+    #   ARN or Amazon Kinesis Data Firehose delivery stream ARN.
+    #
+    #   The name of the Amazon CloudWatch Logs log group must begin with the
+    #   `/aws/fsx` prefix. The name of the Amazon Kinesis Data Firehouse
+    #   delivery stream must begin with the `aws-fsx` prefix.
+    #
+    #   The destination ARN (either CloudWatch Logs log group or Kinesis
+    #   Data Firehose delivery stream) must be in the same AWS partition,
+    #   AWS region, and AWS account as your Amazon FSx file system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/WindowsAuditLogConfiguration AWS API Documentation
+    #
+    class WindowsAuditLogConfiguration < Struct.new(
+      :file_access_audit_log_level,
+      :file_share_access_audit_log_level,
+      :audit_log_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Windows file access auditing configuration used when creating or
+    # updating an Amazon FSx for Windows File Server file system.
+    #
+    # @note When making an API call, you may pass WindowsAuditLogCreateConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #         file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #         audit_log_destination: "GeneralARN",
+    #       }
+    #
+    # @!attribute [rw] file_access_audit_log_level
+    #   Sets which attempt type is logged by Amazon FSx for file and folder
+    #   accesses.
+    #
+    #   * `SUCCESS_ONLY` - only successful attempts to access files or
+    #     folders are logged.
+    #
+    #   * `FAILURE_ONLY` - only failed attempts to access files or folders
+    #     are logged.
+    #
+    #   * `SUCCESS_AND_FAILURE` - both successful attempts and failed
+    #     attempts to access files or folders are logged.
+    #
+    #   * `DISABLED` - access auditing of files and folders is turned off.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_share_access_audit_log_level
+    #   Sets which attempt type is logged by Amazon FSx for file share
+    #   accesses.
+    #
+    #   * `SUCCESS_ONLY` - only successful attempts to access file shares
+    #     are logged.
+    #
+    #   * `FAILURE_ONLY` - only failed attempts to access file shares are
+    #     logged.
+    #
+    #   * `SUCCESS_AND_FAILURE` - both successful attempts and failed
+    #     attempts to access file shares are logged.
+    #
+    #   * `DISABLED` - access auditing of file shares is turned off.
+    #   @return [String]
+    #
+    # @!attribute [rw] audit_log_destination
+    #   The Amazon Resource Name (ARN) that specifies the destination of the
+    #   audit logs.
+    #
+    #   The destination can be any Amazon CloudWatch Logs log group ARN or
+    #   Amazon Kinesis Data Firehose delivery stream ARN, with the following
+    #   requirements:
+    #
+    #   * The destination ARN that you provide (either CloudWatch Logs log
+    #     group or Kinesis Data Firehose delivery stream) must be in the
+    #     same AWS partition, AWS region, and AWS account as your Amazon FSx
+    #     file system.
+    #
+    #   * The name of the Amazon CloudWatch Logs log group must begin with
+    #     the `/aws/fsx` prefix. The name of the Amazon Kinesis Data
+    #     Firehouse delivery stream must begin with the `aws-fsx` prefix.
+    #
+    #   * If you do not provide a destination in `AuditLogDestination`,
+    #     Amazon FSx will create and use a log stream in the CloudWatch Logs
+    #     `/aws/fsx/windows` log group.
+    #
+    #   * If `AuditLogDestination` is provided and the resource does not
+    #     exist, the request will fail with a `BadRequest` error.
+    #
+    #   * If `FileAccessAuditLogLevel` and `FileShareAccessAuditLogLevel`
+    #     are both set to `DISABLED`, you cannot specify a destination in
+    #     `AuditLogDestination`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/WindowsAuditLogCreateConfiguration AWS API Documentation
+    #
+    class WindowsAuditLogCreateConfiguration < Struct.new(
+      :file_access_audit_log_level,
+      :file_share_access_audit_log_level,
+      :audit_log_destination)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4014,6 +4201,12 @@ module Aws::FSx
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html
     #   @return [Array<Types::Alias>]
     #
+    # @!attribute [rw] audit_log_configuration
+    #   The configuration that Amazon FSx for Windows File Server uses to
+    #   audit and log user accesses of files, folders, and file shares on
+    #   the Amazon FSx for Windows File Server file system.
+    #   @return [Types::WindowsAuditLogConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/WindowsFileSystemConfiguration AWS API Documentation
     #
     class WindowsFileSystemConfiguration < Struct.new(
@@ -4029,7 +4222,8 @@ module Aws::FSx
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
       :copy_tags_to_backups,
-      :aliases)
+      :aliases,
+      :audit_log_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

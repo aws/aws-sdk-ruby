@@ -27,6 +27,10 @@ module Aws::Kendra
     BatchDeleteDocumentResponse = Shapes::StructureShape.new(name: 'BatchDeleteDocumentResponse')
     BatchDeleteDocumentResponseFailedDocument = Shapes::StructureShape.new(name: 'BatchDeleteDocumentResponseFailedDocument')
     BatchDeleteDocumentResponseFailedDocuments = Shapes::ListShape.new(name: 'BatchDeleteDocumentResponseFailedDocuments')
+    BatchGetDocumentStatusRequest = Shapes::StructureShape.new(name: 'BatchGetDocumentStatusRequest')
+    BatchGetDocumentStatusResponse = Shapes::StructureShape.new(name: 'BatchGetDocumentStatusResponse')
+    BatchGetDocumentStatusResponseError = Shapes::StructureShape.new(name: 'BatchGetDocumentStatusResponseError')
+    BatchGetDocumentStatusResponseErrors = Shapes::ListShape.new(name: 'BatchGetDocumentStatusResponseErrors')
     BatchPutDocumentRequest = Shapes::StructureShape.new(name: 'BatchPutDocumentRequest')
     BatchPutDocumentResponse = Shapes::StructureShape.new(name: 'BatchPutDocumentResponse')
     BatchPutDocumentResponseFailedDocument = Shapes::StructureShape.new(name: 'BatchPutDocumentResponseFailedDocument')
@@ -131,6 +135,8 @@ module Aws::Kendra
     DocumentAttributeValueType = Shapes::StringShape.new(name: 'DocumentAttributeValueType')
     DocumentId = Shapes::StringShape.new(name: 'DocumentId')
     DocumentIdList = Shapes::ListShape.new(name: 'DocumentIdList')
+    DocumentInfo = Shapes::StructureShape.new(name: 'DocumentInfo')
+    DocumentInfoList = Shapes::ListShape.new(name: 'DocumentInfoList')
     DocumentList = Shapes::ListShape.new(name: 'DocumentList')
     DocumentMetadataBoolean = Shapes::BooleanShape.new(name: 'DocumentMetadataBoolean')
     DocumentMetadataConfiguration = Shapes::StructureShape.new(name: 'DocumentMetadataConfiguration')
@@ -138,6 +144,8 @@ module Aws::Kendra
     DocumentMetadataConfigurationName = Shapes::StringShape.new(name: 'DocumentMetadataConfigurationName')
     DocumentRelevanceConfiguration = Shapes::StructureShape.new(name: 'DocumentRelevanceConfiguration')
     DocumentRelevanceOverrideConfigurationList = Shapes::ListShape.new(name: 'DocumentRelevanceOverrideConfigurationList')
+    DocumentStatus = Shapes::StringShape.new(name: 'DocumentStatus')
+    DocumentStatusList = Shapes::ListShape.new(name: 'DocumentStatusList')
     DocumentsMetadataConfiguration = Shapes::StructureShape.new(name: 'DocumentsMetadataConfiguration')
     Duration = Shapes::StringShape.new(name: 'Duration')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
@@ -290,6 +298,7 @@ module Aws::Kendra
     SqlConfiguration = Shapes::StructureShape.new(name: 'SqlConfiguration')
     StartDataSourceSyncJobRequest = Shapes::StructureShape.new(name: 'StartDataSourceSyncJobRequest')
     StartDataSourceSyncJobResponse = Shapes::StructureShape.new(name: 'StartDataSourceSyncJobResponse')
+    Status = Shapes::StructureShape.new(name: 'Status')
     StopDataSourceSyncJobRequest = Shapes::StructureShape.new(name: 'StopDataSourceSyncJobRequest')
     StorageCapacityUnit = Shapes::IntegerShape.new(name: 'StorageCapacityUnit')
     String = Shapes::StringShape.new(name: 'String')
@@ -391,6 +400,21 @@ module Aws::Kendra
     BatchDeleteDocumentResponseFailedDocument.struct_class = Types::BatchDeleteDocumentResponseFailedDocument
 
     BatchDeleteDocumentResponseFailedDocuments.member = Shapes::ShapeRef.new(shape: BatchDeleteDocumentResponseFailedDocument)
+
+    BatchGetDocumentStatusRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    BatchGetDocumentStatusRequest.add_member(:document_info_list, Shapes::ShapeRef.new(shape: DocumentInfoList, required: true, location_name: "DocumentInfoList"))
+    BatchGetDocumentStatusRequest.struct_class = Types::BatchGetDocumentStatusRequest
+
+    BatchGetDocumentStatusResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchGetDocumentStatusResponseErrors, location_name: "Errors"))
+    BatchGetDocumentStatusResponse.add_member(:document_status_list, Shapes::ShapeRef.new(shape: DocumentStatusList, location_name: "DocumentStatusList"))
+    BatchGetDocumentStatusResponse.struct_class = Types::BatchGetDocumentStatusResponse
+
+    BatchGetDocumentStatusResponseError.add_member(:document_id, Shapes::ShapeRef.new(shape: DocumentId, location_name: "DocumentId"))
+    BatchGetDocumentStatusResponseError.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    BatchGetDocumentStatusResponseError.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    BatchGetDocumentStatusResponseError.struct_class = Types::BatchGetDocumentStatusResponseError
+
+    BatchGetDocumentStatusResponseErrors.member = Shapes::ShapeRef.new(shape: BatchGetDocumentStatusResponseError)
 
     BatchPutDocumentRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     BatchPutDocumentRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
@@ -785,6 +809,12 @@ module Aws::Kendra
 
     DocumentIdList.member = Shapes::ShapeRef.new(shape: DocumentId)
 
+    DocumentInfo.add_member(:document_id, Shapes::ShapeRef.new(shape: DocumentId, required: true, location_name: "DocumentId"))
+    DocumentInfo.add_member(:attributes, Shapes::ShapeRef.new(shape: DocumentAttributeList, location_name: "Attributes"))
+    DocumentInfo.struct_class = Types::DocumentInfo
+
+    DocumentInfoList.member = Shapes::ShapeRef.new(shape: DocumentInfo)
+
     DocumentList.member = Shapes::ShapeRef.new(shape: Document)
 
     DocumentMetadataConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: DocumentMetadataConfigurationName, required: true, location_name: "Name"))
@@ -800,6 +830,8 @@ module Aws::Kendra
     DocumentRelevanceConfiguration.struct_class = Types::DocumentRelevanceConfiguration
 
     DocumentRelevanceOverrideConfigurationList.member = Shapes::ShapeRef.new(shape: DocumentRelevanceConfiguration)
+
+    DocumentStatusList.member = Shapes::ShapeRef.new(shape: Status)
 
     DocumentsMetadataConfiguration.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "S3Prefix"))
     DocumentsMetadataConfiguration.struct_class = Types::DocumentsMetadataConfiguration
@@ -1178,6 +1210,12 @@ module Aws::Kendra
     StartDataSourceSyncJobResponse.add_member(:execution_id, Shapes::ShapeRef.new(shape: String, location_name: "ExecutionId"))
     StartDataSourceSyncJobResponse.struct_class = Types::StartDataSourceSyncJobResponse
 
+    Status.add_member(:document_id, Shapes::ShapeRef.new(shape: DocumentId, location_name: "DocumentId"))
+    Status.add_member(:document_status, Shapes::ShapeRef.new(shape: DocumentStatus, location_name: "DocumentStatus"))
+    Status.add_member(:failure_code, Shapes::ShapeRef.new(shape: String, location_name: "FailureCode"))
+    Status.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "FailureReason"))
+    Status.struct_class = Types::Status
+
     StopDataSourceSyncJobRequest.add_member(:id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location_name: "Id"))
     StopDataSourceSyncJobRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     StopDataSourceSyncJobRequest.struct_class = Types::StopDataSourceSyncJobRequest
@@ -1337,6 +1375,20 @@ module Aws::Kendra
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: BatchDeleteDocumentRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchDeleteDocumentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:batch_get_document_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetDocumentStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetDocumentStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetDocumentStatusResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

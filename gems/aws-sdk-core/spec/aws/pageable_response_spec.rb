@@ -20,7 +20,8 @@ module Aws
 
       let(:options) {{
         tokens: {
-          'next_token' => 'offset'
+          'next_token' => 'offset',
+          'other_token' => 'token'
         }
       }}
 
@@ -76,6 +77,40 @@ module Aws
         resp.next_page
       end
 
+      it 'removes previous tokens on subsequent #next_page calls' do
+        client = double('client')
+        request_1 = double('new-request')
+        request_2 = double('new-new-request')
+
+        resp.data = { 'next_token' => 'OFFSET', 'other_token' => 'TOKEN' }
+        resp.context.client = client
+        resp.context.operation_name = 'operation-name'
+
+        expect(client).to receive(:build_request).
+          with('operation-name', { :offset => 'OFFSET', :token => 'TOKEN' }).
+          and_return(request_1)
+
+        context = Seahorse::Client::RequestContext.new(
+          params: { :offset => 'OFFSET', :token => 'TOKEN' }
+        )
+        new_resp = pageable(Seahorse::Client::Response.new(context: context), pager)
+        new_resp.data = { 'next_token' => 'OFFSET' }
+        new_resp.context.client = client
+        new_resp.context.operation_name = 'operation-name'
+
+        expect(request_1).to receive(:send_request).and_return(new_resp)
+
+        second_page = resp.next_page
+
+        expect(client).to receive(:build_request).
+          with('operation-name', { :offset => 'OFFSET' }).
+          and_return(request_2)
+
+        expect(request_2).to receive(:send_request).
+          and_return(Seahorse::Client::Response.new)
+
+        second_page.next_page
+      end
     end
 
     describe 'paging with multiple tokens' do

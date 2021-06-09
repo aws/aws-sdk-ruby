@@ -651,6 +651,9 @@ module Aws::FSx
     #   resp.backup.file_system.windows_configuration.aliases #=> Array
     #   resp.backup.file_system.windows_configuration.aliases[0].name #=> String
     #   resp.backup.file_system.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.backup.file_system.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.backup.file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.backup.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.backup.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -869,6 +872,9 @@ module Aws::FSx
     #   resp.backup.file_system.windows_configuration.aliases #=> Array
     #   resp.backup.file_system.windows_configuration.aliases[0].name #=> String
     #   resp.backup.file_system.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.backup.file_system.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.backup.file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.backup.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.backup.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -1267,6 +1273,11 @@ module Aws::FSx
     #       automatic_backup_retention_days: 1,
     #       copy_tags_to_backups: false,
     #       aliases: ["AlternateDNSName"],
+    #       audit_log_configuration: {
+    #         file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #         file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #         audit_log_destination: "GeneralARN",
+    #       },
     #     },
     #     lustre_configuration: {
     #       weekly_maintenance_start_time: "WeeklyTime",
@@ -1326,6 +1337,9 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.aliases #=> Array
     #   resp.file_system.windows_configuration.aliases[0].name #=> String
     #   resp.file_system.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.file_system.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -1562,6 +1576,11 @@ module Aws::FSx
     #       automatic_backup_retention_days: 1,
     #       copy_tags_to_backups: false,
     #       aliases: ["AlternateDNSName"],
+    #       audit_log_configuration: {
+    #         file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #         file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #         audit_log_destination: "GeneralARN",
+    #       },
     #     },
     #     lustre_configuration: {
     #       weekly_maintenance_start_time: "WeeklyTime",
@@ -1623,6 +1642,9 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.aliases #=> Array
     #   resp.file_system.windows_configuration.aliases[0].name #=> String
     #   resp.file_system.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.file_system.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -1988,6 +2010,9 @@ module Aws::FSx
     #   resp.backups[0].file_system.windows_configuration.aliases #=> Array
     #   resp.backups[0].file_system.windows_configuration.aliases[0].name #=> String
     #   resp.backups[0].file_system.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.backups[0].file_system.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.backups[0].file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.backups[0].file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.backups[0].file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -2327,6 +2352,9 @@ module Aws::FSx
     #   resp.file_systems[0].windows_configuration.aliases #=> Array
     #   resp.file_systems[0].windows_configuration.aliases[0].name #=> String
     #   resp.file_systems[0].windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.file_systems[0].windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.file_systems[0].windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.file_systems[0].windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.file_systems[0].lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.import_path #=> String
@@ -2599,6 +2627,8 @@ module Aws::FSx
     # For Amazon FSx for Windows File Server file systems, you can update
     # the following properties:
     #
+    # * AuditLogConfiguration
+    #
     # * AutomaticBackupRetentionDays
     #
     # * DailyAutomaticBackupStartTime
@@ -2745,6 +2775,11 @@ module Aws::FSx
     #         password: "DirectoryPassword",
     #         dns_ips: ["IpAddress"],
     #       },
+    #       audit_log_configuration: {
+    #         file_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #         file_share_access_audit_log_level: "DISABLED", # required, accepts DISABLED, SUCCESS_ONLY, FAILURE_ONLY, SUCCESS_AND_FAILURE
+    #         audit_log_destination: "GeneralARN",
+    #       },
     #     },
     #     lustre_configuration: {
     #       weekly_maintenance_start_time: "WeeklyTime",
@@ -2797,6 +2832,9 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.aliases #=> Array
     #   resp.file_system.windows_configuration.aliases[0].name #=> String
     #   resp.file_system.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.file_system.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
@@ -2842,7 +2880,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

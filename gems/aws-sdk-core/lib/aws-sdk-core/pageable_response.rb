@@ -115,6 +115,11 @@ module Aws
     # @return [Hash] Returns the hash of request parameters for the
     #   next page, merging any given params.
     def next_page_params(params)
+      # Remove all previous tokens from original params
+      # Sometimes a token can be nil and merge would not include it.
+      @pager.tokens.each do |_k, v|
+        context[:original_params].delete(v.to_sym)
+      end
       context[:original_params].merge(@pager.next_tokens(self).merge(params))
     end
 

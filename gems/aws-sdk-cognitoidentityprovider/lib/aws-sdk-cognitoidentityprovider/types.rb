@@ -5664,8 +5664,6 @@ module Aws::CognitoIdentityProvider
     #     * jwks\_uri *if not available from discovery URL specified by
     #       oidc\_issuer key*
     #
-    #     * authorize\_scopes
-    #
     #   * For SAML providers:
     #
     #     * MetadataFile OR MetadataURL
@@ -10348,6 +10346,24 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] sms_configuration_failure
     #   The reason why the SMS configuration cannot send the messages to
     #   your users.
+    #
+    #   This message might include comma-separated values to describe why
+    #   your SMS configuration can't send messages to user pool end users.
+    #
+    #   * InvalidSmsRoleAccessPolicyException - The IAM role which Cognito
+    #     uses to send SMS messages is not properly configured. For more
+    #     information, see [SmsConfigurationType][1].
+    #
+    #   * SNSSandbox - The AWS account is in SNS Sandbox and messages won’t
+    #     reach unverified end users. This parameter won’t get populated
+    #     with SNSSandbox if the IAM user creating the user pool doesn’t
+    #     have SNS permissions. To learn how to move your AWS account out of
+    #     the sandbox, see [Moving out of the SMS sandbox][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SmsConfigurationType.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox-moving-to-production.html
     #   @return [String]
     #
     # @!attribute [rw] email_configuration_failure

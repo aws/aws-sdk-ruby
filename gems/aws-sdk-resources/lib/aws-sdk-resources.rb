@@ -208,6 +208,7 @@ module Aws
   autoload :Polly, 'aws-sdk-polly'
   autoload :Pricing, 'aws-sdk-pricing'
   autoload :PrometheusService, 'aws-sdk-prometheusservice'
+  autoload :Proton, 'aws-sdk-proton'
   autoload :QLDB, 'aws-sdk-qldb'
   autoload :QLDBSession, 'aws-sdk-qldbsession'
   autoload :QuickSight, 'aws-sdk-quicksight'

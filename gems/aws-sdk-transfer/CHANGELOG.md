@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2021-06-09)
+------------------
+
+* Feature - Documentation updates for the AWS Transfer Family service.
+
 1.33.0 (2021-05-25)
 ------------------
 

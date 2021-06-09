@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2021-06-08)
+------------------
+
+* Feature - Documentation updates for cognito-idp
+
 1.51.0 (2021-04-22)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2021-06-08)
+------------------
+
+* Feature - increase max pagesize for List/Search apis
+
 1.59.0 (2021-03-10)
 ------------------
 

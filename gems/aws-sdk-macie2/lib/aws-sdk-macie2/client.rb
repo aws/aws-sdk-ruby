@@ -454,7 +454,7 @@ module Aws::Macie2
     #             {
     #               simple_scope_term: {
     #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                 key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
+    #                 key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #                 values: ["__string"],
     #               },
     #               tag_scope_term: {
@@ -476,7 +476,7 @@ module Aws::Macie2
     #             {
     #               simple_scope_term: {
     #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                 key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
+    #                 key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #                 values: ["__string"],
     #               },
     #               tag_scope_term: {
@@ -1079,7 +1079,7 @@ module Aws::Macie2
     #   resp.s3_job_definition.bucket_definitions[0].buckets[0] #=> String
     #   resp.s3_job_definition.scoping.excludes.and #=> Array
     #   resp.s3_job_definition.scoping.excludes.and[0].simple_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
-    #   resp.s3_job_definition.scoping.excludes.and[0].simple_scope_term.key #=> String, one of "BUCKET_CREATION_DATE", "OBJECT_EXTENSION", "OBJECT_LAST_MODIFIED_DATE", "OBJECT_SIZE", "TAG", "OBJECT_KEY"
+    #   resp.s3_job_definition.scoping.excludes.and[0].simple_scope_term.key #=> String, one of "OBJECT_EXTENSION", "OBJECT_LAST_MODIFIED_DATE", "OBJECT_SIZE", "OBJECT_KEY"
     #   resp.s3_job_definition.scoping.excludes.and[0].simple_scope_term.values #=> Array
     #   resp.s3_job_definition.scoping.excludes.and[0].simple_scope_term.values[0] #=> String
     #   resp.s3_job_definition.scoping.excludes.and[0].tag_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
@@ -1090,7 +1090,7 @@ module Aws::Macie2
     #   resp.s3_job_definition.scoping.excludes.and[0].tag_scope_term.target #=> String, one of "S3_OBJECT"
     #   resp.s3_job_definition.scoping.includes.and #=> Array
     #   resp.s3_job_definition.scoping.includes.and[0].simple_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
-    #   resp.s3_job_definition.scoping.includes.and[0].simple_scope_term.key #=> String, one of "BUCKET_CREATION_DATE", "OBJECT_EXTENSION", "OBJECT_LAST_MODIFIED_DATE", "OBJECT_SIZE", "TAG", "OBJECT_KEY"
+    #   resp.s3_job_definition.scoping.includes.and[0].simple_scope_term.key #=> String, one of "OBJECT_EXTENSION", "OBJECT_LAST_MODIFIED_DATE", "OBJECT_SIZE", "OBJECT_KEY"
     #   resp.s3_job_definition.scoping.includes.and[0].simple_scope_term.values #=> Array
     #   resp.s3_job_definition.scoping.includes.and[0].simple_scope_term.values[0] #=> String
     #   resp.s3_job_definition.scoping.includes.and[0].tag_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
@@ -2748,6 +2748,10 @@ module Aws::Macie2
     #
     # @option params [Integer] :position
     #
+    # @option params [String] :client_token
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::UpdateFindingsFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFindingsFilterResponse#arn #arn} => String
@@ -2774,6 +2778,7 @@ module Aws::Macie2
     #     id: "__string", # required
     #     name: "__string",
     #     position: 1,
+    #     client_token: "__string",
     #   })
     #
     # @example Response structure
@@ -2886,7 +2891,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

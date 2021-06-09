@@ -970,7 +970,7 @@ module Aws::Macie2
     #                 {
     #                   simple_scope_term: {
     #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                     key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
+    #                     key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #                     values: ["__string"],
     #                   },
     #                   tag_scope_term: {
@@ -992,7 +992,7 @@ module Aws::Macie2
     #                 {
     #                   simple_scope_term: {
     #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                     key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
+    #                     key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #                     values: ["__string"],
     #                   },
     #                   tag_scope_term: {
@@ -1642,9 +1642,9 @@ module Aws::Macie2
     #   @return [String]
     #
     # @!attribute [rw] occurrences
-    #   Provides the location of 1-15 occurrences of sensitive data that was
-    #   detected by managed data identifiers or a custom data identifier and
-    #   produced a sensitive data finding.
+    #   Specifies the location of 1-15 occurrences of sensitive data that
+    #   was detected by managed data identifiers or a custom data identifier
+    #   and produced a sensitive data finding.
     #   @return [Types::Occurrences]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CustomDetection AWS API Documentation
@@ -1710,9 +1710,9 @@ module Aws::Macie2
     #   @return [Integer]
     #
     # @!attribute [rw] occurrences
-    #   Provides the location of 1-15 occurrences of sensitive data that was
-    #   detected by managed data identifiers or a custom data identifier and
-    #   produced a sensitive data finding.
+    #   Specifies the location of 1-15 occurrences of sensitive data that
+    #   was detected by managed data identifiers or a custom data identifier
+    #   and produced a sensitive data finding.
     #   @return [Types::Occurrences]
     #
     # @!attribute [rw] type
@@ -3512,7 +3512,9 @@ module Aws::Macie2
     end
 
     # Specifies a property- or tag-based condition that defines criteria for
-    # including or excluding S3 objects from a classification job.
+    # including or excluding S3 objects from a classification job. A
+    # JobScopeTerm object can contain only one simpleScopeTerm object or one
+    # tagScopeTerm object.
     #
     # @note When making an API call, you may pass JobScopeTerm
     #   data as a hash:
@@ -3520,7 +3522,7 @@ module Aws::Macie2
     #       {
     #         simple_scope_term: {
     #           comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #           key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
+    #           key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #           values: ["__string"],
     #         },
     #         tag_scope_term: {
@@ -3543,9 +3545,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] tag_scope_term
     #   Specifies a tag-based condition that determines whether an S3 object
-    #   is included or excluded from a classification job. Tag keys and
-    #   values are case sensitive. Also, Amazon Macie doesn't support use
-    #   of partial values or wildcard characters in tag-based conditions.
+    #   is included or excluded from a classification job.
     #   @return [Types::TagScopeTerm]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/JobScopeTerm AWS API Documentation
@@ -3569,7 +3569,7 @@ module Aws::Macie2
     #           {
     #             simple_scope_term: {
     #               comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #               key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
+    #               key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #               values: ["__string"],
     #             },
     #             tag_scope_term: {
@@ -4426,7 +4426,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides the location of 1-15 occurrences of sensitive data that was
+    # Specifies the location of 1-15 occurrences of sensitive data that was
     # detected by managed data identifiers or a custom data identifier and
     # produced a sensitive data finding.
     #
@@ -4474,14 +4474,12 @@ module Aws::Macie2
     #
     # @!attribute [rw] line_range
     #   Provides details about the location of an occurrence of sensitive
-    #   data in an Adobe Portable Document Format file, Microsoft Word
-    #   document, or non-binary text file.
+    #   data in a Microsoft Word document or non-binary text file.
     #   @return [Types::Range]
     #
     # @!attribute [rw] offset_range
     #   Provides details about the location of an occurrence of sensitive
-    #   data in an Adobe Portable Document Format file, Microsoft Word
-    #   document, or non-binary text file.
+    #   data in a Microsoft Word document or non-binary text file.
     #   @return [Types::Range]
     #
     # @!attribute [rw] page_number
@@ -4612,8 +4610,7 @@ module Aws::Macie2
     class PutFindingsPublicationConfigurationResponse < Aws::EmptyStructure; end
 
     # Provides details about the location of an occurrence of sensitive data
-    # in an Adobe Portable Document Format file, Microsoft Word document, or
-    # non-binary text file.
+    # in a Microsoft Word document or non-binary text file.
     #
     # @!attribute [rw] end
     #   @return [Integer]
@@ -4927,7 +4924,7 @@ module Aws::Macie2
     #               {
     #                 simple_scope_term: {
     #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                   key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
+    #                   key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #                   values: ["__string"],
     #                 },
     #                 tag_scope_term: {
@@ -4949,7 +4946,7 @@ module Aws::Macie2
     #               {
     #                 simple_scope_term: {
     #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                   key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
+    #                   key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #                   values: ["__string"],
     #                 },
     #                 tag_scope_term: {
@@ -5112,7 +5109,7 @@ module Aws::Macie2
     #             {
     #               simple_scope_term: {
     #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                 key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
+    #                 key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #                 values: ["__string"],
     #               },
     #               tag_scope_term: {
@@ -5134,7 +5131,7 @@ module Aws::Macie2
     #             {
     #               simple_scope_term: {
     #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                 key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
+    #                 key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #                 values: ["__string"],
     #               },
     #               tag_scope_term: {
@@ -5803,7 +5800,7 @@ module Aws::Macie2
     #
     #       {
     #         comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #         key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
+    #         key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #         values: ["__string"],
     #       }
     #
@@ -5972,9 +5969,7 @@ module Aws::Macie2
     class TagResourceResponse < Aws::EmptyStructure; end
 
     # Specifies a tag-based condition that determines whether an S3 object
-    # is included or excluded from a classification job. Tag keys and values
-    # are case sensitive. Also, Amazon Macie doesn't support use of partial
-    # values or wildcard characters in tag-based conditions.
+    # is included or excluded from a classification job.
     #
     # @note When making an API call, you may pass TagScopeTerm
     #   data as a hash:
@@ -6226,6 +6221,7 @@ module Aws::Macie2
     #         id: "__string", # required
     #         name: "__string",
     #         position: 1,
+    #         client_token: "__string",
     #       }
     #
     # @!attribute [rw] action
@@ -6251,6 +6247,11 @@ module Aws::Macie2
     # @!attribute [rw] position
     #   @return [Integer]
     #
+    # @!attribute [rw] client_token
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateFindingsFilterRequest AWS API Documentation
     #
     class UpdateFindingsFilterRequest < Struct.new(
@@ -6259,7 +6260,8 @@ module Aws::Macie2
       :finding_criteria,
       :id,
       :name,
-      :position)
+      :position,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end

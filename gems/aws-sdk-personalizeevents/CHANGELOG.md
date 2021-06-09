@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2021-06-09)
+------------------
+
+* Feature - Support for unstructured text inputs in the items dataset to to automatically extract key information from product/content description as an input when creating solution versions.
+
 1.17.0 (2021-03-10)
 ------------------
 

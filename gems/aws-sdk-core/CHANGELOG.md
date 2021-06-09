@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Issue - Add `entities` to `UnsafeEnumerableMethods` - responses with `entities` members will now correctly return the member value. This also avoids potentially unexpected fetching of all pages of a result.
 
+3.114.2 (2021-06-09)
+------------------
+
+* Issue - Fixed an issue with `Aws::PageableResponse` where intentionally nil tokens were not merged into the params for the next call.
+
 3.114.1 (2021-06-02)
 ------------------
 

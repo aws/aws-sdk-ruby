@@ -382,6 +382,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Outposts                                          | Aws::Outposts                        | aws-sdk-outposts                        | 2019-12-03  |
 | AWS Performance Insights                              | Aws::PI                              | aws-sdk-pi                              | 2018-02-27  |
 | AWS Price List Service                                | Aws::Pricing                         | aws-sdk-pricing                         | 2017-10-15  |
+| AWS Proton                                            | Aws::Proton                          | aws-sdk-proton                          | 2020-07-20  |
 | AWS RDS DataService                                   | Aws::RDSDataService                  | aws-sdk-rdsdataservice                  | 2018-08-01  |
 | AWS Resource Access Manager                           | Aws::RAM                             | aws-sdk-ram                             | 2018-01-04  |
 | AWS Resource Groups                                   | Aws::ResourceGroups                  | aws-sdk-resourcegroups                  | 2017-11-27  |
