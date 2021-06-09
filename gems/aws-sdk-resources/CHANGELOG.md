@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.105.0 (2021-06-09)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-proton` gem.
+
 3.104.0 (2021-05-18)
 ------------------
 

@@ -65,16 +65,17 @@ module Aws::Transfer
     #   The landing directory (folder) for a user when they log in to the
     #   server using the client.
     #
-    #   A `HomeDirectory` example is `/directory_name/home/mydirectory`.
+    #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #   @return [String]
     #
     # @!attribute [rw] home_directory_type
-    #   The type of landing directory (folder) that you want your users'
-    #   home directory to be when they log in to the server. If you set it
-    #   to `PATH`, the user will see the absolute Amazon S3 bucket paths as
-    #   is in their file transfer protocol clients. If you set it `LOGICAL`,
-    #   you must provide mappings in the `HomeDirectoryMappings` for how you
-    #   want to make Amazon S3 paths visible to your users.
+    #   The type of landing directory (folder) you want your users' home
+    #   directory to be when they log into the server. If you set it to
+    #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
+    #   as is in their file transfer protocol clients. If you set it
+    #   `LOGICAL`, you will need to provide mappings in the
+    #   `HomeDirectoryMappings` for how you want to make Amazon S3 or EFS
+    #   paths visible to your users.
     #   @return [String]
     #
     # @!attribute [rw] home_directory_mappings
@@ -115,8 +116,6 @@ module Aws::Transfer
     #   folder.
     #
     #    </note>
-    #
-    #   Required: No
     #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] policy
@@ -127,7 +126,7 @@ module Aws::Transfer
     #   `$\{Transfer:HomeDirectory\}`, and `$\{Transfer:HomeBucket\}`.
     #
     #   <note markdown="1"> This only applies when domain of `ServerId` is S3. Amazon EFS does
-    #   not use scope down policy.
+    #   not use scope-down policies.
     #
     #    For scope-down policies, AWS Transfer Family stores the policy as a
     #   JSON blob, instead of the Amazon Resource Name (ARN) of the policy.
@@ -158,13 +157,14 @@ module Aws::Transfer
     #   @return [Types::PosixProfile]
     #
     # @!attribute [rw] role
-    #   Specifies the IAM role that controls your users' access to your
-    #   Amazon S3 bucket or EFS file system. The policies attached to this
-    #   role determine the level of access that you want to provide your
-    #   users when transferring files into and out of your Amazon S3 bucket
-    #   or EFS file system. The IAM role should also contain a trust
-    #   relationship that allows the server to access your resources when
-    #   servicing your users' transfer requests.
+    #   Specifies the Amazon Resource Name (ARN) of the IAM role that
+    #   controls your users' access to your Amazon S3 bucket or EFS file
+    #   system. The policies attached to this role determine the level of
+    #   access that you want to provide your users when transferring files
+    #   into and out of your Amazon S3 bucket or EFS file system. The IAM
+    #   role should also contain a trust relationship that allows the server
+    #   to access your resources when servicing your users' transfer
+    #   requests.
     #   @return [String]
     #
     # @!attribute [rw] server_id
@@ -181,7 +181,7 @@ module Aws::Transfer
     #   using Windows PowerShell.
     #
     #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
-    #   -Properties * | Select SamaccountName,ObjectSid`
+    #   -Properties * | Select SamAccountName,ObjectSid`
     #
     #   In that command, replace *YourGroupName* with the name of your
     #   Active Directory group.
@@ -326,11 +326,11 @@ module Aws::Transfer
     #   within your VPC or choose to make it internet facing by attaching
     #   Elastic IP addresses directly to it.
     #
-    #   <note markdown="1"> After March 31, 2021, you won't be able to create a server using
+    #   <note markdown="1"> After May 19, 2021, you won't be able to create a server using
     #   `EndpointType=VPC_ENDPOINT` in your AWS account if your account
-    #   hasn't already done so before March 31, 2021. If you have already
+    #   hasn't already done so before May 19, 2021. If you have already
     #   created servers with `EndpointType=VPC_ENDPOINT` in your AWS account
-    #   on or before March 31, 2021, you will not be affected. After this
+    #   on or before May 19, 2021, you will not be affected. After this
     #   date, use `EndpointType`=`VPC`.
     #
     #    For more information, see
@@ -501,10 +501,11 @@ module Aws::Transfer
     # @!attribute [rw] home_directory_type
     #   The type of landing directory (folder) you want your users' home
     #   directory to be when they log into the server. If you set it to
-    #   `PATH`, the user will see the absolute Amazon S3 bucket paths as is
-    #   in their file transfer protocol clients. If you set it `LOGICAL`,
-    #   you will need to provide mappings in the `HomeDirectoryMappings` for
-    #   how you want to make Amazon S3 paths visible to your users.
+    #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
+    #   as is in their file transfer protocol clients. If you set it
+    #   `LOGICAL`, you will need to provide mappings in the
+    #   `HomeDirectoryMappings` for how you want to make Amazon S3 or EFS
+    #   paths visible to your users.
     #   @return [String]
     #
     # @!attribute [rw] home_directory_mappings
@@ -544,8 +545,8 @@ module Aws::Transfer
     #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] policy
-    #   A scope-down policy for your user so you can use the same IAM role
-    #   across multiple users. This policy scopes down user access to
+    #   A scope-down policy for your user so that you can use the same IAM
+    #   role across multiple users. This policy scopes down user access to
     #   portions of their Amazon S3 bucket. Variables that you can use
     #   inside this policy include `$\{Transfer:UserName\}`,
     #   `$\{Transfer:HomeDirectory\}`, and `$\{Transfer:HomeBucket\}`.
@@ -582,13 +583,14 @@ module Aws::Transfer
     #   @return [Types::PosixProfile]
     #
     # @!attribute [rw] role
-    #   Specifies the IAM role that controls your users' access to your
-    #   Amazon S3 bucket or EFS file system. The policies attached to this
-    #   role will determine the level of access you want to provide your
-    #   users when transferring files into and out of your Amazon S3 bucket
-    #   or EFS file system. The IAM role should also contain a trust
-    #   relationship that allows the server to access your resources when
-    #   servicing your users' transfer requests.
+    #   Specifies the Amazon Resource Name (ARN) of the IAM role that
+    #   controls your users' access to your Amazon S3 bucket or EFS file
+    #   system. The policies attached to this role determine the level of
+    #   access that you want to provide your users when transferring files
+    #   into and out of your Amazon S3 bucket or EFS file system. The IAM
+    #   role should also contain a trust relationship that allows the server
+    #   to access your resources when servicing your users' transfer
+    #   requests.
     #   @return [String]
     #
     # @!attribute [rw] server_id
@@ -672,7 +674,7 @@ module Aws::Transfer
     #   using Windows PowerShell.
     #
     #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
-    #   -Properties * | Select SamaccountName,ObjectSid`
+    #   -Properties * | Select SamAccountName,ObjectSid`
     #
     #   In that command, replace *YourGroupName* with the name of your
     #   Active Directory group.
@@ -786,14 +788,14 @@ module Aws::Transfer
     #
     # @!attribute [rw] external_id
     #   A unique identifier that is required to identify specific groups
-    #   within your directory. The users of the group you associate have
-    #   access to your Amazon S3 or Amazon EFS resources over the enabled
-    #   protocols using AWS Transfer Family. If you know the group name, you
-    #   can view the SID values by running the following command using
-    #   Windows PowerShell.
+    #   within your directory. The users of the group that you associate
+    #   have access to your Amazon S3 or Amazon EFS resources over the
+    #   enabled protocols using AWS Transfer Family. If you know the group
+    #   name, you can view the SID values by running the following command
+    #   using Windows PowerShell.
     #
     #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
-    #   -Properties * | Select SamaccountName,ObjectSid`
+    #   -Properties * | Select SamAccountName,ObjectSid`
     #
     #   In that command, replace *YourGroupName* with the name of your
     #   Active Directory group.
@@ -945,9 +947,10 @@ module Aws::Transfer
     # Describes the properties of the access that was specified.
     #
     # @!attribute [rw] home_directory
-    #   Specifies the landing directory (or folder), which is the location
-    #   that files are written to or read from in an Amazon S3 bucket, for
-    #   the described access.
+    #   The landing directory (folder) for a user when they log in to the
+    #   server using the client.
+    #
+    #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #   @return [String]
     #
     # @!attribute [rw] home_directory_mappings
@@ -967,21 +970,21 @@ module Aws::Transfer
     #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] home_directory_type
-    #   The type of landing directory (folder) that you want your users'
-    #   home directory to be when they log in to the server. If you set it
-    #   to `PATH`, the user will see the absolute Amazon S3 bucket paths as
-    #   is in their file transfer protocol clients. If you set it to
-    #   `LOGICAL`, you must provide mappings in the `HomeDirectoryMappings`
-    #   for how you want to make Amazon S3 paths visible to your users.
+    #   The type of landing directory (folder) you want your users' home
+    #   directory to be when they log into the server. If you set it to
+    #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
+    #   as is in their file transfer protocol clients. If you set it
+    #   `LOGICAL`, you will need to provide mappings in the
+    #   `HomeDirectoryMappings` for how you want to make Amazon S3 or EFS
+    #   paths visible to your users.
     #   @return [String]
     #
     # @!attribute [rw] policy
-    #   A scope-down policy for your user so that you can use the same AWS
-    #   Identity and Access Management (IAM) role across multiple users.
-    #   This policy scopes down user access to portions of their Amazon S3
-    #   bucket. Variables that you can use inside this policy include
-    #   `$\{Transfer:UserName\}`, `$\{Transfer:HomeDirectory\}`, and
-    #   `$\{Transfer:HomeBucket\}`.
+    #   A scope-down policy for your user so that you can use the same IAM
+    #   role across multiple users. This policy scopes down user access to
+    #   portions of their Amazon S3 bucket. Variables that you can use
+    #   inside this policy include `$\{Transfer:UserName\}`,
+    #   `$\{Transfer:HomeDirectory\}`, and `$\{Transfer:HomeBucket\}`.
     #   @return [String]
     #
     # @!attribute [rw] posix_profile
@@ -994,27 +997,29 @@ module Aws::Transfer
     #   @return [Types::PosixProfile]
     #
     # @!attribute [rw] role
-    #   The IAM role that controls access to your Amazon S3 bucket from the
-    #   specified associated access. The policies attached to this role will
-    #   determine the level of access that you want to provide the
-    #   associated access when transferring files into and out of your
-    #   Amazon S3 bucket or buckets. The IAM role should also contain a
-    #   trust relationship that allows a server to access your resources
-    #   when servicing transfer requests for the associated access.
+    #   Specifies the Amazon Resource Name (ARN) of the IAM role that
+    #   controls your users' access to your Amazon S3 bucket or EFS file
+    #   system. The policies attached to this role determine the level of
+    #   access that you want to provide your users when transferring files
+    #   into and out of your Amazon S3 bucket or EFS file system. The IAM
+    #   role should also contain a trust relationship that allows the server
+    #   to access your resources when servicing your users' transfer
+    #   requests.
     #   @return [String]
     #
     # @!attribute [rw] external_id
-    #   A unique identifier that might be required when you assume a role in
-    #   another account. Think of the `ExternalID` as a group membership
-    #   mechanism that uses a unique identifier (often a SID, but could be a
-    #   group name or something else) as a basis. If the administrator of
-    #   the account to which the role belongs provided you with an external
-    #   ID, then provide that value in the `ExternalId` parameter. A
-    #   cross-account role is usually set up to trust everyone in an
-    #   account. Therefore, the administrator of the trusting account might
-    #   send an external ID to the administrator of the trusted account.
-    #   That way, only someone with the ID can assume the role, rather than
-    #   everyone in the account.
+    #   A unique identifier that is required to identify specific groups
+    #   within your directory. The users of the group that you associate
+    #   have access to your Amazon S3 or Amazon EFS resources over the
+    #   enabled protocols using AWS Transfer Family. If you know the group
+    #   name, you can view the SID values by running the following command
+    #   using Windows PowerShell.
+    #
+    #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
+    #   -Properties * | Select SamAccountName,ObjectSid`
+    #
+    #   In that command, replace *YourGroupName* with the name of your
+    #   Active Directory group.
     #
     #   The regex used to validate this parameter is a string of characters
     #   consisting of uppercase and lowercase alphanumeric characters with
@@ -1224,10 +1229,10 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] home_directory
-    #   Specifies the landing directory (or folder), which is the location
-    #   that files are written to or read from in an Amazon S3 bucket, for
-    #   the described user. An example is <i>
-    #   <code>your-Amazon-S3-bucket-name&gt;/home/username</code> </i>.
+    #   The landing directory (folder) for a user when they log in to the
+    #   server using the client.
+    #
+    #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #   @return [String]
     #
     # @!attribute [rw] home_directory_mappings
@@ -1247,17 +1252,21 @@ module Aws::Transfer
     #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] home_directory_type
-    #   Specifies the type of landing directory (folder) you mapped for your
-    #   users to see when they log into the file transfer protocol-enabled
-    #   server. If you set it to `PATH`, the user will see the absolute
-    #   Amazon S3 bucket or EFS paths as is in their file transfer protocol
-    #   clients. If you set it `LOGICAL`, you will need to provide mappings
-    #   in the `HomeDirectoryMappings` for how you want to make Amazon S3 or
-    #   EFS paths visible to your users.
+    #   The type of landing directory (folder) you want your users' home
+    #   directory to be when they log into the server. If you set it to
+    #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
+    #   as is in their file transfer protocol clients. If you set it
+    #   `LOGICAL`, you will need to provide mappings in the
+    #   `HomeDirectoryMappings` for how you want to make Amazon S3 or EFS
+    #   paths visible to your users.
     #   @return [String]
     #
     # @!attribute [rw] policy
-    #   Specifies the name of the policy in use for the described user.
+    #   A scope-down policy for your user so that you can use the same IAM
+    #   role across multiple users. This policy scopes down user access to
+    #   portions of their Amazon S3 bucket. Variables that you can use
+    #   inside this policy include `$\{Transfer:UserName\}`,
+    #   `$\{Transfer:HomeDirectory\}`, and `$\{Transfer:HomeBucket\}`.
     #   @return [String]
     #
     # @!attribute [rw] posix_profile
@@ -1271,12 +1280,14 @@ module Aws::Transfer
     #   @return [Types::PosixProfile]
     #
     # @!attribute [rw] role
-    #   The IAM role that controls your users' access to your Amazon S3
-    #   bucket. The policies attached to this role will determine the level
-    #   of access you want to provide your users when transferring files
-    #   into and out of your Amazon S3 bucket or buckets. The IAM role
-    #   should also contain a trust relationship that allows a server to
-    #   access your resources when servicing your users' transfer requests.
+    #   Specifies the Amazon Resource Name (ARN) of the IAM role that
+    #   controls your users' access to your Amazon S3 bucket or EFS file
+    #   system. The policies attached to this role determine the level of
+    #   access that you want to provide your users when transferring files
+    #   into and out of your Amazon S3 bucket or EFS file system. The IAM
+    #   role should also contain a trust relationship that allows the server
+    #   to access your resources when servicing your users' transfer
+    #   requests.
     #   @return [String]
     #
     # @!attribute [rw] ssh_public_keys
@@ -1318,12 +1329,12 @@ module Aws::Transfer
     # VPC. To control incoming internet traffic, invoke the `UpdateServer`
     # API and attach an Elastic IP address to your server's endpoint.
     #
-    # <note markdown="1"> After March 31, 2021, you won't be able to create a server using
+    # <note markdown="1"> After May 19, 2021, you won't be able to create a server using
     # `EndpointType=VPC_ENDPOINT` in your AWS account if your account
-    # hasn't already done so before March 31, 2021. If you have already
+    # hasn't already done so before May 19, 2021. If you have already
     # created servers with `EndpointType=VPC_ENDPOINT` in your AWS account
-    # on or before March 31, 2021, you will not be affected. After this
-    # date, use `EndpointType`=`VPC`.
+    # on or before May 19, 2021, you will not be affected. After this date,
+    # use `EndpointType`=`VPC`.
     #
     #  For more information, see
     # https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.
@@ -1866,43 +1877,46 @@ module Aws::Transfer
     # Lists the properties for one or more specified associated accesses.
     #
     # @!attribute [rw] home_directory
-    #   Specifies the landing directory (or folder), which is the location
-    #   that files are written to or read from in an Amazon S3 bucket, for
-    #   the described access.
+    #   The landing directory (folder) for a user when they log in to the
+    #   server using the client.
+    #
+    #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #   @return [String]
     #
     # @!attribute [rw] home_directory_type
-    #   The type of landing directory (folder) that you want your users'
-    #   home directory to be when they log in to the server. If you set it
-    #   to `PATH`, the user will see the absolute Amazon S3 bucket paths as
-    #   is in their file transfer protocol clients. If you set it to
-    #   `LOGICAL`, you must provide mappings in the `HomeDirectoryMappings`
-    #   for how you want to make Amazon S3 paths visible to your users.
+    #   The type of landing directory (folder) you want your users' home
+    #   directory to be when they log into the server. If you set it to
+    #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
+    #   as is in their file transfer protocol clients. If you set it
+    #   `LOGICAL`, you will need to provide mappings in the
+    #   `HomeDirectoryMappings` for how you want to make Amazon S3 or EFS
+    #   paths visible to your users.
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The AWS Identity and Access Management (IAM) role that controls
-    #   access to your Amazon S3 bucket from the specified associated
-    #   access. The policies attached to this role will determine the level
-    #   of access that you want to provide the associated access when
-    #   transferring files into and out of your Amazon S3 bucket or buckets.
-    #   The IAM role should also contain a trust relationship that allows a
-    #   server to access your resources when servicing transfer requests for
-    #   the associated access.
+    #   Specifies the Amazon Resource Name (ARN) of the IAM role that
+    #   controls your users' access to your Amazon S3 bucket or EFS file
+    #   system. The policies attached to this role determine the level of
+    #   access that you want to provide your users when transferring files
+    #   into and out of your Amazon S3 bucket or EFS file system. The IAM
+    #   role should also contain a trust relationship that allows the server
+    #   to access your resources when servicing your users' transfer
+    #   requests.
     #   @return [String]
     #
     # @!attribute [rw] external_id
-    #   A unique identifier that might be required when you assume a role in
-    #   another account. Think of the `ExternalID` as a group membership
-    #   mechanism that uses a unique identifier (often a SID, but could be a
-    #   group name or something else) as a basis. If the administrator of
-    #   the account to which the role belongs provided you with an external
-    #   ID, then provide that value in the `ExternalId` parameter. A
-    #   cross-account role is usually set up to trust everyone in an
-    #   account. Therefore, the administrator of the trusting account might
-    #   send an external ID to the administrator of the trusted account.
-    #   That way, only someone with the ID can assume the role, rather than
-    #   everyone in the account.
+    #   A unique identifier that is required to identify specific groups
+    #   within your directory. The users of the group that you associate
+    #   have access to your Amazon S3 or Amazon EFS resources over the
+    #   enabled protocols using AWS Transfer Family. If you know the group
+    #   name, you can view the SID values by running the following command
+    #   using Windows PowerShell.
+    #
+    #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
+    #   -Properties * | Select SamAccountName,ObjectSid`
+    #
+    #   In that command, replace *YourGroupName* with the name of your
+    #   Active Directory group.
     #
     #   The regex used to validate this parameter is a string of characters
     #   consisting of uppercase and lowercase alphanumeric characters with
@@ -1997,26 +2011,31 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] home_directory
-    #   Specifies the location that files are written to or read from an
-    #   Amazon S3 bucket for the user you specify by their ARN.
+    #   The landing directory (folder) for a user when they log in to the
+    #   server using the client.
+    #
+    #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #   @return [String]
     #
     # @!attribute [rw] home_directory_type
-    #   Specifies the type of landing directory (folder) you mapped for your
-    #   users' home directory. If you set it to `PATH`, the user will see
-    #   the absolute Amazon S3 bucket paths as is in their file transfer
-    #   protocol clients. If you set it `LOGICAL`, you will need to provide
-    #   mappings in the `HomeDirectoryMappings` for how you want to make
-    #   Amazon S3 paths visible to your users.
+    #   The type of landing directory (folder) you want your users' home
+    #   directory to be when they log into the server. If you set it to
+    #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
+    #   as is in their file transfer protocol clients. If you set it
+    #   `LOGICAL`, you will need to provide mappings in the
+    #   `HomeDirectoryMappings` for how you want to make Amazon S3 or EFS
+    #   paths visible to your users.
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   Specifies the role that is in use by this user. A *role* is an AWS
-    #   Identity and Access Management (IAM) entity that, in this case,
-    #   allows a file transfer protocol-enabled server to act on a user's
-    #   behalf. It allows the server to inherit the trust relationship that
-    #   enables that user to perform file operations to their Amazon S3
-    #   bucket.
+    #   Specifies the Amazon Resource Name (ARN) of the IAM role that
+    #   controls your users' access to your Amazon S3 bucket or EFS file
+    #   system. The policies attached to this role determine the level of
+    #   access that you want to provide your users when transferring files
+    #   into and out of your Amazon S3 bucket or EFS file system. The IAM
+    #   role should also contain a trust relationship that allows the server
+    #   to access your resources when servicing your users' transfer
+    #   requests.
     #
     #   <note markdown="1"> The IAM role that controls your users' access to your Amazon S3
     #   bucket for servers with `Domain=S3`, or your EFS file system for
@@ -2434,16 +2453,17 @@ module Aws::Transfer
     #   The landing directory (folder) for a user when they log in to the
     #   server using the client.
     #
-    #   A `HomeDirectory` example is `/directory_name/home/mydirectory`.
+    #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #   @return [String]
     #
     # @!attribute [rw] home_directory_type
-    #   The type of landing directory (folder) that you want your users'
-    #   home directory to be when they log in to the server. If you set it
-    #   to `PATH`, the user will see the absolute Amazon S3 bucket paths as
-    #   is in their file transfer protocol clients. If you set it `LOGICAL`,
-    #   you must provide mappings in the `HomeDirectoryMappings` for how you
-    #   want to make Amazon S3 paths visible to your users.
+    #   The type of landing directory (folder) you want your users' home
+    #   directory to be when they log into the server. If you set it to
+    #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
+    #   as is in their file transfer protocol clients. If you set it
+    #   `LOGICAL`, you will need to provide mappings in the
+    #   `HomeDirectoryMappings` for how you want to make Amazon S3 or EFS
+    #   paths visible to your users.
     #   @return [String]
     #
     # @!attribute [rw] home_directory_mappings
@@ -2484,8 +2504,6 @@ module Aws::Transfer
     #   folder.
     #
     #    </note>
-    #
-    #   Required: No
     #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] policy
@@ -2527,13 +2545,14 @@ module Aws::Transfer
     #   @return [Types::PosixProfile]
     #
     # @!attribute [rw] role
-    #   Specifies the IAM role that controls your users' access to your
-    #   Amazon S3 bucket or EFS file system. The policies attached to this
-    #   role determine the level of access that you want to provide your
-    #   users when transferring files into and out of your Amazon S3 bucket
-    #   or EFS file system. The IAM role should also contain a trust
-    #   relationship that allows the server to access your resources when
-    #   servicing your users' transfer requests.
+    #   Specifies the Amazon Resource Name (ARN) of the IAM role that
+    #   controls your users' access to your Amazon S3 bucket or EFS file
+    #   system. The policies attached to this role determine the level of
+    #   access that you want to provide your users when transferring files
+    #   into and out of your Amazon S3 bucket or EFS file system. The IAM
+    #   role should also contain a trust relationship that allows the server
+    #   to access your resources when servicing your users' transfer
+    #   requests.
     #   @return [String]
     #
     # @!attribute [rw] server_id
@@ -2550,7 +2569,7 @@ module Aws::Transfer
     #   using Windows PowerShell.
     #
     #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
-    #   -Properties * | Select SamaccountName,ObjectSid`
+    #   -Properties * | Select SamAccountName,ObjectSid`
     #
     #   In that command, replace *YourGroupName* with the name of your
     #   Active Directory group.
@@ -2676,11 +2695,11 @@ module Aws::Transfer
     #   within your VPC or choose to make it internet facing by attaching
     #   Elastic IP addresses directly to it.
     #
-    #   <note markdown="1"> After March 31, 2021, you won't be able to create a server using
+    #   <note markdown="1"> After May 19, 2021, you won't be able to create a server using
     #   `EndpointType=VPC_ENDPOINT` in your AWS account if your account
-    #   hasn't already done so before March 31, 2021. If you have already
+    #   hasn't already done so before May 19, 2021. If you have already
     #   created servers with `EndpointType=VPC_ENDPOINT` in your AWS account
-    #   on or before March 31, 2021, you will not be affected. After this
+    #   on or before May 19, 2021, you will not be affected. After this
     #   date, use `EndpointType`=`VPC`.
     #
     #    For more information, see
@@ -2817,10 +2836,10 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] home_directory
-    #   Specifies the landing directory (folder) for a user when they log in
-    #   to the server using their file transfer protocol client.
+    #   The landing directory (folder) for a user when they log in to the
+    #   server using the client.
     #
-    #   An example is `your-Amazon-S3-bucket-name>/home/username`.
+    #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
     #   @return [String]
     #
     # @!attribute [rw] home_directory_type
@@ -2865,13 +2884,16 @@ module Aws::Transfer
     #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] policy
-    #   Allows you to supply a scope-down policy for your user so you can
-    #   use the same IAM role across multiple users. The policy scopes down
-    #   user access to portions of your Amazon S3 bucket. Variables you can
-    #   use inside this policy include `$\{Transfer:UserName\}`,
+    #   A scope-down policy for your user so that you can use the same IAM
+    #   role across multiple users. This policy scopes down user access to
+    #   portions of their Amazon S3 bucket. Variables that you can use
+    #   inside this policy include `$\{Transfer:UserName\}`,
     #   `$\{Transfer:HomeDirectory\}`, and `$\{Transfer:HomeBucket\}`.
     #
-    #   <note markdown="1"> For scope-down policies, AWS Transfer Family stores the policy as a
+    #   <note markdown="1"> This only applies when domain of `ServerId` is S3. Amazon EFS does
+    #   not use scope-down policies.
+    #
+    #    For scope-down policies, AWS Transfer Family stores the policy as a
     #   JSON blob, instead of the Amazon Resource Name (ARN) of the policy.
     #   You save the policy as a JSON blob and pass it in the `Policy`
     #   argument.
@@ -2901,12 +2923,14 @@ module Aws::Transfer
     #   @return [Types::PosixProfile]
     #
     # @!attribute [rw] role
-    #   The IAM role that controls your users' access to your Amazon S3
-    #   bucket. The policies attached to this role determine the level of
-    #   access you want to provide your users when transferring files into
-    #   and out of your S3 bucket or buckets. The IAM role should also
-    #   contain a trust relationship that allows the server to access your
-    #   resources when servicing your users' transfer requests.
+    #   Specifies the Amazon Resource Name (ARN) of the IAM role that
+    #   controls your users' access to your Amazon S3 bucket or EFS file
+    #   system. The policies attached to this role determine the level of
+    #   access that you want to provide your users when transferring files
+    #   into and out of your Amazon S3 bucket or EFS file system. The IAM
+    #   role should also contain a trust relationship that allows the server
+    #   to access your resources when servicing your users' transfer
+    #   requests.
     #   @return [String]
     #
     # @!attribute [rw] server_id

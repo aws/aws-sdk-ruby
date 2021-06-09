@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.466.0 (2021-06-09)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Proton`.
+
 1.465.0 (2021-05-28)
 ------------------
 

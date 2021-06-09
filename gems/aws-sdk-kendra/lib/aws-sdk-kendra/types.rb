@@ -568,6 +568,103 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BatchGetDocumentStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         document_info_list: [ # required
+    #           {
+    #             document_id: "DocumentId", # required
+    #             attributes: [
+    #               {
+    #                 key: "DocumentAttributeKey", # required
+    #                 value: { # required
+    #                   string_value: "DocumentAttributeStringValue",
+    #                   string_list_value: ["String"],
+    #                   long_value: 1,
+    #                   date_value: Time.now,
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index to add documents to. The index ID is
+    #   returned by the [ CreateIndex ][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_CreateIndex.html
+    #   @return [String]
+    #
+    # @!attribute [rw] document_info_list
+    #   A list of `DocumentInfo` objects that identify the documents for
+    #   which to get the status. You identify the documents by their
+    #   document ID and optional attributes.
+    #   @return [Array<Types::DocumentInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/BatchGetDocumentStatusRequest AWS API Documentation
+    #
+    class BatchGetDocumentStatusRequest < Struct.new(
+      :index_id,
+      :document_info_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   A list of documents that Amazon Kendra couldn't get the status for.
+    #   The list includes the ID of the document and the reason that the
+    #   status couldn't be found.
+    #   @return [Array<Types::BatchGetDocumentStatusResponseError>]
+    #
+    # @!attribute [rw] document_status_list
+    #   The status of documents. The status indicates if the document is
+    #   waiting to be indexed, is in the process of indexing, has completed
+    #   indexing, or failed indexing. If a document failed indexing, the
+    #   status provides the reason why.
+    #   @return [Array<Types::Status>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/BatchGetDocumentStatusResponse AWS API Documentation
+    #
+    class BatchGetDocumentStatusResponse < Struct.new(
+      :errors,
+      :document_status_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a response when the status of a document could not be
+    # retrieved.
+    #
+    # @!attribute [rw] document_id
+    #   The unique identifier of the document whose status could not be
+    #   retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   Indicates the source of the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   States that the API could not get the status of a document. This
+    #   could be because the request is not valid or there is a system
+    #   error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/BatchGetDocumentStatusResponseError AWS API Documentation
+    #
+    class BatchGetDocumentStatusResponseError < Struct.new(
+      :document_id,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BatchPutDocumentRequest
     #   data as a hash:
     #
@@ -3739,6 +3836,11 @@ module Aws::Kendra
     #
     # @!attribute [rw] date_value
     #   A date expressed as an ISO 8601 string.
+    #
+    #   It is important for the time zone to be included in the ISO 8601
+    #   date-time format. For example, 20120325T123010+01:00 is the ISO 8601
+    #   date-time format for March 25th 2012 at 12:30PM (plus 10 seconds) in
+    #   Central European Time.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DocumentAttributeValue AWS API Documentation
@@ -3769,6 +3871,61 @@ module Aws::Kendra
     class DocumentAttributeValueCountPair < Struct.new(
       :document_attribute_value,
       :count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies a document for which to retrieve status information
+    #
+    # @note When making an API call, you may pass DocumentInfo
+    #   data as a hash:
+    #
+    #       {
+    #         document_id: "DocumentId", # required
+    #         attributes: [
+    #           {
+    #             key: "DocumentAttributeKey", # required
+    #             value: { # required
+    #               string_value: "DocumentAttributeStringValue",
+    #               string_list_value: ["String"],
+    #               long_value: 1,
+    #               date_value: Time.now,
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] document_id
+    #   The unique identifier of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   Attributes that identify a specific version of a document to check.
+    #
+    #   The only valid attributes are:
+    #
+    #   * version
+    #
+    #   * datasourceId
+    #
+    #   * jobExecutionId
+    #
+    #   The attributes follow these rules:
+    #
+    #   * `dataSourceId` and `jobExecutionId` must be used together.
+    #
+    #   * `version` is ignored if `dataSourceId` and `jobExecutionId` are
+    #     not provided.
+    #
+    #   * If `dataSourceId` and `jobExecutionId` are provided, but `version`
+    #     is not, the version defaults to "0".
+    #   @return [Array<Types::DocumentAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DocumentInfo AWS API Documentation
+    #
+    class DocumentInfo < Struct.new(
+      :document_id,
+      :attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6645,6 +6802,41 @@ module Aws::Kendra
     #
     class StartDataSourceSyncJobResponse < Struct.new(
       :execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the status of documents submitted for
+    # indexing.
+    #
+    # @!attribute [rw] document_id
+    #   The unique identifier of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_status
+    #   The current status of a document.
+    #
+    #   If the document was submitted for deletion, the status is
+    #   `NOT_FOUND` after the document is deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_code
+    #   Indicates the source of the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   Provides detailed information about why the document couldn't be
+    #   indexed. Use this information to correct the error before you
+    #   resubmit the document for indexing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Status AWS API Documentation
+    #
+    class Status < Struct.new(
+      :document_id,
+      :document_status,
+      :failure_code,
+      :failure_reason)
       SENSITIVE = []
       include Aws::Structure
     end

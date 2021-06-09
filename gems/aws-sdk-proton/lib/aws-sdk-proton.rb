@@ -11,15 +11,15 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-kendra/types'
-require_relative 'aws-sdk-kendra/client_api'
-require_relative 'aws-sdk-kendra/client'
-require_relative 'aws-sdk-kendra/errors'
-require_relative 'aws-sdk-kendra/resource'
-require_relative 'aws-sdk-kendra/customizations'
+require_relative 'aws-sdk-proton/types'
+require_relative 'aws-sdk-proton/client_api'
+require_relative 'aws-sdk-proton/client'
+require_relative 'aws-sdk-proton/errors'
+require_relative 'aws-sdk-proton/resource'
+require_relative 'aws-sdk-proton/customizations'
 
-# This module provides support for AWSKendraFrontendService. This module is available in the
-# `aws-sdk-kendra` gem.
+# This module provides support for AWS Proton. This module is available in the
+# `aws-sdk-proton` gem.
 #
 # # Client
 #
@@ -27,27 +27,27 @@ require_relative 'aws-sdk-kendra/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
-#     kendra = Aws::Kendra::Client.new
-#     resp = kendra.batch_delete_document(params)
+#     proton = Aws::Proton::Client.new
+#     resp = proton.accept_environment_account_connection(params)
 #
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWSKendraFrontendService are defined in the
+# Errors returned from AWS Proton are defined in the
 # {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
-#     rescue Aws::Kendra::Errors::ServiceError
-#       # rescues all AWSKendraFrontendService API errors
+#     rescue Aws::Proton::Errors::ServiceError
+#       # rescues all AWS Proton API errors
 #     end
 #
 # See {Errors} for more information.
 #
 # @!group service
-module Aws::Kendra
+module Aws::Proton
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.0.0'
 
 end

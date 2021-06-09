@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2021-06-09)
+------------------
+
+* Feature - AWS Kendra now supports checking document status.
+
 1.25.0 (2021-05-27)
 ------------------
 

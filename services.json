@@ -667,6 +667,9 @@
   "PrometheusService": {
     "models": "amp/2020-08-01"
   },
+  "Proton": {
+    "models": "proton/2020-07-20"
+  },
   "QLDB": {
     "models": "qldb/2019-01-02"
   },

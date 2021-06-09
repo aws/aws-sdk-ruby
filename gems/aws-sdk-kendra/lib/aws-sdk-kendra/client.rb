@@ -384,6 +384,85 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Returns the indexing status for one or more documents submitted with
+    # the [ BatchPutDocument][1] operation.
+    #
+    # When you use the `BatchPutDocument` operation, documents are indexed
+    # asynchronously. You can use the `BatchGetDocumentStatus` operation to
+    # get the current status of a list of documents so that you can
+    # determine if they have been successfully indexed.
+    #
+    # You can also use the `BatchGetDocumentStatus` operation to check the
+    # status of the [ BatchDeleteDocument][2] operation. When a document is
+    # deleted from the index, Amazon Kendra returns `NOT_FOUND` as the
+    # status.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html
+    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/API_BatchDeleteDocument.html
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index to add documents to. The index ID is
+    #   returned by the [ CreateIndex ][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_CreateIndex.html
+    #
+    # @option params [required, Array<Types::DocumentInfo>] :document_info_list
+    #   A list of `DocumentInfo` objects that identify the documents for which
+    #   to get the status. You identify the documents by their document ID and
+    #   optional attributes.
+    #
+    # @return [Types::BatchGetDocumentStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetDocumentStatusResponse#errors #errors} => Array&lt;Types::BatchGetDocumentStatusResponseError&gt;
+    #   * {Types::BatchGetDocumentStatusResponse#document_status_list #document_status_list} => Array&lt;Types::Status&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_document_status({
+    #     index_id: "IndexId", # required
+    #     document_info_list: [ # required
+    #       {
+    #         document_id: "DocumentId", # required
+    #         attributes: [
+    #           {
+    #             key: "DocumentAttributeKey", # required
+    #             value: { # required
+    #               string_value: "DocumentAttributeStringValue",
+    #               string_list_value: ["String"],
+    #               long_value: 1,
+    #               date_value: Time.now,
+    #             },
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].document_id #=> String
+    #   resp.errors[0].error_code #=> String, one of "InternalError", "InvalidRequest"
+    #   resp.errors[0].error_message #=> String
+    #   resp.document_status_list #=> Array
+    #   resp.document_status_list[0].document_id #=> String
+    #   resp.document_status_list[0].document_status #=> String, one of "NOT_FOUND", "PROCESSING", "INDEXED", "UPDATED", "FAILED", "UPDATE_FAILED"
+    #   resp.document_status_list[0].failure_code #=> String
+    #   resp.document_status_list[0].failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/BatchGetDocumentStatus AWS API Documentation
+    #
+    # @overload batch_get_document_status(params = {})
+    # @param [Hash] params ({})
+    def batch_get_document_status(params = {}, options = {})
+      req = build_request(:batch_get_document_status, params)
+      req.send_request(options)
+    end
+
     # Adds one or more documents to an index.
     #
     # The `BatchPutDocument` operation enables you to ingest inline
@@ -3430,7 +3509,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
