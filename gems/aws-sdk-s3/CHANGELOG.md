@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - fix GetBucketLocation location_constraint XML parsing (#2536)
+
 1.96.0 (2021-06-03)
 ------------------
 
