@@ -154,16 +154,8 @@ module Aws
         end
       end
 
-      def entries
-        if data.respond_to?(:entries)
-          data.entries
-        else
-          raise NoMethodError, "undefined method `entries'"
-        end
-      end
-
       def respond_to?(method_name, *args)
-        if [:count, :entries].include?(method_name)
+        if [:count].include?(method_name)
           data.respond_to?(method_name)
         else
           super

@@ -5,7 +5,7 @@ require 'set'
 module AwsSdkCodeGenerator
   class ClientResponseStructureExample
 
-    ENUMERABLE_METHODS = Class.new.new.extend(Enumerable).methods - [:count, :entries]
+    ENUMERABLE_METHODS = Class.new.new.extend(Enumerable).methods - [:count]
 
     # @option options [required, Hash] :shape_ref
     # @option options [required, Hash] :api

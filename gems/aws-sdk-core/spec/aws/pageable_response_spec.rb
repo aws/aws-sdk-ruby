@@ -259,28 +259,5 @@ module Aws
 
     end
 
-    describe '#entries' do
-
-      let(:options) {{
-        tokens: {}
-      }}
-
-      it 'raises not implemented error by default' do
-        data = double('data')
-        resp = Seahorse::Client::Response.new(data:data)
-        page = pageable(resp, pager)
-        expect {
-          page.entries
-        }.to raise_error(NoMethodError)
-      end
-
-      it 'calls entries method on data' do
-        entries = double('entries')
-        data = double('data', entries: entries)
-        resp = Seahorse::Client::Response.new(data:data)
-        page = pageable(resp, pager)
-        expect(page.entries).to eq(entries)
-      end
-    end
   end
 end

@@ -2097,7 +2097,7 @@ module Aws::CloudWatchEvents
     # @return [Types::PutEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutEventsResponse#failed_entry_count #failed_entry_count} => Integer
-    #   * {Types::PutEventsResponse#entries #entries} => Array&lt;Types::PutEventsResultEntry&gt;
+    #   * {Types::PutEventsResponse#entries #data.entries} => Array&lt;Types::PutEventsResultEntry&gt; (This method conflicts with a method on Response, call it through the data member)
     #
     # @example Request syntax with placeholder values
     #
@@ -2118,10 +2118,10 @@ module Aws::CloudWatchEvents
     # @example Response structure
     #
     #   resp.failed_entry_count #=> Integer
-    #   resp.entries #=> Array
-    #   resp.entries[0].event_id #=> String
-    #   resp.entries[0].error_code #=> String
-    #   resp.entries[0].error_message #=> String
+    #   resp.data.entries #=> Array
+    #   resp.data.entries[0].event_id #=> String
+    #   resp.data.entries[0].error_code #=> String
+    #   resp.data.entries[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEvents AWS API Documentation
     #
@@ -2141,7 +2141,7 @@ module Aws::CloudWatchEvents
     # @return [Types::PutPartnerEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutPartnerEventsResponse#failed_entry_count #failed_entry_count} => Integer
-    #   * {Types::PutPartnerEventsResponse#entries #entries} => Array&lt;Types::PutPartnerEventsResultEntry&gt;
+    #   * {Types::PutPartnerEventsResponse#entries #data.entries} => Array&lt;Types::PutPartnerEventsResultEntry&gt; (This method conflicts with a method on Response, call it through the data member)
     #
     # @example Request syntax with placeholder values
     #
@@ -2160,10 +2160,10 @@ module Aws::CloudWatchEvents
     # @example Response structure
     #
     #   resp.failed_entry_count #=> Integer
-    #   resp.entries #=> Array
-    #   resp.entries[0].event_id #=> String
-    #   resp.entries[0].error_code #=> String
-    #   resp.entries[0].error_message #=> String
+    #   resp.data.entries #=> Array
+    #   resp.data.entries[0].event_id #=> String
+    #   resp.data.entries[0].error_code #=> String
+    #   resp.data.entries[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPartnerEvents AWS API Documentation
     #
