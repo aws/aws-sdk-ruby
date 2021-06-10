@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2021-06-10)
+------------------
+
+* Feature - Adding MAP_ALL task type support.
+
 1.10.0 (2021-04-05)
 ------------------
 

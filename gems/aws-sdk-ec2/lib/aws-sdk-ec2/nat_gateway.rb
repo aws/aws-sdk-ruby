@@ -142,6 +142,13 @@ module Aws::EC2
       data[:tags]
     end
 
+    # Indicates whether the NAT gateway supports public or private
+    # connectivity.
+    # @return [String]
+    def connectivity_type
+      data[:connectivity_type]
+    end
+
     # @!endgroup
 
     # @return [Client]

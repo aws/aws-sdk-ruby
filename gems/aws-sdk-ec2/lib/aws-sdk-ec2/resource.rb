@@ -620,6 +620,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   natgateway = ec2.create_nat_gateway({
+    #     allocation_id: "AllocationId",
     #     client_token: "String",
     #     dry_run: false,
     #     subnet_id: "SubnetId", # required
@@ -634,9 +635,15 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
-    #     allocation_id: "AllocationId", # required
+    #     connectivity_type: "private", # accepts private, public
     #   })
     # @param [Hash] options ({})
+    # @option options [String] :allocation_id
+    #   \[Public NAT gateways only\] The allocation ID of an Elastic IP
+    #   address to associate with the NAT gateway. You cannot specify an
+    #   Elastic IP address with a private NAT gateway. If the Elastic IP
+    #   address is associated with another resource, you must first
+    #   disassociate it.
     # @option options [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
@@ -656,10 +663,9 @@ module Aws::EC2
     #   The subnet in which to create the NAT gateway.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the NAT gateway.
-    # @option options [required, String] :allocation_id
-    #   The allocation ID of an Elastic IP address to associate with the NAT
-    #   gateway. If the Elastic IP address is associated with another
-    #   resource, you must first disassociate it.
+    # @option options [String] :connectivity_type
+    #   Indicates whether the NAT gateway supports public or private
+    #   connectivity. The default is public connectivity.
     # @return [NatGateway]
     def create_nat_gateway(options = {})
       resp = @client.create_nat_gateway(options)

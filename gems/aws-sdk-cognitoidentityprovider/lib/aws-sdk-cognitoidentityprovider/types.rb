@@ -3310,6 +3310,7 @@ module Aws::CognitoIdentityProvider
     #           user_data_shared: false,
     #         },
     #         prevent_user_existence_errors: "LEGACY", # accepts LEGACY, ENABLED
+    #         enable_token_revocation: false,
     #       }
     #
     # @!attribute [rw] user_pool_id
@@ -3518,6 +3519,18 @@ module Aws::CognitoIdentityProvider
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] enable_token_revocation
+    #   Enables or disables token revocation. For more information about
+    #   revoking tokens, see [RevokeToken][1].
+    #
+    #   If you don't include this parameter, token revocation is
+    #   automatically enabled for the new user pool client.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_RevokeToken.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolClientRequest AWS API Documentation
     #
     class CreateUserPoolClientRequest < Struct.new(
@@ -3539,7 +3552,8 @@ module Aws::CognitoIdentityProvider
       :allowed_o_auth_scopes,
       :allowed_o_auth_flows_user_pool_client,
       :analytics_configuration,
-      :prevent_user_existence_errors)
+      :prevent_user_existence_errors,
+      :enable_token_revocation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7608,6 +7622,42 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RevokeTokenRequest
+    #   data as a hash:
+    #
+    #       {
+    #         token: "TokenModelType", # required
+    #         client_id: "ClientIdType", # required
+    #         client_secret: "ClientSecretType",
+    #       }
+    #
+    # @!attribute [rw] token
+    #   The token that you want to revoke.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The client ID for the token that you want to revoke.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret
+    #   The secret for the client ID. This is required only if the client ID
+    #   has a secret.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RevokeTokenRequest AWS API Documentation
+    #
+    class RevokeTokenRequest < Struct.new(
+      :token,
+      :client_id,
+      :client_secret)
+      SENSITIVE = [:token, :client_id, :client_secret]
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RevokeTokenResponse AWS API Documentation
+    #
+    class RevokeTokenResponse < Aws::EmptyStructure; end
+
     # The risk configuration type.
     #
     # @!attribute [rw] user_pool_id
@@ -8714,6 +8764,20 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # This exception is thrown when the request is not authorized. This can
+    # happen due to an invalid access token in the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UnauthorizedException AWS API Documentation
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This exception is thrown when the Amazon Cognito service encounters an
     # unexpected exception with the AWS Lambda service.
     #
@@ -8739,6 +8803,34 @@ module Aws::CognitoIdentityProvider
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UnsupportedIdentityProviderException AWS API Documentation
     #
     class UnsupportedIdentityProviderException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This exception is thrown when you attempt to perform an operation that
+    # is not enabled for the user pool client.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UnsupportedOperationException AWS API Documentation
+    #
+    class UnsupportedOperationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This exception is thrown when an unsupported token is passed to an
+    # operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UnsupportedTokenTypeException AWS API Documentation
+    #
+    class UnsupportedTokenTypeException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -9178,6 +9270,7 @@ module Aws::CognitoIdentityProvider
     #           user_data_shared: false,
     #         },
     #         prevent_user_existence_errors: "LEGACY", # accepts LEGACY, ENABLED
+    #         enable_token_revocation: false,
     #       }
     #
     # @!attribute [rw] user_pool_id
@@ -9369,6 +9462,15 @@ module Aws::CognitoIdentityProvider
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] enable_token_revocation
+    #   Enables or disables token revocation. For more information about
+    #   revoking tokens, see [RevokeToken][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_RevokeToken.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolClientRequest AWS API Documentation
     #
     class UpdateUserPoolClientRequest < Struct.new(
@@ -9390,7 +9492,8 @@ module Aws::CognitoIdentityProvider
       :allowed_o_auth_scopes,
       :allowed_o_auth_flows_user_pool_client,
       :analytics_configuration,
-      :prevent_user_existence_errors)
+      :prevent_user_existence_errors,
+      :enable_token_revocation)
       SENSITIVE = [:client_id]
       include Aws::Structure
     end
@@ -10130,6 +10233,17 @@ module Aws::CognitoIdentityProvider
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] enable_token_revocation
+    #   Indicates whether token revocation is enabled for the user pool
+    #   client. When you create a new user pool client, token revocation is
+    #   enabled by default. For more information about revoking tokens, see
+    #   [RevokeToken][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_RevokeToken.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolClientType AWS API Documentation
     #
     class UserPoolClientType < Struct.new(
@@ -10154,7 +10268,8 @@ module Aws::CognitoIdentityProvider
       :allowed_o_auth_scopes,
       :allowed_o_auth_flows_user_pool_client,
       :analytics_configuration,
-      :prevent_user_existence_errors)
+      :prevent_user_existence_errors,
+      :enable_token_revocation)
       SENSITIVE = [:client_id, :client_secret]
       include Aws::Structure
     end

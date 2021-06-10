@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2021-06-10)
+------------------
+
+* Feature - This SDK release adds support for UpdateAccount API to allow users to update their default license on Chime account.
+
 1.46.0 (2021-05-04)
 ------------------
 

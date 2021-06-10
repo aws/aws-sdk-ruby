@@ -4399,6 +4399,8 @@ module Aws::SageMaker
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
     #           kms_key_id: "KmsKeyId",
+    #           preset_deployment_type: "GreengrassV2Component", # accepts GreengrassV2Component
+    #           preset_deployment_config: "String",
     #         },
     #         tags: [
     #           {
@@ -4406,6 +4408,7 @@ module Aws::SageMaker
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         enable_iot_role_alias: false,
     #       }
     #
     # @!attribute [rw] device_fleet_name
@@ -4430,6 +4433,15 @@ module Aws::SageMaker
     #   Creates tags for the specified fleet.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] enable_iot_role_alias
+    #   Whether to create an AWS IoT Role Alias during device fleet
+    #   creation. The name of the role alias generated will match this
+    #   pattern: "SageMakerEdge-\\\{DeviceFleetName\\}".
+    #
+    #   For example, if your device fleet is called "demo-fleet", the name
+    #   of the role alias will be "SageMakerEdge-demo-fleet".
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateDeviceFleetRequest AWS API Documentation
     #
     class CreateDeviceFleetRequest < Struct.new(
@@ -4437,7 +4449,8 @@ module Aws::SageMaker
       :role_arn,
       :description,
       :output_config,
-      :tags)
+      :tags,
+      :enable_iot_role_alias)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4601,6 +4614,8 @@ module Aws::SageMaker
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
     #           kms_key_id: "KmsKeyId",
+    #           preset_deployment_type: "GreengrassV2Component", # accepts GreengrassV2Component
+    #           preset_deployment_config: "String",
     #         },
     #         resource_key: "KmsKeyId",
     #         tags: [
@@ -11784,6 +11799,10 @@ module Aws::SageMaker
     #   The signature document of files in the model artifact.
     #   @return [String]
     #
+    # @!attribute [rw] preset_deployment_output
+    #   The output of a SageMaker Edge Manager deployable resource.
+    #   @return [Types::EdgePresetDeploymentOutput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEdgePackagingJobResponse AWS API Documentation
     #
     class DescribeEdgePackagingJobResponse < Struct.new(
@@ -11800,7 +11819,8 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :model_artifact,
-      :model_signature)
+      :model_signature,
+      :preset_deployment_output)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15330,6 +15350,8 @@ module Aws::SageMaker
     #       {
     #         s3_output_location: "S3Uri", # required
     #         kms_key_id: "KmsKeyId",
+    #         preset_deployment_type: "GreengrassV2Component", # accepts GreengrassV2Component
+    #         preset_deployment_config: "String",
     #       }
     #
     # @!attribute [rw] s3_output_location
@@ -15343,11 +15365,57 @@ module Aws::SageMaker
     #   KMS key for Amazon S3 for your role's account.
     #   @return [String]
     #
+    # @!attribute [rw] preset_deployment_type
+    #   The deployment type SageMaker Edge Manager will create. Currently
+    #   only supports AWS IoT Greengrass Version 2 components.
+    #   @return [String]
+    #
+    # @!attribute [rw] preset_deployment_config
+    #   The configuration used to create deployment artifacts. Specify
+    #   configuration options with a JSON string. The available
+    #   configuration options for each type are:
+    #
+    #   * `ComponentName` (optional) - Name of the GreenGrass V2 component.
+    #     If not specified, the default name generated consists of
+    #     "SagemakerEdgeManager" and the name of your SageMaker Edge
+    #     Manager packaging job.
+    #
+    #   * `ComponentDescription` (optional) - Description of the component.
+    #
+    #   * `ComponentVersion` (optional) - The version of the component.
+    #
+    #     <note markdown="1"> AWS IoT Greengrass uses semantic versions for components. Semantic
+    #     versions follow a<i> major.minor.patch</i> number system. For
+    #     example, version 1.0.0 represents the first major release for a
+    #     component. For more information, see the [semantic version
+    #     specification][1].
+    #
+    #      </note>
+    #
+    #   * `PlatformOS` (optional) - The name of the operating system for the
+    #     platform. Supported platforms include Windows and Linux.
+    #
+    #   * `PlatformArchitecture` (optional) - The processor architecture for
+    #     the platform.
+    #
+    #     Supported architectures Windows include: Windows32\_x86,
+    #     Windows64\_x64.
+    #
+    #     Supported architectures for Linux include: Linux x86\_64, Linux
+    #     ARMV8.
+    #
+    #
+    #
+    #   [1]: https://semver.org/
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EdgeOutputConfig AWS API Documentation
     #
     class EdgeOutputConfig < Struct.new(
       :s3_output_location,
-      :kms_key_id)
+      :kms_key_id,
+      :preset_deployment_type,
+      :preset_deployment_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15397,6 +15465,36 @@ module Aws::SageMaker
       :model_version,
       :creation_time,
       :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The output of a SageMaker Edge Manager deployable resource.
+    #
+    # @!attribute [rw] type
+    #   The deployment type created by SageMaker Edge Manager. Currently
+    #   only supports AWS IoT Greengrass Version 2 components.
+    #   @return [String]
+    #
+    # @!attribute [rw] artifact
+    #   The Amazon Resource Name (ARN) of the generated deployable resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the deployable resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Returns a message describing the status of the deployed resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EdgePresetDeploymentOutput AWS API Documentation
+    #
+    class EdgePresetDeploymentOutput < Struct.new(
+      :type,
+      :artifact,
+      :status,
+      :status_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34114,7 +34212,10 @@ module Aws::SageMaker
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
     #           kms_key_id: "KmsKeyId",
+    #           preset_deployment_type: "GreengrassV2Component", # accepts GreengrassV2Component
+    #           preset_deployment_config: "String",
     #         },
+    #         enable_iot_role_alias: false,
     #       }
     #
     # @!attribute [rw] device_fleet_name
@@ -34133,13 +34234,23 @@ module Aws::SageMaker
     #   Output configuration for storing sample data collected by the fleet.
     #   @return [Types::EdgeOutputConfig]
     #
+    # @!attribute [rw] enable_iot_role_alias
+    #   Whether to create an AWS IoT Role Alias during device fleet
+    #   creation. The name of the role alias generated will match this
+    #   pattern: "SageMakerEdge-\\\{DeviceFleetName\\}".
+    #
+    #   For example, if your device fleet is called "demo-fleet", the name
+    #   of the role alias will be "SageMakerEdge-demo-fleet".
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateDeviceFleetRequest AWS API Documentation
     #
     class UpdateDeviceFleetRequest < Struct.new(
       :device_fleet_name,
       :role_arn,
       :description,
-      :output_config)
+      :output_config,
+      :enable_iot_role_alias)
       SENSITIVE = []
       include Aws::Structure
     end

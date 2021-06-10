@@ -271,6 +271,7 @@ module Aws::EC2
     ConnectionNotificationSet = Shapes::ListShape.new(name: 'ConnectionNotificationSet')
     ConnectionNotificationState = Shapes::StringShape.new(name: 'ConnectionNotificationState')
     ConnectionNotificationType = Shapes::StringShape.new(name: 'ConnectionNotificationType')
+    ConnectivityType = Shapes::StringShape.new(name: 'ConnectivityType')
     ContainerFormat = Shapes::StringShape.new(name: 'ContainerFormat')
     ConversionIdStringList = Shapes::ListShape.new(name: 'ConversionIdStringList')
     ConversionTask = Shapes::StructureShape.new(name: 'ConversionTask')
@@ -3463,11 +3464,12 @@ module Aws::EC2
     CreateManagedPrefixListResult.add_member(:prefix_list, Shapes::ShapeRef.new(shape: ManagedPrefixList, location_name: "prefixList"))
     CreateManagedPrefixListResult.struct_class = Types::CreateManagedPrefixListResult
 
+    CreateNatGatewayRequest.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, location_name: "AllocationId"))
     CreateNatGatewayRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateNatGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateNatGatewayRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "SubnetId"))
     CreateNatGatewayRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
-    CreateNatGatewayRequest.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, required: true, location_name: "AllocationId"))
+    CreateNatGatewayRequest.add_member(:connectivity_type, Shapes::ShapeRef.new(shape: ConnectivityType, location_name: "ConnectivityType"))
     CreateNatGatewayRequest.struct_class = Types::CreateNatGatewayRequest
 
     CreateNatGatewayResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
@@ -8392,6 +8394,7 @@ module Aws::EC2
     NatGateway.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "subnetId"))
     NatGateway.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
     NatGateway.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    NatGateway.add_member(:connectivity_type, Shapes::ShapeRef.new(shape: ConnectivityType, location_name: "connectivityType"))
     NatGateway.struct_class = Types::NatGateway
 
     NatGatewayAddress.add_member(:allocation_id, Shapes::ShapeRef.new(shape: String, location_name: "allocationId"))

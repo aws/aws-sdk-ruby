@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.241.0 (2021-06-10)
+------------------
+
+* Feature - This release adds a new optional parameter connectivityType (public, private) for the CreateNatGateway API. Private NatGateway does not require customers to attach an InternetGateway to the VPC and can be used for communication with other VPCs and on-premise networks.
+
 1.240.0 (2021-06-01)
 ------------------
 

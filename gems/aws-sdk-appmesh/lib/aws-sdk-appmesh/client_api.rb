@@ -46,6 +46,7 @@ module Aws::AppMesh
     CreateVirtualRouterOutput = Shapes::StructureShape.new(name: 'CreateVirtualRouterOutput')
     CreateVirtualServiceInput = Shapes::StructureShape.new(name: 'CreateVirtualServiceInput')
     CreateVirtualServiceOutput = Shapes::StructureShape.new(name: 'CreateVirtualServiceOutput')
+    DefaultGatewayRouteRewrite = Shapes::StringShape.new(name: 'DefaultGatewayRouteRewrite')
     DeleteGatewayRouteInput = Shapes::StructureShape.new(name: 'DeleteGatewayRouteInput')
     DeleteGatewayRouteOutput = Shapes::StructureShape.new(name: 'DeleteGatewayRouteOutput')
     DeleteMeshInput = Shapes::StructureShape.new(name: 'DeleteMeshInput')
@@ -74,17 +75,22 @@ module Aws::AppMesh
     DescribeVirtualRouterOutput = Shapes::StructureShape.new(name: 'DescribeVirtualRouterOutput')
     DescribeVirtualServiceInput = Shapes::StructureShape.new(name: 'DescribeVirtualServiceInput')
     DescribeVirtualServiceOutput = Shapes::StructureShape.new(name: 'DescribeVirtualServiceOutput')
+    DnsResponseType = Shapes::StringShape.new(name: 'DnsResponseType')
     DnsServiceDiscovery = Shapes::StructureShape.new(name: 'DnsServiceDiscovery')
     Duration = Shapes::StructureShape.new(name: 'Duration')
     DurationUnit = Shapes::StringShape.new(name: 'DurationUnit')
     DurationValue = Shapes::IntegerShape.new(name: 'DurationValue')
     EgressFilter = Shapes::StructureShape.new(name: 'EgressFilter')
     EgressFilterType = Shapes::StringShape.new(name: 'EgressFilterType')
+    ExactHostName = Shapes::StringShape.new(name: 'ExactHostName')
     FileAccessLog = Shapes::StructureShape.new(name: 'FileAccessLog')
     FilePath = Shapes::StringShape.new(name: 'FilePath')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     GatewayRouteData = Shapes::StructureShape.new(name: 'GatewayRouteData')
+    GatewayRouteHostnameMatch = Shapes::StructureShape.new(name: 'GatewayRouteHostnameMatch')
+    GatewayRouteHostnameRewrite = Shapes::StructureShape.new(name: 'GatewayRouteHostnameRewrite')
     GatewayRouteList = Shapes::ListShape.new(name: 'GatewayRouteList')
+    GatewayRoutePriority = Shapes::IntegerShape.new(name: 'GatewayRoutePriority')
     GatewayRouteRef = Shapes::StructureShape.new(name: 'GatewayRouteRef')
     GatewayRouteSpec = Shapes::StructureShape.new(name: 'GatewayRouteSpec')
     GatewayRouteStatus = Shapes::StructureShape.new(name: 'GatewayRouteStatus')
@@ -94,6 +100,10 @@ module Aws::AppMesh
     GrpcGatewayRoute = Shapes::StructureShape.new(name: 'GrpcGatewayRoute')
     GrpcGatewayRouteAction = Shapes::StructureShape.new(name: 'GrpcGatewayRouteAction')
     GrpcGatewayRouteMatch = Shapes::StructureShape.new(name: 'GrpcGatewayRouteMatch')
+    GrpcGatewayRouteMetadata = Shapes::StructureShape.new(name: 'GrpcGatewayRouteMetadata')
+    GrpcGatewayRouteMetadataList = Shapes::ListShape.new(name: 'GrpcGatewayRouteMetadataList')
+    GrpcGatewayRouteRewrite = Shapes::StructureShape.new(name: 'GrpcGatewayRouteRewrite')
+    GrpcMetadataMatchMethod = Shapes::StructureShape.new(name: 'GrpcMetadataMatchMethod')
     GrpcRetryPolicy = Shapes::StructureShape.new(name: 'GrpcRetryPolicy')
     GrpcRetryPolicyEvent = Shapes::StringShape.new(name: 'GrpcRetryPolicyEvent')
     GrpcRetryPolicyEvents = Shapes::ListShape.new(name: 'GrpcRetryPolicyEvents')
@@ -114,8 +124,19 @@ module Aws::AppMesh
     Hostname = Shapes::StringShape.new(name: 'Hostname')
     HttpGatewayRoute = Shapes::StructureShape.new(name: 'HttpGatewayRoute')
     HttpGatewayRouteAction = Shapes::StructureShape.new(name: 'HttpGatewayRouteAction')
+    HttpGatewayRouteHeader = Shapes::StructureShape.new(name: 'HttpGatewayRouteHeader')
+    HttpGatewayRouteHeaders = Shapes::ListShape.new(name: 'HttpGatewayRouteHeaders')
     HttpGatewayRouteMatch = Shapes::StructureShape.new(name: 'HttpGatewayRouteMatch')
+    HttpGatewayRoutePathRewrite = Shapes::StructureShape.new(name: 'HttpGatewayRoutePathRewrite')
+    HttpGatewayRoutePrefix = Shapes::StringShape.new(name: 'HttpGatewayRoutePrefix')
+    HttpGatewayRoutePrefixRewrite = Shapes::StructureShape.new(name: 'HttpGatewayRoutePrefixRewrite')
+    HttpGatewayRouteRewrite = Shapes::StructureShape.new(name: 'HttpGatewayRouteRewrite')
     HttpMethod = Shapes::StringShape.new(name: 'HttpMethod')
+    HttpPathExact = Shapes::StringShape.new(name: 'HttpPathExact')
+    HttpPathMatch = Shapes::StructureShape.new(name: 'HttpPathMatch')
+    HttpPathRegex = Shapes::StringShape.new(name: 'HttpPathRegex')
+    HttpQueryParameter = Shapes::StructureShape.new(name: 'HttpQueryParameter')
+    HttpQueryParameters = Shapes::ListShape.new(name: 'HttpQueryParameters')
     HttpRetryPolicy = Shapes::StructureShape.new(name: 'HttpRetryPolicy')
     HttpRetryPolicyEvent = Shapes::StringShape.new(name: 'HttpRetryPolicyEvent')
     HttpRetryPolicyEvents = Shapes::ListShape.new(name: 'HttpRetryPolicyEvents')
@@ -185,6 +206,8 @@ module Aws::AppMesh
     PortNumber = Shapes::IntegerShape.new(name: 'PortNumber')
     PortProtocol = Shapes::StringShape.new(name: 'PortProtocol')
     PortSet = Shapes::ListShape.new(name: 'PortSet')
+    QueryParameterMatch = Shapes::StructureShape.new(name: 'QueryParameterMatch')
+    QueryParameterName = Shapes::StringShape.new(name: 'QueryParameterName')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceMetadata = Shapes::StructureShape.new(name: 'ResourceMetadata')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
@@ -204,6 +227,7 @@ module Aws::AppMesh
     SubjectAlternativeNameList = Shapes::ListShape.new(name: 'SubjectAlternativeNameList')
     SubjectAlternativeNameMatchers = Shapes::StructureShape.new(name: 'SubjectAlternativeNameMatchers')
     SubjectAlternativeNames = Shapes::StructureShape.new(name: 'SubjectAlternativeNames')
+    SuffixHostname = Shapes::StringShape.new(name: 'SuffixHostname')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagList = Shapes::ListShape.new(name: 'TagList')
@@ -589,6 +613,7 @@ module Aws::AppMesh
     DescribeVirtualServiceOutput[:payload_member] = DescribeVirtualServiceOutput.member(:virtual_service)
 
     DnsServiceDiscovery.add_member(:hostname, Shapes::ShapeRef.new(shape: Hostname, required: true, location_name: "hostname"))
+    DnsServiceDiscovery.add_member(:response_type, Shapes::ShapeRef.new(shape: DnsResponseType, location_name: "responseType"))
     DnsServiceDiscovery.struct_class = Types::DnsServiceDiscovery
 
     Duration.add_member(:unit, Shapes::ShapeRef.new(shape: DurationUnit, location_name: "unit"))
@@ -612,6 +637,13 @@ module Aws::AppMesh
     GatewayRouteData.add_member(:virtual_gateway_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "virtualGatewayName"))
     GatewayRouteData.struct_class = Types::GatewayRouteData
 
+    GatewayRouteHostnameMatch.add_member(:exact, Shapes::ShapeRef.new(shape: ExactHostName, location_name: "exact"))
+    GatewayRouteHostnameMatch.add_member(:suffix, Shapes::ShapeRef.new(shape: SuffixHostname, location_name: "suffix"))
+    GatewayRouteHostnameMatch.struct_class = Types::GatewayRouteHostnameMatch
+
+    GatewayRouteHostnameRewrite.add_member(:default_target_hostname, Shapes::ShapeRef.new(shape: DefaultGatewayRouteRewrite, location_name: "defaultTargetHostname"))
+    GatewayRouteHostnameRewrite.struct_class = Types::GatewayRouteHostnameRewrite
+
     GatewayRouteList.member = Shapes::ShapeRef.new(shape: GatewayRouteRef)
 
     GatewayRouteRef.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
@@ -628,6 +660,7 @@ module Aws::AppMesh
     GatewayRouteSpec.add_member(:grpc_route, Shapes::ShapeRef.new(shape: GrpcGatewayRoute, location_name: "grpcRoute"))
     GatewayRouteSpec.add_member(:http2_route, Shapes::ShapeRef.new(shape: HttpGatewayRoute, location_name: "http2Route"))
     GatewayRouteSpec.add_member(:http_route, Shapes::ShapeRef.new(shape: HttpGatewayRoute, location_name: "httpRoute"))
+    GatewayRouteSpec.add_member(:priority, Shapes::ShapeRef.new(shape: GatewayRoutePriority, location_name: "priority"))
     GatewayRouteSpec.struct_class = Types::GatewayRouteSpec
 
     GatewayRouteStatus.add_member(:status, Shapes::ShapeRef.new(shape: GatewayRouteStatusCode, required: true, location_name: "status"))
@@ -643,11 +676,31 @@ module Aws::AppMesh
     GrpcGatewayRoute.add_member(:match, Shapes::ShapeRef.new(shape: GrpcGatewayRouteMatch, required: true, location_name: "match"))
     GrpcGatewayRoute.struct_class = Types::GrpcGatewayRoute
 
+    GrpcGatewayRouteAction.add_member(:rewrite, Shapes::ShapeRef.new(shape: GrpcGatewayRouteRewrite, location_name: "rewrite"))
     GrpcGatewayRouteAction.add_member(:target, Shapes::ShapeRef.new(shape: GatewayRouteTarget, required: true, location_name: "target"))
     GrpcGatewayRouteAction.struct_class = Types::GrpcGatewayRouteAction
 
+    GrpcGatewayRouteMatch.add_member(:hostname, Shapes::ShapeRef.new(shape: GatewayRouteHostnameMatch, location_name: "hostname"))
+    GrpcGatewayRouteMatch.add_member(:metadata, Shapes::ShapeRef.new(shape: GrpcGatewayRouteMetadataList, location_name: "metadata"))
     GrpcGatewayRouteMatch.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, location_name: "serviceName"))
     GrpcGatewayRouteMatch.struct_class = Types::GrpcGatewayRouteMatch
+
+    GrpcGatewayRouteMetadata.add_member(:invert, Shapes::ShapeRef.new(shape: Boolean, location_name: "invert"))
+    GrpcGatewayRouteMetadata.add_member(:match, Shapes::ShapeRef.new(shape: GrpcMetadataMatchMethod, location_name: "match"))
+    GrpcGatewayRouteMetadata.add_member(:name, Shapes::ShapeRef.new(shape: HeaderName, required: true, location_name: "name"))
+    GrpcGatewayRouteMetadata.struct_class = Types::GrpcGatewayRouteMetadata
+
+    GrpcGatewayRouteMetadataList.member = Shapes::ShapeRef.new(shape: GrpcGatewayRouteMetadata)
+
+    GrpcGatewayRouteRewrite.add_member(:hostname, Shapes::ShapeRef.new(shape: GatewayRouteHostnameRewrite, location_name: "hostname"))
+    GrpcGatewayRouteRewrite.struct_class = Types::GrpcGatewayRouteRewrite
+
+    GrpcMetadataMatchMethod.add_member(:exact, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "exact"))
+    GrpcMetadataMatchMethod.add_member(:prefix, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "prefix"))
+    GrpcMetadataMatchMethod.add_member(:range, Shapes::ShapeRef.new(shape: MatchRange, location_name: "range"))
+    GrpcMetadataMatchMethod.add_member(:regex, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "regex"))
+    GrpcMetadataMatchMethod.add_member(:suffix, Shapes::ShapeRef.new(shape: HeaderMatch, location_name: "suffix"))
+    GrpcMetadataMatchMethod.struct_class = Types::GrpcMetadataMatchMethod
 
     GrpcRetryPolicy.add_member(:grpc_retry_events, Shapes::ShapeRef.new(shape: GrpcRetryPolicyEvents, location_name: "grpcRetryEvents"))
     GrpcRetryPolicy.add_member(:http_retry_events, Shapes::ShapeRef.new(shape: HttpRetryPolicyEvents, location_name: "httpRetryEvents"))
@@ -710,11 +763,46 @@ module Aws::AppMesh
     HttpGatewayRoute.add_member(:match, Shapes::ShapeRef.new(shape: HttpGatewayRouteMatch, required: true, location_name: "match"))
     HttpGatewayRoute.struct_class = Types::HttpGatewayRoute
 
+    HttpGatewayRouteAction.add_member(:rewrite, Shapes::ShapeRef.new(shape: HttpGatewayRouteRewrite, location_name: "rewrite"))
     HttpGatewayRouteAction.add_member(:target, Shapes::ShapeRef.new(shape: GatewayRouteTarget, required: true, location_name: "target"))
     HttpGatewayRouteAction.struct_class = Types::HttpGatewayRouteAction
 
-    HttpGatewayRouteMatch.add_member(:prefix, Shapes::ShapeRef.new(shape: String, required: true, location_name: "prefix"))
+    HttpGatewayRouteHeader.add_member(:invert, Shapes::ShapeRef.new(shape: Boolean, location_name: "invert"))
+    HttpGatewayRouteHeader.add_member(:match, Shapes::ShapeRef.new(shape: HeaderMatchMethod, location_name: "match"))
+    HttpGatewayRouteHeader.add_member(:name, Shapes::ShapeRef.new(shape: HeaderName, required: true, location_name: "name"))
+    HttpGatewayRouteHeader.struct_class = Types::HttpGatewayRouteHeader
+
+    HttpGatewayRouteHeaders.member = Shapes::ShapeRef.new(shape: HttpGatewayRouteHeader)
+
+    HttpGatewayRouteMatch.add_member(:headers, Shapes::ShapeRef.new(shape: HttpGatewayRouteHeaders, location_name: "headers"))
+    HttpGatewayRouteMatch.add_member(:hostname, Shapes::ShapeRef.new(shape: GatewayRouteHostnameMatch, location_name: "hostname"))
+    HttpGatewayRouteMatch.add_member(:method, Shapes::ShapeRef.new(shape: HttpMethod, location_name: "method"))
+    HttpGatewayRouteMatch.add_member(:path, Shapes::ShapeRef.new(shape: HttpPathMatch, location_name: "path"))
+    HttpGatewayRouteMatch.add_member(:prefix, Shapes::ShapeRef.new(shape: String, location_name: "prefix"))
+    HttpGatewayRouteMatch.add_member(:query_parameters, Shapes::ShapeRef.new(shape: HttpQueryParameters, location_name: "queryParameters"))
     HttpGatewayRouteMatch.struct_class = Types::HttpGatewayRouteMatch
+
+    HttpGatewayRoutePathRewrite.add_member(:exact, Shapes::ShapeRef.new(shape: HttpPathExact, location_name: "exact"))
+    HttpGatewayRoutePathRewrite.struct_class = Types::HttpGatewayRoutePathRewrite
+
+    HttpGatewayRoutePrefixRewrite.add_member(:default_prefix, Shapes::ShapeRef.new(shape: DefaultGatewayRouteRewrite, location_name: "defaultPrefix"))
+    HttpGatewayRoutePrefixRewrite.add_member(:value, Shapes::ShapeRef.new(shape: HttpGatewayRoutePrefix, location_name: "value"))
+    HttpGatewayRoutePrefixRewrite.struct_class = Types::HttpGatewayRoutePrefixRewrite
+
+    HttpGatewayRouteRewrite.add_member(:hostname, Shapes::ShapeRef.new(shape: GatewayRouteHostnameRewrite, location_name: "hostname"))
+    HttpGatewayRouteRewrite.add_member(:path, Shapes::ShapeRef.new(shape: HttpGatewayRoutePathRewrite, location_name: "path"))
+    HttpGatewayRouteRewrite.add_member(:prefix, Shapes::ShapeRef.new(shape: HttpGatewayRoutePrefixRewrite, location_name: "prefix"))
+    HttpGatewayRouteRewrite.struct_class = Types::HttpGatewayRouteRewrite
+
+    HttpPathMatch.add_member(:exact, Shapes::ShapeRef.new(shape: HttpPathExact, location_name: "exact"))
+    HttpPathMatch.add_member(:regex, Shapes::ShapeRef.new(shape: HttpPathRegex, location_name: "regex"))
+    HttpPathMatch.struct_class = Types::HttpPathMatch
+
+    HttpQueryParameter.add_member(:match, Shapes::ShapeRef.new(shape: QueryParameterMatch, location_name: "match"))
+    HttpQueryParameter.add_member(:name, Shapes::ShapeRef.new(shape: QueryParameterName, required: true, location_name: "name"))
+    HttpQueryParameter.struct_class = Types::HttpQueryParameter
+
+    HttpQueryParameters.member = Shapes::ShapeRef.new(shape: HttpQueryParameter)
 
     HttpRetryPolicy.add_member(:http_retry_events, Shapes::ShapeRef.new(shape: HttpRetryPolicyEvents, location_name: "httpRetryEvents"))
     HttpRetryPolicy.add_member(:max_retries, Shapes::ShapeRef.new(shape: MaxRetries, required: true, location_name: "maxRetries"))
@@ -742,7 +830,9 @@ module Aws::AppMesh
 
     HttpRouteMatch.add_member(:headers, Shapes::ShapeRef.new(shape: HttpRouteHeaders, location_name: "headers"))
     HttpRouteMatch.add_member(:method, Shapes::ShapeRef.new(shape: HttpMethod, location_name: "method"))
-    HttpRouteMatch.add_member(:prefix, Shapes::ShapeRef.new(shape: String, required: true, location_name: "prefix"))
+    HttpRouteMatch.add_member(:path, Shapes::ShapeRef.new(shape: HttpPathMatch, location_name: "path"))
+    HttpRouteMatch.add_member(:prefix, Shapes::ShapeRef.new(shape: String, location_name: "prefix"))
+    HttpRouteMatch.add_member(:query_parameters, Shapes::ShapeRef.new(shape: HttpQueryParameters, location_name: "queryParameters"))
     HttpRouteMatch.add_member(:scheme, Shapes::ShapeRef.new(shape: HttpScheme, location_name: "scheme"))
     HttpRouteMatch.struct_class = Types::HttpRouteMatch
 
@@ -923,6 +1013,9 @@ module Aws::AppMesh
     PortMapping.struct_class = Types::PortMapping
 
     PortSet.member = Shapes::ShapeRef.new(shape: PortNumber)
+
+    QueryParameterMatch.add_member(:exact, Shapes::ShapeRef.new(shape: String, location_name: "exact"))
+    QueryParameterMatch.struct_class = Types::QueryParameterMatch
 
     ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceInUseException.struct_class = Types::ResourceInUseException

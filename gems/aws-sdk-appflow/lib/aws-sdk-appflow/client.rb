@@ -767,7 +767,7 @@ module Aws::Appflow
     #           zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #         },
     #         destination_field: "DestinationField",
-    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Mask, Merge, Truncate, Validate
+    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Truncate, Validate
     #         task_properties: {
     #           "VALUE" => "Property",
     #         },
@@ -1189,7 +1189,7 @@ module Aws::Appflow
     #   resp.tasks[0].connector_operator.veeva #=> String, one of "PROJECTION", "LESS_THAN", "GREATER_THAN", "CONTAINS", "BETWEEN", "LESS_THAN_OR_EQUAL_TO", "GREATER_THAN_OR_EQUAL_TO", "EQUAL_TO", "NOT_EQUAL_TO", "ADDITION", "MULTIPLICATION", "DIVISION", "SUBTRACTION", "MASK_ALL", "MASK_FIRST_N", "MASK_LAST_N", "VALIDATE_NON_NULL", "VALIDATE_NON_ZERO", "VALIDATE_NON_NEGATIVE", "VALIDATE_NUMERIC", "NO_OP"
     #   resp.tasks[0].connector_operator.zendesk #=> String, one of "PROJECTION", "GREATER_THAN", "ADDITION", "MULTIPLICATION", "DIVISION", "SUBTRACTION", "MASK_ALL", "MASK_FIRST_N", "MASK_LAST_N", "VALIDATE_NON_NULL", "VALIDATE_NON_ZERO", "VALIDATE_NON_NEGATIVE", "VALIDATE_NUMERIC", "NO_OP"
     #   resp.tasks[0].destination_field #=> String
-    #   resp.tasks[0].task_type #=> String, one of "Arithmetic", "Filter", "Map", "Mask", "Merge", "Truncate", "Validate"
+    #   resp.tasks[0].task_type #=> String, one of "Arithmetic", "Filter", "Map", "Map_all", "Mask", "Merge", "Truncate", "Validate"
     #   resp.tasks[0].task_properties #=> Hash
     #   resp.tasks[0].task_properties["OperatorPropertiesKeys"] #=> String
     #   resp.created_at #=> Time
@@ -1924,7 +1924,7 @@ module Aws::Appflow
     #           zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #         },
     #         destination_field: "DestinationField",
-    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Mask, Merge, Truncate, Validate
+    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Truncate, Validate
     #         task_properties: {
     #           "VALUE" => "Property",
     #         },
@@ -1958,7 +1958,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

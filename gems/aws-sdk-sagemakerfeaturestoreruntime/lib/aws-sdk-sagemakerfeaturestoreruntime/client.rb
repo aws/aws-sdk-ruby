@@ -327,6 +327,60 @@ module Aws::SageMakerFeatureStoreRuntime
 
     # @!group API Operations
 
+    # Retrieves a batch of `Records` from a `FeatureGroup`.
+    #
+    # @option params [required, Array<Types::BatchGetRecordIdentifier>] :identifiers
+    #   A list of `FeatureGroup` names, with their corresponding
+    #   `RecordIdentifier` value, and Feature name that have been requested to
+    #   be retrieved in batch.
+    #
+    # @return [Types::BatchGetRecordResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetRecordResponse#records #records} => Array&lt;Types::BatchGetRecordResultDetail&gt;
+    #   * {Types::BatchGetRecordResponse#errors #errors} => Array&lt;Types::BatchGetRecordError&gt;
+    #   * {Types::BatchGetRecordResponse#unprocessed_identifiers #unprocessed_identifiers} => Array&lt;Types::BatchGetRecordIdentifier&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_record({
+    #     identifiers: [ # required
+    #       {
+    #         feature_group_name: "FeatureGroupName", # required
+    #         record_identifiers_value_as_string: ["ValueAsString"], # required
+    #         feature_names: ["FeatureName"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.records #=> Array
+    #   resp.records[0].feature_group_name #=> String
+    #   resp.records[0].record_identifier_value_as_string #=> String
+    #   resp.records[0].record #=> Array
+    #   resp.records[0].record[0].feature_name #=> String
+    #   resp.records[0].record[0].value_as_string #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].feature_group_name #=> String
+    #   resp.errors[0].record_identifier_value_as_string #=> String
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #   resp.unprocessed_identifiers #=> Array
+    #   resp.unprocessed_identifiers[0].feature_group_name #=> String
+    #   resp.unprocessed_identifiers[0].record_identifiers_value_as_string #=> Array
+    #   resp.unprocessed_identifiers[0].record_identifiers_value_as_string[0] #=> String
+    #   resp.unprocessed_identifiers[0].feature_names #=> Array
+    #   resp.unprocessed_identifiers[0].feature_names[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/BatchGetRecord AWS API Documentation
+    #
+    # @overload batch_get_record(params = {})
+    # @param [Hash] params ({})
+    def batch_get_record(params = {}, options = {})
+      req = build_request(:batch_get_record, params)
+      req.send_request(options)
+    end
+
     # Deletes a `Record` from a `FeatureGroup`. A new record will show up in
     # the `OfflineStore` when the `DeleteRecord` API is called. This record
     # will have a value of `True` in the `is_deleted` column.
@@ -460,7 +514,7 @@ module Aws::SageMakerFeatureStoreRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakerfeaturestoreruntime'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

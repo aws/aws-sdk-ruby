@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2021-06-10)
+------------------
+
+* Feature - This release supports KMS customer-managed Customer Master Keys (CMKs) on member-specific Hyperledger Fabric resources.
+
 1.22.0 (2021-03-10)
 ------------------
 

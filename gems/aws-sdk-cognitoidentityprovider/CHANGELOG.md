@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2021-06-10)
+------------------
+
+* Feature - Amazon Cognito now supports targeted sign out through refresh token revocation
+
 1.52.0 (2021-06-08)
 ------------------
 

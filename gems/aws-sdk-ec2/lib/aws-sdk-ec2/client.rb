@@ -6515,17 +6515,34 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates a NAT gateway in the specified public subnet. This action
-    # creates a network interface in the specified subnet with a private IP
-    # address from the IP address range of the subnet. Internet-bound
-    # traffic from a private subnet can be routed to the NAT gateway,
-    # therefore enabling instances in the private subnet to connect to the
-    # internet. For more information, see [NAT Gateways][1] in the *Amazon
-    # Virtual Private Cloud User Guide*.
+    # Creates a NAT gateway in the specified subnet. This action creates a
+    # network interface in the specified subnet with a private IP address
+    # from the IP address range of the subnet. You can create either a
+    # public NAT gateway or a private NAT gateway.
+    #
+    # With a public NAT gateway, internet-bound traffic from a private
+    # subnet can be routed to the NAT gateway, so that instances in a
+    # private subnet can connect to the internet.
+    #
+    # With a private NAT gateway, private communication is routed across
+    # VPCs and on-premises networks through a transit gateway or virtual
+    # private gateway. Common use cases include running large workloads
+    # behind a small pool of allowlisted IPv4 addresses, preserving private
+    # IPv4 addresses, and communicating between overlapping networks.
+    #
+    # For more information, see [NAT Gateways][1] in the *Amazon Virtual
+    # Private Cloud User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
+    #
+    # @option params [String] :allocation_id
+    #   \[Public NAT gateways only\] The allocation ID of an Elastic IP
+    #   address to associate with the NAT gateway. You cannot specify an
+    #   Elastic IP address with a private NAT gateway. If the Elastic IP
+    #   address is associated with another resource, you must first
+    #   disassociate it.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -6553,10 +6570,9 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the NAT gateway.
     #
-    # @option params [required, String] :allocation_id
-    #   The allocation ID of an Elastic IP address to associate with the NAT
-    #   gateway. If the Elastic IP address is associated with another
-    #   resource, you must first disassociate it.
+    # @option params [String] :connectivity_type
+    #   Indicates whether the NAT gateway supports public or private
+    #   connectivity. The default is public connectivity.
     #
     # @return [Types::CreateNatGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6593,6 +6609,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_nat_gateway({
+    #     allocation_id: "AllocationId",
     #     client_token: "String",
     #     dry_run: false,
     #     subnet_id: "SubnetId", # required
@@ -6607,7 +6624,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
-    #     allocation_id: "AllocationId", # required
+    #     connectivity_type: "private", # accepts private, public
     #   })
     #
     # @example Response structure
@@ -6634,6 +6651,7 @@ module Aws::EC2
     #   resp.nat_gateway.tags #=> Array
     #   resp.nat_gateway.tags[0].key #=> String
     #   resp.nat_gateway.tags[0].value #=> String
+    #   resp.nat_gateway.connectivity_type #=> String, one of "private", "public"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNatGateway AWS API Documentation
     #
@@ -11888,7 +11906,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Deletes the specified NAT gateway. Deleting a NAT gateway
+    # Deletes the specified NAT gateway. Deleting a public NAT gateway
     # disassociates its Elastic IP address, but does not release the address
     # from your account. Deleting a NAT gateway does not delete any NAT
     # gateway routes in your route tables.
@@ -20543,6 +20561,7 @@ module Aws::EC2
     #   resp.nat_gateways[0].tags #=> Array
     #   resp.nat_gateways[0].tags[0].key #=> String
     #   resp.nat_gateways[0].tags[0].value #=> String
+    #   resp.nat_gateways[0].connectivity_type #=> String, one of "private", "public"
     #   resp.next_token #=> String
     #
     #
@@ -41896,7 +41915,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.240.0'
+      context[:gem_version] = '1.241.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

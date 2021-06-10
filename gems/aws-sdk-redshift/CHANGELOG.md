@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2021-06-10)
+------------------
+
+* Feature - Added InvalidClusterStateFault to the ModifyAquaConfiguration API, thrown when calling the API on a non available cluster.
+
 1.62.0 (2021-04-21)
 ------------------
 

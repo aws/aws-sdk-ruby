@@ -523,9 +523,14 @@ module Aws::SageMaker
     EdgePackagingJobStatus = Shapes::StringShape.new(name: 'EdgePackagingJobStatus')
     EdgePackagingJobSummaries = Shapes::ListShape.new(name: 'EdgePackagingJobSummaries')
     EdgePackagingJobSummary = Shapes::StructureShape.new(name: 'EdgePackagingJobSummary')
+    EdgePresetDeploymentArtifact = Shapes::StringShape.new(name: 'EdgePresetDeploymentArtifact')
+    EdgePresetDeploymentOutput = Shapes::StructureShape.new(name: 'EdgePresetDeploymentOutput')
+    EdgePresetDeploymentStatus = Shapes::StringShape.new(name: 'EdgePresetDeploymentStatus')
+    EdgePresetDeploymentType = Shapes::StringShape.new(name: 'EdgePresetDeploymentType')
     EdgeVersion = Shapes::StringShape.new(name: 'EdgeVersion')
     EfsUid = Shapes::StringShape.new(name: 'EfsUid')
     EnableCapture = Shapes::BooleanShape.new(name: 'EnableCapture')
+    EnableIotRoleAlias = Shapes::BooleanShape.new(name: 'EnableIotRoleAlias')
     EnableSagemakerServicecatalogPortfolioInput = Shapes::StructureShape.new(name: 'EnableSagemakerServicecatalogPortfolioInput')
     EnableSagemakerServicecatalogPortfolioOutput = Shapes::StructureShape.new(name: 'EnableSagemakerServicecatalogPortfolioOutput')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
@@ -1973,6 +1978,7 @@ module Aws::SageMaker
     CreateDeviceFleetRequest.add_member(:description, Shapes::ShapeRef.new(shape: DeviceFleetDescription, location_name: "Description"))
     CreateDeviceFleetRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: EdgeOutputConfig, required: true, location_name: "OutputConfig"))
     CreateDeviceFleetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateDeviceFleetRequest.add_member(:enable_iot_role_alias, Shapes::ShapeRef.new(shape: EnableIotRoleAlias, location_name: "EnableIotRoleAlias"))
     CreateDeviceFleetRequest.struct_class = Types::CreateDeviceFleetRequest
 
     CreateDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
@@ -2874,6 +2880,7 @@ module Aws::SageMaker
     DescribeEdgePackagingJobResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     DescribeEdgePackagingJobResponse.add_member(:model_artifact, Shapes::ShapeRef.new(shape: S3Uri, location_name: "ModelArtifact"))
     DescribeEdgePackagingJobResponse.add_member(:model_signature, Shapes::ShapeRef.new(shape: String, location_name: "ModelSignature"))
+    DescribeEdgePackagingJobResponse.add_member(:preset_deployment_output, Shapes::ShapeRef.new(shape: EdgePresetDeploymentOutput, location_name: "PresetDeploymentOutput"))
     DescribeEdgePackagingJobResponse.struct_class = Types::DescribeEdgePackagingJobResponse
 
     DescribeEndpointConfigInput.add_member(:endpoint_config_name, Shapes::ShapeRef.new(shape: EndpointConfigName, required: true, location_name: "EndpointConfigName"))
@@ -3491,6 +3498,8 @@ module Aws::SageMaker
 
     EdgeOutputConfig.add_member(:s3_output_location, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3OutputLocation"))
     EdgeOutputConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    EdgeOutputConfig.add_member(:preset_deployment_type, Shapes::ShapeRef.new(shape: EdgePresetDeploymentType, location_name: "PresetDeploymentType"))
+    EdgeOutputConfig.add_member(:preset_deployment_config, Shapes::ShapeRef.new(shape: String, location_name: "PresetDeploymentConfig"))
     EdgeOutputConfig.struct_class = Types::EdgeOutputConfig
 
     EdgePackagingJobSummaries.member = Shapes::ShapeRef.new(shape: EdgePackagingJobSummary)
@@ -3504,6 +3513,12 @@ module Aws::SageMaker
     EdgePackagingJobSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     EdgePackagingJobSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     EdgePackagingJobSummary.struct_class = Types::EdgePackagingJobSummary
+
+    EdgePresetDeploymentOutput.add_member(:type, Shapes::ShapeRef.new(shape: EdgePresetDeploymentType, required: true, location_name: "Type"))
+    EdgePresetDeploymentOutput.add_member(:artifact, Shapes::ShapeRef.new(shape: EdgePresetDeploymentArtifact, location_name: "Artifact"))
+    EdgePresetDeploymentOutput.add_member(:status, Shapes::ShapeRef.new(shape: EdgePresetDeploymentStatus, location_name: "Status"))
+    EdgePresetDeploymentOutput.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
+    EdgePresetDeploymentOutput.struct_class = Types::EdgePresetDeploymentOutput
 
     EnableSagemakerServicecatalogPortfolioInput.struct_class = Types::EnableSagemakerServicecatalogPortfolioInput
 
@@ -6069,6 +6084,7 @@ module Aws::SageMaker
     UpdateDeviceFleetRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     UpdateDeviceFleetRequest.add_member(:description, Shapes::ShapeRef.new(shape: DeviceFleetDescription, location_name: "Description"))
     UpdateDeviceFleetRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: EdgeOutputConfig, required: true, location_name: "OutputConfig"))
+    UpdateDeviceFleetRequest.add_member(:enable_iot_role_alias, Shapes::ShapeRef.new(shape: EnableIotRoleAlias, location_name: "EnableIotRoleAlias"))
     UpdateDeviceFleetRequest.struct_class = Types::UpdateDeviceFleetRequest
 
     UpdateDevicesRequest.add_member(:device_fleet_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "DeviceFleetName"))

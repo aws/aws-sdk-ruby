@@ -345,6 +345,8 @@ module Aws::CognitoIdentityProvider
     ResourceServersListType = Shapes::ListShape.new(name: 'ResourceServersListType')
     RespondToAuthChallengeRequest = Shapes::StructureShape.new(name: 'RespondToAuthChallengeRequest')
     RespondToAuthChallengeResponse = Shapes::StructureShape.new(name: 'RespondToAuthChallengeResponse')
+    RevokeTokenRequest = Shapes::StructureShape.new(name: 'RevokeTokenRequest')
+    RevokeTokenResponse = Shapes::StructureShape.new(name: 'RevokeTokenResponse')
     RiskConfigurationType = Shapes::StructureShape.new(name: 'RiskConfigurationType')
     RiskDecisionType = Shapes::StringShape.new(name: 'RiskDecisionType')
     RiskExceptionConfigurationType = Shapes::StructureShape.new(name: 'RiskExceptionConfigurationType')
@@ -401,8 +403,11 @@ module Aws::CognitoIdentityProvider
     TooManyFailedAttemptsException = Shapes::StructureShape.new(name: 'TooManyFailedAttemptsException')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     UICustomizationType = Shapes::StructureShape.new(name: 'UICustomizationType')
+    UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     UnexpectedLambdaException = Shapes::StructureShape.new(name: 'UnexpectedLambdaException')
     UnsupportedIdentityProviderException = Shapes::StructureShape.new(name: 'UnsupportedIdentityProviderException')
+    UnsupportedOperationException = Shapes::StructureShape.new(name: 'UnsupportedOperationException')
+    UnsupportedTokenTypeException = Shapes::StructureShape.new(name: 'UnsupportedTokenTypeException')
     UnsupportedUserStateException = Shapes::StructureShape.new(name: 'UnsupportedUserStateException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -917,6 +922,7 @@ module Aws::CognitoIdentityProvider
     CreateUserPoolClientRequest.add_member(:allowed_o_auth_flows_user_pool_client, Shapes::ShapeRef.new(shape: BooleanType, location_name: "AllowedOAuthFlowsUserPoolClient"))
     CreateUserPoolClientRequest.add_member(:analytics_configuration, Shapes::ShapeRef.new(shape: AnalyticsConfigurationType, location_name: "AnalyticsConfiguration"))
     CreateUserPoolClientRequest.add_member(:prevent_user_existence_errors, Shapes::ShapeRef.new(shape: PreventUserExistenceErrorTypes, location_name: "PreventUserExistenceErrors"))
+    CreateUserPoolClientRequest.add_member(:enable_token_revocation, Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "EnableTokenRevocation"))
     CreateUserPoolClientRequest.struct_class = Types::CreateUserPoolClientRequest
 
     CreateUserPoolClientResponse.add_member(:user_pool_client, Shapes::ShapeRef.new(shape: UserPoolClientType, location_name: "UserPoolClient"))
@@ -1506,6 +1512,13 @@ module Aws::CognitoIdentityProvider
     RespondToAuthChallengeResponse.add_member(:authentication_result, Shapes::ShapeRef.new(shape: AuthenticationResultType, location_name: "AuthenticationResult"))
     RespondToAuthChallengeResponse.struct_class = Types::RespondToAuthChallengeResponse
 
+    RevokeTokenRequest.add_member(:token, Shapes::ShapeRef.new(shape: TokenModelType, required: true, location_name: "Token"))
+    RevokeTokenRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, required: true, location_name: "ClientId"))
+    RevokeTokenRequest.add_member(:client_secret, Shapes::ShapeRef.new(shape: ClientSecretType, location_name: "ClientSecret"))
+    RevokeTokenRequest.struct_class = Types::RevokeTokenRequest
+
+    RevokeTokenResponse.struct_class = Types::RevokeTokenResponse
+
     RiskConfigurationType.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId"))
     RiskConfigurationType.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId"))
     RiskConfigurationType.add_member(:compromised_credentials_risk_configuration, Shapes::ShapeRef.new(shape: CompromisedCredentialsRiskConfigurationType, location_name: "CompromisedCredentialsRiskConfiguration"))
@@ -1665,11 +1678,20 @@ module Aws::CognitoIdentityProvider
     UICustomizationType.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
     UICustomizationType.struct_class = Types::UICustomizationType
 
+    UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    UnauthorizedException.struct_class = Types::UnauthorizedException
+
     UnexpectedLambdaException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
     UnexpectedLambdaException.struct_class = Types::UnexpectedLambdaException
 
     UnsupportedIdentityProviderException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
     UnsupportedIdentityProviderException.struct_class = Types::UnsupportedIdentityProviderException
+
+    UnsupportedOperationException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    UnsupportedOperationException.struct_class = Types::UnsupportedOperationException
+
+    UnsupportedTokenTypeException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    UnsupportedTokenTypeException.struct_class = Types::UnsupportedTokenTypeException
 
     UnsupportedUserStateException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
     UnsupportedUserStateException.struct_class = Types::UnsupportedUserStateException
@@ -1752,6 +1774,7 @@ module Aws::CognitoIdentityProvider
     UpdateUserPoolClientRequest.add_member(:allowed_o_auth_flows_user_pool_client, Shapes::ShapeRef.new(shape: BooleanType, location_name: "AllowedOAuthFlowsUserPoolClient"))
     UpdateUserPoolClientRequest.add_member(:analytics_configuration, Shapes::ShapeRef.new(shape: AnalyticsConfigurationType, location_name: "AnalyticsConfiguration"))
     UpdateUserPoolClientRequest.add_member(:prevent_user_existence_errors, Shapes::ShapeRef.new(shape: PreventUserExistenceErrorTypes, location_name: "PreventUserExistenceErrors"))
+    UpdateUserPoolClientRequest.add_member(:enable_token_revocation, Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "EnableTokenRevocation"))
     UpdateUserPoolClientRequest.struct_class = Types::UpdateUserPoolClientRequest
 
     UpdateUserPoolClientResponse.add_member(:user_pool_client, Shapes::ShapeRef.new(shape: UserPoolClientType, location_name: "UserPoolClient"))
@@ -1855,6 +1878,7 @@ module Aws::CognitoIdentityProvider
     UserPoolClientType.add_member(:allowed_o_auth_flows_user_pool_client, Shapes::ShapeRef.new(shape: BooleanType, location_name: "AllowedOAuthFlowsUserPoolClient", metadata: {"box"=>true}))
     UserPoolClientType.add_member(:analytics_configuration, Shapes::ShapeRef.new(shape: AnalyticsConfigurationType, location_name: "AnalyticsConfiguration"))
     UserPoolClientType.add_member(:prevent_user_existence_errors, Shapes::ShapeRef.new(shape: PreventUserExistenceErrorTypes, location_name: "PreventUserExistenceErrors"))
+    UserPoolClientType.add_member(:enable_token_revocation, Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "EnableTokenRevocation"))
     UserPoolClientType.struct_class = Types::UserPoolClientType
 
     UserPoolDescriptionType.add_member(:id, Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "Id"))
@@ -3274,6 +3298,20 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: AliasExistsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: SoftwareTokenMFANotFoundException)
+      end)
+
+      api.add_operation(:revoke_token, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RevokeToken"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RevokeTokenRequest)
+        o.output = Shapes::ShapeRef.new(shape: RevokeTokenResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedTokenTypeException)
       end)
 
       api.add_operation(:set_risk_configuration, Seahorse::Model::Operation.new.tap do |o|

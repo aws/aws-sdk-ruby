@@ -7808,6 +7808,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         allocation_id: "AllocationId",
     #         client_token: "String",
     #         dry_run: false,
     #         subnet_id: "SubnetId", # required
@@ -7822,8 +7823,16 @@ module Aws::EC2
     #             ],
     #           },
     #         ],
-    #         allocation_id: "AllocationId", # required
+    #         connectivity_type: "private", # accepts private, public
     #       }
+    #
+    # @!attribute [rw] allocation_id
+    #   \[Public NAT gateways only\] The allocation ID of an Elastic IP
+    #   address to associate with the NAT gateway. You cannot specify an
+    #   Elastic IP address with a private NAT gateway. If the Elastic IP
+    #   address is associated with another resource, you must first
+    #   disassociate it.
+    #   @return [String]
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -7855,20 +7864,20 @@ module Aws::EC2
     #   The tags to assign to the NAT gateway.
     #   @return [Array<Types::TagSpecification>]
     #
-    # @!attribute [rw] allocation_id
-    #   The allocation ID of an Elastic IP address to associate with the NAT
-    #   gateway. If the Elastic IP address is associated with another
-    #   resource, you must first disassociate it.
+    # @!attribute [rw] connectivity_type
+    #   Indicates whether the NAT gateway supports public or private
+    #   connectivity. The default is public connectivity.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNatGatewayRequest AWS API Documentation
     #
     class CreateNatGatewayRequest < Struct.new(
+      :allocation_id,
       :client_token,
       :dry_run,
       :subnet_id,
       :tag_specifications,
-      :allocation_id)
+      :connectivity_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41314,6 +41323,11 @@ module Aws::EC2
     #   The tags for the NAT gateway.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] connectivity_type
+    #   Indicates whether the NAT gateway supports public or private
+    #   connectivity.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NatGateway AWS API Documentation
     #
     class NatGateway < Struct.new(
@@ -41327,7 +41341,8 @@ module Aws::EC2
       :state,
       :subnet_id,
       :vpc_id,
-      :tags)
+      :tags,
+      :connectivity_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41336,8 +41351,8 @@ module Aws::EC2
     # gateway.
     #
     # @!attribute [rw] allocation_id
-    #   The allocation ID of the Elastic IP address that's associated with
-    #   the NAT gateway.
+    #   \[Public NAT gateway only\] The allocation ID of the Elastic IP
+    #   address that's associated with the NAT gateway.
     #   @return [String]
     #
     # @!attribute [rw] network_interface_id
@@ -41345,11 +41360,12 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] private_ip
-    #   The private IP address associated with the Elastic IP address.
+    #   The private IP address associated with the NAT gateway.
     #   @return [String]
     #
     # @!attribute [rw] public_ip
-    #   The Elastic IP address associated with the NAT gateway.
+    #   \[Public NAT gateway only\] The Elastic IP address associated with
+    #   the NAT gateway.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NatGatewayAddress AWS API Documentation

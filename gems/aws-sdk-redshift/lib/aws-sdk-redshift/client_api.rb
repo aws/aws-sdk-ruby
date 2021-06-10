@@ -3354,6 +3354,7 @@ module Aws::Redshift
         o.input = Shapes::ShapeRef.new(shape: ModifyAquaInputMessage)
         o.output = Shapes::ShapeRef.new(shape: ModifyAquaOutputMessage)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 

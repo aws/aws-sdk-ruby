@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2021-06-10)
+------------------
+
+* Feature - Using SageMaker Edge Manager with AWS IoT Greengrass v2 simplifies accessing, maintaining, and deploying models to your devices. You can now create deployable IoT Greengrass components during edge packaging jobs. You can choose to create a device fleet with or without creating an AWS IoT role alias.
+
 1.88.0 (2021-06-07)
 ------------------
 

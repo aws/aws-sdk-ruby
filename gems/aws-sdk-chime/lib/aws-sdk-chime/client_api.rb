@@ -2340,6 +2340,7 @@ module Aws::Chime
 
     UpdateAccountRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     UpdateAccountRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccountName, location_name: "Name"))
+    UpdateAccountRequest.add_member(:default_license, Shapes::ShapeRef.new(shape: License, location_name: "DefaultLicense"))
     UpdateAccountRequest.struct_class = Types::UpdateAccountRequest
 
     UpdateAccountResponse.add_member(:account, Shapes::ShapeRef.new(shape: Account, location_name: "Account"))

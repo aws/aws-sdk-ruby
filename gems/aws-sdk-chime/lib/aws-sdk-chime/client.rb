@@ -775,10 +775,10 @@ module Aws::Chime
     # example, you can update the product type or the calling name.
     #
     # For toll-free numbers, you cannot use the Amazon Chime Business
-    # Calling product type. For numbers outside the US, you must use the
+    # Calling product type. For numbers outside the U.S., you must use the
     # Amazon Chime SIP Media Application Dial-In product type.
     #
-    # Updates to outbound calling names can take 72 hours to complete.
+    # Updates to outbound calling names can take up to 72 hours to complete.
     # Pending updates to outbound calling names must be complete before you
     # can request another update.
     #
@@ -1661,7 +1661,7 @@ module Aws::Chime
 
     # Creates an order for phone numbers to be provisioned. For toll-free
     # numbers, you cannot use the Amazon Chime Business Calling product
-    # type. For numbers outside the US, you must use the Amazon Chime SIP
+    # type. For numbers outside the U.S., you must use the Amazon Chime SIP
     # Media Application Dial-In product type.
     #
     # @option params [required, String] :product_type
@@ -7210,13 +7210,18 @@ module Aws::Chime
     end
 
     # Updates account details for the specified Amazon Chime account.
-    # Currently, only account name updates are supported for this action.
+    # Currently, only account name and default license updates are supported
+    # for this action.
     #
     # @option params [required, String] :account_id
     #   The Amazon Chime account ID.
     #
     # @option params [String] :name
     #   The new name for the specified Amazon Chime account.
+    #
+    # @option params [String] :default_license
+    #   The default license applied when you add users to an Amazon Chime
+    #   account.
     #
     # @return [Types::UpdateAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7227,6 +7232,7 @@ module Aws::Chime
     #   resp = client.update_account({
     #     account_id: "NonEmptyString", # required
     #     name: "AccountName",
+    #     default_license: "Basic", # accepts Basic, Plus, Pro, ProTrial
     #   })
     #
     # @example Response structure
@@ -8126,7 +8132,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

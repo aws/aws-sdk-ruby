@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2021-06-10)
+------------------
+
+* Feature - AWS Resource Access Manager (RAM) is releasing new field isResourceTypeDefault in ListPermissions and GetPermission response, and adding permissionArn parameter to GetResourceShare request to filter by permission attached
+
 1.25.0 (2021-04-08)
 ------------------
 

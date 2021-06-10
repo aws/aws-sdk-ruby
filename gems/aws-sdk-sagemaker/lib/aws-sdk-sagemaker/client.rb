@@ -1612,6 +1612,14 @@ module Aws::SageMaker
     # @option params [Array<Types::Tag>] :tags
     #   Creates tags for the specified fleet.
     #
+    # @option params [Boolean] :enable_iot_role_alias
+    #   Whether to create an AWS IoT Role Alias during device fleet creation.
+    #   The name of the role alias generated will match this pattern:
+    #   "SageMakerEdge-\\\{DeviceFleetName\\}".
+    #
+    #   For example, if your device fleet is called "demo-fleet", the name
+    #   of the role alias will be "SageMakerEdge-demo-fleet".
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1623,6 +1631,8 @@ module Aws::SageMaker
     #     output_config: { # required
     #       s3_output_location: "S3Uri", # required
     #       kms_key_id: "KmsKeyId",
+    #       preset_deployment_type: "GreengrassV2Component", # accepts GreengrassV2Component
+    #       preset_deployment_config: "String",
     #     },
     #     tags: [
     #       {
@@ -1630,6 +1640,7 @@ module Aws::SageMaker
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     enable_iot_role_alias: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateDeviceFleet AWS API Documentation
@@ -1860,6 +1871,8 @@ module Aws::SageMaker
     #     output_config: { # required
     #       s3_output_location: "S3Uri", # required
     #       kms_key_id: "KmsKeyId",
+    #       preset_deployment_type: "GreengrassV2Component", # accepts GreengrassV2Component
+    #       preset_deployment_config: "String",
     #     },
     #     resource_key: "KmsKeyId",
     #     tags: [
@@ -7986,6 +7999,8 @@ module Aws::SageMaker
     #   resp.device_fleet_arn #=> String
     #   resp.output_config.s3_output_location #=> String
     #   resp.output_config.kms_key_id #=> String
+    #   resp.output_config.preset_deployment_type #=> String, one of "GreengrassV2Component"
+    #   resp.output_config.preset_deployment_config #=> String
     #   resp.description #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
@@ -8101,6 +8116,7 @@ module Aws::SageMaker
     #   * {Types::DescribeEdgePackagingJobResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::DescribeEdgePackagingJobResponse#model_artifact #model_artifact} => String
     #   * {Types::DescribeEdgePackagingJobResponse#model_signature #model_signature} => String
+    #   * {Types::DescribeEdgePackagingJobResponse#preset_deployment_output #preset_deployment_output} => Types::EdgePresetDeploymentOutput
     #
     # @example Request syntax with placeholder values
     #
@@ -8118,6 +8134,8 @@ module Aws::SageMaker
     #   resp.role_arn #=> String
     #   resp.output_config.s3_output_location #=> String
     #   resp.output_config.kms_key_id #=> String
+    #   resp.output_config.preset_deployment_type #=> String, one of "GreengrassV2Component"
+    #   resp.output_config.preset_deployment_config #=> String
     #   resp.resource_key #=> String
     #   resp.edge_packaging_job_status #=> String, one of "STARTING", "INPROGRESS", "COMPLETED", "FAILED", "STOPPING", "STOPPED"
     #   resp.edge_packaging_job_status_message #=> String
@@ -8125,6 +8143,10 @@ module Aws::SageMaker
     #   resp.last_modified_time #=> Time
     #   resp.model_artifact #=> String
     #   resp.model_signature #=> String
+    #   resp.preset_deployment_output.type #=> String, one of "GreengrassV2Component"
+    #   resp.preset_deployment_output.artifact #=> String
+    #   resp.preset_deployment_output.status #=> String, one of "COMPLETED", "FAILED"
+    #   resp.preset_deployment_output.status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEdgePackagingJob AWS API Documentation
     #
@@ -10622,6 +10644,8 @@ module Aws::SageMaker
     #   resp.device_fleet_name #=> String
     #   resp.output_config.s3_output_location #=> String
     #   resp.output_config.kms_key_id #=> String
+    #   resp.output_config.preset_deployment_type #=> String, one of "GreengrassV2Component"
+    #   resp.output_config.preset_deployment_config #=> String
     #   resp.description #=> String
     #   resp.report_generated #=> Time
     #   resp.device_stats.connected_device_count #=> Integer
@@ -16318,6 +16342,14 @@ module Aws::SageMaker
     # @option params [required, Types::EdgeOutputConfig] :output_config
     #   Output configuration for storing sample data collected by the fleet.
     #
+    # @option params [Boolean] :enable_iot_role_alias
+    #   Whether to create an AWS IoT Role Alias during device fleet creation.
+    #   The name of the role alias generated will match this pattern:
+    #   "SageMakerEdge-\\\{DeviceFleetName\\}".
+    #
+    #   For example, if your device fleet is called "demo-fleet", the name
+    #   of the role alias will be "SageMakerEdge-demo-fleet".
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -16329,7 +16361,10 @@ module Aws::SageMaker
     #     output_config: { # required
     #       s3_output_location: "S3Uri", # required
     #       kms_key_id: "KmsKeyId",
+    #       preset_deployment_type: "GreengrassV2Component", # accepts GreengrassV2Component
+    #       preset_deployment_config: "String",
     #     },
+    #     enable_iot_role_alias: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateDeviceFleet AWS API Documentation
@@ -17550,7 +17585,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

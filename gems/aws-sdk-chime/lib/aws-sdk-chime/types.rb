@@ -9186,6 +9186,7 @@ module Aws::Chime
     #       {
     #         account_id: "NonEmptyString", # required
     #         name: "AccountName",
+    #         default_license: "Basic", # accepts Basic, Plus, Pro, ProTrial
     #       }
     #
     # @!attribute [rw] account_id
@@ -9196,11 +9197,17 @@ module Aws::Chime
     #   The new name for the specified Amazon Chime account.
     #   @return [String]
     #
+    # @!attribute [rw] default_license
+    #   The default license applied when you add users to an Amazon Chime
+    #   account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateAccountRequest AWS API Documentation
     #
     class UpdateAccountRequest < Struct.new(
       :account_id,
-      :name)
+      :name,
+      :default_license)
       SENSITIVE = []
       include Aws::Structure
     end
