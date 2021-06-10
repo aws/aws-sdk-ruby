@@ -5483,7 +5483,7 @@ module Aws::Glue
     #
     # @return [Types::GetPartitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetPartitionResponse#partition #partition} => Types::Partition
+    #   * {Types::GetPartitionResponse#partition #data.partition} => Types::Partition (This method conflicts with a method on Response, call it through the data member)
     #
     # @example Request syntax with placeholder values
     #
@@ -5496,50 +5496,50 @@ module Aws::Glue
     #
     # @example Response structure
     #
-    #   resp.partition.values #=> Array
-    #   resp.partition.values[0] #=> String
-    #   resp.partition.database_name #=> String
-    #   resp.partition.table_name #=> String
-    #   resp.partition.creation_time #=> Time
-    #   resp.partition.last_access_time #=> Time
-    #   resp.partition.storage_descriptor.columns #=> Array
-    #   resp.partition.storage_descriptor.columns[0].name #=> String
-    #   resp.partition.storage_descriptor.columns[0].type #=> String
-    #   resp.partition.storage_descriptor.columns[0].comment #=> String
-    #   resp.partition.storage_descriptor.columns[0].parameters #=> Hash
-    #   resp.partition.storage_descriptor.columns[0].parameters["KeyString"] #=> String
-    #   resp.partition.storage_descriptor.location #=> String
-    #   resp.partition.storage_descriptor.input_format #=> String
-    #   resp.partition.storage_descriptor.output_format #=> String
-    #   resp.partition.storage_descriptor.compressed #=> Boolean
-    #   resp.partition.storage_descriptor.number_of_buckets #=> Integer
-    #   resp.partition.storage_descriptor.serde_info.name #=> String
-    #   resp.partition.storage_descriptor.serde_info.serialization_library #=> String
-    #   resp.partition.storage_descriptor.serde_info.parameters #=> Hash
-    #   resp.partition.storage_descriptor.serde_info.parameters["KeyString"] #=> String
-    #   resp.partition.storage_descriptor.bucket_columns #=> Array
-    #   resp.partition.storage_descriptor.bucket_columns[0] #=> String
-    #   resp.partition.storage_descriptor.sort_columns #=> Array
-    #   resp.partition.storage_descriptor.sort_columns[0].column #=> String
-    #   resp.partition.storage_descriptor.sort_columns[0].sort_order #=> Integer
-    #   resp.partition.storage_descriptor.parameters #=> Hash
-    #   resp.partition.storage_descriptor.parameters["KeyString"] #=> String
-    #   resp.partition.storage_descriptor.skewed_info.skewed_column_names #=> Array
-    #   resp.partition.storage_descriptor.skewed_info.skewed_column_names[0] #=> String
-    #   resp.partition.storage_descriptor.skewed_info.skewed_column_values #=> Array
-    #   resp.partition.storage_descriptor.skewed_info.skewed_column_values[0] #=> String
-    #   resp.partition.storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
-    #   resp.partition.storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
-    #   resp.partition.storage_descriptor.stored_as_sub_directories #=> Boolean
-    #   resp.partition.storage_descriptor.schema_reference.schema_id.schema_arn #=> String
-    #   resp.partition.storage_descriptor.schema_reference.schema_id.schema_name #=> String
-    #   resp.partition.storage_descriptor.schema_reference.schema_id.registry_name #=> String
-    #   resp.partition.storage_descriptor.schema_reference.schema_version_id #=> String
-    #   resp.partition.storage_descriptor.schema_reference.schema_version_number #=> Integer
-    #   resp.partition.parameters #=> Hash
-    #   resp.partition.parameters["KeyString"] #=> String
-    #   resp.partition.last_analyzed_time #=> Time
-    #   resp.partition.catalog_id #=> String
+    #   resp.data.partition.values #=> Array
+    #   resp.data.partition.values[0] #=> String
+    #   resp.data.partition.database_name #=> String
+    #   resp.data.partition.table_name #=> String
+    #   resp.data.partition.creation_time #=> Time
+    #   resp.data.partition.last_access_time #=> Time
+    #   resp.data.partition.storage_descriptor.columns #=> Array
+    #   resp.data.partition.storage_descriptor.columns[0].name #=> String
+    #   resp.data.partition.storage_descriptor.columns[0].type #=> String
+    #   resp.data.partition.storage_descriptor.columns[0].comment #=> String
+    #   resp.data.partition.storage_descriptor.columns[0].parameters #=> Hash
+    #   resp.data.partition.storage_descriptor.columns[0].parameters["KeyString"] #=> String
+    #   resp.data.partition.storage_descriptor.location #=> String
+    #   resp.data.partition.storage_descriptor.input_format #=> String
+    #   resp.data.partition.storage_descriptor.output_format #=> String
+    #   resp.data.partition.storage_descriptor.compressed #=> Boolean
+    #   resp.data.partition.storage_descriptor.number_of_buckets #=> Integer
+    #   resp.data.partition.storage_descriptor.serde_info.name #=> String
+    #   resp.data.partition.storage_descriptor.serde_info.serialization_library #=> String
+    #   resp.data.partition.storage_descriptor.serde_info.parameters #=> Hash
+    #   resp.data.partition.storage_descriptor.serde_info.parameters["KeyString"] #=> String
+    #   resp.data.partition.storage_descriptor.bucket_columns #=> Array
+    #   resp.data.partition.storage_descriptor.bucket_columns[0] #=> String
+    #   resp.data.partition.storage_descriptor.sort_columns #=> Array
+    #   resp.data.partition.storage_descriptor.sort_columns[0].column #=> String
+    #   resp.data.partition.storage_descriptor.sort_columns[0].sort_order #=> Integer
+    #   resp.data.partition.storage_descriptor.parameters #=> Hash
+    #   resp.data.partition.storage_descriptor.parameters["KeyString"] #=> String
+    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_names #=> Array
+    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_names[0] #=> String
+    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_values #=> Array
+    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_values[0] #=> String
+    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
+    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
+    #   resp.data.partition.storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.data.partition.storage_descriptor.schema_reference.schema_id.schema_arn #=> String
+    #   resp.data.partition.storage_descriptor.schema_reference.schema_id.schema_name #=> String
+    #   resp.data.partition.storage_descriptor.schema_reference.schema_id.registry_name #=> String
+    #   resp.data.partition.storage_descriptor.schema_reference.schema_version_id #=> String
+    #   resp.data.partition.storage_descriptor.schema_reference.schema_version_number #=> Integer
+    #   resp.data.partition.parameters #=> Hash
+    #   resp.data.partition.parameters["KeyString"] #=> String
+    #   resp.data.partition.last_analyzed_time #=> Time
+    #   resp.data.partition.catalog_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPartition AWS API Documentation
     #

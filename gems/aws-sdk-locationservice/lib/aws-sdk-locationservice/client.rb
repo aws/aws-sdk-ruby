@@ -2193,7 +2193,7 @@ module Aws::LocationService
     #
     # @return [Types::ListDevicePositionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListDevicePositionsResponse#entries #entries} => Array&lt;Types::ListDevicePositionsResponseEntry&gt;
+    #   * {Types::ListDevicePositionsResponse#entries #data.entries} => Array&lt;Types::ListDevicePositionsResponseEntry&gt; (This method conflicts with a method on Response, call it through the data member)
     #   * {Types::ListDevicePositionsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
@@ -2208,11 +2208,11 @@ module Aws::LocationService
     #
     # @example Response structure
     #
-    #   resp.entries #=> Array
-    #   resp.entries[0].device_id #=> String
-    #   resp.entries[0].position #=> Array
-    #   resp.entries[0].position[0] #=> Float
-    #   resp.entries[0].sample_time #=> Time
+    #   resp.data.entries #=> Array
+    #   resp.data.entries[0].device_id #=> String
+    #   resp.data.entries[0].position #=> Array
+    #   resp.data.entries[0].position[0] #=> Float
+    #   resp.data.entries[0].sample_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListDevicePositions AWS API Documentation
@@ -2240,7 +2240,7 @@ module Aws::LocationService
     #
     # @return [Types::ListGeofenceCollectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListGeofenceCollectionsResponse#entries #entries} => Array&lt;Types::ListGeofenceCollectionsResponseEntry&gt;
+    #   * {Types::ListGeofenceCollectionsResponse#entries #data.entries} => Array&lt;Types::ListGeofenceCollectionsResponseEntry&gt; (This method conflicts with a method on Response, call it through the data member)
     #   * {Types::ListGeofenceCollectionsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
@@ -2254,13 +2254,13 @@ module Aws::LocationService
     #
     # @example Response structure
     #
-    #   resp.entries #=> Array
-    #   resp.entries[0].collection_name #=> String
-    #   resp.entries[0].create_time #=> Time
-    #   resp.entries[0].description #=> String
-    #   resp.entries[0].pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
-    #   resp.entries[0].pricing_plan_data_source #=> String
-    #   resp.entries[0].update_time #=> Time
+    #   resp.data.entries #=> Array
+    #   resp.data.entries[0].collection_name #=> String
+    #   resp.data.entries[0].create_time #=> Time
+    #   resp.data.entries[0].description #=> String
+    #   resp.data.entries[0].pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
+    #   resp.data.entries[0].pricing_plan_data_source #=> String
+    #   resp.data.entries[0].update_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListGeofenceCollections AWS API Documentation
@@ -2285,7 +2285,7 @@ module Aws::LocationService
     #
     # @return [Types::ListGeofencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListGeofencesResponse#entries #entries} => Array&lt;Types::ListGeofenceResponseEntry&gt;
+    #   * {Types::ListGeofencesResponse#entries #data.entries} => Array&lt;Types::ListGeofenceResponseEntry&gt; (This method conflicts with a method on Response, call it through the data member)
     #   * {Types::ListGeofencesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
@@ -2299,15 +2299,15 @@ module Aws::LocationService
     #
     # @example Response structure
     #
-    #   resp.entries #=> Array
-    #   resp.entries[0].create_time #=> Time
-    #   resp.entries[0].geofence_id #=> String
-    #   resp.entries[0].geometry.polygon #=> Array
-    #   resp.entries[0].geometry.polygon[0] #=> Array
-    #   resp.entries[0].geometry.polygon[0][0] #=> Array
-    #   resp.entries[0].geometry.polygon[0][0][0] #=> Float
-    #   resp.entries[0].status #=> String
-    #   resp.entries[0].update_time #=> Time
+    #   resp.data.entries #=> Array
+    #   resp.data.entries[0].create_time #=> Time
+    #   resp.data.entries[0].geofence_id #=> String
+    #   resp.data.entries[0].geometry.polygon #=> Array
+    #   resp.data.entries[0].geometry.polygon[0] #=> Array
+    #   resp.data.entries[0].geometry.polygon[0][0] #=> Array
+    #   resp.data.entries[0].geometry.polygon[0][0][0] #=> Float
+    #   resp.data.entries[0].status #=> String
+    #   resp.data.entries[0].update_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListGeofences AWS API Documentation
@@ -2335,7 +2335,7 @@ module Aws::LocationService
     #
     # @return [Types::ListMapsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListMapsResponse#entries #entries} => Array&lt;Types::ListMapsResponseEntry&gt;
+    #   * {Types::ListMapsResponse#entries #data.entries} => Array&lt;Types::ListMapsResponseEntry&gt; (This method conflicts with a method on Response, call it through the data member)
     #   * {Types::ListMapsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
@@ -2349,13 +2349,13 @@ module Aws::LocationService
     #
     # @example Response structure
     #
-    #   resp.entries #=> Array
-    #   resp.entries[0].create_time #=> Time
-    #   resp.entries[0].data_source #=> String
-    #   resp.entries[0].description #=> String
-    #   resp.entries[0].map_name #=> String
-    #   resp.entries[0].pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
-    #   resp.entries[0].update_time #=> Time
+    #   resp.data.entries #=> Array
+    #   resp.data.entries[0].create_time #=> Time
+    #   resp.data.entries[0].data_source #=> String
+    #   resp.data.entries[0].description #=> String
+    #   resp.data.entries[0].map_name #=> String
+    #   resp.data.entries[0].pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
+    #   resp.data.entries[0].update_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListMaps AWS API Documentation
@@ -2383,7 +2383,7 @@ module Aws::LocationService
     #
     # @return [Types::ListPlaceIndexesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListPlaceIndexesResponse#entries #entries} => Array&lt;Types::ListPlaceIndexesResponseEntry&gt;
+    #   * {Types::ListPlaceIndexesResponse#entries #data.entries} => Array&lt;Types::ListPlaceIndexesResponseEntry&gt; (This method conflicts with a method on Response, call it through the data member)
     #   * {Types::ListPlaceIndexesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
@@ -2397,13 +2397,13 @@ module Aws::LocationService
     #
     # @example Response structure
     #
-    #   resp.entries #=> Array
-    #   resp.entries[0].create_time #=> Time
-    #   resp.entries[0].data_source #=> String
-    #   resp.entries[0].description #=> String
-    #   resp.entries[0].index_name #=> String
-    #   resp.entries[0].pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
-    #   resp.entries[0].update_time #=> Time
+    #   resp.data.entries #=> Array
+    #   resp.data.entries[0].create_time #=> Time
+    #   resp.data.entries[0].data_source #=> String
+    #   resp.data.entries[0].description #=> String
+    #   resp.data.entries[0].index_name #=> String
+    #   resp.data.entries[0].pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
+    #   resp.data.entries[0].update_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListPlaceIndexes AWS API Documentation
@@ -2430,7 +2430,7 @@ module Aws::LocationService
     #
     # @return [Types::ListRouteCalculatorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListRouteCalculatorsResponse#entries #entries} => Array&lt;Types::ListRouteCalculatorsResponseEntry&gt;
+    #   * {Types::ListRouteCalculatorsResponse#entries #data.entries} => Array&lt;Types::ListRouteCalculatorsResponseEntry&gt; (This method conflicts with a method on Response, call it through the data member)
     #   * {Types::ListRouteCalculatorsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
@@ -2444,13 +2444,13 @@ module Aws::LocationService
     #
     # @example Response structure
     #
-    #   resp.entries #=> Array
-    #   resp.entries[0].calculator_name #=> String
-    #   resp.entries[0].create_time #=> Time
-    #   resp.entries[0].data_source #=> String
-    #   resp.entries[0].description #=> String
-    #   resp.entries[0].pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
-    #   resp.entries[0].update_time #=> Time
+    #   resp.data.entries #=> Array
+    #   resp.data.entries[0].calculator_name #=> String
+    #   resp.data.entries[0].create_time #=> Time
+    #   resp.data.entries[0].data_source #=> String
+    #   resp.data.entries[0].description #=> String
+    #   resp.data.entries[0].pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
+    #   resp.data.entries[0].update_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListRouteCalculators AWS API Documentation
@@ -2557,7 +2557,7 @@ module Aws::LocationService
     #
     # @return [Types::ListTrackersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListTrackersResponse#entries #entries} => Array&lt;Types::ListTrackersResponseEntry&gt;
+    #   * {Types::ListTrackersResponse#entries #data.entries} => Array&lt;Types::ListTrackersResponseEntry&gt; (This method conflicts with a method on Response, call it through the data member)
     #   * {Types::ListTrackersResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
@@ -2571,13 +2571,13 @@ module Aws::LocationService
     #
     # @example Response structure
     #
-    #   resp.entries #=> Array
-    #   resp.entries[0].create_time #=> Time
-    #   resp.entries[0].description #=> String
-    #   resp.entries[0].pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
-    #   resp.entries[0].pricing_plan_data_source #=> String
-    #   resp.entries[0].tracker_name #=> String
-    #   resp.entries[0].update_time #=> Time
+    #   resp.data.entries #=> Array
+    #   resp.data.entries[0].create_time #=> Time
+    #   resp.data.entries[0].description #=> String
+    #   resp.data.entries[0].pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
+    #   resp.data.entries[0].pricing_plan_data_source #=> String
+    #   resp.data.entries[0].tracker_name #=> String
+    #   resp.data.entries[0].update_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListTrackers AWS API Documentation

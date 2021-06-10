@@ -5,6 +5,8 @@ require 'set'
 module AwsSdkCodeGenerator
   class ClientResponseStructureExample
 
+    ENUMERABLE_METHODS = Class.new.new.extend(Enumerable).methods - [:count]
+
     # @option options [required, Hash] :shape_ref
     # @option options [required, Hash] :api
     def initialize(options = {})
@@ -40,7 +42,12 @@ module AwsSdkCodeGenerator
         return event_ctx
       elsif shape['members']
         shape['members'].each_pair do |member_name, member_ref|
-          lines += entry(member_ref, "#{context}.#{underscore(member_name)}", visited)
+          method_name = underscore(member_name)
+          if context == 'resp' && ENUMERABLE_METHODS.include?(method_name.to_sym)
+            lines += entry(member_ref, "#{context}.data.#{method_name}", visited)
+          else
+            lines += entry(member_ref, "#{context}.#{method_name}", visited)
+          end
         end
       end
       lines

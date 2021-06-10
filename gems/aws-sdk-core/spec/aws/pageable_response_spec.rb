@@ -229,7 +229,7 @@ module Aws
         }.to raise_error(NoMethodError)
       end
 
-      it 'passes count from the raises not implemented error by default' do
+      it 'calls count on data' do
         data = double('data', count: 10)
         resp = Seahorse::Client::Response.new(data:data)
         page = pageable(resp, pager)
@@ -258,5 +258,6 @@ module Aws
       end
 
     end
+
   end
 end

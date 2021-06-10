@@ -1911,7 +1911,7 @@ module Aws::CloudWatch
     # @return [Types::ListMetricStreamsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListMetricStreamsOutput#next_token #next_token} => String
-    #   * {Types::ListMetricStreamsOutput#entries #entries} => Array&lt;Types::MetricStreamEntry&gt;
+    #   * {Types::ListMetricStreamsOutput#entries #data.entries} => Array&lt;Types::MetricStreamEntry&gt; (This method conflicts with a method on Response, call it through the data member)
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1925,14 +1925,14 @@ module Aws::CloudWatch
     # @example Response structure
     #
     #   resp.next_token #=> String
-    #   resp.entries #=> Array
-    #   resp.entries[0].arn #=> String
-    #   resp.entries[0].creation_date #=> Time
-    #   resp.entries[0].last_update_date #=> Time
-    #   resp.entries[0].name #=> String
-    #   resp.entries[0].firehose_arn #=> String
-    #   resp.entries[0].state #=> String
-    #   resp.entries[0].output_format #=> String, one of "json", "opentelemetry0.7"
+    #   resp.data.entries #=> Array
+    #   resp.data.entries[0].arn #=> String
+    #   resp.data.entries[0].creation_date #=> Time
+    #   resp.data.entries[0].last_update_date #=> Time
+    #   resp.data.entries[0].name #=> String
+    #   resp.data.entries[0].firehose_arn #=> String
+    #   resp.data.entries[0].state #=> String
+    #   resp.data.entries[0].output_format #=> String, one of "json", "opentelemetry0.7"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetricStreams AWS API Documentation
     #
