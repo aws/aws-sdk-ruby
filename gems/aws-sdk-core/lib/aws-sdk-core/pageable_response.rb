@@ -155,8 +155,8 @@ module Aws
       end
 
       def respond_to?(method_name, *args)
-        if [:count].include?(method_name)
-          data.respond_to?(method_name)
+        if method_name == :count
+          data.respond_to?(:count)
         else
           super
         end

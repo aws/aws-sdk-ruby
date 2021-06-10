@@ -1,8 +1,6 @@
 Unreleased Changes
 ------------------
 
-* Issue - Add `entries` to `UnsafeEnumerableMethods` - responses with `entries` members will now correctly return the member value. This also avoids potentially unexpected fetching of all pages of a result.
-
 3.114.2 (2021-06-09)
 ------------------
 
