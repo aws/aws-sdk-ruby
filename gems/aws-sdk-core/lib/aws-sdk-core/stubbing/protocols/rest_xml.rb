@@ -12,7 +12,7 @@ module Aws
             xml = []
             rules.location_name = operation.name + 'Result'
             rules['xmlNamespace'] = { 'uri' => api.metadata['xmlNamespace'] }
-            Xml::Builder.new(rules, target:xml).to_xml(data)
+            Xml::Builder.new(rules, target: xml, indent: '  ').to_xml(data)
             xml.join
           end
         end

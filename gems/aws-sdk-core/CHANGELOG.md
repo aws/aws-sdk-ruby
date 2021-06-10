@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix XML Stubber to use indenting (#2536).
+
 3.114.2 (2021-06-09)
 ------------------
 
