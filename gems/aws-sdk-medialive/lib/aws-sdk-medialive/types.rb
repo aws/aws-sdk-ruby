@@ -2641,6 +2641,7 @@ module Aws::MediaLive
     #           arib_source_settings: {
     #           },
     #           dvb_sub_source_settings: {
+    #             ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #             pid: 1,
     #           },
     #           embedded_source_settings: {
@@ -2654,6 +2655,7 @@ module Aws::MediaLive
     #             source_608_channel_number: 1,
     #           },
     #           scte_27_source_settings: {
+    #             ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #             pid: 1,
     #           },
     #           teletext_source_settings: {
@@ -2705,6 +2707,7 @@ module Aws::MediaLive
     #         arib_source_settings: {
     #         },
     #         dvb_sub_source_settings: {
+    #           ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #           pid: 1,
     #         },
     #         embedded_source_settings: {
@@ -2718,6 +2721,7 @@ module Aws::MediaLive
     #           source_608_channel_number: 1,
     #         },
     #         scte_27_source_settings: {
+    #           ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #           pid: 1,
     #         },
     #         teletext_source_settings: {
@@ -3953,6 +3957,7 @@ module Aws::MediaLive
     #                     arib_source_settings: {
     #                     },
     #                     dvb_sub_source_settings: {
+    #                       ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #                       pid: 1,
     #                     },
     #                     embedded_source_settings: {
@@ -3966,6 +3971,7 @@ module Aws::MediaLive
     #                       source_608_channel_number: 1,
     #                     },
     #                     scte_27_source_settings: {
+    #                       ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #                       pid: 1,
     #                     },
     #                     teletext_source_settings: {
@@ -3990,6 +3996,7 @@ module Aws::MediaLive
     #                   buffer_segments: 1,
     #                   retries: 1,
     #                   retry_interval: 1,
+    #                   scte_35_source: "MANIFEST", # accepts MANIFEST, SEGMENTS
     #                 },
     #                 server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #               },
@@ -6064,8 +6071,15 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #         pid: 1,
     #       }
+    #
+    # @!attribute [rw] ocr_language
+    #   If you will configure a WebVTT caption description that references
+    #   this caption selector, use this field to provide the language to
+    #   consider when translating the image-based source to text.
+    #   @return [String]
     #
     # @!attribute [rw] pid
     #   When using DVB-Sub with Burn-In or SMPTE-TT, use this PID for the
@@ -6076,6 +6090,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DvbSubSourceSettings AWS API Documentation
     #
     class DvbSubSourceSettings < Struct.new(
+      :ocr_language,
       :pid)
       SENSITIVE = []
       include Aws::Structure
@@ -9168,6 +9183,7 @@ module Aws::MediaLive
     #         buffer_segments: 1,
     #         retries: 1,
     #         retry_interval: 1,
+    #         scte_35_source: "MANIFEST", # accepts MANIFEST, SEGMENTS
     #       }
     #
     # @!attribute [rw] bandwidth
@@ -9194,13 +9210,21 @@ module Aws::MediaLive
     #   manifest or segment fails.
     #   @return [Integer]
     #
+    # @!attribute [rw] scte_35_source
+    #   Identifies the source for the SCTE-35 messages that MediaLive will
+    #   ingest. Messages can be ingested from the content segments (in the
+    #   stream) or from tags in the playlist (the HLS manifest). MediaLive
+    #   ignores SCTE-35 information in the source that is not selected.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsInputSettings AWS API Documentation
     #
     class HlsInputSettings < Struct.new(
       :bandwidth,
       :buffer_segments,
       :retries,
-      :retry_interval)
+      :retry_interval,
+      :scte_35_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9677,6 +9701,7 @@ module Aws::MediaLive
     #                 arib_source_settings: {
     #                 },
     #                 dvb_sub_source_settings: {
+    #                   ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #                   pid: 1,
     #                 },
     #                 embedded_source_settings: {
@@ -9690,6 +9715,7 @@ module Aws::MediaLive
     #                   source_608_channel_number: 1,
     #                 },
     #                 scte_27_source_settings: {
+    #                   ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #                   pid: 1,
     #                 },
     #                 teletext_source_settings: {
@@ -9714,6 +9740,7 @@ module Aws::MediaLive
     #               buffer_segments: 1,
     #               retries: 1,
     #               retry_interval: 1,
+    #               scte_35_source: "MANIFEST", # accepts MANIFEST, SEGMENTS
     #             },
     #             server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #           },
@@ -10555,6 +10582,7 @@ module Aws::MediaLive
     #               arib_source_settings: {
     #               },
     #               dvb_sub_source_settings: {
+    #                 ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #                 pid: 1,
     #               },
     #               embedded_source_settings: {
@@ -10568,6 +10596,7 @@ module Aws::MediaLive
     #                 source_608_channel_number: 1,
     #               },
     #               scte_27_source_settings: {
+    #                 ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #                 pid: 1,
     #               },
     #               teletext_source_settings: {
@@ -10592,6 +10621,7 @@ module Aws::MediaLive
     #             buffer_segments: 1,
     #             retries: 1,
     #             retry_interval: 1,
+    #             scte_35_source: "MANIFEST", # accepts MANIFEST, SEGMENTS
     #           },
     #           server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #         },
@@ -13338,6 +13368,7 @@ module Aws::MediaLive
     #           buffer_segments: 1,
     #           retries: 1,
     #           retry_interval: 1,
+    #           scte_35_source: "MANIFEST", # accepts MANIFEST, SEGMENTS
     #         },
     #         server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #       }
@@ -15776,8 +15807,15 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #         pid: 1,
     #       }
+    #
+    # @!attribute [rw] ocr_language
+    #   If you will configure a WebVTT caption description that references
+    #   this caption selector, use this field to provide the language to
+    #   consider when translating the image-based source to text.
+    #   @return [String]
     #
     # @!attribute [rw] pid
     #   The pid field is used in conjunction with the caption selector
@@ -15793,6 +15831,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte27SourceSettings AWS API Documentation
     #
     class Scte27SourceSettings < Struct.new(
+      :ocr_language,
       :pid)
       SENSITIVE = []
       include Aws::Structure
@@ -17031,9 +17070,6 @@ module Aws::MediaLive
     #   The AWS account ID for the recipient of the input device transfer.
     #   @return [String]
     #
-    # @!attribute [rw] target_region
-    #   @return [String]
-    #
     # @!attribute [rw] transfer_type
     #   The type (direction) of the input device transfer.
     #   @return [String]
@@ -17044,7 +17080,6 @@ module Aws::MediaLive
       :id,
       :message,
       :target_customer_id,
-      :target_region,
       :transfer_type)
       SENSITIVE = []
       include Aws::Structure
@@ -18308,6 +18343,7 @@ module Aws::MediaLive
     #                     arib_source_settings: {
     #                     },
     #                     dvb_sub_source_settings: {
+    #                       ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #                       pid: 1,
     #                     },
     #                     embedded_source_settings: {
@@ -18321,6 +18357,7 @@ module Aws::MediaLive
     #                       source_608_channel_number: 1,
     #                     },
     #                     scte_27_source_settings: {
+    #                       ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #                       pid: 1,
     #                     },
     #                     teletext_source_settings: {
@@ -18345,6 +18382,7 @@ module Aws::MediaLive
     #                   buffer_segments: 1,
     #                   retries: 1,
     #                   retry_interval: 1,
+    #                   scte_35_source: "MANIFEST", # accepts MANIFEST, SEGMENTS
     #                 },
     #                 server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #               },

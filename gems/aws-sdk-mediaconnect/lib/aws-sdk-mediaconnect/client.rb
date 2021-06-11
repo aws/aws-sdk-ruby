@@ -846,7 +846,11 @@ module Aws::MediaConnect
     #       whitelist_cidr: "__string",
     #     },
     #     source_failover_config: {
+    #       failover_mode: "MERGE", # accepts MERGE, FAILOVER
     #       recovery_window: 1,
+    #       source_priority: {
+    #         primary_source: "__string",
+    #       },
     #       state: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     sources: [
@@ -1016,7 +1020,9 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.stream_id #=> String
     #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
+    #   resp.flow.source_failover_config.failover_mode #=> String, one of "MERGE", "FAILOVER"
     #   resp.flow.source_failover_config.recovery_window #=> Integer
+    #   resp.flow.source_failover_config.source_priority.primary_source #=> String
     #   resp.flow.source_failover_config.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.flow.sources #=> Array
     #   resp.flow.sources[0].data_transfer_subscriber_fee_percent #=> Integer
@@ -1235,7 +1241,9 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.stream_id #=> String
     #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
+    #   resp.flow.source_failover_config.failover_mode #=> String, one of "MERGE", "FAILOVER"
     #   resp.flow.source_failover_config.recovery_window #=> Integer
+    #   resp.flow.source_failover_config.source_priority.primary_source #=> String
     #   resp.flow.source_failover_config.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.flow.sources #=> Array
     #   resp.flow.sources[0].data_transfer_subscriber_fee_percent #=> Integer
@@ -2013,7 +2021,11 @@ module Aws::MediaConnect
     #   resp = client.update_flow({
     #     flow_arn: "__string", # required
     #     source_failover_config: {
+    #       failover_mode: "MERGE", # accepts MERGE, FAILOVER
     #       recovery_window: 1,
+    #       source_priority: {
+    #         primary_source: "__string",
+    #       },
     #       state: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #   })
@@ -2133,7 +2145,9 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.stream_id #=> String
     #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
+    #   resp.flow.source_failover_config.failover_mode #=> String, one of "MERGE", "FAILOVER"
     #   resp.flow.source_failover_config.recovery_window #=> Integer
+    #   resp.flow.source_failover_config.source_priority.primary_source #=> String
     #   resp.flow.source_failover_config.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.flow.sources #=> Array
     #   resp.flow.sources[0].data_transfer_subscriber_fee_percent #=> Integer
@@ -2685,7 +2699,7 @@ module Aws::MediaConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

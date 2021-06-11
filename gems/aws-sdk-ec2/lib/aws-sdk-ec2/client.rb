@@ -17318,7 +17318,8 @@ module Aws::EC2
     # Recently deregistered images appear in the returned results for a
     # short interval and then return empty results. After all instances that
     # reference a deregistered AMI are terminated, specifying the ID of the
-    # image results in an error indicating that the AMI ID cannot be found.
+    # image will eventually return an error indicating that the AMI ID
+    # cannot be found.
     #
     # @option params [Array<String>] :executable_users
     #   Scopes the images by users with explicit launch permissions. Specify
@@ -17429,6 +17430,17 @@ module Aws::EC2
     #   `aws-marketplace`. If you omit this parameter, the results include all
     #   images for which you have launch permissions, regardless of ownership.
     #
+    # @option params [Boolean] :include_deprecated
+    #   If `true`, all deprecated AMIs are included in the response. If
+    #   `false`, no deprecated AMIs are included in the response. If no value
+    #   is specified, the default value is `false`.
+    #
+    #   <note markdown="1"> If you are the AMI owner, all deprecated AMIs appear in the response
+    #   regardless of the value (`true` or `false`) that you set for this
+    #   parameter.
+    #
+    #    </note>
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -17495,6 +17507,7 @@ module Aws::EC2
     #     ],
     #     image_ids: ["ImageId"],
     #     owners: ["String"],
+    #     include_deprecated: false,
     #     dry_run: false,
     #   })
     #
@@ -17545,6 +17558,7 @@ module Aws::EC2
     #   resp.images[0].tags[0].value #=> String
     #   resp.images[0].virtualization_type #=> String, one of "hvm", "paravirtual"
     #   resp.images[0].boot_mode #=> String, one of "legacy-bios", "uefi"
+    #   resp.images[0].deprecation_time #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -28648,6 +28662,48 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Cancels the deprecation of the specified AMI.
+    #
+    # For more information, see [Deprecate an AMI][1] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-deprecate.html
+    #
+    # @option params [required, String] :image_id
+    #   The ID of the AMI.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DisableImageDeprecationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableImageDeprecationResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_image_deprecation({
+    #     image_id: "ImageId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableImageDeprecation AWS API Documentation
+    #
+    # @overload disable_image_deprecation(params = {})
+    # @param [Hash] params ({})
+    def disable_image_deprecation(params = {}, options = {})
+      req = build_request(:disable_image_deprecation, params)
+      req.send_request(options)
+    end
+
     # Disables access to the EC2 serial console of all instances for your
     # account. By default, access to the EC2 serial console is disabled for
     # your account. For more information, see [Manage account access to the
@@ -29416,6 +29472,58 @@ module Aws::EC2
     # @param [Hash] params ({})
     def enable_fast_snapshot_restores(params = {}, options = {})
       req = build_request(:enable_fast_snapshot_restores, params)
+      req.send_request(options)
+    end
+
+    # Enables deprecation of the specified AMI at the specified date and
+    # time.
+    #
+    # For more information, see [Deprecate an AMI][1] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-deprecate.html
+    #
+    # @option params [required, String] :image_id
+    #   The ID of the AMI.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :deprecate_at
+    #   The date and time to deprecate the AMI, in UTC, in the following
+    #   format: *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z. If you specify a value for
+    #   seconds, Amazon EC2 rounds the seconds to the nearest minute.
+    #
+    #   You can’t specify a date in the past. The upper limit for
+    #   `DeprecateAt` is 10 years from now.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::EnableImageDeprecationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableImageDeprecationResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_image_deprecation({
+    #     image_id: "ImageId", # required
+    #     deprecate_at: Time.now, # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableImageDeprecation AWS API Documentation
+    #
+    # @overload enable_image_deprecation(params = {})
+    # @param [Hash] params ({})
+    def enable_image_deprecation(params = {}, options = {})
+      req = build_request(:enable_image_deprecation, params)
       req.send_request(options)
     end
 
@@ -41915,7 +42023,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.241.0'
+      context[:gem_version] = '1.242.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

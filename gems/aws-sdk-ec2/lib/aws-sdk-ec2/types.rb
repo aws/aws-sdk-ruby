@@ -17198,6 +17198,7 @@ module Aws::EC2
     #         ],
     #         image_ids: ["ImageId"],
     #         owners: ["String"],
+    #         include_deprecated: false,
     #         dry_run: false,
     #       }
     #
@@ -17317,6 +17318,18 @@ module Aws::EC2
     #   ownership.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] include_deprecated
+    #   If `true`, all deprecated AMIs are included in the response. If
+    #   `false`, no deprecated AMIs are included in the response. If no
+    #   value is specified, the default value is `false`.
+    #
+    #   <note markdown="1"> If you are the AMI owner, all deprecated AMIs appear in the response
+    #   regardless of the value (`true` or `false`) that you set for this
+    #   parameter.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -17331,6 +17344,7 @@ module Aws::EC2
       :filters,
       :image_ids,
       :owners,
+      :include_deprecated,
       :dry_run)
       SENSITIVE = []
       include Aws::Structure
@@ -25925,6 +25939,47 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisableImageDeprecationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_id: "ImageId", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableImageDeprecationRequest AWS API Documentation
+    #
+    class DisableImageDeprecationRequest < Struct.new(
+      :image_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableImageDeprecationResult AWS API Documentation
+    #
+    class DisableImageDeprecationResult < Struct.new(
+      :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisableSerialConsoleAccessRequest
     #   data as a hash:
     #
@@ -27452,6 +27507,58 @@ module Aws::EC2
     class EnableFastSnapshotRestoresResult < Struct.new(
       :successful,
       :unsuccessful)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass EnableImageDeprecationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_id: "ImageId", # required
+    #         deprecate_at: Time.now, # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] deprecate_at
+    #   The date and time to deprecate the AMI, in UTC, in the following
+    #   format: *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z. If you specify a value
+    #   for seconds, Amazon EC2 rounds the seconds to the nearest minute.
+    #
+    #   You can’t specify a date in the past. The upper limit for
+    #   `DeprecateAt` is 10 years from now.
+    #   @return [Time]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableImageDeprecationRequest AWS API Documentation
+    #
+    class EnableImageDeprecationRequest < Struct.new(
+      :image_id,
+      :deprecate_at,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableImageDeprecationResult AWS API Documentation
+    #
+    class EnableImageDeprecationResult < Struct.new(
+      :return)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31862,6 +31969,12 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
     #   @return [String]
     #
+    # @!attribute [rw] deprecation_time
+    #   The date and time to deprecate the AMI, in UTC, in the following
+    #   format: *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z. If you specified a value
+    #   for seconds, Amazon EC2 rounds the seconds to the nearest minute.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Image AWS API Documentation
     #
     class Image < Struct.new(
@@ -31891,7 +32004,8 @@ module Aws::EC2
       :state_reason,
       :tags,
       :virtualization_type,
-      :boot_mode)
+      :boot_mode,
+      :deprecation_time)
       SENSITIVE = []
       include Aws::Structure
     end

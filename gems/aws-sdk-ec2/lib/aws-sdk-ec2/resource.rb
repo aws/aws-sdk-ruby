@@ -1825,6 +1825,7 @@ module Aws::EC2
     #     ],
     #     image_ids: ["ImageId"],
     #     owners: ["String"],
+    #     include_deprecated: false,
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -1933,6 +1934,16 @@ module Aws::EC2
     #   specify a combination of AWS account IDs, `self`, `amazon`, and
     #   `aws-marketplace`. If you omit this parameter, the results include all
     #   images for which you have launch permissions, regardless of ownership.
+    # @option options [Boolean] :include_deprecated
+    #   If `true`, all deprecated AMIs are included in the response. If
+    #   `false`, no deprecated AMIs are included in the response. If no value
+    #   is specified, the default value is `false`.
+    #
+    #   <note markdown="1"> If you are the AMI owner, all deprecated AMIs appear in the response
+    #   regardless of the value (`true` or `false`) that you set for this
+    #   parameter.
+    #
+    #    </note>
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

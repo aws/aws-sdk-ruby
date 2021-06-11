@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.242.0 (2021-06-11)
+------------------
+
+* Feature - Amazon EC2 adds new AMI property to flag outdated AMIs
+
 1.241.0 (2021-06-10)
 ------------------
 

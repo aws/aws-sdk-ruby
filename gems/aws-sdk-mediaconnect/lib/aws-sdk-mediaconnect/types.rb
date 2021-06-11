@@ -710,7 +710,11 @@ module Aws::MediaConnect
     #           whitelist_cidr: "__string",
     #         },
     #         source_failover_config: {
+    #           failover_mode: "MERGE", # accepts MERGE, FAILOVER
     #           recovery_window: 1,
+    #           source_priority: {
+    #             primary_source: "__string",
+    #           },
     #           state: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #         sources: [
@@ -1260,13 +1264,29 @@ module Aws::MediaConnect
     #   data as a hash:
     #
     #       {
+    #         failover_mode: "MERGE", # accepts MERGE, FAILOVER
     #         recovery_window: 1,
+    #         source_priority: {
+    #           primary_source: "__string",
+    #         },
     #         state: "ENABLED", # accepts ENABLED, DISABLED
     #       }
+    #
+    # @!attribute [rw] failover_mode
+    #   The type of failover you choose for this flow. MERGE combines the
+    #   source streams into a single stream, allowing graceful recovery from
+    #   any single-source loss. FAILOVER allows switching between different
+    #   streams.
+    #   @return [String]
     #
     # @!attribute [rw] recovery_window
     #   Search window time to look for dash-7 packets
     #   @return [Integer]
+    #
+    # @!attribute [rw] source_priority
+    #   The priority you want to assign to a source. You can have a primary
+    #   stream and a backup stream or two equally prioritized streams.
+    #   @return [Types::SourcePriority]
     #
     # @!attribute [rw] state
     #   @return [String]
@@ -1274,7 +1294,9 @@ module Aws::MediaConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/FailoverConfig AWS API Documentation
     #
     class FailoverConfig < Struct.new(
+      :failover_mode,
       :recovery_window,
+      :source_priority,
       :state)
       SENSITIVE = []
       include Aws::Structure
@@ -3150,6 +3172,29 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The priority you want to assign to a source. You can have a primary
+    # stream and a backup stream or two equally prioritized streams.
+    #
+    # @note When making an API call, you may pass SourcePriority
+    #   data as a hash:
+    #
+    #       {
+    #         primary_source: "__string",
+    #       }
+    #
+    # @!attribute [rw] primary_source
+    #   The name of the source you choose as the primary source for this
+    #   flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/SourcePriority AWS API Documentation
+    #
+    class SourcePriority < Struct.new(
+      :primary_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartFlowRequest
     #   data as a hash:
     #
@@ -3453,13 +3498,29 @@ module Aws::MediaConnect
     #   data as a hash:
     #
     #       {
+    #         failover_mode: "MERGE", # accepts MERGE, FAILOVER
     #         recovery_window: 1,
+    #         source_priority: {
+    #           primary_source: "__string",
+    #         },
     #         state: "ENABLED", # accepts ENABLED, DISABLED
     #       }
+    #
+    # @!attribute [rw] failover_mode
+    #   The type of failover you choose for this flow. MERGE combines the
+    #   source streams into a single stream, allowing graceful recovery from
+    #   any single-source loss. FAILOVER allows switching between different
+    #   streams.
+    #   @return [String]
     #
     # @!attribute [rw] recovery_window
     #   Recovery window time to look for dash-7 packets
     #   @return [Integer]
+    #
+    # @!attribute [rw] source_priority
+    #   The priority you want to assign to a source. You can have a primary
+    #   stream and a backup stream or two equally prioritized streams.
+    #   @return [Types::SourcePriority]
     #
     # @!attribute [rw] state
     #   @return [String]
@@ -3467,7 +3528,9 @@ module Aws::MediaConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFailoverConfig AWS API Documentation
     #
     class UpdateFailoverConfig < Struct.new(
+      :failover_mode,
       :recovery_window,
+      :source_priority,
       :state)
       SENSITIVE = []
       include Aws::Structure
@@ -3825,7 +3888,11 @@ module Aws::MediaConnect
     #       {
     #         flow_arn: "__string", # required
     #         source_failover_config: {
+    #           failover_mode: "MERGE", # accepts MERGE, FAILOVER
     #           recovery_window: 1,
+    #           source_priority: {
+    #             primary_source: "__string",
+    #           },
     #           state: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #       }

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2021-06-11)
+------------------
+
+* Feature - AWS MediaLive now supports OCR-based conversion of DVB-Sub and SCTE-27 image-based source captions to WebVTT, and supports ingest of ad avail decorations in HLS input manifests.
+
 1.71.0 (2021-06-04)
 ------------------
 

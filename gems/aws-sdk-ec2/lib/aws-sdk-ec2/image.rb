@@ -222,6 +222,14 @@ module Aws::EC2
       data[:boot_mode]
     end
 
+    # The date and time to deprecate the AMI, in UTC, in the following
+    # format: *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z. If you specified a value
+    # for seconds, Amazon EC2 rounds the seconds to the nearest minute.
+    # @return [String]
+    def deprecation_time
+      data[:deprecation_time]
+    end
+
     # @!endgroup
 
     # @return [Client]
