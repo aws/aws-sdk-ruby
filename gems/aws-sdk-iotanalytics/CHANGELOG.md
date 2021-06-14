@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2021-06-14)
+------------------
+
+* Feature - Adds support for data store partitions.
+
 1.38.0 (2021-03-10)
 ------------------
 

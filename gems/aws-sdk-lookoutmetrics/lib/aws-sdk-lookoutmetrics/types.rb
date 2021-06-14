@@ -785,8 +785,9 @@ module Aws::LookoutMetrics
     #   @return [Array<Types::Metric>]
     #
     # @!attribute [rw] offset
-    #   After an interval ends, the amount of time that the detector waits
-    #   before importing data.
+    #   After an interval ends, the amount of seconds that the detector
+    #   waits before importing data. Offset is only supported for S3 and
+    #   Redshift datasources.
     #   @return [Integer]
     #
     # @!attribute [rw] timestamp_column
@@ -1149,7 +1150,8 @@ module Aws::LookoutMetrics
     #   @return [Time]
     #
     # @!attribute [rw] offset
-    #   The offset for the dataset.
+    #   The offset in seconds. Only supported for S3 and Redshift
+    #   datasources.
     #   @return [Integer]
     #
     # @!attribute [rw] metric_list
@@ -2724,8 +2726,9 @@ module Aws::LookoutMetrics
     #   @return [Array<Types::Metric>]
     #
     # @!attribute [rw] offset
-    #   After an interval ends, the amount of time that the detector waits
-    #   before importing data.
+    #   After an interval ends, the amount of seconds that the detector
+    #   waits before importing data. Offset is only supported for S3 and
+    #   Redshift datasources.
     #   @return [Integer]
     #
     # @!attribute [rw] timestamp_column

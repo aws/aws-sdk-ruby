@@ -263,6 +263,11 @@ module Aws::IoTAnalytics
     # @!attribute [rw] s3_paths
     #   Specifies one or more keys that identify the Amazon Simple Storage
     #   Service (Amazon S3) objects that save your channel messages.
+    #
+    #   You must use the full path for the key.
+    #
+    #   Example path: `channel/mychannel/__dt=2020-02-29
+    #   00:00:00/1582940490000_1582940520000_123456789012_mychannel_0_2118.0.json.gz`
     #   @return [Array<String>]
     #
     class ChannelMessages < Struct.new(
@@ -819,6 +824,19 @@ module Aws::IoTAnalytics
     #             },
     #           },
     #         },
+    #         datastore_partitions: {
+    #           partitions: [
+    #             {
+    #               attribute_partition: {
+    #                 attribute_name: "PartitionAttributeName", # required
+    #               },
+    #               timestamp_partition: {
+    #                 attribute_name: "PartitionAttributeName", # required
+    #                 timestamp_format: "TimestampFormat",
+    #               },
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] datastore_name
@@ -854,12 +872,17 @@ module Aws::IoTAnalytics
     #   [1]: https://parquet.apache.org/
     #   @return [Types::FileFormatConfiguration]
     #
+    # @!attribute [rw] datastore_partitions
+    #   Contains information about the partitions in a data store.
+    #   @return [Types::DatastorePartitions]
+    #
     class CreateDatastoreRequest < Struct.new(
       :datastore_name,
       :datastore_storage,
       :retention_period,
       :tags,
-      :file_format_configuration)
+      :file_format_configuration,
+      :datastore_partitions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1609,6 +1632,10 @@ module Aws::IoTAnalytics
     #   [1]: https://parquet.apache.org/
     #   @return [Types::FileFormatConfiguration]
     #
+    # @!attribute [rw] datastore_partitions
+    #   Contains information about the partitions in a data store.
+    #   @return [Types::DatastorePartitions]
+    #
     class Datastore < Struct.new(
       :name,
       :storage,
@@ -1618,7 +1645,8 @@ module Aws::IoTAnalytics
       :creation_time,
       :last_update_time,
       :last_message_arrival_time,
-      :file_format_configuration)
+      :file_format_configuration,
+      :datastore_partitions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1645,6 +1673,65 @@ module Aws::IoTAnalytics
     class DatastoreActivity < Struct.new(
       :name,
       :datastore_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single partition in a data store.
+    #
+    # @note When making an API call, you may pass DatastorePartition
+    #   data as a hash:
+    #
+    #       {
+    #         attribute_partition: {
+    #           attribute_name: "PartitionAttributeName", # required
+    #         },
+    #         timestamp_partition: {
+    #           attribute_name: "PartitionAttributeName", # required
+    #           timestamp_format: "TimestampFormat",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] attribute_partition
+    #   A partition defined by an `attributeName`.
+    #   @return [Types::Partition]
+    #
+    # @!attribute [rw] timestamp_partition
+    #   A partition defined by an `attributeName` and a timestamp format.
+    #   @return [Types::TimestampPartition]
+    #
+    class DatastorePartition < Struct.new(
+      :attribute_partition,
+      :timestamp_partition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about partitions in a data store.
+    #
+    # @note When making an API call, you may pass DatastorePartitions
+    #   data as a hash:
+    #
+    #       {
+    #         partitions: [
+    #           {
+    #             attribute_partition: {
+    #               attribute_name: "PartitionAttributeName", # required
+    #             },
+    #             timestamp_partition: {
+    #               attribute_name: "PartitionAttributeName", # required
+    #               timestamp_format: "TimestampFormat",
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] partitions
+    #   A list of partitions in a data store.
+    #   @return [Array<Types::DatastorePartition>]
+    #
+    class DatastorePartitions < Struct.new(
+      :partitions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1755,6 +1842,10 @@ module Aws::IoTAnalytics
     #   The file format of the data in the data store.
     #   @return [String]
     #
+    # @!attribute [rw] datastore_partitions
+    #   Contains information about the partitions in a data store.
+    #   @return [Types::DatastorePartitions]
+    #
     class DatastoreSummary < Struct.new(
       :datastore_name,
       :datastore_storage,
@@ -1762,7 +1853,8 @@ module Aws::IoTAnalytics
       :creation_time,
       :last_update_time,
       :last_message_arrival_time,
-      :file_format_type)
+      :file_format_type,
+      :datastore_partitions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2910,6 +3002,25 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # A single partition.
+    #
+    # @note When making an API call, you may pass Partition
+    #   data as a hash:
+    #
+    #       {
+    #         attribute_name: "PartitionAttributeName", # required
+    #       }
+    #
+    # @!attribute [rw] attribute_name
+    #   The attribute name of the partition.
+    #   @return [String]
+    #
+    class Partition < Struct.new(
+      :attribute_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a pipeline.
     #
     # @!attribute [rw] name
@@ -3544,7 +3655,7 @@ module Aws::IoTAnalytics
     #   Specifies one or more columns that store your data.
     #
     #   Each schema can have up to 100 columns. Each column can have up to
-    #   100 nested types
+    #   100 nested types.
     #   @return [Array<Types::Column>]
     #
     class SchemaDefinition < Struct.new(
@@ -3773,6 +3884,31 @@ module Aws::IoTAnalytics
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A partition defined by a timestamp.
+    #
+    # @note When making an API call, you may pass TimestampPartition
+    #   data as a hash:
+    #
+    #       {
+    #         attribute_name: "PartitionAttributeName", # required
+    #         timestamp_format: "TimestampFormat",
+    #       }
+    #
+    # @!attribute [rw] attribute_name
+    #   The attribute name of the partition defined by a timestamp.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp_format
+    #   The timestamp format of a partition defined by a timestamp.
+    #   @return [String]
+    #
+    class TimestampPartition < Struct.new(
+      :attribute_name,
+      :timestamp_format)
       SENSITIVE = []
       include Aws::Structure
     end

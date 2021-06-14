@@ -87,6 +87,8 @@ module Aws::IoTAnalytics
     DatastoreActivity = Shapes::StructureShape.new(name: 'DatastoreActivity')
     DatastoreArn = Shapes::StringShape.new(name: 'DatastoreArn')
     DatastoreName = Shapes::StringShape.new(name: 'DatastoreName')
+    DatastorePartition = Shapes::StructureShape.new(name: 'DatastorePartition')
+    DatastorePartitions = Shapes::StructureShape.new(name: 'DatastorePartitions')
     DatastoreStatistics = Shapes::StructureShape.new(name: 'DatastoreStatistics')
     DatastoreStatus = Shapes::StringShape.new(name: 'DatastoreStatus')
     DatastoreStorage = Shapes::StructureShape.new(name: 'DatastoreStorage')
@@ -172,6 +174,9 @@ module Aws::IoTAnalytics
     OutputFileName = Shapes::StringShape.new(name: 'OutputFileName')
     OutputFileUriValue = Shapes::StructureShape.new(name: 'OutputFileUriValue')
     ParquetConfiguration = Shapes::StructureShape.new(name: 'ParquetConfiguration')
+    Partition = Shapes::StructureShape.new(name: 'Partition')
+    PartitionAttributeName = Shapes::StringShape.new(name: 'PartitionAttributeName')
+    Partitions = Shapes::ListShape.new(name: 'Partitions')
     Pipeline = Shapes::StructureShape.new(name: 'Pipeline')
     PipelineActivities = Shapes::ListShape.new(name: 'PipelineActivities')
     PipelineActivity = Shapes::StructureShape.new(name: 'PipelineActivity')
@@ -231,6 +236,8 @@ module Aws::IoTAnalytics
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeExpression = Shapes::StringShape.new(name: 'TimeExpression')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TimestampFormat = Shapes::StringShape.new(name: 'TimestampFormat')
+    TimestampPartition = Shapes::StructureShape.new(name: 'TimestampPartition')
     TriggeringDataset = Shapes::StructureShape.new(name: 'TriggeringDataset')
     UnlimitedRetentionPeriod = Shapes::BooleanShape.new(name: 'UnlimitedRetentionPeriod')
     UnlimitedVersioning = Shapes::BooleanShape.new(name: 'UnlimitedVersioning')
@@ -368,6 +375,7 @@ module Aws::IoTAnalytics
     CreateDatastoreRequest.add_member(:retention_period, Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "retentionPeriod"))
     CreateDatastoreRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateDatastoreRequest.add_member(:file_format_configuration, Shapes::ShapeRef.new(shape: FileFormatConfiguration, location_name: "fileFormatConfiguration"))
+    CreateDatastoreRequest.add_member(:datastore_partitions, Shapes::ShapeRef.new(shape: DatastorePartitions, location_name: "datastorePartitions"))
     CreateDatastoreRequest.struct_class = Types::CreateDatastoreRequest
 
     CreateDatastoreResponse.add_member(:datastore_name, Shapes::ShapeRef.new(shape: DatastoreName, location_name: "datastoreName"))
@@ -487,11 +495,19 @@ module Aws::IoTAnalytics
     Datastore.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
     Datastore.add_member(:last_message_arrival_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastMessageArrivalTime"))
     Datastore.add_member(:file_format_configuration, Shapes::ShapeRef.new(shape: FileFormatConfiguration, location_name: "fileFormatConfiguration"))
+    Datastore.add_member(:datastore_partitions, Shapes::ShapeRef.new(shape: DatastorePartitions, location_name: "datastorePartitions"))
     Datastore.struct_class = Types::Datastore
 
     DatastoreActivity.add_member(:name, Shapes::ShapeRef.new(shape: ActivityName, required: true, location_name: "name"))
     DatastoreActivity.add_member(:datastore_name, Shapes::ShapeRef.new(shape: DatastoreName, required: true, location_name: "datastoreName"))
     DatastoreActivity.struct_class = Types::DatastoreActivity
+
+    DatastorePartition.add_member(:attribute_partition, Shapes::ShapeRef.new(shape: Partition, location_name: "attributePartition"))
+    DatastorePartition.add_member(:timestamp_partition, Shapes::ShapeRef.new(shape: TimestampPartition, location_name: "timestampPartition"))
+    DatastorePartition.struct_class = Types::DatastorePartition
+
+    DatastorePartitions.add_member(:partitions, Shapes::ShapeRef.new(shape: Partitions, location_name: "partitions"))
+    DatastorePartitions.struct_class = Types::DatastorePartitions
 
     DatastoreStatistics.add_member(:size, Shapes::ShapeRef.new(shape: EstimatedResourceSize, location_name: "size"))
     DatastoreStatistics.struct_class = Types::DatastoreStatistics
@@ -513,6 +529,7 @@ module Aws::IoTAnalytics
     DatastoreSummary.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
     DatastoreSummary.add_member(:last_message_arrival_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastMessageArrivalTime"))
     DatastoreSummary.add_member(:file_format_type, Shapes::ShapeRef.new(shape: FileFormatType, location_name: "fileFormatType"))
+    DatastoreSummary.add_member(:datastore_partitions, Shapes::ShapeRef.new(shape: DatastorePartitions, location_name: "datastorePartitions"))
     DatastoreSummary.struct_class = Types::DatastoreSummary
 
     DeleteChannelRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: ChannelName, required: true, location: "uri", location_name: "channelName"))
@@ -715,6 +732,11 @@ module Aws::IoTAnalytics
     ParquetConfiguration.add_member(:schema_definition, Shapes::ShapeRef.new(shape: SchemaDefinition, location_name: "schemaDefinition"))
     ParquetConfiguration.struct_class = Types::ParquetConfiguration
 
+    Partition.add_member(:attribute_name, Shapes::ShapeRef.new(shape: PartitionAttributeName, required: true, location_name: "attributeName"))
+    Partition.struct_class = Types::Partition
+
+    Partitions.member = Shapes::ShapeRef.new(shape: DatastorePartition)
+
     Pipeline.add_member(:name, Shapes::ShapeRef.new(shape: PipelineName, location_name: "name"))
     Pipeline.add_member(:arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "arn"))
     Pipeline.add_member(:activities, Shapes::ShapeRef.new(shape: PipelineActivities, location_name: "activities"))
@@ -857,6 +879,10 @@ module Aws::IoTAnalytics
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TimestampPartition.add_member(:attribute_name, Shapes::ShapeRef.new(shape: PartitionAttributeName, required: true, location_name: "attributeName"))
+    TimestampPartition.add_member(:timestamp_format, Shapes::ShapeRef.new(shape: TimestampFormat, location_name: "timestampFormat"))
+    TimestampPartition.struct_class = Types::TimestampPartition
 
     TriggeringDataset.add_member(:name, Shapes::ShapeRef.new(shape: DatasetName, required: true, location_name: "name"))
     TriggeringDataset.struct_class = Types::TriggeringDataset

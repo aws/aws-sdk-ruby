@@ -691,7 +691,9 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
-    # Creates a data store, which is a repository for messages.
+    # Creates a data store, which is a repository for messages. Only data
+    # stores that are used to save pipeline data can be configured with
+    # `ParquetConfiguration`.
     #
     # @option params [required, String] :datastore_name
     #   The name of the data store.
@@ -720,6 +722,9 @@ module Aws::IoTAnalytics
     #
     #
     #   [1]: https://parquet.apache.org/
+    #
+    # @option params [Types::DatastorePartitions] :datastore_partitions
+    #   Contains information about the partitions in a data store.
     #
     # @return [Types::CreateDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -763,6 +768,19 @@ module Aws::IoTAnalytics
     #           ],
     #         },
     #       },
+    #     },
+    #     datastore_partitions: {
+    #       partitions: [
+    #         {
+    #           attribute_partition: {
+    #             attribute_name: "PartitionAttributeName", # required
+    #           },
+    #           timestamp_partition: {
+    #             attribute_name: "PartitionAttributeName", # required
+    #             timestamp_format: "TimestampFormat",
+    #           },
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -1154,6 +1172,10 @@ module Aws::IoTAnalytics
     #   resp.datastore.file_format_configuration.parquet_configuration.schema_definition.columns #=> Array
     #   resp.datastore.file_format_configuration.parquet_configuration.schema_definition.columns[0].name #=> String
     #   resp.datastore.file_format_configuration.parquet_configuration.schema_definition.columns[0].type #=> String
+    #   resp.datastore.datastore_partitions.partitions #=> Array
+    #   resp.datastore.datastore_partitions.partitions[0].attribute_partition.attribute_name #=> String
+    #   resp.datastore.datastore_partitions.partitions[0].timestamp_partition.attribute_name #=> String
+    #   resp.datastore.datastore_partitions.partitions[0].timestamp_partition.timestamp_format #=> String
     #   resp.statistics.size.estimated_size_in_bytes #=> Float
     #   resp.statistics.size.estimated_on #=> Time
     #
@@ -1478,6 +1500,10 @@ module Aws::IoTAnalytics
     #   resp.datastore_summaries[0].last_update_time #=> Time
     #   resp.datastore_summaries[0].last_message_arrival_time #=> Time
     #   resp.datastore_summaries[0].file_format_type #=> String, one of "JSON", "PARQUET"
+    #   resp.datastore_summaries[0].datastore_partitions.partitions #=> Array
+    #   resp.datastore_summaries[0].datastore_partitions.partitions[0].attribute_partition.attribute_name #=> String
+    #   resp.datastore_summaries[0].datastore_partitions.partitions[0].timestamp_partition.attribute_name #=> String
+    #   resp.datastore_summaries[0].datastore_partitions.partitions[0].timestamp_partition.timestamp_format #=> String
     #   resp.next_token #=> String
     #
     # @overload list_datastores(params = {})
@@ -2194,7 +2220,7 @@ module Aws::IoTAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotanalytics'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
