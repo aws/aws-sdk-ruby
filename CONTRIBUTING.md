@@ -23,9 +23,8 @@ Please submit any [issues][] or [pull requests][pull-requests] through GitHub.
 ## What we are looking for
 
 We are open to anything that improves the SDK and doesn't unnecessarily cause backwards-incompatible changes. If you are
-unsure if your idea is something we would be open to, please ask us; Open an issue, send us an email, or ask in the
-[Gitter channel](https://gitter.im/aws/aws-sdk-ruby). Specifically, here are a few things that we would
-appreciate help on:
+unsure if your idea is something we would be open to, please ask us; Open an issue or send us an email.
+Specifically, here are a few things that we would appreciate help on:
 
 1. **Waiters** – Waiter configurations are located in the apis directory.
 2. **Docs** – We  greatly appreciate contributions to our documentation. The docs are written as code comments
