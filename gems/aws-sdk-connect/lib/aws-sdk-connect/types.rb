@@ -19,7 +19,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] origin
@@ -31,6 +32,43 @@ module Aws::Connect
     class AssociateApprovedOriginRequest < Struct.new(
       :instance_id,
       :origin)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AssociateBotRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         lex_bot: {
+    #           name: "BotName",
+    #           lex_region: "LexRegion",
+    #         },
+    #         lex_v2_bot: {
+    #           alias_arn: "AliasArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] lex_bot
+    #   Configuration information of an Amazon Lex bot.
+    #   @return [Types::LexBot]
+    #
+    # @!attribute [rw] lex_v2_bot
+    #   The Amazon Lex V2 bot to associate with the instance.
+    #   @return [Types::LexV2Bot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateBotRequest AWS API Documentation
+    #
+    class AssociateBotRequest < Struct.new(
+      :instance_id,
+      :lex_bot,
+      :lex_v2_bot)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -70,7 +108,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -113,7 +152,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] function_arn
@@ -142,11 +182,12 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] lex_bot
-    #   The Amazon Lex box to associate with the instance.
+    #   The Amazon Lex bot to associate with the instance.
     #   @return [Types::LexBot]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateLexBotRequest AWS API Documentation
@@ -168,7 +209,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] queue_id
@@ -208,7 +250,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] routing_profile_id
@@ -238,7 +281,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -582,7 +626,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] integration_type
@@ -661,7 +706,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -752,7 +798,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -830,7 +877,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -905,7 +953,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] integration_association_id
@@ -970,7 +1019,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUserHierarchyGroupRequest AWS API Documentation
@@ -1076,7 +1126,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1228,7 +1279,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteInstanceRequest AWS API Documentation
@@ -1248,7 +1300,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] integration_association_id
@@ -1273,7 +1326,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] quick_connect_id
@@ -1299,7 +1353,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] integration_association_id
@@ -1333,7 +1388,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteUserHierarchyGroupRequest AWS API Documentation
@@ -1354,7 +1410,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -1416,7 +1473,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] hours_of_operation_id
@@ -1453,7 +1511,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] attribute_type
@@ -1489,7 +1548,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeInstanceRequest AWS API Documentation
@@ -1522,7 +1582,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] association_id
@@ -1565,7 +1626,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] queue_id
@@ -1602,7 +1664,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] quick_connect_id
@@ -1639,7 +1702,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] routing_profile_id
@@ -1680,7 +1744,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserHierarchyGroupRequest AWS API Documentation
@@ -1712,7 +1777,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserHierarchyStructureRequest AWS API Documentation
@@ -1748,7 +1814,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserRequest AWS API Documentation
@@ -1814,7 +1881,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] origin
@@ -1830,6 +1898,43 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisassociateBotRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         lex_bot: {
+    #           name: "BotName",
+    #           lex_region: "LexRegion",
+    #         },
+    #         lex_v2_bot: {
+    #           alias_arn: "AliasArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] lex_bot
+    #   Configuration information of an Amazon Lex bot.
+    #   @return [Types::LexBot]
+    #
+    # @!attribute [rw] lex_v2_bot
+    #   The Amazon Lex V2 bot to disassociate from the instance.
+    #   @return [Types::LexV2Bot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateBotRequest AWS API Documentation
+    #
+    class DisassociateBotRequest < Struct.new(
+      :instance_id,
+      :lex_bot,
+      :lex_v2_bot)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisassociateInstanceStorageConfigRequest
     #   data as a hash:
     #
@@ -1840,7 +1945,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] association_id
@@ -1871,7 +1977,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance..
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance..
     #   @return [String]
     #
     # @!attribute [rw] function_arn
@@ -1898,7 +2005,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] bot_name
@@ -1929,7 +2037,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] queue_id
@@ -1965,7 +2074,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] routing_profile_id
@@ -1995,7 +2105,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] association_id
@@ -2138,7 +2249,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -2333,7 +2445,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetFederationTokenRequest AWS API Documentation
@@ -2384,7 +2497,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -2436,6 +2550,11 @@ module Aws::Connect
     #   each metric. The following historical metrics are available. For a
     #   description of each metric, see [Historical Metrics Definitions][1]
     #   in the *Amazon Connect Administrator Guide*.
+    #
+    #   <note markdown="1"> This API does not support a contacts incoming metric (there's no
+    #   CONTACTS\_INCOMING metric missing from the documented list).
+    #
+    #    </note>
     #
     #   ABANDON\_TIME
     #
@@ -3075,7 +3194,8 @@ module Aws::Connect
     # The Amazon Connect instance.
     #
     # @!attribute [rw] id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -3280,7 +3400,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] integration_type
@@ -3485,6 +3606,46 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Configuration information of an Amazon Lex or Amazon Lex V2 bot.
+    #
+    # @!attribute [rw] lex_bot
+    #   Configuration information of an Amazon Lex bot.
+    #   @return [Types::LexBot]
+    #
+    # @!attribute [rw] lex_v2_bot
+    #   Configuration information of an Amazon Lex V2 bot.
+    #   @return [Types::LexV2Bot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/LexBotConfig AWS API Documentation
+    #
+    class LexBotConfig < Struct.new(
+      :lex_bot,
+      :lex_v2_bot)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information of an Amazon Lex V2 bot.
+    #
+    # @note When making an API call, you may pass LexV2Bot
+    #   data as a hash:
+    #
+    #       {
+    #         alias_arn: "AliasArn",
+    #       }
+    #
+    # @!attribute [rw] alias_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Lex V2 bot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/LexV2Bot AWS API Documentation
+    #
+    class LexV2Bot < Struct.new(
+      :alias_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The allowed limit for the resource has been exceeded.
     #
     # @!attribute [rw] message
@@ -3509,7 +3670,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3550,6 +3712,65 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListBotsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         lex_version: "V1", # required, accepts V1, V2
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] lex_version
+    #   The version of Amazon Lex or Amazon Lex V2.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListBotsRequest AWS API Documentation
+    #
+    class ListBotsRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results,
+      :lex_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lex_bots
+    #   The names and Regions of the Amazon Lex or Amazon Lex V2 bots
+    #   associated with the specified instance.
+    #   @return [Array<Types::LexBotConfig>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListBotsResponse AWS API Documentation
+    #
+    class ListBotsResponse < Struct.new(
+      :lex_bots,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListContactFlowsRequest
     #   data as a hash:
     #
@@ -3561,7 +3782,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_types
@@ -3617,7 +3839,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3668,7 +3891,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3720,7 +3944,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -3821,7 +4046,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3872,7 +4098,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3923,7 +4150,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3977,7 +4205,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] phone_number_types
@@ -4090,7 +4319,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] queue_id
@@ -4147,7 +4377,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] queue_types
@@ -4204,7 +4435,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4264,7 +4496,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] routing_profile_id
@@ -4320,7 +4553,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4371,7 +4605,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4422,7 +4657,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4508,7 +4744,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] integration_association_id
@@ -4564,7 +4801,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4615,7 +4853,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -5199,7 +5438,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] contact_id
@@ -5228,7 +5468,8 @@ module Aws::Connect
     # Contains information about a routing profile.
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -5546,7 +5787,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
@@ -5641,7 +5883,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] contact_id
@@ -5703,14 +5946,15 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. The token is valid for 7 days after
     #   creation. If a contact is already started, the contact ID is
-    #   returned. If the contact is disconnected, a new contact is started.
+    #   returned.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -5788,7 +6032,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] previous_contact_id
@@ -5876,7 +6121,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] contact_id
@@ -5915,7 +6161,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StopContactRequest AWS API Documentation
@@ -5941,7 +6188,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] contact_id
@@ -6078,7 +6326,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -6188,7 +6437,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] attribute_type
@@ -6245,7 +6495,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] association_id
@@ -6282,7 +6533,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] queue_id
@@ -6313,7 +6565,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] queue_id
@@ -6346,7 +6599,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] queue_id
@@ -6386,7 +6640,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] queue_id
@@ -6417,7 +6672,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] queue_id
@@ -6461,7 +6717,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] quick_connect_id
@@ -6493,7 +6750,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] quick_connect_id
@@ -6534,7 +6792,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] routing_profile_id
@@ -6566,7 +6825,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] routing_profile_id
@@ -6598,7 +6858,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] routing_profile_id
@@ -6645,7 +6906,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @!attribute [rw] routing_profile_id
@@ -6687,7 +6949,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserHierarchyGroupNameRequest AWS API Documentation
@@ -6718,7 +6981,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserHierarchyRequest AWS API Documentation
@@ -6760,7 +7024,8 @@ module Aws::Connect
     #   @return [Types::HierarchyStructureUpdate]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserHierarchyStructureRequest AWS API Documentation
@@ -6794,7 +7059,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserIdentityInfoRequest AWS API Documentation
@@ -6830,7 +7096,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserPhoneConfigRequest AWS API Documentation
@@ -6861,7 +7128,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserRoutingProfileRequest AWS API Documentation
@@ -6892,7 +7160,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserSecurityProfilesRequest AWS API Documentation

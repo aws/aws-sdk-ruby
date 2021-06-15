@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2021-06-15)
+------------------
+
+* Feature - Redshift Data API service now supports SQL parameterization.
+
 1.6.0 (2021-03-10)
 ------------------
 

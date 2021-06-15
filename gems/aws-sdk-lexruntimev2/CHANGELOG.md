@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2021-06-15)
+------------------
+
+* Feature - This release adds support for Multi Valued slots in Amazon Lex V2 APIs for runtime
+
 1.2.0 (2021-03-10)
 ------------------
 

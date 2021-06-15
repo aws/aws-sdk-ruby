@@ -389,6 +389,7 @@ module Aws::RedshiftDataAPIService
     #   * {Types::DescribeStatementResponse#error #error} => String
     #   * {Types::DescribeStatementResponse#has_result_set #has_result_set} => Boolean
     #   * {Types::DescribeStatementResponse#id #id} => String
+    #   * {Types::DescribeStatementResponse#query_parameters #query_parameters} => Array&lt;Types::SqlParameter&gt;
     #   * {Types::DescribeStatementResponse#query_string #query_string} => String
     #   * {Types::DescribeStatementResponse#redshift_pid #redshift_pid} => Integer
     #   * {Types::DescribeStatementResponse#redshift_query_id #redshift_query_id} => Integer
@@ -414,6 +415,9 @@ module Aws::RedshiftDataAPIService
     #   resp.error #=> String
     #   resp.has_result_set #=> Boolean
     #   resp.id #=> String
+    #   resp.query_parameters #=> Array
+    #   resp.query_parameters[0].name #=> String
+    #   resp.query_parameters[0].value #=> String
     #   resp.query_string #=> String
     #   resp.redshift_pid #=> Integer
     #   resp.redshift_query_id #=> Integer
@@ -566,6 +570,9 @@ module Aws::RedshiftDataAPIService
     #   The database user name. This parameter is required when authenticating
     #   using temporary credentials.
     #
+    # @option params [Array<Types::SqlParameter>] :parameters
+    #   The parameters for the SQL statement.
+    #
     # @option params [String] :secret_arn
     #   The name or ARN of the secret that enables access to the database.
     #   This parameter is required when authenticating using AWS Secrets
@@ -597,6 +604,12 @@ module Aws::RedshiftDataAPIService
     #     cluster_identifier: "Location", # required
     #     database: "String",
     #     db_user: "String",
+    #     parameters: [
+    #       {
+    #         name: "ParameterName", # required
+    #         value: "ParameterValue", # required
+    #       },
+    #     ],
     #     secret_arn: "SecretArn",
     #     sql: "StatementString", # required
     #     statement_name: "StatementNameString",
@@ -927,6 +940,9 @@ module Aws::RedshiftDataAPIService
     #   resp.statements #=> Array
     #   resp.statements[0].created_at #=> Time
     #   resp.statements[0].id #=> String
+    #   resp.statements[0].query_parameters #=> Array
+    #   resp.statements[0].query_parameters[0].name #=> String
+    #   resp.statements[0].query_parameters[0].value #=> String
     #   resp.statements[0].query_string #=> String
     #   resp.statements[0].secret_arn #=> String
     #   resp.statements[0].statement_name #=> String
@@ -1061,7 +1077,7 @@ module Aws::RedshiftDataAPIService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshiftdataapiservice'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2505,6 +2505,9 @@ module Aws::LexModelsV2
     #         bot_version: "DraftBotVersion", # required
     #         locale_id: "LocaleId", # required
     #         intent_id: "Id", # required
+    #         multiple_values_setting: {
+    #           allow_multiple_values: false,
+    #         },
     #       }
     #
     # @!attribute [rw] slot_name
@@ -2561,6 +2564,16 @@ module Aws::LexModelsV2
     #   The identifier of the intent that contains the slot.
     #   @return [String]
     #
+    # @!attribute [rw] multiple_values_setting
+    #   Indicates whether the slot returns multiple values in one response.
+    #   Multi-value slots are only available in the en-US locale. If you set
+    #   this value to `true` in any other locale, Amazon Lex throws a
+    #   `ValidationException`.
+    #
+    #   If the `multipleValuesSetting` is not set, the default value is
+    #   `false`.
+    #   @return [Types::MultipleValuesSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateSlotRequest AWS API Documentation
     #
     class CreateSlotRequest < Struct.new(
@@ -2572,7 +2585,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :locale_id,
-      :intent_id)
+      :intent_id,
+      :multiple_values_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2623,6 +2637,10 @@ module Aws::LexModelsV2
     #   The timestamp of the date and time that the slot was created.
     #   @return [Time]
     #
+    # @!attribute [rw] multiple_values_setting
+    #   Indicates whether the slot returns multiple values in one response.
+    #   @return [Types::MultipleValuesSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateSlotResponse AWS API Documentation
     #
     class CreateSlotResponse < Struct.new(
@@ -2636,7 +2654,8 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :intent_id,
-      :creation_date_time)
+      :creation_date_time,
+      :multiple_values_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4288,6 +4307,14 @@ module Aws::LexModelsV2
     #   A timestamp of the date and time that the slot was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] multiple_values_setting
+    #   Indicates whether the slot accepts multiple values in a single
+    #   utterance.
+    #
+    #   If the `multipleValuesSetting` is not set, the default value is
+    #   `false`.
+    #   @return [Types::MultipleValuesSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeSlotResponse AWS API Documentation
     #
     class DescribeSlotResponse < Struct.new(
@@ -4302,7 +4329,8 @@ module Aws::LexModelsV2
       :locale_id,
       :intent_id,
       :creation_date_time,
-      :last_updated_date_time)
+      :last_updated_date_time,
+      :multiple_values_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6460,6 +6488,36 @@ module Aws::LexModelsV2
     class MessageGroup < Struct.new(
       :message,
       :variations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Indicates whether a slot can return multiple values.
+    #
+    # @note When making an API call, you may pass MultipleValuesSetting
+    #   data as a hash:
+    #
+    #       {
+    #         allow_multiple_values: false,
+    #       }
+    #
+    # @!attribute [rw] allow_multiple_values
+    #   Indicates whether a slot can return multiple values. When `true`,
+    #   the slot may return more than one value in a response. When `false`,
+    #   the slot returns only a single value.
+    #
+    #   Multi-value slots are only available in the en-US locale. If you set
+    #   this value to `true` in any other locale, Amazon Lex throws a
+    #   `ValidationException`.
+    #
+    #   If the `allowMutlipleValues` is not set, the default value is
+    #   `false`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/MultipleValuesSetting AWS API Documentation
+    #
+    class MultipleValuesSetting < Struct.new(
+      :allow_multiple_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9124,6 +9182,9 @@ module Aws::LexModelsV2
     #         bot_version: "DraftBotVersion", # required
     #         locale_id: "LocaleId", # required
     #         intent_id: "Id", # required
+    #         multiple_values_setting: {
+    #           allow_multiple_values: false,
+    #         },
     #       }
     #
     # @!attribute [rw] slot_id
@@ -9176,6 +9237,16 @@ module Aws::LexModelsV2
     #   The identifier of the intent that contains the slot.
     #   @return [String]
     #
+    # @!attribute [rw] multiple_values_setting
+    #   Determines whether the slot accepts multiple values in one response.
+    #   Multiple value slots are only available in the en-US locale. If you
+    #   set this value to `true` in any other locale, Amazon Lex throws a
+    #   `ValidationException`.
+    #
+    #   If the `multipleValuesSetting` is not set, the default value is
+    #   `false`.
+    #   @return [Types::MultipleValuesSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateSlotRequest AWS API Documentation
     #
     class UpdateSlotRequest < Struct.new(
@@ -9188,7 +9259,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :locale_id,
-      :intent_id)
+      :intent_id,
+      :multiple_values_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9245,6 +9317,10 @@ module Aws::LexModelsV2
     #   The timestamp of the date and time that the slot was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] multiple_values_setting
+    #   Indicates whether the slot accepts multiple values in one response.
+    #   @return [Types::MultipleValuesSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateSlotResponse AWS API Documentation
     #
     class UpdateSlotResponse < Struct.new(
@@ -9259,7 +9335,8 @@ module Aws::LexModelsV2
       :locale_id,
       :intent_id,
       :creation_date_time,
-      :last_updated_date_time)
+      :last_updated_date_time,
+      :multiple_values_setting)
       SENSITIVE = []
       include Aws::Structure
     end

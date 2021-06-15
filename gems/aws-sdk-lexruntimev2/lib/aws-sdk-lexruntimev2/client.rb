@@ -405,7 +405,7 @@ module Aws::LexRuntimeV2
     # For example, you can use this operation to retrieve session
     # information for a user that has left a long-running session in use.
     #
-    # If the bot, alias, or session identifier doesn't exist, Amazon Lex
+    # If the bot, alias, or session identifier doesn't exist, Amazon Lex V2
     # returns a `BadRequestException`. If the locale doesn't exist or is
     # not enabled for the alias, you receive a `BadRequestException`.
     #
@@ -463,6 +463,9 @@ module Aws::LexRuntimeV2
     #   resp.interpretations[0].intent.slots["NonEmptyString"].value.interpreted_value #=> String
     #   resp.interpretations[0].intent.slots["NonEmptyString"].value.resolved_values #=> Array
     #   resp.interpretations[0].intent.slots["NonEmptyString"].value.resolved_values[0] #=> String
+    #   resp.interpretations[0].intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List"
+    #   resp.interpretations[0].intent.slots["NonEmptyString"].values #=> Array
+    #   resp.interpretations[0].intent.slots["NonEmptyString"].values[0] #=> Types::Slot
     #   resp.interpretations[0].intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting"
     #   resp.interpretations[0].intent.confirmation_state #=> String, one of "Confirmed", "Denied", "None"
     #   resp.session_state.dialog_action.type #=> String, one of "Close", "ConfirmIntent", "Delegate", "ElicitIntent", "ElicitSlot"
@@ -473,6 +476,9 @@ module Aws::LexRuntimeV2
     #   resp.session_state.intent.slots["NonEmptyString"].value.interpreted_value #=> String
     #   resp.session_state.intent.slots["NonEmptyString"].value.resolved_values #=> Array
     #   resp.session_state.intent.slots["NonEmptyString"].value.resolved_values[0] #=> String
+    #   resp.session_state.intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List"
+    #   resp.session_state.intent.slots["NonEmptyString"].values #=> Array
+    #   resp.session_state.intent.slots["NonEmptyString"].values[0] #=> Types::Slot
     #   resp.session_state.intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting"
     #   resp.session_state.intent.confirmation_state #=> String, one of "Confirmed", "Denied", "None"
     #   resp.session_state.active_contexts #=> Array
@@ -495,7 +501,7 @@ module Aws::LexRuntimeV2
     end
 
     # Creates a new session or modifies an existing session with an Amazon
-    # Lex bot. Use this operation to enable your application to set the
+    # Lex V2 bot. Use this operation to enable your application to set the
     # state of the bot.
     #
     # @option params [required, String] :bot_id
@@ -517,22 +523,22 @@ module Aws::LexRuntimeV2
     # @option params [required, Types::SessionState] :session_state
     #   Sets the state of the session with the user. You can use this to set
     #   the current intent, attributes, context, and dialog action. Use the
-    #   dialog action to determine the next step that Amazon Lex should use in
-    #   the conversation with the user.
+    #   dialog action to determine the next step that Amazon Lex V2 should use
+    #   in the conversation with the user.
     #
     # @option params [Hash<String,String>] :request_attributes
-    #   Request-specific information passed between Amazon Lex and the client
-    #   application.
+    #   Request-specific information passed between Amazon Lex V2 and the
+    #   client application.
     #
     #   The namespace `x-amz-lex:` is reserved for special attributes. Don't
     #   create any request attributes with the prefix `x-amz-lex:`.
     #
     # @option params [String] :response_content_type
-    #   The message that Amazon Lex returns in the response can be either text
-    #   or speech depending on the value of this parameter.
+    #   The message that Amazon Lex V2 returns in the response can be either
+    #   text or speech depending on the value of this parameter.
     #
-    #   * If the value is `text/plain; charset=utf-8`, Amazon Lex returns text
-    #     in the response.
+    #   * If the value is `text/plain; charset=utf-8`, Amazon Lex V2 returns
+    #     text in the response.
     #
     #   ^
     #
@@ -555,7 +561,7 @@ module Aws::LexRuntimeV2
     #     messages: [
     #       {
     #         content: "Text",
-    #         content_type: "CustomPayload", # accepts CustomPayload, ImageResponseCard, PlainText, SSML
+    #         content_type: "CustomPayload", # required, accepts CustomPayload, ImageResponseCard, PlainText, SSML
     #         image_response_card: {
     #           title: "AttachmentTitle", # required
     #           subtitle: "AttachmentTitle",
@@ -583,6 +589,12 @@ module Aws::LexRuntimeV2
     #               interpreted_value: "NonEmptyString", # required
     #               resolved_values: ["NonEmptyString"],
     #             },
+    #             shape: "Scalar", # accepts Scalar, List
+    #             values: [
+    #               {
+    #                 # recursive Slot
+    #               },
+    #             ],
     #           },
     #         },
     #         state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting
@@ -595,7 +607,7 @@ module Aws::LexRuntimeV2
     #             time_to_live_in_seconds: 1, # required
     #             turns_to_live: 1, # required
     #           },
-    #           context_attributes: {
+    #           context_attributes: { # required
     #             "ParameterName" => "Text",
     #           },
     #         },
@@ -629,12 +641,13 @@ module Aws::LexRuntimeV2
       req.send_request(options, &block)
     end
 
-    # Sends user input to Amazon Lex. Client applications use this API to
-    # send requests to Amazon Lex at runtime. Amazon Lex then interprets the
-    # user input using the machine learning model that it build for the bot.
+    # Sends user input to Amazon Lex V2. Client applications use this API to
+    # send requests to Amazon Lex V2 at runtime. Amazon Lex V2 then
+    # interprets the user input using the machine learning model that it
+    # build for the bot.
     #
-    # In response, Amazon Lex returns the next message to convey to the user
-    # and an optional response card to display.
+    # In response, Amazon Lex V2 returns the next message to convey to the
+    # user and an optional response card to display.
     #
     # @option params [required, String] :bot_id
     #   The identifier of the bot that processes the request.
@@ -649,14 +662,14 @@ module Aws::LexRuntimeV2
     #   The identifier of the user session that is having the conversation.
     #
     # @option params [required, String] :text
-    #   The text that the user entered. Amazon Lex interprets this text.
+    #   The text that the user entered. Amazon Lex V2 interprets this text.
     #
     # @option params [Types::SessionState] :session_state
     #   The current state of the dialog between the user and the bot.
     #
     # @option params [Hash<String,String>] :request_attributes
     #   Request-specific information passed between the client application and
-    #   Amazon Lex
+    #   Amazon Lex V2
     #
     #   The namespace `x-amz-lex:` is reserved for special attributes. Don't
     #   create any request attributes with the prefix `x-amz-lex:`.
@@ -691,6 +704,12 @@ module Aws::LexRuntimeV2
     #               interpreted_value: "NonEmptyString", # required
     #               resolved_values: ["NonEmptyString"],
     #             },
+    #             shape: "Scalar", # accepts Scalar, List
+    #             values: [
+    #               {
+    #                 # recursive Slot
+    #               },
+    #             ],
     #           },
     #         },
     #         state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting
@@ -703,7 +722,7 @@ module Aws::LexRuntimeV2
     #             time_to_live_in_seconds: 1, # required
     #             turns_to_live: 1, # required
     #           },
-    #           context_attributes: {
+    #           context_attributes: { # required
     #             "ParameterName" => "Text",
     #           },
     #         },
@@ -737,6 +756,9 @@ module Aws::LexRuntimeV2
     #   resp.session_state.intent.slots["NonEmptyString"].value.interpreted_value #=> String
     #   resp.session_state.intent.slots["NonEmptyString"].value.resolved_values #=> Array
     #   resp.session_state.intent.slots["NonEmptyString"].value.resolved_values[0] #=> String
+    #   resp.session_state.intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List"
+    #   resp.session_state.intent.slots["NonEmptyString"].values #=> Array
+    #   resp.session_state.intent.slots["NonEmptyString"].values[0] #=> Types::Slot
     #   resp.session_state.intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting"
     #   resp.session_state.intent.confirmation_state #=> String, one of "Confirmed", "Denied", "None"
     #   resp.session_state.active_contexts #=> Array
@@ -761,6 +783,9 @@ module Aws::LexRuntimeV2
     #   resp.interpretations[0].intent.slots["NonEmptyString"].value.interpreted_value #=> String
     #   resp.interpretations[0].intent.slots["NonEmptyString"].value.resolved_values #=> Array
     #   resp.interpretations[0].intent.slots["NonEmptyString"].value.resolved_values[0] #=> String
+    #   resp.interpretations[0].intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List"
+    #   resp.interpretations[0].intent.slots["NonEmptyString"].values #=> Array
+    #   resp.interpretations[0].intent.slots["NonEmptyString"].values[0] #=> Types::Slot
     #   resp.interpretations[0].intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting"
     #   resp.interpretations[0].intent.confirmation_state #=> String, one of "Confirmed", "Denied", "None"
     #   resp.request_attributes #=> Hash
@@ -776,10 +801,35 @@ module Aws::LexRuntimeV2
       req.send_request(options)
     end
 
-    # Sends user input to Amazon Lex. You can send text or speech. Clients
-    # use this API to send text and audio requests to Amazon Lex at runtime.
-    # Amazon Lex interprets the user input using the machine learning model
-    # built for the bot.
+    # Sends user input to Amazon Lex V2. You can send text or speech.
+    # Clients use this API to send text and audio requests to Amazon Lex V2
+    # at runtime. Amazon Lex V2 interprets the user input using the machine
+    # learning model built for the bot.
+    #
+    # The following request fields must be compressed with gzip and then
+    # base64 encoded before you send them to Amazon Lex V2.
+    #
+    # * requestAttributes
+    #
+    # * sessionState
+    #
+    # The following response fields are compressed using gzip and then
+    # base64 encoded by Amazon Lex V2. Before you can use these fields, you
+    # must decode and decompress them.
+    #
+    # * inputTranscript
+    #
+    # * interpretations
+    #
+    # * messages
+    #
+    # * requestAttributes
+    #
+    # * sessionState
+    #
+    # The example contains a Java application that compresses and encodes a
+    # Java object to send to Amazon Lex V2, and a second that decodes and
+    # decompresses a response from Amazon Lex V2.
     #
     # @option params [required, String] :bot_id
     #   The identifier of the bot that should receive the request.
@@ -797,15 +847,21 @@ module Aws::LexRuntimeV2
     # @option params [String] :session_state
     #   Sets the state of the session with the user. You can use this to set
     #   the current intent, attributes, context, and dialog action. Use the
-    #   dialog action to determine the next step that Amazon Lex should use in
-    #   the conversation with the user.
+    #   dialog action to determine the next step that Amazon Lex V2 should use
+    #   in the conversation with the user.
+    #
+    #   The `sessionState` field must be compressed using gzip and then base64
+    #   encoded before sending to Amazon Lex V2.
     #
     # @option params [String] :request_attributes
     #   Request-specific information passed between the client application and
-    #   Amazon Lex
+    #   Amazon Lex V2
     #
     #   The namespace `x-amz-lex:` is reserved for special attributes. Don't
     #   create any request attributes for prefix `x-amz-lex:`.
+    #
+    #   The `requestAttributes` field must be compressed using gzip and then
+    #   base64 encoded before sending to Amazon Lex V2.
     #
     # @option params [required, String] :request_content_type
     #   Indicates the format for audio input or that the content is text. The
@@ -833,17 +889,18 @@ module Aws::LexRuntimeV2
     #     ^
     #
     # @option params [String] :response_content_type
-    #   The message that Amazon Lex returns in the response can be either text
-    #   or speech based on the `responseContentType` value.
+    #   The message that Amazon Lex V2 returns in the response can be either
+    #   text or speech based on the `responseContentType` value.
     #
-    #   * If the value is `text/plain;charset=utf-8`, Amazon Lex returns text
-    #     in the response.
+    #   * If the value is `text/plain;charset=utf-8`, Amazon Lex V2 returns
+    #     text in the response.
     #
-    #   * If the value begins with `audio/`, Amazon Lex returns speech in the
-    #     response. Amazon Lex uses Amazon Polly to generate the speech using
-    #     the configuration that you specified in the `requestContentType`
-    #     parameter. For example, if you specify `audio/mpeg` as the value,
-    #     Amazon Lex returns speech in the MPEG format.
+    #   * If the value begins with `audio/`, Amazon Lex V2 returns speech in
+    #     the response. Amazon Lex V2 uses Amazon Polly to generate the speech
+    #     using the configuration that you specified in the
+    #     `requestContentType` parameter. For example, if you specify
+    #     `audio/mpeg` as the value, Amazon Lex V2 returns speech in the MPEG
+    #     format.
     #
     #   * If the value is `audio/pcm`, the speech returned is `audio/pcm` at
     #     16 KHz in 16-bit, little-endian format.
@@ -924,7 +981,7 @@ module Aws::LexRuntimeV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexruntimev2'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

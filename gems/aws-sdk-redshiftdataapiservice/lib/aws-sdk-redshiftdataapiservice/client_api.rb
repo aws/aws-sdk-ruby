@@ -50,9 +50,13 @@ module Aws::RedshiftDataAPIService
     Location = Shapes::StringShape.new(name: 'Location')
     Long = Shapes::IntegerShape.new(name: 'Long')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
+    ParameterName = Shapes::StringShape.new(name: 'ParameterName')
+    ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     SchemaList = Shapes::ListShape.new(name: 'SchemaList')
     SecretArn = Shapes::StringShape.new(name: 'SecretArn')
+    SqlParameter = Shapes::StructureShape.new(name: 'SqlParameter')
+    SqlParametersList = Shapes::ListShape.new(name: 'SqlParametersList')
     SqlRecords = Shapes::ListShape.new(name: 'SqlRecords')
     StatementData = Shapes::StructureShape.new(name: 'StatementData')
     StatementList = Shapes::ListShape.new(name: 'StatementList')
@@ -108,6 +112,7 @@ module Aws::RedshiftDataAPIService
     DescribeStatementResponse.add_member(:error, Shapes::ShapeRef.new(shape: String, location_name: "Error"))
     DescribeStatementResponse.add_member(:has_result_set, Shapes::ShapeRef.new(shape: Boolean, location_name: "HasResultSet"))
     DescribeStatementResponse.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "Id"))
+    DescribeStatementResponse.add_member(:query_parameters, Shapes::ShapeRef.new(shape: SqlParametersList, location_name: "QueryParameters"))
     DescribeStatementResponse.add_member(:query_string, Shapes::ShapeRef.new(shape: StatementString, location_name: "QueryString"))
     DescribeStatementResponse.add_member(:redshift_pid, Shapes::ShapeRef.new(shape: Long, location_name: "RedshiftPid"))
     DescribeStatementResponse.add_member(:redshift_query_id, Shapes::ShapeRef.new(shape: Long, location_name: "RedshiftQueryId"))
@@ -141,6 +146,7 @@ module Aws::RedshiftDataAPIService
     ExecuteStatementInput.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "ClusterIdentifier"))
     ExecuteStatementInput.add_member(:database, Shapes::ShapeRef.new(shape: String, location_name: "Database"))
     ExecuteStatementInput.add_member(:db_user, Shapes::ShapeRef.new(shape: String, location_name: "DbUser"))
+    ExecuteStatementInput.add_member(:parameters, Shapes::ShapeRef.new(shape: SqlParametersList, location_name: "Parameters"))
     ExecuteStatementInput.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
     ExecuteStatementInput.add_member(:sql, Shapes::ShapeRef.new(shape: StatementString, required: true, location_name: "Sql"))
     ExecuteStatementInput.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementNameString, location_name: "StatementName"))
@@ -236,10 +242,17 @@ module Aws::RedshiftDataAPIService
 
     SchemaList.member = Shapes::ShapeRef.new(shape: String)
 
+    SqlParameter.add_member(:name, Shapes::ShapeRef.new(shape: ParameterName, required: true, location_name: "name"))
+    SqlParameter.add_member(:value, Shapes::ShapeRef.new(shape: ParameterValue, required: true, location_name: "value"))
+    SqlParameter.struct_class = Types::SqlParameter
+
+    SqlParametersList.member = Shapes::ShapeRef.new(shape: SqlParameter)
+
     SqlRecords.member = Shapes::ShapeRef.new(shape: FieldList)
 
     StatementData.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     StatementData.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "Id"))
+    StatementData.add_member(:query_parameters, Shapes::ShapeRef.new(shape: SqlParametersList, location_name: "QueryParameters"))
     StatementData.add_member(:query_string, Shapes::ShapeRef.new(shape: StatementString, location_name: "QueryString"))
     StatementData.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
     StatementData.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementNameString, location_name: "StatementName"))

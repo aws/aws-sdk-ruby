@@ -1354,8 +1354,8 @@ module Aws::LexModelsV2
     # resource policy exists, the statement is added to the current resource
     # policy. If a policy doesn't exist, a new policy is created.
     #
-    # You can create a resource policy statement that allows cross-account
-    # access.
+    # You can't create a resource policy statement that allows
+    # cross-account access.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the bot or bot alias that the
@@ -1501,6 +1501,15 @@ module Aws::LexModelsV2
     # @option params [required, String] :intent_id
     #   The identifier of the intent that contains the slot.
     #
+    # @option params [Types::MultipleValuesSetting] :multiple_values_setting
+    #   Indicates whether the slot returns multiple values in one response.
+    #   Multi-value slots are only available in the en-US locale. If you set
+    #   this value to `true` in any other locale, Amazon Lex throws a
+    #   `ValidationException`.
+    #
+    #   If the `multipleValuesSetting` is not set, the default value is
+    #   `false`.
+    #
     # @return [Types::CreateSlotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSlotResponse#slot_id #slot_id} => String
@@ -1514,6 +1523,7 @@ module Aws::LexModelsV2
     #   * {Types::CreateSlotResponse#locale_id #locale_id} => String
     #   * {Types::CreateSlotResponse#intent_id #intent_id} => String
     #   * {Types::CreateSlotResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::CreateSlotResponse#multiple_values_setting #multiple_values_setting} => Types::MultipleValuesSetting
     #
     # @example Request syntax with placeholder values
     #
@@ -1760,6 +1770,9 @@ module Aws::LexModelsV2
     #     bot_version: "DraftBotVersion", # required
     #     locale_id: "LocaleId", # required
     #     intent_id: "Id", # required
+    #     multiple_values_setting: {
+    #       allow_multiple_values: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1866,6 +1879,7 @@ module Aws::LexModelsV2
     #   resp.locale_id #=> String
     #   resp.intent_id #=> String
     #   resp.creation_date_time #=> Time
+    #   resp.multiple_values_setting.allow_multiple_values #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateSlot AWS API Documentation
     #
@@ -3054,6 +3068,7 @@ module Aws::LexModelsV2
     #   * {Types::DescribeSlotResponse#intent_id #intent_id} => String
     #   * {Types::DescribeSlotResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::DescribeSlotResponse#last_updated_date_time #last_updated_date_time} => Time
+    #   * {Types::DescribeSlotResponse#multiple_values_setting #multiple_values_setting} => Types::MultipleValuesSetting
     #
     # @example Request syntax with placeholder values
     #
@@ -3170,6 +3185,7 @@ module Aws::LexModelsV2
     #   resp.intent_id #=> String
     #   resp.creation_date_time #=> Time
     #   resp.last_updated_date_time #=> Time
+    #   resp.multiple_values_setting.allow_multiple_values #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeSlot AWS API Documentation
     #
@@ -4592,7 +4608,12 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
-    # Updates the password used to encrypt an export zip archive.
+    # Updates the password used to protect an export zip archive.
+    #
+    # The password is not required. If you don't supply a password, Amazon
+    # Lex generates a zip file that is not protected by a password. This is
+    # the archive that is available at the pre-signed S3 URL provided by the
+    # operation.
     #
     # @option params [required, String] :export_id
     #   The unique identifier Amazon Lex assigned to the export.
@@ -5131,6 +5152,15 @@ module Aws::LexModelsV2
     # @option params [required, String] :intent_id
     #   The identifier of the intent that contains the slot.
     #
+    # @option params [Types::MultipleValuesSetting] :multiple_values_setting
+    #   Determines whether the slot accepts multiple values in one response.
+    #   Multiple value slots are only available in the en-US locale. If you
+    #   set this value to `true` in any other locale, Amazon Lex throws a
+    #   `ValidationException`.
+    #
+    #   If the `multipleValuesSetting` is not set, the default value is
+    #   `false`.
+    #
     # @return [Types::UpdateSlotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSlotResponse#slot_id #slot_id} => String
@@ -5145,6 +5175,7 @@ module Aws::LexModelsV2
     #   * {Types::UpdateSlotResponse#intent_id #intent_id} => String
     #   * {Types::UpdateSlotResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::UpdateSlotResponse#last_updated_date_time #last_updated_date_time} => Time
+    #   * {Types::UpdateSlotResponse#multiple_values_setting #multiple_values_setting} => Types::MultipleValuesSetting
     #
     # @example Request syntax with placeholder values
     #
@@ -5392,6 +5423,9 @@ module Aws::LexModelsV2
     #     bot_version: "DraftBotVersion", # required
     #     locale_id: "LocaleId", # required
     #     intent_id: "Id", # required
+    #     multiple_values_setting: {
+    #       allow_multiple_values: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -5499,6 +5533,7 @@ module Aws::LexModelsV2
     #   resp.intent_id #=> String
     #   resp.creation_date_time #=> Time
     #   resp.last_updated_date_time #=> Time
+    #   resp.multiple_values_setting.allow_multiple_values #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateSlot AWS API Documentation
     #
@@ -5631,7 +5666,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

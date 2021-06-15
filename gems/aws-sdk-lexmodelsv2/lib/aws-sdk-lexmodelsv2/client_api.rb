@@ -243,6 +243,7 @@ module Aws::LexModelsV2
     MessageGroup = Shapes::StructureShape.new(name: 'MessageGroup')
     MessageGroupsList = Shapes::ListShape.new(name: 'MessageGroupsList')
     MessageVariationsList = Shapes::ListShape.new(name: 'MessageVariationsList')
+    MultipleValuesSetting = Shapes::StructureShape.new(name: 'MultipleValuesSetting')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NumericalBotVersion = Shapes::StringShape.new(name: 'NumericalBotVersion')
@@ -691,6 +692,7 @@ module Aws::LexModelsV2
     CreateSlotRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, required: true, location: "uri", location_name: "botVersion"))
     CreateSlotRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
     CreateSlotRequest.add_member(:intent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "intentId"))
+    CreateSlotRequest.add_member(:multiple_values_setting, Shapes::ShapeRef.new(shape: MultipleValuesSetting, location_name: "multipleValuesSetting"))
     CreateSlotRequest.struct_class = Types::CreateSlotRequest
 
     CreateSlotResponse.add_member(:slot_id, Shapes::ShapeRef.new(shape: Id, location_name: "slotId"))
@@ -704,6 +706,7 @@ module Aws::LexModelsV2
     CreateSlotResponse.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
     CreateSlotResponse.add_member(:intent_id, Shapes::ShapeRef.new(shape: Id, location_name: "intentId"))
     CreateSlotResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    CreateSlotResponse.add_member(:multiple_values_setting, Shapes::ShapeRef.new(shape: MultipleValuesSetting, location_name: "multipleValuesSetting"))
     CreateSlotResponse.struct_class = Types::CreateSlotResponse
 
     CreateSlotTypeRequest.add_member(:slot_type_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "slotTypeName"))
@@ -980,6 +983,7 @@ module Aws::LexModelsV2
     DescribeSlotResponse.add_member(:intent_id, Shapes::ShapeRef.new(shape: Id, location_name: "intentId"))
     DescribeSlotResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     DescribeSlotResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
+    DescribeSlotResponse.add_member(:multiple_values_setting, Shapes::ShapeRef.new(shape: MultipleValuesSetting, location_name: "multipleValuesSetting"))
     DescribeSlotResponse.struct_class = Types::DescribeSlotResponse
 
     DescribeSlotTypeRequest.add_member(:slot_type_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "slotTypeId"))
@@ -1278,6 +1282,9 @@ module Aws::LexModelsV2
     MessageGroupsList.member = Shapes::ShapeRef.new(shape: MessageGroup)
 
     MessageVariationsList.member = Shapes::ShapeRef.new(shape: Message)
+
+    MultipleValuesSetting.add_member(:allow_multiple_values, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowMultipleValues"))
+    MultipleValuesSetting.struct_class = Types::MultipleValuesSetting
 
     ObfuscationSetting.add_member(:obfuscation_setting_type, Shapes::ShapeRef.new(shape: ObfuscationSettingType, required: true, location_name: "obfuscationSettingType"))
     ObfuscationSetting.struct_class = Types::ObfuscationSetting
@@ -1596,6 +1603,7 @@ module Aws::LexModelsV2
     UpdateSlotRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, required: true, location: "uri", location_name: "botVersion"))
     UpdateSlotRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
     UpdateSlotRequest.add_member(:intent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "intentId"))
+    UpdateSlotRequest.add_member(:multiple_values_setting, Shapes::ShapeRef.new(shape: MultipleValuesSetting, location_name: "multipleValuesSetting"))
     UpdateSlotRequest.struct_class = Types::UpdateSlotRequest
 
     UpdateSlotResponse.add_member(:slot_id, Shapes::ShapeRef.new(shape: Id, location_name: "slotId"))
@@ -1610,6 +1618,7 @@ module Aws::LexModelsV2
     UpdateSlotResponse.add_member(:intent_id, Shapes::ShapeRef.new(shape: Id, location_name: "intentId"))
     UpdateSlotResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     UpdateSlotResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
+    UpdateSlotResponse.add_member(:multiple_values_setting, Shapes::ShapeRef.new(shape: MultipleValuesSetting, location_name: "multipleValuesSetting"))
     UpdateSlotResponse.struct_class = Types::UpdateSlotResponse
 
     UpdateSlotTypeRequest.add_member(:slot_type_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "slotTypeId"))

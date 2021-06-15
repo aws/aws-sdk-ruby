@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.243.0 (2021-06-15)
+------------------
+
+* Feature - EC2 M5n, M5dn, R5n, R5dn metal instances with 100 Gbps network performance and Elastic Fabric Adapter (EFA) for ultra low latency
+
 1.242.0 (2021-06-11)
 ------------------
 
