@@ -8,7 +8,7 @@ module Aws
     def pageable(resp, pager)
       resp.extend(PageableResponse)
       resp.pager = pager
-      resp.context[:original_params] = resp.context.params
+      resp.context[:original_params] = resp.context.params.freeze
       resp
     end
 

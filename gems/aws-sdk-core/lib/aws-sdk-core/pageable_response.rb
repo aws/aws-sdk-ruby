@@ -117,10 +117,11 @@ module Aws
     def next_page_params(params)
       # Remove all previous tokens from original params
       # Sometimes a token can be nil and merge would not include it.
-      @pager.tokens.each do |_k, v|
-        context[:original_params].delete(v.to_sym)
-      end
-      context[:original_params].merge(@pager.next_tokens(self).merge(params))
+      tokens = @pager.tokens.values.map(&:to_sym)
+
+      params_without_tokens = context[:original_params].reject { |k, _v| tokens.include?(k) }
+      params_without_tokens.merge!(@pager.next_tokens(self).merge(params))
+      params_without_tokens
     end
 
     # Raised when calling {PageableResponse#next_page} on a pager that

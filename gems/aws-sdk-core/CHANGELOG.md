@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fixed an issue with `Aws::PageableResponse` where it was modifying original params hash, causing frozen hashes to fail.
+
 3.114.2 (2021-06-09)
 ------------------
 
