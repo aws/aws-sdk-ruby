@@ -289,7 +289,6 @@ module Aws
 
     def assume_role_process_credentials_from_config(profile)
       validate_profile_exists(profile)
-      puts "Checking role_process from config...., profile: #{profile}"
       credential_process = @parsed_credentials.fetch(:profile, {})['credential_process']
       if @parsed_config
         credential_process = @parsed_config.fetch(:profile, {})['credential_process']

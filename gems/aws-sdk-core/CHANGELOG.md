@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature = Add support for Assume Role Chaining in profiles. (#2531)
+
 3.114.3 (2021-06-15)
 ------------------
 
