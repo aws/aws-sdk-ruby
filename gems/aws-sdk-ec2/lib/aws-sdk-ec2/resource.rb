@@ -733,7 +733,7 @@ module Aws::EC2
     #       },
     #     ],
     #     secondary_private_ip_address_count: 1,
-    #     interface_type: "efa", # accepts efa
+    #     interface_type: "efa", # accepts efa, branch, trunk
     #     subnet_id: "SubnetId", # required
     #     tag_specifications: [
     #       {
@@ -795,10 +795,14 @@ module Aws::EC2
     #   Indicates the type of network interface. To create an Elastic Fabric
     #   Adapter (EFA), specify `efa`. For more information, see [ Elastic
     #   Fabric Adapter][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   To create a trunk network interface, specify `efa`. For more
+    #   information, see [ Network interface trunking][2] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/eni-trunking.html
     # @option options [required, String] :subnet_id
     #   The ID of the subnet to associate with the network interface.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
@@ -1680,12 +1684,13 @@ module Aws::EC2
     #     with, if any.
     #
     #   * `network-border-group` - A unique set of Availability Zones, Local
-    #     Zones, or Wavelength Zones from where AWS advertises IP addresses.
+    #     Zones, or Wavelength Zones from where Amazon Web Services advertises
+    #     IP addresses.
     #
     #   * `network-interface-id` - \[EC2-VPC\] The ID of the network interface
     #     that the address is associated with, if any.
     #
-    #   * `network-interface-owner-id` - The AWS account ID of the owner.
+    #   * `network-interface-owner-id` - The account ID of the owner.
     #
     #   * `private-ip-address` - \[EC2-VPC\] The private IP address associated
     #     with the Elastic IP address.
@@ -2699,7 +2704,7 @@ module Aws::EC2
     #
     #   * `network-interface-id` - The ID of the network interface.
     #
-    #   * `owner-id` - The AWS account ID of the network interface owner.
+    #   * `owner-id` - The account ID of the network interface owner.
     #
     #   * `private-ip-address` - The private IPv4 address or addresses of the
     #     network interface.
@@ -2707,11 +2712,11 @@ module Aws::EC2
     #   * `private-dns-name` - The private DNS name of the network interface
     #     (IPv4).
     #
-    #   * `requester-id` - The alias or AWS account ID of the principal or
-    #     service that created the network interface.
+    #   * `requester-id` - The alias or account ID of the principal or service
+    #     that created the network interface.
     #
     #   * `requester-managed` - Indicates whether the network interface is
-    #     being managed by an AWS service (for example, AWS Management
+    #     being managed by an Amazon Web Service (for example, Management
     #     Console, Auto Scaling, and so on).
     #
     #   * `source-dest-check` - Indicates whether the network interface
@@ -3443,12 +3448,13 @@ module Aws::EC2
     #     with, if any.
     #
     #   * `network-border-group` - A unique set of Availability Zones, Local
-    #     Zones, or Wavelength Zones from where AWS advertises IP addresses.
+    #     Zones, or Wavelength Zones from where Amazon Web Services advertises
+    #     IP addresses.
     #
     #   * `network-interface-id` - \[EC2-VPC\] The ID of the network interface
     #     that the address is associated with, if any.
     #
-    #   * `network-interface-owner-id` - The AWS account ID of the owner.
+    #   * `network-interface-owner-id` - The account ID of the owner.
     #
     #   * `private-ip-address` - \[EC2-VPC\] The private IP address associated
     #     with the Elastic IP address.

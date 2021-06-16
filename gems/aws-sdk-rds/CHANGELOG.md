@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.120.0 (2021-06-16)
+------------------
+
+* Feature - This release enables fast cloning in Aurora Serverless. You can now clone between Aurora Serverless clusters and Aurora Provisioned clusters.
+
 1.119.0 (2021-06-04)
 ------------------
 

@@ -50,12 +50,12 @@ module Aws::RDS
 
     # Specifies the current state of this database.
     #
-    # For information about DB instance statuses, see [Viewing DB instance
-    # status][1] in the *Amazon RDS User Guide.*
+    # For information about DB instance statuses, see [DB Instance
+    # Status][1] in the *Amazon RDS User Guide.*
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/accessing-monitoring.html#Overview.DBInstance.Status
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Status.html
     # @return [String]
     def db_instance_status
       data[:db_instance_status]

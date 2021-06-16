@@ -98,6 +98,8 @@ module Aws::EC2
     AssociateTransitGatewayMulticastDomainResult = Shapes::StructureShape.new(name: 'AssociateTransitGatewayMulticastDomainResult')
     AssociateTransitGatewayRouteTableRequest = Shapes::StructureShape.new(name: 'AssociateTransitGatewayRouteTableRequest')
     AssociateTransitGatewayRouteTableResult = Shapes::StructureShape.new(name: 'AssociateTransitGatewayRouteTableResult')
+    AssociateTrunkInterfaceRequest = Shapes::StructureShape.new(name: 'AssociateTrunkInterfaceRequest')
+    AssociateTrunkInterfaceResult = Shapes::StructureShape.new(name: 'AssociateTrunkInterfaceResult')
     AssociateVpcCidrBlockRequest = Shapes::StructureShape.new(name: 'AssociateVpcCidrBlockRequest')
     AssociateVpcCidrBlockResult = Shapes::StructureShape.new(name: 'AssociateVpcCidrBlockResult')
     AssociatedNetworkType = Shapes::StringShape.new(name: 'AssociatedNetworkType')
@@ -796,6 +798,9 @@ module Aws::EC2
     DescribeTransitGatewayVpcAttachmentsResult = Shapes::StructureShape.new(name: 'DescribeTransitGatewayVpcAttachmentsResult')
     DescribeTransitGatewaysRequest = Shapes::StructureShape.new(name: 'DescribeTransitGatewaysRequest')
     DescribeTransitGatewaysResult = Shapes::StructureShape.new(name: 'DescribeTransitGatewaysResult')
+    DescribeTrunkInterfaceAssociationsMaxResults = Shapes::IntegerShape.new(name: 'DescribeTrunkInterfaceAssociationsMaxResults')
+    DescribeTrunkInterfaceAssociationsRequest = Shapes::StructureShape.new(name: 'DescribeTrunkInterfaceAssociationsRequest')
+    DescribeTrunkInterfaceAssociationsResult = Shapes::StructureShape.new(name: 'DescribeTrunkInterfaceAssociationsResult')
     DescribeVolumeAttributeRequest = Shapes::StructureShape.new(name: 'DescribeVolumeAttributeRequest')
     DescribeVolumeAttributeResult = Shapes::StructureShape.new(name: 'DescribeVolumeAttributeResult')
     DescribeVolumeStatusRequest = Shapes::StructureShape.new(name: 'DescribeVolumeStatusRequest')
@@ -886,6 +891,8 @@ module Aws::EC2
     DisassociateTransitGatewayMulticastDomainResult = Shapes::StructureShape.new(name: 'DisassociateTransitGatewayMulticastDomainResult')
     DisassociateTransitGatewayRouteTableRequest = Shapes::StructureShape.new(name: 'DisassociateTransitGatewayRouteTableRequest')
     DisassociateTransitGatewayRouteTableResult = Shapes::StructureShape.new(name: 'DisassociateTransitGatewayRouteTableResult')
+    DisassociateTrunkInterfaceRequest = Shapes::StructureShape.new(name: 'DisassociateTrunkInterfaceRequest')
+    DisassociateTrunkInterfaceResult = Shapes::StructureShape.new(name: 'DisassociateTrunkInterfaceResult')
     DisassociateVpcCidrBlockRequest = Shapes::StructureShape.new(name: 'DisassociateVpcCidrBlockRequest')
     DisassociateVpcCidrBlockResult = Shapes::StructureShape.new(name: 'DisassociateVpcCidrBlockResult')
     DiskCount = Shapes::IntegerShape.new(name: 'DiskCount')
@@ -1279,6 +1286,7 @@ module Aws::EC2
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegrateServices = Shapes::StructureShape.new(name: 'IntegrateServices')
     InterfacePermissionType = Shapes::StringShape.new(name: 'InterfacePermissionType')
+    InterfaceProtocolType = Shapes::StringShape.new(name: 'InterfaceProtocolType')
     InternetGateway = Shapes::StructureShape.new(name: 'InternetGateway')
     InternetGatewayAttachment = Shapes::StructureShape.new(name: 'InternetGatewayAttachment')
     InternetGatewayAttachmentList = Shapes::ListShape.new(name: 'InternetGatewayAttachmentList')
@@ -2135,6 +2143,10 @@ module Aws::EC2
     TransitGatewayVpcAttachmentList = Shapes::ListShape.new(name: 'TransitGatewayVpcAttachmentList')
     TransitGatewayVpcAttachmentOptions = Shapes::StructureShape.new(name: 'TransitGatewayVpcAttachmentOptions')
     TransportProtocol = Shapes::StringShape.new(name: 'TransportProtocol')
+    TrunkInterfaceAssociation = Shapes::StructureShape.new(name: 'TrunkInterfaceAssociation')
+    TrunkInterfaceAssociationId = Shapes::StringShape.new(name: 'TrunkInterfaceAssociationId')
+    TrunkInterfaceAssociationIdList = Shapes::ListShape.new(name: 'TrunkInterfaceAssociationIdList')
+    TrunkInterfaceAssociationList = Shapes::ListShape.new(name: 'TrunkInterfaceAssociationList')
     TunnelInsideIpVersion = Shapes::StringShape.new(name: 'TunnelInsideIpVersion')
     TunnelOption = Shapes::StructureShape.new(name: 'TunnelOption')
     TunnelOptionsList = Shapes::ListShape.new(name: 'TunnelOptionsList')
@@ -2590,6 +2602,18 @@ module Aws::EC2
 
     AssociateTransitGatewayRouteTableResult.add_member(:association, Shapes::ShapeRef.new(shape: TransitGatewayAssociation, location_name: "association"))
     AssociateTransitGatewayRouteTableResult.struct_class = Types::AssociateTransitGatewayRouteTableResult
+
+    AssociateTrunkInterfaceRequest.add_member(:branch_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, required: true, location_name: "BranchInterfaceId"))
+    AssociateTrunkInterfaceRequest.add_member(:trunk_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, required: true, location_name: "TrunkInterfaceId"))
+    AssociateTrunkInterfaceRequest.add_member(:vlan_id, Shapes::ShapeRef.new(shape: Integer, location_name: "VlanId"))
+    AssociateTrunkInterfaceRequest.add_member(:gre_key, Shapes::ShapeRef.new(shape: Integer, location_name: "GreKey"))
+    AssociateTrunkInterfaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    AssociateTrunkInterfaceRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    AssociateTrunkInterfaceRequest.struct_class = Types::AssociateTrunkInterfaceRequest
+
+    AssociateTrunkInterfaceResult.add_member(:interface_association, Shapes::ShapeRef.new(shape: TrunkInterfaceAssociation, location_name: "interfaceAssociation"))
+    AssociateTrunkInterfaceResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+    AssociateTrunkInterfaceResult.struct_class = Types::AssociateTrunkInterfaceResult
 
     AssociateVpcCidrBlockRequest.add_member(:amazon_provided_ipv_6_cidr_block, Shapes::ShapeRef.new(shape: Boolean, location_name: "amazonProvidedIpv6CidrBlock"))
     AssociateVpcCidrBlockRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "CidrBlock"))
@@ -5528,6 +5552,17 @@ module Aws::EC2
     DescribeTransitGatewaysResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeTransitGatewaysResult.struct_class = Types::DescribeTransitGatewaysResult
 
+    DescribeTrunkInterfaceAssociationsRequest.add_member(:association_ids, Shapes::ShapeRef.new(shape: TrunkInterfaceAssociationIdList, location_name: "AssociationId"))
+    DescribeTrunkInterfaceAssociationsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeTrunkInterfaceAssociationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeTrunkInterfaceAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeTrunkInterfaceAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeTrunkInterfaceAssociationsMaxResults, location_name: "MaxResults"))
+    DescribeTrunkInterfaceAssociationsRequest.struct_class = Types::DescribeTrunkInterfaceAssociationsRequest
+
+    DescribeTrunkInterfaceAssociationsResult.add_member(:interface_associations, Shapes::ShapeRef.new(shape: TrunkInterfaceAssociationList, location_name: "interfaceAssociationSet"))
+    DescribeTrunkInterfaceAssociationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeTrunkInterfaceAssociationsResult.struct_class = Types::DescribeTrunkInterfaceAssociationsResult
+
     DescribeVolumeAttributeRequest.add_member(:attribute, Shapes::ShapeRef.new(shape: VolumeAttributeName, required: true, location_name: "Attribute"))
     DescribeVolumeAttributeRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
     DescribeVolumeAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -5896,6 +5931,15 @@ module Aws::EC2
 
     DisassociateTransitGatewayRouteTableResult.add_member(:association, Shapes::ShapeRef.new(shape: TransitGatewayAssociation, location_name: "association"))
     DisassociateTransitGatewayRouteTableResult.struct_class = Types::DisassociateTransitGatewayRouteTableResult
+
+    DisassociateTrunkInterfaceRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: TrunkInterfaceAssociationId, required: true, location_name: "AssociationId"))
+    DisassociateTrunkInterfaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    DisassociateTrunkInterfaceRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisassociateTrunkInterfaceRequest.struct_class = Types::DisassociateTrunkInterfaceRequest
+
+    DisassociateTrunkInterfaceResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    DisassociateTrunkInterfaceResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+    DisassociateTrunkInterfaceResult.struct_class = Types::DisassociateTrunkInterfaceResult
 
     DisassociateVpcCidrBlockRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: VpcCidrAssociationId, required: true, location_name: "associationId"))
     DisassociateVpcCidrBlockRequest.struct_class = Types::DisassociateVpcCidrBlockRequest
@@ -10664,6 +10708,19 @@ module Aws::EC2
     TransitGatewayVpcAttachmentOptions.add_member(:appliance_mode_support, Shapes::ShapeRef.new(shape: ApplianceModeSupportValue, location_name: "applianceModeSupport"))
     TransitGatewayVpcAttachmentOptions.struct_class = Types::TransitGatewayVpcAttachmentOptions
 
+    TrunkInterfaceAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: TrunkInterfaceAssociationId, location_name: "associationId"))
+    TrunkInterfaceAssociation.add_member(:branch_interface_id, Shapes::ShapeRef.new(shape: String, location_name: "branchInterfaceId"))
+    TrunkInterfaceAssociation.add_member(:trunk_interface_id, Shapes::ShapeRef.new(shape: String, location_name: "trunkInterfaceId"))
+    TrunkInterfaceAssociation.add_member(:interface_protocol, Shapes::ShapeRef.new(shape: InterfaceProtocolType, location_name: "interfaceProtocol"))
+    TrunkInterfaceAssociation.add_member(:vlan_id, Shapes::ShapeRef.new(shape: Integer, location_name: "vlanId"))
+    TrunkInterfaceAssociation.add_member(:gre_key, Shapes::ShapeRef.new(shape: Integer, location_name: "greKey"))
+    TrunkInterfaceAssociation.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    TrunkInterfaceAssociation.struct_class = Types::TrunkInterfaceAssociation
+
+    TrunkInterfaceAssociationIdList.member = Shapes::ShapeRef.new(shape: TrunkInterfaceAssociationId, location_name: "item")
+
+    TrunkInterfaceAssociationList.member = Shapes::ShapeRef.new(shape: TrunkInterfaceAssociation, location_name: "item")
+
     TunnelOption.add_member(:outside_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "outsideIpAddress"))
     TunnelOption.add_member(:tunnel_inside_cidr, Shapes::ShapeRef.new(shape: String, location_name: "tunnelInsideCidr"))
     TunnelOption.add_member(:tunnel_inside_ipv_6_cidr, Shapes::ShapeRef.new(shape: String, location_name: "tunnelInsideIpv6Cidr"))
@@ -11305,6 +11362,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AssociateTransitGatewayRouteTableRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateTransitGatewayRouteTableResult)
+      end)
+
+      api.add_operation(:associate_trunk_interface, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateTrunkInterface"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateTrunkInterfaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateTrunkInterfaceResult)
       end)
 
       api.add_operation(:associate_vpc_cidr_block, Seahorse::Model::Operation.new.tap do |o|
@@ -13746,6 +13811,14 @@ module Aws::EC2
         )
       end)
 
+      api.add_operation(:describe_trunk_interface_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTrunkInterfaceAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTrunkInterfaceAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTrunkInterfaceAssociationsResult)
+      end)
+
       api.add_operation(:describe_volume_attribute, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeVolumeAttribute"
         o.http_method = "POST"
@@ -14114,6 +14187,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DisassociateTransitGatewayRouteTableRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateTransitGatewayRouteTableResult)
+      end)
+
+      api.add_operation(:disassociate_trunk_interface, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateTrunkInterface"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateTrunkInterfaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateTrunkInterfaceResult)
       end)
 
       api.add_operation(:disassociate_vpc_cidr_block, Seahorse::Model::Operation.new.tap do |o|

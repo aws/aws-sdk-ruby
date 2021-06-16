@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2021-06-16)
+------------------
+
+* Feature - Adds AWS Secrets Manager Access Token Authentication for Source Locations
+
 1.38.0 (2021-03-16)
 ------------------
 

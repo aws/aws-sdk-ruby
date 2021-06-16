@@ -412,7 +412,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] network_interface_owner_id
-    #   The ID of the AWS account that owns the network interface.
+    #   The ID of the account that owns the network interface.
     #   @return [String]
     #
     # @!attribute [rw] private_ip_address
@@ -639,8 +639,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] allocation_id
-    #   \[EC2-VPC\] The ID that AWS assigns to represent the allocation of
-    #   the Elastic IP address for use with instances in a VPC.
+    #   \[EC2-VPC\] The ID that Amazon Web Services assigns to represent the
+    #   allocation of the Elastic IP address for use with instances in a
+    #   VPC.
     #   @return [String]
     #
     # @!attribute [rw] public_ipv_4_pool
@@ -1782,6 +1783,91 @@ module Aws::EC2
     #
     class AssociateTransitGatewayRouteTableResult < Struct.new(
       :association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AssociateTrunkInterfaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         branch_interface_id: "NetworkInterfaceId", # required
+    #         trunk_interface_id: "NetworkInterfaceId", # required
+    #         vlan_id: 1,
+    #         gre_key: 1,
+    #         client_token: "String",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] branch_interface_id
+    #   The ID of the branch network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] trunk_interface_id
+    #   The ID of the trunk network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] vlan_id
+    #   The ID of the VLAN. This applies to the VLAN protocol.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] gre_key
+    #   The application key. This applies to the GRE protocol.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateTrunkInterfaceRequest AWS API Documentation
+    #
+    class AssociateTrunkInterfaceRequest < Struct.new(
+      :branch_interface_id,
+      :trunk_interface_id,
+      :vlan_id,
+      :gre_key,
+      :client_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] interface_association
+    #   Information about the association between the trunk network
+    #   interface and branch network interface.
+    #   @return [Types::TrunkInterfaceAssociation]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateTrunkInterfaceResult AWS API Documentation
+    #
+    class AssociateTrunkInterfaceResult < Struct.new(
+      :interface_association,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3007,7 +3093,8 @@ module Aws::EC2
     end
 
     # Information about an address range that is provisioned for use with
-    # your AWS resources through bring your own IP addresses (BYOIP).
+    # your Amazon Web Services resources through bring your own IP addresses
+    # (BYOIP).
     #
     # @!attribute [rw] cidr
     #   The address range, in CIDR notation.
@@ -3938,9 +4025,9 @@ module Aws::EC2
     end
 
     # Provides authorization for Amazon to bring a specific IP address range
-    # to a specific AWS account using bring your own IP addresses (BYOIP).
-    # For more information, see [Prepare to Bring Your Address Range to Your
-    # AWS Account][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # to a specific account using bring your own IP addresses (BYOIP). For
+    # more information, see [Configuring your BYOIP address range][1] in the
+    # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -8179,11 +8266,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS account ID.
+    #   The account ID.
     #   @return [String]
     #
     # @!attribute [rw] aws_service
-    #   The AWS service. Currently not supported.
+    #   The Amazon Web Service. Currently not supported.
     #   @return [String]
     #
     # @!attribute [rw] permission
@@ -8246,7 +8333,7 @@ module Aws::EC2
     #           },
     #         ],
     #         secondary_private_ip_address_count: 1,
-    #         interface_type: "efa", # accepts efa
+    #         interface_type: "efa", # accepts efa, branch, trunk
     #         subnet_id: "SubnetId", # required
     #         tag_specifications: [
     #           {
@@ -8325,10 +8412,14 @@ module Aws::EC2
     #   Indicates the type of network interface. To create an Elastic Fabric
     #   Adapter (EFA), specify `efa`. For more information, see [ Elastic
     #   Fabric Adapter][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   To create a trunk network interface, specify `efa`. For more
+    #   information, see [ Network interface trunking][2] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/eni-trunking.html
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
@@ -14312,12 +14403,13 @@ module Aws::EC2
     #     with, if any.
     #
     #   * `network-border-group` - A unique set of Availability Zones, Local
-    #     Zones, or Wavelength Zones from where AWS advertises IP addresses.
+    #     Zones, or Wavelength Zones from where Amazon Web Services
+    #     advertises IP addresses.
     #
     #   * `network-interface-id` - \[EC2-VPC\] The ID of the network
     #     interface that the address is associated with, if any.
     #
-    #   * `network-interface-owner-id` - The AWS account ID of the owner.
+    #   * `network-interface-owner-id` - The account ID of the owner.
     #
     #   * `private-ip-address` - \[EC2-VPC\] The private IP address
     #     associated with the Elastic IP address.
@@ -20044,10 +20136,10 @@ module Aws::EC2
     #   * `network-interface-permission.network-interface-id` - The ID of
     #     the network interface.
     #
-    #   * `network-interface-permission.aws-account-id` - The AWS account
-    #     ID.
+    #   * `network-interface-permission.aws-account-id` - The account ID.
     #
-    #   * `network-interface-permission.aws-service` - The AWS service.
+    #   * `network-interface-permission.aws-service` - The Amazon Web
+    #     Service.
     #
     #   * `network-interface-permission.permission` - The type of permission
     #     (`INSTANCE-ATTACH` \| `EIP-ASSOCIATE`).
@@ -20182,7 +20274,7 @@ module Aws::EC2
     #
     #   * `network-interface-id` - The ID of the network interface.
     #
-    #   * `owner-id` - The AWS account ID of the network interface owner.
+    #   * `owner-id` - The account ID of the network interface owner.
     #
     #   * `private-ip-address` - The private IPv4 address or addresses of
     #     the network interface.
@@ -20190,11 +20282,11 @@ module Aws::EC2
     #   * `private-dns-name` - The private DNS name of the network interface
     #     (IPv4).
     #
-    #   * `requester-id` - The alias or AWS account ID of the principal or
+    #   * `requester-id` - The alias or account ID of the principal or
     #     service that created the network interface.
     #
     #   * `requester-managed` - Indicates whether the network interface is
-    #     being managed by an AWS service (for example, AWS Management
+    #     being managed by an Amazon Web Service (for example, Management
     #     Console, Auto Scaling, and so on).
     #
     #   * `source-dest-check` - Indicates whether the network interface
@@ -23873,6 +23965,82 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeTrunkInterfaceAssociationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         association_ids: ["TrunkInterfaceAssociationId"],
+    #         dry_run: false,
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] association_ids
+    #   The IDs of the associations.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #
+    #   * `gre-key` - The ID of a trunk interface association.
+    #
+    #   * `interface-protocol` - The interface protocol. Valid values are
+    #     `VLAN` and `GRE`.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrunkInterfaceAssociationsRequest AWS API Documentation
+    #
+    class DescribeTrunkInterfaceAssociationsRequest < Struct.new(
+      :association_ids,
+      :dry_run,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] interface_associations
+    #   Information about the trunk associations.
+    #   @return [Array<Types::TrunkInterfaceAssociation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrunkInterfaceAssociationsResult AWS API Documentation
+    #
+    class DescribeTrunkInterfaceAssociationsResult < Struct.new(
+      :interface_associations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeVolumeAttributeRequest
     #   data as a hash:
     #
@@ -26495,6 +26663,73 @@ module Aws::EC2
     #
     class DisassociateTransitGatewayRouteTableResult < Struct.new(
       :association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisassociateTrunkInterfaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         association_id: "TrunkInterfaceAssociationId", # required
+    #         client_token: "String",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] association_id
+    #   The ID ofthe association
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateTrunkInterfaceRequest AWS API Documentation
+    #
+    class DisassociateTrunkInterfaceRequest < Struct.new(
+      :association_id,
+      :client_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateTrunkInterfaceResult AWS API Documentation
+    #
+    class DisassociateTrunkInterfaceResult < Struct.new(
+      :return,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34091,7 +34326,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The ID of the AWS account that created the network interface.
+    #   The ID of the account that created the network interface.
     #   @return [String]
     #
     # @!attribute [rw] private_dns_name
@@ -34126,7 +34361,7 @@ module Aws::EC2
     # @!attribute [rw] interface_type
     #   Describes the type of network interface.
     #
-    #   Valid values: `interface` \| `efa`
+    #   Valid values: `interface` \| `efa` \| `trunk`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterface AWS API Documentation
@@ -34355,8 +34590,8 @@ module Aws::EC2
     #
     #   You can only assign a carrier IP address to a network interface that
     #   is in a subnet in a Wavelength Zone. For more information about
-    #   carrier IP addresses, see Carrier IP addresses in the AWS Wavelength
-    #   Developer Guide.
+    #   carrier IP addresses, see Carrier IP addresses in the Amazon Web
+    #   Services Wavelength Developer Guide.
     #   @return [Boolean]
     #
     # @!attribute [rw] interface_type
@@ -34365,9 +34600,6 @@ module Aws::EC2
     #   To create an Elastic Fabric Adapter (EFA), specify `efa`. For more
     #   information, see [Elastic Fabric Adapter][1] in the *Amazon Elastic
     #   Compute Cloud User Guide*.
-    #
-    #   If you are not creating an EFA, specify `interface` or omit this
-    #   parameter.
     #
     #   Valid values: `interface` \| `efa`
     #
@@ -41886,7 +42118,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The AWS account ID of the owner of the network interface.
+    #   The account ID of the owner of the network interface.
     #   @return [String]
     #
     # @!attribute [rw] private_dns_name
@@ -41902,12 +42134,13 @@ module Aws::EC2
     #   @return [Array<Types::NetworkInterfacePrivateIpAddress>]
     #
     # @!attribute [rw] requester_id
-    #   The alias or AWS account ID of the principal or service that created
-    #   the network interface.
+    #   The alias or account ID of the principal or service that created the
+    #   network interface.
     #   @return [String]
     #
     # @!attribute [rw] requester_managed
-    #   Indicates whether the network interface is being managed by AWS.
+    #   Indicates whether the network interface is being managed by Amazon
+    #   Web Services.
     #   @return [Boolean]
     #
     # @!attribute [rw] source_dest_check
@@ -42037,7 +42270,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] instance_owner_id
-    #   The AWS account ID of the owner of the instance.
+    #   The account ID of the owner of the instance.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -42112,11 +42345,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS account ID.
+    #   The account ID.
     #   @return [String]
     #
     # @!attribute [rw] aws_service
-    #   The AWS service.
+    #   The Amazon Web Service.
     #   @return [String]
     #
     # @!attribute [rw] permission
@@ -42982,10 +43215,10 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes prefixes for AWS services.
+    # Describes prefixes for Amazon Web Services services.
     #
     # @!attribute [rw] cidrs
-    #   The IP address range of the AWS service.
+    #   The IP address range of the Amazon Web Service.
     #   @return [Array<String>]
     #
     # @!attribute [rw] prefix_list_id
@@ -43531,7 +43764,8 @@ module Aws::EC2
     # @!attribute [rw] network_border_group
     #   The name of the location from which the address pool is advertised.
     #   A network border group is a unique set of Availability Zones or
-    #   Local Zones from where AWS advertises public IP addresses.
+    #   Local Zones from where Amazon Web Services advertises public IP
+    #   addresses.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -54529,6 +54763,51 @@ module Aws::EC2
       :dns_support,
       :ipv_6_support,
       :appliance_mode_support)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an association between a branch network interface
+    # with a trunk network interface.
+    #
+    # @!attribute [rw] association_id
+    #   The ID of the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch_interface_id
+    #   The ID of the branch network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] trunk_interface_id
+    #   The ID of the trunk network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] interface_protocol
+    #   The interface protocol. Valid values are `VLAN` and `GRE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] vlan_id
+    #   The ID of the VLAN when you use the VLAN protocol.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] gre_key
+    #   The application key when you use the GRE protocol.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   The tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrunkInterfaceAssociation AWS API Documentation
+    #
+    class TrunkInterfaceAssociation < Struct.new(
+      :association_id,
+      :branch_interface_id,
+      :trunk_interface_id,
+      :interface_protocol,
+      :vlan_id,
+      :gre_key,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

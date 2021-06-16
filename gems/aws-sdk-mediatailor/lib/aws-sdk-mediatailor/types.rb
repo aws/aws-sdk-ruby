@@ -16,7 +16,12 @@ module Aws::MediaTailor
     #   data as a hash:
     #
     #       {
-    #         access_type: "S3_SIGV4", # accepts S3_SIGV4
+    #         access_type: "S3_SIGV4", # accepts S3_SIGV4, SECRETS_MANAGER_ACCESS_TOKEN
+    #         secrets_manager_access_token_configuration: {
+    #           header_name: "__string",
+    #           secret_arn: "__string",
+    #           secret_string_key: "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] access_type
@@ -48,10 +53,15 @@ module Aws::MediaTailor
     #   VodSource packaging configurations.
     #   @return [String]
     #
+    # @!attribute [rw] secrets_manager_access_token_configuration
+    #   AWS Secrets Manager access token configuration parameters.
+    #   @return [Types::SecretsManagerAccessTokenConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/AccessConfiguration AWS API Documentation
     #
     class AccessConfiguration < Struct.new(
-      :access_type)
+      :access_type,
+      :secrets_manager_access_token_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -522,7 +532,12 @@ module Aws::MediaTailor
     #
     #       {
     #         access_configuration: {
-    #           access_type: "S3_SIGV4", # accepts S3_SIGV4
+    #           access_type: "S3_SIGV4", # accepts S3_SIGV4, SECRETS_MANAGER_ACCESS_TOKEN
+    #           secrets_manager_access_token_configuration: {
+    #             header_name: "__string",
+    #             secret_arn: "__string",
+    #             secret_string_key: "__string",
+    #           },
     #         },
     #         default_segment_delivery_configuration: {
     #           base_url: "__string",
@@ -2514,6 +2529,53 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # AWS Secrets Manager access token configuration parameters. For
+    # information about Secrets Manager access token authentication, see
+    # [Working with AWS Secrets Manager access token authentication][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-access-configuration-access-token.html
+    #
+    # @note When making an API call, you may pass SecretsManagerAccessTokenConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         header_name: "__string",
+    #         secret_arn: "__string",
+    #         secret_string_key: "__string",
+    #       }
+    #
+    # @!attribute [rw] header_name
+    #   The name of the HTTP header used to supply the access token in
+    #   requests to the source location.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the AWS Secrets Manager secret
+    #   that contains the access token.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_string_key
+    #   The AWS Secrets Manager [SecretString][1] key associated with the
+    #   access token. MediaTailor uses the key to look up SecretString key
+    #   and value pair containing the access token.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_CreateSecret.html#SecretsManager-CreateSecret-request-SecretString.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/SecretsManagerAccessTokenConfiguration AWS API Documentation
+    #
+    class SecretsManagerAccessTokenConfiguration < Struct.new(
+      :header_name,
+      :secret_arn,
+      :secret_string_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Slate VOD source configuration.
     #
     # @note When making an API call, you may pass SlateSource
@@ -2855,7 +2917,12 @@ module Aws::MediaTailor
     #
     #       {
     #         access_configuration: {
-    #           access_type: "S3_SIGV4", # accepts S3_SIGV4
+    #           access_type: "S3_SIGV4", # accepts S3_SIGV4, SECRETS_MANAGER_ACCESS_TOKEN
+    #           secrets_manager_access_token_configuration: {
+    #             header_name: "__string",
+    #             secret_arn: "__string",
+    #             secret_string_key: "__string",
+    #           },
     #         },
     #         default_segment_delivery_configuration: {
     #           base_url: "__string",

@@ -1465,6 +1465,14 @@ module Aws::RDS
     #     copy_tags_to_snapshot: false,
     #     domain: "String",
     #     domain_iam_role_name: "String",
+    #     scaling_configuration: {
+    #       min_capacity: 1,
+    #       max_capacity: 1,
+    #       auto_pause: false,
+    #       seconds_until_auto_pause: 1,
+    #       timeout_action: "String",
+    #     },
+    #     engine_mode: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_cluster_identifier
@@ -1642,6 +1650,16 @@ module Aws::RDS
     # @option options [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.
+    # @option options [Types::ScalingConfiguration] :scaling_configuration
+    #   For DB clusters in `serverless` DB engine mode, the scaling properties
+    #   of the DB cluster.
+    # @option options [String] :engine_mode
+    #   The engine mode of the new cluster. Specify `provisioned` or
+    #   `serverless`, depending on the type of the cluster you are creating.
+    #   You can create an Aurora Serverless clone from a provisioned cluster,
+    #   or a provisioned clone from an Aurora Serverless cluster. To create a
+    #   clone that is an Aurora Serverless cluster, the original cluster must
+    #   be an Aurora Serverless cluster or an encrypted provisioned cluster.
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(source_db_cluster_identifier: @id)

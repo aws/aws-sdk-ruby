@@ -97,6 +97,7 @@ module Aws::MediaTailor
     ResponseOutputs = Shapes::ListShape.new(name: 'ResponseOutputs')
     ScheduleConfiguration = Shapes::StructureShape.new(name: 'ScheduleConfiguration')
     ScheduleEntry = Shapes::StructureShape.new(name: 'ScheduleEntry')
+    SecretsManagerAccessTokenConfiguration = Shapes::StructureShape.new(name: 'SecretsManagerAccessTokenConfiguration')
     SlateSource = Shapes::StructureShape.new(name: 'SlateSource')
     SourceLocation = Shapes::StructureShape.new(name: 'SourceLocation')
     SpliceInsertMessage = Shapes::StructureShape.new(name: 'SpliceInsertMessage')
@@ -131,6 +132,7 @@ module Aws::MediaTailor
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
 
     AccessConfiguration.add_member(:access_type, Shapes::ShapeRef.new(shape: AccessType, location_name: "AccessType"))
+    AccessConfiguration.add_member(:secrets_manager_access_token_configuration, Shapes::ShapeRef.new(shape: SecretsManagerAccessTokenConfiguration, location_name: "SecretsManagerAccessTokenConfiguration"))
     AccessConfiguration.struct_class = Types::AccessConfiguration
 
     AdBreak.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
@@ -531,6 +533,11 @@ module Aws::MediaTailor
     ScheduleEntry.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "SourceLocationName"))
     ScheduleEntry.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "VodSourceName"))
     ScheduleEntry.struct_class = Types::ScheduleEntry
+
+    SecretsManagerAccessTokenConfiguration.add_member(:header_name, Shapes::ShapeRef.new(shape: __string, location_name: "HeaderName"))
+    SecretsManagerAccessTokenConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: __string, location_name: "SecretArn"))
+    SecretsManagerAccessTokenConfiguration.add_member(:secret_string_key, Shapes::ShapeRef.new(shape: __string, location_name: "SecretStringKey"))
+    SecretsManagerAccessTokenConfiguration.struct_class = Types::SecretsManagerAccessTokenConfiguration
 
     SlateSource.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, location_name: "SourceLocationName"))
     SlateSource.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "VodSourceName"))

@@ -516,31 +516,6 @@ module Aws::RDS
     #   **Aurora PostgreSQL**
     #
     #   Example: `aurora-postgresql9.6`
-    #
-    #   To list all of the available parameter group families for a DB engine,
-    #   use the following command:
-    #
-    #   `aws rds describe-db-engine-versions --query
-    #   "DBEngineVersions[].DBParameterGroupFamily" --engine <engine>`
-    #
-    #   For example, to list all of the available parameter group families for
-    #   the Aurora PostgreSQL DB engine, use the following command:
-    #
-    #   `aws rds describe-db-engine-versions --query
-    #   "DBEngineVersions[].DBParameterGroupFamily" --engine
-    #   aurora-postgresql`
-    #
-    #   <note markdown="1"> The output contains duplicates.
-    #
-    #    </note>
-    #
-    #   The following are the valid DB engine values:
-    #
-    #   * `aurora` (for MySQL 5.6-compatible Aurora)
-    #
-    #   * `aurora-mysql` (for MySQL 5.7-compatible Aurora)
-    #
-    #   * `aurora-postgresql`
     # @option options [required, String] :description
     #   The description for the DB cluster parameter group.
     # @option options [Array<Types::Tag>] :tags
@@ -1514,51 +1489,15 @@ module Aws::RDS
     #   applied only to a DB instance running a database engine and engine
     #   version compatible with that DB parameter group family.
     #
-    #   To list all of the available parameter group families for a DB engine,
-    #   use the following command:
+    #   To list all of the available parameter group families, use the
+    #   following command:
     #
     #   `aws rds describe-db-engine-versions --query
-    #   "DBEngineVersions[].DBParameterGroupFamily" --engine <engine>`
-    #
-    #   For example, to list all of the available parameter group families for
-    #   the MySQL DB engine, use the following command:
-    #
-    #   `aws rds describe-db-engine-versions --query
-    #   "DBEngineVersions[].DBParameterGroupFamily" --engine mysql`
+    #   "DBEngineVersions[].DBParameterGroupFamily"`
     #
     #   <note markdown="1"> The output contains duplicates.
     #
     #    </note>
-    #
-    #   The following are the valid DB engine values:
-    #
-    #   * `aurora` (for MySQL 5.6-compatible Aurora)
-    #
-    #   * `aurora-mysql` (for MySQL 5.7-compatible Aurora)
-    #
-    #   * `aurora-postgresql`
-    #
-    #   * `mariadb`
-    #
-    #   * `mysql`
-    #
-    #   * `oracle-ee`
-    #
-    #   * `oracle-se2`
-    #
-    #   * `oracle-se1`
-    #
-    #   * `oracle-se`
-    #
-    #   * `postgres`
-    #
-    #   * `sqlserver-ee`
-    #
-    #   * `sqlserver-se`
-    #
-    #   * `sqlserver-ex`
-    #
-    #   * `sqlserver-web`
     # @option options [required, String] :description
     #   The description for the DB parameter group.
     # @option options [Array<Types::Tag>] :tags

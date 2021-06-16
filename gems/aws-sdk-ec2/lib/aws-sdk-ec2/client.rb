@@ -646,19 +646,22 @@ module Aws::EC2
     end
 
     # Advertises an IPv4 or IPv6 address range that is provisioned for use
-    # with your AWS resources through bring your own IP addresses (BYOIP).
+    # with your Amazon Web Services resources through bring your own IP
+    # addresses (BYOIP).
     #
     # You can perform this operation at most once every 10 seconds, even if
     # you specify different address ranges each time.
     #
     # We recommend that you stop advertising the BYOIP CIDR from other
-    # locations when you advertise it from AWS. To minimize down time, you
-    # can configure your AWS resources to use an address from a BYOIP CIDR
-    # before it is advertised, and then simultaneously stop advertising it
-    # from the current location and start advertising it through AWS.
+    # locations when you advertise it from Amazon Web Services. To minimize
+    # down time, you can configure your Amazon Web Services resources to use
+    # an address from a BYOIP CIDR before it is advertised, and then
+    # simultaneously stop advertising it from the current location and start
+    # advertising it through Amazon Web Services.
     #
     # It can take a few minutes before traffic to the specified addresses
-    # starts routing to AWS because of BGP propagation delays.
+    # starts routing to Amazon Web Services because of BGP propagation
+    # delays.
     #
     # To stop advertising the BYOIP CIDR, use WithdrawByoipCidr.
     #
@@ -700,22 +703,23 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Allocates an Elastic IP address to your AWS account. After you
-    # allocate the Elastic IP address you can associate it with an instance
-    # or network interface. After you release an Elastic IP address, it is
+    # Allocates an Elastic IP address to your account. After you allocate
+    # the Elastic IP address you can associate it with an instance or
+    # network interface. After you release an Elastic IP address, it is
     # released to the IP address pool and can be allocated to a different
-    # AWS account.
+    # account.
     #
     # You can allocate an Elastic IP address from an address pool owned by
-    # AWS or from an address pool created from a public IPv4 address range
-    # that you have brought to AWS for use with your AWS resources using
-    # bring your own IP addresses (BYOIP). For more information, see [Bring
-    # Your Own IP Addresses (BYOIP)][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # Amazon Web Services or from an address pool created from a public IPv4
+    # address range that you have brought to Amazon Web Services for use
+    # with your Amazon Web Services resources using bring your own IP
+    # addresses (BYOIP). For more information, see [Bring Your Own IP
+    # Addresses (BYOIP)][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     # \[EC2-VPC\] If you release an Elastic IP address, you might be able to
     # recover it. You cannot recover an Elastic IP address that you released
-    # after it is allocated to another AWS account. You cannot recover an
+    # after it is allocated to another account. You cannot recover an
     # Elastic IP address for EC2-Classic. To attempt to recover an Elastic
     # IP address that you released, specify it in this operation.
     #
@@ -1821,6 +1825,90 @@ module Aws::EC2
     # @param [Hash] params ({})
     def associate_transit_gateway_route_table(params = {}, options = {})
       req = build_request(:associate_transit_gateway_route_table, params)
+      req.send_request(options)
+    end
+
+    # Associates a branch network interface with a trunk network interface.
+    #
+    # Before you create the association, run the
+    # [create-network-interface][1] command and set `--interface-type` to
+    # `trunk`. You must also create a network interface for each branch
+    # network interface that you want to associate with the trunk network
+    # interface.
+    #
+    # For more information, see [ Network interface trunking][2] in the
+    # *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/eni-trunking.html
+    #
+    # @option params [required, String] :branch_interface_id
+    #   The ID of the branch network interface.
+    #
+    # @option params [required, String] :trunk_interface_id
+    #   The ID of the trunk network interface.
+    #
+    # @option params [Integer] :vlan_id
+    #   The ID of the VLAN. This applies to the VLAN protocol.
+    #
+    # @option params [Integer] :gre_key
+    #   The application key. This applies to the GRE protocol.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::AssociateTrunkInterfaceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateTrunkInterfaceResult#interface_association #interface_association} => Types::TrunkInterfaceAssociation
+    #   * {Types::AssociateTrunkInterfaceResult#client_token #client_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_trunk_interface({
+    #     branch_interface_id: "NetworkInterfaceId", # required
+    #     trunk_interface_id: "NetworkInterfaceId", # required
+    #     vlan_id: 1,
+    #     gre_key: 1,
+    #     client_token: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.interface_association.association_id #=> String
+    #   resp.interface_association.branch_interface_id #=> String
+    #   resp.interface_association.trunk_interface_id #=> String
+    #   resp.interface_association.interface_protocol #=> String, one of "VLAN", "GRE"
+    #   resp.interface_association.vlan_id #=> Integer
+    #   resp.interface_association.gre_key #=> Integer
+    #   resp.interface_association.tags #=> Array
+    #   resp.interface_association.tags[0].key #=> String
+    #   resp.interface_association.tags[0].value #=> String
+    #   resp.client_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateTrunkInterface AWS API Documentation
+    #
+    # @overload associate_trunk_interface(params = {})
+    # @param [Hash] params ({})
+    def associate_trunk_interface(params = {}, options = {})
+      req = build_request(:associate_trunk_interface, params)
       req.send_request(options)
     end
 
@@ -7070,10 +7158,14 @@ module Aws::EC2
     #   Indicates the type of network interface. To create an Elastic Fabric
     #   Adapter (EFA), specify `efa`. For more information, see [ Elastic
     #   Fabric Adapter][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   To create a trunk network interface, specify `efa`. For more
+    #   information, see [ Network interface trunking][2] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/eni-trunking.html
     #
     # @option params [required, String] :subnet_id
     #   The ID of the subnet to associate with the network interface.
@@ -7163,7 +7255,7 @@ module Aws::EC2
     #       },
     #     ],
     #     secondary_private_ip_address_count: 1,
-    #     interface_type: "efa", # accepts efa
+    #     interface_type: "efa", # accepts efa, branch, trunk
     #     subnet_id: "SubnetId", # required
     #     tag_specifications: [
     #       {
@@ -7201,7 +7293,7 @@ module Aws::EC2
     #   resp.network_interface.groups #=> Array
     #   resp.network_interface.groups[0].group_name #=> String
     #   resp.network_interface.groups[0].group_id #=> String
-    #   resp.network_interface.interface_type #=> String, one of "interface", "natGateway", "efa"
+    #   resp.network_interface.interface_type #=> String, one of "interface", "natGateway", "efa", "trunk"
     #   resp.network_interface.ipv_6_addresses #=> Array
     #   resp.network_interface.ipv_6_addresses[0].ipv_6_address #=> String
     #   resp.network_interface.mac_address #=> String
@@ -7241,20 +7333,20 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Grants an AWS-authorized account permission to attach the specified
-    # network interface to an instance in their account.
+    # Grants an Amazon Web Services-authorized account permission to attach
+    # the specified network interface to an instance in their account.
     #
-    # You can grant permission to a single AWS account only, and only one
+    # You can grant permission to a single account only, and only one
     # account at a time.
     #
     # @option params [required, String] :network_interface_id
     #   The ID of the network interface.
     #
     # @option params [String] :aws_account_id
-    #   The AWS account ID.
+    #   The account ID.
     #
     # @option params [String] :aws_service
-    #   The AWS service. Currently not supported.
+    #   The Amazon Web Service. Currently not supported.
     #
     # @option params [required, String] :permission
     #   The type of permission to grant.
@@ -13600,8 +13692,8 @@ module Aws::EC2
     end
 
     # Releases the specified address range that you provisioned for use with
-    # your AWS resources through bring your own IP addresses (BYOIP) and
-    # deletes the corresponding address pool.
+    # your Amazon Web Services resources through bring your own IP addresses
+    # (BYOIP) and deletes the corresponding address pool.
     #
     # Before you can release an address range, you must stop advertising it
     # using WithdrawByoipCidr and you must not have any IP addresses
@@ -13998,12 +14090,13 @@ module Aws::EC2
     #     with, if any.
     #
     #   * `network-border-group` - A unique set of Availability Zones, Local
-    #     Zones, or Wavelength Zones from where AWS advertises IP addresses.
+    #     Zones, or Wavelength Zones from where Amazon Web Services advertises
+    #     IP addresses.
     #
     #   * `network-interface-id` - \[EC2-VPC\] The ID of the network interface
     #     that the address is associated with, if any.
     #
-    #   * `network-interface-owner-id` - The AWS account ID of the owner.
+    #   * `network-interface-owner-id` - The account ID of the owner.
     #
     #   * `private-ip-address` - \[EC2-VPC\] The private IP address associated
     #     with the Elastic IP address.
@@ -20282,7 +20375,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes your managed prefix lists and any AWS-managed prefix lists.
+    # Describes your managed prefix lists and any Amazon Web
+    # Services-managed prefix lists.
     #
     # To view the entries for your prefix list, use
     # GetManagedPrefixListEntries.
@@ -21321,9 +21415,9 @@ module Aws::EC2
     #   * `network-interface-permission.network-interface-id` - The ID of the
     #     network interface.
     #
-    #   * `network-interface-permission.aws-account-id` - The AWS account ID.
+    #   * `network-interface-permission.aws-account-id` - The account ID.
     #
-    #   * `network-interface-permission.aws-service` - The AWS service.
+    #   * `network-interface-permission.aws-service` - The Amazon Web Service.
     #
     #   * `network-interface-permission.permission` - The type of permission
     #     (`INSTANCE-ATTACH` \| `EIP-ASSOCIATE`).
@@ -21450,7 +21544,7 @@ module Aws::EC2
     #
     #   * `network-interface-id` - The ID of the network interface.
     #
-    #   * `owner-id` - The AWS account ID of the network interface owner.
+    #   * `owner-id` - The account ID of the network interface owner.
     #
     #   * `private-ip-address` - The private IPv4 address or addresses of the
     #     network interface.
@@ -21458,11 +21552,11 @@ module Aws::EC2
     #   * `private-dns-name` - The private DNS name of the network interface
     #     (IPv4).
     #
-    #   * `requester-id` - The alias or AWS account ID of the principal or
-    #     service that created the network interface.
+    #   * `requester-id` - The alias or account ID of the principal or service
+    #     that created the network interface.
     #
     #   * `requester-managed` - Indicates whether the network interface is
-    #     being managed by an AWS service (for example, AWS Management
+    #     being managed by an Amazon Web Service (for example, Management
     #     Console, Auto Scaling, and so on).
     #
     #   * `source-dest-check` - Indicates whether the network interface
@@ -21620,7 +21714,7 @@ module Aws::EC2
     #   resp.network_interfaces[0].groups #=> Array
     #   resp.network_interfaces[0].groups[0].group_name #=> String
     #   resp.network_interfaces[0].groups[0].group_id #=> String
-    #   resp.network_interfaces[0].interface_type #=> String, one of "interface", "natGateway", "efa"
+    #   resp.network_interfaces[0].interface_type #=> String, one of "interface", "natGateway", "efa", "trunk"
     #   resp.network_interfaces[0].ipv_6_addresses #=> Array
     #   resp.network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
     #   resp.network_interfaces[0].mac_address #=> String
@@ -21748,9 +21842,9 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes available AWS services in a prefix list format, which
-    # includes the prefix list name and prefix list ID of the service and
-    # the IP address range for the service.
+    # Describes available Amazon Web Services services in a prefix list
+    # format, which includes the prefix list name and prefix list ID of the
+    # service and the IP address range for the service.
     #
     # We recommend that you use DescribeManagedPrefixLists instead.
     #
@@ -26314,6 +26408,76 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes one or more network interface trunk associations.
+    #
+    # @option params [Array<String>] :association_ids
+    #   The IDs of the associations.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    #   * `gre-key` - The ID of a trunk interface association.
+    #
+    #   * `interface-protocol` - The interface protocol. Valid values are
+    #     `VLAN` and `GRE`.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @return [Types::DescribeTrunkInterfaceAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTrunkInterfaceAssociationsResult#interface_associations #interface_associations} => Array&lt;Types::TrunkInterfaceAssociation&gt;
+    #   * {Types::DescribeTrunkInterfaceAssociationsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_trunk_interface_associations({
+    #     association_ids: ["TrunkInterfaceAssociationId"],
+    #     dry_run: false,
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.interface_associations #=> Array
+    #   resp.interface_associations[0].association_id #=> String
+    #   resp.interface_associations[0].branch_interface_id #=> String
+    #   resp.interface_associations[0].trunk_interface_id #=> String
+    #   resp.interface_associations[0].interface_protocol #=> String, one of "VLAN", "GRE"
+    #   resp.interface_associations[0].vlan_id #=> Integer
+    #   resp.interface_associations[0].gre_key #=> Integer
+    #   resp.interface_associations[0].tags #=> Array
+    #   resp.interface_associations[0].tags[0].key #=> String
+    #   resp.interface_associations[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrunkInterfaceAssociations AWS API Documentation
+    #
+    # @overload describe_trunk_interface_associations(params = {})
+    # @param [Hash] params ({})
+    def describe_trunk_interface_associations(params = {}, options = {})
+      req = build_request(:describe_trunk_interface_associations, params)
+      req.send_request(options)
+    end
+
     # Describes the specified attribute of the specified volume. You can
     # specify only one attribute at a time.
     #
@@ -29300,6 +29464,57 @@ module Aws::EC2
     # @param [Hash] params ({})
     def disassociate_transit_gateway_route_table(params = {}, options = {})
       req = build_request(:disassociate_transit_gateway_route_table, params)
+      req.send_request(options)
+    end
+
+    # Removes an association between a branch network interface with a trunk
+    # network interface.
+    #
+    # @option params [required, String] :association_id
+    #   The ID ofthe association
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DisassociateTrunkInterfaceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateTrunkInterfaceResult#return #return} => Boolean
+    #   * {Types::DisassociateTrunkInterfaceResult#client_token #client_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_trunk_interface({
+    #     association_id: "TrunkInterfaceAssociationId", # required
+    #     client_token: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #   resp.client_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateTrunkInterface AWS API Documentation
+    #
+    # @overload disassociate_trunk_interface(params = {})
+    # @param [Hash] params ({})
+    def disassociate_trunk_interface(params = {}, options = {})
+      req = build_request(:disassociate_trunk_interface, params)
       req.send_request(options)
     end
 
@@ -36334,17 +36549,17 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Provisions an IPv4 or IPv6 address range for use with your AWS
-    # resources through bring your own IP addresses (BYOIP) and creates a
-    # corresponding address pool. After the address range is provisioned, it
-    # is ready to be advertised using AdvertiseByoipCidr.
+    # Provisions an IPv4 or IPv6 address range for use with your Amazon Web
+    # Services resources through bring your own IP addresses (BYOIP) and
+    # creates a corresponding address pool. After the address range is
+    # provisioned, it is ready to be advertised using AdvertiseByoipCidr.
     #
-    # AWS verifies that you own the address range and are authorized to
-    # advertise it. You must ensure that the address range is registered to
-    # you and that you created an RPKI ROA to authorize Amazon ASNs 16509
-    # and 14618 to advertise the address range. For more information, see
-    # [Bring Your Own IP Addresses (BYOIP)][1] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # Amazon Web Services verifies that you own the address range and are
+    # authorized to advertise it. You must ensure that the address range is
+    # registered to you and that you created an RPKI ROA to authorize Amazon
+    # ASNs 16509 and 14618 to advertise the address range. For more
+    # information, see [Bring your own IP addresses (BYOIP)][1] in the
+    # *Amazon Elastic Compute Cloud User Guide*.
     #
     # Provisioning an address range is an asynchronous operation, so the
     # call returns immediately, but the address range is not ready to use
@@ -37404,7 +37619,7 @@ module Aws::EC2
     # address pool. Be sure to update your DNS records and any servers or
     # devices that communicate with the address. If you attempt to release
     # an Elastic IP address that you already released, you'll get an
-    # `AuthFailure` error if the address is already allocated to another AWS
+    # `AuthFailure` error if the address is already allocated to another
     # account.
     #
     # \[EC2-VPC\] After you release an Elastic IP address for use in a VPC,
@@ -41972,7 +42187,8 @@ module Aws::EC2
     # you specify different address ranges each time.
     #
     # It can take a few minutes before traffic to the specified addresses
-    # stops routing to AWS because of BGP propagation delays.
+    # stops routing to Amazon Web Services because of BGP propagation
+    # delays.
     #
     # @option params [required, String] :cidr
     #   The address range, in CIDR notation.
@@ -42023,7 +42239,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.243.0'
+      context[:gem_version] = '1.244.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.244.0 (2021-06-16)
+------------------
+
+* Feature - This release adds support for VLAN-tagged network traffic over an Elastic Network Interface (ENI). This feature is in limited Preview for this release. Contact your account manager if you are interested in this feature.
+
 1.243.0 (2021-06-15)
 ------------------
 

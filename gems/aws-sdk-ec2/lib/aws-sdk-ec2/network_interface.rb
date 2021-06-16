@@ -83,7 +83,7 @@ module Aws::EC2
       data[:outpost_arn]
     end
 
-    # The AWS account ID of the owner of the network interface.
+    # The account ID of the owner of the network interface.
     # @return [String]
     def owner_id
       data[:owner_id]
@@ -107,14 +107,15 @@ module Aws::EC2
       data[:private_ip_addresses]
     end
 
-    # The alias or AWS account ID of the principal or service that created
-    # the network interface.
+    # The alias or account ID of the principal or service that created the
+    # network interface.
     # @return [String]
     def requester_id
       data[:requester_id]
     end
 
-    # Indicates whether the network interface is being managed by AWS.
+    # Indicates whether the network interface is being managed by Amazon Web
+    # Services.
     # @return [Boolean]
     def requester_managed
       data[:requester_managed]
