@@ -17,6 +17,7 @@ module Aws::RDS
     AccountQuota = Shapes::StructureShape.new(name: 'AccountQuota')
     AccountQuotaList = Shapes::ListShape.new(name: 'AccountQuotaList')
     ActivityStreamMode = Shapes::StringShape.new(name: 'ActivityStreamMode')
+    ActivityStreamModeList = Shapes::ListShape.new(name: 'ActivityStreamModeList')
     ActivityStreamStatus = Shapes::StringShape.new(name: 'ActivityStreamStatus')
     AddRoleToDBClusterMessage = Shapes::StructureShape.new(name: 'AddRoleToDBClusterMessage')
     AddRoleToDBInstanceMessage = Shapes::StructureShape.new(name: 'AddRoleToDBInstanceMessage')
@@ -611,6 +612,8 @@ module Aws::RDS
     AccountQuota.struct_class = Types::AccountQuota
 
     AccountQuotaList.member = Shapes::ShapeRef.new(shape: AccountQuota, location_name: "AccountQuota")
+
+    ActivityStreamModeList.member = Shapes::ShapeRef.new(shape: String)
 
     AddRoleToDBClusterMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
     AddRoleToDBClusterMessage.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RoleArn"))
@@ -1359,6 +1362,11 @@ module Aws::RDS
     DBInstance.add_member(:db_instance_automated_backups_replications, Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackupsReplicationList, location_name: "DBInstanceAutomatedBackupsReplications"))
     DBInstance.add_member(:customer_owned_ip_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CustomerOwnedIpEnabled"))
     DBInstance.add_member(:aws_backup_recovery_point_arn, Shapes::ShapeRef.new(shape: String, location_name: "AwsBackupRecoveryPointArn"))
+    DBInstance.add_member(:activity_stream_status, Shapes::ShapeRef.new(shape: ActivityStreamStatus, location_name: "ActivityStreamStatus"))
+    DBInstance.add_member(:activity_stream_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "ActivityStreamKmsKeyId"))
+    DBInstance.add_member(:activity_stream_kinesis_stream_name, Shapes::ShapeRef.new(shape: String, location_name: "ActivityStreamKinesisStreamName"))
+    DBInstance.add_member(:activity_stream_mode, Shapes::ShapeRef.new(shape: ActivityStreamMode, location_name: "ActivityStreamMode"))
+    DBInstance.add_member(:activity_stream_engine_native_audit_fields_included, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ActivityStreamEngineNativeAuditFieldsIncluded"))
     DBInstance.struct_class = Types::DBInstance
 
     DBInstanceAlreadyExistsFault.struct_class = Types::DBInstanceAlreadyExistsFault
@@ -2700,6 +2708,7 @@ module Aws::RDS
     OrderableDBInstanceOption.add_member(:supports_storage_autoscaling, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsStorageAutoscaling"))
     OrderableDBInstanceOption.add_member(:supports_kerberos_authentication, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsKerberosAuthentication"))
     OrderableDBInstanceOption.add_member(:outpost_capable, Shapes::ShapeRef.new(shape: Boolean, location_name: "OutpostCapable"))
+    OrderableDBInstanceOption.add_member(:supported_activity_stream_modes, Shapes::ShapeRef.new(shape: ActivityStreamModeList, location_name: "SupportedActivityStreamModes"))
     OrderableDBInstanceOption.add_member(:supports_global_databases, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsGlobalDatabases"))
     OrderableDBInstanceOption.struct_class = Types::OrderableDBInstanceOption
 
@@ -3198,6 +3207,7 @@ module Aws::RDS
     StartActivityStreamRequest.add_member(:mode, Shapes::ShapeRef.new(shape: ActivityStreamMode, required: true, location_name: "Mode"))
     StartActivityStreamRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "KmsKeyId"))
     StartActivityStreamRequest.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ApplyImmediately"))
+    StartActivityStreamRequest.add_member(:engine_native_audit_fields_included, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EngineNativeAuditFieldsIncluded"))
     StartActivityStreamRequest.struct_class = Types::StartActivityStreamRequest
 
     StartActivityStreamResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
@@ -3205,6 +3215,7 @@ module Aws::RDS
     StartActivityStreamResponse.add_member(:status, Shapes::ShapeRef.new(shape: ActivityStreamStatus, location_name: "Status"))
     StartActivityStreamResponse.add_member(:mode, Shapes::ShapeRef.new(shape: ActivityStreamMode, location_name: "Mode"))
     StartActivityStreamResponse.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: Boolean, location_name: "ApplyImmediately"))
+    StartActivityStreamResponse.add_member(:engine_native_audit_fields_included, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EngineNativeAuditFieldsIncluded"))
     StartActivityStreamResponse.struct_class = Types::StartActivityStreamResponse
 
     StartDBClusterMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2021-06-17)
+------------------
+
+* Feature - This release enables Database Activity Streams for RDS Oracle
+
 1.120.0 (2021-06-16)
 ------------------
 
