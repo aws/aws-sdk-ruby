@@ -289,9 +289,9 @@ module Aws
 
     def assume_role_process_credentials_from_config(profile)
       validate_profile_exists(profile)
-      credential_process = @parsed_credentials.fetch(:profile, {})['credential_process']
+      credential_process = @parsed_credentials.fetch(profile, {})['credential_process']
       if @parsed_config
-        credential_process = @parsed_config.fetch(:profile, {})['credential_process']
+        credential_process ||= @parsed_config.fetch(profile, {})['credential_process']
       end
       ProcessCredentials.new(credential_process) if credential_process
     end
