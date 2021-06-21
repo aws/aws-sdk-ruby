@@ -327,6 +327,193 @@ module Aws::CloudFormation
 
     # @!group API Operations
 
+    # Activates a public third-party extension, making it available for use
+    # in stack templates. For more information, see [Using public
+    # extensions][1] in the *CloudFormation User Guide*.
+    #
+    # Once you have activated a public third-party extension in your account
+    # and region, use
+    # [SetTypeConfiguration](AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html)
+    # to specify configuration properties for the extension. For more
+    # information, see [Configuring extensions at the account level][2] in
+    # the *CloudFormation User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html
+    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
+    #
+    # @option params [String] :type
+    #   The extension type.
+    #
+    #   Conditional: You must specify `PublicTypeArn`, or `TypeName`, `Type`,
+    #   and `PublisherId`.
+    #
+    # @option params [String] :public_type_arn
+    #   The Amazon Resource Number (ARN) of the public extension.
+    #
+    #   Conditional: You must specify `PublicTypeArn`, or `TypeName`, `Type`,
+    #   and `PublisherId`.
+    #
+    # @option params [String] :publisher_id
+    #   The ID of the extension publisher.
+    #
+    #   Conditional: You must specify `PublicTypeArn`, or `TypeName`, `Type`,
+    #   and `PublisherId`.
+    #
+    # @option params [String] :type_name
+    #   The name of the extension.
+    #
+    #   Conditional: You must specify `PublicTypeArn`, or `TypeName`, `Type`,
+    #   and `PublisherId`.
+    #
+    # @option params [String] :type_name_alias
+    #   An alias to assign to the public extension, in this account and
+    #   region. If you specify an alias for the extension, CloudFormation
+    #   treats the alias as the extension type name within this account and
+    #   region. You must use the alias to refer to the extension in your
+    #   templates, API calls, and CloudFormation console.
+    #
+    #   An extension alias must be unique within a given account and region.
+    #   You can activate the same public resource multiple times in the same
+    #   account and region, using different type name aliases.
+    #
+    # @option params [Boolean] :auto_update
+    #   Whether to automatically update the extension in this account and
+    #   region when a new *minor* version is published by the extension
+    #   publisher. Major versions released by the publisher must be manually
+    #   updated.
+    #
+    #   The default is `true`.
+    #
+    # @option params [Types::LoggingConfig] :logging_config
+    #   Contains logging configuration information for an extension.
+    #
+    # @option params [String] :execution_role_arn
+    #   The name of the IAM execution role to use to activate the extension.
+    #
+    # @option params [String] :version_bump
+    #   Manually updates a previously-activated type to a new major or minor
+    #   version, if available. You can also use this parameter to update the
+    #   value of `AutoUpdate`.
+    #
+    #   * `MAJOR`\: CloudFormation updates the extension to the newest major
+    #     version, if one is available.
+    #
+    #   * `MINOR`\: CloudFormation updates the extension to the newest minor
+    #     version, if one is available.
+    #
+    # @option params [Integer] :major_version
+    #   The major version of this extension you want to activate, if multiple
+    #   major versions are available. The default is the latest major version.
+    #   CloudFormation uses the latest available *minor* version of the major
+    #   version selected.
+    #
+    #   You can specify `MajorVersion` or `VersionBump`, but not both.
+    #
+    # @return [Types::ActivateTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ActivateTypeOutput#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.activate_type({
+    #     type: "RESOURCE", # accepts RESOURCE, MODULE
+    #     public_type_arn: "ThirdPartyTypeArn",
+    #     publisher_id: "PublisherId",
+    #     type_name: "TypeName",
+    #     type_name_alias: "TypeName",
+    #     auto_update: false,
+    #     logging_config: {
+    #       log_role_arn: "RoleArn", # required
+    #       log_group_name: "LogGroupName", # required
+    #     },
+    #     execution_role_arn: "RoleArn",
+    #     version_bump: "MAJOR", # accepts MAJOR, MINOR
+    #     major_version: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ActivateType AWS API Documentation
+    #
+    # @overload activate_type(params = {})
+    # @param [Hash] params ({})
+    def activate_type(params = {}, options = {})
+      req = build_request(:activate_type, params)
+      req.send_request(options)
+    end
+
+    # Returns configuration data for the specified CloudFormation
+    # extensions, from the CloudFormation registry for the account and
+    # region.
+    #
+    # For more information, see [Configuring extensions at the account
+    # level][1] in the *CloudFormation User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
+    #
+    # @option params [required, Array<Types::TypeConfigurationIdentifier>] :type_configuration_identifiers
+    #   The list of identifiers for the desired extension configurations.
+    #
+    # @return [Types::BatchDescribeTypeConfigurationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDescribeTypeConfigurationsOutput#errors #errors} => Array&lt;Types::BatchDescribeTypeConfigurationsError&gt;
+    #   * {Types::BatchDescribeTypeConfigurationsOutput#unprocessed_type_configurations #unprocessed_type_configurations} => Array&lt;Types::TypeConfigurationIdentifier&gt;
+    #   * {Types::BatchDescribeTypeConfigurationsOutput#type_configurations #type_configurations} => Array&lt;Types::TypeConfigurationDetails&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_describe_type_configurations({
+    #     type_configuration_identifiers: [ # required
+    #       {
+    #         type_arn: "TypeArn",
+    #         type_configuration_alias: "TypeConfigurationAlias",
+    #         type_configuration_arn: "TypeConfigurationArn",
+    #         type: "RESOURCE", # accepts RESOURCE, MODULE
+    #         type_name: "TypeName",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #   resp.errors[0].type_configuration_identifier.type_arn #=> String
+    #   resp.errors[0].type_configuration_identifier.type_configuration_alias #=> String
+    #   resp.errors[0].type_configuration_identifier.type_configuration_arn #=> String
+    #   resp.errors[0].type_configuration_identifier.type #=> String, one of "RESOURCE", "MODULE"
+    #   resp.errors[0].type_configuration_identifier.type_name #=> String
+    #   resp.unprocessed_type_configurations #=> Array
+    #   resp.unprocessed_type_configurations[0].type_arn #=> String
+    #   resp.unprocessed_type_configurations[0].type_configuration_alias #=> String
+    #   resp.unprocessed_type_configurations[0].type_configuration_arn #=> String
+    #   resp.unprocessed_type_configurations[0].type #=> String, one of "RESOURCE", "MODULE"
+    #   resp.unprocessed_type_configurations[0].type_name #=> String
+    #   resp.type_configurations #=> Array
+    #   resp.type_configurations[0].arn #=> String
+    #   resp.type_configurations[0].alias #=> String
+    #   resp.type_configurations[0].configuration #=> String
+    #   resp.type_configurations[0].last_updated #=> Time
+    #   resp.type_configurations[0].type_arn #=> String
+    #   resp.type_configurations[0].type_name #=> String
+    #   resp.type_configurations[0].is_default_configuration #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/BatchDescribeTypeConfigurations AWS API Documentation
+    #
+    # @overload batch_describe_type_configurations(params = {})
+    # @param [Hash] params ({})
+    def batch_describe_type_configurations(params = {}, options = {})
+      req = build_request(:batch_describe_type_configurations, params)
+      req.send_request(options)
+    end
+
     # Cancels an update on the specified stack. If the call completes
     # successfully, the stack rolls back the update and reverts to the
     # previous stack configuration.
@@ -1531,6 +1718,52 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
+    # Deactivates a public extension that was previously activated in this
+    # account and region.
+    #
+    # Once deactivated, an extension cannot be used in any CloudFormation
+    # operation. This includes stack update operations where the stack
+    # template includes the extension, even if no updates are being made to
+    # the extension. In addition, deactivated extensions are not
+    # automatically updated if a new version of the extension is released.
+    #
+    # @option params [String] :type_name
+    #   The type name of the extension, in this account and region. If you
+    #   specified a type name alias when enabling the extension, use the type
+    #   name alias.
+    #
+    #   Conditional: You must specify either `Arn`, or `TypeName` and `Type`.
+    #
+    # @option params [String] :type
+    #   The extension type.
+    #
+    #   Conditional: You must specify either `Arn`, or `TypeName` and `Type`.
+    #
+    # @option params [String] :arn
+    #   The Amazon Resource Name (ARN) for the extension, in this account and
+    #   region.
+    #
+    #   Conditional: You must specify either `Arn`, or `TypeName` and `Type`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deactivate_type({
+    #     type_name: "TypeName",
+    #     type: "RESOURCE", # accepts RESOURCE, MODULE
+    #     arn: "PrivateTypeArn",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeactivateType AWS API Documentation
+    #
+    # @overload deactivate_type(params = {})
+    # @param [Hash] params ({})
+    def deactivate_type(params = {}, options = {})
+      req = build_request(:deactivate_type, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified change set. Deleting change sets ensures that no
     # one executes the wrong change set.
     #
@@ -2018,6 +2251,60 @@ module Aws::CloudFormation
     # @param [Hash] params ({})
     def describe_change_set(params = {}, options = {})
       req = build_request(:describe_change_set, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a CloudFormation extension publisher.
+    #
+    # If you do not supply a `PublisherId`, and you have registered as an
+    # extension publisher, `DescribePublisher` returns information about
+    # your own publisher account.
+    #
+    # For more information on registering as a publisher, see:
+    #
+    # * [RegisterPublisher][1]
+    #
+    # * [Publishing extensions to make them available for public use][2] in
+    #   the *CloudFormation CLI User Guide*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterPublisher.html
+    # [2]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html
+    #
+    # @option params [String] :publisher_id
+    #   The ID of the extension publisher.
+    #
+    #   If you do not supply a `PublisherId`, and you have registered as an
+    #   extension publisher, `DescribePublisher` returns information about
+    #   your own publisher account.
+    #
+    # @return [Types::DescribePublisherOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePublisherOutput#publisher_id #publisher_id} => String
+    #   * {Types::DescribePublisherOutput#publisher_status #publisher_status} => String
+    #   * {Types::DescribePublisherOutput#identity_provider #identity_provider} => String
+    #   * {Types::DescribePublisherOutput#publisher_profile #publisher_profile} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_publisher({
+    #     publisher_id: "PublisherId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.publisher_id #=> String
+    #   resp.publisher_status #=> String, one of "VERIFIED", "UNVERIFIED"
+    #   resp.identity_provider #=> String, one of "AWS_Marketplace", "GitHub", "Bitbucket"
+    #   resp.publisher_profile #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribePublisher AWS API Documentation
+    #
+    # @overload describe_publisher(params = {})
+    # @param [Hash] params ({})
+    def describe_publisher(params = {}, options = {})
+      req = build_request(:describe_publisher, params)
       req.send_request(options)
     end
 
@@ -2777,6 +3064,14 @@ module Aws::CloudFormation
     #   that specific extension version. Otherwise, it returns information
     #   about the default extension version.
     #
+    # @option params [String] :publisher_id
+    #   The publisher ID of the extension publisher.
+    #
+    #   Extensions provided by Amazon are not assigned a publisher ID.
+    #
+    # @option params [String] :public_version_number
+    #   The version number of a public third-party extension.
+    #
     # @return [Types::DescribeTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeTypeOutput#arn #arn} => String
@@ -2784,17 +3079,28 @@ module Aws::CloudFormation
     #   * {Types::DescribeTypeOutput#type_name #type_name} => String
     #   * {Types::DescribeTypeOutput#default_version_id #default_version_id} => String
     #   * {Types::DescribeTypeOutput#is_default_version #is_default_version} => Boolean
+    #   * {Types::DescribeTypeOutput#type_tests_status #type_tests_status} => String
+    #   * {Types::DescribeTypeOutput#type_tests_status_description #type_tests_status_description} => String
     #   * {Types::DescribeTypeOutput#description #description} => String
     #   * {Types::DescribeTypeOutput#schema #schema} => String
     #   * {Types::DescribeTypeOutput#provisioning_type #provisioning_type} => String
     #   * {Types::DescribeTypeOutput#deprecated_status #deprecated_status} => String
     #   * {Types::DescribeTypeOutput#logging_config #logging_config} => Types::LoggingConfig
+    #   * {Types::DescribeTypeOutput#required_activated_types #required_activated_types} => Array&lt;Types::RequiredActivatedType&gt;
     #   * {Types::DescribeTypeOutput#execution_role_arn #execution_role_arn} => String
     #   * {Types::DescribeTypeOutput#visibility #visibility} => String
     #   * {Types::DescribeTypeOutput#source_url #source_url} => String
     #   * {Types::DescribeTypeOutput#documentation_url #documentation_url} => String
     #   * {Types::DescribeTypeOutput#last_updated #last_updated} => Time
     #   * {Types::DescribeTypeOutput#time_created #time_created} => Time
+    #   * {Types::DescribeTypeOutput#configuration_schema #configuration_schema} => String
+    #   * {Types::DescribeTypeOutput#publisher_id #publisher_id} => String
+    #   * {Types::DescribeTypeOutput#original_type_name #original_type_name} => String
+    #   * {Types::DescribeTypeOutput#original_type_arn #original_type_arn} => String
+    #   * {Types::DescribeTypeOutput#public_version_number #public_version_number} => String
+    #   * {Types::DescribeTypeOutput#latest_public_version #latest_public_version} => String
+    #   * {Types::DescribeTypeOutput#is_activated #is_activated} => Boolean
+    #   * {Types::DescribeTypeOutput#auto_update #auto_update} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -2803,6 +3109,8 @@ module Aws::CloudFormation
     #     type_name: "TypeName",
     #     arn: "TypeArn",
     #     version_id: "TypeVersionId",
+    #     publisher_id: "PublisherId",
+    #     public_version_number: "PublicVersionNumber",
     #   })
     #
     # @example Response structure
@@ -2812,18 +3120,34 @@ module Aws::CloudFormation
     #   resp.type_name #=> String
     #   resp.default_version_id #=> String
     #   resp.is_default_version #=> Boolean
+    #   resp.type_tests_status #=> String, one of "PASSED", "FAILED", "IN_PROGRESS", "NOT_TESTED"
+    #   resp.type_tests_status_description #=> String
     #   resp.description #=> String
     #   resp.schema #=> String
     #   resp.provisioning_type #=> String, one of "NON_PROVISIONABLE", "IMMUTABLE", "FULLY_MUTABLE"
     #   resp.deprecated_status #=> String, one of "LIVE", "DEPRECATED"
     #   resp.logging_config.log_role_arn #=> String
     #   resp.logging_config.log_group_name #=> String
+    #   resp.required_activated_types #=> Array
+    #   resp.required_activated_types[0].type_name_alias #=> String
+    #   resp.required_activated_types[0].original_type_name #=> String
+    #   resp.required_activated_types[0].publisher_id #=> String
+    #   resp.required_activated_types[0].supported_major_versions #=> Array
+    #   resp.required_activated_types[0].supported_major_versions[0] #=> Integer
     #   resp.execution_role_arn #=> String
     #   resp.visibility #=> String, one of "PUBLIC", "PRIVATE"
     #   resp.source_url #=> String
     #   resp.documentation_url #=> String
     #   resp.last_updated #=> Time
     #   resp.time_created #=> Time
+    #   resp.configuration_schema #=> String
+    #   resp.publisher_id #=> String
+    #   resp.original_type_name #=> String
+    #   resp.original_type_arn #=> String
+    #   resp.public_version_number #=> String
+    #   resp.latest_public_version #=> String
+    #   resp.is_activated #=> Boolean
+    #   resp.auto_update #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeType AWS API Documentation
     #
@@ -3315,7 +3639,7 @@ module Aws::CloudFormation
     #
     #   If the template doesn't include transforms, `Original` and
     #   `Processed` return the same template. By default, AWS CloudFormation
-    #   specifies `Original`.
+    #   specifies `Processed`.
     #
     # @return [Types::GetTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4217,6 +4541,11 @@ module Aws::CloudFormation
     #
     #   The default is `LIVE`.
     #
+    # @option params [String] :publisher_id
+    #   The publisher ID of the extension publisher.
+    #
+    #   Extensions published by Amazon are not assigned a publisher ID.
+    #
     # @return [Types::ListTypeVersionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTypeVersionsOutput#type_version_summaries #type_version_summaries} => Array&lt;Types::TypeVersionSummary&gt;
@@ -4229,10 +4558,11 @@ module Aws::CloudFormation
     #   resp = client.list_type_versions({
     #     type: "RESOURCE", # accepts RESOURCE, MODULE
     #     type_name: "TypeName",
-    #     arn: "PrivateTypeArn",
+    #     arn: "TypeArn",
     #     max_results: 1,
     #     next_token: "NextToken",
     #     deprecated_status: "LIVE", # accepts LIVE, DEPRECATED
+    #     publisher_id: "PublisherId",
     #   })
     #
     # @example Response structure
@@ -4245,6 +4575,7 @@ module Aws::CloudFormation
     #   resp.type_version_summaries[0].arn #=> String
     #   resp.type_version_summaries[0].time_created #=> Time
     #   resp.type_version_summaries[0].description #=> String
+    #   resp.type_version_summaries[0].public_version_number #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListTypeVersions AWS API Documentation
@@ -4260,36 +4591,45 @@ module Aws::CloudFormation
     # with CloudFormation.
     #
     # @option params [String] :visibility
-    #   The scope at which the extension is visible and usable in
+    #   The scope at which the extensions are visible and usable in
     #   CloudFormation operations.
     #
     #   Valid values include:
     #
-    #   * `PRIVATE`\: The extension is only visible and usable within the
-    #     account in which it is registered. Currently, AWS CloudFormation
-    #     marks any extension you create as `PRIVATE`.
+    #   * `PRIVATE`\: Extensions that are visible and usable within this
+    #     account and region. This includes:
     #
-    #   * `PUBLIC`\: The extension is publically visible and usable within any
-    #     Amazon account.
+    #     * Private extensions you have registered in this account and region.
+    #
+    #     * Public extensions that you have activated in this account and
+    #       region.
+    #
+    #   * `PUBLIC`\: Extensions that are publicly visible and available to be
+    #     activated within any Amazon account. This includes extensions from
+    #     Amazon, as well as third-party publishers.
     #
     #   The default is `PRIVATE`.
     #
     # @option params [String] :provisioning_type
-    #   The provisioning behavior of the type. AWS CloudFormation determines
-    #   the provisioning type during registration, based on the types of
-    #   handlers in the schema handler package submitted.
+    #   For resource types, the provisioning behavior of the resource type.
+    #   AWS CloudFormation determines the provisioning type during
+    #   registration, based on the types of handlers in the schema handler
+    #   package submitted.
     #
     #   Valid values include:
     #
-    #   * `FULLY_MUTABLE`\: The extension includes an update handler to
-    #     process updates to the extension during stack update operations.
+    #   * `FULLY_MUTABLE`\: The resource type includes an update handler to
+    #     process updates to the type during stack update operations.
     #
-    #   * `IMMUTABLE`\: The extension does not include an update handler, so
-    #     the extension cannot be updated and must instead be replaced during
+    #   * `IMMUTABLE`\: The resource type does not include an update handler,
+    #     so the type cannot be updated and must instead be replaced during
     #     stack update operations.
     #
-    #   * `NON_PROVISIONABLE`\: The extension does not include create, read,
-    #     and delete handlers, and therefore cannot actually be provisioned.
+    #   * `NON_PROVISIONABLE`\: The resource type does not include create,
+    #     read, and delete handlers, and therefore cannot actually be
+    #     provisioned.
+    #
+    #   The default is `FULLY_MUTABLE`.
     #
     # @option params [String] :deprecated_status
     #   The deprecation status of the extension that you want to get summary
@@ -4305,6 +4645,12 @@ module Aws::CloudFormation
     #
     # @option params [String] :type
     #   The type of extension.
+    #
+    # @option params [Types::TypeFilters] :filters
+    #   Filter criteria to use in determining which extensions to return.
+    #
+    #   If you specify a filter, CloudFormation ignores any specified
+    #   `Visibility` value when returning the list of types.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned with a single call. If
@@ -4334,6 +4680,11 @@ module Aws::CloudFormation
     #     provisioning_type: "NON_PROVISIONABLE", # accepts NON_PROVISIONABLE, IMMUTABLE, FULLY_MUTABLE
     #     deprecated_status: "LIVE", # accepts LIVE, DEPRECATED
     #     type: "RESOURCE", # accepts RESOURCE, MODULE
+    #     filters: {
+    #       category: "REGISTERED", # accepts REGISTERED, ACTIVATED, THIRD_PARTY, AWS_TYPES
+    #       publisher_id: "PublisherId",
+    #       type_name_prefix: "TypeNamePrefix",
+    #     },
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -4347,6 +4698,13 @@ module Aws::CloudFormation
     #   resp.type_summaries[0].type_arn #=> String
     #   resp.type_summaries[0].last_updated #=> Time
     #   resp.type_summaries[0].description #=> String
+    #   resp.type_summaries[0].publisher_id #=> String
+    #   resp.type_summaries[0].original_type_name #=> String
+    #   resp.type_summaries[0].public_version_number #=> String
+    #   resp.type_summaries[0].latest_public_version #=> String
+    #   resp.type_summaries[0].publisher_identity #=> String, one of "AWS_Marketplace", "GitHub", "Bitbucket"
+    #   resp.type_summaries[0].publisher_name #=> String
+    #   resp.type_summaries[0].is_activated #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListTypes AWS API Documentation
@@ -4355,6 +4713,78 @@ module Aws::CloudFormation
     # @param [Hash] params ({})
     def list_types(params = {}, options = {})
       req = build_request(:list_types, params)
+      req.send_request(options)
+    end
+
+    # Publishes the specified extension to the CloudFormation registry as a
+    # public extension in this region. Public extensions are available for
+    # use by all CloudFormation users. For more information on publishing
+    # extensions, see [Publishing extensions to make them available for
+    # public use][1] in the *CloudFormation CLI User Guide*.
+    #
+    # To publish an extension, you must be registered as a publisher with
+    # CloudFormation. For more information, see [RegisterPublisher][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html
+    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterPublisher.html
+    #
+    # @option params [String] :type
+    #   The type of the extension.
+    #
+    #   Conditional: You must specify `Arn`, or `TypeName` and `Type`.
+    #
+    # @option params [String] :arn
+    #   The Amazon Resource Number (ARN) of the extension.
+    #
+    #   Conditional: You must specify `Arn`, or `TypeName` and `Type`.
+    #
+    # @option params [String] :type_name
+    #   The name of the extension.
+    #
+    #   Conditional: You must specify `Arn`, or `TypeName` and `Type`.
+    #
+    # @option params [String] :public_version_number
+    #   The version number to assign to this version of the extension.
+    #
+    #   Use the following format, and adhere to semantic versioning when
+    #   assigning a version number to your extension:
+    #
+    #   `MAJOR.MINOR.PATCH`
+    #
+    #   For more information, see [Semantic Versioning 2.0.0][1].
+    #
+    #   If you do not specify a version number, CloudFormation increments the
+    #   version number by one minor version release.
+    #
+    #
+    #
+    #   [1]: https://semver.org/
+    #
+    # @return [Types::PublishTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PublishTypeOutput#public_type_arn #public_type_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.publish_type({
+    #     type: "RESOURCE", # accepts RESOURCE, MODULE
+    #     arn: "PrivateTypeArn",
+    #     type_name: "TypeName",
+    #     public_version_number: "PublicVersionNumber",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.public_type_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/PublishType AWS API Documentation
+    #
+    # @overload publish_type(params = {})
+    # @param [Hash] params ({})
+    def publish_type(params = {}, options = {})
+      req = build_request(:publish_type, params)
       req.send_request(options)
     end
 
@@ -4425,7 +4855,7 @@ module Aws::CloudFormation
     #     operation_status: "PENDING", # required, accepts PENDING, IN_PROGRESS, SUCCESS, FAILED
     #     current_operation_status: "PENDING", # accepts PENDING, IN_PROGRESS, SUCCESS, FAILED
     #     status_message: "StatusMessage",
-    #     error_code: "NotUpdatable", # accepts NotUpdatable, InvalidRequest, AccessDenied, InvalidCredentials, AlreadyExists, NotFound, ResourceConflict, Throttling, ServiceLimitExceeded, NotStabilized, GeneralServiceException, ServiceInternalError, NetworkFailure, InternalFailure
+    #     error_code: "NotUpdatable", # accepts NotUpdatable, InvalidRequest, AccessDenied, InvalidCredentials, AlreadyExists, NotFound, ResourceConflict, Throttling, ServiceLimitExceeded, NotStabilized, GeneralServiceException, ServiceInternalError, NetworkFailure, InternalFailure, InvalidTypeConfiguration
     #     resource_model: "ResourceModel",
     #     client_request_token: "ClientRequestToken",
     #   })
@@ -4436,6 +4866,65 @@ module Aws::CloudFormation
     # @param [Hash] params ({})
     def record_handler_progress(params = {}, options = {})
       req = build_request(:record_handler_progress, params)
+      req.send_request(options)
+    end
+
+    # Registers your account as a publisher of public extensions in the
+    # CloudFormation registry. Public extensions are available for use by
+    # all CloudFormation users. This publisher ID applies to your account in
+    # all AWS regions.
+    #
+    # For information on requirements for registering as a public extension
+    # publisher, see [Registering your account to publish CloudFormation
+    # extensions][1] in the *CloudFormation CLI User Guide*.
+    #
+    #
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-prereqs
+    #
+    # @option params [Boolean] :accept_terms_and_conditions
+    #   Whether you accept the terms and conditions for publishing extensions
+    #   in the CloudFormation registry. You must accept the terms and
+    #   conditions in order to register to publish public extensions to the
+    #   CloudFormation registry.
+    #
+    #   The default is `false`.
+    #
+    # @option params [String] :connection_arn
+    #   If you are using a Bitbucket or GitHub account for identity
+    #   verification, the Amazon Resource Name (ARN) for your connection to
+    #   that account.
+    #
+    #   For more information, see [Registering your account to publish
+    #   CloudFormation extensions][1] in the *CloudFormation CLI User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-prereqs
+    #
+    # @return [Types::RegisterPublisherOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterPublisherOutput#publisher_id #publisher_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_publisher({
+    #     accept_terms_and_conditions: false,
+    #     connection_arn: "ConnectionArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.publisher_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RegisterPublisher AWS API Documentation
+    #
+    # @overload register_publisher(params = {})
+    # @param [Hash] params ({})
+    def register_publisher(params = {}, options = {})
+      req = build_request(:register_publisher, params)
       req.send_request(options)
     end
 
@@ -4463,9 +4952,17 @@ module Aws::CloudFormation
     # you can use ` DescribeTypeRegistration ` to monitor the progress of
     # the registration request.
     #
+    # Once you have registered a private extension in your account and
+    # region, use
+    # [SetTypeConfiguration](AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html)
+    # to specify configuration properties for the extension. For more
+    # information, see [Configuring extensions at the account level][2] in
+    # the *CloudFormation User Guide*.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html
+    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
     #
     # @option params [String] :type
     #   The kind of extension.
@@ -4473,8 +4970,13 @@ module Aws::CloudFormation
     # @option params [required, String] :type_name
     #   The name of the extension being registered.
     #
-    #   We recommend that extension names adhere to the following pattern:
-    #   *company\_or\_organization*\::*service*\::*type*.
+    #   We recommend that extension names adhere to the following patterns:
+    #
+    #   * For resource types,
+    #     *company\_or\_organization*\::*service*\::*type*.
+    #
+    #   * For modules,
+    #     *company\_or\_organization*\::*service*\::*type*\::MODULE.
     #
     #   <note markdown="1"> The following organization namespaces are reserved and cannot be used
     #   in your extension names:
@@ -4520,15 +5022,25 @@ module Aws::CloudFormation
     #
     # @option params [String] :execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role for CloudFormation to
-    #   assume when invoking the extension. If your extension calls AWS APIs
-    #   in any of its handlers, you must create an <i> <a
+    #   assume when invoking the extension.
+    #
+    #   For CloudFormation to assume the specified execution role, the role
+    #   must contain a trust relationship with the CloudFormation service
+    #   principle (`resources.cloudformation.amazonaws.com`). For more
+    #   information on adding trust relationships, see [Modifying a role trust
+    #   policy](IAM/latest/UserGuide/roles-managingrole-editing-console.html#roles-managingrole_edit-trust-policy)
+    #   in the *AWS Identity and Access Management User Guide*.
+    #
+    #   If your extension calls AWS APIs in any of its handlers, you must
+    #   create an <i> <a
     #   href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM
     #   execution role</a> </i> that includes the necessary permissions to
     #   call those AWS APIs, and provision that execution role in your
-    #   account. When CloudFormation needs to invoke the extension handler,
-    #   CloudFormation assumes this execution role to create a temporary
-    #   session token, which it then passes to the extension handler, thereby
-    #   supplying your extension with the appropriate credentials.
+    #   account. When CloudFormation needs to invoke the resource type
+    #   handler, CloudFormation assumes this execution role to create a
+    #   temporary session token, which it then passes to the resource type
+    #   handler, thereby supplying your resource type with the appropriate
+    #   credentials.
     #
     # @option params [String] :client_request_token
     #   A unique identifier that acts as an idempotency key for this
@@ -4605,6 +5117,101 @@ module Aws::CloudFormation
     # @param [Hash] params ({})
     def set_stack_policy(params = {}, options = {})
       req = build_request(:set_stack_policy, params)
+      req.send_request(options)
+    end
+
+    # Specifies the configuration data for a registered CloudFormation
+    # extension, in the given account and region.
+    #
+    # To view the current configuration data for an extension, refer to the
+    # `ConfigurationSchema` element of
+    # [DescribeType](AWSCloudFormation/latest/APIReference/API_DescribeType.html).
+    # For more information, see [Configuring extensions at the account
+    # level][1] in the *CloudFormation User Guide*.
+    #
+    # It is strongly recommended that you use dynamic references to restrict
+    # sensitive configuration definitions, such as third-party credentials.
+    # For more details on dynamic references, see [Using dynamic references
+    # to specify template values][2] in the *AWS CloudFormation User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
+    # [2]: https://docs.aws.amazon.com/
+    #
+    # @option params [String] :type_arn
+    #   The Amazon Resource Name (ARN) for the extension, in this account and
+    #   region.
+    #
+    #   For public extensions, this will be the ARN assigned when you
+    #   [activate the type][1] in this account and region. For private
+    #   extensions, this will be the ARN assigned when you [register the
+    #   type][2] in this account and region.
+    #
+    #   Do not include the extension versions suffix at the end of the ARN.
+    #   You can set the configuration for an extension, but not for a specific
+    #   extension version.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html
+    #
+    # @option params [required, String] :configuration
+    #   The configuration data for the extension, in this account and region.
+    #
+    #   The configuration data must be formatted as JSON, and validate against
+    #   the schema returned in the `ConfigurationSchema` response element of
+    #   [API\_DescribeType](AWSCloudFormation/latest/APIReference/API_DescribeType.html).
+    #   For more information, see [Defining account-level configuration data
+    #   for an extension][1] in the *CloudFormation CLI User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration
+    #
+    # @option params [String] :configuration_alias
+    #   An alias by which to refer to this extension configuration data.
+    #
+    #   Conditional: Specifying a configuration alias is required when setting
+    #   a configuration for a resource type extension.
+    #
+    # @option params [String] :type_name
+    #   The name of the extension.
+    #
+    #   Conditional: You must specify `ConfigurationArn`, or `Type` and
+    #   `TypeName`.
+    #
+    # @option params [String] :type
+    #   The type of extension.
+    #
+    #   Conditional: You must specify `ConfigurationArn`, or `Type` and
+    #   `TypeName`.
+    #
+    # @return [Types::SetTypeConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SetTypeConfigurationOutput#configuration_arn #configuration_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_type_configuration({
+    #     type_arn: "TypeArn",
+    #     configuration: "TypeConfiguration", # required
+    #     configuration_alias: "TypeConfigurationAlias",
+    #     type_name: "TypeName",
+    #     type: "RESOURCE", # accepts RESOURCE, MODULE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SetTypeConfiguration AWS API Documentation
+    #
+    # @overload set_type_configuration(params = {})
+    # @param [Hash] params ({})
+    def set_type_configuration(params = {}, options = {})
+      req = build_request(:set_type_configuration, params)
       req.send_request(options)
     end
 
@@ -4747,6 +5354,114 @@ module Aws::CloudFormation
     # @param [Hash] params ({})
     def stop_stack_set_operation(params = {}, options = {})
       req = build_request(:stop_stack_set_operation, params)
+      req.send_request(options)
+    end
+
+    # Tests a registered extension to make sure it meets all necessary
+    # requirements for being published in the CloudFormation registry.
+    #
+    # * For resource types, this includes passing all contracts tests
+    #   defined for the type.
+    #
+    # * For modules, this includes determining if the module's model meets
+    #   all necessary requirements.
+    #
+    # For more information, see [Testing your public extension prior to
+    # publishing][1] in the *CloudFormation CLI User Guide*.
+    #
+    # If you do not specify a version, CloudFormation uses the default
+    # version of the extension in your account and region for testing.
+    #
+    # To perform testing, CloudFormation assumes the execution role
+    # specified when the test was registered. For more information, see
+    # [RegisterType](AWSCloudFormation/latest/APIReference/API_RegisterType.html).
+    #
+    # Once you've initiated testing on an extension using `TestType`, you
+    # can use [DescribeType][2] to monitor the current test status and test
+    # status description for the extension.
+    #
+    # An extension must have a test status of `PASSED` before it can be
+    # published. For more information, see [Publishing extensions to make
+    # them available for public use][3] in the *CloudFormation CLI User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-testing
+    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
+    # [3]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-publish.html
+    #
+    # @option params [String] :arn
+    #   The Amazon Resource Number (ARN) of the extension.
+    #
+    #   Conditional: You must specify `Arn`, or `TypeName` and `Type`.
+    #
+    # @option params [String] :type
+    #   The type of the extension to test.
+    #
+    #   Conditional: You must specify `Arn`, or `TypeName` and `Type`.
+    #
+    # @option params [String] :type_name
+    #   The name of the extension to test.
+    #
+    #   Conditional: You must specify `Arn`, or `TypeName` and `Type`.
+    #
+    # @option params [String] :version_id
+    #   The version of the extension to test.
+    #
+    #   You can specify the version id with either `Arn`, or with `TypeName`
+    #   and `Type`.
+    #
+    #   If you do not specify a version, CloudFormation uses the default
+    #   version of the extension in this account and region for testing.
+    #
+    # @option params [String] :log_delivery_bucket
+    #   The S3 bucket to which CloudFormation delivers the contract test
+    #   execution logs.
+    #
+    #   CloudFormation delivers the logs by the time contract testing has
+    #   completed and the extension has been assigned a test type status of
+    #   `PASSED` or `FAILED`.
+    #
+    #   The user calling `TestType` must be able to access items in the
+    #   specified S3 bucket. Specifically, the user needs the following
+    #   permissions:
+    #
+    #   * GetObject
+    #
+    #   * PutObject
+    #
+    #   For more information, see [Actions, Resources, and Condition Keys for
+    #   Amazon S3][1] in the *AWS Identity and Access Management User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazons3.html
+    #
+    # @return [Types::TestTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TestTypeOutput#type_version_arn #type_version_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.test_type({
+    #     arn: "TypeArn",
+    #     type: "RESOURCE", # accepts RESOURCE, MODULE
+    #     type_name: "TypeName",
+    #     version_id: "TypeVersionId",
+    #     log_delivery_bucket: "S3Bucket",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.type_version_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/TestType AWS API Documentation
+    #
+    # @overload test_type(params = {})
+    # @param [Hash] params ({})
+    def test_type(params = {}, options = {})
+      req = build_request(:test_type, params)
       req.send_request(options)
     end
 
@@ -5765,7 +6480,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
