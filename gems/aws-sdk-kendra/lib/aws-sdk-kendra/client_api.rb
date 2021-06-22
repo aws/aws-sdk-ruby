@@ -23,6 +23,9 @@ module Aws::Kendra
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AttributeFilter = Shapes::StructureShape.new(name: 'AttributeFilter')
     AttributeFilterList = Shapes::ListShape.new(name: 'AttributeFilterList')
+    AuthenticationConfiguration = Shapes::StructureShape.new(name: 'AuthenticationConfiguration')
+    BasicAuthenticationConfiguration = Shapes::StructureShape.new(name: 'BasicAuthenticationConfiguration')
+    BasicAuthenticationConfigurationList = Shapes::ListShape.new(name: 'BasicAuthenticationConfigurationList')
     BatchDeleteDocumentRequest = Shapes::StructureShape.new(name: 'BatchDeleteDocumentRequest')
     BatchDeleteDocumentResponse = Shapes::StructureShape.new(name: 'BatchDeleteDocumentResponse')
     BatchDeleteDocumentResponseFailedDocument = Shapes::StructureShape.new(name: 'BatchDeleteDocumentResponseFailedDocument')
@@ -69,6 +72,7 @@ module Aws::Kendra
     ConfluenceVersion = Shapes::StringShape.new(name: 'ConfluenceVersion')
     ConnectionConfiguration = Shapes::StructureShape.new(name: 'ConnectionConfiguration')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
+    CrawlDepth = Shapes::IntegerShape.new(name: 'CrawlDepth')
     CreateDataSourceRequest = Shapes::StructureShape.new(name: 'CreateDataSourceRequest')
     CreateDataSourceResponse = Shapes::StructureShape.new(name: 'CreateDataSourceResponse')
     CreateFaqRequest = Shapes::StructureShape.new(name: 'CreateFaqRequest')
@@ -172,6 +176,7 @@ module Aws::Kendra
     Highlight = Shapes::StructureShape.new(name: 'Highlight')
     HighlightList = Shapes::ListShape.new(name: 'HighlightList')
     HighlightType = Shapes::StringShape.new(name: 'HighlightType')
+    Host = Shapes::StringShape.new(name: 'Host')
     Importance = Shapes::IntegerShape.new(name: 'Importance')
     IndexConfigurationSummary = Shapes::StructureShape.new(name: 'IndexConfigurationSummary')
     IndexConfigurationSummaryList = Shapes::ListShape.new(name: 'IndexConfigurationSummaryList')
@@ -206,12 +211,15 @@ module Aws::Kendra
     ListThesauriRequest = Shapes::StructureShape.new(name: 'ListThesauriRequest')
     ListThesauriResponse = Shapes::StructureShape.new(name: 'ListThesauriResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MaxContentSizePerPageInMegaBytes = Shapes::FloatShape.new(name: 'MaxContentSizePerPageInMegaBytes')
+    MaxLinksPerPage = Shapes::IntegerShape.new(name: 'MaxLinksPerPage')
     MaxResultsIntegerForListDataSourceSyncJobsRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListDataSourceSyncJobsRequest')
     MaxResultsIntegerForListDataSourcesRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListDataSourcesRequest')
     MaxResultsIntegerForListFaqsRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListFaqsRequest')
     MaxResultsIntegerForListIndicesRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListIndicesRequest')
     MaxResultsIntegerForListQuerySuggestionsBlockLists = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListQuerySuggestionsBlockLists')
     MaxResultsIntegerForListThesauriRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListThesauriRequest')
+    MaxUrlsPerMinuteCrawlRate = Shapes::IntegerShape.new(name: 'MaxUrlsPerMinuteCrawlRate')
     MetricValue = Shapes::StringShape.new(name: 'MetricValue')
     MimeType = Shapes::StringShape.new(name: 'MimeType')
     MinimumNumberOfQueryingUsers = Shapes::IntegerShape.new(name: 'MinimumNumberOfQueryingUsers')
@@ -224,10 +232,12 @@ module Aws::Kendra
     OneDriveUserList = Shapes::ListShape.new(name: 'OneDriveUserList')
     OneDriveUsers = Shapes::StructureShape.new(name: 'OneDriveUsers')
     Order = Shapes::StringShape.new(name: 'Order')
+    Port = Shapes::IntegerShape.new(name: 'Port')
     Principal = Shapes::StructureShape.new(name: 'Principal')
     PrincipalList = Shapes::ListShape.new(name: 'PrincipalList')
     PrincipalName = Shapes::StringShape.new(name: 'PrincipalName')
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
+    ProxyConfiguration = Shapes::StructureShape.new(name: 'ProxyConfiguration')
     QueryCapacityUnit = Shapes::IntegerShape.new(name: 'QueryCapacityUnit')
     QueryId = Shapes::StringShape.new(name: 'QueryId')
     QueryIdentifiersEnclosingOption = Shapes::StringShape.new(name: 'QueryIdentifiersEnclosingOption')
@@ -280,6 +290,9 @@ module Aws::Kendra
     Search = Shapes::StructureShape.new(name: 'Search')
     SecretArn = Shapes::StringShape.new(name: 'SecretArn')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
+    SeedUrl = Shapes::StringShape.new(name: 'SeedUrl')
+    SeedUrlConfiguration = Shapes::StructureShape.new(name: 'SeedUrlConfiguration')
+    SeedUrlList = Shapes::ListShape.new(name: 'SeedUrlList')
     ServerSideEncryptionConfiguration = Shapes::StructureShape.new(name: 'ServerSideEncryptionConfiguration')
     ServiceNowAuthenticationType = Shapes::StringShape.new(name: 'ServiceNowAuthenticationType')
     ServiceNowBuildVersionType = Shapes::StringShape.new(name: 'ServiceNowBuildVersionType')
@@ -293,6 +306,9 @@ module Aws::Kendra
     SharePointUrlList = Shapes::ListShape.new(name: 'SharePointUrlList')
     SharePointVersion = Shapes::StringShape.new(name: 'SharePointVersion')
     SharedDriveId = Shapes::StringShape.new(name: 'SharedDriveId')
+    SiteMap = Shapes::StringShape.new(name: 'SiteMap')
+    SiteMapsConfiguration = Shapes::StructureShape.new(name: 'SiteMapsConfiguration')
+    SiteMapsList = Shapes::ListShape.new(name: 'SiteMapsList')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     SortingConfiguration = Shapes::StructureShape.new(name: 'SortingConfiguration')
     SqlConfiguration = Shapes::StructureShape.new(name: 'SqlConfiguration')
@@ -341,6 +357,7 @@ module Aws::Kendra
     UpdateQuerySuggestionsConfigRequest = Shapes::StructureShape.new(name: 'UpdateQuerySuggestionsConfigRequest')
     UpdateThesaurusRequest = Shapes::StructureShape.new(name: 'UpdateThesaurusRequest')
     Url = Shapes::StringShape.new(name: 'Url')
+    Urls = Shapes::StructureShape.new(name: 'Urls')
     UserAccount = Shapes::StringShape.new(name: 'UserAccount')
     UserContext = Shapes::StructureShape.new(name: 'UserContext')
     UserContextPolicy = Shapes::StringShape.new(name: 'UserContextPolicy')
@@ -352,6 +369,8 @@ module Aws::Kendra
     ValueImportanceMapKey = Shapes::StringShape.new(name: 'ValueImportanceMapKey')
     VisitorId = Shapes::StringShape.new(name: 'VisitorId')
     VpcSecurityGroupId = Shapes::StringShape.new(name: 'VpcSecurityGroupId')
+    WebCrawlerConfiguration = Shapes::StructureShape.new(name: 'WebCrawlerConfiguration')
+    WebCrawlerMode = Shapes::StringShape.new(name: 'WebCrawlerMode')
 
     AccessControlListConfiguration.add_member(:key_path, Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "KeyPath"))
     AccessControlListConfiguration.struct_class = Types::AccessControlListConfiguration
@@ -385,6 +404,16 @@ module Aws::Kendra
     AttributeFilter.struct_class = Types::AttributeFilter
 
     AttributeFilterList.member = Shapes::ShapeRef.new(shape: AttributeFilter)
+
+    AuthenticationConfiguration.add_member(:basic_authentication, Shapes::ShapeRef.new(shape: BasicAuthenticationConfigurationList, location_name: "BasicAuthentication"))
+    AuthenticationConfiguration.struct_class = Types::AuthenticationConfiguration
+
+    BasicAuthenticationConfiguration.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
+    BasicAuthenticationConfiguration.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
+    BasicAuthenticationConfiguration.add_member(:credentials, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "Credentials"))
+    BasicAuthenticationConfiguration.struct_class = Types::BasicAuthenticationConfiguration
+
+    BasicAuthenticationConfigurationList.member = Shapes::ShapeRef.new(shape: BasicAuthenticationConfiguration)
 
     BatchDeleteDocumentRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     BatchDeleteDocumentRequest.add_member(:document_id_list, Shapes::ShapeRef.new(shape: DocumentIdList, required: true, location_name: "DocumentIdList"))
@@ -595,6 +624,7 @@ module Aws::Kendra
     DataSourceConfiguration.add_member(:service_now_configuration, Shapes::ShapeRef.new(shape: ServiceNowConfiguration, location_name: "ServiceNowConfiguration"))
     DataSourceConfiguration.add_member(:confluence_configuration, Shapes::ShapeRef.new(shape: ConfluenceConfiguration, location_name: "ConfluenceConfiguration"))
     DataSourceConfiguration.add_member(:google_drive_configuration, Shapes::ShapeRef.new(shape: GoogleDriveConfiguration, location_name: "GoogleDriveConfiguration"))
+    DataSourceConfiguration.add_member(:web_crawler_configuration, Shapes::ShapeRef.new(shape: WebCrawlerConfiguration, location_name: "WebCrawlerConfiguration"))
     DataSourceConfiguration.struct_class = Types::DataSourceConfiguration
 
     DataSourceInclusionsExclusionsStrings.member = Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStringsMember)
@@ -1007,6 +1037,11 @@ module Aws::Kendra
 
     PrincipalList.member = Shapes::ShapeRef.new(shape: Principal)
 
+    ProxyConfiguration.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
+    ProxyConfiguration.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
+    ProxyConfiguration.add_member(:credentials, Shapes::ShapeRef.new(shape: SecretArn, location_name: "Credentials"))
+    ProxyConfiguration.struct_class = Types::ProxyConfiguration
+
     QueryRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     QueryRequest.add_member(:query_text, Shapes::ShapeRef.new(shape: QueryText, required: true, location_name: "QueryText"))
     QueryRequest.add_member(:attribute_filter, Shapes::ShapeRef.new(shape: AttributeFilter, location_name: "AttributeFilter"))
@@ -1150,6 +1185,12 @@ module Aws::Kendra
 
     SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: VpcSecurityGroupId)
 
+    SeedUrlConfiguration.add_member(:seed_urls, Shapes::ShapeRef.new(shape: SeedUrlList, required: true, location_name: "SeedUrls"))
+    SeedUrlConfiguration.add_member(:web_crawler_mode, Shapes::ShapeRef.new(shape: WebCrawlerMode, location_name: "WebCrawlerMode"))
+    SeedUrlConfiguration.struct_class = Types::SeedUrlConfiguration
+
+    SeedUrlList.member = Shapes::ShapeRef.new(shape: SeedUrl)
+
     ServerSideEncryptionConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     ServerSideEncryptionConfiguration.struct_class = Types::ServerSideEncryptionConfiguration
 
@@ -1195,6 +1236,11 @@ module Aws::Kendra
     SharePointConfiguration.struct_class = Types::SharePointConfiguration
 
     SharePointUrlList.member = Shapes::ShapeRef.new(shape: Url)
+
+    SiteMapsConfiguration.add_member(:site_maps, Shapes::ShapeRef.new(shape: SiteMapsList, required: true, location_name: "SiteMaps"))
+    SiteMapsConfiguration.struct_class = Types::SiteMapsConfiguration
+
+    SiteMapsList.member = Shapes::ShapeRef.new(shape: SiteMap)
 
     SortingConfiguration.add_member(:document_attribute_key, Shapes::ShapeRef.new(shape: DocumentAttributeKey, required: true, location_name: "DocumentAttributeKey"))
     SortingConfiguration.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "SortOrder"))
@@ -1334,6 +1380,10 @@ module Aws::Kendra
     UpdateThesaurusRequest.add_member(:source_s3_path, Shapes::ShapeRef.new(shape: S3Path, location_name: "SourceS3Path"))
     UpdateThesaurusRequest.struct_class = Types::UpdateThesaurusRequest
 
+    Urls.add_member(:seed_url_configuration, Shapes::ShapeRef.new(shape: SeedUrlConfiguration, location_name: "SeedUrlConfiguration"))
+    Urls.add_member(:site_maps_configuration, Shapes::ShapeRef.new(shape: SiteMapsConfiguration, location_name: "SiteMapsConfiguration"))
+    Urls.struct_class = Types::Urls
+
     UserContext.add_member(:token, Shapes::ShapeRef.new(shape: Token, location_name: "Token"))
     UserContext.struct_class = Types::UserContext
 
@@ -1348,6 +1398,17 @@ module Aws::Kendra
 
     ValueImportanceMap.key = Shapes::ShapeRef.new(shape: ValueImportanceMapKey)
     ValueImportanceMap.value = Shapes::ShapeRef.new(shape: Importance)
+
+    WebCrawlerConfiguration.add_member(:urls, Shapes::ShapeRef.new(shape: Urls, required: true, location_name: "Urls"))
+    WebCrawlerConfiguration.add_member(:crawl_depth, Shapes::ShapeRef.new(shape: CrawlDepth, location_name: "CrawlDepth"))
+    WebCrawlerConfiguration.add_member(:max_links_per_page, Shapes::ShapeRef.new(shape: MaxLinksPerPage, location_name: "MaxLinksPerPage"))
+    WebCrawlerConfiguration.add_member(:max_content_size_per_page_in_mega_bytes, Shapes::ShapeRef.new(shape: MaxContentSizePerPageInMegaBytes, location_name: "MaxContentSizePerPageInMegaBytes"))
+    WebCrawlerConfiguration.add_member(:max_urls_per_minute_crawl_rate, Shapes::ShapeRef.new(shape: MaxUrlsPerMinuteCrawlRate, location_name: "MaxUrlsPerMinuteCrawlRate"))
+    WebCrawlerConfiguration.add_member(:url_inclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "UrlInclusionPatterns"))
+    WebCrawlerConfiguration.add_member(:url_exclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "UrlExclusionPatterns"))
+    WebCrawlerConfiguration.add_member(:proxy_configuration, Shapes::ShapeRef.new(shape: ProxyConfiguration, location_name: "ProxyConfiguration"))
+    WebCrawlerConfiguration.add_member(:authentication_configuration, Shapes::ShapeRef.new(shape: AuthenticationConfiguration, location_name: "AuthenticationConfiguration"))
+    WebCrawlerConfiguration.struct_class = Types::WebCrawlerConfiguration
 
 
     # @api private

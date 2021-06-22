@@ -234,19 +234,21 @@ module Aws::RDS
       data[:storage_encrypted]
     end
 
-    # If `StorageEncrypted` is enabled, the AWS KMS key identifier for the
-    # encrypted DB cluster.
+    # If `StorageEncrypted` is enabled, the Amazon Web Services KMS key
+    # identifier for the encrypted DB cluster.
     #
-    # The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-    # name for the AWS KMS customer master key (CMK).
+    # The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    # alias ARN, or alias name for the Amazon Web Services KMS customer
+    # master key (CMK).
     # @return [String]
     def kms_key_id
       data[:kms_key_id]
     end
 
-    # The AWS Region-unique, immutable identifier for the DB cluster. This
-    # identifier is found in AWS CloudTrail log entries whenever the AWS KMS
-    # CMK for the DB cluster is accessed.
+    # The Amazon Web Services Region-unique, immutable identifier for the DB
+    # cluster. This identifier is found in Amazon Web Services CloudTrail
+    # log entries whenever the Amazon Web Services KMS CMK for the DB
+    # cluster is accessed.
     # @return [String]
     def db_cluster_resource_id
       data[:db_cluster_resource_id]
@@ -258,17 +260,18 @@ module Aws::RDS
       data[:db_cluster_arn]
     end
 
-    # Provides a list of the AWS Identity and Access Management (IAM) roles
-    # that are associated with the DB cluster. IAM roles that are associated
-    # with a DB cluster grant permission for the DB cluster to access other
-    # AWS services on your behalf.
+    # Provides a list of the Amazon Web Services Identity and Access
+    # Management (IAM) roles that are associated with the DB cluster. IAM
+    # roles that are associated with a DB cluster grant permission for the
+    # DB cluster to access other Amazon Web Services on your behalf.
     # @return [Array<Types::DBClusterRole>]
     def associated_roles
       data[:associated_roles]
     end
 
-    # A value that indicates whether the mapping of AWS Identity and Access
-    # Management (IAM) accounts to database accounts is enabled.
+    # A value that indicates whether the mapping of Amazon Web Services
+    # Identity and Access Management (IAM) accounts to database accounts is
+    # enabled.
     # @return [Boolean]
     def iam_database_authentication_enabled
       data[:iam_database_authentication_enabled]
@@ -404,11 +407,12 @@ module Aws::RDS
       data[:activity_stream_status]
     end
 
-    # The AWS KMS key identifier used for encrypting messages in the
-    # database activity stream.
+    # The Amazon Web Services KMS key identifier used for encrypting
+    # messages in the database activity stream.
     #
-    # The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-    # name for the AWS KMS customer master key (CMK).
+    # The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    # alias ARN, or alias name for the Amazon Web Services KMS customer
+    # master key (CMK).
     # @return [String]
     def activity_stream_kms_key_id
       data[:activity_stream_kms_key_id]
@@ -429,7 +433,7 @@ module Aws::RDS
     end
 
     # Specifies whether the DB cluster is a clone of a DB cluster owned by a
-    # different AWS account.
+    # different Amazon Web Services account.
     # @return [Boolean]
     def cross_account_clone
       data[:cross_account_clone]
@@ -664,9 +668,9 @@ module Aws::RDS
     # @param [Hash] options ({})
     # @option options [Array<String>] :availability_zones
     #   A list of Availability Zones (AZs) where instances in the DB cluster
-    #   can be created. For information on AWS Regions and Availability Zones,
-    #   see [Choosing the Regions and Availability Zones][1] in the *Amazon
-    #   Aurora User Guide*.
+    #   can be created. For information on Amazon Web Services Regions and
+    #   Availability Zones, see [Choosing the Regions and Availability
+    #   Zones][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
@@ -777,8 +781,9 @@ module Aws::RDS
     #   parameter.
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region. To view the time blocks available,
-    #   see [ Backup window][1] in the *Amazon Aurora User Guide.*
+    #   block of time for each Amazon Web Services Region. To view the time
+    #   blocks available, see [ Backup window][1] in the *Amazon Aurora User
+    #   Guide.*
     #
     #   Constraints:
     #
@@ -800,9 +805,10 @@ module Aws::RDS
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region, occurring on a random day of the
-    #   week. To see the time blocks available, see [ Adjusting the Preferred
-    #   DB Cluster Maintenance Window][1] in the *Amazon Aurora User Guide.*
+    #   block of time for each Amazon Web Services Region, occurring on a
+    #   random day of the week. To see the time blocks available, see [
+    #   Adjusting the Preferred DB Cluster Maintenance Window][1] in the
+    #   *Amazon Aurora User Guide.*
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
@@ -819,11 +825,13 @@ module Aws::RDS
     # @option options [Boolean] :storage_encrypted
     #   A value that indicates whether the DB cluster is encrypted.
     # @option options [String] :kms_key_id
-    #   The AWS KMS key identifier for an encrypted DB cluster.
+    #   The Amazon Web Services KMS key identifier for an encrypted DB
+    #   cluster.
     #
-    #   The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-    #   name for the AWS KMS customer master key (CMK). To use a CMK in a
-    #   different AWS account, specify the key ARN or alias ARN.
+    #   The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    #   alias ARN, or alias name for the Amazon Web Services KMS customer
+    #   master key (CMK). To use a CMK in a different Amazon Web Services
+    #   account, specify the key ARN or alias ARN.
     #
     #   When a CMK isn't specified in `KmsKeyId`\:
     #
@@ -835,53 +843,58 @@ module Aws::RDS
     #     `ReplicationSourceIdentifier` isn't specified, then Amazon RDS will
     #     use your default CMK.
     #
-    #   There is a default CMK for your AWS account. Your AWS account has a
-    #   different default CMK for each AWS Region.
+    #   There is a default CMK for your Amazon Web Services account. Your
+    #   Amazon Web Services account has a different default CMK for each
+    #   Amazon Web Services Region.
     #
-    #   If you create a read replica of an encrypted DB cluster in another AWS
-    #   Region, you must set `KmsKeyId` to a AWS KMS key identifier that is
-    #   valid in the destination AWS Region. This CMK is used to encrypt the
-    #   read replica in that AWS Region.
+    #   If you create a read replica of an encrypted DB cluster in another
+    #   Amazon Web Services Region, you must set `KmsKeyId` to a Amazon Web
+    #   Services KMS key identifier that is valid in the destination Amazon
+    #   Web Services Region. This CMK is used to encrypt the read replica in
+    #   that Amazon Web Services Region.
     # @option options [String] :pre_signed_url
     #   A URL that contains a Signature Version 4 signed request for the
-    #   `CreateDBCluster` action to be called in the source AWS Region where
-    #   the DB cluster is replicated from. You only need to specify
-    #   `PreSignedUrl` when you are performing cross-region replication from
-    #   an encrypted DB cluster.
+    #   `CreateDBCluster` action to be called in the source Amazon Web
+    #   Services Region where the DB cluster is replicated from. You only need
+    #   to specify `PreSignedUrl` when you are performing cross-region
+    #   replication from an encrypted DB cluster.
     #
     #   The pre-signed URL must be a valid request for the `CreateDBCluster`
-    #   API action that can be executed in the source AWS Region that contains
-    #   the encrypted DB cluster to be copied.
+    #   API action that can be executed in the source Amazon Web Services
+    #   Region that contains the encrypted DB cluster to be copied.
     #
     #   The pre-signed URL request must contain the following parameter
     #   values:
     #
-    #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
-    #     encrypt the copy of the DB cluster in the destination AWS Region.
-    #     This should refer to the same AWS KMS CMK for both the
-    #     `CreateDBCluster` action that is called in the destination AWS
-    #     Region, and the action contained in the pre-signed URL.
+    #   * `KmsKeyId` - The Amazon Web Services KMS key identifier for the key
+    #     to use to encrypt the copy of the DB cluster in the destination
+    #     Amazon Web Services Region. This should refer to the same Amazon Web
+    #     Services KMS CMK for both the `CreateDBCluster` action that is
+    #     called in the destination Amazon Web Services Region, and the action
+    #     contained in the pre-signed URL.
     #
-    #   * `DestinationRegion` - The name of the AWS Region that Aurora read
-    #     replica will be created in.
+    #   * `DestinationRegion` - The name of the Amazon Web Services Region
+    #     that Aurora read replica will be created in.
     #
     #   * `ReplicationSourceIdentifier` - The DB cluster identifier for the
     #     encrypted DB cluster to be copied. This identifier must be in the
-    #     Amazon Resource Name (ARN) format for the source AWS Region. For
-    #     example, if you are copying an encrypted DB cluster from the
-    #     us-west-2 AWS Region, then your `ReplicationSourceIdentifier` would
-    #     look like Example:
+    #     Amazon Resource Name (ARN) format for the source Amazon Web Services
+    #     Region. For example, if you are copying an encrypted DB cluster from
+    #     the us-west-2 Amazon Web Services Region, then your
+    #     `ReplicationSourceIdentifier` would look like Example:
     #     `arn:aws:rds:us-west-2:123456789012:cluster:aurora-cluster1`.
     #
     #   To learn how to generate a Signature Version 4 signed request, see [
-    #   Authenticating Requests: Using Query Parameters (AWS Signature Version
-    #   4)][1] and [ Signature Version 4 Signing Process][2].
+    #   Authenticating Requests: Using Query Parameters (Amazon Web Services
+    #   Signature Version 4)][1] and [ Signature Version 4 Signing
+    #   Process][2].
     #
-    #   <note markdown="1"> If you are using an AWS SDK tool or the AWS CLI, you can specify
-    #   `SourceRegion` (or `--source-region` for the AWS CLI) instead of
+    #   <note markdown="1"> If you are using an Amazon Web Services SDK tool or the CLI, you can
+    #   specify `SourceRegion` (or `--source-region` for the CLI) instead of
     #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
     #   autogenerates a pre-signed URL that is a valid request for the
-    #   operation that can be executed in the source AWS Region.
+    #   operation that can be executed in the source Amazon Web Services
+    #   Region.
     #
     #    </note>
     #
@@ -890,9 +903,9 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
     #   [2]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     # @option options [Boolean] :enable_iam_database_authentication
-    #   A value that indicates whether to enable mapping of AWS Identity and
-    #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   A value that indicates whether to enable mapping of Amazon Web
+    #   Services Identity and Access Management (IAM) accounts to database
+    #   accounts. By default, mapping is disabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
     #   *Amazon Aurora User Guide.*
@@ -1261,8 +1274,9 @@ module Aws::RDS
     #   parameter.
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region. To view the time blocks available,
-    #   see [ Backup window][1] in the *Amazon Aurora User Guide.*
+    #   block of time for each Amazon Web Services Region. To view the time
+    #   blocks available, see [ Backup window][1] in the *Amazon Aurora User
+    #   Guide.*
     #
     #   Constraints:
     #
@@ -1284,9 +1298,10 @@ module Aws::RDS
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region, occurring on a random day of the
-    #   week. To see the time blocks available, see [ Adjusting the Preferred
-    #   DB Cluster Maintenance Window][1] in the *Amazon Aurora User Guide.*
+    #   block of time for each Amazon Web Services Region, occurring on a
+    #   random day of the week. To see the time blocks available, see [
+    #   Adjusting the Preferred DB Cluster Maintenance Window][1] in the
+    #   *Amazon Aurora User Guide.*
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
@@ -1296,9 +1311,9 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora
     # @option options [Boolean] :enable_iam_database_authentication
-    #   A value that indicates whether to enable mapping of AWS Identity and
-    #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   A value that indicates whether to enable mapping of Amazon Web
+    #   Services Identity and Access Management (IAM) accounts to database
+    #   accounts. By default, mapping is disabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
     #   *Amazon Aurora User Guide.*
@@ -1552,24 +1567,26 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     # @option options [String] :kms_key_id
-    #   The AWS KMS key identifier to use when restoring an encrypted DB
-    #   cluster from an encrypted DB cluster.
+    #   The Amazon Web Services KMS key identifier to use when restoring an
+    #   encrypted DB cluster from an encrypted DB cluster.
     #
-    #   The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-    #   name for the AWS KMS customer master key (CMK). To use a CMK in a
-    #   different AWS account, specify the key ARN or alias ARN.
+    #   The Amazon Web Services KMS key identifier is the key ARN, key ID,
+    #   alias ARN, or alias name for the Amazon Web Services KMS customer
+    #   master key (CMK). To use a CMK in a different Amazon Web Services
+    #   account, specify the key ARN or alias ARN.
     #
     #   You can restore to a new DB cluster and encrypt the new DB cluster
-    #   with a AWS KMS CMK that is different than the AWS KMS key used to
-    #   encrypt the source DB cluster. The new DB cluster is encrypted with
-    #   the AWS KMS CMK identified by the `KmsKeyId` parameter.
+    #   with a Amazon Web Services KMS CMK that is different than the Amazon
+    #   Web Services KMS key used to encrypt the source DB cluster. The new DB
+    #   cluster is encrypted with the Amazon Web Services KMS CMK identified
+    #   by the `KmsKeyId` parameter.
     #
     #   If you don't specify a value for the `KmsKeyId` parameter, then the
     #   following occurs:
     #
     #   * If the DB cluster is encrypted, then the restored DB cluster is
-    #     encrypted using the AWS KMS CMK that was used to encrypt the source
-    #     DB cluster.
+    #     encrypted using the Amazon Web Services KMS CMK that was used to
+    #     encrypt the source DB cluster.
     #
     #   * If the DB cluster isn't encrypted, then the restored DB cluster
     #     isn't encrypted.
@@ -1577,9 +1594,9 @@ module Aws::RDS
     #   If `DBClusterIdentifier` refers to a DB cluster that isn't encrypted,
     #   then the restore request is rejected.
     # @option options [Boolean] :enable_iam_database_authentication
-    #   A value that indicates whether to enable mapping of AWS Identity and
-    #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled.
+    #   A value that indicates whether to enable mapping of Amazon Web
+    #   Services Identity and Access Management (IAM) accounts to database
+    #   accounts. By default, mapping is disabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
     #   *Amazon Aurora User Guide.*
@@ -1811,13 +1828,14 @@ module Aws::RDS
     #   of the following values:
     #
     #   * `automated` - Return all DB cluster snapshots that have been
-    #     automatically taken by Amazon RDS for my AWS account.
+    #     automatically taken by Amazon RDS for my Amazon Web Services
+    #     account.
     #
     #   * `manual` - Return all DB cluster snapshots that have been taken by
-    #     my AWS account.
+    #     my Amazon Web Services account.
     #
     #   * `shared` - Return all manual DB cluster snapshots that have been
-    #     shared to my AWS account.
+    #     shared to my Amazon Web Services account.
     #
     #   * `public` - Return all DB cluster snapshots that have been marked as
     #     public.
@@ -1848,17 +1866,17 @@ module Aws::RDS
     #   * `engine` - Accepts names of database engines.
     # @option options [Boolean] :include_shared
     #   A value that indicates whether to include shared manual DB cluster
-    #   snapshots from other AWS accounts that this AWS account has been given
-    #   permission to copy or restore. By default, these snapshots are not
-    #   included.
+    #   snapshots from other Amazon Web Services accounts that this Amazon Web
+    #   Services account has been given permission to copy or restore. By
+    #   default, these snapshots are not included.
     #
-    #   You can give an AWS account permission to restore a manual DB cluster
-    #   snapshot from another AWS account by the
-    #   `ModifyDBClusterSnapshotAttribute` API action.
+    #   You can give an Amazon Web Services account permission to restore a
+    #   manual DB cluster snapshot from another Amazon Web Services account by
+    #   the `ModifyDBClusterSnapshotAttribute` API action.
     # @option options [Boolean] :include_public
     #   A value that indicates whether to include manual DB cluster snapshots
-    #   that are public and can be copied or restored by any AWS account. By
-    #   default, the public snapshots are not included.
+    #   that are public and can be copied or restored by any Amazon Web
+    #   Services account. By default, the public snapshots are not included.
     #
     #   You can share a manual DB cluster snapshot as public by using the
     #   ModifyDBClusterSnapshotAttribute API action.

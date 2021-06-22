@@ -492,6 +492,87 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Provides the configuration information to connect to websites that
+    # require user authentication.
+    #
+    # @note When making an API call, you may pass AuthenticationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         basic_authentication: [
+    #           {
+    #             host: "Host", # required
+    #             port: 1, # required
+    #             credentials: "SecretArn", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] basic_authentication
+    #   The list of configuration information that's required to connect to
+    #   and crawl a website host using basic authentication credentials.
+    #
+    #   The list includes the name and port number of the website host.
+    #   @return [Array<Types::BasicAuthenticationConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AuthenticationConfiguration AWS API Documentation
+    #
+    class AuthenticationConfiguration < Struct.new(
+      :basic_authentication)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information to connect to websites that
+    # require basic user authentication.
+    #
+    # @note When making an API call, you may pass BasicAuthenticationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         credentials: "SecretArn", # required
+    #       }
+    #
+    # @!attribute [rw] host
+    #   The name of the website host you want to connect to using
+    #   authentication credentials.
+    #
+    #   For example, the host name of https://a.example.com/page1.html is
+    #   "a.example.com".
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port number of the website host you want to connect to using
+    #   authentication credentials.
+    #
+    #   For example, the port for https://a.example.com/page1.html is 443,
+    #   the standard port for HTTPS.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] credentials
+    #   Your secret ARN, which you can create in [AWS Secrets Manager][1]
+    #
+    #   You use a secret if basic authentication credentials are required to
+    #   connect to a website. The secret stores your credentials of user
+    #   name and password.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/BasicAuthenticationConfiguration AWS API Documentation
+    #
+    class BasicAuthenticationConfiguration < Struct.new(
+      :host,
+      :port,
+      :credentials)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BatchDeleteDocumentRequest
     #   data as a hash:
     #
@@ -801,8 +882,9 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Specifies capacity units configured for your index. You can add and
-    # remove capacity units to tune an index to your requirements.
+    # Specifies capacity units configured for your enterprise edition index.
+    # You can add and remove capacity units to tune an index to your
+    # requirements.
     #
     # @note When making an API call, you may pass CapacityUnitsConfiguration
     #   data as a hash:
@@ -813,14 +895,28 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] storage_capacity_units
-    #   The amount of extra storage capacity for an index. Each capacity
-    #   unit provides 150 Gb of storage space or 500,000 documents,
-    #   whichever is reached first.
+    #   The amount of extra storage capacity for an index. A single capacity
+    #   unit for an index provides 150 GB of storage space or 500,000
+    #   documents, whichever is reached first.
     #   @return [Integer]
     #
     # @!attribute [rw] query_capacity_units
-    #   The amount of extra query capacity for an index. Each capacity unit
-    #   provides 0.5 queries per second and 40,000 queries per day.
+    #   The amount of extra query capacity for an index and
+    #   [GetQuerySuggestions][1] capacity.
+    #
+    #   A single extra capacity unit for an index provides 0.5 queries per
+    #   second or approximately 40,000 queries per day.
+    #
+    #   `GetQuerySuggestions` capacity is 5 times the provisioned query
+    #   capacity for an index. For example, the base capacity for an index
+    #   is 0.5 queries per second, so GetQuerySuggestions capacity is 2.5
+    #   calls per second. If adding another 0.5 queries per second to total
+    #   1 queries per second for an index, the `GetQuerySuggestions`
+    #   capacity is 5 calls per second.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CapacityUnitsConfiguration AWS API Documentation
@@ -1499,7 +1595,7 @@ module Aws::Kendra
     #       {
     #         name: "DataSourceName", # required
     #         index_id: "IndexId", # required
-    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE
+    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER
     #         configuration: {
     #           s3_configuration: {
     #             bucket_name: "S3BucketName", # required
@@ -1761,6 +1857,37 @@ module Aws::Kendra
     #             exclude_mime_types: ["MimeType"],
     #             exclude_user_accounts: ["UserAccount"],
     #             exclude_shared_drives: ["SharedDriveId"],
+    #           },
+    #           web_crawler_configuration: {
+    #             urls: { # required
+    #               seed_url_configuration: {
+    #                 seed_urls: ["SeedUrl"], # required
+    #                 web_crawler_mode: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS, EVERYTHING
+    #               },
+    #               site_maps_configuration: {
+    #                 site_maps: ["SiteMap"], # required
+    #               },
+    #             },
+    #             crawl_depth: 1,
+    #             max_links_per_page: 1,
+    #             max_content_size_per_page_in_mega_bytes: 1.0,
+    #             max_urls_per_minute_crawl_rate: 1,
+    #             url_inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             url_exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             proxy_configuration: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               credentials: "SecretArn",
+    #             },
+    #             authentication_configuration: {
+    #               basic_authentication: [
+    #                 {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   credentials: "SecretArn", # required
+    #                 },
+    #               ],
+    #             },
     #           },
     #         },
     #         description: "Description",
@@ -2570,6 +2697,37 @@ module Aws::Kendra
     #           exclude_user_accounts: ["UserAccount"],
     #           exclude_shared_drives: ["SharedDriveId"],
     #         },
+    #         web_crawler_configuration: {
+    #           urls: { # required
+    #             seed_url_configuration: {
+    #               seed_urls: ["SeedUrl"], # required
+    #               web_crawler_mode: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS, EVERYTHING
+    #             },
+    #             site_maps_configuration: {
+    #               site_maps: ["SiteMap"], # required
+    #             },
+    #           },
+    #           crawl_depth: 1,
+    #           max_links_per_page: 1,
+    #           max_content_size_per_page_in_mega_bytes: 1.0,
+    #           max_urls_per_minute_crawl_rate: 1,
+    #           url_inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           url_exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           proxy_configuration: {
+    #             host: "Host", # required
+    #             port: 1, # required
+    #             credentials: "SecretArn",
+    #           },
+    #           authentication_configuration: {
+    #             basic_authentication: [
+    #               {
+    #                 host: "Host", # required
+    #                 port: 1, # required
+    #                 credentials: "SecretArn", # required
+    #               },
+    #             ],
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] s3_configuration
@@ -2612,6 +2770,11 @@ module Aws::Kendra
     #   Drive.
     #   @return [Types::GoogleDriveConfiguration]
     #
+    # @!attribute [rw] web_crawler_configuration
+    #   Provides the configuration information required for Amazon Kendra
+    #   web crawler.
+    #   @return [Types::WebCrawlerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DataSourceConfiguration AWS API Documentation
     #
     class DataSourceConfiguration < Struct.new(
@@ -2622,7 +2785,8 @@ module Aws::Kendra
       :one_drive_configuration,
       :service_now_configuration,
       :confluence_configuration,
-      :google_drive_configuration)
+      :google_drive_configuration,
+      :web_crawler_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5048,6 +5212,57 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Provides the configuration information for a web proxy to connect to
+    # website hosts.
+    #
+    # @note When making an API call, you may pass ProxyConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         credentials: "SecretArn",
+    #       }
+    #
+    # @!attribute [rw] host
+    #   The name of the website host you want to connect to via a web proxy
+    #   server.
+    #
+    #   For example, the host name of https://a.example.com/page1.html is
+    #   "a.example.com".
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port number of the website host you want to connect to via a web
+    #   proxy server.
+    #
+    #   For example, the port for https://a.example.com/page1.html is 443,
+    #   the standard port for HTTPS.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] credentials
+    #   Your secret ARN, which you can create in [AWS Secrets Manager][1]
+    #
+    #   The credentials are optional. You use a secret if web proxy
+    #   credentials are required to connect to a website host. Amazon Kendra
+    #   currently support basic authentication to connect to a web proxy
+    #   server. The secret stores your credentials.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ProxyConfiguration AWS API Documentation
+    #
+    class ProxyConfiguration < Struct.new(
+      :host,
+      :port,
+      :credentials)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass QueryRequest
     #   data as a hash:
     #
@@ -6253,6 +6468,59 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Provides the configuration information of the seed or starting point
+    # URLs to crawl.
+    #
+    # *When selecting websites to index, you must adhere to the [Amazon
+    # Acceptable Use Policy][1] and all other Amazon terms. Remember that
+    # you must only use the Amazon Kendra web crawler to index your own
+    # webpages, or webpages that you have authorization to index.*
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/aup/
+    #
+    # @note When making an API call, you may pass SeedUrlConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         seed_urls: ["SeedUrl"], # required
+    #         web_crawler_mode: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS, EVERYTHING
+    #       }
+    #
+    # @!attribute [rw] seed_urls
+    #   The list of seed or starting point URLs of the websites you want to
+    #   crawl.
+    #
+    #   The list can include a maximum of 100 seed URLs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] web_crawler_mode
+    #   You can choose one of the following modes:
+    #
+    #   * `HOST_ONLY` – crawl only the website host names. For example, if
+    #     the seed URL is "abc.example.com", then only URLs with host name
+    #     "abc.example.com" are crawled.
+    #
+    #   * `SUBDOMAINS` – crawl the website host names with subdomains. For
+    #     example, if the seed URL is "abc.example.com", then
+    #     "a.abc.example.com" and "b.abc.example.com" are also crawled.
+    #
+    #   * `EVERYTHING` – crawl the website host names with subdomains and
+    #     other domains that the webpages link to.
+    #
+    #   The default mode is set to `HOST_ONLY`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SeedUrlConfiguration AWS API Documentation
+    #
+    class SeedUrlConfiguration < Struct.new(
+      :seed_urls,
+      :web_crawler_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides the identifier of the AWS KMS customer master key (CMK) used
     # to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't
     # support asymmetric CMKs.
@@ -6671,6 +6939,38 @@ module Aws::Kendra
       :field_mappings,
       :document_title_field_name,
       :disable_local_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information of the sitemap URLs to crawl.
+    #
+    # *When selecting websites to index, you must adhere to the [Amazon
+    # Acceptable Use Policy][1] and all other Amazon terms. Remember that
+    # you must only use the Amazon Kendra web crawler to index your own
+    # webpages, or webpages that you have authorization to index.*
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/aup/
+    #
+    # @note When making an API call, you may pass SiteMapsConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         site_maps: ["SiteMap"], # required
+    #       }
+    #
+    # @!attribute [rw] site_maps
+    #   The list of sitemap URLs of the websites you want to crawl.
+    #
+    #   The list can include a maximum of three sitemap URLs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SiteMapsConfiguration AWS API Documentation
+    #
+    class SiteMapsConfiguration < Struct.new(
+      :site_maps)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7476,6 +7776,37 @@ module Aws::Kendra
     #             exclude_user_accounts: ["UserAccount"],
     #             exclude_shared_drives: ["SharedDriveId"],
     #           },
+    #           web_crawler_configuration: {
+    #             urls: { # required
+    #               seed_url_configuration: {
+    #                 seed_urls: ["SeedUrl"], # required
+    #                 web_crawler_mode: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS, EVERYTHING
+    #               },
+    #               site_maps_configuration: {
+    #                 site_maps: ["SiteMap"], # required
+    #               },
+    #             },
+    #             crawl_depth: 1,
+    #             max_links_per_page: 1,
+    #             max_content_size_per_page_in_mega_bytes: 1.0,
+    #             max_urls_per_minute_crawl_rate: 1,
+    #             url_inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             url_exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             proxy_configuration: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               credentials: "SecretArn",
+    #             },
+    #             authentication_configuration: {
+    #               basic_authentication: [
+    #                 {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   credentials: "SecretArn", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
     #         },
     #         description: "Description",
     #         schedule: "ScanSchedule",
@@ -7838,6 +8169,58 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Provides the configuration information of the URLs to crawl.
+    #
+    # *When selecting websites to index, you must adhere to the [Amazon
+    # Acceptable Use Policy][1] and all other Amazon terms. Remember that
+    # you must only use the Amazon Kendra web crawler to index your own
+    # webpages, or webpages that you have authorization to index.*
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/aup/
+    #
+    # @note When making an API call, you may pass Urls
+    #   data as a hash:
+    #
+    #       {
+    #         seed_url_configuration: {
+    #           seed_urls: ["SeedUrl"], # required
+    #           web_crawler_mode: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS, EVERYTHING
+    #         },
+    #         site_maps_configuration: {
+    #           site_maps: ["SiteMap"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] seed_url_configuration
+    #   Provides the configuration of the seed or starting point URLs of the
+    #   websites you want to crawl.
+    #
+    #   You can choose to crawl only the website host names, or the website
+    #   host names with subdomains, or the website host names with
+    #   subdomains and other domains that the webpages link to.
+    #
+    #   You can list up to 100 seed URLs.
+    #   @return [Types::SeedUrlConfiguration]
+    #
+    # @!attribute [rw] site_maps_configuration
+    #   Provides the configuration of the sitemap URLs of the websites you
+    #   want to crawl.
+    #
+    #   Only URLs belonging to the same website host names are crawled. You
+    #   can list up to three sitemap URLs.
+    #   @return [Types::SiteMapsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Urls AWS API Documentation
+    #
+    class Urls < Struct.new(
+      :seed_url_configuration,
+      :site_maps_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about the user context for a Amazon Kendra index.
     #
     # @note When making an API call, you may pass UserContext
@@ -7904,6 +8287,168 @@ module Aws::Kendra
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information required for Amazon Kendra web
+    # crawler.
+    #
+    # @note When making an API call, you may pass WebCrawlerConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         urls: { # required
+    #           seed_url_configuration: {
+    #             seed_urls: ["SeedUrl"], # required
+    #             web_crawler_mode: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS, EVERYTHING
+    #           },
+    #           site_maps_configuration: {
+    #             site_maps: ["SiteMap"], # required
+    #           },
+    #         },
+    #         crawl_depth: 1,
+    #         max_links_per_page: 1,
+    #         max_content_size_per_page_in_mega_bytes: 1.0,
+    #         max_urls_per_minute_crawl_rate: 1,
+    #         url_inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         url_exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         proxy_configuration: {
+    #           host: "Host", # required
+    #           port: 1, # required
+    #           credentials: "SecretArn",
+    #         },
+    #         authentication_configuration: {
+    #           basic_authentication: [
+    #             {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               credentials: "SecretArn", # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] urls
+    #   Specifies the seed or starting point URLs of the websites or the
+    #   sitemap URLs of the websites you want to crawl.
+    #
+    #   You can include website subdomains. You can list up to 100 seed URLs
+    #   and up to three sitemap URLs.
+    #
+    #   *When selecting websites to index, you must adhere to the [Amazon
+    #   Acceptable Use Policy][1] and all other Amazon terms. Remember that
+    #   you must only use the Amazon Kendra web crawler to index your own
+    #   webpages, or webpages that you have authorization to index.*
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/aup/
+    #   @return [Types::Urls]
+    #
+    # @!attribute [rw] crawl_depth
+    #   Specifies the number of levels in a website that you want to crawl.
+    #
+    #   The first level begins from the website seed or starting point URL.
+    #   For example, if a website has 3 levels – index level (i.e. seed in
+    #   this example), sections level, and subsections level – and you are
+    #   only interested in crawling information up to the sections level
+    #   (i.e. levels 0-1), you can set your depth to 1.
+    #
+    #   The default crawl depth is set to 2.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_links_per_page
+    #   The maximum number of URLs on a webpage to include when crawling a
+    #   website. This number is per webpage.
+    #
+    #   As a website’s webpages are crawled, any URLs the webpages link to
+    #   are also crawled. URLs on a webpage are crawled in order of
+    #   appearance.
+    #
+    #   The default maximum links per page is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_content_size_per_page_in_mega_bytes
+    #   The maximum size (in MB) of a webpage or attachment to crawl.
+    #
+    #   Files larger than this size (in MB) are skipped/not crawled.
+    #
+    #   The default maximum size of a webpage or attachment is set to 50 MB.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_urls_per_minute_crawl_rate
+    #   The maximum number of URLs crawled per website host per minute.
+    #
+    #   A minimum of one URL is required.
+    #
+    #   The default maximum number of URLs crawled per website host per
+    #   minute is 300.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] url_inclusion_patterns
+    #   The regular expression pattern to include certain URLs to crawl.
+    #
+    #   If there is a regular expression pattern to exclude certain URLs
+    #   that conflicts with the include pattern, the exclude pattern takes
+    #   precedence.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] url_exclusion_patterns
+    #   The regular expression pattern to exclude certain URLs to crawl.
+    #
+    #   If there is a regular expression pattern to include certain URLs
+    #   that conflicts with the exclude pattern, the exclude pattern takes
+    #   precedence.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] proxy_configuration
+    #   Provides configuration information required to connect to your
+    #   internal websites via a web proxy.
+    #
+    #   You must provide the website host name and port number. For example,
+    #   the host name of https://a.example.com/page1.html is
+    #   "a.example.com" and the port is 443, the standard port for HTTPS.
+    #
+    #   Web proxy credentials are optional and you can use them to connect
+    #   to a web proxy server that requires basic authentication. To store
+    #   web proxy credentials, you use a secret in [AWS Secrets Manager][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+    #   @return [Types::ProxyConfiguration]
+    #
+    # @!attribute [rw] authentication_configuration
+    #   Provides configuration information required to connect to websites
+    #   using authentication.
+    #
+    #   You can connect to websites using basic authentication of user name
+    #   and password.
+    #
+    #   You must provide the website host name and port number. For example,
+    #   the host name of https://a.example.com/page1.html is
+    #   "a.example.com" and the port is 443, the standard port for HTTPS.
+    #   You use a secret in [AWS Secrets Manager][1] to store your
+    #   authentication credentials.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+    #   @return [Types::AuthenticationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/WebCrawlerConfiguration AWS API Documentation
+    #
+    class WebCrawlerConfiguration < Struct.new(
+      :urls,
+      :crawl_depth,
+      :max_links_per_page,
+      :max_content_size_per_page_in_mega_bytes,
+      :max_urls_per_minute_crawl_rate,
+      :url_inclusion_patterns,
+      :url_exclusion_patterns,
+      :proxy_configuration,
+      :authentication_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -484,6 +484,7 @@ module Aws::Chime
     RoomMembershipList = Shapes::ListShape.new(name: 'RoomMembershipList')
     RoomMembershipRole = Shapes::StringShape.new(name: 'RoomMembershipRole')
     RoomRetentionSettings = Shapes::StructureShape.new(name: 'RoomRetentionSettings')
+    SMAUpdateCallArgumentsMap = Shapes::MapShape.new(name: 'SMAUpdateCallArgumentsMap')
     SearchAvailablePhoneNumbersRequest = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersRequest')
     SearchAvailablePhoneNumbersResponse = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersResponse')
     SendChannelMessageRequest = Shapes::StructureShape.new(name: 'SendChannelMessageRequest')
@@ -562,6 +563,8 @@ module Aws::Chime
     UpdateRoomMembershipResponse = Shapes::StructureShape.new(name: 'UpdateRoomMembershipResponse')
     UpdateRoomRequest = Shapes::StructureShape.new(name: 'UpdateRoomRequest')
     UpdateRoomResponse = Shapes::StructureShape.new(name: 'UpdateRoomResponse')
+    UpdateSipMediaApplicationCallRequest = Shapes::StructureShape.new(name: 'UpdateSipMediaApplicationCallRequest')
+    UpdateSipMediaApplicationCallResponse = Shapes::StructureShape.new(name: 'UpdateSipMediaApplicationCallResponse')
     UpdateSipMediaApplicationRequest = Shapes::StructureShape.new(name: 'UpdateSipMediaApplicationRequest')
     UpdateSipMediaApplicationResponse = Shapes::StructureShape.new(name: 'UpdateSipMediaApplicationResponse')
     UpdateSipRuleRequest = Shapes::StructureShape.new(name: 'UpdateSipRuleRequest')
@@ -2182,6 +2185,9 @@ module Aws::Chime
     RoomRetentionSettings.add_member(:retention_days, Shapes::ShapeRef.new(shape: RetentionDays, location_name: "RetentionDays"))
     RoomRetentionSettings.struct_class = Types::RoomRetentionSettings
 
+    SMAUpdateCallArgumentsMap.key = Shapes::ShapeRef.new(shape: SensitiveString)
+    SMAUpdateCallArgumentsMap.value = Shapes::ShapeRef.new(shape: SensitiveString)
+
     SearchAvailablePhoneNumbersRequest.add_member(:area_code, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "area-code"))
     SearchAvailablePhoneNumbersRequest.add_member(:city, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "city"))
     SearchAvailablePhoneNumbersRequest.add_member(:country, Shapes::ShapeRef.new(shape: Alpha2CountryCode, location: "querystring", location_name: "country"))
@@ -2451,6 +2457,14 @@ module Aws::Chime
 
     UpdateRoomResponse.add_member(:room, Shapes::ShapeRef.new(shape: Room, location_name: "Room"))
     UpdateRoomResponse.struct_class = Types::UpdateRoomResponse
+
+    UpdateSipMediaApplicationCallRequest.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipMediaApplicationId"))
+    UpdateSipMediaApplicationCallRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "transactionId"))
+    UpdateSipMediaApplicationCallRequest.add_member(:arguments, Shapes::ShapeRef.new(shape: SMAUpdateCallArgumentsMap, required: true, location_name: "Arguments"))
+    UpdateSipMediaApplicationCallRequest.struct_class = Types::UpdateSipMediaApplicationCallRequest
+
+    UpdateSipMediaApplicationCallResponse.add_member(:sip_media_application_call, Shapes::ShapeRef.new(shape: SipMediaApplicationCall, location_name: "SipMediaApplicationCall"))
+    UpdateSipMediaApplicationCallResponse.struct_class = Types::UpdateSipMediaApplicationCallResponse
 
     UpdateSipMediaApplicationRequest.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipMediaApplicationId"))
     UpdateSipMediaApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: SipMediaApplicationName, location_name: "Name"))
@@ -5536,6 +5550,22 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_sip_media_application_call, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSipMediaApplicationCall"
+        o.http_method = "POST"
+        o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}/calls/{transactionId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSipMediaApplicationCallRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSipMediaApplicationCallResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)

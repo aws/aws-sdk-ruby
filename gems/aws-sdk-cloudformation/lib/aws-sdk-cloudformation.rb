@@ -33,7 +33,7 @@ require_relative 'aws-sdk-cloudformation/customizations'
 # structure.
 #
 #     cloud_formation = Aws::CloudFormation::Client.new
-#     resp = cloud_formation.cancel_update_stack(params)
+#     resp = cloud_formation.activate_type(params)
 #
 # See {Client} for more information.
 #
@@ -53,6 +53,6 @@ require_relative 'aws-sdk-cloudformation/customizations'
 # @!group service
 module Aws::CloudFormation
 
-  GEM_VERSION = '1.52.0'
+  GEM_VERSION = '1.53.0'
 
 end

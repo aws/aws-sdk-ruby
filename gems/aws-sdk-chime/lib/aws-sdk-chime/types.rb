@@ -9803,6 +9803,52 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateSipMediaApplicationCallRequest
+    #   data as a hash:
+    #
+    #       {
+    #         sip_media_application_id: "NonEmptyString", # required
+    #         transaction_id: "NonEmptyString", # required
+    #         arguments: { # required
+    #           "SensitiveString" => "SensitiveString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] sip_media_application_id
+    #   The ID of the SIP media application handling the call.
+    #   @return [String]
+    #
+    # @!attribute [rw] transaction_id
+    #   The ID of the call transaction.
+    #   @return [String]
+    #
+    # @!attribute [rw] arguments
+    #   Arguments made available to the Lambda function as part of the
+    #   `CALL_UPDATE_REQUESTED` event. Can contain 0-20 key-value pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateSipMediaApplicationCallRequest AWS API Documentation
+    #
+    class UpdateSipMediaApplicationCallRequest < Struct.new(
+      :sip_media_application_id,
+      :transaction_id,
+      :arguments)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sip_media_application_call
+    #   A `Call` instance for a SIP media application.
+    #   @return [Types::SipMediaApplicationCall]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateSipMediaApplicationCallResponse AWS API Documentation
+    #
+    class UpdateSipMediaApplicationCallResponse < Struct.new(
+      :sip_media_application_call)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateSipMediaApplicationRequest
     #   data as a hash:
     #

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2021-06-17)
+------------------
+
+* Feature - Enable ml.g4dn instance types for SageMaker Batch Transform and SageMaker Processing
+
 1.89.0 (2021-06-10)
 ------------------
 

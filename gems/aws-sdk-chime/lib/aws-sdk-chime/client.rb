@@ -4332,7 +4332,7 @@ module Aws::Chime
     end
 
     # Retrieves details for the specified Amazon Chime Voice Connector
-    # group, such as timestamps,name, and associated `VoiceConnectorItems` .
+    # group, such as timestamps,name, and associated `VoiceConnectorItems`.
     #
     # @option params [required, String] :voice_connector_group_id
     #   The Amazon Chime Voice Connector group ID.
@@ -5407,7 +5407,7 @@ module Aws::Chime
 
     # Lists up to 100 active Amazon Chime SDK meetings. For more information
     # about the Amazon Chime SDK, see [Using the Amazon Chime SDK][1] in the
-    # *Amazon Chime Developer Guide* .
+    # *Amazon Chime Developer Guide*.
     #
     #
     #
@@ -6240,13 +6240,13 @@ module Aws::Chime
     # account. We recommend using AWS CloudTrail to monitor usage of this
     # API for your account. For more information, see [Logging Amazon Chime
     # API Calls with AWS CloudTrail][1] in the *Amazon Chime Administration
-    # Guide* .
+    # Guide*.
     #
     # To turn off existing retention settings, remove the number of days
     # from the corresponding **RetentionDays** field in the
     # **RetentionSettings** object. For more information about retention
     # settings, see [Managing Chat Retention Policies][2] in the *Amazon
-    # Chime Administration Guide* .
+    # Chime Administration Guide*.
     #
     #
     #
@@ -7873,6 +7873,47 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Allows you to trigger a Lambda function at any time while a call is
+    # active, and replace the current actions with new actions returned by
+    # the invocation.
+    #
+    # @option params [required, String] :sip_media_application_id
+    #   The ID of the SIP media application handling the call.
+    #
+    # @option params [required, String] :transaction_id
+    #   The ID of the call transaction.
+    #
+    # @option params [required, Hash<String,String>] :arguments
+    #   Arguments made available to the Lambda function as part of the
+    #   `CALL_UPDATE_REQUESTED` event. Can contain 0-20 key-value pairs.
+    #
+    # @return [Types::UpdateSipMediaApplicationCallResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSipMediaApplicationCallResponse#sip_media_application_call #sip_media_application_call} => Types::SipMediaApplicationCall
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_sip_media_application_call({
+    #     sip_media_application_id: "NonEmptyString", # required
+    #     transaction_id: "NonEmptyString", # required
+    #     arguments: { # required
+    #       "SensitiveString" => "SensitiveString",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sip_media_application_call.transaction_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateSipMediaApplicationCall AWS API Documentation
+    #
+    # @overload update_sip_media_application_call(params = {})
+    # @param [Hash] params ({})
+    def update_sip_media_application_call(params = {}, options = {})
+      req = build_request(:update_sip_media_application_call, params)
+      req.send_request(options)
+    end
+
     # Updates the details of the specified SIP rule.
     #
     # @option params [required, String] :sip_rule_id
@@ -8132,7 +8173,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,7 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add support for Assume Role Chaining in profiles. (#2531)
 * Issue - Fixed an issue with `Seahorse::Client::H2::Connection` for non-https endpoints. (#2542)
 
 3.114.3 (2021-06-15)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2021-06-17)
+------------------
+
+* Feature - This release adds a new API UpdateSipMediaApplicationCall, to update an in-progress call for SipMediaApplication.
+
 1.47.0 (2021-06-10)
 ------------------
 

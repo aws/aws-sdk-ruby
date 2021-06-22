@@ -679,7 +679,7 @@ module Aws::Kendra
     #   resp = client.create_data_source({
     #     name: "DataSourceName", # required
     #     index_id: "IndexId", # required
-    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE
+    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER
     #     configuration: {
     #       s3_configuration: {
     #         bucket_name: "S3BucketName", # required
@@ -941,6 +941,37 @@ module Aws::Kendra
     #         exclude_mime_types: ["MimeType"],
     #         exclude_user_accounts: ["UserAccount"],
     #         exclude_shared_drives: ["SharedDriveId"],
+    #       },
+    #       web_crawler_configuration: {
+    #         urls: { # required
+    #           seed_url_configuration: {
+    #             seed_urls: ["SeedUrl"], # required
+    #             web_crawler_mode: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS, EVERYTHING
+    #           },
+    #           site_maps_configuration: {
+    #             site_maps: ["SiteMap"], # required
+    #           },
+    #         },
+    #         crawl_depth: 1,
+    #         max_links_per_page: 1,
+    #         max_content_size_per_page_in_mega_bytes: 1.0,
+    #         max_urls_per_minute_crawl_rate: 1,
+    #         url_inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         url_exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         proxy_configuration: {
+    #           host: "Host", # required
+    #           port: 1, # required
+    #           credentials: "SecretArn",
+    #         },
+    #         authentication_configuration: {
+    #           basic_authentication: [
+    #             {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               credentials: "SecretArn", # required
+    #             },
+    #           ],
+    #         },
     #       },
     #     },
     #     description: "Description",
@@ -1525,7 +1556,7 @@ module Aws::Kendra
     #   resp.id #=> String
     #   resp.index_id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE"
+    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER"
     #   resp.configuration.s3_configuration.bucket_name #=> String
     #   resp.configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.configuration.s3_configuration.inclusion_prefixes[0] #=> String
@@ -1711,6 +1742,26 @@ module Aws::Kendra
     #   resp.configuration.google_drive_configuration.exclude_user_accounts[0] #=> String
     #   resp.configuration.google_drive_configuration.exclude_shared_drives #=> Array
     #   resp.configuration.google_drive_configuration.exclude_shared_drives[0] #=> String
+    #   resp.configuration.web_crawler_configuration.urls.seed_url_configuration.seed_urls #=> Array
+    #   resp.configuration.web_crawler_configuration.urls.seed_url_configuration.seed_urls[0] #=> String
+    #   resp.configuration.web_crawler_configuration.urls.seed_url_configuration.web_crawler_mode #=> String, one of "HOST_ONLY", "SUBDOMAINS", "EVERYTHING"
+    #   resp.configuration.web_crawler_configuration.urls.site_maps_configuration.site_maps #=> Array
+    #   resp.configuration.web_crawler_configuration.urls.site_maps_configuration.site_maps[0] #=> String
+    #   resp.configuration.web_crawler_configuration.crawl_depth #=> Integer
+    #   resp.configuration.web_crawler_configuration.max_links_per_page #=> Integer
+    #   resp.configuration.web_crawler_configuration.max_content_size_per_page_in_mega_bytes #=> Float
+    #   resp.configuration.web_crawler_configuration.max_urls_per_minute_crawl_rate #=> Integer
+    #   resp.configuration.web_crawler_configuration.url_inclusion_patterns #=> Array
+    #   resp.configuration.web_crawler_configuration.url_inclusion_patterns[0] #=> String
+    #   resp.configuration.web_crawler_configuration.url_exclusion_patterns #=> Array
+    #   resp.configuration.web_crawler_configuration.url_exclusion_patterns[0] #=> String
+    #   resp.configuration.web_crawler_configuration.proxy_configuration.host #=> String
+    #   resp.configuration.web_crawler_configuration.proxy_configuration.port #=> Integer
+    #   resp.configuration.web_crawler_configuration.proxy_configuration.credentials #=> String
+    #   resp.configuration.web_crawler_configuration.authentication_configuration.basic_authentication #=> Array
+    #   resp.configuration.web_crawler_configuration.authentication_configuration.basic_authentication[0].host #=> String
+    #   resp.configuration.web_crawler_configuration.authentication_configuration.basic_authentication[0].port #=> Integer
+    #   resp.configuration.web_crawler_configuration.authentication_configuration.basic_authentication[0].credentials #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.description #=> String
@@ -2182,7 +2233,7 @@ module Aws::Kendra
     #   resp.summary_items #=> Array
     #   resp.summary_items[0].name #=> String
     #   resp.summary_items[0].id #=> String
-    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE"
+    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER"
     #   resp.summary_items[0].created_at #=> Time
     #   resp.summary_items[0].updated_at #=> Time
     #   resp.summary_items[0].status #=> String, one of "CREATING", "DELETING", "FAILED", "UPDATING", "ACTIVE"
@@ -3180,6 +3231,37 @@ module Aws::Kendra
     #         exclude_user_accounts: ["UserAccount"],
     #         exclude_shared_drives: ["SharedDriveId"],
     #       },
+    #       web_crawler_configuration: {
+    #         urls: { # required
+    #           seed_url_configuration: {
+    #             seed_urls: ["SeedUrl"], # required
+    #             web_crawler_mode: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS, EVERYTHING
+    #           },
+    #           site_maps_configuration: {
+    #             site_maps: ["SiteMap"], # required
+    #           },
+    #         },
+    #         crawl_depth: 1,
+    #         max_links_per_page: 1,
+    #         max_content_size_per_page_in_mega_bytes: 1.0,
+    #         max_urls_per_minute_crawl_rate: 1,
+    #         url_inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         url_exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         proxy_configuration: {
+    #           host: "Host", # required
+    #           port: 1, # required
+    #           credentials: "SecretArn",
+    #         },
+    #         authentication_configuration: {
+    #           basic_authentication: [
+    #             {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               credentials: "SecretArn", # required
+    #             },
+    #           ],
+    #         },
+    #       },
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
@@ -3509,7 +3591,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

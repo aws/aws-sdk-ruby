@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2021-06-17)
+------------------
+
+* Feature - Amazon Kendra now supports the indexing of web documents for search through the web crawler.
+
 1.26.0 (2021-06-09)
 ------------------
 
