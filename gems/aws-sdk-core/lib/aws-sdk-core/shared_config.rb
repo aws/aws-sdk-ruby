@@ -249,7 +249,7 @@ module Aws
 
     def resolve_source_profile(profile, opts = {})
       if opts[:visited_profiles] && opts[:visited_profiles].include?(profile)
-        raise Errors::CredentialSourceConflictError  # TODO: Better error for this
+        raise Errors::SourceProfileCircularReferenceError
       end
       opts[:visited_profiles].add(profile) if opts[:visited_profiles]
 
