@@ -1015,6 +1015,11 @@ module Aws::MediaTailor
     #   resp.items[0].arn #=> String
     #   resp.items[0].channel_name #=> String
     #   resp.items[0].program_name #=> String
+    #   resp.items[0].schedule_ad_breaks #=> Array
+    #   resp.items[0].schedule_ad_breaks[0].approximate_duration_seconds #=> Integer
+    #   resp.items[0].schedule_ad_breaks[0].approximate_start_time #=> Time
+    #   resp.items[0].schedule_ad_breaks[0].source_location_name #=> String
+    #   resp.items[0].schedule_ad_breaks[0].vod_source_name #=> String
     #   resp.items[0].source_location_name #=> String
     #   resp.items[0].vod_source_name #=> String
     #   resp.next_token #=> String
@@ -1858,7 +1863,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2021-06-23)
+------------------
+
+* Feature - DocumentDB documentation-only edits
+
 1.31.0 (2021-06-02)
 ------------------
 

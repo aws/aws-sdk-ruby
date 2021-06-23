@@ -8913,6 +8913,7 @@ module Aws::EC2
     ProvisionByoipCidrRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     ProvisionByoipCidrRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ProvisionByoipCidrRequest.add_member(:pool_tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "PoolTagSpecification"))
+    ProvisionByoipCidrRequest.add_member(:multi_region, Shapes::ShapeRef.new(shape: Boolean, location_name: "MultiRegion"))
     ProvisionByoipCidrRequest.struct_class = Types::ProvisionByoipCidrRequest
 
     ProvisionByoipCidrResult.add_member(:byoip_cidr, Shapes::ShapeRef.new(shape: ByoipCidr, location_name: "byoipCidr"))

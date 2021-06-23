@@ -50,6 +50,6 @@ require_relative 'aws-sdk-sso/customizations'
 # @!group service
 module Aws::SSO
 
-  GEM_VERSION = '3.114.3'
+  GEM_VERSION = '3.115.0'
 
 end

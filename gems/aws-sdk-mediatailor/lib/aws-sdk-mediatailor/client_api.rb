@@ -95,6 +95,7 @@ module Aws::MediaTailor
     RequestOutputs = Shapes::ListShape.new(name: 'RequestOutputs')
     ResponseOutputItem = Shapes::StructureShape.new(name: 'ResponseOutputItem')
     ResponseOutputs = Shapes::ListShape.new(name: 'ResponseOutputs')
+    ScheduleAdBreak = Shapes::StructureShape.new(name: 'ScheduleAdBreak')
     ScheduleConfiguration = Shapes::StructureShape.new(name: 'ScheduleConfiguration')
     ScheduleEntry = Shapes::StructureShape.new(name: 'ScheduleEntry')
     SecretsManagerAccessTokenConfiguration = Shapes::StructureShape.new(name: 'SecretsManagerAccessTokenConfiguration')
@@ -122,6 +123,7 @@ module Aws::MediaTailor
     __listOfAdBreak = Shapes::ListShape.new(name: '__listOfAdBreak')
     __listOfChannel = Shapes::ListShape.new(name: '__listOfChannel')
     __listOfPlaybackConfiguration = Shapes::ListShape.new(name: '__listOfPlaybackConfiguration')
+    __listOfScheduleAdBreak = Shapes::ListShape.new(name: '__listOfScheduleAdBreak')
     __listOfScheduleEntry = Shapes::ListShape.new(name: '__listOfScheduleEntry')
     __listOfSourceLocation = Shapes::ListShape.new(name: '__listOfSourceLocation')
     __listOfVodSource = Shapes::ListShape.new(name: '__listOfVodSource')
@@ -522,6 +524,12 @@ module Aws::MediaTailor
 
     ResponseOutputs.member = Shapes::ShapeRef.new(shape: ResponseOutputItem)
 
+    ScheduleAdBreak.add_member(:approximate_duration_seconds, Shapes::ShapeRef.new(shape: __long, location_name: "ApproximateDurationSeconds"))
+    ScheduleAdBreak.add_member(:approximate_start_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "ApproximateStartTime"))
+    ScheduleAdBreak.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, location_name: "SourceLocationName"))
+    ScheduleAdBreak.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "VodSourceName"))
+    ScheduleAdBreak.struct_class = Types::ScheduleAdBreak
+
     ScheduleConfiguration.add_member(:transition, Shapes::ShapeRef.new(shape: Transition, required: true, location_name: "Transition"))
     ScheduleConfiguration.struct_class = Types::ScheduleConfiguration
 
@@ -530,6 +538,7 @@ module Aws::MediaTailor
     ScheduleEntry.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Arn"))
     ScheduleEntry.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ChannelName"))
     ScheduleEntry.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ProgramName"))
+    ScheduleEntry.add_member(:schedule_ad_breaks, Shapes::ShapeRef.new(shape: __listOfScheduleAdBreak, location_name: "ScheduleAdBreaks"))
     ScheduleEntry.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "SourceLocationName"))
     ScheduleEntry.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "VodSourceName"))
     ScheduleEntry.struct_class = Types::ScheduleEntry
@@ -640,6 +649,8 @@ module Aws::MediaTailor
     __listOfChannel.member = Shapes::ShapeRef.new(shape: Channel)
 
     __listOfPlaybackConfiguration.member = Shapes::ShapeRef.new(shape: PlaybackConfiguration)
+
+    __listOfScheduleAdBreak.member = Shapes::ShapeRef.new(shape: ScheduleAdBreak)
 
     __listOfScheduleEntry.member = Shapes::ShapeRef.new(shape: ScheduleEntry)
 

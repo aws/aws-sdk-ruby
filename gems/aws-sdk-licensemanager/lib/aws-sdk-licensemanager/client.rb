@@ -357,7 +357,7 @@ module Aws::LicenseManager
     # @example Response structure
     #
     #   resp.grant_arn #=> String
-    #   resp.status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED"
+    #   resp.status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED", "WORKFLOW_COMPLETED"
     #   resp.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/AcceptGrant AWS API Documentation
@@ -587,7 +587,7 @@ module Aws::LicenseManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_grant({
-    #     client_token: "String", # required
+    #     client_token: "ClientToken", # required
     #     grant_name: "String", # required
     #     license_arn: "Arn", # required
     #     principals: ["Arn"], # required
@@ -598,7 +598,7 @@ module Aws::LicenseManager
     # @example Response structure
     #
     #   resp.grant_arn #=> String
-    #   resp.status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED"
+    #   resp.status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED", "WORKFLOW_COMPLETED"
     #   resp.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/CreateGrant AWS API Documentation
@@ -628,6 +628,8 @@ module Aws::LicenseManager
     # @option params [String] :status
     #   Grant status.
     #
+    # @option params [String] :status_reason
+    #
     # @option params [String] :source_version
     #   Current version of the grant.
     #
@@ -640,18 +642,19 @@ module Aws::LicenseManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_grant_version({
-    #     client_token: "String", # required
+    #     client_token: "ClientToken", # required
     #     grant_arn: "Arn", # required
     #     grant_name: "String",
     #     allowed_operations: ["CreateGrant"], # accepts CreateGrant, CheckoutLicense, CheckoutBorrowLicense, CheckInLicense, ExtendConsumptionLicense, ListPurchasedLicenses, CreateToken
-    #     status: "PENDING_WORKFLOW", # accepts PENDING_WORKFLOW, PENDING_ACCEPT, REJECTED, ACTIVE, FAILED_WORKFLOW, DELETED, PENDING_DELETE, DISABLED
+    #     status: "PENDING_WORKFLOW", # accepts PENDING_WORKFLOW, PENDING_ACCEPT, REJECTED, ACTIVE, FAILED_WORKFLOW, DELETED, PENDING_DELETE, DISABLED, WORKFLOW_COMPLETED
+    #     status_reason: "StatusReasonMessage",
     #     source_version: "String",
     #   })
     #
     # @example Response structure
     #
     #   resp.grant_arn #=> String
-    #   resp.status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED"
+    #   resp.status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED", "WORKFLOW_COMPLETED"
     #   resp.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/CreateGrantVersion AWS API Documentation
@@ -750,7 +753,7 @@ module Aws::LicenseManager
     #         value: "String",
     #       },
     #     ],
-    #     client_token: "String", # required
+    #     client_token: "ClientToken", # required
     #   })
     #
     # @example Response structure
@@ -1034,7 +1037,7 @@ module Aws::LicenseManager
     #       },
     #     },
     #     status: "AVAILABLE", # required, accepts AVAILABLE, PENDING_AVAILABLE, DEACTIVATED, SUSPENDED, EXPIRED, PENDING_DELETE, DELETED
-    #     client_token: "String", # required
+    #     client_token: "ClientToken", # required
     #     source_version: "String",
     #   })
     #
@@ -1092,7 +1095,7 @@ module Aws::LicenseManager
     #     role_arns: ["Arn"],
     #     expiration_in_days: 1,
     #     token_properties: ["String"],
-    #     client_token: "IdempotencyToken", # required
+    #     client_token: "ClientToken", # required
     #   })
     #
     # @example Response structure
@@ -1115,6 +1118,8 @@ module Aws::LicenseManager
     # @option params [required, String] :grant_arn
     #   Amazon Resource Name (ARN) of the grant.
     #
+    # @option params [String] :status_reason
+    #
     # @option params [required, String] :version
     #   Current version of the grant.
     #
@@ -1128,13 +1133,14 @@ module Aws::LicenseManager
     #
     #   resp = client.delete_grant({
     #     grant_arn: "Arn", # required
+    #     status_reason: "StatusReasonMessage",
     #     version: "String", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.grant_arn #=> String
-    #   resp.status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED"
+    #   resp.status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED", "WORKFLOW_COMPLETED"
     #   resp.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/DeleteGrant AWS API Documentation
@@ -1350,7 +1356,7 @@ module Aws::LicenseManager
     #   resp.grant.license_arn #=> String
     #   resp.grant.grantee_principal_arn #=> String
     #   resp.grant.home_region #=> String
-    #   resp.grant.grant_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED"
+    #   resp.grant.grant_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED", "WORKFLOW_COMPLETED"
     #   resp.grant.status_reason #=> String
     #   resp.grant.version #=> String
     #   resp.grant.granted_operations #=> Array
@@ -1703,7 +1709,7 @@ module Aws::LicenseManager
     #   resp.grants[0].license_arn #=> String
     #   resp.grants[0].grantee_principal_arn #=> String
     #   resp.grants[0].home_region #=> String
-    #   resp.grants[0].grant_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED"
+    #   resp.grants[0].grant_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED", "WORKFLOW_COMPLETED"
     #   resp.grants[0].status_reason #=> String
     #   resp.grants[0].version #=> String
     #   resp.grants[0].granted_operations #=> Array
@@ -2162,7 +2168,7 @@ module Aws::LicenseManager
     #   resp.grants[0].license_arn #=> String
     #   resp.grants[0].grantee_principal_arn #=> String
     #   resp.grants[0].home_region #=> String
-    #   resp.grants[0].grant_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED"
+    #   resp.grants[0].grant_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED", "WORKFLOW_COMPLETED"
     #   resp.grants[0].status_reason #=> String
     #   resp.grants[0].version #=> String
     #   resp.grants[0].granted_operations #=> Array
@@ -2252,7 +2258,8 @@ module Aws::LicenseManager
     #   resp.licenses[0].license_metadata[0].value #=> String
     #   resp.licenses[0].create_time #=> String
     #   resp.licenses[0].version #=> String
-    #   resp.licenses[0].received_metadata.received_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "DISABLED"
+    #   resp.licenses[0].received_metadata.received_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "DISABLED", "WORKFLOW_COMPLETED"
+    #   resp.licenses[0].received_metadata.received_status_reason #=> String
     #   resp.licenses[0].received_metadata.allowed_operations #=> Array
     #   resp.licenses[0].received_metadata.allowed_operations[0] #=> String, one of "CreateGrant", "CheckoutLicense", "CheckoutBorrowLicense", "CheckInLicense", "ExtendConsumptionLicense", "ListPurchasedLicenses", "CreateToken"
     #   resp.next_token #=> String
@@ -2515,7 +2522,7 @@ module Aws::LicenseManager
     # @example Response structure
     #
     #   resp.grant_arn #=> String
-    #   resp.status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED"
+    #   resp.status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED", "WORKFLOW_COMPLETED"
     #   resp.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/RejectGrant AWS API Documentation
@@ -2813,7 +2820,7 @@ module Aws::LicenseManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-licensemanager'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

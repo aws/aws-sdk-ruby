@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.245.0 (2021-06-23)
+------------------
+
+* Feature - This release adds support for provisioning your own IP (BYOIP) range in multiple regions. This feature is in limited Preview for this release. Contact your account manager if you are interested in this feature.
+
 1.244.0 (2021-06-16)
 ------------------
 

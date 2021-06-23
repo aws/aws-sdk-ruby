@@ -2052,7 +2052,7 @@ module Aws::CloudFront
     #             iam_certificate_id: "string",
     #             acm_certificate_arn: "string",
     #             ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
-    #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
+    #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019, TLSv1.2_2021
     #             certificate: "string",
     #             certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #           },
@@ -2348,7 +2348,7 @@ module Aws::CloudFront
     #               iam_certificate_id: "string",
     #               acm_certificate_arn: "string",
     #               ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
-    #               minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
+    #               minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019, TLSv1.2_2021
     #               certificate: "string",
     #               certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #             },
@@ -4497,7 +4497,7 @@ module Aws::CloudFront
     #           iam_certificate_id: "string",
     #           acm_certificate_arn: "string",
     #           ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
-    #           minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
+    #           minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019, TLSv1.2_2021
     #           certificate: "string",
     #           certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #         },
@@ -5002,7 +5002,7 @@ module Aws::CloudFront
     #             iam_certificate_id: "string",
     #             acm_certificate_arn: "string",
     #             ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
-    #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
+    #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019, TLSv1.2_2021
     #             certificate: "string",
     #             certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #           },
@@ -12931,7 +12931,7 @@ module Aws::CloudFront
     #             iam_certificate_id: "string",
     #             acm_certificate_arn: "string",
     #             ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
-    #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
+    #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019, TLSv1.2_2021
     #             certificate: "string",
     #             certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #           },
@@ -13606,7 +13606,7 @@ module Aws::CloudFront
     #         iam_certificate_id: "string",
     #         acm_certificate_arn: "string",
     #         ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
-    #         minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
+    #         minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019, TLSv1.2_2021
     #         certificate: "string",
     #         certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #       }

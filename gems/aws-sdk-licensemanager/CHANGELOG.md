@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2021-06-23)
+------------------
+
+* Feature - AWS License Manager now allows license administrators and end users to communicate to each other by setting custom status reasons when updating the status on a granted license.
+
 1.27.0 (2021-05-18)
 ------------------
 

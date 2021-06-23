@@ -106,7 +106,6 @@ module Aws::LicenseManager
     GrantedLicense = Shapes::StructureShape.new(name: 'GrantedLicense')
     GrantedLicenseList = Shapes::ListShape.new(name: 'GrantedLicenseList')
     ISO8601DateTime = Shapes::StringShape.new(name: 'ISO8601DateTime')
-    IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
     InvalidResourceStateException = Shapes::StructureShape.new(name: 'InvalidResourceStateException')
@@ -201,6 +200,7 @@ module Aws::LicenseManager
     S3Location = Shapes::StructureShape.new(name: 'S3Location')
     ServerInternalException = Shapes::StructureShape.new(name: 'ServerInternalException')
     SignedToken = Shapes::StringShape.new(name: 'SignedToken')
+    StatusReasonMessage = Shapes::StringShape.new(name: 'StatusReasonMessage')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -306,7 +306,7 @@ module Aws::LicenseManager
     ConsumptionConfiguration.add_member(:borrow_configuration, Shapes::ShapeRef.new(shape: BorrowConfiguration, location_name: "BorrowConfiguration"))
     ConsumptionConfiguration.struct_class = Types::ConsumptionConfiguration
 
-    CreateGrantRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientToken"))
+    CreateGrantRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken"))
     CreateGrantRequest.add_member(:grant_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GrantName"))
     CreateGrantRequest.add_member(:license_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "LicenseArn"))
     CreateGrantRequest.add_member(:principals, Shapes::ShapeRef.new(shape: PrincipalArnList, required: true, location_name: "Principals"))
@@ -319,11 +319,12 @@ module Aws::LicenseManager
     CreateGrantResponse.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "Version"))
     CreateGrantResponse.struct_class = Types::CreateGrantResponse
 
-    CreateGrantVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientToken"))
+    CreateGrantVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken"))
     CreateGrantVersionRequest.add_member(:grant_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "GrantArn"))
     CreateGrantVersionRequest.add_member(:grant_name, Shapes::ShapeRef.new(shape: String, location_name: "GrantName"))
     CreateGrantVersionRequest.add_member(:allowed_operations, Shapes::ShapeRef.new(shape: AllowedOperationList, location_name: "AllowedOperations"))
     CreateGrantVersionRequest.add_member(:status, Shapes::ShapeRef.new(shape: GrantStatus, location_name: "Status"))
+    CreateGrantVersionRequest.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReasonMessage, location_name: "StatusReason"))
     CreateGrantVersionRequest.add_member(:source_version, Shapes::ShapeRef.new(shape: String, location_name: "SourceVersion"))
     CreateGrantVersionRequest.struct_class = Types::CreateGrantVersionRequest
 
@@ -368,7 +369,7 @@ module Aws::LicenseManager
     CreateLicenseRequest.add_member(:beneficiary, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Beneficiary"))
     CreateLicenseRequest.add_member(:consumption_configuration, Shapes::ShapeRef.new(shape: ConsumptionConfiguration, required: true, location_name: "ConsumptionConfiguration"))
     CreateLicenseRequest.add_member(:license_metadata, Shapes::ShapeRef.new(shape: MetadataList, location_name: "LicenseMetadata"))
-    CreateLicenseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientToken"))
+    CreateLicenseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken"))
     CreateLicenseRequest.struct_class = Types::CreateLicenseRequest
 
     CreateLicenseResponse.add_member(:license_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "LicenseArn"))
@@ -386,7 +387,7 @@ module Aws::LicenseManager
     CreateLicenseVersionRequest.add_member(:entitlements, Shapes::ShapeRef.new(shape: EntitlementList, required: true, location_name: "Entitlements"))
     CreateLicenseVersionRequest.add_member(:consumption_configuration, Shapes::ShapeRef.new(shape: ConsumptionConfiguration, required: true, location_name: "ConsumptionConfiguration"))
     CreateLicenseVersionRequest.add_member(:status, Shapes::ShapeRef.new(shape: LicenseStatus, required: true, location_name: "Status"))
-    CreateLicenseVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientToken"))
+    CreateLicenseVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken"))
     CreateLicenseVersionRequest.add_member(:source_version, Shapes::ShapeRef.new(shape: String, location_name: "SourceVersion"))
     CreateLicenseVersionRequest.struct_class = Types::CreateLicenseVersionRequest
 
@@ -399,7 +400,7 @@ module Aws::LicenseManager
     CreateTokenRequest.add_member(:role_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "RoleArns"))
     CreateTokenRequest.add_member(:expiration_in_days, Shapes::ShapeRef.new(shape: Integer, location_name: "ExpirationInDays"))
     CreateTokenRequest.add_member(:token_properties, Shapes::ShapeRef.new(shape: MaxSize3StringList, location_name: "TokenProperties"))
-    CreateTokenRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "ClientToken"))
+    CreateTokenRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken"))
     CreateTokenRequest.struct_class = Types::CreateTokenRequest
 
     CreateTokenResponse.add_member(:token_id, Shapes::ShapeRef.new(shape: String, location_name: "TokenId"))
@@ -412,6 +413,7 @@ module Aws::LicenseManager
     DatetimeRange.struct_class = Types::DatetimeRange
 
     DeleteGrantRequest.add_member(:grant_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "GrantArn"))
+    DeleteGrantRequest.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReasonMessage, location_name: "StatusReason"))
     DeleteGrantRequest.add_member(:version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Version"))
     DeleteGrantRequest.struct_class = Types::DeleteGrantRequest
 
@@ -567,7 +569,7 @@ module Aws::LicenseManager
     Grant.add_member(:grantee_principal_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "GranteePrincipalArn"))
     Grant.add_member(:home_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "HomeRegion"))
     Grant.add_member(:grant_status, Shapes::ShapeRef.new(shape: GrantStatus, required: true, location_name: "GrantStatus"))
-    Grant.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "StatusReason"))
+    Grant.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReasonMessage, location_name: "StatusReason"))
     Grant.add_member(:version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Version"))
     Grant.add_member(:granted_operations, Shapes::ShapeRef.new(shape: AllowedOperationList, required: true, location_name: "GrantedOperations"))
     Grant.struct_class = Types::Grant
@@ -868,6 +870,7 @@ module Aws::LicenseManager
     RateLimitExceededException.struct_class = Types::RateLimitExceededException
 
     ReceivedMetadata.add_member(:received_status, Shapes::ShapeRef.new(shape: ReceivedStatus, location_name: "ReceivedStatus"))
+    ReceivedMetadata.add_member(:received_status_reason, Shapes::ShapeRef.new(shape: StatusReasonMessage, location_name: "ReceivedStatusReason"))
     ReceivedMetadata.add_member(:allowed_operations, Shapes::ShapeRef.new(shape: AllowedOperationList, location_name: "AllowedOperations"))
     ReceivedMetadata.struct_class = Types::ReceivedMetadata
 
@@ -1050,6 +1053,7 @@ module Aws::LicenseManager
         o.input = Shapes::ShapeRef.new(shape: CheckInLicenseRequest)
         o.output = Shapes::ShapeRef.new(shape: CheckInLicenseResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationException)
@@ -1065,6 +1069,7 @@ module Aws::LicenseManager
         o.input = Shapes::ShapeRef.new(shape: CheckoutBorrowLicenseRequest)
         o.output = Shapes::ShapeRef.new(shape: CheckoutBorrowLicenseResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: NoEntitlementsAllowedException)
         o.errors << Shapes::ShapeRef.new(shape: EntitlementNotAllowedException)
@@ -1083,6 +1088,7 @@ module Aws::LicenseManager
         o.input = Shapes::ShapeRef.new(shape: CheckoutLicenseRequest)
         o.output = Shapes::ShapeRef.new(shape: CheckoutLicenseResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: NoEntitlementsAllowedException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedDigitalSignatureMethodException)

@@ -36602,6 +36602,9 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :pool_tag_specifications
     #   The tags to apply to the address pool.
     #
+    # @option params [Boolean] :multi_region
+    #   <para>Reserved.</para>
+    #
     # @return [Types::ProvisionByoipCidrResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ProvisionByoipCidrResult#byoip_cidr #byoip_cidr} => Types::ByoipCidr
@@ -36628,6 +36631,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     multi_region: false,
     #   })
     #
     # @example Response structure
@@ -42239,7 +42243,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.244.0'
+      context[:gem_version] = '1.245.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

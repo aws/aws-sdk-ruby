@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2021-06-23)
+------------------
+
+* Feature - This release replaces previous generation CloudSearch instances with equivalent new instances that provide better stability at the same price.
+
 1.29.0 (2021-03-10)
 ------------------
 

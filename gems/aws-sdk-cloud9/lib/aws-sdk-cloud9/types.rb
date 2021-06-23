@@ -52,7 +52,8 @@ module Aws::Cloud9
     # @!attribute [rw] name
     #   The name of the environment to create.
     #
-    #   This name is visible to other AWS IAM users in the same AWS account.
+    #   This name is visible to other IAM users in the same Amazon Web
+    #   Services account.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -60,7 +61,7 @@ module Aws::Cloud9
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   A unique, case-sensitive string that helps AWS Cloud9 to ensure this
+    #   A unique, case-sensitive string that helps Cloud9 to ensure this
     #   operation completes no more than one time.
     #
     #   For more information, see [Client Tokens][1] in the *Amazon EC2 API
@@ -68,7 +69,7 @@ module Aws::Cloud9
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -77,17 +78,20 @@ module Aws::Cloud9
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
-    #   The ID of the subnet in Amazon VPC that AWS Cloud9 will use to
+    #   The ID of the subnet in Amazon VPC that Cloud9 will use to
     #   communicate with the Amazon EC2 instance.
     #   @return [String]
     #
     # @!attribute [rw] image_id
     #   The identifier for the Amazon Machine Image (AMI) that's used to
     #   create the EC2 instance. To choose an AMI for the instance, you must
-    #   specify a valid AMI alias or a valid AWS Systems Manager (SSM) path.
+    #   specify a valid AMI alias or a valid Amazon EC2 Systems Manager
+    #   (SSM) path.
     #
     #   The default AMI is used if the parameter isn't explicitly assigned
-    #   a value in the request.
+    #   a value in the request. Because Amazon Linux AMI has ended standard
+    #   support as of December 31, 2020, we recommend you choose Amazon
+    #   Linux 2, which includes long term support through 2023.
     #
     #   <b>AMI aliases </b>
     #
@@ -117,22 +121,22 @@ module Aws::Cloud9
     #
     # @!attribute [rw] owner_arn
     #   The Amazon Resource Name (ARN) of the environment owner. This ARN
-    #   can be the ARN of any AWS IAM principal. If this value is not
-    #   specified, the ARN defaults to this environment's creator.
+    #   can be the ARN of any IAM principal. If this value is not specified,
+    #   the ARN defaults to this environment's creator.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   An array of key-value pairs that will be associated with the new AWS
+    #   An array of key-value pairs that will be associated with the new
     #   Cloud9 development environment.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] connection_type
     #   The connection type used for connecting to an Amazon EC2
     #   environment. Valid values are `CONNECT_SSH` (default) and
-    #   `CONNECT_SSM` (connected through AWS Systems Manager).
+    #   `CONNECT_SSM` (connected through Amazon EC2 Systems Manager).
     #
     #   For more information, see [Accessing no-ingress EC2 instances with
-    #   AWS Systems Manager][1] in the *AWS Cloud9 User Guide*.
+    #   Amazon EC2 Systems Manager][1] in the *Cloud9 User Guide*.
     #
     #
     #
@@ -434,7 +438,7 @@ module Aws::Cloud9
       include Aws::Structure
     end
 
-    # Information about an AWS Cloud9 development environment.
+    # Information about an Cloud9 development environment.
     #
     # @!attribute [rw] id
     #   The ID of the environment.
@@ -475,8 +479,8 @@ module Aws::Cloud9
     #   @return [Types::EnvironmentLifecycle]
     #
     # @!attribute [rw] managed_credentials_status
-    #   Describes the status of AWS managed temporary credentials for the
-    #   AWS Cloud9 environment. Available values are:
+    #   Describes the status of Amazon Web Services managed temporary
+    #   credentials for the Cloud9 environment. Available values are:
     #
     #   * `ENABLED_ON_CREATE`
     #
@@ -516,7 +520,7 @@ module Aws::Cloud9
     end
 
     # Information about the current creation or deletion lifecycle state of
-    # an AWS Cloud9 development environment.
+    # an Cloud9 development environment.
     #
     # @!attribute [rw] status
     #   The current creation or deletion lifecycle state of the environment.
@@ -539,7 +543,7 @@ module Aws::Cloud9
     #
     # @!attribute [rw] failure_resource
     #   If the environment failed to delete, the Amazon Resource Name (ARN)
-    #   of the related AWS resource.
+    #   of the related Amazon Web Services resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/EnvironmentLifecycle AWS API Documentation
@@ -552,7 +556,7 @@ module Aws::Cloud9
       include Aws::Structure
     end
 
-    # Information about an environment member for an AWS Cloud9 development
+    # Information about an environment member for an Cloud9 development
     # environment.
     #
     # @!attribute [rw] permissions
@@ -567,7 +571,7 @@ module Aws::Cloud9
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   The user ID in AWS Identity and Access Management (AWS IAM) of the
+    #   The user ID in Identity and Access Management (IAM) of the
     #   environment member.
     #   @return [String]
     #
@@ -673,8 +677,8 @@ module Aws::Cloud9
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the AWS Cloud9 development
-    #   environment to get the tags for.
+    #   The Amazon Resource Name (ARN) of the Cloud9 development environment
+    #   to get the tags for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/ListTagsForResourceRequest AWS API Documentation
@@ -686,8 +690,7 @@ module Aws::Cloud9
     end
 
     # @!attribute [rw] tags
-    #   The list of tags associated with the AWS Cloud9 development
-    #   environment.
+    #   The list of tags associated with the Cloud9 development environment.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/ListTagsForResourceResponse AWS API Documentation
@@ -704,12 +707,12 @@ module Aws::Cloud9
     #
     class NotFoundException < Aws::EmptyStructure; end
 
-    # Metadata that is associated with AWS resources. In particular, a
-    # name-value pair that can be associated with an AWS Cloud9 development
-    # environment. There are two types of tags: *user tags* and *system
-    # tags*. A user tag is created by the user. A system tag is
-    # automatically created by AWS services. A system tag is prefixed with
-    # "aws:" and cannot be modified by the user.
+    # Metadata that is associated with Amazon Web Services resources. In
+    # particular, a name-value pair that can be associated with an Cloud9
+    # development environment. There are two types of tags: *user tags* and
+    # *system tags*. A user tag is created by the user. A system tag is
+    # automatically created by Amazon Web Services services. A system tag is
+    # prefixed with "aws:" and cannot be modified by the user.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -750,13 +753,12 @@ module Aws::Cloud9
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the AWS Cloud9 development
-    #   environment to add tags to.
+    #   The Amazon Resource Name (ARN) of the Cloud9 development environment
+    #   to add tags to.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The list of tags to add to the given AWS Cloud9 development
-    #   environment.
+    #   The list of tags to add to the given Cloud9 development environment.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/TagResourceRequest AWS API Documentation
@@ -787,12 +789,12 @@ module Aws::Cloud9
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the AWS Cloud9 development
-    #   environment to remove tags from.
+    #   The Amazon Resource Name (ARN) of the Cloud9 development environment
+    #   to remove tags from.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   The tag names of the tags to remove from the given AWS Cloud9
+    #   The tag names of the tags to remove from the given Cloud9
     #   development environment.
     #   @return [Array<String>]
     #

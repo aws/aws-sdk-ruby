@@ -2459,6 +2459,36 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # The schedule's ad break properties.
+    #
+    # @!attribute [rw] approximate_duration_seconds
+    #   The approximate duration of the ad break, in seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] approximate_start_time
+    #   The approximate time that the ad will start playing.
+    #   @return [Time]
+    #
+    # @!attribute [rw] source_location_name
+    #   The name of the source location containing the VOD source used for
+    #   the ad break.
+    #   @return [String]
+    #
+    # @!attribute [rw] vod_source_name
+    #   The name of the VOD source used for the ad break.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ScheduleAdBreak AWS API Documentation
+    #
+    class ScheduleAdBreak < Struct.new(
+      :approximate_duration_seconds,
+      :approximate_start_time,
+      :source_location_name,
+      :vod_source_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Schedule configuration parameters. A channel must be stopped before
     # changes can be made to the schedule.
     #
@@ -2507,6 +2537,10 @@ module Aws::MediaTailor
     #   The name of the program.
     #   @return [String]
     #
+    # @!attribute [rw] schedule_ad_breaks
+    #   The schedule's ad break properties.
+    #   @return [Array<Types::ScheduleAdBreak>]
+    #
     # @!attribute [rw] source_location_name
     #   The name of the source location.
     #   @return [String]
@@ -2523,6 +2557,7 @@ module Aws::MediaTailor
       :arn,
       :channel_name,
       :program_name,
+      :schedule_ad_breaks,
       :source_location_name,
       :vod_source_name)
       SENSITIVE = []

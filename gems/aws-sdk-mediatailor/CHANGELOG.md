@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2021-06-23)
+------------------
+
+* Feature - Update GetChannelSchedule to return information on ad breaks.
+
 1.39.0 (2021-06-16)
 ------------------
 

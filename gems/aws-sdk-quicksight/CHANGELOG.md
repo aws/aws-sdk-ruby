@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2021-06-23)
+------------------
+
+* Feature - Releasing new APIs for AWS QuickSight Folders
+
 1.46.0 (2021-05-24)
 ------------------
 

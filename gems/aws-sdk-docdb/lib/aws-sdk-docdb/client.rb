@@ -388,8 +388,8 @@ module Aws::DocDB
 
     # Adds metadata tags to an Amazon DocumentDB resource. You can use these
     # tags with cost allocation reporting to track costs that are associated
-    # with Amazon DocumentDB resources. or in a `Condition` statement in an
-    # AWS Identity and Access Management (IAM) policy for Amazon DocumentDB.
+    # with Amazon DocumentDB resources or in a `Condition` statement in an
+    # Identity and Access Management (IAM) policy for Amazon DocumentDB.
     #
     # @option params [required, String] :resource_name
     #   The Amazon DocumentDB resource that the tags are added to. This value
@@ -489,11 +489,11 @@ module Aws::DocDB
     #
     #   * Must specify a valid cluster parameter group.
     #
-    #   * If the source cluster parameter group is in the same AWS Region as
-    #     the copy, specify a valid parameter group identifier; for example,
+    #   * If the source cluster parameter group is in the same Region as the
+    #     copy, specify a valid parameter group identifier; for example,
     #     `my-db-cluster-param-group`, or a valid ARN.
     #
-    #   * If the source parameter group is in a different AWS Region than the
+    #   * If the source parameter group is in a different Region than the
     #     copy, specify a valid cluster parameter group ARN; for example,
     #     `arn:aws:rds:us-east-1:123456789012:sample-cluster:sample-parameter-group`.
     #
@@ -557,7 +557,7 @@ module Aws::DocDB
     # To copy a cluster snapshot from a shared manual cluster snapshot,
     # `SourceDBClusterSnapshotIdentifier` must be the Amazon Resource Name
     # (ARN) of the shared cluster snapshot. You can only copy a shared DB
-    # cluster snapshot, whether encrypted or not, in the same AWS Region.
+    # cluster snapshot, whether encrypted or not, in the same Region.
     #
     # To cancel the copy operation after it is in progress, delete the
     # target cluster snapshot identified by
@@ -572,10 +572,10 @@ module Aws::DocDB
     #
     #   * Must specify a valid system snapshot in the *available* state.
     #
-    #   * If the source snapshot is in the same AWS Region as the copy,
-    #     specify a valid snapshot identifier.
+    #   * If the source snapshot is in the same Region as the copy, specify a
+    #     valid snapshot identifier.
     #
-    #   * If the source snapshot is in a different AWS Region than the copy,
+    #   * If the source snapshot is in a different Region than the copy,
     #     specify a valid cluster snapshot ARN.
     #
     #   Example: `my-cluster-snapshot1`
@@ -595,54 +595,53 @@ module Aws::DocDB
     #   Example: `my-cluster-snapshot2`
     #
     # @option params [String] :kms_key_id
-    #   The AWS KMS key ID for an encrypted cluster snapshot. The AWS KMS key
-    #   ID is the Amazon Resource Name (ARN), AWS KMS key identifier, or the
-    #   AWS KMS key alias for the AWS KMS encryption key.
+    #   The KMS key ID for an encrypted cluster snapshot. The KMS key ID is
+    #   the Amazon Resource Name (ARN), KMS key identifier, or the KMS key
+    #   alias for the KMS encryption key.
     #
-    #   If you copy an encrypted cluster snapshot from your AWS account, you
-    #   can specify a value for `KmsKeyId` to encrypt the copy with a new AWS
-    #   KMS encryption key. If you don't specify a value for `KmsKeyId`, then
-    #   the copy of the cluster snapshot is encrypted with the same AWS KMS
-    #   key as the source cluster snapshot.
+    #   If you copy an encrypted cluster snapshot from your account, you can
+    #   specify a value for `KmsKeyId` to encrypt the copy with a new KMS
+    #   encryption key. If you don't specify a value for `KmsKeyId`, then the
+    #   copy of the cluster snapshot is encrypted with the same KMS key as the
+    #   source cluster snapshot.
     #
     #   If you copy an encrypted cluster snapshot that is shared from another
-    #   AWS account, then you must specify a value for `KmsKeyId`.
+    #   account, then you must specify a value for `KmsKeyId`.
     #
-    #   To copy an encrypted cluster snapshot to another AWS Region, set
-    #   `KmsKeyId` to the AWS KMS key ID that you want to use to encrypt the
-    #   copy of the cluster snapshot in the destination Region. AWS KMS
-    #   encryption keys are specific to the AWS Region that they are created
-    #   in, and you can't use encryption keys from one AWS Region in another
-    #   AWS Region.
+    #   To copy an encrypted cluster snapshot to another Region, set
+    #   `KmsKeyId` to the KMS key ID that you want to use to encrypt the copy
+    #   of the cluster snapshot in the destination Region. KMS encryption keys
+    #   are specific to the Region that they are created in, and you can't
+    #   use encryption keys from one Region in another Region.
     #
     #   If you copy an unencrypted cluster snapshot and specify a value for
     #   the `KmsKeyId` parameter, an error is returned.
     #
     # @option params [String] :pre_signed_url
-    #   The URL that contains a Signature Version 4 signed request for the
-    #   `CopyDBClusterSnapshot` API action in the AWS Region that contains the
+    #   The URL that contains a Signature Version 4 signed request for
+    #   the`CopyDBClusterSnapshot` API action in the Region that contains the
     #   source cluster snapshot to copy. You must use the `PreSignedUrl`
-    #   parameter when copying a cluster snapshot from another AWS Region.
+    #   parameter when copying a cluster snapshot from another Region.
     #
-    #   If you are using an AWS SDK tool or the AWS CLI, you can specify
-    #   `SourceRegion` (or `--source-region` for the AWS CLI) instead of
+    #   If you are using an Amazon Web Services SDK tool or the CLI, you can
+    #   specify `SourceRegion` (or `--source-region` for the CLI) instead of
     #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
     #   autogenerates a pre-signed URL that is a valid request for the
-    #   operation that can be executed in the source AWS Region.
+    #   operation that can be executed in the source Region.
     #
     #   The presigned URL must be a valid request for the
     #   `CopyDBClusterSnapshot` API action that can be executed in the source
-    #   AWS Region that contains the cluster snapshot to be copied. The
-    #   presigned URL request must contain the following parameter values:
+    #   Region that contains the cluster snapshot to be copied. The presigned
+    #   URL request must contain the following parameter values:
     #
     #   * `SourceRegion` - The ID of the region that contains the snapshot to
     #     be copied.
     #
     #   * `SourceDBClusterSnapshotIdentifier` - The identifier for the the
     #     encrypted cluster snapshot to be copied. This identifier must be in
-    #     the Amazon Resource Name (ARN) format for the source AWS Region. For
+    #     the Amazon Resource Name (ARN) format for the source Region. For
     #     example, if you are copying an encrypted cluster snapshot from the
-    #     us-east-1 AWS Region, then your `SourceDBClusterSnapshotIdentifier`
+    #     us-east-1 Region, then your `SourceDBClusterSnapshotIdentifier`
     #     looks something like the following:
     #     `arn:aws:rds:us-east-1:12345678012:sample-cluster:sample-cluster-snapshot`.
     #
@@ -766,10 +765,10 @@ module Aws::DocDB
     #   Valid values: `docdb`
     #
     # @option params [String] :engine_version
-    #   The version number of the database engine to use. The --engine-version
-    #   will default to the latest major engine version. For production
-    #   workloads, we recommend explicitly declaring this parameter with the
-    #   intended major engine version.
+    #   The version number of the database engine to use. The
+    #   `--engine-version` will default to the latest major engine version.
+    #   For production workloads, we recommend explicitly declaring this
+    #   parameter with the intended major engine version.
     #
     # @option params [Integer] :port
     #   The port number on which the instances in the cluster accept
@@ -799,7 +798,7 @@ module Aws::DocDB
     #   parameter.
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region.
+    #   block of time for each Region.
     #
     #   Constraints:
     #
@@ -818,8 +817,7 @@ module Aws::DocDB
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region, occurring on a random day of the
-    #   week.
+    #   block of time for each Region, occurring on a random day of the week.
     #
     #   Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
     #
@@ -832,13 +830,13 @@ module Aws::DocDB
     #   Specifies whether the cluster is encrypted.
     #
     # @option params [String] :kms_key_id
-    #   The AWS KMS key identifier for an encrypted cluster.
+    #   The KMS key identifier for an encrypted cluster.
     #
-    #   The AWS KMS key identifier is the Amazon Resource Name (ARN) for the
-    #   AWS KMS encryption key. If you are creating a cluster using the same
-    #   AWS account that owns the AWS KMS encryption key that is used to
-    #   encrypt the new cluster, you can use the AWS KMS key alias instead of
-    #   the ARN for the AWS KMS encryption key.
+    #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
+    #   encryption key. If you are creating a cluster using the same account
+    #   that owns the KMS encryption key that is used to encrypt the new
+    #   cluster, you can use the KMS key alias instead of the ARN for the KMS
+    #   encryption key.
     #
     #   If an encryption key is not specified in `KmsKeyId`\:
     #
@@ -847,9 +845,8 @@ module Aws::DocDB
     #
     #   ^
     #
-    #   AWS KMS creates the default encryption key for your AWS account. Your
-    #   AWS account has a different default encryption key for each AWS
-    #   Region.
+    #   KMS creates the default encryption key for your account. Your account
+    #   has a different default encryption key for each Regions.
     #
     # @option params [String] :pre_signed_url
     #   Not currently supported.
@@ -1154,7 +1151,7 @@ module Aws::DocDB
     #   The Amazon EC2 Availability Zone that the instance is created in.
     #
     #   Default: A random, system-chosen Availability Zone in the endpoint's
-    #   AWS Region.
+    #   Region.
     #
     #   Example: `us-east-1d`
     #
@@ -1165,18 +1162,17 @@ module Aws::DocDB
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region, occurring on a random day of the
-    #   week.
+    #   block of time for each Region, occurring on a random day of the week.
     #
     #   Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
     #
     #   Constraints: Minimum 30-minute window.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
-    #   Indicates that minor engine upgrades are applied automatically to the
-    #   instance during the maintenance window.
+    #   This parameter does not apply to Amazon DocumentDB. Amazon DocumentDB
+    #   does not perform minor version upgrades regardless of the value set.
     #
-    #   Default: `true`
+    #   Default: `false`
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to be assigned to the instance. You can assign up to 10 tags
@@ -1289,7 +1285,7 @@ module Aws::DocDB
     end
 
     # Creates a new subnet group. subnet groups must contain at least one
-    # subnet in at least two Availability Zones in the AWS Region.
+    # subnet in at least two Availability Zones in the Region.
     #
     # @option params [required, String] :db_subnet_group_name
     #   The name for the subnet group. This value is stored as a lowercase
@@ -1390,7 +1386,7 @@ module Aws::DocDB
     #   events are returned.
     #
     #   Valid values: `db-instance`, `db-cluster`, `db-parameter-group`,
-    #   `db-security-group`, `db-snapshot`, `db-cluster-snapshot`
+    #   `db-security-group`, `db-cluster-snapshot`
     #
     # @option params [Array<String>] :event_categories
     #   A list of event categories for a `SourceType` that you want to
@@ -1472,11 +1468,11 @@ module Aws::DocDB
     end
 
     # Creates an Amazon DocumentDB global cluster that can span multiple
-    # multiple AWS Regions. The global cluster contains one primary cluster
-    # with read-write capability, and up-to give read-only secondary
-    # clusters. Global clusters uses storage-based fast replication across
-    # regions with latencies less than one second, using dedicated
-    # infrastructure with no impact to your workload’s performance.
+    # multiple Regions. The global cluster contains one primary cluster with
+    # read-write capability, and up-to give read-only secondary clusters.
+    # Global clusters uses storage-based fast replication across regions
+    # with latencies less than one second, using dedicated infrastructure
+    # with no impact to your workload’s performance.
     #
     #
     #
@@ -1970,7 +1966,7 @@ module Aws::DocDB
     end
 
     # Returns a list of certificate authority (CA) certificates provided by
-    # Amazon DocumentDB for this AWS account.
+    # Amazon DocumentDB for this account.
     #
     # @option params [String] :certificate_identifier
     #   The user-supplied certificate identifier. If this parameter is
@@ -2205,12 +2201,12 @@ module Aws::DocDB
     # Returns a list of cluster snapshot attribute names and values for a
     # manual DB cluster snapshot.
     #
-    # When you share snapshots with other AWS accounts,
+    # When you share snapshots with other accounts,
     # `DescribeDBClusterSnapshotAttributes` returns the `restore` attribute
-    # and a list of IDs for the AWS accounts that are authorized to copy or
+    # and a list of IDs for the accounts that are authorized to copy or
     # restore the manual cluster snapshot. If `all` is included in the list
     # of values for the `restore` attribute, then the manual cluster
-    # snapshot is public and can be copied or restored by all AWS accounts.
+    # snapshot is public and can be copied or restored by all accounts.
     #
     # @option params [required, String] :db_cluster_snapshot_identifier
     #   The identifier for the cluster snapshot to describe the attributes
@@ -2275,13 +2271,13 @@ module Aws::DocDB
     #   the following values:
     #
     #   * `automated` - Return all cluster snapshots that Amazon DocumentDB
-    #     has automatically created for your AWS account.
+    #     has automatically created for your account.
     #
     #   * `manual` - Return all cluster snapshots that you have manually
-    #     created for your AWS account.
+    #     created for your account.
     #
     #   * `shared` - Return all manual cluster snapshots that have been shared
-    #     to your AWS account.
+    #     to your account.
     #
     #   * `public` - Return all cluster snapshots that have been marked as
     #     public.
@@ -2318,13 +2314,13 @@ module Aws::DocDB
     #
     # @option params [Boolean] :include_shared
     #   Set to `true` to include shared manual cluster snapshots from other
-    #   AWS accounts that this AWS account has been given permission to copy
-    #   or restore, and otherwise `false`. The default is `false`.
+    #   accounts that this account has been given permission to copy or
+    #   restore, and otherwise `false`. The default is `false`.
     #
     # @option params [Boolean] :include_public
     #   Set to `true` to include manual cluster snapshots that are public and
-    #   can be copied or restored by any AWS account, and otherwise `false`.
-    #   The default is `false`.
+    #   can be copied or restored by any account, and otherwise `false`. The
+    #   default is `false`.
     #
     # @return [Types::DBClusterSnapshotMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2895,8 +2891,7 @@ module Aws::DocDB
     # @option params [String] :source_type
     #   The type of source that is generating the events.
     #
-    #   Valid values: `db-instance`, `db-parameter-group`,
-    #   `db-security-group`, `db-snapshot`
+    #   Valid values: `db-instance`, `db-parameter-group`, `db-security-group`
     #
     # @option params [Array<Types::Filter>] :filters
     #   This parameter is not currently supported.
@@ -3588,7 +3583,7 @@ module Aws::DocDB
     #   parameter.
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region.
+    #   block of time for each Region.
     #
     #   Constraints:
     #
@@ -3607,8 +3602,7 @@ module Aws::DocDB
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region, occurring on a random day of the
-    #   week.
+    #   block of time for each Region, occurring on a random day of the week.
     #
     #   Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
     #
@@ -3774,19 +3768,19 @@ module Aws::DocDB
     end
 
     # Adds an attribute and values to, or removes an attribute and values
-    # from, a manual DB cluster snapshot.
+    # from, a manual cluster snapshot.
     #
-    # To share a manual cluster snapshot with other AWS accounts, specify
+    # To share a manual cluster snapshot with other accounts, specify
     # `restore` as the `AttributeName`, and use the `ValuesToAdd` parameter
-    # to add a list of IDs of the AWS accounts that are authorized to
-    # restore the manual cluster snapshot. Use the value `all` to make the
-    # manual cluster snapshot public, which means that it can be copied or
-    # restored by all AWS accounts. Do not add the `all` value for any
-    # manual DB cluster snapshots that contain private information that you
-    # don't want available to all AWS accounts. If a manual cluster
-    # snapshot is encrypted, it can be shared, but only by specifying a list
-    # of authorized AWS account IDs for the `ValuesToAdd` parameter. You
-    # can't use `all` as a value for that parameter in this case.
+    # to add a list of IDs of the accounts that are authorized to restore
+    # the manual cluster snapshot. Use the value `all` to make the manual
+    # cluster snapshot public, which means that it can be copied or restored
+    # by all accounts. Do not add the `all` value for any manual cluster
+    # snapshots that contain private information that you don't want
+    # available to all accounts. If a manual cluster snapshot is encrypted,
+    # it can be shared, but only by specifying a list of authorized account
+    # IDs for the `ValuesToAdd` parameter. You can't use `all` as a value
+    # for that parameter in this case.
     #
     # @option params [required, String] :db_cluster_snapshot_identifier
     #   The identifier for the cluster snapshot to modify the attributes for.
@@ -3794,31 +3788,30 @@ module Aws::DocDB
     # @option params [required, String] :attribute_name
     #   The name of the cluster snapshot attribute to modify.
     #
-    #   To manage authorization for other AWS accounts to copy or restore a
-    #   manual cluster snapshot, set this value to `restore`.
+    #   To manage authorization for other accounts to copy or restore a manual
+    #   cluster snapshot, set this value to `restore`.
     #
     # @option params [Array<String>] :values_to_add
     #   A list of cluster snapshot attributes to add to the attribute
     #   specified by `AttributeName`.
     #
-    #   To authorize other AWS accounts to copy or restore a manual cluster
-    #   snapshot, set this list to include one or more AWS account IDs. To
-    #   make the manual cluster snapshot restorable by any AWS account, set it
-    #   to `all`. Do not add the `all` value for any manual cluster snapshots
+    #   To authorize other accounts to copy or restore a manual cluster
+    #   snapshot, set this list to include one or more account IDs. To make
+    #   the manual cluster snapshot restorable by any account, set it to
+    #   `all`. Do not add the `all` value for any manual cluster snapshots
     #   that contain private information that you don't want to be available
-    #   to all AWS accounts.
+    #   to all accounts.
     #
     # @option params [Array<String>] :values_to_remove
     #   A list of cluster snapshot attributes to remove from the attribute
     #   specified by `AttributeName`.
     #
-    #   To remove authorization for other AWS accounts to copy or restore a
-    #   manual cluster snapshot, set this list to include one or more AWS
-    #   account identifiers. To remove authorization for any AWS account to
-    #   copy or restore the cluster snapshot, set it to `all` . If you specify
-    #   `all`, an AWS account whose account ID is explicitly added to the
-    #   `restore` attribute can still copy or restore a manual cluster
-    #   snapshot.
+    #   To remove authorization for other accounts to copy or restore a manual
+    #   cluster snapshot, set this list to include one or more account
+    #   identifiers. To remove authorization for any account to copy or
+    #   restore the cluster snapshot, set it to `all` . If you specify `all`,
+    #   an account whose account ID is explicitly added to the `restore`
+    #   attribute can still copy or restore a manual cluster snapshot.
     #
     # @return [Types::ModifyDBClusterSnapshotAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3865,8 +3858,7 @@ module Aws::DocDB
     #
     # @option params [String] :db_instance_class
     #   The new compute and memory capacity of the instance; for example,
-    #   `db.r5.large`. Not all instance classes are available in all AWS
-    #   Regions.
+    #   `db.r5.large`. Not all instance classes are available in all Regions.
     #
     #   If you modify the instance class, an outage occurs during the change.
     #   The change is applied during the next maintenance window, unless
@@ -3906,13 +3898,8 @@ module Aws::DocDB
     #   Constraints: Must be at least 30 minutes.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
-    #   Indicates that minor version upgrades are applied automatically to the
-    #   instance during the maintenance window. Changing this parameter
-    #   doesn't result in an outage except in the following case, and the
-    #   change is asynchronously applied as soon as possible. An outage
-    #   results if this parameter is set to `true` during the maintenance
-    #   window, and a newer minor version is available, and Amazon DocumentDB
-    #   has enabled automatic patching for that engine version.
+    #   This parameter does not apply to Amazon DocumentDB. Amazon DocumentDB
+    #   does not perform minor version upgrades regardless of the value set.
     #
     # @option params [String] :new_db_instance_identifier
     #   The new instance identifier for the instance when renaming an
@@ -4033,7 +4020,7 @@ module Aws::DocDB
     end
 
     # Modifies an existing subnet group. subnet groups must contain at least
-    # one subnet in at least two Availability Zones in the AWS Region.
+    # one subnet in at least two Availability Zones in the Region.
     #
     # @option params [required, String] :db_subnet_group_name
     #   The name for the subnet group. This value is stored as a lowercase
@@ -4100,8 +4087,7 @@ module Aws::DocDB
     #   parameter to `db-instance`. If this value is not specified, all events
     #   are returned.
     #
-    #   Valid values: `db-instance`, `db-parameter-group`,
-    #   `db-security-group`, `db-snapshot`
+    #   Valid values: `db-instance`, `db-parameter-group`, `db-security-group`
     #
     # @option params [Array<String>] :event_categories
     #   A list of event categories for a `SourceType` that you want to
@@ -4592,21 +4578,21 @@ module Aws::DocDB
     #   The tags to be assigned to the restored cluster.
     #
     # @option params [String] :kms_key_id
-    #   The AWS KMS key identifier to use when restoring an encrypted cluster
-    #   from a DB snapshot or cluster snapshot.
+    #   The KMS key identifier to use when restoring an encrypted cluster from
+    #   a DB snapshot or cluster snapshot.
     #
-    #   The AWS KMS key identifier is the Amazon Resource Name (ARN) for the
-    #   AWS KMS encryption key. If you are restoring a cluster with the same
-    #   AWS account that owns the AWS KMS encryption key used to encrypt the
-    #   new cluster, then you can use the AWS KMS key alias instead of the ARN
-    #   for the AWS KMS encryption key.
+    #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
+    #   encryption key. If you are restoring a cluster with the same account
+    #   that owns the KMS encryption key used to encrypt the new cluster, then
+    #   you can use the KMS key alias instead of the ARN for the KMS
+    #   encryption key.
     #
     #   If you do not specify a value for the `KmsKeyId` parameter, then the
     #   following occurs:
     #
     #   * If the snapshot or cluster snapshot in `SnapshotIdentifier` is
-    #     encrypted, then the restored cluster is encrypted using the AWS KMS
-    #     key that was used to encrypt the snapshot or the cluster snapshot.
+    #     encrypted, then the restored cluster is encrypted using the KMS key
+    #     that was used to encrypt the snapshot or the cluster snapshot.
     #
     #   * If the snapshot or the cluster snapshot in `SnapshotIdentifier` is
     #     not encrypted, then the restored DB cluster is not encrypted.
@@ -4779,25 +4765,25 @@ module Aws::DocDB
     #   The tags to be assigned to the restored cluster.
     #
     # @option params [String] :kms_key_id
-    #   The AWS KMS key identifier to use when restoring an encrypted cluster
-    #   from an encrypted cluster.
+    #   The KMS key identifier to use when restoring an encrypted cluster from
+    #   an encrypted cluster.
     #
-    #   The AWS KMS key identifier is the Amazon Resource Name (ARN) for the
-    #   AWS KMS encryption key. If you are restoring a cluster with the same
-    #   AWS account that owns the AWS KMS encryption key used to encrypt the
-    #   new cluster, then you can use the AWS KMS key alias instead of the ARN
-    #   for the AWS KMS encryption key.
+    #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
+    #   encryption key. If you are restoring a cluster with the same account
+    #   that owns the KMS encryption key used to encrypt the new cluster, then
+    #   you can use the KMS key alias instead of the ARN for the KMS
+    #   encryption key.
     #
     #   You can restore to a new cluster and encrypt the new cluster with an
-    #   AWS KMS key that is different from the AWS KMS key used to encrypt the
-    #   source cluster. The new DB cluster is encrypted with the AWS KMS key
-    #   identified by the `KmsKeyId` parameter.
+    #   KMS key that is different from the KMS key used to encrypt the source
+    #   cluster. The new DB cluster is encrypted with the KMS key identified
+    #   by the `KmsKeyId` parameter.
     #
     #   If you do not specify a value for the `KmsKeyId` parameter, then the
     #   following occurs:
     #
     #   * If the cluster is encrypted, then the restored cluster is encrypted
-    #     using the AWS KMS key that was used to encrypt the source cluster.
+    #     using the KMS key that was used to encrypt the source cluster.
     #
     #   * If the cluster is not encrypted, then the restored cluster is not
     #     encrypted.
@@ -5059,7 +5045,7 @@ module Aws::DocDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-docdb'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -87,6 +87,10 @@ module Aws::QuickSight
     CreateDataSetResponse = Shapes::StructureShape.new(name: 'CreateDataSetResponse')
     CreateDataSourceRequest = Shapes::StructureShape.new(name: 'CreateDataSourceRequest')
     CreateDataSourceResponse = Shapes::StructureShape.new(name: 'CreateDataSourceResponse')
+    CreateFolderMembershipRequest = Shapes::StructureShape.new(name: 'CreateFolderMembershipRequest')
+    CreateFolderMembershipResponse = Shapes::StructureShape.new(name: 'CreateFolderMembershipResponse')
+    CreateFolderRequest = Shapes::StructureShape.new(name: 'CreateFolderRequest')
+    CreateFolderResponse = Shapes::StructureShape.new(name: 'CreateFolderResponse')
     CreateGroupMembershipRequest = Shapes::StructureShape.new(name: 'CreateGroupMembershipRequest')
     CreateGroupMembershipResponse = Shapes::StructureShape.new(name: 'CreateGroupMembershipResponse')
     CreateGroupRequest = Shapes::StructureShape.new(name: 'CreateGroupRequest')
@@ -161,6 +165,10 @@ module Aws::QuickSight
     DeleteDataSetResponse = Shapes::StructureShape.new(name: 'DeleteDataSetResponse')
     DeleteDataSourceRequest = Shapes::StructureShape.new(name: 'DeleteDataSourceRequest')
     DeleteDataSourceResponse = Shapes::StructureShape.new(name: 'DeleteDataSourceResponse')
+    DeleteFolderMembershipRequest = Shapes::StructureShape.new(name: 'DeleteFolderMembershipRequest')
+    DeleteFolderMembershipResponse = Shapes::StructureShape.new(name: 'DeleteFolderMembershipResponse')
+    DeleteFolderRequest = Shapes::StructureShape.new(name: 'DeleteFolderRequest')
+    DeleteFolderResponse = Shapes::StructureShape.new(name: 'DeleteFolderResponse')
     DeleteGroupMembershipRequest = Shapes::StructureShape.new(name: 'DeleteGroupMembershipRequest')
     DeleteGroupMembershipResponse = Shapes::StructureShape.new(name: 'DeleteGroupMembershipResponse')
     DeleteGroupRequest = Shapes::StructureShape.new(name: 'DeleteGroupRequest')
@@ -202,6 +210,12 @@ module Aws::QuickSight
     DescribeDataSourcePermissionsResponse = Shapes::StructureShape.new(name: 'DescribeDataSourcePermissionsResponse')
     DescribeDataSourceRequest = Shapes::StructureShape.new(name: 'DescribeDataSourceRequest')
     DescribeDataSourceResponse = Shapes::StructureShape.new(name: 'DescribeDataSourceResponse')
+    DescribeFolderPermissionsRequest = Shapes::StructureShape.new(name: 'DescribeFolderPermissionsRequest')
+    DescribeFolderPermissionsResponse = Shapes::StructureShape.new(name: 'DescribeFolderPermissionsResponse')
+    DescribeFolderRequest = Shapes::StructureShape.new(name: 'DescribeFolderRequest')
+    DescribeFolderResolvedPermissionsRequest = Shapes::StructureShape.new(name: 'DescribeFolderResolvedPermissionsRequest')
+    DescribeFolderResolvedPermissionsResponse = Shapes::StructureShape.new(name: 'DescribeFolderResolvedPermissionsResponse')
+    DescribeFolderResponse = Shapes::StructureShape.new(name: 'DescribeFolderResponse')
     DescribeGroupRequest = Shapes::StructureShape.new(name: 'DescribeGroupRequest')
     DescribeGroupResponse = Shapes::StructureShape.new(name: 'DescribeGroupResponse')
     DescribeIAMPolicyAssignmentRequest = Shapes::StructureShape.new(name: 'DescribeIAMPolicyAssignmentRequest')
@@ -243,7 +257,17 @@ module Aws::QuickSight
     FileFormat = Shapes::StringShape.new(name: 'FileFormat')
     FilterOperation = Shapes::StructureShape.new(name: 'FilterOperation')
     FilterOperator = Shapes::StringShape.new(name: 'FilterOperator')
+    Folder = Shapes::StructureShape.new(name: 'Folder')
     FolderColumnList = Shapes::ListShape.new(name: 'FolderColumnList')
+    FolderFilterAttribute = Shapes::StringShape.new(name: 'FolderFilterAttribute')
+    FolderMember = Shapes::StructureShape.new(name: 'FolderMember')
+    FolderMemberList = Shapes::ListShape.new(name: 'FolderMemberList')
+    FolderName = Shapes::StringShape.new(name: 'FolderName')
+    FolderSearchFilter = Shapes::StructureShape.new(name: 'FolderSearchFilter')
+    FolderSearchFilterList = Shapes::ListShape.new(name: 'FolderSearchFilterList')
+    FolderSummary = Shapes::StructureShape.new(name: 'FolderSummary')
+    FolderSummaryList = Shapes::ListShape.new(name: 'FolderSummaryList')
+    FolderType = Shapes::StringShape.new(name: 'FolderType')
     GeoSpatialColumnGroup = Shapes::StructureShape.new(name: 'GeoSpatialColumnGroup')
     GeoSpatialCountryCode = Shapes::StringShape.new(name: 'GeoSpatialCountryCode')
     GeoSpatialDataRole = Shapes::StringShape.new(name: 'GeoSpatialDataRole')
@@ -303,6 +327,10 @@ module Aws::QuickSight
     ListDataSetsResponse = Shapes::StructureShape.new(name: 'ListDataSetsResponse')
     ListDataSourcesRequest = Shapes::StructureShape.new(name: 'ListDataSourcesRequest')
     ListDataSourcesResponse = Shapes::StructureShape.new(name: 'ListDataSourcesResponse')
+    ListFolderMembersRequest = Shapes::StructureShape.new(name: 'ListFolderMembersRequest')
+    ListFolderMembersResponse = Shapes::StructureShape.new(name: 'ListFolderMembersResponse')
+    ListFoldersRequest = Shapes::StructureShape.new(name: 'ListFoldersRequest')
+    ListFoldersResponse = Shapes::StructureShape.new(name: 'ListFoldersResponse')
     ListGroupMembershipsRequest = Shapes::StructureShape.new(name: 'ListGroupMembershipsRequest')
     ListGroupMembershipsResponse = Shapes::StructureShape.new(name: 'ListGroupMembershipsResponse')
     ListGroupsRequest = Shapes::StructureShape.new(name: 'ListGroupsRequest')
@@ -344,6 +372,8 @@ module Aws::QuickSight
     MarginStyle = Shapes::StructureShape.new(name: 'MarginStyle')
     MariaDbParameters = Shapes::StructureShape.new(name: 'MariaDbParameters')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MemberIdArnPair = Shapes::StructureShape.new(name: 'MemberIdArnPair')
+    MemberType = Shapes::StringShape.new(name: 'MemberType')
     MySqlParameters = Shapes::StructureShape.new(name: 'MySqlParameters')
     Namespace = Shapes::StringShape.new(name: 'Namespace')
     NamespaceError = Shapes::StructureShape.new(name: 'NamespaceError')
@@ -359,6 +389,7 @@ module Aws::QuickSight
     OutputColumnList = Shapes::ListShape.new(name: 'OutputColumnList')
     Parameters = Shapes::StructureShape.new(name: 'Parameters')
     Password = Shapes::StringShape.new(name: 'Password')
+    Path = Shapes::ListShape.new(name: 'Path')
     PhysicalTable = Shapes::StructureShape.new(name: 'PhysicalTable')
     PhysicalTableId = Shapes::StringShape.new(name: 'PhysicalTableId')
     PhysicalTableMap = Shapes::MapShape.new(name: 'PhysicalTableMap')
@@ -409,6 +440,8 @@ module Aws::QuickSight
     SearchAnalysesResponse = Shapes::StructureShape.new(name: 'SearchAnalysesResponse')
     SearchDashboardsRequest = Shapes::StructureShape.new(name: 'SearchDashboardsRequest')
     SearchDashboardsResponse = Shapes::StructureShape.new(name: 'SearchDashboardsResponse')
+    SearchFoldersRequest = Shapes::StructureShape.new(name: 'SearchFoldersRequest')
+    SearchFoldersResponse = Shapes::StructureShape.new(name: 'SearchFoldersResponse')
     ServiceNowParameters = Shapes::StructureShape.new(name: 'ServiceNowParameters')
     SessionLifetimeInMinutes = Shapes::IntegerShape.new(name: 'SessionLifetimeInMinutes')
     SessionLifetimeInMinutesInvalidException = Shapes::StructureShape.new(name: 'SessionLifetimeInMinutesInvalidException')
@@ -502,6 +535,10 @@ module Aws::QuickSight
     UpdateDataSourcePermissionsResponse = Shapes::StructureShape.new(name: 'UpdateDataSourcePermissionsResponse')
     UpdateDataSourceRequest = Shapes::StructureShape.new(name: 'UpdateDataSourceRequest')
     UpdateDataSourceResponse = Shapes::StructureShape.new(name: 'UpdateDataSourceResponse')
+    UpdateFolderPermissionsRequest = Shapes::StructureShape.new(name: 'UpdateFolderPermissionsRequest')
+    UpdateFolderPermissionsResponse = Shapes::StructureShape.new(name: 'UpdateFolderPermissionsResponse')
+    UpdateFolderRequest = Shapes::StructureShape.new(name: 'UpdateFolderRequest')
+    UpdateFolderResponse = Shapes::StructureShape.new(name: 'UpdateFolderResponse')
     UpdateGroupRequest = Shapes::StructureShape.new(name: 'UpdateGroupRequest')
     UpdateGroupResponse = Shapes::StructureShape.new(name: 'UpdateGroupResponse')
     UpdateIAMPolicyAssignmentRequest = Shapes::StructureShape.new(name: 'UpdateIAMPolicyAssignmentRequest')
@@ -796,6 +833,32 @@ module Aws::QuickSight
     CreateDataSourceResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     CreateDataSourceResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     CreateDataSourceResponse.struct_class = Types::CreateDataSourceResponse
+
+    CreateFolderMembershipRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    CreateFolderMembershipRequest.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "FolderId"))
+    CreateFolderMembershipRequest.add_member(:member_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "MemberId"))
+    CreateFolderMembershipRequest.add_member(:member_type, Shapes::ShapeRef.new(shape: MemberType, required: true, location: "uri", location_name: "MemberType"))
+    CreateFolderMembershipRequest.struct_class = Types::CreateFolderMembershipRequest
+
+    CreateFolderMembershipResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location_name: "Status"))
+    CreateFolderMembershipResponse.add_member(:folder_member, Shapes::ShapeRef.new(shape: FolderMember, location_name: "FolderMember"))
+    CreateFolderMembershipResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    CreateFolderMembershipResponse.struct_class = Types::CreateFolderMembershipResponse
+
+    CreateFolderRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    CreateFolderRequest.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "FolderId"))
+    CreateFolderRequest.add_member(:name, Shapes::ShapeRef.new(shape: FolderName, location_name: "Name"))
+    CreateFolderRequest.add_member(:folder_type, Shapes::ShapeRef.new(shape: FolderType, location_name: "FolderType"))
+    CreateFolderRequest.add_member(:parent_folder_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ParentFolderArn"))
+    CreateFolderRequest.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
+    CreateFolderRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateFolderRequest.struct_class = Types::CreateFolderRequest
+
+    CreateFolderResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    CreateFolderResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    CreateFolderResponse.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "FolderId"))
+    CreateFolderResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    CreateFolderResponse.struct_class = Types::CreateFolderResponse
 
     CreateGroupMembershipRequest.add_member(:member_name, Shapes::ShapeRef.new(shape: GroupMemberName, required: true, location: "uri", location_name: "MemberName"))
     CreateGroupMembershipRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location: "uri", location_name: "GroupName"))
@@ -1161,6 +1224,26 @@ module Aws::QuickSight
     DeleteDataSourceResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DeleteDataSourceResponse.struct_class = Types::DeleteDataSourceResponse
 
+    DeleteFolderMembershipRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DeleteFolderMembershipRequest.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "FolderId"))
+    DeleteFolderMembershipRequest.add_member(:member_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "MemberId"))
+    DeleteFolderMembershipRequest.add_member(:member_type, Shapes::ShapeRef.new(shape: MemberType, required: true, location: "uri", location_name: "MemberType"))
+    DeleteFolderMembershipRequest.struct_class = Types::DeleteFolderMembershipRequest
+
+    DeleteFolderMembershipResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location_name: "Status"))
+    DeleteFolderMembershipResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DeleteFolderMembershipResponse.struct_class = Types::DeleteFolderMembershipResponse
+
+    DeleteFolderRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DeleteFolderRequest.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "FolderId"))
+    DeleteFolderRequest.struct_class = Types::DeleteFolderRequest
+
+    DeleteFolderResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DeleteFolderResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    DeleteFolderResponse.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "FolderId"))
+    DeleteFolderResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DeleteFolderResponse.struct_class = Types::DeleteFolderResponse
+
     DeleteGroupMembershipRequest.add_member(:member_name, Shapes::ShapeRef.new(shape: GroupMemberName, required: true, location: "uri", location_name: "MemberName"))
     DeleteGroupMembershipRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location: "uri", location_name: "GroupName"))
     DeleteGroupMembershipRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -1365,6 +1448,37 @@ module Aws::QuickSight
     DescribeDataSourceResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DescribeDataSourceResponse.struct_class = Types::DescribeDataSourceResponse
 
+    DescribeFolderPermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeFolderPermissionsRequest.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "FolderId"))
+    DescribeFolderPermissionsRequest.struct_class = Types::DescribeFolderPermissionsRequest
+
+    DescribeFolderPermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeFolderPermissionsResponse.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "FolderId"))
+    DescribeFolderPermissionsResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    DescribeFolderPermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
+    DescribeFolderPermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeFolderPermissionsResponse.struct_class = Types::DescribeFolderPermissionsResponse
+
+    DescribeFolderRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeFolderRequest.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "FolderId"))
+    DescribeFolderRequest.struct_class = Types::DescribeFolderRequest
+
+    DescribeFolderResolvedPermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeFolderResolvedPermissionsRequest.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "FolderId"))
+    DescribeFolderResolvedPermissionsRequest.struct_class = Types::DescribeFolderResolvedPermissionsRequest
+
+    DescribeFolderResolvedPermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeFolderResolvedPermissionsResponse.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "FolderId"))
+    DescribeFolderResolvedPermissionsResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    DescribeFolderResolvedPermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
+    DescribeFolderResolvedPermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeFolderResolvedPermissionsResponse.struct_class = Types::DescribeFolderResolvedPermissionsResponse
+
+    DescribeFolderResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeFolderResponse.add_member(:folder, Shapes::ShapeRef.new(shape: Folder, location_name: "Folder"))
+    DescribeFolderResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeFolderResponse.struct_class = Types::DescribeFolderResponse
+
     DescribeGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location: "uri", location_name: "GroupName"))
     DescribeGroupRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeGroupRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
@@ -1501,7 +1615,39 @@ module Aws::QuickSight
     FilterOperation.add_member(:condition_expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "ConditionExpression"))
     FilterOperation.struct_class = Types::FilterOperation
 
+    Folder.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "FolderId"))
+    Folder.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    Folder.add_member(:name, Shapes::ShapeRef.new(shape: FolderName, location_name: "Name"))
+    Folder.add_member(:folder_type, Shapes::ShapeRef.new(shape: FolderType, location_name: "FolderType"))
+    Folder.add_member(:folder_path, Shapes::ShapeRef.new(shape: Path, location_name: "FolderPath"))
+    Folder.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    Folder.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
+    Folder.struct_class = Types::Folder
+
     FolderColumnList.member = Shapes::ShapeRef.new(shape: String)
+
+    FolderMember.add_member(:member_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "MemberId"))
+    FolderMember.add_member(:member_type, Shapes::ShapeRef.new(shape: MemberType, location_name: "MemberType"))
+    FolderMember.struct_class = Types::FolderMember
+
+    FolderMemberList.member = Shapes::ShapeRef.new(shape: MemberIdArnPair)
+
+    FolderSearchFilter.add_member(:operator, Shapes::ShapeRef.new(shape: FilterOperator, location_name: "Operator"))
+    FolderSearchFilter.add_member(:name, Shapes::ShapeRef.new(shape: FolderFilterAttribute, location_name: "Name"))
+    FolderSearchFilter.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    FolderSearchFilter.struct_class = Types::FolderSearchFilter
+
+    FolderSearchFilterList.member = Shapes::ShapeRef.new(shape: FolderSearchFilter)
+
+    FolderSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    FolderSummary.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "FolderId"))
+    FolderSummary.add_member(:name, Shapes::ShapeRef.new(shape: FolderName, location_name: "Name"))
+    FolderSummary.add_member(:folder_type, Shapes::ShapeRef.new(shape: FolderType, location_name: "FolderType"))
+    FolderSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    FolderSummary.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
+    FolderSummary.struct_class = Types::FolderSummary
+
+    FolderSummaryList.member = Shapes::ShapeRef.new(shape: FolderSummary)
 
     GeoSpatialColumnGroup.add_member(:name, Shapes::ShapeRef.new(shape: ColumnGroupName, required: true, location_name: "Name"))
     GeoSpatialColumnGroup.add_member(:country_code, Shapes::ShapeRef.new(shape: GeoSpatialCountryCode, required: true, location_name: "CountryCode"))
@@ -1689,6 +1835,29 @@ module Aws::QuickSight
     ListDataSourcesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     ListDataSourcesResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     ListDataSourcesResponse.struct_class = Types::ListDataSourcesResponse
+
+    ListFolderMembersRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    ListFolderMembersRequest.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "FolderId"))
+    ListFolderMembersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListFolderMembersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListFolderMembersRequest.struct_class = Types::ListFolderMembersRequest
+
+    ListFolderMembersResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    ListFolderMembersResponse.add_member(:folder_member_list, Shapes::ShapeRef.new(shape: FolderMemberList, location_name: "FolderMemberList"))
+    ListFolderMembersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListFolderMembersResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ListFolderMembersResponse.struct_class = Types::ListFolderMembersResponse
+
+    ListFoldersRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    ListFoldersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListFoldersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListFoldersRequest.struct_class = Types::ListFoldersRequest
+
+    ListFoldersResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    ListFoldersResponse.add_member(:folder_summary_list, Shapes::ShapeRef.new(shape: FolderSummaryList, location_name: "FolderSummaryList"))
+    ListFoldersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListFoldersResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ListFoldersResponse.struct_class = Types::ListFoldersResponse
 
     ListGroupMembershipsRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location: "uri", location_name: "GroupName"))
     ListGroupMembershipsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
@@ -1894,6 +2063,10 @@ module Aws::QuickSight
     MariaDbParameters.add_member(:database, Shapes::ShapeRef.new(shape: Database, required: true, location_name: "Database"))
     MariaDbParameters.struct_class = Types::MariaDbParameters
 
+    MemberIdArnPair.add_member(:member_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "MemberId"))
+    MemberIdArnPair.add_member(:member_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "MemberArn"))
+    MemberIdArnPair.struct_class = Types::MemberIdArnPair
+
     MySqlParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
     MySqlParameters.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
     MySqlParameters.add_member(:database, Shapes::ShapeRef.new(shape: Database, required: true, location_name: "Database"))
@@ -1930,6 +2103,8 @@ module Aws::QuickSight
     Parameters.add_member(:decimal_parameters, Shapes::ShapeRef.new(shape: DecimalParameterList, location_name: "DecimalParameters"))
     Parameters.add_member(:date_time_parameters, Shapes::ShapeRef.new(shape: DateTimeParameterList, location_name: "DateTimeParameters"))
     Parameters.struct_class = Types::Parameters
+
+    Path.member = Shapes::ShapeRef.new(shape: Arn)
 
     PhysicalTable.add_member(:relational_table, Shapes::ShapeRef.new(shape: RelationalTable, location_name: "RelationalTable"))
     PhysicalTable.add_member(:custom_sql, Shapes::ShapeRef.new(shape: CustomSql, location_name: "CustomSql"))
@@ -2081,6 +2256,18 @@ module Aws::QuickSight
     SearchDashboardsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     SearchDashboardsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     SearchDashboardsResponse.struct_class = Types::SearchDashboardsResponse
+
+    SearchFoldersRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    SearchFoldersRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FolderSearchFilterList, required: true, location_name: "Filters"))
+    SearchFoldersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    SearchFoldersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchFoldersRequest.struct_class = Types::SearchFoldersRequest
+
+    SearchFoldersResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    SearchFoldersResponse.add_member(:folder_summary_list, Shapes::ShapeRef.new(shape: FolderSummaryList, location_name: "FolderSummaryList"))
+    SearchFoldersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    SearchFoldersResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    SearchFoldersResponse.struct_class = Types::SearchFoldersResponse
 
     ServiceNowParameters.add_member(:site_base_url, Shapes::ShapeRef.new(shape: SiteBaseUrl, required: true, location_name: "SiteBaseUrl"))
     ServiceNowParameters.struct_class = Types::ServiceNowParameters
@@ -2483,6 +2670,30 @@ module Aws::QuickSight
     UpdateDataSourceResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     UpdateDataSourceResponse.struct_class = Types::UpdateDataSourceResponse
 
+    UpdateFolderPermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateFolderPermissionsRequest.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "FolderId"))
+    UpdateFolderPermissionsRequest.add_member(:grant_permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "GrantPermissions"))
+    UpdateFolderPermissionsRequest.add_member(:revoke_permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "RevokePermissions"))
+    UpdateFolderPermissionsRequest.struct_class = Types::UpdateFolderPermissionsRequest
+
+    UpdateFolderPermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location_name: "Status"))
+    UpdateFolderPermissionsResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    UpdateFolderPermissionsResponse.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "FolderId"))
+    UpdateFolderPermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
+    UpdateFolderPermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateFolderPermissionsResponse.struct_class = Types::UpdateFolderPermissionsResponse
+
+    UpdateFolderRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateFolderRequest.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "FolderId"))
+    UpdateFolderRequest.add_member(:name, Shapes::ShapeRef.new(shape: FolderName, required: true, location_name: "Name"))
+    UpdateFolderRequest.struct_class = Types::UpdateFolderRequest
+
+    UpdateFolderResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    UpdateFolderResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    UpdateFolderResponse.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "FolderId"))
+    UpdateFolderResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateFolderResponse.struct_class = Types::UpdateFolderResponse
+
     UpdateGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location: "uri", location_name: "GroupName"))
     UpdateGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: GroupDescription, location_name: "Description"))
     UpdateGroupRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -2743,6 +2954,39 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:create_folder, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateFolder"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/folders/{FolderId}"
+        o.input = Shapes::ShapeRef.new(shape: CreateFolderRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateFolderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:create_folder_membership, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateFolderMembership"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/folders/{FolderId}/members/{MemberType}/{MemberId}"
+        o.input = Shapes::ShapeRef.new(shape: CreateFolderMembershipRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateFolderMembershipResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:create_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateGroup"
         o.http_method = "POST"
@@ -2953,6 +3197,36 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:delete_folder, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFolder"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/accounts/{AwsAccountId}/folders/{FolderId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFolderRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteFolderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:delete_folder_membership, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFolderMembership"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/accounts/{AwsAccountId}/folders/{FolderId}/members/{MemberType}/{MemberId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFolderMembershipRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteFolderMembershipResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
@@ -3234,6 +3508,48 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:describe_folder, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFolder"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/folders/{FolderId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFolderRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFolderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:describe_folder_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFolderPermissions"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/folders/{FolderId}/permissions"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFolderPermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFolderPermissionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:describe_folder_resolved_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFolderResolvedPermissions"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/folders/{FolderId}/resolved-permissions"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFolderResolvedPermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFolderResolvedPermissionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
@@ -3523,6 +3839,36 @@ module Aws::QuickSight
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_folder_members, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFolderMembers"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/folders/{FolderId}/members"
+        o.input = Shapes::ShapeRef.new(shape: ListFolderMembersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFolderMembersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:list_folders, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFolders"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/folders"
+        o.input = Shapes::ShapeRef.new(shape: ListFoldersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFoldersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:list_group_memberships, Seahorse::Model::Operation.new.tap do |o|
@@ -3860,6 +4206,21 @@ module Aws::QuickSight
         )
       end)
 
+      api.add_operation(:search_folders, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchFolders"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/search/folders"
+        o.input = Shapes::ShapeRef.new(shape: SearchFoldersRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchFoldersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
@@ -4042,6 +4403,37 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_folder, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateFolder"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/folders/{FolderId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateFolderRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateFolderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_folder_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateFolderPermissions"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/folders/{FolderId}/permissions"
+        o.input = Shapes::ShapeRef.new(shape: UpdateFolderPermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateFolderPermissionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 

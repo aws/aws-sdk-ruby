@@ -43582,6 +43582,7 @@ module Aws::EC2
     #             ],
     #           },
     #         ],
+    #         multi_region: false,
     #       }
     #
     # @!attribute [rw] cidr
@@ -43619,6 +43620,10 @@ module Aws::EC2
     #   The tags to apply to the address pool.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] multi_region
+    #   <para>Reserved.</para>
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionByoipCidrRequest AWS API Documentation
     #
     class ProvisionByoipCidrRequest < Struct.new(
@@ -43627,7 +43632,8 @@ module Aws::EC2
       :publicly_advertisable,
       :description,
       :dry_run,
-      :pool_tag_specifications)
+      :pool_tag_specifications,
+      :multi_region)
       SENSITIVE = []
       include Aws::Structure
     end

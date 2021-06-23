@@ -1896,6 +1896,166 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateFolderMembershipRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         folder_id: "RestrictiveResourceId", # required
+    #         member_id: "RestrictiveResourceId", # required
+    #         member_type: "DASHBOARD", # required, accepts DASHBOARD, ANALYSIS, DATASET
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS Account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_id
+    #   The ID of the asset (the dashboard, analysis, or dataset).
+    #   @return [String]
+    #
+    # @!attribute [rw] member_type
+    #   The type of the member, including `DASHBOARD`, `ANALYSIS`, and
+    #   `DATASET`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateFolderMembershipRequest AWS API Documentation
+    #
+    class CreateFolderMembershipRequest < Struct.new(
+      :aws_account_id,
+      :folder_id,
+      :member_id,
+      :member_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the folder membership. If succeeded, the status is
+    #   `SC_OK (200)`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] folder_member
+    #   Information about the member in the folder.
+    #   @return [Types::FolderMember]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateFolderMembershipResponse AWS API Documentation
+    #
+    class CreateFolderMembershipResponse < Struct.new(
+      :status,
+      :folder_member,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateFolderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         folder_id: "RestrictiveResourceId", # required
+    #         name: "FolderName",
+    #         folder_type: "SHARED", # accepts SHARED
+    #         parent_folder_arn: "Arn",
+    #         permissions: [
+    #           {
+    #             principal: "Principal", # required
+    #             actions: ["String"], # required
+    #           },
+    #         ],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS Account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_type
+    #   The type of folder. By default, `folderType` is `SHARED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_folder_arn
+    #   The Amazon Resource Name (ARN) for the parent folder.
+    #
+    #   `ParentFolderArn` can be null. An empty `parentFolderArn` creates a
+    #   root-level folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   A structure that describes the principals and the resource-level
+    #   permissions of a folder.
+    #
+    #   To specify no permissions, omit `Permissions`.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] tags
+    #   Tags for the folder.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateFolderRequest AWS API Documentation
+    #
+    class CreateFolderRequest < Struct.new(
+      :aws_account_id,
+      :folder_id,
+      :name,
+      :folder_type,
+      :parent_folder_arn,
+      :permissions,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the newly created folder. If succeeded, the status is
+    #   `SC_OK (200)`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the newly created folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID for the newly created folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID for the newly created folder.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateFolderResponse AWS API Documentation
+    #
+    class CreateFolderResponse < Struct.new(
+      :status,
+      :arn,
+      :folder_id,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateGroupMembershipRequest
     #   data as a hash:
     #
@@ -4257,6 +4417,116 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteFolderMembershipRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         folder_id: "RestrictiveResourceId", # required
+    #         member_id: "RestrictiveResourceId", # required
+    #         member_type: "DASHBOARD", # required, accepts DASHBOARD, ANALYSIS, DATASET
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS Account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The Folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_id
+    #   The ID of the asset (the dashboard, analysis, or dataset) that you
+    #   want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_type
+    #   The type of the member, including `DASHBOARD`, `ANALYSIS`, and
+    #   `DATASET`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteFolderMembershipRequest AWS API Documentation
+    #
+    class DeleteFolderMembershipRequest < Struct.new(
+      :aws_account_id,
+      :folder_id,
+      :member_id,
+      :member_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of deleting the asset. If succeeded, the status is `SC_OK
+    #   (200)`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteFolderMembershipResponse AWS API Documentation
+    #
+    class DeleteFolderMembershipResponse < Struct.new(
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteFolderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         folder_id: "RestrictiveResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS Account ID for the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteFolderRequest AWS API Documentation
+    #
+    class DeleteFolderRequest < Struct.new(
+      :aws_account_id,
+      :folder_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of deleting the folder. If succeeded, the status is
+    #   `SC_OK (200)`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name of the deleted folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteFolderResponse AWS API Documentation
+    #
+    class DeleteFolderResponse < Struct.new(
+      :status,
+      :arn,
+      :folder_id,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteGroupMembershipRequest
     #   data as a hash:
     #
@@ -5385,6 +5655,167 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeFolderPermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         folder_id: "RestrictiveResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS Account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderPermissionsRequest AWS API Documentation
+    #
+    class DescribeFolderPermissionsRequest < Struct.new(
+      :aws_account_id,
+      :folder_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status. If succeeded, the status is `SC_OK`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   Information about the permissions on the folder.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderPermissionsResponse AWS API Documentation
+    #
+    class DescribeFolderPermissionsResponse < Struct.new(
+      :status,
+      :folder_id,
+      :arn,
+      :permissions,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFolderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         folder_id: "RestrictiveResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderRequest AWS API Documentation
+    #
+    class DescribeFolderRequest < Struct.new(
+      :aws_account_id,
+      :folder_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFolderResolvedPermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         folder_id: "RestrictiveResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderResolvedPermissionsRequest AWS API Documentation
+    #
+    class DescribeFolderResolvedPermissionsRequest < Struct.new(
+      :aws_account_id,
+      :folder_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status. If succeeded, the status is `SC_OK`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   Information about the permissions on the dashboard.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderResolvedPermissionsResponse AWS API Documentation
+    #
+    class DescribeFolderResolvedPermissionsResponse < Struct.new(
+      :status,
+      :folder_id,
+      :arn,
+      :permissions,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status. If succeeded, the status is `SC_OK (200)`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] folder
+    #   Information about the folder.
+    #   @return [Types::Folder]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderResponse AWS API Documentation
+    #
+    class DescribeFolderResponse < Struct.new(
+      :status,
+      :folder,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeGroupRequest
     #   data as a hash:
     #
@@ -6121,6 +6552,145 @@ module Aws::QuickSight
     #
     class FilterOperation < Struct.new(
       :condition_expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A folder.
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The folder Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A display name for the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_type
+    #   The type of the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_path
+    #   An array of ancestor folder ARN strings.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_time
+    #   The time that the folder was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time that the folder was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Folder AWS API Documentation
+    #
+    class Folder < Struct.new(
+      :folder_id,
+      :arn,
+      :name,
+      :folder_type,
+      :folder_path,
+      :created_time,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An asset in a folder, such as a dashboard, analysis, or dataset.
+    #
+    # @!attribute [rw] member_id
+    #   The ID of the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_type
+    #   The type of the asset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FolderMember AWS API Documentation
+    #
+    class FolderMember < Struct.new(
+      :member_id,
+      :member_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Searches a folder by a filter.
+    #
+    # @note When making an API call, you may pass FolderSearchFilter
+    #   data as a hash:
+    #
+    #       {
+    #         operator: "StringEquals", # accepts StringEquals
+    #         name: "PARENT_FOLDER_ARN", # accepts PARENT_FOLDER_ARN
+    #         value: "String",
+    #       }
+    #
+    # @!attribute [rw] operator
+    #   The comparison operator that you want to use as a filter. For
+    #   example, `"Operator": "StringEquals"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the value that you want to use as a filter. For example,
+    #   `"Name": "PARENT_FOLDER_ARN"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the named item (in this example, `PARENT_FOLDER_ARN`),
+    #   that you want to use as a filter. For example, `"Value":
+    #   "arn:aws:quicksight:us-east-1:1:folder/folderId"`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FolderSearchFilter AWS API Documentation
+    #
+    class FolderSearchFilter < Struct.new(
+      :operator,
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the folder.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The display name of the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_type
+    #   The type of folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time that the folder was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time that the folder was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FolderSummary AWS API Documentation
+    #
+    class FolderSummary < Struct.new(
+      :arn,
+      :folder_id,
+      :name,
+      :folder_type,
+      :created_time,
+      :last_updated_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7135,6 +7705,134 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListFolderMembersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         folder_id: "RestrictiveResourceId", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListFolderMembersRequest AWS API Documentation
+    #
+    class ListFolderMembersRequest < Struct.new(
+      :aws_account_id,
+      :folder_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status. If succeeded, the status is `SC_OK`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] folder_member_list
+    #   A structure that contains all of the folder members (dashboards,
+    #   analyses, and datasets) in the folder.
+    #   @return [Array<Types::MemberIdArnPair>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListFolderMembersResponse AWS API Documentation
+    #
+    class ListFolderMembersResponse < Struct.new(
+      :status,
+      :folder_member_list,
+      :next_token,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListFoldersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListFoldersRequest AWS API Documentation
+    #
+    class ListFoldersRequest < Struct.new(
+      :aws_account_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status. If succeeded, the status is `SC_OK`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] folder_summary_list
+    #   A structure that contains all of the folders in your AWS account.
+    #   This structure provides basic information about the folders.
+    #   @return [Array<Types::FolderSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListFoldersResponse AWS API Documentation
+    #
+    class ListFoldersResponse < Struct.new(
+      :status,
+      :folder_summary_list,
+      :next_token,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8347,6 +9045,26 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # An object that consists of the member Amazon Resource Name (ARN) and
+    # member ID.
+    #
+    # @!attribute [rw] member_id
+    #   The ID of the member.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_arn
+    #   The Amazon Resource Name (ARN) of the member.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/MemberIdArnPair AWS API Documentation
+    #
+    class MemberIdArnPair < Struct.new(
+      :member_id,
+      :member_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # MySQL parameters.
     #
     # @note When making an API call, you may pass MySqlParameters
@@ -9381,7 +10099,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # A physical table type for as S3 data source.
+    # A physical table type for an S3 data source.
     #
     # @note When making an API call, you may pass S3Source
     #   data as a hash:
@@ -9412,7 +10130,12 @@ module Aws::QuickSight
     #   @return [Types::UploadSettings]
     #
     # @!attribute [rw] input_columns
-    #   A physical table type for as S3 data source.
+    #   A physical table type for an S3 data source.
+    #
+    #   <note markdown="1"> For non-JSON files, only `STRING` data types are supported in input
+    #   columns.
+    #
+    #    </note>
     #   @return [Array<Types::InputColumn>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/S3Source AWS API Documentation
@@ -9569,6 +10292,82 @@ module Aws::QuickSight
       :dashboard_summary_list,
       :next_token,
       :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SearchFoldersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         filters: [ # required
+    #           {
+    #             operator: "StringEquals", # accepts StringEquals
+    #             name: "PARENT_FOLDER_ARN", # accepts PARENT_FOLDER_ARN
+    #             value: "String",
+    #           },
+    #         ],
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   The filters to apply to the search. Currently, you can search only
+    #   by the parent folder ARN. For example, `"Filters": [ \{ "Name":
+    #   "PARENT_FOLDER_ARN", "Operator": "StringEquals", "Value":
+    #   "arn:aws:quicksight:us-east-1:1:folder/folderId" \} ]`.
+    #   @return [Array<Types::FolderSearchFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchFoldersRequest AWS API Documentation
+    #
+    class SearchFoldersRequest < Struct.new(
+      :aws_account_id,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status. If succeeded, the status is `SC_OK`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] folder_summary_list
+    #   A structure that contains all of the folders in your AWS account.
+    #   This structure provides basic information about the folders.
+    #   @return [Array<Types::FolderSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchFoldersResponse AWS API Documentation
+    #
+    class SearchFoldersResponse < Struct.new(
+      :status,
+      :folder_summary_list,
+      :next_token,
       :request_id)
       SENSITIVE = []
       include Aws::Structure
@@ -12330,6 +13129,143 @@ module Aws::QuickSight
       :update_status,
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateFolderPermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         folder_id: "RestrictiveResourceId", # required
+    #         grant_permissions: [
+    #           {
+    #             principal: "Principal", # required
+    #             actions: ["String"], # required
+    #           },
+    #         ],
+    #         revoke_permissions: [
+    #           {
+    #             principal: "Principal", # required
+    #             actions: ["String"], # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_permissions
+    #   The permissions that you want to grant on a resource.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] revoke_permissions
+    #   The permissions that you want to revoke from a resource.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateFolderPermissionsRequest AWS API Documentation
+    #
+    class UpdateFolderPermissionsRequest < Struct.new(
+      :aws_account_id,
+      :folder_id,
+      :grant_permissions,
+      :revoke_permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status. If succeeded, the status is `SC_OK`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   Information about the permissions on the dashboard.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateFolderPermissionsResponse AWS API Documentation
+    #
+    class UpdateFolderPermissionsResponse < Struct.new(
+      :status,
+      :arn,
+      :folder_id,
+      :permissions,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateFolderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         folder_id: "RestrictiveResourceId", # required
+    #         name: "FolderName", # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the folder.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateFolderRequest AWS API Documentation
+    #
+    class UpdateFolderRequest < Struct.new(
+      :aws_account_id,
+      :folder_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status. If succeeded, the status is `SC_OK`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_id
+    #   The folder ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The request ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateFolderResponse AWS API Documentation
+    #
+    class UpdateFolderResponse < Struct.new(
+      :status,
+      :arn,
+      :folder_id,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end

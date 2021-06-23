@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2021-06-23)
+------------------
+
+* Feature - Amazon CloudFront adds support for a new security policy, TLSv1.2_2021.
+
 1.51.0 (2021-05-26)
 ------------------
 

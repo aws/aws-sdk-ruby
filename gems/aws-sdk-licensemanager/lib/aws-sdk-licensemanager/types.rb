@@ -441,7 +441,7 @@ module Aws::LicenseManager
     #   data as a hash:
     #
     #       {
-    #         client_token: "String", # required
+    #         client_token: "ClientToken", # required
     #         grant_name: "String", # required
     #         license_arn: "Arn", # required
     #         principals: ["Arn"], # required
@@ -513,11 +513,12 @@ module Aws::LicenseManager
     #   data as a hash:
     #
     #       {
-    #         client_token: "String", # required
+    #         client_token: "ClientToken", # required
     #         grant_arn: "Arn", # required
     #         grant_name: "String",
     #         allowed_operations: ["CreateGrant"], # accepts CreateGrant, CheckoutLicense, CheckoutBorrowLicense, CheckInLicense, ExtendConsumptionLicense, ListPurchasedLicenses, CreateToken
-    #         status: "PENDING_WORKFLOW", # accepts PENDING_WORKFLOW, PENDING_ACCEPT, REJECTED, ACTIVE, FAILED_WORKFLOW, DELETED, PENDING_DELETE, DISABLED
+    #         status: "PENDING_WORKFLOW", # accepts PENDING_WORKFLOW, PENDING_ACCEPT, REJECTED, ACTIVE, FAILED_WORKFLOW, DELETED, PENDING_DELETE, DISABLED, WORKFLOW_COMPLETED
+    #         status_reason: "StatusReasonMessage",
     #         source_version: "String",
     #       }
     #
@@ -542,6 +543,9 @@ module Aws::LicenseManager
     #   Grant status.
     #   @return [String]
     #
+    # @!attribute [rw] status_reason
+    #   @return [String]
+    #
     # @!attribute [rw] source_version
     #   Current version of the grant.
     #   @return [String]
@@ -554,6 +558,7 @@ module Aws::LicenseManager
       :grant_name,
       :allowed_operations,
       :status,
+      :status_reason,
       :source_version)
       SENSITIVE = []
       include Aws::Structure
@@ -827,7 +832,7 @@ module Aws::LicenseManager
     #             value: "String",
     #           },
     #         ],
-    #         client_token: "String", # required
+    #         client_token: "ClientToken", # required
     #       }
     #
     # @!attribute [rw] license_name
@@ -961,7 +966,7 @@ module Aws::LicenseManager
     #           },
     #         },
     #         status: "AVAILABLE", # required, accepts AVAILABLE, PENDING_AVAILABLE, DEACTIVATED, SUSPENDED, EXPIRED, PENDING_DELETE, DELETED
-    #         client_token: "String", # required
+    #         client_token: "ClientToken", # required
     #         source_version: "String",
     #       }
     #
@@ -1066,7 +1071,7 @@ module Aws::LicenseManager
     #         role_arns: ["Arn"],
     #         expiration_in_days: 1,
     #         token_properties: ["String"],
-    #         client_token: "IdempotencyToken", # required
+    #         client_token: "ClientToken", # required
     #       }
     #
     # @!attribute [rw] license_arn
@@ -1159,11 +1164,15 @@ module Aws::LicenseManager
     #
     #       {
     #         grant_arn: "Arn", # required
+    #         status_reason: "StatusReasonMessage",
     #         version: "String", # required
     #       }
     #
     # @!attribute [rw] grant_arn
     #   Amazon Resource Name (ARN) of the grant.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -1174,6 +1183,7 @@ module Aws::LicenseManager
     #
     class DeleteGrantRequest < Struct.new(
       :grant_arn,
+      :status_reason,
       :version)
       SENSITIVE = []
       include Aws::Structure
@@ -3563,6 +3573,9 @@ module Aws::LicenseManager
     #   Received status.
     #   @return [String]
     #
+    # @!attribute [rw] received_status_reason
+    #   @return [String]
+    #
     # @!attribute [rw] allowed_operations
     #   Allowed operations.
     #   @return [Array<String>]
@@ -3571,6 +3584,7 @@ module Aws::LicenseManager
     #
     class ReceivedMetadata < Struct.new(
       :received_status,
+      :received_status_reason,
       :allowed_operations)
       SENSITIVE = []
       include Aws::Structure
