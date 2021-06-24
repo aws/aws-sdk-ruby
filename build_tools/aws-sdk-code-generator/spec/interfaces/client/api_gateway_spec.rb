@@ -49,6 +49,18 @@ describe 'Client Interface:' do
       }.to raise_error("cannot locate shape ShapeFoo")
     end
 
+    it 'handles modeled errors correctly' do
+      error_data = JSON.dump({ code: 'InternalServerErrorException', hostId: 'test' } )
+      client.stub_responses(:get_noauth_errors, {status_code: 500, headers: {}, body: error_data})
+      expect do
+        client.get_noauth_errors(error_type: "internal_error")
+      end.to raise_error { |error|
+        expect(error).to be_a(WhiteLabel::Errors::InternalServerErrorException)
+        expect(error.data).to be_a(WhiteLabel::Types::InternalServerErrorException)
+        expect(error.data.host_id).to eq('test')
+      }
+    end
+
     it 'populates x-api-key header correctly' do
       resp = client.put_apikey({
         scalar_types: {
