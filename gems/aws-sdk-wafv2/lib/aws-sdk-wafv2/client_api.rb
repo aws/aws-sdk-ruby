@@ -542,9 +542,10 @@ module Aws::WAFV2
     GetRegexPatternSetResponse.add_member(:lock_token, Shapes::ShapeRef.new(shape: LockToken, location_name: "LockToken"))
     GetRegexPatternSetResponse.struct_class = Types::GetRegexPatternSetResponse
 
-    GetRuleGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
-    GetRuleGroupRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
-    GetRuleGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "Id"))
+    GetRuleGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, location_name: "Name"))
+    GetRuleGroupRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "Scope"))
+    GetRuleGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: EntityId, location_name: "Id"))
+    GetRuleGroupRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ARN"))
     GetRuleGroupRequest.struct_class = Types::GetRuleGroupRequest
 
     GetRuleGroupResponse.add_member(:rule_group, Shapes::ShapeRef.new(shape: RuleGroup, location_name: "RuleGroup"))

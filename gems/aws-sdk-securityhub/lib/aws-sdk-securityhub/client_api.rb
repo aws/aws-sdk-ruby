@@ -104,6 +104,8 @@ module Aws::SecurityHub
     AwsDynamoDbTableStreamSpecification = Shapes::StructureShape.new(name: 'AwsDynamoDbTableStreamSpecification')
     AwsEc2EipDetails = Shapes::StructureShape.new(name: 'AwsEc2EipDetails')
     AwsEc2InstanceDetails = Shapes::StructureShape.new(name: 'AwsEc2InstanceDetails')
+    AwsEc2InstanceNetworkInterfacesDetails = Shapes::StructureShape.new(name: 'AwsEc2InstanceNetworkInterfacesDetails')
+    AwsEc2InstanceNetworkInterfacesList = Shapes::ListShape.new(name: 'AwsEc2InstanceNetworkInterfacesList')
     AwsEc2NetworkAclAssociation = Shapes::StructureShape.new(name: 'AwsEc2NetworkAclAssociation')
     AwsEc2NetworkAclAssociationList = Shapes::ListShape.new(name: 'AwsEc2NetworkAclAssociationList')
     AwsEc2NetworkAclDetails = Shapes::StructureShape.new(name: 'AwsEc2NetworkAclDetails')
@@ -133,6 +135,64 @@ module Aws::SecurityHub
     AwsEc2VolumeAttachmentList = Shapes::ListShape.new(name: 'AwsEc2VolumeAttachmentList')
     AwsEc2VolumeDetails = Shapes::StructureShape.new(name: 'AwsEc2VolumeDetails')
     AwsEc2VpcDetails = Shapes::StructureShape.new(name: 'AwsEc2VpcDetails')
+    AwsEcsClusterClusterSettingsDetails = Shapes::StructureShape.new(name: 'AwsEcsClusterClusterSettingsDetails')
+    AwsEcsClusterClusterSettingsList = Shapes::ListShape.new(name: 'AwsEcsClusterClusterSettingsList')
+    AwsEcsClusterConfigurationDetails = Shapes::StructureShape.new(name: 'AwsEcsClusterConfigurationDetails')
+    AwsEcsClusterConfigurationExecuteCommandConfigurationDetails = Shapes::StructureShape.new(name: 'AwsEcsClusterConfigurationExecuteCommandConfigurationDetails')
+    AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails = Shapes::StructureShape.new(name: 'AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails')
+    AwsEcsClusterDefaultCapacityProviderStrategyDetails = Shapes::StructureShape.new(name: 'AwsEcsClusterDefaultCapacityProviderStrategyDetails')
+    AwsEcsClusterDefaultCapacityProviderStrategyList = Shapes::ListShape.new(name: 'AwsEcsClusterDefaultCapacityProviderStrategyList')
+    AwsEcsClusterDetails = Shapes::StructureShape.new(name: 'AwsEcsClusterDetails')
+    AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails')
+    AwsEcsTaskDefinitionContainerDefinitionsDependsOnList = Shapes::ListShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsDependsOnList')
+    AwsEcsTaskDefinitionContainerDefinitionsDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsDetails')
+    AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails')
+    AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails')
+    AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesList = Shapes::ListShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesList')
+    AwsEcsTaskDefinitionContainerDefinitionsEnvironmentList = Shapes::ListShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsEnvironmentList')
+    AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails')
+    AwsEcsTaskDefinitionContainerDefinitionsExtraHostsList = Shapes::ListShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsExtraHostsList')
+    AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails')
+    AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails')
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails')
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails')
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails')
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesList = Shapes::ListShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesList')
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails')
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsList = Shapes::ListShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsList')
+    AwsEcsTaskDefinitionContainerDefinitionsList = Shapes::ListShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsList')
+    AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails')
+    AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails')
+    AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsList = Shapes::ListShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsList')
+    AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails')
+    AwsEcsTaskDefinitionContainerDefinitionsMountPointsList = Shapes::ListShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsMountPointsList')
+    AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails')
+    AwsEcsTaskDefinitionContainerDefinitionsPortMappingsList = Shapes::ListShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsPortMappingsList')
+    AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails')
+    AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails')
+    AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsList = Shapes::ListShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsList')
+    AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails')
+    AwsEcsTaskDefinitionContainerDefinitionsSecretsList = Shapes::ListShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsSecretsList')
+    AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails')
+    AwsEcsTaskDefinitionContainerDefinitionsSystemControlsList = Shapes::ListShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsSystemControlsList')
+    AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails')
+    AwsEcsTaskDefinitionContainerDefinitionsUlimitsList = Shapes::ListShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsUlimitsList')
+    AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails')
+    AwsEcsTaskDefinitionContainerDefinitionsVolumesFromList = Shapes::ListShape.new(name: 'AwsEcsTaskDefinitionContainerDefinitionsVolumesFromList')
+    AwsEcsTaskDefinitionDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionDetails')
+    AwsEcsTaskDefinitionInferenceAcceleratorsDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionInferenceAcceleratorsDetails')
+    AwsEcsTaskDefinitionInferenceAcceleratorsList = Shapes::ListShape.new(name: 'AwsEcsTaskDefinitionInferenceAcceleratorsList')
+    AwsEcsTaskDefinitionPlacementConstraintsDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionPlacementConstraintsDetails')
+    AwsEcsTaskDefinitionPlacementConstraintsList = Shapes::ListShape.new(name: 'AwsEcsTaskDefinitionPlacementConstraintsList')
+    AwsEcsTaskDefinitionProxyConfigurationDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionProxyConfigurationDetails')
+    AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails')
+    AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesList = Shapes::ListShape.new(name: 'AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesList')
+    AwsEcsTaskDefinitionVolumesDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionVolumesDetails')
+    AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails')
+    AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails')
+    AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails')
+    AwsEcsTaskDefinitionVolumesHostDetails = Shapes::StructureShape.new(name: 'AwsEcsTaskDefinitionVolumesHostDetails')
+    AwsEcsTaskDefinitionVolumesList = Shapes::ListShape.new(name: 'AwsEcsTaskDefinitionVolumesList')
     AwsElasticBeanstalkEnvironmentDetails = Shapes::StructureShape.new(name: 'AwsElasticBeanstalkEnvironmentDetails')
     AwsElasticBeanstalkEnvironmentEnvironmentLink = Shapes::StructureShape.new(name: 'AwsElasticBeanstalkEnvironmentEnvironmentLink')
     AwsElasticBeanstalkEnvironmentEnvironmentLinks = Shapes::ListShape.new(name: 'AwsElasticBeanstalkEnvironmentEnvironmentLinks')
@@ -142,7 +202,10 @@ module Aws::SecurityHub
     AwsElasticsearchDomainDetails = Shapes::StructureShape.new(name: 'AwsElasticsearchDomainDetails')
     AwsElasticsearchDomainDomainEndpointOptions = Shapes::StructureShape.new(name: 'AwsElasticsearchDomainDomainEndpointOptions')
     AwsElasticsearchDomainEncryptionAtRestOptions = Shapes::StructureShape.new(name: 'AwsElasticsearchDomainEncryptionAtRestOptions')
+    AwsElasticsearchDomainLogPublishingOptions = Shapes::StructureShape.new(name: 'AwsElasticsearchDomainLogPublishingOptions')
+    AwsElasticsearchDomainLogPublishingOptionsLogConfig = Shapes::StructureShape.new(name: 'AwsElasticsearchDomainLogPublishingOptionsLogConfig')
     AwsElasticsearchDomainNodeToNodeEncryptionOptions = Shapes::StructureShape.new(name: 'AwsElasticsearchDomainNodeToNodeEncryptionOptions')
+    AwsElasticsearchDomainServiceSoftwareOptions = Shapes::StructureShape.new(name: 'AwsElasticsearchDomainServiceSoftwareOptions')
     AwsElasticsearchDomainVPCOptions = Shapes::StructureShape.new(name: 'AwsElasticsearchDomainVPCOptions')
     AwsElbAppCookieStickinessPolicies = Shapes::ListShape.new(name: 'AwsElbAppCookieStickinessPolicies')
     AwsElbAppCookieStickinessPolicy = Shapes::StructureShape.new(name: 'AwsElbAppCookieStickinessPolicy')
@@ -256,6 +319,20 @@ module Aws::SecurityHub
     AwsRedshiftClusterVpcSecurityGroup = Shapes::StructureShape.new(name: 'AwsRedshiftClusterVpcSecurityGroup')
     AwsRedshiftClusterVpcSecurityGroups = Shapes::ListShape.new(name: 'AwsRedshiftClusterVpcSecurityGroups')
     AwsS3AccountPublicAccessBlockDetails = Shapes::StructureShape.new(name: 'AwsS3AccountPublicAccessBlockDetails')
+    AwsS3BucketBucketLifecycleConfigurationDetails = Shapes::StructureShape.new(name: 'AwsS3BucketBucketLifecycleConfigurationDetails')
+    AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails = Shapes::StructureShape.new(name: 'AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails')
+    AwsS3BucketBucketLifecycleConfigurationRulesDetails = Shapes::StructureShape.new(name: 'AwsS3BucketBucketLifecycleConfigurationRulesDetails')
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails = Shapes::StructureShape.new(name: 'AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails')
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails = Shapes::StructureShape.new(name: 'AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails')
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails = Shapes::StructureShape.new(name: 'AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails')
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsList = Shapes::ListShape.new(name: 'AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsList')
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails = Shapes::StructureShape.new(name: 'AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails')
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails = Shapes::StructureShape.new(name: 'AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails')
+    AwsS3BucketBucketLifecycleConfigurationRulesList = Shapes::ListShape.new(name: 'AwsS3BucketBucketLifecycleConfigurationRulesList')
+    AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails = Shapes::StructureShape.new(name: 'AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails')
+    AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsList = Shapes::ListShape.new(name: 'AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsList')
+    AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails = Shapes::StructureShape.new(name: 'AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails')
+    AwsS3BucketBucketLifecycleConfigurationRulesTransitionsList = Shapes::ListShape.new(name: 'AwsS3BucketBucketLifecycleConfigurationRulesTransitionsList')
     AwsS3BucketDetails = Shapes::StructureShape.new(name: 'AwsS3BucketDetails')
     AwsS3BucketServerSideEncryptionByDefault = Shapes::StructureShape.new(name: 'AwsS3BucketServerSideEncryptionByDefault')
     AwsS3BucketServerSideEncryptionConfiguration = Shapes::StructureShape.new(name: 'AwsS3BucketServerSideEncryptionConfiguration')
@@ -710,6 +787,7 @@ module Aws::SecurityHub
     AwsApiGatewayV2RouteSettings.add_member(:throttling_rate_limit, Shapes::ShapeRef.new(shape: Double, location_name: "ThrottlingRateLimit"))
     AwsApiGatewayV2RouteSettings.struct_class = Types::AwsApiGatewayV2RouteSettings
 
+    AwsApiGatewayV2StageDetails.add_member(:client_certificate_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClientCertificateId"))
     AwsApiGatewayV2StageDetails.add_member(:created_date, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreatedDate"))
     AwsApiGatewayV2StageDetails.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
     AwsApiGatewayV2StageDetails.add_member(:default_route_settings, Shapes::ShapeRef.new(shape: AwsApiGatewayV2RouteSettings, location_name: "DefaultRouteSettings"))
@@ -1031,7 +1109,13 @@ module Aws::SecurityHub
     AwsEc2InstanceDetails.add_member(:vpc_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VpcId"))
     AwsEc2InstanceDetails.add_member(:subnet_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SubnetId"))
     AwsEc2InstanceDetails.add_member(:launched_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LaunchedAt"))
+    AwsEc2InstanceDetails.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: AwsEc2InstanceNetworkInterfacesList, location_name: "NetworkInterfaces"))
     AwsEc2InstanceDetails.struct_class = Types::AwsEc2InstanceDetails
+
+    AwsEc2InstanceNetworkInterfacesDetails.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NetworkInterfaceId"))
+    AwsEc2InstanceNetworkInterfacesDetails.struct_class = Types::AwsEc2InstanceNetworkInterfacesDetails
+
+    AwsEc2InstanceNetworkInterfacesList.member = Shapes::ShapeRef.new(shape: AwsEc2InstanceNetworkInterfacesDetails)
 
     AwsEc2NetworkAclAssociation.add_member(:network_acl_association_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NetworkAclAssociationId"))
     AwsEc2NetworkAclAssociation.add_member(:network_acl_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NetworkAclId"))
@@ -1178,6 +1262,272 @@ module Aws::SecurityHub
     AwsEc2VpcDetails.add_member(:state, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "State"))
     AwsEc2VpcDetails.struct_class = Types::AwsEc2VpcDetails
 
+    AwsEcsClusterClusterSettingsDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsEcsClusterClusterSettingsDetails.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Value"))
+    AwsEcsClusterClusterSettingsDetails.struct_class = Types::AwsEcsClusterClusterSettingsDetails
+
+    AwsEcsClusterClusterSettingsList.member = Shapes::ShapeRef.new(shape: AwsEcsClusterClusterSettingsDetails)
+
+    AwsEcsClusterConfigurationDetails.add_member(:execute_command_configuration, Shapes::ShapeRef.new(shape: AwsEcsClusterConfigurationExecuteCommandConfigurationDetails, location_name: "ExecuteCommandConfiguration"))
+    AwsEcsClusterConfigurationDetails.struct_class = Types::AwsEcsClusterConfigurationDetails
+
+    AwsEcsClusterConfigurationExecuteCommandConfigurationDetails.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "KmsKeyId"))
+    AwsEcsClusterConfigurationExecuteCommandConfigurationDetails.add_member(:log_configuration, Shapes::ShapeRef.new(shape: AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails, location_name: "LogConfiguration"))
+    AwsEcsClusterConfigurationExecuteCommandConfigurationDetails.add_member(:logging, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Logging"))
+    AwsEcsClusterConfigurationExecuteCommandConfigurationDetails.struct_class = Types::AwsEcsClusterConfigurationExecuteCommandConfigurationDetails
+
+    AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails.add_member(:cloud_watch_encryption_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "CloudWatchEncryptionEnabled"))
+    AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails.add_member(:cloud_watch_log_group_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CloudWatchLogGroupName"))
+    AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "S3BucketName"))
+    AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails.add_member(:s3_encryption_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "S3EncryptionEnabled"))
+    AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "S3KeyPrefix"))
+    AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails.struct_class = Types::AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails
+
+    AwsEcsClusterDefaultCapacityProviderStrategyDetails.add_member(:base, Shapes::ShapeRef.new(shape: Integer, location_name: "Base"))
+    AwsEcsClusterDefaultCapacityProviderStrategyDetails.add_member(:capacity_provider, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CapacityProvider"))
+    AwsEcsClusterDefaultCapacityProviderStrategyDetails.add_member(:weight, Shapes::ShapeRef.new(shape: Integer, location_name: "Weight"))
+    AwsEcsClusterDefaultCapacityProviderStrategyDetails.struct_class = Types::AwsEcsClusterDefaultCapacityProviderStrategyDetails
+
+    AwsEcsClusterDefaultCapacityProviderStrategyList.member = Shapes::ShapeRef.new(shape: AwsEcsClusterDefaultCapacityProviderStrategyDetails)
+
+    AwsEcsClusterDetails.add_member(:capacity_providers, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "CapacityProviders"))
+    AwsEcsClusterDetails.add_member(:cluster_settings, Shapes::ShapeRef.new(shape: AwsEcsClusterClusterSettingsList, location_name: "ClusterSettings"))
+    AwsEcsClusterDetails.add_member(:configuration, Shapes::ShapeRef.new(shape: AwsEcsClusterConfigurationDetails, location_name: "Configuration"))
+    AwsEcsClusterDetails.add_member(:default_capacity_provider_strategy, Shapes::ShapeRef.new(shape: AwsEcsClusterDefaultCapacityProviderStrategyList, location_name: "DefaultCapacityProviderStrategy"))
+    AwsEcsClusterDetails.struct_class = Types::AwsEcsClusterDetails
+
+    AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails.add_member(:condition, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Condition"))
+    AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails.add_member(:container_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ContainerName"))
+    AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails.struct_class = Types::AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails
+
+    AwsEcsTaskDefinitionContainerDefinitionsDependsOnList.member = Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails)
+
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:command, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "Command"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:cpu, Shapes::ShapeRef.new(shape: Integer, location_name: "Cpu"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:depends_on, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsDependsOnList, location_name: "DependsOn"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:disable_networking, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableNetworking"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:dns_search_domains, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "DnsSearchDomains"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:dns_servers, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "DnsServers"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:docker_labels, Shapes::ShapeRef.new(shape: FieldMap, location_name: "DockerLabels"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:docker_security_options, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "DockerSecurityOptions"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:entry_point, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "EntryPoint"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:environment, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsEnvironmentList, location_name: "Environment"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:environment_files, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesList, location_name: "EnvironmentFiles"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:essential, Shapes::ShapeRef.new(shape: Boolean, location_name: "Essential"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:extra_hosts, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsExtraHostsList, location_name: "ExtraHosts"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:firelens_configuration, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails, location_name: "FirelensConfiguration"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:health_check, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails, location_name: "HealthCheck"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:hostname, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Hostname"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:image, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Image"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:interactive, Shapes::ShapeRef.new(shape: Boolean, location_name: "Interactive"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:links, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "Links"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:linux_parameters, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails, location_name: "LinuxParameters"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:log_configuration, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails, location_name: "LogConfiguration"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:memory, Shapes::ShapeRef.new(shape: Integer, location_name: "Memory"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:memory_reservation, Shapes::ShapeRef.new(shape: Integer, location_name: "MemoryReservation"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:mount_points, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsMountPointsList, location_name: "MountPoints"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:port_mappings, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsPortMappingsList, location_name: "PortMappings"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:privileged, Shapes::ShapeRef.new(shape: Boolean, location_name: "Privileged"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:pseudo_terminal, Shapes::ShapeRef.new(shape: Boolean, location_name: "PseudoTerminal"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:readonly_root_filesystem, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadonlyRootFilesystem"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:repository_credentials, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails, location_name: "RepositoryCredentials"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:resource_requirements, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsList, location_name: "ResourceRequirements"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:secrets, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsSecretsList, location_name: "Secrets"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:start_timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "StartTimeout"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:stop_timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "StopTimeout"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:system_controls, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsSystemControlsList, location_name: "SystemControls"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:ulimits, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsUlimitsList, location_name: "Ulimits"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:user, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "User"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:volumes_from, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsVolumesFromList, location_name: "VolumesFrom"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:working_directory, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "WorkingDirectory"))
+    AwsEcsTaskDefinitionContainerDefinitionsDetails.struct_class = Types::AwsEcsTaskDefinitionContainerDefinitionsDetails
+
+    AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Value"))
+    AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails.struct_class = Types::AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails
+
+    AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Value"))
+    AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails.struct_class = Types::AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails
+
+    AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesList.member = Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails)
+
+    AwsEcsTaskDefinitionContainerDefinitionsEnvironmentList.member = Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails)
+
+    AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails.add_member(:hostname, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Hostname"))
+    AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails.add_member(:ip_address, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "IpAddress"))
+    AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails.struct_class = Types::AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails
+
+    AwsEcsTaskDefinitionContainerDefinitionsExtraHostsList.member = Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails)
+
+    AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails.add_member(:options, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Options"))
+    AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails.struct_class = Types::AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails
+
+    AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails.add_member(:command, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "Command"))
+    AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails.add_member(:interval, Shapes::ShapeRef.new(shape: Integer, location_name: "Interval"))
+    AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails.add_member(:retries, Shapes::ShapeRef.new(shape: Integer, location_name: "Retries"))
+    AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails.add_member(:start_period, Shapes::ShapeRef.new(shape: Integer, location_name: "StartPeriod"))
+    AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails.add_member(:timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "Timeout"))
+    AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails.struct_class = Types::AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails
+
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails.add_member(:add, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "Add"))
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails.add_member(:drop, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "Drop"))
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails.struct_class = Types::AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails
+
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails.add_member(:capabilities, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails, location_name: "Capabilities"))
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails.add_member(:devices, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesList, location_name: "Devices"))
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails.add_member(:init_process_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "InitProcessEnabled"))
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails.add_member(:max_swap, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxSwap"))
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails.add_member(:shared_memory_size, Shapes::ShapeRef.new(shape: Integer, location_name: "SharedMemorySize"))
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails.add_member(:swappiness, Shapes::ShapeRef.new(shape: Integer, location_name: "Swappiness"))
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails.add_member(:tmpfs, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsList, location_name: "Tmpfs"))
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails.struct_class = Types::AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails
+
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails.add_member(:container_path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ContainerPath"))
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails.add_member(:host_path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HostPath"))
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails.add_member(:permissions, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "Permissions"))
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails.struct_class = Types::AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails
+
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesList.member = Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails)
+
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails.add_member(:container_path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ContainerPath"))
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails.add_member(:mount_options, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "MountOptions"))
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails.add_member(:size, Shapes::ShapeRef.new(shape: Integer, location_name: "Size"))
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails.struct_class = Types::AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails
+
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsList.member = Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails)
+
+    AwsEcsTaskDefinitionContainerDefinitionsList.member = Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsDetails)
+
+    AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails.add_member(:log_driver, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LogDriver"))
+    AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails.add_member(:options, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Options"))
+    AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails.add_member(:secret_options, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsList, location_name: "SecretOptions"))
+    AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails.struct_class = Types::AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails
+
+    AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails.add_member(:value_from, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ValueFrom"))
+    AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails.struct_class = Types::AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails
+
+    AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsList.member = Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails)
+
+    AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails.add_member(:container_path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ContainerPath"))
+    AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
+    AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails.add_member(:source_volume, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SourceVolume"))
+    AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails.struct_class = Types::AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails
+
+    AwsEcsTaskDefinitionContainerDefinitionsMountPointsList.member = Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails)
+
+    AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails.add_member(:container_port, Shapes::ShapeRef.new(shape: Integer, location_name: "ContainerPort"))
+    AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails.add_member(:host_port, Shapes::ShapeRef.new(shape: Integer, location_name: "HostPort"))
+    AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails.add_member(:protocol, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Protocol"))
+    AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails.struct_class = Types::AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails
+
+    AwsEcsTaskDefinitionContainerDefinitionsPortMappingsList.member = Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails)
+
+    AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails.add_member(:credentials_parameter, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CredentialsParameter"))
+    AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails.struct_class = Types::AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails
+
+    AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Value"))
+    AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails.struct_class = Types::AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails
+
+    AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsList.member = Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails)
+
+    AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails.add_member(:value_from, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ValueFrom"))
+    AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails.struct_class = Types::AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails
+
+    AwsEcsTaskDefinitionContainerDefinitionsSecretsList.member = Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails)
+
+    AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails.add_member(:namespace, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Namespace"))
+    AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Value"))
+    AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails.struct_class = Types::AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails
+
+    AwsEcsTaskDefinitionContainerDefinitionsSystemControlsList.member = Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails)
+
+    AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails.add_member(:hard_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "HardLimit"))
+    AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails.add_member(:soft_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "SoftLimit"))
+    AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails.struct_class = Types::AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails
+
+    AwsEcsTaskDefinitionContainerDefinitionsUlimitsList.member = Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails)
+
+    AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
+    AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails.add_member(:source_container, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SourceContainer"))
+    AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails.struct_class = Types::AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails
+
+    AwsEcsTaskDefinitionContainerDefinitionsVolumesFromList.member = Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails)
+
+    AwsEcsTaskDefinitionDetails.add_member(:container_definitions, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionContainerDefinitionsList, location_name: "ContainerDefinitions"))
+    AwsEcsTaskDefinitionDetails.add_member(:cpu, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Cpu"))
+    AwsEcsTaskDefinitionDetails.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ExecutionRoleArn"))
+    AwsEcsTaskDefinitionDetails.add_member(:family, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Family"))
+    AwsEcsTaskDefinitionDetails.add_member(:inference_accelerators, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionInferenceAcceleratorsList, location_name: "InferenceAccelerators"))
+    AwsEcsTaskDefinitionDetails.add_member(:ipc_mode, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "IpcMode"))
+    AwsEcsTaskDefinitionDetails.add_member(:memory, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Memory"))
+    AwsEcsTaskDefinitionDetails.add_member(:network_mode, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NetworkMode"))
+    AwsEcsTaskDefinitionDetails.add_member(:pid_mode, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PidMode"))
+    AwsEcsTaskDefinitionDetails.add_member(:placement_constraints, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionPlacementConstraintsList, location_name: "PlacementConstraints"))
+    AwsEcsTaskDefinitionDetails.add_member(:proxy_configuration, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionProxyConfigurationDetails, location_name: "ProxyConfiguration"))
+    AwsEcsTaskDefinitionDetails.add_member(:requires_compatibilities, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "RequiresCompatibilities"))
+    AwsEcsTaskDefinitionDetails.add_member(:task_role_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "TaskRoleArn"))
+    AwsEcsTaskDefinitionDetails.add_member(:volumes, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionVolumesList, location_name: "Volumes"))
+    AwsEcsTaskDefinitionDetails.struct_class = Types::AwsEcsTaskDefinitionDetails
+
+    AwsEcsTaskDefinitionInferenceAcceleratorsDetails.add_member(:device_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DeviceName"))
+    AwsEcsTaskDefinitionInferenceAcceleratorsDetails.add_member(:device_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DeviceType"))
+    AwsEcsTaskDefinitionInferenceAcceleratorsDetails.struct_class = Types::AwsEcsTaskDefinitionInferenceAcceleratorsDetails
+
+    AwsEcsTaskDefinitionInferenceAcceleratorsList.member = Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionInferenceAcceleratorsDetails)
+
+    AwsEcsTaskDefinitionPlacementConstraintsDetails.add_member(:expression, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Expression"))
+    AwsEcsTaskDefinitionPlacementConstraintsDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsEcsTaskDefinitionPlacementConstraintsDetails.struct_class = Types::AwsEcsTaskDefinitionPlacementConstraintsDetails
+
+    AwsEcsTaskDefinitionPlacementConstraintsList.member = Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionPlacementConstraintsDetails)
+
+    AwsEcsTaskDefinitionProxyConfigurationDetails.add_member(:container_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ContainerName"))
+    AwsEcsTaskDefinitionProxyConfigurationDetails.add_member(:proxy_configuration_properties, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesList, location_name: "ProxyConfigurationProperties"))
+    AwsEcsTaskDefinitionProxyConfigurationDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsEcsTaskDefinitionProxyConfigurationDetails.struct_class = Types::AwsEcsTaskDefinitionProxyConfigurationDetails
+
+    AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Value"))
+    AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails.struct_class = Types::AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails
+
+    AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesList.member = Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails)
+
+    AwsEcsTaskDefinitionVolumesDetails.add_member(:docker_volume_configuration, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails, location_name: "DockerVolumeConfiguration"))
+    AwsEcsTaskDefinitionVolumesDetails.add_member(:efs_volume_configuration, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails, location_name: "EfsVolumeConfiguration"))
+    AwsEcsTaskDefinitionVolumesDetails.add_member(:host, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionVolumesHostDetails, location_name: "Host"))
+    AwsEcsTaskDefinitionVolumesDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsEcsTaskDefinitionVolumesDetails.struct_class = Types::AwsEcsTaskDefinitionVolumesDetails
+
+    AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails.add_member(:autoprovision, Shapes::ShapeRef.new(shape: Boolean, location_name: "Autoprovision"))
+    AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails.add_member(:driver, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Driver"))
+    AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails.add_member(:driver_opts, Shapes::ShapeRef.new(shape: FieldMap, location_name: "DriverOpts"))
+    AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails.add_member(:labels, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Labels"))
+    AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails.add_member(:scope, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Scope"))
+    AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails.struct_class = Types::AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails
+
+    AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails.add_member(:access_point_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AccessPointId"))
+    AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails.add_member(:iam, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Iam"))
+    AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails.struct_class = Types::AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails
+
+    AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails.add_member(:authorization_config, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails, location_name: "AuthorizationConfig"))
+    AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails.add_member(:filesystem_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FilesystemId"))
+    AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails.add_member(:root_directory, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RootDirectory"))
+    AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails.add_member(:transit_encryption, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "TransitEncryption"))
+    AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails.add_member(:transit_encryption_port, Shapes::ShapeRef.new(shape: Integer, location_name: "TransitEncryptionPort"))
+    AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails.struct_class = Types::AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails
+
+    AwsEcsTaskDefinitionVolumesHostDetails.add_member(:source_path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SourcePath"))
+    AwsEcsTaskDefinitionVolumesHostDetails.struct_class = Types::AwsEcsTaskDefinitionVolumesHostDetails
+
+    AwsEcsTaskDefinitionVolumesList.member = Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionVolumesDetails)
+
     AwsElasticBeanstalkEnvironmentDetails.add_member(:application_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ApplicationName"))
     AwsElasticBeanstalkEnvironmentDetails.add_member(:cname, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Cname"))
     AwsElasticBeanstalkEnvironmentDetails.add_member(:date_created, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DateCreated"))
@@ -1223,7 +1573,9 @@ module Aws::SecurityHub
     AwsElasticsearchDomainDetails.add_member(:endpoints, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Endpoints"))
     AwsElasticsearchDomainDetails.add_member(:elasticsearch_version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ElasticsearchVersion"))
     AwsElasticsearchDomainDetails.add_member(:encryption_at_rest_options, Shapes::ShapeRef.new(shape: AwsElasticsearchDomainEncryptionAtRestOptions, location_name: "EncryptionAtRestOptions"))
+    AwsElasticsearchDomainDetails.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: AwsElasticsearchDomainLogPublishingOptions, location_name: "LogPublishingOptions"))
     AwsElasticsearchDomainDetails.add_member(:node_to_node_encryption_options, Shapes::ShapeRef.new(shape: AwsElasticsearchDomainNodeToNodeEncryptionOptions, location_name: "NodeToNodeEncryptionOptions"))
+    AwsElasticsearchDomainDetails.add_member(:service_software_options, Shapes::ShapeRef.new(shape: AwsElasticsearchDomainServiceSoftwareOptions, location_name: "ServiceSoftwareOptions"))
     AwsElasticsearchDomainDetails.add_member(:vpc_options, Shapes::ShapeRef.new(shape: AwsElasticsearchDomainVPCOptions, location_name: "VPCOptions"))
     AwsElasticsearchDomainDetails.struct_class = Types::AwsElasticsearchDomainDetails
 
@@ -1235,8 +1587,25 @@ module Aws::SecurityHub
     AwsElasticsearchDomainEncryptionAtRestOptions.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "KmsKeyId"))
     AwsElasticsearchDomainEncryptionAtRestOptions.struct_class = Types::AwsElasticsearchDomainEncryptionAtRestOptions
 
+    AwsElasticsearchDomainLogPublishingOptions.add_member(:index_slow_logs, Shapes::ShapeRef.new(shape: AwsElasticsearchDomainLogPublishingOptionsLogConfig, location_name: "IndexSlowLogs"))
+    AwsElasticsearchDomainLogPublishingOptions.add_member(:search_slow_logs, Shapes::ShapeRef.new(shape: AwsElasticsearchDomainLogPublishingOptionsLogConfig, location_name: "SearchSlowLogs"))
+    AwsElasticsearchDomainLogPublishingOptions.struct_class = Types::AwsElasticsearchDomainLogPublishingOptions
+
+    AwsElasticsearchDomainLogPublishingOptionsLogConfig.add_member(:cloud_watch_logs_log_group_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CloudWatchLogsLogGroupArn"))
+    AwsElasticsearchDomainLogPublishingOptionsLogConfig.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    AwsElasticsearchDomainLogPublishingOptionsLogConfig.struct_class = Types::AwsElasticsearchDomainLogPublishingOptionsLogConfig
+
     AwsElasticsearchDomainNodeToNodeEncryptionOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     AwsElasticsearchDomainNodeToNodeEncryptionOptions.struct_class = Types::AwsElasticsearchDomainNodeToNodeEncryptionOptions
+
+    AwsElasticsearchDomainServiceSoftwareOptions.add_member(:automated_update_date, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AutomatedUpdateDate"))
+    AwsElasticsearchDomainServiceSoftwareOptions.add_member(:cancellable, Shapes::ShapeRef.new(shape: Boolean, location_name: "Cancellable"))
+    AwsElasticsearchDomainServiceSoftwareOptions.add_member(:current_version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CurrentVersion"))
+    AwsElasticsearchDomainServiceSoftwareOptions.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    AwsElasticsearchDomainServiceSoftwareOptions.add_member(:new_version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NewVersion"))
+    AwsElasticsearchDomainServiceSoftwareOptions.add_member(:update_available, Shapes::ShapeRef.new(shape: Boolean, location_name: "UpdateAvailable"))
+    AwsElasticsearchDomainServiceSoftwareOptions.add_member(:update_status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "UpdateStatus"))
+    AwsElasticsearchDomainServiceSoftwareOptions.struct_class = Types::AwsElasticsearchDomainServiceSoftwareOptions
 
     AwsElasticsearchDomainVPCOptions.add_member(:availability_zones, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "AvailabilityZones"))
     AwsElasticsearchDomainVPCOptions.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "SecurityGroupIds"))
@@ -1349,7 +1718,7 @@ module Aws::SecurityHub
     AwsElbv2LoadBalancerDetails.add_member(:vpc_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VpcId"))
     AwsElbv2LoadBalancerDetails.struct_class = Types::AwsElbv2LoadBalancerDetails
 
-    AwsIamAccessKeyDetails.add_member(:user_name, Shapes::ShapeRef.new(shape: NonEmptyString, deprecated: true, location_name: "UserName", metadata: {"deprecatedMessage"=>"This field is deprecated, use PrincipalName instead."}))
+    AwsIamAccessKeyDetails.add_member(:user_name, Shapes::ShapeRef.new(shape: NonEmptyString, deprecated: true, location_name: "UserName", metadata: {"deprecatedMessage"=>"This filter is deprecated. Instead, use PrincipalName."}))
     AwsIamAccessKeyDetails.add_member(:status, Shapes::ShapeRef.new(shape: AwsIamAccessKeyStatus, location_name: "Status"))
     AwsIamAccessKeyDetails.add_member(:created_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreatedAt"))
     AwsIamAccessKeyDetails.add_member(:principal_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PrincipalId"))
@@ -1934,10 +2303,69 @@ module Aws::SecurityHub
     AwsS3AccountPublicAccessBlockDetails.add_member(:restrict_public_buckets, Shapes::ShapeRef.new(shape: Boolean, location_name: "RestrictPublicBuckets"))
     AwsS3AccountPublicAccessBlockDetails.struct_class = Types::AwsS3AccountPublicAccessBlockDetails
 
+    AwsS3BucketBucketLifecycleConfigurationDetails.add_member(:rules, Shapes::ShapeRef.new(shape: AwsS3BucketBucketLifecycleConfigurationRulesList, location_name: "Rules"))
+    AwsS3BucketBucketLifecycleConfigurationDetails.struct_class = Types::AwsS3BucketBucketLifecycleConfigurationDetails
+
+    AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails.add_member(:days_after_initiation, Shapes::ShapeRef.new(shape: Integer, location_name: "DaysAfterInitiation"))
+    AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails.struct_class = Types::AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails
+
+    AwsS3BucketBucketLifecycleConfigurationRulesDetails.add_member(:abort_incomplete_multipart_upload, Shapes::ShapeRef.new(shape: AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails, location_name: "AbortIncompleteMultipartUpload"))
+    AwsS3BucketBucketLifecycleConfigurationRulesDetails.add_member(:expiration_date, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ExpirationDate"))
+    AwsS3BucketBucketLifecycleConfigurationRulesDetails.add_member(:expiration_in_days, Shapes::ShapeRef.new(shape: Integer, location_name: "ExpirationInDays"))
+    AwsS3BucketBucketLifecycleConfigurationRulesDetails.add_member(:expired_object_delete_marker, Shapes::ShapeRef.new(shape: Boolean, location_name: "ExpiredObjectDeleteMarker"))
+    AwsS3BucketBucketLifecycleConfigurationRulesDetails.add_member(:filter, Shapes::ShapeRef.new(shape: AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails, location_name: "Filter"))
+    AwsS3BucketBucketLifecycleConfigurationRulesDetails.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ID"))
+    AwsS3BucketBucketLifecycleConfigurationRulesDetails.add_member(:noncurrent_version_expiration_in_days, Shapes::ShapeRef.new(shape: Integer, location_name: "NoncurrentVersionExpirationInDays"))
+    AwsS3BucketBucketLifecycleConfigurationRulesDetails.add_member(:noncurrent_version_transitions, Shapes::ShapeRef.new(shape: AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsList, location_name: "NoncurrentVersionTransitions"))
+    AwsS3BucketBucketLifecycleConfigurationRulesDetails.add_member(:prefix, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Prefix"))
+    AwsS3BucketBucketLifecycleConfigurationRulesDetails.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
+    AwsS3BucketBucketLifecycleConfigurationRulesDetails.add_member(:transitions, Shapes::ShapeRef.new(shape: AwsS3BucketBucketLifecycleConfigurationRulesTransitionsList, location_name: "Transitions"))
+    AwsS3BucketBucketLifecycleConfigurationRulesDetails.struct_class = Types::AwsS3BucketBucketLifecycleConfigurationRulesDetails
+
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails.add_member(:predicate, Shapes::ShapeRef.new(shape: AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails, location_name: "Predicate"))
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails.struct_class = Types::AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails
+
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails.add_member(:operands, Shapes::ShapeRef.new(shape: AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsList, location_name: "Operands"))
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails.add_member(:prefix, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Prefix"))
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails.add_member(:tag, Shapes::ShapeRef.new(shape: AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails, location_name: "Tag"))
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails.struct_class = Types::AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails
+
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails.add_member(:prefix, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Prefix"))
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails.add_member(:tag, Shapes::ShapeRef.new(shape: AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails, location_name: "Tag"))
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails.struct_class = Types::AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails
+
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsList.member = Shapes::ShapeRef.new(shape: AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails)
+
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails.add_member(:key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Key"))
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Value"))
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails.struct_class = Types::AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails
+
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails.add_member(:key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Key"))
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Value"))
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails.struct_class = Types::AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails
+
+    AwsS3BucketBucketLifecycleConfigurationRulesList.member = Shapes::ShapeRef.new(shape: AwsS3BucketBucketLifecycleConfigurationRulesDetails)
+
+    AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails.add_member(:days, Shapes::ShapeRef.new(shape: Integer, location_name: "Days"))
+    AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails.add_member(:storage_class, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StorageClass"))
+    AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails.struct_class = Types::AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails
+
+    AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsList.member = Shapes::ShapeRef.new(shape: AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails)
+
+    AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails.add_member(:date, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Date"))
+    AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails.add_member(:days, Shapes::ShapeRef.new(shape: Integer, location_name: "Days"))
+    AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails.add_member(:storage_class, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StorageClass"))
+    AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails.struct_class = Types::AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails
+
+    AwsS3BucketBucketLifecycleConfigurationRulesTransitionsList.member = Shapes::ShapeRef.new(shape: AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails)
+
     AwsS3BucketDetails.add_member(:owner_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OwnerId"))
     AwsS3BucketDetails.add_member(:owner_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OwnerName"))
     AwsS3BucketDetails.add_member(:created_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreatedAt"))
     AwsS3BucketDetails.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: AwsS3BucketServerSideEncryptionConfiguration, location_name: "ServerSideEncryptionConfiguration"))
+    AwsS3BucketDetails.add_member(:bucket_lifecycle_configuration, Shapes::ShapeRef.new(shape: AwsS3BucketBucketLifecycleConfigurationDetails, location_name: "BucketLifecycleConfiguration"))
     AwsS3BucketDetails.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: AwsS3AccountPublicAccessBlockDetails, location_name: "PublicAccessBlockConfiguration"))
     AwsS3BucketDetails.struct_class = Types::AwsS3BucketDetails
 
@@ -2095,7 +2523,7 @@ module Aws::SecurityHub
     AwsSecurityFindingFilters.add_member(:note_text, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "NoteText"))
     AwsSecurityFindingFilters.add_member(:note_updated_at, Shapes::ShapeRef.new(shape: DateFilterList, location_name: "NoteUpdatedAt"))
     AwsSecurityFindingFilters.add_member(:note_updated_by, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "NoteUpdatedBy"))
-    AwsSecurityFindingFilters.add_member(:keyword, Shapes::ShapeRef.new(shape: KeywordFilterList, location_name: "Keyword"))
+    AwsSecurityFindingFilters.add_member(:keyword, Shapes::ShapeRef.new(shape: KeywordFilterList, deprecated: true, location_name: "Keyword", metadata: {"deprecatedMessage"=>"The Keyword property is deprecated."}))
     AwsSecurityFindingFilters.add_member(:finding_provider_fields_confidence, Shapes::ShapeRef.new(shape: NumberFilterList, location_name: "FindingProviderFieldsConfidence"))
     AwsSecurityFindingFilters.add_member(:finding_provider_fields_criticality, Shapes::ShapeRef.new(shape: NumberFilterList, location_name: "FindingProviderFieldsCriticality"))
     AwsSecurityFindingFilters.add_member(:finding_provider_fields_related_findings_id, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "FindingProviderFieldsRelatedFindingsId"))
@@ -2890,6 +3318,8 @@ module Aws::SecurityHub
     ResourceDetails.add_member(:aws_rds_db_snapshot, Shapes::ShapeRef.new(shape: AwsRdsDbSnapshotDetails, location_name: "AwsRdsDbSnapshot"))
     ResourceDetails.add_member(:aws_rds_db_cluster_snapshot, Shapes::ShapeRef.new(shape: AwsRdsDbClusterSnapshotDetails, location_name: "AwsRdsDbClusterSnapshot"))
     ResourceDetails.add_member(:aws_rds_db_cluster, Shapes::ShapeRef.new(shape: AwsRdsDbClusterDetails, location_name: "AwsRdsDbCluster"))
+    ResourceDetails.add_member(:aws_ecs_cluster, Shapes::ShapeRef.new(shape: AwsEcsClusterDetails, location_name: "AwsEcsCluster"))
+    ResourceDetails.add_member(:aws_ecs_task_definition, Shapes::ShapeRef.new(shape: AwsEcsTaskDefinitionDetails, location_name: "AwsEcsTaskDefinition"))
     ResourceDetails.add_member(:container, Shapes::ShapeRef.new(shape: ContainerDetails, location_name: "Container"))
     ResourceDetails.add_member(:other, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Other"))
     ResourceDetails.struct_class = Types::ResourceDetails

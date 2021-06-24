@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2021-06-24)
+------------------
+
+* Feature - Customers can successfully use legacy clients with Transfer Family endpoints enabled for FTPS and FTP behind routers, firewalls, and load balancers by providing a Custom IP address used for data channel communication.
+
 1.34.0 (2021-06-09)
 ------------------
 

@@ -900,9 +900,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Creates a quick connect for the specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
@@ -1289,9 +1286,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Deletes a quick connect.
     #
     # @option params [required, String] :instance_id
@@ -1692,9 +1686,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Describes the quick connect.
     #
     # @option params [required, String] :instance_id
@@ -3528,9 +3519,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Provides information about the quick connects for the specified Amazon
     # Connect instance.
     #
@@ -4965,9 +4953,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Updates the configuration settings for the specified quick connect.
     #
     # @option params [required, String] :instance_id
@@ -5012,9 +4997,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Updates the name and description of a quick connect. The request
     # accepts the following data in JSON format. At least `Name` or
     # `Description` must be provided.
@@ -5040,7 +5022,7 @@ module Aws::Connect
     #     instance_id: "InstanceId", # required
     #     quick_connect_id: "QuickConnectId", # required
     #     name: "QuickConnectName",
-    #     description: "QuickConnectDescription",
+    #     description: "UpdateQuickConnectDescription",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateQuickConnectName AWS API Documentation
@@ -5466,7 +5448,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2021-06-24)
+------------------
+
+* Feature - Amazon Kendra now supports SharePoint 2013 and SharePoint 2016 when using a SharePoint data source.
+
 1.27.0 (2021-06-17)
 ------------------
 

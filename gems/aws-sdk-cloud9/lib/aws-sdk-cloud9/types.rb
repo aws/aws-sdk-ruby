@@ -712,7 +712,7 @@ module Aws::Cloud9
     # development environment. There are two types of tags: *user tags* and
     # *system tags*. A user tag is created by the user. A system tag is
     # automatically created by Amazon Web Services services. A system tag is
-    # prefixed with "aws:" and cannot be modified by the user.
+    # prefixed with `"aws:"` and cannot be modified by the user.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:

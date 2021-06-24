@@ -48,6 +48,6 @@ require_relative 'aws-sdk-codebuild/customizations'
 # @!group service
 module Aws::CodeBuild
 
-  GEM_VERSION = '1.72.0'
+  GEM_VERSION = '1.73.0'
 
 end

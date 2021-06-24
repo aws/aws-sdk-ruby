@@ -6785,6 +6785,10 @@ module Aws::Chime
     #   The turn control URL.
     #   @return [String]
     #
+    # @!attribute [rw] event_ingestion_url
+    #   The event ingestion URL.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/MediaPlacement AWS API Documentation
     #
     class MediaPlacement < Struct.new(
@@ -6794,7 +6798,8 @@ module Aws::Chime
       :screen_sharing_url,
       :screen_viewing_url,
       :signaling_url,
-      :turn_control_url)
+      :turn_control_url,
+      :event_ingestion_url)
       SENSITIVE = []
       include Aws::Structure
     end

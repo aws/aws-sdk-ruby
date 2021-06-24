@@ -664,8 +664,7 @@ module Aws::Cloud9
     #
     # @example Example: DescribeEnvironmentMemberships1
     #
-    #   # The following example gets information about all of the environment members for the specified &AWS; Cloud9 development
-    #   # environment.
+    #   # The following example gets information about all of the environment members for the specified development environment.
     #
     #   resp = client.describe_environment_memberships({
     #     environment_id: "8d9967e2f0624182b74e7690ad69ebEX", 
@@ -691,7 +690,7 @@ module Aws::Cloud9
     #
     # @example Example: DescribeEnvironmentMemberships2
     #
-    #   # The following example gets information about the owner of the specified &AWS; Cloud9 development environment.
+    #   # The following example gets information about the owner of the specified development environment.
     #
     #   resp = client.describe_environment_memberships({
     #     environment_id: "8d9967e2f0624182b74e7690ad69ebEX", 
@@ -714,7 +713,7 @@ module Aws::Cloud9
     #
     # @example Example: DescribeEnvironmentMemberships3
     #
-    #   # The following example gets &AWS; Cloud9 development environment membership information for the specified user.
+    #   # The following example gets development environment membership information for the specified user.
     #
     #   resp = client.describe_environment_memberships({
     #     user_arn: "arn:aws:iam::123456789012:user/MyDemoUser", 
@@ -1164,7 +1163,7 @@ module Aws::Cloud9
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloud9'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

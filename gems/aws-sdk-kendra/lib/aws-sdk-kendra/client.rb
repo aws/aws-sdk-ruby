@@ -694,7 +694,7 @@ module Aws::Kendra
     #         },
     #       },
     #       share_point_configuration: {
-    #         share_point_version: "SHAREPOINT_ONLINE", # required, accepts SHAREPOINT_ONLINE
+    #         share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE
     #         urls: ["Url"], # required
     #         secret_arn: "SecretArn", # required
     #         crawl_attachments: false,
@@ -714,6 +714,10 @@ module Aws::Kendra
     #         ],
     #         document_title_field_name: "DataSourceFieldName",
     #         disable_local_groups: false,
+    #         ssl_certificate_s3_path: {
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #         },
     #       },
     #       database_configuration: {
     #         database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -1566,7 +1570,7 @@ module Aws::Kendra
     #   resp.configuration.s3_configuration.exclusion_patterns[0] #=> String
     #   resp.configuration.s3_configuration.documents_metadata_configuration.s3_prefix #=> String
     #   resp.configuration.s3_configuration.access_control_list_configuration.key_path #=> String
-    #   resp.configuration.share_point_configuration.share_point_version #=> String, one of "SHAREPOINT_ONLINE"
+    #   resp.configuration.share_point_configuration.share_point_version #=> String, one of "SHAREPOINT_2013", "SHAREPOINT_2016", "SHAREPOINT_ONLINE"
     #   resp.configuration.share_point_configuration.urls #=> Array
     #   resp.configuration.share_point_configuration.urls[0] #=> String
     #   resp.configuration.share_point_configuration.secret_arn #=> String
@@ -1586,6 +1590,8 @@ module Aws::Kendra
     #   resp.configuration.share_point_configuration.field_mappings[0].index_field_name #=> String
     #   resp.configuration.share_point_configuration.document_title_field_name #=> String
     #   resp.configuration.share_point_configuration.disable_local_groups #=> Boolean
+    #   resp.configuration.share_point_configuration.ssl_certificate_s3_path.bucket #=> String
+    #   resp.configuration.share_point_configuration.ssl_certificate_s3_path.key #=> String
     #   resp.configuration.database_configuration.database_engine_type #=> String, one of "RDS_AURORA_MYSQL", "RDS_AURORA_POSTGRESQL", "RDS_MYSQL", "RDS_POSTGRESQL"
     #   resp.configuration.database_configuration.connection_configuration.database_host #=> String
     #   resp.configuration.database_configuration.connection_configuration.database_port #=> Integer
@@ -2983,7 +2989,7 @@ module Aws::Kendra
     #         },
     #       },
     #       share_point_configuration: {
-    #         share_point_version: "SHAREPOINT_ONLINE", # required, accepts SHAREPOINT_ONLINE
+    #         share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE
     #         urls: ["Url"], # required
     #         secret_arn: "SecretArn", # required
     #         crawl_attachments: false,
@@ -3003,6 +3009,10 @@ module Aws::Kendra
     #         ],
     #         document_title_field_name: "DataSourceFieldName",
     #         disable_local_groups: false,
+    #         ssl_certificate_s3_path: {
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #         },
     #       },
     #       database_configuration: {
     #         database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -3591,7 +3601,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

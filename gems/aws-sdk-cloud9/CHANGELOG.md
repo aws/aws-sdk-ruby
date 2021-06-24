@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2021-06-24)
+------------------
+
+* Feature - Minor update to AWS Cloud9 documentation to allow correct parsing of outputted text
+
 1.34.0 (2021-06-23)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2021-06-24)
+------------------
+
+* Feature - Added new resource details for ECS clusters and ECS task definitions. Added additional information for S3 buckets, Elasticsearch domains, and API Gateway V2 stages.
+
 1.46.0 (2021-05-14)
 ------------------
 

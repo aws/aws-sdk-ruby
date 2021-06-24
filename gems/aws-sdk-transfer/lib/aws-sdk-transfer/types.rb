@@ -84,10 +84,10 @@ module Aws::Transfer
     #   make them visible. You must specify the `Entry` and `Target` pair,
     #   where `Entry` shows how the path is made visible and `Target` is the
     #   actual Amazon S3 or Amazon EFS path. If you only specify a target,
-    #   it will be displayed as is. You also must ensure that your AWS
-    #   Identity and Access Management (IAM) role provides access to paths
-    #   in `Target`. This value can only be set when `HomeDirectoryType` is
-    #   set to *LOGICAL*.
+    #   it is displayed as is. You also must ensure that your Amazon Web
+    #   Services Identity and Access Management (IAM) role provides access
+    #   to paths in `Target`. This value can only be set when
+    #   `HomeDirectoryType` is set to *LOGICAL*.
     #
     #   The following is an `Entry` and `Target` pair example.
     #
@@ -101,19 +101,16 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
     #
     #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon
-    #   S3 or Amazon EFS, the entry will be ignored. As a workaround, you
-    #   can use the Amazon S3 API or EFS API to create 0-byte objects as
-    #   place holders for your directory. If using the AWS CLI, use the
-    #   `s3api` or `efsapi` call instead of `s3` or `efs` so you can use the
-    #   `put-object` operation. For example, you can use the following.
-    #
-    #    `aws s3api put-object --bucket bucketname --key path/to/folder/`
-    #
-    #    The end of the key name must end in a `/` for it to be considered a
-    #   folder.
+    #   S3 or EFS, the entry is ignored. As a workaround, you can use the
+    #   Amazon S3 API or EFS API to create 0 byte objects as place holders
+    #   for your directory. If using the CLI, use the `s3api` or `efsapi`
+    #   call instead of `s3` or `efs` so you can use the put-object
+    #   operation. For example, you use the following: `aws s3api put-object
+    #   --bucket bucketname --key path/to/folder/`. Make sure that the end
+    #   of the key name ends in a `/` for it to be considered a folder.
     #
     #    </note>
     #   @return [Array<Types::HomeDirectoryMapEntry>]
@@ -128,16 +125,16 @@ module Aws::Transfer
     #   <note markdown="1"> This only applies when domain of `ServerId` is S3. Amazon EFS does
     #   not use scope-down policies.
     #
-    #    For scope-down policies, AWS Transfer Family stores the policy as a
-    #   JSON blob, instead of the Amazon Resource Name (ARN) of the policy.
-    #   You save the policy as a JSON blob and pass it in the `Policy`
-    #   argument.
+    #    For scope-down policies, Amazon Web Services Transfer Family stores
+    #   the policy as a JSON blob, instead of the Amazon Resource Name (ARN)
+    #   of the policy. You save the policy as a JSON blob and pass it in the
+    #   `Policy` argument.
     #
     #    For an example of a scope-down policy, see [Example scope-down
     #   policy][1].
     #
-    #    For more information, see [AssumeRole][2] in the *AWS Security Token
-    #   Service API Reference*.
+    #    For more information, see [AssumeRole][2] in the *Amazon Web
+    #   Services Security Token Service API Reference*.
     #
     #    </note>
     #
@@ -176,9 +173,9 @@ module Aws::Transfer
     #   A unique identifier that is required to identify specific groups
     #   within your directory. The users of the group that you associate
     #   have access to your Amazon S3 or Amazon EFS resources over the
-    #   enabled protocols using AWS Transfer Family. If you know the group
-    #   name, you can view the SID values by running the following command
-    #   using Windows PowerShell.
+    #   enabled protocols using Amazon Web Services Transfer Family. If you
+    #   know the group name, you can view the SID values by running the
+    #   following command using Windows PowerShell.
     #
     #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
     #   -Properties * | Select SamAccountName,ObjectSid`
@@ -213,8 +210,8 @@ module Aws::Transfer
     #
     # @!attribute [rw] external_id
     #   The external ID of the group whose users have access to your Amazon
-    #   S3 or Amazon EFS resources over the enabled protocols using AWS
-    #   Transfer Family.
+    #   S3 or Amazon EFS resources over the enabled protocols using Amazon
+    #   Web Services Transfer Family.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateAccessResponse AWS API Documentation
@@ -259,19 +256,21 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] certificate
-    #   The Amazon Resource Name (ARN) of the AWS Certificate Manager (ACM)
-    #   certificate. Required when `Protocols` is set to `FTPS`.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services
+    #   Certificate Manager (ACM) certificate. Required when `Protocols` is
+    #   set to `FTPS`.
     #
     #   To request a new public certificate, see [Request a public
-    #   certificate][1] in the <i> AWS Certificate Manager User Guide</i>.
+    #   certificate][1] in the <i> Amazon Web Services Certificate Manager
+    #   User Guide</i>.
     #
     #   To import an existing certificate into ACM, see [Importing
-    #   certificates into ACM][2] in the <i> AWS Certificate Manager User
-    #   Guide</i>.
+    #   certificates into ACM][2] in the <i> Amazon Web Services Certificate
+    #   Manager User Guide</i>.
     #
     #   To request a private certificate to use FTPS through private IP
-    #   addresses, see [Request a private certificate][3] in the <i> AWS
-    #   Certificate Manager User Guide</i>.
+    #   addresses, see [Request a private certificate][3] in the <i> Amazon
+    #   Web Services Certificate Manager User Guide</i>.
     #
     #   Certificates with the following cryptographic algorithms and key
     #   sizes are supported:
@@ -327,11 +326,11 @@ module Aws::Transfer
     #   Elastic IP addresses directly to it.
     #
     #   <note markdown="1"> After May 19, 2021, you won't be able to create a server using
-    #   `EndpointType=VPC_ENDPOINT` in your AWS account if your account
-    #   hasn't already done so before May 19, 2021. If you have already
-    #   created servers with `EndpointType=VPC_ENDPOINT` in your AWS account
-    #   on or before May 19, 2021, you will not be affected. After this
-    #   date, use `EndpointType`=`VPC`.
+    #   `EndpointType=VPC_ENDPOINT` in your Amazon Web Services account if
+    #   your account hasn't already done so before May 19, 2021. If you
+    #   have already created servers with `EndpointType=VPC_ENDPOINT` in
+    #   your Amazon Web Services account on or before May 19, 2021, you will
+    #   not be affected. After this date, use `EndpointType`=`VPC`.
     #
     #    For more information, see
     #   https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.
@@ -355,7 +354,7 @@ module Aws::Transfer
     #   Accidentally changing a server's host key can be disruptive.
     #
     #   For more information, see [Change the host key for your SFTP-enabled
-    #   server][1] in the *AWS Transfer Family User Guide*.
+    #   server][1] in the *Amazon Web Services Transfer Family User Guide*.
     #
     #
     #
@@ -374,21 +373,27 @@ module Aws::Transfer
     # @!attribute [rw] identity_provider_type
     #   Specifies the mode of authentication for a server. The default value
     #   is `SERVICE_MANAGED`, which allows you to store and access user
-    #   credentials within the AWS Transfer Family service. Use
-    #   `AWS_DIRECTORY_SERVICE` to provide access to Active Directory groups
-    #   in AWS Managed Active Directory or Microsoft Active Directory in
-    #   your on-premises environment or in AWS using AD Connectors. This
-    #   option also requires you to provide a Directory ID using the
-    #   `IdentityProviderDetails` parameter. Use the `API_GATEWAY` value to
-    #   integrate with an identity provider of your choosing. The
-    #   `API_GATEWAY` setting requires you to provide an API Gateway
-    #   endpoint URL to call for authentication using the
+    #   credentials within the Amazon Web Services Transfer Family service.
+    #
+    #   Use `AWS_DIRECTORY_SERVICE` to provide access to Active Directory
+    #   groups in Amazon Web Services Managed Active Directory or Microsoft
+    #   Active Directory in your on-premises environment or in Amazon Web
+    #   Services using AD Connectors. This option also requires you to
+    #   provide a Directory ID using the `IdentityProviderDetails`
+    #   parameter.
+    #
+    #   Use the `API_GATEWAY` value to integrate with an identity provider
+    #   of your choosing. The `API_GATEWAY` setting requires you to provide
+    #   an API Gateway endpoint URL to call for authentication using the
     #   `IdentityProviderDetails` parameter.
     #   @return [String]
     #
     # @!attribute [rw] logging_role
-    #   Allows the service to write your users' activity to your Amazon
-    #   CloudWatch logs for monitoring and auditing purposes.
+    #   Specifies the Amazon Resource Name (ARN) of the Amazon Web Services
+    #   Identity and Access Management (IAM) role that allows a server to
+    #   turn on Amazon CloudWatch logging for Amazon S3 or Amazon EFS
+    #   events. When set, user activity can be viewed in your CloudWatch
+    #   logs.
     #   @return [String]
     #
     # @!attribute [rw] protocols
@@ -404,9 +409,9 @@ module Aws::Transfer
     #
     #   * `FTP` (File Transfer Protocol): Unencrypted file transfer
     #
-    #   <note markdown="1"> If you select `FTPS`, you must choose a certificate stored in AWS
-    #   Certificate Manager (ACM) which will be used to identify your server
-    #   when clients connect to it over FTPS.
+    #   <note markdown="1"> If you select `FTPS`, you must choose a certificate stored in Amazon
+    #   Web Services Certificate Manager (ACM) which is used to identify
+    #   your server when clients connect to it over FTPS.
     #
     #    If `Protocol` includes either `FTP` or `FTPS`, then the
     #   `EndpointType` must be `VPC` and the `IdentityProviderType` must be
@@ -509,14 +514,15 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] home_directory_mappings
-    #   Logical directory mappings that specify what Amazon S3 or EFS paths
-    #   and keys should be visible to your user and how you want to make
-    #   them visible. You will need to specify the `Entry` and `Target`
-    #   pair, where `Entry` shows how the path is made visible and `Target`
-    #   is the actual Amazon S3 or EFS path. If you only specify a target,
-    #   it will be displayed as is. You will need to also make sure that
-    #   your IAM role provides access to paths in `Target`. This value can
-    #   only be set when `HomeDirectoryType` is set to `LOGICAL`.
+    #   Logical directory mappings that specify what Amazon S3 or Amazon EFS
+    #   paths and keys should be visible to your user and how you want to
+    #   make them visible. You must specify the `Entry` and `Target` pair,
+    #   where `Entry` shows how the path is made visible and `Target` is the
+    #   actual Amazon S3 or Amazon EFS path. If you only specify a target,
+    #   it is displayed as is. You also must ensure that your Amazon Web
+    #   Services Identity and Access Management (IAM) role provides access
+    #   to paths in `Target`. This value can only be set when
+    #   `HomeDirectoryType` is set to *LOGICAL*.
     #
     #   The following is an `Entry` and `Target` pair example.
     #
@@ -530,13 +536,13 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
     #
     #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon
-    #   S3 or EFS, the entry will be ignored. As a workaround, you can use
-    #   the Amazon S3 API or EFS API to create 0 byte objects as place
-    #   holders for your directory. If using the CLI, use the `s3api` or
-    #   `efsapi` call instead of `s3` or `efs` so you can use the put-object
+    #   S3 or EFS, the entry is ignored. As a workaround, you can use the
+    #   Amazon S3 API or EFS API to create 0 byte objects as place holders
+    #   for your directory. If using the CLI, use the `s3api` or `efsapi`
+    #   call instead of `s3` or `efs` so you can use the put-object
     #   operation. For example, you use the following: `aws s3api put-object
     #   --bucket bucketname --key path/to/folder/`. Make sure that the end
     #   of the key name ends in a `/` for it to be considered a folder.
@@ -554,16 +560,16 @@ module Aws::Transfer
     #   <note markdown="1"> This only applies when domain of ServerId is S3. EFS does not use
     #   scope down policy.
     #
-    #    For scope-down policies, AWS Transfer Family stores the policy as a
-    #   JSON blob, instead of the Amazon Resource Name (ARN) of the policy.
-    #   You save the policy as a JSON blob and pass it in the `Policy`
-    #   argument.
+    #    For scope-down policies, Amazon Web Services Transfer Family stores
+    #   the policy as a JSON blob, instead of the Amazon Resource Name (ARN)
+    #   of the policy. You save the policy as a JSON blob and pass it in the
+    #   `Policy` argument.
     #
     #    For an example of a scope-down policy, see [Example scope-down
     #   policy][1].
     #
-    #    For more information, see [AssumeRole][2] in the *AWS Security Token
-    #   Service API Reference*.
+    #    For more information, see [AssumeRole][2] in the *Amazon Web
+    #   Services Security Token Service API Reference*.
     #
     #    </note>
     #
@@ -669,9 +675,9 @@ module Aws::Transfer
     #   A unique identifier that is required to identify specific groups
     #   within your directory. The users of the group that you associate
     #   have access to your Amazon S3 or Amazon EFS resources over the
-    #   enabled protocols using AWS Transfer Family. If you know the group
-    #   name, you can view the SID values by running the following command
-    #   using Windows PowerShell.
+    #   enabled protocols using Amazon Web Services Transfer Family. If you
+    #   know the group name, you can view the SID values by running the
+    #   following command using Windows PowerShell.
     #
     #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
     #   -Properties * | Select SamAccountName,ObjectSid`
@@ -790,9 +796,9 @@ module Aws::Transfer
     #   A unique identifier that is required to identify specific groups
     #   within your directory. The users of the group that you associate
     #   have access to your Amazon S3 or Amazon EFS resources over the
-    #   enabled protocols using AWS Transfer Family. If you know the group
-    #   name, you can view the SID values by running the following command
-    #   using Windows PowerShell.
+    #   enabled protocols using Amazon Web Services Transfer Family. If you
+    #   know the group name, you can view the SID values by running the
+    #   following command using Windows PowerShell.
     #
     #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
     #   -Properties * | Select SamAccountName,ObjectSid`
@@ -912,8 +918,8 @@ module Aws::Transfer
     #
     # @!attribute [rw] user_name
     #   The name of the user assigned to one or more servers. User names are
-    #   part of the sign-in credentials to use the AWS Transfer Family
-    #   service and perform file transfer tasks.
+    #   part of the sign-in credentials to use the Amazon Web Services
+    #   Transfer Family service and perform file transfer tasks.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeUserRequest AWS API Documentation
@@ -954,14 +960,15 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] home_directory_mappings
-    #   Specifies the logical directory mappings that specify what Amazon S3
-    #   or Amazon EFS paths and keys should be visible to the associated
-    #   access and how you want to make them visible. You must specify the
-    #   "`Entry`" and "`Target`" pair, where `Entry` shows how the path
-    #   is made visible and `Target` is the actual Amazon S3 or EFS path. If
-    #   you only specify a target, it will be displayed as is. You also must
-    #   ensure that your AWS Identity and Access Management (IAM) role
-    #   provides access to paths in `Target`.
+    #   Logical directory mappings that specify what Amazon S3 or Amazon EFS
+    #   paths and keys should be visible to your user and how you want to
+    #   make them visible. You must specify the `Entry` and `Target` pair,
+    #   where `Entry` shows how the path is made visible and `Target` is the
+    #   actual Amazon S3 or Amazon EFS path. If you only specify a target,
+    #   it is displayed as is. You also must ensure that your Amazon Web
+    #   Services Identity and Access Management (IAM) role provides access
+    #   to paths in `Target`. This value can only be set when
+    #   `HomeDirectoryType` is set to *LOGICAL*.
     #
     #   In most cases, you can use this value instead of the scope-down
     #   policy to lock down the associated access to the designated home
@@ -1011,9 +1018,9 @@ module Aws::Transfer
     #   A unique identifier that is required to identify specific groups
     #   within your directory. The users of the group that you associate
     #   have access to your Amazon S3 or Amazon EFS resources over the
-    #   enabled protocols using AWS Transfer Family. If you know the group
-    #   name, you can view the SID values by running the following command
-    #   using Windows PowerShell.
+    #   enabled protocols using Amazon Web Services Transfer Family. If you
+    #   know the group name, you can view the SID values by running the
+    #   following command using Windows PowerShell.
     #
     #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
     #   -Properties * | Select SamAccountName,ObjectSid`
@@ -1102,9 +1109,17 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] certificate
-    #   Specifies the ARN of the AWS Certificate Manager (ACM) certificate.
-    #   Required when `Protocols` is set to `FTPS`.
+    #   Specifies the ARN of the Amazon Web ServicesCertificate Manager
+    #   (ACM) certificate. Required when `Protocols` is set to `FTPS`.
     #   @return [String]
+    #
+    # @!attribute [rw] protocol_details
+    #   The protocol settings that are configured for your server.
+    #
+    #   Use the `PassiveIp` parameter to indicate passive mode. Enter a
+    #   single dotted-quad IPv4 address, such as the external IP address of
+    #   a firewall, router, or load balancer.
+    #   @return [Types::ProtocolDetails]
     #
     # @!attribute [rw] domain
     #   Specifies the domain of the storage system that is used for file
@@ -1112,8 +1127,12 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] endpoint_details
-    #   Specifies the virtual private cloud (VPC) endpoint settings that you
-    #   configured for your server.
+    #   The virtual private cloud (VPC) endpoint settings that are
+    #   configured for your server. When you host your endpoint within your
+    #   VPC, you can make it accessible only to resources within your VPC,
+    #   or you can attach Elastic IP addresses and make it accessible to
+    #   clients over the internet. Your VPC's default security groups are
+    #   automatically assigned to your endpoint.
     #   @return [Types::EndpointDetails]
     #
     # @!attribute [rw] endpoint_type
@@ -1135,22 +1154,29 @@ module Aws::Transfer
     #   @return [Types::IdentityProviderDetails]
     #
     # @!attribute [rw] identity_provider_type
-    #   Specifies the mode of authentication method enabled for this
-    #   service. A value of `AWS_DIRECTORY_SERVICE` means that you are
-    #   providing access to Active Directory groups in AWS Managed Active
-    #   Directory or Microsoft Active Directory in your on-premises
-    #   environment or in AWS using AD Connectors. A value of
-    #   `SERVICE_MANAGED` means that you are using this server to store and
-    #   access user credentials within the service. A value of `API_GATEWAY`
-    #   indicates that you have integrated an API Gateway endpoint that will
-    #   be invoked for authenticating your user into the service.
+    #   Specifies the mode of authentication for a server. The default value
+    #   is `SERVICE_MANAGED`, which allows you to store and access user
+    #   credentials within the Amazon Web Services Transfer Family service.
+    #
+    #   Use `AWS_DIRECTORY_SERVICE` to provide access to Active Directory
+    #   groups in Amazon Web Services Managed Active Directory or Microsoft
+    #   Active Directory in your on-premises environment or in Amazon Web
+    #   Services using AD Connectors. This option also requires you to
+    #   provide a Directory ID using the `IdentityProviderDetails`
+    #   parameter.
+    #
+    #   Use the `API_GATEWAY` value to integrate with an identity provider
+    #   of your choosing. The `API_GATEWAY` setting requires you to provide
+    #   an API Gateway endpoint URL to call for authentication using the
+    #   `IdentityProviderDetails` parameter.
     #   @return [String]
     #
     # @!attribute [rw] logging_role
-    #   Specifies the AWS Identity and Access Management (IAM) role that
-    #   allows a server to turn on Amazon CloudWatch logging for Amazon S3
-    #   or Amazon EFS events. When set, user activity can be viewed in your
-    #   CloudWatch logs.
+    #   Specifies the Amazon Resource Name (ARN) of the Amazon Web Services
+    #   Identity and Access Management (IAM) role that allows a server to
+    #   turn on Amazon CloudWatch logging for Amazon S3 or Amazon EFS
+    #   events. When set, user activity can be viewed in your CloudWatch
+    #   logs.
     #   @return [String]
     #
     # @!attribute [rw] protocols
@@ -1204,6 +1230,7 @@ module Aws::Transfer
     class DescribedServer < Struct.new(
       :arn,
       :certificate,
+      :protocol_details,
       :domain,
       :endpoint_details,
       :endpoint_type,
@@ -1236,14 +1263,15 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] home_directory_mappings
-    #   Specifies the logical directory mappings that specify what Amazon S3
-    #   or EFS paths and keys should be visible to your user and how you
-    #   want to make them visible. You will need to specify the "`Entry`"
-    #   and "`Target`" pair, where `Entry` shows how the path is made
-    #   visible and `Target` is the actual Amazon S3 or EFS path. If you
-    #   only specify a target, it will be displayed as is. You will need to
-    #   also make sure that your AWS Identity and Access Management (IAM)
-    #   role provides access to paths in `Target`.
+    #   Logical directory mappings that specify what Amazon S3 or Amazon EFS
+    #   paths and keys should be visible to your user and how you want to
+    #   make them visible. You must specify the `Entry` and `Target` pair,
+    #   where `Entry` shows how the path is made visible and `Target` is the
+    #   actual Amazon S3 or Amazon EFS path. If you only specify a target,
+    #   it is displayed as is. You also must ensure that your Amazon Web
+    #   Services Identity and Access Management (IAM) role provides access
+    #   to paths in `Target`. This value can only be set when
+    #   `HomeDirectoryType` is set to *LOGICAL*.
     #
     #   In most cases, you can use this value instead of the scope-down
     #   policy to lock your user down to the designated home directory
@@ -1330,11 +1358,11 @@ module Aws::Transfer
     # API and attach an Elastic IP address to your server's endpoint.
     #
     # <note markdown="1"> After May 19, 2021, you won't be able to create a server using
-    # `EndpointType=VPC_ENDPOINT` in your AWS account if your account
-    # hasn't already done so before May 19, 2021. If you have already
-    # created servers with `EndpointType=VPC_ENDPOINT` in your AWS account
-    # on or before May 19, 2021, you will not be affected. After this date,
-    # use `EndpointType`=`VPC`.
+    # `EndpointType=VPC_ENDPOINT` in your Amazon Web Servicesaccount if your
+    # account hasn't already done so before May 19, 2021. If you have
+    # already created servers with `EndpointType=VPC_ENDPOINT` in your
+    # Amazon Web Servicesaccount on or before May 19, 2021, you will not be
+    # affected. After this date, use `EndpointType`=`VPC`.
     #
     #  For more information, see
     # https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.
@@ -1426,6 +1454,21 @@ module Aws::Transfer
     # Represents an object that contains entries and targets for
     # `HomeDirectoryMappings`.
     #
+    # The following is an `Entry` and `Target` pair example for `chroot`.
+    #
+    # `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    #
+    # <note markdown="1"> If the target of a logical directory entry does not exist in Amazon S3
+    # or EFS, the entry is ignored. As a workaround, you can use the Amazon
+    # S3 API or EFS API to create 0 byte objects as place holders for your
+    # directory. If using the CLI, use the `s3api` or `efsapi` call instead
+    # of `s3` or `efs` so you can use the put-object operation. For example,
+    # you use the following: `aws s3api put-object --bucket bucketname --key
+    # path/to/folder/`. Make sure that the end of the key name ends in a `/`
+    # for it to be considered a folder.
+    #
+    #  </note>
+    #
     # @note When making an API call, you may pass HomeDirectoryMapEntry
     #   data as a hash:
     #
@@ -1435,7 +1478,7 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] entry
-    #   Represents an entry and a target for `HomeDirectoryMappings`.
+    #   Represents an entry for `HomeDirectoryMappings`.
     #   @return [String]
     #
     # @!attribute [rw] target
@@ -1475,8 +1518,8 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] directory_id
-    #   The identifier of the AWS Directory Service directory that you want
-    #   to stop sharing.
+    #   The identifier of the Amazon Web ServicesDirectory Service directory
+    #   that you want to stop sharing.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/IdentityProviderDetails AWS API Documentation
@@ -1547,8 +1590,8 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # This exception is thrown when an error occurs in the AWS Transfer
-    # Family service.
+    # This exception is thrown when an error occurs in the Amazon Web
+    # ServicesTransfer Family service.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1758,8 +1801,8 @@ module Aws::Transfer
     #
     # @!attribute [rw] arn
     #   Requests the tags associated with a particular Amazon Resource Name
-    #   (ARN). An ARN is an identifier for a specific AWS resource, such as
-    #   a server, user, or role.
+    #   (ARN). An ARN is an identifier for a specific Amazon Web Services
+    #   resource, such as a server, user, or role.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1908,9 +1951,9 @@ module Aws::Transfer
     #   A unique identifier that is required to identify specific groups
     #   within your directory. The users of the group that you associate
     #   have access to your Amazon S3 or Amazon EFS resources over the
-    #   enabled protocols using AWS Transfer Family. If you know the group
-    #   name, you can view the SID values by running the following command
-    #   using Windows PowerShell.
+    #   enabled protocols using Amazon Web Services Transfer Family. If you
+    #   know the group name, you can view the SID values by running the
+    #   following command using Windows PowerShell.
     #
     #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
     #   -Properties * | Select SamAccountName,ObjectSid`
@@ -1949,10 +1992,21 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] identity_provider_type
-    #   Specifies the authentication method used to validate a user for a
-    #   server that was specified. This can include Secure Shell (SSH),
-    #   Active Directory groups, user name and password combinations, or
-    #   your own custom authentication method.
+    #   Specifies the mode of authentication for a server. The default value
+    #   is `SERVICE_MANAGED`, which allows you to store and access user
+    #   credentials within the Amazon Web Services Transfer Family service.
+    #
+    #   Use `AWS_DIRECTORY_SERVICE` to provide access to Active Directory
+    #   groups in Amazon Web Services Managed Active Directory or Microsoft
+    #   Active Directory in your on-premises environment or in Amazon Web
+    #   Services using AD Connectors. This option also requires you to
+    #   provide a Directory ID using the `IdentityProviderDetails`
+    #   parameter.
+    #
+    #   Use the `API_GATEWAY` value to integrate with an identity provider
+    #   of your choosing. The `API_GATEWAY` setting requires you to provide
+    #   an API Gateway endpoint URL to call for authentication using the
+    #   `IdentityProviderDetails` parameter.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_type
@@ -1962,8 +2016,11 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] logging_role
-    #   Specifies the AWS Identity and Access Management (IAM) role that
-    #   allows a server to turn on Amazon CloudWatch logging.
+    #   Specifies the Amazon Resource Name (ARN) of the Amazon Web Services
+    #   Identity and Access Management (IAM) role that allows a server to
+    #   turn on Amazon CloudWatch logging for Amazon S3 or Amazon EFS
+    #   events. When set, user activity can be viewed in your CloudWatch
+    #   logs.
     #   @return [String]
     #
     # @!attribute [rw] server_id
@@ -2110,6 +2167,38 @@ module Aws::Transfer
       include Aws::Structure
     end
 
+    # The protocol settings that are configured for your server.
+    #
+    # <note markdown="1"> This type is only valid in the `UpdateServer` API.
+    #
+    #  </note>
+    #
+    # @note When making an API call, you may pass ProtocolDetails
+    #   data as a hash:
+    #
+    #       {
+    #         passive_ip: "PassiveIp",
+    #       }
+    #
+    # @!attribute [rw] passive_ip
+    #   Indicates passive mode, for FTP and FTPS protocols. Enter a single
+    #   dotted-quad IPv4 address, such as the external IP address of a
+    #   firewall, router, or load balancer. For example:
+    #
+    #   ` aws transfer update-server --protocol-details PassiveIp=0.0.0.0 `
+    #
+    #   Replace ` 0.0.0.0 ` in the example above with the actual IP address
+    #   you want to use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ProtocolDetails AWS API Documentation
+    #
+    class ProtocolDetails < Struct.new(
+      :passive_ip)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The requested resource does not exist.
     #
     # @!attribute [rw] message
@@ -2131,8 +2220,8 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # This exception is thrown when a resource is not found by the AWS
-    # Transfer Family service.
+    # This exception is thrown when a resource is not found by the Amazon
+    # Web ServicesTransfer Family service.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2153,8 +2242,8 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # The request has failed because the AWS Transfer Family service is not
-    # available.
+    # The request has failed because the Amazon Web ServicesTransfer Family
+    # service is not available.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2284,8 +2373,8 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] arn
-    #   An Amazon Resource Name (ARN) for a specific AWS resource, such as a
-    #   server, user, or role.
+    #   An Amazon Resource Name (ARN) for a specific Amazon Web Services
+    #   resource, such as a server, user, or role.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2407,8 +2496,8 @@ module Aws::Transfer
     #
     # @!attribute [rw] arn
     #   The value of the resource that will have the tag removed. An Amazon
-    #   Resource Name (ARN) is an identifier for a specific AWS resource,
-    #   such as a server, user, or role.
+    #   Resource Name (ARN) is an identifier for a specific Amazon Web
+    #   Services resource, such as a server, user, or role.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -2472,10 +2561,10 @@ module Aws::Transfer
     #   make them visible. You must specify the `Entry` and `Target` pair,
     #   where `Entry` shows how the path is made visible and `Target` is the
     #   actual Amazon S3 or Amazon EFS path. If you only specify a target,
-    #   it will be displayed as is. You also must ensure that your AWS
-    #   Identity and Access Management (IAM) role provides access to paths
-    #   in `Target`. This value can only be set when `HomeDirectoryType` is
-    #   set to *LOGICAL*.
+    #   it is displayed as is. You also must ensure that your Amazon Web
+    #   Services Identity and Access Management (IAM) role provides access
+    #   to paths in `Target`. This value can only be set when
+    #   `HomeDirectoryType` is set to *LOGICAL*.
     #
     #   The following is an `Entry` and `Target` pair example.
     #
@@ -2489,19 +2578,16 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
     #
     #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon
-    #   S3 or Amazon EFS, the entry will be ignored. As a workaround, you
-    #   can use the Amazon S3 API or EFS API to create 0-byte objects as
-    #   place holders for your directory. If using the AWS CLI, use the
-    #   `s3api` or `efsapi` call instead of `s3` or `efs` so you can use the
-    #   `put-object` operation. For example, you can use the following.
-    #
-    #    `aws s3api put-object --bucket bucketname --key path/to/folder/`
-    #
-    #    The end of the key name must end in a `/` for it to be considered a
-    #   folder.
+    #   S3 or EFS, the entry is ignored. As a workaround, you can use the
+    #   Amazon S3 API or EFS API to create 0 byte objects as place holders
+    #   for your directory. If using the CLI, use the `s3api` or `efsapi`
+    #   call instead of `s3` or `efs` so you can use the put-object
+    #   operation. For example, you use the following: `aws s3api put-object
+    #   --bucket bucketname --key path/to/folder/`. Make sure that the end
+    #   of the key name ends in a `/` for it to be considered a folder.
     #
     #    </note>
     #   @return [Array<Types::HomeDirectoryMapEntry>]
@@ -2516,16 +2602,16 @@ module Aws::Transfer
     #   <note markdown="1"> This only applies when domain of `ServerId` is S3. Amazon EFS does
     #   not use scope down policy.
     #
-    #    For scope-down policies, AWS Transfer Family stores the policy as a
-    #   JSON blob, instead of the Amazon Resource Name (ARN) of the policy.
-    #   You save the policy as a JSON blob and pass it in the `Policy`
-    #   argument.
+    #    For scope-down policies, Amazon Web ServicesTransfer Family stores
+    #   the policy as a JSON blob, instead of the Amazon Resource Name (ARN)
+    #   of the policy. You save the policy as a JSON blob and pass it in the
+    #   `Policy` argument.
     #
     #    For an example of a scope-down policy, see [Example scope-down
     #   policy][1].
     #
-    #    For more information, see [AssumeRole][2] in the *AWS Security Token
-    #   Service API Reference*.
+    #    For more information, see [AssumeRole][2] in the *Amazon Web
+    #   ServicesSecurity Token Service API Reference*.
     #
     #    </note>
     #
@@ -2564,9 +2650,9 @@ module Aws::Transfer
     #   A unique identifier that is required to identify specific groups
     #   within your directory. The users of the group that you associate
     #   have access to your Amazon S3 or Amazon EFS resources over the
-    #   enabled protocols using AWS Transfer Family. If you know the group
-    #   name, you can view the SID values by running the following command
-    #   using Windows PowerShell.
+    #   enabled protocols using Amazon Web Services Transfer Family. If you
+    #   know the group name, you can view the SID values by running the
+    #   following command using Windows PowerShell.
     #
     #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
     #   -Properties * | Select SamAccountName,ObjectSid`
@@ -2601,8 +2687,8 @@ module Aws::Transfer
     #
     # @!attribute [rw] external_id
     #   The external ID of the group whose users have access to your Amazon
-    #   S3 or Amazon EFS resources over the enabled protocols using AWS
-    #   Transfer Family.
+    #   S3 or Amazon EFS resources over the enabled protocols using Amazon
+    #   Web ServicesTransfer Family.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateAccessResponse AWS API Documentation
@@ -2619,6 +2705,9 @@ module Aws::Transfer
     #
     #       {
     #         certificate: "Certificate",
+    #         protocol_details: {
+    #           passive_ip: "PassiveIp",
+    #         },
     #         endpoint_details: {
     #           address_allocation_ids: ["AddressAllocationId"],
     #           subnet_ids: ["SubnetId"],
@@ -2640,19 +2729,21 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] certificate
-    #   The Amazon Resource Name (ARN) of the AWS Certificate Manager (ACM)
-    #   certificate. Required when `Protocols` is set to `FTPS`.
+    #   The Amazon Resource Name (ARN) of the Amazon Web ServicesCertificate
+    #   Manager (ACM) certificate. Required when `Protocols` is set to
+    #   `FTPS`.
     #
     #   To request a new public certificate, see [Request a public
-    #   certificate][1] in the <i> AWS Certificate Manager User Guide</i>.
+    #   certificate][1] in the <i> Amazon Web ServicesCertificate Manager
+    #   User Guide</i>.
     #
     #   To import an existing certificate into ACM, see [Importing
-    #   certificates into ACM][2] in the <i> AWS Certificate Manager User
-    #   Guide</i>.
+    #   certificates into ACM][2] in the <i> Amazon Web ServicesCertificate
+    #   Manager User Guide</i>.
     #
     #   To request a private certificate to use FTPS through private IP
-    #   addresses, see [Request a private certificate][3] in the <i> AWS
-    #   Certificate Manager User Guide</i>.
+    #   addresses, see [Request a private certificate][3] in the <i> Amazon
+    #   Web ServicesCertificate Manager User Guide</i>.
     #
     #   Certificates with the following cryptographic algorithms and key
     #   sizes are supported:
@@ -2679,12 +2770,21 @@ module Aws::Transfer
     #   [3]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-private.html
     #   @return [String]
     #
+    # @!attribute [rw] protocol_details
+    #   The protocol settings that are configured for your server.
+    #
+    #   Use the `PassiveIp` parameter to indicate passive mode (for FTP and
+    #   FTPS protocols). Enter a single dotted-quad IPv4 address, such as
+    #   the external IP address of a firewall, router, or load balancer.
+    #   @return [Types::ProtocolDetails]
+    #
     # @!attribute [rw] endpoint_details
     #   The virtual private cloud (VPC) endpoint settings that are
-    #   configured for your server. With a VPC endpoint, you can restrict
-    #   access to your server to resources only within your VPC. To control
-    #   incoming internet traffic, you will need to associate one or more
-    #   Elastic IP addresses with your server's endpoint.
+    #   configured for your server. When you host your endpoint within your
+    #   VPC, you can make it accessible only to resources within your VPC,
+    #   or you can attach Elastic IP addresses and make it accessible to
+    #   clients over the internet. Your VPC's default security groups are
+    #   automatically assigned to your endpoint.
     #   @return [Types::EndpointDetails]
     #
     # @!attribute [rw] endpoint_type
@@ -2696,11 +2796,11 @@ module Aws::Transfer
     #   Elastic IP addresses directly to it.
     #
     #   <note markdown="1"> After May 19, 2021, you won't be able to create a server using
-    #   `EndpointType=VPC_ENDPOINT` in your AWS account if your account
-    #   hasn't already done so before May 19, 2021. If you have already
-    #   created servers with `EndpointType=VPC_ENDPOINT` in your AWS account
-    #   on or before May 19, 2021, you will not be affected. After this
-    #   date, use `EndpointType`=`VPC`.
+    #   `EndpointType=VPC_ENDPOINT` in your Amazon Web Servicesaccount if
+    #   your account hasn't already done so before May 19, 2021. If you
+    #   have already created servers with `EndpointType=VPC_ENDPOINT` in
+    #   your Amazon Web Servicesaccount on or before May 19, 2021, you will
+    #   not be affected. After this date, use `EndpointType`=`VPC`.
     #
     #    For more information, see
     #   https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.
@@ -2724,7 +2824,7 @@ module Aws::Transfer
     #   changing a server's host key can be disruptive.
     #
     #   For more information, see [Change the host key for your SFTP-enabled
-    #   server][1] in the *AWS Transfer Family User Guide*.
+    #   server][1] in the *Amazon Web ServicesTransfer Family User Guide*.
     #
     #
     #
@@ -2737,9 +2837,11 @@ module Aws::Transfer
     #   @return [Types::IdentityProviderDetails]
     #
     # @!attribute [rw] logging_role
-    #   Changes the AWS Identity and Access Management (IAM) role that
-    #   allows Amazon S3 or Amazon EFS events to be logged in Amazon
-    #   CloudWatch, turning logging on or off.
+    #   Specifies the Amazon Resource Name (ARN) of the Amazon Web Services
+    #   Identity and Access Management (IAM) role that allows a server to
+    #   turn on Amazon CloudWatch logging for Amazon S3 or Amazon EFS
+    #   events. When set, user activity can be viewed in your CloudWatch
+    #   logs.
     #   @return [String]
     #
     # @!attribute [rw] protocols
@@ -2755,9 +2857,9 @@ module Aws::Transfer
     #
     #   * File Transfer Protocol (FTP): Unencrypted file transfer
     #
-    #   <note markdown="1"> If you select `FTPS`, you must choose a certificate stored in AWS
-    #   Certificate Manager (ACM) which will be used to identify your server
-    #   when clients connect to it over FTPS.
+    #   <note markdown="1"> If you select `FTPS`, you must choose a certificate stored in Amazon
+    #   Web ServicesCertificate Manager (ACM) which will be used to identify
+    #   your server when clients connect to it over FTPS.
     #
     #    If `Protocol` includes either `FTP` or `FTPS`, then the
     #   `EndpointType` must be `VPC` and the `IdentityProviderType` must be
@@ -2787,6 +2889,7 @@ module Aws::Transfer
     #
     class UpdateServerRequest < Struct.new(
       :certificate,
+      :protocol_details,
       :endpoint_details,
       :endpoint_type,
       :host_key,
@@ -2855,30 +2958,36 @@ module Aws::Transfer
     # @!attribute [rw] home_directory_mappings
     #   Logical directory mappings that specify what Amazon S3 or Amazon EFS
     #   paths and keys should be visible to your user and how you want to
-    #   make them visible. You will need to specify the "`Entry`" and
-    #   "`Target`" pair, where `Entry` shows how the path is made visible
-    #   and `Target` is the actual Amazon S3 or Amazon EFS path. If you only
-    #   specify a target, it will be displayed as is. You will need to also
-    #   make sure that your IAM role provides access to paths in `Target`.
-    #   The following is an example.
+    #   make them visible. You must specify the `Entry` and `Target` pair,
+    #   where `Entry` shows how the path is made visible and `Target` is the
+    #   actual Amazon S3 or Amazon EFS path. If you only specify a target,
+    #   it is displayed as is. You also must ensure that your Amazon Web
+    #   Services Identity and Access Management (IAM) role provides access
+    #   to paths in `Target`. This value can only be set when
+    #   `HomeDirectoryType` is set to *LOGICAL*.
     #
-    #   `'[ "/bucket2/documentation", \{ "Entry":
-    #   "your-personal-report.pdf", "Target":
-    #   "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \} ]'`
+    #   The following is an `Entry` and `Target` pair example.
+    #
+    #   `[ \{ "Entry": "your-personal-report.pdf", "Target":
+    #   "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \} ]`
     #
     #   In most cases, you can use this value instead of the scope-down
     #   policy to lock down your user to the designated home directory
     #   ("`chroot`"). To do this, you can set `Entry` to '/' and set
     #   `Target` to the HomeDirectory parameter value.
     #
+    #   The following is an `Entry` and `Target` pair example for `chroot`.
+    #
+    #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    #
     #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon
-    #   S3 or EFS, the entry will be ignored. As a workaround, you can use
-    #   the Amazon S3 API or EFS API to create 0-byte objects as place
-    #   holders for your directory. If using the AWS CLI, use the `s3api` or
-    #   `efsapi` call instead of `s3` `efs` so you can use the put-object
+    #   S3 or EFS, the entry is ignored. As a workaround, you can use the
+    #   Amazon S3 API or EFS API to create 0 byte objects as place holders
+    #   for your directory. If using the CLI, use the `s3api` or `efsapi`
+    #   call instead of `s3` or `efs` so you can use the put-object
     #   operation. For example, you use the following: `aws s3api put-object
     #   --bucket bucketname --key path/to/folder/`. Make sure that the end
-    #   of the key name ends in a / for it to be considered a folder.
+    #   of the key name ends in a `/` for it to be considered a folder.
     #
     #    </note>
     #   @return [Array<Types::HomeDirectoryMapEntry>]
@@ -2893,16 +3002,16 @@ module Aws::Transfer
     #   <note markdown="1"> This only applies when domain of `ServerId` is S3. Amazon EFS does
     #   not use scope-down policies.
     #
-    #    For scope-down policies, AWS Transfer Family stores the policy as a
-    #   JSON blob, instead of the Amazon Resource Name (ARN) of the policy.
-    #   You save the policy as a JSON blob and pass it in the `Policy`
-    #   argument.
+    #    For scope-down policies, Amazon Web ServicesTransfer Family stores
+    #   the policy as a JSON blob, instead of the Amazon Resource Name (ARN)
+    #   of the policy. You save the policy as a JSON blob and pass it in the
+    #   `Policy` argument.
     #
     #    For an example of a scope-down policy, see [Creating a scope-down
     #   policy][1].
     #
-    #    For more information, see [AssumeRole][2] in the *AWS Security Token
-    #   Service API Reference*.
+    #    For more information, see [AssumeRole][2] in the *Amazon Web
+    #   Services Security Token Service API Reference*.
     #
     #    </note>
     #

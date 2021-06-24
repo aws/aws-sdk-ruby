@@ -1610,7 +1610,7 @@ module Aws::Kendra
     #             },
     #           },
     #           share_point_configuration: {
-    #             share_point_version: "SHAREPOINT_ONLINE", # required, accepts SHAREPOINT_ONLINE
+    #             share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE
     #             urls: ["Url"], # required
     #             secret_arn: "SecretArn", # required
     #             crawl_attachments: false,
@@ -1630,6 +1630,10 @@ module Aws::Kendra
     #             ],
     #             document_title_field_name: "DataSourceFieldName",
     #             disable_local_groups: false,
+    #             ssl_certificate_s3_path: {
+    #               bucket: "S3BucketName", # required
+    #               key: "S3ObjectKey", # required
+    #             },
     #           },
     #           database_configuration: {
     #             database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -2449,7 +2453,7 @@ module Aws::Kendra
     #           },
     #         },
     #         share_point_configuration: {
-    #           share_point_version: "SHAREPOINT_ONLINE", # required, accepts SHAREPOINT_ONLINE
+    #           share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE
     #           urls: ["Url"], # required
     #           secret_arn: "SecretArn", # required
     #           crawl_attachments: false,
@@ -2469,6 +2473,10 @@ module Aws::Kendra
     #           ],
     #           document_title_field_name: "DataSourceFieldName",
     #           disable_local_groups: false,
+    #           ssl_certificate_s3_path: {
+    #             bucket: "S3BucketName", # required
+    #             key: "S3ObjectKey", # required
+    #           },
     #         },
     #         database_configuration: {
     #           database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -6820,7 +6828,7 @@ module Aws::Kendra
     #   data as a hash:
     #
     #       {
-    #         share_point_version: "SHAREPOINT_ONLINE", # required, accepts SHAREPOINT_ONLINE
+    #         share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE
     #         urls: ["Url"], # required
     #         secret_arn: "SecretArn", # required
     #         crawl_attachments: false,
@@ -6840,6 +6848,10 @@ module Aws::Kendra
     #         ],
     #         document_title_field_name: "DataSourceFieldName",
     #         disable_local_groups: false,
+    #         ssl_certificate_s3_path: {
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #         },
     #       }
     #
     # @!attribute [rw] share_point_version
@@ -6854,10 +6866,12 @@ module Aws::Kendra
     #
     # @!attribute [rw] secret_arn
     #   The Amazon Resource Name (ARN) of credentials stored in AWS Secrets
-    #   Manager. The credentials should be a user/password pair. For more
-    #   information, see [Using a Microsoft SharePoint Data Source][1]. For
-    #   more information about AWS Secrets Manager, see [ What Is AWS
-    #   Secrets Manager ][2] in the *AWS Secrets Manager* user guide.
+    #   Manager. The credentials should be a user/password pair. If you use
+    #   SharePoint Sever, you also need to provide the sever domain name as
+    #   part of the credentials. For more information, see [Using a
+    #   Microsoft SharePoint Data Source][1]. For more information about AWS
+    #   Secrets Manager, see [ What Is AWS Secrets Manager ][2] in the *AWS
+    #   Secrets Manager* user guide.
     #
     #
     #
@@ -6925,6 +6939,10 @@ module Aws::Kendra
     #   (`True`) or enabled (`False`).
     #   @return [Boolean]
     #
+    # @!attribute [rw] ssl_certificate_s3_path
+    #   Information required to find a specific file in an Amazon S3 bucket.
+    #   @return [Types::S3Path]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SharePointConfiguration AWS API Documentation
     #
     class SharePointConfiguration < Struct.new(
@@ -6938,7 +6956,8 @@ module Aws::Kendra
       :vpc_configuration,
       :field_mappings,
       :document_title_field_name,
-      :disable_local_groups)
+      :disable_local_groups,
+      :ssl_certificate_s3_path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7528,7 +7547,7 @@ module Aws::Kendra
     #             },
     #           },
     #           share_point_configuration: {
-    #             share_point_version: "SHAREPOINT_ONLINE", # required, accepts SHAREPOINT_ONLINE
+    #             share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE
     #             urls: ["Url"], # required
     #             secret_arn: "SecretArn", # required
     #             crawl_attachments: false,
@@ -7548,6 +7567,10 @@ module Aws::Kendra
     #             ],
     #             document_title_field_name: "DataSourceFieldName",
     #             disable_local_groups: false,
+    #             ssl_certificate_s3_path: {
+    #               bucket: "S3BucketName", # required
+    #               key: "S3ObjectKey", # required
+    #             },
     #           },
     #           database_configuration: {
     #             database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL

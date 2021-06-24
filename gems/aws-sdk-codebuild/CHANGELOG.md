@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2021-06-24)
+------------------
+
+* Feature - BucketOwnerAccess is currently not supported
+
 1.72.0 (2021-04-12)
 ------------------
 

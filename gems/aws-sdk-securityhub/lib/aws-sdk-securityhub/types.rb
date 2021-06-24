@@ -1253,6 +1253,7 @@ module Aws::SecurityHub
     #   data as a hash:
     #
     #       {
+    #         client_certificate_id: "NonEmptyString",
     #         created_date: "NonEmptyString",
     #         description: "NonEmptyString",
     #         default_route_settings: {
@@ -1283,6 +1284,11 @@ module Aws::SecurityHub
     #         last_deployment_status_message: "NonEmptyString",
     #         api_gateway_managed: false,
     #       }
+    #
+    # @!attribute [rw] client_certificate_id
+    #   The identifier of a client certificate for a stage. Supported only
+    #   for WebSocket API calls.
+    #   @return [String]
     #
     # @!attribute [rw] created_date
     #   Indicates when the stage was created.
@@ -1363,6 +1369,7 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsApiGatewayV2StageDetails AWS API Documentation
     #
     class AwsApiGatewayV2StageDetails < Struct.new(
+      :client_certificate_id,
       :created_date,
       :description,
       :default_route_settings,
@@ -2579,8 +2586,8 @@ module Aws::SecurityHub
     #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
     #   used to encrypt the build output artifacts.
     #
-    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
-    #   if available, the CMK alias (using the format alias/alias-name).
+    #   You can specify either the ARN of the CMK or, if available, the CMK
+    #   alias (using the format alias/alias-name).
     #   @return [String]
     #
     # @!attribute [rw] environment
@@ -2708,8 +2715,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] credential
-    #   The Amazon Resource Name (ARN) or name of credentials created using
-    #   AWS Secrets Manager.
+    #   The ARN or name of credentials created using AWS Secrets Manager.
     #
     #   <note markdown="1"> The credential can use the name of the credentials only if they
     #   exist in your current AWS Region.
@@ -3772,7 +3778,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # The details of an Amazon EC2 instance.
+    # The details of an EC2 instance.
     #
     # @note When making an API call, you may pass AwsEc2InstanceDetails
     #   data as a hash:
@@ -3787,6 +3793,11 @@ module Aws::SecurityHub
     #         vpc_id: "NonEmptyString",
     #         subnet_id: "NonEmptyString",
     #         launched_at: "NonEmptyString",
+    #         network_interfaces: [
+    #           {
+    #             network_interface_id: "NonEmptyString",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] type
@@ -3833,6 +3844,12 @@ module Aws::SecurityHub
     #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
+    # @!attribute [rw] network_interfaces
+    #   The identifiers of the network interfaces for the EC2 instance. The
+    #   details for each network interface are in a corresponding
+    #   `AwsEc2NetworkInterfacesDetails` object.
+    #   @return [Array<Types::AwsEc2InstanceNetworkInterfacesDetails>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2InstanceDetails AWS API Documentation
     #
     class AwsEc2InstanceDetails < Struct.new(
@@ -3844,7 +3861,30 @@ module Aws::SecurityHub
       :iam_instance_profile_arn,
       :vpc_id,
       :subnet_id,
-      :launched_at)
+      :launched_at,
+      :network_interfaces)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies a network interface for the EC2 instance.
+    #
+    # @note When making an API call, you may pass AwsEc2InstanceNetworkInterfacesDetails
+    #   data as a hash:
+    #
+    #       {
+    #         network_interface_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] network_interface_id
+    #   The identifier of the network interface. The details are in a
+    #   corresponding `AwsEc2NetworkInterfacesDetails` object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2InstanceNetworkInterfacesDetails AWS API Documentation
+    #
+    class AwsEc2InstanceNetworkInterfacesDetails < Struct.new(
+      :network_interface_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4577,7 +4617,7 @@ module Aws::SecurityHub
     #   referenced security group is deleted, this value is not returned.
     #
     #   \[EC2-Classic\] Required when adding or removing rules that
-    #   reference a security group in another AWS.
+    #   reference a security group in another VPC.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -4869,6 +4909,1978 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Indicates whether to enable CloudWatch Container Insights for the ECS
+    # cluster.
+    #
+    # @note When making an API call, you may pass AwsEcsClusterClusterSettingsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString",
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the setting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsClusterClusterSettingsDetails AWS API Documentation
+    #
+    class AwsEcsClusterClusterSettingsDetails < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The run command configuration for the cluster.
+    #
+    # @note When making an API call, you may pass AwsEcsClusterConfigurationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         execute_command_configuration: {
+    #           kms_key_id: "NonEmptyString",
+    #           log_configuration: {
+    #             cloud_watch_encryption_enabled: false,
+    #             cloud_watch_log_group_name: "NonEmptyString",
+    #             s3_bucket_name: "NonEmptyString",
+    #             s3_encryption_enabled: false,
+    #             s3_key_prefix: "NonEmptyString",
+    #           },
+    #           logging: "NonEmptyString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] execute_command_configuration
+    #   Contains the run command configuration for the cluster.
+    #   @return [Types::AwsEcsClusterConfigurationExecuteCommandConfigurationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsClusterConfigurationDetails AWS API Documentation
+    #
+    class AwsEcsClusterConfigurationDetails < Struct.new(
+      :execute_command_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the run command configuration for the cluster.
+    #
+    # @note When making an API call, you may pass AwsEcsClusterConfigurationExecuteCommandConfigurationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         kms_key_id: "NonEmptyString",
+    #         log_configuration: {
+    #           cloud_watch_encryption_enabled: false,
+    #           cloud_watch_log_group_name: "NonEmptyString",
+    #           s3_bucket_name: "NonEmptyString",
+    #           s3_encryption_enabled: false,
+    #           s3_key_prefix: "NonEmptyString",
+    #         },
+    #         logging: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier of the KMS key that is used to encrypt the data
+    #   between the local client and the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_configuration
+    #   The log configuration for the results of the run command actions.
+    #   Required if `Logging` is `NONE`.
+    #   @return [Types::AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails]
+    #
+    # @!attribute [rw] logging
+    #   The log setting to use for redirecting logs for run command results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsClusterConfigurationExecuteCommandConfigurationDetails AWS API Documentation
+    #
+    class AwsEcsClusterConfigurationExecuteCommandConfigurationDetails < Struct.new(
+      :kms_key_id,
+      :log_configuration,
+      :logging)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The log configuration for the results of the run command actions.
+    #
+    # @note When making an API call, you may pass AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_watch_encryption_enabled: false,
+    #         cloud_watch_log_group_name: "NonEmptyString",
+    #         s3_bucket_name: "NonEmptyString",
+    #         s3_encryption_enabled: false,
+    #         s3_key_prefix: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] cloud_watch_encryption_enabled
+    #   Whether to enable encryption on the CloudWatch logs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cloud_watch_log_group_name
+    #   The name of the CloudWatch log group to send the logs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The name of the S3 bucket to send logs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_encryption_enabled
+    #   Whether to encrypt the logs that are sent to the S3 bucket.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] s3_key_prefix
+    #   Identifies the folder in the S3 bucket to send the logs to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails AWS API Documentation
+    #
+    class AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails < Struct.new(
+      :cloud_watch_encryption_enabled,
+      :cloud_watch_log_group_name,
+      :s3_bucket_name,
+      :s3_encryption_enabled,
+      :s3_key_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The default capacity provider strategy for the cluster. The default
+    # capacity provider strategy is used when services or tasks are run
+    # without a specified launch type or capacity provider strategy.
+    #
+    # @note When making an API call, you may pass AwsEcsClusterDefaultCapacityProviderStrategyDetails
+    #   data as a hash:
+    #
+    #       {
+    #         base: 1,
+    #         capacity_provider: "NonEmptyString",
+    #         weight: 1,
+    #       }
+    #
+    # @!attribute [rw] base
+    #   The minimum number of tasks to run on the specified capacity
+    #   provider.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] capacity_provider
+    #   The name of the capacity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] weight
+    #   The relative percentage of the total number of tasks launched that
+    #   should use the capacity provider.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsClusterDefaultCapacityProviderStrategyDetails AWS API Documentation
+    #
+    class AwsEcsClusterDefaultCapacityProviderStrategyDetails < Struct.new(
+      :base,
+      :capacity_provider,
+      :weight)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # provides details about an ECS cluster.
+    #
+    # @note When making an API call, you may pass AwsEcsClusterDetails
+    #   data as a hash:
+    #
+    #       {
+    #         capacity_providers: ["NonEmptyString"],
+    #         cluster_settings: [
+    #           {
+    #             name: "NonEmptyString",
+    #             value: "NonEmptyString",
+    #           },
+    #         ],
+    #         configuration: {
+    #           execute_command_configuration: {
+    #             kms_key_id: "NonEmptyString",
+    #             log_configuration: {
+    #               cloud_watch_encryption_enabled: false,
+    #               cloud_watch_log_group_name: "NonEmptyString",
+    #               s3_bucket_name: "NonEmptyString",
+    #               s3_encryption_enabled: false,
+    #               s3_key_prefix: "NonEmptyString",
+    #             },
+    #             logging: "NonEmptyString",
+    #           },
+    #         },
+    #         default_capacity_provider_strategy: [
+    #           {
+    #             base: 1,
+    #             capacity_provider: "NonEmptyString",
+    #             weight: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] capacity_providers
+    #   The short name of one or more capacity providers to associate with
+    #   the cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cluster_settings
+    #   The setting to use to create the cluster. Specifically used to
+    #   configure whether to enable CloudWatch Container Insights for the
+    #   cluster.
+    #   @return [Array<Types::AwsEcsClusterClusterSettingsDetails>]
+    #
+    # @!attribute [rw] configuration
+    #   The run command configuration for the cluster.
+    #   @return [Types::AwsEcsClusterConfigurationDetails]
+    #
+    # @!attribute [rw] default_capacity_provider_strategy
+    #   The default capacity provider strategy for the cluster. The default
+    #   capacity provider strategy is used when services or tasks are run
+    #   without a specified launch type or capacity provider strategy.
+    #   @return [Array<Types::AwsEcsClusterDefaultCapacityProviderStrategyDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsClusterDetails AWS API Documentation
+    #
+    class AwsEcsClusterDetails < Struct.new(
+      :capacity_providers,
+      :cluster_settings,
+      :configuration,
+      :default_capacity_provider_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A dependency that is defined for container startup and shutdown.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails
+    #   data as a hash:
+    #
+    #       {
+    #         condition: "NonEmptyString",
+    #         container_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] condition
+    #   The dependency condition of the dependent container. Indicates the
+    #   required status of the dependent container before the current
+    #   container can start.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_name
+    #   The name of the dependent container.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails < Struct.new(
+      :condition,
+      :container_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container definition that describes a container in the task.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         command: ["NonEmptyString"],
+    #         cpu: 1,
+    #         depends_on: [
+    #           {
+    #             condition: "NonEmptyString",
+    #             container_name: "NonEmptyString",
+    #           },
+    #         ],
+    #         disable_networking: false,
+    #         dns_search_domains: ["NonEmptyString"],
+    #         dns_servers: ["NonEmptyString"],
+    #         docker_labels: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
+    #         docker_security_options: ["NonEmptyString"],
+    #         entry_point: ["NonEmptyString"],
+    #         environment: [
+    #           {
+    #             name: "NonEmptyString",
+    #             value: "NonEmptyString",
+    #           },
+    #         ],
+    #         environment_files: [
+    #           {
+    #             type: "NonEmptyString",
+    #             value: "NonEmptyString",
+    #           },
+    #         ],
+    #         essential: false,
+    #         extra_hosts: [
+    #           {
+    #             hostname: "NonEmptyString",
+    #             ip_address: "NonEmptyString",
+    #           },
+    #         ],
+    #         firelens_configuration: {
+    #           options: {
+    #             "NonEmptyString" => "NonEmptyString",
+    #           },
+    #           type: "NonEmptyString",
+    #         },
+    #         health_check: {
+    #           command: ["NonEmptyString"],
+    #           interval: 1,
+    #           retries: 1,
+    #           start_period: 1,
+    #           timeout: 1,
+    #         },
+    #         hostname: "NonEmptyString",
+    #         image: "NonEmptyString",
+    #         interactive: false,
+    #         links: ["NonEmptyString"],
+    #         linux_parameters: {
+    #           capabilities: {
+    #             add: ["NonEmptyString"],
+    #             drop: ["NonEmptyString"],
+    #           },
+    #           devices: [
+    #             {
+    #               container_path: "NonEmptyString",
+    #               host_path: "NonEmptyString",
+    #               permissions: ["NonEmptyString"],
+    #             },
+    #           ],
+    #           init_process_enabled: false,
+    #           max_swap: 1,
+    #           shared_memory_size: 1,
+    #           swappiness: 1,
+    #           tmpfs: [
+    #             {
+    #               container_path: "NonEmptyString",
+    #               mount_options: ["NonEmptyString"],
+    #               size: 1,
+    #             },
+    #           ],
+    #         },
+    #         log_configuration: {
+    #           log_driver: "NonEmptyString",
+    #           options: {
+    #             "NonEmptyString" => "NonEmptyString",
+    #           },
+    #           secret_options: [
+    #             {
+    #               name: "NonEmptyString",
+    #               value_from: "NonEmptyString",
+    #             },
+    #           ],
+    #         },
+    #         memory: 1,
+    #         memory_reservation: 1,
+    #         mount_points: [
+    #           {
+    #             container_path: "NonEmptyString",
+    #             read_only: false,
+    #             source_volume: "NonEmptyString",
+    #           },
+    #         ],
+    #         name: "NonEmptyString",
+    #         port_mappings: [
+    #           {
+    #             container_port: 1,
+    #             host_port: 1,
+    #             protocol: "NonEmptyString",
+    #           },
+    #         ],
+    #         privileged: false,
+    #         pseudo_terminal: false,
+    #         readonly_root_filesystem: false,
+    #         repository_credentials: {
+    #           credentials_parameter: "NonEmptyString",
+    #         },
+    #         resource_requirements: [
+    #           {
+    #             type: "NonEmptyString",
+    #             value: "NonEmptyString",
+    #           },
+    #         ],
+    #         secrets: [
+    #           {
+    #             name: "NonEmptyString",
+    #             value_from: "NonEmptyString",
+    #           },
+    #         ],
+    #         start_timeout: 1,
+    #         stop_timeout: 1,
+    #         system_controls: [
+    #           {
+    #             namespace: "NonEmptyString",
+    #             value: "NonEmptyString",
+    #           },
+    #         ],
+    #         ulimits: [
+    #           {
+    #             hard_limit: 1,
+    #             name: "NonEmptyString",
+    #             soft_limit: 1,
+    #           },
+    #         ],
+    #         user: "NonEmptyString",
+    #         volumes_from: [
+    #           {
+    #             read_only: false,
+    #             source_container: "NonEmptyString",
+    #           },
+    #         ],
+    #         working_directory: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] command
+    #   The command that is passed to the container.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cpu
+    #   The number of CPU units reserved for the container.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] depends_on
+    #   The dependencies that are defined for container startup and
+    #   shutdown.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails>]
+    #
+    # @!attribute [rw] disable_networking
+    #   Whether to disable networking within the container.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dns_search_domains
+    #   A list of DNS search domains that are presented to the container.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dns_servers
+    #   A list of DNS servers that are presented to the container.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] docker_labels
+    #   A key-value map of labels to add to the container.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] docker_security_options
+    #   A list of strings to provide custom labels for SELinux and AppArmor
+    #   multi-level security systems.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] entry_point
+    #   The entry point that is passed to the container.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] environment
+    #   The environment variables to pass to a container.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails>]
+    #
+    # @!attribute [rw] environment_files
+    #   A list of files containing the environment variables to pass to a
+    #   container.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails>]
+    #
+    # @!attribute [rw] essential
+    #   Whether the container is essential. All tasks must have at least one
+    #   essential container.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] extra_hosts
+    #   A list of hostnames and IP address mappings to append to the
+    #   **/etc/hosts** file on the container.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails>]
+    #
+    # @!attribute [rw] firelens_configuration
+    #   The FireLens configuration for the container. Specifies and
+    #   configures a log router for container logs.
+    #   @return [Types::AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails]
+    #
+    # @!attribute [rw] health_check
+    #   The container health check command and associated configuration
+    #   parameters for the container.
+    #   @return [Types::AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails]
+    #
+    # @!attribute [rw] hostname
+    #   The hostname to use for the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] image
+    #   The image used to start the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] interactive
+    #   If set to true, then containerized applications can be deployed that
+    #   require `stdin` or a `tty` to be allocated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] links
+    #   A list of links for the container in the form ` container_name:alias
+    #   `. Allows containers to communicate with each other without the need
+    #   for port mappings.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] linux_parameters
+    #   Linux-specific modifications that are applied to the container, such
+    #   as Linux kernel capabilities.
+    #   @return [Types::AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails]
+    #
+    # @!attribute [rw] log_configuration
+    #   The log configuration specification for the container.
+    #   @return [Types::AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails]
+    #
+    # @!attribute [rw] memory
+    #   The amount (in MiB) of memory to present to the container. If the
+    #   container attempts to exceed the memory specified here, the
+    #   container is shut down. The total amount of memory reserved for all
+    #   containers within a task must be lower than the task memory value,
+    #   if one is specified.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] memory_reservation
+    #   The soft limit (in MiB) of memory to reserve for the container.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mount_points
+    #   The mount points for the data volumes in the container.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails>]
+    #
+    # @!attribute [rw] name
+    #   The name of the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] port_mappings
+    #   The list of port mappings for the container.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails>]
+    #
+    # @!attribute [rw] privileged
+    #   Whether the container is given elevated privileges on the host
+    #   container instance. The elevated privileges are similar to the root
+    #   user.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] pseudo_terminal
+    #   Whether to allocate a TTY to the container.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] readonly_root_filesystem
+    #   Whether the container is given read-only access to its root file
+    #   system.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] repository_credentials
+    #   The private repository authentication credentials to use.
+    #   @return [Types::AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails]
+    #
+    # @!attribute [rw] resource_requirements
+    #   The type and amount of a resource to assign to a container. The only
+    #   supported resource is a GPU.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails>]
+    #
+    # @!attribute [rw] secrets
+    #   The secrets to pass to the container.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails>]
+    #
+    # @!attribute [rw] start_timeout
+    #   The number of seconds to wait before giving up on resolving
+    #   dependencies for a container.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stop_timeout
+    #   The number of seconds to wait before the container is stopped if it
+    #   doesn't shut down normally on its own.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] system_controls
+    #   A list of namespaced kernel parameters to set in the container.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails>]
+    #
+    # @!attribute [rw] ulimits
+    #   A list of ulimits to set in the container.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails>]
+    #
+    # @!attribute [rw] user
+    #   The user to use inside the container.
+    #
+    #   The value can use one of the following formats.
+    #
+    #   * ` user `
+    #
+    #   * ` user `\:` group `
+    #
+    #   * ` uid `
+    #
+    #   * ` uid `\:` gid `
+    #
+    #   * ` user `\:` gid `
+    #
+    #   * ` uid `\:` group `
+    #   @return [String]
+    #
+    # @!attribute [rw] volumes_from
+    #   Data volumes to mount from another container.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails>]
+    #
+    # @!attribute [rw] working_directory
+    #   The working directory in which to run commands inside the container.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsDetails < Struct.new(
+      :command,
+      :cpu,
+      :depends_on,
+      :disable_networking,
+      :dns_search_domains,
+      :dns_servers,
+      :docker_labels,
+      :docker_security_options,
+      :entry_point,
+      :environment,
+      :environment_files,
+      :essential,
+      :extra_hosts,
+      :firelens_configuration,
+      :health_check,
+      :hostname,
+      :image,
+      :interactive,
+      :links,
+      :linux_parameters,
+      :log_configuration,
+      :memory,
+      :memory_reservation,
+      :mount_points,
+      :name,
+      :port_mappings,
+      :privileged,
+      :pseudo_terminal,
+      :readonly_root_filesystem,
+      :repository_credentials,
+      :resource_requirements,
+      :secrets,
+      :start_timeout,
+      :stop_timeout,
+      :system_controls,
+      :ulimits,
+      :user,
+      :volumes_from,
+      :working_directory)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An environment variable to pass to the container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString",
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the environment variable.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the environment variable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A file that contain environment variables to pass to a container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails
+    #   data as a hash:
+    #
+    #       {
+    #         type: "NonEmptyString",
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of environment file.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The ARN of the S3 object that contains the environment variable
+    #   file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails < Struct.new(
+      :type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A hostname and IP address mapping to append to the **/etc/hosts** file
+    # on the container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         hostname: "NonEmptyString",
+    #         ip_address: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] hostname
+    #   The hostname to use in the **/etc/hosts** entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address
+    #   The IP address to use in the **/etc/hosts** entry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails < Struct.new(
+      :hostname,
+      :ip_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The FireLens configuration for the container. The configuration
+    # specifies and configures a log router for container logs.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         options: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
+    #         type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] options
+    #   The options to use to configure the log router.
+    #
+    #   The valid option keys are as follows:
+    #
+    #   * `enable-ecs-log-metadata`. The value can be `true` or `false`.
+    #
+    #   * `config-file-type`. The value can be `s3` or `file`.
+    #
+    #   * `config-file-value`. The value is either an S3 ARN or a file path.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] type
+    #   The log router to use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails < Struct.new(
+      :options,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The container health check command and associated configuration
+    # parameters for the container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails
+    #   data as a hash:
+    #
+    #       {
+    #         command: ["NonEmptyString"],
+    #         interval: 1,
+    #         retries: 1,
+    #         start_period: 1,
+    #         timeout: 1,
+    #       }
+    #
+    # @!attribute [rw] command
+    #   The command that the container runs to determine whether it is
+    #   healthy.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] interval
+    #   The time period in seconds between each health check execution. The
+    #   default value is 30 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] retries
+    #   The number of times to retry a failed health check before the
+    #   container is considered unhealthy. The default value is 3.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_period
+    #   The optional grace period in seconds that allows containers time to
+    #   bootstrap before failed health checks count towards the maximum
+    #   number of retries.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeout
+    #   The time period in seconds to wait for a health check to succeed
+    #   before it is considered a failure. The default value is 5.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails < Struct.new(
+      :command,
+      :interval,
+      :retries,
+      :start_period,
+      :timeout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Linux capabilities for the container that are added to or dropped
+    # from the default configuration provided by Docker.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails
+    #   data as a hash:
+    #
+    #       {
+    #         add: ["NonEmptyString"],
+    #         drop: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] add
+    #   The Linux capabilities for the container that are added to the
+    #   default configuration provided by Docker.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] drop
+    #   The Linux capabilities for the container that are dropped from the
+    #   default configuration provided by Docker.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails < Struct.new(
+      :add,
+      :drop)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # &gt;Linux-specific modifications that are applied to the container,
+    # such as Linux kernel capabilities.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails
+    #   data as a hash:
+    #
+    #       {
+    #         capabilities: {
+    #           add: ["NonEmptyString"],
+    #           drop: ["NonEmptyString"],
+    #         },
+    #         devices: [
+    #           {
+    #             container_path: "NonEmptyString",
+    #             host_path: "NonEmptyString",
+    #             permissions: ["NonEmptyString"],
+    #           },
+    #         ],
+    #         init_process_enabled: false,
+    #         max_swap: 1,
+    #         shared_memory_size: 1,
+    #         swappiness: 1,
+    #         tmpfs: [
+    #           {
+    #             container_path: "NonEmptyString",
+    #             mount_options: ["NonEmptyString"],
+    #             size: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] capabilities
+    #   The Linux capabilities for the container that are added to or
+    #   dropped from the default configuration provided by Docker.
+    #   @return [Types::AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails]
+    #
+    # @!attribute [rw] devices
+    #   The host devices to expose to the container.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails>]
+    #
+    # @!attribute [rw] init_process_enabled
+    #   Whether to run an `init` process inside the container that forwards
+    #   signals and reaps processes.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_swap
+    #   The total amount of swap memory (in MiB) that a container can use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] shared_memory_size
+    #   The value for the size (in MiB) of the **/dev/shm** volume.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] swappiness
+    #   Configures the container's memory swappiness behavior. Determines
+    #   how aggressively pages are swapped. The higher the value, the more
+    #   aggressive the swappiness. The default is 60.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tmpfs
+    #   The container path, mount options, and size (in MiB) of the tmpfs
+    #   mount.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails < Struct.new(
+      :capabilities,
+      :devices,
+      :init_process_enabled,
+      :max_swap,
+      :shared_memory_size,
+      :swappiness,
+      :tmpfs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A host device to expose to the container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails
+    #   data as a hash:
+    #
+    #       {
+    #         container_path: "NonEmptyString",
+    #         host_path: "NonEmptyString",
+    #         permissions: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] container_path
+    #   The path inside the container at which to expose the host device.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_path
+    #   The path for the device on the host container instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   The explicit permissions to provide to the container for the device.
+    #   By default, the container has permissions for read, write, and
+    #   `mknod` for the device.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails < Struct.new(
+      :container_path,
+      :host_path,
+      :permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The container path, mount options, and size (in MiB) of a tmpfs mount.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         container_path: "NonEmptyString",
+    #         mount_options: ["NonEmptyString"],
+    #         size: 1,
+    #       }
+    #
+    # @!attribute [rw] container_path
+    #   The absolute file path where the tmpfs volume is to be mounted.
+    #   @return [String]
+    #
+    # @!attribute [rw] mount_options
+    #   The list of tmpfs volume mount options.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] size
+    #   The maximum size (in MiB) of the tmpfs volume.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails < Struct.new(
+      :container_path,
+      :mount_options,
+      :size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The log configuration specification for the container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         log_driver: "NonEmptyString",
+    #         options: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
+    #         secret_options: [
+    #           {
+    #             name: "NonEmptyString",
+    #             value_from: "NonEmptyString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] log_driver
+    #   The log driver to use for the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] options
+    #   The configuration options to send to the log driver. Requires
+    #   version 1.19 of the Docker Remote API or greater on your container
+    #   instance.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] secret_options
+    #   The secrets to pass to the log configuration.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails < Struct.new(
+      :log_driver,
+      :options,
+      :secret_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A secret to pass to the log configuration.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString",
+    #         value_from: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_from
+    #   The secret to expose to the container.
+    #
+    #   The value is either the full ARN of the Secrets Manager secret or
+    #   the full ARN of the parameter in the Systems Manager Parameter
+    #   Store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails < Struct.new(
+      :name,
+      :value_from)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A mount point for the data volumes in the container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         container_path: "NonEmptyString",
+    #         read_only: false,
+    #         source_volume: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] container_path
+    #   The path on the container to mount the host volume at.
+    #   @return [String]
+    #
+    # @!attribute [rw] read_only
+    #   Whether the container has read-only access to the volume.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] source_volume
+    #   The name of the volume to mount. Must match the name of a volume
+    #   listed in `VolumeDetails` for the task definition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails < Struct.new(
+      :container_path,
+      :read_only,
+      :source_volume)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A port mapping for the container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         container_port: 1,
+    #         host_port: 1,
+    #         protocol: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] container_port
+    #   The port number on the container that is bound to the user-specified
+    #   or automatically assigned host port.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] host_port
+    #   The port number on the container instance to reserve for the
+    #   container.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol used for the port mapping. The default is `tcp`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails < Struct.new(
+      :container_port,
+      :host_port,
+      :protocol)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The private repository authentication credentials to use.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         credentials_parameter: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] credentials_parameter
+    #   The ARN of the secret that contains the private repository
+    #   credentials.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails < Struct.new(
+      :credentials_parameter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A resource to assign to a container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         type: "NonEmptyString",
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of resource to assign to a container.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value for the specified resource type.
+    #
+    #   For `GPU`, the value is the number of physical GPUs the Amazon ECS
+    #   container agent reserves for the container.
+    #
+    #   For `InferenceAccelerator`, the value should match the `DeviceName`
+    #   attribute of an entry in `InferenceAccelerators`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails < Struct.new(
+      :type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A secret to pass to the container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString",
+    #         value_from: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_from
+    #   The secret to expose to the container. The value is either the full
+    #   ARN of the Secrets Manager secret or the full ARN of the parameter
+    #   in the Systems Manager Parameter Store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails < Struct.new(
+      :name,
+      :value_from)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A namespaced kernel parameter to set in the container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         namespace: "NonEmptyString",
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] namespace
+    #   The namespaced kernel parameter for which to set a value.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails < Struct.new(
+      :namespace,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A ulimit to set in the container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         hard_limit: 1,
+    #         name: "NonEmptyString",
+    #         soft_limit: 1,
+    #       }
+    #
+    # @!attribute [rw] hard_limit
+    #   The hard limit for the ulimit type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   The type of the ulimit.
+    #   @return [String]
+    #
+    # @!attribute [rw] soft_limit
+    #   The soft limit for the ulimit type.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails < Struct.new(
+      :hard_limit,
+      :name,
+      :soft_limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A data volume to mount from another container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails
+    #   data as a hash:
+    #
+    #       {
+    #         read_only: false,
+    #         source_container: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] read_only
+    #   Whether the container has read-only access to the volume.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] source_container
+    #   The name of another container within the same task definition from
+    #   which to mount volumes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails < Struct.new(
+      :read_only,
+      :source_container)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # details about a task definition. A task definition describes the
+    # container and volume definitions of an Amazon Elastic Container
+    # Service task.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionDetails
+    #   data as a hash:
+    #
+    #       {
+    #         container_definitions: [
+    #           {
+    #             command: ["NonEmptyString"],
+    #             cpu: 1,
+    #             depends_on: [
+    #               {
+    #                 condition: "NonEmptyString",
+    #                 container_name: "NonEmptyString",
+    #               },
+    #             ],
+    #             disable_networking: false,
+    #             dns_search_domains: ["NonEmptyString"],
+    #             dns_servers: ["NonEmptyString"],
+    #             docker_labels: {
+    #               "NonEmptyString" => "NonEmptyString",
+    #             },
+    #             docker_security_options: ["NonEmptyString"],
+    #             entry_point: ["NonEmptyString"],
+    #             environment: [
+    #               {
+    #                 name: "NonEmptyString",
+    #                 value: "NonEmptyString",
+    #               },
+    #             ],
+    #             environment_files: [
+    #               {
+    #                 type: "NonEmptyString",
+    #                 value: "NonEmptyString",
+    #               },
+    #             ],
+    #             essential: false,
+    #             extra_hosts: [
+    #               {
+    #                 hostname: "NonEmptyString",
+    #                 ip_address: "NonEmptyString",
+    #               },
+    #             ],
+    #             firelens_configuration: {
+    #               options: {
+    #                 "NonEmptyString" => "NonEmptyString",
+    #               },
+    #               type: "NonEmptyString",
+    #             },
+    #             health_check: {
+    #               command: ["NonEmptyString"],
+    #               interval: 1,
+    #               retries: 1,
+    #               start_period: 1,
+    #               timeout: 1,
+    #             },
+    #             hostname: "NonEmptyString",
+    #             image: "NonEmptyString",
+    #             interactive: false,
+    #             links: ["NonEmptyString"],
+    #             linux_parameters: {
+    #               capabilities: {
+    #                 add: ["NonEmptyString"],
+    #                 drop: ["NonEmptyString"],
+    #               },
+    #               devices: [
+    #                 {
+    #                   container_path: "NonEmptyString",
+    #                   host_path: "NonEmptyString",
+    #                   permissions: ["NonEmptyString"],
+    #                 },
+    #               ],
+    #               init_process_enabled: false,
+    #               max_swap: 1,
+    #               shared_memory_size: 1,
+    #               swappiness: 1,
+    #               tmpfs: [
+    #                 {
+    #                   container_path: "NonEmptyString",
+    #                   mount_options: ["NonEmptyString"],
+    #                   size: 1,
+    #                 },
+    #               ],
+    #             },
+    #             log_configuration: {
+    #               log_driver: "NonEmptyString",
+    #               options: {
+    #                 "NonEmptyString" => "NonEmptyString",
+    #               },
+    #               secret_options: [
+    #                 {
+    #                   name: "NonEmptyString",
+    #                   value_from: "NonEmptyString",
+    #                 },
+    #               ],
+    #             },
+    #             memory: 1,
+    #             memory_reservation: 1,
+    #             mount_points: [
+    #               {
+    #                 container_path: "NonEmptyString",
+    #                 read_only: false,
+    #                 source_volume: "NonEmptyString",
+    #               },
+    #             ],
+    #             name: "NonEmptyString",
+    #             port_mappings: [
+    #               {
+    #                 container_port: 1,
+    #                 host_port: 1,
+    #                 protocol: "NonEmptyString",
+    #               },
+    #             ],
+    #             privileged: false,
+    #             pseudo_terminal: false,
+    #             readonly_root_filesystem: false,
+    #             repository_credentials: {
+    #               credentials_parameter: "NonEmptyString",
+    #             },
+    #             resource_requirements: [
+    #               {
+    #                 type: "NonEmptyString",
+    #                 value: "NonEmptyString",
+    #               },
+    #             ],
+    #             secrets: [
+    #               {
+    #                 name: "NonEmptyString",
+    #                 value_from: "NonEmptyString",
+    #               },
+    #             ],
+    #             start_timeout: 1,
+    #             stop_timeout: 1,
+    #             system_controls: [
+    #               {
+    #                 namespace: "NonEmptyString",
+    #                 value: "NonEmptyString",
+    #               },
+    #             ],
+    #             ulimits: [
+    #               {
+    #                 hard_limit: 1,
+    #                 name: "NonEmptyString",
+    #                 soft_limit: 1,
+    #               },
+    #             ],
+    #             user: "NonEmptyString",
+    #             volumes_from: [
+    #               {
+    #                 read_only: false,
+    #                 source_container: "NonEmptyString",
+    #               },
+    #             ],
+    #             working_directory: "NonEmptyString",
+    #           },
+    #         ],
+    #         cpu: "NonEmptyString",
+    #         execution_role_arn: "NonEmptyString",
+    #         family: "NonEmptyString",
+    #         inference_accelerators: [
+    #           {
+    #             device_name: "NonEmptyString",
+    #             device_type: "NonEmptyString",
+    #           },
+    #         ],
+    #         ipc_mode: "NonEmptyString",
+    #         memory: "NonEmptyString",
+    #         network_mode: "NonEmptyString",
+    #         pid_mode: "NonEmptyString",
+    #         placement_constraints: [
+    #           {
+    #             expression: "NonEmptyString",
+    #             type: "NonEmptyString",
+    #           },
+    #         ],
+    #         proxy_configuration: {
+    #           container_name: "NonEmptyString",
+    #           proxy_configuration_properties: [
+    #             {
+    #               name: "NonEmptyString",
+    #               value: "NonEmptyString",
+    #             },
+    #           ],
+    #           type: "NonEmptyString",
+    #         },
+    #         requires_compatibilities: ["NonEmptyString"],
+    #         task_role_arn: "NonEmptyString",
+    #         volumes: [
+    #           {
+    #             docker_volume_configuration: {
+    #               autoprovision: false,
+    #               driver: "NonEmptyString",
+    #               driver_opts: {
+    #                 "NonEmptyString" => "NonEmptyString",
+    #               },
+    #               labels: {
+    #                 "NonEmptyString" => "NonEmptyString",
+    #               },
+    #               scope: "NonEmptyString",
+    #             },
+    #             efs_volume_configuration: {
+    #               authorization_config: {
+    #                 access_point_id: "NonEmptyString",
+    #                 iam: "NonEmptyString",
+    #               },
+    #               filesystem_id: "NonEmptyString",
+    #               root_directory: "NonEmptyString",
+    #               transit_encryption: "NonEmptyString",
+    #               transit_encryption_port: 1,
+    #             },
+    #             host: {
+    #               source_path: "NonEmptyString",
+    #             },
+    #             name: "NonEmptyString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] container_definitions
+    #   The container definitions that describe the containers that make up
+    #   the task.
+    #   @return [Array<Types::AwsEcsTaskDefinitionContainerDefinitionsDetails>]
+    #
+    # @!attribute [rw] cpu
+    #   The number of CPU units used by the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The ARN of the task execution role that grants the container agent
+    #   permission to make API calls on behalf of the container user.
+    #   @return [String]
+    #
+    # @!attribute [rw] family
+    #   The name of a family that this task definition is registered to.
+    #   @return [String]
+    #
+    # @!attribute [rw] inference_accelerators
+    #   The Elastic Inference accelerators to use for the containers in the
+    #   task.
+    #   @return [Array<Types::AwsEcsTaskDefinitionInferenceAcceleratorsDetails>]
+    #
+    # @!attribute [rw] ipc_mode
+    #   The IPC resource namespace to use for the containers in the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] memory
+    #   The amount (in MiB) of memory used by the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_mode
+    #   The Docker networking mode to use for the containers in the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] pid_mode
+    #   The process namespace to use for the containers in the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] placement_constraints
+    #   The placement constraint objects to use for tasks.
+    #   @return [Array<Types::AwsEcsTaskDefinitionPlacementConstraintsDetails>]
+    #
+    # @!attribute [rw] proxy_configuration
+    #   The configuration details for the App Mesh proxy.
+    #   @return [Types::AwsEcsTaskDefinitionProxyConfigurationDetails]
+    #
+    # @!attribute [rw] requires_compatibilities
+    #   The task launch types that the task definition was validated
+    #   against.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] task_role_arn
+    #   The short name or ARN of the IAM role that grants containers in the
+    #   task permission to call AWS API operations on your behalf.
+    #   @return [String]
+    #
+    # @!attribute [rw] volumes
+    #   The data volume definitions for the task.
+    #   @return [Array<Types::AwsEcsTaskDefinitionVolumesDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionDetails < Struct.new(
+      :container_definitions,
+      :cpu,
+      :execution_role_arn,
+      :family,
+      :inference_accelerators,
+      :ipc_mode,
+      :memory,
+      :network_mode,
+      :pid_mode,
+      :placement_constraints,
+      :proxy_configuration,
+      :requires_compatibilities,
+      :task_role_arn,
+      :volumes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An Elastic Inference accelerator to use for the containers in the
+    # task.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionInferenceAcceleratorsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         device_name: "NonEmptyString",
+    #         device_type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] device_name
+    #   The Elastic Inference accelerator device name.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_type
+    #   The Elastic Inference accelerator type to use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionInferenceAcceleratorsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionInferenceAcceleratorsDetails < Struct.new(
+      :device_name,
+      :device_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A placement constraint object to use for tasks.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionPlacementConstraintsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         expression: "NonEmptyString",
+    #         type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] expression
+    #   A cluster query language expression to apply to the constraint.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of constraint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionPlacementConstraintsDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionPlacementConstraintsDetails < Struct.new(
+      :expression,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration details for the App Mesh proxy.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionProxyConfigurationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         container_name: "NonEmptyString",
+    #         proxy_configuration_properties: [
+    #           {
+    #             name: "NonEmptyString",
+    #             value: "NonEmptyString",
+    #           },
+    #         ],
+    #         type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] container_name
+    #   The name of the container that will serve as the App Mesh proxy.
+    #   @return [String]
+    #
+    # @!attribute [rw] proxy_configuration_properties
+    #   The set of network configuration parameters to provide to the
+    #   Container Network Interface (CNI) plugin, specified as key-value
+    #   pairs.
+    #   @return [Array<Types::AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails>]
+    #
+    # @!attribute [rw] type
+    #   The proxy type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionProxyConfigurationDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionProxyConfigurationDetails < Struct.new(
+      :container_name,
+      :proxy_configuration_properties,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A network configuration parameter to provide to the Container Network
+    # Interface (CNI) plugin.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString",
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the property.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the property.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A data volume to mount from another container.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionVolumesDetails
+    #   data as a hash:
+    #
+    #       {
+    #         docker_volume_configuration: {
+    #           autoprovision: false,
+    #           driver: "NonEmptyString",
+    #           driver_opts: {
+    #             "NonEmptyString" => "NonEmptyString",
+    #           },
+    #           labels: {
+    #             "NonEmptyString" => "NonEmptyString",
+    #           },
+    #           scope: "NonEmptyString",
+    #         },
+    #         efs_volume_configuration: {
+    #           authorization_config: {
+    #             access_point_id: "NonEmptyString",
+    #             iam: "NonEmptyString",
+    #           },
+    #           filesystem_id: "NonEmptyString",
+    #           root_directory: "NonEmptyString",
+    #           transit_encryption: "NonEmptyString",
+    #           transit_encryption_port: 1,
+    #         },
+    #         host: {
+    #           source_path: "NonEmptyString",
+    #         },
+    #         name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] docker_volume_configuration
+    #   Information about a Docker volume.
+    #   @return [Types::AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails]
+    #
+    # @!attribute [rw] efs_volume_configuration
+    #   Information about the Amazon Elastic File System file system that is
+    #   used for task storage.
+    #   @return [Types::AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails]
+    #
+    # @!attribute [rw] host
+    #   Information about a bind mount host volume.
+    #   @return [Types::AwsEcsTaskDefinitionVolumesHostDetails]
+    #
+    # @!attribute [rw] name
+    #   The name of the data volume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionVolumesDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionVolumesDetails < Struct.new(
+      :docker_volume_configuration,
+      :efs_volume_configuration,
+      :host,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a Docker volume.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         autoprovision: false,
+    #         driver: "NonEmptyString",
+    #         driver_opts: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
+    #         labels: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
+    #         scope: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] autoprovision
+    #   Whether to create the Docker volume automatically if it does not
+    #   already exist.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] driver
+    #   The Docker volume driver to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] driver_opts
+    #   A map of Docker driver-specific options that are passed through.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] labels
+    #   Custom metadata to add to the Docker volume.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] scope
+    #   The scope for the Docker volume that determines its lifecycle.
+    #   Docker volumes that are scoped to a task are provisioned
+    #   automatically when the task starts and destroyed when the task
+    #   stops. Docker volumes that are shared persist after the task stops.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails < Struct.new(
+      :autoprovision,
+      :driver,
+      :driver_opts,
+      :labels,
+      :scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails
+    #   data as a hash:
+    #
+    #       {
+    #         access_point_id: "NonEmptyString",
+    #         iam: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] access_point_id
+    #   The Amazon EFS access point identifier to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam
+    #   Whether to use the Amazon ECS task IAM role defined in a task
+    #   definition when mounting the Amazon EFS file system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails < Struct.new(
+      :access_point_id,
+      :iam)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the Amazon Elastic File System file system that is
+    # used for task storage.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         authorization_config: {
+    #           access_point_id: "NonEmptyString",
+    #           iam: "NonEmptyString",
+    #         },
+    #         filesystem_id: "NonEmptyString",
+    #         root_directory: "NonEmptyString",
+    #         transit_encryption: "NonEmptyString",
+    #         transit_encryption_port: 1,
+    #       }
+    #
+    # @!attribute [rw] authorization_config
+    #   The authorization configuration details for the Amazon EFS file
+    #   system.
+    #   @return [Types::AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails]
+    #
+    # @!attribute [rw] filesystem_id
+    #   The Amazon EFS file system identifier to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] root_directory
+    #   The directory within the Amazon EFS file system to mount as the root
+    #   directory inside the host.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_encryption
+    #   Whether to enable encryption for Amazon EFS data in transit between
+    #   the Amazon ECS host and the Amazon EFS server.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_encryption_port
+    #   The port to use when sending encrypted data between the Amazon ECS
+    #   host and the Amazon EFS server.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails < Struct.new(
+      :authorization_config,
+      :filesystem_id,
+      :root_directory,
+      :transit_encryption,
+      :transit_encryption_port)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a bind mount host volume.
+    #
+    # @note When making an API call, you may pass AwsEcsTaskDefinitionVolumesHostDetails
+    #   data as a hash:
+    #
+    #       {
+    #         source_path: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] source_path
+    #   The path on the host container instance that is presented to the
+    #   container.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsTaskDefinitionVolumesHostDetails AWS API Documentation
+    #
+    class AwsEcsTaskDefinitionVolumesHostDetails < Struct.new(
+      :source_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details about an Elastic Beanstalk environment.
     #
     # @note When making an API call, you may pass AwsElasticBeanstalkEnvironmentDetails
@@ -5122,8 +7134,27 @@ module Aws::SecurityHub
     #           enabled: false,
     #           kms_key_id: "NonEmptyString",
     #         },
+    #         log_publishing_options: {
+    #           index_slow_logs: {
+    #             cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #             enabled: false,
+    #           },
+    #           search_slow_logs: {
+    #             cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #             enabled: false,
+    #           },
+    #         },
     #         node_to_node_encryption_options: {
     #           enabled: false,
+    #         },
+    #         service_software_options: {
+    #           automated_update_date: "NonEmptyString",
+    #           cancellable: false,
+    #           current_version: "NonEmptyString",
+    #           description: "NonEmptyString",
+    #           new_version: "NonEmptyString",
+    #           update_available: false,
+    #           update_status: "NonEmptyString",
     #         },
     #         vpc_options: {
     #           availability_zones: ["NonEmptyString"],
@@ -5178,9 +7209,19 @@ module Aws::SecurityHub
     #   Details about the configuration for encryption at rest.
     #   @return [Types::AwsElasticsearchDomainEncryptionAtRestOptions]
     #
+    # @!attribute [rw] log_publishing_options
+    #   Configures the CloudWatch Logs to publish for the Elasticsearch
+    #   domain.
+    #   @return [Types::AwsElasticsearchDomainLogPublishingOptions]
+    #
     # @!attribute [rw] node_to_node_encryption_options
     #   Details about the configuration for node-to-node encryption.
     #   @return [Types::AwsElasticsearchDomainNodeToNodeEncryptionOptions]
+    #
+    # @!attribute [rw] service_software_options
+    #   Information about the status of a domain relative to the latest
+    #   service software.
+    #   @return [Types::AwsElasticsearchDomainServiceSoftwareOptions]
     #
     # @!attribute [rw] vpc_options
     #   Information that Amazon ES derives based on `VPCOptions` for the
@@ -5198,7 +7239,9 @@ module Aws::SecurityHub
       :endpoints,
       :elasticsearch_version,
       :encryption_at_rest_options,
+      :log_publishing_options,
       :node_to_node_encryption_options,
+      :service_software_options,
       :vpc_options)
       SENSITIVE = []
       include Aws::Structure
@@ -5266,6 +7309,67 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # configures the CloudWatch Logs to publish for the Elasticsearch
+    # domain.
+    #
+    # @note When making an API call, you may pass AwsElasticsearchDomainLogPublishingOptions
+    #   data as a hash:
+    #
+    #       {
+    #         index_slow_logs: {
+    #           cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #           enabled: false,
+    #         },
+    #         search_slow_logs: {
+    #           cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #           enabled: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] index_slow_logs
+    #   Configures the Elasticsearch index logs publishing.
+    #   @return [Types::AwsElasticsearchDomainLogPublishingOptionsLogConfig]
+    #
+    # @!attribute [rw] search_slow_logs
+    #   Configures the Elasticsearch search slow log publishing.
+    #   @return [Types::AwsElasticsearchDomainLogPublishingOptionsLogConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElasticsearchDomainLogPublishingOptions AWS API Documentation
+    #
+    class AwsElasticsearchDomainLogPublishingOptions < Struct.new(
+      :index_slow_logs,
+      :search_slow_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The log configuration.
+    #
+    # @note When making an API call, you may pass AwsElasticsearchDomainLogPublishingOptionsLogConfig
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] cloud_watch_logs_log_group_arn
+    #   The ARN of the CloudWatch Logs group to publish the logs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Whether the log publishing is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElasticsearchDomainLogPublishingOptionsLogConfig AWS API Documentation
+    #
+    class AwsElasticsearchDomainLogPublishingOptionsLogConfig < Struct.new(
+      :cloud_watch_logs_log_group_arn,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about the configuration for node-to-node encryption.
     #
     # @note When making an API call, you may pass AwsElasticsearchDomainNodeToNodeEncryptionOptions
@@ -5283,6 +7387,67 @@ module Aws::SecurityHub
     #
     class AwsElasticsearchDomainNodeToNodeEncryptionOptions < Struct.new(
       :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the state of the domain relative to the latest
+    # service software.
+    #
+    # @note When making an API call, you may pass AwsElasticsearchDomainServiceSoftwareOptions
+    #   data as a hash:
+    #
+    #       {
+    #         automated_update_date: "NonEmptyString",
+    #         cancellable: false,
+    #         current_version: "NonEmptyString",
+    #         description: "NonEmptyString",
+    #         new_version: "NonEmptyString",
+    #         update_available: false,
+    #         update_status: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] automated_update_date
+    #   The epoch time when the deployment window closes for required
+    #   updates. After this time, Amazon Elasticsearch Service schedules the
+    #   software upgrade automatically.
+    #   @return [String]
+    #
+    # @!attribute [rw] cancellable
+    #   Whether a request to update the domain can be canceled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] current_version
+    #   The version of the service software that is currently installed on
+    #   the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A more detailed description of the service software status.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_version
+    #   The most recent version of the service software.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_available
+    #   Whether a service software update is available for the domain.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] update_status
+    #   The status of the service software update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElasticsearchDomainServiceSoftwareOptions AWS API Documentation
+    #
+    class AwsElasticsearchDomainServiceSoftwareOptions < Struct.new(
+      :automated_update_date,
+      :cancellable,
+      :current_version,
+      :description,
+      :new_version,
+      :update_available,
+      :update_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7136,8 +9301,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] target_arn
-    #   The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS
-    #   topic.
+    #   The ARN of an Amazon SQS queue or Amazon SNS topic.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsLambdaFunctionDeadLetterConfig AWS API Documentation
@@ -7251,7 +9415,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] memory_size
-    #   The memory that's allocated to the function.
+    #   The memory that is allocated to the function.
     #   @return [Integer]
     #
     # @!attribute [rw] revision_id
@@ -7340,7 +9504,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Error messages for environment variables that couldn't be applied.
+    # Error messages for environment variables that could not be applied.
     #
     # @note When making an API call, you may pass AwsLambdaFunctionEnvironmentError
     #   data as a hash:
@@ -7378,7 +9542,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the function layer.
+    #   The ARN of the function layer.
     #   @return [String]
     #
     # @!attribute [rw] code_size
@@ -7416,7 +9580,7 @@ module Aws::SecurityHub
     end
 
     # The VPC security groups and subnets that are attached to a Lambda
-    # function. For more information, see VPC Settings.
+    # function.
     #
     # @note When making an API call, you may pass AwsLambdaFunctionVpcConfig
     #   data as a hash:
@@ -8092,8 +10256,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role that is associated
-    #   with the DB instance.
+    #   The ARN of the IAM role that is associated with the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] feature_name
@@ -10357,6 +12520,483 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The lifecycle configuration for the objects in the S3 bucket.
+    #
+    # @note When making an API call, you may pass AwsS3BucketBucketLifecycleConfigurationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         rules: [
+    #           {
+    #             abort_incomplete_multipart_upload: {
+    #               days_after_initiation: 1,
+    #             },
+    #             expiration_date: "NonEmptyString",
+    #             expiration_in_days: 1,
+    #             expired_object_delete_marker: false,
+    #             filter: {
+    #               predicate: {
+    #                 operands: [
+    #                   {
+    #                     prefix: "NonEmptyString",
+    #                     tag: {
+    #                       key: "NonEmptyString",
+    #                       value: "NonEmptyString",
+    #                     },
+    #                     type: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 prefix: "NonEmptyString",
+    #                 tag: {
+    #                   key: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                 },
+    #                 type: "NonEmptyString",
+    #               },
+    #             },
+    #             id: "NonEmptyString",
+    #             noncurrent_version_expiration_in_days: 1,
+    #             noncurrent_version_transitions: [
+    #               {
+    #                 days: 1,
+    #                 storage_class: "NonEmptyString",
+    #               },
+    #             ],
+    #             prefix: "NonEmptyString",
+    #             status: "NonEmptyString",
+    #             transitions: [
+    #               {
+    #                 date: "NonEmptyString",
+    #                 days: 1,
+    #                 storage_class: "NonEmptyString",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] rules
+    #   The lifecycle rules.
+    #   @return [Array<Types::AwsS3BucketBucketLifecycleConfigurationRulesDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationDetails AWS API Documentation
+    #
+    class AwsS3BucketBucketLifecycleConfigurationDetails < Struct.new(
+      :rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about what Amazon S3 does when a multipart upload is
+    # incomplete.
+    #
+    # @note When making an API call, you may pass AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails
+    #   data as a hash:
+    #
+    #       {
+    #         days_after_initiation: 1,
+    #       }
+    #
+    # @!attribute [rw] days_after_initiation
+    #   The number of days after which Amazon S3 cancels an incomplete
+    #   multipart upload.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails AWS API Documentation
+    #
+    class AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails < Struct.new(
+      :days_after_initiation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for a lifecycle rule.
+    #
+    # @note When making an API call, you may pass AwsS3BucketBucketLifecycleConfigurationRulesDetails
+    #   data as a hash:
+    #
+    #       {
+    #         abort_incomplete_multipart_upload: {
+    #           days_after_initiation: 1,
+    #         },
+    #         expiration_date: "NonEmptyString",
+    #         expiration_in_days: 1,
+    #         expired_object_delete_marker: false,
+    #         filter: {
+    #           predicate: {
+    #             operands: [
+    #               {
+    #                 prefix: "NonEmptyString",
+    #                 tag: {
+    #                   key: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                 },
+    #                 type: "NonEmptyString",
+    #               },
+    #             ],
+    #             prefix: "NonEmptyString",
+    #             tag: {
+    #               key: "NonEmptyString",
+    #               value: "NonEmptyString",
+    #             },
+    #             type: "NonEmptyString",
+    #           },
+    #         },
+    #         id: "NonEmptyString",
+    #         noncurrent_version_expiration_in_days: 1,
+    #         noncurrent_version_transitions: [
+    #           {
+    #             days: 1,
+    #             storage_class: "NonEmptyString",
+    #           },
+    #         ],
+    #         prefix: "NonEmptyString",
+    #         status: "NonEmptyString",
+    #         transitions: [
+    #           {
+    #             date: "NonEmptyString",
+    #             days: 1,
+    #             storage_class: "NonEmptyString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] abort_incomplete_multipart_upload
+    #   How Amazon S3 responds when a multipart upload is incomplete.
+    #   Specifically, provides a number of days before Amazon S3 cancels the
+    #   entire upload.
+    #   @return [Types::AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails]
+    #
+    # @!attribute [rw] expiration_date
+    #   The date when objects are moved or deleted.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration_in_days
+    #   The length in days of the lifetime for objects that are subject to
+    #   the rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] expired_object_delete_marker
+    #   Whether Amazon S3 removes a delete marker that has no noncurrent
+    #   versions. If set to `true`, the delete marker is expired. If set to
+    #   `false`, the policy takes no action.
+    #
+    #   If you provide `ExpiredObjectDeleteMarker`, you cannot provide
+    #   `ExpirationInDays` or `ExpirationDate`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filter
+    #   Identifies the objects that a rule applies to.
+    #   @return [Types::AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] noncurrent_version_expiration_in_days
+    #   The number of days that an object is noncurrent before Amazon S3 can
+    #   perform the associated action.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] noncurrent_version_transitions
+    #   Transition rules that describe when noncurrent objects transition to
+    #   a specified storage class.
+    #   @return [Array<Types::AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails>]
+    #
+    # @!attribute [rw] prefix
+    #   A prefix that identifies one or more objects that the rule applies
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the rule. Indicates whether the rule is
+    #   currently being applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] transitions
+    #   Transition rules that indicate when objects transition to a
+    #   specified storage class.
+    #   @return [Array<Types::AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationRulesDetails AWS API Documentation
+    #
+    class AwsS3BucketBucketLifecycleConfigurationRulesDetails < Struct.new(
+      :abort_incomplete_multipart_upload,
+      :expiration_date,
+      :expiration_in_days,
+      :expired_object_delete_marker,
+      :filter,
+      :id,
+      :noncurrent_version_expiration_in_days,
+      :noncurrent_version_transitions,
+      :prefix,
+      :status,
+      :transitions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the objects that a rule applies to.
+    #
+    # @note When making an API call, you may pass AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails
+    #   data as a hash:
+    #
+    #       {
+    #         predicate: {
+    #           operands: [
+    #             {
+    #               prefix: "NonEmptyString",
+    #               tag: {
+    #                 key: "NonEmptyString",
+    #                 value: "NonEmptyString",
+    #               },
+    #               type: "NonEmptyString",
+    #             },
+    #           ],
+    #           prefix: "NonEmptyString",
+    #           tag: {
+    #             key: "NonEmptyString",
+    #             value: "NonEmptyString",
+    #           },
+    #           type: "NonEmptyString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] predicate
+    #   The configuration for the filter.
+    #   @return [Types::AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails AWS API Documentation
+    #
+    class AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails < Struct.new(
+      :predicate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for the filter.
+    #
+    # @note When making an API call, you may pass AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails
+    #   data as a hash:
+    #
+    #       {
+    #         operands: [
+    #           {
+    #             prefix: "NonEmptyString",
+    #             tag: {
+    #               key: "NonEmptyString",
+    #               value: "NonEmptyString",
+    #             },
+    #             type: "NonEmptyString",
+    #           },
+    #         ],
+    #         prefix: "NonEmptyString",
+    #         tag: {
+    #           key: "NonEmptyString",
+    #           value: "NonEmptyString",
+    #         },
+    #         type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] operands
+    #   The values to use for the filter.
+    #   @return [Array<Types::AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails>]
+    #
+    # @!attribute [rw] prefix
+    #   A prefix filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag
+    #   A tag filter.
+    #   @return [Types::AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails]
+    #
+    # @!attribute [rw] type
+    #   Whether to use `AND` or `OR` to join the operands.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails AWS API Documentation
+    #
+    class AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails < Struct.new(
+      :operands,
+      :prefix,
+      :tag,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A value to use for the filter.
+    #
+    # @note When making an API call, you may pass AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         prefix: "NonEmptyString",
+    #         tag: {
+    #           key: "NonEmptyString",
+    #           value: "NonEmptyString",
+    #         },
+    #         type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] prefix
+    #   Prefix text for matching objects.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag
+    #   A tag that is assigned to matching objects.
+    #   @return [Types::AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails]
+    #
+    # @!attribute [rw] type
+    #   The type of filter value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails AWS API Documentation
+    #
+    class AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails < Struct.new(
+      :prefix,
+      :tag,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A tag that is assigned to matching objects.
+    #
+    # @note When making an API call, you may pass AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails
+    #   data as a hash:
+    #
+    #       {
+    #         key: "NonEmptyString",
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The tag key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The tag value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails AWS API Documentation
+    #
+    class AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A tag filter.
+    #
+    # @note When making an API call, you may pass AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails
+    #   data as a hash:
+    #
+    #       {
+    #         key: "NonEmptyString",
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The tag key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The tag value
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails AWS API Documentation
+    #
+    class AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A transition rule that describes when noncurrent objects transition to
+    # a specified storage class.
+    #
+    # @note When making an API call, you may pass AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         days: 1,
+    #         storage_class: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] days
+    #   The number of days that an object is noncurrent before Amazon S3 can
+    #   perform the associated action.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_class
+    #   The class of storage to change the object to after the object is
+    #   noncurrent for the specified number of days.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails AWS API Documentation
+    #
+    class AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails < Struct.new(
+      :days,
+      :storage_class)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A rule for when objects transition to specific storage classes.
+    #
+    # @note When making an API call, you may pass AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         date: "NonEmptyString",
+    #         days: 1,
+    #         storage_class: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] date
+    #   A date on which to transition objects to the specified storage
+    #   class. If you provide `Date`, you cannot provide `Days`.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] days
+    #   The number of days after which to transition the object to the
+    #   specified storage class. If you provide `Days`, you cannot provide
+    #   `Date`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_class
+    #   The storage class to transition the object to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails AWS API Documentation
+    #
+    class AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails < Struct.new(
+      :date,
+      :days,
+      :storage_class)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of an Amazon S3 bucket.
     #
     # @note When making an API call, you may pass AwsS3BucketDetails
@@ -10373,6 +13013,55 @@ module Aws::SecurityHub
     #                 sse_algorithm: "NonEmptyString",
     #                 kms_master_key_id: "NonEmptyString",
     #               },
+    #             },
+    #           ],
+    #         },
+    #         bucket_lifecycle_configuration: {
+    #           rules: [
+    #             {
+    #               abort_incomplete_multipart_upload: {
+    #                 days_after_initiation: 1,
+    #               },
+    #               expiration_date: "NonEmptyString",
+    #               expiration_in_days: 1,
+    #               expired_object_delete_marker: false,
+    #               filter: {
+    #                 predicate: {
+    #                   operands: [
+    #                     {
+    #                       prefix: "NonEmptyString",
+    #                       tag: {
+    #                         key: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                       type: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   prefix: "NonEmptyString",
+    #                   tag: {
+    #                     key: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                   },
+    #                   type: "NonEmptyString",
+    #                 },
+    #               },
+    #               id: "NonEmptyString",
+    #               noncurrent_version_expiration_in_days: 1,
+    #               noncurrent_version_transitions: [
+    #                 {
+    #                   days: 1,
+    #                   storage_class: "NonEmptyString",
+    #                 },
+    #               ],
+    #               prefix: "NonEmptyString",
+    #               status: "NonEmptyString",
+    #               transitions: [
+    #                 {
+    #                   date: "NonEmptyString",
+    #                   days: 1,
+    #                   storage_class: "NonEmptyString",
+    #                 },
+    #               ],
     #             },
     #           ],
     #         },
@@ -10408,6 +13097,10 @@ module Aws::SecurityHub
     #   The encryption rules that are applied to the S3 bucket.
     #   @return [Types::AwsS3BucketServerSideEncryptionConfiguration]
     #
+    # @!attribute [rw] bucket_lifecycle_configuration
+    #   The lifecycle configuration for objects in the S3 bucket.
+    #   @return [Types::AwsS3BucketBucketLifecycleConfigurationDetails]
+    #
     # @!attribute [rw] public_access_block_configuration
     #   Provides information about the Amazon S3 Public Access Block
     #   configuration for the S3 bucket.
@@ -10420,6 +13113,7 @@ module Aws::SecurityHub
       :owner_name,
       :created_at,
       :server_side_encryption_configuration,
+      :bucket_lifecycle_configuration,
       :public_access_block_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -11025,6 +13719,11 @@ module Aws::SecurityHub
     #                 vpc_id: "NonEmptyString",
     #                 subnet_id: "NonEmptyString",
     #                 launched_at: "NonEmptyString",
+    #                 network_interfaces: [
+    #                   {
+    #                     network_interface_id: "NonEmptyString",
+    #                   },
+    #                 ],
     #               },
     #               aws_ec2_network_interface: {
     #                 attachment: {
@@ -11297,8 +13996,27 @@ module Aws::SecurityHub
     #                   enabled: false,
     #                   kms_key_id: "NonEmptyString",
     #                 },
+    #                 log_publishing_options: {
+    #                   index_slow_logs: {
+    #                     cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                     enabled: false,
+    #                   },
+    #                   search_slow_logs: {
+    #                     cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                     enabled: false,
+    #                   },
+    #                 },
     #                 node_to_node_encryption_options: {
     #                   enabled: false,
+    #                 },
+    #                 service_software_options: {
+    #                   automated_update_date: "NonEmptyString",
+    #                   cancellable: false,
+    #                   current_version: "NonEmptyString",
+    #                   description: "NonEmptyString",
+    #                   new_version: "NonEmptyString",
+    #                   update_available: false,
+    #                   update_status: "NonEmptyString",
     #                 },
     #                 vpc_options: {
     #                   availability_zones: ["NonEmptyString"],
@@ -11318,6 +14036,55 @@ module Aws::SecurityHub
     #                         sse_algorithm: "NonEmptyString",
     #                         kms_master_key_id: "NonEmptyString",
     #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #                 bucket_lifecycle_configuration: {
+    #                   rules: [
+    #                     {
+    #                       abort_incomplete_multipart_upload: {
+    #                         days_after_initiation: 1,
+    #                       },
+    #                       expiration_date: "NonEmptyString",
+    #                       expiration_in_days: 1,
+    #                       expired_object_delete_marker: false,
+    #                       filter: {
+    #                         predicate: {
+    #                           operands: [
+    #                             {
+    #                               prefix: "NonEmptyString",
+    #                               tag: {
+    #                                 key: "NonEmptyString",
+    #                                 value: "NonEmptyString",
+    #                               },
+    #                               type: "NonEmptyString",
+    #                             },
+    #                           ],
+    #                           prefix: "NonEmptyString",
+    #                           tag: {
+    #                             key: "NonEmptyString",
+    #                             value: "NonEmptyString",
+    #                           },
+    #                           type: "NonEmptyString",
+    #                         },
+    #                       },
+    #                       id: "NonEmptyString",
+    #                       noncurrent_version_expiration_in_days: 1,
+    #                       noncurrent_version_transitions: [
+    #                         {
+    #                           days: 1,
+    #                           storage_class: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                       prefix: "NonEmptyString",
+    #                       status: "NonEmptyString",
+    #                       transitions: [
+    #                         {
+    #                           date: "NonEmptyString",
+    #                           days: 1,
+    #                           storage_class: "NonEmptyString",
+    #                         },
+    #                       ],
     #                     },
     #                   ],
     #                 },
@@ -11419,6 +14186,7 @@ module Aws::SecurityHub
     #                 update_date: "NonEmptyString",
     #               },
     #               aws_api_gateway_v2_stage: {
+    #                 client_certificate_id: "NonEmptyString",
     #                 created_date: "NonEmptyString",
     #                 description: "NonEmptyString",
     #                 default_route_settings: {
@@ -12372,6 +15140,247 @@ module Aws::SecurityHub
     #                   },
     #                 ],
     #                 iam_database_authentication_enabled: false,
+    #               },
+    #               aws_ecs_cluster: {
+    #                 capacity_providers: ["NonEmptyString"],
+    #                 cluster_settings: [
+    #                   {
+    #                     name: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 configuration: {
+    #                   execute_command_configuration: {
+    #                     kms_key_id: "NonEmptyString",
+    #                     log_configuration: {
+    #                       cloud_watch_encryption_enabled: false,
+    #                       cloud_watch_log_group_name: "NonEmptyString",
+    #                       s3_bucket_name: "NonEmptyString",
+    #                       s3_encryption_enabled: false,
+    #                       s3_key_prefix: "NonEmptyString",
+    #                     },
+    #                     logging: "NonEmptyString",
+    #                   },
+    #                 },
+    #                 default_capacity_provider_strategy: [
+    #                   {
+    #                     base: 1,
+    #                     capacity_provider: "NonEmptyString",
+    #                     weight: 1,
+    #                   },
+    #                 ],
+    #               },
+    #               aws_ecs_task_definition: {
+    #                 container_definitions: [
+    #                   {
+    #                     command: ["NonEmptyString"],
+    #                     cpu: 1,
+    #                     depends_on: [
+    #                       {
+    #                         condition: "NonEmptyString",
+    #                         container_name: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     disable_networking: false,
+    #                     dns_search_domains: ["NonEmptyString"],
+    #                     dns_servers: ["NonEmptyString"],
+    #                     docker_labels: {
+    #                       "NonEmptyString" => "NonEmptyString",
+    #                     },
+    #                     docker_security_options: ["NonEmptyString"],
+    #                     entry_point: ["NonEmptyString"],
+    #                     environment: [
+    #                       {
+    #                         name: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     environment_files: [
+    #                       {
+    #                         type: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     essential: false,
+    #                     extra_hosts: [
+    #                       {
+    #                         hostname: "NonEmptyString",
+    #                         ip_address: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     firelens_configuration: {
+    #                       options: {
+    #                         "NonEmptyString" => "NonEmptyString",
+    #                       },
+    #                       type: "NonEmptyString",
+    #                     },
+    #                     health_check: {
+    #                       command: ["NonEmptyString"],
+    #                       interval: 1,
+    #                       retries: 1,
+    #                       start_period: 1,
+    #                       timeout: 1,
+    #                     },
+    #                     hostname: "NonEmptyString",
+    #                     image: "NonEmptyString",
+    #                     interactive: false,
+    #                     links: ["NonEmptyString"],
+    #                     linux_parameters: {
+    #                       capabilities: {
+    #                         add: ["NonEmptyString"],
+    #                         drop: ["NonEmptyString"],
+    #                       },
+    #                       devices: [
+    #                         {
+    #                           container_path: "NonEmptyString",
+    #                           host_path: "NonEmptyString",
+    #                           permissions: ["NonEmptyString"],
+    #                         },
+    #                       ],
+    #                       init_process_enabled: false,
+    #                       max_swap: 1,
+    #                       shared_memory_size: 1,
+    #                       swappiness: 1,
+    #                       tmpfs: [
+    #                         {
+    #                           container_path: "NonEmptyString",
+    #                           mount_options: ["NonEmptyString"],
+    #                           size: 1,
+    #                         },
+    #                       ],
+    #                     },
+    #                     log_configuration: {
+    #                       log_driver: "NonEmptyString",
+    #                       options: {
+    #                         "NonEmptyString" => "NonEmptyString",
+    #                       },
+    #                       secret_options: [
+    #                         {
+    #                           name: "NonEmptyString",
+    #                           value_from: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                     },
+    #                     memory: 1,
+    #                     memory_reservation: 1,
+    #                     mount_points: [
+    #                       {
+    #                         container_path: "NonEmptyString",
+    #                         read_only: false,
+    #                         source_volume: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     name: "NonEmptyString",
+    #                     port_mappings: [
+    #                       {
+    #                         container_port: 1,
+    #                         host_port: 1,
+    #                         protocol: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     privileged: false,
+    #                     pseudo_terminal: false,
+    #                     readonly_root_filesystem: false,
+    #                     repository_credentials: {
+    #                       credentials_parameter: "NonEmptyString",
+    #                     },
+    #                     resource_requirements: [
+    #                       {
+    #                         type: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     secrets: [
+    #                       {
+    #                         name: "NonEmptyString",
+    #                         value_from: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     start_timeout: 1,
+    #                     stop_timeout: 1,
+    #                     system_controls: [
+    #                       {
+    #                         namespace: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     ulimits: [
+    #                       {
+    #                         hard_limit: 1,
+    #                         name: "NonEmptyString",
+    #                         soft_limit: 1,
+    #                       },
+    #                     ],
+    #                     user: "NonEmptyString",
+    #                     volumes_from: [
+    #                       {
+    #                         read_only: false,
+    #                         source_container: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     working_directory: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 cpu: "NonEmptyString",
+    #                 execution_role_arn: "NonEmptyString",
+    #                 family: "NonEmptyString",
+    #                 inference_accelerators: [
+    #                   {
+    #                     device_name: "NonEmptyString",
+    #                     device_type: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 ipc_mode: "NonEmptyString",
+    #                 memory: "NonEmptyString",
+    #                 network_mode: "NonEmptyString",
+    #                 pid_mode: "NonEmptyString",
+    #                 placement_constraints: [
+    #                   {
+    #                     expression: "NonEmptyString",
+    #                     type: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 proxy_configuration: {
+    #                   container_name: "NonEmptyString",
+    #                   proxy_configuration_properties: [
+    #                     {
+    #                       name: "NonEmptyString",
+    #                       value: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   type: "NonEmptyString",
+    #                 },
+    #                 requires_compatibilities: ["NonEmptyString"],
+    #                 task_role_arn: "NonEmptyString",
+    #                 volumes: [
+    #                   {
+    #                     docker_volume_configuration: {
+    #                       autoprovision: false,
+    #                       driver: "NonEmptyString",
+    #                       driver_opts: {
+    #                         "NonEmptyString" => "NonEmptyString",
+    #                       },
+    #                       labels: {
+    #                         "NonEmptyString" => "NonEmptyString",
+    #                       },
+    #                       scope: "NonEmptyString",
+    #                     },
+    #                     efs_volume_configuration: {
+    #                       authorization_config: {
+    #                         access_point_id: "NonEmptyString",
+    #                         iam: "NonEmptyString",
+    #                       },
+    #                       filesystem_id: "NonEmptyString",
+    #                       root_directory: "NonEmptyString",
+    #                       transit_encryption: "NonEmptyString",
+    #                       transit_encryption_port: 1,
+    #                     },
+    #                     host: {
+    #                       source_path: "NonEmptyString",
+    #                     },
+    #                     name: "NonEmptyString",
+    #                   },
+    #                 ],
     #               },
     #               container: {
     #                 name: "NonEmptyString",
@@ -14037,7 +17046,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # A wrapper type for the topic's Amazon Resource Name (ARN).
+    # A wrapper type for the topic's ARN.
     #
     # @note When making an API call, you may pass AwsSnsTopicDetails
     #   data as a hash:
@@ -14138,9 +17147,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] dead_letter_target_arn
-    #   The Amazon Resource Name (ARN) of the dead-letter queue to which
-    #   Amazon SQS moves messages after the value of `maxReceiveCount` is
-    #   exceeded.
+    #   The ARN of the dead-letter queue to which Amazon SQS moves messages
+    #   after the value of `maxReceiveCount` is exceeded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSqsQueueDetails AWS API Documentation
@@ -14951,6 +17959,11 @@ module Aws::SecurityHub
     #                     vpc_id: "NonEmptyString",
     #                     subnet_id: "NonEmptyString",
     #                     launched_at: "NonEmptyString",
+    #                     network_interfaces: [
+    #                       {
+    #                         network_interface_id: "NonEmptyString",
+    #                       },
+    #                     ],
     #                   },
     #                   aws_ec2_network_interface: {
     #                     attachment: {
@@ -15223,8 +18236,27 @@ module Aws::SecurityHub
     #                       enabled: false,
     #                       kms_key_id: "NonEmptyString",
     #                     },
+    #                     log_publishing_options: {
+    #                       index_slow_logs: {
+    #                         cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                         enabled: false,
+    #                       },
+    #                       search_slow_logs: {
+    #                         cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                         enabled: false,
+    #                       },
+    #                     },
     #                     node_to_node_encryption_options: {
     #                       enabled: false,
+    #                     },
+    #                     service_software_options: {
+    #                       automated_update_date: "NonEmptyString",
+    #                       cancellable: false,
+    #                       current_version: "NonEmptyString",
+    #                       description: "NonEmptyString",
+    #                       new_version: "NonEmptyString",
+    #                       update_available: false,
+    #                       update_status: "NonEmptyString",
     #                     },
     #                     vpc_options: {
     #                       availability_zones: ["NonEmptyString"],
@@ -15244,6 +18276,55 @@ module Aws::SecurityHub
     #                             sse_algorithm: "NonEmptyString",
     #                             kms_master_key_id: "NonEmptyString",
     #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                     bucket_lifecycle_configuration: {
+    #                       rules: [
+    #                         {
+    #                           abort_incomplete_multipart_upload: {
+    #                             days_after_initiation: 1,
+    #                           },
+    #                           expiration_date: "NonEmptyString",
+    #                           expiration_in_days: 1,
+    #                           expired_object_delete_marker: false,
+    #                           filter: {
+    #                             predicate: {
+    #                               operands: [
+    #                                 {
+    #                                   prefix: "NonEmptyString",
+    #                                   tag: {
+    #                                     key: "NonEmptyString",
+    #                                     value: "NonEmptyString",
+    #                                   },
+    #                                   type: "NonEmptyString",
+    #                                 },
+    #                               ],
+    #                               prefix: "NonEmptyString",
+    #                               tag: {
+    #                                 key: "NonEmptyString",
+    #                                 value: "NonEmptyString",
+    #                               },
+    #                               type: "NonEmptyString",
+    #                             },
+    #                           },
+    #                           id: "NonEmptyString",
+    #                           noncurrent_version_expiration_in_days: 1,
+    #                           noncurrent_version_transitions: [
+    #                             {
+    #                               days: 1,
+    #                               storage_class: "NonEmptyString",
+    #                             },
+    #                           ],
+    #                           prefix: "NonEmptyString",
+    #                           status: "NonEmptyString",
+    #                           transitions: [
+    #                             {
+    #                               date: "NonEmptyString",
+    #                               days: 1,
+    #                               storage_class: "NonEmptyString",
+    #                             },
+    #                           ],
     #                         },
     #                       ],
     #                     },
@@ -15345,6 +18426,7 @@ module Aws::SecurityHub
     #                     update_date: "NonEmptyString",
     #                   },
     #                   aws_api_gateway_v2_stage: {
+    #                     client_certificate_id: "NonEmptyString",
     #                     created_date: "NonEmptyString",
     #                     description: "NonEmptyString",
     #                     default_route_settings: {
@@ -16299,6 +19381,247 @@ module Aws::SecurityHub
     #                     ],
     #                     iam_database_authentication_enabled: false,
     #                   },
+    #                   aws_ecs_cluster: {
+    #                     capacity_providers: ["NonEmptyString"],
+    #                     cluster_settings: [
+    #                       {
+    #                         name: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     configuration: {
+    #                       execute_command_configuration: {
+    #                         kms_key_id: "NonEmptyString",
+    #                         log_configuration: {
+    #                           cloud_watch_encryption_enabled: false,
+    #                           cloud_watch_log_group_name: "NonEmptyString",
+    #                           s3_bucket_name: "NonEmptyString",
+    #                           s3_encryption_enabled: false,
+    #                           s3_key_prefix: "NonEmptyString",
+    #                         },
+    #                         logging: "NonEmptyString",
+    #                       },
+    #                     },
+    #                     default_capacity_provider_strategy: [
+    #                       {
+    #                         base: 1,
+    #                         capacity_provider: "NonEmptyString",
+    #                         weight: 1,
+    #                       },
+    #                     ],
+    #                   },
+    #                   aws_ecs_task_definition: {
+    #                     container_definitions: [
+    #                       {
+    #                         command: ["NonEmptyString"],
+    #                         cpu: 1,
+    #                         depends_on: [
+    #                           {
+    #                             condition: "NonEmptyString",
+    #                             container_name: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         disable_networking: false,
+    #                         dns_search_domains: ["NonEmptyString"],
+    #                         dns_servers: ["NonEmptyString"],
+    #                         docker_labels: {
+    #                           "NonEmptyString" => "NonEmptyString",
+    #                         },
+    #                         docker_security_options: ["NonEmptyString"],
+    #                         entry_point: ["NonEmptyString"],
+    #                         environment: [
+    #                           {
+    #                             name: "NonEmptyString",
+    #                             value: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         environment_files: [
+    #                           {
+    #                             type: "NonEmptyString",
+    #                             value: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         essential: false,
+    #                         extra_hosts: [
+    #                           {
+    #                             hostname: "NonEmptyString",
+    #                             ip_address: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         firelens_configuration: {
+    #                           options: {
+    #                             "NonEmptyString" => "NonEmptyString",
+    #                           },
+    #                           type: "NonEmptyString",
+    #                         },
+    #                         health_check: {
+    #                           command: ["NonEmptyString"],
+    #                           interval: 1,
+    #                           retries: 1,
+    #                           start_period: 1,
+    #                           timeout: 1,
+    #                         },
+    #                         hostname: "NonEmptyString",
+    #                         image: "NonEmptyString",
+    #                         interactive: false,
+    #                         links: ["NonEmptyString"],
+    #                         linux_parameters: {
+    #                           capabilities: {
+    #                             add: ["NonEmptyString"],
+    #                             drop: ["NonEmptyString"],
+    #                           },
+    #                           devices: [
+    #                             {
+    #                               container_path: "NonEmptyString",
+    #                               host_path: "NonEmptyString",
+    #                               permissions: ["NonEmptyString"],
+    #                             },
+    #                           ],
+    #                           init_process_enabled: false,
+    #                           max_swap: 1,
+    #                           shared_memory_size: 1,
+    #                           swappiness: 1,
+    #                           tmpfs: [
+    #                             {
+    #                               container_path: "NonEmptyString",
+    #                               mount_options: ["NonEmptyString"],
+    #                               size: 1,
+    #                             },
+    #                           ],
+    #                         },
+    #                         log_configuration: {
+    #                           log_driver: "NonEmptyString",
+    #                           options: {
+    #                             "NonEmptyString" => "NonEmptyString",
+    #                           },
+    #                           secret_options: [
+    #                             {
+    #                               name: "NonEmptyString",
+    #                               value_from: "NonEmptyString",
+    #                             },
+    #                           ],
+    #                         },
+    #                         memory: 1,
+    #                         memory_reservation: 1,
+    #                         mount_points: [
+    #                           {
+    #                             container_path: "NonEmptyString",
+    #                             read_only: false,
+    #                             source_volume: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         name: "NonEmptyString",
+    #                         port_mappings: [
+    #                           {
+    #                             container_port: 1,
+    #                             host_port: 1,
+    #                             protocol: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         privileged: false,
+    #                         pseudo_terminal: false,
+    #                         readonly_root_filesystem: false,
+    #                         repository_credentials: {
+    #                           credentials_parameter: "NonEmptyString",
+    #                         },
+    #                         resource_requirements: [
+    #                           {
+    #                             type: "NonEmptyString",
+    #                             value: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         secrets: [
+    #                           {
+    #                             name: "NonEmptyString",
+    #                             value_from: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         start_timeout: 1,
+    #                         stop_timeout: 1,
+    #                         system_controls: [
+    #                           {
+    #                             namespace: "NonEmptyString",
+    #                             value: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         ulimits: [
+    #                           {
+    #                             hard_limit: 1,
+    #                             name: "NonEmptyString",
+    #                             soft_limit: 1,
+    #                           },
+    #                         ],
+    #                         user: "NonEmptyString",
+    #                         volumes_from: [
+    #                           {
+    #                             read_only: false,
+    #                             source_container: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         working_directory: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     cpu: "NonEmptyString",
+    #                     execution_role_arn: "NonEmptyString",
+    #                     family: "NonEmptyString",
+    #                     inference_accelerators: [
+    #                       {
+    #                         device_name: "NonEmptyString",
+    #                         device_type: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     ipc_mode: "NonEmptyString",
+    #                     memory: "NonEmptyString",
+    #                     network_mode: "NonEmptyString",
+    #                     pid_mode: "NonEmptyString",
+    #                     placement_constraints: [
+    #                       {
+    #                         expression: "NonEmptyString",
+    #                         type: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     proxy_configuration: {
+    #                       container_name: "NonEmptyString",
+    #                       proxy_configuration_properties: [
+    #                         {
+    #                           name: "NonEmptyString",
+    #                           value: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                       type: "NonEmptyString",
+    #                     },
+    #                     requires_compatibilities: ["NonEmptyString"],
+    #                     task_role_arn: "NonEmptyString",
+    #                     volumes: [
+    #                       {
+    #                         docker_volume_configuration: {
+    #                           autoprovision: false,
+    #                           driver: "NonEmptyString",
+    #                           driver_opts: {
+    #                             "NonEmptyString" => "NonEmptyString",
+    #                           },
+    #                           labels: {
+    #                             "NonEmptyString" => "NonEmptyString",
+    #                           },
+    #                           scope: "NonEmptyString",
+    #                         },
+    #                         efs_volume_configuration: {
+    #                           authorization_config: {
+    #                             access_point_id: "NonEmptyString",
+    #                             iam: "NonEmptyString",
+    #                           },
+    #                           filesystem_id: "NonEmptyString",
+    #                           root_directory: "NonEmptyString",
+    #                           transit_encryption: "NonEmptyString",
+    #                           transit_encryption_port: 1,
+    #                         },
+    #                         host: {
+    #                           source_path: "NonEmptyString",
+    #                         },
+    #                         name: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                   },
     #                   container: {
     #                     name: "NonEmptyString",
     #                     image_id: "NonEmptyString",
@@ -17172,7 +20495,8 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the custom action target.
+    #   The name of the custom action target. Can contain up to 20
+    #   characters.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -17180,7 +20504,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The ID for the custom action target.
+    #   The ID for the custom action target. Can contain up to 20
+    #   alphanumeric characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateActionTargetRequest AWS API Documentation
@@ -22210,6 +25535,11 @@ module Aws::SecurityHub
     #             vpc_id: "NonEmptyString",
     #             subnet_id: "NonEmptyString",
     #             launched_at: "NonEmptyString",
+    #             network_interfaces: [
+    #               {
+    #                 network_interface_id: "NonEmptyString",
+    #               },
+    #             ],
     #           },
     #           aws_ec2_network_interface: {
     #             attachment: {
@@ -22482,8 +25812,27 @@ module Aws::SecurityHub
     #               enabled: false,
     #               kms_key_id: "NonEmptyString",
     #             },
+    #             log_publishing_options: {
+    #               index_slow_logs: {
+    #                 cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                 enabled: false,
+    #               },
+    #               search_slow_logs: {
+    #                 cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                 enabled: false,
+    #               },
+    #             },
     #             node_to_node_encryption_options: {
     #               enabled: false,
+    #             },
+    #             service_software_options: {
+    #               automated_update_date: "NonEmptyString",
+    #               cancellable: false,
+    #               current_version: "NonEmptyString",
+    #               description: "NonEmptyString",
+    #               new_version: "NonEmptyString",
+    #               update_available: false,
+    #               update_status: "NonEmptyString",
     #             },
     #             vpc_options: {
     #               availability_zones: ["NonEmptyString"],
@@ -22503,6 +25852,55 @@ module Aws::SecurityHub
     #                     sse_algorithm: "NonEmptyString",
     #                     kms_master_key_id: "NonEmptyString",
     #                   },
+    #                 },
+    #               ],
+    #             },
+    #             bucket_lifecycle_configuration: {
+    #               rules: [
+    #                 {
+    #                   abort_incomplete_multipart_upload: {
+    #                     days_after_initiation: 1,
+    #                   },
+    #                   expiration_date: "NonEmptyString",
+    #                   expiration_in_days: 1,
+    #                   expired_object_delete_marker: false,
+    #                   filter: {
+    #                     predicate: {
+    #                       operands: [
+    #                         {
+    #                           prefix: "NonEmptyString",
+    #                           tag: {
+    #                             key: "NonEmptyString",
+    #                             value: "NonEmptyString",
+    #                           },
+    #                           type: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                       prefix: "NonEmptyString",
+    #                       tag: {
+    #                         key: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                       type: "NonEmptyString",
+    #                     },
+    #                   },
+    #                   id: "NonEmptyString",
+    #                   noncurrent_version_expiration_in_days: 1,
+    #                   noncurrent_version_transitions: [
+    #                     {
+    #                       days: 1,
+    #                       storage_class: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   prefix: "NonEmptyString",
+    #                   status: "NonEmptyString",
+    #                   transitions: [
+    #                     {
+    #                       date: "NonEmptyString",
+    #                       days: 1,
+    #                       storage_class: "NonEmptyString",
+    #                     },
+    #                   ],
     #                 },
     #               ],
     #             },
@@ -22604,6 +26002,7 @@ module Aws::SecurityHub
     #             update_date: "NonEmptyString",
     #           },
     #           aws_api_gateway_v2_stage: {
+    #             client_certificate_id: "NonEmptyString",
     #             created_date: "NonEmptyString",
     #             description: "NonEmptyString",
     #             default_route_settings: {
@@ -23558,6 +26957,247 @@ module Aws::SecurityHub
     #             ],
     #             iam_database_authentication_enabled: false,
     #           },
+    #           aws_ecs_cluster: {
+    #             capacity_providers: ["NonEmptyString"],
+    #             cluster_settings: [
+    #               {
+    #                 name: "NonEmptyString",
+    #                 value: "NonEmptyString",
+    #               },
+    #             ],
+    #             configuration: {
+    #               execute_command_configuration: {
+    #                 kms_key_id: "NonEmptyString",
+    #                 log_configuration: {
+    #                   cloud_watch_encryption_enabled: false,
+    #                   cloud_watch_log_group_name: "NonEmptyString",
+    #                   s3_bucket_name: "NonEmptyString",
+    #                   s3_encryption_enabled: false,
+    #                   s3_key_prefix: "NonEmptyString",
+    #                 },
+    #                 logging: "NonEmptyString",
+    #               },
+    #             },
+    #             default_capacity_provider_strategy: [
+    #               {
+    #                 base: 1,
+    #                 capacity_provider: "NonEmptyString",
+    #                 weight: 1,
+    #               },
+    #             ],
+    #           },
+    #           aws_ecs_task_definition: {
+    #             container_definitions: [
+    #               {
+    #                 command: ["NonEmptyString"],
+    #                 cpu: 1,
+    #                 depends_on: [
+    #                   {
+    #                     condition: "NonEmptyString",
+    #                     container_name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 disable_networking: false,
+    #                 dns_search_domains: ["NonEmptyString"],
+    #                 dns_servers: ["NonEmptyString"],
+    #                 docker_labels: {
+    #                   "NonEmptyString" => "NonEmptyString",
+    #                 },
+    #                 docker_security_options: ["NonEmptyString"],
+    #                 entry_point: ["NonEmptyString"],
+    #                 environment: [
+    #                   {
+    #                     name: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 environment_files: [
+    #                   {
+    #                     type: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 essential: false,
+    #                 extra_hosts: [
+    #                   {
+    #                     hostname: "NonEmptyString",
+    #                     ip_address: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 firelens_configuration: {
+    #                   options: {
+    #                     "NonEmptyString" => "NonEmptyString",
+    #                   },
+    #                   type: "NonEmptyString",
+    #                 },
+    #                 health_check: {
+    #                   command: ["NonEmptyString"],
+    #                   interval: 1,
+    #                   retries: 1,
+    #                   start_period: 1,
+    #                   timeout: 1,
+    #                 },
+    #                 hostname: "NonEmptyString",
+    #                 image: "NonEmptyString",
+    #                 interactive: false,
+    #                 links: ["NonEmptyString"],
+    #                 linux_parameters: {
+    #                   capabilities: {
+    #                     add: ["NonEmptyString"],
+    #                     drop: ["NonEmptyString"],
+    #                   },
+    #                   devices: [
+    #                     {
+    #                       container_path: "NonEmptyString",
+    #                       host_path: "NonEmptyString",
+    #                       permissions: ["NonEmptyString"],
+    #                     },
+    #                   ],
+    #                   init_process_enabled: false,
+    #                   max_swap: 1,
+    #                   shared_memory_size: 1,
+    #                   swappiness: 1,
+    #                   tmpfs: [
+    #                     {
+    #                       container_path: "NonEmptyString",
+    #                       mount_options: ["NonEmptyString"],
+    #                       size: 1,
+    #                     },
+    #                   ],
+    #                 },
+    #                 log_configuration: {
+    #                   log_driver: "NonEmptyString",
+    #                   options: {
+    #                     "NonEmptyString" => "NonEmptyString",
+    #                   },
+    #                   secret_options: [
+    #                     {
+    #                       name: "NonEmptyString",
+    #                       value_from: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                 },
+    #                 memory: 1,
+    #                 memory_reservation: 1,
+    #                 mount_points: [
+    #                   {
+    #                     container_path: "NonEmptyString",
+    #                     read_only: false,
+    #                     source_volume: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 name: "NonEmptyString",
+    #                 port_mappings: [
+    #                   {
+    #                     container_port: 1,
+    #                     host_port: 1,
+    #                     protocol: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 privileged: false,
+    #                 pseudo_terminal: false,
+    #                 readonly_root_filesystem: false,
+    #                 repository_credentials: {
+    #                   credentials_parameter: "NonEmptyString",
+    #                 },
+    #                 resource_requirements: [
+    #                   {
+    #                     type: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 secrets: [
+    #                   {
+    #                     name: "NonEmptyString",
+    #                     value_from: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 start_timeout: 1,
+    #                 stop_timeout: 1,
+    #                 system_controls: [
+    #                   {
+    #                     namespace: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 ulimits: [
+    #                   {
+    #                     hard_limit: 1,
+    #                     name: "NonEmptyString",
+    #                     soft_limit: 1,
+    #                   },
+    #                 ],
+    #                 user: "NonEmptyString",
+    #                 volumes_from: [
+    #                   {
+    #                     read_only: false,
+    #                     source_container: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 working_directory: "NonEmptyString",
+    #               },
+    #             ],
+    #             cpu: "NonEmptyString",
+    #             execution_role_arn: "NonEmptyString",
+    #             family: "NonEmptyString",
+    #             inference_accelerators: [
+    #               {
+    #                 device_name: "NonEmptyString",
+    #                 device_type: "NonEmptyString",
+    #               },
+    #             ],
+    #             ipc_mode: "NonEmptyString",
+    #             memory: "NonEmptyString",
+    #             network_mode: "NonEmptyString",
+    #             pid_mode: "NonEmptyString",
+    #             placement_constraints: [
+    #               {
+    #                 expression: "NonEmptyString",
+    #                 type: "NonEmptyString",
+    #               },
+    #             ],
+    #             proxy_configuration: {
+    #               container_name: "NonEmptyString",
+    #               proxy_configuration_properties: [
+    #                 {
+    #                   name: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                 },
+    #               ],
+    #               type: "NonEmptyString",
+    #             },
+    #             requires_compatibilities: ["NonEmptyString"],
+    #             task_role_arn: "NonEmptyString",
+    #             volumes: [
+    #               {
+    #                 docker_volume_configuration: {
+    #                   autoprovision: false,
+    #                   driver: "NonEmptyString",
+    #                   driver_opts: {
+    #                     "NonEmptyString" => "NonEmptyString",
+    #                   },
+    #                   labels: {
+    #                     "NonEmptyString" => "NonEmptyString",
+    #                   },
+    #                   scope: "NonEmptyString",
+    #                 },
+    #                 efs_volume_configuration: {
+    #                   authorization_config: {
+    #                     access_point_id: "NonEmptyString",
+    #                     iam: "NonEmptyString",
+    #                   },
+    #                   filesystem_id: "NonEmptyString",
+    #                   root_directory: "NonEmptyString",
+    #                   transit_encryption: "NonEmptyString",
+    #                   transit_encryption_port: 1,
+    #                 },
+    #                 host: {
+    #                   source_path: "NonEmptyString",
+    #                 },
+    #                 name: "NonEmptyString",
+    #               },
+    #             ],
+    #           },
     #           container: {
     #             name: "NonEmptyString",
     #             image_id: "NonEmptyString",
@@ -23752,6 +27392,11 @@ module Aws::SecurityHub
     #           vpc_id: "NonEmptyString",
     #           subnet_id: "NonEmptyString",
     #           launched_at: "NonEmptyString",
+    #           network_interfaces: [
+    #             {
+    #               network_interface_id: "NonEmptyString",
+    #             },
+    #           ],
     #         },
     #         aws_ec2_network_interface: {
     #           attachment: {
@@ -24024,8 +27669,27 @@ module Aws::SecurityHub
     #             enabled: false,
     #             kms_key_id: "NonEmptyString",
     #           },
+    #           log_publishing_options: {
+    #             index_slow_logs: {
+    #               cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #               enabled: false,
+    #             },
+    #             search_slow_logs: {
+    #               cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #               enabled: false,
+    #             },
+    #           },
     #           node_to_node_encryption_options: {
     #             enabled: false,
+    #           },
+    #           service_software_options: {
+    #             automated_update_date: "NonEmptyString",
+    #             cancellable: false,
+    #             current_version: "NonEmptyString",
+    #             description: "NonEmptyString",
+    #             new_version: "NonEmptyString",
+    #             update_available: false,
+    #             update_status: "NonEmptyString",
     #           },
     #           vpc_options: {
     #             availability_zones: ["NonEmptyString"],
@@ -24045,6 +27709,55 @@ module Aws::SecurityHub
     #                   sse_algorithm: "NonEmptyString",
     #                   kms_master_key_id: "NonEmptyString",
     #                 },
+    #               },
+    #             ],
+    #           },
+    #           bucket_lifecycle_configuration: {
+    #             rules: [
+    #               {
+    #                 abort_incomplete_multipart_upload: {
+    #                   days_after_initiation: 1,
+    #                 },
+    #                 expiration_date: "NonEmptyString",
+    #                 expiration_in_days: 1,
+    #                 expired_object_delete_marker: false,
+    #                 filter: {
+    #                   predicate: {
+    #                     operands: [
+    #                       {
+    #                         prefix: "NonEmptyString",
+    #                         tag: {
+    #                           key: "NonEmptyString",
+    #                           value: "NonEmptyString",
+    #                         },
+    #                         type: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     prefix: "NonEmptyString",
+    #                     tag: {
+    #                       key: "NonEmptyString",
+    #                       value: "NonEmptyString",
+    #                     },
+    #                     type: "NonEmptyString",
+    #                   },
+    #                 },
+    #                 id: "NonEmptyString",
+    #                 noncurrent_version_expiration_in_days: 1,
+    #                 noncurrent_version_transitions: [
+    #                   {
+    #                     days: 1,
+    #                     storage_class: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 prefix: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #                 transitions: [
+    #                   {
+    #                     date: "NonEmptyString",
+    #                     days: 1,
+    #                     storage_class: "NonEmptyString",
+    #                   },
+    #                 ],
     #               },
     #             ],
     #           },
@@ -24146,6 +27859,7 @@ module Aws::SecurityHub
     #           update_date: "NonEmptyString",
     #         },
     #         aws_api_gateway_v2_stage: {
+    #           client_certificate_id: "NonEmptyString",
     #           created_date: "NonEmptyString",
     #           description: "NonEmptyString",
     #           default_route_settings: {
@@ -25100,6 +28814,247 @@ module Aws::SecurityHub
     #           ],
     #           iam_database_authentication_enabled: false,
     #         },
+    #         aws_ecs_cluster: {
+    #           capacity_providers: ["NonEmptyString"],
+    #           cluster_settings: [
+    #             {
+    #               name: "NonEmptyString",
+    #               value: "NonEmptyString",
+    #             },
+    #           ],
+    #           configuration: {
+    #             execute_command_configuration: {
+    #               kms_key_id: "NonEmptyString",
+    #               log_configuration: {
+    #                 cloud_watch_encryption_enabled: false,
+    #                 cloud_watch_log_group_name: "NonEmptyString",
+    #                 s3_bucket_name: "NonEmptyString",
+    #                 s3_encryption_enabled: false,
+    #                 s3_key_prefix: "NonEmptyString",
+    #               },
+    #               logging: "NonEmptyString",
+    #             },
+    #           },
+    #           default_capacity_provider_strategy: [
+    #             {
+    #               base: 1,
+    #               capacity_provider: "NonEmptyString",
+    #               weight: 1,
+    #             },
+    #           ],
+    #         },
+    #         aws_ecs_task_definition: {
+    #           container_definitions: [
+    #             {
+    #               command: ["NonEmptyString"],
+    #               cpu: 1,
+    #               depends_on: [
+    #                 {
+    #                   condition: "NonEmptyString",
+    #                   container_name: "NonEmptyString",
+    #                 },
+    #               ],
+    #               disable_networking: false,
+    #               dns_search_domains: ["NonEmptyString"],
+    #               dns_servers: ["NonEmptyString"],
+    #               docker_labels: {
+    #                 "NonEmptyString" => "NonEmptyString",
+    #               },
+    #               docker_security_options: ["NonEmptyString"],
+    #               entry_point: ["NonEmptyString"],
+    #               environment: [
+    #                 {
+    #                   name: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                 },
+    #               ],
+    #               environment_files: [
+    #                 {
+    #                   type: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                 },
+    #               ],
+    #               essential: false,
+    #               extra_hosts: [
+    #                 {
+    #                   hostname: "NonEmptyString",
+    #                   ip_address: "NonEmptyString",
+    #                 },
+    #               ],
+    #               firelens_configuration: {
+    #                 options: {
+    #                   "NonEmptyString" => "NonEmptyString",
+    #                 },
+    #                 type: "NonEmptyString",
+    #               },
+    #               health_check: {
+    #                 command: ["NonEmptyString"],
+    #                 interval: 1,
+    #                 retries: 1,
+    #                 start_period: 1,
+    #                 timeout: 1,
+    #               },
+    #               hostname: "NonEmptyString",
+    #               image: "NonEmptyString",
+    #               interactive: false,
+    #               links: ["NonEmptyString"],
+    #               linux_parameters: {
+    #                 capabilities: {
+    #                   add: ["NonEmptyString"],
+    #                   drop: ["NonEmptyString"],
+    #                 },
+    #                 devices: [
+    #                   {
+    #                     container_path: "NonEmptyString",
+    #                     host_path: "NonEmptyString",
+    #                     permissions: ["NonEmptyString"],
+    #                   },
+    #                 ],
+    #                 init_process_enabled: false,
+    #                 max_swap: 1,
+    #                 shared_memory_size: 1,
+    #                 swappiness: 1,
+    #                 tmpfs: [
+    #                   {
+    #                     container_path: "NonEmptyString",
+    #                     mount_options: ["NonEmptyString"],
+    #                     size: 1,
+    #                   },
+    #                 ],
+    #               },
+    #               log_configuration: {
+    #                 log_driver: "NonEmptyString",
+    #                 options: {
+    #                   "NonEmptyString" => "NonEmptyString",
+    #                 },
+    #                 secret_options: [
+    #                   {
+    #                     name: "NonEmptyString",
+    #                     value_from: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
+    #               memory: 1,
+    #               memory_reservation: 1,
+    #               mount_points: [
+    #                 {
+    #                   container_path: "NonEmptyString",
+    #                   read_only: false,
+    #                   source_volume: "NonEmptyString",
+    #                 },
+    #               ],
+    #               name: "NonEmptyString",
+    #               port_mappings: [
+    #                 {
+    #                   container_port: 1,
+    #                   host_port: 1,
+    #                   protocol: "NonEmptyString",
+    #                 },
+    #               ],
+    #               privileged: false,
+    #               pseudo_terminal: false,
+    #               readonly_root_filesystem: false,
+    #               repository_credentials: {
+    #                 credentials_parameter: "NonEmptyString",
+    #               },
+    #               resource_requirements: [
+    #                 {
+    #                   type: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                 },
+    #               ],
+    #               secrets: [
+    #                 {
+    #                   name: "NonEmptyString",
+    #                   value_from: "NonEmptyString",
+    #                 },
+    #               ],
+    #               start_timeout: 1,
+    #               stop_timeout: 1,
+    #               system_controls: [
+    #                 {
+    #                   namespace: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                 },
+    #               ],
+    #               ulimits: [
+    #                 {
+    #                   hard_limit: 1,
+    #                   name: "NonEmptyString",
+    #                   soft_limit: 1,
+    #                 },
+    #               ],
+    #               user: "NonEmptyString",
+    #               volumes_from: [
+    #                 {
+    #                   read_only: false,
+    #                   source_container: "NonEmptyString",
+    #                 },
+    #               ],
+    #               working_directory: "NonEmptyString",
+    #             },
+    #           ],
+    #           cpu: "NonEmptyString",
+    #           execution_role_arn: "NonEmptyString",
+    #           family: "NonEmptyString",
+    #           inference_accelerators: [
+    #             {
+    #               device_name: "NonEmptyString",
+    #               device_type: "NonEmptyString",
+    #             },
+    #           ],
+    #           ipc_mode: "NonEmptyString",
+    #           memory: "NonEmptyString",
+    #           network_mode: "NonEmptyString",
+    #           pid_mode: "NonEmptyString",
+    #           placement_constraints: [
+    #             {
+    #               expression: "NonEmptyString",
+    #               type: "NonEmptyString",
+    #             },
+    #           ],
+    #           proxy_configuration: {
+    #             container_name: "NonEmptyString",
+    #             proxy_configuration_properties: [
+    #               {
+    #                 name: "NonEmptyString",
+    #                 value: "NonEmptyString",
+    #               },
+    #             ],
+    #             type: "NonEmptyString",
+    #           },
+    #           requires_compatibilities: ["NonEmptyString"],
+    #           task_role_arn: "NonEmptyString",
+    #           volumes: [
+    #             {
+    #               docker_volume_configuration: {
+    #                 autoprovision: false,
+    #                 driver: "NonEmptyString",
+    #                 driver_opts: {
+    #                   "NonEmptyString" => "NonEmptyString",
+    #                 },
+    #                 labels: {
+    #                   "NonEmptyString" => "NonEmptyString",
+    #                 },
+    #                 scope: "NonEmptyString",
+    #               },
+    #               efs_volume_configuration: {
+    #                 authorization_config: {
+    #                   access_point_id: "NonEmptyString",
+    #                   iam: "NonEmptyString",
+    #                 },
+    #                 filesystem_id: "NonEmptyString",
+    #                 root_directory: "NonEmptyString",
+    #                 transit_encryption: "NonEmptyString",
+    #                 transit_encryption_port: 1,
+    #               },
+    #               host: {
+    #                 source_path: "NonEmptyString",
+    #               },
+    #               name: "NonEmptyString",
+    #             },
+    #           ],
+    #         },
     #         container: {
     #           name: "NonEmptyString",
     #           image_id: "NonEmptyString",
@@ -25124,7 +29079,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsCloudFrontDistributionDetails]
     #
     # @!attribute [rw] aws_ec2_instance
-    #   Details about an Amazon EC2 instance related to a finding.
+    #   Details about an EC2 instance related to a finding.
     #   @return [Types::AwsEc2InstanceDetails]
     #
     # @!attribute [rw] aws_ec2_network_interface
@@ -25286,6 +29241,16 @@ module Aws::SecurityHub
     #   Details about an Amazon RDS database cluster.
     #   @return [Types::AwsRdsDbClusterDetails]
     #
+    # @!attribute [rw] aws_ecs_cluster
+    #   Details about an ECS cluster.
+    #   @return [Types::AwsEcsClusterDetails]
+    #
+    # @!attribute [rw] aws_ecs_task_definition
+    #   Details about a task definition. A task definition describes the
+    #   container and volume definitions of an Amazon Elastic Container
+    #   Service task.
+    #   @return [Types::AwsEcsTaskDefinitionDetails]
+    #
     # @!attribute [rw] container
     #   Details about a container resource related to a finding.
     #   @return [Types::ContainerDetails]
@@ -25350,6 +29315,8 @@ module Aws::SecurityHub
       :aws_rds_db_snapshot,
       :aws_rds_db_cluster_snapshot,
       :aws_rds_db_cluster,
+      :aws_ecs_cluster,
+      :aws_ecs_task_definition,
       :container,
       :other)
       SENSITIVE = []

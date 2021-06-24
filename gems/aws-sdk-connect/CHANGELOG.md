@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2021-06-24)
+------------------
+
+* Feature - Released Amazon Connect quick connects management API for general availability (GA). For more information, see https://docs.aws.amazon.com/connect/latest/APIReference/Welcome.html
+
 1.45.0 (2021-06-15)
 ------------------
 

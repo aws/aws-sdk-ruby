@@ -398,6 +398,7 @@ module Aws::Connect
     UpdateQueueOutboundCallerConfigRequest = Shapes::StructureShape.new(name: 'UpdateQueueOutboundCallerConfigRequest')
     UpdateQueueStatusRequest = Shapes::StructureShape.new(name: 'UpdateQueueStatusRequest')
     UpdateQuickConnectConfigRequest = Shapes::StructureShape.new(name: 'UpdateQuickConnectConfigRequest')
+    UpdateQuickConnectDescription = Shapes::StringShape.new(name: 'UpdateQuickConnectDescription')
     UpdateQuickConnectNameRequest = Shapes::StructureShape.new(name: 'UpdateQuickConnectNameRequest')
     UpdateRoutingProfileConcurrencyRequest = Shapes::StructureShape.new(name: 'UpdateRoutingProfileConcurrencyRequest')
     UpdateRoutingProfileDefaultOutboundQueueRequest = Shapes::StructureShape.new(name: 'UpdateRoutingProfileDefaultOutboundQueueRequest')
@@ -1578,7 +1579,7 @@ module Aws::Connect
     UpdateQuickConnectNameRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     UpdateQuickConnectNameRequest.add_member(:quick_connect_id, Shapes::ShapeRef.new(shape: QuickConnectId, required: true, location: "uri", location_name: "QuickConnectId"))
     UpdateQuickConnectNameRequest.add_member(:name, Shapes::ShapeRef.new(shape: QuickConnectName, location_name: "Name"))
-    UpdateQuickConnectNameRequest.add_member(:description, Shapes::ShapeRef.new(shape: QuickConnectDescription, location_name: "Description"))
+    UpdateQuickConnectNameRequest.add_member(:description, Shapes::ShapeRef.new(shape: UpdateQuickConnectDescription, location_name: "Description"))
     UpdateQuickConnectNameRequest.struct_class = Types::UpdateQuickConnectNameRequest
 
     UpdateRoutingProfileConcurrencyRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))

@@ -83,10 +83,12 @@ module Aws::Transfer
     Message = Shapes::StringShape.new(name: 'Message')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NullableRole = Shapes::StringShape.new(name: 'NullableRole')
+    PassiveIp = Shapes::StringShape.new(name: 'PassiveIp')
     Policy = Shapes::StringShape.new(name: 'Policy')
     PosixId = Shapes::IntegerShape.new(name: 'PosixId')
     PosixProfile = Shapes::StructureShape.new(name: 'PosixProfile')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
+    ProtocolDetails = Shapes::StructureShape.new(name: 'ProtocolDetails')
     Protocols = Shapes::ListShape.new(name: 'Protocols')
     Resource = Shapes::StringShape.new(name: 'Resource')
     ResourceExistsException = Shapes::StructureShape.new(name: 'ResourceExistsException')
@@ -257,6 +259,7 @@ module Aws::Transfer
 
     DescribedServer.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
     DescribedServer.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate"))
+    DescribedServer.add_member(:protocol_details, Shapes::ShapeRef.new(shape: ProtocolDetails, location_name: "ProtocolDetails"))
     DescribedServer.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, location_name: "Domain"))
     DescribedServer.add_member(:endpoint_details, Shapes::ShapeRef.new(shape: EndpointDetails, location_name: "EndpointDetails"))
     DescribedServer.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
@@ -402,6 +405,9 @@ module Aws::Transfer
     PosixProfile.add_member(:secondary_gids, Shapes::ShapeRef.new(shape: SecondaryGids, location_name: "SecondaryGids"))
     PosixProfile.struct_class = Types::PosixProfile
 
+    ProtocolDetails.add_member(:passive_ip, Shapes::ShapeRef.new(shape: PassiveIp, location_name: "PassiveIp"))
+    ProtocolDetails.struct_class = Types::ProtocolDetails
+
     Protocols.member = Shapes::ShapeRef.new(shape: Protocol)
 
     ResourceExistsException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
@@ -487,6 +493,7 @@ module Aws::Transfer
     UpdateAccessResponse.struct_class = Types::UpdateAccessResponse
 
     UpdateServerRequest.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate"))
+    UpdateServerRequest.add_member(:protocol_details, Shapes::ShapeRef.new(shape: ProtocolDetails, location_name: "ProtocolDetails"))
     UpdateServerRequest.add_member(:endpoint_details, Shapes::ShapeRef.new(shape: EndpointDetails, location_name: "EndpointDetails"))
     UpdateServerRequest.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
     UpdateServerRequest.add_member(:host_key, Shapes::ShapeRef.new(shape: HostKey, location_name: "HostKey"))

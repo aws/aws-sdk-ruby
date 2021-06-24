@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2021-06-24)
+------------------
+
+* Feature - Adds EventIngestionUrl field to MediaPlacement
+
 1.48.0 (2021-06-17)
 ------------------
 

@@ -726,8 +726,9 @@ module Aws::Chime
     # Removes the suspension from up to 50 previously suspended users for
     # the specified Amazon Chime `EnterpriseLWA` account. Only users on
     # `EnterpriseLWA` accounts can be unsuspended using this action. For
-    # more information about different account types, see [Managing Your
-    # Amazon Chime Accounts][1] in the *Amazon Chime Administration Guide*.
+    # more information about different account types, see [ Managing Your
+    # Amazon Chime Accounts ][1] in the account types, in the *Amazon Chime
+    # Administration Guide*.
     #
     # Previously suspended users who are unsuspended using this action are
     # returned to `Registered` status. Users who are not previously
@@ -1484,6 +1485,7 @@ module Aws::Chime
     #   resp.meeting.media_placement.screen_viewing_url #=> String
     #   resp.meeting.media_placement.signaling_url #=> String
     #   resp.meeting.media_placement.turn_control_url #=> String
+    #   resp.meeting.media_placement.event_ingestion_url #=> String
     #   resp.meeting.media_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateMeeting AWS API Documentation
@@ -1640,6 +1642,7 @@ module Aws::Chime
     #   resp.meeting.media_placement.screen_viewing_url #=> String
     #   resp.meeting.media_placement.signaling_url #=> String
     #   resp.meeting.media_placement.turn_control_url #=> String
+    #   resp.meeting.media_placement.event_ingestion_url #=> String
     #   resp.meeting.media_region #=> String
     #   resp.attendees #=> Array
     #   resp.attendees[0].external_user_id #=> String
@@ -3814,6 +3817,7 @@ module Aws::Chime
     #   resp.meeting.media_placement.screen_viewing_url #=> String
     #   resp.meeting.media_placement.signaling_url #=> String
     #   resp.meeting.media_placement.turn_control_url #=> String
+    #   resp.meeting.media_placement.event_ingestion_url #=> String
     #   resp.meeting.media_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetMeeting AWS API Documentation
@@ -4003,8 +4007,8 @@ module Aws::Chime
 
     # Gets the retention settings for the specified Amazon Chime Enterprise
     # account. For more information about retention settings, see [Managing
-    # Chat Retention Policies][1] in the *Amazon Chime Administration Guide*
-    # .
+    # Chat Retention Policies][1] in the *Amazon Chime Administration
+    # Guide*.
     #
     #
     #
@@ -4832,7 +4836,7 @@ module Aws::Chime
 
     # Lists the attendees for the specified Amazon Chime SDK meeting. For
     # more information about the Amazon Chime SDK, see [Using the Amazon
-    # Chime SDK][1] in the *Amazon Chime Developer Guide* .
+    # Chime SDK][1] in the *Amazon Chime Developer Guide*.
     #
     #
     #
@@ -5445,6 +5449,7 @@ module Aws::Chime
     #   resp.meetings[0].media_placement.screen_viewing_url #=> String
     #   resp.meetings[0].media_placement.signaling_url #=> String
     #   resp.meetings[0].media_placement.turn_control_url #=> String
+    #   resp.meetings[0].media_placement.event_ingestion_url #=> String
     #   resp.meetings[0].media_region #=> String
     #   resp.next_token #=> String
     #
@@ -8173,7 +8178,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

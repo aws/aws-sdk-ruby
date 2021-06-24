@@ -904,6 +904,11 @@ module Aws::SecurityHub
     #                 vpc_id: "NonEmptyString",
     #                 subnet_id: "NonEmptyString",
     #                 launched_at: "NonEmptyString",
+    #                 network_interfaces: [
+    #                   {
+    #                     network_interface_id: "NonEmptyString",
+    #                   },
+    #                 ],
     #               },
     #               aws_ec2_network_interface: {
     #                 attachment: {
@@ -1176,8 +1181,27 @@ module Aws::SecurityHub
     #                   enabled: false,
     #                   kms_key_id: "NonEmptyString",
     #                 },
+    #                 log_publishing_options: {
+    #                   index_slow_logs: {
+    #                     cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                     enabled: false,
+    #                   },
+    #                   search_slow_logs: {
+    #                     cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                     enabled: false,
+    #                   },
+    #                 },
     #                 node_to_node_encryption_options: {
     #                   enabled: false,
+    #                 },
+    #                 service_software_options: {
+    #                   automated_update_date: "NonEmptyString",
+    #                   cancellable: false,
+    #                   current_version: "NonEmptyString",
+    #                   description: "NonEmptyString",
+    #                   new_version: "NonEmptyString",
+    #                   update_available: false,
+    #                   update_status: "NonEmptyString",
     #                 },
     #                 vpc_options: {
     #                   availability_zones: ["NonEmptyString"],
@@ -1197,6 +1221,55 @@ module Aws::SecurityHub
     #                         sse_algorithm: "NonEmptyString",
     #                         kms_master_key_id: "NonEmptyString",
     #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #                 bucket_lifecycle_configuration: {
+    #                   rules: [
+    #                     {
+    #                       abort_incomplete_multipart_upload: {
+    #                         days_after_initiation: 1,
+    #                       },
+    #                       expiration_date: "NonEmptyString",
+    #                       expiration_in_days: 1,
+    #                       expired_object_delete_marker: false,
+    #                       filter: {
+    #                         predicate: {
+    #                           operands: [
+    #                             {
+    #                               prefix: "NonEmptyString",
+    #                               tag: {
+    #                                 key: "NonEmptyString",
+    #                                 value: "NonEmptyString",
+    #                               },
+    #                               type: "NonEmptyString",
+    #                             },
+    #                           ],
+    #                           prefix: "NonEmptyString",
+    #                           tag: {
+    #                             key: "NonEmptyString",
+    #                             value: "NonEmptyString",
+    #                           },
+    #                           type: "NonEmptyString",
+    #                         },
+    #                       },
+    #                       id: "NonEmptyString",
+    #                       noncurrent_version_expiration_in_days: 1,
+    #                       noncurrent_version_transitions: [
+    #                         {
+    #                           days: 1,
+    #                           storage_class: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                       prefix: "NonEmptyString",
+    #                       status: "NonEmptyString",
+    #                       transitions: [
+    #                         {
+    #                           date: "NonEmptyString",
+    #                           days: 1,
+    #                           storage_class: "NonEmptyString",
+    #                         },
+    #                       ],
     #                     },
     #                   ],
     #                 },
@@ -1298,6 +1371,7 @@ module Aws::SecurityHub
     #                 update_date: "NonEmptyString",
     #               },
     #               aws_api_gateway_v2_stage: {
+    #                 client_certificate_id: "NonEmptyString",
     #                 created_date: "NonEmptyString",
     #                 description: "NonEmptyString",
     #                 default_route_settings: {
@@ -2252,6 +2326,247 @@ module Aws::SecurityHub
     #                 ],
     #                 iam_database_authentication_enabled: false,
     #               },
+    #               aws_ecs_cluster: {
+    #                 capacity_providers: ["NonEmptyString"],
+    #                 cluster_settings: [
+    #                   {
+    #                     name: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 configuration: {
+    #                   execute_command_configuration: {
+    #                     kms_key_id: "NonEmptyString",
+    #                     log_configuration: {
+    #                       cloud_watch_encryption_enabled: false,
+    #                       cloud_watch_log_group_name: "NonEmptyString",
+    #                       s3_bucket_name: "NonEmptyString",
+    #                       s3_encryption_enabled: false,
+    #                       s3_key_prefix: "NonEmptyString",
+    #                     },
+    #                     logging: "NonEmptyString",
+    #                   },
+    #                 },
+    #                 default_capacity_provider_strategy: [
+    #                   {
+    #                     base: 1,
+    #                     capacity_provider: "NonEmptyString",
+    #                     weight: 1,
+    #                   },
+    #                 ],
+    #               },
+    #               aws_ecs_task_definition: {
+    #                 container_definitions: [
+    #                   {
+    #                     command: ["NonEmptyString"],
+    #                     cpu: 1,
+    #                     depends_on: [
+    #                       {
+    #                         condition: "NonEmptyString",
+    #                         container_name: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     disable_networking: false,
+    #                     dns_search_domains: ["NonEmptyString"],
+    #                     dns_servers: ["NonEmptyString"],
+    #                     docker_labels: {
+    #                       "NonEmptyString" => "NonEmptyString",
+    #                     },
+    #                     docker_security_options: ["NonEmptyString"],
+    #                     entry_point: ["NonEmptyString"],
+    #                     environment: [
+    #                       {
+    #                         name: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     environment_files: [
+    #                       {
+    #                         type: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     essential: false,
+    #                     extra_hosts: [
+    #                       {
+    #                         hostname: "NonEmptyString",
+    #                         ip_address: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     firelens_configuration: {
+    #                       options: {
+    #                         "NonEmptyString" => "NonEmptyString",
+    #                       },
+    #                       type: "NonEmptyString",
+    #                     },
+    #                     health_check: {
+    #                       command: ["NonEmptyString"],
+    #                       interval: 1,
+    #                       retries: 1,
+    #                       start_period: 1,
+    #                       timeout: 1,
+    #                     },
+    #                     hostname: "NonEmptyString",
+    #                     image: "NonEmptyString",
+    #                     interactive: false,
+    #                     links: ["NonEmptyString"],
+    #                     linux_parameters: {
+    #                       capabilities: {
+    #                         add: ["NonEmptyString"],
+    #                         drop: ["NonEmptyString"],
+    #                       },
+    #                       devices: [
+    #                         {
+    #                           container_path: "NonEmptyString",
+    #                           host_path: "NonEmptyString",
+    #                           permissions: ["NonEmptyString"],
+    #                         },
+    #                       ],
+    #                       init_process_enabled: false,
+    #                       max_swap: 1,
+    #                       shared_memory_size: 1,
+    #                       swappiness: 1,
+    #                       tmpfs: [
+    #                         {
+    #                           container_path: "NonEmptyString",
+    #                           mount_options: ["NonEmptyString"],
+    #                           size: 1,
+    #                         },
+    #                       ],
+    #                     },
+    #                     log_configuration: {
+    #                       log_driver: "NonEmptyString",
+    #                       options: {
+    #                         "NonEmptyString" => "NonEmptyString",
+    #                       },
+    #                       secret_options: [
+    #                         {
+    #                           name: "NonEmptyString",
+    #                           value_from: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                     },
+    #                     memory: 1,
+    #                     memory_reservation: 1,
+    #                     mount_points: [
+    #                       {
+    #                         container_path: "NonEmptyString",
+    #                         read_only: false,
+    #                         source_volume: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     name: "NonEmptyString",
+    #                     port_mappings: [
+    #                       {
+    #                         container_port: 1,
+    #                         host_port: 1,
+    #                         protocol: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     privileged: false,
+    #                     pseudo_terminal: false,
+    #                     readonly_root_filesystem: false,
+    #                     repository_credentials: {
+    #                       credentials_parameter: "NonEmptyString",
+    #                     },
+    #                     resource_requirements: [
+    #                       {
+    #                         type: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     secrets: [
+    #                       {
+    #                         name: "NonEmptyString",
+    #                         value_from: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     start_timeout: 1,
+    #                     stop_timeout: 1,
+    #                     system_controls: [
+    #                       {
+    #                         namespace: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     ulimits: [
+    #                       {
+    #                         hard_limit: 1,
+    #                         name: "NonEmptyString",
+    #                         soft_limit: 1,
+    #                       },
+    #                     ],
+    #                     user: "NonEmptyString",
+    #                     volumes_from: [
+    #                       {
+    #                         read_only: false,
+    #                         source_container: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     working_directory: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 cpu: "NonEmptyString",
+    #                 execution_role_arn: "NonEmptyString",
+    #                 family: "NonEmptyString",
+    #                 inference_accelerators: [
+    #                   {
+    #                     device_name: "NonEmptyString",
+    #                     device_type: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 ipc_mode: "NonEmptyString",
+    #                 memory: "NonEmptyString",
+    #                 network_mode: "NonEmptyString",
+    #                 pid_mode: "NonEmptyString",
+    #                 placement_constraints: [
+    #                   {
+    #                     expression: "NonEmptyString",
+    #                     type: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 proxy_configuration: {
+    #                   container_name: "NonEmptyString",
+    #                   proxy_configuration_properties: [
+    #                     {
+    #                       name: "NonEmptyString",
+    #                       value: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   type: "NonEmptyString",
+    #                 },
+    #                 requires_compatibilities: ["NonEmptyString"],
+    #                 task_role_arn: "NonEmptyString",
+    #                 volumes: [
+    #                   {
+    #                     docker_volume_configuration: {
+    #                       autoprovision: false,
+    #                       driver: "NonEmptyString",
+    #                       driver_opts: {
+    #                         "NonEmptyString" => "NonEmptyString",
+    #                       },
+    #                       labels: {
+    #                         "NonEmptyString" => "NonEmptyString",
+    #                       },
+    #                       scope: "NonEmptyString",
+    #                     },
+    #                     efs_volume_configuration: {
+    #                       authorization_config: {
+    #                         access_point_id: "NonEmptyString",
+    #                         iam: "NonEmptyString",
+    #                       },
+    #                       filesystem_id: "NonEmptyString",
+    #                       root_directory: "NonEmptyString",
+    #                       transit_encryption: "NonEmptyString",
+    #                       transit_encryption_port: 1,
+    #                     },
+    #                     host: {
+    #                       source_path: "NonEmptyString",
+    #                     },
+    #                     name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
     #               container: {
     #                 name: "NonEmptyString",
     #                 image_id: "NonEmptyString",
@@ -2658,13 +2973,14 @@ module Aws::SecurityHub
     # trigger target actions in Amazon CloudWatch Events.
     #
     # @option params [required, String] :name
-    #   The name of the custom action target.
+    #   The name of the custom action target. Can contain up to 20 characters.
     #
     # @option params [required, String] :description
     #   The description for the custom action target.
     #
     # @option params [required, String] :id
-    #   The ID for the custom action target.
+    #   The ID for the custom action target. Can contain up to 20 alphanumeric
+    #   characters.
     #
     # @return [Types::CreateActionTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5056,6 +5372,8 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_ec2_instance.vpc_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_instance.subnet_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_instance.launched_at #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_instance.network_interfaces #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_instance.network_interfaces[0].network_interface_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_network_interface.attachment.attach_time #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_network_interface.attachment.attachment_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_network_interface.attachment.delete_on_termination #=> Boolean
@@ -5228,7 +5546,18 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.elasticsearch_version #=> String
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.encryption_at_rest_options.enabled #=> Boolean
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.encryption_at_rest_options.kms_key_id #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.log_publishing_options.index_slow_logs.cloud_watch_logs_log_group_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.log_publishing_options.index_slow_logs.enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.log_publishing_options.search_slow_logs.cloud_watch_logs_log_group_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.log_publishing_options.search_slow_logs.enabled #=> Boolean
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.node_to_node_encryption_options.enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.service_software_options.automated_update_date #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.service_software_options.cancellable #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.service_software_options.current_version #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.service_software_options.description #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.service_software_options.new_version #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.service_software_options.update_available #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.service_software_options.update_status #=> String
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.vpc_options.availability_zones #=> Array
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.vpc_options.availability_zones[0] #=> String
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.vpc_options.security_group_ids #=> Array
@@ -5242,6 +5571,31 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_s3_bucket.server_side_encryption_configuration.rules #=> Array
     #   resp.findings[0].resources[0].details.aws_s3_bucket.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.sse_algorithm #=> String
     #   resp.findings[0].resources[0].details.aws_s3_bucket.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.kms_master_key_id #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules #=> Array
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].abort_incomplete_multipart_upload.days_after_initiation #=> Integer
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].expiration_date #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].expiration_in_days #=> Integer
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].expired_object_delete_marker #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].filter.predicate.operands #=> Array
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].filter.predicate.operands[0].prefix #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].filter.predicate.operands[0].tag.key #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].filter.predicate.operands[0].tag.value #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].filter.predicate.operands[0].type #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].filter.predicate.prefix #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].filter.predicate.tag.key #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].filter.predicate.tag.value #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].filter.predicate.type #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].id #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].noncurrent_version_expiration_in_days #=> Integer
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].noncurrent_version_transitions #=> Array
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].noncurrent_version_transitions[0].days #=> Integer
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].noncurrent_version_transitions[0].storage_class #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].prefix #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].status #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].transitions #=> Array
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].transitions[0].date #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].transitions[0].days #=> Integer
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.bucket_lifecycle_configuration.rules[0].transitions[0].storage_class #=> String
     #   resp.findings[0].resources[0].details.aws_s3_bucket.public_access_block_configuration.block_public_acls #=> Boolean
     #   resp.findings[0].resources[0].details.aws_s3_bucket.public_access_block_configuration.block_public_policy #=> Boolean
     #   resp.findings[0].resources[0].details.aws_s3_bucket.public_access_block_configuration.ignore_public_acls #=> Boolean
@@ -5306,6 +5660,7 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_iam_policy.policy_version_list[0].is_default_version #=> Boolean
     #   resp.findings[0].resources[0].details.aws_iam_policy.policy_version_list[0].create_date #=> String
     #   resp.findings[0].resources[0].details.aws_iam_policy.update_date #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.client_certificate_id #=> String
     #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.created_date #=> String
     #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.description #=> String
     #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.default_route_settings.detailed_metrics_enabled #=> Boolean
@@ -5988,6 +6343,160 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_rds_db_cluster.db_cluster_members[0].db_instance_identifier #=> String
     #   resp.findings[0].resources[0].details.aws_rds_db_cluster.db_cluster_members[0].db_cluster_parameter_group_status #=> String
     #   resp.findings[0].resources[0].details.aws_rds_db_cluster.iam_database_authentication_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.capacity_providers #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.capacity_providers[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.cluster_settings #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.cluster_settings[0].name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.cluster_settings[0].value #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.configuration.execute_command_configuration.kms_key_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.configuration.execute_command_configuration.log_configuration.cloud_watch_encryption_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.configuration.execute_command_configuration.log_configuration.cloud_watch_log_group_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.configuration.execute_command_configuration.log_configuration.s3_bucket_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.configuration.execute_command_configuration.log_configuration.s3_encryption_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.configuration.execute_command_configuration.log_configuration.s3_key_prefix #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.configuration.execute_command_configuration.logging #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.default_capacity_provider_strategy #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.default_capacity_provider_strategy[0].base #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.default_capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_cluster.default_capacity_provider_strategy[0].weight #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].command #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].command[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].cpu #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].depends_on #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].depends_on[0].condition #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].depends_on[0].container_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].disable_networking #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].dns_search_domains #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].dns_search_domains[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].dns_servers #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].dns_servers[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].docker_labels #=> Hash
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].docker_labels["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].docker_security_options #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].docker_security_options[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].entry_point #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].entry_point[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].environment #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].environment[0].name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].environment[0].value #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].environment_files #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].environment_files[0].type #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].environment_files[0].value #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].essential #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].extra_hosts #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].extra_hosts[0].hostname #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].extra_hosts[0].ip_address #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].firelens_configuration.options #=> Hash
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].firelens_configuration.options["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].firelens_configuration.type #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].health_check.command #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].health_check.command[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].health_check.interval #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].health_check.retries #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].health_check.start_period #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].health_check.timeout #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].hostname #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].image #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].interactive #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].links #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].links[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.capabilities.add #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.capabilities.add[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.capabilities.drop #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.capabilities.drop[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.devices #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.devices[0].container_path #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.devices[0].host_path #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.devices[0].permissions #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.devices[0].permissions[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.init_process_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.max_swap #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.shared_memory_size #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.swappiness #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.tmpfs #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.tmpfs[0].container_path #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].linux_parameters.tmpfs[0].size #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].log_configuration.log_driver #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].log_configuration.options #=> Hash
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].log_configuration.options["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].log_configuration.secret_options #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].log_configuration.secret_options[0].name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].log_configuration.secret_options[0].value_from #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].memory #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].memory_reservation #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].mount_points #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].mount_points[0].container_path #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].mount_points[0].read_only #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].mount_points[0].source_volume #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].port_mappings #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].port_mappings[0].container_port #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].port_mappings[0].host_port #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].port_mappings[0].protocol #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].privileged #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].pseudo_terminal #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].readonly_root_filesystem #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].repository_credentials.credentials_parameter #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].resource_requirements #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].resource_requirements[0].type #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].resource_requirements[0].value #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].secrets #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].secrets[0].name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].secrets[0].value_from #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].start_timeout #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].stop_timeout #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].system_controls #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].system_controls[0].namespace #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].system_controls[0].value #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].ulimits #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].ulimits[0].hard_limit #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].ulimits[0].name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].ulimits[0].soft_limit #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].user #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].volumes_from #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].volumes_from[0].read_only #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].volumes_from[0].source_container #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.container_definitions[0].working_directory #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.cpu #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.execution_role_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.family #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.inference_accelerators #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.inference_accelerators[0].device_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.inference_accelerators[0].device_type #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.ipc_mode #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.memory #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.network_mode #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.pid_mode #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.placement_constraints #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.placement_constraints[0].expression #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.placement_constraints[0].type #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.proxy_configuration.container_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.proxy_configuration.proxy_configuration_properties #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.proxy_configuration.proxy_configuration_properties[0].name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.proxy_configuration.proxy_configuration_properties[0].value #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.proxy_configuration.type #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.requires_compatibilities #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.requires_compatibilities[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.task_role_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes #=> Array
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].docker_volume_configuration.autoprovision #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].docker_volume_configuration.driver #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].docker_volume_configuration.driver_opts #=> Hash
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].docker_volume_configuration.driver_opts["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].docker_volume_configuration.labels #=> Hash
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].docker_volume_configuration.labels["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].docker_volume_configuration.scope #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].efs_volume_configuration.authorization_config.iam #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].efs_volume_configuration.filesystem_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].efs_volume_configuration.root_directory #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].efs_volume_configuration.transit_encryption #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].host.source_path #=> String
+    #   resp.findings[0].resources[0].details.aws_ecs_task_definition.volumes[0].name #=> String
     #   resp.findings[0].resources[0].details.container.name #=> String
     #   resp.findings[0].resources[0].details.container.image_id #=> String
     #   resp.findings[0].resources[0].details.container.image_name #=> String
@@ -8340,7 +8849,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

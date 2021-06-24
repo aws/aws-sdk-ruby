@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2021-06-24)
+------------------
+
+* Feature - Add support for encryption in transit to DAX clusters.
+
 1.29.0 (2021-03-10)
 ------------------
 

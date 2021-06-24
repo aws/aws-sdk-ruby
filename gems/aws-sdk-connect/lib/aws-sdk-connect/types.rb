@@ -4917,7 +4917,7 @@ module Aws::Connect
     #
     #   Valid Range for `VOICE`\: Minimum value of 1. Maximum value of 1.
     #
-    #   Valid Range for `CHAT`\: Minimum value of 1. Maximum value of 5.
+    #   Valid Range for `CHAT`\: Minimum value of 1. Maximum value of 10.
     #
     #   Valid Range for `TASK`\: Minimum value of 1. Maximum value of 10.
     #   @return [Integer]
@@ -6746,7 +6746,7 @@ module Aws::Connect
     #         instance_id: "InstanceId", # required
     #         quick_connect_id: "QuickConnectId", # required
     #         name: "QuickConnectName",
-    #         description: "QuickConnectDescription",
+    #         description: "UpdateQuickConnectDescription",
     #       }
     #
     # @!attribute [rw] instance_id

@@ -1866,6 +1866,7 @@ module Aws::Chime
     MediaPlacement.add_member(:screen_viewing_url, Shapes::ShapeRef.new(shape: UriType, location_name: "ScreenViewingUrl"))
     MediaPlacement.add_member(:signaling_url, Shapes::ShapeRef.new(shape: UriType, location_name: "SignalingUrl"))
     MediaPlacement.add_member(:turn_control_url, Shapes::ShapeRef.new(shape: UriType, location_name: "TurnControlUrl"))
+    MediaPlacement.add_member(:event_ingestion_url, Shapes::ShapeRef.new(shape: UriType, location_name: "EventIngestionUrl"))
     MediaPlacement.struct_class = Types::MediaPlacement
 
     Meeting.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "MeetingId"))
