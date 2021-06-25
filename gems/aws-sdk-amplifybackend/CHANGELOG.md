@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2021-06-25)
+------------------
+
+* Feature - Imports an existing backend authentication resource.
+
 1.3.0 (2021-03-10)
 ------------------
 

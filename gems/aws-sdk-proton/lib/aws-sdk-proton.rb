@@ -15,6 +15,7 @@ require_relative 'aws-sdk-proton/types'
 require_relative 'aws-sdk-proton/client_api'
 require_relative 'aws-sdk-proton/client'
 require_relative 'aws-sdk-proton/errors'
+require_relative 'aws-sdk-proton/waiters'
 require_relative 'aws-sdk-proton/resource'
 require_relative 'aws-sdk-proton/customizations'
 
@@ -48,6 +49,6 @@ require_relative 'aws-sdk-proton/customizations'
 # @!group service
 module Aws::Proton
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.1.0'
 
 end

@@ -91,6 +91,9 @@ module Aws::AmplifyBackend
     GetTokenRequest = Shapes::StructureShape.new(name: 'GetTokenRequest')
     GetTokenRespObj = Shapes::StructureShape.new(name: 'GetTokenRespObj')
     GetTokenResponse = Shapes::StructureShape.new(name: 'GetTokenResponse')
+    ImportBackendAuthReqObj = Shapes::StructureShape.new(name: 'ImportBackendAuthReqObj')
+    ImportBackendAuthRequest = Shapes::StructureShape.new(name: 'ImportBackendAuthRequest')
+    ImportBackendAuthResponse = Shapes::StructureShape.new(name: 'ImportBackendAuthResponse')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListBackendJobReqObj = Shapes::StructureShape.new(name: 'ListBackendJobReqObj')
@@ -590,6 +593,28 @@ module Aws::AmplifyBackend
     GetTokenResponse.add_member(:ttl, Shapes::ShapeRef.new(shape: __string, location_name: "ttl"))
     GetTokenResponse.struct_class = Types::GetTokenResponse
 
+    ImportBackendAuthReqObj.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: __string, location_name: "identityPoolId"))
+    ImportBackendAuthReqObj.add_member(:native_client_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "nativeClientId"))
+    ImportBackendAuthReqObj.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "userPoolId"))
+    ImportBackendAuthReqObj.add_member(:web_client_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "webClientId"))
+    ImportBackendAuthReqObj.struct_class = Types::ImportBackendAuthReqObj
+
+    ImportBackendAuthRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "appId"))
+    ImportBackendAuthRequest.add_member(:backend_environment_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "backendEnvironmentName"))
+    ImportBackendAuthRequest.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: __string, location_name: "identityPoolId"))
+    ImportBackendAuthRequest.add_member(:native_client_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "nativeClientId"))
+    ImportBackendAuthRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "userPoolId"))
+    ImportBackendAuthRequest.add_member(:web_client_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "webClientId"))
+    ImportBackendAuthRequest.struct_class = Types::ImportBackendAuthRequest
+
+    ImportBackendAuthResponse.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, location_name: "appId"))
+    ImportBackendAuthResponse.add_member(:backend_environment_name, Shapes::ShapeRef.new(shape: __string, location_name: "backendEnvironmentName"))
+    ImportBackendAuthResponse.add_member(:error, Shapes::ShapeRef.new(shape: __string, location_name: "error"))
+    ImportBackendAuthResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: __string, location_name: "jobId"))
+    ImportBackendAuthResponse.add_member(:operation, Shapes::ShapeRef.new(shape: __string, location_name: "operation"))
+    ImportBackendAuthResponse.add_member(:status, Shapes::ShapeRef.new(shape: __string, location_name: "status"))
+    ImportBackendAuthResponse.struct_class = Types::ImportBackendAuthResponse
+
     InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     InternalServiceException.struct_class = Types::InternalServiceException
 
@@ -1010,6 +1035,18 @@ module Aws::AmplifyBackend
         o.http_request_uri = "/backend/{appId}/challenge/{sessionId}"
         o.input = Shapes::ShapeRef.new(shape: GetTokenRequest)
         o.output = Shapes::ShapeRef.new(shape: GetTokenResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:import_backend_auth, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ImportBackendAuth"
+        o.http_method = "POST"
+        o.http_request_uri = "/backend/{appId}/auth/{backendEnvironmentName}/import"
+        o.input = Shapes::ShapeRef.new(shape: ImportBackendAuthRequest)
+        o.output = Shapes::ShapeRef.new(shape: ImportBackendAuthResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)

@@ -428,8 +428,8 @@ module Aws::AmplifyBackend
     # @option params [required, String] :backend_environment_name
     #
     # @option params [required, Types::BackendAPIResourceConfig] :resource_config
-    #   The resource configuration for the data model, configured as a part of
-    #   the Amplify project.
+    #   The resource config for the data model, configured as a part of the
+    #   Amplify project.
     #
     # @option params [required, String] :resource_name
     #
@@ -723,8 +723,8 @@ module Aws::AmplifyBackend
     # @option params [required, String] :backend_environment_name
     #
     # @option params [Types::BackendAPIResourceConfig] :resource_config
-    #   The resource configuration for the data model, configured as a part of
-    #   the Amplify project.
+    #   The resource config for the data model, configured as a part of the
+    #   Amplify project.
     #
     # @option params [required, String] :resource_name
     #
@@ -963,8 +963,8 @@ module Aws::AmplifyBackend
     # @option params [required, String] :backend_environment_name
     #
     # @option params [Types::BackendAPIResourceConfig] :resource_config
-    #   The resource configuration for the data model, configured as a part of
-    #   the Amplify project.
+    #   The resource config for the data model, configured as a part of the
+    #   Amplify project.
     #
     # @option params [required, String] :resource_name
     #
@@ -1094,7 +1094,7 @@ module Aws::AmplifyBackend
       req.send_request(options)
     end
 
-    # Gets backend auth details.
+    # Gets a backend auth details.
     #
     # @option params [required, String] :app_id
     #
@@ -1250,6 +1250,58 @@ module Aws::AmplifyBackend
       req.send_request(options)
     end
 
+    # Imports an existing backend authentication resource.
+    #
+    # @option params [required, String] :app_id
+    #
+    # @option params [required, String] :backend_environment_name
+    #
+    # @option params [String] :identity_pool_id
+    #
+    # @option params [required, String] :native_client_id
+    #
+    # @option params [required, String] :user_pool_id
+    #
+    # @option params [required, String] :web_client_id
+    #
+    # @return [Types::ImportBackendAuthResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportBackendAuthResponse#app_id #app_id} => String
+    #   * {Types::ImportBackendAuthResponse#backend_environment_name #backend_environment_name} => String
+    #   * {Types::ImportBackendAuthResponse#error #error} => String
+    #   * {Types::ImportBackendAuthResponse#job_id #job_id} => String
+    #   * {Types::ImportBackendAuthResponse#operation #operation} => String
+    #   * {Types::ImportBackendAuthResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_backend_auth({
+    #     app_id: "__string", # required
+    #     backend_environment_name: "__string", # required
+    #     identity_pool_id: "__string",
+    #     native_client_id: "__string", # required
+    #     user_pool_id: "__string", # required
+    #     web_client_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_id #=> String
+    #   resp.backend_environment_name #=> String
+    #   resp.error #=> String
+    #   resp.job_id #=> String
+    #   resp.operation #=> String
+    #   resp.status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/ImportBackendAuth AWS API Documentation
+    #
+    # @overload import_backend_auth(params = {})
+    # @param [Hash] params ({})
+    def import_backend_auth(params = {}, options = {})
+      req = build_request(:import_backend_auth, params)
+      req.send_request(options)
+    end
+
     # Lists the jobs for the backend of an Amplify app.
     #
     # @option params [required, String] :app_id
@@ -1345,8 +1397,7 @@ module Aws::AmplifyBackend
       req.send_request(options)
     end
 
-    # Removes the AWS resources that are required to access the Amplify
-    # Admin UI.
+    # Removes the AWS resources required to access the Amplify Admin UI.
     #
     # @option params [required, String] :app_id
     #
@@ -1380,8 +1431,8 @@ module Aws::AmplifyBackend
     # @option params [required, String] :backend_environment_name
     #
     # @option params [Types::BackendAPIResourceConfig] :resource_config
-    #   The resource configuration for the data model, configured as a part of
-    #   the Amplify project.
+    #   The resource config for the data model, configured as a part of the
+    #   Amplify project.
     #
     # @option params [required, String] :resource_name
     #
@@ -1554,8 +1605,7 @@ module Aws::AmplifyBackend
       req.send_request(options)
     end
 
-    # Updates the AWS resources that are required to access the Amplify
-    # Admin UI.
+    # Updates the AWS resources required to access the Amplify Admin UI.
     #
     # @option params [required, String] :app_id
     #
@@ -1666,7 +1716,7 @@ module Aws::AmplifyBackend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplifybackend'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
