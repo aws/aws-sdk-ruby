@@ -3270,6 +3270,7 @@ module Aws::Redshift
         o.input = Shapes::ShapeRef.new(shape: DisableLoggingMessage)
         o.output = Shapes::ShapeRef.new(shape: LoggingStatus)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
       end)
 
       api.add_operation(:disable_snapshot_copy, Seahorse::Model::Operation.new.tap do |o|

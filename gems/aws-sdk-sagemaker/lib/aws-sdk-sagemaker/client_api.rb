@@ -687,6 +687,7 @@ module Aws::SageMaker
     Images = Shapes::ListShape.new(name: 'Images')
     InferenceExecutionConfig = Shapes::StructureShape.new(name: 'InferenceExecutionConfig')
     InferenceExecutionMode = Shapes::StringShape.new(name: 'InferenceExecutionMode')
+    InferenceImage = Shapes::StringShape.new(name: 'InferenceImage')
     InferenceSpecification = Shapes::StructureShape.new(name: 'InferenceSpecification')
     InputConfig = Shapes::StructureShape.new(name: 'InputConfig')
     InputDataConfig = Shapes::ListShape.new(name: 'InputDataConfig')
@@ -973,6 +974,11 @@ module Aws::SageMaker
     MountPath = Shapes::StringShape.new(name: 'MountPath')
     MultiModelConfig = Shapes::StructureShape.new(name: 'MultiModelConfig')
     NameContains = Shapes::StringShape.new(name: 'NameContains')
+    NeoVpcConfig = Shapes::StructureShape.new(name: 'NeoVpcConfig')
+    NeoVpcSecurityGroupId = Shapes::StringShape.new(name: 'NeoVpcSecurityGroupId')
+    NeoVpcSecurityGroupIds = Shapes::ListShape.new(name: 'NeoVpcSecurityGroupIds')
+    NeoVpcSubnetId = Shapes::StringShape.new(name: 'NeoVpcSubnetId')
+    NeoVpcSubnets = Shapes::ListShape.new(name: 'NeoVpcSubnets')
     NestedFilters = Shapes::StructureShape.new(name: 'NestedFilters')
     NestedFiltersList = Shapes::ListShape.new(name: 'NestedFiltersList')
     NetworkConfig = Shapes::StructureShape.new(name: 'NetworkConfig')
@@ -1940,6 +1946,7 @@ module Aws::SageMaker
     CreateCompilationJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     CreateCompilationJobRequest.add_member(:input_config, Shapes::ShapeRef.new(shape: InputConfig, required: true, location_name: "InputConfig"))
     CreateCompilationJobRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, required: true, location_name: "OutputConfig"))
+    CreateCompilationJobRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: NeoVpcConfig, location_name: "VpcConfig"))
     CreateCompilationJobRequest.add_member(:stopping_condition, Shapes::ShapeRef.new(shape: StoppingCondition, required: true, location_name: "StoppingCondition"))
     CreateCompilationJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateCompilationJobRequest.struct_class = Types::CreateCompilationJobRequest
@@ -2770,6 +2777,7 @@ module Aws::SageMaker
     DescribeCompilationJobResponse.add_member(:compilation_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompilationStartTime"))
     DescribeCompilationJobResponse.add_member(:compilation_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompilationEndTime"))
     DescribeCompilationJobResponse.add_member(:stopping_condition, Shapes::ShapeRef.new(shape: StoppingCondition, required: true, location_name: "StoppingCondition"))
+    DescribeCompilationJobResponse.add_member(:inference_image, Shapes::ShapeRef.new(shape: InferenceImage, location_name: "InferenceImage"))
     DescribeCompilationJobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "CreationTime"))
     DescribeCompilationJobResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, required: true, location_name: "LastModifiedTime"))
     DescribeCompilationJobResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, required: true, location_name: "FailureReason"))
@@ -2778,6 +2786,7 @@ module Aws::SageMaker
     DescribeCompilationJobResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     DescribeCompilationJobResponse.add_member(:input_config, Shapes::ShapeRef.new(shape: InputConfig, required: true, location_name: "InputConfig"))
     DescribeCompilationJobResponse.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, required: true, location_name: "OutputConfig"))
+    DescribeCompilationJobResponse.add_member(:vpc_config, Shapes::ShapeRef.new(shape: NeoVpcConfig, location_name: "VpcConfig"))
     DescribeCompilationJobResponse.struct_class = Types::DescribeCompilationJobResponse
 
     DescribeContextRequest.add_member(:context_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, required: true, location_name: "ContextName"))
@@ -5072,6 +5081,14 @@ module Aws::SageMaker
 
     MultiModelConfig.add_member(:model_cache_setting, Shapes::ShapeRef.new(shape: ModelCacheSetting, location_name: "ModelCacheSetting"))
     MultiModelConfig.struct_class = Types::MultiModelConfig
+
+    NeoVpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: NeoVpcSecurityGroupIds, required: true, location_name: "SecurityGroupIds"))
+    NeoVpcConfig.add_member(:subnets, Shapes::ShapeRef.new(shape: NeoVpcSubnets, required: true, location_name: "Subnets"))
+    NeoVpcConfig.struct_class = Types::NeoVpcConfig
+
+    NeoVpcSecurityGroupIds.member = Shapes::ShapeRef.new(shape: NeoVpcSecurityGroupId)
+
+    NeoVpcSubnets.member = Shapes::ShapeRef.new(shape: NeoVpcSubnetId)
 
     NestedFilters.add_member(:nested_property_name, Shapes::ShapeRef.new(shape: ResourcePropertyName, required: true, location_name: "NestedPropertyName"))
     NestedFilters.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, required: true, location_name: "Filters"))

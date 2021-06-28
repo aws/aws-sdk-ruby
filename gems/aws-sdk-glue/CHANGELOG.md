@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2021-06-28)
+------------------
+
+* Feature - Add JSON Support for Glue Schema Registry
+
 1.88.0 (2021-06-07)
 ------------------
 

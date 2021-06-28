@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2021-06-28)
+------------------
+
+* Feature - MediaConvert adds support for HDR10+, ProRes 4444,  and XAVC outputs, ADM/DAMF support for Dolby Atmos ingest, and alternative audio and WebVTT caption ingest via HLS inputs. MediaConvert also now supports creating trickplay outputs for Roku devices for HLS, CMAF, and DASH output groups.
+
 1.67.0 (2021-05-10)
 ------------------
 

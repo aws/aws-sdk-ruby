@@ -1313,6 +1313,16 @@ module Aws::SageMaker
     #   Provides information about the output location for the compiled model
     #   and the target device the model runs on.
     #
+    # @option params [Types::NeoVpcConfig] :vpc_config
+    #   A VpcConfig object that specifies the VPC that you want your
+    #   compilation job to connect to. Control access to your models by
+    #   configuring the VPC. For more information, see [Protect Compilation
+    #   Jobs by Using an Amazon Virtual Private Cloud][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html
+    #
     # @option params [required, Types::StoppingCondition] :stopping_condition
     #   Specifies a limit to how long a model compilation job can run. When
     #   the job reaches the time limit, Amazon SageMaker ends the compilation
@@ -1344,7 +1354,7 @@ module Aws::SageMaker
     #     },
     #     output_config: { # required
     #       s3_output_location: "S3Uri", # required
-    #       target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, x86_win32, x86_win64, coreml, jacinto_tda4vm
+    #       target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, amba_cv25, x86_win32, x86_win64, coreml, jacinto_tda4vm
     #       target_platform: {
     #         os: "ANDROID", # required, accepts ANDROID, LINUX
     #         arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
@@ -1352,6 +1362,10 @@ module Aws::SageMaker
     #       },
     #       compiler_options: "CompilerOptions",
     #       kms_key_id: "KmsKeyId",
+    #     },
+    #     vpc_config: {
+    #       security_group_ids: ["NeoVpcSecurityGroupId"], # required
+    #       subnets: ["NeoVpcSubnetId"], # required
     #     },
     #     stopping_condition: { # required
     #       max_runtime_in_seconds: 1,
@@ -7730,6 +7744,7 @@ module Aws::SageMaker
     #   * {Types::DescribeCompilationJobResponse#compilation_start_time #compilation_start_time} => Time
     #   * {Types::DescribeCompilationJobResponse#compilation_end_time #compilation_end_time} => Time
     #   * {Types::DescribeCompilationJobResponse#stopping_condition #stopping_condition} => Types::StoppingCondition
+    #   * {Types::DescribeCompilationJobResponse#inference_image #inference_image} => String
     #   * {Types::DescribeCompilationJobResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeCompilationJobResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::DescribeCompilationJobResponse#failure_reason #failure_reason} => String
@@ -7738,6 +7753,7 @@ module Aws::SageMaker
     #   * {Types::DescribeCompilationJobResponse#role_arn #role_arn} => String
     #   * {Types::DescribeCompilationJobResponse#input_config #input_config} => Types::InputConfig
     #   * {Types::DescribeCompilationJobResponse#output_config #output_config} => Types::OutputConfig
+    #   * {Types::DescribeCompilationJobResponse#vpc_config #vpc_config} => Types::NeoVpcConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -7754,6 +7770,7 @@ module Aws::SageMaker
     #   resp.compilation_end_time #=> Time
     #   resp.stopping_condition.max_runtime_in_seconds #=> Integer
     #   resp.stopping_condition.max_wait_time_in_seconds #=> Integer
+    #   resp.inference_image #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -7765,12 +7782,16 @@ module Aws::SageMaker
     #   resp.input_config.framework #=> String, one of "TENSORFLOW", "KERAS", "MXNET", "ONNX", "PYTORCH", "XGBOOST", "TFLITE", "DARKNET", "SKLEARN"
     #   resp.input_config.framework_version #=> String
     #   resp.output_config.s3_output_location #=> String
-    #   resp.output_config.target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_g4dn", "ml_inf1", "ml_eia2", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "sitara_am57x", "amba_cv22", "x86_win32", "x86_win64", "coreml", "jacinto_tda4vm"
+    #   resp.output_config.target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_g4dn", "ml_inf1", "ml_eia2", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "sitara_am57x", "amba_cv22", "amba_cv25", "x86_win32", "x86_win64", "coreml", "jacinto_tda4vm"
     #   resp.output_config.target_platform.os #=> String, one of "ANDROID", "LINUX"
     #   resp.output_config.target_platform.arch #=> String, one of "X86_64", "X86", "ARM64", "ARM_EABI", "ARM_EABIHF"
     #   resp.output_config.target_platform.accelerator #=> String, one of "INTEL_GRAPHICS", "MALI", "NVIDIA"
     #   resp.output_config.compiler_options #=> String
     #   resp.output_config.kms_key_id #=> String
+    #   resp.vpc_config.security_group_ids #=> Array
+    #   resp.vpc_config.security_group_ids[0] #=> String
+    #   resp.vpc_config.subnets #=> Array
+    #   resp.vpc_config.subnets[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCompilationJob AWS API Documentation
     #
@@ -11528,7 +11549,7 @@ module Aws::SageMaker
     #   resp.compilation_job_summaries[0].creation_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_start_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_end_time #=> Time
-    #   resp.compilation_job_summaries[0].compilation_target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_g4dn", "ml_inf1", "ml_eia2", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "sitara_am57x", "amba_cv22", "x86_win32", "x86_win64", "coreml", "jacinto_tda4vm"
+    #   resp.compilation_job_summaries[0].compilation_target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_g4dn", "ml_inf1", "ml_eia2", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "sitara_am57x", "amba_cv22", "amba_cv25", "x86_win32", "x86_win64", "coreml", "jacinto_tda4vm"
     #   resp.compilation_job_summaries[0].compilation_target_platform_os #=> String, one of "ANDROID", "LINUX"
     #   resp.compilation_job_summaries[0].compilation_target_platform_arch #=> String, one of "X86_64", "X86", "ARM64", "ARM_EABI", "ARM_EABIHF"
     #   resp.compilation_job_summaries[0].compilation_target_platform_accelerator #=> String, one of "INTEL_GRAPHICS", "MALI", "NVIDIA"
@@ -17585,7 +17606,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

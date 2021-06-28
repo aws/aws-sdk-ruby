@@ -4051,7 +4051,7 @@ module Aws::SageMaker
     #         },
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
-    #           target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, x86_win32, x86_win64, coreml, jacinto_tda4vm
+    #           target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, amba_cv25, x86_win32, x86_win64, coreml, jacinto_tda4vm
     #           target_platform: {
     #             os: "ANDROID", # required, accepts ANDROID, LINUX
     #             arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
@@ -4059,6 +4059,10 @@ module Aws::SageMaker
     #           },
     #           compiler_options: "CompilerOptions",
     #           kms_key_id: "KmsKeyId",
+    #         },
+    #         vpc_config: {
+    #           security_group_ids: ["NeoVpcSecurityGroupId"], # required
+    #           subnets: ["NeoVpcSubnetId"], # required
     #         },
     #         stopping_condition: { # required
     #           max_runtime_in_seconds: 1,
@@ -4112,6 +4116,17 @@ module Aws::SageMaker
     #   model and the target device the model runs on.
     #   @return [Types::OutputConfig]
     #
+    # @!attribute [rw] vpc_config
+    #   A VpcConfig object that specifies the VPC that you want your
+    #   compilation job to connect to. Control access to your models by
+    #   configuring the VPC. For more information, see [Protect Compilation
+    #   Jobs by Using an Amazon Virtual Private Cloud][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html
+    #   @return [Types::NeoVpcConfig]
+    #
     # @!attribute [rw] stopping_condition
     #   Specifies a limit to how long a model compilation job can run. When
     #   the job reaches the time limit, Amazon SageMaker ends the
@@ -4135,6 +4150,7 @@ module Aws::SageMaker
       :role_arn,
       :input_config,
       :output_config,
+      :vpc_config,
       :stopping_condition,
       :tags)
       SENSITIVE = []
@@ -11215,6 +11231,9 @@ module Aws::SageMaker
     #   compilation job. Use this API to cap model training costs.
     #   @return [Types::StoppingCondition]
     #
+    # @!attribute [rw] inference_image
+    #   @return [String]
+    #
     # @!attribute [rw] creation_time
     #   The time that the model compilation job was created.
     #   @return [Time]
@@ -11254,6 +11273,17 @@ module Aws::SageMaker
     #   target device that the model runs on.
     #   @return [Types::OutputConfig]
     #
+    # @!attribute [rw] vpc_config
+    #   A VpcConfig object that specifies the VPC that you want your
+    #   compilation job to connect to. Control access to your models by
+    #   configuring the VPC. For more information, see [Protect Compilation
+    #   Jobs by Using an Amazon Virtual Private Cloud][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html
+    #   @return [Types::NeoVpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCompilationJobResponse AWS API Documentation
     #
     class DescribeCompilationJobResponse < Struct.new(
@@ -11263,6 +11293,7 @@ module Aws::SageMaker
       :compilation_start_time,
       :compilation_end_time,
       :stopping_condition,
+      :inference_image,
       :creation_time,
       :last_modified_time,
       :failure_reason,
@@ -11270,7 +11301,8 @@ module Aws::SageMaker
       :model_digests,
       :role_arn,
       :input_config,
-      :output_config)
+      :output_config,
+      :vpc_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26823,6 +26855,29 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass NeoVpcConfig
+    #   data as a hash:
+    #
+    #       {
+    #         security_group_ids: ["NeoVpcSecurityGroupId"], # required
+    #         subnets: ["NeoVpcSubnetId"], # required
+    #       }
+    #
+    # @!attribute [rw] security_group_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnets
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NeoVpcConfig AWS API Documentation
+    #
+    class NeoVpcConfig < Struct.new(
+      :security_group_ids,
+      :subnets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of nested Filter objects. A resource must satisfy the
     # conditions of all filters to be included in the results returned from
     # the Search API.
@@ -27468,7 +27523,7 @@ module Aws::SageMaker
     #
     #       {
     #         s3_output_location: "S3Uri", # required
-    #         target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, x86_win32, x86_win64, coreml, jacinto_tda4vm
+    #         target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, amba_cv25, x86_win32, x86_win64, coreml, jacinto_tda4vm
     #         target_platform: {
     #           os: "ANDROID", # required, accepts ANDROID, LINUX
     #           arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
@@ -27639,10 +27694,13 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
-    #   uses to encrypt data on the storage volume after compilation job. If
-    #   you don't provide a KMS key ID, Amazon SageMaker uses the default
-    #   KMS key for Amazon S3 for your role's account
+    #   The Amazon Web Services Key Management Service key (Amazon Web
+    #   Services KMS) that Amazon SageMaker uses to encrypt your output
+    #   models with Amazon S3 server-side encryption after compilation job.
+    #   If you don't provide a KMS key ID, Amazon SageMaker uses the
+    #   default KMS key for Amazon S3 for your role's account. For more
+    #   information, see [KMS-Managed Encryption Keys][1] in the *Amazon
+    #   Simple Storage Service Developer Guide.*
     #
     #   The KmsKeyId can be any of the following formats:
     #
@@ -27655,6 +27713,10 @@ module Aws::SageMaker
     #
     #   * Alias name ARN:
     #     `arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OutputConfig AWS API Documentation

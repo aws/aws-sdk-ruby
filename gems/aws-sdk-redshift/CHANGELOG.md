@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2021-06-28)
+------------------
+
+* Feature - Added InvalidClusterStateFault to the DisableLogging API, thrown when calling the API on a non available cluster.
+
 1.63.0 (2021-06-10)
 ------------------
 

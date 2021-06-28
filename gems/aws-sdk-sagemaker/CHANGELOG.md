@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2021-06-28)
+------------------
+
+* Feature - Sagemaker Neo now supports running compilation jobs using customer's Amazon VPC
+
 1.90.0 (2021-06-17)
 ------------------
 
