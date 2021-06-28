@@ -410,7 +410,7 @@ module Aws
             Seahorse::Client::Response.new(context: context)
           end
           resp = client.get_bucket_location(bucket: 'name')
-          expect(resp.location_constraint).to eq('')
+          expect(resp.location_constraint).to eq('us-east-1')
         end
       end
 

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Replace null LocationConstraint with us-east-1 instead of an empty string.
+
 1.96.1 (2021-06-10)
 ------------------
 

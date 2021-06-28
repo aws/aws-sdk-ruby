@@ -12,7 +12,11 @@ module Aws
               response.data = S3::Types::GetBucketLocationOutput.new
               xml = context.http_response.body_contents
               matches = xml.match(/<LocationConstraint.*?>(.+?)<\/LocationConstraint>/)
-              response.data[:location_constraint] = matches ? matches[1] : ''
+
+              # According to the service API docs, a bucket is us-east-1 has a LocationConstraint
+              # value `null`.
+              # https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLocation.html
+              response.data[:location_constraint] = matches ? matches[1] : 'us-east-1'
             end
           end
         end
