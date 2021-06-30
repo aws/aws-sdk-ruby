@@ -989,7 +989,7 @@ module Aws::AutoScaling
     #   The Amazon Resource Name (ARN) of the service-linked role that the
     #   Auto Scaling group uses to call other Amazon Web Services on your
     #   behalf. By default, Amazon EC2 Auto Scaling uses a service-linked role
-    #   named AWSServiceRoleForAutoScaling, which it creates if it does not
+    #   named `AWSServiceRoleForAutoScaling`, which it creates if it does not
     #   exist. For more information, see [Service-linked roles][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
     #
@@ -1007,6 +1007,9 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html
+    #
+    # @option params [String] :context
+    #   Reserved.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1163,6 +1166,7 @@ module Aws::AutoScaling
     #     ],
     #     service_linked_role_arn: "ResourceName",
     #     max_instance_lifetime: 1,
+    #     context: "Context",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroup AWS API Documentation
@@ -1913,9 +1917,11 @@ module Aws::AutoScaling
     # Describes the current Amazon EC2 Auto Scaling resource quotas for your
     # account.
     #
-    # For information about requesting an increase, see [Amazon EC2 Auto
-    # Scaling service quotas][1] in the *Amazon EC2 Auto Scaling User
-    # Guide*.
+    # When you establish an account, the account has initial quotas on the
+    # maximum number of Auto Scaling groups and launch configurations that
+    # you can create in a given Region. For more information, see [Amazon
+    # EC2 Auto Scaling service quotas][1] in the *Amazon EC2 Auto Scaling
+    # User Guide*.
     #
     #
     #
@@ -2180,6 +2186,7 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].warm_pool_configuration.pool_state #=> String, one of "Stopped", "Running"
     #   resp.auto_scaling_groups[0].warm_pool_configuration.status #=> String, one of "PendingDelete"
     #   resp.auto_scaling_groups[0].warm_pool_size #=> Integer
+    #   resp.auto_scaling_groups[0].context #=> String
     #   resp.next_token #=> String
     #
     #
@@ -5800,6 +5807,9 @@ module Aws::AutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalance.html
     #
+    # @option params [String] :context
+    #   Reserved.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -5883,6 +5893,7 @@ module Aws::AutoScaling
     #     service_linked_role_arn: "ResourceName",
     #     max_instance_lifetime: 1,
     #     capacity_rebalance: false,
+    #     context: "Context",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroup AWS API Documentation
@@ -5907,7 +5918,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

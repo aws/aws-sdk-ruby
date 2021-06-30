@@ -1114,6 +1114,13 @@ module Aws::Kendra
     #   The `Edition` parameter is optional. If you don't supply a value, the
     #   default is `ENTERPRISE_EDITION`.
     #
+    #   For more information on quota limits for enterprise and developer
+    #   editions, see [Quotas][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
+    #
     # @option params [required, String] :role_arn
     #   An AWS Identity and Access Management (IAM) role that gives Amazon
     #   Kendra permissions to access your Amazon CloudWatch logs and metrics.
@@ -3601,7 +3608,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -110,6 +110,7 @@ module Aws::AutoScaling
     #     ],
     #     service_linked_role_arn: "ResourceName",
     #     max_instance_lifetime: 1,
+    #     context: "Context",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :auto_scaling_group_name
@@ -321,7 +322,7 @@ module Aws::AutoScaling
     #   The Amazon Resource Name (ARN) of the service-linked role that the
     #   Auto Scaling group uses to call other Amazon Web Services on your
     #   behalf. By default, Amazon EC2 Auto Scaling uses a service-linked role
-    #   named AWSServiceRoleForAutoScaling, which it creates if it does not
+    #   named `AWSServiceRoleForAutoScaling`, which it creates if it does not
     #   exist. For more information, see [Service-linked roles][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
     #
@@ -338,6 +339,8 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html
+    # @option options [String] :context
+    #   Reserved.
     # @return [AutoScalingGroup]
     def create_group(options = {})
       @client.create_auto_scaling_group(options)

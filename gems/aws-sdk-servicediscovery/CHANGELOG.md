@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2021-06-30)
+------------------
+
+* Feature - AWS Cloud Map now allows configuring the TTL of the SOA record for a hosted zone to control the negative caching for new services.
+
 1.36.0 (2021-06-01)
 ------------------
 

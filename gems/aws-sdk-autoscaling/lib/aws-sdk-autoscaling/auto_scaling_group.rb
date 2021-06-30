@@ -212,6 +212,12 @@ module Aws::AutoScaling
       data[:warm_pool_size]
     end
 
+    # Reserved.
+    # @return [String]
+    def context
+      data[:context]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -1031,6 +1037,7 @@ module Aws::AutoScaling
     #     service_linked_role_arn: "ResourceName",
     #     max_instance_lifetime: 1,
     #     capacity_rebalance: false,
+    #     context: "Context",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :launch_configuration_name
@@ -1164,6 +1171,8 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalance.html
+    # @option options [String] :context
+    #   Reserved.
     # @return [AutoScalingGroup]
     def update(options = {})
       options = options.merge(auto_scaling_group_name: @name)

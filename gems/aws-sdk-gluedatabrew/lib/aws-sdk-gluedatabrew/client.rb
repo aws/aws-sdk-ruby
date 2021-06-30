@@ -400,7 +400,7 @@ module Aws::GlueDataBrew
     #   alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
     #
     # @option params [String] :format
-    #   The file format of a dataset that is created from an S3 file or
+    #   The file format of a dataset that is created from an Amazon S3 file or
     #   folder.
     #
     # @option params [Types::FormatOptions] :format_options
@@ -409,11 +409,11 @@ module Aws::GlueDataBrew
     #
     # @option params [required, Types::Input] :input
     #   Represents information on how DataBrew can find data, in either the
-    #   AWS Glue Data Catalog or Amazon S3.
+    #   Glue Data Catalog or Amazon S3.
     #
     # @option params [Types::PathOptions] :path_options
-    #   A set of options that defines how DataBrew interprets an S3 path of
-    #   the dataset.
+    #   A set of options that defines how DataBrew interprets an Amazon S3
+    #   path of the dataset.
     #
     # @option params [Hash<String,String>] :tags
     #   Metadata tags to apply to this dataset.
@@ -525,7 +525,7 @@ module Aws::GlueDataBrew
     # @option params [String] :encryption_mode
     #   The encryption mode for the job, which can be one of the following:
     #
-    #   * `SSE-KMS` - `SSE-KMS` - Server-side encryption with AWS KMS-managed
+    #   * `SSE-KMS` - `SSE-KMS` - Server-side encryption with KMS-managed
     #     keys.
     #
     #   * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
@@ -550,8 +550,8 @@ module Aws::GlueDataBrew
     #   DataBrew can read input data, or write output from a job.
     #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role to be assumed when DataBrew runs the job.
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role to be assumed when DataBrew runs the job.
     #
     # @option params [Hash<String,String>] :tags
     #   Metadata tags to apply to this job.
@@ -625,8 +625,8 @@ module Aws::GlueDataBrew
     #   interactive data analysis.
     #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role to be assumed for this request.
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role to be assumed for this request.
     #
     # @option params [Hash<String,String>] :tags
     #   Metadata tags to apply to this project.
@@ -726,7 +726,7 @@ module Aws::GlueDataBrew
     end
 
     # Creates a new job to transform input data, using steps defined in an
-    # existing AWS Glue DataBrew recipe
+    # existing Glue DataBrew recipe
     #
     # @option params [String] :dataset_name
     #   The name of the dataset that this job processes.
@@ -738,7 +738,7 @@ module Aws::GlueDataBrew
     # @option params [String] :encryption_mode
     #   The encryption mode for the job, which can be one of the following:
     #
-    #   * `SSE-KMS` - Server-side encryption with keys managed by AWS KMS.
+    #   * `SSE-KMS` - Server-side encryption with keys managed by KMS.
     #
     #   * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
     #
@@ -757,8 +757,12 @@ module Aws::GlueDataBrew
     # @option params [Integer] :max_retries
     #   The maximum number of times to retry the job after a job run fails.
     #
-    # @option params [required, Array<Types::Output>] :outputs
+    # @option params [Array<Types::Output>] :outputs
     #   One or more artifacts that represent the output from running the job.
+    #
+    # @option params [Array<Types::DataCatalogOutput>] :data_catalog_outputs
+    #   One or more artifacts that represent the AWS Glue Data Catalog output
+    #   from running the job.
     #
     # @option params [String] :project_name
     #   Either the name of an existing project, or a combination of a recipe
@@ -768,8 +772,8 @@ module Aws::GlueDataBrew
     #   Represents the name and version of a DataBrew recipe.
     #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role to be assumed when DataBrew runs the job.
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role to be assumed when DataBrew runs the job.
     #
     # @option params [Hash<String,String>] :tags
     #   Metadata tags to apply to this job.
@@ -792,7 +796,7 @@ module Aws::GlueDataBrew
     #     log_subscription: "ENABLE", # accepts ENABLE, DISABLE
     #     max_capacity: 1,
     #     max_retries: 1,
-    #     outputs: [ # required
+    #     outputs: [
     #       {
     #         compression_format: "GZIP", # accepts GZIP, LZ4, SNAPPY, BZIP2, DEFLATE, LZO, BROTLI, ZSTD, ZLIB
     #         format: "CSV", # accepts CSV, JSON, PARQUET, GLUEPARQUET, AVRO, ORC, XML
@@ -807,6 +811,27 @@ module Aws::GlueDataBrew
     #             delimiter: "Delimiter",
     #           },
     #         },
+    #       },
+    #     ],
+    #     data_catalog_outputs: [
+    #       {
+    #         catalog_id: "CatalogId",
+    #         database_name: "DatabaseName", # required
+    #         table_name: "TableName", # required
+    #         s3_options: {
+    #           location: { # required
+    #             bucket: "Bucket", # required
+    #             key: "Key",
+    #           },
+    #         },
+    #         database_options: {
+    #           temp_directory: {
+    #             bucket: "Bucket", # required
+    #             key: "Key",
+    #           },
+    #           table_name: "DatabaseTableName", # required
+    #         },
+    #         overwrite: false,
     #       },
     #     ],
     #     project_name: "ProjectName",
@@ -842,7 +867,7 @@ module Aws::GlueDataBrew
     #
     # @option params [required, String] :cron_expression
     #   The date or dates and time or times when the jobs are to be run. For
-    #   more information, see [Cron expressions][1] in the *AWS Glue DataBrew
+    #   more information, see [Cron expressions][1] in the *Glue DataBrew
     #   Developer Guide*.
     #
     #
@@ -1135,6 +1160,7 @@ module Aws::GlueDataBrew
     #   * {Types::DescribeJobResponse#max_capacity #max_capacity} => Integer
     #   * {Types::DescribeJobResponse#max_retries #max_retries} => Integer
     #   * {Types::DescribeJobResponse#outputs #outputs} => Array&lt;Types::Output&gt;
+    #   * {Types::DescribeJobResponse#data_catalog_outputs #data_catalog_outputs} => Array&lt;Types::DataCatalogOutput&gt;
     #   * {Types::DescribeJobResponse#project_name #project_name} => String
     #   * {Types::DescribeJobResponse#recipe_reference #recipe_reference} => Types::RecipeReference
     #   * {Types::DescribeJobResponse#resource_arn #resource_arn} => String
@@ -1172,6 +1198,16 @@ module Aws::GlueDataBrew
     #   resp.outputs[0].location.key #=> String
     #   resp.outputs[0].overwrite #=> Boolean
     #   resp.outputs[0].format_options.csv.delimiter #=> String
+    #   resp.data_catalog_outputs #=> Array
+    #   resp.data_catalog_outputs[0].catalog_id #=> String
+    #   resp.data_catalog_outputs[0].database_name #=> String
+    #   resp.data_catalog_outputs[0].table_name #=> String
+    #   resp.data_catalog_outputs[0].s3_options.location.bucket #=> String
+    #   resp.data_catalog_outputs[0].s3_options.location.key #=> String
+    #   resp.data_catalog_outputs[0].database_options.temp_directory.bucket #=> String
+    #   resp.data_catalog_outputs[0].database_options.temp_directory.key #=> String
+    #   resp.data_catalog_outputs[0].database_options.table_name #=> String
+    #   resp.data_catalog_outputs[0].overwrite #=> Boolean
     #   resp.project_name #=> String
     #   resp.recipe_reference.name #=> String
     #   resp.recipe_reference.recipe_version #=> String
@@ -1213,6 +1249,7 @@ module Aws::GlueDataBrew
     #   * {Types::DescribeJobRunResponse#log_subscription #log_subscription} => String
     #   * {Types::DescribeJobRunResponse#log_group_name #log_group_name} => String
     #   * {Types::DescribeJobRunResponse#outputs #outputs} => Array&lt;Types::Output&gt;
+    #   * {Types::DescribeJobRunResponse#data_catalog_outputs #data_catalog_outputs} => Array&lt;Types::DataCatalogOutput&gt;
     #   * {Types::DescribeJobRunResponse#recipe_reference #recipe_reference} => Types::RecipeReference
     #   * {Types::DescribeJobRunResponse#started_by #started_by} => String
     #   * {Types::DescribeJobRunResponse#started_on #started_on} => Time
@@ -1246,6 +1283,16 @@ module Aws::GlueDataBrew
     #   resp.outputs[0].location.key #=> String
     #   resp.outputs[0].overwrite #=> Boolean
     #   resp.outputs[0].format_options.csv.delimiter #=> String
+    #   resp.data_catalog_outputs #=> Array
+    #   resp.data_catalog_outputs[0].catalog_id #=> String
+    #   resp.data_catalog_outputs[0].database_name #=> String
+    #   resp.data_catalog_outputs[0].table_name #=> String
+    #   resp.data_catalog_outputs[0].s3_options.location.bucket #=> String
+    #   resp.data_catalog_outputs[0].s3_options.location.key #=> String
+    #   resp.data_catalog_outputs[0].database_options.temp_directory.bucket #=> String
+    #   resp.data_catalog_outputs[0].database_options.temp_directory.key #=> String
+    #   resp.data_catalog_outputs[0].database_options.table_name #=> String
+    #   resp.data_catalog_outputs[0].overwrite #=> Boolean
     #   resp.recipe_reference.name #=> String
     #   resp.recipe_reference.recipe_version #=> String
     #   resp.started_by #=> String
@@ -1562,6 +1609,16 @@ module Aws::GlueDataBrew
     #   resp.job_runs[0].outputs[0].location.key #=> String
     #   resp.job_runs[0].outputs[0].overwrite #=> Boolean
     #   resp.job_runs[0].outputs[0].format_options.csv.delimiter #=> String
+    #   resp.job_runs[0].data_catalog_outputs #=> Array
+    #   resp.job_runs[0].data_catalog_outputs[0].catalog_id #=> String
+    #   resp.job_runs[0].data_catalog_outputs[0].database_name #=> String
+    #   resp.job_runs[0].data_catalog_outputs[0].table_name #=> String
+    #   resp.job_runs[0].data_catalog_outputs[0].s3_options.location.bucket #=> String
+    #   resp.job_runs[0].data_catalog_outputs[0].s3_options.location.key #=> String
+    #   resp.job_runs[0].data_catalog_outputs[0].database_options.temp_directory.bucket #=> String
+    #   resp.job_runs[0].data_catalog_outputs[0].database_options.temp_directory.key #=> String
+    #   resp.job_runs[0].data_catalog_outputs[0].database_options.table_name #=> String
+    #   resp.job_runs[0].data_catalog_outputs[0].overwrite #=> Boolean
     #   resp.job_runs[0].recipe_reference.name #=> String
     #   resp.job_runs[0].recipe_reference.recipe_version #=> String
     #   resp.job_runs[0].started_by #=> String
@@ -1639,6 +1696,16 @@ module Aws::GlueDataBrew
     #   resp.jobs[0].outputs[0].location.key #=> String
     #   resp.jobs[0].outputs[0].overwrite #=> Boolean
     #   resp.jobs[0].outputs[0].format_options.csv.delimiter #=> String
+    #   resp.jobs[0].data_catalog_outputs #=> Array
+    #   resp.jobs[0].data_catalog_outputs[0].catalog_id #=> String
+    #   resp.jobs[0].data_catalog_outputs[0].database_name #=> String
+    #   resp.jobs[0].data_catalog_outputs[0].table_name #=> String
+    #   resp.jobs[0].data_catalog_outputs[0].s3_options.location.bucket #=> String
+    #   resp.jobs[0].data_catalog_outputs[0].s3_options.location.key #=> String
+    #   resp.jobs[0].data_catalog_outputs[0].database_options.temp_directory.bucket #=> String
+    #   resp.jobs[0].data_catalog_outputs[0].database_options.temp_directory.key #=> String
+    #   resp.jobs[0].data_catalog_outputs[0].database_options.table_name #=> String
+    #   resp.jobs[0].data_catalog_outputs[0].overwrite #=> Boolean
     #   resp.jobs[0].project_name #=> String
     #   resp.jobs[0].recipe_reference.name #=> String
     #   resp.jobs[0].recipe_reference.recipe_version #=> String
@@ -2193,7 +2260,7 @@ module Aws::GlueDataBrew
     #   The name of the dataset to be updated.
     #
     # @option params [String] :format
-    #   The file format of a dataset that is created from an S3 file or
+    #   The file format of a dataset that is created from an Amazon S3 file or
     #   folder.
     #
     # @option params [Types::FormatOptions] :format_options
@@ -2202,11 +2269,11 @@ module Aws::GlueDataBrew
     #
     # @option params [required, Types::Input] :input
     #   Represents information on how DataBrew can find data, in either the
-    #   AWS Glue Data Catalog or Amazon S3.
+    #   Glue Data Catalog or Amazon S3.
     #
     # @option params [Types::PathOptions] :path_options
-    #   A set of options that defines how DataBrew interprets an S3 path of
-    #   the dataset.
+    #   A set of options that defines how DataBrew interprets an Amazon S3
+    #   path of the dataset.
     #
     # @return [Types::UpdateDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2309,7 +2376,7 @@ module Aws::GlueDataBrew
     # @option params [String] :encryption_mode
     #   The encryption mode for the job, which can be one of the following:
     #
-    #   * `SSE-KMS` - Server-side encryption with keys managed by AWS KMS.
+    #   * `SSE-KMS` - Server-side encryption with keys managed by KMS.
     #
     #   * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
     #
@@ -2332,8 +2399,8 @@ module Aws::GlueDataBrew
     #   DataBrew can read input data, or write output from a job.
     #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role to be assumed when DataBrew runs the job.
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role to be assumed when DataBrew runs the job.
     #
     # @option params [Integer] :timeout
     #   The job's timeout in minutes. A job that attempts to run longer than
@@ -2490,7 +2557,7 @@ module Aws::GlueDataBrew
     # @option params [String] :encryption_mode
     #   The encryption mode for the job, which can be one of the following:
     #
-    #   * `SSE-KMS` - Server-side encryption with keys managed by AWS KMS.
+    #   * `SSE-KMS` - Server-side encryption with keys managed by KMS.
     #
     #   * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
     #
@@ -2508,12 +2575,16 @@ module Aws::GlueDataBrew
     # @option params [Integer] :max_retries
     #   The maximum number of times to retry the job after a job run fails.
     #
-    # @option params [required, Array<Types::Output>] :outputs
+    # @option params [Array<Types::Output>] :outputs
     #   One or more artifacts that represent the output from running the job.
     #
+    # @option params [Array<Types::DataCatalogOutput>] :data_catalog_outputs
+    #   One or more artifacts that represent the AWS Glue Data Catalog output
+    #   from running the job.
+    #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role to be assumed when DataBrew runs the job.
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role to be assumed when DataBrew runs the job.
     #
     # @option params [Integer] :timeout
     #   The job's timeout in minutes. A job that attempts to run longer than
@@ -2532,7 +2603,7 @@ module Aws::GlueDataBrew
     #     log_subscription: "ENABLE", # accepts ENABLE, DISABLE
     #     max_capacity: 1,
     #     max_retries: 1,
-    #     outputs: [ # required
+    #     outputs: [
     #       {
     #         compression_format: "GZIP", # accepts GZIP, LZ4, SNAPPY, BZIP2, DEFLATE, LZO, BROTLI, ZSTD, ZLIB
     #         format: "CSV", # accepts CSV, JSON, PARQUET, GLUEPARQUET, AVRO, ORC, XML
@@ -2547,6 +2618,27 @@ module Aws::GlueDataBrew
     #             delimiter: "Delimiter",
     #           },
     #         },
+    #       },
+    #     ],
+    #     data_catalog_outputs: [
+    #       {
+    #         catalog_id: "CatalogId",
+    #         database_name: "DatabaseName", # required
+    #         table_name: "TableName", # required
+    #         s3_options: {
+    #           location: { # required
+    #             bucket: "Bucket", # required
+    #             key: "Key",
+    #           },
+    #         },
+    #         database_options: {
+    #           temp_directory: {
+    #             bucket: "Bucket", # required
+    #             key: "Key",
+    #           },
+    #           table_name: "DatabaseTableName", # required
+    #         },
+    #         overwrite: false,
     #       },
     #     ],
     #     role_arn: "Arn", # required
@@ -2573,7 +2665,7 @@ module Aws::GlueDataBrew
     #
     # @option params [required, String] :cron_expression
     #   The date or dates and time or times when the jobs are to be run. For
-    #   more information, see [Cron expressions][1] in the *AWS Glue DataBrew
+    #   more information, see [Cron expressions][1] in the *Glue DataBrew
     #   Developer Guide*.
     #
     #
@@ -2621,7 +2713,7 @@ module Aws::GlueDataBrew
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gluedatabrew'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

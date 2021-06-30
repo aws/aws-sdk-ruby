@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2021-06-30)
+------------------
+
+* Feature - Adds support for the output of job results to the AWS Glue Data Catalog.
+
 1.7.0 (2021-03-30)
 ------------------
 

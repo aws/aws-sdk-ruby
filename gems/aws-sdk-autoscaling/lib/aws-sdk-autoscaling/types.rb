@@ -407,6 +407,10 @@ module Aws::AutoScaling
     #   The current size of the warm pool.
     #   @return [Integer]
     #
+    # @!attribute [rw] context
+    #   Reserved.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingGroup AWS API Documentation
     #
     class AutoScalingGroup < Struct.new(
@@ -439,7 +443,8 @@ module Aws::AutoScaling
       :max_instance_lifetime,
       :capacity_rebalance,
       :warm_pool_configuration,
-      :warm_pool_size)
+      :warm_pool_size,
+      :context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -939,6 +944,7 @@ module Aws::AutoScaling
     #         ],
     #         service_linked_role_arn: "ResourceName",
     #         max_instance_lifetime: 1,
+    #         context: "Context",
     #       }
     #
     # @!attribute [rw] auto_scaling_group_name
@@ -1197,9 +1203,9 @@ module Aws::AutoScaling
     #   The Amazon Resource Name (ARN) of the service-linked role that the
     #   Auto Scaling group uses to call other Amazon Web Services on your
     #   behalf. By default, Amazon EC2 Auto Scaling uses a service-linked
-    #   role named AWSServiceRoleForAutoScaling, which it creates if it does
-    #   not exist. For more information, see [Service-linked roles][1] in
-    #   the *Amazon EC2 Auto Scaling User Guide*.
+    #   role named `AWSServiceRoleForAutoScaling`, which it creates if it
+    #   does not exist. For more information, see [Service-linked roles][1]
+    #   in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -1218,6 +1224,10 @@ module Aws::AutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html
     #   @return [Integer]
+    #
+    # @!attribute [rw] context
+    #   Reserved.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroupType AWS API Documentation
     #
@@ -1244,7 +1254,8 @@ module Aws::AutoScaling
       :lifecycle_hook_specification_list,
       :tags,
       :service_linked_role_arn,
-      :max_instance_lifetime)
+      :max_instance_lifetime,
+      :context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2798,16 +2809,16 @@ module Aws::AutoScaling
     #   encryption value. Volumes that are created from encrypted snapshots
     #   are automatically encrypted, and volumes that are created from
     #   unencrypted snapshots are automatically unencrypted. By default,
-    #   encrypted snapshots use the AWS managed CMK that is used for EBS
-    #   encryption, but you can specify a custom CMK when you create the
-    #   snapshot. The ability to encrypt a snapshot during copying also
-    #   allows you to apply a new CMK to an already-encrypted snapshot.
-    #   Volumes restored from the resulting copy are only accessible using
-    #   the new CMK.
+    #   encrypted snapshots use the Amazon Web Services managed CMK that is
+    #   used for EBS encryption, but you can specify a custom CMK when you
+    #   create the snapshot. The ability to encrypt a snapshot during
+    #   copying also allows you to apply a new CMK to an already-encrypted
+    #   snapshot. Volumes restored from the resulting copy are only
+    #   accessible using the new CMK.
     #
     #    Enabling [encryption by default][2] results in all EBS volumes being
-    #   encrypted with the AWS managed CMK or a customer managed CMK,
-    #   whether or not the snapshot was encrypted.
+    #   encrypted with the Amazon Web Services managed CMK or a customer
+    #   managed CMK, whether or not the snapshot was encrypted.
     #
     #    </note>
     #
@@ -4775,25 +4786,26 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] resource_label
-    #   Identifies the resource associated with the metric type. You can't
-    #   specify a resource label unless the metric type is
-    #   `ALBRequestCountPerTarget` and there is a target group attached to
-    #   the Auto Scaling group.
+    #   A label that uniquely identifies a specific Application Load
+    #   Balancer target group from which to determine the average request
+    #   count served by your Auto Scaling group. You can't specify a
+    #   resource label unless the target group is attached to the Auto
+    #   Scaling group.
     #
     #   You create the resource label by appending the final portion of the
     #   load balancer ARN and the final portion of the target group ARN into
-    #   a single value, separated by a forward slash (/). The format is
-    #   app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt;/targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt;,
-    #   where:
+    #   a single value, separated by a forward slash (/). The format of the
+    #   resource label is:
+    #
+    #   `app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff`.
+    #
+    #   Where:
     #
     #   * app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the
     #     final portion of the load balancer ARN
     #
     #   * targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is
     #     the final portion of the target group ARN.
-    #
-    #   This is an example:
-    #   app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.
     #
     #   To find the ARN for an Application Load Balancer, use the
     #   [DescribeLoadBalancers][1] API operation. To find the ARN for the
@@ -5034,7 +5046,7 @@ module Aws::AutoScaling
     #   a single value, separated by a forward slash (/). The format of the
     #   resource label is:
     #
-    #   `app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d`.
+    #   `app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff`.
     #
     #   Where:
     #
@@ -5084,16 +5096,17 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] resource_label
     #   A label that uniquely identifies a specific Application Load
-    #   Balancer target group from which to determine the request count
-    #   served by your Auto Scaling group. You can't specify a resource
-    #   label unless the target group is attached to the Auto Scaling group.
+    #   Balancer target group from which to determine the total and average
+    #   request count served by your Auto Scaling group. You can't specify
+    #   a resource label unless the target group is attached to the Auto
+    #   Scaling group.
     #
     #   You create the resource label by appending the final portion of the
     #   load balancer ARN and the final portion of the target group ARN into
     #   a single value, separated by a forward slash (/). The format of the
     #   resource label is:
     #
-    #   `app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d`.
+    #   `app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff`.
     #
     #   Where:
     #
@@ -5142,16 +5155,17 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] resource_label
     #   A label that uniquely identifies a specific Application Load
-    #   Balancer target group from which to determine the request count
-    #   served by your Auto Scaling group. You can't specify a resource
-    #   label unless the target group is attached to the Auto Scaling group.
+    #   Balancer target group from which to determine the average request
+    #   count served by your Auto Scaling group. You can't specify a
+    #   resource label unless the target group is attached to the Auto
+    #   Scaling group.
     #
     #   You create the resource label by appending the final portion of the
     #   load balancer ARN and the final portion of the target group ARN into
     #   a single value, separated by a forward slash (/). The format of the
     #   resource label is:
     #
-    #   `app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d`.
+    #   `app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff`.
     #
     #   Where:
     #
@@ -6849,6 +6863,7 @@ module Aws::AutoScaling
     #         service_linked_role_arn: "ResourceName",
     #         max_instance_lifetime: 1,
     #         capacity_rebalance: false,
+    #         context: "Context",
     #       }
     #
     # @!attribute [rw] auto_scaling_group_name
@@ -7020,6 +7035,10 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalance.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] context
+    #   Reserved.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroupType AWS API Documentation
     #
     class UpdateAutoScalingGroupType < Struct.new(
@@ -7040,7 +7059,8 @@ module Aws::AutoScaling
       :new_instances_protected_from_scale_in,
       :service_linked_role_arn,
       :max_instance_lifetime,
-      :capacity_rebalance)
+      :capacity_rebalance,
+      :context)
       SENSITIVE = []
       include Aws::Structure
     end
