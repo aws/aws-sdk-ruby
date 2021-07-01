@@ -78,9 +78,9 @@ module Aws::SQS
     #     seconds (1 minute) to 1,209,600 seconds (14 days). Default: 345,600
     #     (4 days).
     #
-    #   * `Policy` – The queue's policy. A valid AWS policy. For more
-    #     information about policy structure, see [Overview of AWS IAM
-    #     Policies][1] in the *Amazon IAM User Guide*.
+    #   * `Policy` – The queue's policy. A valid Amazon Web Services policy.
+    #     For more information about policy structure, see [Overview of Amazon
+    #     Web Services IAM Policies][1] in the *Amazon IAM User Guide*.
     #
     #   * `ReceiveMessageWaitTimeSeconds` – The length of time, in seconds,
     #     for which a ` ReceiveMessage ` action waits for a message to arrive.
@@ -90,7 +90,7 @@ module Aws::SQS
     #     dead-letter queue functionality of the source queue as a JSON
     #     object. For more information about the redrive policy and
     #     dead-letter queues, see [Using Amazon SQS Dead-Letter Queues][2] in
-    #     the *Amazon Simple Queue Service Developer Guide*.
+    #     the *Amazon SQS Developer Guide*.
     #
     #     * `deadLetterTargetArn` – The Amazon Resource Name (ARN) of the
     #       dead-letter queue to which Amazon SQS moves messages after the
@@ -110,26 +110,26 @@ module Aws::SQS
     #   * `VisibilityTimeout` – The visibility timeout for the queue, in
     #     seconds. Valid values: An integer from 0 to 43,200 (12 hours).
     #     Default: 30. For more information about the visibility timeout, see
-    #     [Visibility Timeout][3] in the *Amazon Simple Queue Service
-    #     Developer Guide*.
+    #     [Visibility Timeout][3] in the *Amazon SQS Developer Guide*.
     #
     #   The following attributes apply only to [server-side-encryption][4]\:
     #
-    #   * `KmsMasterKeyId` – The ID of an AWS-managed customer master key
-    #     (CMK) for Amazon SQS or a custom CMK. For more information, see [Key
-    #     Terms][5]. While the alias of the AWS-managed CMK for Amazon SQS is
-    #     always `alias/aws/sqs`, the alias of a custom CMK can, for example,
-    #     be `alias/MyAlias `. For more examples, see [KeyId][6] in the *AWS
-    #     Key Management Service API Reference*.
+    #   * `KmsMasterKeyId` – The ID of an Amazon Web Services managed customer
+    #     master key (CMK) for Amazon SQS or a custom CMK. For more
+    #     information, see [Key Terms][5]. While the alias of the Amazon Web
+    #     Services managed CMK for Amazon SQS is always `alias/aws/sqs`, the
+    #     alias of a custom CMK can, for example, be `alias/MyAlias `. For
+    #     more examples, see [KeyId][6] in the *Key Management Service API
+    #     Reference*.
     #
     #   * `KmsDataKeyReusePeriodSeconds` – The length of time, in seconds, for
     #     which Amazon SQS can reuse a [data key][7] to encrypt or decrypt
-    #     messages before calling AWS KMS again. An integer representing
-    #     seconds, between 60 seconds (1 minute) and 86,400 seconds (24
-    #     hours). Default: 300 (5 minutes). A shorter time period provides
-    #     better security but results in more calls to KMS which might incur
-    #     charges after Free Tier. For more information, see [How Does the
-    #     Data Key Reuse Period Work?][8].
+    #     messages before calling KMS again. An integer representing seconds,
+    #     between 60 seconds (1 minute) and 86,400 seconds (24 hours).
+    #     Default: 300 (5 minutes). A shorter time period provides better
+    #     security but results in more calls to KMS which might incur charges
+    #     after Free Tier. For more information, see [How Does the Data Key
+    #     Reuse Period Work?][8].
     #
     #   The following attributes apply only to [FIFO (first-in-first-out)
     #   queues][9]\:
@@ -141,13 +141,13 @@ module Aws::SQS
     #     When you set this attribute, you must also provide the
     #     `MessageGroupId` for your messages explicitly.
     #
-    #     For more information, see [FIFO queue logic][10] in the *Amazon
-    #     Simple Queue Service Developer Guide*.
+    #     For more information, see [FIFO queue logic][10] in the *Amazon SQS
+    #     Developer Guide*.
     #
     #   * `ContentBasedDeduplication` – Enables content-based deduplication.
     #     Valid values are `true` and `false`. For more information, see
-    #     [Exactly-once processing][11] in the *Amazon Simple Queue Service
-    #     Developer Guide*. Note the following:
+    #     [Exactly-once processing][11] in the *Amazon SQS Developer Guide*.
+    #     Note the following:
     #
     #     * Every message must have a unique `MessageDeduplicationId`.
     #
@@ -201,7 +201,7 @@ module Aws::SQS
     #   deduplication occurs as specified.
     #
     #   For information on throughput quotas, see [Quotas related to
-    #   messages][13] in the *Amazon Simple Queue Service Developer Guide*.
+    #   messages][13] in the *Amazon SQS Developer Guide*.
     #
     #
     #
@@ -220,8 +220,8 @@ module Aws::SQS
     #   [13]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-messages.html
     # @option options [Hash<String,String>] :tags
     #   Add cost allocation tags to the specified Amazon SQS queue. For an
-    #   overview, see [Tagging Your Amazon SQS Queues][1] in the *Amazon
-    #   Simple Queue Service Developer Guide*.
+    #   overview, see [Tagging Your Amazon SQS Queues][1] in the *Amazon SQS
+    #   Developer Guide*.
     #
     #   When you use queue tags, keep the following guidelines in mind:
     #
@@ -235,15 +235,15 @@ module Aws::SQS
     #   * A new tag with a key identical to that of an existing tag overwrites
     #     the existing tag.
     #
-    #   For a full list of tag restrictions, see [Limits Related to Queues][2]
-    #   in the *Amazon Simple Queue Service Developer Guide*.
+    #   For a full list of tag restrictions, see [Quotas related to queues][2]
+    #   in the *Amazon SQS Developer Guide*.
     #
     #   <note markdown="1"> To be able to tag a queue on creation, you must have the
     #   `sqs:CreateQueue` and `sqs:TagQueue` permissions.
     #
     #    Cross-account permissions don't apply to this action. For more
     #   information, see [Grant cross-account permissions to a role and a user
-    #   name][3] in the *Amazon Simple Queue Service Developer Guide*.
+    #   name][3] in the *Amazon SQS Developer Guide*.
     #
     #    </note>
     #
@@ -275,7 +275,7 @@ module Aws::SQS
     #
     #   Queue URLs and names are case-sensitive.
     # @option options [String] :queue_owner_aws_account_id
-    #   The AWS account ID of the account that created the queue.
+    #   The account ID of the account that created the queue.
     # @return [Queue]
     def get_queue_by_name(options = {})
       resp = @client.get_queue_url(options)

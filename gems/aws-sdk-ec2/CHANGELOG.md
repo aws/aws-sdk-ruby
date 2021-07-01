@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.246.0 (2021-07-01)
+------------------
+
+* Feature - Adding a new reserved field to support future infrastructure improvements for Amazon EC2 Fleet.
+
 1.245.0 (2021-06-23)
 ------------------
 

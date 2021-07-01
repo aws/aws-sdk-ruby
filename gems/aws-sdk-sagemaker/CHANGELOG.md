@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2021-07-01)
+------------------
+
+* Feature - SageMaker model registry now supports up to 5 containers and associated environment variables.
+
 1.91.0 (2021-06-28)
 ------------------
 

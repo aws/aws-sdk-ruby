@@ -405,7 +405,7 @@ module Aws::SageMaker
     #
     # Each tag consists of a key and an optional value. Tag keys must be
     # unique per resource. For more information about tags, see For more
-    # information, see [AWS Tagging Strategies][1].
+    # information, see [Amazon Web Services Tagging Strategies][1].
     #
     # <note markdown="1"> Tags that you add to a hyperparameter tuning job by calling this API
     # are also added to any training jobs that the hyperparameter tuning job
@@ -438,9 +438,10 @@ module Aws::SageMaker
     #   The Amazon Resource Name (ARN) of the resource that you want to tag.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #
     #
@@ -531,8 +532,8 @@ module Aws::SageMaker
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html
     #
     # @option params [required, String] :action_name
-    #   The name of the action. Must be unique to your account in an AWS
-    #   Region.
+    #   The name of the action. Must be unique to your account in an Amazon
+    #   Web Services Region.
     #
     # @option params [required, Types::ActionSource] :source
     #   The source type, ID, and URI.
@@ -602,7 +603,7 @@ module Aws::SageMaker
     end
 
     # Create a machine learning algorithm that you can use in Amazon
-    # SageMaker and list in the AWS Marketplace.
+    # SageMaker and list in the Amazon Web Services Marketplace.
     #
     # @option params [required, String] :algorithm_name
     #   The name of the algorithm.
@@ -652,13 +653,14 @@ module Aws::SageMaker
     #   the algorithm's inference code.
     #
     # @option params [Boolean] :certify_for_marketplace
-    #   Whether to certify the algorithm so that it can be listed in AWS
-    #   Marketplace.
+    #   Whether to certify the algorithm so that it can be listed in Amazon
+    #   Web Services Marketplace.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #
     #
@@ -732,6 +734,9 @@ module Aws::SageMaker
     #           image_digest: "ImageDigest",
     #           model_data_url: "Url",
     #           product_id: "ProductId",
+    #           environment: {
+    #             "EnvironmentKey" => "EnvironmentValue",
+    #           },
     #         },
     #       ],
     #       supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
@@ -982,8 +987,8 @@ module Aws::SageMaker
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html
     #
     # @option params [String] :artifact_name
-    #   The name of the artifact. Must be unique to your account in an AWS
-    #   Region.
+    #   The name of the artifact. Must be unique to your account in an Amazon
+    #   Web Services Region.
     #
     # @option params [required, Types::ArtifactSource] :source
     #   The ID, ID type, and URI of the source.
@@ -1188,8 +1193,8 @@ module Aws::SageMaker
     # persists independently from the lifecycle of any notebook instances it
     # is associated with.
     #
-    # The repository can be hosted either in [AWS CodeCommit][1] or in any
-    # other Git repository.
+    # The repository can be hosted either in [Amazon Web Services
+    # CodeCommit][1] or in any other Git repository.
     #
     #
     #
@@ -1205,9 +1210,10 @@ module Aws::SageMaker
     #   access the repository.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #
     #
@@ -1253,8 +1259,8 @@ module Aws::SageMaker
     #
     # If you choose to host your model using Amazon SageMaker hosting
     # services, you can use the resulting model artifacts as part of the
-    # model. You can also use the artifacts with AWS IoT Greengrass. In that
-    # case, deploy them as an ML resource.
+    # model. You can also use the artifacts with Amazon Web Services IoT
+    # Greengrass. In that case, deploy them as an ML resource.
     #
     # In the request body, you provide the following:
     #
@@ -1279,7 +1285,8 @@ module Aws::SageMaker
     #
     # @option params [required, String] :compilation_job_name
     #   A name for the model compilation job. The name must be unique within
-    #   the AWS Region and within your AWS account.
+    #   the Amazon Web Services Region and within your Amazon Web Services
+    #   account.
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of an IAM role that enables Amazon
@@ -1329,9 +1336,10 @@ module Aws::SageMaker
     #   job. Use this API to cap model training costs.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #
     #
@@ -1409,8 +1417,8 @@ module Aws::SageMaker
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html
     #
     # @option params [required, String] :context_name
-    #   The name of the context. Must be unique to your account in an AWS
-    #   Region.
+    #   The name of the context. Must be unique to your account in an Amazon
+    #   Web Services Region.
     #
     # @option params [required, Types::ContextSource] :source
     #   The source type, ID, and URI.
@@ -1506,8 +1514,8 @@ module Aws::SageMaker
     #
     # @option params [Array<Types::Tag>] :tags
     #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
-    #   Management User Guide*.
+    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
+    #   and Cost Management User Guide*.
     #
     #
     #
@@ -1613,8 +1621,8 @@ module Aws::SageMaker
     #   The name of the fleet that the device belongs to.
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) that has access to AWS Internet of
-    #   Things (IoT).
+    #   The Amazon Resource Name (ARN) that has access to Amazon Web Services
+    #   Internet of Things (IoT).
     #
     # @option params [String] :description
     #   A description of the fleet.
@@ -1627,9 +1635,9 @@ module Aws::SageMaker
     #   Creates tags for the specified fleet.
     #
     # @option params [Boolean] :enable_iot_role_alias
-    #   Whether to create an AWS IoT Role Alias during device fleet creation.
-    #   The name of the role alias generated will match this pattern:
-    #   "SageMakerEdge-\\\{DeviceFleetName\\}".
+    #   Whether to create an Amazon Web Services IoT Role Alias during device
+    #   fleet creation. The name of the role alias generated will match this
+    #   pattern: "SageMakerEdge-\\\{DeviceFleetName\\}".
     #
     #   For example, if your device fleet is called "demo-fleet", the name
     #   of the role alias will be "SageMakerEdge-demo-fleet".
@@ -1669,9 +1677,9 @@ module Aws::SageMaker
     # Creates a `Domain` used by Amazon SageMaker Studio. A domain consists
     # of an associated Amazon Elastic File System (EFS) volume, a list of
     # authorized users, and a variety of security, application, policy, and
-    # Amazon Virtual Private Cloud (VPC) configurations. An AWS account is
-    # limited to one domain per region. Users within a domain can share
-    # notebook files and other artifacts with each other.
+    # Amazon Virtual Private Cloud (VPC) configurations. An Amazon Web
+    # Services account is limited to one domain per region. Users within a
+    # domain can share notebook files and other artifacts with each other.
     #
     # **EFS storage**
     #
@@ -1680,11 +1688,11 @@ module Aws::SageMaker
     # directory within the EFS volume for notebooks, Git repositories, and
     # data files.
     #
-    # SageMaker uses the AWS Key Management Service (AWS KMS) to encrypt the
-    # EFS volume attached to the domain with an AWS managed customer master
-    # key (CMK) by default. For more control, you can specify a customer
-    # managed CMK. For more information, see [Protect Data at Rest Using
-    # Encryption][1].
+    # SageMaker uses the Amazon Web Services Key Management Service (Amazon
+    # Web Services KMS) to encrypt the EFS volume attached to the domain
+    # with an Amazon Web Services managed customer master key (CMK) by
+    # default. For more control, you can specify a customer managed CMK. For
+    # more information, see [Protect Data at Rest Using Encryption][1].
     #
     # **VPC configuration**
     #
@@ -1707,6 +1715,10 @@ module Aws::SageMaker
     #   notebook or to train or host models unless your VPC has an interface
     #   endpoint to the SageMaker API and runtime or a NAT gateway and your
     #   security groups allow outbound connections.
+    #
+    # NFS traffic over TCP on port 2049 needs to be allowed in both inbound
+    # and outbound rules in order to launch a SageMaker Studio app
+    # successfully.
     #
     # For more information, see [Connect SageMaker Studio Notebooks to
     # Resources in a VPC][2].
@@ -1761,9 +1773,10 @@ module Aws::SageMaker
     #   This member is deprecated and replaced with `KmsKeyId`.
     #
     # @option params [String] :kms_key_id
-    #   SageMaker uses AWS KMS to encrypt the EFS volume attached to the
-    #   domain with an AWS managed customer master key (CMK) by default. For
-    #   more control, specify a customer managed CMK.
+    #   SageMaker uses Amazon Web Services KMS to encrypt the EFS volume
+    #   attached to the domain with an Amazon Web Services managed customer
+    #   master key (CMK) by default. For more control, specify a customer
+    #   managed CMK.
     #
     # @return [Types::CreateDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1915,7 +1928,7 @@ module Aws::SageMaker
     #
     # For an example that calls this method when deploying a model to Amazon
     # SageMaker hosting services, see [Deploy the Model to Amazon SageMaker
-    # Hosting Services (AWS SDK for Python (Boto 3)).][1]
+    # Hosting Services (Amazon Web Services SDK for Python (Boto 3)).][1]
     #
     # <note markdown="1"> You must not delete an `EndpointConfig` that is in use by an endpoint
     # that is live or while the `UpdateEndpoint` or `CreateEndpoint`
@@ -1924,8 +1937,8 @@ module Aws::SageMaker
     #
     #  </note>
     #
-    # The endpoint name must be unique within an AWS Region in your AWS
-    # account.
+    # The endpoint name must be unique within an Amazon Web Services Region
+    # in your Amazon Web Services account.
     #
     # When it receives the request, Amazon SageMaker creates the endpoint,
     # launches the resources (ML compute instances), and deploys the
@@ -1952,13 +1965,14 @@ module Aws::SageMaker
     # DescribeEndpoint API.
     #
     # If any of the models hosted at this endpoint get model data from an
-    # Amazon S3 location, Amazon SageMaker uses AWS Security Token Service
-    # to download model artifacts from the S3 path you provided. AWS STS is
-    # activated in your IAM user account by default. If you previously
-    # deactivated AWS STS for a region, you need to reactivate AWS STS for
+    # Amazon S3 location, Amazon SageMaker uses Amazon Web Services Security
+    # Token Service to download model artifacts from the S3 path you
+    # provided. Amazon Web Services STS is activated in your IAM user
+    # account by default. If you previously deactivated Amazon Web Services
+    # STS for a region, you need to reactivate Amazon Web Services STS for
     # that region. For more information, see [Activating and Deactivating
-    # AWS STS in an AWS Region][3] in the *AWS Identity and Access
-    # Management User Guide*.
+    # Amazon Web Services STS in an Amazon Web Services Region][3] in the
+    # *Amazon Web Services Identity and Access Management User Guide*.
     #
     # <note markdown="1"> To add the IAM role policies for using this API operation, go to the
     # [IAM console][4], and choose Roles in the left navigation pane. Search
@@ -1998,18 +2012,20 @@ module Aws::SageMaker
     # [5]: https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html
     #
     # @option params [required, String] :endpoint_name
-    #   The name of the endpoint.The name must be unique within an AWS Region
-    #   in your AWS account. The name is case-insensitive in `CreateEndpoint`,
-    #   but the case is preserved and must be matched in .
+    #   The name of the endpoint.The name must be unique within an Amazon Web
+    #   Services Region in your Amazon Web Services account. The name is
+    #   case-insensitive in `CreateEndpoint`, but the case is preserved and
+    #   must be matched in .
     #
     # @option params [required, String] :endpoint_config_name
     #   The name of an endpoint configuration. For more information, see
     #   CreateEndpointConfig.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #
     #
@@ -2070,7 +2086,7 @@ module Aws::SageMaker
     #
     # For an example that calls this method when deploying a model to Amazon
     # SageMaker hosting services, see [Deploy the Model to Amazon SageMaker
-    # Hosting Services (AWS SDK for Python (Boto 3)).][1]
+    # Hosting Services (Amazon Web Services SDK for Python (Boto 3)).][1]
     #
     # <note markdown="1"> When you call CreateEndpoint, a load call is made to DynamoDB to
     # verify that your endpoint configuration exists. When you read data
@@ -2102,18 +2118,19 @@ module Aws::SageMaker
     # @option params [Types::DataCaptureConfig] :data_capture_config
     #
     # @option params [Array<Types::Tag>] :tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @option params [String] :kms_key_id
-    #   The Amazon Resource Name (ARN) of a AWS Key Management Service key
-    #   that Amazon SageMaker uses to encrypt data on the storage volume
-    #   attached to the ML compute instance that hosts the endpoint.
+    #   The Amazon Resource Name (ARN) of a Amazon Web Services Key Management
+    #   Service key that Amazon SageMaker uses to encrypt data on the storage
+    #   volume attached to the ML compute instance that hosts the endpoint.
     #
     #   The KmsKeyId can be any of the following formats:
     #
@@ -2129,8 +2146,8 @@ module Aws::SageMaker
     #
     #   The KMS key policy must grant permission to the IAM role that you
     #   specify in your `CreateEndpoint`, `UpdateEndpoint` requests. For more
-    #   information, refer to the AWS Key Management Service section[ Using
-    #   Key Policies in AWS KMS ][1]
+    #   information, refer to the Amazon Web Services Key Management Service
+    #   section[ Using Key Policies in Amazon Web Services KMS ][1]
     #
     #   <note markdown="1"> Certain Nitro-based instances include local storage, dependent on the
     #   instance type. Local storage volumes are encrypted using a hardware
@@ -2227,8 +2244,8 @@ module Aws::SageMaker
     #
     # When you use SageMaker Studio or the SageMaker Python SDK, all
     # experiments, trials, and trial components are automatically tracked,
-    # logged, and indexed. When you use the AWS SDK for Python (Boto), you
-    # must use the logging APIs provided by the SDK.
+    # logged, and indexed. When you use the Amazon Web Services SDK for
+    # Python (Boto), you must use the logging APIs provided by the SDK.
     #
     # You can add tags to experiments, trials, trial components and then use
     # the Search API to search for the tags.
@@ -2243,8 +2260,8 @@ module Aws::SageMaker
     # the ListTrials API. To create a trial call the CreateTrial API.
     #
     # @option params [required, String] :experiment_name
-    #   The name of the experiment. The name must be unique in your AWS
-    #   account and is not case-sensitive.
+    #   The name of the experiment. The name must be unique in your Amazon Web
+    #   Services account and is not case-sensitive.
     #
     # @option params [String] :display_name
     #   The name of the experiment as displayed. The name doesn't need to be
@@ -2296,8 +2313,8 @@ module Aws::SageMaker
     # FeatureGroup. A `FeatureGroup` definition is composed of a list of
     # `Features`, a `RecordIdentifierFeatureName`, an `EventTimeFeatureName`
     # and configurations for its `OnlineStore` and `OfflineStore`. Check
-    # [AWS service quotas][1] to see the `FeatureGroup`s quota for your AWS
-    # account.
+    # [Amazon Web Services service quotas][1] to see the `FeatureGroup`s
+    # quota for your Amazon Web Services account.
     #
     # You must include at least one of `OnlineStoreConfig` and
     # `OfflineStoreConfig` to create a `FeatureGroup`.
@@ -2307,8 +2324,9 @@ module Aws::SageMaker
     # [1]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
     #
     # @option params [required, String] :feature_group_name
-    #   The name of the `FeatureGroup`. The name must be unique within an AWS
-    #   Region in an AWS account. The name:
+    #   The name of the `FeatureGroup`. The name must be unique within an
+    #   Amazon Web Services Region in an Amazon Web Services account. The
+    #   name:
     #
     #   * Must start and end with an alphanumeric character.
     #
@@ -2371,8 +2389,8 @@ module Aws::SageMaker
     #   `EnableOnlineStore` flag in `OnlineStoreConfig`; the default value is
     #   `False`.
     #
-    #   You can also include an AWS KMS key ID (`KMSKeyId`) for at-rest
-    #   encryption of the `OnlineStore`.
+    #   You can also include an Amazon Web Services KMS key ID (`KMSKeyId`)
+    #   for at-rest encryption of the `OnlineStore`.
     #
     # @option params [Types::OfflineStoreConfig] :offline_store_config
     #   Use this to configure an `OfflineFeatureStore`. This parameter allows
@@ -2381,7 +2399,8 @@ module Aws::SageMaker
     #   * The Amazon Simple Storage Service (Amazon S3) location of an
     #     `OfflineStore`.
     #
-    #   * A configuration for an AWS Glue or AWS Hive data cataolgue.
+    #   * A configuration for an Amazon Web Services Glue or Amazon Web
+    #     Services Hive data cataolgue.
     #
     #   * An KMS encryption key to encrypt the Amazon S3 location used for
     #     `OfflineStore`.
@@ -2605,9 +2624,10 @@ module Aws::SageMaker
     # @option params [required, String] :hyper_parameter_tuning_job_name
     #   The name of the tuning job. This name is the prefix for the names of
     #   all training jobs that this tuning job launches. The name must be
-    #   unique within the same AWS account and AWS Region. The name must have
-    #   1 to 32 characters. Valid characters are a-z, A-Z, 0-9, and : + = @ \_
-    #   % - (hyphen). The name is not case sensitive.
+    #   unique within the same Amazon Web Services account and Amazon Web
+    #   Services Region. The name must have 1 to 32 characters. Valid
+    #   characters are a-z, A-Z, 0-9, and : + = @ \_ % - (hyphen). The name is
+    #   not case sensitive.
     #
     # @option params [required, Types::HyperParameterTuningJobConfig] :hyper_parameter_tuning_job_config
     #   The HyperParameterTuningJobConfig object that describes the tuning
@@ -2652,9 +2672,10 @@ module Aws::SageMaker
     #    </note>
     #
     # @option params [Array<Types::Tag>] :tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #   Tags that you specify for the tuning job are also added to all
     #   training jobs that the tuning job launches.
@@ -3012,8 +3033,9 @@ module Aws::SageMaker
     #   [@digest]>`
     #
     # @option params [required, String] :client_token
-    #   A unique ID. If not specified, the AWS CLI and AWS SDKs, such as the
-    #   SDK for Python (Boto3), add a unique value to the call.
+    #   A unique ID. If not specified, the Amazon Web Services CLI and Amazon
+    #   Web Services SDKs, such as the SDK for Python (Boto3), add a unique
+    #   value to the call.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -3057,8 +3079,8 @@ module Aws::SageMaker
     #   the data to stay within your organization or when a specific set of
     #   skills is required.
     #
-    # * One or more vendors that you select from the AWS Marketplace.
-    #   Vendors provide expertise in specific areas.
+    # * One or more vendors that you select from the Amazon Web Services
+    #   Marketplace. Vendors provide expertise in specific areas.
     #
     # * The Amazon Mechanical Turk workforce. This is the largest workforce,
     #   but it should only be used for public data or data that has been
@@ -3098,9 +3120,9 @@ module Aws::SageMaker
     # @option params [required, String] :labeling_job_name
     #   The name of the labeling job. This name is used to identify the job in
     #   a list of labeling jobs. Labeling job names must be unique within an
-    #   AWS account and region. `LabelingJobName` is not case sensitive. For
-    #   example, Example-job and example-job are considered the same labeling
-    #   job name by Ground Truth.
+    #   Amazon Web Services account and region. `LabelingJobName` is not case
+    #   sensitive. For example, Example-job and example-job are considered the
+    #   same labeling job name by Ground Truth.
     #
     # @option params [required, String] :label_attribute_name
     #   The attribute name to use for the label in the output manifest file.
@@ -3177,8 +3199,9 @@ module Aws::SageMaker
     #   content.
     #
     # @option params [required, Types::LabelingJobOutputConfig] :output_config
-    #   The location of the output data and the AWS Key Management Service key
-    #   ID for the key used to encrypt the output data, if any.
+    #   The location of the output data and the Amazon Web Services Key
+    #   Management Service key ID for the key used to encrypt the output data,
+    #   if any.
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Number (ARN) that Amazon SageMaker assumes to
@@ -3248,8 +3271,8 @@ module Aws::SageMaker
     #
     # @option params [Array<Types::Tag>] :tags
     #   An array of key/value pairs. For more information, see [Using Cost
-    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
-    #   Guide*.
+    #   Allocation Tags][1] in the *Amazon Web Services Billing and Cost
+    #   Management User Guide*.
     #
     #
     #
@@ -3357,7 +3380,7 @@ module Aws::SageMaker
     #
     # For an example that calls this method when deploying a model to Amazon
     # SageMaker hosting services, see [Deploy the Model to Amazon SageMaker
-    # Hosting Services (AWS SDK for Python (Boto 3)).][1]
+    # Hosting Services (Amazon Web Services SDK for Python (Boto 3)).][1]
     #
     # To run a batch transform using your model, you start a job with the
     # `CreateTransformJob` API. Amazon SageMaker uses your model and your
@@ -3371,8 +3394,8 @@ module Aws::SageMaker
     # assume to access model artifacts and docker image for deployment on ML
     # compute hosting instances or for batch transform jobs. In addition,
     # you also use the IAM role to manage permissions the inference code
-    # needs. For example, if the inference code access any other AWS
-    # resources, you grant necessary permissions via this role.
+    # needs. For example, if the inference code access any other Amazon Web
+    # Services resources, you grant necessary permissions via this role.
     #
     #
     #
@@ -3410,9 +3433,10 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #
     #
@@ -3517,7 +3541,7 @@ module Aws::SageMaker
     #
     # @option params [required, String] :job_definition_name
     #   The name of the bias job definition. The name must be unique within an
-    #   AWS Region in the AWS account.
+    #   Amazon Web Services Region in the Amazon Web Services account.
     #
     # @option params [Types::ModelBiasBaselineConfig] :model_bias_baseline_config
     #   The baseline configuration for a model bias job.
@@ -3548,8 +3572,8 @@ module Aws::SageMaker
     #
     # @option params [Array<Types::Tag>] :tags
     #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
-    #   Management User Guide*.
+    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
+    #   and Cost Management User Guide*.
     #
     #
     #
@@ -3650,7 +3674,8 @@ module Aws::SageMaker
     #
     # @option params [required, String] :job_definition_name
     #   The name of the model explainability job definition. The name must be
-    #   unique within an AWS Region in the AWS account.
+    #   unique within an Amazon Web Services Region in the Amazon Web Services
+    #   account.
     #
     # @option params [Types::ModelExplainabilityBaselineConfig] :model_explainability_baseline_config
     #   The baseline configuration for a model explainability job.
@@ -3681,8 +3706,8 @@ module Aws::SageMaker
     #
     # @option params [Array<Types::Tag>] :tags
     #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
-    #   Management User Guide*.
+    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
+    #   and Cost Management User Guide*.
     #
     #
     #
@@ -3777,15 +3802,17 @@ module Aws::SageMaker
     end
 
     # Creates a model package that you can use to create Amazon SageMaker
-    # models or list on AWS Marketplace, or a versioned model that is part
-    # of a model group. Buyers can subscribe to model packages listed on AWS
-    # Marketplace to create models in Amazon SageMaker.
+    # models or list on Amazon Web Services Marketplace, or a versioned
+    # model that is part of a model group. Buyers can subscribe to model
+    # packages listed on Amazon Web Services Marketplace to create models in
+    # Amazon SageMaker.
     #
     # To create a model package by specifying a Docker container that
     # contains your inference code and the Amazon S3 location of your model
     # artifacts, provide values for `InferenceSpecification`. To create a
     # model from an algorithm resource that you created or subscribed to in
-    # AWS Marketplace, provide a value for `SourceAlgorithmSpecification`.
+    # Amazon Web Services Marketplace, provide a value for
+    # `SourceAlgorithmSpecification`.
     #
     # <note markdown="1"> There are two types of model packages:
     #
@@ -3833,15 +3860,16 @@ module Aws::SageMaker
     #   Details about the algorithm that was used to create the model package.
     #
     # @option params [Boolean] :certify_for_marketplace
-    #   Whether to certify the model package for listing on AWS Marketplace.
+    #   Whether to certify the model package for listing on Amazon Web
+    #   Services Marketplace.
     #
     #   This parameter is optional for unversioned models, and does not apply
     #   to versioned models.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of key value pairs associated with the model. For more
-    #   information, see [Tagging AWS resources][1] in the *AWS General
-    #   Reference Guide*.
+    #   information, see [Tagging Amazon Web Services resources][1] in the
+    #   *Amazon Web Services General Reference Guide*.
     #
     #
     #
@@ -3887,6 +3915,9 @@ module Aws::SageMaker
     #           image_digest: "ImageDigest",
     #           model_data_url: "Url",
     #           product_id: "ProductId",
+    #           environment: {
+    #             "EnvironmentKey" => "EnvironmentValue",
+    #           },
     #         },
     #       ],
     #       supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
@@ -4021,8 +4052,8 @@ module Aws::SageMaker
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of key value pairs associated with the model group. For more
-    #   information, see [Tagging AWS resources][1] in the *AWS General
-    #   Reference Guide*.
+    #   information, see [Tagging Amazon Web Services resources][1] in the
+    #   *Amazon Web Services General Reference Guide*.
     #
     #
     #
@@ -4098,8 +4129,8 @@ module Aws::SageMaker
     #
     # @option params [Array<Types::Tag>] :tags
     #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
-    #   Management User Guide*.
+    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
+    #   and Cost Management User Guide*.
     #
     #
     #
@@ -4205,7 +4236,7 @@ module Aws::SageMaker
     #
     # @option params [required, String] :monitoring_schedule_name
     #   The name of the monitoring schedule. The name must be unique within an
-    #   AWS Region within an AWS account.
+    #   Amazon Web Services Region within an Amazon Web Services account.
     #
     # @option params [required, Types::MonitoringScheduleConfig] :monitoring_schedule_config
     #   The configuration object that specifies the monitoring schedule and
@@ -4215,7 +4246,7 @@ module Aws::SageMaker
     #   (Optional) An array of key-value pairs. For more information, see
     #   [Using Cost Allocation Tags](
     #   https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
-    #   in the *AWS Billing and Cost Management User Guide*.
+    #   in the *Amazon Web Services Billing and Cost Management User Guide*.
     #
     # @return [Types::CreateMonitoringScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4384,13 +4415,13 @@ module Aws::SageMaker
     #   groups must be for the same VPC as specified in the subnet.
     #
     # @option params [required, String] :role_arn
-    #   When you send any requests to AWS resources from the notebook
-    #   instance, Amazon SageMaker assumes this role to perform tasks on your
-    #   behalf. You must grant this role necessary permissions so Amazon
-    #   SageMaker can perform these tasks. The policy must allow the Amazon
-    #   SageMaker service principal (sagemaker.amazonaws.com) permissions to
-    #   assume this role. For more information, see [Amazon SageMaker
-    #   Roles][1].
+    #   When you send any requests to Amazon Web Services resources from the
+    #   notebook instance, Amazon SageMaker assumes this role to perform tasks
+    #   on your behalf. You must grant this role necessary permissions so
+    #   Amazon SageMaker can perform these tasks. The policy must allow the
+    #   Amazon SageMaker service principal (sagemaker.amazonaws.com)
+    #   permissions to assume this role. For more information, see [Amazon
+    #   SageMaker Roles][1].
     #
     #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
     #   API must have the `iam:PassRole` permission.
@@ -4402,20 +4433,21 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #
     # @option params [String] :kms_key_id
-    #   The Amazon Resource Name (ARN) of a AWS Key Management Service key
-    #   that Amazon SageMaker uses to encrypt data on the storage volume
-    #   attached to your notebook instance. The KMS key you provide must be
-    #   enabled. For information, see [Enabling and Disabling Keys][1] in the
-    #   *AWS Key Management Service Developer Guide*.
+    #   The Amazon Resource Name (ARN) of a Amazon Web Services Key Management
+    #   Service key that Amazon SageMaker uses to encrypt data on the storage
+    #   volume attached to your notebook instance. The KMS key you provide
+    #   must be enabled. For information, see [Enabling and Disabling Keys][1]
+    #   in the *Amazon Web Services Key Management Service Developer Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #
     #
@@ -4463,10 +4495,11 @@ module Aws::SageMaker
     #   A Git repository to associate with the notebook instance as its
     #   default code repository. This can be either the name of a Git
     #   repository stored as a resource in your account, or the URL of a Git
-    #   repository in [AWS CodeCommit][1] or in any other Git repository. When
-    #   you open a notebook instance, it opens in the directory that contains
-    #   this repository. For more information, see [Associating Git
-    #   Repositories with Amazon SageMaker Notebook Instances][2].
+    #   repository in [Amazon Web Services CodeCommit][1] or in any other Git
+    #   repository. When you open a notebook instance, it opens in the
+    #   directory that contains this repository. For more information, see
+    #   [Associating Git Repositories with Amazon SageMaker Notebook
+    #   Instances][2].
     #
     #
     #
@@ -4477,10 +4510,11 @@ module Aws::SageMaker
     #   An array of up to three Git repositories to associate with the
     #   notebook instance. These can be either the names of Git repositories
     #   stored as resources in your account, or the URL of Git repositories in
-    #   [AWS CodeCommit][1] or in any other Git repository. These repositories
-    #   are cloned at the same level as the default repository of your
-    #   notebook instance. For more information, see [Associating Git
-    #   Repositories with Amazon SageMaker Notebook Instances][2].
+    #   [Amazon Web Services CodeCommit][1] or in any other Git repository.
+    #   These repositories are cloned at the same level as the default
+    #   repository of your notebook instance. For more information, see
+    #   [Associating Git Repositories with Amazon SageMaker Notebook
+    #   Instances][2].
     #
     #
     #
@@ -4678,12 +4712,28 @@ module Aws::SageMaker
     # This operation can only be called when the authentication mode equals
     # IAM.
     #
+    # The IAM role or user used to call this API defines the permissions to
+    # access the app. Once the presigned URL is created, no additional
+    # permission is required to access this URL. IAM authorization policies
+    # for this API are also enforced for every HTTP request and WebSocket
+    # frame that attempts to connect to the app.
+    #
+    # You can restrict access to this API and to the URL that it returns to
+    # a list of IP addresses, Amazon VPCs or Amazon VPC Endpoints that you
+    # specify. For more information, see [Connect to SageMaker Studio
+    # Through an Interface VPC Endpoint][1] .
+    #
     # <note markdown="1"> The URL that you get from a call to `CreatePresignedDomainUrl` has a
     # default timeout of 5 minutes. You can configure this value using
     # `ExpiresInSeconds`. If you try to use the URL after the timeout limit
-    # expires, you are directed to the AWS console sign-in page.
+    # expires, you are directed to the Amazon Web Services console sign-in
+    # page.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/studio-interface-endpoint.html
     #
     # @option params [required, String] :domain_id
     #   The domain ID.
@@ -4747,8 +4797,8 @@ module Aws::SageMaker
     #
     # <note markdown="1"> The URL that you get from a call to CreatePresignedNotebookInstanceUrl
     # is valid only for 5 minutes. If you try to use the URL after the
-    # 5-minute limit expires, you are directed to the AWS console sign-in
-    # page.
+    # 5-minute limit expires, you are directed to the Amazon Web Services
+    # console sign-in page.
     #
     #  </note>
     #
@@ -4796,8 +4846,8 @@ module Aws::SageMaker
     #   Output configuration for the processing job.
     #
     # @option params [required, String] :processing_job_name
-    #   The name of the processing job. The name must be unique within an AWS
-    #   Region in the AWS account.
+    #   The name of the processing job. The name must be unique within an
+    #   Amazon Web Services Region in the Amazon Web Services account.
     #
     # @option params [required, Types::ProcessingResources] :processing_resources
     #   Identifies the resources, ML compute instances, and ML storage volumes
@@ -4827,8 +4877,8 @@ module Aws::SageMaker
     #
     # @option params [Array<Types::Tag>] :tags
     #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
-    #   Management User Guide*.
+    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
+    #   and Cost Management User Guide*.
     #
     #
     #
@@ -4975,7 +5025,8 @@ module Aws::SageMaker
     #
     # @option params [required, Types::ServiceCatalogProvisioningDetails] :service_catalog_provisioning_details
     #   The product ID and provisioning artifact ID to provision a service
-    #   catalog. For information, see [What is AWS Service Catalog][1].
+    #   catalog. For information, see [What is Amazon Web Services Service
+    #   Catalog][1].
     #
     #
     #
@@ -4983,8 +5034,9 @@ module Aws::SageMaker
     #
     # @option params [Array<Types::Tag>] :tags
     #   An array of key-value pairs that you want to use to organize and track
-    #   your AWS resource costs. For more information, see [Tagging AWS
-    #   resources][1] in the *AWS General Reference Guide*.
+    #   your Amazon Web Services resource costs. For more information, see
+    #   [Tagging Amazon Web Services resources][1] in the *Amazon Web Services
+    #   General Reference Guide*.
     #
     #
     #
@@ -5092,8 +5144,8 @@ module Aws::SageMaker
     # [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html
     #
     # @option params [required, String] :training_job_name
-    #   The name of the training job. The name must be unique within an AWS
-    #   Region in an AWS account.
+    #   The name of the training job. The name must be unique within an Amazon
+    #   Web Services Region in an Amazon Web Services account.
     #
     # @option params [Hash<String,String>] :hyper_parameters
     #   Algorithm-specific parameters that influence the quality of the model.
@@ -5197,9 +5249,10 @@ module Aws::SageMaker
     #   of training are not lost.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #
     #
@@ -5457,12 +5510,13 @@ module Aws::SageMaker
     # In the request body, you provide the following:
     #
     # * `TransformJobName` - Identifies the transform job. The name must be
-    #   unique within an AWS Region in an AWS account.
+    #   unique within an Amazon Web Services Region in an Amazon Web
+    #   Services account.
     #
     # * `ModelName` - Identifies the model to use. `ModelName` must be the
-    #   name of an existing Amazon SageMaker model in the same AWS Region
-    #   and AWS account. For information on creating a model, see
-    #   CreateModel.
+    #   name of an existing Amazon SageMaker model in the same Amazon Web
+    #   Services Region and Amazon Web Services account. For information on
+    #   creating a model, see CreateModel.
     #
     # * `TransformInput` - Describes the dataset to be transformed and the
     #   Amazon S3 location where it is stored.
@@ -5481,13 +5535,14 @@ module Aws::SageMaker
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html
     #
     # @option params [required, String] :transform_job_name
-    #   The name of the transform job. The name must be unique within an AWS
-    #   Region in an AWS account.
+    #   The name of the transform job. The name must be unique within an
+    #   Amazon Web Services Region in an Amazon Web Services account.
     #
     # @option params [required, String] :model_name
     #   The name of the model that you want to use for the transform job.
     #   `ModelName` must be the name of an existing Amazon SageMaker model
-    #   within an AWS Region in an AWS account.
+    #   within an Amazon Web Services Region in an Amazon Web Services
+    #   account.
     #
     # @option params [Integer] :max_concurrent_transforms
     #   The maximum number of parallel requests that can be sent to each
@@ -5568,8 +5623,8 @@ module Aws::SageMaker
     #
     # @option params [Array<Types::Tag>] :tags
     #   (Optional) An array of key-value pairs. For more information, see
-    #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
-    #   Management User Guide*.
+    #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
+    #   and Cost Management User Guide*.
     #
     #
     #
@@ -5663,8 +5718,8 @@ module Aws::SageMaker
     #
     # When you use SageMaker Studio or the SageMaker Python SDK, all
     # experiments, trials, and trial components are automatically tracked,
-    # logged, and indexed. When you use the AWS SDK for Python (Boto), you
-    # must use the logging APIs provided by the SDK.
+    # logged, and indexed. When you use the Amazon Web Services SDK for
+    # Python (Boto), you must use the logging APIs provided by the SDK.
     #
     # You can add tags to a trial and then use the Search API to search for
     # the tags.
@@ -5674,8 +5729,8 @@ module Aws::SageMaker
     # component, call the CreateTrialComponent API.
     #
     # @option params [required, String] :trial_name
-    #   The name of the trial. The name must be unique in your AWS account and
-    #   is not case-sensitive.
+    #   The name of the trial. The name must be unique in your Amazon Web
+    #   Services account and is not case-sensitive.
     #
     # @option params [String] :display_name
     #   The name of the trial as displayed. The name doesn't need to be
@@ -5737,23 +5792,15 @@ module Aws::SageMaker
     #
     # When you use SageMaker Studio or the SageMaker Python SDK, all
     # experiments, trials, and trial components are automatically tracked,
-    # logged, and indexed. When you use the AWS SDK for Python (Boto), you
-    # must use the logging APIs provided by the SDK.
+    # logged, and indexed. When you use the Amazon Web Services SDK for
+    # Python (Boto), you must use the logging APIs provided by the SDK.
     #
     # You can add tags to a trial component and then use the Search API to
     # search for the tags.
     #
-    # <note markdown="1"> `CreateTrialComponent` can only be invoked from within an SageMaker
-    # managed environment. This includes SageMaker training jobs, processing
-    # jobs, transform jobs, and SageMaker notebooks. A call to
-    # `CreateTrialComponent` from outside one of these environments results
-    # in an error.
-    #
-    #  </note>
-    #
     # @option params [required, String] :trial_component_name
-    #   The name of the component. The name must be unique in your AWS account
-    #   and is not case-sensitive.
+    #   The name of the component. The name must be unique in your Amazon Web
+    #   Services account and is not case-sensitive.
     #
     # @option params [String] :display_name
     #   The name of the component as displayed. The name doesn't need to be
@@ -5876,10 +5923,10 @@ module Aws::SageMaker
     #   not SSO, this field cannot be specified.
     #
     # @option params [String] :single_sign_on_user_value
-    #   The username of the associated AWS Single Sign-On User for this
-    #   UserProfile. If the Domain's AuthMode is SSO, this field is required,
-    #   and must match a valid username of a user in your directory. If the
-    #   Domain's AuthMode is not SSO, this field cannot be specified.
+    #   The username of the associated Amazon Web Services Single Sign-On User
+    #   for this UserProfile. If the Domain's AuthMode is SSO, this field is
+    #   required, and must match a valid username of a user in your directory.
+    #   If the Domain's AuthMode is not SSO, this field cannot be specified.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Each tag consists of a key and an optional value. Tag keys must be
@@ -5961,13 +6008,14 @@ module Aws::SageMaker
     end
 
     # Use this operation to create a workforce. This operation will return
-    # an error if a workforce already exists in the AWS Region that you
-    # specify. You can only create one workforce in each AWS Region per AWS
-    # account.
+    # an error if a workforce already exists in the Amazon Web Services
+    # Region that you specify. You can only create one workforce in each
+    # Amazon Web Services Region per Amazon Web Services account.
     #
-    # If you want to create a new workforce in an AWS Region where a
-    # workforce already exists, use the API operation to delete the existing
-    # workforce and then use `CreateWorkforce` to create a new workforce.
+    # If you want to create a new workforce in an Amazon Web Services Region
+    # where a workforce already exists, use the API operation to delete the
+    # existing workforce and then use `CreateWorkforce` to create a new
+    # workforce.
     #
     # To create a private workforce using Amazon Cognito, you must specify a
     # Cognito user pool in `CognitoConfig`. You can also create an Amazon
@@ -6115,7 +6163,8 @@ module Aws::SageMaker
     #   An array of key-value pairs.
     #
     #   For more information, see [Resource Tag][1] and [Using Cost Allocation
-    #   Tags][2] in the <i> AWS Billing and Cost Management User Guide</i>.
+    #   Tags][2] in the <i> Amazon Web Services Billing and Cost Management
+    #   User Guide</i>.
     #
     #
     #
@@ -6572,13 +6621,14 @@ module Aws::SageMaker
     # `OnlineStore` of the `FeatureGroup`. Data cannot be accessed from the
     # `OnlineStore` immediately after `DeleteFeatureGroup` is called.
     #
-    # Data written into the `OfflineStore` will not be deleted. The AWS Glue
-    # database and tables that are automatically created for your
-    # `OfflineStore` are not deleted.
+    # Data written into the `OfflineStore` will not be deleted. The Amazon
+    # Web Services Glue database and tables that are automatically created
+    # for your `OfflineStore` are not deleted.
     #
     # @option params [required, String] :feature_group_name
     #   The name of the `FeatureGroup` you want to delete. The name must be
-    #   unique within an AWS Region in an AWS account.
+    #   unique within an Amazon Web Services Region in an Amazon Web Services
+    #   account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6698,7 +6748,7 @@ module Aws::SageMaker
     end
 
     # Deletes a model. The `DeleteModel` API deletes only the model entry
-    # that was created in Amazon SageMaker when you called the CreateModel
+    # that was created in Amazon SageMaker when you called the `CreateModel`
     # API. It does not delete model artifacts, inference code, or the IAM
     # role that you specified when creating the model.
     #
@@ -6769,8 +6819,9 @@ module Aws::SageMaker
     # Deletes a model package.
     #
     # A model package is used to create Amazon SageMaker models or list on
-    # AWS Marketplace. Buyers can subscribe to model packages listed on AWS
-    # Marketplace to create models in Amazon SageMaker.
+    # Amazon Web Services Marketplace. Buyers can subscribe to model
+    # packages listed on Amazon Web Services Marketplace to create models in
+    # Amazon SageMaker.
     #
     # @option params [required, String] :model_package_name
     #   The name or Amazon Resource Name (ARN) of the model package to delete.
@@ -7130,9 +7181,9 @@ module Aws::SageMaker
 
     # Use this operation to delete a workforce.
     #
-    # If you want to create a new workforce in an AWS Region where a
-    # workforce already exists, use this operation to delete the existing
-    # workforce and then use to create a new workforce.
+    # If you want to create a new workforce in an Amazon Web Services Region
+    # where a workforce already exists, use this operation to delete the
+    # existing workforce and then use to create a new workforce.
     #
     # If a private workforce contains one or more work teams, you must use
     # the operation to delete all work teams before you delete the
@@ -7346,6 +7397,8 @@ module Aws::SageMaker
     #   resp.inference_specification.containers[0].image_digest #=> String
     #   resp.inference_specification.containers[0].model_data_url #=> String
     #   resp.inference_specification.containers[0].product_id #=> String
+    #   resp.inference_specification.containers[0].environment #=> Hash
+    #   resp.inference_specification.containers[0].environment["EnvironmentKey"] #=> String
     #   resp.inference_specification.supported_transform_instance_types #=> Array
     #   resp.inference_specification.supported_transform_instance_types[0] #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge"
     #   resp.inference_specification.supported_realtime_inference_instance_types #=> Array
@@ -9009,7 +9062,8 @@ module Aws::SageMaker
     #
     # @option params [required, String] :job_definition_name
     #   The name of the model bias job definition. The name must be unique
-    #   within an AWS Region in the AWS account.
+    #   within an Amazon Web Services Region in the Amazon Web Services
+    #   account.
     #
     # @return [Types::DescribeModelBiasJobDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9084,7 +9138,8 @@ module Aws::SageMaker
     #
     # @option params [required, String] :job_definition_name
     #   The name of the model explainability job definition. The name must be
-    #   unique within an AWS Region in the AWS account.
+    #   unique within an Amazon Web Services Region in the Amazon Web Services
+    #   account.
     #
     # @return [Types::DescribeModelExplainabilityJobDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9155,10 +9210,11 @@ module Aws::SageMaker
     end
 
     # Returns a description of the specified model package, which is used to
-    # create Amazon SageMaker models or list them on AWS Marketplace.
+    # create Amazon SageMaker models or list them on Amazon Web Services
+    # Marketplace.
     #
     # To create models in Amazon SageMaker, buyers can subscribe to model
-    # packages listed on AWS Marketplace.
+    # packages listed on Amazon Web Services Marketplace.
     #
     # @option params [required, String] :model_package_name
     #   The name or Amazon Resource Name (ARN) of the model package to
@@ -9209,6 +9265,8 @@ module Aws::SageMaker
     #   resp.inference_specification.containers[0].image_digest #=> String
     #   resp.inference_specification.containers[0].model_data_url #=> String
     #   resp.inference_specification.containers[0].product_id #=> String
+    #   resp.inference_specification.containers[0].environment #=> Hash
+    #   resp.inference_specification.containers[0].environment["EnvironmentKey"] #=> String
     #   resp.inference_specification.supported_transform_instance_types #=> Array
     #   resp.inference_specification.supported_transform_instance_types[0] #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge"
     #   resp.inference_specification.supported_realtime_inference_instance_types #=> Array
@@ -9335,7 +9393,7 @@ module Aws::SageMaker
     #
     # @option params [required, String] :job_definition_name
     #   The name of the model quality job. The name must be unique within an
-    #   AWS Region in the AWS account.
+    #   Amazon Web Services Region in the Amazon Web Services account.
     #
     # @return [Types::DescribeModelQualityJobDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9772,8 +9830,8 @@ module Aws::SageMaker
     # Returns a description of a processing job.
     #
     # @option params [required, String] :processing_job_name
-    #   The name of the processing job. The name must be unique within an AWS
-    #   Region in the AWS account.
+    #   The name of the processing job. The name must be unique within an
+    #   Amazon Web Services Region in the Amazon Web Services account.
     #
     # @return [Types::DescribeProcessingJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9946,7 +10004,8 @@ module Aws::SageMaker
     end
 
     # Gets information about a work team provided by a vendor. It returns
-    # details about the subscription with a vendor in the AWS Marketplace.
+    # details about the subscription with a vendor in the Amazon Web
+    # Services Marketplace.
     #
     # @option params [required, String] :workteam_arn
     #   The Amazon Resource Name (ARN) of the subscribed work team to
@@ -10693,8 +10752,8 @@ module Aws::SageMaker
 
     # Gets a resource policy that manages access for a model group. For
     # information about resource policies, see [Identity-based policies and
-    # resource-based policies][1] in the *AWS Identity and Access Management
-    # User Guide.*.
+    # resource-based policies][1] in the *Amazon Web Services Identity and
+    # Access Management User Guide.*.
     #
     #
     #
@@ -12937,7 +12996,7 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Gets a list of the model groups in your AWS account.
+    # Gets a list of the model groups in your Amazon Web Services account.
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
     #   A filter that returns only model groups created after the specified
@@ -13168,7 +13227,7 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Lists models created with the CreateModel API.
+    # Lists models created with the `CreateModel` API.
     #
     # @option params [String] :sort_by
     #   Sorts the list of results. The default is `CreationTime`.
@@ -13514,7 +13573,7 @@ module Aws::SageMaker
     end
 
     # Returns a list of the Amazon SageMaker notebook instances in the
-    # requester's account in an AWS Region.
+    # requester's account in an Amazon Web Services Region.
     #
     # @option params [String] :next_token
     #   If the previous call to the `ListNotebookInstances` is truncated, the
@@ -13952,7 +14011,7 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Gets a list of the projects in an AWS account.
+    # Gets a list of the projects in an Amazon Web Services account.
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
     #   A filter that returns the projects that were created after a specified
@@ -14019,9 +14078,9 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Gets a list of the work teams that you are subscribed to in the AWS
-    # Marketplace. The list may be empty if no work team satisfies the
-    # filter specified in the `NameContains` parameter.
+    # Gets a list of the work teams that you are subscribed to in the Amazon
+    # Web Services Marketplace. The list may be empty if no work team
+    # satisfies the filter specified in the `NameContains` parameter.
     #
     # @option params [String] :name_contains
     #   A string in the work team name. This filter returns only work teams
@@ -14132,7 +14191,8 @@ module Aws::SageMaker
     # from the most current to the oldest). Next, those with a status of
     # `InProgress` are returned.
     #
-    #  You can quickly test the API using the following AWS CLI code.
+    #  You can quickly test the API using the following Amazon Web Services
+    # CLI code.
     #
     #  `aws sagemaker list-training-jobs --max-results 100 --status-equals
     # InProgress`
@@ -14614,9 +14674,9 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Use this operation to list all private and vendor workforces in an AWS
-    # Region. Note that you can only have one private workforce per AWS
-    # Region.
+    # Use this operation to list all private and vendor workforces in an
+    # Amazon Web Services Region. Note that you can only have one private
+    # workforce per Amazon Web Services Region.
     #
     # @option params [String] :sort_by
     #   Sort workforces using the workforce name or creation date.
@@ -14753,8 +14813,8 @@ module Aws::SageMaker
 
     # Adds a resouce policy to control access to a model group. For
     # information about resoure policies, see [Identity-based policies and
-    # resource-based policies][1] in the *AWS Identity and Access Management
-    # User Guide.*.
+    # resource-based policies][1] in the *Amazon Web Services Identity and
+    # Access Management User Guide.*.
     #
     #
     #
@@ -15477,6 +15537,8 @@ module Aws::SageMaker
     #   resp.results[0].model_package.inference_specification.containers[0].image_digest #=> String
     #   resp.results[0].model_package.inference_specification.containers[0].model_data_url #=> String
     #   resp.results[0].model_package.inference_specification.containers[0].product_id #=> String
+    #   resp.results[0].model_package.inference_specification.containers[0].environment #=> Hash
+    #   resp.results[0].model_package.inference_specification.containers[0].environment["EnvironmentKey"] #=> String
     #   resp.results[0].model_package.inference_specification.supported_transform_instance_types #=> Array
     #   resp.results[0].model_package.inference_specification.supported_transform_instance_types[0] #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge"
     #   resp.results[0].model_package.inference_specification.supported_realtime_inference_instance_types #=> Array
@@ -16021,6 +16083,20 @@ module Aws::SageMaker
 
     # Stops a pipeline execution.
     #
+    # A pipeline execution won't stop while a callback step is running.
+    # When you call `StopPipelineExecution` on a pipeline execution with a
+    # running callback step, SageMaker Pipelines sends an additional Amazon
+    # SQS message to the specified SQS queue. The body of the SQS message
+    # contains a "Status" field which is set to "Stopping".
+    #
+    # You should add logic to your Amazon SQS message consumer to take any
+    # needed action (for example, resource cleanup) upon receipt of the
+    # message followed by a call to `SendPipelineExecutionStepSuccess` or
+    # `SendPipelineExecutionStepFailure`.
+    #
+    # Only when SageMaker Pipelines receives one of these calls will it stop
+    # the pipeline execution.
+    #
     # @option params [required, String] :pipeline_execution_arn
     #   The Amazon Resource Name (ARN) of the pipeline execution.
     #
@@ -16274,10 +16350,10 @@ module Aws::SageMaker
     #
     # @option params [Types::GitConfigForUpdate] :git_config
     #   The configuration of the git repository, including the URL and the
-    #   Amazon Resource Name (ARN) of the AWS Secrets Manager secret that
-    #   contains the credentials used to access the repository. The secret
-    #   must have a staging label of `AWSCURRENT` and must be in the following
-    #   format:
+    #   Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+    #   secret that contains the credentials used to access the repository.
+    #   The secret must have a staging label of `AWSCURRENT` and must be in
+    #   the following format:
     #
     #   `\{"username": UserName, "password": Password\}`
     #
@@ -16364,9 +16440,9 @@ module Aws::SageMaker
     #   Output configuration for storing sample data collected by the fleet.
     #
     # @option params [Boolean] :enable_iot_role_alias
-    #   Whether to create an AWS IoT Role Alias during device fleet creation.
-    #   The name of the role alias generated will match this pattern:
-    #   "SageMakerEdge-\\\{DeviceFleetName\\}".
+    #   Whether to create an Amazon Web Services IoT Role Alias during device
+    #   fleet creation. The name of the role alias generated will match this
+    #   pattern: "SageMakerEdge-\\\{DeviceFleetName\\}".
     #
     #   For example, if your device fleet is called "demo-fleet", the name
     #   of the role alias will be "SageMakerEdge-demo-fleet".
@@ -16769,7 +16845,7 @@ module Aws::SageMaker
     #
     # @option params [required, String] :monitoring_schedule_name
     #   The name of the monitoring schedule. The name must be unique within an
-    #   AWS Region within an AWS account.
+    #   Amazon Web Services Region within an Amazon Web Services account.
     #
     # @option params [required, Types::MonitoringScheduleConfig] :monitoring_schedule_config
     #   The configuration object that specifies the monitoring schedule and
@@ -16928,10 +17004,11 @@ module Aws::SageMaker
     #   The Git repository to associate with the notebook instance as its
     #   default code repository. This can be either the name of a Git
     #   repository stored as a resource in your account, or the URL of a Git
-    #   repository in [AWS CodeCommit][1] or in any other Git repository. When
-    #   you open a notebook instance, it opens in the directory that contains
-    #   this repository. For more information, see [Associating Git
-    #   Repositories with Amazon SageMaker Notebook Instances][2].
+    #   repository in [Amazon Web Services CodeCommit][1] or in any other Git
+    #   repository. When you open a notebook instance, it opens in the
+    #   directory that contains this repository. For more information, see
+    #   [Associating Git Repositories with Amazon SageMaker Notebook
+    #   Instances][2].
     #
     #
     #
@@ -16942,10 +17019,11 @@ module Aws::SageMaker
     #   An array of up to three Git repositories to associate with the
     #   notebook instance. These can be either the names of Git repositories
     #   stored as resources in your account, or the URL of Git repositories in
-    #   [AWS CodeCommit][1] or in any other Git repository. These repositories
-    #   are cloned at the same level as the default repository of your
-    #   notebook instance. For more information, see [Associating Git
-    #   Repositories with Amazon SageMaker Notebook Instances][2].
+    #   [Amazon Web Services CodeCommit][1] or in any other Git repository.
+    #   These repositories are cloned at the same level as the default
+    #   repository of your notebook instance. For more information, see
+    #   [Associating Git Repositories with Amazon SageMaker Notebook
+    #   Instances][2].
     #
     #
     #
@@ -17606,7 +17684,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
