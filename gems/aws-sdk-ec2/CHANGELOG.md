@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.247.0 (2021-07-02)
+------------------
+
+* Feature - This release removes network-insights-boundary
+
 1.246.0 (2021-07-01)
 ------------------
 

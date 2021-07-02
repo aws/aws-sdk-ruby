@@ -1105,8 +1105,8 @@ module Aws::ElasticLoadBalancingV2
     #   \[HTTP1 or HTTP2 protocol version\] The ping path. The default is /.
     #
     #   \[GRPC protocol version\] The path of a custom health check method
-    #   with the format /package.service/method. The default is
-    #   /AWS.ALB/healthcheck.
+    #   with the format /package.service/method. The default is /Amazon Web
+    #   Services.ALB/healthcheck.
     #   @return [String]
     #
     # @!attribute [rw] health_check_interval_seconds
@@ -2104,7 +2104,7 @@ module Aws::ElasticLoadBalancingV2
     class InvalidTargetException < Aws::EmptyStructure; end
 
     # Information about an Elastic Load Balancing resource limit for your
-    # AWS account.
+    # Amazon Web Services account.
     #
     # @!attribute [rw] name
     #   The name of the limit. The possible values are:
@@ -2395,8 +2395,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * `waf.fail_open.enabled` - Indicates whether to allow a WAF-enabled
     #     load balancer to route requests to targets if it is unable to
-    #     forward the request to AWS WAF. The value is `true` or `false`.
-    #     The default is `false`.
+    #     forward the request to Amazon Web Services WAF. The value is
+    #     `true` or `false`. The default is `false`.
     #
     #   The following attribute is supported by Network Load Balancers and
     #   Gateway Load Balancers:
@@ -2896,10 +2896,13 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] health_check_protocol
     #   The protocol the load balancer uses when performing health checks on
-    #   targets. The TCP protocol is supported for health checks only if the
-    #   protocol of the target group is TCP, TLS, UDP, or TCP\_UDP. The
-    #   GENEVE, TLS, UDP, and TCP\_UDP protocols are not supported for
-    #   health checks.
+    #   targets. For Application Load Balancers, the default is HTTP. For
+    #   Network Load Balancers and Gateway Load Balancers, the default is
+    #   TCP. The TCP protocol is not supported for health checks if the
+    #   protocol of the target group is HTTP or HTTPS. It is supported for
+    #   health checks only if the protocol of the target group is TCP, TLS,
+    #   UDP, or TCP\_UDP. The GENEVE, TLS, UDP, and TCP\_UDP protocols are
+    #   not supported for health checks.
     #
     #   With Network Load Balancers, you can't modify this setting.
     #   @return [String]
@@ -2916,8 +2919,8 @@ module Aws::ElasticLoadBalancingV2
     #   \[HTTP1 or HTTP2 protocol version\] The ping path. The default is /.
     #
     #   \[GRPC protocol version\] The path of a custom health check method
-    #   with the format /package.service/method. The default is
-    #   /AWS.ALB/healthcheck.
+    #   with the format /package.service/method. The default is /Amazon Web
+    #   Services.ALB/healthcheck.
     #   @return [String]
     #
     # @!attribute [rw] health_check_enabled
@@ -4080,8 +4083,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * `stickiness.app_cookie.cookie_name` - Indicates the name of the
     #     application-based cookie. Names that start with the following
-    #     names are not allowed: `AWSALB`, `AWSALBAPP`, and `AWSALBTG`.
-    #     They're reserved for use by the load balancer.
+    #     prefixes are not allowed: `AWSALB`, `AWSALBAPP`, and `AWSALBTG`;
+    #     they're reserved for use by the load balancer.
     #
     #   * `stickiness.app_cookie.duration_seconds` - The time period, in
     #     seconds, during which requests from a client should be routed to
@@ -4338,8 +4341,8 @@ module Aws::ElasticLoadBalancingV2
     #
     class TooManyListenersException < Aws::EmptyStructure; end
 
-    # You've reached the limit on the number of load balancers for your AWS
-    # account.
+    # You've reached the limit on the number of load balancers for your
+    # Amazon Web Services account.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyLoadBalancersException AWS API Documentation
     #
@@ -4364,8 +4367,8 @@ module Aws::ElasticLoadBalancingV2
     #
     class TooManyTagsException < Aws::EmptyStructure; end
 
-    # You've reached the limit on the number of target groups for your AWS
-    # account.
+    # You've reached the limit on the number of target groups for your
+    # Amazon Web Services account.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyTargetGroupsException AWS API Documentation
     #

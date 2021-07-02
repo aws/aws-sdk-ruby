@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2021-07-02)
+------------------
+
+* Feature - Documentation updates for elasticloadbalancingv2
+
 1.61.0 (2021-03-10)
 ------------------
 
