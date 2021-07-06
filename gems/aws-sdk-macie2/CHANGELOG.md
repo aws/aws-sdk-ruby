@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2021-07-06)
+------------------
+
+* Feature - Sensitive data findings in Amazon Macie now include enhanced location data for JSON and JSON Lines files
+
 1.29.0 (2021-06-08)
 ------------------
 

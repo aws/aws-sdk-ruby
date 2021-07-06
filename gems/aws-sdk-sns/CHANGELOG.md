@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2021-07-06)
+------------------
+
+* Feature - Documentation updates for Amazon SNS.
+
 1.41.0 (2021-06-01)
 ------------------
 

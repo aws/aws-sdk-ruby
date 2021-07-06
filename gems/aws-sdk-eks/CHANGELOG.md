@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2021-07-06)
+------------------
+
+* Feature - Adding new error code UnsupportedAddonModification for Addons in EKS
+
 1.55.0 (2021-06-07)
 ------------------
 

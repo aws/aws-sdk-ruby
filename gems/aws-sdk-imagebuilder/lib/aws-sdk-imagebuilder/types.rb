@@ -10,23 +10,65 @@
 module Aws::Imagebuilder
   module Types
 
-    # Details of an EC2 AMI.
+    # In addition to your infrastruction configuration, these settings
+    # provide an extra layer of control over your build instances. For
+    # instances where Image Builder installs the SSM agent, you can choose
+    # whether to keep it for the AMI that you create. You can also specify
+    # commands to run on launch for all of your build instances.
+    #
+    # @note When making an API call, you may pass AdditionalInstanceConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         systems_manager_agent: {
+    #           uninstall_after_build: false,
+    #         },
+    #         user_data_override: "UserDataOverride",
+    #       }
+    #
+    # @!attribute [rw] systems_manager_agent
+    #   Contains settings for the SSM agent on your build instance.
+    #   @return [Types::SystemsManagerAgent]
+    #
+    # @!attribute [rw] user_data_override
+    #   Use this property to provide commands or a command script to run
+    #   when you launch your build instance.
+    #
+    #   <note markdown="1"> The userDataOverride property replaces any commands that Image
+    #   Builder might have added to ensure that SSM is installed on your
+    #   Linux build instance. If you override the user data, make sure that
+    #   you add commands to install SSM, if it is not pre-installed on your
+    #   source image.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/AdditionalInstanceConfiguration AWS API Documentation
+    #
+    class AdditionalInstanceConfiguration < Struct.new(
+      :systems_manager_agent,
+      :user_data_override)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of an Amazon EC2 AMI.
     #
     # @!attribute [rw] region
-    #   The AWS Region of the EC2 AMI.
+    #   The Region of the Amazon EC2 AMI.
     #   @return [String]
     #
     # @!attribute [rw] image
-    #   The AMI ID of the EC2 AMI.
+    #   The AMI ID of the Amazon EC2 AMI.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the EC2 AMI.
+    #   The name of the Amazon EC2 AMI.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the EC2 AMI. Minimum and maximum length are in
-    #   characters.
+    #   The description of the Amazon EC2 AMI. Minimum and maximum length
+    #   are in characters.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -91,8 +133,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] launch_permission
-    #   Launch permissions can be used to configure which AWS accounts can
-    #   use the AMI to launch instances.
+    #   Launch permissions can be used to configure which accounts can use
+    #   the AMI to launch instances.
     #   @return [Types::LaunchPermissionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/AmiDistributionConfiguration AWS API Documentation
@@ -227,6 +269,11 @@ module Aws::Imagebuilder
     #   parent image OS version during image recipe creation.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] parameters
+    #   Contains parameter details for each of the parameters that are
+    #   defined for the component.
+    #   @return [Array<Types::ComponentParameterDetail>]
+    #
     # @!attribute [rw] owner
     #   The owner of the component.
     #   @return [String]
@@ -262,6 +309,7 @@ module Aws::Imagebuilder
       :type,
       :platform,
       :supported_os_versions,
+      :parameters,
       :owner,
       :data,
       :kms_key_id,
@@ -279,16 +327,86 @@ module Aws::Imagebuilder
     #
     #       {
     #         component_arn: "ComponentVersionArnOrBuildVersionArn", # required
+    #         parameters: [
+    #           {
+    #             name: "ComponentParameterName", # required
+    #             value: ["ComponentParameterValue"], # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] component_arn
     #   The Amazon Resource Name (ARN) of the component.
     #   @return [String]
     #
+    # @!attribute [rw] parameters
+    #   A group of parameter settings that are used to configure the
+    #   component for a specific recipe.
+    #   @return [Array<Types::ComponentParameter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ComponentConfiguration AWS API Documentation
     #
     class ComponentConfiguration < Struct.new(
-      :component_arn)
+      :component_arn,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a key/value pair that sets the named component parameter.
+    #
+    # @note When making an API call, you may pass ComponentParameter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ComponentParameterName", # required
+    #         value: ["ComponentParameterValue"], # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the component parameter to set.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Sets the value for the named component parameter.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ComponentParameter AWS API Documentation
+    #
+    class ComponentParameter < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a parameter that is used to provide configuration details for
+    # the component.
+    #
+    # @!attribute [rw] name
+    #   The name of this input parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of input this parameter provides. The currently supported
+    #   value is "string".
+    #   @return [String]
+    #
+    # @!attribute [rw] default_value
+    #   The default value of this parameter if no input is provided.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] description
+    #   Describes this parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ComponentParameterDetail AWS API Documentation
+    #
+    class ComponentParameterDetail < Struct.new(
+      :name,
+      :type,
+      :default_value,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -683,10 +801,11 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] uri
-    #   The uri of the component. Must be an S3 URL and the requester must
-    #   have permission to access the S3 bucket. If you use S3, you can
-    #   specify component content up to your service quota. Either `data` or
-    #   `uri` can be used to specify the data within the component.
+    #   The uri of the component. Must be an Amazon S3 URL and the requester
+    #   must have permission to access the Amazon S3 bucket. If you use
+    #   Amazon S3, you can specify component content up to your service
+    #   quota. Either `data` or `uri` can be used to specify the data within
+    #   the component.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -756,6 +875,12 @@ module Aws::Imagebuilder
     #         components: [ # required
     #           {
     #             component_arn: "ComponentVersionArnOrBuildVersionArn", # required
+    #             parameters: [
+    #               {
+    #                 name: "ComponentParameterName", # required
+    #                 value: ["ComponentParameterValue"], # required
+    #               },
+    #             ],
     #           },
     #         ],
     #         instance_configuration: {
@@ -827,7 +952,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] dockerfile_template_uri
-    #   The S3 URI for the Dockerfile that will be used to build your
+    #   The Amazon S3 URI for the Dockerfile that will be used to build your
     #   container image.
     #   @return [String]
     #
@@ -1155,6 +1280,12 @@ module Aws::Imagebuilder
     #         components: [ # required
     #           {
     #             component_arn: "ComponentVersionArnOrBuildVersionArn", # required
+    #             parameters: [
+    #               {
+    #                 name: "ComponentParameterName", # required
+    #                 value: ["ComponentParameterValue"], # required
+    #               },
+    #             ],
     #           },
     #         ],
     #         parent_image: "NonEmptyString", # required
@@ -1178,6 +1309,12 @@ module Aws::Imagebuilder
     #           "TagKey" => "TagValue",
     #         },
     #         working_directory: "NonEmptyString",
+    #         additional_instance_configuration: {
+    #           systems_manager_agent: {
+    #             uninstall_after_build: false,
+    #           },
+    #           user_data_override: "UserDataOverride",
+    #         },
     #         client_token: "ClientToken", # required
     #       }
     #
@@ -1217,8 +1354,13 @@ module Aws::Imagebuilder
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] working_directory
-    #   The working directory to be used during build and test workflows.
+    #   The working directory used during build and test workflows.
     #   @return [String]
+    #
+    # @!attribute [rw] additional_instance_configuration
+    #   Specify additional settings and launch scripts for your build
+    #   instances.
+    #   @return [Types::AdditionalInstanceConfiguration]
     #
     # @!attribute [rw] client_token
     #   The idempotency token used to make this request idempotent.
@@ -1238,6 +1380,7 @@ module Aws::Imagebuilder
       :block_device_mappings,
       :tags,
       :working_directory,
+      :additional_instance_configuration,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1410,17 +1553,17 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] instance_profile_name
     #   The instance profile to associate with the instance used to
-    #   customize your EC2 AMI.
+    #   customize your Amazon EC2 AMI.
     #   @return [String]
     #
     # @!attribute [rw] security_group_ids
     #   The security group IDs to associate with the instance used to
-    #   customize your EC2 AMI.
+    #   customize your Amazon EC2 AMI.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_id
     #   The subnet ID in which to place the instance used to customize your
-    #   EC2 AMI.
+    #   Amazon EC2 AMI.
     #   @return [String]
     #
     # @!attribute [rw] logging
@@ -2736,6 +2879,14 @@ module Aws::Imagebuilder
     #   The working directory to be used during build and test workflows.
     #   @return [String]
     #
+    # @!attribute [rw] additional_instance_configuration
+    #   Before you create a new AMI, Image Builder launches temporary Amazon
+    #   EC2 instances to build and test your image configuration. Instance
+    #   configuration adds a layer of control over those instances. You can
+    #   define settings and add scripts to run when an instance is launched
+    #   from your AMI.
+    #   @return [Types::AdditionalInstanceConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImageRecipe AWS API Documentation
     #
     class ImageRecipe < Struct.new(
@@ -2751,7 +2902,8 @@ module Aws::Imagebuilder
       :block_device_mappings,
       :date_created,
       :tags,
-      :working_directory)
+      :working_directory,
+      :additional_instance_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3022,10 +3174,11 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] uri
-    #   The uri of the component. Must be an S3 URL and the requester must
-    #   have permission to access the S3 bucket. If you use S3, you can
-    #   specify component content up to your service quota. Either `data` or
-    #   `uri` can be used to specify the data within the component.
+    #   The uri of the component. Must be an Amazon S3 URL and the requester
+    #   must have permission to access the Amazon S3 bucket. If you use
+    #   Amazon S3, you can specify component content up to your service
+    #   quota. Either `data` or `uri` can be used to specify the data within
+    #   the component.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -3119,7 +3272,7 @@ module Aws::Imagebuilder
     #   @return [Types::Logging]
     #
     # @!attribute [rw] key_pair
-    #   The EC2 key pair of the infrastructure configuration.
+    #   The Amazon EC2 key pair of the infrastructure configuration.
     #   @return [String]
     #
     # @!attribute [rw] terminate_instance_on_failure
@@ -3170,7 +3323,7 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # The infrastructure used when building EC2 AMIs.
+    # The infrastructure used when building Amazon EC2 AMIs.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration.
@@ -3401,11 +3554,11 @@ module Aws::Imagebuilder
     end
 
     # Describes the configuration for a launch permission. The launch
-    # permission modification request is sent to the [EC2
+    # permission modification request is sent to the [Amazon EC2
     # ModifyImageAttribute][1] API on behalf of the user for each Region
     # they have selected to distribute the AMI. To make an AMI public, set
     # the launch permission authorized accounts to `all`. See the examples
-    # for making an AMI public at [EC2 ModifyImageAttribute][1].
+    # for making an AMI public at [Amazon EC2 ModifyImageAttribute][1].
     #
     #
     #
@@ -3420,7 +3573,7 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] user_ids
-    #   The AWS account ID.
+    #   The account ID.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_groups
@@ -3436,7 +3589,8 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # Identifies an EC2 launch template to use for a specific account.
+    # Identifies an Amazon EC2 launch template to use for a specific
+    # account.
     #
     # @note When making an API call, you may pass LaunchTemplateConfiguration
     #   data as a hash:
@@ -3448,7 +3602,7 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] launch_template_id
-    #   Identifies the EC2 launch template to use.
+    #   Identifies the Amazon EC2 launch template to use.
     #   @return [String]
     #
     # @!attribute [rw] account_id
@@ -3456,8 +3610,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] set_default_version
-    #   Set the specified EC2 launch template as the default launch template
-    #   for the specified account.
+    #   Set the specified Amazon EC2 launch template as the default launch
+    #   template for the specified account.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/LaunchTemplateConfiguration AWS API Documentation
@@ -4279,7 +4433,7 @@ module Aws::Imagebuilder
     # The resources produced by this image.
     #
     # @!attribute [rw] amis
-    #   The EC2 AMIs created by this image.
+    #   The Amazon EC2 AMIs created by this image.
     #   @return [Array<Types::Ami>]
     #
     # @!attribute [rw] containers
@@ -4714,6 +4868,30 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # Contains settings for the SSM agent on your build instance.
+    #
+    # @note When making an API call, you may pass SystemsManagerAgent
+    #   data as a hash:
+    #
+    #       {
+    #         uninstall_after_build: false,
+    #       }
+    #
+    # @!attribute [rw] uninstall_after_build
+    #   This property defaults to true. If Image Builder installs the SSM
+    #   agent on a build instance, it removes the agent before creating a
+    #   snapshot for the AMI. To ensure that the AMI you create includes the
+    #   SSM agent, set this property to false.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/SystemsManagerAgent AWS API Documentation
+    #
+    class SystemsManagerAgent < Struct.new(
+      :uninstall_after_build)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass TagResourceRequest
     #   data as a hash:
     #
@@ -5062,17 +5240,17 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] instance_profile_name
     #   The instance profile to associate with the instance used to
-    #   customize your EC2 AMI.
+    #   customize your Amazon EC2 AMI.
     #   @return [String]
     #
     # @!attribute [rw] security_group_ids
     #   The security group IDs to associate with the instance used to
-    #   customize your EC2 AMI.
+    #   customize your Amazon EC2 AMI.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_id
-    #   The subnet ID to place the instance used to customize your EC2 AMI
-    #   in.
+    #   The subnet ID to place the instance used to customize your Amazon
+    #   EC2 AMI in.
     #   @return [String]
     #
     # @!attribute [rw] logging

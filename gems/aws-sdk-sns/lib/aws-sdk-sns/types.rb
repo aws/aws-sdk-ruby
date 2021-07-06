@@ -29,9 +29,9 @@ module Aws::SNS
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS account IDs of the users (principals) who will be given
-    #   access to the specified actions. The users must have AWS accounts,
-    #   but do not need to be signed up for this service.
+    #   The account IDs of the users (principals) who will be given access
+    #   to the specified actions. The users must have account, but do not
+    #   need to be signed up for this service.
     #   @return [Array<String>]
     #
     # @!attribute [rw] action_name
@@ -141,10 +141,10 @@ module Aws::SNS
     #
     # @!attribute [rw] authenticate_on_unsubscribe
     #   Disallows unauthenticated unsubscribes of the subscription. If the
-    #   value of this parameter is `true` and the request has an AWS
-    #   signature, then only the topic owner and the subscription owner can
-    #   unsubscribe the endpoint. The unsubscribe action requires AWS
-    #   authentication.
+    #   value of this parameter is `true` and the request has an Amazon Web
+    #   Services signature, then only the topic owner and the subscription
+    #   owner can unsubscribe the endpoint. The unsubscribe action requires
+    #   Amazon Web Services authentication.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ConfirmSubscriptionInput AWS API Documentation
@@ -377,10 +377,10 @@ module Aws::SNS
     #   The following attribute applies only to [server-side
     #   encryption][1]\:
     #
-    #   * `KmsMasterKeyId` – The ID of an AWS managed customer master key
-    #     (CMK) for Amazon SNS or a custom CMK. For more information, see
-    #     [Key Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
-    #     Management Service API Reference*.
+    #   * `KmsMasterKeyId` – The ID of an Amazon Web Services managed
+    #     customer master key (CMK) for Amazon SNS or a custom CMK. For more
+    #     information, see [Key Terms][2]. For more examples, see [KeyId][3]
+    #     in the *Key Management Service API Reference*.
     #
     #   ^
     #
@@ -564,9 +564,9 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Indicates that the number of filter polices in your AWS account
-    # exceeds the limit. To add more filter polices, submit an SNS Limit
-    # Increase case in the AWS Support Center.
+    # Indicates that the number of filter polices in your account exceeds
+    # the limit. To add more filter polices, submit an SNS Limit Increase
+    # case in the Amazon Web Services Support Center.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -784,7 +784,7 @@ module Aws::SNS
     #     subscription. For more information, see [Amazon SNS Message
     #     Filtering][1] in the *Amazon SNS Developer Guide*.
     #
-    #   * `Owner` – The AWS account ID of the subscription's owner.
+    #   * `Owner` – The account ID of the subscription's owner.
     #
     #   * `PendingConfirmation` – `true` if the subscription hasn't been
     #     confirmed. To confirm a pending subscription, call the
@@ -869,7 +869,7 @@ module Aws::SNS
     #   * `DisplayName` – The human-readable name used in the `From` field
     #     for notifications to `email` and `email-json` endpoints.
     #
-    #   * `Owner` – The AWS account ID of the topic's owner.
+    #   * `Owner` – The account ID of the topic's owner.
     #
     #   * `Policy` – The JSON serialization of the topic's access control
     #     policy.
@@ -891,10 +891,10 @@ module Aws::SNS
     #   The following attribute applies only to
     #   [server-side-encryption][1]\:
     #
-    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
-    #     (CMK) for Amazon SNS or a custom CMK. For more information, see
-    #     [Key Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
-    #     Management Service API Reference*.
+    #   * `KmsMasterKeyId` - The ID of an Amazon Web Services managed
+    #     customer master key (CMK) for Amazon SNS or a custom CMK. For more
+    #     information, see [Key Terms][2]. For more examples, see [KeyId][3]
+    #     in the *Key Management Service API Reference*.
     #
     #   ^
     #
@@ -1022,8 +1022,8 @@ module Aws::SNS
 
     # The request was rejected because the state of the specified resource
     # isn't valid for this request. For more information, see [How Key
-    # State Affects Use of a Customer Master Key][1] in the *AWS Key
-    # Management Service Developer Guide*.
+    # State Affects Use of a Customer Master Key][1] in the *Key Management
+    # Service Developer Guide*.
     #
     #
     #
@@ -1054,7 +1054,8 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # The AWS access key ID needs a subscription for the service.
+    # The Amazon Web Services access key ID needs a subscription for the
+    # service.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1068,7 +1069,7 @@ module Aws::SNS
     end
 
     # The request was denied due to request throttling. For more information
-    # about throttling, see [Limits][1] in the *AWS Key Management Service
+    # about throttling, see [Limits][1] in the *Key Management Service
     # Developer Guide.*
     #
     #
@@ -1578,7 +1579,7 @@ module Aws::SNS
     class OptInPhoneNumberResponse < Aws::EmptyStructure; end
 
     # Indicates that the specified phone number opted out of receiving SMS
-    # messages from your AWS account. You can't send SMS messages to phone
+    # messages from your account. You can't send SMS messages to phone
     # numbers that opt out.
     #
     # @!attribute [rw] message
@@ -1916,15 +1917,14 @@ module Aws::SNS
 
     # A verified or pending destination phone number in the SMS sandbox.
     #
-    # When you start using Amazon SNS to send SMS messages, your AWS account
-    # is in the *SMS sandbox*. The SMS sandbox provides a safe environment
-    # for you to try Amazon SNS features without risking your reputation as
-    # an SMS sender. While your account is in the SMS sandbox, you can use
-    # all of the features of Amazon SNS. However, you can send SMS messages
-    # only to verified destination phone numbers. For more information,
-    # including how to move out of the sandbox to send messages without
-    # restrictions, see [SMS sandbox][1] in the *Amazon SNS Developer
-    # Guide*.
+    # When you start using Amazon SNS to send SMS messages, your account is
+    # in the *SMS sandbox*. The SMS sandbox provides a safe environment for
+    # you to try Amazon SNS features without risking your reputation as an
+    # SMS sender. While your account is in the SMS sandbox, you can use all
+    # of the features of Amazon SNS. However, you can send SMS messages only
+    # to verified destination phone numbers. For more information, including
+    # how to move out of the sandbox to send messages without restrictions,
+    # see [SMS sandbox][1] in the *Amazon SNS Developer Guide*.
     #
     #
     #
@@ -2139,7 +2139,7 @@ module Aws::SNS
     #   * Total number of parts
     #
     #   To receive the report, the bucket must have a policy that allows the
-    #   Amazon SNS service principle to perform the `s3:PutObject` and
+    #   Amazon SNS service principal to perform the `s3:PutObject` and
     #   `s3:GetBucketLocation` actions.
     #
     #   For an example bucket policy and usage report, see [Monitoring SMS
@@ -2275,10 +2275,10 @@ module Aws::SNS
     #   The following attribute applies only to
     #   [server-side-encryption][1]\:
     #
-    #   * `KmsMasterKeyId` – The ID of an AWS-managed customer master key
-    #     (CMK) for Amazon SNS or a custom CMK. For more information, see
-    #     [Key Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
-    #     Management Service API Reference*.
+    #   * `KmsMasterKeyId` – The ID of an Amazon Web Services managed
+    #     customer master key (CMK) for Amazon SNS or a custom CMK. For more
+    #     information, see [Key Terms][2]. For more examples, see [KeyId][3]
+    #     in the *Key Management Service API Reference*.
     #
     #   ^
     #
@@ -2375,8 +2375,7 @@ module Aws::SNS
     #   * `application` – delivery of JSON-encoded message to an EndpointArn
     #     for a mobile app and device
     #
-    #   * `lambda` – delivery of JSON-encoded message to an AWS Lambda
-    #     function
+    #   * `lambda` – delivery of JSON-encoded message to an Lambda function
     #
     #   * `firehose` – delivery of JSON-encoded message to an Amazon Kinesis
     #     Data Firehose delivery stream.
@@ -2405,8 +2404,8 @@ module Aws::SNS
     #   * For the `application` protocol, the endpoint is the EndpointArn of
     #     a mobile app and device.
     #
-    #   * For the `lambda` protocol, the endpoint is the ARN of an AWS
-    #     Lambda function.
+    #   * For the `lambda` protocol, the endpoint is the ARN of an Lambda
+    #     function.
     #
     #   * For the `firehose` protocol, the endpoint is the ARN of an Amazon
     #     Kinesis Data Firehose delivery stream.
@@ -2416,8 +2415,7 @@ module Aws::SNS
     #   A map of attributes with their corresponding values.
     #
     #   The following lists the names, descriptions, and values of the
-    #   special request parameters that the `SetTopicAttributes` action
-    #   uses:
+    #   special request parameters that the `Subscribe` action uses:
     #
     #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
     #     failed deliveries to HTTP/S endpoints.

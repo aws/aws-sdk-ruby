@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2021-07-06)
+------------------
+
+* Feature - Added support for AmazonMQRabbitMQ as an event source. Added support for VIRTUAL_HOST as SourceAccessType for streams event source mappings.
+
 1.62.0 (2021-03-16)
 ------------------
 

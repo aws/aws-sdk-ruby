@@ -401,10 +401,10 @@ module Aws::Imagebuilder
     #   `data` or `uri` can be used to specify the data within the component.
     #
     # @option params [String] :uri
-    #   The uri of the component. Must be an S3 URL and the requester must
-    #   have permission to access the S3 bucket. If you use S3, you can
-    #   specify component content up to your service quota. Either `data` or
-    #   `uri` can be used to specify the data within the component.
+    #   The uri of the component. Must be an Amazon S3 URL and the requester
+    #   must have permission to access the Amazon S3 bucket. If you use Amazon
+    #   S3, you can specify component content up to your service quota. Either
+    #   `data` or `uri` can be used to specify the data within the component.
     #
     # @option params [String] :kms_key_id
     #   The ID of the KMS key that should be used to encrypt this component.
@@ -486,7 +486,7 @@ module Aws::Imagebuilder
     #   blob.
     #
     # @option params [String] :dockerfile_template_uri
-    #   The S3 URI for the Dockerfile that will be used to build your
+    #   The Amazon S3 URI for the Dockerfile that will be used to build your
     #   container image.
     #
     # @option params [String] :platform_override
@@ -533,6 +533,12 @@ module Aws::Imagebuilder
     #     components: [ # required
     #       {
     #         component_arn: "ComponentVersionArnOrBuildVersionArn", # required
+    #         parameters: [
+    #           {
+    #             name: "ComponentParameterName", # required
+    #             value: ["ComponentParameterValue"], # required
+    #           },
+    #         ],
     #       },
     #     ],
     #     instance_configuration: {
@@ -881,7 +887,11 @@ module Aws::Imagebuilder
     #   The tags of the image recipe.
     #
     # @option params [String] :working_directory
-    #   The working directory to be used during build and test workflows.
+    #   The working directory used during build and test workflows.
+    #
+    # @option params [Types::AdditionalInstanceConfiguration] :additional_instance_configuration
+    #   Specify additional settings and launch scripts for your build
+    #   instances.
     #
     # @option params [required, String] :client_token
     #   The idempotency token used to make this request idempotent.
@@ -904,6 +914,12 @@ module Aws::Imagebuilder
     #     components: [ # required
     #       {
     #         component_arn: "ComponentVersionArnOrBuildVersionArn", # required
+    #         parameters: [
+    #           {
+    #             name: "ComponentParameterName", # required
+    #             value: ["ComponentParameterValue"], # required
+    #           },
+    #         ],
     #       },
     #     ],
     #     parent_image: "NonEmptyString", # required
@@ -927,6 +943,12 @@ module Aws::Imagebuilder
     #       "TagKey" => "TagValue",
     #     },
     #     working_directory: "NonEmptyString",
+    #     additional_instance_configuration: {
+    #       systems_manager_agent: {
+    #         uninstall_after_build: false,
+    #       },
+    #       user_data_override: "UserDataOverride",
+    #     },
     #     client_token: "ClientToken", # required
     #   })
     #
@@ -962,15 +984,15 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :instance_profile_name
     #   The instance profile to associate with the instance used to customize
-    #   your EC2 AMI.
+    #   your Amazon EC2 AMI.
     #
     # @option params [Array<String>] :security_group_ids
     #   The security group IDs to associate with the instance used to
-    #   customize your EC2 AMI.
+    #   customize your Amazon EC2 AMI.
     #
     # @option params [String] :subnet_id
     #   The subnet ID in which to place the instance used to customize your
-    #   EC2 AMI.
+    #   Amazon EC2 AMI.
     #
     # @option params [Types::Logging] :logging
     #   The logging configuration of the infrastructure configuration.
@@ -1290,6 +1312,12 @@ module Aws::Imagebuilder
     #   resp.component.platform #=> String, one of "Windows", "Linux"
     #   resp.component.supported_os_versions #=> Array
     #   resp.component.supported_os_versions[0] #=> String
+    #   resp.component.parameters #=> Array
+    #   resp.component.parameters[0].name #=> String
+    #   resp.component.parameters[0].type #=> String
+    #   resp.component.parameters[0].default_value #=> Array
+    #   resp.component.parameters[0].default_value[0] #=> String
+    #   resp.component.parameters[0].description #=> String
     #   resp.component.owner #=> String
     #   resp.component.data #=> String
     #   resp.component.kms_key_id #=> String
@@ -1366,6 +1394,10 @@ module Aws::Imagebuilder
     #   resp.container_recipe.version #=> String
     #   resp.container_recipe.components #=> Array
     #   resp.container_recipe.components[0].component_arn #=> String
+    #   resp.container_recipe.components[0].parameters #=> Array
+    #   resp.container_recipe.components[0].parameters[0].name #=> String
+    #   resp.container_recipe.components[0].parameters[0].value #=> Array
+    #   resp.container_recipe.components[0].parameters[0].value[0] #=> String
     #   resp.container_recipe.instance_configuration.image #=> String
     #   resp.container_recipe.instance_configuration.block_device_mappings #=> Array
     #   resp.container_recipe.instance_configuration.block_device_mappings[0].device_name #=> String
@@ -1528,6 +1560,10 @@ module Aws::Imagebuilder
     #   resp.image.image_recipe.version #=> String
     #   resp.image.image_recipe.components #=> Array
     #   resp.image.image_recipe.components[0].component_arn #=> String
+    #   resp.image.image_recipe.components[0].parameters #=> Array
+    #   resp.image.image_recipe.components[0].parameters[0].name #=> String
+    #   resp.image.image_recipe.components[0].parameters[0].value #=> Array
+    #   resp.image.image_recipe.components[0].parameters[0].value[0] #=> String
     #   resp.image.image_recipe.parent_image #=> String
     #   resp.image.image_recipe.block_device_mappings #=> Array
     #   resp.image.image_recipe.block_device_mappings[0].device_name #=> String
@@ -1544,6 +1580,8 @@ module Aws::Imagebuilder
     #   resp.image.image_recipe.tags #=> Hash
     #   resp.image.image_recipe.tags["TagKey"] #=> String
     #   resp.image.image_recipe.working_directory #=> String
+    #   resp.image.image_recipe.additional_instance_configuration.systems_manager_agent.uninstall_after_build #=> Boolean
+    #   resp.image.image_recipe.additional_instance_configuration.user_data_override #=> String
     #   resp.image.container_recipe.arn #=> String
     #   resp.image.container_recipe.container_type #=> String, one of "DOCKER"
     #   resp.image.container_recipe.name #=> String
@@ -1553,6 +1591,10 @@ module Aws::Imagebuilder
     #   resp.image.container_recipe.version #=> String
     #   resp.image.container_recipe.components #=> Array
     #   resp.image.container_recipe.components[0].component_arn #=> String
+    #   resp.image.container_recipe.components[0].parameters #=> Array
+    #   resp.image.container_recipe.components[0].parameters[0].name #=> String
+    #   resp.image.container_recipe.components[0].parameters[0].value #=> Array
+    #   resp.image.container_recipe.components[0].parameters[0].value[0] #=> String
     #   resp.image.container_recipe.instance_configuration.image #=> String
     #   resp.image.container_recipe.instance_configuration.block_device_mappings #=> Array
     #   resp.image.container_recipe.instance_configuration.block_device_mappings[0].device_name #=> String
@@ -1767,6 +1809,10 @@ module Aws::Imagebuilder
     #   resp.image_recipe.version #=> String
     #   resp.image_recipe.components #=> Array
     #   resp.image_recipe.components[0].component_arn #=> String
+    #   resp.image_recipe.components[0].parameters #=> Array
+    #   resp.image_recipe.components[0].parameters[0].name #=> String
+    #   resp.image_recipe.components[0].parameters[0].value #=> Array
+    #   resp.image_recipe.components[0].parameters[0].value[0] #=> String
     #   resp.image_recipe.parent_image #=> String
     #   resp.image_recipe.block_device_mappings #=> Array
     #   resp.image_recipe.block_device_mappings[0].device_name #=> String
@@ -1783,6 +1829,8 @@ module Aws::Imagebuilder
     #   resp.image_recipe.tags #=> Hash
     #   resp.image_recipe.tags["TagKey"] #=> String
     #   resp.image_recipe.working_directory #=> String
+    #   resp.image_recipe.additional_instance_configuration.systems_manager_agent.uninstall_after_build #=> Boolean
+    #   resp.image_recipe.additional_instance_configuration.user_data_override #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetImageRecipe AWS API Documentation
     #
@@ -1908,10 +1956,10 @@ module Aws::Imagebuilder
     #   `data` or `uri` can be used to specify the data within the component.
     #
     # @option params [String] :uri
-    #   The uri of the component. Must be an S3 URL and the requester must
-    #   have permission to access the S3 bucket. If you use S3, you can
-    #   specify component content up to your service quota. Either `data` or
-    #   `uri` can be used to specify the data within the component.
+    #   The uri of the component. Must be an Amazon S3 URL and the requester
+    #   must have permission to access the Amazon S3 bucket. If you use Amazon
+    #   S3, you can specify component content up to your service quota. Either
+    #   `data` or `uri` can be used to specify the data within the component.
     #
     # @option params [String] :kms_key_id
     #   The ID of the KMS key that should be used to encrypt this component.
@@ -2299,7 +2347,7 @@ module Aws::Imagebuilder
     end
 
     # List the Packages that are associated with an Image Build Version, as
-    # determined by AWS Systems Manager Inventory at build time.
+    # determined by Amazon EC2 Systems Manager Inventory at build time.
     #
     # @option params [required, String] :image_build_version_arn
     #   Filter results for the ListImagePackages request by the Image Build
@@ -3185,14 +3233,15 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :instance_profile_name
     #   The instance profile to associate with the instance used to customize
-    #   your EC2 AMI.
+    #   your Amazon EC2 AMI.
     #
     # @option params [Array<String>] :security_group_ids
     #   The security group IDs to associate with the instance used to
-    #   customize your EC2 AMI.
+    #   customize your Amazon EC2 AMI.
     #
     # @option params [String] :subnet_id
-    #   The subnet ID to place the instance used to customize your EC2 AMI in.
+    #   The subnet ID to place the instance used to customize your Amazon EC2
+    #   AMI in.
     #
     # @option params [Types::Logging] :logging
     #   The logging configuration of the infrastructure configuration.
@@ -3277,7 +3326,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -25,7 +25,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] code_size_zipped
     #   The maximum size of a deployment package when it's uploaded
-    #   directly to AWS Lambda. Use Amazon S3 for larger files.
+    #   directly to Lambda. Use Amazon S3 for larger files.
     #   @return [Integer]
     #
     # @!attribute [rw] concurrent_executions
@@ -102,7 +102,11 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] principal
-    #   An account ID, or `*` to grant permission to all AWS accounts.
+    #   An account ID, or `*` to grant layer usage permission to all
+    #   accounts in an organization, or all Amazon Web Services accounts (if
+    #   `organizationId` is not specified). For the last case, make sure
+    #   that you really do want all Amazon Web Services accounts to have
+    #   usage permission to this layer.
     #   @return [String]
     #
     # @!attribute [rw] organization_id
@@ -191,14 +195,16 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] principal
-    #   The AWS service or account that invokes the function. If you specify
-    #   a service, use `SourceArn` or `SourceAccount` to limit who can
-    #   invoke the function through that service.
+    #   The Amazon Web Services service or account that invokes the
+    #   function. If you specify a service, use `SourceArn` or
+    #   `SourceAccount` to limit who can invoke the function through that
+    #   service.
     #   @return [String]
     #
     # @!attribute [rw] source_arn
-    #   For AWS services, the ARN of the AWS resource that invokes the
-    #   function. For example, an Amazon S3 bucket or Amazon SNS topic.
+    #   For Amazon Web Services services, the ARN of the Amazon Web Services
+    #   resource that invokes the function. For example, an Amazon S3 bucket
+    #   or Amazon SNS topic.
     #   @return [String]
     #
     # @!attribute [rw] source_account
@@ -349,7 +355,11 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # Details about a Code signing configuration.
+    # Details about a [Code signing configuration][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html
     #
     # @!attribute [rw] code_signing_config_id
     #   Unique identifer for the Code signing configuration.
@@ -407,8 +417,12 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # Code signing configuration policies specifies the validation failure
-    # action for signature mismatch or expiry.
+    # Code signing configuration [policies][1] specify the validation
+    # failure action for signature mismatch or expiry.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-policies
     #
     # @note When making an API call, you may pass CodeSigningPolicies
     #   data as a hash:
@@ -633,7 +647,7 @@ module Aws::Lambda
     #         queues: ["Queue"],
     #         source_access_configurations: [
     #           {
-    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH
+    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST
     #             uri: "URI",
     #           },
     #         ],
@@ -705,7 +719,7 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
-    #   (Streams) The number of batches to process from each shard
+    #   (Streams only) The number of batches to process from each shard
     #   concurrently.
     #   @return [Integer]
     #
@@ -721,29 +735,29 @@ module Aws::Lambda
     #   @return [Time]
     #
     # @!attribute [rw] destination_config
-    #   (Streams) An Amazon SQS queue or Amazon SNS topic destination for
-    #   discarded records.
+    #   (Streams only) An Amazon SQS queue or Amazon SNS topic destination
+    #   for discarded records.
     #   @return [Types::DestinationConfig]
     #
     # @!attribute [rw] maximum_record_age_in_seconds
-    #   (Streams) Discard records older than the specified age. The default
-    #   value is infinite (-1).
+    #   (Streams only) Discard records older than the specified age. The
+    #   default value is infinite (-1).
     #   @return [Integer]
     #
     # @!attribute [rw] bisect_batch_on_function_error
-    #   (Streams) If the function returns an error, split the batch in two
-    #   and retry.
+    #   (Streams only) If the function returns an error, split the batch in
+    #   two and retry.
     #   @return [Boolean]
     #
     # @!attribute [rw] maximum_retry_attempts
-    #   (Streams) Discard records after the specified number of retries. The
-    #   default value is infinite (-1). When set to infinite (-1), failed
-    #   records will be retried until the record expires.
+    #   (Streams only) Discard records after the specified number of
+    #   retries. The default value is infinite (-1). When set to infinite
+    #   (-1), failed records will be retried until the record expires.
     #   @return [Integer]
     #
     # @!attribute [rw] tumbling_window_in_seconds
-    #   (Streams) The duration in seconds of a processing window. The range
-    #   is between 1 second up to 900 seconds.
+    #   (Streams only) The duration in seconds of a processing window. The
+    #   range is between 1 second up to 900 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] topics
@@ -764,8 +778,8 @@ module Aws::Lambda
     #   @return [Types::SelfManagedEventSource]
     #
     # @!attribute [rw] function_response_types
-    #   (Streams) A list of current response type enums applied to the event
-    #   source mapping.
+    #   (Streams only) A list of current response type enums applied to the
+    #   event source mapping.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMappingRequest AWS API Documentation
@@ -897,13 +911,22 @@ module Aws::Lambda
     # @!attribute [rw] timeout
     #   The amount of time that Lambda allows a function to run before
     #   stopping it. The default is 3 seconds. The maximum allowed value is
-    #   900 seconds.
+    #   900 seconds. For additional information, see [Lambda execution
+    #   environment][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html
     #   @return [Integer]
     #
     # @!attribute [rw] memory_size
-    #   The amount of memory available to the function at runtime.
-    #   Increasing the function's memory also increases its CPU allocation.
+    #   The amount of [memory available to the function][1] at runtime.
+    #   Increasing the function memory also increases its CPU allocation.
     #   The default value is 128 MB. The value can be any multiple of 1 MB.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html
     #   @return [Integer]
     #
     # @!attribute [rw] publish
@@ -912,10 +935,11 @@ module Aws::Lambda
     #   @return [Boolean]
     #
     # @!attribute [rw] vpc_config
-    #   For network connectivity to AWS resources in a VPC, specify a list
-    #   of security groups and subnets in the VPC. When you connect a
-    #   function to a VPC, it can only access resources and the internet
-    #   through that VPC. For more information, see [VPC Settings][1].
+    #   For network connectivity to Amazon Web Services resources in a VPC,
+    #   specify a list of security groups and subnets in the VPC. When you
+    #   connect a function to a VPC, it can only access resources and the
+    #   internet through that VPC. For more information, see [VPC
+    #   Settings][1].
     #
     #
     #
@@ -943,14 +967,18 @@ module Aws::Lambda
     #   @return [Types::Environment]
     #
     # @!attribute [rw] kms_key_arn
-    #   The ARN of the AWS Key Management Service (AWS KMS) key that's used
-    #   to encrypt your function's environment variables. If it's not
-    #   provided, AWS Lambda uses a default service key.
+    #   The ARN of the Amazon Web Services Key Management Service (KMS) key
+    #   that's used to encrypt your function's environment variables. If
+    #   it's not provided, Lambda uses a default service key.
     #   @return [String]
     #
     # @!attribute [rw] tracing_config
     #   Set `Mode` to `Active` to sample and trace a subset of incoming
-    #   requests with AWS X-Ray.
+    #   requests with [X-Ray][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html
     #   @return [Types::TracingConfig]
     #
     # @!attribute [rw] tags
@@ -975,12 +1003,12 @@ module Aws::Lambda
     #   @return [Array<Types::FileSystemConfig>]
     #
     # @!attribute [rw] image_config
-    #   [Container image configuration values][1] that override the values
+    #   Container image [configuration values][1] that override the values
     #   in the container image Dockerfile.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-images.html#configuration-images-settings
     #   @return [Types::ImageConfig]
     #
     # @!attribute [rw] code_signing_config_arn
@@ -1375,7 +1403,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # AWS Lambda was throttled by Amazon EC2 during Lambda function
+    # Lambda was throttled by Amazon EC2 during Lambda function
     # initialization using the execution role provided for the Lambda
     # function.
     #
@@ -1394,8 +1422,8 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # AWS Lambda received an unexpected EC2 client exception while setting
-    # up for the Lambda function.
+    # Lambda received an unexpected EC2 client exception while setting up
+    # for the Lambda function.
     #
     # @!attribute [rw] type
     #   @return [String]
@@ -1488,9 +1516,9 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # AWS Lambda was not able to create an elastic network interface in the
-    # VPC, specified as part of Lambda function configuration, because the
-    # limit for network interfaces has been reached.
+    # Lambda was not able to create an elastic network interface in the VPC,
+    # specified as part of Lambda function configuration, because the limit
+    # for network interfaces has been reached.
     #
     # @!attribute [rw] type
     #   @return [String]
@@ -1507,7 +1535,10 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # A function's environment variable settings.
+    # A function's environment variable settings. You can use environment
+    # variables to adjust your function's behavior without updating code.
+    # An environment variable is a pair of strings that are stored in a
+    # function's version-specific configuration.
     #
     # @note When making an API call, you may pass Environment
     #   data as a hash:
@@ -1519,7 +1550,12 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] variables
-    #   Environment variable key-value pairs.
+    #   Environment variable key-value pairs. For more information, see
+    #   [Using Lambda environment variables][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Environment AWS API Documentation
@@ -1571,8 +1607,8 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # A mapping between an AWS resource and an AWS Lambda function. See
-    # CreateEventSourceMapping for details.
+    # A mapping between an Amazon Web Services resource and an Lambda
+    # function. See CreateEventSourceMapping for details.
     #
     # @!attribute [rw] uuid
     #   The identifier of the event source mapping.
@@ -1600,7 +1636,7 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
-    #   (Streams) The number of batches to process from each shard
+    #   (Streams only) The number of batches to process from each shard
     #   concurrently. The default value is 1.
     #   @return [Integer]
     #
@@ -1618,8 +1654,7 @@ module Aws::Lambda
     #   @return [Time]
     #
     # @!attribute [rw] last_processing_result
-    #   The result of the last AWS Lambda invocation of your Lambda
-    #   function.
+    #   The result of the last Lambda invocation of your Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -1634,8 +1669,8 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] destination_config
-    #   (Streams) An Amazon SQS queue or Amazon SNS topic destination for
-    #   discarded records.
+    #   (Streams only) An Amazon SQS queue or Amazon SNS topic destination
+    #   for discarded records.
     #   @return [Types::DestinationConfig]
     #
     # @!attribute [rw] topics
@@ -1656,30 +1691,31 @@ module Aws::Lambda
     #   @return [Types::SelfManagedEventSource]
     #
     # @!attribute [rw] maximum_record_age_in_seconds
-    #   (Streams) Discard records older than the specified age. The default
-    #   value is infinite (-1). When set to infinite (-1), failed records
-    #   are retried until the record expires.
+    #   (Streams only) Discard records older than the specified age. The
+    #   default value is -1, which sets the maximum age to infinite. When
+    #   the value is set to infinite, Lambda never discards old records.
     #   @return [Integer]
     #
     # @!attribute [rw] bisect_batch_on_function_error
-    #   (Streams) If the function returns an error, split the batch in two
-    #   and retry. The default value is false.
+    #   (Streams only) If the function returns an error, split the batch in
+    #   two and retry. The default value is false.
     #   @return [Boolean]
     #
     # @!attribute [rw] maximum_retry_attempts
-    #   (Streams) Discard records after the specified number of retries. The
-    #   default value is infinite (-1). When set to infinite (-1), failed
-    #   records are retried until the record expires.
+    #   (Streams only) Discard records after the specified number of
+    #   retries. The default value is -1, which sets the maximum number of
+    #   retries to infinite. When MaximumRetryAttempts is infinite, Lambda
+    #   retries failed records until the record expires in the event source.
     #   @return [Integer]
     #
     # @!attribute [rw] tumbling_window_in_seconds
-    #   (Streams) The duration in seconds of a processing window. The range
-    #   is between 1 second up to 900 seconds.
+    #   (Streams only) The duration in seconds of a processing window. The
+    #   range is between 1 second up to 900 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] function_response_types
-    #   (Streams) A list of current response type enums applied to the event
-    #   source mapping.
+    #   (Streams only) A list of current response type enums applied to the
+    #   event source mapping.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventSourceMappingConfiguration AWS API Documentation
@@ -1711,8 +1747,12 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # Details about the connection between a Lambda function and an Amazon
-    # EFS file system.
+    # Details about the connection between a Lambda function and an [Amazon
+    # EFS file system][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html
     #
     # @note When making an API call, you may pass FileSystemConfig
     #   data as a hash:
@@ -1757,13 +1797,15 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] zip_file
-    #   The base64-encoded contents of the deployment package. AWS SDK and
-    #   AWS CLI clients handle the encoding for you.
+    #   The base64-encoded contents of the deployment package. Amazon Web
+    #   Services SDK and Amazon Web Services CLI clients handle the encoding
+    #   for you.
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket
-    #   An Amazon S3 bucket in the same AWS Region as your function. The
-    #   bucket can be in a different AWS account.
+    #   An Amazon S3 bucket in the same Amazon Web Services Region as your
+    #   function. The bucket can be in a different Amazon Web Services
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] s3_key
@@ -1776,7 +1818,11 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] image_uri
-    #   URI of a container image in the Amazon ECR registry.
+    #   URI of a [container image][1] in the Amazon ECR registry.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionCode AWS API Documentation
@@ -1885,7 +1931,11 @@ module Aws::Lambda
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] environment
-    #   The function's environment variables.
+    #   The function's [environment variables][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html
     #   @return [Types::EnvironmentResponse]
     #
     # @!attribute [rw] kms_key_arn
@@ -1895,7 +1945,7 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] tracing_config
-    #   The function's AWS X-Ray tracing configuration.
+    #   The function's X-Ray tracing configuration.
     #   @return [Types::TracingConfigResponse]
     #
     # @!attribute [rw] master_arn
@@ -1943,7 +1993,11 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] file_system_configs
-    #   Connection settings for an Amazon EFS file system.
+    #   Connection settings for an [Amazon EFS file system][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html
     #   @return [Array<Types::FileSystemConfig>]
     #
     # @!attribute [rw] package_type
@@ -2878,7 +2932,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # AWS Lambda could not unzip the deployment package.
+    # Lambda could not unzip the deployment package.
     #
     # @!attribute [rw] type
     #   @return [String]
@@ -3136,7 +3190,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # An [AWS Lambda layer][1].
+    # An [Lambda layer][1].
     #
     #
     #
@@ -3169,9 +3223,9 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # A ZIP archive that contains the contents of an [AWS Lambda layer][1].
-    # You can specify either an Amazon S3 location, or upload a layer
-    # archive directly.
+    # A ZIP archive that contains the contents of an [Lambda layer][1]. You
+    # can specify either an Amazon S3 location, or upload a layer archive
+    # directly.
     #
     #
     #
@@ -3201,8 +3255,9 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] zip_file
-    #   The base64-encoded contents of the layer archive. AWS SDK and AWS
-    #   CLI clients handle the encoding for you.
+    #   The base64-encoded contents of the layer archive. Amazon Web
+    #   Services SDK and Amazon Web Services CLI clients handle the encoding
+    #   for you.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/LayerVersionContentInput AWS API Documentation
@@ -3216,7 +3271,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # Details about a version of an [AWS Lambda layer][1].
+    # Details about a version of an [Lambda layer][1].
     #
     #
     #
@@ -3255,7 +3310,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # Details about a version of an [AWS Lambda layer][1].
+    # Details about a version of an [Lambda layer][1].
     #
     #
     #
@@ -3299,7 +3354,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # Details about an [AWS Lambda layer][1].
+    # Details about an [Lambda layer][1].
     #
     #
     #
@@ -3640,11 +3695,11 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] master_region
-    #   For Lambda@Edge functions, the AWS Region of the master function.
-    #   For example, `us-east-1` filters the list of functions to only
-    #   include Lambda@Edge functions replicated from a master function in
-    #   US East (N. Virginia). If specified, you must set `FunctionVersion`
-    #   to `ALL`.
+    #   For Lambda@Edge functions, the Region of the master function. For
+    #   example, `us-east-1` filters the list of functions to only include
+    #   Lambda@Edge functions replicated from a master function in US East
+    #   (N. Virginia). If specified, you must set `FunctionVersion` to
+    #   `ALL`.
     #   @return [String]
     #
     # @!attribute [rw] function_version
@@ -3920,7 +3975,9 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   The maximum number of versions to return.
+    #   The maximum number of versions to return. Note that
+    #   `ListVersionsByFunction` returns a maximum of 50 items in each
+    #   response, even if you set the number higher.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunctionRequest AWS API Documentation
@@ -4760,7 +4817,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The AWS Lambda service encountered an internal error.
+    # The Lambda service encountered an internal error.
     #
     # @!attribute [rw] type
     #   @return [String]
@@ -4784,7 +4841,7 @@ module Aws::Lambda
     #   data as a hash:
     #
     #       {
-    #         type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH
+    #         type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST
     #         uri: "URI",
     #       }
     #
@@ -4809,6 +4866,9 @@ module Aws::Lambda
     #   * `SASL_SCRAM_512_AUTH` - The Secrets Manager ARN of your secret key
     #     used for SASL SCRAM-512 authentication of your Self-Managed Apache
     #     Kafka brokers.
+    #
+    #   * `VIRTUAL_HOST` - The name of the virtual host in your RabbitMQ
+    #     broker. Lambda will use this host as the event source.
     #   @return [String]
     #
     # @!attribute [rw] uri
@@ -4826,7 +4886,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # AWS Lambda was not able to set up VPC access for the Lambda function
+    # Lambda was not able to set up VPC access for the Lambda function
     # because one or more configured subnets has no available IP addresses.
     #
     # @!attribute [rw] type
@@ -4897,8 +4957,12 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The function's AWS X-Ray tracing configuration. To sample and record
+    # The function's [X-Ray][1] tracing configuration. To sample and record
     # incoming requests, set `Mode` to `Active`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html
     #
     # @note When making an API call, you may pass TracingConfig
     #   data as a hash:
@@ -4919,7 +4983,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The function's AWS X-Ray tracing configuration.
+    # The function's X-Ray tracing configuration.
     #
     # @!attribute [rw] mode
     #   The tracing mode.
@@ -5123,7 +5187,7 @@ module Aws::Lambda
     #         parallelization_factor: 1,
     #         source_access_configurations: [
     #           {
-    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH
+    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST
     #             uri: "URI",
     #           },
     #         ],
@@ -5181,28 +5245,28 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] destination_config
-    #   (Streams) An Amazon SQS queue or Amazon SNS topic destination for
-    #   discarded records.
+    #   (Streams only) An Amazon SQS queue or Amazon SNS topic destination
+    #   for discarded records.
     #   @return [Types::DestinationConfig]
     #
     # @!attribute [rw] maximum_record_age_in_seconds
-    #   (Streams) Discard records older than the specified age. The default
-    #   value is infinite (-1).
+    #   (Streams only) Discard records older than the specified age. The
+    #   default value is infinite (-1).
     #   @return [Integer]
     #
     # @!attribute [rw] bisect_batch_on_function_error
-    #   (Streams) If the function returns an error, split the batch in two
-    #   and retry.
+    #   (Streams only) If the function returns an error, split the batch in
+    #   two and retry.
     #   @return [Boolean]
     #
     # @!attribute [rw] maximum_retry_attempts
-    #   (Streams) Discard records after the specified number of retries. The
-    #   default value is infinite (-1). When set to infinite (-1), failed
-    #   records will be retried until the record expires.
+    #   (Streams only) Discard records after the specified number of
+    #   retries. The default value is infinite (-1). When set to infinite
+    #   (-1), failed records will be retried until the record expires.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
-    #   (Streams) The number of batches to process from each shard
+    #   (Streams only) The number of batches to process from each shard
     #   concurrently.
     #   @return [Integer]
     #
@@ -5212,13 +5276,13 @@ module Aws::Lambda
     #   @return [Array<Types::SourceAccessConfiguration>]
     #
     # @!attribute [rw] tumbling_window_in_seconds
-    #   (Streams) The duration in seconds of a processing window. The range
-    #   is between 1 second up to 900 seconds.
+    #   (Streams only) The duration in seconds of a processing window. The
+    #   range is between 1 second up to 900 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] function_response_types
-    #   (Streams) A list of current response type enums applied to the event
-    #   source mapping.
+    #   (Streams only) A list of current response type enums applied to the
+    #   event source mapping.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMappingRequest AWS API Documentation
@@ -5273,13 +5337,15 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] zip_file
-    #   The base64-encoded contents of the deployment package. AWS SDK and
-    #   AWS CLI clients handle the encoding for you.
+    #   The base64-encoded contents of the deployment package. Amazon Web
+    #   Services SDK and Amazon Web Services CLI clients handle the encoding
+    #   for you.
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket
-    #   An Amazon S3 bucket in the same AWS Region as your function. The
-    #   bucket can be in a different AWS account.
+    #   An Amazon S3 bucket in the same Amazon Web Services Region as your
+    #   function. The bucket can be in a different Amazon Web Services
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] s3_key
@@ -5408,20 +5474,30 @@ module Aws::Lambda
     # @!attribute [rw] timeout
     #   The amount of time that Lambda allows a function to run before
     #   stopping it. The default is 3 seconds. The maximum allowed value is
-    #   900 seconds.
+    #   900 seconds. For additional information, see [Lambda execution
+    #   environment][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html
     #   @return [Integer]
     #
     # @!attribute [rw] memory_size
-    #   The amount of memory available to the function at runtime.
-    #   Increasing the function's memory also increases its CPU allocation.
+    #   The amount of [memory available to the function][1] at runtime.
+    #   Increasing the function memory also increases its CPU allocation.
     #   The default value is 128 MB. The value can be any multiple of 1 MB.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html
     #   @return [Integer]
     #
     # @!attribute [rw] vpc_config
-    #   For network connectivity to AWS resources in a VPC, specify a list
-    #   of security groups and subnets in the VPC. When you connect a
-    #   function to a VPC, it can only access resources and the internet
-    #   through that VPC. For more information, see [VPC Settings][1].
+    #   For network connectivity to Amazon Web Services resources in a VPC,
+    #   specify a list of security groups and subnets in the VPC. When you
+    #   connect a function to a VPC, it can only access resources and the
+    #   internet through that VPC. For more information, see [VPC
+    #   Settings][1].
     #
     #
     #
@@ -5452,14 +5528,18 @@ module Aws::Lambda
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] kms_key_arn
-    #   The ARN of the AWS Key Management Service (AWS KMS) key that's used
-    #   to encrypt your function's environment variables. If it's not
-    #   provided, AWS Lambda uses a default service key.
+    #   The ARN of the Amazon Web Services Key Management Service (KMS) key
+    #   that's used to encrypt your function's environment variables. If
+    #   it's not provided, Lambda uses a default service key.
     #   @return [String]
     #
     # @!attribute [rw] tracing_config
     #   Set `Mode` to `Active` to sample and trace a subset of incoming
-    #   requests with AWS X-Ray.
+    #   requests with [X-Ray][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html
     #   @return [Types::TracingConfig]
     #
     # @!attribute [rw] revision_id
