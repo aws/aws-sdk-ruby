@@ -269,6 +269,16 @@ module Aws
           expect(signature.headers['x-amz-content-sha256']).to eq(Digest::SHA256.hexdigest('abc'))
         end
 
+        it 'adds the X-Amz-Content-Sha256 header if :apply_checksum_header option with true is passed' do
+          options[:apply_checksum_header] = true
+          signature = Signer.new(options).sign_request(
+            http_method: 'GET',
+            url: 'https://domain.com',
+            body: 'abc'
+          )
+          expect(signature.headers['x-amz-content-sha256']).to eq(Digest::SHA256.hexdigest('abc'))
+        end
+
         it 'can omit the X-Amz-Content-Sha256 header' do
           options[:apply_checksum_header] = false
           signature = Signer.new(options).sign_request(
