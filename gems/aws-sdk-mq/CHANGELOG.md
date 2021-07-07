@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2021-07-07)
+------------------
+
+* Feature - adds support for modifying the maintenance window for brokers.
+
 1.36.0 (2021-03-10)
 ------------------
 

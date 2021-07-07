@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2021-07-07)
+------------------
+
+* Feature - Adding support for oplocks for SMB file shares,  S3 Access Point and S3 Private Link for all file shares and IP address support for file system associations
+
 1.55.0 (2021-04-07)
 ------------------
 

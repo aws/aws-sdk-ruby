@@ -128,7 +128,9 @@ module Aws::EC2
     AuthorizeClientVpnIngressRequest = Shapes::StructureShape.new(name: 'AuthorizeClientVpnIngressRequest')
     AuthorizeClientVpnIngressResult = Shapes::StructureShape.new(name: 'AuthorizeClientVpnIngressResult')
     AuthorizeSecurityGroupEgressRequest = Shapes::StructureShape.new(name: 'AuthorizeSecurityGroupEgressRequest')
+    AuthorizeSecurityGroupEgressResult = Shapes::StructureShape.new(name: 'AuthorizeSecurityGroupEgressResult')
     AuthorizeSecurityGroupIngressRequest = Shapes::StructureShape.new(name: 'AuthorizeSecurityGroupIngressRequest')
+    AuthorizeSecurityGroupIngressResult = Shapes::StructureShape.new(name: 'AuthorizeSecurityGroupIngressResult')
     AutoAcceptSharedAssociationsValue = Shapes::StringShape.new(name: 'AutoAcceptSharedAssociationsValue')
     AutoAcceptSharedAttachmentsValue = Shapes::StringShape.new(name: 'AutoAcceptSharedAttachmentsValue')
     AutoPlacement = Shapes::StringShape.new(name: 'AutoPlacement')
@@ -743,6 +745,9 @@ module Aws::EC2
     DescribeScheduledInstancesResult = Shapes::StructureShape.new(name: 'DescribeScheduledInstancesResult')
     DescribeSecurityGroupReferencesRequest = Shapes::StructureShape.new(name: 'DescribeSecurityGroupReferencesRequest')
     DescribeSecurityGroupReferencesResult = Shapes::StructureShape.new(name: 'DescribeSecurityGroupReferencesResult')
+    DescribeSecurityGroupRulesMaxResults = Shapes::IntegerShape.new(name: 'DescribeSecurityGroupRulesMaxResults')
+    DescribeSecurityGroupRulesRequest = Shapes::StructureShape.new(name: 'DescribeSecurityGroupRulesRequest')
+    DescribeSecurityGroupRulesResult = Shapes::StructureShape.new(name: 'DescribeSecurityGroupRulesResult')
     DescribeSecurityGroupsMaxResults = Shapes::IntegerShape.new(name: 'DescribeSecurityGroupsMaxResults')
     DescribeSecurityGroupsRequest = Shapes::StructureShape.new(name: 'DescribeSecurityGroupsRequest')
     DescribeSecurityGroupsResult = Shapes::StructureShape.new(name: 'DescribeSecurityGroupsResult')
@@ -1493,6 +1498,8 @@ module Aws::EC2
     ModifyNetworkInterfaceAttributeRequest = Shapes::StructureShape.new(name: 'ModifyNetworkInterfaceAttributeRequest')
     ModifyReservedInstancesRequest = Shapes::StructureShape.new(name: 'ModifyReservedInstancesRequest')
     ModifyReservedInstancesResult = Shapes::StructureShape.new(name: 'ModifyReservedInstancesResult')
+    ModifySecurityGroupRulesRequest = Shapes::StructureShape.new(name: 'ModifySecurityGroupRulesRequest')
+    ModifySecurityGroupRulesResult = Shapes::StructureShape.new(name: 'ModifySecurityGroupRulesResult')
     ModifySnapshotAttributeRequest = Shapes::StructureShape.new(name: 'ModifySnapshotAttributeRequest')
     ModifySpotFleetRequestRequest = Shapes::StructureShape.new(name: 'ModifySpotFleetRequestRequest')
     ModifySpotFleetRequestResponse = Shapes::StructureShape.new(name: 'ModifySpotFleetRequestResponse')
@@ -1735,6 +1742,7 @@ module Aws::EC2
     RecurringCharge = Shapes::StructureShape.new(name: 'RecurringCharge')
     RecurringChargeFrequency = Shapes::StringShape.new(name: 'RecurringChargeFrequency')
     RecurringChargesList = Shapes::ListShape.new(name: 'RecurringChargesList')
+    ReferencedSecurityGroup = Shapes::StructureShape.new(name: 'ReferencedSecurityGroup')
     Region = Shapes::StructureShape.new(name: 'Region')
     RegionList = Shapes::ListShape.new(name: 'RegionList')
     RegionNameStringList = Shapes::ListShape.new(name: 'RegionNameStringList')
@@ -1912,6 +1920,15 @@ module Aws::EC2
     SecurityGroupName = Shapes::StringShape.new(name: 'SecurityGroupName')
     SecurityGroupReference = Shapes::StructureShape.new(name: 'SecurityGroupReference')
     SecurityGroupReferences = Shapes::ListShape.new(name: 'SecurityGroupReferences')
+    SecurityGroupRule = Shapes::StructureShape.new(name: 'SecurityGroupRule')
+    SecurityGroupRuleDescription = Shapes::StructureShape.new(name: 'SecurityGroupRuleDescription')
+    SecurityGroupRuleDescriptionList = Shapes::ListShape.new(name: 'SecurityGroupRuleDescriptionList')
+    SecurityGroupRuleId = Shapes::StringShape.new(name: 'SecurityGroupRuleId')
+    SecurityGroupRuleIdList = Shapes::ListShape.new(name: 'SecurityGroupRuleIdList')
+    SecurityGroupRuleList = Shapes::ListShape.new(name: 'SecurityGroupRuleList')
+    SecurityGroupRuleRequest = Shapes::StructureShape.new(name: 'SecurityGroupRuleRequest')
+    SecurityGroupRuleUpdate = Shapes::StructureShape.new(name: 'SecurityGroupRuleUpdate')
+    SecurityGroupRuleUpdateList = Shapes::ListShape.new(name: 'SecurityGroupRuleUpdateList')
     SecurityGroupStringList = Shapes::ListShape.new(name: 'SecurityGroupStringList')
     SelfServicePortal = Shapes::StringShape.new(name: 'SelfServicePortal')
     SendDiagnosticInterruptRequest = Shapes::StructureShape.new(name: 'SendDiagnosticInterruptRequest')
@@ -2726,6 +2743,7 @@ module Aws::EC2
     AuthorizeSecurityGroupEgressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     AuthorizeSecurityGroupEgressRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, required: true, location_name: "groupId"))
     AuthorizeSecurityGroupEgressRequest.add_member(:ip_permissions, Shapes::ShapeRef.new(shape: IpPermissionList, location_name: "ipPermissions"))
+    AuthorizeSecurityGroupEgressRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     AuthorizeSecurityGroupEgressRequest.add_member(:cidr_ip, Shapes::ShapeRef.new(shape: String, location_name: "cidrIp"))
     AuthorizeSecurityGroupEgressRequest.add_member(:from_port, Shapes::ShapeRef.new(shape: Integer, location_name: "fromPort"))
     AuthorizeSecurityGroupEgressRequest.add_member(:ip_protocol, Shapes::ShapeRef.new(shape: String, location_name: "ipProtocol"))
@@ -2733,6 +2751,10 @@ module Aws::EC2
     AuthorizeSecurityGroupEgressRequest.add_member(:source_security_group_name, Shapes::ShapeRef.new(shape: String, location_name: "sourceSecurityGroupName"))
     AuthorizeSecurityGroupEgressRequest.add_member(:source_security_group_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "sourceSecurityGroupOwnerId"))
     AuthorizeSecurityGroupEgressRequest.struct_class = Types::AuthorizeSecurityGroupEgressRequest
+
+    AuthorizeSecurityGroupEgressResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    AuthorizeSecurityGroupEgressResult.add_member(:security_group_rules, Shapes::ShapeRef.new(shape: SecurityGroupRuleList, location_name: "securityGroupRuleSet"))
+    AuthorizeSecurityGroupEgressResult.struct_class = Types::AuthorizeSecurityGroupEgressResult
 
     AuthorizeSecurityGroupIngressRequest.add_member(:cidr_ip, Shapes::ShapeRef.new(shape: String, location_name: "CidrIp"))
     AuthorizeSecurityGroupIngressRequest.add_member(:from_port, Shapes::ShapeRef.new(shape: Integer, location_name: "FromPort"))
@@ -2744,7 +2766,12 @@ module Aws::EC2
     AuthorizeSecurityGroupIngressRequest.add_member(:source_security_group_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "SourceSecurityGroupOwnerId"))
     AuthorizeSecurityGroupIngressRequest.add_member(:to_port, Shapes::ShapeRef.new(shape: Integer, location_name: "ToPort"))
     AuthorizeSecurityGroupIngressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
+    AuthorizeSecurityGroupIngressRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     AuthorizeSecurityGroupIngressRequest.struct_class = Types::AuthorizeSecurityGroupIngressRequest
+
+    AuthorizeSecurityGroupIngressResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    AuthorizeSecurityGroupIngressResult.add_member(:security_group_rules, Shapes::ShapeRef.new(shape: SecurityGroupRuleList, location_name: "securityGroupRuleSet"))
+    AuthorizeSecurityGroupIngressResult.struct_class = Types::AuthorizeSecurityGroupIngressResult
 
     AvailabilityZone.add_member(:state, Shapes::ShapeRef.new(shape: AvailabilityZoneState, location_name: "zoneState"))
     AvailabilityZone.add_member(:opt_in_status, Shapes::ShapeRef.new(shape: AvailabilityZoneOptInStatus, location_name: "optInStatus"))
@@ -5286,6 +5313,17 @@ module Aws::EC2
 
     DescribeSecurityGroupReferencesResult.add_member(:security_group_reference_set, Shapes::ShapeRef.new(shape: SecurityGroupReferences, location_name: "securityGroupReferenceSet"))
     DescribeSecurityGroupReferencesResult.struct_class = Types::DescribeSecurityGroupReferencesResult
+
+    DescribeSecurityGroupRulesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeSecurityGroupRulesRequest.add_member(:security_group_rule_ids, Shapes::ShapeRef.new(shape: SecurityGroupRuleIdList, location_name: "SecurityGroupRuleId"))
+    DescribeSecurityGroupRulesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeSecurityGroupRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeSecurityGroupRulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeSecurityGroupRulesMaxResults, location_name: "MaxResults"))
+    DescribeSecurityGroupRulesRequest.struct_class = Types::DescribeSecurityGroupRulesRequest
+
+    DescribeSecurityGroupRulesResult.add_member(:security_group_rules, Shapes::ShapeRef.new(shape: SecurityGroupRuleList, location_name: "securityGroupRuleSet"))
+    DescribeSecurityGroupRulesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeSecurityGroupRulesResult.struct_class = Types::DescribeSecurityGroupRulesResult
 
     DescribeSecurityGroupsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeSecurityGroupsRequest.add_member(:group_ids, Shapes::ShapeRef.new(shape: GroupIdStringList, location_name: "GroupId"))
@@ -8170,6 +8208,14 @@ module Aws::EC2
     ModifyReservedInstancesResult.add_member(:reserved_instances_modification_id, Shapes::ShapeRef.new(shape: String, location_name: "reservedInstancesModificationId"))
     ModifyReservedInstancesResult.struct_class = Types::ModifyReservedInstancesResult
 
+    ModifySecurityGroupRulesRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, required: true, location_name: "GroupId"))
+    ModifySecurityGroupRulesRequest.add_member(:security_group_rules, Shapes::ShapeRef.new(shape: SecurityGroupRuleUpdateList, required: true, location_name: "SecurityGroupRule"))
+    ModifySecurityGroupRulesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifySecurityGroupRulesRequest.struct_class = Types::ModifySecurityGroupRulesRequest
+
+    ModifySecurityGroupRulesResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    ModifySecurityGroupRulesResult.struct_class = Types::ModifySecurityGroupRulesResult
+
     ModifySnapshotAttributeRequest.add_member(:attribute, Shapes::ShapeRef.new(shape: SnapshotAttributeName, location_name: "Attribute"))
     ModifySnapshotAttributeRequest.add_member(:create_volume_permission, Shapes::ShapeRef.new(shape: CreateVolumePermissionModifications, location_name: "CreateVolumePermission"))
     ModifySnapshotAttributeRequest.add_member(:group_names, Shapes::ShapeRef.new(shape: GroupNameStringList, location_name: "UserGroup"))
@@ -9023,6 +9069,13 @@ module Aws::EC2
 
     RecurringChargesList.member = Shapes::ShapeRef.new(shape: RecurringCharge, location_name: "item")
 
+    ReferencedSecurityGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "groupId"))
+    ReferencedSecurityGroup.add_member(:peering_status, Shapes::ShapeRef.new(shape: String, location_name: "peeringStatus"))
+    ReferencedSecurityGroup.add_member(:user_id, Shapes::ShapeRef.new(shape: String, location_name: "userId"))
+    ReferencedSecurityGroup.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
+    ReferencedSecurityGroup.add_member(:vpc_peering_connection_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcPeeringConnectionId"))
+    ReferencedSecurityGroup.struct_class = Types::ReferencedSecurityGroup
+
     Region.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "regionEndpoint"))
     Region.add_member(:region_name, Shapes::ShapeRef.new(shape: String, location_name: "regionName"))
     Region.add_member(:opt_in_status, Shapes::ShapeRef.new(shape: String, location_name: "optInStatus"))
@@ -9538,6 +9591,7 @@ module Aws::EC2
     RevokeSecurityGroupEgressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     RevokeSecurityGroupEgressRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, required: true, location_name: "groupId"))
     RevokeSecurityGroupEgressRequest.add_member(:ip_permissions, Shapes::ShapeRef.new(shape: IpPermissionList, location_name: "ipPermissions"))
+    RevokeSecurityGroupEgressRequest.add_member(:security_group_rule_ids, Shapes::ShapeRef.new(shape: SecurityGroupRuleIdList, location_name: "SecurityGroupRuleId"))
     RevokeSecurityGroupEgressRequest.add_member(:cidr_ip, Shapes::ShapeRef.new(shape: String, location_name: "cidrIp"))
     RevokeSecurityGroupEgressRequest.add_member(:from_port, Shapes::ShapeRef.new(shape: Integer, location_name: "fromPort"))
     RevokeSecurityGroupEgressRequest.add_member(:ip_protocol, Shapes::ShapeRef.new(shape: String, location_name: "ipProtocol"))
@@ -9560,6 +9614,7 @@ module Aws::EC2
     RevokeSecurityGroupIngressRequest.add_member(:source_security_group_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "SourceSecurityGroupOwnerId"))
     RevokeSecurityGroupIngressRequest.add_member(:to_port, Shapes::ShapeRef.new(shape: Integer, location_name: "ToPort"))
     RevokeSecurityGroupIngressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
+    RevokeSecurityGroupIngressRequest.add_member(:security_group_rule_ids, Shapes::ShapeRef.new(shape: SecurityGroupRuleIdList, location_name: "SecurityGroupRuleId"))
     RevokeSecurityGroupIngressRequest.struct_class = Types::RevokeSecurityGroupIngressRequest
 
     RevokeSecurityGroupIngressResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
@@ -9857,6 +9912,47 @@ module Aws::EC2
     SecurityGroupReference.struct_class = Types::SecurityGroupReference
 
     SecurityGroupReferences.member = Shapes::ShapeRef.new(shape: SecurityGroupReference, location_name: "item")
+
+    SecurityGroupRule.add_member(:security_group_rule_id, Shapes::ShapeRef.new(shape: SecurityGroupRuleId, location_name: "securityGroupRuleId"))
+    SecurityGroupRule.add_member(:group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "groupId"))
+    SecurityGroupRule.add_member(:group_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "groupOwnerId"))
+    SecurityGroupRule.add_member(:is_egress, Shapes::ShapeRef.new(shape: Boolean, location_name: "isEgress"))
+    SecurityGroupRule.add_member(:ip_protocol, Shapes::ShapeRef.new(shape: String, location_name: "ipProtocol"))
+    SecurityGroupRule.add_member(:from_port, Shapes::ShapeRef.new(shape: Integer, location_name: "fromPort"))
+    SecurityGroupRule.add_member(:to_port, Shapes::ShapeRef.new(shape: Integer, location_name: "toPort"))
+    SecurityGroupRule.add_member(:cidr_ipv_4, Shapes::ShapeRef.new(shape: String, location_name: "cidrIpv4"))
+    SecurityGroupRule.add_member(:cidr_ipv_6, Shapes::ShapeRef.new(shape: String, location_name: "cidrIpv6"))
+    SecurityGroupRule.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, location_name: "prefixListId"))
+    SecurityGroupRule.add_member(:referenced_group_info, Shapes::ShapeRef.new(shape: ReferencedSecurityGroup, location_name: "referencedGroupInfo"))
+    SecurityGroupRule.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    SecurityGroupRule.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    SecurityGroupRule.struct_class = Types::SecurityGroupRule
+
+    SecurityGroupRuleDescription.add_member(:security_group_rule_id, Shapes::ShapeRef.new(shape: String, location_name: "SecurityGroupRuleId"))
+    SecurityGroupRuleDescription.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    SecurityGroupRuleDescription.struct_class = Types::SecurityGroupRuleDescription
+
+    SecurityGroupRuleDescriptionList.member = Shapes::ShapeRef.new(shape: SecurityGroupRuleDescription, location_name: "item")
+
+    SecurityGroupRuleIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
+    SecurityGroupRuleList.member = Shapes::ShapeRef.new(shape: SecurityGroupRule, location_name: "item")
+
+    SecurityGroupRuleRequest.add_member(:ip_protocol, Shapes::ShapeRef.new(shape: String, location_name: "IpProtocol"))
+    SecurityGroupRuleRequest.add_member(:from_port, Shapes::ShapeRef.new(shape: Integer, location_name: "FromPort"))
+    SecurityGroupRuleRequest.add_member(:to_port, Shapes::ShapeRef.new(shape: Integer, location_name: "ToPort"))
+    SecurityGroupRuleRequest.add_member(:cidr_ipv_4, Shapes::ShapeRef.new(shape: String, location_name: "CidrIpv4"))
+    SecurityGroupRuleRequest.add_member(:cidr_ipv_6, Shapes::ShapeRef.new(shape: String, location_name: "CidrIpv6"))
+    SecurityGroupRuleRequest.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, location_name: "PrefixListId"))
+    SecurityGroupRuleRequest.add_member(:referenced_group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "ReferencedGroupId"))
+    SecurityGroupRuleRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    SecurityGroupRuleRequest.struct_class = Types::SecurityGroupRuleRequest
+
+    SecurityGroupRuleUpdate.add_member(:security_group_rule_id, Shapes::ShapeRef.new(shape: SecurityGroupRuleId, location_name: "SecurityGroupRuleId"))
+    SecurityGroupRuleUpdate.add_member(:security_group_rule, Shapes::ShapeRef.new(shape: SecurityGroupRuleRequest, location_name: "SecurityGroupRule"))
+    SecurityGroupRuleUpdate.struct_class = Types::SecurityGroupRuleUpdate
+
+    SecurityGroupRuleUpdateList.member = Shapes::ShapeRef.new(shape: SecurityGroupRuleUpdate, location_name: "item")
 
     SecurityGroupStringList.member = Shapes::ShapeRef.new(shape: SecurityGroupName, location_name: "SecurityGroup")
 
@@ -10794,7 +10890,8 @@ module Aws::EC2
     UpdateSecurityGroupRuleDescriptionsEgressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     UpdateSecurityGroupRuleDescriptionsEgressRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "GroupId"))
     UpdateSecurityGroupRuleDescriptionsEgressRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: SecurityGroupName, location_name: "GroupName"))
-    UpdateSecurityGroupRuleDescriptionsEgressRequest.add_member(:ip_permissions, Shapes::ShapeRef.new(shape: IpPermissionList, required: true, location_name: "IpPermissions"))
+    UpdateSecurityGroupRuleDescriptionsEgressRequest.add_member(:ip_permissions, Shapes::ShapeRef.new(shape: IpPermissionList, location_name: "IpPermissions"))
+    UpdateSecurityGroupRuleDescriptionsEgressRequest.add_member(:security_group_rule_descriptions, Shapes::ShapeRef.new(shape: SecurityGroupRuleDescriptionList, location_name: "SecurityGroupRuleDescription"))
     UpdateSecurityGroupRuleDescriptionsEgressRequest.struct_class = Types::UpdateSecurityGroupRuleDescriptionsEgressRequest
 
     UpdateSecurityGroupRuleDescriptionsEgressResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
@@ -10803,7 +10900,8 @@ module Aws::EC2
     UpdateSecurityGroupRuleDescriptionsIngressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     UpdateSecurityGroupRuleDescriptionsIngressRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "GroupId"))
     UpdateSecurityGroupRuleDescriptionsIngressRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: SecurityGroupName, location_name: "GroupName"))
-    UpdateSecurityGroupRuleDescriptionsIngressRequest.add_member(:ip_permissions, Shapes::ShapeRef.new(shape: IpPermissionList, required: true, location_name: "IpPermissions"))
+    UpdateSecurityGroupRuleDescriptionsIngressRequest.add_member(:ip_permissions, Shapes::ShapeRef.new(shape: IpPermissionList, location_name: "IpPermissions"))
+    UpdateSecurityGroupRuleDescriptionsIngressRequest.add_member(:security_group_rule_descriptions, Shapes::ShapeRef.new(shape: SecurityGroupRuleDescriptionList, location_name: "SecurityGroupRuleDescription"))
     UpdateSecurityGroupRuleDescriptionsIngressRequest.struct_class = Types::UpdateSecurityGroupRuleDescriptionsIngressRequest
 
     UpdateSecurityGroupRuleDescriptionsIngressResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
@@ -11439,7 +11537,7 @@ module Aws::EC2
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AuthorizeSecurityGroupEgressRequest)
-        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: AuthorizeSecurityGroupEgressResult)
       end)
 
       api.add_operation(:authorize_security_group_ingress, Seahorse::Model::Operation.new.tap do |o|
@@ -11447,7 +11545,7 @@ module Aws::EC2
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AuthorizeSecurityGroupIngressRequest)
-        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: AuthorizeSecurityGroupIngressResult)
       end)
 
       api.add_operation(:bundle_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -13505,6 +13603,20 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DescribeSecurityGroupReferencesResult)
       end)
 
+      api.add_operation(:describe_security_group_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeSecurityGroupRules"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeSecurityGroupRulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeSecurityGroupRulesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_security_groups, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeSecurityGroups"
         o.http_method = "POST"
@@ -14775,6 +14887,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyReservedInstancesRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyReservedInstancesResult)
+      end)
+
+      api.add_operation(:modify_security_group_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifySecurityGroupRules"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifySecurityGroupRulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifySecurityGroupRulesResult)
       end)
 
       api.add_operation(:modify_snapshot_attribute, Seahorse::Model::Operation.new.tap do |o|

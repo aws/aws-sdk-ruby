@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2021-07-07)
+------------------
+
+* Feature - Releasing new APIs for AWS Chime MediaCapturePipeline
+
 1.49.0 (2021-06-24)
 ------------------
 

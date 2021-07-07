@@ -2126,6 +2126,67 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateMediaCapturePipelineRequest
+    #   data as a hash:
+    #
+    #       {
+    #         source_type: "ChimeSdkMeeting", # required, accepts ChimeSdkMeeting
+    #         source_arn: "Arn", # required
+    #         sink_type: "S3Bucket", # required, accepts S3Bucket
+    #         sink_arn: "Arn", # required
+    #         client_request_token: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] source_type
+    #   Source type from which the media artifacts will be captured. A Chime
+    #   SDK Meeting is the only supported source.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_arn
+    #   ARN of the source from which the media artifacts are captured.
+    #   @return [String]
+    #
+    # @!attribute [rw] sink_type
+    #   Destination type to which the media artifacts are saved. You must
+    #   use an S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] sink_arn
+    #   The ARN of the sink type.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   The token assigned to the client making the pipeline request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateMediaCapturePipelineRequest AWS API Documentation
+    #
+    class CreateMediaCapturePipelineRequest < Struct.new(
+      :source_type,
+      :source_arn,
+      :sink_type,
+      :sink_arn,
+      :client_request_token)
+      SENSITIVE = [:source_arn, :sink_arn, :client_request_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] media_capture_pipeline
+    #   A media capture pipeline object, the ID, source type, source ARN,
+    #   sink type, and sink ARN of a media capture pipeline object.
+    #   @return [Types::MediaCapturePipeline]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateMediaCapturePipelineResponse AWS API Documentation
+    #
+    class CreateMediaCapturePipelineResponse < Struct.new(
+      :media_capture_pipeline)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateMeetingDialOutRequest
     #   data as a hash:
     #
@@ -3248,6 +3309,25 @@ module Aws::Chime
     class DeleteEventsConfigurationRequest < Struct.new(
       :account_id,
       :bot_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteMediaCapturePipelineRequest
+    #   data as a hash:
+    #
+    #       {
+    #         media_pipeline_id: "GuidString", # required
+    #       }
+    #
+    # @!attribute [rw] media_pipeline_id
+    #   The ID of the media capture pipeline being deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteMediaCapturePipelineRequest AWS API Documentation
+    #
+    class DeleteMediaCapturePipelineRequest < Struct.new(
+      :media_pipeline_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4454,6 +4534,37 @@ module Aws::Chime
     class GetGlobalSettingsResponse < Struct.new(
       :business_calling,
       :voice_connector)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetMediaCapturePipelineRequest
+    #   data as a hash:
+    #
+    #       {
+    #         media_pipeline_id: "GuidString", # required
+    #       }
+    #
+    # @!attribute [rw] media_pipeline_id
+    #   The ID of the pipeline that you want to get.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetMediaCapturePipelineRequest AWS API Documentation
+    #
+    class GetMediaCapturePipelineRequest < Struct.new(
+      :media_pipeline_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] media_capture_pipeline
+    #   The media capture pipeline object.
+    #   @return [Types::MediaCapturePipeline]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetMediaCapturePipelineResponse AWS API Documentation
+    #
+    class GetMediaCapturePipelineResponse < Struct.new(
+      :media_capture_pipeline)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6028,6 +6139,49 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListMediaCapturePipelinesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token used to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Valid
+    #   Range: 1 - 99.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListMediaCapturePipelinesRequest AWS API Documentation
+    #
+    class ListMediaCapturePipelinesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] media_capture_pipelines
+    #   The media capture pipeline objects in the list.
+    #   @return [Array<Types::MediaCapturePipeline>]
+    #
+    # @!attribute [rw] next_token
+    #   The token used to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListMediaCapturePipelinesResponse AWS API Documentation
+    #
+    class ListMediaCapturePipelinesResponse < Struct.new(
+      :media_capture_pipelines,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListMeetingTagsRequest
     #   data as a hash:
     #
@@ -6753,6 +6907,60 @@ module Aws::Chime
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/LogoutUserResponse AWS API Documentation
     #
     class LogoutUserResponse < Aws::EmptyStructure; end
+
+    # A media capture pipeline object. A string consisting of an ID, source
+    # type, a source ARN, a sink type, and a sink ARN.
+    #
+    # @!attribute [rw] media_pipeline_id
+    #   The ID of a media capture pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_type
+    #   Source type from which media artifacts are saved. You must use
+    #   `ChimeMeeting`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_arn
+    #   ARN of the source from which the media artifacts will be saved.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the media capture pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] sink_type
+    #   Destination type to which the media artifacts are saved. You must
+    #   use an S3 Bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] sink_arn
+    #   ARN of the destination to which the media artifacts are saved.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time at which the capture pipeline was created, in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   The time at which the capture pipeline was updated, in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/MediaCapturePipeline AWS API Documentation
+    #
+    class MediaCapturePipeline < Struct.new(
+      :media_pipeline_id,
+      :source_type,
+      :source_arn,
+      :status,
+      :sink_type,
+      :sink_arn,
+      :created_timestamp,
+      :updated_timestamp)
+      SENSITIVE = [:source_arn, :sink_arn]
+      include Aws::Structure
+    end
 
     # A set of endpoints used by clients to connect to the media service
     # group for a Amazon Chime SDK meeting.

@@ -103,6 +103,7 @@ module Aws::IoTSiteWise
     CreatePortalResponse = Shapes::StructureShape.new(name: 'CreatePortalResponse')
     CreateProjectRequest = Shapes::StructureShape.new(name: 'CreateProjectRequest')
     CreateProjectResponse = Shapes::StructureShape.new(name: 'CreateProjectResponse')
+    CustomerManagedS3Storage = Shapes::StructureShape.new(name: 'CustomerManagedS3Storage')
     DashboardDefinition = Shapes::StringShape.new(name: 'DashboardDefinition')
     DashboardSummaries = Shapes::ListShape.new(name: 'DashboardSummaries')
     DashboardSummary = Shapes::StructureShape.new(name: 'DashboardSummary')
@@ -142,6 +143,8 @@ module Aws::IoTSiteWise
     DescribePortalResponse = Shapes::StructureShape.new(name: 'DescribePortalResponse')
     DescribeProjectRequest = Shapes::StructureShape.new(name: 'DescribeProjectRequest')
     DescribeProjectResponse = Shapes::StructureShape.new(name: 'DescribeProjectResponse')
+    DescribeStorageConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeStorageConfigurationRequest')
+    DescribeStorageConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeStorageConfigurationResponse')
     Description = Shapes::StringShape.new(name: 'Description')
     DisassociateAssetsRequest = Shapes::StructureShape.new(name: 'DisassociateAssetsRequest')
     Email = Shapes::StringShape.new(name: 'Email')
@@ -224,6 +227,7 @@ module Aws::IoTSiteWise
     MonitorErrorCode = Shapes::StringShape.new(name: 'MonitorErrorCode')
     MonitorErrorDetails = Shapes::StructureShape.new(name: 'MonitorErrorDetails')
     MonitorErrorMessage = Shapes::StringShape.new(name: 'MonitorErrorMessage')
+    MultiLayerStorage = Shapes::StructureShape.new(name: 'MultiLayerStorage')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OffsetInNanos = Shapes::IntegerShape.new(name: 'OffsetInNanos')
@@ -255,6 +259,8 @@ module Aws::IoTSiteWise
     PutDefaultEncryptionConfigurationResponse = Shapes::StructureShape.new(name: 'PutDefaultEncryptionConfigurationResponse')
     PutLoggingOptionsRequest = Shapes::StructureShape.new(name: 'PutLoggingOptionsRequest')
     PutLoggingOptionsResponse = Shapes::StructureShape.new(name: 'PutLoggingOptionsResponse')
+    PutStorageConfigurationRequest = Shapes::StructureShape.new(name: 'PutStorageConfigurationRequest')
+    PutStorageConfigurationResponse = Shapes::StructureShape.new(name: 'PutStorageConfigurationResponse')
     Qualities = Shapes::ListShape.new(name: 'Qualities')
     Quality = Shapes::StringShape.new(name: 'Quality')
     Resolution = Shapes::StringShape.new(name: 'Resolution')
@@ -266,6 +272,7 @@ module Aws::IoTSiteWise
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     SSOApplicationId = Shapes::StringShape.new(name: 'SSOApplicationId')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
+    StorageType = Shapes::StringShape.new(name: 'StorageType')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -634,6 +641,10 @@ module Aws::IoTSiteWise
     CreateProjectResponse.add_member(:project_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "projectArn"))
     CreateProjectResponse.struct_class = Types::CreateProjectResponse
 
+    CustomerManagedS3Storage.add_member(:s3_resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "s3ResourceArn"))
+    CustomerManagedS3Storage.add_member(:role_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "roleArn"))
+    CustomerManagedS3Storage.struct_class = Types::CustomerManagedS3Storage
+
     DashboardSummaries.member = Shapes::ShapeRef.new(shape: DashboardSummary)
 
     DashboardSummary.add_member(:id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "id"))
@@ -816,6 +827,14 @@ module Aws::IoTSiteWise
     DescribeProjectResponse.add_member(:project_creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "projectCreationDate"))
     DescribeProjectResponse.add_member(:project_last_update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "projectLastUpdateDate"))
     DescribeProjectResponse.struct_class = Types::DescribeProjectResponse
+
+    DescribeStorageConfigurationRequest.struct_class = Types::DescribeStorageConfigurationRequest
+
+    DescribeStorageConfigurationResponse.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, required: true, location_name: "storageType"))
+    DescribeStorageConfigurationResponse.add_member(:multi_layer_storage, Shapes::ShapeRef.new(shape: MultiLayerStorage, location_name: "multiLayerStorage"))
+    DescribeStorageConfigurationResponse.add_member(:configuration_status, Shapes::ShapeRef.new(shape: ConfigurationStatus, required: true, location_name: "configurationStatus"))
+    DescribeStorageConfigurationResponse.add_member(:last_update_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateDate"))
+    DescribeStorageConfigurationResponse.struct_class = Types::DescribeStorageConfigurationResponse
 
     DisassociateAssetsRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "assetId"))
     DisassociateAssetsRequest.add_member(:hierarchy_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "hierarchyId"))
@@ -1074,6 +1093,9 @@ module Aws::IoTSiteWise
     MonitorErrorDetails.add_member(:message, Shapes::ShapeRef.new(shape: MonitorErrorMessage, location_name: "message"))
     MonitorErrorDetails.struct_class = Types::MonitorErrorDetails
 
+    MultiLayerStorage.add_member(:customer_managed_s3_storage, Shapes::ShapeRef.new(shape: CustomerManagedS3Storage, required: true, location_name: "customerManagedS3Storage"))
+    MultiLayerStorage.struct_class = Types::MultiLayerStorage
+
     PortalResource.add_member(:id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "id"))
     PortalResource.struct_class = Types::PortalResource
 
@@ -1146,6 +1168,15 @@ module Aws::IoTSiteWise
     PutLoggingOptionsRequest.struct_class = Types::PutLoggingOptionsRequest
 
     PutLoggingOptionsResponse.struct_class = Types::PutLoggingOptionsResponse
+
+    PutStorageConfigurationRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, required: true, location_name: "storageType"))
+    PutStorageConfigurationRequest.add_member(:multi_layer_storage, Shapes::ShapeRef.new(shape: MultiLayerStorage, location_name: "multiLayerStorage"))
+    PutStorageConfigurationRequest.struct_class = Types::PutStorageConfigurationRequest
+
+    PutStorageConfigurationResponse.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, required: true, location_name: "storageType"))
+    PutStorageConfigurationResponse.add_member(:multi_layer_storage, Shapes::ShapeRef.new(shape: MultiLayerStorage, location_name: "multiLayerStorage"))
+    PutStorageConfigurationResponse.add_member(:configuration_status, Shapes::ShapeRef.new(shape: ConfigurationStatus, required: true, location_name: "configurationStatus"))
+    PutStorageConfigurationResponse.struct_class = Types::PutStorageConfigurationResponse
 
     Qualities.member = Shapes::ShapeRef.new(shape: Quality)
 
@@ -1766,6 +1797,20 @@ module Aws::IoTSiteWise
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:describe_storage_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeStorageConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/configuration/account/storage"
+        o.input = Shapes::ShapeRef.new(shape: DescribeStorageConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeStorageConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
+      end)
+
       api.add_operation(:disassociate_assets, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateAssets"
         o.http_method = "POST"
@@ -2109,6 +2154,21 @@ module Aws::IoTSiteWise
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:put_storage_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutStorageConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/configuration/account/storage"
+        o.input = Shapes::ShapeRef.new(shape: PutStorageConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutStorageConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

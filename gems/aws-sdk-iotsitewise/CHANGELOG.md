@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2021-07-07)
+------------------
+
+* Feature - This release add storage configuration APIs for AWS IoT SiteWise.
+
 1.23.0 (2021-05-27)
 ------------------
 

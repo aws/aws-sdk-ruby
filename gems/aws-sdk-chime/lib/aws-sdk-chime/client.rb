@@ -1410,6 +1410,62 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Creates a media capture pipeline.
+    #
+    # @option params [required, String] :source_type
+    #   Source type from which the media artifacts will be captured. A Chime
+    #   SDK Meeting is the only supported source.
+    #
+    # @option params [required, String] :source_arn
+    #   ARN of the source from which the media artifacts are captured.
+    #
+    # @option params [required, String] :sink_type
+    #   Destination type to which the media artifacts are saved. You must use
+    #   an S3 bucket.
+    #
+    # @option params [required, String] :sink_arn
+    #   The ARN of the sink type.
+    #
+    # @option params [String] :client_request_token
+    #   The token assigned to the client making the pipeline request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateMediaCapturePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMediaCapturePipelineResponse#media_capture_pipeline #media_capture_pipeline} => Types::MediaCapturePipeline
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_media_capture_pipeline({
+    #     source_type: "ChimeSdkMeeting", # required, accepts ChimeSdkMeeting
+    #     source_arn: "Arn", # required
+    #     sink_type: "S3Bucket", # required, accepts S3Bucket
+    #     sink_arn: "Arn", # required
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.media_capture_pipeline.media_pipeline_id #=> String
+    #   resp.media_capture_pipeline.source_type #=> String, one of "ChimeSdkMeeting"
+    #   resp.media_capture_pipeline.source_arn #=> String
+    #   resp.media_capture_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped"
+    #   resp.media_capture_pipeline.sink_type #=> String, one of "S3Bucket"
+    #   resp.media_capture_pipeline.sink_arn #=> String
+    #   resp.media_capture_pipeline.created_timestamp #=> Time
+    #   resp.media_capture_pipeline.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateMediaCapturePipeline AWS API Documentation
+    #
+    # @overload create_media_capture_pipeline(params = {})
+    # @param [Hash] params ({})
+    def create_media_capture_pipeline(params = {}, options = {})
+      req = build_request(:create_media_capture_pipeline, params)
+      req.send_request(options)
+    end
+
     # Creates a new Amazon Chime SDK meeting in the specified media Region
     # with no initial attendees. For more information about specifying media
     # Regions, see [Amazon Chime SDK Media Regions][1] in the *Amazon Chime
@@ -2552,6 +2608,28 @@ module Aws::Chime
     # @param [Hash] params ({})
     def delete_events_configuration(params = {}, options = {})
       req = build_request(:delete_events_configuration, params)
+      req.send_request(options)
+    end
+
+    # Deletes the media capture pipeline.
+    #
+    # @option params [required, String] :media_pipeline_id
+    #   The ID of the media capture pipeline being deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_media_capture_pipeline({
+    #     media_pipeline_id: "GuidString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteMediaCapturePipeline AWS API Documentation
+    #
+    # @overload delete_media_capture_pipeline(params = {})
+    # @param [Hash] params ({})
+    def delete_media_capture_pipeline(params = {}, options = {})
+      req = build_request(:delete_media_capture_pipeline, params)
       req.send_request(options)
     end
 
@@ -3782,6 +3860,41 @@ module Aws::Chime
     # @param [Hash] params ({})
     def get_global_settings(params = {}, options = {})
       req = build_request(:get_global_settings, params)
+      req.send_request(options)
+    end
+
+    # Gets an existing media capture pipeline.
+    #
+    # @option params [required, String] :media_pipeline_id
+    #   The ID of the pipeline that you want to get.
+    #
+    # @return [Types::GetMediaCapturePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMediaCapturePipelineResponse#media_capture_pipeline #media_capture_pipeline} => Types::MediaCapturePipeline
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_media_capture_pipeline({
+    #     media_pipeline_id: "GuidString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.media_capture_pipeline.media_pipeline_id #=> String
+    #   resp.media_capture_pipeline.source_type #=> String, one of "ChimeSdkMeeting"
+    #   resp.media_capture_pipeline.source_arn #=> String
+    #   resp.media_capture_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped"
+    #   resp.media_capture_pipeline.sink_type #=> String, one of "S3Bucket"
+    #   resp.media_capture_pipeline.sink_arn #=> String
+    #   resp.media_capture_pipeline.created_timestamp #=> Time
+    #   resp.media_capture_pipeline.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetMediaCapturePipeline AWS API Documentation
+    #
+    # @overload get_media_capture_pipeline(params = {})
+    # @param [Hash] params ({})
+    def get_media_capture_pipeline(params = {}, options = {})
+      req = build_request(:get_media_capture_pipeline, params)
       req.send_request(options)
     end
 
@@ -5376,6 +5489,51 @@ module Aws::Chime
     # @param [Hash] params ({})
     def list_channels_moderated_by_app_instance_user(params = {}, options = {})
       req = build_request(:list_channels_moderated_by_app_instance_user, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of media capture pipelines.
+    #
+    # @option params [String] :next_token
+    #   The token used to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Valid Range:
+    #   1 - 99.
+    #
+    # @return [Types::ListMediaCapturePipelinesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMediaCapturePipelinesResponse#media_capture_pipelines #media_capture_pipelines} => Array&lt;Types::MediaCapturePipeline&gt;
+    #   * {Types::ListMediaCapturePipelinesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_media_capture_pipelines({
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.media_capture_pipelines #=> Array
+    #   resp.media_capture_pipelines[0].media_pipeline_id #=> String
+    #   resp.media_capture_pipelines[0].source_type #=> String, one of "ChimeSdkMeeting"
+    #   resp.media_capture_pipelines[0].source_arn #=> String
+    #   resp.media_capture_pipelines[0].status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped"
+    #   resp.media_capture_pipelines[0].sink_type #=> String, one of "S3Bucket"
+    #   resp.media_capture_pipelines[0].sink_arn #=> String
+    #   resp.media_capture_pipelines[0].created_timestamp #=> Time
+    #   resp.media_capture_pipelines[0].updated_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListMediaCapturePipelines AWS API Documentation
+    #
+    # @overload list_media_capture_pipelines(params = {})
+    # @param [Hash] params ({})
+    def list_media_capture_pipelines(params = {}, options = {})
+      req = build_request(:list_media_capture_pipelines, params)
       req.send_request(options)
     end
 
@@ -8178,7 +8336,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
