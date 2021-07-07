@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix usage of `:uri_escape_path` and `:apply_checksum_header` in `Signer`.
+
 1.2.3 (2021-03-04)
 ------------------
 

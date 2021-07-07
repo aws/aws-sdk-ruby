@@ -269,7 +269,7 @@ module Aws
           expect(signature.headers['x-amz-content-sha256']).to eq(Digest::SHA256.hexdigest('abc'))
         end
 
-        it 'adds the X-Amz-Content-Sha256 header if :apply_checksum_header option with true is passed' do
+        it 'adds the X-Amz-Content-Sha256 header if :apply_checksum_header is true' do
           options[:apply_checksum_header] = true
           signature = Signer.new(options).sign_request(
             http_method: 'GET',
@@ -279,7 +279,7 @@ module Aws
           expect(signature.headers['x-amz-content-sha256']).to eq(Digest::SHA256.hexdigest('abc'))
         end
 
-        it 'can omit the X-Amz-Content-Sha256 header' do
+        it 'can omit the X-Amz-Content-Sha256 header if :apply_checksum_header is false' do
           options[:apply_checksum_header] = false
           signature = Signer.new(options).sign_request(
             http_method: 'GET',
@@ -364,7 +364,7 @@ module Aws
           expect(signature.canonical_request.lines[1]).to eq "/foo%25bar\n"
         end
 
-        it 'escapes path for the canonical request if :uri_escape_path option with true is passed' do
+        it 'escapes path for the canonical request if :uri_escape_path is true' do
           options[:uri_escape_path] = true
           signature = Signer.new(options).sign_request(
             http_method: 'GET',
@@ -373,7 +373,7 @@ module Aws
           expect(signature.canonical_request.lines[1]).to eq "/foo%25bar\n"
         end
 
-        it 'does not escape path for the canonical request if :uri_escape_path option with false is passed' do
+        it 'does not escape path for the canonical request if :uri_escape_path is false' do
           options[:uri_escape_path] = false
           signature = Signer.new(options).sign_request(
             http_method: 'GET',
