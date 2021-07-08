@@ -74,14 +74,10 @@ module Aws::Outposts
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone.
-    #
-    #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_id
     #   The ID of the Availability Zone.
-    #
-    #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -281,6 +277,9 @@ module Aws::Outposts
     #       {
     #         next_token: "Token",
     #         max_results: 1,
+    #         life_cycle_status_filter: ["LifeCycleStatus"],
+    #         availability_zone_filter: ["AvailabilityZone"],
+    #         availability_zone_id_filter: ["AvailabilityZoneId"],
     #       }
     #
     # @!attribute [rw] next_token
@@ -291,11 +290,38 @@ module Aws::Outposts
     #   The maximum page size.
     #   @return [Integer]
     #
+    # @!attribute [rw] life_cycle_status_filter
+    #   A filter for the lifecycle status of the Outpost.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for
+    #   a filter, the values are joined with an `OR`, and the request
+    #   returns all results that match any of the specified values.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] availability_zone_filter
+    #   A filter for the Availibility Zone (`us-east-1a`) of the Outpost.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for
+    #   a filter, the values are joined with an `OR`, and the request
+    #   returns all results that match any of the specified values.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] availability_zone_id_filter
+    #   A filter for the AZ IDs (`use1-az1`) of the Outpost.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for
+    #   a filter, the values are joined with an `OR`, and the request
+    #   returns all results that match any of the specified values.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListOutpostsInput AWS API Documentation
     #
     class ListOutpostsInput < Struct.new(
       :next_token,
-      :max_results)
+      :max_results,
+      :life_cycle_status_filter,
+      :availability_zone_filter,
+      :availability_zone_id_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -435,14 +461,10 @@ module Aws::Outposts
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone.
-    #
-    #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_id
     #   The ID of the Availability Zone.
-    #
-    #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
     #   @return [String]
     #
     # @!attribute [rw] tags

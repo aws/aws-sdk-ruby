@@ -1103,6 +1103,49 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
+    # Returns a list of alerts for the given resource.
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::ListAlertsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAlertsResponse#items #items} => Array&lt;Types::Alert&gt;
+    #   * {Types::ListAlertsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_alerts({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     resource_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].alert_code #=> String
+    #   resp.items[0].alert_message #=> String
+    #   resp.items[0].last_modified_time #=> Time
+    #   resp.items[0].related_resource_arns #=> Array
+    #   resp.items[0].related_resource_arns[0] #=> String
+    #   resp.items[0].resource_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListAlerts AWS API Documentation
+    #
+    # @overload list_alerts(params = {})
+    # @param [Hash] params ({})
+    def list_alerts(params = {}, options = {})
+      req = build_request(:list_alerts, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of channels that are associated with this account.
     #
     # @option params [Integer] :max_results
@@ -1863,7 +1906,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

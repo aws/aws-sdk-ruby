@@ -18,6 +18,8 @@ module Aws::Outposts
     Arn = Shapes::StringShape.new(name: 'Arn')
     AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
     AvailabilityZoneId = Shapes::StringShape.new(name: 'AvailabilityZoneId')
+    AvailabilityZoneIdList = Shapes::ListShape.new(name: 'AvailabilityZoneIdList')
+    AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateOutpostInput = Shapes::StructureShape.new(name: 'CreateOutpostInput')
     CreateOutpostOutput = Shapes::StructureShape.new(name: 'CreateOutpostOutput')
@@ -35,6 +37,7 @@ module Aws::Outposts
     InstanceTypeListDefinition = Shapes::ListShape.new(name: 'InstanceTypeListDefinition')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     LifeCycleStatus = Shapes::StringShape.new(name: 'LifeCycleStatus')
+    LifeCycleStatusList = Shapes::ListShape.new(name: 'LifeCycleStatusList')
     ListOutpostsInput = Shapes::StructureShape.new(name: 'ListOutpostsInput')
     ListOutpostsOutput = Shapes::StructureShape.new(name: 'ListOutpostsOutput')
     ListSitesInput = Shapes::StructureShape.new(name: 'ListSitesInput')
@@ -72,6 +75,10 @@ module Aws::Outposts
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AvailabilityZoneIdList.member = Shapes::ShapeRef.new(shape: AvailabilityZoneId)
+
+    AvailabilityZoneList.member = Shapes::ShapeRef.new(shape: AvailabilityZone)
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
@@ -124,8 +131,13 @@ module Aws::Outposts
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    LifeCycleStatusList.member = Shapes::ShapeRef.new(shape: LifeCycleStatus)
+
     ListOutpostsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "NextToken"))
     ListOutpostsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults1000, location: "querystring", location_name: "MaxResults"))
+    ListOutpostsInput.add_member(:life_cycle_status_filter, Shapes::ShapeRef.new(shape: LifeCycleStatusList, location: "querystring", location_name: "LifeCycleStatusFilter"))
+    ListOutpostsInput.add_member(:availability_zone_filter, Shapes::ShapeRef.new(shape: AvailabilityZoneList, location: "querystring", location_name: "AvailabilityZoneFilter"))
+    ListOutpostsInput.add_member(:availability_zone_id_filter, Shapes::ShapeRef.new(shape: AvailabilityZoneIdList, location: "querystring", location_name: "AvailabilityZoneIdFilter"))
     ListOutpostsInput.struct_class = Types::ListOutpostsInput
 
     ListOutpostsOutput.add_member(:outposts, Shapes::ShapeRef.new(shape: outpostListDefinition, location_name: "Outposts"))

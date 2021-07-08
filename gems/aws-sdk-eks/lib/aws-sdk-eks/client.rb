@@ -1767,6 +1767,12 @@ module Aws::EKS
     #   resp.fargate_profile.tags #=> Hash
     #   resp.fargate_profile.tags["TagKey"] #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * fargate_profile_active
+    #   * fargate_profile_deleted
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeFargateProfile AWS API Documentation
     #
     # @overload describe_fargate_profile(params = {})
@@ -3008,7 +3014,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -3074,14 +3080,16 @@ module Aws::EKS
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name       | params                      | :delay   | :max_attempts |
-    # | ----------------- | --------------------------- | -------- | ------------- |
-    # | addon_active      | {Client#describe_addon}     | 10       | 60            |
-    # | addon_deleted     | {Client#describe_addon}     | 10       | 60            |
-    # | cluster_active    | {Client#describe_cluster}   | 30       | 40            |
-    # | cluster_deleted   | {Client#describe_cluster}   | 30       | 40            |
-    # | nodegroup_active  | {Client#describe_nodegroup} | 30       | 80            |
-    # | nodegroup_deleted | {Client#describe_nodegroup} | 30       | 40            |
+    # | waiter_name             | params                            | :delay   | :max_attempts |
+    # | ----------------------- | --------------------------------- | -------- | ------------- |
+    # | addon_active            | {Client#describe_addon}           | 10       | 60            |
+    # | addon_deleted           | {Client#describe_addon}           | 10       | 60            |
+    # | cluster_active          | {Client#describe_cluster}         | 30       | 40            |
+    # | cluster_deleted         | {Client#describe_cluster}         | 30       | 40            |
+    # | fargate_profile_active  | {Client#describe_fargate_profile} | 10       | 60            |
+    # | fargate_profile_deleted | {Client#describe_fargate_profile} | 30       | 60            |
+    # | nodegroup_active        | {Client#describe_nodegroup}       | 30       | 80            |
+    # | nodegroup_deleted       | {Client#describe_nodegroup}       | 30       | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -3136,6 +3144,8 @@ module Aws::EKS
         addon_deleted: Waiters::AddonDeleted,
         cluster_active: Waiters::ClusterActive,
         cluster_deleted: Waiters::ClusterDeleted,
+        fargate_profile_active: Waiters::FargateProfileActive,
+        fargate_profile_deleted: Waiters::FargateProfileDeleted,
         nodegroup_active: Waiters::NodegroupActive,
         nodegroup_deleted: Waiters::NodegroupDeleted
       }

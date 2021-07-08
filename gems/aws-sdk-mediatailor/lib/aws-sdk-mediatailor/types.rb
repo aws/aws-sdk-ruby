@@ -144,6 +144,41 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # Alert configuration parameters.
+    #
+    # @!attribute [rw] alert_code
+    #   The code for the alert. For example, NOT\_PROCESSED.
+    #   @return [String]
+    #
+    # @!attribute [rw] alert_message
+    #   If an alert is generated for a resource, an explanation of the
+    #   reason for the alert.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the alert was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] related_resource_arns
+    #   The Amazon Resource Names (ARNs) related to this alert.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/Alert AWS API Documentation
+    #
+    class Alert < Struct.new(
+      :alert_code,
+      :alert_message,
+      :last_modified_time,
+      :related_resource_arns,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for avail suppression, also known as ad suppression.
     # For more information about ad suppression, see [Ad Suppression][1].
     #
@@ -1634,6 +1669,54 @@ module Aws::MediaTailor
       :path,
       :source_group,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAlertsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "__string",
+    #         resource_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListAlertsRequest AWS API Documentation
+    #
+    class ListAlertsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Lists the alerts for a given resource.
+    #
+    # @!attribute [rw] items
+    #   An array of alerts that are associated with this resource.
+    #   @return [Array<Types::Alert>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token from the list request. Use the token to fetch the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListAlertsResponse AWS API Documentation
+    #
+    class ListAlertsResponse < Struct.new(
+      :items,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end

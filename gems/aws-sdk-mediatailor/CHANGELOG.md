@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2021-07-08)
+------------------
+
+* Feature - Add ListAlerts for Channel, Program, Source Location, and VOD Source to return alerts for resources.
+
 1.40.0 (2021-06-23)
 ------------------
 

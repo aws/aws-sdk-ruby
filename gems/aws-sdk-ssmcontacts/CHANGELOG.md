@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2021-07-08)
+------------------
+
+* Feature - Updated description for CreateContactChannel contactId.
+
 1.1.0 (2021-06-30)
 ------------------
 

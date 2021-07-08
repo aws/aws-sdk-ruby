@@ -329,6 +329,8 @@ module Aws::Outposts
 
     # Creates an Outpost.
     #
+    # You can specify `AvailabilityZone` or `AvailabilityZoneId`.
+    #
     # @option params [required, String] :name
     #   The name of the Outpost.
     #
@@ -341,12 +343,8 @@ module Aws::Outposts
     # @option params [String] :availability_zone
     #   The Availability Zone.
     #
-    #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
-    #
     # @option params [String] :availability_zone_id
     #   The ID of the Availability Zone.
-    #
-    #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to apply to the Outpost.
@@ -518,13 +516,41 @@ module Aws::Outposts
       req.send_request(options)
     end
 
-    # List the Outposts for your AWS account.
+    # Create a list of the Outposts for your AWS account. Add filters to
+    # your request to return a more specific list of results. Use filters to
+    # match an Outpost lifecycle status, Availibility Zone (`us-east-1a`),
+    # and AZ ID (`use1-az1`).
+    #
+    # If you specify multiple filters, the filters are joined with an `AND`,
+    # and the request returns only results that match all of the specified
+    # filters.
     #
     # @option params [String] :next_token
     #   The pagination token.
     #
     # @option params [Integer] :max_results
     #   The maximum page size.
+    #
+    # @option params [Array<String>] :life_cycle_status_filter
+    #   A filter for the lifecycle status of the Outpost.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for a
+    #   filter, the values are joined with an `OR`, and the request returns
+    #   all results that match any of the specified values.
+    #
+    # @option params [Array<String>] :availability_zone_filter
+    #   A filter for the Availibility Zone (`us-east-1a`) of the Outpost.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for a
+    #   filter, the values are joined with an `OR`, and the request returns
+    #   all results that match any of the specified values.
+    #
+    # @option params [Array<String>] :availability_zone_id_filter
+    #   A filter for the AZ IDs (`use1-az1`) of the Outpost.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for a
+    #   filter, the values are joined with an `OR`, and the request returns
+    #   all results that match any of the specified values.
     #
     # @return [Types::ListOutpostsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -538,6 +564,9 @@ module Aws::Outposts
     #   resp = client.list_outposts({
     #     next_token: "Token",
     #     max_results: 1,
+    #     life_cycle_status_filter: ["LifeCycleStatus"],
+    #     availability_zone_filter: ["AvailabilityZone"],
+    #     availability_zone_id_filter: ["AvailabilityZoneId"],
     #   })
     #
     # @example Response structure
@@ -705,7 +734,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

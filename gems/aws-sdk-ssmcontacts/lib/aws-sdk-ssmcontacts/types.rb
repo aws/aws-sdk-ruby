@@ -306,7 +306,8 @@ module Aws::SSMContacts
     #       }
     #
     # @!attribute [rw] contact_id
-    #   The Amazon Resource Name (ARN) of the contact channel.
+    #   The Amazon Resource Name (ARN) of the contact you are adding the
+    #   contact channel to.
     #   @return [String]
     #
     # @!attribute [rw] name

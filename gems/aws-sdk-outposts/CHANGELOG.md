@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2021-07-08)
+------------------
+
+* Feature - Added property filters for listOutposts
+
 1.16.0 (2021-05-26)
 ------------------
 

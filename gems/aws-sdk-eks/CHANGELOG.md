@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2021-07-08)
+------------------
+
+* Feature - Added waiters for EKS FargateProfiles.
+
 1.56.0 (2021-07-06)
 ------------------
 
