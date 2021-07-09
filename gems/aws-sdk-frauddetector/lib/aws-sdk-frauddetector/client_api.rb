@@ -127,12 +127,14 @@ module Aws::FraudDetector
     Label = Shapes::StructureShape.new(name: 'Label')
     LabelSchema = Shapes::StructureShape.new(name: 'LabelSchema')
     Language = Shapes::StringShape.new(name: 'Language')
+    ListOfLogitMetrics = Shapes::ListShape.new(name: 'ListOfLogitMetrics')
     ListOfModelScores = Shapes::ListShape.new(name: 'ListOfModelScores')
     ListOfModelVersions = Shapes::ListShape.new(name: 'ListOfModelVersions')
     ListOfRuleResults = Shapes::ListShape.new(name: 'ListOfRuleResults')
     ListOfStrings = Shapes::ListShape.new(name: 'ListOfStrings')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResult = Shapes::StructureShape.new(name: 'ListTagsForResourceResult')
+    LogitMetric = Shapes::StructureShape.new(name: 'LogitMetric')
     MetricDataPoint = Shapes::StructureShape.new(name: 'MetricDataPoint')
     Model = Shapes::StructureShape.new(name: 'Model')
     ModelEndpointDataBlob = Shapes::StructureShape.new(name: 'ModelEndpointDataBlob')
@@ -209,6 +211,7 @@ module Aws::FraudDetector
     Variable = Shapes::StructureShape.new(name: 'Variable')
     VariableEntry = Shapes::StructureShape.new(name: 'VariableEntry')
     VariableEntryList = Shapes::ListShape.new(name: 'VariableEntryList')
+    VariableImportanceMetrics = Shapes::StructureShape.new(name: 'VariableImportanceMetrics')
     VariableList = Shapes::ListShape.new(name: 'VariableList')
     VariablesMaxResults = Shapes::IntegerShape.new(name: 'VariablesMaxResults')
     batchPredictionsMaxPageSize = Shapes::IntegerShape.new(name: 'batchPredictionsMaxPageSize')
@@ -714,6 +717,8 @@ module Aws::FraudDetector
     LabelSchema.add_member(:label_mapper, Shapes::ShapeRef.new(shape: labelMapper, required: true, location_name: "labelMapper"))
     LabelSchema.struct_class = Types::LabelSchema
 
+    ListOfLogitMetrics.member = Shapes::ShapeRef.new(shape: LogitMetric)
+
     ListOfModelScores.member = Shapes::ShapeRef.new(shape: ModelScores)
 
     ListOfModelVersions.member = Shapes::ShapeRef.new(shape: ModelVersion)
@@ -730,6 +735,11 @@ module Aws::FraudDetector
     ListTagsForResourceResult.add_member(:tags, Shapes::ShapeRef.new(shape: tagList, location_name: "tags"))
     ListTagsForResourceResult.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
     ListTagsForResourceResult.struct_class = Types::ListTagsForResourceResult
+
+    LogitMetric.add_member(:variable_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "variableName"))
+    LogitMetric.add_member(:variable_type, Shapes::ShapeRef.new(shape: string, required: true, location_name: "variableType"))
+    LogitMetric.add_member(:variable_importance, Shapes::ShapeRef.new(shape: float, required: true, location_name: "variableImportance"))
+    LogitMetric.struct_class = Types::LogitMetric
 
     MetricDataPoint.add_member(:fpr, Shapes::ShapeRef.new(shape: float, location_name: "fpr"))
     MetricDataPoint.add_member(:precision, Shapes::ShapeRef.new(shape: float, location_name: "precision"))
@@ -907,6 +917,7 @@ module Aws::FraudDetector
 
     TrainingResult.add_member(:data_validation_metrics, Shapes::ShapeRef.new(shape: DataValidationMetrics, location_name: "dataValidationMetrics"))
     TrainingResult.add_member(:training_metrics, Shapes::ShapeRef.new(shape: TrainingMetrics, location_name: "trainingMetrics"))
+    TrainingResult.add_member(:variable_importance_metrics, Shapes::ShapeRef.new(shape: VariableImportanceMetrics, location_name: "variableImportanceMetrics"))
     TrainingResult.struct_class = Types::TrainingResult
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: fraudDetectorArn, required: true, location_name: "resourceARN"))
@@ -1017,6 +1028,9 @@ module Aws::FraudDetector
 
     VariableEntryList.member = Shapes::ShapeRef.new(shape: VariableEntry)
 
+    VariableImportanceMetrics.add_member(:logit_metrics, Shapes::ShapeRef.new(shape: ListOfLogitMetrics, location_name: "LogitMetrics"))
+    VariableImportanceMetrics.struct_class = Types::VariableImportanceMetrics
+
     VariableList.member = Shapes::ShapeRef.new(shape: Variable)
 
     entityTypeList.member = Shapes::ShapeRef.new(shape: EntityType)
@@ -1107,6 +1121,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:create_detector_version, Seahorse::Model::Operation.new.tap do |o|

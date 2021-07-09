@@ -112,6 +112,7 @@ module Aws::MediaConvert
     CmafPtsOffsetHandlingForBFrames = Shapes::StringShape.new(name: 'CmafPtsOffsetHandlingForBFrames')
     CmafSegmentControl = Shapes::StringShape.new(name: 'CmafSegmentControl')
     CmafStreamInfResolution = Shapes::StringShape.new(name: 'CmafStreamInfResolution')
+    CmafTargetDurationCompatibilityMode = Shapes::StringShape.new(name: 'CmafTargetDurationCompatibilityMode')
     CmafWriteDASHManifest = Shapes::StringShape.new(name: 'CmafWriteDASHManifest')
     CmafWriteHLSManifest = Shapes::StringShape.new(name: 'CmafWriteHLSManifest')
     CmafWriteSegmentTimelineInRepresentation = Shapes::StringShape.new(name: 'CmafWriteSegmentTimelineInRepresentation')
@@ -318,6 +319,7 @@ module Aws::MediaConvert
     HlsSegmentControl = Shapes::StringShape.new(name: 'HlsSegmentControl')
     HlsSettings = Shapes::StructureShape.new(name: 'HlsSettings')
     HlsStreamInfResolution = Shapes::StringShape.new(name: 'HlsStreamInfResolution')
+    HlsTargetDurationCompatibilityMode = Shapes::StringShape.new(name: 'HlsTargetDurationCompatibilityMode')
     HlsTimedMetadataId3Frame = Shapes::StringShape.new(name: 'HlsTimedMetadataId3Frame')
     HopDestination = Shapes::StructureShape.new(name: 'HopDestination')
     Id3Insertion = Shapes::StructureShape.new(name: 'Id3Insertion')
@@ -495,6 +497,8 @@ module Aws::MediaConvert
     SimulateReservedQueue = Shapes::StringShape.new(name: 'SimulateReservedQueue')
     SpekeKeyProvider = Shapes::StructureShape.new(name: 'SpekeKeyProvider')
     SpekeKeyProviderCmaf = Shapes::StructureShape.new(name: 'SpekeKeyProviderCmaf')
+    SrtDestinationSettings = Shapes::StructureShape.new(name: 'SrtDestinationSettings')
+    SrtStylePassthrough = Shapes::StringShape.new(name: 'SrtStylePassthrough')
     StaticKeyProvider = Shapes::StructureShape.new(name: 'StaticKeyProvider')
     StatusUpdateInterval = Shapes::StringShape.new(name: 'StatusUpdateInterval')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
@@ -951,6 +955,7 @@ module Aws::MediaConvert
     CaptionDestinationSettings.add_member(:embedded_destination_settings, Shapes::ShapeRef.new(shape: EmbeddedDestinationSettings, location_name: "embeddedDestinationSettings"))
     CaptionDestinationSettings.add_member(:imsc_destination_settings, Shapes::ShapeRef.new(shape: ImscDestinationSettings, location_name: "imscDestinationSettings"))
     CaptionDestinationSettings.add_member(:scc_destination_settings, Shapes::ShapeRef.new(shape: SccDestinationSettings, location_name: "sccDestinationSettings"))
+    CaptionDestinationSettings.add_member(:srt_destination_settings, Shapes::ShapeRef.new(shape: SrtDestinationSettings, location_name: "srtDestinationSettings"))
     CaptionDestinationSettings.add_member(:teletext_destination_settings, Shapes::ShapeRef.new(shape: TeletextDestinationSettings, location_name: "teletextDestinationSettings"))
     CaptionDestinationSettings.add_member(:ttml_destination_settings, Shapes::ShapeRef.new(shape: TtmlDestinationSettings, location_name: "ttmlDestinationSettings"))
     CaptionDestinationSettings.add_member(:webvtt_destination_settings, Shapes::ShapeRef.new(shape: WebvttDestinationSettings, location_name: "webvttDestinationSettings"))
@@ -1008,6 +1013,7 @@ module Aws::MediaConvert
     CmafGroupSettings.add_member(:segment_control, Shapes::ShapeRef.new(shape: CmafSegmentControl, location_name: "segmentControl"))
     CmafGroupSettings.add_member(:segment_length, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "segmentLength"))
     CmafGroupSettings.add_member(:stream_inf_resolution, Shapes::ShapeRef.new(shape: CmafStreamInfResolution, location_name: "streamInfResolution"))
+    CmafGroupSettings.add_member(:target_duration_compatibility_mode, Shapes::ShapeRef.new(shape: CmafTargetDurationCompatibilityMode, location_name: "targetDurationCompatibilityMode"))
     CmafGroupSettings.add_member(:write_dash_manifest, Shapes::ShapeRef.new(shape: CmafWriteDASHManifest, location_name: "writeDashManifest"))
     CmafGroupSettings.add_member(:write_hls_manifest, Shapes::ShapeRef.new(shape: CmafWriteHLSManifest, location_name: "writeHlsManifest"))
     CmafGroupSettings.add_member(:write_segment_timeline_in_representation, Shapes::ShapeRef.new(shape: CmafWriteSegmentTimelineInRepresentation, location_name: "writeSegmentTimelineInRepresentation"))
@@ -1484,6 +1490,7 @@ module Aws::MediaConvert
     HlsGroupSettings.add_member(:segment_length, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "segmentLength"))
     HlsGroupSettings.add_member(:segments_per_subdirectory, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "segmentsPerSubdirectory"))
     HlsGroupSettings.add_member(:stream_inf_resolution, Shapes::ShapeRef.new(shape: HlsStreamInfResolution, location_name: "streamInfResolution"))
+    HlsGroupSettings.add_member(:target_duration_compatibility_mode, Shapes::ShapeRef.new(shape: HlsTargetDurationCompatibilityMode, location_name: "targetDurationCompatibilityMode"))
     HlsGroupSettings.add_member(:timed_metadata_id_3_frame, Shapes::ShapeRef.new(shape: HlsTimedMetadataId3Frame, location_name: "timedMetadataId3Frame"))
     HlsGroupSettings.add_member(:timed_metadata_id_3_period, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "timedMetadataId3Period"))
     HlsGroupSettings.add_member(:timestamp_delta_milliseconds, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "timestampDeltaMilliseconds"))
@@ -2088,6 +2095,9 @@ module Aws::MediaConvert
     SpekeKeyProviderCmaf.add_member(:resource_id, Shapes::ShapeRef.new(shape: __stringPatternW, location_name: "resourceId"))
     SpekeKeyProviderCmaf.add_member(:url, Shapes::ShapeRef.new(shape: __stringPatternHttps, location_name: "url"))
     SpekeKeyProviderCmaf.struct_class = Types::SpekeKeyProviderCmaf
+
+    SrtDestinationSettings.add_member(:style_passthrough, Shapes::ShapeRef.new(shape: SrtStylePassthrough, location_name: "stylePassthrough"))
+    SrtDestinationSettings.struct_class = Types::SrtDestinationSettings
 
     StaticKeyProvider.add_member(:key_format, Shapes::ShapeRef.new(shape: __stringPatternIdentityAZaZ26AZaZ09163, location_name: "keyFormat"))
     StaticKeyProvider.add_member(:key_format_versions, Shapes::ShapeRef.new(shape: __stringPatternDD, location_name: "keyFormatVersions"))

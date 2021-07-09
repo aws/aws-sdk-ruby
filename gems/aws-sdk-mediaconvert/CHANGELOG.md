@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2021-07-09)
+------------------
+
+* Feature - MediaConvert now supports color, style and position information passthrough from 608 and Teletext to SRT and WebVTT subtitles. MediaConvert now also supports Automatic QVBR quality levels for QVBR RateControlMode.
+
 1.68.0 (2021-06-28)
 ------------------
 

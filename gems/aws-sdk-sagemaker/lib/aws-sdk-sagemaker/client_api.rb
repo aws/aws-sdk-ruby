@@ -1367,6 +1367,7 @@ module Aws::SageMaker
     TrialSummaries = Shapes::ListShape.new(name: 'TrialSummaries')
     TrialSummary = Shapes::StructureShape.new(name: 'TrialSummary')
     TuningJobCompletionCriteria = Shapes::StructureShape.new(name: 'TuningJobCompletionCriteria')
+    TuningJobStepMetaData = Shapes::StructureShape.new(name: 'TuningJobStepMetaData')
     USD = Shapes::StructureShape.new(name: 'USD')
     UiConfig = Shapes::StructureShape.new(name: 'UiConfig')
     UiTemplate = Shapes::StructureShape.new(name: 'UiTemplate')
@@ -5265,6 +5266,7 @@ module Aws::SageMaker
     PipelineExecutionStepMetadata.add_member(:training_job, Shapes::ShapeRef.new(shape: TrainingJobStepMetadata, location_name: "TrainingJob"))
     PipelineExecutionStepMetadata.add_member(:processing_job, Shapes::ShapeRef.new(shape: ProcessingJobStepMetadata, location_name: "ProcessingJob"))
     PipelineExecutionStepMetadata.add_member(:transform_job, Shapes::ShapeRef.new(shape: TransformJobStepMetadata, location_name: "TransformJob"))
+    PipelineExecutionStepMetadata.add_member(:tuning_job, Shapes::ShapeRef.new(shape: TuningJobStepMetaData, location_name: "TuningJob"))
     PipelineExecutionStepMetadata.add_member(:model, Shapes::ShapeRef.new(shape: ModelStepMetadata, location_name: "Model"))
     PipelineExecutionStepMetadata.add_member(:register_model, Shapes::ShapeRef.new(shape: RegisterModelStepMetadata, location_name: "RegisterModel"))
     PipelineExecutionStepMetadata.add_member(:condition, Shapes::ShapeRef.new(shape: ConditionStepMetadata, location_name: "Condition"))
@@ -6039,6 +6041,9 @@ module Aws::SageMaker
 
     TuningJobCompletionCriteria.add_member(:target_objective_metric_value, Shapes::ShapeRef.new(shape: TargetObjectiveMetricValue, required: true, location_name: "TargetObjectiveMetricValue"))
     TuningJobCompletionCriteria.struct_class = Types::TuningJobCompletionCriteria
+
+    TuningJobStepMetaData.add_member(:arn, Shapes::ShapeRef.new(shape: HyperParameterTuningJobArn, location_name: "Arn"))
+    TuningJobStepMetaData.struct_class = Types::TuningJobStepMetaData
 
     USD.add_member(:dollars, Shapes::ShapeRef.new(shape: Dollars, location_name: "Dollars"))
     USD.add_member(:cents, Shapes::ShapeRef.new(shape: Cents, location_name: "Cents"))

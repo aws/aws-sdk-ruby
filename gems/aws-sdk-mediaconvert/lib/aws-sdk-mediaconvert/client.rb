@@ -758,6 +758,7 @@ module Aws::MediaConvert
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #               target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #               write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #               write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -882,6 +883,7 @@ module Aws::MediaConvert
     #               segment_length: 1,
     #               segments_per_subdirectory: 1,
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #               target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #               timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
     #               timed_metadata_id_3_period: 1,
     #               timestamp_delta_milliseconds: 1,
@@ -1115,6 +1117,9 @@ module Aws::MediaConvert
     #                     },
     #                     scc_destination_settings: {
     #                       framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                     },
+    #                     srt_destination_settings: {
+    #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                     },
     #                     teletext_destination_settings: {
     #                       page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -1892,6 +1897,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -1972,6 +1978,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.segments_per_subdirectory #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
@@ -2142,6 +2149,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.srt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
@@ -2921,6 +2929,7 @@ module Aws::MediaConvert
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #               target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #               write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #               write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -3045,6 +3054,7 @@ module Aws::MediaConvert
     #               segment_length: 1,
     #               segments_per_subdirectory: 1,
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #               target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #               timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
     #               timed_metadata_id_3_period: 1,
     #               timestamp_delta_milliseconds: 1,
@@ -3278,6 +3288,9 @@ module Aws::MediaConvert
     #                     },
     #                     scc_destination_settings: {
     #                       framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                     },
+    #                     srt_destination_settings: {
+    #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                     },
     #                     teletext_destination_settings: {
     #                       page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -4025,6 +4038,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -4105,6 +4119,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segments_per_subdirectory #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
@@ -4275,6 +4290,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.srt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
@@ -4925,6 +4941,9 @@ module Aws::MediaConvert
     #             },
     #             scc_destination_settings: {
     #               framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #             },
+    #             srt_destination_settings: {
+    #               style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #             teletext_destination_settings: {
     #               page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -5599,6 +5618,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.srt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
@@ -6462,6 +6482,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -6542,6 +6563,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.segments_per_subdirectory #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
@@ -6712,6 +6734,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.srt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
@@ -7355,6 +7378,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -7435,6 +7459,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segments_per_subdirectory #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
@@ -7605,6 +7630,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.srt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
@@ -8202,6 +8228,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.srt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
@@ -8894,6 +8921,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -8974,6 +9002,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.segments_per_subdirectory #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
@@ -9144,6 +9173,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.srt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
@@ -9837,6 +9867,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -9917,6 +9948,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.segments_per_subdirectory #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
@@ -10087,6 +10119,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.srt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
@@ -10722,6 +10755,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.srt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
@@ -11626,6 +11660,7 @@ module Aws::MediaConvert
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #               target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #               write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #               write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -11750,6 +11785,7 @@ module Aws::MediaConvert
     #               segment_length: 1,
     #               segments_per_subdirectory: 1,
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #               target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #               timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
     #               timed_metadata_id_3_period: 1,
     #               timestamp_delta_milliseconds: 1,
@@ -11983,6 +12019,9 @@ module Aws::MediaConvert
     #                     },
     #                     scc_destination_settings: {
     #                       framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                     },
+    #                     srt_destination_settings: {
+    #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                     },
     #                     teletext_destination_settings: {
     #                       page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -12727,6 +12766,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
@@ -12807,6 +12847,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segments_per_subdirectory #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_frame #=> String, one of "NONE", "PRIV", "TDRL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timed_metadata_id_3_period #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.timestamp_delta_milliseconds #=> Integer
@@ -12977,6 +13018,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.srt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
@@ -13621,6 +13663,9 @@ module Aws::MediaConvert
     #             },
     #             scc_destination_settings: {
     #               framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #             },
+    #             srt_destination_settings: {
+    #               style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #             teletext_destination_settings: {
     #               page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -14292,6 +14337,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.embedded_destination_settings.destination_708_service_number #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.imsc_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.scc_destination_settings.framerate #=> String, one of "FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.srt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
@@ -14780,7 +14826,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

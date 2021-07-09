@@ -28309,6 +28309,11 @@ module Aws::SageMaker
     #   this step execution.
     #   @return [Types::TransformJobStepMetadata]
     #
+    # @!attribute [rw] tuning_job
+    #   The Amazon Resource Name (ARN) of the tuning job that was run by
+    #   this step execution.
+    #   @return [Types::TuningJobStepMetaData]
+    #
     # @!attribute [rw] model
     #   Metadata for the Model step.
     #   @return [Types::ModelStepMetadata]
@@ -28332,6 +28337,7 @@ module Aws::SageMaker
       :training_job,
       :processing_job,
       :transform_job,
+      :tuning_job,
       :model,
       :register_model,
       :condition,
@@ -30117,8 +30123,8 @@ module Aws::SageMaker
     # registry where your model image is hosted. Specify a value for this
     # property only if you specified `Vpc` as the value for the
     # `RepositoryAccessMode` field of the `ImageConfig` object that you
-    # passed to a call to CreateModel and the private Docker registry where
-    # the model image is hosted requires authentication.
+    # passed to a call to `CreateModel` and the private Docker registry
+    # where the model image is hosted requires authentication.
     #
     # @note When making an API call, you may pass RepositoryAuthConfig
     #   data as a hash:
@@ -34005,6 +34011,21 @@ module Aws::SageMaker
     #
     class TuningJobCompletionCriteria < Struct.new(
       :target_objective_metric_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata for a tuning step.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the tuning job that was run by
+    #   this step execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TuningJobStepMetaData AWS API Documentation
+    #
+    class TuningJobStepMetaData < Struct.new(
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end

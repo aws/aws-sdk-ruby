@@ -13731,6 +13731,7 @@ module Aws::SageMaker
     #   resp.pipeline_execution_steps[0].metadata.training_job.arn #=> String
     #   resp.pipeline_execution_steps[0].metadata.processing_job.arn #=> String
     #   resp.pipeline_execution_steps[0].metadata.transform_job.arn #=> String
+    #   resp.pipeline_execution_steps[0].metadata.tuning_job.arn #=> String
     #   resp.pipeline_execution_steps[0].metadata.model.arn #=> String
     #   resp.pipeline_execution_steps[0].metadata.register_model.arn #=> String
     #   resp.pipeline_execution_steps[0].metadata.condition.outcome #=> String, one of "True", "False"
@@ -17684,7 +17685,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.92.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

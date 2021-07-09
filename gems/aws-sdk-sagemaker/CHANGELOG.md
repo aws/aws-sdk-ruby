@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2021-07-09)
+------------------
+
+* Feature - Releasing new APIs related to Tuning steps in model building pipelines.
+
 1.92.0 (2021-07-01)
 ------------------
 
