@@ -24,7 +24,7 @@ request URI and never moved to the host as a sub-domain.
           DOCS
 
         def add_handlers(handlers, config)
-          handlers.add(Handler) unless config.force_path_style
+          handlers.add(Handler, priority: 48) unless config.force_path_style
         end
 
         # @api private

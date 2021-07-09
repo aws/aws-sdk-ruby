@@ -37,7 +37,9 @@ module Aws
         if prefix && cfg.endpoint.to_s.match(/#{prefix}\.amazonaws\.com/)
           'us-east-1'
         elsif cfg.region
-          Aws::Partitions::EndpointProvider.signing_region(cfg.region, cfg.sigv4_name)
+          Aws::Partitions::EndpointProvider.signing_region(
+            cfg.region, cfg.sigv4_name, cfg.use_dualstack_endpoint
+          )
         end
       end
 

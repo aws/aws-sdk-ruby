@@ -47,21 +47,21 @@ module Aws
             bucket: 'bucket-name', account_id: '12345', use_dualstack_endpoint: false
           )
           expect(resp.context.http_request.endpoint.to_s).to match(
-            'https://12345.s3-control.us-west-2.amazonaws.com/'
+            'https://12345.s3-control.us-west-2.amazonaws.com'
           )
         end
 
         it 'works for global operations' do
           resp = dualstack_client.list_regional_buckets(account_id: '12345')
           expect(resp.context.http_request.endpoint.to_s).to match(
-            'https://12345.s3-control.dualstack.us-west-2.amazonaws.com/'
+            'https://12345.s3-control.dualstack.us-west-2.amazonaws.com'
           )
         end
 
         it 'works with DNS incompatible buckets' do
           resp = dualstack_client.get_bucket(bucket: 'bucket.name', account_id: '12345')
           expect(resp.context.http_request.endpoint.to_s).to match(
-            'https://12345.s3-control.dualstack.us-west-2.amazonaws.com/'
+            'https://12345.s3-control.dualstack.us-west-2.amazonaws.com'
           )
         end
 
@@ -73,7 +73,7 @@ module Aws
           )
           resp = client.get_bucket(bucket: 'bucket-name', account_id: '12345')
           expect(resp.context.http_request.endpoint.to_s).to match(
-            'https://12345.s3-control.dualstack.us-east-1.amazonaws.com/'
+            'https://12345.s3-control.dualstack.us-east-1.amazonaws.com'
           )
         end
 
@@ -85,7 +85,7 @@ module Aws
           )
           resp = client.get_bucket(bucket: 'bucket-name', account_id: '12345')
           expect(resp.context.http_request.endpoint.to_s).to match(
-            "https://12345.s3-control.dualstack.cn-north-1.amazonaws.com.cn/"
+            "https://12345.s3-control.dualstack.cn-north-1.amazonaws.com.cn"
           )
         end
       end

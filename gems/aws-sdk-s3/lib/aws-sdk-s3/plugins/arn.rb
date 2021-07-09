@@ -113,8 +113,8 @@ be made. Set to `false` to use the client's region instead.
 
             if !arn.support_dualstack? && context[:use_dualstack_endpoint]
               raise ArgumentError,
-                    'Cannot provide an Outpost Access Point ARN when '\
-                    '`:use_dualstack_endpoint` is set to true.'
+                    'Cannot provide an Outpost Access Point or Object Lambda '\
+                    'ARN when `:use_dualstack_endpoint` is set to true.'
             end
           end
         end

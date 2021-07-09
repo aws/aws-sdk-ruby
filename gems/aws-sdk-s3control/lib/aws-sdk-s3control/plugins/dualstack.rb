@@ -5,15 +5,6 @@ module Aws
     module Plugins
       # @api private
       class Dualstack < Seahorse::Client::Plugin
-
-        option(:use_dualstack_endpoint,
-          default: false,
-          doc_type: 'Boolean',
-          docstring: <<-DOCS)
-When set to `true`, IPv6-compatible bucket endpoints will be used
-for all operations.
-          DOCS
-
         def add_handlers(handlers, config)
           handlers.add(OptionHandler, step: :initialize)
           handlers.add(DualstackHandler, step: :build, priority: 11)
@@ -40,22 +31,18 @@ for all operations.
         # @api private
         class DualstackHandler < Seahorse::Client::Handler
           def call(context)
-            if context.config.regional_endpoint && context[:use_dualstack_endpoint]
-              apply_dualstack_endpoint(context)
+            # if it's a regional endpoint and not an ARN, then construct the
+            # endpoint. regional endpoint plugin uses the dualstack config
+            if context.config.regional_endpoint && !context.metadata[:s3_arn]
+              endpoint = Aws::Partitions::EndpointProvider.resolve(
+                context.config.region,
+                's3-control',
+                'regional',
+                context[:use_dualstack_endpoint]
+              )
+              context.http_request.endpoint = URI.parse(endpoint)
             end
             @handler.call(context)
-          end
-
-          private
-          def apply_dualstack_endpoint(context)
-            region = context.config.region
-            dns_suffix = Aws::Partitions::EndpointProvider.dns_suffix_for(region)
-            host = "s3-control.dualstack.#{region}.#{dns_suffix}"
-            endpoint = URI.parse(context.http_request.endpoint.to_s)
-            endpoint.scheme = context.http_request.endpoint.scheme
-            endpoint.port = context.http_request.endpoint.port
-            endpoint.host = host
-            context.http_request.endpoint = endpoint.to_s
           end
         end
 
