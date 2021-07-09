@@ -19,6 +19,7 @@ require_relative 'aws-sdk-core/instance_profile_credentials'
 require_relative 'aws-sdk-core/shared_credentials'
 require_relative 'aws-sdk-core/process_credentials'
 require_relative 'aws-sdk-core/sso_credentials'
+require_relative 'aws-sdk-core/provider_chain_credentials'
 
 # client modules
 

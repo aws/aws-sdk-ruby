@@ -223,6 +223,7 @@ module Seahorse
           if @members.include?(method_name)
             value_at(method_name)
           else
+            puts caller
             super
           end
         end
