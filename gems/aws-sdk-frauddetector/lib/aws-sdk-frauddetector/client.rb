@@ -1329,6 +1329,10 @@ module Aws::FraudDetector
     #   resp.model_version_details[0].training_result.training_metrics.metric_data_points[0].precision #=> Float
     #   resp.model_version_details[0].training_result.training_metrics.metric_data_points[0].tpr #=> Float
     #   resp.model_version_details[0].training_result.training_metrics.metric_data_points[0].threshold #=> Float
+    #   resp.model_version_details[0].training_result.variable_importance_metrics.logit_metrics #=> Array
+    #   resp.model_version_details[0].training_result.variable_importance_metrics.logit_metrics[0].variable_name #=> String
+    #   resp.model_version_details[0].training_result.variable_importance_metrics.logit_metrics[0].variable_type #=> String
+    #   resp.model_version_details[0].training_result.variable_importance_metrics.logit_metrics[0].variable_importance #=> Float
     #   resp.model_version_details[0].last_updated_time #=> String
     #   resp.model_version_details[0].created_time #=> String
     #   resp.model_version_details[0].arn #=> String
@@ -1595,6 +1599,30 @@ module Aws::FraudDetector
     #   Names of the event type's variables you defined in Amazon Fraud
     #   Detector to represent data elements and their corresponding values for
     #   the event you are sending for evaluation.
+    #
+    #   * You must provide at least one eventVariable
+    #
+    #   * If detectorVersion is associated with a modelVersion, you must
+    #     provide at least one associated eventVariable
+    #
+    #   To ensure highest possible fraud prediction and to simplify your data
+    #   preparation, Amazon Fraud Detector will replace all missing variables
+    #   or values as follows:
+    #
+    #   **For Amazon Fraud Detector trained models:**
+    #
+    #   If a null value is provided explicitly for a variable or if a variable
+    #   is missing, model will replace the null value or the missing variable
+    #   (no variable name in the eventVariables map) with calculated default
+    #   mean/medians for numeric variables and with special values for
+    #   categorical variables.
+    #
+    #   **For External models ( for example, imported SageMaker):**
+    #
+    #   If a null value is provided explicitly for a variable, the model and
+    #   rules will use “null” as the value. If a variable is not provided (no
+    #   variable name in the eventVariables map), model and rules will use the
+    #   default value that is provided for the variable.
     #
     # @option params [Hash<String,Types::ModelEndpointDataBlob>] :external_model_endpoint_data_blobs
     #   The Amazon SageMaker model endpoint input data blobs.
@@ -2942,7 +2970,7 @@ module Aws::FraudDetector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-frauddetector'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1150,10 +1150,9 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Settings for quality-defined variable bitrate encoding with the AV1
-    # codec. Required when you set Rate control mode to QVBR. Not valid when
-    # you set Rate control mode to a value other than QVBR, or when you
-    # don't define Rate control mode.
+    # Settings for quality-defined variable bitrate encoding with the H.265
+    # codec. Use these settings only when you set QVBR for Rate control mode
+    # (RateControlMode).
     #
     # @note When making an API call, you may pass Av1QvbrSettings
     #   data as a hash:
@@ -1164,15 +1163,20 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] qvbr_quality_level
-    #   Required when you use QVBR rate control mode. That is, when you
-    #   specify qvbrSettings within av1Settings. Specify the general target
-    #   quality level for this output, from 1 to 10. Use higher numbers for
-    #   greater quality. Level 10 results in nearly lossless compression.
-    #   The quality level for most broadcast-quality transcodes is between 6
-    #   and 9. Optionally, to specify a value between whole numbers, also
-    #   provide a value for the setting qvbrQualityLevelFineTune. For
-    #   example, if you want your QVBR quality level to be 7.33, set
-    #   qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
+    #   Use this setting only when you set Rate control mode
+    #   (RateControlMode) to QVBR. Specify the target quality level for this
+    #   output. MediaConvert determines the right number of bits to use for
+    #   each part of the video to maintain the video quality that you
+    #   specify. When you keep the default value, AUTO, MediaConvert picks a
+    #   quality level for you, based on characteristics of your input video.
+    #   If you prefer to specify a quality level, specify a number from 1
+    #   through 10. Use higher numbers for greater quality. Level 10 results
+    #   in nearly lossless compression. The quality level for most
+    #   broadcast-quality transcodes is between 6 and 9. Optionally, to
+    #   specify a value between whole numbers, also provide a value for the
+    #   setting qvbrQualityLevelFineTune. For example, if you want your QVBR
+    #   quality level to be 7.33, set qvbrQualityLevel to 7 and set
+    #   qvbrQualityLevelFineTune to .33.
     #   @return [Integer]
     #
     # @!attribute [rw] qvbr_quality_level_fine_tune
@@ -1296,10 +1300,9 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] qvbr_settings
-    #   Settings for quality-defined variable bitrate encoding with the AV1
-    #   codec. Required when you set Rate control mode to QVBR. Not valid
-    #   when you set Rate control mode to a value other than QVBR, or when
-    #   you don't define Rate control mode.
+    #   Settings for quality-defined variable bitrate encoding with the
+    #   H.265 codec. Use these settings only when you set QVBR for Rate
+    #   control mode (RateControlMode).
     #   @return [Types::Av1QvbrSettings]
     #
     # @!attribute [rw] rate_control_mode
@@ -1858,6 +1861,9 @@ module Aws::MediaConvert
     #           scc_destination_settings: {
     #             framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #           },
+    #           srt_destination_settings: {
+    #             style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
     #           teletext_destination_settings: {
     #             page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #             page_types: ["PAGE_TYPE_INITIAL"], # accepts PAGE_TYPE_INITIAL, PAGE_TYPE_SUBTITLE, PAGE_TYPE_ADDL_INFO, PAGE_TYPE_PROGRAM_SCHEDULE, PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE
@@ -1991,6 +1997,9 @@ module Aws::MediaConvert
     #           scc_destination_settings: {
     #             framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #           },
+    #           srt_destination_settings: {
+    #             style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
     #           teletext_destination_settings: {
     #             page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #             page_types: ["PAGE_TYPE_INITIAL"], # accepts PAGE_TYPE_INITIAL, PAGE_TYPE_SUBTITLE, PAGE_TYPE_ADDL_INFO, PAGE_TYPE_PROGRAM_SCHEDULE, PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE
@@ -2123,6 +2132,9 @@ module Aws::MediaConvert
     #         scc_destination_settings: {
     #           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #         },
+    #         srt_destination_settings: {
+    #           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
     #         teletext_destination_settings: {
     #           page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #           page_types: ["PAGE_TYPE_INITIAL"], # accepts PAGE_TYPE_INITIAL, PAGE_TYPE_SUBTITLE, PAGE_TYPE_ADDL_INFO, PAGE_TYPE_PROGRAM_SCHEDULE, PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE
@@ -2198,6 +2210,10 @@ module Aws::MediaConvert
     #   SCC.
     #   @return [Types::SccDestinationSettings]
     #
+    # @!attribute [rw] srt_destination_settings
+    #   SRT Destination Settings
+    #   @return [Types::SrtDestinationSettings]
+    #
     # @!attribute [rw] teletext_destination_settings
     #   Settings related to teletext captions. Set up teletext captions in
     #   the same output as your video. For more information, see
@@ -2231,6 +2247,7 @@ module Aws::MediaConvert
       :embedded_destination_settings,
       :imsc_destination_settings,
       :scc_destination_settings,
+      :srt_destination_settings,
       :teletext_destination_settings,
       :ttml_destination_settings,
       :webvtt_destination_settings)
@@ -2691,6 +2708,7 @@ module Aws::MediaConvert
     #         segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #         segment_length: 1,
     #         stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #         target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #         write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #         write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #         write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -2846,6 +2864,19 @@ module Aws::MediaConvert
     #   EXT-X-STREAM-INF tag of variant manifest.
     #   @return [String]
     #
+    # @!attribute [rw] target_duration_compatibility_mode
+    #   When set to LEGACY, the segment target duration is always rounded up
+    #   to the nearest integer value above its current value in seconds.
+    #   When set to SPEC\\\\\_COMPLIANT, the segment target duration is
+    #   rounded up to the nearest integer value if fraction seconds are
+    #   greater than or equal to 0.5 (>= 0.5) and rounded down if less than
+    #   0.5 (< 0.5). You may need to use LEGACY if your client needs to
+    #   ensure that the target duration is always longer than the actual
+    #   duration of the segment. Some older players may experience
+    #   interrupted playback when the actual duration of a track in a
+    #   segment is longer than the target duration.
+    #   @return [String]
+    #
     # @!attribute [rw] write_dash_manifest
     #   When set to ENABLED, a DASH MPD manifest will be generated for this
     #   output.
@@ -2888,6 +2919,7 @@ module Aws::MediaConvert
       :segment_control,
       :segment_length,
       :stream_inf_resolution,
+      :target_duration_compatibility_mode,
       :write_dash_manifest,
       :write_hls_manifest,
       :write_segment_timeline_in_representation)
@@ -3648,6 +3680,7 @@ module Aws::MediaConvert
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                   write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                   write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                   write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -3772,6 +3805,7 @@ module Aws::MediaConvert
     #                   segment_length: 1,
     #                   segments_per_subdirectory: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                   timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
     #                   timed_metadata_id_3_period: 1,
     #                   timestamp_delta_milliseconds: 1,
@@ -4005,6 +4039,9 @@ module Aws::MediaConvert
     #                         },
     #                         scc_destination_settings: {
     #                           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                         },
+    #                         srt_destination_settings: {
+    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                         },
     #                         teletext_destination_settings: {
     #                           page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -4982,6 +5019,7 @@ module Aws::MediaConvert
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                   write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                   write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                   write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -5106,6 +5144,7 @@ module Aws::MediaConvert
     #                   segment_length: 1,
     #                   segments_per_subdirectory: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                   timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
     #                   timed_metadata_id_3_period: 1,
     #                   timestamp_delta_milliseconds: 1,
@@ -5339,6 +5378,9 @@ module Aws::MediaConvert
     #                         },
     #                         scc_destination_settings: {
     #                           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                         },
+    #                         srt_destination_settings: {
+    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                         },
     #                         teletext_destination_settings: {
     #                           page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -6185,6 +6227,9 @@ module Aws::MediaConvert
     #                 },
     #                 scc_destination_settings: {
     #                   framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                 },
+    #                 srt_destination_settings: {
+    #                   style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                 },
     #                 teletext_destination_settings: {
     #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -7669,7 +7714,7 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] font_color
-    #   Specifies the color of the burned-in captions. This option is not
+    #   Specifies the color of the DVB-SUB captions. This option is not
     #   valid for source captions that are STL, 608/embedded or teletext.
     #   These source settings are already pre-defined by the caption stream.
     #   All burn-in and DVB-Sub font settings must match.
@@ -8867,10 +8912,9 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Settings for quality-defined variable bitrate encoding with the H.264
-    # codec. Required when you set Rate control mode to QVBR. Not valid when
-    # you set Rate control mode to a value other than QVBR, or when you
-    # don't define Rate control mode.
+    # Settings for quality-defined variable bitrate encoding with the H.265
+    # codec. Use these settings only when you set QVBR for Rate control mode
+    # (RateControlMode).
     #
     # @note When making an API call, you may pass H264QvbrSettings
     #   data as a hash:
@@ -8892,15 +8936,20 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] qvbr_quality_level
-    #   Required when you use QVBR rate control mode. That is, when you
-    #   specify qvbrSettings within h264Settings. Specify the general target
-    #   quality level for this output, from 1 to 10. Use higher numbers for
-    #   greater quality. Level 10 results in nearly lossless compression.
-    #   The quality level for most broadcast-quality transcodes is between 6
-    #   and 9. Optionally, to specify a value between whole numbers, also
-    #   provide a value for the setting qvbrQualityLevelFineTune. For
-    #   example, if you want your QVBR quality level to be 7.33, set
-    #   qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
+    #   Use this setting only when you set Rate control mode
+    #   (RateControlMode) to QVBR. Specify the target quality level for this
+    #   output. MediaConvert determines the right number of bits to use for
+    #   each part of the video to maintain the video quality that you
+    #   specify. When you keep the default value, AUTO, MediaConvert picks a
+    #   quality level for you, based on characteristics of your input video.
+    #   If you prefer to specify a quality level, specify a number from 1
+    #   through 10. Use higher numbers for greater quality. Level 10 results
+    #   in nearly lossless compression. The quality level for most
+    #   broadcast-quality transcodes is between 6 and 9. Optionally, to
+    #   specify a value between whole numbers, also provide a value for the
+    #   setting qvbrQualityLevelFineTune. For example, if you want your QVBR
+    #   quality level to be 7.33, set qvbrQualityLevel to 7 and set
+    #   qvbrQualityLevelFineTune to .33.
     #   @return [Integer]
     #
     # @!attribute [rw] qvbr_quality_level_fine_tune
@@ -9211,9 +9260,8 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] qvbr_settings
     #   Settings for quality-defined variable bitrate encoding with the
-    #   H.264 codec. Required when you set Rate control mode to QVBR. Not
-    #   valid when you set Rate control mode to a value other than QVBR, or
-    #   when you don't define Rate control mode.
+    #   H.265 codec. Use these settings only when you set QVBR for Rate
+    #   control mode (RateControlMode).
     #   @return [Types::H264QvbrSettings]
     #
     # @!attribute [rw] rate_control_mode
@@ -9413,9 +9461,8 @@ module Aws::MediaConvert
     end
 
     # Settings for quality-defined variable bitrate encoding with the H.265
-    # codec. Required when you set Rate control mode to QVBR. Not valid when
-    # you set Rate control mode to a value other than QVBR, or when you
-    # don't define Rate control mode.
+    # codec. Use these settings only when you set QVBR for Rate control mode
+    # (RateControlMode).
     #
     # @note When making an API call, you may pass H265QvbrSettings
     #   data as a hash:
@@ -9437,15 +9484,20 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] qvbr_quality_level
-    #   Required when you use QVBR rate control mode. That is, when you
-    #   specify qvbrSettings within h265Settings. Specify the general target
-    #   quality level for this output, from 1 to 10. Use higher numbers for
-    #   greater quality. Level 10 results in nearly lossless compression.
-    #   The quality level for most broadcast-quality transcodes is between 6
-    #   and 9. Optionally, to specify a value between whole numbers, also
-    #   provide a value for the setting qvbrQualityLevelFineTune. For
-    #   example, if you want your QVBR quality level to be 7.33, set
-    #   qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
+    #   Use this setting only when you set Rate control mode
+    #   (RateControlMode) to QVBR. Specify the target quality level for this
+    #   output. MediaConvert determines the right number of bits to use for
+    #   each part of the video to maintain the video quality that you
+    #   specify. When you keep the default value, AUTO, MediaConvert picks a
+    #   quality level for you, based on characteristics of your input video.
+    #   If you prefer to specify a quality level, specify a number from 1
+    #   through 10. Use higher numbers for greater quality. Level 10 results
+    #   in nearly lossless compression. The quality level for most
+    #   broadcast-quality transcodes is between 6 and 9. Optionally, to
+    #   specify a value between whole numbers, also provide a value for the
+    #   setting qvbrQualityLevelFineTune. For example, if you want your QVBR
+    #   quality level to be 7.33, set qvbrQualityLevel to 7 and set
+    #   qvbrQualityLevelFineTune to .33.
     #   @return [Integer]
     #
     # @!attribute [rw] qvbr_quality_level_fine_tune
@@ -9736,9 +9788,8 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] qvbr_settings
     #   Settings for quality-defined variable bitrate encoding with the
-    #   H.265 codec. Required when you set Rate control mode to QVBR. Not
-    #   valid when you set Rate control mode to a value other than QVBR, or
-    #   when you don't define Rate control mode.
+    #   H.265 codec. Use these settings only when you set QVBR for Rate
+    #   control mode (RateControlMode).
     #   @return [Types::H265QvbrSettings]
     #
     # @!attribute [rw] rate_control_mode
@@ -10320,6 +10371,7 @@ module Aws::MediaConvert
     #         segment_length: 1,
     #         segments_per_subdirectory: 1,
     #         stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #         target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #         timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
     #         timed_metadata_id_3_period: 1,
     #         timestamp_delta_milliseconds: 1,
@@ -10488,6 +10540,19 @@ module Aws::MediaConvert
     #   EXT-X-STREAM-INF tag of variant manifest.
     #   @return [String]
     #
+    # @!attribute [rw] target_duration_compatibility_mode
+    #   When set to LEGACY, the segment target duration is always rounded up
+    #   to the nearest integer value above its current value in seconds.
+    #   When set to SPEC\\\\\_COMPLIANT, the segment target duration is
+    #   rounded up to the nearest integer value if fraction seconds are
+    #   greater than or equal to 0.5 (>= 0.5) and rounded down if less than
+    #   0.5 (< 0.5). You may need to use LEGACY if your client needs to
+    #   ensure that the target duration is always longer than the actual
+    #   duration of the segment. Some older players may experience
+    #   interrupted playback when the actual duration of a track in a
+    #   segment is longer than the target duration.
+    #   @return [String]
+    #
     # @!attribute [rw] timed_metadata_id_3_frame
     #   Indicates ID3 frame that has the timecode.
     #   @return [String]
@@ -10528,6 +10593,7 @@ module Aws::MediaConvert
       :segment_length,
       :segments_per_subdirectory,
       :stream_inf_resolution,
+      :target_duration_compatibility_mode,
       :timed_metadata_id_3_frame,
       :timed_metadata_id_3_period,
       :timestamp_delta_milliseconds)
@@ -12202,6 +12268,7 @@ module Aws::MediaConvert
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1,
     #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                 write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                 write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                 write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -12326,6 +12393,7 @@ module Aws::MediaConvert
     #                 segment_length: 1,
     #                 segments_per_subdirectory: 1,
     #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                 timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
     #                 timed_metadata_id_3_period: 1,
     #                 timestamp_delta_milliseconds: 1,
@@ -12559,6 +12627,9 @@ module Aws::MediaConvert
     #                       },
     #                       scc_destination_settings: {
     #                         framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                       },
+    #                       srt_destination_settings: {
+    #                         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                       },
     #                       teletext_destination_settings: {
     #                         page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -13576,6 +13647,7 @@ module Aws::MediaConvert
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1,
     #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                 write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                 write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                 write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -13700,6 +13772,7 @@ module Aws::MediaConvert
     #                 segment_length: 1,
     #                 segments_per_subdirectory: 1,
     #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                 timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
     #                 timed_metadata_id_3_period: 1,
     #                 timestamp_delta_milliseconds: 1,
@@ -13933,6 +14006,9 @@ module Aws::MediaConvert
     #                       },
     #                       scc_destination_settings: {
     #                         framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                       },
+    #                       srt_destination_settings: {
+    #                         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                       },
     #                       teletext_destination_settings: {
     #                         page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -17370,6 +17446,9 @@ module Aws::MediaConvert
     #               scc_destination_settings: {
     #                 framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #               },
+    #               srt_destination_settings: {
+    #                 style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #               },
     #               teletext_destination_settings: {
     #                 page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                 page_types: ["PAGE_TYPE_INITIAL"], # accepts PAGE_TYPE_INITIAL, PAGE_TYPE_SUBTITLE, PAGE_TYPE_ADDL_INFO, PAGE_TYPE_PROGRAM_SCHEDULE, PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE
@@ -18085,6 +18164,7 @@ module Aws::MediaConvert
     #             segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #             segment_length: 1,
     #             stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #             target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #             write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #             write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #             write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -18209,6 +18289,7 @@ module Aws::MediaConvert
     #             segment_length: 1,
     #             segments_per_subdirectory: 1,
     #             stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #             target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #             timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
     #             timed_metadata_id_3_period: 1,
     #             timestamp_delta_milliseconds: 1,
@@ -18442,6 +18523,9 @@ module Aws::MediaConvert
     #                   },
     #                   scc_destination_settings: {
     #                     framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                   },
+    #                   srt_destination_settings: {
+    #                     style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                   },
     #                   teletext_destination_settings: {
     #                     page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -19083,6 +19167,7 @@ module Aws::MediaConvert
     #           segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #           segment_length: 1,
     #           stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #           write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #           write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #           write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -19207,6 +19292,7 @@ module Aws::MediaConvert
     #           segment_length: 1,
     #           segments_per_subdirectory: 1,
     #           stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #           timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
     #           timed_metadata_id_3_period: 1,
     #           timestamp_delta_milliseconds: 1,
@@ -19618,6 +19704,9 @@ module Aws::MediaConvert
     #               },
     #               scc_destination_settings: {
     #                 framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #               },
+    #               srt_destination_settings: {
+    #                 style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #               },
     #               teletext_destination_settings: {
     #                 page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -20953,6 +21042,30 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # SRT Destination Settings
+    #
+    # @note When making an API call, you may pass SrtDestinationSettings
+    #   data as a hash:
+    #
+    #       {
+    #         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] style_passthrough
+    #   Choose Enabled (ENABLED) to have MediaConvert use the font style,
+    #   color, and position information from the captions source in the
+    #   input. Keep the default value, Disabled (DISABLED), for simplified
+    #   output captions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/SrtDestinationSettings AWS API Documentation
+    #
+    class SrtDestinationSettings < Struct.new(
+      :style_passthrough)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Use these settings to set up encryption with a static key provider.
     #
     # @note When making an API call, you may pass StaticKeyProvider
@@ -21673,6 +21786,7 @@ module Aws::MediaConvert
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                   write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                   write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                   write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
@@ -21797,6 +21911,7 @@ module Aws::MediaConvert
     #                   segment_length: 1,
     #                   segments_per_subdirectory: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                   timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
     #                   timed_metadata_id_3_period: 1,
     #                   timestamp_delta_milliseconds: 1,
@@ -22030,6 +22145,9 @@ module Aws::MediaConvert
     #                         },
     #                         scc_destination_settings: {
     #                           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                         },
+    #                         srt_destination_settings: {
+    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                         },
     #                         teletext_destination_settings: {
     #                           page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
@@ -22863,6 +22981,9 @@ module Aws::MediaConvert
     #                 },
     #                 scc_destination_settings: {
     #                   framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_25, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
+    #                 },
+    #                 srt_destination_settings: {
+    #                   style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                 },
     #                 teletext_destination_settings: {
     #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",

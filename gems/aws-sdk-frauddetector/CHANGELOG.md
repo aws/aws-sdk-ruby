@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2021-07-09)
+------------------
+
+* Feature - This release adds support for ML Explainability to display model variable importance value in Amazon Fraud Detector.
+
 1.18.0 (2021-03-30)
 ------------------
 
