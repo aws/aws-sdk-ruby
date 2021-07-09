@@ -1,0 +1,180 @@
+{
+  "partitions": [
+    {
+      "defaults": {
+        "hostname": "{service}.{region}.{dnsSuffix}",
+        "protocols": [
+          "https"
+        ],
+        "signatureVersions": [
+          "v4"
+        ]
+      },
+      "dualstackDefaults": {
+        "hostname": "{service}.{region}.{dualstackDnsSuffix}",
+        "protocols": [
+          "https"
+        ],
+        "signatureVersions": [
+          "v4"
+        ]
+      },
+      "dnsSuffix": "amazonaws.com",
+      "dualstackDnsSuffix": "aws",
+      "partition": "aws",
+      "regionRegex": "^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$",
+      "regions": {
+        "us-east-1": {
+          "description": "US East (N. Virginia)"
+        },
+        "us-west-2": {
+          "description": "US West (Oregon)"
+        }
+      },
+      "services": {
+        "ec2": {
+          "defaults": {
+            "protocols": [
+              "http",
+              "https"
+            ],
+            "hostname": "api.{service}.{region}.{dnsSuffix}"
+          },
+          "dualstackDefaults": {
+            "protocols": [
+              "http",
+              "https"
+            ],
+            "hostname": "api.{service}.{region}.{dualstackDnsSuffix}"
+          },
+          "endpoints": {
+            "us-west-2": {
+              "credentialScope": {
+                "region": "us-west-2"
+              },
+              "hostname": "ec2.us-west-2.amazonaws.com"
+            }
+          },
+          "dualstackEndpoints": {
+            "us-west-2": {
+              "credentialScope": {
+                "region": "us-west-2"
+              },
+              "hostname": "ec2.us-west-2.aws"
+            }
+          }
+        },
+        "s3": {
+          "defaults": {
+            "protocols": [
+              "http",
+              "https"
+            ],
+            "signatureVersions": [
+              "s3v4"
+            ]
+          },
+          "dualstackDefaults": {
+            "protocols": [
+              "http",
+              "https"
+            ],
+            "hostname": "{service}.dualstack.{region}.{dualstackDnsSuffix}"
+          },
+          "dualstackDnsSuffix": "amazonaws.com",
+          "endpoints": {
+            "us-west-2": {
+              "hostname": "s3.api.us-west-2.amazonaws.com",
+              "signatureVersions": [
+                "s3",
+                "s3v4"
+              ]
+            }
+          },
+          "dualstackEndpoints": {
+            "us-west-2": {
+              "hostname": "s3.api.dualstack.us-west-2.amazonaws.com",
+              "signatureVersions": [
+                "s3",
+                "s3v4"
+              ]
+            }
+          }
+        },
+        "route53": {
+          "endpoints": {
+            "aws-global": {
+              "credentialScope": {
+                "region": "us-east-1"
+              },
+              "hostname": "route53.amazonaws.com"
+            }
+          },
+          "dualstackEndpoints": {
+            "aws-global": {
+              "credentialScope": {
+                "region": "us-east-1"
+              },
+              "hostname": "route53.global.aws"
+            }
+          },
+          "isRegionalized": false,
+          "partitionEndpoint": "aws-global"
+        },
+        "dynamodb": {
+          "defaults": {
+            "protocols": [
+              "http",
+              "https"
+            ]
+          },
+          "endpoints": {
+            "us-west-2": {},
+            "fips-us-west-2": {
+              "credentialScope": {
+                "region": "us-west-2"
+              },
+              "hostname": "dynamodb-fips.us-west-2.amazonaws.com"
+            }
+          },
+          "dualstackEndpoints": {
+            "us-west-2": {},
+            "fips-us-west-2": {
+              "credentialScope": {
+                "region": "us-west-2"
+              },
+              "hostname": "fips.dynamodb.us-west-2.aws"
+            }
+          }
+        }
+      }
+    },
+    {
+      "defaults": {
+        "hostname": "{service}.{region}.{dnsSuffix}",
+        "protocols": [
+          "https"
+        ],
+        "signatureVersions": [
+          "v4"
+        ]
+      },
+      "dnsSuffix": "c2s.ic.gov",
+      "partition": "aws-iso",
+      "regionRegex": "^us\\-iso\\-\\w+\\-\\d+$",
+      "regions": {
+        "us-iso-east-1": {
+          "description": "US ISO East"
+        }
+      },
+      "services": {
+        "ec2": {
+          "endpoints": {
+            "us-iso-east-1": {}
+          }
+        }
+      }
+    }
+  ],
+  "version": 3
+}

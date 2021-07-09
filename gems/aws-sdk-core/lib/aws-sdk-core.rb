@@ -88,6 +88,9 @@ require_relative 'aws-sdk-core/arn'
 require_relative 'aws-sdk-core/arn_parser'
 require_relative 'aws-sdk-core/ec2_metadata'
 
+# plugins
+# loaded through building STS or SSO ..
+
 # aws-sdk-sts is included to support Aws::AssumeRoleCredentials
 require_relative 'aws-sdk-sts'
 

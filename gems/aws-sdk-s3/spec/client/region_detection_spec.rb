@@ -87,15 +87,13 @@ module Aws
       end
 
       context 'using an access point ARN' do
-        before(:each) do
+        it 'detects the moved permanently and redirects' do
           stub_request(:put, 'https://myendpoint-123456789012.s3-accesspoint.us-east-1.amazonaws.com/key')
             .to_return(status: [400, 'Bad Request'], body: auth_header_malformed_body)
 
           stub_request(:put, 'https://myendpoint-123456789012.s3-accesspoint.eu-central-1.amazonaws.com/key')
             .to_return(status: [200, 'Ok'])
-        end
 
-        it 'detects the moved permanently and redirects' do
           client = S3::Client.new(client_opts.merge(region: 'us-west-2'))
           expect_any_instance_of(Plugins::S3Signer::BucketRegionErrorHandler).to receive(:warn)
           bucket = 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint'
@@ -103,6 +101,22 @@ module Aws
           resp = client.put_object(bucket: bucket, key: 'key', body: 'body')
           host = resp.context.http_request.endpoint.host
           expect(host).to eq('myendpoint-123456789012.s3-accesspoint.eu-central-1.amazonaws.com')
+        end
+
+        it 'redirects with dualstack' do
+          stub_request(:put, 'https://myendpoint-123456789012.s3-accesspoint.dualstack.us-east-1.amazonaws.com/key')
+            .to_return(status: [400, 'Bad Request'], body: auth_header_malformed_body)
+
+          stub_request(:put, 'https://myendpoint-123456789012.s3-accesspoint.dualstack.eu-central-1.amazonaws.com/key')
+            .to_return(status: [200, 'Ok'])
+
+          client = S3::Client.new(client_opts.merge(region: 'us-west-2', use_dualstack_endpoint: true))
+          expect_any_instance_of(Plugins::S3Signer::BucketRegionErrorHandler).to receive(:warn)
+          bucket = 'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint'
+          expect_sigv4_service('s3')
+          resp = client.put_object(bucket: bucket, key: 'key', body: 'body')
+          host = resp.context.http_request.endpoint.host
+          expect(host).to eq('myendpoint-123456789012.s3-accesspoint.dualstack.eu-central-1.amazonaws.com')
         end
       end
 
@@ -123,6 +137,26 @@ module Aws
           resp = client.put_object(bucket: bucket, key: 'key', body: 'body')
           host = resp.context.http_request.endpoint.host
           expect(host).to eq('myaccesspoint-123456789012.op-01234567890123456.s3-outposts.eu-central-1.amazonaws.com')
+        end
+      end
+
+      context 'using an object lambda ARN' do
+        before(:each) do
+          stub_request(:put, 'https://mybanner-123456789012.s3-object-lambda.us-east-1.amazonaws.com/key')
+            .to_return(status: [400, 'Bad Request'], body: auth_header_malformed_body)
+
+          stub_request(:put, 'https://mybanner-123456789012.s3-object-lambda.eu-central-1.amazonaws.com/key')
+            .to_return(status: [200, 'Ok'])
+        end
+
+        it 'detects the moved permanently and redirects' do
+          client = S3::Client.new(client_opts.merge(region: 'us-west-2'))
+          expect_any_instance_of(Plugins::S3Signer::BucketRegionErrorHandler).to receive(:warn)
+          bucket = 'arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/mybanner'
+          expect_sigv4_service('s3-object-lambda')
+          resp = client.put_object(bucket: bucket, key: 'key', body: 'body')
+          host = resp.context.http_request.endpoint.host
+          expect(host).to eq('mybanner-123456789012.s3-object-lambda.eu-central-1.amazonaws.com')
         end
       end
 

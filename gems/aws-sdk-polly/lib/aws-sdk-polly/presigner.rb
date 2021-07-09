@@ -57,6 +57,7 @@ module Aws
           region: @region,
           credentials_provider: @credentials
         )
+        # TODO - use context so that dualstack can be used
         url = Aws::Partitions::EndpointProvider.resolve(signer.region, 'polly')
         url += "/v1/speech?#{query}"
         pre_signed_url = signer.presign_url(

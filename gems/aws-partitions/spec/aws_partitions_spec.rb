@@ -320,5 +320,290 @@ module Aws
         end
       end
     end
+
+    # dualstack endpoints testing
+    describe Partitions::EndpointProvider do
+      let(:dualstack_partition_json) do
+        path = File.expand_path('../dualstack_test_partition.json', __FILE__)
+        JSON.load(File.read(path))
+      end
+
+      before do
+        Partitions.clear
+        Partitions.add(dualstack_partition_json)
+      end
+
+      after do
+        path = File.expand_path('../../partitions.json', __FILE__)
+        original_json = JSON.load(File.read(path))
+        Partitions.clear
+        Partitions.add(original_json)
+      end
+
+      describe '.resolve' do
+        context 'service has dualstack defaults' do
+          it 'still resolves a normal endpoint' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'us-west-2',
+                'ec2',
+                'regional',
+                false
+              )
+            ).to eq('https://ec2.us-west-2.amazonaws.com')
+          end
+
+          it 'still falls back to hostname pattern' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'us-east-2',
+                'ec2',
+                'regional',
+                false
+              )
+            ).to eq('https://api.ec2.us-east-2.amazonaws.com')
+          end
+
+          it 'resolves a dualstack endpoint' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'us-west-2',
+                'ec2',
+                'regional',
+                true
+              )
+            ).to eq('https://ec2.us-west-2.aws')
+          end
+
+          it 'resolves dualstack endpoint using hostname pattern' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'us-east-2',
+                'ec2',
+                'regional',
+                true
+              )
+            ).to eq('https://api.ec2.us-east-2.aws')
+          end
+        end
+
+        context 'service has a different dualstack dns suffix' do
+          it 'still resolves a normal endpoint' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'us-west-2',
+                's3',
+                'regional',
+                false
+              )
+            ).to eq('https://s3.api.us-west-2.amazonaws.com')
+          end
+
+          it 'still falls back to hostname pattern' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'us-east-2',
+                's3',
+                'regional',
+                false
+              )
+            ).to eq('https://s3.us-east-2.amazonaws.com')
+          end
+
+          it 'resolves a dualstack endpoint' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'us-west-2',
+                's3',
+                'regional',
+                true
+              )
+            ).to eq('https://s3.api.dualstack.us-west-2.amazonaws.com')
+          end
+
+          it 'resolves dualstack endpoint using hostname pattern' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'us-east-2',
+                's3',
+                'regional',
+                true
+              )
+            ).to eq('https://s3.dualstack.us-east-2.amazonaws.com')
+          end
+        end
+
+        context 'service has global regions and no dualstack defaults' do
+          it 'still resolves a normal global endpoint 1' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'us-west-2',
+                'route53',
+                'regional',
+                false
+              )
+            ).to eq('https://route53.amazonaws.com')
+          end
+
+          it 'still resolves a normal global endpoint 2' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'us-east-2',
+                'route53',
+                'regional',
+                false
+              )
+            ).to eq('https://route53.amazonaws.com')
+          end
+
+          it 'resolves a dualstack global endpoint 1' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'us-west-2',
+                'route53',
+                'regional',
+                true
+              )
+            ).to eq('https://route53.global.aws')
+          end
+
+          it 'resolves a dualstack global endpoint 2' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'us-east-2',
+                'route53',
+                'regional',
+                true
+              )
+            ).to eq('https://route53.global.aws')
+          end
+        end
+
+        context 'service has fips and no dualstack defaults' do
+          it 'still resolves a normal endpoint' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'us-west-2',
+                'dynamodb',
+                'regional',
+                false
+              )
+            ).to eq('https://dynamodb.us-west-2.amazonaws.com')
+          end
+
+          it 'still falls back to hostname pattern' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'us-east-2',
+                'dynamodb',
+                'regional',
+                false
+              )
+            ).to eq('https://dynamodb.us-east-2.amazonaws.com')
+          end
+
+          it 'resolves a dualstack endpoint' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'us-west-2',
+                'dynamodb',
+                'regional',
+                true
+              )
+            ).to eq('https://dynamodb.us-west-2.aws')
+          end
+
+          it 'resolves a dualstack endpoint using hostname pattern' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'us-east-2',
+                'dynamodb',
+                'regional',
+                true
+              )
+            ).to eq('https://dynamodb.us-east-2.aws')
+          end
+
+          it 'still resolves a fips endpoint' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'fips-us-west-2',
+                'dynamodb',
+                'regional',
+                false
+              )
+            ).to eq('https://dynamodb-fips.us-west-2.amazonaws.com')
+          end
+
+          it 'resolves a fips dualstack endpoint' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'fips-us-west-2',
+                'dynamodb',
+                'regional',
+                true
+              )
+            ).to eq('https://fips.dynamodb.us-west-2.aws')
+          end
+        end
+
+        context 'partition does not have dualstack' do
+          it 'still resolves a normal endpoint' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'us-iso-east-1',
+                'ec2',
+                'regional',
+                false
+              )
+            ).to eq('https://ec2.us-iso-east-1.c2s.ic.gov')
+          end
+
+          it 'raises because partition has no dualstack defaults' do
+            expect do
+              Partitions::EndpointProvider.resolve(
+                'us-iso-east-1',
+                'ec2',
+                'regional',
+                true
+              )
+            end.to raise_error(ArgumentError)
+          end
+        end
+      end
+
+      describe '.dns_suffix_for' do
+        it 'gets the dualstack dns suffix for a region' do
+          expect(
+            Partitions::EndpointProvider.dns_suffix_for('us-west-2', nil, true)
+          ).to eq('aws')
+        end
+
+        it 'gets a service level dualstack dns suffix' do
+          expect(
+            Partitions::EndpointProvider.dns_suffix_for('us-west-2', 's3', true)
+          ).to eq('amazonaws.com')
+        end
+
+        it 'does not look at the service for regular dns suffix' do
+          expect(
+            Partitions::EndpointProvider.dns_suffix_for(
+              'us-west-2', 'ec2', false
+            )
+          ).to eq('amazonaws.com')
+        end
+      end
+
+      describe '.signing_region' do
+        it 'still gets the signing region for a given region and service' do
+          expect(
+            Partitions::EndpointProvider.signing_region(
+              'aws-global', 'route53'
+            )
+          ).to eq('us-east-1')
+        end
+      end
+
+    end
   end
 end

@@ -45,7 +45,8 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
           Aws::Partitions::EndpointProvider.resolve(
             cfg.region,
             endpoint_prefix,
-            sts_regional
+            sts_regional,
+            cfg.use_dualstack_endpoint
           )
         end
       end

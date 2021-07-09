@@ -163,6 +163,7 @@ module Aws
       :ca_bundle,
       :credential_process,
       :endpoint_discovery_enabled,
+      :use_dualstack_endpoint,
       :max_attempts,
       :retry_mode,
       :adaptive_retry_wait_to_fill,

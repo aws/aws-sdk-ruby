@@ -41,7 +41,7 @@ each bucket. [Go here for more information](http://docs.aws.amazon.com/AmazonS3/
               accelerate = context.params.delete(:use_accelerate_endpoint)
             end
             accelerate = context.config.use_accelerate_endpoint if accelerate.nil?
-            # Raise if :endpoint and dualstack are both provided
+            # Raise if :endpoint and accelerate are both provided
             if accelerate && !context.config.regional_endpoint
               raise ArgumentError,
                     'Cannot use both :use_accelerate_endpoint and :endpoint'
