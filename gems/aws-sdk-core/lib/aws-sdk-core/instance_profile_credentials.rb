@@ -48,8 +48,8 @@ module Aws
     # @option options [String] :endpoint_mode ('IPv4') The endpoint mode for
     #   the instance metadata service. This is either 'IPv4' ('169.254.169.254')
     #   or 'IPv6' ('[fd00:ec2::254]').
-    # @option options [String] :ip_address ('169.254.169.254') Deprecated. Do
-    #   not use. The IP address for the endpoint.
+    # @option options [String] :ip_address ('169.254.169.254') Deprecated. Use
+    #   :endpoint instead. The IP address for the endpoint.
     # @option options [Integer] :port (80)
     # @option options [Float] :http_open_timeout (1)
     # @option options [Float] :http_read_timeout (1)
