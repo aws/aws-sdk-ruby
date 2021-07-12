@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2021-07-12)
+------------------
+
+* Feature - Documentation updates for Wesley to support the parallel node upgrade feature.
+
 1.57.0 (2021-07-08)
 ------------------
 

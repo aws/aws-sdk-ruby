@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2021-07-12)
+------------------
+
+* Feature - Amazon Kendra now supports Principal Store
+
 1.29.0 (2021-06-30)
 ------------------
 

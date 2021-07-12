@@ -393,8 +393,8 @@ module Aws::EKS
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that provides
-    #   permissions for the Kubernetes control plane to make calls to AWS
-    #   API operations on your behalf.
+    #   permissions for the Kubernetes control plane to make calls to Amazon
+    #   Web Services API operations on your behalf.
     #   @return [String]
     #
     # @!attribute [rw] resources_vpc_config
@@ -524,11 +524,11 @@ module Aws::EKS
     #
     # @!attribute [rw] addon_name
     #   The name of the add-on. The name must match one of the names
-    #   returned by [ `ListAddons` ][1].
+    #   returned by [ `DescribeAddonVersions` ][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html
+    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html
     #   @return [String]
     #
     # @!attribute [rw] addon_version
@@ -657,9 +657,10 @@ module Aws::EKS
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that provides
-    #   permissions for the Kubernetes control plane to make calls to AWS
-    #   API operations on your behalf. For more information, see [Amazon EKS
-    #   Service IAM Role][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #   permissions for the Kubernetes control plane to make calls to Amazon
+    #   Web Services API operations on your behalf. For more information,
+    #   see [Amazon EKS Service IAM Role][1] in the <i> <i>Amazon EKS User
+    #   Guide</i> </i>.
     #
     #
     #
@@ -689,12 +690,12 @@ module Aws::EKS
     #   Enable or disable exporting the Kubernetes control plane logs for
     #   your cluster to CloudWatch Logs. By default, cluster control plane
     #   logs aren't exported to CloudWatch Logs. For more information, see
-    #   [Amazon EKS Cluster Control Plane Logs][1] in the <i> <i>Amazon EKS
+    #   [Amazon EKS Cluster control plane logs][1] in the <i> <i>Amazon EKS
     #   User Guide</i> </i>.
     #
     #   <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
     #   apply to exported control plane logs. For more information, see
-    #   [Amazon CloudWatch Pricing][2].
+    #   [CloudWatch Pricing][2].
     #
     #    </note>
     #
@@ -988,12 +989,12 @@ module Aws::EKS
     # @!attribute [rw] node_role
     #   The Amazon Resource Name (ARN) of the IAM role to associate with
     #   your node group. The Amazon EKS worker node `kubelet` daemon makes
-    #   calls to AWS APIs on your behalf. Nodes receive permissions for
-    #   these API calls through an IAM instance profile and associated
-    #   policies. Before you can launch nodes and register them into a
-    #   cluster, you must create an IAM role for those nodes to use when
-    #   they are launched. For more information, see [Amazon EKS node IAM
-    #   role][1] in the <i> <i>Amazon EKS User Guide</i> </i>. If you
+    #   calls to Amazon Web Services APIs on your behalf. Nodes receive
+    #   permissions for these API calls through an IAM instance profile and
+    #   associated policies. Before you can launch nodes and register them
+    #   into a cluster, you must create an IAM role for those nodes to use
+    #   when they are launched. For more information, see [Amazon EKS node
+    #   IAM role][1] in the <i> <i>Amazon EKS User Guide</i> </i>. If you
     #   specify `launchTemplate`, then don't specify [ `IamInstanceProfile`
     #   ][2] in your launch template, or the node group deployment will
     #   fail. For more information about using launch templates with Amazon
@@ -1039,6 +1040,7 @@ module Aws::EKS
     #   @return [Types::LaunchTemplateSpecification]
     #
     # @!attribute [rw] update_config
+    #   The node group update configuration.
     #   @return [Types::NodegroupUpdateConfig]
     #
     # @!attribute [rw] capacity_type
@@ -1654,8 +1656,8 @@ module Aws::EKS
     #   @return [Array<String>]
     #
     # @!attribute [rw] provider
-    #   AWS Key Management Service (AWS KMS) key. Either the ARN or the
-    #   alias can be used.
+    #   Key Management Service (KMS) key. Either the ARN or the alias can be
+    #   used.
     #   @return [Types::Provider]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/EncryptionConfig AWS API Documentation
@@ -1714,7 +1716,7 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # An object representing an AWS Fargate profile.
+    # An object representing an Fargate profile.
     #
     # @!attribute [rw] fargate_profile_name
     #   The name of the Fargate profile.
@@ -1781,7 +1783,7 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # An object representing an AWS Fargate profile selector.
+    # An object representing an Fargate profile selector.
     #
     # @note When making an API call, you may pass FargateProfileSelector
     #   data as a hash:
@@ -1987,9 +1989,10 @@ module Aws::EKS
     #     managed node group. You may be able to recreate an IAM role with
     #     the same settings to recover.
     #
-    #   * **InstanceLimitExceeded**\: Your AWS account is unable to launch
-    #     any more instances of the specified instance type. You may be able
-    #     to request an Amazon EC2 instance limit increase to recover.
+    #   * **InstanceLimitExceeded**\: Your Amazon Web Services account is
+    #     unable to launch any more instances of the specified instance
+    #     type. You may be able to request an Amazon EC2 instance limit
+    #     increase to recover.
     #
     #   * **InsufficientFreeAddresses**\: One or more of the subnets
     #     associated with your managed node group does not have enough
@@ -2014,7 +2017,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] resource_ids
-    #   The AWS resources that are afflicted by this issue.
+    #   The Amazon Web Services resources that are afflicted by this issue.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Issue AWS API Documentation
@@ -2283,8 +2286,8 @@ module Aws::EKS
     #       }
     #
     # @!attribute [rw] cluster_name
-    #   The name of the Amazon EKS cluster that you would like to
-    #   listFargate profiles in.
+    #   The name of the Amazon EKS cluster that you would like to list
+    #   Fargate profiles in.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2710,9 +2713,9 @@ module Aws::EKS
     #
     # @!attribute [rw] node_role
     #   The IAM role associated with your node group. The Amazon EKS node
-    #   `kubelet` daemon makes calls to AWS APIs on your behalf. Nodes
-    #   receive permissions for these API calls through an IAM instance
-    #   profile and associated policies.
+    #   `kubelet` daemon makes calls to Amazon Web Services APIs on your
+    #   behalf. Nodes receive permissions for these API calls through an IAM
+    #   instance profile and associated policies.
     #   @return [String]
     #
     # @!attribute [rw] labels
@@ -2727,8 +2730,8 @@ module Aws::EKS
     #
     # @!attribute [rw] taints
     #   The Kubernetes taints to be applied to the nodes in the node group
-    #   when they are created. Effect is one of `NoSchedule`,
-    #   `PreferNoSchedule`, or `NoExecute`. Kubernetes taints can be used
+    #   when they are created. Effect is one of `No_Schedule`,
+    #   `Prefer_No_Schedule`, or `No_Execute`. Kubernetes taints can be used
     #   together with tolerations to control how workloads are scheduled to
     #   your nodes.
     #   @return [Array<Types::Taint>]
@@ -2750,6 +2753,7 @@ module Aws::EKS
     #   @return [Types::NodegroupHealth]
     #
     # @!attribute [rw] update_config
+    #   The node group update configuration.
     #   @return [Types::NodegroupUpdateConfig]
     #
     # @!attribute [rw] launch_template
@@ -2846,7 +2850,7 @@ module Aws::EKS
     #
     # @!attribute [rw] min_size
     #   The minimum number of nodes that the managed node group can scale in
-    #   to. This number must be greater than zero.
+    #   to.
     #   @return [Integer]
     #
     # @!attribute [rw] max_size
@@ -2875,6 +2879,8 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # The node group update configuration.
+    #
     # @note When making an API call, you may pass NodegroupUpdateConfig
     #   data as a hash:
     #
@@ -2884,9 +2890,17 @@ module Aws::EKS
     #       }
     #
     # @!attribute [rw] max_unavailable
+    #   The maximum number of nodes unavailable at once during a version
+    #   update. Nodes will be updated in parallel. This value or
+    #   `maxUnavailablePercentage` is required to have a value.The maximum
+    #   number is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] max_unavailable_percentage
+    #   The maximum percentage of nodes unavailable during a version update.
+    #   This percentage of nodes will be updated in parallel, up to 100
+    #   nodes at once. This value or `maxUnavailable` is required to have a
+    #   value.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/NodegroupUpdateConfig AWS API Documentation
@@ -3112,8 +3126,8 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # Identifies the AWS Key Management Service (AWS KMS) key used to
-    # encrypt the secrets.
+    # Identifies the Key Management Service (KMS) key used to encrypt the
+    # secrets.
     #
     # @note When making an API call, you may pass Provider
     #   data as a hash:
@@ -3127,8 +3141,8 @@ module Aws::EKS
     #   be symmetric, created in the same region as the cluster, and if the
     #   KMS key was created in a different account, the user must have
     #   access to the KMS key. For more information, see [Allowing Users in
-    #   Other Accounts to Use a KMS key][1] in the *AWS Key Management
-    #   Service Developer Guide*.
+    #   Other Accounts to Use a KMS key][1] in the *Key Management Service
+    #   Developer Guide*.
     #
     #
     #
@@ -3157,8 +3171,8 @@ module Aws::EKS
     # @!attribute [rw] ec2_ssh_key
     #   The Amazon EC2 SSH key that provides access for SSH communication
     #   with the nodes in the managed node group. For more information, see
-    #   [Amazon EC2 Key Pairs][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide for Linux Instances*.
+    #   [Amazon EC2 key pairs and Linux instances][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide for Linux Instances*.
     #
     #
     #
@@ -3611,12 +3625,12 @@ module Aws::EKS
     #   Enable or disable exporting the Kubernetes control plane logs for
     #   your cluster to CloudWatch Logs. By default, cluster control plane
     #   logs aren't exported to CloudWatch Logs. For more information, see
-    #   [Amazon EKS Cluster Control Plane Logs][1] in the <i> <i>Amazon EKS
+    #   [Amazon EKS cluster control plane logs][1] in the <i> <i>Amazon EKS
     #   User Guide</i> </i>.
     #
     #   <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
     #   apply to exported control plane logs. For more information, see
-    #   [Amazon CloudWatch Pricing][2].
+    #   [CloudWatch Pricing][2].
     #
     #    </note>
     #
@@ -3799,6 +3813,7 @@ module Aws::EKS
     #   @return [Types::NodegroupScalingConfig]
     #
     # @!attribute [rw] update_config
+    #   The node group update configuration.
     #   @return [Types::NodegroupUpdateConfig]
     #
     # @!attribute [rw] client_request_token
@@ -4023,7 +4038,7 @@ module Aws::EKS
     #
     # @!attribute [rw] security_group_ids
     #   Specify one or more security groups for the cross-account elastic
-    #   network interfaces that Amazon EKS creates to use to allow
+    #   network interfaces that Amazon EKS creates to use that allow
     #   communication between your nodes and the Kubernetes control plane.
     #   If you don't specify any security groups, then familiarize yourself
     #   with the difference between Amazon EKS defaults for clusters
@@ -4047,8 +4062,8 @@ module Aws::EKS
     #   access, your cluster's Kubernetes API server can only receive
     #   requests from within the cluster VPC. The default value for this
     #   parameter is `true`, which enables public access for your Kubernetes
-    #   API server. For more information, see [Amazon EKS Cluster Endpoint
-    #   Access Control][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #   API server. For more information, see [Amazon EKS cluster endpoint
+    #   access control][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
     #
     #
     #
@@ -4061,12 +4076,11 @@ module Aws::EKS
     #   access, Kubernetes API requests from within your cluster's VPC use
     #   the private VPC endpoint. The default value for this parameter is
     #   `false`, which disables private access for your Kubernetes API
-    #   server. If you disable private access and you have nodes or AWS
-    #   Fargate pods in the cluster, then ensure that `publicAccessCidrs`
-    #   includes the necessary CIDR blocks for communication with the nodes
-    #   or Fargate pods. For more information, see [Amazon EKS Cluster
-    #   Endpoint Access Control][1] in the <i> <i>Amazon EKS User Guide</i>
-    #   </i>.
+    #   server. If you disable private access and you have nodes or Fargate
+    #   pods in the cluster, then ensure that `publicAccessCidrs` includes
+    #   the necessary CIDR blocks for communication with the nodes or
+    #   Fargate pods. For more information, see [Amazon EKS cluster endpoint
+    #   access control][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
     #
     #
     #
@@ -4078,9 +4092,9 @@ module Aws::EKS
     #   Kubernetes API server endpoint. Communication to the endpoint from
     #   addresses outside of the CIDR blocks that you specify is denied. The
     #   default value is `0.0.0.0/0`. If you've disabled private endpoint
-    #   access and you have nodes or AWS Fargate pods in the cluster, then
+    #   access and you have nodes or Fargate pods in the cluster, then
     #   ensure that you specify the necessary CIDR blocks. For more
-    #   information, see [Amazon EKS Cluster Endpoint Access Control][1] in
+    #   information, see [Amazon EKS cluster endpoint access control][1] in
     #   the <i> <i>Amazon EKS User Guide</i> </i>.
     #
     #
@@ -4135,11 +4149,11 @@ module Aws::EKS
     #   endpoint is enabled. If the Amazon EKS private API server endpoint
     #   is enabled, Kubernetes API requests that originate from within your
     #   cluster's VPC use the private VPC endpoint instead of traversing
-    #   the internet. If this value is disabled and you have nodes or AWS
+    #   the internet. If this value is disabled and you have nodes or
     #   Fargate pods in the cluster, then ensure that `publicAccessCidrs`
     #   includes the necessary CIDR blocks for communication with the nodes
-    #   or Fargate pods. For more information, see [Amazon EKS Cluster
-    #   Endpoint Access Control][1] in the <i> <i>Amazon EKS User Guide</i>
+    #   or Fargate pods. For more information, see [Amazon EKS cluster
+    #   endpoint access control][1] in the <i> <i>Amazon EKS User Guide</i>
     #   </i>.
     #
     #
@@ -4152,9 +4166,9 @@ module Aws::EKS
     #   Kubernetes API server endpoint. Communication to the endpoint from
     #   addresses outside of the listed CIDR blocks is denied. The default
     #   value is `0.0.0.0/0`. If you've disabled private endpoint access
-    #   and you have nodes or AWS Fargate pods in the cluster, then ensure
-    #   that the necessary CIDR blocks are listed. For more information, see
-    #   [Amazon EKS Cluster Endpoint Access Control][1] in the <i> <i>Amazon
+    #   and you have nodes or Fargate pods in the cluster, then ensure that
+    #   the necessary CIDR blocks are listed. For more information, see
+    #   [Amazon EKS cluster endpoint access control][1] in the <i> <i>Amazon
     #   EKS User Guide</i> </i>.
     #
     #

@@ -25,7 +25,8 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] key_path
-    #   Path to the AWS S3 bucket that contains the ACL files.
+    #   Path to the Amazon Web Services S3 bucket that contains the ACL
+    #   files.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AccessControlListConfiguration AWS API Documentation
@@ -777,6 +778,19 @@ module Aws::Kendra
     #                 name: "PrincipalName", # required
     #                 type: "USER", # required, accepts USER, GROUP
     #                 access: "ALLOW", # required, accepts ALLOW, DENY
+    #                 data_source_id: "DataSourceId",
+    #               },
+    #             ],
+    #             hierarchical_access_control_list: [
+    #               {
+    #                 principal_list: [ # required
+    #                   {
+    #                     name: "PrincipalName", # required
+    #                     type: "USER", # required, accepts USER, GROUP
+    #                     access: "ALLOW", # required, accepts ALLOW, DENY
+    #                     data_source_id: "DataSourceId",
+    #                   },
+    #                 ],
     #               },
     #             ],
     #             content_type: "PDF", # accepts PDF, HTML, MS_WORD, PLAIN_TEXT, PPT
@@ -842,8 +856,9 @@ module Aws::Kendra
     #   index.
     #
     #   If there was an error adding a document to an index the error is
-    #   reported in your AWS CloudWatch log. For more information, see
-    #   [Monitoring Amazon Kendra with Amazon CloudWatch Logs][1]
+    #   reported in your Amazon Web Services CloudWatch log. For more
+    #   information, see [Monitoring Amazon Kendra with Amazon CloudWatch
+    #   Logs][1]
     #
     #
     #
@@ -896,25 +911,23 @@ module Aws::Kendra
     #
     # @!attribute [rw] storage_capacity_units
     #   The amount of extra storage capacity for an index. A single capacity
-    #   unit provides 30 GB of storage space or 100,000 documents, whichever
-    #   is reached first.
+    #   unit for an index provides 150 GB of storage space or 500,000
+    #   documents, whichever is reached first.
     #   @return [Integer]
     #
     # @!attribute [rw] query_capacity_units
     #   The amount of extra query capacity for an index and
     #   [GetQuerySuggestions][1] capacity.
     #
-    #   A single extra capacity unit for an index provides 0.1 queries per
-    #   second or approximately 8,000 queries per day.
+    #   A single extra capacity unit for an index provides 0.5 queries per
+    #   second or approximately 40,000 queries per day.
     #
-    #   `GetQuerySuggestions` capacity is five times the provisioned query
-    #   capacity for an index, or the base capacity of 2.5 calls per second,
-    #   whichever is higher. For example, the base capacity for an index is
-    #   0.1 queries per second, and `GetQuerySuggestions` capacity has a
-    #   base of 2.5 calls per second. If you add another 0.1 queries per
-    #   second to total 0.2 queries per second for an index, the
-    #   `GetQuerySuggestions` capacity is 2.5 calls per second (higher than
-    #   five times 0.2 queries per second).
+    #   `GetQuerySuggestions` capacity is 5 times the provisioned query
+    #   capacity for an index. For example, the base capacity for an index
+    #   is 0.5 queries per second, so GetQuerySuggestions capacity is 2.5
+    #   calls per second. If adding another 0.5 queries per second to total
+    #   1 queries per second for an index, the `GetQuerySuggestions`
+    #   capacity is 5 calls per second.
     #
     #
     #
@@ -1274,7 +1287,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that
+    #   The Amazon Resource Name (ARN) of an Secrets Managersecret that
     #   contains the key/value pairs required to connect to your Confluence
     #   server. The secret must contain a JSON structure with the following
     #   keys:
@@ -1571,7 +1584,7 @@ module Aws::Kendra
     #   Manager. The credentials should be a user/password pair. For more
     #   information, see [Using a Database Data Source][1]. For more
     #   information about AWS Secrets Manager, see [ What Is AWS Secrets
-    #   Manager ][2] in the *AWS Secrets Manager* user guide.
+    #   Manager ][2] in the <i> Secrets Manager </i> user guide.
     #
     #
     #
@@ -2164,25 +2177,17 @@ module Aws::Kendra
     #
     #   The `Edition` parameter is optional. If you don't supply a value,
     #   the default is `ENTERPRISE_EDITION`.
-    #
-    #   For more information on quota limits for enterprise and developer
-    #   editions, see [Quotas][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   An AWS Identity and Access Management (IAM) role that gives Amazon
-    #   Kendra permissions to access your Amazon CloudWatch logs and
-    #   metrics. This is also the role used when you use the
-    #   `BatchPutDocument` operation to index documents from an Amazon S3
-    #   bucket.
+    #   An Identity and Access Management(IAM) role that gives Amazon Kendra
+    #   permissions to access your Amazon CloudWatch logs and metrics. This
+    #   is also the role used when you use the `BatchPutDocument` operation
+    #   to index documents from an Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The identifier of the AWS KMS customer managed key (CMK) to use to
+    #   The identifier of the KMScustomer managed key (CMK) to use to
     #   encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't
     #   support asymmetric CMKs.
     #   @return [Types::ServerSideEncryptionConfiguration]
@@ -2808,6 +2813,37 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Data source information for user context filtering.
+    #
+    # @note When making an API call, you may pass DataSourceGroup
+    #   data as a hash:
+    #
+    #       {
+    #         group_id: "PrincipalName", # required
+    #         data_source_id: "DataSourceId", # required
+    #       }
+    #
+    # @!attribute [rw] group_id
+    #   The identifier of the group you want to add to your list of groups.
+    #   This is for filtering search results based on the groups' access to
+    #   documents.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_id
+    #   The identifier of the data source group you want to add to your list
+    #   of data source groups. This is for filtering search results based on
+    #   the groups' access to documents in that data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DataSourceGroup AWS API Documentation
+    #
+    class DataSourceGroup < Struct.new(
+      :group_id,
+      :data_source_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Summary information for a Amazon Kendra data source. Returned in a
     # call to the `DescribeDataSource` operation.
     #
@@ -3199,6 +3235,68 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeletePrincipalMappingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         data_source_id: "DataSourceId",
+    #         group_id: "GroupId", # required
+    #         ordering_id: 1,
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index you want to delete a group from.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_id
+    #   The identifier of the data source you want to delete a group from.
+    #
+    #   This is useful if a group is tied to multiple data sources and you
+    #   want to delete a group from accessing documents in a certain data
+    #   source. For example, the groups "Research", "Engineering", and
+    #   "Sales and Marketing" are all tied to the company's documents
+    #   stored in the data sources Confluence and Salesforce. You want to
+    #   delete "Research" and "Engineering" groups from Salesforce, so
+    #   that these groups cannot access customer-related documents stored in
+    #   Salesforce. Only "Sales and Marketing" should access documents in
+    #   the Salesforce data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The identifier of the group you want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] ordering_id
+    #   The timestamp identifier you specify to ensure Amazon Kendra does
+    #   not override the latest `DELETE` action with previous actions. The
+    #   highest number ID, which is the ordering ID, is the latest action
+    #   you want to process and apply on top of other actions with lower
+    #   number IDs. This prevents previous actions with lower number IDs
+    #   from possibly overriding the latest action.
+    #
+    #   The ordering ID can be the UNIX time of the last update you made to
+    #   a group members list. You would then provide this list when calling
+    #   `PutPrincipalMapping`. This ensures your `DELETE` action for that
+    #   updated group with the latest members list doesn't get overwritten
+    #   by earlier `DELETE` actions for the same group which are yet to be
+    #   processed.
+    #
+    #   The default ordering ID is the current UNIX time in milliseconds
+    #   that the action was received by Amazon Kendra.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeletePrincipalMappingRequest AWS API Documentation
+    #
+    class DeletePrincipalMappingRequest < Struct.new(
+      :index_id,
+      :data_source_id,
+      :group_id,
+      :ordering_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteQuerySuggestionsBlockListRequest
     #   data as a hash:
     #
@@ -3477,8 +3575,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The identifier of the AWS KMS customer master key (CMK) used to
-    #   encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.
+    #   The identifier of the KMScustomer master key (CMK) used to encrypt
+    #   your data. Amazon Kendra doesn't support asymmetric CMKs.
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] status
@@ -3548,6 +3646,86 @@ module Aws::Kendra
       :capacity_units,
       :user_token_configurations,
       :user_context_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribePrincipalMappingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         data_source_id: "DataSourceId",
+    #         group_id: "GroupId", # required
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index required to check the processing of
+    #   `PUT` and `DELETE` actions for mapping users to their groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_id
+    #   The identifier of the data source to check the processing of `PUT`
+    #   and `DELETE` actions for mapping users to their groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The identifier of the group required to check the processing of
+    #   `PUT` and `DELETE` actions for mapping users to their groups.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribePrincipalMappingRequest AWS API Documentation
+    #
+    class DescribePrincipalMappingRequest < Struct.new(
+      :index_id,
+      :data_source_id,
+      :group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] index_id
+    #   Shows the identifier of the index to see information on the
+    #   processing of `PUT` and `DELETE` actions for mapping users to their
+    #   groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_id
+    #   Shows the identifier of the data source to see information on the
+    #   processing of `PUT` and `DELETE` actions for mapping users to their
+    #   groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   Shows the identifier of the group to see information on the
+    #   processing of `PUT` and `DELETE` actions for mapping users to their
+    #   groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_ordering_id_summaries
+    #   Shows the following information on the processing of `PUT` and
+    #   `DELETE` actions for mapping users to their groups:
+    #
+    #   * Status – the status can be either `PROCESSING`, `SUCCEEDED`,
+    #     `DELETING`, `DELETED`, or `FAILED`.
+    #
+    #   * Last updated – the last date-time an action was updated.
+    #
+    #   * Received – the last date-time an action was received or submitted.
+    #
+    #   * Ordering ID – the latest action that should process and apply
+    #     after other actions.
+    #
+    #   * Failure reason – the reason an action could not be processed.
+    #   @return [Array<Types::GroupOrderingIdSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribePrincipalMappingResponse AWS API Documentation
+    #
+    class DescribePrincipalMappingResponse < Struct.new(
+      :index_id,
+      :data_source_id,
+      :group_id,
+      :group_ordering_id_summaries)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3902,6 +4080,19 @@ module Aws::Kendra
     #             name: "PrincipalName", # required
     #             type: "USER", # required, accepts USER, GROUP
     #             access: "ALLOW", # required, accepts ALLOW, DENY
+    #             data_source_id: "DataSourceId",
+    #           },
+    #         ],
+    #         hierarchical_access_control_list: [
+    #           {
+    #             principal_list: [ # required
+    #               {
+    #                 name: "PrincipalName", # required
+    #                 type: "USER", # required, accepts USER, GROUP
+    #                 access: "ALLOW", # required, accepts ALLOW, DENY
+    #                 data_source_id: "DataSourceId",
+    #               },
+    #             ],
     #           },
     #         ],
     #         content_type: "PDF", # accepts PDF, HTML, MS_WORD, PLAIN_TEXT, PPT
@@ -3920,9 +4111,9 @@ module Aws::Kendra
     #
     #   Documents passed to the `Blob` parameter must be base64 encoded.
     #   Your code might not need to encode the document file bytes if
-    #   you're using an AWS SDK to call Amazon Kendra operations. If you
-    #   are calling the Amazon Kendra endpoint directly using REST, you must
-    #   base64 encode the contents before sending.
+    #   you're using an Amazon Web Services SDK to call Amazon Kendra
+    #   operations. If you are calling the Amazon Kendra endpoint directly
+    #   using REST, you must base64 encode the contents before sending.
     #   @return [String]
     #
     # @!attribute [rw] s3_path
@@ -3937,8 +4128,18 @@ module Aws::Kendra
     #   @return [Array<Types::DocumentAttribute>]
     #
     # @!attribute [rw] access_control_list
-    #   Information to use for user context filtering.
+    #   Information on user and group access rights, which is used for user
+    #   context filtering.
     #   @return [Array<Types::Principal>]
+    #
+    # @!attribute [rw] hierarchical_access_control_list
+    #   The list of [principal][1] lists that define the hierarchy for which
+    #   documents users should have access to.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html
+    #   @return [Array<Types::HierarchicalPrincipal>]
     #
     # @!attribute [rw] content_type
     #   The file type of the document in the `Blob` field.
@@ -3953,6 +4154,7 @@ module Aws::Kendra
       :s3_path,
       :attributes,
       :access_control_list,
+      :hierarchical_access_control_list,
       :content_type)
       SENSITIVE = []
       include Aws::Structure
@@ -4216,9 +4418,10 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] s3_prefix
-    #   A prefix used to filter metadata configuration files in the AWS S3
-    #   bucket. The S3 bucket might contain multiple metadata files. Use
-    #   `S3Prefix` to include only the desired metadata files.
+    #   A prefix used to filter metadata configuration files in the Amazon
+    #   Web Services S3 bucket. The S3 bucket might contain multiple
+    #   metadata files. Use `S3Prefix` to include only the desired metadata
+    #   files.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DocumentsMetadataConfiguration AWS API Documentation
@@ -4416,7 +4619,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] secret_arn
-    #   The Amazon Resource Name (ARN) of a AWS Secrets Manager secret that
+    #   The Amazon Resource Name (ARN) of a Secrets Managersecret that
     #   contains the credentials required to connect to Google Drive. For
     #   more information, see [Using a Google Workspace Drive data
     #   source][1].
@@ -4486,6 +4689,157 @@ module Aws::Kendra
       :exclude_mime_types,
       :exclude_user_accounts,
       :exclude_shared_drives)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of users or sub groups that belong to a group. Users and groups
+    # are useful for filtering search results to different users based on
+    # their group's access to documents.
+    #
+    # @note When making an API call, you may pass GroupMembers
+    #   data as a hash:
+    #
+    #       {
+    #         member_groups: [
+    #           {
+    #             group_id: "GroupId", # required
+    #             data_source_id: "DataSourceId",
+    #           },
+    #         ],
+    #         member_users: [
+    #           {
+    #             user_id: "UserId", # required
+    #           },
+    #         ],
+    #         s3_pathfor_group_members: {
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] member_groups
+    #   A list of sub groups that belong to a group. For example, the sub
+    #   groups "Research", "Engineering", and "Sales and Marketing"
+    #   all belong to the group "Company".
+    #   @return [Array<Types::MemberGroup>]
+    #
+    # @!attribute [rw] member_users
+    #   A list of users that belong to a group. For example, a list of
+    #   interns all belong to the "Interns" group.
+    #   @return [Array<Types::MemberUser>]
+    #
+    # @!attribute [rw] s3_pathfor_group_members
+    #   If you have more than 1000 users and/or sub groups for a single
+    #   group, you need to provide the path to the S3 file that lists your
+    #   users and sub groups for a group. Your sub groups can contain more
+    #   than 1000 users, but the list of sub groups that belong to a group
+    #   (and/or users) must be no more than 1000.
+    #   @return [Types::S3Path]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GroupMembers AWS API Documentation
+    #
+    class GroupMembers < Struct.new(
+      :member_groups,
+      :member_users,
+      :s3_pathfor_group_members)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information on the processing of `PUT` and `DELETE` actions for
+    # mapping users to their groups.
+    #
+    # @!attribute [rw] status
+    #   The current processing status of actions for mapping users to their
+    #   groups. The status can be either `PROCESSING`, `SUCCEEDED`,
+    #   `DELETING`, `DELETED`, or `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The last date-time an action was updated. An action can be a `PUT`
+    #   or `DELETE` action for mapping users to their groups.
+    #   @return [Time]
+    #
+    # @!attribute [rw] received_at
+    #   The date-time an action was received by Amazon Kendra. An action can
+    #   be a `PUT` or `DELETE` action for mapping users to their groups.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ordering_id
+    #   The order in which actions should complete processing. An action can
+    #   be a `PUT` or `DELETE` action for mapping users to their groups.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason an action could not be processed. An action can be a
+    #   `PUT` or `DELETE` action for mapping users to their groups.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GroupOrderingIdSummary AWS API Documentation
+    #
+    class GroupOrderingIdSummary < Struct.new(
+      :status,
+      :last_updated_at,
+      :received_at,
+      :ordering_id,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Group summary information.
+    #
+    # @!attribute [rw] group_id
+    #   The identifier of the group you want group summary information on.
+    #   @return [String]
+    #
+    # @!attribute [rw] ordering_id
+    #   The timestamp identifier used for the latest `PUT` or `DELETE`
+    #   action.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GroupSummary AWS API Documentation
+    #
+    class GroupSummary < Struct.new(
+      :group_id,
+      :ordering_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information to define the hierarchy for which documents users should
+    # have access to.
+    #
+    # @note When making an API call, you may pass HierarchicalPrincipal
+    #   data as a hash:
+    #
+    #       {
+    #         principal_list: [ # required
+    #           {
+    #             name: "PrincipalName", # required
+    #             type: "USER", # required, accepts USER, GROUP
+    #             access: "ALLOW", # required, accepts ALLOW, DENY
+    #             data_source_id: "DataSourceId",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] principal_list
+    #   A list of [principal][1] lists that define the hierarchy for which
+    #   documents users should have access to. Each hierarchical list
+    #   specifies which user or group has allow or deny access for each
+    #   document.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html
+    #   @return [Array<Types::Principal>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/HierarchicalPrincipal AWS API Documentation
+    #
+    class HierarchicalPrincipal < Struct.new(
+      :principal_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4870,6 +5224,71 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListGroupsOlderThanOrderingIdRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         data_source_id: "DataSourceId",
+    #         ordering_id: 1, # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for getting a list of groups mapped to
+    #   users before a given ordering or timestamp identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_id
+    #   The identifier of the data source for getting a list of groups
+    #   mapped to users before a given ordering timestamp identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] ordering_id
+    #   The timestamp identifier used for the latest `PUT` or `DELETE`
+    #   action for mapping users to their groups.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The next items in the list of groups that go beyond the maximum.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum results shown for a list of groups that are mapped to
+    #   users before a given ordering or timestamp identifier.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListGroupsOlderThanOrderingIdRequest AWS API Documentation
+    #
+    class ListGroupsOlderThanOrderingIdRequest < Struct.new(
+      :index_id,
+      :data_source_id,
+      :ordering_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] groups_summaries
+    #   Summary information for list of groups that are mapped to users
+    #   before a given ordering or timestamp identifier.
+    #   @return [Array<Types::GroupSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The next items in the list of groups that go beyond the maximum.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListGroupsOlderThanOrderingIdResponse AWS API Documentation
+    #
+    class ListGroupsOlderThanOrderingIdResponse < Struct.new(
+      :groups_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListIndicesRequest
     #   data as a hash:
     #
@@ -5074,6 +5493,55 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # The sub groups that belong to a group.
+    #
+    # @note When making an API call, you may pass MemberGroup
+    #   data as a hash:
+    #
+    #       {
+    #         group_id: "GroupId", # required
+    #         data_source_id: "DataSourceId",
+    #       }
+    #
+    # @!attribute [rw] group_id
+    #   The identifier of the sub group you want to map to a group.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_id
+    #   The identifier of the data source for the sub group you want to map
+    #   to a group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/MemberGroup AWS API Documentation
+    #
+    class MemberGroup < Struct.new(
+      :group_id,
+      :data_source_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The users that belong to a group.
+    #
+    # @note When making an API call, you may pass MemberUser
+    #   data as a hash:
+    #
+    #       {
+    #         user_id: "UserId", # required
+    #       }
+    #
+    # @!attribute [rw] user_id
+    #   The identifier of the user you want to map to a group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/MemberUser AWS API Documentation
+    #
+    class MemberUser < Struct.new(
+      :user_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides configuration information for data sources that connect to
     # OneDrive.
     #
@@ -5107,7 +5575,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that
+    #   The Amazon Resource Name (ARN) of an Secrets Managersecret that
     #   contains the user name and password to connect to OneDrive. The user
     #   namd should be the application ID for the OneDrive application, and
     #   the password is the application key for the OneDrive application.
@@ -5205,6 +5673,7 @@ module Aws::Kendra
     #         name: "PrincipalName", # required
     #         type: "USER", # required, accepts USER, GROUP
     #         access: "ALLOW", # required, accepts ALLOW, DENY
+    #         data_source_id: "DataSourceId",
     #       }
     #
     # @!attribute [rw] name
@@ -5219,12 +5688,18 @@ module Aws::Kendra
     #   Whether to allow or deny access to the principal.
     #   @return [String]
     #
+    # @!attribute [rw] data_source_id
+    #   The identifier of the data source the principal should access
+    #   documents from.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Principal AWS API Documentation
     #
     class Principal < Struct.new(
       :name,
       :type,
-      :access)
+      :access,
+      :data_source_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5276,6 +5751,114 @@ module Aws::Kendra
       :host,
       :port,
       :credentials)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutPrincipalMappingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         data_source_id: "DataSourceId",
+    #         group_id: "GroupId", # required
+    #         group_members: { # required
+    #           member_groups: [
+    #             {
+    #               group_id: "GroupId", # required
+    #               data_source_id: "DataSourceId",
+    #             },
+    #           ],
+    #           member_users: [
+    #             {
+    #               user_id: "UserId", # required
+    #             },
+    #           ],
+    #           s3_pathfor_group_members: {
+    #             bucket: "S3BucketName", # required
+    #             key: "S3ObjectKey", # required
+    #           },
+    #         },
+    #         ordering_id: 1,
+    #         role_arn: "RoleArn",
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index you want to map users to their groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_id
+    #   The identifier of the data source you want to map users to their
+    #   groups.
+    #
+    #   This is useful if a group is tied to multiple data sources, but you
+    #   only want the group to access documents of a certain data source.
+    #   For example, the groups "Research", "Engineering", and "Sales
+    #   and Marketing" are all tied to the company's documents stored in
+    #   the data sources Confluence and Salesforce. However, "Sales and
+    #   Marketing" team only needs access to customer-related documents
+    #   stored in Salesforce.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The identifier of the group you want to map its users to.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_members
+    #   The list that contains your users or sub groups that belong the same
+    #   group.
+    #
+    #   For example, the group "Company" includes the user "CEO" and the
+    #   sub groups "Research", "Engineering", and "Sales and
+    #   Marketing".
+    #
+    #   If you have more than 1000 users and/or sub groups for a single
+    #   group, you need to provide the path to the S3 file that lists your
+    #   users and sub groups for a group. Your sub groups can contain more
+    #   than 1000 users, but the list of sub groups that belong to a group
+    #   (and/or users) must be no more than 1000.
+    #   @return [Types::GroupMembers]
+    #
+    # @!attribute [rw] ordering_id
+    #   The timestamp identifier you specify to ensure Amazon Kendra does
+    #   not override the latest `PUT` action with previous actions. The
+    #   highest number ID, which is the ordering ID, is the latest action
+    #   you want to process and apply on top of other actions with lower
+    #   number IDs. This prevents previous actions with lower number IDs
+    #   from possibly overriding the latest action.
+    #
+    #   The ordering ID can be the UNIX time of the last update you made to
+    #   a group members list. You would then provide this list when calling
+    #   `PutPrincipalMapping`. This ensures your `PUT` action for that
+    #   updated group with the latest members list doesn't get overwritten
+    #   by earlier `PUT` actions for the same group which are yet to be
+    #   processed.
+    #
+    #   The default ordering ID is the current UNIX time in milliseconds
+    #   that the action was received by Amazon Kendra.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of a role that has access to the S3
+    #   file that contains your list of users or sub groups that belong to a
+    #   group.
+    #
+    #   For more information, see [IAM roles for Amazon Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-ds
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/PutPrincipalMappingRequest AWS API Documentation
+    #
+    class PutPrincipalMappingRequest < Struct.new(
+      :index_id,
+      :data_source_id,
+      :group_id,
+      :group_members,
+      :ordering_id,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5393,6 +5976,14 @@ module Aws::Kendra
     #         },
     #         user_context: {
     #           token: "Token",
+    #           user_id: "PrincipalName",
+    #           groups: ["PrincipalName"],
+    #           data_source_groups: [
+    #             {
+    #               group_id: "PrincipalName", # required
+    #               data_source_id: "DataSourceId", # required
+    #             },
+    #           ],
     #         },
     #         visitor_id: "VisitorId",
     #       }
@@ -6095,7 +6686,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that
+    #   The Amazon Resource Name (ARN) of an Secrets Managersecret that
     #   contains the key/value pairs required to connect to your Salesforce
     #   instance. The secret must contain a JSON structure with the
     #   following keys:
@@ -6538,9 +7129,9 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the identifier of the AWS KMS customer master key (CMK) used
-    # to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't
-    # support asymmetric CMKs.
+    # Provides the identifier of the KMScustomer master key (CMK) used to
+    # encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support
+    # asymmetric CMKs.
     #
     # @note When making an API call, you may pass ServerSideEncryptionConfiguration
     #   data as a hash:
@@ -6550,8 +7141,8 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] kms_key_id
-    #   The identifier of the AWS KMS customer master key (CMK). Amazon
-    #   Kendra doesn't support asymmetric CMKs.
+    #   The identifier of the KMScustomer master key (CMK). Amazon Kendra
+    #   doesn't support asymmetric CMKs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ServerSideEncryptionConfiguration AWS API Documentation
@@ -6611,7 +7202,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The Amazon Resource Name (ARN) of the AWS Secret Manager secret that
+    #   The Amazon Resource Name (ARN) of the Secrets Manager secret that
     #   contains the user name and password required to connect to the
     #   ServiceNow instance.
     #   @return [String]
@@ -6875,10 +7466,12 @@ module Aws::Kendra
     #
     # @!attribute [rw] secret_arn
     #   The Amazon Resource Name (ARN) of credentials stored in AWS Secrets
-    #   Manager. The credentials should be a user/password pair. For more
-    #   information, see [Using a Microsoft SharePoint Data Source][1]. For
-    #   more information about AWS Secrets Manager, see [ What Is AWS
-    #   Secrets Manager ][2] in the *AWS Secrets Manager* user guide.
+    #   Manager. The credentials should be a user/password pair. If you use
+    #   SharePoint Sever, you also need to provide the sever domain name as
+    #   part of the credentials. For more information, see [Using a
+    #   Microsoft SharePoint Data Source][1]. For more information about AWS
+    #   Secrets Manager, see [ What Is AWS Secrets Manager ][2] in the
+    #   <i>Secrets Manager </i> user guide.
     #
     #
     #
@@ -8253,21 +8846,60 @@ module Aws::Kendra
 
     # Provides information about the user context for a Amazon Kendra index.
     #
+    # This is used for filtering search results for different users based on
+    # their access to documents.
+    #
+    # You provide one of the following:
+    #
+    # * User token
+    #
+    # * User ID, the groups the user belongs to, and the data sources the
+    #   groups can access
+    #
+    # If you provide both, an exception is thrown.
+    #
     # @note When making an API call, you may pass UserContext
     #   data as a hash:
     #
     #       {
     #         token: "Token",
+    #         user_id: "PrincipalName",
+    #         groups: ["PrincipalName"],
+    #         data_source_groups: [
+    #           {
+    #             group_id: "PrincipalName", # required
+    #             data_source_id: "DataSourceId", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] token
-    #   The user context token. It must be a JWT or a JSON token.
+    #   The user context token for filtering search results for a user. It
+    #   must be a JWT or a JSON token.
     #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier of the user you want to filter search results based
+    #   on their access to documents.
+    #   @return [String]
+    #
+    # @!attribute [rw] groups
+    #   The list of groups you want to filter search results based on the
+    #   groups' access to documents.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] data_source_groups
+    #   The list of data source groups you want to filter search results
+    #   based on groups' access to documents in that data source.
+    #   @return [Array<Types::DataSourceGroup>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UserContext AWS API Documentation
     #
     class UserContext < Struct.new(
-      :token)
+      :token,
+      :user_id,
+      :groups,
+      :data_source_groups)
       SENSITIVE = []
       include Aws::Structure
     end

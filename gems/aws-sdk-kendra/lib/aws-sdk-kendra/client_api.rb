@@ -86,6 +86,8 @@ module Aws::Kendra
     DataSourceConfiguration = Shapes::StructureShape.new(name: 'DataSourceConfiguration')
     DataSourceDateFieldFormat = Shapes::StringShape.new(name: 'DataSourceDateFieldFormat')
     DataSourceFieldName = Shapes::StringShape.new(name: 'DataSourceFieldName')
+    DataSourceGroup = Shapes::StructureShape.new(name: 'DataSourceGroup')
+    DataSourceGroups = Shapes::ListShape.new(name: 'DataSourceGroups')
     DataSourceId = Shapes::StringShape.new(name: 'DataSourceId')
     DataSourceInclusionsExclusionsStrings = Shapes::ListShape.new(name: 'DataSourceInclusionsExclusionsStrings')
     DataSourceInclusionsExclusionsStringsMember = Shapes::StringShape.new(name: 'DataSourceInclusionsExclusionsStringsMember')
@@ -111,6 +113,7 @@ module Aws::Kendra
     DeleteDataSourceRequest = Shapes::StructureShape.new(name: 'DeleteDataSourceRequest')
     DeleteFaqRequest = Shapes::StructureShape.new(name: 'DeleteFaqRequest')
     DeleteIndexRequest = Shapes::StructureShape.new(name: 'DeleteIndexRequest')
+    DeletePrincipalMappingRequest = Shapes::StructureShape.new(name: 'DeletePrincipalMappingRequest')
     DeleteQuerySuggestionsBlockListRequest = Shapes::StructureShape.new(name: 'DeleteQuerySuggestionsBlockListRequest')
     DeleteThesaurusRequest = Shapes::StructureShape.new(name: 'DeleteThesaurusRequest')
     DescribeDataSourceRequest = Shapes::StructureShape.new(name: 'DescribeDataSourceRequest')
@@ -119,6 +122,8 @@ module Aws::Kendra
     DescribeFaqResponse = Shapes::StructureShape.new(name: 'DescribeFaqResponse')
     DescribeIndexRequest = Shapes::StructureShape.new(name: 'DescribeIndexRequest')
     DescribeIndexResponse = Shapes::StructureShape.new(name: 'DescribeIndexResponse')
+    DescribePrincipalMappingRequest = Shapes::StructureShape.new(name: 'DescribePrincipalMappingRequest')
+    DescribePrincipalMappingResponse = Shapes::StructureShape.new(name: 'DescribePrincipalMappingResponse')
     DescribeQuerySuggestionsBlockListRequest = Shapes::StructureShape.new(name: 'DescribeQuerySuggestionsBlockListRequest')
     DescribeQuerySuggestionsBlockListResponse = Shapes::StructureShape.new(name: 'DescribeQuerySuggestionsBlockListResponse')
     DescribeQuerySuggestionsConfigRequest = Shapes::StructureShape.new(name: 'DescribeQuerySuggestionsConfigRequest')
@@ -161,6 +166,7 @@ module Aws::Kendra
     FacetList = Shapes::ListShape.new(name: 'FacetList')
     FacetResult = Shapes::StructureShape.new(name: 'FacetResult')
     FacetResultList = Shapes::ListShape.new(name: 'FacetResultList')
+    FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     FaqFileFormat = Shapes::StringShape.new(name: 'FaqFileFormat')
     FaqId = Shapes::StringShape.new(name: 'FaqId')
     FaqName = Shapes::StringShape.new(name: 'FaqName')
@@ -173,6 +179,14 @@ module Aws::Kendra
     GetQuerySuggestionsResponse = Shapes::StructureShape.new(name: 'GetQuerySuggestionsResponse')
     GoogleDriveConfiguration = Shapes::StructureShape.new(name: 'GoogleDriveConfiguration')
     GroupAttributeField = Shapes::StringShape.new(name: 'GroupAttributeField')
+    GroupId = Shapes::StringShape.new(name: 'GroupId')
+    GroupMembers = Shapes::StructureShape.new(name: 'GroupMembers')
+    GroupOrderingIdSummaries = Shapes::ListShape.new(name: 'GroupOrderingIdSummaries')
+    GroupOrderingIdSummary = Shapes::StructureShape.new(name: 'GroupOrderingIdSummary')
+    GroupSummary = Shapes::StructureShape.new(name: 'GroupSummary')
+    Groups = Shapes::ListShape.new(name: 'Groups')
+    HierarchicalPrincipal = Shapes::StructureShape.new(name: 'HierarchicalPrincipal')
+    HierarchicalPrincipalList = Shapes::ListShape.new(name: 'HierarchicalPrincipalList')
     Highlight = Shapes::StructureShape.new(name: 'Highlight')
     HighlightList = Shapes::ListShape.new(name: 'HighlightList')
     HighlightType = Shapes::StringShape.new(name: 'HighlightType')
@@ -202,8 +216,11 @@ module Aws::Kendra
     ListDataSourcesResponse = Shapes::StructureShape.new(name: 'ListDataSourcesResponse')
     ListFaqsRequest = Shapes::StructureShape.new(name: 'ListFaqsRequest')
     ListFaqsResponse = Shapes::StructureShape.new(name: 'ListFaqsResponse')
+    ListGroupsOlderThanOrderingIdRequest = Shapes::StructureShape.new(name: 'ListGroupsOlderThanOrderingIdRequest')
+    ListGroupsOlderThanOrderingIdResponse = Shapes::StructureShape.new(name: 'ListGroupsOlderThanOrderingIdResponse')
     ListIndicesRequest = Shapes::StructureShape.new(name: 'ListIndicesRequest')
     ListIndicesResponse = Shapes::StructureShape.new(name: 'ListIndicesResponse')
+    ListOfGroupSummaries = Shapes::ListShape.new(name: 'ListOfGroupSummaries')
     ListQuerySuggestionsBlockListsRequest = Shapes::StructureShape.new(name: 'ListQuerySuggestionsBlockListsRequest')
     ListQuerySuggestionsBlockListsResponse = Shapes::StructureShape.new(name: 'ListQuerySuggestionsBlockListsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -217,9 +234,14 @@ module Aws::Kendra
     MaxResultsIntegerForListDataSourcesRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListDataSourcesRequest')
     MaxResultsIntegerForListFaqsRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListFaqsRequest')
     MaxResultsIntegerForListIndicesRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListIndicesRequest')
+    MaxResultsIntegerForListPrincipalsRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListPrincipalsRequest')
     MaxResultsIntegerForListQuerySuggestionsBlockLists = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListQuerySuggestionsBlockLists')
     MaxResultsIntegerForListThesauriRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListThesauriRequest')
     MaxUrlsPerMinuteCrawlRate = Shapes::IntegerShape.new(name: 'MaxUrlsPerMinuteCrawlRate')
+    MemberGroup = Shapes::StructureShape.new(name: 'MemberGroup')
+    MemberGroups = Shapes::ListShape.new(name: 'MemberGroups')
+    MemberUser = Shapes::StructureShape.new(name: 'MemberUser')
+    MemberUsers = Shapes::ListShape.new(name: 'MemberUsers')
     MetricValue = Shapes::StringShape.new(name: 'MetricValue')
     MimeType = Shapes::StringShape.new(name: 'MimeType')
     MinimumNumberOfQueryingUsers = Shapes::IntegerShape.new(name: 'MinimumNumberOfQueryingUsers')
@@ -235,9 +257,12 @@ module Aws::Kendra
     Port = Shapes::IntegerShape.new(name: 'Port')
     Principal = Shapes::StructureShape.new(name: 'Principal')
     PrincipalList = Shapes::ListShape.new(name: 'PrincipalList')
+    PrincipalMappingStatus = Shapes::StringShape.new(name: 'PrincipalMappingStatus')
     PrincipalName = Shapes::StringShape.new(name: 'PrincipalName')
+    PrincipalOrderingId = Shapes::IntegerShape.new(name: 'PrincipalOrderingId')
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
     ProxyConfiguration = Shapes::StructureShape.new(name: 'ProxyConfiguration')
+    PutPrincipalMappingRequest = Shapes::StructureShape.new(name: 'PutPrincipalMappingRequest')
     QueryCapacityUnit = Shapes::IntegerShape.new(name: 'QueryCapacityUnit')
     QueryId = Shapes::StringShape.new(name: 'QueryId')
     QueryIdentifiersEnclosingOption = Shapes::StringShape.new(name: 'QueryIdentifiersEnclosingOption')
@@ -361,6 +386,7 @@ module Aws::Kendra
     UserAccount = Shapes::StringShape.new(name: 'UserAccount')
     UserContext = Shapes::StructureShape.new(name: 'UserContext')
     UserContextPolicy = Shapes::StringShape.new(name: 'UserContextPolicy')
+    UserId = Shapes::StringShape.new(name: 'UserId')
     UserNameAttributeField = Shapes::StringShape.new(name: 'UserNameAttributeField')
     UserTokenConfiguration = Shapes::StructureShape.new(name: 'UserTokenConfiguration')
     UserTokenConfigurationList = Shapes::ListShape.new(name: 'UserTokenConfigurationList')
@@ -627,6 +653,12 @@ module Aws::Kendra
     DataSourceConfiguration.add_member(:web_crawler_configuration, Shapes::ShapeRef.new(shape: WebCrawlerConfiguration, location_name: "WebCrawlerConfiguration"))
     DataSourceConfiguration.struct_class = Types::DataSourceConfiguration
 
+    DataSourceGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: PrincipalName, required: true, location_name: "GroupId"))
+    DataSourceGroup.add_member(:data_source_id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location_name: "DataSourceId"))
+    DataSourceGroup.struct_class = Types::DataSourceGroup
+
+    DataSourceGroups.member = Shapes::ShapeRef.new(shape: DataSourceGroup)
+
     DataSourceInclusionsExclusionsStrings.member = Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStringsMember)
 
     DataSourceSummary.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, location_name: "Name"))
@@ -692,6 +724,12 @@ module Aws::Kendra
     DeleteIndexRequest.add_member(:id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "Id"))
     DeleteIndexRequest.struct_class = Types::DeleteIndexRequest
 
+    DeletePrincipalMappingRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    DeletePrincipalMappingRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: DataSourceId, location_name: "DataSourceId"))
+    DeletePrincipalMappingRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: GroupId, required: true, location_name: "GroupId"))
+    DeletePrincipalMappingRequest.add_member(:ordering_id, Shapes::ShapeRef.new(shape: PrincipalOrderingId, location_name: "OrderingId"))
+    DeletePrincipalMappingRequest.struct_class = Types::DeletePrincipalMappingRequest
+
     DeleteQuerySuggestionsBlockListRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     DeleteQuerySuggestionsBlockListRequest.add_member(:id, Shapes::ShapeRef.new(shape: QuerySuggestionsBlockListId, required: true, location_name: "Id"))
     DeleteQuerySuggestionsBlockListRequest.struct_class = Types::DeleteQuerySuggestionsBlockListRequest
@@ -755,6 +793,17 @@ module Aws::Kendra
     DescribeIndexResponse.add_member(:user_context_policy, Shapes::ShapeRef.new(shape: UserContextPolicy, location_name: "UserContextPolicy"))
     DescribeIndexResponse.struct_class = Types::DescribeIndexResponse
 
+    DescribePrincipalMappingRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    DescribePrincipalMappingRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: DataSourceId, location_name: "DataSourceId"))
+    DescribePrincipalMappingRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: GroupId, required: true, location_name: "GroupId"))
+    DescribePrincipalMappingRequest.struct_class = Types::DescribePrincipalMappingRequest
+
+    DescribePrincipalMappingResponse.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, location_name: "IndexId"))
+    DescribePrincipalMappingResponse.add_member(:data_source_id, Shapes::ShapeRef.new(shape: DataSourceId, location_name: "DataSourceId"))
+    DescribePrincipalMappingResponse.add_member(:group_id, Shapes::ShapeRef.new(shape: GroupId, location_name: "GroupId"))
+    DescribePrincipalMappingResponse.add_member(:group_ordering_id_summaries, Shapes::ShapeRef.new(shape: GroupOrderingIdSummaries, location_name: "GroupOrderingIdSummaries"))
+    DescribePrincipalMappingResponse.struct_class = Types::DescribePrincipalMappingResponse
+
     DescribeQuerySuggestionsBlockListRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     DescribeQuerySuggestionsBlockListRequest.add_member(:id, Shapes::ShapeRef.new(shape: QuerySuggestionsBlockListId, required: true, location_name: "Id"))
     DescribeQuerySuggestionsBlockListRequest.struct_class = Types::DescribeQuerySuggestionsBlockListRequest
@@ -812,6 +861,7 @@ module Aws::Kendra
     Document.add_member(:s3_path, Shapes::ShapeRef.new(shape: S3Path, location_name: "S3Path"))
     Document.add_member(:attributes, Shapes::ShapeRef.new(shape: DocumentAttributeList, location_name: "Attributes"))
     Document.add_member(:access_control_list, Shapes::ShapeRef.new(shape: PrincipalList, location_name: "AccessControlList"))
+    Document.add_member(:hierarchical_access_control_list, Shapes::ShapeRef.new(shape: HierarchicalPrincipalList, location_name: "HierarchicalAccessControlList"))
     Document.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType"))
     Document.struct_class = Types::Document
 
@@ -915,6 +965,31 @@ module Aws::Kendra
     GoogleDriveConfiguration.add_member(:exclude_shared_drives, Shapes::ShapeRef.new(shape: ExcludeSharedDrivesList, location_name: "ExcludeSharedDrives"))
     GoogleDriveConfiguration.struct_class = Types::GoogleDriveConfiguration
 
+    GroupMembers.add_member(:member_groups, Shapes::ShapeRef.new(shape: MemberGroups, location_name: "MemberGroups"))
+    GroupMembers.add_member(:member_users, Shapes::ShapeRef.new(shape: MemberUsers, location_name: "MemberUsers"))
+    GroupMembers.add_member(:s3_pathfor_group_members, Shapes::ShapeRef.new(shape: S3Path, location_name: "S3PathforGroupMembers"))
+    GroupMembers.struct_class = Types::GroupMembers
+
+    GroupOrderingIdSummaries.member = Shapes::ShapeRef.new(shape: GroupOrderingIdSummary)
+
+    GroupOrderingIdSummary.add_member(:status, Shapes::ShapeRef.new(shape: PrincipalMappingStatus, location_name: "Status"))
+    GroupOrderingIdSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedAt"))
+    GroupOrderingIdSummary.add_member(:received_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ReceivedAt"))
+    GroupOrderingIdSummary.add_member(:ordering_id, Shapes::ShapeRef.new(shape: PrincipalOrderingId, location_name: "OrderingId"))
+    GroupOrderingIdSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    GroupOrderingIdSummary.struct_class = Types::GroupOrderingIdSummary
+
+    GroupSummary.add_member(:group_id, Shapes::ShapeRef.new(shape: GroupId, location_name: "GroupId"))
+    GroupSummary.add_member(:ordering_id, Shapes::ShapeRef.new(shape: PrincipalOrderingId, location_name: "OrderingId"))
+    GroupSummary.struct_class = Types::GroupSummary
+
+    Groups.member = Shapes::ShapeRef.new(shape: PrincipalName)
+
+    HierarchicalPrincipal.add_member(:principal_list, Shapes::ShapeRef.new(shape: PrincipalList, required: true, location_name: "PrincipalList"))
+    HierarchicalPrincipal.struct_class = Types::HierarchicalPrincipal
+
+    HierarchicalPrincipalList.member = Shapes::ShapeRef.new(shape: HierarchicalPrincipal)
+
     Highlight.add_member(:begin_offset, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "BeginOffset"))
     Highlight.add_member(:end_offset, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "EndOffset"))
     Highlight.add_member(:top_answer, Shapes::ShapeRef.new(shape: Boolean, location_name: "TopAnswer"))
@@ -983,6 +1058,17 @@ module Aws::Kendra
     ListFaqsResponse.add_member(:faq_summary_items, Shapes::ShapeRef.new(shape: FaqSummaryItems, location_name: "FaqSummaryItems"))
     ListFaqsResponse.struct_class = Types::ListFaqsResponse
 
+    ListGroupsOlderThanOrderingIdRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    ListGroupsOlderThanOrderingIdRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: DataSourceId, location_name: "DataSourceId"))
+    ListGroupsOlderThanOrderingIdRequest.add_member(:ordering_id, Shapes::ShapeRef.new(shape: PrincipalOrderingId, required: true, location_name: "OrderingId"))
+    ListGroupsOlderThanOrderingIdRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListGroupsOlderThanOrderingIdRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsIntegerForListPrincipalsRequest, location_name: "MaxResults"))
+    ListGroupsOlderThanOrderingIdRequest.struct_class = Types::ListGroupsOlderThanOrderingIdRequest
+
+    ListGroupsOlderThanOrderingIdResponse.add_member(:groups_summaries, Shapes::ShapeRef.new(shape: ListOfGroupSummaries, location_name: "GroupsSummaries"))
+    ListGroupsOlderThanOrderingIdResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListGroupsOlderThanOrderingIdResponse.struct_class = Types::ListGroupsOlderThanOrderingIdResponse
+
     ListIndicesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListIndicesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsIntegerForListIndicesRequest, location_name: "MaxResults"))
     ListIndicesRequest.struct_class = Types::ListIndicesRequest
@@ -990,6 +1076,8 @@ module Aws::Kendra
     ListIndicesResponse.add_member(:index_configuration_summary_items, Shapes::ShapeRef.new(shape: IndexConfigurationSummaryList, location_name: "IndexConfigurationSummaryItems"))
     ListIndicesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListIndicesResponse.struct_class = Types::ListIndicesResponse
+
+    ListOfGroupSummaries.member = Shapes::ShapeRef.new(shape: GroupSummary)
 
     ListQuerySuggestionsBlockListsRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     ListQuerySuggestionsBlockListsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -1015,6 +1103,17 @@ module Aws::Kendra
     ListThesauriResponse.add_member(:thesaurus_summary_items, Shapes::ShapeRef.new(shape: ThesaurusSummaryItems, location_name: "ThesaurusSummaryItems"))
     ListThesauriResponse.struct_class = Types::ListThesauriResponse
 
+    MemberGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: GroupId, required: true, location_name: "GroupId"))
+    MemberGroup.add_member(:data_source_id, Shapes::ShapeRef.new(shape: DataSourceId, location_name: "DataSourceId"))
+    MemberGroup.struct_class = Types::MemberGroup
+
+    MemberGroups.member = Shapes::ShapeRef.new(shape: MemberGroup)
+
+    MemberUser.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location_name: "UserId"))
+    MemberUser.struct_class = Types::MemberUser
+
+    MemberUsers.member = Shapes::ShapeRef.new(shape: MemberUser)
+
     OneDriveConfiguration.add_member(:tenant_domain, Shapes::ShapeRef.new(shape: TenantDomain, required: true, location_name: "TenantDomain"))
     OneDriveConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
     OneDriveConfiguration.add_member(:one_drive_users, Shapes::ShapeRef.new(shape: OneDriveUsers, required: true, location_name: "OneDriveUsers"))
@@ -1033,6 +1132,7 @@ module Aws::Kendra
     Principal.add_member(:name, Shapes::ShapeRef.new(shape: PrincipalName, required: true, location_name: "Name"))
     Principal.add_member(:type, Shapes::ShapeRef.new(shape: PrincipalType, required: true, location_name: "Type"))
     Principal.add_member(:access, Shapes::ShapeRef.new(shape: ReadAccessType, required: true, location_name: "Access"))
+    Principal.add_member(:data_source_id, Shapes::ShapeRef.new(shape: DataSourceId, location_name: "DataSourceId"))
     Principal.struct_class = Types::Principal
 
     PrincipalList.member = Shapes::ShapeRef.new(shape: Principal)
@@ -1041,6 +1141,14 @@ module Aws::Kendra
     ProxyConfiguration.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
     ProxyConfiguration.add_member(:credentials, Shapes::ShapeRef.new(shape: SecretArn, location_name: "Credentials"))
     ProxyConfiguration.struct_class = Types::ProxyConfiguration
+
+    PutPrincipalMappingRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    PutPrincipalMappingRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: DataSourceId, location_name: "DataSourceId"))
+    PutPrincipalMappingRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: GroupId, required: true, location_name: "GroupId"))
+    PutPrincipalMappingRequest.add_member(:group_members, Shapes::ShapeRef.new(shape: GroupMembers, required: true, location_name: "GroupMembers"))
+    PutPrincipalMappingRequest.add_member(:ordering_id, Shapes::ShapeRef.new(shape: PrincipalOrderingId, location_name: "OrderingId"))
+    PutPrincipalMappingRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    PutPrincipalMappingRequest.struct_class = Types::PutPrincipalMappingRequest
 
     QueryRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     QueryRequest.add_member(:query_text, Shapes::ShapeRef.new(shape: QueryText, required: true, location_name: "QueryText"))
@@ -1386,6 +1494,9 @@ module Aws::Kendra
     Urls.struct_class = Types::Urls
 
     UserContext.add_member(:token, Shapes::ShapeRef.new(shape: Token, location_name: "Token"))
+    UserContext.add_member(:user_id, Shapes::ShapeRef.new(shape: PrincipalName, location_name: "UserId"))
+    UserContext.add_member(:groups, Shapes::ShapeRef.new(shape: Groups, location_name: "Groups"))
+    UserContext.add_member(:data_source_groups, Shapes::ShapeRef.new(shape: DataSourceGroups, location_name: "DataSourceGroups"))
     UserContext.struct_class = Types::UserContext
 
     UserTokenConfiguration.add_member(:jwt_token_type_configuration, Shapes::ShapeRef.new(shape: JwtTokenTypeConfiguration, location_name: "JwtTokenTypeConfiguration"))
@@ -1606,6 +1717,20 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:delete_principal_mapping, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePrincipalMapping"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeletePrincipalMappingRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_query_suggestions_block_list, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteQuerySuggestionsBlockList"
         o.http_method = "POST"
@@ -1666,6 +1791,19 @@ module Aws::Kendra
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeIndexRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeIndexResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_principal_mapping, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribePrincipalMapping"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribePrincipalMappingRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribePrincipalMappingResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1779,6 +1917,20 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:list_groups_older_than_ordering_id, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListGroupsOlderThanOrderingId"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListGroupsOlderThanOrderingIdRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListGroupsOlderThanOrderingIdResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:list_indices, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListIndices"
         o.http_method = "POST"
@@ -1833,6 +1985,21 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:put_principal_mapping, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutPrincipalMapping"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutPrincipalMappingRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
